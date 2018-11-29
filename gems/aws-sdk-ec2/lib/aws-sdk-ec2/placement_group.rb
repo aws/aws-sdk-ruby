@@ -244,6 +244,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #

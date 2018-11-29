@@ -333,6 +333,11 @@ module Aws::EC2
     #         type: "String", # required
     #       },
     #     ],
+    #     elastic_inference_accelerators: [
+    #       {
+    #         type: "String", # required
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
@@ -372,6 +377,14 @@ module Aws::EC2
     #         capacity_reservation_id: "String",
     #       },
     #     },
+    #     hibernation_options: {
+    #       configured: false,
+    #     },
+    #     license_specifications: [
+    #       {
+    #         license_configuration_arn: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -541,6 +554,8 @@ module Aws::EC2
     #   more than one instance in the request.
     # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
     #   An elastic GPU to associate with the instance.
+    # @option options [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
+    #   An elastic inference accelerator.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
@@ -579,6 +594,16 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
     #   Information about the Capacity Reservation targeting option.
+    # @option options [Types::HibernationOptionsRequest] :hibernation_options
+    #   Indicates whether an instance is enabled for hibernation. For more
+    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    # @option options [Array<Types::LicenseConfigurationRequest>] :license_specifications
+    #   The license configurations.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -774,6 +799,10 @@ module Aws::EC2
     #
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
+    #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
     #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.

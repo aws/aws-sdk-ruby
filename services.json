@@ -17,6 +17,9 @@
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
+  "AppMesh": {
+    "models": "appmesh/2018-10-01"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
@@ -309,6 +312,9 @@
   },
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19"
+  },
+  "LicenseManager": {
+    "models": "license-manager/2018-08-01"
   },
   "Lightsail": {
     "models": "lightsail/2016-11-28"

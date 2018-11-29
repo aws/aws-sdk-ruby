@@ -2613,8 +2613,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ConfirmProductInstance.
-    #
     # @note When making an API call, you may pass ConfirmProductInstanceRequest
     #   data as a hash:
     #
@@ -2648,8 +2646,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of ConfirmProductInstance.
-    #
     # @!attribute [rw] owner_id
     #   The AWS account ID of the instance owner. This is only present if
     #   the product code is attached to the instance.
@@ -4327,6 +4323,11 @@ module Aws::EC2
     #               type: "String", # required
     #             },
     #           ],
+    #           elastic_inference_accelerators: [
+    #             {
+    #               type: "String", # required
+    #             },
+    #           ],
     #           security_group_ids: ["String"],
     #           security_groups: ["String"],
     #           instance_market_options: {
@@ -4352,6 +4353,14 @@ module Aws::EC2
     #               capacity_reservation_id: "String",
     #             },
     #           },
+    #           hibernation_options: {
+    #             configured: false,
+    #           },
+    #           license_specifications: [
+    #             {
+    #               license_configuration_arn: "String",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4498,6 +4507,11 @@ module Aws::EC2
     #               type: "String", # required
     #             },
     #           ],
+    #           elastic_inference_accelerators: [
+    #             {
+    #               type: "String", # required
+    #             },
+    #           ],
     #           security_group_ids: ["String"],
     #           security_groups: ["String"],
     #           instance_market_options: {
@@ -4523,6 +4537,14 @@ module Aws::EC2
     #               capacity_reservation_id: "String",
     #             },
     #           },
+    #           hibernation_options: {
+    #             configured: false,
+    #           },
+    #           license_specifications: [
+    #             {
+    #               license_configuration_arn: "String",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4964,8 +4986,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreatePlacementGroup.
-    #
     # @note When making an API call, you may pass CreatePlacementGroupRequest
     #   data as a hash:
     #
@@ -7268,8 +7288,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeletePlacementGroup.
-    #
     # @note When making an API call, you may pass DeletePlacementGroupRequest
     #   data as a hash:
     #
@@ -10275,8 +10293,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeInstanceAttribute.
-    #
     # @note When making an API call, you may pass DescribeInstanceAttributeRequest
     #   data as a hash:
     #
@@ -10391,8 +10407,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeInstanceStatus.
-    #
     # @note When making an API call, you may pass DescribeInstanceStatusRequest
     #   data as a hash:
     #
@@ -10501,8 +10515,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeInstanceStatus.
-    #
     # @!attribute [rw] instance_statuses
     #   One or more instance status descriptions.
     #   @return [Array<Types::InstanceStatus>]
@@ -10520,8 +10532,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeInstances.
-    #
     # @note When making an API call, you may pass DescribeInstancesRequest
     #   data as a hash:
     #
@@ -10575,6 +10585,10 @@ module Aws::EC2
     #
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
+    #
+    #   * `hibernation-options.configured` - A Boolean that indicates
+    #     whether the instance is enabled for hibernation. A value of `true`
+    #     means that the instance is enabled for hibernation.
     #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
@@ -10838,8 +10852,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeInstances.
-    #
     # @!attribute [rw] reservations
     #   Zero or more reservations.
     #   @return [Array<Types::Reservation>]
@@ -11781,8 +11793,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribePlacementGroups.
-    #
     # @note When making an API call, you may pass DescribePlacementGroupsRequest
     #   data as a hash:
     #
@@ -11832,8 +11842,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribePlacementGroups.
-    #
     # @!attribute [rw] placement_groups
     #   One or more placement groups.
     #   @return [Array<Types::PlacementGroup>]
@@ -16921,6 +16929,57 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an elastic inference accelerator.
+    #
+    # @note When making an API call, you may pass ElasticInferenceAccelerator
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of elastic inference accelerator. The possible values are
+    #   eia1.small, eia1.medium, and eia1.large.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAccelerator AWS API Documentation
+    #
+    class ElasticInferenceAccelerator < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes the association between an instance and an elastic inference
+    # accelerator.
+    #
+    # @!attribute [rw] elastic_inference_accelerator_arn
+    #   The Amazon Resource Name (ARN) of the elastic inference accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_inference_accelerator_association_id
+    #   The ID of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_inference_accelerator_association_state
+    #   The state of the elastic inference accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_inference_accelerator_association_time
+    #   The time at which the elastic inference accelerator is associated
+    #   with an instance.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAcceleratorAssociation AWS API Documentation
+    #
+    class ElasticInferenceAcceleratorAssociation < Struct.new(
+      :elastic_inference_accelerator_arn,
+      :elastic_inference_accelerator_association_id,
+      :elastic_inference_accelerator_association_state,
+      :elastic_inference_accelerator_association_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableTransitGatewayRouteTablePropagationRequest
     #   data as a hash:
     #
@@ -18025,8 +18084,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for GetConsoleOutput.
-    #
     # @note When making an API call, you may pass GetConsoleOutputRequest
     #   data as a hash:
     #
@@ -18062,8 +18119,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of GetConsoleOutput.
-    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -18086,8 +18141,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for the request.
-    #
     # @note When making an API call, you may pass GetConsoleScreenshotRequest
     #   data as a hash:
     #
@@ -18122,8 +18175,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of the request.
-    #
     # @!attribute [rw] image_data
     #   The data that comprises the image.
     #   @return [String]
@@ -18232,8 +18283,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for GetPasswordData.
-    #
     # @note When making an API call, you may pass GetPasswordDataRequest
     #   data as a hash:
     #
@@ -18261,8 +18310,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of GetPasswordData.
-    #
     # @!attribute [rw] instance_id
     #   The ID of the Windows instance.
     #   @return [String]
@@ -18629,6 +18676,61 @@ module Aws::EC2
     class GroupIdentifier < Struct.new(
       :group_name,
       :group_id)
+      include Aws::Structure
+    end
+
+    # Indicates whether your instance is configured for hibernation. This
+    # parameter is valid only if the instance meets the [hibernation
+    # prerequisites][1]. Hibernation is currently supported only for Amazon
+    # Linux. For more information, see [Hibernate Your Instance][2] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #
+    # @!attribute [rw] configured
+    #   If this parameter is set to `true`, your instance is enabled for
+    #   hibernation; otherwise, it is not enabled for hibernation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptions AWS API Documentation
+    #
+    class HibernationOptions < Struct.new(
+      :configured)
+      include Aws::Structure
+    end
+
+    # Indicates whether your instance is configured for hibernation. This
+    # parameter is valid only if the instance meets the [hibernation
+    # prerequisites][1]. Hibernation is currently supported only for Amazon
+    # Linux. For more information, see [Hibernate Your Instance][2] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #
+    # @note When making an API call, you may pass HibernationOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configured: false,
+    #       }
+    #
+    # @!attribute [rw] configured
+    #   If you set this parameter to `true`, your instance is enabled for
+    #   hibernation.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptionsRequest AWS API Documentation
+    #
+    class HibernationOptionsRequest < Struct.new(
+      :configured)
       include Aws::Structure
     end
 
@@ -20338,6 +20440,10 @@ module Aws::EC2
     #   The Elastic GPU associated with the instance.
     #   @return [Array<Types::ElasticGpuAssociation>]
     #
+    # @!attribute [rw] elastic_inference_accelerator_associations
+    #   The elastic inference accelerator associated with the instance.
+    #   @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
+    #
     # @!attribute [rw] network_interfaces
     #   \[EC2-VPC\] One or more network interfaces for the instance.
     #   @return [Array<Types::InstanceNetworkInterface>]
@@ -20402,6 +20508,14 @@ module Aws::EC2
     #   Information about the Capacity Reservation targeting option.
     #   @return [Types::CapacityReservationSpecificationResponse]
     #
+    # @!attribute [rw] hibernation_options
+    #   Indicates whether the instance is enabled for hibernation.
+    #   @return [Types::HibernationOptions]
+    #
+    # @!attribute [rw] licenses
+    #   The license configurations.
+    #   @return [Array<Types::LicenseConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -20434,6 +20548,7 @@ module Aws::EC2
       :iam_instance_profile,
       :instance_lifecycle,
       :elastic_gpu_associations,
+      :elastic_inference_accelerator_associations,
       :network_interfaces,
       :root_device_name,
       :root_device_type,
@@ -20446,7 +20561,9 @@ module Aws::EC2
       :virtualization_type,
       :cpu_options,
       :capacity_reservation_id,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :hibernation_options,
+      :licenses)
       include Aws::Structure
     end
 
@@ -22119,6 +22236,85 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an elastic inference accelerator.
+    #
+    # @note When making an API call, you may pass LaunchTemplateElasticInferenceAccelerator
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of elastic inference accelerator. The possible values are
+    #   eia1.medium, eia1.large, and eia1.xlarge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAccelerator AWS API Documentation
+    #
+    class LaunchTemplateElasticInferenceAccelerator < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes an elastic inference accelerator.
+    #
+    # @!attribute [rw] type
+    #   The type of elastic inference accelerator. The possible values are
+    #   eia1.medium, eia1.large, and eia1.xlarge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAcceleratorResponse AWS API Documentation
+    #
+    class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Indicates whether an instance is configured for hibernation.
+    #
+    # @!attribute [rw] configured
+    #   If this parameter is set to `true`, the instance is enabled for
+    #   hibernation; otherwise, it is not enabled for hibernation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateHibernationOptions AWS API Documentation
+    #
+    class LaunchTemplateHibernationOptions < Struct.new(
+      :configured)
+      include Aws::Structure
+    end
+
+    # Indicates whether the instance is configured for hibernation. This
+    # parameter is valid only if the instance meets the [hibernation
+    # prerequisites][1]. Hibernation is currently supported only for Amazon
+    # Linux.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    #
+    # @note When making an API call, you may pass LaunchTemplateHibernationOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configured: false,
+    #       }
+    #
+    # @!attribute [rw] configured
+    #   If you set this parameter to `true`, the instance is enabled for
+    #   hibernation.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateHibernationOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateHibernationOptionsRequest < Struct.new(
+      :configured)
+      include Aws::Structure
+    end
+
     # Describes an IAM instance profile.
     #
     # @!attribute [rw] arn
@@ -22387,6 +22583,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a license configuration.
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The Amazon Resource Name (ARN) of the license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateLicenseConfiguration AWS API Documentation
+    #
+    class LaunchTemplateLicenseConfiguration < Struct.new(
+      :license_configuration_arn)
+      include Aws::Structure
+    end
+
+    # Describes a license configuration.
+    #
+    # @note When making an API call, you may pass LaunchTemplateLicenseConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_configuration_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The Amazon Resource Name (ARN) of the license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateLicenseConfigurationRequest AWS API Documentation
+    #
+    class LaunchTemplateLicenseConfigurationRequest < Struct.new(
+      :license_configuration_arn)
+      include Aws::Structure
+    end
+
     # Describes overrides for a launch template.
     #
     # @note When making an API call, you may pass LaunchTemplateOverrides
@@ -22484,7 +22713,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The placement for the instance.
+    # Describes the placement of an instance.
     #
     # @note When making an API call, you may pass LaunchTemplatePlacementRequest
     #   data as a hash:
@@ -22793,6 +23022,39 @@ module Aws::EC2
     #
     class LaunchTemplatesMonitoringRequest < Struct.new(
       :enabled)
+      include Aws::Structure
+    end
+
+    # Describes a license configuration.
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The Amazon Resource Name (ARN) of the license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LicenseConfiguration AWS API Documentation
+    #
+    class LicenseConfiguration < Struct.new(
+      :license_configuration_arn)
+      include Aws::Structure
+    end
+
+    # Describes a license configuration.
+    #
+    # @note When making an API call, you may pass LicenseConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_configuration_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] license_configuration_arn
+    #   The Amazon Resource Name (ARN) of the license configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LicenseConfigurationRequest AWS API Documentation
+    #
+    class LicenseConfigurationRequest < Struct.new(
+      :license_configuration_arn)
       include Aws::Structure
     end
 
@@ -23373,8 +23635,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyInstanceAttribute.
-    #
     # @note When making an API call, you may pass ModifyInstanceAttributeRequest
     #   data as a hash:
     #
@@ -24728,8 +24988,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for MonitorInstances.
-    #
     # @note When making an API call, you may pass MonitorInstancesRequest
     #   data as a hash:
     #
@@ -24757,8 +25015,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of MonitorInstances.
-    #
     # @!attribute [rw] instance_monitorings
     #   The monitoring information.
     #   @return [Array<Types::InstanceMonitoring>]
@@ -26429,8 +26685,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for RebootInstances.
-    #
     # @note When making an API call, you may pass RebootInstancesRequest
     #   data as a hash:
     #
@@ -27195,8 +27449,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ReportInstanceStatus.
-    #
     # @note When making an API call, you may pass ReportInstanceStatusRequest
     #   data as a hash:
     #
@@ -27367,6 +27619,11 @@ module Aws::EC2
     #             type: "String", # required
     #           },
     #         ],
+    #         elastic_inference_accelerators: [
+    #           {
+    #             type: "String", # required
+    #           },
+    #         ],
     #         security_group_ids: ["String"],
     #         security_groups: ["String"],
     #         instance_market_options: {
@@ -27392,6 +27649,14 @@ module Aws::EC2
     #             capacity_reservation_id: "String",
     #           },
     #         },
+    #         hibernation_options: {
+    #           configured: false,
+    #         },
+    #         license_specifications: [
+    #           {
+    #             license_configuration_arn: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -27512,6 +27777,10 @@ module Aws::EC2
     #   An elastic GPU to associate with the instance.
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
+    # @!attribute [rw] elastic_inference_accelerators
+    #   The elastic inference accelerator for the instance.
+    #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
+    #
     # @!attribute [rw] security_group_ids
     #   One or more security group IDs. You can create a security group
     #   using CreateSecurityGroup. You cannot specify both a security group
@@ -27545,8 +27814,25 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateCpuOptionsRequest]
     #
     # @!attribute [rw] capacity_reservation_specification
-    #   Information about the Capacity Reservation targeting option.
+    #   The Capacity Reservation targeting option.
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationRequest]
+    #
+    # @!attribute [rw] hibernation_options
+    #   Indicates whether an instance is enabled for hibernation. This
+    #   parameter is valid only if the instance meets the [hibernation
+    #   prerequisites][1]. Hibernation is currently supported only for
+    #   Amazon Linux. For more information, see [Hibernate Your Instance][2]
+    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   @return [Types::LaunchTemplateHibernationOptionsRequest]
+    #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LaunchTemplateLicenseConfigurationRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
@@ -27567,12 +27853,15 @@ module Aws::EC2
       :user_data,
       :tag_specifications,
       :elastic_gpu_specifications,
+      :elastic_inference_accelerators,
       :security_group_ids,
       :security_groups,
       :instance_market_options,
       :credit_specification,
       :cpu_options,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :hibernation_options,
+      :license_specifications)
       include Aws::Structure
     end
 
@@ -28739,8 +29028,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for ResetInstanceAttribute.
-    #
     # @note When making an API call, you may pass ResetInstanceAttributeRequest
     #   data as a hash:
     #
@@ -28938,6 +29225,10 @@ module Aws::EC2
     #   The elastic GPU specification.
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
+    # @!attribute [rw] elastic_inference_accelerators
+    #   The elastic inference accelerator for the instance.
+    #   @return [Array<Types::LaunchTemplateElasticInferenceAcceleratorResponse>]
+    #
     # @!attribute [rw] security_group_ids
     #   The security group IDs.
     #   @return [Array<String>]
@@ -28968,6 +29259,20 @@ module Aws::EC2
     #   Information about the Capacity Reservation targeting option.
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationResponse]
     #
+    # @!attribute [rw] hibernation_options
+    #   Indicates whether an instance is configured for hibernation. For
+    #   more information, see [Hibernate Your Instance][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   @return [Types::LaunchTemplateHibernationOptions]
+    #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LaunchTemplateLicenseConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -28987,12 +29292,15 @@ module Aws::EC2
       :user_data,
       :tag_specifications,
       :elastic_gpu_specifications,
+      :elastic_inference_accelerators,
       :security_group_ids,
       :security_groups,
       :instance_market_options,
       :credit_specification,
       :cpu_options,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :hibernation_options,
+      :license_specifications)
       include Aws::Structure
     end
 
@@ -29462,8 +29770,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for RunInstances.
-    #
     # @note When making an API call, you may pass RunInstancesRequest
     #   data as a hash:
     #
@@ -29553,6 +29859,11 @@ module Aws::EC2
     #             type: "String", # required
     #           },
     #         ],
+    #         elastic_inference_accelerators: [
+    #           {
+    #             type: "String", # required
+    #           },
+    #         ],
     #         tag_specifications: [
     #           {
     #             resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
@@ -29592,6 +29903,14 @@ module Aws::EC2
     #             capacity_reservation_id: "String",
     #           },
     #         },
+    #         hibernation_options: {
+    #           configured: false,
+    #         },
+    #         license_specifications: [
+    #           {
+    #             license_configuration_arn: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -29817,6 +30136,10 @@ module Aws::EC2
     #   An elastic GPU to associate with the instance.
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
+    # @!attribute [rw] elastic_inference_accelerators
+    #   An elastic inference accelerator.
+    #   @return [Array<Types::ElasticInferenceAccelerator>]
+    #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to
@@ -29867,6 +30190,20 @@ module Aws::EC2
     #   Information about the Capacity Reservation targeting option.
     #   @return [Types::CapacityReservationSpecification]
     #
+    # @!attribute [rw] hibernation_options
+    #   Indicates whether an instance is enabled for hibernation. For more
+    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   @return [Types::HibernationOptionsRequest]
+    #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LicenseConfigurationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -29896,12 +30233,15 @@ module Aws::EC2
       :network_interfaces,
       :private_ip_address,
       :elastic_gpu_specification,
+      :elastic_inference_accelerators,
       :tag_specifications,
       :launch_template,
       :instance_market_options,
       :credit_specification,
       :cpu_options,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :hibernation_options,
+      :license_specifications)
       include Aws::Structure
     end
 
@@ -32582,8 +32922,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for StartInstances.
-    #
     # @note When making an API call, you may pass StartInstancesRequest
     #   data as a hash:
     #
@@ -32617,8 +32955,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of StartInstances.
-    #
     # @!attribute [rw] starting_instances
     #   Information about one or more started instances.
     #   @return [Array<Types::InstanceStateChange>]
@@ -32670,6 +33006,9 @@ module Aws::EC2
     #   * `Client.InvalidSnapshot.NotFound`\: The specified snapshot was not
     #     found.
     #
+    #   * `Client.UserInitiatedHibernate`\: Hibernation was initiated on the
+    #     instance.
+    #
     #   * `Client.UserInitiatedShutdown`\: The instance was shut down using
     #     the Amazon EC2 API.
     #
@@ -32686,13 +33025,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for StopInstances.
-    #
     # @note When making an API call, you may pass StopInstancesRequest
     #   data as a hash:
     #
     #       {
     #         instance_ids: ["String"], # required
+    #         hibernate: false,
     #         dry_run: false,
     #         force: false,
     #       }
@@ -32700,6 +33038,19 @@ module Aws::EC2
     # @!attribute [rw] instance_ids
     #   One or more instance IDs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] hibernate
+    #   Hibernates the instance if the instance was enabled for hibernation
+    #   at launch. If the instance cannot hibernate successfully, a normal
+    #   shutdown occurs. For more information, see [Hibernate Your
+    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -32721,13 +33072,12 @@ module Aws::EC2
     #
     class StopInstancesRequest < Struct.new(
       :instance_ids,
+      :hibernate,
       :dry_run,
       :force)
       include Aws::Structure
     end
 
-    # Contains the output of StopInstances.
-    #
     # @!attribute [rw] stopping_instances
     #   Information about one or more stopped instances.
     #   @return [Array<Types::InstanceStateChange>]
@@ -33215,8 +33565,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for TerminateInstances.
-    #
     # @note When making an API call, you may pass TerminateInstancesRequest
     #   data as a hash:
     #
@@ -33247,8 +33595,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of TerminateInstances.
-    #
     # @!attribute [rw] terminating_instances
     #   Information about one or more terminated instances.
     #   @return [Array<Types::InstanceStateChange>]
@@ -33869,8 +34215,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for UnmonitorInstances.
-    #
     # @note When making an API call, you may pass UnmonitorInstancesRequest
     #   data as a hash:
     #
@@ -33898,8 +34242,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of UnmonitorInstances.
-    #
     # @!attribute [rw] instance_monitorings
     #   The monitoring information.
     #   @return [Array<Types::InstanceMonitoring>]

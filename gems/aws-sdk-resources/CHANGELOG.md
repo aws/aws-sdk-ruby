@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.34.0 (2018-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-licensemanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appmesh` gem.
+
 3.33.0 (2018-11-28)
 ------------------
 

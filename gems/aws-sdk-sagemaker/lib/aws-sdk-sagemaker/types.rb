@@ -68,6 +68,7 @@ module Aws::SageMaker
     #
     #       {
     #         training_image: "AlgorithmImage",
+    #         algorithm_name: "ArnOrName",
     #         training_input_mode: "Pipe", # required, accepts Pipe, File
     #         metric_definitions: [
     #           {
@@ -86,6 +87,13 @@ module Aws::SageMaker
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_name
+    #   The name of the algorithm resource to use for the training job. This
+    #   must be an algorithm resource that you created or subscribe to on
+    #   AWS Marketplace. If you specify a value for this parameter, you
+    #   can't specify a value for `TrainingImage`.
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -126,8 +134,339 @@ module Aws::SageMaker
     #
     class AlgorithmSpecification < Struct.new(
       :training_image,
+      :algorithm_name,
       :training_input_mode,
       :metric_definitions)
+      include Aws::Structure
+    end
+
+    # Specifies the validation and image scan statuses of the algorithm.
+    #
+    # @!attribute [rw] validation_statuses
+    #   The status of the validation of the algorithm.
+    #   @return [Array<Types::AlgorithmStatusItem>]
+    #
+    # @!attribute [rw] image_scan_statuses
+    #   The status of the scan of the algorithm's Docker image container.
+    #   @return [Array<Types::AlgorithmStatusItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusDetails AWS API Documentation
+    #
+    class AlgorithmStatusDetails < Struct.new(
+      :validation_statuses,
+      :image_scan_statuses)
+      include Aws::Structure
+    end
+
+    # Represents the overall status of an algorithm.
+    #
+    # @!attribute [rw] name
+    #   The name of the algorithm for which the overall status is being
+    #   repoorted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure, if the overall status is a failed state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusItem AWS API Documentation
+    #
+    class AlgorithmStatusItem < Struct.new(
+      :name,
+      :status,
+      :failure_reason)
+      include Aws::Structure
+    end
+
+    # Provides summary information about an algorithm.
+    #
+    # @!attribute [rw] algorithm_name
+    #   The name of the algorithm which is described by the summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_arn
+    #   The Amazon Resource Name (ARN) of the algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_description
+    #   A brief statement describing the algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the algorithm was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] algorithm_status
+    #   The overall status of the algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSummary AWS API Documentation
+    #
+    class AlgorithmSummary < Struct.new(
+      :algorithm_name,
+      :algorithm_arn,
+      :algorithm_description,
+      :creation_time,
+      :algorithm_status)
+      include Aws::Structure
+    end
+
+    # Defines a training job and a batch transform job that Amazon SageMaker
+    # runs to validate your algorithm.
+    #
+    # The data provided in the validation profile is made available to your
+    # buyers on AWS Marketplace.
+    #
+    # @note When making an API call, you may pass AlgorithmValidationProfile
+    #   data as a hash:
+    #
+    #       {
+    #         profile_name: "EntityName", # required
+    #         training_job_definition: { # required
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           hyper_parameters: {
+    #             "ParameterKey" => "ParameterValue",
+    #           },
+    #           input_data_config: [ # required
+    #             {
+    #               channel_name: "ChannelName", # required
+    #               data_source: { # required
+    #                 s3_data_source: { # required
+    #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                   s3_uri: "S3Uri", # required
+    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                   attribute_names: ["AttributeName"],
+    #                 },
+    #               },
+    #               content_type: "ContentType",
+    #               compression_type: "None", # accepts None, Gzip
+    #               record_wrapper_type: "None", # accepts None, RecordIO
+    #               input_mode: "Pipe", # accepts Pipe, File
+    #               shuffle_config: {
+    #                 seed: 1, # required
+    #               },
+    #             },
+    #           ],
+    #           output_data_config: { # required
+    #             kms_key_id: "KmsKeyId",
+    #             s3_output_path: "S3Uri", # required
+    #           },
+    #           resource_config: { # required
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #             instance_count: 1, # required
+    #             volume_size_in_gb: 1, # required
+    #             volume_kms_key_id: "KmsKeyId",
+    #           },
+    #           stopping_condition: { # required
+    #             max_runtime_in_seconds: 1,
+    #           },
+    #         },
+    #         transform_job_definition: {
+    #           max_concurrent_transforms: 1,
+    #           max_payload_in_mb: 1,
+    #           batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #           environment: {
+    #             "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #           },
+    #           transform_input: { # required
+    #             data_source: { # required
+    #               s3_data_source: { # required
+    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                 s3_uri: "S3Uri", # required
+    #               },
+    #             },
+    #             content_type: "ContentType",
+    #             compression_type: "None", # accepts None, Gzip
+    #             split_type: "None", # accepts None, Line, RecordIO
+    #           },
+    #           transform_output: { # required
+    #             s3_output_path: "S3Uri", # required
+    #             accept: "Accept",
+    #             assemble_with: "None", # accepts None, Line
+    #             kms_key_id: "KmsKeyId",
+    #           },
+    #           transform_resources: { # required
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #             instance_count: 1, # required
+    #             volume_kms_key_id: "KmsKeyId",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the profile for the algorithm. The name must have 1 to
+    #   63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] training_job_definition
+    #   The `TrainingJobDefinition` object that describes the training job
+    #   that Amazon SageMaker runs to validate your algorithm.
+    #   @return [Types::TrainingJobDefinition]
+    #
+    # @!attribute [rw] transform_job_definition
+    #   The `TransformJobDefinition` object that describes the transform job
+    #   that Amazon SageMaker runs to validate your algorithm.
+    #   @return [Types::TransformJobDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationProfile AWS API Documentation
+    #
+    class AlgorithmValidationProfile < Struct.new(
+      :profile_name,
+      :training_job_definition,
+      :transform_job_definition)
+      include Aws::Structure
+    end
+
+    # Specifies configurations for one or more training jobs that Amazon
+    # SageMaker runs to test the algorithm.
+    #
+    # @note When making an API call, you may pass AlgorithmValidationSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         validation_role: "RoleArn", # required
+    #         validation_profiles: [ # required
+    #           {
+    #             profile_name: "EntityName", # required
+    #             training_job_definition: { # required
+    #               training_input_mode: "Pipe", # required, accepts Pipe, File
+    #               hyper_parameters: {
+    #                 "ParameterKey" => "ParameterValue",
+    #               },
+    #               input_data_config: [ # required
+    #                 {
+    #                   channel_name: "ChannelName", # required
+    #                   data_source: { # required
+    #                     s3_data_source: { # required
+    #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                       s3_uri: "S3Uri", # required
+    #                       s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                       attribute_names: ["AttributeName"],
+    #                     },
+    #                   },
+    #                   content_type: "ContentType",
+    #                   compression_type: "None", # accepts None, Gzip
+    #                   record_wrapper_type: "None", # accepts None, RecordIO
+    #                   input_mode: "Pipe", # accepts Pipe, File
+    #                   shuffle_config: {
+    #                     seed: 1, # required
+    #                   },
+    #                 },
+    #               ],
+    #               output_data_config: { # required
+    #                 kms_key_id: "KmsKeyId",
+    #                 s3_output_path: "S3Uri", # required
+    #               },
+    #               resource_config: { # required
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #                 instance_count: 1, # required
+    #                 volume_size_in_gb: 1, # required
+    #                 volume_kms_key_id: "KmsKeyId",
+    #               },
+    #               stopping_condition: { # required
+    #                 max_runtime_in_seconds: 1,
+    #               },
+    #             },
+    #             transform_job_definition: {
+    #               max_concurrent_transforms: 1,
+    #               max_payload_in_mb: 1,
+    #               batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #               environment: {
+    #                 "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #               },
+    #               transform_input: { # required
+    #                 data_source: { # required
+    #                   s3_data_source: { # required
+    #                     s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                     s3_uri: "S3Uri", # required
+    #                   },
+    #                 },
+    #                 content_type: "ContentType",
+    #                 compression_type: "None", # accepts None, Gzip
+    #                 split_type: "None", # accepts None, Line, RecordIO
+    #               },
+    #               transform_output: { # required
+    #                 s3_output_path: "S3Uri", # required
+    #                 accept: "Accept",
+    #                 assemble_with: "None", # accepts None, Line
+    #                 kms_key_id: "KmsKeyId",
+    #               },
+    #               transform_resources: { # required
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                 instance_count: 1, # required
+    #                 volume_kms_key_id: "KmsKeyId",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] validation_role
+    #   The IAM roles that Amazon SageMaker uses to run the training jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_profiles
+    #   An array of `AlgorithmValidationProfile` objects, each of which
+    #   specifies a training job and batch transform job that Amazon
+    #   SageMaker runs to validate your algorithm.
+    #   @return [Array<Types::AlgorithmValidationProfile>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationSpecification AWS API Documentation
+    #
+    class AlgorithmValidationSpecification < Struct.new(
+      :validation_role,
+      :validation_profiles)
+      include Aws::Structure
+    end
+
+    # Configures how labels are consolidated across human workers.
+    #
+    # @note When making an API call, you may pass AnnotationConsolidationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         annotation_consolidation_lambda_arn: "LambdaFunctionArn", # required
+    #       }
+    #
+    # @!attribute [rw] annotation_consolidation_lambda_arn
+    #   The Amazon Resource Name (ARN) of a Lambda function implements the
+    #   logic for annotation consolidation.
+    #
+    #   Amazon SageMaker Ground Truth provides three annotation
+    #   consolidation functions that you can choose to use. They are:
+    #
+    #   * *Bounding box* - Finds the most similar boxes from different
+    #     workers based on the Jaccard index of the boxes.
+    #
+    #     `arn:aws:lambda:region:432418664414:function:ACS-BoundingBox`
+    #
+    #   * *Image classification* - Uses a variant of the Expectation
+    #     Maximization approach to estimate the true class of an image based
+    #     on annotations from individual workers.
+    #
+    #     `arn:aws:lambda:region:432418664414:function:ACS-ImageMultiClass`
+    #
+    #   * *Text classification* - Uses a variant of the Expectation
+    #     Maximization approach to estimate the true class of text based on
+    #     annotations from individual workers.
+    #
+    #     `arn:aws:lambda:region:432418664414:function:ACS-TextMultiClass`
+    #
+    #   For more information, see [Annotation Consolidation][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AnnotationConsolidationConfig AWS API Documentation
+    #
+    class AnnotationConsolidationConfig < Struct.new(
+      :annotation_consolidation_lambda_arn)
       include Aws::Structure
     end
 
@@ -157,6 +496,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the possible values for a categorical hyperparameter.
+    #
+    # @note When making an API call, you may pass CategoricalParameterRangeSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["ParameterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] values
+    #   The allowed categories for the hyperparameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CategoricalParameterRangeSpecification AWS API Documentation
+    #
+    class CategoricalParameterRangeSpecification < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
     # A channel is a named input source that training algorithms can
     # consume.
     #
@@ -167,15 +526,19 @@ module Aws::SageMaker
     #         channel_name: "ChannelName", # required
     #         data_source: { # required
     #           s3_data_source: { # required
-    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #             s3_uri: "S3Uri", # required
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #             attribute_names: ["AttributeName"],
     #           },
     #         },
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
     #         record_wrapper_type: "None", # accepts None, RecordIO
     #         input_mode: "Pipe", # accepts Pipe, File
+    #         shuffle_config: {
+    #           seed: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] channel_name
@@ -198,15 +561,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] record_wrapper_type
     #   Specify RecordIO as the value when input data is in raw format but
-    #   the training algorithm requires the RecordIO format, in which case,
+    #   the training algorithm requires the RecordIO format. In this case,
     #   Amazon SageMaker wraps each individual S3 object in a RecordIO
     #   record. If the input data is already in RecordIO format, you don't
     #   need to set this attribute. For more information, see [Create a
     #   Dataset Using RecordIO][1].
     #
-    #   In FILE mode, leave this field unset or set it to None.
-    #
-    #
+    #   In File mode, leave this field unset or set it to None.
     #
     #
     #
@@ -228,6 +589,25 @@ module Aws::SageMaker
     #   To use a model for incremental training, choose `File` input model.
     #   @return [String]
     #
+    # @!attribute [rw] shuffle_config
+    #   A configuration for a shuffle option for input data in a channel. If
+    #   you use `S3Prefix` for `S3DataType`, this shuffles the results of
+    #   the S3 key prefix matches. If you use `ManifestFile`, the order of
+    #   the S3 object references in the `ManifestFile` is shuffled. If you
+    #   use `AugmentedManifestFile`, the order of the JSON lines in the
+    #   `AugmentedManifestFile` is shuffled. The shuffling order is
+    #   determined using the `Seed` value.
+    #
+    #   For Pipe input mode, shuffling is done at the start of every epoch.
+    #   With large datasets this ensures that the order of the training data
+    #   is different for each epoch, it helps reduce bias and possible
+    #   overfitting. In a multi-node training job when ShuffleConfig is
+    #   combined with `S3DataDistributionType` of `ShardedByS3Key`, the data
+    #   is shuffled across nodes so that the content sent to a particular
+    #   node on the first epoch might be sent to a different node on the
+    #   second epoch.
+    #   @return [Types::ShuffleConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -236,7 +616,181 @@ module Aws::SageMaker
       :content_type,
       :compression_type,
       :record_wrapper_type,
-      :input_mode)
+      :input_mode,
+      :shuffle_config)
+      include Aws::Structure
+    end
+
+    # Defines a named input source, called a channel, to be used by an
+    # algorithm.
+    #
+    # @note When making an API call, you may pass ChannelSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ChannelName", # required
+    #         description: "EntityDescription",
+    #         is_required: false,
+    #         supported_content_types: ["ContentType"], # required
+    #         supported_compression_types: ["None"], # accepts None, Gzip
+    #         supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the channel./sagemaker/eia
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_required
+    #   Indicates whether the channel is required by the algorithm.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_content_types
+    #   The supported MIME types for the data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_compression_types
+    #   The allowed compression types, if data compression is used.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_input_modes
+    #   The allowed input mode, either FILE or PIPE.
+    #
+    #   In FILE mode, Amazon SageMaker copies the data from the input source
+    #   onto the local Amazon Elastic Block Store (Amazon EBS) volumes
+    #   before starting your training algorithm. This is the most commonly
+    #   used input mode.
+    #
+    #   In PIPE mode, Amazon SageMaker streams input data from the source
+    #   directly to your algorithm without using the EBS volume.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ChannelSpecification AWS API Documentation
+    #
+    class ChannelSpecification < Struct.new(
+      :name,
+      :description,
+      :is_required,
+      :supported_content_types,
+      :supported_compression_types,
+      :supported_input_modes)
+      include Aws::Structure
+    end
+
+    # Specifies summary information about a git repository.
+    #
+    # @!attribute [rw] code_repository_name
+    #   The name of the git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_repository_arn
+    #   The Amazon Resource Name (ARN) of the git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the git repository was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the git repository was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] git_config
+    #   Configuration details for the git repository, including the URL
+    #   where it is located and the ARN of the AWS Secrets Manager secret
+    #   that contains the credentials used to access the repository.
+    #   @return [Types::GitConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeRepositorySummary AWS API Documentation
+    #
+    class CodeRepositorySummary < Struct.new(
+      :code_repository_name,
+      :code_repository_arn,
+      :creation_time,
+      :last_modified_time,
+      :git_config)
+      include Aws::Structure
+    end
+
+    # Identifies a Amazon Cognito user group. A user group can be used in on
+    # or more work teams.
+    #
+    # @note When making an API call, you may pass CognitoMemberDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool: "CognitoUserPool", # required
+    #         user_group: "CognitoUserGroup", # required
+    #         client_id: "CognitoClientId", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool
+    #   An identifier for a user pool. The user pool must be in the same
+    #   region as the service that you are calling.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_group
+    #   An identifier for a user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   An identifier for an application client. You must create the app
+    #   client ID using Amazon Cognito.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CognitoMemberDefinition AWS API Documentation
+    #
+    class CognitoMemberDefinition < Struct.new(
+      :user_pool,
+      :user_group,
+      :client_id)
+      include Aws::Structure
+    end
+
+    # A summary of a model compilation job.
+    #
+    # @!attribute [rw] compilation_job_name
+    #   The name of the model compilation job that you want a summary for.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_job_arn
+    #   The Amazon Resource Name (ARN) of the model compilation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the model compilation job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compilation_end_time
+    #   The time when the model compilation job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compilation_target_device
+    #   The type of device that the model will run on after compilation has
+    #   completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the model compilation job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compilation_job_status
+    #   The status of the model compilation job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CompilationJobSummary AWS API Documentation
+    #
+    class CompilationJobSummary < Struct.new(
+      :compilation_job_name,
+      :compilation_job_arn,
+      :creation_time,
+      :compilation_end_time,
+      :compilation_target_device,
+      :last_modified_time,
+      :compilation_job_status)
       include Aws::Structure
     end
 
@@ -247,11 +801,12 @@ module Aws::SageMaker
     #
     #       {
     #         container_hostname: "ContainerHostname",
-    #         image: "Image", # required
+    #         image: "Image",
     #         model_data_url: "Url",
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
+    #         model_package_name: "ArnOrName",
     #       }
     #
     # @!attribute [rw] container_hostname
@@ -283,7 +838,7 @@ module Aws::SageMaker
     #   you provide. AWS STS is activated in your IAM user account by
     #   default. If you previously deactivated AWS STS for a region, you
     #   need to reactivate AWS STS for that region. For more information,
-    #   see [Activating and Deactivating AWS STS in an AWS Region][1] in the
+    #   see [Activating and Deactivating AWS STS i an AWS Region][1] in the
     #   *AWS Identity and Access Management User Guide*.
     #
     #
@@ -297,13 +852,18 @@ module Aws::SageMaker
     #   of up to 1024. We support up to 16 entries in the map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] model_package_name
+    #   The name of the model package in this container.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
       :container_hostname,
       :image,
       :model_data_url,
-      :environment)
+      :environment,
+      :model_package_name)
       include Aws::Structure
     end
 
@@ -342,6 +902,400 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the possible values for a continuous hyperparameter.
+    #
+    # @note When making an API call, you may pass ContinuousParameterRangeSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         min_value: "ParameterValue", # required
+    #         max_value: "ParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] min_value
+    #   The minimum floating-point value allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum floating-point value allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContinuousParameterRangeSpecification AWS API Documentation
+    #
+    class ContinuousParameterRangeSpecification < Struct.new(
+      :min_value,
+      :max_value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAlgorithmInput
+    #   data as a hash:
+    #
+    #       {
+    #         algorithm_name: "EntityName", # required
+    #         algorithm_description: "EntityDescription",
+    #         training_specification: { # required
+    #           training_image: "Image", # required
+    #           training_image_digest: "ImageDigest",
+    #           supported_hyper_parameters: [
+    #             {
+    #               name: "ParameterName", # required
+    #               description: "EntityDescription",
+    #               type: "Integer", # required, accepts Integer, Continuous, Categorical, FreeText
+    #               range: {
+    #                 integer_parameter_range_specification: {
+    #                   min_value: "ParameterValue", # required
+    #                   max_value: "ParameterValue", # required
+    #                 },
+    #                 continuous_parameter_range_specification: {
+    #                   min_value: "ParameterValue", # required
+    #                   max_value: "ParameterValue", # required
+    #                 },
+    #                 categorical_parameter_range_specification: {
+    #                   values: ["ParameterValue"], # required
+    #                 },
+    #               },
+    #               is_tunable: false,
+    #               is_required: false,
+    #               default_value: "ParameterValue",
+    #             },
+    #           ],
+    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           supports_distributed_training: false,
+    #           metric_definitions: [
+    #             {
+    #               name: "MetricName", # required
+    #               regex: "MetricRegex", # required
+    #             },
+    #           ],
+    #           training_channels: [ # required
+    #             {
+    #               name: "ChannelName", # required
+    #               description: "EntityDescription",
+    #               is_required: false,
+    #               supported_content_types: ["ContentType"], # required
+    #               supported_compression_types: ["None"], # accepts None, Gzip
+    #               supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #             },
+    #           ],
+    #           supported_tuning_job_objective_metrics: [
+    #             {
+    #               type: "Maximize", # required, accepts Maximize, Minimize
+    #               metric_name: "MetricName", # required
+    #             },
+    #           ],
+    #         },
+    #         inference_specification: {
+    #           containers: [ # required
+    #             {
+    #               container_hostname: "ContainerHostname",
+    #               image: "Image", # required
+    #               image_digest: "ImageDigest",
+    #               model_data_url: "Url",
+    #               product_id: "ProductId",
+    #             },
+    #           ],
+    #           supported_transform_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           supported_content_types: ["ContentType"], # required
+    #           supported_response_mime_types: ["ResponseMIMEType"], # required
+    #         },
+    #         validation_specification: {
+    #           validation_role: "RoleArn", # required
+    #           validation_profiles: [ # required
+    #             {
+    #               profile_name: "EntityName", # required
+    #               training_job_definition: { # required
+    #                 training_input_mode: "Pipe", # required, accepts Pipe, File
+    #                 hyper_parameters: {
+    #                   "ParameterKey" => "ParameterValue",
+    #                 },
+    #                 input_data_config: [ # required
+    #                   {
+    #                     channel_name: "ChannelName", # required
+    #                     data_source: { # required
+    #                       s3_data_source: { # required
+    #                         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                         s3_uri: "S3Uri", # required
+    #                         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                         attribute_names: ["AttributeName"],
+    #                       },
+    #                     },
+    #                     content_type: "ContentType",
+    #                     compression_type: "None", # accepts None, Gzip
+    #                     record_wrapper_type: "None", # accepts None, RecordIO
+    #                     input_mode: "Pipe", # accepts Pipe, File
+    #                     shuffle_config: {
+    #                       seed: 1, # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 output_data_config: { # required
+    #                   kms_key_id: "KmsKeyId",
+    #                   s3_output_path: "S3Uri", # required
+    #                 },
+    #                 resource_config: { # required
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #                   instance_count: 1, # required
+    #                   volume_size_in_gb: 1, # required
+    #                   volume_kms_key_id: "KmsKeyId",
+    #                 },
+    #                 stopping_condition: { # required
+    #                   max_runtime_in_seconds: 1,
+    #                 },
+    #               },
+    #               transform_job_definition: {
+    #                 max_concurrent_transforms: 1,
+    #                 max_payload_in_mb: 1,
+    #                 batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #                 environment: {
+    #                   "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #                 },
+    #                 transform_input: { # required
+    #                   data_source: { # required
+    #                     s3_data_source: { # required
+    #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                       s3_uri: "S3Uri", # required
+    #                     },
+    #                   },
+    #                   content_type: "ContentType",
+    #                   compression_type: "None", # accepts None, Gzip
+    #                   split_type: "None", # accepts None, Line, RecordIO
+    #                 },
+    #                 transform_output: { # required
+    #                   s3_output_path: "S3Uri", # required
+    #                   accept: "Accept",
+    #                   assemble_with: "None", # accepts None, Line
+    #                   kms_key_id: "KmsKeyId",
+    #                 },
+    #                 transform_resources: { # required
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                   instance_count: 1, # required
+    #                   volume_kms_key_id: "KmsKeyId",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         certify_for_marketplace: false,
+    #       }
+    #
+    # @!attribute [rw] algorithm_name
+    #   The name of the algorithm. The name must have 1 to 63 characters.
+    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_description
+    #   A description of the algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_specification
+    #   Specifies details about training jobs run by this algorithm,
+    #   including the following:
+    #
+    #   * The Amazon ECR path of the container and the version digest of the
+    #     algorithm.
+    #
+    #   * The hyperparameters that the algorithm supports.
+    #
+    #   * The instance types that the algorithm supports for training.
+    #
+    #   * Whether the algorithm supports distributed training.
+    #
+    #   * The metrics that the algorithm emits to Amazon CloudWatch.
+    #
+    #   * Which metrics that the algorithm emits can be used as the
+    #     objective metric for hyperparameter tuning jobs.
+    #
+    #   * The input channels that the algorithm supports for training data.
+    #     For example, an algorithm might support `train`, `validation`, and
+    #     `test` channels.
+    #   @return [Types::TrainingSpecification]
+    #
+    # @!attribute [rw] inference_specification
+    #   Specifies details about inference jobs that the algorithm runs,
+    #   including the following:
+    #
+    #   * The Amazon ECR paths of containers that contain the inference code
+    #     and model artifacts.
+    #
+    #   * The instance types that the algorithm supports for transform jobs
+    #     and real-time endpoints used for inference.
+    #
+    #   * The input and output content formats that the algorithm supports
+    #     for inference.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] validation_specification
+    #   Specifies configurations for one or more training jobs and that
+    #   Amazon SageMaker runs to test the algorithm's training code and,
+    #   optionally, one or more batch transform jobs that Amazon SageMaker
+    #   runs to test the algorithm's inference code.
+    #   @return [Types::AlgorithmValidationSpecification]
+    #
+    # @!attribute [rw] certify_for_marketplace
+    #   Whether to certify the algorithm so that it can be listed in AWS
+    #   Marektplace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithmInput AWS API Documentation
+    #
+    class CreateAlgorithmInput < Struct.new(
+      :algorithm_name,
+      :algorithm_description,
+      :training_specification,
+      :inference_specification,
+      :validation_specification,
+      :certify_for_marketplace)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] algorithm_arn
+    #   The Amazon Resource Name (ARN) of the new algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithmOutput AWS API Documentation
+    #
+    class CreateAlgorithmOutput < Struct.new(
+      :algorithm_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCodeRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         code_repository_name: "EntityName", # required
+    #         git_config: { # required
+    #           repository_url: "Url", # required
+    #           branch: "Branch",
+    #           secret_arn: "SecretArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] code_repository_name
+    #   The name of the git repository. The name must have 1 to 63
+    #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] git_config
+    #   Specifies details about the repository, including the URL where the
+    #   repository is located, the default branch, and credentials to use to
+    #   access the repository.
+    #   @return [Types::GitConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCodeRepositoryInput AWS API Documentation
+    #
+    class CreateCodeRepositoryInput < Struct.new(
+      :code_repository_name,
+      :git_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_repository_arn
+    #   The Amazon Resource Name (ARN) of the new repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCodeRepositoryOutput AWS API Documentation
+    #
+    class CreateCodeRepositoryOutput < Struct.new(
+      :code_repository_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCompilationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compilation_job_name: "EntityName", # required
+    #         role_arn: "RoleArn", # required
+    #         input_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           data_input_config: "DataInputConfig", # required
+    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, MXNET, ONNX, PYTORCH, XGBOOST
+    #         },
+    #         output_config: { # required
+    #           s3_output_location: "S3Uri", # required
+    #           target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #         },
+    #         stopping_condition: { # required
+    #           max_runtime_in_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compilation_job_name
+    #   A name for the model compilation job. The name must be unique within
+    #   the AWS Region and within your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #
+    #   During model compilation, Amazon SageMaker needs your permission to:
+    #
+    #   * Read input data from an S3 bucket
+    #
+    #   * Write model artifacts to an S3 bucket
+    #
+    #   * Write logs to Amazon CloudWatch Logs
+    #
+    #   * Publish metrics to Amazon CloudWatch
+    #
+    #   You grant permissions for all of these tasks to an IAM role. To pass
+    #   this role to Amazon SageMaker, the caller of this API must have the
+    #   `iam:PassRole` permission. For more information, see [Amazon
+    #   SageMaker Roles.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Provides information about the location of input model artifacts,
+    #   the name and shape of the expected data inputs, and the framework in
+    #   which the model was trained.
+    #   @return [Types::InputConfig]
+    #
+    # @!attribute [rw] output_config
+    #   Provides information about the output location for the compiled
+    #   model and the target device the model runs on.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   The duration allowed for model compilation.
+    #   @return [Types::StoppingCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJobRequest AWS API Documentation
+    #
+    class CreateCompilationJobRequest < Struct.new(
+      :compilation_job_name,
+      :role_arn,
+      :input_config,
+      :output_config,
+      :stopping_condition)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compilation_job_arn
+    #   If the action is successful, the service sends back an HTTP 200
+    #   response. Amazon SageMaker returns the following data in JSON
+    #   format:
+    #
+    #   * `CompilationJobArn`\: The Amazon Resource Name (ARN) of the
+    #     compiled job.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJobResponse AWS API Documentation
+    #
+    class CreateCompilationJobResponse < Struct.new(
+      :compilation_job_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateEndpointConfigInput
     #   data as a hash:
     #
@@ -354,6 +1308,7 @@ module Aws::SageMaker
     #             initial_instance_count: 1, # required
     #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #             initial_variant_weight: 1.0,
+    #             accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
     #           },
     #         ],
     #         tags: [
@@ -519,6 +1474,7 @@ module Aws::SageMaker
     #           algorithm_specification: { # required
     #             training_image: "AlgorithmImage",
     #             training_input_mode: "Pipe", # required, accepts Pipe, File
+    #             algorithm_name: "ArnOrName",
     #             metric_definitions: [
     #               {
     #                 name: "MetricName", # required
@@ -532,15 +1488,19 @@ module Aws::SageMaker
     #               channel_name: "ChannelName", # required
     #               data_source: { # required
     #                 s3_data_source: { # required
-    #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                   s3_uri: "S3Uri", # required
     #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                   attribute_names: ["AttributeName"],
     #                 },
     #               },
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
     #               record_wrapper_type: "None", # accepts None, RecordIO
     #               input_mode: "Pipe", # accepts Pipe, File
+    #               shuffle_config: {
+    #                 seed: 1, # required
+    #               },
     #             },
     #           ],
     #           vpc_config: {
@@ -560,6 +1520,7 @@ module Aws::SageMaker
     #           stopping_condition: { # required
     #             max_runtime_in_seconds: 1,
     #           },
+    #           enable_network_isolation: false,
     #         },
     #         warm_start_config: {
     #           parent_hyper_parameter_tuning_jobs: [ # required
@@ -659,19 +1620,185 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLabelingJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         labeling_job_name: "LabelingJobName", # required
+    #         label_attribute_name: "LabelAttributeName", # required
+    #         input_config: { # required
+    #           data_source: { # required
+    #             s3_data_source: { # required
+    #               manifest_s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #           data_attributes: {
+    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #           },
+    #         },
+    #         output_config: { # required
+    #           s3_output_path: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         role_arn: "RoleArn", # required
+    #         label_category_config_s3_uri: "S3Uri",
+    #         stopping_conditions: {
+    #           max_human_labeled_object_count: 1,
+    #           max_percentage_of_input_dataset_labeled: 1,
+    #         },
+    #         labeling_job_algorithms_config: {
+    #           labeling_job_algorithm_specification_arn: "LabelingJobAlgorithmSpecificationArn", # required
+    #           initial_active_learning_model_arn: "ModelArn",
+    #           labeling_job_resource_config: {
+    #             volume_kms_key_id: "KmsKeyId",
+    #           },
+    #         },
+    #         human_task_config: { # required
+    #           workteam_arn: "WorkteamArn", # required
+    #           ui_config: { # required
+    #             ui_template_s3_uri: "S3Uri", # required
+    #           },
+    #           pre_human_task_lambda_arn: "LambdaFunctionArn", # required
+    #           task_keywords: ["TaskKeyword"],
+    #           task_title: "TaskTitle", # required
+    #           task_description: "TaskDescription", # required
+    #           number_of_human_workers_per_data_object: 1, # required
+    #           task_time_limit_in_seconds: 1, # required
+    #           task_availability_lifetime_in_seconds: 1,
+    #           max_concurrent_task_count: 1,
+    #           annotation_consolidation_config: { # required
+    #             annotation_consolidation_lambda_arn: "LambdaFunctionArn", # required
+    #           },
+    #           public_workforce_task_price: {
+    #             amount_in_usd: {
+    #               dollars: 1,
+    #               cents: 1,
+    #               tenth_fractions_of_a_cent: 1,
+    #             },
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] labeling_job_name
+    #   The name of the labeling job. This name is used to identify the job
+    #   in a list of labeling jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_attribute_name
+    #   The attribute name to use for the label in the output manifest file.
+    #   This is the key for the key/value pair formed with the label that a
+    #   worker assigns to the object. The name can't end with "-metadata"
+    #   or "-ref".
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Input data for the labeling job, such as the Amazon S3 location of
+    #   the data objects and the location of the manifest file that
+    #   describes the data objects.
+    #   @return [Types::LabelingJobInputConfig]
+    #
+    # @!attribute [rw] output_config
+    #   The location of the output data and the AWS Key Management Service
+    #   key ID for the key used to encrypt the output data, if any.
+    #   @return [Types::LabelingJobOutputConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
+    #   perform tasks on your behalf during data labeling. You must grant
+    #   this role the necessary permissions so that Amazon SageMaker can
+    #   successfully complete data labeling.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_category_config_s3_uri
+    #   The S3 URL of the file that defines the categories used to label the
+    #   data objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopping_conditions
+    #   A set of conditions for stopping the labeling job. If any of the
+    #   conditions are met, the job is automatically stopped. You can use
+    #   these conditions to control the cost of data labeling.
+    #   @return [Types::LabelingJobStoppingConditions]
+    #
+    # @!attribute [rw] labeling_job_algorithms_config
+    #   Configures the information required to perform automated data
+    #   labeling.
+    #   @return [Types::LabelingJobAlgorithmsConfig]
+    #
+    # @!attribute [rw] human_task_config
+    #   Configures the information required for human workers to complete a
+    #   labeling task.
+    #   @return [Types::HumanTaskConfig]
+    #
+    # @!attribute [rw] tags
+    #   An array of key/value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJobRequest AWS API Documentation
+    #
+    class CreateLabelingJobRequest < Struct.new(
+      :labeling_job_name,
+      :label_attribute_name,
+      :input_config,
+      :output_config,
+      :role_arn,
+      :label_category_config_s3_uri,
+      :stopping_conditions,
+      :labeling_job_algorithms_config,
+      :human_task_config,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) of the labeling job. You use this ARN
+    #   to identify the labeling job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJobResponse AWS API Documentation
+    #
+    class CreateLabelingJobResponse < Struct.new(
+      :labeling_job_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateModelInput
     #   data as a hash:
     #
     #       {
     #         model_name: "ModelName", # required
-    #         primary_container: { # required
+    #         primary_container: {
     #           container_hostname: "ContainerHostname",
-    #           image: "Image", # required
+    #           image: "Image",
     #           model_data_url: "Url",
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
     #           },
+    #           model_package_name: "ArnOrName",
     #         },
+    #         containers: [
+    #           {
+    #             container_hostname: "ContainerHostname",
+    #             image: "Image",
+    #             model_data_url: "Url",
+    #             environment: {
+    #               "EnvironmentKey" => "EnvironmentValue",
+    #             },
+    #             model_package_name: "ArnOrName",
+    #           },
+    #         ],
     #         execution_role_arn: "RoleArn", # required
     #         tags: [
     #           {
@@ -683,6 +1810,7 @@ module Aws::SageMaker
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         enable_network_isolation: false,
     #       }
     #
     # @!attribute [rw] model_name
@@ -694,6 +1822,10 @@ module Aws::SageMaker
     #   associated artifacts, and custom environment map that the inference
     #   code uses when the model is deployed for predictions.
     #   @return [Types::ContainerDefinition]
+    #
+    # @!attribute [rw] containers
+    #   Specifies the containers in the inference pipeline.
+    #   @return [Array<Types::ContainerDefinition>]
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
@@ -736,14 +1868,26 @@ module Aws::SageMaker
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] enable_network_isolation
+    #   Isolates the model container. No inbound or outbound network calls
+    #   can be made to or from the model container.
+    #
+    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
+    #   network isolation.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
     #
     class CreateModelInput < Struct.new(
       :model_name,
       :primary_container,
+      :containers,
       :execution_role_arn,
       :tags,
-      :vpc_config)
+      :vpc_config,
+      :enable_network_isolation)
       include Aws::Structure
     end
 
@@ -755,6 +1899,136 @@ module Aws::SageMaker
     #
     class CreateModelOutput < Struct.new(
       :model_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateModelPackageInput
+    #   data as a hash:
+    #
+    #       {
+    #         model_package_name: "EntityName", # required
+    #         model_package_description: "EntityDescription",
+    #         inference_specification: {
+    #           containers: [ # required
+    #             {
+    #               container_hostname: "ContainerHostname",
+    #               image: "Image", # required
+    #               image_digest: "ImageDigest",
+    #               model_data_url: "Url",
+    #               product_id: "ProductId",
+    #             },
+    #           ],
+    #           supported_transform_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           supported_realtime_inference_instance_types: ["ml.t2.medium"], # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           supported_content_types: ["ContentType"], # required
+    #           supported_response_mime_types: ["ResponseMIMEType"], # required
+    #         },
+    #         validation_specification: {
+    #           validation_role: "RoleArn", # required
+    #           validation_profiles: [ # required
+    #             {
+    #               profile_name: "EntityName", # required
+    #               transform_job_definition: { # required
+    #                 max_concurrent_transforms: 1,
+    #                 max_payload_in_mb: 1,
+    #                 batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #                 environment: {
+    #                   "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #                 },
+    #                 transform_input: { # required
+    #                   data_source: { # required
+    #                     s3_data_source: { # required
+    #                       s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                       s3_uri: "S3Uri", # required
+    #                     },
+    #                   },
+    #                   content_type: "ContentType",
+    #                   compression_type: "None", # accepts None, Gzip
+    #                   split_type: "None", # accepts None, Line, RecordIO
+    #                 },
+    #                 transform_output: { # required
+    #                   s3_output_path: "S3Uri", # required
+    #                   accept: "Accept",
+    #                   assemble_with: "None", # accepts None, Line
+    #                   kms_key_id: "KmsKeyId",
+    #                 },
+    #                 transform_resources: { # required
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                   instance_count: 1, # required
+    #                   volume_kms_key_id: "KmsKeyId",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         source_algorithm_specification: {
+    #           source_algorithms: [ # required
+    #             {
+    #               model_data_url: "Url",
+    #               algorithm_name: "ArnOrName", # required
+    #             },
+    #           ],
+    #         },
+    #         certify_for_marketplace: false,
+    #       }
+    #
+    # @!attribute [rw] model_package_name
+    #   The name of the model package. The name must have 1 to 63
+    #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_description
+    #   A description of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_specification
+    #   Specifies details about inference jobs that can be run with models
+    #   based on this model package, including the following:
+    #
+    #   * The Amazon ECR paths of containers that contain the inference code
+    #     and model artifacts.
+    #
+    #   * The instance types that the model package supports for transform
+    #     jobs and real-time endpoints used for inference.
+    #
+    #   * The input and output content formats that the model package
+    #     supports for inference.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] validation_specification
+    #   Specifies configurations for one or more transform jobs that Amazon
+    #   SageMaker runs to test the model package.
+    #   @return [Types::ModelPackageValidationSpecification]
+    #
+    # @!attribute [rw] source_algorithm_specification
+    #   Details about the algorithm that was used to create the model
+    #   package.
+    #   @return [Types::SourceAlgorithmSpecification]
+    #
+    # @!attribute [rw] certify_for_marketplace
+    #   Whether to certify the model package for listing on AWS Marketplace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
+    #
+    class CreateModelPackageInput < Struct.new(
+      :model_package_name,
+      :model_package_description,
+      :inference_specification,
+      :validation_specification,
+      :source_algorithm_specification,
+      :certify_for_marketplace)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_package_arn
+    #   The Amazon Resource Name (ARN) of the new model package.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageOutput AWS API Documentation
+    #
+    class CreateModelPackageOutput < Struct.new(
+      :model_package_arn)
       include Aws::Structure
     end
 
@@ -777,6 +2051,9 @@ module Aws::SageMaker
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         direct_internet_access: "Enabled", # accepts Enabled, Disabled
     #         volume_size_in_gb: 1,
+    #         accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
+    #         default_code_repository: "CodeRepositoryNameOrUrl",
+    #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -819,13 +2096,7 @@ module Aws::SageMaker
     # @!attribute [rw] kms_key_id
     #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
     #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance. The KMS key you provide must be enabled. For
-    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
-    #   Management Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
+    #   notebook instance.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -864,6 +2135,47 @@ module Aws::SageMaker
     #   instance. The default value is 5 GB.
     #   @return [Integer]
     #
+    # @!attribute [rw] accelerator_types
+    #   A list of Elastic Inference (EI) instance types to associate with
+    #   this notebook instance. Currently, only one instance type can be
+    #   associated with a notebook intance. For more information, see [Using
+    #   Elastic Inference in Amazon SageMaker][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_code_repository
+    #   A git repository to associate with the notebook instance as its
+    #   default code repository. This can be either the name of a git
+    #   repository stored as a resource in your account, or the URL of a git
+    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   When you open a notebook instance, it opens in the directory that
+    #   contains this repository. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_code_repositories
+    #   An array of up to 3 git repositories to associate with the notebook
+    #   instance. These can be either the names of git repositories stored
+    #   as resources in your account, or the URL of git repositories in [AWS
+    #   CodeCommit][1] or in any other git repository. These repositories
+    #   are cloned at the same level as the default repository of your
+    #   notebook instance. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
     class CreateNotebookInstanceInput < Struct.new(
@@ -876,7 +2188,10 @@ module Aws::SageMaker
       :tags,
       :lifecycle_config_name,
       :direct_internet_access,
-      :volume_size_in_gb)
+      :volume_size_in_gb,
+      :accelerator_types,
+      :default_code_repository,
+      :additional_code_repositories)
       include Aws::Structure
     end
 
@@ -988,6 +2303,7 @@ module Aws::SageMaker
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
+    #           algorithm_name: "ArnOrName",
     #           training_input_mode: "Pipe", # required, accepts Pipe, File
     #           metric_definitions: [
     #             {
@@ -1002,15 +2318,19 @@ module Aws::SageMaker
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
     #               s3_data_source: { # required
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                 attribute_names: ["AttributeName"],
     #               },
     #             },
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
     #             input_mode: "Pipe", # accepts Pipe, File
+    #             shuffle_config: {
+    #               seed: 1, # required
+    #             },
     #           },
     #         ],
     #         output_data_config: { # required
@@ -1036,6 +2356,7 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         enable_network_isolation: false,
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -1074,7 +2395,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   can assume to perform tasks on your behalf.
+    #   assumes to perform tasks on your behalf.
     #
     #   During model training, Amazon SageMaker needs your permission to
     #   read input data from an S3 bucket, download a Docker image that
@@ -1163,6 +2484,21 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] enable_network_isolation
+    #   Isolates the training container. No inbound or outbound network
+    #   calls can be made, except for calls between peers within a training
+    #   cluster for distributed training. If network isolation is used for
+    #   training jobs that are configured to use a VPC, Amazon SageMaker
+    #   downloads and uploads customer data and model artifacts through the
+    #   specifed VPC, but the training container does not have network
+    #   access.
+    #
+    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
+    #   network isolation.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -1175,7 +2511,8 @@ module Aws::SageMaker
       :resource_config,
       :vpc_config,
       :stopping_condition,
-      :tags)
+      :tags,
+      :enable_network_isolation)
       include Aws::Structure
     end
 
@@ -1205,7 +2542,7 @@ module Aws::SageMaker
     #         transform_input: { # required
     #           data_source: { # required
     #             s3_data_source: { # required
-    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #               s3_uri: "S3Uri", # required
     #             },
     #           },
@@ -1257,10 +2594,15 @@ module Aws::SageMaker
     #   `MaxPayloadInMB` must be greater or equal to the size of a single
     #   record. You can approximate the size of a record by dividing the
     #   size of your dataset by the number of records. Then multiply this
-    #   value by the number of records you want in a mini-batch. It is
-    #   recommended to enter a value slightly larger than this to ensure the
+    #   value by the number of records you want in a mini-batch. We
+    #   recommend to enter a slightly larger value than this to ensure the
     #   records fit within the maximum payload size. The default value is
-    #   `6` MB. For an unlimited payload size, set the value to `0`.
+    #   `6` MB.
+    #
+    #   For cases where the payload might be arbitrarily large and is
+    #   transmitted using HTTP chunked encoding, set the value to `0`. This
+    #   feature only works in supported algorithms. Currently, Amazon
+    #   SageMaker built-in algorithms do not support this feature.
     #   @return [Integer]
     #
     # @!attribute [rw] batch_strategy
@@ -1332,6 +2674,75 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWorkteamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_name: "WorkteamName", # required
+    #         member_definitions: [ # required
+    #           {
+    #             cognito_member_definition: {
+    #               user_pool: "CognitoUserPool", # required
+    #               user_group: "CognitoUserGroup", # required
+    #               client_id: "CognitoClientId", # required
+    #             },
+    #           },
+    #         ],
+    #         description: "String200", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] workteam_name
+    #   The name of the work team. Use this name to identify the work team.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_definitions
+    #   A list of `MemberDefinition` objects that contains objects that
+    #   identify the Amazon Cognito user pool that makes up the work team.
+    #   For more information, see [Amazon Cognito User Pools][1].
+    #
+    #   All of the `CognitoMemberDefinition` objects that make up the member
+    #   definition must have the same `ClientId` and `UserPool` values.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
+    #   @return [Array<Types::MemberDefinition>]
+    #
+    # @!attribute [rw] description
+    #   A description of the work team.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkteamRequest AWS API Documentation
+    #
+    class CreateWorkteamRequest < Struct.new(
+      :workteam_name,
+      :member_definitions,
+      :description,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) of the work team. You can use this
+    #   ARN to identify the work team.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkteamResponse AWS API Documentation
+    #
+    class CreateWorkteamResponse < Struct.new(
+      :workteam_arn)
+      include Aws::Structure
+    end
+
     # Describes the location of the channel data.
     #
     # @note When making an API call, you may pass DataSource
@@ -1339,9 +2750,10 @@ module Aws::SageMaker
     #
     #       {
     #         s3_data_source: { # required
-    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #           s3_uri: "S3Uri", # required
     #           s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #           attribute_names: ["AttributeName"],
     #         },
     #       }
     #
@@ -1354,6 +2766,42 @@ module Aws::SageMaker
     #
     class DataSource < Struct.new(
       :s3_data_source)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAlgorithmInput
+    #   data as a hash:
+    #
+    #       {
+    #         algorithm_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] algorithm_name
+    #   The name of the algorithm to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAlgorithmInput AWS API Documentation
+    #
+    class DeleteAlgorithmInput < Struct.new(
+      :algorithm_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCodeRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         code_repository_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] code_repository_name
+    #   The name of the git repository to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCodeRepositoryInput AWS API Documentation
+    #
+    class DeleteCodeRepositoryInput < Struct.new(
+      :code_repository_name)
       include Aws::Structure
     end
 
@@ -1408,6 +2856,25 @@ module Aws::SageMaker
     #
     class DeleteModelInput < Struct.new(
       :model_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteModelPackageInput
+    #   data as a hash:
+    #
+    #       {
+    #         model_package_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] model_package_name
+    #   The name of the model package. The name must have 1 to 63
+    #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackageInput AWS API Documentation
+    #
+    class DeleteModelPackageInput < Struct.new(
+      :model_package_name)
       include Aws::Structure
     end
 
@@ -1476,6 +2943,36 @@ module Aws::SageMaker
     #
     class DeleteTagsOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteWorkteamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_name: "WorkteamName", # required
+    #       }
+    #
+    # @!attribute [rw] workteam_name
+    #   The name of the work team to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkteamRequest AWS API Documentation
+    #
+    class DeleteWorkteamRequest < Struct.new(
+      :workteam_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] success
+    #   Returns `true` if the work team was successfully deleted; otherwise,
+    #   returns `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkteamResponse AWS API Documentation
+    #
+    class DeleteWorkteamResponse < Struct.new(
+      :success)
+      include Aws::Structure
+    end
+
     # Gets the Amazon EC2 Container Registry path of the docker image of the
     # model that is hosted in this ProductionVariant.
     #
@@ -1511,6 +3008,244 @@ module Aws::SageMaker
       :specified_image,
       :resolved_image,
       :resolution_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAlgorithmInput
+    #   data as a hash:
+    #
+    #       {
+    #         algorithm_name: "ArnOrName", # required
+    #       }
+    #
+    # @!attribute [rw] algorithm_name
+    #   The name of the algorithm to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithmInput AWS API Documentation
+    #
+    class DescribeAlgorithmInput < Struct.new(
+      :algorithm_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] algorithm_name
+    #   The name of the algorithm being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_arn
+    #   The Amazon Resource Name (ARN) of the algorithm.&gt;
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_description
+    #   A brief summary about the algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp specifying when the algorithm was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_specification
+    #   Details about training jobs run by this algorithm.
+    #   @return [Types::TrainingSpecification]
+    #
+    # @!attribute [rw] inference_specification
+    #   Details about inference jobs that the algorithm runs.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] validation_specification
+    #   Details about configurations for one or more training jobs that
+    #   Amazon SageMaker runs to test the algorithm.
+    #   @return [Types::AlgorithmValidationSpecification]
+    #
+    # @!attribute [rw] algorithm_status
+    #   The current status of the algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_status_details
+    #   Details about the current status of the algorithm.
+    #   @return [Types::AlgorithmStatusDetails]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier of the algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] certify_for_marketplace
+    #   Whether the algorithm is certified to be listed in AWS Marektplace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithmOutput AWS API Documentation
+    #
+    class DescribeAlgorithmOutput < Struct.new(
+      :algorithm_name,
+      :algorithm_arn,
+      :algorithm_description,
+      :creation_time,
+      :training_specification,
+      :inference_specification,
+      :validation_specification,
+      :algorithm_status,
+      :algorithm_status_details,
+      :product_id,
+      :certify_for_marketplace)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCodeRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         code_repository_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] code_repository_name
+    #   The name of the git repository to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepositoryInput AWS API Documentation
+    #
+    class DescribeCodeRepositoryInput < Struct.new(
+      :code_repository_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_repository_name
+    #   The name of the git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_repository_arn
+    #   The Amazon Resource Name (ARN) of the git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the repository was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the repository was last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] git_config
+    #   Configuration details about the repository, including the URL where
+    #   the repository is located, the default branch, and the Amazon
+    #   Resource Name (ARN) of the AWS Secrets Manager secret that contains
+    #   the credentials used to access the repository.
+    #   @return [Types::GitConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepositoryOutput AWS API Documentation
+    #
+    class DescribeCodeRepositoryOutput < Struct.new(
+      :code_repository_name,
+      :code_repository_arn,
+      :creation_time,
+      :last_modified_time,
+      :git_config)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCompilationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compilation_job_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] compilation_job_name
+    #   The name of the model compilation job that you want information
+    #   about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobRequest AWS API Documentation
+    #
+    class DescribeCompilationJobRequest < Struct.new(
+      :compilation_job_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compilation_job_name
+    #   The name of the model compilation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_job_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
+    #   assumes to perform the model compilation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_job_status
+    #   The status of the model compilation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] compilation_start_time
+    #   The time when the model compilation job started the `CompilationJob`
+    #   instances.
+    #
+    #   You are billed for the time between this timestamp and the timestamp
+    #   in the DescribeCompilationJobResponse$CompilationEndTime field. In
+    #   Amazon CloudWatch Logs, the start time might be later than this
+    #   time. That's because it takes time to download the compilation job,
+    #   which depends on the size of the compilation job container.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compilation_end_time
+    #   The time when the model compilation job on a compilation job
+    #   instance ended. For a successful or stopped job, this is when the
+    #   job's model artifacts have finished uploading. For a failed job,
+    #   this is when Amazon SageMaker detected that the job failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stopping_condition
+    #   The duration allowed for model compilation.
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the model compilation job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time that the status of the model compilation job was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a model compilation job failed, the reason it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_artifacts
+    #   Information about the location in Amazon S3 that has been configured
+    #   for storing the model artifacts used in the compilation job.
+    #   @return [Types::ModelArtifacts]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the model compilation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Information about the location in Amazon S3 of the input model
+    #   artifacts, the name and shape of the expected data inputs, and the
+    #   framework in which the model was trained.
+    #   @return [Types::InputConfig]
+    #
+    # @!attribute [rw] output_config
+    #   Information about the output location for the compiled model and the
+    #   target device that the model runs on.
+    #   @return [Types::OutputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobResponse AWS API Documentation
+    #
+    class DescribeCompilationJobResponse < Struct.new(
+      :compilation_job_name,
+      :compilation_job_arn,
+      :compilation_job_status,
+      :compilation_start_time,
+      :compilation_end_time,
+      :stopping_condition,
+      :creation_time,
+      :last_modified_time,
+      :failure_reason,
+      :model_artifacts,
+      :role_arn,
+      :input_config,
+      :output_config)
       include Aws::Structure
     end
 
@@ -1733,11 +3468,11 @@ module Aws::SageMaker
     #   @return [Types::HyperParameterTrainingJobSummary]
     #
     # @!attribute [rw] overall_best_training_job
-    #   If the hyperparameter tuning job is an incremental tuning job with a
+    #   If the hyperparameter tuning job is an warm start tuning job with a
     #   `WarmStartType` of `IDENTICAL_DATA_AND_ALGORITHM`, this is the
     #   TrainingJobSummary for the training job with the best objective
     #   metric value of all training jobs launched by this tuning job and
-    #   all parent jobs specified for the incremental tuning job.
+    #   all parent jobs specified for the warm start tuning job.
     #   @return [Types::HyperParameterTrainingJobSummary]
     #
     # @!attribute [rw] warm_start_config
@@ -1772,6 +3507,136 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeLabelingJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         labeling_job_name: "LabelingJobName", # required
+    #       }
+    #
+    # @!attribute [rw] labeling_job_name
+    #   The name of the labeling job to return information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLabelingJobRequest AWS API Documentation
+    #
+    class DescribeLabelingJobRequest < Struct.new(
+      :labeling_job_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] labeling_job_status
+    #   The processing status of the labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_counters
+    #   Provides a breakdown of the number of data objects labeled by
+    #   humans, the number of objects labeled by machine, the number of
+    #   objects than couldn't be labeled, and the total number of objects
+    #   labeled.
+    #   @return [Types::LabelCounters]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the job failed, the reason that it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the labeling job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the labeling job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_reference_code
+    #   A unique identifier for work done as part of a labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_name
+    #   The name assigned to the labeling job when it was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) of the labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_attribute_name
+    #   The attribute used as the label in the output manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Input configuration information for the labeling job, such as the
+    #   Amazon S3 location of the data objects and the location of the
+    #   manifest file that describes the data objects.
+    #   @return [Types::LabelingJobInputConfig]
+    #
+    # @!attribute [rw] output_config
+    #   The location of the job's output data and the AWS Key Management
+    #   Service key ID for the key used to encrypt the output data, if any.
+    #   @return [Types::LabelingJobOutputConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) that Amazon SageMaker assumes to
+    #   perform tasks on your behalf during data labeling.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_category_config_s3_uri
+    #   The S3 location of the JSON file that defines the categories used to
+    #   label data objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopping_conditions
+    #   A set of conditions for stopping a labeling job. If any of the
+    #   conditions are met, the job is automatically stopped.
+    #   @return [Types::LabelingJobStoppingConditions]
+    #
+    # @!attribute [rw] labeling_job_algorithms_config
+    #   Configuration information for automated data labeling.
+    #   @return [Types::LabelingJobAlgorithmsConfig]
+    #
+    # @!attribute [rw] human_task_config
+    #   Configuration information required for human workers to complete a
+    #   labeling task.
+    #   @return [Types::HumanTaskConfig]
+    #
+    # @!attribute [rw] tags
+    #   An array of key/value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] labeling_job_output
+    #   The location of the output produced by the labeling job.
+    #   @return [Types::LabelingJobOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLabelingJobResponse AWS API Documentation
+    #
+    class DescribeLabelingJobResponse < Struct.new(
+      :labeling_job_status,
+      :label_counters,
+      :failure_reason,
+      :creation_time,
+      :last_modified_time,
+      :job_reference_code,
+      :labeling_job_name,
+      :labeling_job_arn,
+      :label_attribute_name,
+      :input_config,
+      :output_config,
+      :role_arn,
+      :label_category_config_s3_uri,
+      :stopping_conditions,
+      :labeling_job_algorithms_config,
+      :human_task_config,
+      :tags,
+      :labeling_job_output)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeModelInput
     #   data as a hash:
     #
@@ -1800,6 +3665,10 @@ module Aws::SageMaker
     #   deployed in production.
     #   @return [Types::ContainerDefinition]
     #
+    # @!attribute [rw] containers
+    #   The containers in the inference pipeline.
+    #   @return [Array<Types::ContainerDefinition>]
+    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that you specified
     #   for the model.
@@ -1823,15 +3692,105 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the model.
     #   @return [String]
     #
+    # @!attribute [rw] enable_network_isolation
+    #   If `True`, no inbound or outbound network calls can be made to or
+    #   from the model container.
+    #
+    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
+    #   network isolation.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput AWS API Documentation
     #
     class DescribeModelOutput < Struct.new(
       :model_name,
       :primary_container,
+      :containers,
       :execution_role_arn,
       :vpc_config,
       :creation_time,
-      :model_arn)
+      :model_arn,
+      :enable_network_isolation)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeModelPackageInput
+    #   data as a hash:
+    #
+    #       {
+    #         model_package_name: "ArnOrName", # required
+    #       }
+    #
+    # @!attribute [rw] model_package_name
+    #   The name of the model package to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageInput AWS API Documentation
+    #
+    class DescribeModelPackageInput < Struct.new(
+      :model_package_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_package_name
+    #   The name of the model package being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_arn
+    #   The Amazon Resource Name (ARN) of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_description
+    #   A brief summary about the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp specifying when the model package was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inference_specification
+    #   Details about inference jobs that can be run with models based on
+    #   this model package.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] source_algorithm_specification
+    #   Details about the algorithm that was used to create the model
+    #   package.
+    #   @return [Types::SourceAlgorithmSpecification]
+    #
+    # @!attribute [rw] validation_specification
+    #   Configurations for one or more transform jobs that Amazon SageMaker
+    #   runs to test the model package.
+    #   @return [Types::ModelPackageValidationSpecification]
+    #
+    # @!attribute [rw] model_package_status
+    #   The current status of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_status_details
+    #   Details about the current status of the model package.
+    #   @return [Types::ModelPackageStatusDetails]
+    #
+    # @!attribute [rw] certify_for_marketplace
+    #   Whether the model package is certified for listing on AWS
+    #   Marketplace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
+    #
+    class DescribeModelPackageOutput < Struct.new(
+      :model_package_name,
+      :model_package_arn,
+      :model_package_description,
+      :creation_time,
+      :inference_specification,
+      :source_algorithm_specification,
+      :validation_specification,
+      :model_package_status,
+      :model_package_status_details,
+      :certify_for_marketplace)
       include Aws::Structure
     end
 
@@ -1998,6 +3957,47 @@ module Aws::SageMaker
     #   instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] accelerator_types
+    #   A list of the Elastic Inference (EI) instance types associated with
+    #   this notebook instance. Currently only one EI instance type can be
+    #   associated with a notebook instance. For more information, see
+    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_code_repository
+    #   The git repository associated with the notebook instance as its
+    #   default code repository. This can be either the name of a git
+    #   repository stored as a resource in your account, or the URL of a git
+    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   When you open a notebook instance, it opens in the directory that
+    #   contains this repository. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_code_repositories
+    #   An array of up to 3 git repositories associated with the notebook
+    #   instance. These can be either the names of git repositories stored
+    #   as resources in your account, or the URL of git repositories in [AWS
+    #   CodeCommit][1] or in any other git repository. These repositories
+    #   are cloned at the same level as the default repository of your
+    #   notebook instance. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
     class DescribeNotebookInstanceOutput < Struct.new(
@@ -2016,7 +4016,40 @@ module Aws::SageMaker
       :creation_time,
       :notebook_instance_lifecycle_config_name,
       :direct_internet_access,
-      :volume_size_in_gb)
+      :volume_size_in_gb,
+      :accelerator_types,
+      :default_code_repository,
+      :additional_code_repositories)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSubscribedWorkteamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_arn: "WorkteamArn", # required
+    #       }
+    #
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) of the subscribed work team to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSubscribedWorkteamRequest AWS API Documentation
+    #
+    class DescribeSubscribedWorkteamRequest < Struct.new(
+      :workteam_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscribed_workteam
+    #   A `Workteam` instance that contains information about the work team.
+    #   @return [Types::SubscribedWorkteam]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSubscribedWorkteamResponse AWS API Documentation
+    #
+    class DescribeSubscribedWorkteamResponse < Struct.new(
+      :subscribed_workteam)
       include Aws::Structure
     end
 
@@ -2050,6 +4083,11 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the associated hyperparameter
     #   tuning job if the training job was launched by a hyperparameter
     #   tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth
+    #   labeling job that created the transform or training job.
     #   @return [String]
     #
     # @!attribute [rw] model_artifacts
@@ -2217,12 +4255,27 @@ module Aws::SageMaker
     #   CloudWatch.
     #   @return [Array<Types::MetricData>]
     #
+    # @!attribute [rw] enable_network_isolation
+    #   If `True`, inbound or outbound network calls can be made, except for
+    #   calls between peers within a training cluster for distributed
+    #   training. If network isolation is used for training jobs that are
+    #   configured to use a VPC, Amazon SageMaker downloads and uploads
+    #   customer data and model artifacts through the specifed VPC, but the
+    #   training container does not have network access.
+    #
+    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
+    #   network isolation.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
       :training_job_name,
       :training_job_arn,
       :tuning_job_arn,
+      :labeling_job_arn,
       :model_artifacts,
       :training_job_status,
       :secondary_status,
@@ -2240,7 +4293,8 @@ module Aws::SageMaker
       :training_end_time,
       :last_modified_time,
       :secondary_status_transitions,
-      :final_metric_data_list)
+      :final_metric_data_list,
+      :enable_network_isolation)
       include Aws::Structure
     end
 
@@ -2332,6 +4386,11 @@ module Aws::SageMaker
     #   the value of `TransformStartTime`.
     #   @return [Time]
     #
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth
+    #   labeling job that created the transform or training job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJobResponse AWS API Documentation
     #
     class DescribeTransformJobResponse < Struct.new(
@@ -2349,7 +4408,37 @@ module Aws::SageMaker
       :transform_resources,
       :creation_time,
       :transform_start_time,
-      :transform_end_time)
+      :transform_end_time,
+      :labeling_job_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWorkteamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_name: "WorkteamName", # required
+    #       }
+    #
+    # @!attribute [rw] workteam_name
+    #   The name of the work team to return a description of.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteamRequest AWS API Documentation
+    #
+    class DescribeWorkteamRequest < Struct.new(
+      :workteam_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workteam
+    #   A `Workteam` instance that contains information about the work team.
+    #   @return [Types::Workteam]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteamResponse AWS API Documentation
+    #
+    class DescribeWorkteamResponse < Struct.new(
+      :workteam)
       include Aws::Structure
     end
 
@@ -2476,6 +4565,131 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A conditional statement for a search expression that includes a
+    # Boolean operator, a resource property, and a value.
+    #
+    # If you don't specify an `Operator` and a `Value`, the filter searches
+    # for only the specified property. For example, defining a `Filter` for
+    # the `FailureReason` for the `TrainingJob` `Resource` searches for
+    # training job objects that have a value in the `FailureReason` field.
+    #
+    # If you specify a `Value`, but not an `Operator`, Amazon SageMaker uses
+    # the equals operator as a default.
+    #
+    # In search, there are several property types:
+    #
+    # Metrics
+    #
+    # : To define a metric filter, enter a value using the form
+    #   `"Metrics.<name>"`, where `<name>` is a metric name. For example,
+    #   the following filter searches for training jobs with an `"accuracy"`
+    #   metric greater than `"0.9"`\:
+    #
+    #   `\{`
+    #
+    #   `"Name": "Metrics.accuracy",`
+    #
+    #   `"Operator": "GREATER_THAN",`
+    #
+    #   `"Value": "0.9"`
+    #
+    #   `\}`
+    #
+    # HyperParameters
+    #
+    # : To define a hyperparameter filter, enter a value with the form
+    #   `"HyperParamters.<name>"`. Decimal hyperparameter values are treated
+    #   as a decimal in a comparison if the specified `Value` is also a
+    #   decimal value. If the specified `Value` is an integer, the decimal
+    #   hyperparameter values are treated as integers. For example, the
+    #   following filter is satisfied by training jobs with a
+    #   `"learning_rate"` hyperparameter that is less than `"0.5"`\:
+    #
+    #   ` \{`
+    #
+    #   ` "Name": "HyperParameters.learning_rate",`
+    #
+    #   ` "Operator": "LESS_THAN",`
+    #
+    #   ` "Value": "0.5"`
+    #
+    #   ` \}`
+    #
+    # Tags
+    #
+    # : To define a tag filter, enter a value with the form `"Tags.<key>"`.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourcePropertyName", # required
+    #         operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #         value: "FilterValue",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A property name. For example, `TrainingJobName`. See TrainingJob
+    #   properties for the list of valid property names for each supported
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   A Boolean binary operator that is used to evaluate the filter. The
+    #   operator field contains one of the following values:
+    #
+    #   Equals
+    #
+    #   : The specified resource in `Name` equals the specified `Value`.
+    #
+    #   NotEquals
+    #
+    #   : The specified resource in `Name` does not equal the specified
+    #     `Value`.
+    #
+    #   GreaterThan
+    #
+    #   : The specified resource in `Name` is greater than the specified
+    #     `Value`. Not supported for text-based properties.
+    #
+    #   GreaterThanOrEqualTo
+    #
+    #   : The specified resource in `Name` is greater than or equal to the
+    #     specified `Value`. Not supported for text-based properties.
+    #
+    #   LessThan
+    #
+    #   : The specified resource in `Name` is less than the specified
+    #     `Value`. Not supported for text-based properties.
+    #
+    #   LessThanOrEqualTo
+    #
+    #   : The specified resource in `Name` is less than or equal to the
+    #     specified `Value`. Not supported for text-based properties.
+    #
+    #   Contains
+    #
+    #   : Only supported for text-based properties. The word-list of the
+    #     property contains the specified `Value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A value used with `Resource` and `Operator` to determin if objects
+    #   statisfy the filter's condition. For numerical properties, `Value`
+    #   must be an integer or floating-point decimal. For timestamp
+    #   properties, `Value` must be an ISO 8601 date-time string of the
+    #   following format: `YYYY-mm-dd'T'HH:MM:SS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :name,
+      :operator,
+      :value)
+      include Aws::Structure
+    end
+
     # Shows the final value for the objective metric for a training job that
     # was launched by a hyperparameter tuning job. You define the objective
     # metric in the `HyperParameterTuningJobObjective` parameter of
@@ -2503,6 +4717,215 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSearchSuggestionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "TrainingJob", # required, accepts TrainingJob
+    #         suggestion_query: {
+    #           property_name_query: {
+    #             property_name_hint: "PropertyNameHint", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   The name of the Amazon SageMaker resource to Search for. The only
+    #   valid `Resource` value is `TrainingJob`.
+    #   @return [String]
+    #
+    # @!attribute [rw] suggestion_query
+    #   Limits the property names that are included in the response.
+    #   @return [Types::SuggestionQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSearchSuggestionsRequest AWS API Documentation
+    #
+    class GetSearchSuggestionsRequest < Struct.new(
+      :resource,
+      :suggestion_query)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] property_name_suggestions
+    #   A list of property names for a `Resource` that match a
+    #   `SuggestionQuery`.
+    #   @return [Array<Types::PropertyNameSuggestion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSearchSuggestionsResponse AWS API Documentation
+    #
+    class GetSearchSuggestionsResponse < Struct.new(
+      :property_name_suggestions)
+      include Aws::Structure
+    end
+
+    # Specifies configuration details for a git repository in your AWS
+    # account.
+    #
+    # @note When making an API call, you may pass GitConfig
+    #   data as a hash:
+    #
+    #       {
+    #         repository_url: "Url", # required
+    #         branch: "Branch",
+    #         secret_arn: "SecretArn",
+    #       }
+    #
+    # @!attribute [rw] repository_url
+    #   The URL where the git repository is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch
+    #   The default brach for the git repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
+    #   that contains the credentials used to access the git repository. The
+    #   secret must have a staging label of `AWSCURRENT` and must be in the
+    #   following format:
+    #
+    #   `\{"username": UserName, "password": Password\}`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfig AWS API Documentation
+    #
+    class GitConfig < Struct.new(
+      :repository_url,
+      :branch,
+      :secret_arn)
+      include Aws::Structure
+    end
+
+    # Specifies configuration details for a git repository when the
+    # repository is updated.
+    #
+    # @note When making an API call, you may pass GitConfigForUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         secret_arn: "SecretArn",
+    #       }
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
+    #   that contains the credentials used to access the git repository. The
+    #   secret must have a staging label of `AWSCURRENT` and must be in the
+    #   following format:
+    #
+    #   `\{"username": UserName, "password": Password\}`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfigForUpdate AWS API Documentation
+    #
+    class GitConfigForUpdate < Struct.new(
+      :secret_arn)
+      include Aws::Structure
+    end
+
+    # Information required for human workers to complete a labeling task.
+    #
+    # @note When making an API call, you may pass HumanTaskConfig
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_arn: "WorkteamArn", # required
+    #         ui_config: { # required
+    #           ui_template_s3_uri: "S3Uri", # required
+    #         },
+    #         pre_human_task_lambda_arn: "LambdaFunctionArn", # required
+    #         task_keywords: ["TaskKeyword"],
+    #         task_title: "TaskTitle", # required
+    #         task_description: "TaskDescription", # required
+    #         number_of_human_workers_per_data_object: 1, # required
+    #         task_time_limit_in_seconds: 1, # required
+    #         task_availability_lifetime_in_seconds: 1,
+    #         max_concurrent_task_count: 1,
+    #         annotation_consolidation_config: { # required
+    #           annotation_consolidation_lambda_arn: "LambdaFunctionArn", # required
+    #         },
+    #         public_workforce_task_price: {
+    #           amount_in_usd: {
+    #             dollars: 1,
+    #             cents: 1,
+    #             tenth_fractions_of_a_cent: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) of the work team assigned to complete
+    #   the tasks.
+    #   @return [String]
+    #
+    # @!attribute [rw] ui_config
+    #   Information about the user interface that workers use to complete
+    #   the labeling task.
+    #   @return [Types::UiConfig]
+    #
+    # @!attribute [rw] pre_human_task_lambda_arn
+    #   The Amazon Resource Name (ARN) of a Lambda function that is run
+    #   before a data object is sent to a human worker. Use this function to
+    #   provide input to a custom labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_keywords
+    #   Keywords used to describe the task so that workers on Amazon
+    #   Mechanical Turk can discover the task.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] task_title
+    #   A title for the task for your human workers.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_description
+    #   A description of the task for your human workers.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_human_workers_per_data_object
+    #   The number of human workers that will label an object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] task_time_limit_in_seconds
+    #   The amount of time that a worker has to complete a task.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] task_availability_lifetime_in_seconds
+    #   The length of time that a task remains available for labelling by
+    #   human workers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrent_task_count
+    #   Defines the maximum number of data objects that can be labeled by
+    #   human workers at the same time. Each object may have more than one
+    #   worker at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] annotation_consolidation_config
+    #   Configures how labels are consolidated across human workers.
+    #   @return [Types::AnnotationConsolidationConfig]
+    #
+    # @!attribute [rw] public_workforce_task_price
+    #   The price that you pay for each task performed by a public worker.
+    #   @return [Types::PublicWorkforceTaskPrice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanTaskConfig AWS API Documentation
+    #
+    class HumanTaskConfig < Struct.new(
+      :workteam_arn,
+      :ui_config,
+      :pre_human_task_lambda_arn,
+      :task_keywords,
+      :task_title,
+      :task_description,
+      :number_of_human_workers_per_data_object,
+      :task_time_limit_in_seconds,
+      :task_availability_lifetime_in_seconds,
+      :max_concurrent_task_count,
+      :annotation_consolidation_config,
+      :public_workforce_task_price)
+      include Aws::Structure
+    end
+
     # Specifies which training algorithm to use for training jobs that a
     # hyperparameter tuning job launches and the metrics to monitor.
     #
@@ -2512,6 +4935,7 @@ module Aws::SageMaker
     #       {
     #         training_image: "AlgorithmImage",
     #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         algorithm_name: "ArnOrName",
     #         metric_definitions: [
     #           {
     #             name: "MetricName", # required
@@ -2553,6 +4977,12 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
+    # @!attribute [rw] algorithm_name
+    #   The name of the resource algorithm to use for the hyperparameter
+    #   tuning job. If you specify a value for this parameter, do not
+    #   specify a value for `TrainingImage`.
+    #   @return [String]
+    #
     # @!attribute [rw] metric_definitions
     #   An array of MetricDefinition objects that specify the metrics that
     #   the algorithm emits.
@@ -2563,7 +4993,79 @@ module Aws::SageMaker
     class HyperParameterAlgorithmSpecification < Struct.new(
       :training_image,
       :training_input_mode,
+      :algorithm_name,
       :metric_definitions)
+      include Aws::Structure
+    end
+
+    # Defines a hyperparameter to be used by an algorithm.
+    #
+    # @note When making an API call, you may pass HyperParameterSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ParameterName", # required
+    #         description: "EntityDescription",
+    #         type: "Integer", # required, accepts Integer, Continuous, Categorical, FreeText
+    #         range: {
+    #           integer_parameter_range_specification: {
+    #             min_value: "ParameterValue", # required
+    #             max_value: "ParameterValue", # required
+    #           },
+    #           continuous_parameter_range_specification: {
+    #             min_value: "ParameterValue", # required
+    #             max_value: "ParameterValue", # required
+    #           },
+    #           categorical_parameter_range_specification: {
+    #             values: ["ParameterValue"], # required
+    #           },
+    #         },
+    #         is_tunable: false,
+    #         is_required: false,
+    #         default_value: "ParameterValue",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of this hyperparameter. The name must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the hyperparameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of this hyperparameter. The valid types are `Integer`,
+    #   `Continuous`, `Categorical`, and `FreeText`.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The allowed range for this hyperparameter.
+    #   @return [Types::ParameterRange]
+    #
+    # @!attribute [rw] is_tunable
+    #   Indicates whether this hyperparameter is tunable in a hyperparameter
+    #   tuning job.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_required
+    #   Indicates whether this hyperparameter is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_value
+    #   The default value for this hyperparameter. If a default value is
+    #   specified, a hyperparameter cannot be required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterSpecification AWS API Documentation
+    #
+    class HyperParameterSpecification < Struct.new(
+      :name,
+      :description,
+      :type,
+      :range,
+      :is_tunable,
+      :is_required,
+      :default_value)
       include Aws::Structure
     end
 
@@ -2579,6 +5081,7 @@ module Aws::SageMaker
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
     #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           algorithm_name: "ArnOrName",
     #           metric_definitions: [
     #             {
     #               name: "MetricName", # required
@@ -2592,15 +5095,19 @@ module Aws::SageMaker
     #             channel_name: "ChannelName", # required
     #             data_source: { # required
     #               s3_data_source: { # required
-    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                 s3_uri: "S3Uri", # required
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                 attribute_names: ["AttributeName"],
     #               },
     #             },
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
     #             input_mode: "Pipe", # accepts Pipe, File
+    #             shuffle_config: {
+    #               seed: 1, # required
+    #             },
     #           },
     #         ],
     #         vpc_config: {
@@ -2620,6 +5127,7 @@ module Aws::SageMaker
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
     #         },
+    #         enable_network_isolation: false,
     #       }
     #
     # @!attribute [rw] static_hyper_parameters
@@ -2684,6 +5192,21 @@ module Aws::SageMaker
     #   SageMaker save the intermediate results of the job.
     #   @return [Types::StoppingCondition]
     #
+    # @!attribute [rw] enable_network_isolation
+    #   Isolates the training container. No inbound or outbound network
+    #   calls can be made, except for calls between peers within a training
+    #   cluster for distributed training. If network isolation is used for
+    #   training jobs that are configured to use a VPC, Amazon SageMaker
+    #   downloads and uploads customer data and model artifacts through the
+    #   specifed VPC, but the training container does not have network
+    #   access.
+    #
+    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
+    #   network isolation.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
     #
     class HyperParameterTrainingJobDefinition < Struct.new(
@@ -2694,7 +5217,8 @@ module Aws::SageMaker
       :vpc_config,
       :output_data_config,
       :resource_config,
-      :stopping_condition)
+      :stopping_condition,
+      :enable_network_isolation)
       include Aws::Structure
     end
 
@@ -2709,6 +5233,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] tuning_job_name
+    #   The name of the hyperparameter tuning job that launched this
+    #   training job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2983,6 +5509,9 @@ module Aws::SageMaker
     #   about warm starting a hyperparameter tuning job, see [Using a
     #   Previous Hyperparameter Tuning Job as a Starting Point][1].
     #
+    #   Hyperparameter tuning jobs created before October 1, 2018 cannot be
+    #   used as parent jobs for warm start tuning jobs.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/automatic-model-tuning-incremental
@@ -3000,8 +5529,11 @@ module Aws::SageMaker
     #     new version of the training algorithm, unless the changes in the
     #     new version do not affect the algorithm itself. For example,
     #     changes that improve logging or adding support for a different
-    #     data format are allowed. The objective metric for the new tuning
-    #     job must be the same as for all parent jobs.
+    #     data format are allowed. You can also change hyperparameters from
+    #     tunable to static, and from static to tunable, but the total
+    #     number of static plus tunable hyperparameters must remain the same
+    #     as it is in all parent jobs. The objective metric for the new
+    #     tuning job must be the same as for all parent jobs.
     #
     #   TRANSFER\_LEARNING
     #
@@ -3009,7 +5541,7 @@ module Aws::SageMaker
     #     hyperparameter ranges, maximum number of concurrent training jobs,
     #     and maximum number of training jobs that are different than those
     #     of its parent hyperparameter tuning jobs. The training image can
-    #     also be a different versionfrom the version used in the parent
+    #     also be a different version from the version used in the parent
     #     hyperparameter tuning job. You can also change hyperparameters
     #     from tunable to static, and from static to tunable, but the total
     #     number of static plus tunable hyperparameters must remain the same
@@ -3022,6 +5554,127 @@ module Aws::SageMaker
     class HyperParameterTuningJobWarmStartConfig < Struct.new(
       :parent_hyper_parameter_tuning_jobs,
       :warm_start_type)
+      include Aws::Structure
+    end
+
+    # Defines how to perform inference generation after a training job is
+    # run.
+    #
+    # @note When making an API call, you may pass InferenceSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         containers: [ # required
+    #           {
+    #             container_hostname: "ContainerHostname",
+    #             image: "Image", # required
+    #             image_digest: "ImageDigest",
+    #             model_data_url: "Url",
+    #             product_id: "ProductId",
+    #           },
+    #         ],
+    #         supported_transform_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         supported_content_types: ["ContentType"], # required
+    #         supported_response_mime_types: ["ResponseMIMEType"], # required
+    #       }
+    #
+    # @!attribute [rw] containers
+    #   The Amazon ECR registry path of the Docker image that contains the
+    #   inference code.
+    #   @return [Array<Types::ModelPackageContainerDefinition>]
+    #
+    # @!attribute [rw] supported_transform_instance_types
+    #   A list of the instance types on which a transformation job can be
+    #   run or on which an endpoint can be deployed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_realtime_inference_instance_types
+    #   A list of the instance types that are used to generate inferences in
+    #   real-time.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_content_types
+    #   The supported MIME types for the input data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_response_mime_types
+    #   The supported MIME types for the output data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceSpecification AWS API Documentation
+    #
+    class InferenceSpecification < Struct.new(
+      :containers,
+      :supported_transform_instance_types,
+      :supported_realtime_inference_instance_types,
+      :supported_content_types,
+      :supported_response_mime_types)
+      include Aws::Structure
+    end
+
+    # Contains information about the location of input model artifacts, the
+    # name and shape of the expected data inputs, and the framework in which
+    # the model was trained.
+    #
+    # @note When making an API call, you may pass InputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #         data_input_config: "DataInputConfig", # required
+    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, MXNET, ONNX, PYTORCH, XGBOOST
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 path where the model artifacts, which result from model
+    #   training, are stored. This path must point to a single gzip
+    #   compressed tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] data_input_config
+    #   Specifies the name and shape of the expected data inputs for your
+    #   trained model with a JSON dictionary form. The data inputs are
+    #   InputConfig$Framework specific.
+    #
+    #   * `TENSORFLOW`, `MXNET` and `ONNX`\: You must specify the name and
+    #     shape of the expected data inputs in order using a dictionary
+    #     format for your trained model.
+    #
+    #     * Example of one input: `\{‘data’:[1,3,1024,1024]\}\}`
+    #
+    #     * Example for two inputs: `\{‘var1’: [1,1,28,28],
+    #       ‘var2’:[1,1,28,28]\}`
+    #
+    #   * `PYTORCH`\: You can either specify the name and shape of expected
+    #     data inputs in order using a dictionary format for your trained
+    #     model or you can specify the shape only using a list format.
+    #
+    #     * Example of one input in dictionary format:
+    #       `\{‘input0’:[1,3,224,234]\}`
+    #
+    #     * Example of one input in list format: `[1,3,224,224]`
+    #
+    #     * Example of two inputs in dictionary format:
+    #       `\{‘input0’:[1,3,224,234], 'input1':[1,3,224,224]\}`
+    #
+    #     * Example of two inputs in list format: `[[1,3,224,224],
+    #       [1,3,224,224]]`
+    #
+    #   * `XGBOOST`\: input data name and shape are not needed.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework
+    #   Identifies the framework in which the model was trained. For
+    #   example: TENSORFLOW.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InputConfig AWS API Documentation
+    #
+    class InputConfig < Struct.new(
+      :s3_uri,
+      :data_input_config,
+      :framework)
       include Aws::Structure
     end
 
@@ -3055,6 +5708,720 @@ module Aws::SageMaker
       :name,
       :min_value,
       :max_value)
+      include Aws::Structure
+    end
+
+    # Defines the possible values for an integer hyperparameter.
+    #
+    # @note When making an API call, you may pass IntegerParameterRangeSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         min_value: "ParameterValue", # required
+    #         max_value: "ParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] min_value
+    #   The minimum integer value allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum integer value allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRangeSpecification AWS API Documentation
+    #
+    class IntegerParameterRangeSpecification < Struct.new(
+      :min_value,
+      :max_value)
+      include Aws::Structure
+    end
+
+    # Provides a breakdown of the number of objects labeled.
+    #
+    # @!attribute [rw] total_labeled
+    #   The total number of objects labeled.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] human_labeled
+    #   The total number of objects labeled by a human worker.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] machine_labeled
+    #   The total number of objects labeled by automated data labeling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_non_retryable_error
+    #   The total number of objects that could not be labeled due to an
+    #   error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unlabeled
+    #   The total number of objects not yet labeled.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelCounters AWS API Documentation
+    #
+    class LabelCounters < Struct.new(
+      :total_labeled,
+      :human_labeled,
+      :machine_labeled,
+      :failed_non_retryable_error,
+      :unlabeled)
+      include Aws::Structure
+    end
+
+    # Provides counts for human-labeled tasks in the labeling job.
+    #
+    # @!attribute [rw] human_labeled
+    #   The total number of data objects labeled by a human worker.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_human
+    #   The total number of data objects that need to be labeled by a human
+    #   worker.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   The total number of tasks in the labeling job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelCountersForWorkteam AWS API Documentation
+    #
+    class LabelCountersForWorkteam < Struct.new(
+      :human_labeled,
+      :pending_human,
+      :total)
+      include Aws::Structure
+    end
+
+    # Provides configuration information for auto-labeling of your data
+    # objects. A `LabelingJobAlgorithmsConfig` object must be supplied in
+    # order to use auto-labeling.
+    #
+    # @note When making an API call, you may pass LabelingJobAlgorithmsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         labeling_job_algorithm_specification_arn: "LabelingJobAlgorithmSpecificationArn", # required
+    #         initial_active_learning_model_arn: "ModelArn",
+    #         labeling_job_resource_config: {
+    #           volume_kms_key_id: "KmsKeyId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] labeling_job_algorithm_specification_arn
+    #   Specifies the Amazon Resource Name (ARN) of the algorithm used for
+    #   auto-labeling. You must select one of the following ARNs:
+    #
+    #   * *Image classification*
+    #
+    #     `arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/image-classification`
+    #
+    #   * *Text classification*
+    #
+    #     `arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/text-classification`
+    #
+    #   * *Object detection*
+    #
+    #     `arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/object-detection`
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_active_learning_model_arn
+    #   At the end of an auto-label job Amazon SageMaker Ground Truth sends
+    #   the Amazon Resource Nam (ARN) of the final model used for
+    #   auto-labeling. You can use this model as the starting point for
+    #   subsequent similar jobs by providing the ARN of the model here.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_resource_config
+    #   Provides configuration information for a labeling job.
+    #   @return [Types::LabelingJobResourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobAlgorithmsConfig AWS API Documentation
+    #
+    class LabelingJobAlgorithmsConfig < Struct.new(
+      :labeling_job_algorithm_specification_arn,
+      :initial_active_learning_model_arn,
+      :labeling_job_resource_config)
+      include Aws::Structure
+    end
+
+    # Attributes of the data specified by the customer. Use these to
+    # describe the data to be labeled.
+    #
+    # @note When making an API call, you may pass LabelingJobDataAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #       }
+    #
+    # @!attribute [rw] content_classifiers
+    #   Declares that your content is free of personally identifiable
+    #   information or adult content. Amazon SageMaker may restrict the
+    #   Amazon Mechanical Turk workers that can view your task based on this
+    #   information.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataAttributes AWS API Documentation
+    #
+    class LabelingJobDataAttributes < Struct.new(
+      :content_classifiers)
+      include Aws::Structure
+    end
+
+    # Provides information about the location of input data.
+    #
+    # @note When making an API call, you may pass LabelingJobDataSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_data_source: { # required
+    #           manifest_s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_data_source
+    #   The Amazon S3 location of the input data objects.
+    #   @return [Types::LabelingJobS3DataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataSource AWS API Documentation
+    #
+    class LabelingJobDataSource < Struct.new(
+      :s3_data_source)
+      include Aws::Structure
+    end
+
+    # Provides summary information for a work team.
+    #
+    # @!attribute [rw] labeling_job_name
+    #   The name of the labeling job that the work team is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_reference_code
+    #   A unique identifier for a labeling job. You can use this to refer to
+    #   a specific labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_requester_account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the labeling job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] label_counters
+    #   Provides information about the progress of a labeling job.
+    #   @return [Types::LabelCountersForWorkteam]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobForWorkteamSummary AWS API Documentation
+    #
+    class LabelingJobForWorkteamSummary < Struct.new(
+      :labeling_job_name,
+      :job_reference_code,
+      :work_requester_account_id,
+      :creation_time,
+      :label_counters)
+      include Aws::Structure
+    end
+
+    # Input configuration information for a labeling job.
+    #
+    # @note When making an API call, you may pass LabelingJobInputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         data_source: { # required
+    #           s3_data_source: { # required
+    #             manifest_s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #         data_attributes: {
+    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #         },
+    #       }
+    #
+    # @!attribute [rw] data_source
+    #   The location of the input data.
+    #   @return [Types::LabelingJobDataSource]
+    #
+    # @!attribute [rw] data_attributes
+    #   Attributes of the data specified by the customer.
+    #   @return [Types::LabelingJobDataAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobInputConfig AWS API Documentation
+    #
+    class LabelingJobInputConfig < Struct.new(
+      :data_source,
+      :data_attributes)
+      include Aws::Structure
+    end
+
+    # Specifies the location of the output produced by the labeling job.
+    #
+    # @!attribute [rw] output_dataset_s3_uri
+    #   The Amazon S3 bucket location of the manifest file for labeled data.
+    #   @return [String]
+    #
+    # @!attribute [rw] final_active_learning_model_arn
+    #   The Amazon Resource Name (ARN) for the most recent Amazon SageMaker
+    #   model trained as part of automated data labeling.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutput AWS API Documentation
+    #
+    class LabelingJobOutput < Struct.new(
+      :output_dataset_s3_uri,
+      :final_active_learning_model_arn)
+      include Aws::Structure
+    end
+
+    # Output configuration information for a labeling job.
+    #
+    # @note When making an API call, you may pass LabelingJobOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_output_path: "S3Uri", # required
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 location to write output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service ID of the key used to encrypt the
+    #   output data, if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig AWS API Documentation
+    #
+    class LabelingJobOutputConfig < Struct.new(
+      :s3_output_path,
+      :kms_key_id)
+      include Aws::Structure
+    end
+
+    # Provides configuration information for labeling jobs.
+    #
+    # @note When making an API call, you may pass LabelingJobResourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         volume_kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   The AWS Key Management Service key ID for the key used to encrypt
+    #   the output data, if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig AWS API Documentation
+    #
+    class LabelingJobResourceConfig < Struct.new(
+      :volume_kms_key_id)
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location of the input data objects.
+    #
+    # @note When making an API call, you may pass LabelingJobS3DataSource
+    #   data as a hash:
+    #
+    #       {
+    #         manifest_s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] manifest_s3_uri
+    #   The Amazon S3 location of the manifest file that describes the input
+    #   data objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobS3DataSource AWS API Documentation
+    #
+    class LabelingJobS3DataSource < Struct.new(
+      :manifest_s3_uri)
+      include Aws::Structure
+    end
+
+    # A set of conditions for stopping a labeling job. If any of the
+    # conditions are met, the job is automatically stopped. You can use
+    # these conditions to control the cost of data labeling.
+    #
+    # @note When making an API call, you may pass LabelingJobStoppingConditions
+    #   data as a hash:
+    #
+    #       {
+    #         max_human_labeled_object_count: 1,
+    #         max_percentage_of_input_dataset_labeled: 1,
+    #       }
+    #
+    # @!attribute [rw] max_human_labeled_object_count
+    #   The maximum number of objects that can be labeled by human workers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_percentage_of_input_dataset_labeled
+    #   The maximum number of input data objects that should be labeled.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobStoppingConditions AWS API Documentation
+    #
+    class LabelingJobStoppingConditions < Struct.new(
+      :max_human_labeled_object_count,
+      :max_percentage_of_input_dataset_labeled)
+      include Aws::Structure
+    end
+
+    # Provides summary information about a labeling job.
+    #
+    # @!attribute [rw] labeling_job_name
+    #   The name of the labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) assigned to the labeling job when it
+    #   was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the job was created (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the job was last modified (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] labeling_job_status
+    #   The current status of the labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_counters
+    #   Counts showing the progress of the labeling job.
+    #   @return [Types::LabelCounters]
+    #
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) of the work team assigned to the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_human_task_lambda_arn
+    #   The Amazon Resource Name (ARN) of a Lambda function. The function is
+    #   run before each data object is sent to a worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] annotation_consolidation_lambda_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function used to
+    #   consolidate the annotations from individual workers into a label for
+    #   a data object. For more information, see [Annotation
+    #   Consolidation][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `LabelingJobStatus` field is `Failed`, this field contains a
+    #   description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_output
+    #   The location of the output produced by the labeling job.
+    #   @return [Types::LabelingJobOutput]
+    #
+    # @!attribute [rw] input_config
+    #   Input configuration for the labeling job.
+    #   @return [Types::LabelingJobInputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobSummary AWS API Documentation
+    #
+    class LabelingJobSummary < Struct.new(
+      :labeling_job_name,
+      :labeling_job_arn,
+      :creation_time,
+      :last_modified_time,
+      :labeling_job_status,
+      :label_counters,
+      :workteam_arn,
+      :pre_human_task_lambda_arn,
+      :annotation_consolidation_lambda_arn,
+      :failure_reason,
+      :labeling_job_output,
+      :input_config)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAlgorithmsInput
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         max_results: 1,
+    #         name_contains: "NameContains",
+    #         next_token: "NextToken",
+    #         sort_by: "Name", # accepts Name, CreationTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only algorithms created after the specified
+    #   time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only algorithms created before the specified
+    #   time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of algorithms to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the algorithm name. This filter returns only algorithms
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListAlgorithms` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of algorithms, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The parameter by which to sort the results. The default is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAlgorithmsInput AWS API Documentation
+    #
+    class ListAlgorithmsInput < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :max_results,
+      :name_contains,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] algorithm_summary_list
+    #   &gt;An array of `AlgorithmSummary` objects, each of which lists an
+    #   algorithm.
+    #   @return [Array<Types::AlgorithmSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of algorithms, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAlgorithmsOutput AWS API Documentation
+    #
+    class ListAlgorithmsOutput < Struct.new(
+      :algorithm_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCodeRepositoriesInput
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         max_results: 1,
+    #         name_contains: "CodeRepositoryNameContains",
+    #         next_token: "NextToken",
+    #         sort_by: "Name", # accepts Name, CreationTime, LastModifiedTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only git repositories that were created after
+    #   the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only git repositories that were created before
+    #   the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only git repositories that were last modified
+    #   after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only git repositories that were last modified
+    #   before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of git repositories to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the git repositories name. This filter returns only
+    #   repositories whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of a `ListCodeRepositoriesOutput` request was
+    #   truncated, the response includes a `NextToken`. To get the next set
+    #   of git repositories, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `Name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositoriesInput AWS API Documentation
+    #
+    class ListCodeRepositoriesInput < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :max_results,
+      :name_contains,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_repository_summary_list
+    #   Gets a list of summaries of the git repositories. Each summary
+    #   specifies the following values for the repository:
+    #
+    #   * Name
+    #
+    #   * Amazon Resource Name (ARN)
+    #
+    #   * Creation time
+    #
+    #   * Last modified time
+    #
+    #   * Configuration information, including the URL location of the
+    #     repository and the ARN of the AWS Secrets Manager secret that
+    #     contains the credentials used to access the repository.
+    #
+    #   *
+    #   @return [Array<Types::CodeRepositorySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of a `ListCodeRepositoriesOutput` request was
+    #   truncated, the response includes a `NextToken`. To get the next set
+    #   of git repositories, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositoriesOutput AWS API Documentation
+    #
+    class ListCodeRepositoriesOutput < Struct.new(
+      :code_repository_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCompilationJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         name_contains: "NameContains",
+    #         status_equals: "INPROGRESS", # accepts INPROGRESS, COMPLETED, FAILED, STARTING, STOPPING, STOPPED
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListCompilationJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model compilation jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of model compilation jobs to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns the model compilation jobs that were created
+    #   after a specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns the model compilation jobs that were created
+    #   before a specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns the model compilation jobs that were modified
+    #   after a specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns the model compilation jobs that were modified
+    #   before a specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   A filter that returns the model compilation jobs whose name contains
+    #   a specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that retrieves model compilation jobs with a specific
+    #   DescribeCompilationJobResponse$CompilationJobStatus status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobsRequest AWS API Documentation
+    #
+    class ListCompilationJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :name_contains,
+      :status_equals)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compilation_job_summaries
+    #   An array of CompilationJobSummary objects, each describing a model
+    #   compilation job.
+    #   @return [Array<Types::CompilationJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this
+    #   `NextToken`. To retrieve the next set of model compilation jobs, use
+    #   this token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobsResponse AWS API Documentation
+    #
+    class ListCompilationJobsResponse < Struct.new(
+      :compilation_job_summaries,
+      :next_token)
       include Aws::Structure
     end
 
@@ -3333,6 +6700,270 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLabelingJobsForWorkteamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_arn: "WorkteamArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         job_reference_code_contains: "JobReferenceCodeContains",
+    #         sort_by: "CreationTime", # accepts CreationTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) of the work team for which you want
+    #   to see labeling jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of labeling jobs to return in each page of the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListLabelingJobsForWorkteam` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of labeling jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only labeling jobs created after the specified
+    #   time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only labeling jobs created before the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_reference_code_contains
+    #   A filter the limits jobs to only the ones whose job reference code
+    #   contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteamRequest AWS API Documentation
+    #
+    class ListLabelingJobsForWorkteamRequest < Struct.new(
+      :workteam_arn,
+      :max_results,
+      :next_token,
+      :creation_time_after,
+      :creation_time_before,
+      :job_reference_code_contains,
+      :sort_by,
+      :sort_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] labeling_job_summary_list
+    #   An array of `LabelingJobSummary` objects, each describing a labeling
+    #   job.
+    #   @return [Array<Types::LabelingJobForWorkteamSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of labeling jobs, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteamResponse AWS API Documentation
+    #
+    class ListLabelingJobsForWorkteamResponse < Struct.new(
+      :labeling_job_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLabelingJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         name_contains: "NameContains",
+    #         sort_by: "Name", # accepts Name, CreationTime, Status
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only labeling jobs created after the specified
+    #   time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only labeling jobs created before the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only labeling jobs modified after the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only labeling jobs modified before the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of labeling jobs to return in each page of the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListLabelingJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of labeling jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the labeling job name. This filter returns only labeling
+    #   jobs whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that retrieves only labeling jobs with a specific status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsRequest AWS API Documentation
+    #
+    class ListLabelingJobsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :max_results,
+      :next_token,
+      :name_contains,
+      :sort_by,
+      :sort_order,
+      :status_equals)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] labeling_job_summary_list
+    #   An array of `LabelingJobSummary` objects, each describing a labeling
+    #   job.
+    #   @return [Array<Types::LabelingJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of labeling jobs, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsResponse AWS API Documentation
+    #
+    class ListLabelingJobsResponse < Struct.new(
+      :labeling_job_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListModelPackagesInput
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         max_results: 1,
+    #         name_contains: "NameContains",
+    #         next_token: "NextToken",
+    #         sort_by: "Name", # accepts Name, CreationTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only model packages created after the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only model packages created before the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of model packages to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the model package name. This filter returns only model
+    #   packages whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListModelPackages` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of model packages, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The parameter by which to sort the results. The default is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackagesInput AWS API Documentation
+    #
+    class ListModelPackagesInput < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :max_results,
+      :name_contains,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_package_summary_list
+    #   An array of `ModelPackageSummary` objects, each of which lists a
+    #   model package.
+    #   @return [Array<Types::ModelPackageSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of model packages, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackagesOutput AWS API Documentation
+    #
+    class ListModelPackagesOutput < Struct.new(
+      :model_package_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListModelsInput
     #   data as a hash:
     #
@@ -3519,6 +7150,8 @@ module Aws::SageMaker
     #         last_modified_time_after: Time.now,
     #         status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting, Updating
     #         notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
+    #         default_code_repository_contains: "CodeRepositoryContains",
+    #         additional_code_repository_equals: "CodeRepositoryNameOrUrl",
     #       }
     #
     # @!attribute [rw] next_token
@@ -3583,6 +7216,18 @@ module Aws::SageMaker
     #   name that contains the specified string.
     #   @return [String]
     #
+    # @!attribute [rw] default_code_repository_contains
+    #   A string in the name or URL of a git repository associated with this
+    #   notebook instance. This filter returns only notebook instances
+    #   associated with a git repository with a name that contains the
+    #   specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_code_repository_equals
+    #   A filter that returns only notebook instances with associated with
+    #   the specified git respository.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput AWS API Documentation
     #
     class ListNotebookInstancesInput < Struct.new(
@@ -3596,7 +7241,9 @@ module Aws::SageMaker
       :last_modified_time_before,
       :last_modified_time_after,
       :status_equals,
-      :notebook_instance_lifecycle_config_name_contains)
+      :notebook_instance_lifecycle_config_name_contains,
+      :default_code_repository_contains,
+      :additional_code_repository_equals)
       include Aws::Structure
     end
 
@@ -3616,6 +7263,58 @@ module Aws::SageMaker
     class ListNotebookInstancesOutput < Struct.new(
       :next_token,
       :notebook_instances)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSubscribedWorkteamsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_contains: "WorkteamName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the work team name. This filter returns only work teams
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListSubscribedWorkteams` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of labeling jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of work teams to return in each page of the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSubscribedWorkteamsRequest AWS API Documentation
+    #
+    class ListSubscribedWorkteamsRequest < Struct.new(
+      :name_contains,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscribed_workteams
+    #   An array of `Workteam` objects, each describing a work team.
+    #   @return [Array<Types::SubscribedWorkteam>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of work teams, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSubscribedWorkteamsResponse AWS API Documentation
+    #
+    class ListSubscribedWorkteamsResponse < Struct.new(
+      :subscribed_workteams,
+      :next_token)
       include Aws::Structure
     end
 
@@ -3943,6 +7642,94 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListWorkteamsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sort_by: "Name", # accepts Name, CreateDate
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         name_contains: "WorkteamName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the work team's name. This filter returns only work
+    #   teams whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListWorkteams` request was truncated,
+    #   the response includes a `NextToken`. To retrieve the next set of
+    #   labeling jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of work teams to return in each page of the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteamsRequest AWS API Documentation
+    #
+    class ListWorkteamsRequest < Struct.new(
+      :sort_by,
+      :sort_order,
+      :name_contains,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workteams
+    #   An array of `Workteam` objects, each describing a work team.
+    #   @return [Array<Types::Workteam>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To retrieve the next set of work teams, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteamsResponse AWS API Documentation
+    #
+    class ListWorkteamsResponse < Struct.new(
+      :workteams,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Defines the Amazon Cognito user group that is part of a work team.
+    #
+    # @note When making an API call, you may pass MemberDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         cognito_member_definition: {
+    #           user_pool: "CognitoUserPool", # required
+    #           user_group: "CognitoUserGroup", # required
+    #           client_id: "CognitoClientId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cognito_member_definition
+    #   The Amazon Cognito user group that is part of the work team.
+    #   @return [Types::CognitoMemberDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MemberDefinition AWS API Documentation
+    #
+    class MemberDefinition < Struct.new(
+      :cognito_member_definition)
+      include Aws::Structure
+    end
+
     # The name, value, and date and time of a metric that was emitted to
     # Amazon CloudWatch.
     #
@@ -4018,6 +7805,264 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Describes the Docker container for the model package.
+    #
+    # @note When making an API call, you may pass ModelPackageContainerDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         container_hostname: "ContainerHostname",
+    #         image: "Image", # required
+    #         image_digest: "ImageDigest",
+    #         model_data_url: "Url",
+    #         product_id: "ProductId",
+    #       }
+    #
+    # @!attribute [rw] container_hostname
+    #   The DNS host name for the Docker container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   The Amazon EC2 Container Registry path where inference code is
+    #   stored.
+    #
+    #   If you are using your own custom algorithm instead of an algorithm
+    #   provided by Amazon SageMaker, the inference code must meet Amazon
+    #   SageMaker requirements. Amazon SageMaker supports both
+    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
+    #   path formats. For more information, see [Using Your Own Algorithms
+    #   with Amazon SageMaker][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   An MD5 hash of the training algorithm that identifies the Docker
+    #   image used for training.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_data_url
+    #   The Amazon S3 path where the model artifacts, which result from
+    #   model training, are stored. This path must point to a single `gzip`
+    #   compressed tar archive (`.tar.gz` suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The ID of the model package.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
+    #
+    class ModelPackageContainerDefinition < Struct.new(
+      :container_hostname,
+      :image,
+      :image_digest,
+      :model_data_url,
+      :product_id)
+      include Aws::Structure
+    end
+
+    # Specifies the validation and image scan statuses of the model package.
+    #
+    # @!attribute [rw] validation_statuses
+    #   The status of the validation of the model package.
+    #   @return [Array<Types::ModelPackageStatusItem>]
+    #
+    # @!attribute [rw] image_scan_statuses
+    #   The status of the scan of the Docker image container for the model
+    #   package.
+    #   @return [Array<Types::ModelPackageStatusItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusDetails AWS API Documentation
+    #
+    class ModelPackageStatusDetails < Struct.new(
+      :validation_statuses,
+      :image_scan_statuses)
+      include Aws::Structure
+    end
+
+    # Represents the overall status of a model package.
+    #
+    # @!attribute [rw] name
+    #   The name of the model package for which the overall status is being
+    #   repoorted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure, if the overall status is a failed state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusItem AWS API Documentation
+    #
+    class ModelPackageStatusItem < Struct.new(
+      :name,
+      :status,
+      :failure_reason)
+      include Aws::Structure
+    end
+
+    # Provides summary information about a model package.
+    #
+    # @!attribute [rw] model_package_name
+    #   The name of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_arn
+    #   The Amazon Resource Name (ARN) of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_description
+    #   A brief statement describing the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the model package was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_package_status
+    #   The overall status of the model package.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageSummary AWS API Documentation
+    #
+    class ModelPackageSummary < Struct.new(
+      :model_package_name,
+      :model_package_arn,
+      :model_package_description,
+      :creation_time,
+      :model_package_status)
+      include Aws::Structure
+    end
+
+    # Contains data such as the inputs and targeted instance types that are
+    # used in the process of validating the model package.
+    #
+    # The data provided in the validation profile is made available to your
+    # buyers on AWS Marketplace.
+    #
+    # @note When making an API call, you may pass ModelPackageValidationProfile
+    #   data as a hash:
+    #
+    #       {
+    #         profile_name: "EntityName", # required
+    #         transform_job_definition: { # required
+    #           max_concurrent_transforms: 1,
+    #           max_payload_in_mb: 1,
+    #           batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #           environment: {
+    #             "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #           },
+    #           transform_input: { # required
+    #             data_source: { # required
+    #               s3_data_source: { # required
+    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                 s3_uri: "S3Uri", # required
+    #               },
+    #             },
+    #             content_type: "ContentType",
+    #             compression_type: "None", # accepts None, Gzip
+    #             split_type: "None", # accepts None, Line, RecordIO
+    #           },
+    #           transform_output: { # required
+    #             s3_output_path: "S3Uri", # required
+    #             accept: "Accept",
+    #             assemble_with: "None", # accepts None, Line
+    #             kms_key_id: "KmsKeyId",
+    #           },
+    #           transform_resources: { # required
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #             instance_count: 1, # required
+    #             volume_kms_key_id: "KmsKeyId",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] profile_name
+    #   The name of the profile for the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_job_definition
+    #   The `TransformJobDefinition` object that describes the transform job
+    #   used for the validation of the model package.
+    #   @return [Types::TransformJobDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationProfile AWS API Documentation
+    #
+    class ModelPackageValidationProfile < Struct.new(
+      :profile_name,
+      :transform_job_definition)
+      include Aws::Structure
+    end
+
+    # Specifies batch transform jobs that Amazon SageMaker runs to validate
+    # your model package.
+    #
+    # @note When making an API call, you may pass ModelPackageValidationSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         validation_role: "RoleArn", # required
+    #         validation_profiles: [ # required
+    #           {
+    #             profile_name: "EntityName", # required
+    #             transform_job_definition: { # required
+    #               max_concurrent_transforms: 1,
+    #               max_payload_in_mb: 1,
+    #               batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #               environment: {
+    #                 "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #               },
+    #               transform_input: { # required
+    #                 data_source: { # required
+    #                   s3_data_source: { # required
+    #                     s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                     s3_uri: "S3Uri", # required
+    #                   },
+    #                 },
+    #                 content_type: "ContentType",
+    #                 compression_type: "None", # accepts None, Gzip
+    #                 split_type: "None", # accepts None, Line, RecordIO
+    #               },
+    #               transform_output: { # required
+    #                 s3_output_path: "S3Uri", # required
+    #                 accept: "Accept",
+    #                 assemble_with: "None", # accepts None, Line
+    #                 kms_key_id: "KmsKeyId",
+    #               },
+    #               transform_resources: { # required
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #                 instance_count: 1, # required
+    #                 volume_kms_key_id: "KmsKeyId",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] validation_role
+    #   The IAM roles to be used for the validation of a model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_profiles
+    #   An array of `ModelPackageValidationProfile` objects, each of which
+    #   specifies a batch transform job that Amazon SageMaker runs to
+    #   validate your model package.
+    #   @return [Array<Types::ModelPackageValidationProfile>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationSpecification AWS API Documentation
+    #
+    class ModelPackageValidationSpecification < Struct.new(
+      :validation_role,
+      :validation_profiles)
+      include Aws::Structure
+    end
+
     # Provides summary information about a model.
     #
     # @!attribute [rw] model_name
@@ -4038,6 +8083,60 @@ module Aws::SageMaker
       :model_name,
       :model_arn,
       :creation_time)
+      include Aws::Structure
+    end
+
+    # A `NestedFilter` is defined by using a resource name under
+    # `NestedPropertyName`, which entries in a list that properties must
+    # match to be included in the results. To satisfy the conditions
+    # specified in the `NestedFilters` call, each object in the list must
+    # satisfy the conditions of all of the filters.
+    #
+    # For example, a `NestedFilters` could be defined using the training
+    # job's `InputDataConfig` property, this would be defined as a list of
+    # `Channel` objects.
+    #
+    # A `NestedFilters` object contains multiple filters. For example, to
+    # find all training jobs that have `train` in their name, and have
+    # `cat/data` in their` S3Uri (under InputDataConfig), you need to create
+    # a NestedFilters object that specfies the InputDataConfig property with
+    # the following Filter objects:</p>
+    # '\{Name:"InputDataConfig.ChannelName", "Operator":"EQUALS",
+    # "Value":"train"\}',
+    # '\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
+    # "Operator":"CONTAINS", "Value":"cat/data"\}'
+    # `
+    #
+    # @note When making an API call, you may pass NestedFilters
+    #   data as a hash:
+    #
+    #       {
+    #         nested_property_name: "ResourcePropertyName", # required
+    #         filters: [ # required
+    #           {
+    #             name: "ResourcePropertyName", # required
+    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #             value: "FilterValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] nested_property_name
+    #   .The name of the property used in the nested filters.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filters. Each filter acts on a property. For example, a
+    #   `NestedFilters` call might include a filter on the `PropertyName`
+    #   parameter fof the `InputDataConfig` property:
+    #   `InputDataConfig.DataSource.S3DataSource.S3Uri`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NestedFilters AWS API Documentation
+    #
+    class NestedFilters < Struct.new(
+      :nested_property_name,
+      :filters)
       include Aws::Structure
     end
 
@@ -4156,6 +8255,36 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
+    # @!attribute [rw] default_code_repository
+    #   The git repository associated with the notebook instance as its
+    #   default code repository. This can be either the name of a git
+    #   repository stored as a resource in your account, or the URL of a git
+    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   When you open a notebook instance, it opens in the directory that
+    #   contains this repository. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_code_repositories
+    #   An array of up to 3 git repositories associated with the notebook
+    #   instance. These can be either the names of git repositories stored
+    #   as resources in your account, or the URL of git repositories in [AWS
+    #   CodeCommit][1] or in any other git repository. These repositories
+    #   are cloned at the same level as the default repository of your
+    #   notebook instance. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary AWS API Documentation
     #
     class NotebookInstanceSummary < Struct.new(
@@ -4166,7 +8295,9 @@ module Aws::SageMaker
       :instance_type,
       :creation_time,
       :last_modified_time,
-      :notebook_instance_lifecycle_config_name)
+      :notebook_instance_lifecycle_config_name,
+      :default_code_repository,
+      :additional_code_repositories)
       include Aws::Structure
     end
 
@@ -4200,6 +8331,35 @@ module Aws::SageMaker
       :succeeded,
       :pending,
       :failed)
+      include Aws::Structure
+    end
+
+    # Contains information about the output location for the compiled model
+    # and the device (target) that the model runs on.
+    #
+    # @note When making an API call, you may pass OutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_output_location: "S3Uri", # required
+    #         target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #       }
+    #
+    # @!attribute [rw] s3_output_location
+    #   Identifies the S3 path where you want Amazon SageMaker to store the
+    #   model artifacts. For example, s3://bucket-name/key-name-prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_device
+    #   Identifies the device that you want to run your model on after it
+    #   has been compiled. For example: ml\_c5.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig AWS API Documentation
+    #
+    class OutputConfig < Struct.new(
+      :s3_output_location,
+      :target_device)
       include Aws::Structure
     end
 
@@ -4263,6 +8423,50 @@ module Aws::SageMaker
     class OutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path)
+      include Aws::Structure
+    end
+
+    # Defines the possible values for categorical, continous, and integer
+    # hyperparameters to be used by an algorithm.
+    #
+    # @note When making an API call, you may pass ParameterRange
+    #   data as a hash:
+    #
+    #       {
+    #         integer_parameter_range_specification: {
+    #           min_value: "ParameterValue", # required
+    #           max_value: "ParameterValue", # required
+    #         },
+    #         continuous_parameter_range_specification: {
+    #           min_value: "ParameterValue", # required
+    #           max_value: "ParameterValue", # required
+    #         },
+    #         categorical_parameter_range_specification: {
+    #           values: ["ParameterValue"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] integer_parameter_range_specification
+    #   A `IntegerParameterRangeSpecification` object that defines the
+    #   possible values for an integer hyperparameter.
+    #   @return [Types::IntegerParameterRangeSpecification]
+    #
+    # @!attribute [rw] continuous_parameter_range_specification
+    #   A `ContinuousParameterRangeSpecification` object that defines the
+    #   possible values for a continuous hyperparameter.
+    #   @return [Types::ContinuousParameterRangeSpecification]
+    #
+    # @!attribute [rw] categorical_parameter_range_specification
+    #   A `CategoricalParameterRangeSpecification` object that defines the
+    #   possible values for a categorical hyperparameter.
+    #   @return [Types::CategoricalParameterRangeSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRange AWS API Documentation
+    #
+    class ParameterRange < Struct.new(
+      :integer_parameter_range_specification,
+      :continuous_parameter_range_specification,
+      :categorical_parameter_range_specification)
       include Aws::Structure
     end
 
@@ -4367,6 +8571,7 @@ module Aws::SageMaker
     #         initial_instance_count: 1, # required
     #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         initial_variant_weight: 1.0,
+    #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
     #       }
     #
     # @!attribute [rw] variant_name
@@ -4394,6 +8599,18 @@ module Aws::SageMaker
     #   ProductionVariants. If unspecified, it defaults to 1.0.
     #   @return [Float]
     #
+    # @!attribute [rw] accelerator_type
+    #   The size of the Elastic Inference (EI) instance to use for the
+    #   production variant. EI instances provide on-demand GPU computing for
+    #   inference. For more information, see [Using Elastic Inference in
+    #   Amazon SageMaker][1]. For more information, see [Using Elastic
+    #   Inference in Amazon SageMaker][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -4401,7 +8618,8 @@ module Aws::SageMaker
       :model_name,
       :initial_instance_count,
       :instance_type,
-      :initial_variant_weight)
+      :initial_variant_weight,
+      :accelerator_type)
       include Aws::Structure
     end
 
@@ -4447,6 +8665,168 @@ module Aws::SageMaker
       :desired_weight,
       :current_instance_count,
       :desired_instance_count)
+      include Aws::Structure
+    end
+
+    # A suggestion query for retrieving property names.
+    #
+    # @note When making an API call, you may pass PropertyNameQuery
+    #   data as a hash:
+    #
+    #       {
+    #         property_name_hint: "PropertyNameHint", # required
+    #       }
+    #
+    # @!attribute [rw] property_name_hint
+    #   The hyperparameter, metric, and tag key property names that begin
+    #   with the specified hint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameQuery AWS API Documentation
+    #
+    class PropertyNameQuery < Struct.new(
+      :property_name_hint)
+      include Aws::Structure
+    end
+
+    # A property name returned from a `GetSearchSuggestions` call that
+    # specifies a value in the `PropertyNameQuery` field.
+    #
+    # @!attribute [rw] property_name
+    #   A suggested property name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameSuggestion AWS API Documentation
+    #
+    class PropertyNameSuggestion < Struct.new(
+      :property_name)
+      include Aws::Structure
+    end
+
+    # Defines the amount of money paid to an Amazon Mechanical Turk worker
+    # for each task performed. For more information, see [ Public Workforce
+    # Task Price][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-public-payment.html
+    #
+    # @note When making an API call, you may pass PublicWorkforceTaskPrice
+    #   data as a hash:
+    #
+    #       {
+    #         amount_in_usd: {
+    #           dollars: 1,
+    #           cents: 1,
+    #           tenth_fractions_of_a_cent: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] amount_in_usd
+    #   Defines the amount of money paid to a worker in United States
+    #   dollars.
+    #   @return [Types::USD]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PublicWorkforceTaskPrice AWS API Documentation
+    #
+    class PublicWorkforceTaskPrice < Struct.new(
+      :amount_in_usd)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RenderUiTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ui_template: { # required
+    #           content: "TemplateContent", # required
+    #         },
+    #         task: { # required
+    #           input: "TaskInput", # required
+    #         },
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] ui_template
+    #   A `Tempate`object containing the worker UI template to render.
+    #   @return [Types::UiTemplate]
+    #
+    # @!attribute [rw] task
+    #   A `RenderableTask` object containing a representative task to
+    #   render.
+    #   @return [Types::RenderableTask]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) that has access to the S3 objects
+    #   that are used by the template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplateRequest AWS API Documentation
+    #
+    class RenderUiTemplateRequest < Struct.new(
+      :ui_template,
+      :task,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rendered_content
+    #   A Liquid template that renders the HTML for the worker UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   A list of one or more `RenderingError` objects if any were
+    #   encountered while rendering the template. If there were no errors,
+    #   the list is empty.
+    #   @return [Array<Types::RenderingError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplateResponse AWS API Documentation
+    #
+    class RenderUiTemplateResponse < Struct.new(
+      :rendered_content,
+      :errors)
+      include Aws::Structure
+    end
+
+    # Contains input values for a task.
+    #
+    # @note When making an API call, you may pass RenderableTask
+    #   data as a hash:
+    #
+    #       {
+    #         input: "TaskInput", # required
+    #       }
+    #
+    # @!attribute [rw] input
+    #   A JSON object that contains values for the variables defined in the
+    #   template. It is made available to the template under the
+    #   substitution variable `task.input`. For example, if you define a
+    #   variable `task.input.text` in your template, you can supply the
+    #   variable in the JSON object as `"text": "sample text"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderableTask AWS API Documentation
+    #
+    class RenderableTask < Struct.new(
+      :input)
+      include Aws::Structure
+    end
+
+    # A description of an error that occurred while rendering the template.
+    #
+    # @!attribute [rw] code
+    #   A unique identifier for a specific class of errors.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderingError AWS API Documentation
+    #
+    class RenderingError < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -4549,19 +8929,26 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #         s3_uri: "S3Uri", # required
     #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         attribute_names: ["AttributeName"],
     #       }
     #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
-    #   Amazon SageMaker uses all objects with the specified key name prefix
-    #   for model training.
+    #   Amazon SageMaker uses all objects that match the specified key name
+    #   prefix for model training.
     #
     #   If you choose `ManifestFile`, `S3Uri` identifies an object that is a
     #   manifest file containing a list of object keys that you want Amazon
     #   SageMaker to use for model training.
+    #
+    #   If you choose `AugmentedManifestFile`, S3Uri identifies an object
+    #   that is an augmented manifest file in JSON lines format. This file
+    #   contains the data you want to use for model training.
+    #   `AugmentedManifestFile` can only be used if the Channel's input
+    #   mode is `Pipe`.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -4593,14 +8980,14 @@ module Aws::SageMaker
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
-    #     `s3://customer_bucket/some/prefix/relative/path/custdata-2`
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-1`
     #
     #     `...`
     #
-    #     The complete set of `s3uris` in this manifest constitutes the
-    #     input data for the channel for this datasource. The object that
-    #     each `s3uris` points to must readable by the IAM role that Amazon
-    #     SageMaker uses to perform tasks on your behalf.
+    #     The complete set of `s3uris` in this manifest is the input data
+    #     for the channel for this datasource. The object that each `s3uris`
+    #     points to must be readable by the IAM role that Amazon SageMaker
+    #     uses to perform tasks on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
@@ -4618,7 +9005,7 @@ module Aws::SageMaker
     #   Don't choose more ML compute instances for training than available
     #   S3 objects. If you do, some nodes won't get any data and you will
     #   pay for nodes that aren't getting any training data. This applies
-    #   in both FILE and PIPE modes. Keep this in mind when developing
+    #   in both File and Pipemodes. Keep this in mind when developing
     #   algorithms.
     #
     #   In distributed training, where you use multiple ML compute EC2
@@ -4628,12 +9015,234 @@ module Aws::SageMaker
     #   number of objects.
     #   @return [String]
     #
+    # @!attribute [rw] attribute_names
+    #   A list of one or more attribute names to use that are found in a
+    #   specified augmented manifest file.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3DataSource AWS API Documentation
     #
     class S3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri,
-      :s3_data_distribution_type)
+      :s3_data_distribution_type,
+      :attribute_names)
+      include Aws::Structure
+    end
+
+    # A multi-expression that searches for the specified resource or
+    # resources. All resource objects that satisfy the expression's
+    # condition are included in the search results.
+    #
+    # A `SearchExpression` contains the following components:
+    #
+    # * A list of `Filter` objects. Each filter defines a simple Boolean
+    #   expression comprised of a resource property name, Boolean operator,
+    #   and value.
+    #
+    # * A list of `NestedFilter` objects. Each nested filter defines a list
+    #   of Boolean expressions using a list of resource properties. A nested
+    #   filter is satisfied if a single object in the list satisfies all
+    #   Boolean expressions.
+    #
+    # * A list of `SearchExpression` objects.
+    #
+    # * A Boolean operator: `And` or `Or`.
+    #
+    # @note When making an API call, you may pass SearchExpression
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "ResourcePropertyName", # required
+    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #             value: "FilterValue",
+    #           },
+    #         ],
+    #         nested_filters: [
+    #           {
+    #             nested_property_name: "ResourcePropertyName", # required
+    #             filters: [ # required
+    #               {
+    #                 name: "ResourcePropertyName", # required
+    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #                 value: "FilterValue",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         sub_expressions: [
+    #           {
+    #             filters: [
+    #               {
+    #                 name: "ResourcePropertyName", # required
+    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #                 value: "FilterValue",
+    #               },
+    #             ],
+    #             nested_filters: [
+    #               {
+    #                 nested_property_name: "ResourcePropertyName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     name: "ResourcePropertyName", # required
+    #                     operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #                     value: "FilterValue",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             sub_expressions: {
+    #               # recursive SearchExpressionList
+    #             },
+    #             operator: "And", # accepts And, Or
+    #           },
+    #         ],
+    #         operator: "And", # accepts And, Or
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filter objects.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] nested_filters
+    #   A list of nested filter objects.
+    #   @return [Array<Types::NestedFilters>]
+    #
+    # @!attribute [rw] sub_expressions
+    #   A list of search expression objects.
+    #   @return [Array<Types::SearchExpression>]
+    #
+    # @!attribute [rw] operator
+    #   A Boolean operator used to evaluate the search expression. If you
+    #   want every conditional statement in all lists to be satisfied for
+    #   the entire search expression to be true, specify `And`. If only a
+    #   single conditional statement needs to be true for the entire search
+    #   expression to be true, specify `Or`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchExpression AWS API Documentation
+    #
+    class SearchExpression < Struct.new(
+      :filters,
+      :nested_filters,
+      :sub_expressions,
+      :operator)
+      include Aws::Structure
+    end
+
+    # An individual search result record that contains a single resource
+    # object.
+    #
+    # @!attribute [rw] training_job
+    #   A `TrainingJob` object that is returned as part of a `Search`
+    #   request.
+    #   @return [Types::TrainingJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
+    #
+    class SearchRecord < Struct.new(
+      :training_job)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "TrainingJob", # required, accepts TrainingJob
+    #         search_expression: {
+    #           filters: [
+    #             {
+    #               name: "ResourcePropertyName", # required
+    #               operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #               value: "FilterValue",
+    #             },
+    #           ],
+    #           nested_filters: [
+    #             {
+    #               nested_property_name: "ResourcePropertyName", # required
+    #               filters: [ # required
+    #                 {
+    #                   name: "ResourcePropertyName", # required
+    #                   operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains
+    #                   value: "FilterValue",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           sub_expressions: [
+    #             {
+    #               # recursive SearchExpression
+    #             },
+    #           ],
+    #           operator: "And", # accepts And, Or
+    #         },
+    #         sort_by: "ResourcePropertyName",
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   The name of the Amazon SageMaker resource to search for. Currently,
+    #   the only valid `Resource` value is `TrainingJob`.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_expression
+    #   A Boolean conditional statement. Resource objects must satisfy this
+    #   condition to be included in search results.
+    #   @return [Types::SearchExpression]
+    #
+    # @!attribute [rw] sort_by
+    #   The name of the resource property used to sort the `SearchResults`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   How `SearchResults` are ordered. Valid values are `Ascending` or
+    #   `Descending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If more than `MaxResults` resource objects match the specified
+    #   `SearchExpression`, the `SearchResponse` includes a `NextToken`. The
+    #   `NextToken` can be passed to the next `SearchRequest` to continue
+    #   retrieving results for the specified `SearchExpression` and `Sort`
+    #   parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a `SearchResponse`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest AWS API Documentation
+    #
+    class SearchRequest < Struct.new(
+      :resource,
+      :search_expression,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `SearchResult` objects.
+    #   @return [Array<Types::SearchRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `Search` request was truncated, the
+    #   response includes a NextToken. To retrieve the next set of results,
+    #   use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchResponse AWS API Documentation
+    #
+    class SearchResponse < Struct.new(
+      :results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -4757,6 +9366,100 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A configuration for a shuffle option for input data in a channel. If
+    # you use `S3Prefix` for `S3DataType`, the results of the S3 key prefix
+    # matches are shuffled. If you use `ManifestFile`, the order of the S3
+    # object references in the `ManifestFile` is shuffled. If you use
+    # `AugmentedManifestFile`, the order of the JSON lines in the
+    # `AugmentedManifestFile` is shuffled. The shuffling order is determined
+    # using the `Seed` value.
+    #
+    # For Pipe input mode, shuffling is done at the start of every epoch.
+    # With large datasets, this ensures that the order of the training data
+    # is different for each epoch, and it helps reduce bias and possible
+    # overfitting. In a multi-node training job when `ShuffleConfig` is
+    # combined with `S3DataDistributionType` of `ShardedByS3Key`, the data
+    # is shuffled across nodes so that the content sent to a particular node
+    # on the first epoch might be sent to a different node on the second
+    # epoch.
+    #
+    # @note When making an API call, you may pass ShuffleConfig
+    #   data as a hash:
+    #
+    #       {
+    #         seed: 1, # required
+    #       }
+    #
+    # @!attribute [rw] seed
+    #   Determines the shuffling order in `ShuffleConfig`. value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShuffleConfig AWS API Documentation
+    #
+    class ShuffleConfig < Struct.new(
+      :seed)
+      include Aws::Structure
+    end
+
+    # Specifies an algorithm that was used to create the model package. The
+    # algorithm must be either an algorithm resource in your Amazon
+    # SageMaker account or an algorithm in AWS Marketplace that you are
+    # subscribed to.
+    #
+    # @note When making an API call, you may pass SourceAlgorithm
+    #   data as a hash:
+    #
+    #       {
+    #         model_data_url: "Url",
+    #         algorithm_name: "ArnOrName", # required
+    #       }
+    #
+    # @!attribute [rw] model_data_url
+    #   The Amazon S3 path where the model artifacts, which result from
+    #   model training, are stored. This path must point to a single `gzip`
+    #   compressed tar archive (`.tar.gz` suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] algorithm_name
+    #   The name of an algorithm that was used to create the model package.
+    #   The algorithm must be either an algorithm resource in your Amazon
+    #   SageMaker account or an algorithm in AWS Marketplace that you are
+    #   subscribed to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithm AWS API Documentation
+    #
+    class SourceAlgorithm < Struct.new(
+      :model_data_url,
+      :algorithm_name)
+      include Aws::Structure
+    end
+
+    # A list of algorithms that were used to create a model package.
+    #
+    # @note When making an API call, you may pass SourceAlgorithmSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         source_algorithms: [ # required
+    #           {
+    #             model_data_url: "Url",
+    #             algorithm_name: "ArnOrName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] source_algorithms
+    #   A list of the algorithms that were used to create a model package.
+    #   @return [Array<Types::SourceAlgorithm>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithmSpecification AWS API Documentation
+    #
+    class SourceAlgorithmSpecification < Struct.new(
+      :source_algorithms)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartNotebookInstanceInput
     #   data as a hash:
     #
@@ -4775,6 +9478,24 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopCompilationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compilation_job_name: "EntityName", # required
+    #       }
+    #
+    # @!attribute [rw] compilation_job_name
+    #   The name of the model compilation job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopCompilationJobRequest AWS API Documentation
+    #
+    class StopCompilationJobRequest < Struct.new(
+      :compilation_job_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopHyperParameterTuningJobRequest
     #   data as a hash:
     #
@@ -4790,6 +9511,24 @@ module Aws::SageMaker
     #
     class StopHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopLabelingJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         labeling_job_name: "LabelingJobName", # required
+    #       }
+    #
+    # @!attribute [rw] labeling_job_name
+    #   The name of the labeling job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJobRequest AWS API Documentation
+    #
+    class StopLabelingJobRequest < Struct.new(
+      :labeling_job_name)
       include Aws::Structure
     end
 
@@ -4847,12 +9586,12 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies how long model training can run. When model training reaches
-    # the limit, Amazon SageMaker ends the training job. Use this API to cap
-    # model training cost.
+    # Specifies how long a model training or compilation job can run. When
+    # the job reaches the limit, Amazon SageMaker ends the training job. Use
+    # this API to cap model processing cost.
     #
     # To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    # signal, which delays job termination for120 seconds. Algorithms might
+    # signal, which delays job termination for 120 seconds. Algorithms might
     # use this 120-second window to save the model artifacts, so the results
     # of training is not lost.
     #
@@ -4870,16 +9609,73 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
-    #   The maximum length of time, in seconds, that the training job can
-    #   run. If model training does not complete during this time, Amazon
-    #   SageMaker ends the job. If value is not specified, default value is
-    #   1 day. Maximum value is 5 days.
+    #   The maximum length of time, in seconds, that the training or
+    #   compilation job can run. If the job does not complete during this
+    #   time, Amazon SageMaker ends the job. If value is not specified,
+    #   default value is 1 day. Maximum value is 5 days.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
     #
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds)
+      include Aws::Structure
+    end
+
+    # Describes a work team of a vendor that does the a labelling job.
+    #
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) of the vendor that you have
+    #   subscribed.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_title
+    #   The title of the service provided by the vendor in the Amazon
+    #   Marketplace.
+    #   @return [String]
+    #
+    # @!attribute [rw] seller_name
+    #   The name of the vendor in the Amazon Marketplace.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_description
+    #   The description of the vendor from the Amazon Marketplace.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SubscribedWorkteam AWS API Documentation
+    #
+    class SubscribedWorkteam < Struct.new(
+      :workteam_arn,
+      :marketplace_title,
+      :seller_name,
+      :marketplace_description,
+      :listing_id)
+      include Aws::Structure
+    end
+
+    # Limits the property names that are included in the response.
+    #
+    # @note When making an API call, you may pass SuggestionQuery
+    #   data as a hash:
+    #
+    #       {
+    #         property_name_query: {
+    #           property_name_hint: "PropertyNameHint", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] property_name_query
+    #   Defines a property name hint. Only property names that match the
+    #   specified hint are included in the response.
+    #   @return [Types::PropertyNameQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SuggestionQuery AWS API Documentation
+    #
+    class SuggestionQuery < Struct.new(
+      :property_name_query)
       include Aws::Structure
     end
 
@@ -4906,6 +9702,338 @@ module Aws::SageMaker
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # Contains information about a training job.
+    #
+    # @!attribute [rw] training_job_name
+    #   The name of the training job.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_job_arn
+    #   The Amazon Resource Name (ARN) of the training job.
+    #   @return [String]
+    #
+    # @!attribute [rw] tuning_job_arn
+    #   The Amazon Resource Name (ARN) of the associated hyperparameter
+    #   tuning job if the training job was launched by a hyperparameter
+    #   tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] labeling_job_arn
+    #   The Amazon Resource Name (ARN) of the labeling job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_artifacts
+    #   Information about the Amazon S3 location that is configured for
+    #   storing model artifacts.
+    #   @return [Types::ModelArtifacts]
+    #
+    # @!attribute [rw] training_job_status
+    #   The status of the training job.
+    #
+    #   Training job statuses are:
+    #
+    #   * `InProgress` - The training is in progress.
+    #
+    #   * `Completed` - The training job has completed.
+    #
+    #   * `Failed` - The training job has failed. To see the reason for the
+    #     failure, see the `FailureReason` field in the response to a
+    #     `DescribeTrainingJobResponse` call.
+    #
+    #   * `Stopping` - The training job is stopping.
+    #
+    #   * `Stopped` - The training job has stopped.
+    #
+    #   For more detailed information, see `SecondaryStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_status
+    #   Provides detailed information about the state of the training job.
+    #   For detailed information about the secondary status of the training
+    #   job, see `StatusMessage` under SecondaryStatusTransition.
+    #
+    #   Amazon SageMaker provides primary statuses and secondary statuses
+    #   that apply to each of them:
+    #
+    #   InProgress
+    #   : * `Starting` - Starting the training job.
+    #
+    #     * `Downloading` - An optional stage for algorithms that support
+    #       `File` training input mode. It indicates that data is being
+    #       downloaded to the ML storage volumes.
+    #
+    #     * `Training` - Training is in progress.
+    #
+    #     * `Uploading` - Training is complete and the model artifacts are
+    #       being uploaded to the S3 location.
+    #
+    #   Completed
+    #   : * `Completed` - The training job has completed.
+    #
+    #     ^
+    #
+    #   Failed
+    #   : * `Failed` - The training job has failed. The reason for the
+    #       failure is returned in the `FailureReason` field of
+    #       `DescribeTrainingJobResponse`.
+    #
+    #     ^
+    #
+    #   Stopped
+    #   : * `MaxRuntimeExceeded` - The job stopped because it exceeded the
+    #       maximum allowed runtime.
+    #
+    #     * `Stopped` - The training job has stopped.
+    #
+    #   Stopping
+    #   : * `Stopping` - Stopping the training job.
+    #
+    #     ^
+    #
+    #   Valid values for `SecondaryStatus` are subject to change.
+    #
+    #   We no longer support the following secondary statuses:
+    #
+    #   * `LaunchingMLInstances`
+    #
+    #   * `PreparingTrainingStack`
+    #
+    #   * `DownloadingTrainingImage`
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the training job failed, the reason it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameters
+    #   Algorithm-specific parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] algorithm_specification
+    #   Information about the algorithm used for training, and algorithm
+    #   metadata.
+    #   @return [Types::AlgorithmSpecification]
+    #
+    # @!attribute [rw] role_arn
+    #   The AWS Identity and Access Management (IAM) role configured for the
+    #   training job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   An array of `Channel` objects that describes each data input
+    #   channel.
+    #   @return [Array<Types::Channel>]
+    #
+    # @!attribute [rw] output_data_config
+    #   The S3 path where model artifacts that you configured when creating
+    #   the job are stored. Amazon SageMaker creates subfolders for model
+    #   artifacts.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] resource_config
+    #   Resources, including ML compute instances and ML storage volumes,
+    #   that are configured for model training.
+    #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] vpc_config
+    #   A VpcConfig object that specifies the VPC that this training job has
+    #   access to. For more information, see [Protect Training Jobs by Using
+    #   an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   The condition under which to stop the training job.
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that indicates when the training job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_start_time
+    #   Indicates the time when the training job starts on training
+    #   instances. You are billed for the time interval between this time
+    #   and the value of `TrainingEndTime`. The start time in CloudWatch
+    #   Logs might be later than this time. The difference is due to the
+    #   time it takes to download the training data and to the size of the
+    #   training container.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_end_time
+    #   Indicates the time when the training job ends on training instances.
+    #   You are billed for the time interval between the value of
+    #   `TrainingStartTime` and this time. For successful jobs and stopped
+    #   jobs, this is the time after model artifacts are uploaded. For
+    #   failed jobs, this is the time when Amazon SageMaker detects a job
+    #   failure.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that indicates when the status of the training job was
+    #   last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] secondary_status_transitions
+    #   A history of all of the secondary statuses that the training job has
+    #   transitioned through.
+    #   @return [Array<Types::SecondaryStatusTransition>]
+    #
+    # @!attribute [rw] final_metric_data_list
+    #   A list of final metric values that are set when the Training Job
+    #   completes. Used only if the training job was configured to use
+    #   metrics.
+    #   @return [Array<Types::MetricData>]
+    #
+    # @!attribute [rw] enable_network_isolation
+    #   If the `TrainingJob` was created with network isolation, the value
+    #   is set to `true`. If network isolation is enabled, nodes can't
+    #   communicate beyond the VPC they run in.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJob AWS API Documentation
+    #
+    class TrainingJob < Struct.new(
+      :training_job_name,
+      :training_job_arn,
+      :tuning_job_arn,
+      :labeling_job_arn,
+      :model_artifacts,
+      :training_job_status,
+      :secondary_status,
+      :failure_reason,
+      :hyper_parameters,
+      :algorithm_specification,
+      :role_arn,
+      :input_data_config,
+      :output_data_config,
+      :resource_config,
+      :vpc_config,
+      :stopping_condition,
+      :creation_time,
+      :training_start_time,
+      :training_end_time,
+      :last_modified_time,
+      :secondary_status_transitions,
+      :final_metric_data_list,
+      :enable_network_isolation,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Defines the input needed to run a training job using the algorithm.
+    #
+    # @note When making an API call, you may pass TrainingJobDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         hyper_parameters: {
+    #           "ParameterKey" => "ParameterValue",
+    #         },
+    #         input_data_config: [ # required
+    #           {
+    #             channel_name: "ChannelName", # required
+    #             data_source: { # required
+    #               s3_data_source: { # required
+    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #                 s3_uri: "S3Uri", # required
+    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                 attribute_names: ["AttributeName"],
+    #               },
+    #             },
+    #             content_type: "ContentType",
+    #             compression_type: "None", # accepts None, Gzip
+    #             record_wrapper_type: "None", # accepts None, RecordIO
+    #             input_mode: "Pipe", # accepts Pipe, File
+    #             shuffle_config: {
+    #               seed: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         output_data_config: { # required
+    #           kms_key_id: "KmsKeyId",
+    #           s3_output_path: "S3Uri", # required
+    #         },
+    #         resource_config: { # required
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_count: 1, # required
+    #           volume_size_in_gb: 1, # required
+    #           volume_kms_key_id: "KmsKeyId",
+    #         },
+    #         stopping_condition: { # required
+    #           max_runtime_in_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] training_input_mode
+    #   The input mode used by the algorithm for the training job. For the
+    #   input modes that Amazon SageMaker algorithms support, see
+    #   [Algorithms][1].
+    #
+    #   If an algorithm supports the `File` input mode, Amazon SageMaker
+    #   downloads the training data from S3 to the provisioned ML storage
+    #   Volume, and mounts the directory to docker volume for training
+    #   container. If an algorithm supports the `Pipe` input mode, Amazon
+    #   SageMaker streams data directly from S3 to the container.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameters
+    #   The hyperparameters used for the training job.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] input_data_config
+    #   An array of `Channel` objects, each of which specifies an input
+    #   source.
+    #   @return [Array<Types::Channel>]
+    #
+    # @!attribute [rw] output_data_config
+    #   the path to the S3 bucket where you want to store model artifacts.
+    #   Amazon SageMaker creates subfolders for the artifacts.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] resource_config
+    #   The resources, including the ML compute instances and ML storage
+    #   volumes, to use for model training.
+    #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   Sets a duration for training. Use this parameter to cap model
+    #   training costs.
+    #
+    #   To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
+    #   signal, which delays job termination for 120 seconds. Algorithms
+    #   might use this 120-second window to save the model artifacts.
+    #   @return [Types::StoppingCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobDefinition AWS API Documentation
+    #
+    class TrainingJobDefinition < Struct.new(
+      :training_input_mode,
+      :hyper_parameters,
+      :input_data_config,
+      :output_data_config,
+      :resource_config,
+      :stopping_condition)
       include Aws::Structure
     end
 
@@ -4990,6 +10118,119 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines how the algorithm is used for a training job.
+    #
+    # @note When making an API call, you may pass TrainingSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         training_image: "Image", # required
+    #         training_image_digest: "ImageDigest",
+    #         supported_hyper_parameters: [
+    #           {
+    #             name: "ParameterName", # required
+    #             description: "EntityDescription",
+    #             type: "Integer", # required, accepts Integer, Continuous, Categorical, FreeText
+    #             range: {
+    #               integer_parameter_range_specification: {
+    #                 min_value: "ParameterValue", # required
+    #                 max_value: "ParameterValue", # required
+    #               },
+    #               continuous_parameter_range_specification: {
+    #                 min_value: "ParameterValue", # required
+    #                 max_value: "ParameterValue", # required
+    #               },
+    #               categorical_parameter_range_specification: {
+    #                 values: ["ParameterValue"], # required
+    #               },
+    #             },
+    #             is_tunable: false,
+    #             is_required: false,
+    #             default_value: "ParameterValue",
+    #           },
+    #         ],
+    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         supports_distributed_training: false,
+    #         metric_definitions: [
+    #           {
+    #             name: "MetricName", # required
+    #             regex: "MetricRegex", # required
+    #           },
+    #         ],
+    #         training_channels: [ # required
+    #           {
+    #             name: "ChannelName", # required
+    #             description: "EntityDescription",
+    #             is_required: false,
+    #             supported_content_types: ["ContentType"], # required
+    #             supported_compression_types: ["None"], # accepts None, Gzip
+    #             supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #           },
+    #         ],
+    #         supported_tuning_job_objective_metrics: [
+    #           {
+    #             type: "Maximize", # required, accepts Maximize, Minimize
+    #             metric_name: "MetricName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] training_image
+    #   The Amazon Amazon ECR registry path of the Docker image that
+    #   contains the training algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_image_digest
+    #   An MD5 hash of the training algorithm that identifies the Docker
+    #   image used for training.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_hyper_parameters
+    #   A list of the `HyperParameterSpecification` objects, that define the
+    #   supported hyperparameters. This is required if the algorithm
+    #   supports automatic model tuning.&gt;
+    #   @return [Array<Types::HyperParameterSpecification>]
+    #
+    # @!attribute [rw] supported_training_instance_types
+    #   A list of the instance types that this algorithm can use for
+    #   training.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supports_distributed_training
+    #   Indicates whether the algorithm supports distributed training. If
+    #   set to false, buyers can’t request more than one instance during
+    #   training.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] metric_definitions
+    #   A list of `MetricDefinition` objects, which are used for parsing
+    #   metrics generated by the algorithm.
+    #   @return [Array<Types::MetricDefinition>]
+    #
+    # @!attribute [rw] training_channels
+    #   A list of `ChannelSpecification` objects, which specify the input
+    #   sources to be used by the algorithm.
+    #   @return [Array<Types::ChannelSpecification>]
+    #
+    # @!attribute [rw] supported_tuning_job_objective_metrics
+    #   A list of the metrics that the alogorithm emits that can be used as
+    #   the objective metric in a hyperparameter tuning job.
+    #   @return [Array<Types::HyperParameterTuningJobObjective>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSpecification AWS API Documentation
+    #
+    class TrainingSpecification < Struct.new(
+      :training_image,
+      :training_image_digest,
+      :supported_hyper_parameters,
+      :supported_training_instance_types,
+      :supports_distributed_training,
+      :metric_definitions,
+      :training_channels,
+      :supported_tuning_job_objective_metrics)
+      include Aws::Structure
+    end
+
     # Describes the location of the channel data.
     #
     # @note When making an API call, you may pass TransformDataSource
@@ -4997,7 +10238,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_data_source: { # required
-    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #           s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #           s3_uri: "S3Uri", # required
     #         },
     #       }
@@ -5023,7 +10264,7 @@ module Aws::SageMaker
     #       {
     #         data_source: { # required
     #           s3_data_source: { # required
-    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #             s3_uri: "S3Uri", # required
     #           },
     #         },
@@ -5077,6 +10318,94 @@ module Aws::SageMaker
       :content_type,
       :compression_type,
       :split_type)
+      include Aws::Structure
+    end
+
+    # Defines the input needed to run a transform job using the inference
+    # specification specified in the algorithm.
+    #
+    # @note When making an API call, you may pass TransformJobDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         max_concurrent_transforms: 1,
+    #         max_payload_in_mb: 1,
+    #         batch_strategy: "MultiRecord", # accepts MultiRecord, SingleRecord
+    #         environment: {
+    #           "TransformEnvironmentKey" => "TransformEnvironmentValue",
+    #         },
+    #         transform_input: { # required
+    #           data_source: { # required
+    #             s3_data_source: { # required
+    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #           content_type: "ContentType",
+    #           compression_type: "None", # accepts None, Gzip
+    #           split_type: "None", # accepts None, Line, RecordIO
+    #         },
+    #         transform_output: { # required
+    #           s3_output_path: "S3Uri", # required
+    #           accept: "Accept",
+    #           assemble_with: "None", # accepts None, Line
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         transform_resources: { # required
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge
+    #           instance_count: 1, # required
+    #           volume_kms_key_id: "KmsKeyId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] max_concurrent_transforms
+    #   The maximum number of parallel requests that can be sent to each
+    #   instance in a transform job. The default value is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_payload_in_mb
+    #   The maximum payload size allowed, in MB. A payload is the data
+    #   portion of a record (without metadata).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_strategy
+    #   A string that determines the number of records included in a single
+    #   mini-batch.
+    #
+    #   `SingleRecord` means only one record is used per mini-batch.
+    #   `MultiRecord` means a mini-batch is set to contain as many records
+    #   that can fit within the `MaxPayloadInMB` limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container. We support
+    #   up to 16 key and values entries in the map.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] transform_input
+    #   A description of the input source and the way the transform job
+    #   consumes it.
+    #   @return [Types::TransformInput]
+    #
+    # @!attribute [rw] transform_output
+    #   Identifies the Amazon S3 location where you want Amazon SageMaker to
+    #   save the results from the transform job.
+    #   @return [Types::TransformOutput]
+    #
+    # @!attribute [rw] transform_resources
+    #   Identifies the ML compute instances for the transform job.
+    #   @return [Types::TransformResources]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJobDefinition AWS API Documentation
+    #
+    class TransformJobDefinition < Struct.new(
+      :max_concurrent_transforms,
+      :max_payload_in_mb,
+      :batch_strategy,
+      :environment,
+      :transform_input,
+      :transform_output,
+      :transform_resources)
       include Aws::Structure
     end
 
@@ -5270,7 +10599,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #         s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #         s3_uri: "S3Uri", # required
     #       }
     #
@@ -5328,6 +10657,122 @@ module Aws::SageMaker
     class TransformS3DataSource < Struct.new(
       :s3_data_type,
       :s3_uri)
+      include Aws::Structure
+    end
+
+    # Represents an amount of money in United States dollars/
+    #
+    # @note When making an API call, you may pass USD
+    #   data as a hash:
+    #
+    #       {
+    #         dollars: 1,
+    #         cents: 1,
+    #         tenth_fractions_of_a_cent: 1,
+    #       }
+    #
+    # @!attribute [rw] dollars
+    #   The whole number of dollars in the amount.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cents
+    #   The fractional portion, in cents, of the amount.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tenth_fractions_of_a_cent
+    #   Fractions of a cent, in tenths.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/USD AWS API Documentation
+    #
+    class USD < Struct.new(
+      :dollars,
+      :cents,
+      :tenth_fractions_of_a_cent)
+      include Aws::Structure
+    end
+
+    # Provided configuration information for the worker UI for a labeling
+    # job.
+    #
+    # @note When making an API call, you may pass UiConfig
+    #   data as a hash:
+    #
+    #       {
+    #         ui_template_s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] ui_template_s3_uri
+    #   The Amazon S3 bucket location of the UI template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiConfig AWS API Documentation
+    #
+    class UiConfig < Struct.new(
+      :ui_template_s3_uri)
+      include Aws::Structure
+    end
+
+    # The Liquid template for the worker user interface.
+    #
+    # @note When making an API call, you may pass UiTemplate
+    #   data as a hash:
+    #
+    #       {
+    #         content: "TemplateContent", # required
+    #       }
+    #
+    # @!attribute [rw] content
+    #   The content of the Liquid template for the worker user interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiTemplate AWS API Documentation
+    #
+    class UiTemplate < Struct.new(
+      :content)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCodeRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         code_repository_name: "EntityName", # required
+    #         git_config: {
+    #           secret_arn: "SecretArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] code_repository_name
+    #   The name of the git repository to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] git_config
+    #   The configuration of the git repository, including the URL and the
+    #   Amazon Resource Name (ARN) of the AWS Secrets Manager secret that
+    #   contains the credentials used to access the repository. The secret
+    #   must have a staging label of `AWSCURRENT` and must be in the
+    #   following format:
+    #
+    #   `\{"username": UserName, "password": Password\}`
+    #   @return [Types::GitConfigForUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryInput AWS API Documentation
+    #
+    class UpdateCodeRepositoryInput < Struct.new(
+      :code_repository_name,
+      :git_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_repository_arn
+    #   The ARN of the git repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryOutput AWS API Documentation
+    #
+    class UpdateCodeRepositoryOutput < Struct.new(
+      :code_repository_arn)
       include Aws::Structure
     end
 
@@ -5418,6 +10863,12 @@ module Aws::SageMaker
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         disassociate_lifecycle_config: false,
     #         volume_size_in_gb: 1,
+    #         default_code_repository: "CodeRepositoryNameOrUrl",
+    #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
+    #         accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
+    #         disassociate_accelerator_types: false,
+    #         disassociate_default_code_repository: false,
+    #         disassociate_additional_code_repositories: false,
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -5463,6 +10914,62 @@ module Aws::SageMaker
     #   instance. The default value is 5 GB.
     #   @return [Integer]
     #
+    # @!attribute [rw] default_code_repository
+    #   The git repository to associate with the notebook instance as its
+    #   default code repository. This can be either the name of a git
+    #   repository stored as a resource in your account, or the URL of a git
+    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   When you open a notebook instance, it opens in the directory that
+    #   contains this repository. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_code_repositories
+    #   An array of up to 3 git repositories to associate with the notebook
+    #   instance. These can be either the names of git repositories stored
+    #   as resources in your account, or the URL of git repositories in [AWS
+    #   CodeCommit][1] or in any other git repository.. These repositories
+    #   are cloned at the same level as the default repository of your
+    #   notebook instance. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_types
+    #   A list of the Elastic Inference (EI) instance types to associate
+    #   with this notebook instance. Currently only one EI instance type can
+    #   be associated with a notebook instance. For more information, see
+    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disassociate_accelerator_types
+    #   A list of the Elastic Inference (EI) instance types to remove from
+    #   this notebook instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disassociate_default_code_repository
+    #   The name or URL of the default git repository to remove from this
+    #   notebook instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disassociate_additional_code_repositories
+    #   A list of names or URLs of the default git repositories to remove
+    #   from this notebook instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation
     #
     class UpdateNotebookInstanceInput < Struct.new(
@@ -5471,7 +10978,13 @@ module Aws::SageMaker
       :role_arn,
       :lifecycle_config_name,
       :disassociate_lifecycle_config,
-      :volume_size_in_gb)
+      :volume_size_in_gb,
+      :default_code_repository,
+      :additional_code_repositories,
+      :accelerator_types,
+      :disassociate_accelerator_types,
+      :disassociate_default_code_repository,
+      :disassociate_additional_code_repositories)
       include Aws::Structure
     end
 
@@ -5523,6 +11036,56 @@ module Aws::SageMaker
     #
     class UpdateNotebookInstanceOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateWorkteamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workteam_name: "WorkteamName", # required
+    #         member_definitions: [
+    #           {
+    #             cognito_member_definition: {
+    #               user_pool: "CognitoUserPool", # required
+    #               user_group: "CognitoUserGroup", # required
+    #               client_id: "CognitoClientId", # required
+    #             },
+    #           },
+    #         ],
+    #         description: "String200",
+    #       }
+    #
+    # @!attribute [rw] workteam_name
+    #   The name of the work team to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_definitions
+    #   A list of `MemberDefinition` objects that contain the updated work
+    #   team members.
+    #   @return [Array<Types::MemberDefinition>]
+    #
+    # @!attribute [rw] description
+    #   An updated description for the work team.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteamRequest AWS API Documentation
+    #
+    class UpdateWorkteamRequest < Struct.new(
+      :workteam_name,
+      :member_definitions,
+      :description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workteam
+    #   A `Workteam` object that describes the updated work team.
+    #   @return [Types::Workteam]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteamResponse AWS API Documentation
+    #
+    class UpdateWorkteamResponse < Struct.new(
+      :workteam)
+      include Aws::Structure
+    end
+
     # Specifies a VPC that your training jobs and hosted models have access
     # to. Control access to and from your training and model containers by
     # configuring the VPC. For more information, see [Protect Endpoints by
@@ -5558,6 +11121,55 @@ module Aws::SageMaker
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets)
+      include Aws::Structure
+    end
+
+    # Provides details about a labeling work team.
+    #
+    # @!attribute [rw] workteam_name
+    #   The name of the work team.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_definitions
+    #   The Amazon Cognito user groups that make up the work team.
+    #   @return [Array<Types::MemberDefinition>]
+    #
+    # @!attribute [rw] workteam_arn
+    #   The Amazon Resource Name (ARN) that identifies the work team.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_listing_ids
+    #   The Amazon Marketplace identifier for a vendor's work team.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the work team.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_domain
+    #   The URI of the labeling job's user interface. Workers open this URI
+    #   to start labeling your data objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time that the work team was created (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date
+    #   The date and time that the work team was last updated (timestamp).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workteam AWS API Documentation
+    #
+    class Workteam < Struct.new(
+      :workteam_name,
+      :member_definitions,
+      :workteam_arn,
+      :product_listing_ids,
+      :description,
+      :sub_domain,
+      :create_date,
+      :last_updated_date)
       include Aws::Structure
     end
 

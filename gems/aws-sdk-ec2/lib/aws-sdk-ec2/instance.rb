@@ -218,6 +218,12 @@ module Aws::EC2
       data[:elastic_gpu_associations]
     end
 
+    # The elastic inference accelerator associated with the instance.
+    # @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
+    def elastic_inference_accelerator_associations
+      data[:elastic_inference_accelerator_associations]
+    end
+
     # The device name of the root device volume (for example, `/dev/sda1`).
     # @return [String]
     def root_device_name
@@ -299,6 +305,18 @@ module Aws::EC2
     # @return [Types::CapacityReservationSpecificationResponse]
     def capacity_reservation_specification
       data[:capacity_reservation_specification]
+    end
+
+    # Indicates whether the instance is enabled for hibernation.
+    # @return [Types::HibernationOptions]
+    def hibernation_options
+      data[:hibernation_options]
+    end
+
+    # The license configurations.
+    # @return [Array<Types::LicenseConfiguration>]
+    def licenses
+      data[:licenses]
     end
 
     # @!endgroup
@@ -1130,10 +1148,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.stop({
+    #     hibernate: false,
     #     dry_run: false,
     #     force: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :hibernate
+    #   Hibernates the instance if the instance was enabled for hibernation at
+    #   launch. If the instance cannot hibernate successfully, a normal
+    #   shutdown occurs. For more information, see [Hibernate Your
+    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1608,10 +1638,22 @@ module Aws::EC2
       # @example Request syntax with placeholder values
       #
       #   instance.batch_stop({
+      #     hibernate: false,
       #     dry_run: false,
       #     force: false,
       #   })
       # @param options ({})
+      # @option options [Boolean] :hibernate
+      #   Hibernates the instance if the instance was enabled for hibernation at
+      #   launch. If the instance cannot hibernate successfully, a normal
+      #   shutdown occurs. For more information, see [Hibernate Your
+      #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      #
+      #   Default: `false`
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.

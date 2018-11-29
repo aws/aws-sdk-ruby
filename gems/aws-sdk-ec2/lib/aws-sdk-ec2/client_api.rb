@@ -568,6 +568,10 @@ module Aws::EC2
     ElasticGpuState = Shapes::StringShape.new(name: 'ElasticGpuState')
     ElasticGpuStatus = Shapes::StringShape.new(name: 'ElasticGpuStatus')
     ElasticGpus = Shapes::StructureShape.new(name: 'ElasticGpus')
+    ElasticInferenceAccelerator = Shapes::StructureShape.new(name: 'ElasticInferenceAccelerator')
+    ElasticInferenceAcceleratorAssociation = Shapes::StructureShape.new(name: 'ElasticInferenceAcceleratorAssociation')
+    ElasticInferenceAcceleratorAssociationList = Shapes::ListShape.new(name: 'ElasticInferenceAcceleratorAssociationList')
+    ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
     EnableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationRequest')
     EnableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationResult')
     EnableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'EnableVgwRoutePropagationRequest')
@@ -649,6 +653,8 @@ module Aws::EC2
     GroupIdentifierSet = Shapes::ListShape.new(name: 'GroupIdentifierSet')
     GroupIds = Shapes::ListShape.new(name: 'GroupIds')
     GroupNameStringList = Shapes::ListShape.new(name: 'GroupNameStringList')
+    HibernationOptions = Shapes::StructureShape.new(name: 'HibernationOptions')
+    HibernationOptionsRequest = Shapes::StructureShape.new(name: 'HibernationOptionsRequest')
     HistoryRecord = Shapes::StructureShape.new(name: 'HistoryRecord')
     HistoryRecordEntry = Shapes::StructureShape.new(name: 'HistoryRecordEntry')
     HistoryRecordSet = Shapes::ListShape.new(name: 'HistoryRecordSet')
@@ -796,7 +802,13 @@ module Aws::EC2
     LaunchTemplateCpuOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateCpuOptionsRequest')
     LaunchTemplateEbsBlockDevice = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDevice')
     LaunchTemplateEbsBlockDeviceRequest = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDeviceRequest')
+    LaunchTemplateElasticInferenceAccelerator = Shapes::StructureShape.new(name: 'LaunchTemplateElasticInferenceAccelerator')
+    LaunchTemplateElasticInferenceAcceleratorList = Shapes::ListShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorList')
+    LaunchTemplateElasticInferenceAcceleratorResponse = Shapes::StructureShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorResponse')
+    LaunchTemplateElasticInferenceAcceleratorResponseList = Shapes::ListShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorResponseList')
     LaunchTemplateErrorCode = Shapes::StringShape.new(name: 'LaunchTemplateErrorCode')
+    LaunchTemplateHibernationOptions = Shapes::StructureShape.new(name: 'LaunchTemplateHibernationOptions')
+    LaunchTemplateHibernationOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateHibernationOptionsRequest')
     LaunchTemplateIamInstanceProfileSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateIamInstanceProfileSpecification')
     LaunchTemplateIamInstanceProfileSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateIamInstanceProfileSpecificationRequest')
     LaunchTemplateInstanceMarketOptions = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMarketOptions')
@@ -805,6 +817,10 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationList')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequest')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList')
+    LaunchTemplateLicenseConfiguration = Shapes::StructureShape.new(name: 'LaunchTemplateLicenseConfiguration')
+    LaunchTemplateLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateLicenseConfigurationRequest')
+    LaunchTemplateLicenseList = Shapes::ListShape.new(name: 'LaunchTemplateLicenseList')
+    LaunchTemplateLicenseSpecificationListRequest = Shapes::ListShape.new(name: 'LaunchTemplateLicenseSpecificationListRequest')
     LaunchTemplateName = Shapes::StringShape.new(name: 'LaunchTemplateName')
     LaunchTemplateNameStringList = Shapes::ListShape.new(name: 'LaunchTemplateNameStringList')
     LaunchTemplateOverrides = Shapes::StructureShape.new(name: 'LaunchTemplateOverrides')
@@ -823,6 +839,10 @@ module Aws::EC2
     LaunchTemplateVersionSet = Shapes::ListShape.new(name: 'LaunchTemplateVersionSet')
     LaunchTemplatesMonitoring = Shapes::StructureShape.new(name: 'LaunchTemplatesMonitoring')
     LaunchTemplatesMonitoringRequest = Shapes::StructureShape.new(name: 'LaunchTemplatesMonitoringRequest')
+    LicenseConfiguration = Shapes::StructureShape.new(name: 'LicenseConfiguration')
+    LicenseConfigurationRequest = Shapes::StructureShape.new(name: 'LicenseConfigurationRequest')
+    LicenseList = Shapes::ListShape.new(name: 'LicenseList')
+    LicenseSpecificationListRequest = Shapes::ListShape.new(name: 'LicenseSpecificationListRequest')
     ListingState = Shapes::StringShape.new(name: 'ListingState')
     ListingStatus = Shapes::StringShape.new(name: 'ListingStatus')
     LoadBalancersConfig = Shapes::StructureShape.new(name: 'LoadBalancersConfig')
@@ -3724,6 +3744,19 @@ module Aws::EC2
     ElasticGpus.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ElasticGpus.struct_class = Types::ElasticGpus
 
+    ElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    ElasticInferenceAccelerator.struct_class = Types::ElasticInferenceAccelerator
+
+    ElasticInferenceAcceleratorAssociation.add_member(:elastic_inference_accelerator_arn, Shapes::ShapeRef.new(shape: String, location_name: "elasticInferenceAcceleratorArn"))
+    ElasticInferenceAcceleratorAssociation.add_member(:elastic_inference_accelerator_association_id, Shapes::ShapeRef.new(shape: String, location_name: "elasticInferenceAcceleratorAssociationId"))
+    ElasticInferenceAcceleratorAssociation.add_member(:elastic_inference_accelerator_association_state, Shapes::ShapeRef.new(shape: String, location_name: "elasticInferenceAcceleratorAssociationState"))
+    ElasticInferenceAcceleratorAssociation.add_member(:elastic_inference_accelerator_association_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "elasticInferenceAcceleratorAssociationTime"))
+    ElasticInferenceAcceleratorAssociation.struct_class = Types::ElasticInferenceAcceleratorAssociation
+
+    ElasticInferenceAcceleratorAssociationList.member = Shapes::ShapeRef.new(shape: ElasticInferenceAcceleratorAssociation, location_name: "item")
+
+    ElasticInferenceAccelerators.member = Shapes::ShapeRef.new(shape: ElasticInferenceAccelerator, location_name: "item")
+
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayRouteTableId"))
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayAttachmentId"))
     EnableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4022,6 +4055,12 @@ module Aws::EC2
     GroupIds.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     GroupNameStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "GroupName")
+
+    HibernationOptions.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "configured"))
+    HibernationOptions.struct_class = Types::HibernationOptions
+
+    HibernationOptionsRequest.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "Configured"))
+    HibernationOptionsRequest.struct_class = Types::HibernationOptionsRequest
 
     HistoryRecord.add_member(:event_information, Shapes::ShapeRef.new(shape: EventInformation, required: true, location_name: "eventInformation"))
     HistoryRecord.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "eventType"))
@@ -4338,6 +4377,7 @@ module Aws::EC2
     Instance.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfile, location_name: "iamInstanceProfile"))
     Instance.add_member(:instance_lifecycle, Shapes::ShapeRef.new(shape: InstanceLifecycleType, location_name: "instanceLifecycle"))
     Instance.add_member(:elastic_gpu_associations, Shapes::ShapeRef.new(shape: ElasticGpuAssociationList, location_name: "elasticGpuAssociationSet"))
+    Instance.add_member(:elastic_inference_accelerator_associations, Shapes::ShapeRef.new(shape: ElasticInferenceAcceleratorAssociationList, location_name: "elasticInferenceAcceleratorAssociationSet"))
     Instance.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceList, location_name: "networkInterfaceSet"))
     Instance.add_member(:root_device_name, Shapes::ShapeRef.new(shape: String, location_name: "rootDeviceName"))
     Instance.add_member(:root_device_type, Shapes::ShapeRef.new(shape: DeviceType, location_name: "rootDeviceType"))
@@ -4351,6 +4391,8 @@ module Aws::EC2
     Instance.add_member(:cpu_options, Shapes::ShapeRef.new(shape: CpuOptions, location_name: "cpuOptions"))
     Instance.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     Instance.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecificationResponse, location_name: "capacityReservationSpecification"))
+    Instance.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: HibernationOptions, location_name: "hibernationOptions"))
+    Instance.add_member(:licenses, Shapes::ShapeRef.new(shape: LicenseList, location_name: "licenseSet"))
     Instance.struct_class = Types::Instance
 
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
@@ -4693,6 +4735,22 @@ module Aws::EC2
     LaunchTemplateEbsBlockDeviceRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     LaunchTemplateEbsBlockDeviceRequest.struct_class = Types::LaunchTemplateEbsBlockDeviceRequest
 
+    LaunchTemplateElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    LaunchTemplateElasticInferenceAccelerator.struct_class = Types::LaunchTemplateElasticInferenceAccelerator
+
+    LaunchTemplateElasticInferenceAcceleratorList.member = Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAccelerator, location_name: "item")
+
+    LaunchTemplateElasticInferenceAcceleratorResponse.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    LaunchTemplateElasticInferenceAcceleratorResponse.struct_class = Types::LaunchTemplateElasticInferenceAcceleratorResponse
+
+    LaunchTemplateElasticInferenceAcceleratorResponseList.member = Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorResponse, location_name: "item")
+
+    LaunchTemplateHibernationOptions.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "configured"))
+    LaunchTemplateHibernationOptions.struct_class = Types::LaunchTemplateHibernationOptions
+
+    LaunchTemplateHibernationOptionsRequest.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "Configured"))
+    LaunchTemplateHibernationOptionsRequest.struct_class = Types::LaunchTemplateHibernationOptionsRequest
+
     LaunchTemplateIamInstanceProfileSpecification.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     LaunchTemplateIamInstanceProfileSpecification.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     LaunchTemplateIamInstanceProfileSpecification.struct_class = Types::LaunchTemplateIamInstanceProfileSpecification
@@ -4740,6 +4798,16 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, location_name: "InstanceNetworkInterfaceSpecification")
+
+    LaunchTemplateLicenseConfiguration.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "licenseConfigurationArn"))
+    LaunchTemplateLicenseConfiguration.struct_class = Types::LaunchTemplateLicenseConfiguration
+
+    LaunchTemplateLicenseConfigurationRequest.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
+    LaunchTemplateLicenseConfigurationRequest.struct_class = Types::LaunchTemplateLicenseConfigurationRequest
+
+    LaunchTemplateLicenseList.member = Shapes::ShapeRef.new(shape: LaunchTemplateLicenseConfiguration, location_name: "item")
+
+    LaunchTemplateLicenseSpecificationListRequest.member = Shapes::ShapeRef.new(shape: LaunchTemplateLicenseConfigurationRequest, location_name: "item")
 
     LaunchTemplateNameStringList.member = Shapes::ShapeRef.new(shape: LaunchTemplateName, location_name: "item")
 
@@ -4819,6 +4887,16 @@ module Aws::EC2
 
     LaunchTemplatesMonitoringRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     LaunchTemplatesMonitoringRequest.struct_class = Types::LaunchTemplatesMonitoringRequest
+
+    LicenseConfiguration.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "licenseConfigurationArn"))
+    LicenseConfiguration.struct_class = Types::LicenseConfiguration
+
+    LicenseConfigurationRequest.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
+    LicenseConfigurationRequest.struct_class = Types::LicenseConfigurationRequest
+
+    LicenseList.member = Shapes::ShapeRef.new(shape: LicenseConfiguration, location_name: "item")
+
+    LicenseSpecificationListRequest.member = Shapes::ShapeRef.new(shape: LicenseConfigurationRequest, location_name: "item")
 
     LoadBalancersConfig.add_member(:classic_load_balancers_config, Shapes::ShapeRef.new(shape: ClassicLoadBalancersConfig, location_name: "classicLoadBalancersConfig"))
     LoadBalancersConfig.add_member(:target_groups_config, Shapes::ShapeRef.new(shape: TargetGroupsConfig, location_name: "targetGroupsConfig"))
@@ -5618,12 +5696,15 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "UserData"))
     RequestLaunchTemplateData.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateTagSpecificationRequestList, location_name: "TagSpecification"))
     RequestLaunchTemplateData.add_member(:elastic_gpu_specifications, Shapes::ShapeRef.new(shape: ElasticGpuSpecificationList, location_name: "ElasticGpuSpecification"))
+    RequestLaunchTemplateData.add_member(:elastic_inference_accelerators, Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorList, location_name: "ElasticInferenceAccelerator"))
     RequestLaunchTemplateData.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdStringList, location_name: "SecurityGroupId"))
     RequestLaunchTemplateData.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupStringList, location_name: "SecurityGroup"))
     RequestLaunchTemplateData.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMarketOptionsRequest, location_name: "InstanceMarketOptions"))
     RequestLaunchTemplateData.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecificationRequest, location_name: "CreditSpecification"))
     RequestLaunchTemplateData.add_member(:cpu_options, Shapes::ShapeRef.new(shape: LaunchTemplateCpuOptionsRequest, location_name: "CpuOptions"))
     RequestLaunchTemplateData.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: LaunchTemplateCapacityReservationSpecificationRequest, location_name: "CapacityReservationSpecification"))
+    RequestLaunchTemplateData.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: LaunchTemplateHibernationOptionsRequest, location_name: "HibernationOptions"))
+    RequestLaunchTemplateData.add_member(:license_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateLicenseSpecificationListRequest, location_name: "LicenseSpecification"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5844,12 +5925,15 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
     ResponseLaunchTemplateData.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateTagSpecificationList, location_name: "tagSpecificationSet"))
     ResponseLaunchTemplateData.add_member(:elastic_gpu_specifications, Shapes::ShapeRef.new(shape: ElasticGpuSpecificationResponseList, location_name: "elasticGpuSpecificationSet"))
+    ResponseLaunchTemplateData.add_member(:elastic_inference_accelerators, Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorResponseList, location_name: "elasticInferenceAcceleratorSet"))
     ResponseLaunchTemplateData.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "securityGroupIdSet"))
     ResponseLaunchTemplateData.add_member(:security_groups, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "securityGroupSet"))
     ResponseLaunchTemplateData.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMarketOptions, location_name: "instanceMarketOptions"))
     ResponseLaunchTemplateData.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecification, location_name: "creditSpecification"))
     ResponseLaunchTemplateData.add_member(:cpu_options, Shapes::ShapeRef.new(shape: LaunchTemplateCpuOptions, location_name: "cpuOptions"))
     ResponseLaunchTemplateData.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: LaunchTemplateCapacityReservationSpecificationResponse, location_name: "capacityReservationSpecification"))
+    ResponseLaunchTemplateData.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: LaunchTemplateHibernationOptions, location_name: "hibernationOptions"))
+    ResponseLaunchTemplateData.add_member(:license_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateLicenseList, location_name: "licenseSet"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -5950,12 +6034,15 @@ module Aws::EC2
     RunInstancesRequest.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "networkInterface"))
     RunInstancesRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     RunInstancesRequest.add_member(:elastic_gpu_specification, Shapes::ShapeRef.new(shape: ElasticGpuSpecifications, location_name: "ElasticGpuSpecification"))
+    RunInstancesRequest.add_member(:elastic_inference_accelerators, Shapes::ShapeRef.new(shape: ElasticInferenceAccelerators, location_name: "ElasticInferenceAccelerator"))
     RunInstancesRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     RunInstancesRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
     RunInstancesRequest.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: InstanceMarketOptionsRequest, location_name: "InstanceMarketOptions"))
     RunInstancesRequest.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecificationRequest, location_name: "CreditSpecification"))
     RunInstancesRequest.add_member(:cpu_options, Shapes::ShapeRef.new(shape: CpuOptionsRequest, location_name: "CpuOptions"))
     RunInstancesRequest.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecification, location_name: "CapacityReservationSpecification"))
+    RunInstancesRequest.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: HibernationOptionsRequest, location_name: "HibernationOptions"))
+    RunInstancesRequest.add_member(:license_specifications, Shapes::ShapeRef.new(shape: LicenseSpecificationListRequest, location_name: "LicenseSpecification"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -6394,6 +6481,7 @@ module Aws::EC2
     StateReason.struct_class = Types::StateReason
 
     StopInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
+    StopInstancesRequest.add_member(:hibernate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Hibernate"))
     StopInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     StopInstancesRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
     StopInstancesRequest.struct_class = Types::StopInstancesRequest

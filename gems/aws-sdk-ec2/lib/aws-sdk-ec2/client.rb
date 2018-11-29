@@ -4462,6 +4462,11 @@ module Aws::EC2
     #           type: "String", # required
     #         },
     #       ],
+    #       elastic_inference_accelerators: [
+    #         {
+    #           type: "String", # required
+    #         },
+    #       ],
     #       security_group_ids: ["String"],
     #       security_groups: ["String"],
     #       instance_market_options: {
@@ -4487,6 +4492,14 @@ module Aws::EC2
     #           capacity_reservation_id: "String",
     #         },
     #       },
+    #       hibernation_options: {
+    #         configured: false,
+    #       },
+    #       license_specifications: [
+    #         {
+    #           license_configuration_arn: "String",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -4693,6 +4706,11 @@ module Aws::EC2
     #           type: "String", # required
     #         },
     #       ],
+    #       elastic_inference_accelerators: [
+    #         {
+    #           type: "String", # required
+    #         },
+    #       ],
     #       security_group_ids: ["String"],
     #       security_groups: ["String"],
     #       instance_market_options: {
@@ -4718,6 +4736,14 @@ module Aws::EC2
     #           capacity_reservation_id: "String",
     #         },
     #       },
+    #       hibernation_options: {
+    #         configured: false,
+    #       },
+    #       license_specifications: [
+    #         {
+    #           license_configuration_arn: "String",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -4783,6 +4809,8 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].value #=> String
     #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications #=> Array
     #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators #=> Array
+    #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators[0].type #=> String
     #   resp.launch_template_version.launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_version.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_version.launch_template_data.security_groups #=> Array
@@ -4798,6 +4826,9 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_version.launch_template_data.hibernation_options.configured #=> Boolean
+    #   resp.launch_template_version.launch_template_data.license_specifications #=> Array
+    #   resp.launch_template_version.launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -12573,6 +12604,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
@@ -12950,6 +12985,11 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_state #=> String
     #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_time #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations #=> Array
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_arn #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_id #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_state #=> String
+    #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.reservations[0].instances[0].network_interfaces #=> Array
     #   resp.reservations[0].instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_dns_name #=> String
@@ -13000,6 +13040,9 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].capacity_reservation_id #=> String
     #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.reservations[0].instances[0].hibernation_options.configured #=> Boolean
+    #   resp.reservations[0].instances[0].licenses #=> Array
+    #   resp.reservations[0].instances[0].licenses[0].license_configuration_arn #=> String
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -13406,6 +13449,8 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].value #=> String
     #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications #=> Array
     #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators[0].type #=> String
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_versions[0].launch_template_data.security_groups #=> Array
@@ -13421,6 +13466,9 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.hibernation_options.configured #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.license_specifications #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -21098,6 +21146,8 @@ module Aws::EC2
     #   resp.launch_template_data.tag_specifications[0].tags[0].value #=> String
     #   resp.launch_template_data.elastic_gpu_specifications #=> Array
     #   resp.launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_data.elastic_inference_accelerators #=> Array
+    #   resp.launch_template_data.elastic_inference_accelerators[0].type #=> String
     #   resp.launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_data.security_groups #=> Array
@@ -21113,6 +21163,9 @@ module Aws::EC2
     #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.launch_template_data.hibernation_options.configured #=> Boolean
+    #   resp.launch_template_data.license_specifications #=> Array
+    #   resp.launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -27128,6 +27181,9 @@ module Aws::EC2
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
     #   An elastic GPU to associate with the instance.
     #
+    # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
+    #   An elastic inference accelerator.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
@@ -27171,6 +27227,18 @@ module Aws::EC2
     #
     # @option params [Types::CapacityReservationSpecification] :capacity_reservation_specification
     #   Information about the Capacity Reservation targeting option.
+    #
+    # @option params [Types::HibernationOptionsRequest] :hibernation_options
+    #   Indicates whether an instance is enabled for hibernation. For more
+    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #
+    # @option params [Array<Types::LicenseConfigurationRequest>] :license_specifications
+    #   The license configurations.
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -27309,6 +27377,11 @@ module Aws::EC2
     #         type: "String", # required
     #       },
     #     ],
+    #     elastic_inference_accelerators: [
+    #       {
+    #         type: "String", # required
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
@@ -27348,6 +27421,14 @@ module Aws::EC2
     #         capacity_reservation_id: "String",
     #       },
     #     },
+    #     hibernation_options: {
+    #       configured: false,
+    #     },
+    #     license_specifications: [
+    #       {
+    #         license_configuration_arn: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -27403,6 +27484,11 @@ module Aws::EC2
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_state #=> String
     #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_time #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations #=> Array
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_arn #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_id #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_state #=> String
+    #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.instances[0].network_interfaces #=> Array
     #   resp.instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].association.public_dns_name #=> String
@@ -27453,6 +27539,9 @@ module Aws::EC2
     #   resp.instances[0].capacity_reservation_id #=> String
     #   resp.instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
+    #   resp.instances[0].hibernation_options.configured #=> Boolean
+    #   resp.instances[0].licenses #=> Array
+    #   resp.instances[0].licenses[0].license_configuration_arn #=> String
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -27839,6 +27928,11 @@ module Aws::EC2
 
     # Stops an Amazon EBS-backed instance.
     #
+    # You can use the Stop action to hibernate an instance if the instance
+    # is [enabled for hibernation][1] and it meets the [hibernation
+    # prerequisites][2]. For more information, see [Hibernate Your
+    # Instance][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
     # We don't charge usage for a stopped instance, or data transfer fees;
     # however, your root partition Amazon EBS volume remains and continues
     # to persist your data, and you are charged for Amazon EBS volume usage.
@@ -27850,36 +27944,57 @@ module Aws::EC2
     # EC2 charges a one-minute minimum for instance usage, and thereafter
     # charges per second for instance usage.
     #
-    # You can't start or stop Spot Instances, and you can't stop instance
-    # store-backed instances.
+    # You can't start, stop, or hibernate Spot Instances, and you can't
+    # stop or hibernate instance store-backed instances. For information
+    # about using hibernation for Spot Instances, see [Hibernating
+    # Interrupted Spot Instances][4] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
-    # When you stop an instance, we shut it down. You can restart your
-    # instance at any time. Before stopping an instance, make sure it is in
-    # a state from which it can be restarted. Stopping an instance does not
-    # preserve data stored in RAM.
+    # When you stop or hibernate an instance, we shut it down. You can
+    # restart your instance at any time. Before stopping or hibernating an
+    # instance, make sure it is in a state from which it can be restarted.
+    # Stopping an instance does not preserve data stored in RAM, but
+    # hibernating an instance does preserve data stored in RAM. If an
+    # instance cannot hibernate successfully, a normal shutdown occurs.
     #
-    # Stopping an instance is different to rebooting or terminating it. For
-    # example, when you stop an instance, the root device and any other
-    # devices attached to the instance persist. When you terminate an
-    # instance, the root device and any other devices attached during the
-    # instance launch are automatically deleted. For more information about
-    # the differences between rebooting, stopping, and terminating
-    # instances, see [Instance Lifecycle][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # Stopping and hibernating an instance is different to rebooting or
+    # terminating it. For example, when you stop or hibernate an instance,
+    # the root device and any other devices attached to the instance
+    # persist. When you terminate an instance, the root device and any other
+    # devices attached during the instance launch are automatically deleted.
+    # For more information about the differences between rebooting,
+    # stopping, hibernating, and terminating instances, see [Instance
+    # Lifecycle][5] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # When you stop an instance, we attempt to shut it down forcibly after a
     # short while. If your instance appears stuck in the stopping state
     # after a period of time, there may be an issue with the underlying host
     # computer. For more information, see [Troubleshooting Stopping Your
-    # Instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Instance][6] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances
+    # [5]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+    # [6]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
     #
     # @option params [required, Array<String>] :instance_ids
     #   One or more instance IDs.
+    #
+    # @option params [Boolean] :hibernate
+    #   Hibernates the instance if the instance was enabled for hibernation at
+    #   launch. If the instance cannot hibernate successfully, a normal
+    #   shutdown occurs. For more information, see [Hibernate Your
+    #   Instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -27931,6 +28046,7 @@ module Aws::EC2
     #
     #   resp = client.stop_instances({
     #     instance_ids: ["String"], # required
+    #     hibernate: false,
     #     dry_run: false,
     #     force: false,
     #   })
@@ -28461,7 +28577,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

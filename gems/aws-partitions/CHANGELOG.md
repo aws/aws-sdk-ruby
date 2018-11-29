@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2018-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LicenseManager`.
+
+* Feature - Added support for enumerating regions for `Aws::AppMesh`.
+
 1.119.0 (2018-11-28)
 ------------------
 
