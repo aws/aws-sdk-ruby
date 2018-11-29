@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::ServerlessApplicationRepository - Updated the API, and documentation for AWSServerlessApplicationRepository.
+
+* Feature - Aws::States - Updated the API, documentation, and integration test for AWS Step Functions.
+
+* Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
+
+* Feature - Aws::Kafka - Added support for a new service, Managed Streaming for Kafka.
+
 2.11.181 (2018-11-29)
 ------------------
 

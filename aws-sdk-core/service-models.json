@@ -334,6 +334,10 @@
     "models": "kms/2014-11-01",
     "endpoint": "kms"
   },
+  "Kafka": {
+    "models": "kafka/2018-11-14",
+    "endpoint": "kafka"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02",
     "endpoint": "kinesis"
