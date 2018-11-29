@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue -  Update operations needs Content-MD5 header
+
 1.27.0 (2018-11-27)
 ------------------
 
