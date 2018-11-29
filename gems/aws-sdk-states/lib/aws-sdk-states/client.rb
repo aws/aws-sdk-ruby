@@ -215,8 +215,8 @@ module Aws::States
 
     # @!group API Operations
 
-    # Creates an activity. An activity is a task which you write in any
-    # programming language and host on any machine which has access to AWS
+    # Creates an activity. An activity is a task that you write in any
+    # programming language and host on any machine that has access to AWS
     # Step Functions. Activities must poll Step Functions using the
     # `GetActivityTask` API action and respond using `SendTask*` API
     # actions. This function lets Step Functions know the existence of your
@@ -277,10 +277,7 @@ module Aws::States
     # JSON-based, structured language.
     #
     # @option params [required, String] :name
-    #   The name of the state machine. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   The name of the state machine.
     #
     #   A name must *not* contain:
     #
@@ -294,12 +291,13 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
-    #
     # @option params [required, String] :definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to use for this state
@@ -386,6 +384,11 @@ module Aws::States
 
     # Describes an activity.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
     # @option params [required, String] :activity_arn
     #   The Amazon Resource Name (ARN) of the activity to describe.
     #
@@ -417,6 +420,11 @@ module Aws::States
     end
 
     # Describes an execution.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
@@ -460,6 +468,11 @@ module Aws::States
 
     # Describes a state machine.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to describe.
     #
@@ -497,6 +510,11 @@ module Aws::States
     end
 
     # Describes the state machine associated with a specific execution.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution you want state machine
@@ -546,6 +564,14 @@ module Aws::States
     # seconds (5 seconds higher than the maximum time the service may hold
     # the poll request).
     #
+    #  Polling with `GetActivityTask` can cause latency in some
+    # implementations. See [Avoid Latency When Polling for Activity
+    # Tasks][1] in the Step Functions Developer Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
+    #
     # @option params [required, String] :activity_arn
     #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from
     #   (assigned when you create the task using CreateActivity.)
@@ -586,10 +612,12 @@ module Aws::States
     # `timeStamp` of the events. Use the `reverseOrder` parameter to get the
     # latest events first.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 60 seconds. Using an expired pagination token will return an
+    # *HTTP 400 InvalidToken* error.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
@@ -597,7 +625,7 @@ module Aws::States
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
@@ -606,13 +634,12 @@ module Aws::States
     #   Lists events in descending order of their `timeStamp`.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 60 seconds. Using an expired pagination token will return an
+    #   *HTTP 400 InvalidToken* error.
     #
     # @return [Types::GetExecutionHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -632,7 +659,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "TaskFailed", "TaskScheduled", "TaskStartFailed", "TaskStarted", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -647,6 +674,35 @@ module Aws::States
     #   resp.events[0].activity_succeeded_event_details.output #=> String
     #   resp.events[0].activity_timed_out_event_details.error #=> String
     #   resp.events[0].activity_timed_out_event_details.cause #=> String
+    #   resp.events[0].task_failed_event_details.resource_type #=> String
+    #   resp.events[0].task_failed_event_details.resource #=> String
+    #   resp.events[0].task_failed_event_details.error #=> String
+    #   resp.events[0].task_failed_event_details.cause #=> String
+    #   resp.events[0].task_scheduled_event_details.resource_type #=> String
+    #   resp.events[0].task_scheduled_event_details.resource #=> String
+    #   resp.events[0].task_scheduled_event_details.region #=> String
+    #   resp.events[0].task_scheduled_event_details.parameters #=> String
+    #   resp.events[0].task_scheduled_event_details.timeout_in_seconds #=> Integer
+    #   resp.events[0].task_start_failed_event_details.resource_type #=> String
+    #   resp.events[0].task_start_failed_event_details.resource #=> String
+    #   resp.events[0].task_start_failed_event_details.error #=> String
+    #   resp.events[0].task_start_failed_event_details.cause #=> String
+    #   resp.events[0].task_started_event_details.resource_type #=> String
+    #   resp.events[0].task_started_event_details.resource #=> String
+    #   resp.events[0].task_submit_failed_event_details.resource_type #=> String
+    #   resp.events[0].task_submit_failed_event_details.resource #=> String
+    #   resp.events[0].task_submit_failed_event_details.error #=> String
+    #   resp.events[0].task_submit_failed_event_details.cause #=> String
+    #   resp.events[0].task_submitted_event_details.resource_type #=> String
+    #   resp.events[0].task_submitted_event_details.resource #=> String
+    #   resp.events[0].task_submitted_event_details.output #=> String
+    #   resp.events[0].task_succeeded_event_details.resource_type #=> String
+    #   resp.events[0].task_succeeded_event_details.resource #=> String
+    #   resp.events[0].task_succeeded_event_details.output #=> String
+    #   resp.events[0].task_timed_out_event_details.resource_type #=> String
+    #   resp.events[0].task_timed_out_event_details.resource #=> String
+    #   resp.events[0].task_timed_out_event_details.error #=> String
+    #   resp.events[0].task_timed_out_event_details.cause #=> String
     #   resp.events[0].execution_failed_event_details.error #=> String
     #   resp.events[0].execution_failed_event_details.cause #=> String
     #   resp.events[0].execution_started_event_details.input #=> String
@@ -685,27 +741,33 @@ module Aws::States
 
     # Lists the existing activities.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 60 seconds. Using an expired pagination token will return an
+    # *HTTP 400 InvalidToken* error.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 60 seconds. Using an expired pagination token will return an
+    #   *HTTP 400 InvalidToken* error.
     #
     # @return [Types::ListActivitiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -737,12 +799,20 @@ module Aws::States
     end
 
     # Lists the executions of a state machine that meet the filtering
-    # criteria.
+    # criteria. Results are sorted by time, with the most recent execution
+    # first.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 60 seconds. Using an expired pagination token will return an
+    # *HTTP 400 InvalidToken* error.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
@@ -755,19 +825,18 @@ module Aws::States
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 60 seconds. Using an expired pagination token will return an
+    #   *HTTP 400 InvalidToken* error.
     #
     # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -805,27 +874,33 @@ module Aws::States
 
     # Lists the existing state machines.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 60 seconds. Using an expired pagination token will return an
+    # *HTTP 400 InvalidToken* error.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 60 seconds. Using an expired pagination token will return an
+    #   *HTTP 400 InvalidToken* error.
     #
     # @return [Types::ListStateMachinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -865,7 +940,7 @@ module Aws::States
     #   GetActivityTask::taskToken).
     #
     # @option params [String] :error
-    #   An arbitrary error code that identifies the cause of the failure.
+    #   The error code of the failure.
     #
     # @option params [String] :cause
     #   A more detailed explanation of the cause of the failure.
@@ -876,8 +951,8 @@ module Aws::States
     #
     #   resp = client.send_task_failure({
     #     task_token: "TaskToken", # required
-    #     error: "Error",
-    #     cause: "Cause",
+    #     error: "SensitiveError",
+    #     cause: "SensitiveCause",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailure AWS API Documentation
@@ -947,7 +1022,7 @@ module Aws::States
     #
     #   resp = client.send_task_success({
     #     task_token: "TaskToken", # required
-    #     output: "Data", # required
+    #     output: "SensitiveData", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccess AWS API Documentation
@@ -961,6 +1036,14 @@ module Aws::States
 
     # Starts a state machine execution.
     #
+    # <note markdown="1"> `StartExecution` is idempotent. If `StartExecution` is called with the
+    # same name and input as a running execution, the call will succeed and
+    # return the same response as the original request. If the execution is
+    # closed or if the input is different, it will return a 400
+    # `ExecutionAlreadyExists` error. Names can be reused after 90 days.
+    #
+    #  </note>
+    #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to execute.
     #
@@ -969,22 +1052,6 @@ module Aws::States
     #   account and region for 90 days. For more information, see [ Limits
     #   Related to State Machine Executions][1] in the *AWS Step Functions
     #   Developer Guide*.
-    #
-    #   An execution can't use the name of another execution for 90 days.
-    #
-    #    When you make multiple `StartExecution` calls with the same name, the
-    #   new execution doesn't run and the following rules apply:
-    #
-    #    * When the original execution is open and the execution input from
-    #   the
-    #     new call is *different*, the `ExecutionAlreadyExists` message is
-    #     returned.
-    #
-    #   * When the original execution is open and the execution input from the
-    #     new call is *identical*, the `Success` message is returned.
-    #
-    #   * When the original execution is closed, the `ExecutionAlreadyExists`
-    #     message is returned regardless of input.
     #
     #   A name must *not* contain:
     #
@@ -1023,7 +1090,7 @@ module Aws::States
     #   resp = client.start_execution({
     #     state_machine_arn: "Arn", # required
     #     name: "Name",
-    #     input: "Data",
+    #     input: "SensitiveData",
     #   })
     #
     # @example Response structure
@@ -1046,10 +1113,10 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the execution to stop.
     #
     # @option params [String] :error
-    #   An arbitrary error code that identifies the cause of the termination.
+    #   The error code of the failure.
     #
     # @option params [String] :cause
-    #   A more detailed explanation of the cause of the termination.
+    #   A more detailed explanation of the cause of the failure.
     #
     # @return [Types::StopExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1059,8 +1126,8 @@ module Aws::States
     #
     #   resp = client.stop_execution({
     #     execution_arn: "Arn", # required
-    #     error: "Error",
-    #     cause: "Cause",
+    #     error: "SensitiveError",
+    #     cause: "SensitiveCause",
     #   })
     #
     # @example Response structure
@@ -1078,14 +1145,14 @@ module Aws::States
 
     # Updates an existing state machine by modifying its `definition` and/or
     # `roleArn`. Running executions will continue to use the previous
-    # `definition` and `roleArn`.
+    # `definition` and `roleArn`. You must include at least one of
+    # `definition` or `roleArn` or you will receive a
+    # `MissingRequiredParameter` error.
     #
     # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
     # `definition` and `roleArn`. Executions started immediately after
     # calling `UpdateStateMachine` may use the previous state machine
-    # `definition` and `roleArn`. You must include at least one of
-    # `definition` or `roleArn` or you will receive a
-    # `MissingRequiredParameter` error.
+    # `definition` and `roleArn`.
     #
     #  </note>
     #
@@ -1093,7 +1160,12 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the state machine.
     #
     # @option params [String] :definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
@@ -1136,7 +1208,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

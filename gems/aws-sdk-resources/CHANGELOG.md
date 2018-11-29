@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.35.0 (2018-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-kafka` gem.
+
 3.34.0 (2018-11-29)
 ------------------
 

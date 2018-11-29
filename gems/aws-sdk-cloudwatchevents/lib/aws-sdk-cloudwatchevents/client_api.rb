@@ -52,6 +52,8 @@ module Aws::CloudWatchEvents
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListTargetsByRuleRequest = Shapes::StructureShape.new(name: 'ListTargetsByRuleRequest')
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
+    ManagedBy = Shapes::StringShape.new(name: 'ManagedBy')
+    ManagedRuleException = Shapes::StructureShape.new(name: 'ManagedRuleException')
     MessageGroupId = Shapes::StringShape.new(name: 'MessageGroupId')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -131,6 +133,7 @@ module Aws::CloudWatchEvents
     Condition.struct_class = Types::Condition
 
     DeleteRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
+    DeleteRuleRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
 
     DescribeEventBusRequest.struct_class = Types::DescribeEventBusRequest
@@ -150,6 +153,7 @@ module Aws::CloudWatchEvents
     DescribeRuleResponse.add_member(:state, Shapes::ShapeRef.new(shape: RuleState, location_name: "State"))
     DescribeRuleResponse.add_member(:description, Shapes::ShapeRef.new(shape: RuleDescription, location_name: "Description"))
     DescribeRuleResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeRuleResponse.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "ManagedBy"))
     DescribeRuleResponse.struct_class = Types::DescribeRuleResponse
 
     DisableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
@@ -265,6 +269,7 @@ module Aws::CloudWatchEvents
 
     RemoveTargetsRequest.add_member(:rule, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Rule"))
     RemoveTargetsRequest.add_member(:ids, Shapes::ShapeRef.new(shape: TargetIdList, required: true, location_name: "Ids"))
+    RemoveTargetsRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     RemoveTargetsRequest.struct_class = Types::RemoveTargetsRequest
 
     RemoveTargetsResponse.add_member(:failed_entry_count, Shapes::ShapeRef.new(shape: Integer, location_name: "FailedEntryCount"))
@@ -285,6 +290,7 @@ module Aws::CloudWatchEvents
     Rule.add_member(:description, Shapes::ShapeRef.new(shape: RuleDescription, location_name: "Description"))
     Rule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     Rule.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    Rule.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "ManagedBy"))
     Rule.struct_class = Types::Rule
 
     RuleNameList.member = Shapes::ShapeRef.new(shape: RuleName)
@@ -359,6 +365,7 @@ module Aws::CloudWatchEvents
         o.input = Shapes::ShapeRef.new(shape: DeleteRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -390,6 +397,7 @@ module Aws::CloudWatchEvents
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -401,6 +409,7 @@ module Aws::CloudWatchEvents
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -462,6 +471,7 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: InvalidEventPatternException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -474,6 +484,7 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -496,6 +507,7 @@ module Aws::CloudWatchEvents
         o.output = Shapes::ShapeRef.new(shape: RemoveTargetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ManagedRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 

@@ -303,6 +303,7 @@ module Aws
             'IoTAnalytics' => 'iotanalytics',
             'IoTJobsDataPlane' => 'data.jobs.iot',
             'KMS' => 'kms',
+            'Kafka' => 'kafka',
             'Kinesis' => 'kinesis',
             'KinesisAnalytics' => 'kinesisanalytics',
             'KinesisAnalyticsV2' => 'kinesisanalytics',

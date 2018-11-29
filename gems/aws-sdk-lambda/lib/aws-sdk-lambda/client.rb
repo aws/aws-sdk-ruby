@@ -205,6 +205,71 @@ module Aws::Lambda
 
     # @!group API Operations
 
+    # Adds permissions to the resource-based policy of a version of a
+    # function layer. Use this action to grant layer usage permission to
+    # other accounts. You can grant permission to a single account, all AWS
+    # accounts, or all accounts in an organization.
+    #
+    # To revoke permission, call RemoveLayerVersionPermission with the
+    # statement ID that you specified when you added it.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number.
+    #
+    # @option params [required, String] :statement_id
+    #   An identifier that distinguishes the policy from others on the same
+    #   layer version.
+    #
+    # @option params [required, String] :action
+    #   The API action that grants access to the layer. For example,
+    #   `lambda:GetLayerVersion`.
+    #
+    # @option params [required, String] :principal
+    #   An account ID, or `*` to grant permission to all AWS accounts.
+    #
+    # @option params [String] :organization_id
+    #   With the principal set to `*`, grant permission to all accounts in the
+    #   specified organization.
+    #
+    # @option params [String] :revision_id
+    #   Only update the policy if the revision ID matches the ID specified.
+    #   Use this option to avoid modifying a policy that has changed since you
+    #   last read it.
+    #
+    # @return [Types::AddLayerVersionPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddLayerVersionPermissionResponse#statement #statement} => String
+    #   * {Types::AddLayerVersionPermissionResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_layer_version_permission({
+    #     layer_name: "LayerName", # required
+    #     version_number: 1, # required
+    #     statement_id: "StatementId", # required
+    #     action: "LayerPermissionAllowedAction", # required
+    #     principal: "LayerPermissionAllowedPrincipal", # required
+    #     organization_id: "OrganizationId",
+    #     revision_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statement #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddLayerVersionPermission AWS API Documentation
+    #
+    # @overload add_layer_version_permission(params = {})
+    # @param [Hash] params ({})
+    def add_layer_version_permission(params = {}, options = {})
+      req = build_request(:add_layer_version_permission, params)
+      req.send_request(options)
+    end
+
     # Adds a permission to the resource policy associated with the specified
     # AWS Lambda function. You use resource policies to grant permissions to
     # event sources that use the *push* model. In a *push* model, event
@@ -227,7 +292,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -541,7 +606,7 @@ module Aws::Lambda
     # action.
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -629,6 +694,14 @@ module Aws::Lambda
     #
     #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
+    # @option params [Array<String>] :layers
+    #   A list of [function layers][1] to add to the function's execution
+    #   environment.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -650,6 +723,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
+    #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
     #
     #
     # @example Example: create-function
@@ -693,7 +767,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
     #     role: "RoleArn", # required
     #     handler: "Handler", # required
     #     code: { # required
@@ -725,13 +799,14 @@ module Aws::Lambda
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     layers: ["LayerVersionArn"],
     #   })
     #
     # @example Response structure
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -755,6 +830,9 @@ module Aws::Lambda
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
     #   resp.revision_id #=> String
+    #   resp.layers #=> Array
+    #   resp.layers[0].arn #=> String
+    #   resp.layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -891,7 +969,7 @@ module Aws::Lambda
     # action.
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -945,7 +1023,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -973,6 +1051,34 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function_concurrency(params = {}, options = {})
       req = build_request(:delete_function_concurrency, params)
+      req.send_request(options)
+    end
+
+    # Deletes a version of a function layer. Deleted versions can no longer
+    # be viewed or added to functions. However, a copy of the version
+    # remains in Lambda until no functions refer to it.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_layer_version({
+    #     layer_name: "LayerName", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteLayerVersion AWS API Documentation
+    #
+    # @overload delete_layer_version(params = {})
+    # @param [Hash] params ({})
+    def delete_layer_version(params = {}, options = {})
+      req = build_request(:delete_layer_version, params)
       req.send_request(options)
     end
 
@@ -1185,7 +1291,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1264,7 +1370,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -1288,6 +1394,9 @@ module Aws::Lambda
     #   resp.configuration.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.configuration.master_arn #=> String
     #   resp.configuration.revision_id #=> String
+    #   resp.configuration.layers #=> Array
+    #   resp.configuration.layers[0].arn #=> String
+    #   resp.configuration.layers[0].code_size #=> Integer
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
@@ -1323,7 +1432,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1362,6 +1471,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
+    #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
     #
     #
     # @example Example: To retrieve a Lambda function's event source mapping
@@ -1407,7 +1517,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1431,6 +1541,9 @@ module Aws::Lambda
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
     #   resp.revision_id #=> String
+    #   resp.layers #=> Array
+    #   resp.layers[0].arn #=> String
+    #   resp.layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -1438,6 +1551,91 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_function_configuration(params = {}, options = {})
       req = build_request(:get_function_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a version of a function layer, with a link
+    # to download the layer archive that's valid for 10 minutes.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number.
+    #
+    # @return [Types::GetLayerVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLayerVersionResponse#content #content} => Types::LayerVersionContentOutput
+    #   * {Types::GetLayerVersionResponse#layer_arn #layer_arn} => String
+    #   * {Types::GetLayerVersionResponse#layer_version_arn #layer_version_arn} => String
+    #   * {Types::GetLayerVersionResponse#description #description} => String
+    #   * {Types::GetLayerVersionResponse#created_date #created_date} => Time
+    #   * {Types::GetLayerVersionResponse#version #version} => Integer
+    #   * {Types::GetLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
+    #   * {Types::GetLayerVersionResponse#license_info #license_info} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_layer_version({
+    #     layer_name: "LayerName", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content.location #=> String
+    #   resp.content.code_sha_256 #=> String
+    #   resp.content.code_size #=> Integer
+    #   resp.layer_arn #=> String
+    #   resp.layer_version_arn #=> String
+    #   resp.description #=> String
+    #   resp.created_date #=> Time
+    #   resp.version #=> Integer
+    #   resp.compatible_runtimes #=> Array
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.license_info #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersion AWS API Documentation
+    #
+    # @overload get_layer_version(params = {})
+    # @param [Hash] params ({})
+    def get_layer_version(params = {}, options = {})
+      req = build_request(:get_layer_version, params)
+      req.send_request(options)
+    end
+
+    # Returns the permission policy for a layer version. For more
+    # information, see AddLayerVersionPermission.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number.
+    #
+    # @return [Types::GetLayerVersionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLayerVersionPolicyResponse#policy #policy} => String
+    #   * {Types::GetLayerVersionPolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_layer_version_policy({
+    #     layer_name: "LayerName", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionPolicy AWS API Documentation
+    #
+    # @overload get_layer_version_policy(params = {})
+    # @param [Hash] params ({})
+    def get_layer_version_policy(params = {}, options = {})
+      req = build_request(:get_layer_version_policy, params)
       req.send_request(options)
     end
 
@@ -1545,7 +1743,7 @@ module Aws::Lambda
     # [2]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1674,7 +1872,7 @@ module Aws::Lambda
     # action.
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1971,7 +2169,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -1995,6 +2193,9 @@ module Aws::Lambda
     #   resp.functions[0].tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.functions[0].master_arn #=> String
     #   resp.functions[0].revision_id #=> String
+    #   resp.functions[0].layers #=> Array
+    #   resp.functions[0].layers[0].arn #=> String
+    #   resp.functions[0].layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -2002,6 +2203,114 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_functions(params = {}, options = {})
       req = build_request(:list_functions, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of a function layer. Versions that have been
+    # deleted aren't listed. Specify a [runtime identifier][1] to list only
+    # versions that indicate that they're compatible with that runtime.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #
+    # @option params [String] :compatible_runtime
+    #   A runtime identifier. For example, `go1.x`.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [String] :marker
+    #   A pagination token returned by a previous call.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of versions to return.
+    #
+    # @return [Types::ListLayerVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLayerVersionsResponse#next_marker #next_marker} => String
+    #   * {Types::ListLayerVersionsResponse#layer_versions #layer_versions} => Array&lt;Types::LayerVersionsListItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_layer_versions({
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     layer_name: "LayerName", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.layer_versions #=> Array
+    #   resp.layer_versions[0].layer_version_arn #=> String
+    #   resp.layer_versions[0].version #=> Integer
+    #   resp.layer_versions[0].description #=> String
+    #   resp.layer_versions[0].created_date #=> Time
+    #   resp.layer_versions[0].compatible_runtimes #=> Array
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.layer_versions[0].license_info #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions AWS API Documentation
+    #
+    # @overload list_layer_versions(params = {})
+    # @param [Hash] params ({})
+    def list_layer_versions(params = {}, options = {})
+      req = build_request(:list_layer_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists function layers and shows information about the latest version
+    # of each. Specify a [runtime identifier][1] to list only layers that
+    # indicate that they're compatible with that runtime.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #
+    # @option params [String] :compatible_runtime
+    #   A runtime identifier. For example, `go1.x`.
+    #
+    # @option params [String] :marker
+    #   A pagination token returned by a previous call.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of layers to return.
+    #
+    # @return [Types::ListLayersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLayersResponse#next_marker #next_marker} => String
+    #   * {Types::ListLayersResponse#layers #layers} => Array&lt;Types::LayersListItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_layers({
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.layers #=> Array
+    #   resp.layers[0].layer_name #=> String
+    #   resp.layers[0].layer_arn #=> String
+    #   resp.layers[0].latest_matching_version.layer_version_arn #=> String
+    #   resp.layers[0].latest_matching_version.version #=> Integer
+    #   resp.layers[0].latest_matching_version.description #=> String
+    #   resp.layers[0].latest_matching_version.created_date #=> Time
+    #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.layers[0].latest_matching_version.license_info #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers AWS API Documentation
+    #
+    # @overload list_layers(params = {})
+    # @param [Hash] params ({})
+    def list_layers(params = {}, options = {})
+      req = build_request(:list_layers, params)
       req.send_request(options)
     end
 
@@ -2116,7 +2425,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -2140,6 +2449,9 @@ module Aws::Lambda
     #   resp.versions[0].tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.versions[0].master_arn #=> String
     #   resp.versions[0].revision_id #=> String
+    #   resp.versions[0].layers #=> Array
+    #   resp.versions[0].layers[0].arn #=> String
+    #   resp.versions[0].layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -2147,6 +2459,93 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_versions_by_function(params = {}, options = {})
       req = build_request(:list_versions_by_function, params)
+      req.send_request(options)
+    end
+
+    # Creates a function layer from a ZIP archive. Each time you call
+    # `PublishLayerVersion` with the same version name, a new version is
+    # created.
+    #
+    # Add layers to your function with CreateFunction or
+    # UpdateFunctionConfiguration.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [String] :description
+    #   The description of the version.
+    #
+    # @option params [required, Types::LayerVersionContentInput] :content
+    #   The function layer archive.
+    #
+    # @option params [Array<String>] :compatible_runtimes
+    #   A list of compatible [function runtimes][1]. Used for filtering with
+    #   ListLayers and ListLayerVersions.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #
+    # @option params [String] :license_info
+    #   The layer's software license. It can be any of the following:
+    #
+    #   * An [SPDX license identifier][1]. For example, `MIT`.
+    #
+    #   * The URL of a license hosted on the internet. For example,
+    #     `https://opensource.org/licenses/MIT`.
+    #
+    #   * The full text of the license.
+    #
+    #
+    #
+    #   [1]: https://spdx.org/licenses/
+    #
+    # @return [Types::PublishLayerVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishLayerVersionResponse#content #content} => Types::LayerVersionContentOutput
+    #   * {Types::PublishLayerVersionResponse#layer_arn #layer_arn} => String
+    #   * {Types::PublishLayerVersionResponse#layer_version_arn #layer_version_arn} => String
+    #   * {Types::PublishLayerVersionResponse#description #description} => String
+    #   * {Types::PublishLayerVersionResponse#created_date #created_date} => Time
+    #   * {Types::PublishLayerVersionResponse#version #version} => Integer
+    #   * {Types::PublishLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
+    #   * {Types::PublishLayerVersionResponse#license_info #license_info} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_layer_version({
+    #     layer_name: "LayerName", # required
+    #     description: "Description",
+    #     content: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key: "S3Key",
+    #       s3_object_version: "S3ObjectVersion",
+    #       zip_file: "data",
+    #     },
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     license_info: "LicenseInfo",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content.location #=> String
+    #   resp.content.code_sha_256 #=> String
+    #   resp.content.code_size #=> Integer
+    #   resp.layer_arn #=> String
+    #   resp.layer_version_arn #=> String
+    #   resp.description #=> String
+    #   resp.created_date #=> Time
+    #   resp.version #=> Integer
+    #   resp.compatible_runtimes #=> Array
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.license_info #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersion AWS API Documentation
+    #
+    # @overload publish_layer_version(params = {})
+    # @param [Hash] params ({})
+    def publish_layer_version(params = {}, options = {})
+      req = build_request(:publish_layer_version, params)
       req.send_request(options)
     end
 
@@ -2217,6 +2616,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
+    #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -2260,7 +2660,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2284,6 +2684,9 @@ module Aws::Lambda
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
     #   resp.revision_id #=> String
+    #   resp.layers #=> Array
+    #   resp.layers[0].arn #=> String
+    #   resp.layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -2307,7 +2710,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2348,6 +2751,43 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Removes a statement from the permissions policy for a layer version.
+    # For more information, see AddLayerVersionPermission.
+    #
+    # @option params [required, String] :layer_name
+    #   The name of the layer.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number.
+    #
+    # @option params [required, String] :statement_id
+    #   The identifier that was specified when the statement was added.
+    #
+    # @option params [String] :revision_id
+    #   Only update the policy if the revision ID matches the ID specified.
+    #   Use this option to avoid modifying a policy that has changed since you
+    #   last read it.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_layer_version_permission({
+    #     layer_name: "LayerName", # required
+    #     version_number: 1, # required
+    #     statement_id: "StatementId", # required
+    #     revision_id: "String",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemoveLayerVersionPermission AWS API Documentation
+    #
+    # @overload remove_layer_version_permission(params = {})
+    # @param [Hash] params ({})
+    def remove_layer_version_permission(params = {}, options = {})
+      req = build_request(:remove_layer_version_permission, params)
+      req.send_request(options)
+    end
+
     # Removes permissions from a function. You can remove individual
     # permissions from an resource policy associated with a Lambda function
     # by providing a statement ID that you provided when you added the
@@ -2368,7 +2808,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2753,7 +3193,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2832,6 +3272,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
+    #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
     #
     #
     # @example Example: To update a Lambda function's code
@@ -2882,7 +3323,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2906,6 +3347,9 @@ module Aws::Lambda
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
     #   resp.revision_id #=> String
+    #   resp.layers #=> Array
+    #   resp.layers[0].arn #=> String
+    #   resp.layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -2935,7 +3379,7 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3012,6 +3456,14 @@ module Aws::Lambda
     #   function version or alias `RevisionID` using either GetFunction or
     #   GetAlias.
     #
+    # @option params [Array<String>] :layers
+    #   A list of [function layers][1] to add to the function's execution
+    #   environment.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -3033,6 +3485,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
+    #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -3087,7 +3540,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -3096,13 +3549,14 @@ module Aws::Lambda
     #       mode: "Active", # accepts Active, PassThrough
     #     },
     #     revision_id: "String",
+    #     layers: ["LayerVersionArn"],
     #   })
     #
     # @example Response structure
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3126,6 +3580,9 @@ module Aws::Lambda
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
     #   resp.revision_id #=> String
+    #   resp.layers #=> Array
+    #   resp.layers[0].arn #=> String
+    #   resp.layers[0].code_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -3149,7 +3606,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

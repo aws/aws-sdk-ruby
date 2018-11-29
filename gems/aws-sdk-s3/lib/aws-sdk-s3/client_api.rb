@@ -348,7 +348,7 @@ module Aws::S3
     ObjectLockLegalHold = Shapes::StructureShape.new(name: 'ObjectLockLegalHold')
     ObjectLockLegalHoldStatus = Shapes::StringShape.new(name: 'ObjectLockLegalHoldStatus')
     ObjectLockMode = Shapes::StringShape.new(name: 'ObjectLockMode')
-    ObjectLockRetainUntilDate = Shapes::TimestampShape.new(name: 'ObjectLockRetainUntilDate')
+    ObjectLockRetainUntilDate = Shapes::TimestampShape.new(name: 'ObjectLockRetainUntilDate', timestampFormat: "iso8601")
     ObjectLockRetention = Shapes::StructureShape.new(name: 'ObjectLockRetention')
     ObjectLockRetentionMode = Shapes::StringShape.new(name: 'ObjectLockRetentionMode')
     ObjectLockRule = Shapes::StructureShape.new(name: 'ObjectLockRule')

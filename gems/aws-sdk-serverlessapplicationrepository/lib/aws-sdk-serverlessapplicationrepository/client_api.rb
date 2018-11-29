@@ -12,6 +12,8 @@ module Aws::ServerlessApplicationRepository
     include Seahorse::Model
 
     Application = Shapes::StructureShape.new(name: 'Application')
+    ApplicationDependencyPage = Shapes::StructureShape.new(name: 'ApplicationDependencyPage')
+    ApplicationDependencySummary = Shapes::StructureShape.new(name: 'ApplicationDependencySummary')
     ApplicationPage = Shapes::StructureShape.new(name: 'ApplicationPage')
     ApplicationPolicy = Shapes::StructureShape.new(name: 'ApplicationPolicy')
     ApplicationPolicyStatement = Shapes::StructureShape.new(name: 'ApplicationPolicyStatement')
@@ -41,6 +43,8 @@ module Aws::ServerlessApplicationRepository
     GetCloudFormationTemplateRequest = Shapes::StructureShape.new(name: 'GetCloudFormationTemplateRequest')
     GetCloudFormationTemplateResponse = Shapes::StructureShape.new(name: 'GetCloudFormationTemplateResponse')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    ListApplicationDependenciesRequest = Shapes::StructureShape.new(name: 'ListApplicationDependenciesRequest')
+    ListApplicationDependenciesResponse = Shapes::StructureShape.new(name: 'ListApplicationDependenciesResponse')
     ListApplicationVersionsRequest = Shapes::StructureShape.new(name: 'ListApplicationVersionsRequest')
     ListApplicationVersionsResponse = Shapes::StructureShape.new(name: 'ListApplicationVersionsResponse')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
@@ -65,6 +69,7 @@ module Aws::ServerlessApplicationRepository
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
+    __listOfApplicationDependencySummary = Shapes::ListShape.new(name: '__listOfApplicationDependencySummary')
     __listOfApplicationPolicyStatement = Shapes::ListShape.new(name: '__listOfApplicationPolicyStatement')
     __listOfApplicationSummary = Shapes::ListShape.new(name: '__listOfApplicationSummary')
     __listOfCapability = Shapes::ListShape.new(name: '__listOfCapability')
@@ -89,6 +94,14 @@ module Aws::ServerlessApplicationRepository
     Application.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
     Application.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     Application.struct_class = Types::Application
+
+    ApplicationDependencyPage.add_member(:dependencies, Shapes::ShapeRef.new(shape: __listOfApplicationDependencySummary, required: true, location_name: "dependencies"))
+    ApplicationDependencyPage.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ApplicationDependencyPage.struct_class = Types::ApplicationDependencyPage
+
+    ApplicationDependencySummary.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "applicationId"))
+    ApplicationDependencySummary.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "semanticVersion"))
+    ApplicationDependencySummary.struct_class = Types::ApplicationDependencySummary
 
     ApplicationPage.add_member(:applications, Shapes::ShapeRef.new(shape: __listOfApplicationSummary, required: true, location_name: "applications"))
     ApplicationPage.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
@@ -276,6 +289,16 @@ module Aws::ServerlessApplicationRepository
     GetCloudFormationTemplateResponse.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
     GetCloudFormationTemplateResponse.struct_class = Types::GetCloudFormationTemplateResponse
 
+    ListApplicationDependenciesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
+    ListApplicationDependenciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "maxItems"))
+    ListApplicationDependenciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListApplicationDependenciesRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "semanticVersion"))
+    ListApplicationDependenciesRequest.struct_class = Types::ListApplicationDependenciesRequest
+
+    ListApplicationDependenciesResponse.add_member(:dependencies, Shapes::ShapeRef.new(shape: __listOfApplicationDependencySummary, location_name: "dependencies"))
+    ListApplicationDependenciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListApplicationDependenciesResponse.struct_class = Types::ListApplicationDependenciesResponse
+
     ListApplicationVersionsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     ListApplicationVersionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "maxItems"))
     ListApplicationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -385,6 +408,8 @@ module Aws::ServerlessApplicationRepository
     VersionSummary.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "semanticVersion"))
     VersionSummary.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     VersionSummary.struct_class = Types::VersionSummary
+
+    __listOfApplicationDependencySummary.member = Shapes::ShapeRef.new(shape: ApplicationDependencySummary)
 
     __listOfApplicationPolicyStatement.member = Shapes::ShapeRef.new(shape: ApplicationPolicyStatement)
 
@@ -524,6 +549,25 @@ module Aws::ServerlessApplicationRepository
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:list_application_dependencies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationDependencies"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{applicationId}/dependencies"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationDependenciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationDependenciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_application_versions, Seahorse::Model::Operation.new.tap do |o|

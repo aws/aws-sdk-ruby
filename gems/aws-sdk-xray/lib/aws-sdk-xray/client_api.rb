@@ -20,6 +20,7 @@ module Aws::XRay
     AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
     AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    AvailabilityZoneDetail = Shapes::StructureShape.new(name: 'AvailabilityZoneDetail')
     BackendConnectionErrors = Shapes::StructureShape.new(name: 'BackendConnectionErrors')
     BatchGetTracesRequest = Shapes::StructureShape.new(name: 'BatchGetTracesRequest')
     BatchGetTracesResult = Shapes::StructureShape.new(name: 'BatchGetTracesResult')
@@ -44,7 +45,19 @@ module Aws::XRay
     EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorRootCause = Shapes::StructureShape.new(name: 'ErrorRootCause')
+    ErrorRootCauseEntity = Shapes::StructureShape.new(name: 'ErrorRootCauseEntity')
+    ErrorRootCauseEntityPath = Shapes::ListShape.new(name: 'ErrorRootCauseEntityPath')
+    ErrorRootCauseService = Shapes::StructureShape.new(name: 'ErrorRootCauseService')
+    ErrorRootCauseServices = Shapes::ListShape.new(name: 'ErrorRootCauseServices')
+    ErrorRootCauses = Shapes::ListShape.new(name: 'ErrorRootCauses')
     ErrorStatistics = Shapes::StructureShape.new(name: 'ErrorStatistics')
+    FaultRootCause = Shapes::StructureShape.new(name: 'FaultRootCause')
+    FaultRootCauseEntity = Shapes::StructureShape.new(name: 'FaultRootCauseEntity')
+    FaultRootCauseEntityPath = Shapes::ListShape.new(name: 'FaultRootCauseEntityPath')
+    FaultRootCauseService = Shapes::StructureShape.new(name: 'FaultRootCauseService')
+    FaultRootCauseServices = Shapes::ListShape.new(name: 'FaultRootCauseServices')
+    FaultRootCauses = Shapes::ListShape.new(name: 'FaultRootCauses')
     FaultStatistics = Shapes::StructureShape.new(name: 'FaultStatistics')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     FixedRate = Shapes::FloatShape.new(name: 'FixedRate')
@@ -78,6 +91,7 @@ module Aws::XRay
     Host = Shapes::StringShape.new(name: 'Host')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     Http = Shapes::StructureShape.new(name: 'Http')
+    InstanceIdDetail = Shapes::StructureShape.new(name: 'InstanceIdDetail')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -94,6 +108,15 @@ module Aws::XRay
     RequestCount = Shapes::IntegerShape.new(name: 'RequestCount')
     ReservoirSize = Shapes::IntegerShape.new(name: 'ReservoirSize')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    ResourceARNDetail = Shapes::StructureShape.new(name: 'ResourceARNDetail')
+    ResponseTimeRootCause = Shapes::StructureShape.new(name: 'ResponseTimeRootCause')
+    ResponseTimeRootCauseEntity = Shapes::StructureShape.new(name: 'ResponseTimeRootCauseEntity')
+    ResponseTimeRootCauseEntityPath = Shapes::ListShape.new(name: 'ResponseTimeRootCauseEntityPath')
+    ResponseTimeRootCauseService = Shapes::StructureShape.new(name: 'ResponseTimeRootCauseService')
+    ResponseTimeRootCauseServices = Shapes::ListShape.new(name: 'ResponseTimeRootCauseServices')
+    ResponseTimeRootCauses = Shapes::ListShape.new(name: 'ResponseTimeRootCauses')
+    RootCauseException = Shapes::StructureShape.new(name: 'RootCauseException')
+    RootCauseExceptions = Shapes::ListShape.new(name: 'RootCauseExceptions')
     RuleLimitExceededException = Shapes::StructureShape.new(name: 'RuleLimitExceededException')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     SampledCount = Shapes::IntegerShape.new(name: 'SampledCount')
@@ -125,9 +148,12 @@ module Aws::XRay
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Trace = Shapes::StructureShape.new(name: 'Trace')
+    TraceAvailabilityZones = Shapes::ListShape.new(name: 'TraceAvailabilityZones')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
     TraceIdList = Shapes::ListShape.new(name: 'TraceIdList')
+    TraceInstanceIds = Shapes::ListShape.new(name: 'TraceInstanceIds')
     TraceList = Shapes::ListShape.new(name: 'TraceList')
+    TraceResourceARNs = Shapes::ListShape.new(name: 'TraceResourceARNs')
     TraceSegmentDocument = Shapes::StringShape.new(name: 'TraceSegmentDocument')
     TraceSegmentDocumentList = Shapes::ListShape.new(name: 'TraceSegmentDocumentList')
     TraceSummary = Shapes::StructureShape.new(name: 'TraceSummary')
@@ -167,6 +193,9 @@ module Aws::XRay
 
     AttributeMap.key = Shapes::ShapeRef.new(shape: AttributeKey)
     AttributeMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    AvailabilityZoneDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    AvailabilityZoneDetail.struct_class = Types::AvailabilityZoneDetail
 
     BackendConnectionErrors.add_member(:timeout_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "TimeoutCount"))
     BackendConnectionErrors.add_member(:connection_refused_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ConnectionRefusedCount"))
@@ -233,10 +262,54 @@ module Aws::XRay
     EncryptionConfig.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "Type"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
+    ErrorRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ErrorRootCauseServices, location_name: "Services"))
+    ErrorRootCause.struct_class = Types::ErrorRootCause
+
+    ErrorRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ErrorRootCauseEntity.add_member(:exceptions, Shapes::ShapeRef.new(shape: RootCauseExceptions, location_name: "Exceptions"))
+    ErrorRootCauseEntity.add_member(:remote, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Remote"))
+    ErrorRootCauseEntity.struct_class = Types::ErrorRootCauseEntity
+
+    ErrorRootCauseEntityPath.member = Shapes::ShapeRef.new(shape: ErrorRootCauseEntity)
+
+    ErrorRootCauseService.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ErrorRootCauseService.add_member(:names, Shapes::ShapeRef.new(shape: ServiceNames, location_name: "Names"))
+    ErrorRootCauseService.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ErrorRootCauseService.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    ErrorRootCauseService.add_member(:entity_path, Shapes::ShapeRef.new(shape: ErrorRootCauseEntityPath, location_name: "EntityPath"))
+    ErrorRootCauseService.add_member(:inferred, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Inferred"))
+    ErrorRootCauseService.struct_class = Types::ErrorRootCauseService
+
+    ErrorRootCauseServices.member = Shapes::ShapeRef.new(shape: ErrorRootCauseService)
+
+    ErrorRootCauses.member = Shapes::ShapeRef.new(shape: ErrorRootCause)
+
     ErrorStatistics.add_member(:throttle_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "ThrottleCount"))
     ErrorStatistics.add_member(:other_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "OtherCount"))
     ErrorStatistics.add_member(:total_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalCount"))
     ErrorStatistics.struct_class = Types::ErrorStatistics
+
+    FaultRootCause.add_member(:services, Shapes::ShapeRef.new(shape: FaultRootCauseServices, location_name: "Services"))
+    FaultRootCause.struct_class = Types::FaultRootCause
+
+    FaultRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    FaultRootCauseEntity.add_member(:exceptions, Shapes::ShapeRef.new(shape: RootCauseExceptions, location_name: "Exceptions"))
+    FaultRootCauseEntity.add_member(:remote, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Remote"))
+    FaultRootCauseEntity.struct_class = Types::FaultRootCauseEntity
+
+    FaultRootCauseEntityPath.member = Shapes::ShapeRef.new(shape: FaultRootCauseEntity)
+
+    FaultRootCauseService.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    FaultRootCauseService.add_member(:names, Shapes::ShapeRef.new(shape: ServiceNames, location_name: "Names"))
+    FaultRootCauseService.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    FaultRootCauseService.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    FaultRootCauseService.add_member(:entity_path, Shapes::ShapeRef.new(shape: FaultRootCauseEntityPath, location_name: "EntityPath"))
+    FaultRootCauseService.add_member(:inferred, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Inferred"))
+    FaultRootCauseService.struct_class = Types::FaultRootCauseService
+
+    FaultRootCauseServices.member = Shapes::ShapeRef.new(shape: FaultRootCauseService)
+
+    FaultRootCauses.member = Shapes::ShapeRef.new(shape: FaultRootCause)
 
     FaultStatistics.add_member(:other_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "OtherCount"))
     FaultStatistics.add_member(:total_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalCount"))
@@ -343,6 +416,9 @@ module Aws::XRay
     Http.add_member(:client_ip, Shapes::ShapeRef.new(shape: String, location_name: "ClientIp"))
     Http.struct_class = Types::Http
 
+    InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    InstanceIdDetail.struct_class = Types::InstanceIdDetail
+
     PutEncryptionConfigRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyId, location_name: "KeyId"))
     PutEncryptionConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     PutEncryptionConfigRequest.struct_class = Types::PutEncryptionConfigRequest
@@ -363,6 +439,37 @@ module Aws::XRay
 
     PutTraceSegmentsResult.add_member(:unprocessed_trace_segments, Shapes::ShapeRef.new(shape: UnprocessedTraceSegmentList, location_name: "UnprocessedTraceSegments"))
     PutTraceSegmentsResult.struct_class = Types::PutTraceSegmentsResult
+
+    ResourceARNDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ResourceARNDetail.struct_class = Types::ResourceARNDetail
+
+    ResponseTimeRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ResponseTimeRootCauseServices, location_name: "Services"))
+    ResponseTimeRootCause.struct_class = Types::ResponseTimeRootCause
+
+    ResponseTimeRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ResponseTimeRootCauseEntity.add_member(:coverage, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Coverage"))
+    ResponseTimeRootCauseEntity.add_member(:remote, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Remote"))
+    ResponseTimeRootCauseEntity.struct_class = Types::ResponseTimeRootCauseEntity
+
+    ResponseTimeRootCauseEntityPath.member = Shapes::ShapeRef.new(shape: ResponseTimeRootCauseEntity)
+
+    ResponseTimeRootCauseService.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ResponseTimeRootCauseService.add_member(:names, Shapes::ShapeRef.new(shape: ServiceNames, location_name: "Names"))
+    ResponseTimeRootCauseService.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ResponseTimeRootCauseService.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    ResponseTimeRootCauseService.add_member(:entity_path, Shapes::ShapeRef.new(shape: ResponseTimeRootCauseEntityPath, location_name: "EntityPath"))
+    ResponseTimeRootCauseService.add_member(:inferred, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Inferred"))
+    ResponseTimeRootCauseService.struct_class = Types::ResponseTimeRootCauseService
+
+    ResponseTimeRootCauseServices.member = Shapes::ShapeRef.new(shape: ResponseTimeRootCauseService)
+
+    ResponseTimeRootCauses.member = Shapes::ShapeRef.new(shape: ResponseTimeRootCause)
+
+    RootCauseException.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    RootCauseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    RootCauseException.struct_class = Types::RootCauseException
+
+    RootCauseExceptions.member = Shapes::ShapeRef.new(shape: RootCauseException)
 
     SamplingRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
     SamplingRule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
@@ -483,9 +590,15 @@ module Aws::XRay
     Trace.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentList, location_name: "Segments"))
     Trace.struct_class = Types::Trace
 
+    TraceAvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZoneDetail)
+
     TraceIdList.member = Shapes::ShapeRef.new(shape: TraceId)
 
+    TraceInstanceIds.member = Shapes::ShapeRef.new(shape: InstanceIdDetail)
+
     TraceList.member = Shapes::ShapeRef.new(shape: Trace)
+
+    TraceResourceARNs.member = Shapes::ShapeRef.new(shape: ResourceARNDetail)
 
     TraceSegmentDocumentList.member = Shapes::ShapeRef.new(shape: TraceSegmentDocument)
 
@@ -500,6 +613,14 @@ module Aws::XRay
     TraceSummary.add_member(:annotations, Shapes::ShapeRef.new(shape: Annotations, location_name: "Annotations"))
     TraceSummary.add_member(:users, Shapes::ShapeRef.new(shape: TraceUsers, location_name: "Users"))
     TraceSummary.add_member(:service_ids, Shapes::ShapeRef.new(shape: ServiceIds, location_name: "ServiceIds"))
+    TraceSummary.add_member(:resource_arns, Shapes::ShapeRef.new(shape: TraceResourceARNs, location_name: "ResourceARNs"))
+    TraceSummary.add_member(:instance_ids, Shapes::ShapeRef.new(shape: TraceInstanceIds, location_name: "InstanceIds"))
+    TraceSummary.add_member(:availability_zones, Shapes::ShapeRef.new(shape: TraceAvailabilityZones, location_name: "AvailabilityZones"))
+    TraceSummary.add_member(:entry_point, Shapes::ShapeRef.new(shape: ServiceId, location_name: "EntryPoint"))
+    TraceSummary.add_member(:fault_root_causes, Shapes::ShapeRef.new(shape: FaultRootCauses, location_name: "FaultRootCauses"))
+    TraceSummary.add_member(:error_root_causes, Shapes::ShapeRef.new(shape: ErrorRootCauses, location_name: "ErrorRootCauses"))
+    TraceSummary.add_member(:response_time_root_causes, Shapes::ShapeRef.new(shape: ResponseTimeRootCauses, location_name: "ResponseTimeRootCauses"))
+    TraceSummary.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, location_name: "Revision"))
     TraceSummary.struct_class = Types::TraceSummary
 
     TraceSummaryList.member = Shapes::ShapeRef.new(shape: TraceSummary)

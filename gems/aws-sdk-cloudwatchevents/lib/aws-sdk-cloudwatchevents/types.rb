@@ -194,16 +194,26 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         name: "RuleName", # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   If this is a managed rule, created by an AWS service on your behalf,
+    #   you must specify `Force` as `True` to delete the rule. This
+    #   parameter is ignored for rules that are not managed rules. You can
+    #   check whether a rule is a managed rule by using `DescribeRule` or
+    #   `ListRules` and checking the `ManagedBy` field of the response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest AWS API Documentation
     #
     class DeleteRuleRequest < Struct.new(
-      :name)
+      :name,
+      :force)
       include Aws::Structure
     end
 
@@ -289,6 +299,12 @@ module Aws::CloudWatchEvents
     #   rule.
     #   @return [String]
     #
+    # @!attribute [rw] managed_by
+    #   If this is a managed rule, created by an AWS service on your behalf,
+    #   this field displays the principal name of the AWS service that
+    #   created the rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleResponse AWS API Documentation
     #
     class DescribeRuleResponse < Struct.new(
@@ -298,7 +314,8 @@ module Aws::CloudWatchEvents
       :schedule_expression,
       :state,
       :description,
-      :role_arn)
+      :role_arn,
+      :managed_by)
       include Aws::Structure
     end
 
@@ -1100,6 +1117,7 @@ module Aws::CloudWatchEvents
     #       {
     #         rule: "RuleName", # required
     #         ids: ["TargetId"], # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] rule
@@ -1110,11 +1128,20 @@ module Aws::CloudWatchEvents
     #   The IDs of the targets to remove from the rule.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] force
+    #   If this is a managed rule, created by an AWS service on your behalf,
+    #   you must specify `Force` as `True` to remove targets. This parameter
+    #   is ignored for rules that are not managed rules. You can check
+    #   whether a rule is a managed rule by using `DescribeRule` or
+    #   `ListRules` and checking the `ManagedBy` field of the response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsRequest AWS API Documentation
     #
     class RemoveTargetsRequest < Struct.new(
       :rule,
-      :ids)
+      :ids,
+      :force)
       include Aws::Structure
     end
 
@@ -1196,6 +1223,12 @@ module Aws::CloudWatchEvents
     #   invocation.
     #   @return [String]
     #
+    # @!attribute [rw] managed_by
+    #   If the rule was created on behalf of your account by an AWS service,
+    #   this field displays the principal name of the service that created
+    #   the rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule AWS API Documentation
     #
     class Rule < Struct.new(
@@ -1205,7 +1238,8 @@ module Aws::CloudWatchEvents
       :state,
       :description,
       :schedule_expression,
-      :role_arn)
+      :role_arn,
+      :managed_by)
       include Aws::Structure
     end
 

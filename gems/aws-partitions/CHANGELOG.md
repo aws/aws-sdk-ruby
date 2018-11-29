@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2018-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Kafka`.
+
 1.120.0 (2018-11-29)
 ------------------
 

@@ -79,6 +79,81 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AddLayerVersionPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #         statement_id: "StatementId", # required
+    #         action: "LayerPermissionAllowedAction", # required
+    #         principal: "LayerPermissionAllowedPrincipal", # required
+    #         organization_id: "OrganizationId",
+    #         revision_id: "String",
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statement_id
+    #   An identifier that distinguishes the policy from others on the same
+    #   layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The API action that grants access to the layer. For example,
+    #   `lambda:GetLayerVersion`.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   An account ID, or `*` to grant permission to all AWS accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   With the principal set to `*`, grant permission to all accounts in
+    #   the specified organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   Only update the policy if the revision ID matches the ID specified.
+    #   Use this option to avoid modifying a policy that has changed since
+    #   you last read it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddLayerVersionPermissionRequest AWS API Documentation
+    #
+    class AddLayerVersionPermissionRequest < Struct.new(
+      :layer_name,
+      :version_number,
+      :statement_id,
+      :action,
+      :principal,
+      :organization_id,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statement
+    #   The permission statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddLayerVersionPermissionResponse AWS API Documentation
+    #
+    class AddLayerVersionPermissionResponse < Struct.new(
+      :statement,
+      :revision_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddPermissionRequest
     #   data as a hash:
     #
@@ -95,7 +170,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -433,7 +508,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -465,10 +540,11 @@ module Aws::Lambda
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         layers: ["LayerVersionArn"],
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -573,6 +649,15 @@ module Aws::Lambda
     #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] layers
+    #   A list of [function layers][1] to add to the function's execution
+    #   environment.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -590,7 +675,8 @@ module Aws::Lambda
       :environment,
       :kms_key_arn,
       :tracing_config,
-      :tags)
+      :tags,
+      :layers)
       include Aws::Structure
     end
 
@@ -681,7 +767,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -712,7 +798,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -737,6 +823,30 @@ module Aws::Lambda
     class DeleteFunctionRequest < Struct.new(
       :function_name,
       :qualifier)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteLayerVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteLayerVersionRequest AWS API Documentation
+    #
+    class DeleteLayerVersionRequest < Struct.new(
+      :layer_name,
+      :version_number)
       include Aws::Structure
     end
 
@@ -955,7 +1065,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] last_modified
     #   The date and time that the function was last updated, in [ISO-8601
-    #   format][1] (YYYY-MM-DDThh:mm:ssTZD).
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
     #
     #
     #
@@ -999,6 +1109,14 @@ module Aws::Lambda
     #   Represents the latest updated revision of the function or alias.
     #   @return [String]
     #
+    # @!attribute [rw] layers
+    #   A list of [function layers][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<Types::Layer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -1020,7 +1138,8 @@ module Aws::Lambda
       :kms_key_arn,
       :tracing_config,
       :master_arn,
-      :revision_id)
+      :revision_id,
+      :layers)
       include Aws::Structure
     end
 
@@ -1109,7 +1228,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1146,7 +1265,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1211,6 +1330,121 @@ module Aws::Lambda
       :code,
       :tags,
       :concurrency)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLayerVersionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionPolicyRequest AWS API Documentation
+    #
+    class GetLayerVersionPolicyRequest < Struct.new(
+      :layer_name,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy document.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionPolicyResponse AWS API Documentation
+    #
+    class GetLayerVersionPolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLayerVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionRequest AWS API Documentation
+    #
+    class GetLayerVersionRequest < Struct.new(
+      :layer_name,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   Details about the layer version.
+    #   @return [Types::LayerVersionContentOutput]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_version_arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date that the layer version was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   The layer's compatible runtimes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's software license.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionResponse AWS API Documentation
+    #
+    class GetLayerVersionResponse < Struct.new(
+      :content,
+      :layer_arn,
+      :layer_version_arn,
+      :description,
+      :created_date,
+      :version,
+      :compatible_runtimes,
+      :license_info)
       include Aws::Structure
     end
 
@@ -1285,7 +1519,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1437,7 +1671,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1475,6 +1709,152 @@ module Aws::Lambda
     #
     class InvokeAsyncResponse < Struct.new(
       :status)
+      include Aws::Structure
+    end
+
+    # A function layer.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_size
+    #   The size of the layer archive in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Layer AWS API Documentation
+    #
+    class Layer < Struct.new(
+      :arn,
+      :code_size)
+      include Aws::Structure
+    end
+
+    # A ZIP archive that contains the contents of the function layer. You
+    # can specify either an Amazon S3 location, or upload a layer archive
+    # directly.
+    #
+    # @note When making an API call, you may pass LayerVersionContentInput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "S3Bucket",
+    #         s3_key: "S3Key",
+    #         s3_object_version: "S3ObjectVersion",
+    #         zip_file: "data",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The Amazon S3 bucket of the layer archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The Amazon S3 key of the layer archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_version
+    #   For versioned objects, the version of the layer archive object to
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] zip_file
+    #   The base64-encoded contents of the layer archive. AWS SDK and AWS
+    #   CLI clients handle the encoding for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentInput AWS API Documentation
+    #
+    class LayerVersionContentInput < Struct.new(
+      :s3_bucket,
+      :s3_key,
+      :s3_object_version,
+      :zip_file)
+      include Aws::Structure
+    end
+
+    # Details about a layer version.
+    #
+    # @!attribute [rw] location
+    #   A link to the layer archive in Amazon S3 that is valid for 10
+    #   minutes.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_sha_256
+    #   The SHA-256 hash of the layer archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_size
+    #   The size of the layer archive in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentOutput AWS API Documentation
+    #
+    class LayerVersionContentOutput < Struct.new(
+      :location,
+      :code_sha_256,
+      :code_size)
+      include Aws::Structure
+    end
+
+    # Details about a layer version.
+    #
+    # @!attribute [rw] layer_version_arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date that the version was created, in ISO 8601 format. For
+    #   example, `2018-11-27T15:10:45.123+0000`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   The layer's compatible runtimes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's open-source license.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionsListItem AWS API Documentation
+    #
+    class LayerVersionsListItem < Struct.new(
+      :layer_version_arn,
+      :version,
+      :description,
+      :created_date,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
+    # Details about a function layer.
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_matching_version
+    #   The newest version of the layer.
+    #   @return [Types::LayerVersionsListItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayersListItem AWS API Documentation
+    #
+    class LayersListItem < Struct.new(
+      :layer_name,
+      :layer_arn,
+      :latest_matching_version)
       include Aws::Structure
     end
 
@@ -1686,6 +2066,106 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLayerVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #         layer_name: "LayerName", # required
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] compatible_runtime
+    #   A runtime identifier. For example, `go1.x`.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token returned by a previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of versions to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsRequest AWS API Documentation
+    #
+    class ListLayerVersionsRequest < Struct.new(
+      :compatible_runtime,
+      :layer_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A pagination token returned when the response doesn't contain all
+    #   versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_versions
+    #   A list of versions.
+    #   @return [Array<Types::LayerVersionsListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsResponse AWS API Documentation
+    #
+    class ListLayerVersionsResponse < Struct.new(
+      :next_marker,
+      :layer_versions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLayersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] compatible_runtime
+    #   A runtime identifier. For example, `go1.x`.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token returned by a previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of layers to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersRequest AWS API Documentation
+    #
+    class ListLayersRequest < Struct.new(
+      :compatible_runtime,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A pagination token returned when the response doesn't contain all
+    #   layers.
+    #   @return [String]
+    #
+    # @!attribute [rw] layers
+    #   A list of function layers.
+    #   @return [Array<Types::LayersListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersResponse AWS API Documentation
+    #
+    class ListLayersResponse < Struct.new(
+      :next_marker,
+      :layers)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
     #
@@ -1788,6 +2268,120 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PublishLayerVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         description: "Description",
+    #         content: { # required
+    #           s3_bucket: "S3Bucket",
+    #           s3_key: "S3Key",
+    #           s3_object_version: "S3ObjectVersion",
+    #           zip_file: "data",
+    #         },
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #         license_info: "LicenseInfo",
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The function layer archive.
+    #   @return [Types::LayerVersionContentInput]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   A list of compatible [function runtimes][1]. Used for filtering with
+    #   ListLayers and ListLayerVersions.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's software license. It can be any of the following:
+    #
+    #   * An [SPDX license identifier][1]. For example, `MIT`.
+    #
+    #   * The URL of a license hosted on the internet. For example,
+    #     `https://opensource.org/licenses/MIT`.
+    #
+    #   * The full text of the license.
+    #
+    #
+    #
+    #   [1]: https://spdx.org/licenses/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersionRequest AWS API Documentation
+    #
+    class PublishLayerVersionRequest < Struct.new(
+      :layer_name,
+      :description,
+      :content,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   Details about the layer version.
+    #   @return [Types::LayerVersionContentOutput]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_version_arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date that the layer version was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   The layer's compatible runtimes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's software license.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersionResponse AWS API Documentation
+    #
+    class PublishLayerVersionResponse < Struct.new(
+      :content,
+      :layer_arn,
+      :layer_version_arn,
+      :description,
+      :created_date,
+      :version,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PublishVersionRequest
     #   data as a hash:
     #
@@ -1856,7 +2450,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1883,6 +2477,44 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RemoveLayerVersionPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #         statement_id: "StatementId", # required
+    #         revision_id: "String",
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statement_id
+    #   The identifier that was specified when the statement was added.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   Only update the policy if the revision ID matches the ID specified.
+    #   Use this option to avoid modifying a policy that has changed since
+    #   you last read it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemoveLayerVersionPermissionRequest AWS API Documentation
+    #
+    class RemoveLayerVersionPermissionRequest < Struct.new(
+      :layer_name,
+      :version_number,
+      :statement_id,
+      :revision_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemovePermissionRequest
     #   data as a hash:
     #
@@ -1894,7 +2526,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2192,7 +2824,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2293,7 +2925,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
@@ -2302,10 +2934,11 @@ module Aws::Lambda
     #           mode: "Active", # accepts Active, PassThrough
     #         },
     #         revision_id: "String",
+    #         layers: ["LayerVersionArn"],
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2395,6 +3028,15 @@ module Aws::Lambda
     #   GetFunction or GetAlias.
     #   @return [String]
     #
+    # @!attribute [rw] layers
+    #   A list of [function layers][1] to add to the function's execution
+    #   environment.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -2410,7 +3052,8 @@ module Aws::Lambda
       :dead_letter_config,
       :kms_key_arn,
       :tracing_config,
-      :revision_id)
+      :revision_id,
+      :layers)
       include Aws::Structure
     end
 

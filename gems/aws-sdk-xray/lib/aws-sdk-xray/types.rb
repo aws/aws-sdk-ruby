@@ -55,6 +55,19 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # A list of availability zones corresponding to the segments in a trace.
+    #
+    # @!attribute [rw] name
+    #   The name of a corresponding availability zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AvailabilityZoneDetail AWS API Documentation
+    #
+    class AvailabilityZoneDetail < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BackendConnectionErrors
     #   data as a hash:
     #
@@ -392,6 +405,84 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The root cause of a trace summary error.
+    #
+    # @!attribute [rw] services
+    #   A list of services corresponding to an error. A service identifies a
+    #   segment and it contains a name, account ID, type, and inferred flag.
+    #   @return [Array<Types::ErrorRootCauseService>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCause AWS API Documentation
+    #
+    class ErrorRootCause < Struct.new(
+      :services)
+      include Aws::Structure
+    end
+
+    # A collection of segments and corresponding subsegments associated to a
+    # trace summary error.
+    #
+    # @!attribute [rw] name
+    #   The name of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] exceptions
+    #   The types and messages of the exceptions.
+    #   @return [Array<Types::RootCauseException>]
+    #
+    # @!attribute [rw] remote
+    #   A flag that denotes a remote subsegment.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCauseEntity AWS API Documentation
+    #
+    class ErrorRootCauseEntity < Struct.new(
+      :name,
+      :exceptions,
+      :remote)
+      include Aws::Structure
+    end
+
+    # A collection of fields identifying the services in a trace summary
+    # error.
+    #
+    # @!attribute [rw] name
+    #   The service name.
+    #   @return [String]
+    #
+    # @!attribute [rw] names
+    #   A collection of associated service names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type associated to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_path
+    #   The path of root cause entities found on the service.
+    #   @return [Array<Types::ErrorRootCauseEntity>]
+    #
+    # @!attribute [rw] inferred
+    #   A Boolean value indicating if the service is inferred from the
+    #   trace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCauseService AWS API Documentation
+    #
+    class ErrorRootCauseService < Struct.new(
+      :name,
+      :names,
+      :type,
+      :account_id,
+      :entity_path,
+      :inferred)
+      include Aws::Structure
+    end
+
     # Information about requests that failed with a 4xx Client Error status
     # code.
     #
@@ -416,6 +507,84 @@ module Aws::XRay
       :throttle_count,
       :other_count,
       :total_count)
+      include Aws::Structure
+    end
+
+    # The root cause information for a trace summary fault.
+    #
+    # @!attribute [rw] services
+    #   A list of corresponding services. A service identifies a segment and
+    #   it contains a name, account ID, type, and inferred flag.
+    #   @return [Array<Types::FaultRootCauseService>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCause AWS API Documentation
+    #
+    class FaultRootCause < Struct.new(
+      :services)
+      include Aws::Structure
+    end
+
+    # A collection of segments and corresponding subsegments associated to a
+    # trace summary fault error.
+    #
+    # @!attribute [rw] name
+    #   The name of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] exceptions
+    #   The types and messages of the exceptions.
+    #   @return [Array<Types::RootCauseException>]
+    #
+    # @!attribute [rw] remote
+    #   A flag that denotes a remote subsegment.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCauseEntity AWS API Documentation
+    #
+    class FaultRootCauseEntity < Struct.new(
+      :name,
+      :exceptions,
+      :remote)
+      include Aws::Structure
+    end
+
+    # A collection of fields identifying the services in a trace summary
+    # fault.
+    #
+    # @!attribute [rw] name
+    #   The service name.
+    #   @return [String]
+    #
+    # @!attribute [rw] names
+    #   A collection of associated service names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type associated to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_path
+    #   The path of root cause entities found on the service.
+    #   @return [Array<Types::FaultRootCauseEntity>]
+    #
+    # @!attribute [rw] inferred
+    #   A Boolean value indicating if the service is inferred from the
+    #   trace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCauseService AWS API Documentation
+    #
+    class FaultRootCauseService < Struct.new(
+      :name,
+      :names,
+      :type,
+      :account_id,
+      :entity_path,
+      :inferred)
       include Aws::Structure
     end
 
@@ -666,7 +835,7 @@ module Aws::XRay
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The end of the time frame for which to generate a graph.
+    #   The end of the timeframe for which to generate a graph.
     #   @return [Time]
     #
     # @!attribute [rw] group_name
@@ -706,9 +875,9 @@ module Aws::XRay
     #   @return [Array<Types::Service>]
     #
     # @!attribute [rw] contains_old_group_versions
-    #   A flag indicating whether or not the group's filter expression has
-    #   been consistent, or if the returned service graph may show traces
-    #   from an older version of the group's filter expression.
+    #   A flag indicating whether the group's filter expression has been
+    #   consistent, or if the returned service graph may show traces from an
+    #   older version of the group's filter expression.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -941,6 +1110,19 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # A list of EC2 instance IDs corresponding to the segments in a trace.
+    #
+    # @!attribute [rw] id
+    #   The ID of a corresponding EC2 instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InstanceIdDetail AWS API Documentation
+    #
+    class InstanceIdDetail < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEncryptionConfigRequest
     #   data as a hash:
     #
@@ -1069,6 +1251,115 @@ module Aws::XRay
     #
     class PutTraceSegmentsResult < Struct.new(
       :unprocessed_trace_segments)
+      include Aws::Structure
+    end
+
+    # A list of resources ARNs corresponding to the segments in a trace.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of a corresponding resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResourceARNDetail AWS API Documentation
+    #
+    class ResourceARNDetail < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # The root cause information for a response time warning.
+    #
+    # @!attribute [rw] services
+    #   A list of corresponding services. A service identifies a segment and
+    #   contains a name, account ID, type, and inferred flag.
+    #   @return [Array<Types::ResponseTimeRootCauseService>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCause AWS API Documentation
+    #
+    class ResponseTimeRootCause < Struct.new(
+      :services)
+      include Aws::Structure
+    end
+
+    # A collection of segments and corresponding subsegments associated to a
+    # response time warning.
+    #
+    # @!attribute [rw] name
+    #   The name of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] coverage
+    #   The types and messages of the exceptions.
+    #   @return [Float]
+    #
+    # @!attribute [rw] remote
+    #   A flag that denotes a remote subsegment.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCauseEntity AWS API Documentation
+    #
+    class ResponseTimeRootCauseEntity < Struct.new(
+      :name,
+      :coverage,
+      :remote)
+      include Aws::Structure
+    end
+
+    # A collection of fields identifying the service in a response time
+    # warning.
+    #
+    # @!attribute [rw] name
+    #   The service name.
+    #   @return [String]
+    #
+    # @!attribute [rw] names
+    #   A collection of associated service names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type associated to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_path
+    #   The path of root cause entities found on the service.
+    #   @return [Array<Types::ResponseTimeRootCauseEntity>]
+    #
+    # @!attribute [rw] inferred
+    #   A Boolean value indicating if the service is inferred from the
+    #   trace.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCauseService AWS API Documentation
+    #
+    class ResponseTimeRootCauseService < Struct.new(
+      :name,
+      :names,
+      :type,
+      :account_id,
+      :entity_path,
+      :inferred)
+      include Aws::Structure
+    end
+
+    # The exception associated with a root cause.
+    #
+    # @!attribute [rw] name
+    #   The name of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/RootCauseException AWS API Documentation
+    #
+    class RootCauseException < Struct.new(
+      :name,
+      :message)
       include Aws::Structure
     end
 
@@ -1721,6 +2012,44 @@ module Aws::XRay
     #   Service IDs from the trace's segment documents.
     #   @return [Array<Types::ServiceId>]
     #
+    # @!attribute [rw] resource_arns
+    #   A list of resource ARNs for any resource corresponding to the trace
+    #   segments.
+    #   @return [Array<Types::ResourceARNDetail>]
+    #
+    # @!attribute [rw] instance_ids
+    #   A list of EC2 instance IDs for any instance corresponding to the
+    #   trace segments.
+    #   @return [Array<Types::InstanceIdDetail>]
+    #
+    # @!attribute [rw] availability_zones
+    #   A list of availability zones for any zone corresponding to the trace
+    #   segments.
+    #   @return [Array<Types::AvailabilityZoneDetail>]
+    #
+    # @!attribute [rw] entry_point
+    #   The root of a trace.
+    #   @return [Types::ServiceId]
+    #
+    # @!attribute [rw] fault_root_causes
+    #   A collection of FaultRootCause structures corresponding to the the
+    #   trace segments.
+    #   @return [Array<Types::FaultRootCause>]
+    #
+    # @!attribute [rw] error_root_causes
+    #   A collection of ErrorRootCause structures corresponding to the trace
+    #   segments.
+    #   @return [Array<Types::ErrorRootCause>]
+    #
+    # @!attribute [rw] response_time_root_causes
+    #   A collection of ResponseTimeRootCause structures corresponding to
+    #   the trace segments.
+    #   @return [Array<Types::ResponseTimeRootCause>]
+    #
+    # @!attribute [rw] revision
+    #   The revision number of a trace.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceSummary AWS API Documentation
     #
     class TraceSummary < Struct.new(
@@ -1734,7 +2063,15 @@ module Aws::XRay
       :http,
       :annotations,
       :users,
-      :service_ids)
+      :service_ids,
+      :resource_arns,
+      :instance_ids,
+      :availability_zones,
+      :entry_point,
+      :fault_root_causes,
+      :error_root_causes,
+      :response_time_root_causes,
+      :revision)
       include Aws::Structure
     end
 
@@ -1817,7 +2154,7 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] group_arn
-    #   The ARN that was generated upon create.
+    #   The ARN that was generated upon creation.
     #   @return [String]
     #
     # @!attribute [rw] filter_expression

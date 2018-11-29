@@ -301,7 +301,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.version.parameter_definitions[0].type #=> String
     #   resp.version.required_capabilities #=> Array
-    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
     #   resp.version.source_code_url #=> String
@@ -370,7 +370,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.parameter_definitions[0].type #=> String
     #   resp.required_capabilities #=> Array
-    #   resp.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.resources_supported #=> Boolean
     #   resp.semantic_version #=> String
     #   resp.source_code_url #=> String
@@ -404,8 +404,8 @@ module Aws::ServerlessApplicationRepository
     # @option params [Array<String>] :resource_types
     #
     # @option params [Types::RollbackConfiguration] :rollback_configuration
-    #   This property corresponds to the *AWS CloudFormation [
-    #   RollbackConfiguration][1]* Data Type.
+    #   This property corresponds to the *AWS CloudFormation
+    #   [RollbackConfiguration][1]* Data Type.
     #
     #
     #
@@ -600,7 +600,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.version.parameter_definitions[0].type #=> String
     #   resp.version.required_capabilities #=> Array
-    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
     #   resp.version.source_code_url #=> String
@@ -686,6 +686,47 @@ module Aws::ServerlessApplicationRepository
     # @param [Hash] params ({})
     def get_cloud_formation_template(params = {}, options = {})
       req = build_request(:get_cloud_formation_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the list of applications nested in the containing
+    # application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [Integer] :max_items
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :semantic_version
+    #
+    # @return [Types::ListApplicationDependenciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationDependenciesResponse#dependencies #dependencies} => Array&lt;Types::ApplicationDependencySummary&gt;
+    #   * {Types::ListApplicationDependenciesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_dependencies({
+    #     application_id: "__string", # required
+    #     max_items: 1,
+    #     next_token: "__string",
+    #     semantic_version: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dependencies #=> Array
+    #   resp.dependencies[0].application_id #=> String
+    #   resp.dependencies[0].semantic_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependencies AWS API Documentation
+    #
+    # @overload list_application_dependencies(params = {})
+    # @param [Hash] params ({})
+    def list_application_dependencies(params = {}, options = {})
+      req = build_request(:list_application_dependencies, params)
       req.send_request(options)
     end
 
@@ -889,7 +930,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.parameter_definitions[0].referenced_by_resources[0] #=> String
     #   resp.version.parameter_definitions[0].type #=> String
     #   resp.version.required_capabilities #=> Array
-    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_RESOURCE_POLICY"
+    #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
     #   resp.version.source_code_url #=> String
@@ -917,7 +958,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

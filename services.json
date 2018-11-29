@@ -283,6 +283,9 @@
   "KMS": {
     "models": "kms/2014-11-01"
   },
+  "Kafka": {
+    "models": "kafka/2018-11-14"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },

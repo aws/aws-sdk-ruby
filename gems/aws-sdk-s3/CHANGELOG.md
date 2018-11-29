@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2018-11-29)
+------------------
+
+* Feature - API update.
+
 * Issue - Update operations needs Content-MD5 header
 
 1.27.0 (2018-11-27)

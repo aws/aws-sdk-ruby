@@ -92,6 +92,42 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # A list of application summaries nested in the application.
+    #
+    # @!attribute [rw] dependencies
+    #   An array of application summaries nested in the application.
+    #   @return [Array<Types::ApplicationDependencySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationDependencyPage AWS API Documentation
+    #
+    class ApplicationDependencyPage < Struct.new(
+      :dependencies,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # A nested application summary.
+    #
+    # @!attribute [rw] application_id
+    #   The Amazon Resource Name (ARN) of the nested application.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version of the nested application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationDependencySummary AWS API Documentation
+    #
+    class ApplicationDependencySummary < Struct.new(
+      :application_id,
+      :semantic_version)
+      include Aws::Structure
+    end
+
     # A list of application details.
     #
     # @!attribute [rw] applications
@@ -675,10 +711,11 @@ module Aws::ServerlessApplicationRepository
     #   specify CAPABILITY\_NAMED\_IAM.
     #
     #   The following resources require you to specify
-    #   CAPABILITY\_RESOURCE\_POLICY:
-    #   [AWS::ApplicationAutoScaling::ScalingPolicy][5],
-    #   [AWS::S3::BucketPolicy][6], [AWS::SQS::QueuePolicy][7], and
-    #   [AWS::SNS:TopicPolicy][8].
+    #   CAPABILITY\_RESOURCE\_POLICY: [AWS::Lambda::Permission][5],
+    #   [AWS::IAM:Policy][3],
+    #   [AWS::ApplicationAutoScaling::ScalingPolicy][6],
+    #   [AWS::S3::BucketPolicy][7], [AWS::SQS::QueuePolicy][8], and
+    #   [AWS::SNS:TopicPolicy][9].
     #
     #   If your application template contains any of the above resources, we
     #   recommend that you review all permissions associated with the
@@ -692,17 +729,18 @@ module Aws::ServerlessApplicationRepository
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] change_set_name
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -711,7 +749,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] client_token
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -720,7 +758,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] description
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -729,7 +767,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] notification_arns
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -742,7 +780,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] resource_types
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -751,7 +789,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] rollback_configuration
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -770,7 +808,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] stack_name
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -779,7 +817,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] tags
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [ CreateChangeSet][1]* API.
+    #   *AWS CloudFormation [CreateChangeSet][1]* API.
     #
     #
     #
@@ -873,8 +911,8 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<String>]
     #
     # @!attribute [rw] rollback_configuration
-    #   This property corresponds to the *AWS CloudFormation [
-    #   RollbackConfiguration][1]* Data Type.
+    #   This property corresponds to the *AWS CloudFormation
+    #   [RollbackConfiguration][1]* Data Type.
     #
     #
     #
@@ -1163,6 +1201,52 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListApplicationDependenciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         max_items: 1,
+    #         next_token: "__string",
+    #         semantic_version: "__string",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesRequest AWS API Documentation
+    #
+    class ListApplicationDependenciesRequest < Struct.new(
+      :application_id,
+      :max_items,
+      :next_token,
+      :semantic_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dependencies
+    #   @return [Array<Types::ApplicationDependencySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesResponse AWS API Documentation
+    #
+    class ListApplicationDependenciesResponse < Struct.new(
+      :dependencies,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListApplicationVersionsRequest
     #   data as a hash:
     #
@@ -1432,8 +1516,8 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # This property corresponds to the *AWS CloudFormation [
-    # RollbackConfiguration][1]* Data Type.
+    # This property corresponds to the *AWS CloudFormation
+    # [RollbackConfiguration][1]* Data Type.
     #
     #
     #
@@ -1454,7 +1538,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] monitoring_time_in_minutes
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [ RollbackConfiguration][1]* Data Type.
+    #   *AWS CloudFormation [RollbackConfiguration][1]* Data Type.
     #
     #
     #
@@ -1463,7 +1547,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] rollback_triggers
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [ RollbackConfiguration][1]* Data Type.
+    #   *AWS CloudFormation [RollbackConfiguration][1]* Data Type.
     #
     #
     #
@@ -1478,8 +1562,8 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # This property corresponds to the *AWS CloudFormation [
-    # RollbackTrigger][1]* Data Type.
+    # This property corresponds to the *AWS CloudFormation
+    # [RollbackTrigger][1]* Data Type.
     #
     #
     #
@@ -1495,7 +1579,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] arn
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [ RollbackTrigger][1]* Data Type.
+    #   *AWS CloudFormation [RollbackTrigger][1]* Data Type.
     #
     #
     #
@@ -1504,7 +1588,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] type
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [ RollbackTrigger][1]* Data Type.
+    #   *AWS CloudFormation [RollbackTrigger][1]* Data Type.
     #
     #
     #
@@ -1519,7 +1603,7 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # This property corresponds to the *AWS CloudFormation [ Tag][1]* Data
+    # This property corresponds to the *AWS CloudFormation [Tag][1]* Data
     # Type.
     #
     #
@@ -1536,7 +1620,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] key
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [ Tag][1]* Data Type.
+    #   *AWS CloudFormation [Tag][1]* Data Type.
     #
     #
     #
@@ -1545,11 +1629,9 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] value
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [ Tag][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+    #   Tag</a> </i> Data Type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Tag AWS API Documentation
@@ -1803,10 +1885,11 @@ module Aws::ServerlessApplicationRepository
     #   specify CAPABILITY\_NAMED\_IAM.
     #
     #   The following resources require you to specify
-    #   CAPABILITY\_RESOURCE\_POLICY:
-    #   [AWS::ApplicationAutoScaling::ScalingPolicy][5],
-    #   [AWS::S3::BucketPolicy][6], [AWS::SQS::QueuePolicy][7], and
-    #   [AWS::SNS:TopicPolicy][8].
+    #   CAPABILITY\_RESOURCE\_POLICY: [AWS::Lambda::Permission][5],
+    #   [AWS::IAM:Policy][3],
+    #   [AWS::ApplicationAutoScaling::ScalingPolicy][6],
+    #   [AWS::S3::BucketPolicy][7], [AWS::SQS::QueuePolicy][8], and
+    #   [AWS::SNS::TopicPolicy][9].
     #
     #   If your application template contains any of the above resources, we
     #   recommend that you review all permissions associated with the
@@ -1820,12 +1903,13 @@ module Aws::ServerlessApplicationRepository
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resources_supported

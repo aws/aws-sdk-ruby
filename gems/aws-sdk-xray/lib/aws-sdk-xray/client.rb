@@ -656,7 +656,7 @@ module Aws::XRay
     #   The start of the time frame for which to generate a graph.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   The end of the time frame for which to generate a graph.
+    #   The end of the timeframe for which to generate a graph.
     #
     # @option params [String] :group_name
     #   The name of a group to generate a graph based on.
@@ -922,6 +922,58 @@ module Aws::XRay
     #   resp.trace_summaries[0].service_ids[0].names[0] #=> String
     #   resp.trace_summaries[0].service_ids[0].account_id #=> String
     #   resp.trace_summaries[0].service_ids[0].type #=> String
+    #   resp.trace_summaries[0].resource_arns #=> Array
+    #   resp.trace_summaries[0].resource_arns[0].arn #=> String
+    #   resp.trace_summaries[0].instance_ids #=> Array
+    #   resp.trace_summaries[0].instance_ids[0].id #=> String
+    #   resp.trace_summaries[0].availability_zones #=> Array
+    #   resp.trace_summaries[0].availability_zones[0].name #=> String
+    #   resp.trace_summaries[0].entry_point.name #=> String
+    #   resp.trace_summaries[0].entry_point.names #=> Array
+    #   resp.trace_summaries[0].entry_point.names[0] #=> String
+    #   resp.trace_summaries[0].entry_point.account_id #=> String
+    #   resp.trace_summaries[0].entry_point.type #=> String
+    #   resp.trace_summaries[0].fault_root_causes #=> Array
+    #   resp.trace_summaries[0].fault_root_causes[0].services #=> Array
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].name #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].names #=> Array
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].names[0] #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].type #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].account_id #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path #=> Array
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].name #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].exceptions #=> Array
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].exceptions[0].name #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].exceptions[0].message #=> String
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].remote #=> Boolean
+    #   resp.trace_summaries[0].fault_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].error_root_causes #=> Array
+    #   resp.trace_summaries[0].error_root_causes[0].services #=> Array
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].name #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].names #=> Array
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].names[0] #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].type #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].account_id #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path #=> Array
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].name #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].exceptions #=> Array
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].exceptions[0].name #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].exceptions[0].message #=> String
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].remote #=> Boolean
+    #   resp.trace_summaries[0].error_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].response_time_root_causes #=> Array
+    #   resp.trace_summaries[0].response_time_root_causes[0].services #=> Array
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].name #=> String
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].names #=> Array
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].names[0] #=> String
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].type #=> String
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].account_id #=> String
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path #=> Array
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].name #=> String
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].coverage #=> Float
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].remote #=> Boolean
+    #   resp.trace_summaries[0].response_time_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].revision #=> Integer
     #   resp.approximate_time #=> Time
     #   resp.traces_processed_count #=> Integer
     #   resp.next_token #=> String
@@ -1116,7 +1168,7 @@ module Aws::XRay
     #   The case-sensitive name of the group.
     #
     # @option params [String] :group_arn
-    #   The ARN that was generated upon create.
+    #   The ARN that was generated upon creation.
     #
     # @option params [String] :filter_expression
     #   The updated filter expression defining criteria by which to group
@@ -1220,7 +1272,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

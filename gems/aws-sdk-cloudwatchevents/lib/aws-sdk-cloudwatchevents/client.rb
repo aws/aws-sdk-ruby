@@ -223,8 +223,21 @@ module Aws::CloudWatchEvents
     # When you delete a rule, incoming events might continue to match to the
     # deleted rule. Allow a short period of time for changes to take effect.
     #
+    # Managed rules are rules created and managed by another AWS service on
+    # your behalf. These rules are created by those other AWS services to
+    # support functionality in those services. You can delete these rules
+    # using the `Force` option, but you should do so only if you are sure
+    # the other service is not still using that rule.
+    #
     # @option params [required, String] :name
     #   The name of the rule.
+    #
+    # @option params [Boolean] :force
+    #   If this is a managed rule, created by an AWS service on your behalf,
+    #   you must specify `Force` as `True` to delete the rule. This parameter
+    #   is ignored for rules that are not managed rules. You can check whether
+    #   a rule is a managed rule by using `DescribeRule` or `ListRules` and
+    #   checking the `ManagedBy` field of the response.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -232,6 +245,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.delete_rule({
     #     name: "RuleName", # required
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule AWS API Documentation
@@ -286,6 +300,7 @@ module Aws::CloudWatchEvents
     #   * {Types::DescribeRuleResponse#state #state} => String
     #   * {Types::DescribeRuleResponse#description #description} => String
     #   * {Types::DescribeRuleResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeRuleResponse#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -302,6 +317,7 @@ module Aws::CloudWatchEvents
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.description #=> String
     #   resp.role_arn #=> String
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule AWS API Documentation
     #
@@ -447,6 +463,7 @@ module Aws::CloudWatchEvents
     #   resp.rules[0].description #=> String
     #   resp.rules[0].schedule_expression #=> String
     #   resp.rules[0].role_arn #=> String
+    #   resp.rules[0].managed_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules AWS API Documentation
@@ -1009,6 +1026,13 @@ module Aws::CloudWatchEvents
     # @option params [required, Array<String>] :ids
     #   The IDs of the targets to remove from the rule.
     #
+    # @option params [Boolean] :force
+    #   If this is a managed rule, created by an AWS service on your behalf,
+    #   you must specify `Force` as `True` to remove targets. This parameter
+    #   is ignored for rules that are not managed rules. You can check whether
+    #   a rule is a managed rule by using `DescribeRule` or `ListRules` and
+    #   checking the `ManagedBy` field of the response.
+    #
     # @return [Types::RemoveTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RemoveTargetsResponse#failed_entry_count #failed_entry_count} => Integer
@@ -1019,6 +1043,7 @@ module Aws::CloudWatchEvents
     #   resp = client.remove_targets({
     #     rule: "RuleName", # required
     #     ids: ["TargetId"], # required
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -1094,7 +1119,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,7 +8,7 @@
 module Aws::States
   module Types
 
-    # Contains details about an activity which failed during an execution.
+    # Contains details about an activity that failed during an execution.
     #
     # @!attribute [rw] error
     #   The error code of the failure.
@@ -61,7 +61,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about an activity schedule failure which occurred
+    # Contains details about an activity schedule failure that occurred
     # during an execution.
     #
     # @!attribute [rw] error
@@ -123,8 +123,8 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about an activity which successfully terminated
-    # during an execution.
+    # Contains details about an activity that successfully terminated during
+    # an execution.
     #
     # @!attribute [rw] output
     #   The JSON data output by the activity task.
@@ -137,7 +137,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about an activity timeout which occurred during an
+    # Contains details about an activity timeout that occurred during an
     # execution.
     #
     # @!attribute [rw] error
@@ -219,10 +219,7 @@ module Aws::States
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the state machine. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   The name of the state machine.
     #
     #   A name must *not* contain:
     #
@@ -235,14 +232,15 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -481,7 +479,12 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -549,7 +552,12 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -692,7 +700,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about the execution timeout which occurred during the
+    # Contains details about the execution timeout that occurred during the
     # execution.
     #
     # @!attribute [rw] error
@@ -774,7 +782,7 @@ module Aws::States
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
     #   use `nextToken` to obtain further pages of results. The default is
-    #   100 and the maximum allowed page size is 100. A value of 0 uses the
+    #   100 and the maximum allowed page size is 1000. A value of 0 uses the
     #   default.
     #
     #   This is only an upper limit. The actual number of results returned
@@ -786,13 +794,12 @@ module Aws::States
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryInput AWS API Documentation
@@ -810,13 +817,12 @@ module Aws::States
     #   @return [Array<Types::HistoryEvent>]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryOutput AWS API Documentation
@@ -830,7 +836,7 @@ module Aws::States
     # Contains details about the events of an execution.
     #
     # @!attribute [rw] timestamp
-    #   The date the event occurred.
+    #   The date and time the event occurred.
     #   @return [Time]
     #
     # @!attribute [rw] type
@@ -847,12 +853,12 @@ module Aws::States
     #   @return [Integer]
     #
     # @!attribute [rw] activity_failed_event_details
-    #   Contains details about an activity which failed during an execution.
+    #   Contains details about an activity that failed during an execution.
     #   @return [Types::ActivityFailedEventDetails]
     #
     # @!attribute [rw] activity_schedule_failed_event_details
-    #   Contains details about an activity schedule event which failed
-    #   during an execution.
+    #   Contains details about an activity schedule event that failed during
+    #   an execution.
     #   @return [Types::ActivityScheduleFailedEventDetails]
     #
     # @!attribute [rw] activity_scheduled_event_details
@@ -864,14 +870,47 @@ module Aws::States
     #   @return [Types::ActivityStartedEventDetails]
     #
     # @!attribute [rw] activity_succeeded_event_details
-    #   Contains details about an activity which successfully terminated
+    #   Contains details about an activity that successfully terminated
     #   during an execution.
     #   @return [Types::ActivitySucceededEventDetails]
     #
     # @!attribute [rw] activity_timed_out_event_details
-    #   Contains details about an activity timeout which occurred during an
+    #   Contains details about an activity timeout that occurred during an
     #   execution.
     #   @return [Types::ActivityTimedOutEventDetails]
+    #
+    # @!attribute [rw] task_failed_event_details
+    #   Contains details about a task failure event.
+    #   @return [Types::TaskFailedEventDetails]
+    #
+    # @!attribute [rw] task_scheduled_event_details
+    #   Contains details about a task scheduled during an execution.
+    #   @return [Types::TaskScheduledEventDetails]
+    #
+    # @!attribute [rw] task_start_failed_event_details
+    #   Contains details about a task that failed to start during an
+    #   execution.
+    #   @return [Types::TaskStartFailedEventDetails]
+    #
+    # @!attribute [rw] task_started_event_details
+    #   Contains details about the start of a task during an execution.
+    #   @return [Types::TaskStartedEventDetails]
+    #
+    # @!attribute [rw] task_submit_failed_event_details
+    #   @return [Types::TaskSubmitFailedEventDetails]
+    #
+    # @!attribute [rw] task_submitted_event_details
+    #   @return [Types::TaskSubmittedEventDetails]
+    #
+    # @!attribute [rw] task_succeeded_event_details
+    #   Contains details about the start of connected service by a task
+    #   state.
+    #   @return [Types::TaskSucceededEventDetails]
+    #
+    # @!attribute [rw] task_timed_out_event_details
+    #   Contains details about a connected service timeout that occured
+    #   during an execution.
+    #   @return [Types::TaskTimedOutEventDetails]
     #
     # @!attribute [rw] execution_failed_event_details
     #   Contains details about an execution failure event.
@@ -890,17 +929,17 @@ module Aws::States
     #   @return [Types::ExecutionAbortedEventDetails]
     #
     # @!attribute [rw] execution_timed_out_event_details
-    #   Contains details about the execution timeout which occurred during
+    #   Contains details about the execution timeout that occurred during
     #   the execution.
     #   @return [Types::ExecutionTimedOutEventDetails]
     #
     # @!attribute [rw] lambda_function_failed_event_details
-    #   Contains details about a lambda function which failed during an
+    #   Contains details about a lambda function that failed during an
     #   execution.
     #   @return [Types::LambdaFunctionFailedEventDetails]
     #
     # @!attribute [rw] lambda_function_schedule_failed_event_details
-    #   Contains details about a failed lambda function schedule event which
+    #   Contains details about a failed lambda function schedule event that
     #   occurred during an execution.
     #   @return [Types::LambdaFunctionScheduleFailedEventDetails]
     #
@@ -910,17 +949,17 @@ module Aws::States
     #   @return [Types::LambdaFunctionScheduledEventDetails]
     #
     # @!attribute [rw] lambda_function_start_failed_event_details
-    #   Contains details about a lambda function which failed to start
-    #   during an execution.
+    #   Contains details about a lambda function that failed to start during
+    #   an execution.
     #   @return [Types::LambdaFunctionStartFailedEventDetails]
     #
     # @!attribute [rw] lambda_function_succeeded_event_details
-    #   Contains details about a lambda function which terminated
+    #   Contains details about a lambda function that terminated
     #   successfully during an execution.
     #   @return [Types::LambdaFunctionSucceededEventDetails]
     #
     # @!attribute [rw] lambda_function_timed_out_event_details
-    #   Contains details about a lambda function timeout which occurred
+    #   Contains details about a lambda function timeout that occurred
     #   during an execution.
     #   @return [Types::LambdaFunctionTimedOutEventDetails]
     #
@@ -945,6 +984,14 @@ module Aws::States
       :activity_started_event_details,
       :activity_succeeded_event_details,
       :activity_timed_out_event_details,
+      :task_failed_event_details,
+      :task_scheduled_event_details,
+      :task_start_failed_event_details,
+      :task_started_event_details,
+      :task_submit_failed_event_details,
+      :task_submitted_event_details,
+      :task_succeeded_event_details,
+      :task_timed_out_event_details,
       :execution_failed_event_details,
       :execution_started_event_details,
       :execution_succeeded_event_details,
@@ -961,7 +1008,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function which failed during an
+    # Contains details about a lambda function that failed during an
     # execution.
     #
     # @!attribute [rw] error
@@ -980,7 +1027,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a failed lambda function schedule event which
+    # Contains details about a failed lambda function schedule event that
     # occurred during an execution.
     #
     # @!attribute [rw] error
@@ -1023,7 +1070,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function which failed to start during
+    # Contains details about a lambda function that failed to start during
     # an execution.
     #
     # @!attribute [rw] error
@@ -1042,7 +1089,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function which successfully terminated
+    # Contains details about a lambda function that successfully terminated
     # during an execution.
     #
     # @!attribute [rw] output
@@ -1056,7 +1103,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function timeout which occurred during
+    # Contains details about a lambda function timeout that occurred during
     # an execution.
     #
     # @!attribute [rw] error
@@ -1086,7 +1133,7 @@ module Aws::States
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
     #   use `nextToken` to obtain further pages of results. The default is
-    #   100 and the maximum allowed page size is 100. A value of 0 uses the
+    #   100 and the maximum allowed page size is 1000. A value of 0 uses the
     #   default.
     #
     #   This is only an upper limit. The actual number of results returned
@@ -1094,13 +1141,12 @@ module Aws::States
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivitiesInput AWS API Documentation
@@ -1116,13 +1162,12 @@ module Aws::States
     #   @return [Array<Types::ActivityListItem>]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivitiesOutput AWS API Documentation
@@ -1156,7 +1201,7 @@ module Aws::States
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
     #   use `nextToken` to obtain further pages of results. The default is
-    #   100 and the maximum allowed page size is 100. A value of 0 uses the
+    #   100 and the maximum allowed page size is 1000. A value of 0 uses the
     #   default.
     #
     #   This is only an upper limit. The actual number of results returned
@@ -1164,13 +1209,12 @@ module Aws::States
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsInput AWS API Documentation
@@ -1188,13 +1232,12 @@ module Aws::States
     #   @return [Array<Types::ExecutionListItem>]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsOutput AWS API Documentation
@@ -1216,7 +1259,7 @@ module Aws::States
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
     #   use `nextToken` to obtain further pages of results. The default is
-    #   100 and the maximum allowed page size is 100. A value of 0 uses the
+    #   100 and the maximum allowed page size is 1000. A value of 0 uses the
     #   default.
     #
     #   This is only an upper limit. The actual number of results returned
@@ -1224,13 +1267,12 @@ module Aws::States
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachinesInput AWS API Documentation
@@ -1245,13 +1287,12 @@ module Aws::States
     #   @return [Array<Types::StateMachineListItem>]
     #
     # @!attribute [rw] next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the
-    #   call again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 60 seconds. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachinesOutput AWS API Documentation
@@ -1267,8 +1308,8 @@ module Aws::States
     #
     #       {
     #         task_token: "TaskToken", # required
-    #         error: "Error",
-    #         cause: "Cause",
+    #         error: "SensitiveError",
+    #         cause: "SensitiveCause",
     #       }
     #
     # @!attribute [rw] task_token
@@ -1278,7 +1319,7 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   An arbitrary error code that identifies the cause of the failure.
+    #   The error code of the failure.
     #   @return [String]
     #
     # @!attribute [rw] cause
@@ -1327,7 +1368,7 @@ module Aws::States
     #
     #       {
     #         task_token: "TaskToken", # required
-    #         output: "Data", # required
+    #         output: "SensitiveData", # required
     #       }
     #
     # @!attribute [rw] task_token
@@ -1358,7 +1399,7 @@ module Aws::States
     #       {
     #         state_machine_arn: "Arn", # required
     #         name: "Name",
-    #         input: "Data",
+    #         input: "SensitiveData",
     #       }
     #
     # @!attribute [rw] state_machine_arn
@@ -1370,21 +1411,6 @@ module Aws::States
     #   account and region for 90 days. For more information, see [ Limits
     #   Related to State Machine Executions][1] in the *AWS Step Functions
     #   Developer Guide*.
-    #
-    #   An execution can't use the name of another execution for 90 days.
-    #
-    #    When you make multiple `StartExecution` calls with the same name,
-    #   the new execution doesn't run and the following rules apply:
-    #
-    #    * When the original execution is open and the execution input from
-    #     the new call is *different*, the `ExecutionAlreadyExists` message
-    #     is returned.
-    #
-    #   * When the original execution is open and the execution input from
-    #     the new call is *identical*, the `Success` message is returned.
-    #
-    #   * When the original execution is closed, the
-    #     `ExecutionAlreadyExists` message is returned regardless of input.
     #
     #   A name must *not* contain:
     #
@@ -1528,8 +1554,8 @@ module Aws::States
     #
     #       {
     #         execution_arn: "Arn", # required
-    #         error: "Error",
-    #         cause: "Cause",
+    #         error: "SensitiveError",
+    #         cause: "SensitiveCause",
     #       }
     #
     # @!attribute [rw] execution_arn
@@ -1537,12 +1563,11 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   An arbitrary error code that identifies the cause of the
-    #   termination.
+    #   The error code of the failure.
     #   @return [String]
     #
     # @!attribute [rw] cause
-    #   A more detailed explanation of the cause of the termination.
+    #   A more detailed explanation of the cause of the failure.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionInput AWS API Documentation
@@ -1565,6 +1590,214 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Contains details about a task failure event.
+    #
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A more detailed explanation of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskFailedEventDetails AWS API Documentation
+    #
+    class TaskFailedEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :error,
+      :cause)
+      include Aws::Structure
+    end
+
+    # Contains details about a task scheduled during an execution.
+    #
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The JSON data passed to the connected service referenced in a task
+    #   state.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_in_seconds
+    #   The maximum allowed duration of the task.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskScheduledEventDetails AWS API Documentation
+    #
+    class TaskScheduledEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :region,
+      :parameters,
+      :timeout_in_seconds)
+      include Aws::Structure
+    end
+
+    # Contains details about a task that failed to start during an
+    # execution.
+    #
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A more detailed explanation of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartFailedEventDetails AWS API Documentation
+    #
+    class TaskStartFailedEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :error,
+      :cause)
+      include Aws::Structure
+    end
+
+    # Contains details about the start of a task during an execution.
+    #
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartedEventDetails AWS API Documentation
+    #
+    class TaskStartedEventDetails < Struct.new(
+      :resource_type,
+      :resource)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A more detailed explanation of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmitFailedEventDetails AWS API Documentation
+    #
+    class TaskSubmitFailedEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :error,
+      :cause)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The response from a connected service when a task has started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmittedEventDetails AWS API Documentation
+    #
+    class TaskSubmittedEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :output)
+      include Aws::Structure
+    end
+
+    # Contains details about the start of connected service by a task state.
+    #
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The full JSON response from a connected service when a task has
+    #   succeeded. This response becomes the output of the related task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSucceededEventDetails AWS API Documentation
+    #
+    class TaskSucceededEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :output)
+      include Aws::Structure
+    end
+
+    # Contains details about a connected service timeout that occured during
+    # an execution.
+    #
+    # @!attribute [rw] resource_type
+    #   The action of the connected service called by a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The service name of the connected service in a task state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A more detailed explanation of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskTimedOutEventDetails AWS API Documentation
+    #
+    class TaskTimedOutEventDetails < Struct.new(
+      :resource_type,
+      :resource,
+      :error,
+      :cause)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateStateMachineInput
     #   data as a hash:
     #
@@ -1579,7 +1812,12 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
