@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.181 (2018-11-29)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
