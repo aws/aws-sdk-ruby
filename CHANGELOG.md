@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.182 (2018-11-29)
+------------------
+
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
 
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
