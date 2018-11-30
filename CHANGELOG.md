@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Updated the documentation for Amazon Simple Storage Service.
+
 2.11.182 (2018-11-29)
 ------------------
 
