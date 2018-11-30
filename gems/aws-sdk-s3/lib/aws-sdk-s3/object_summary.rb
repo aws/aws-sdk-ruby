@@ -417,6 +417,8 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
+    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
       options = options.merge(

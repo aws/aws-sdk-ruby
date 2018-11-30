@@ -1997,6 +1997,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
+    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   restrictions to process this operation.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectRequest AWS API Documentation
@@ -3237,6 +3239,9 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] object_lock_legal_hold_status
+    #   Indicates whether this object has an active legal hold. This field
+    #   is only returned if you have permission to view an object's legal
+    #   hold status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectOutput AWS API Documentation
@@ -6041,7 +6046,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] object_lock_enabled
-    #   Indicates whether this object has an Object Lock configuration
+    #   Indicates whether this bucket has an Object Lock configuration
     #   enabled.
     #   @return [String]
     #
@@ -6092,6 +6097,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] retain_until_date
+    #   The date on which this Object Lock Retention will expire.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRetention AWS API Documentation
@@ -7508,7 +7514,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] content_md5
-    #   The MD5 signature for the configuration included in your request.
+    #   The MD5 hash for the request body.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHoldRequest AWS API Documentation
@@ -7577,7 +7583,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] content_md5
-    #   The MD5 signature for the configuration included in your request.
+    #   The MD5 hash for the request body.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfigurationRequest AWS API Documentation
@@ -7917,10 +7923,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
+    #   Indicates whether this operation should bypass Governance-mode
+    #   restrictions.j
     #   @return [Boolean]
     #
     # @!attribute [rw] content_md5
-    #   The MD5 signature for the configuration included in your request.
+    #   The MD5 hash for the request body.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRetentionRequest AWS API Documentation

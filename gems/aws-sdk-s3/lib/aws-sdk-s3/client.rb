@@ -1296,6 +1296,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Boolean] :bypass_governance_retention
+    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   restrictions to process this operation.
     #
     # @return [Types::DeleteObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5989,7 +5991,7 @@ module Aws::S3
     #   The version ID of the object that you want to place a Legal Hold on.
     #
     # @option params [String] :content_md5
-    #   The MD5 signature for the configuration included in your request.
+    #   The MD5 hash for the request body.
     #
     # @return [Types::PutObjectLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6043,7 +6045,7 @@ module Aws::S3
     # @option params [String] :token
     #
     # @option params [String] :content_md5
-    #   The MD5 signature for the configuration included in your request.
+    #   The MD5 hash for the request body.
     #
     # @return [Types::PutObjectLockConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6106,9 +6108,11 @@ module Aws::S3
     #   Retention configuration to.
     #
     # @option params [Boolean] :bypass_governance_retention
+    #   Indicates whether this operation should bypass Governance-mode
+    #   restrictions.j
     #
     # @option params [String] :content_md5
-    #   The MD5 signature for the configuration included in your request.
+    #   The MD5 hash for the request body.
     #
     # @return [Types::PutObjectRetentionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6986,7 +6990,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
