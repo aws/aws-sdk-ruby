@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.184 (2018-12-03)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
 
 * Feature - Aws::MediaConvert - Updated the documentation for AWS Elemental MediaConvert.
