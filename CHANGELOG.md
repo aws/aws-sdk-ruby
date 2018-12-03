@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::MediaConvert - Updated the documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::ServiceCatalog - Updated the documentation for AWS Service Catalog.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
 2.11.183 (2018-11-30)
 ------------------
 
