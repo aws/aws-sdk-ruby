@@ -280,6 +280,7 @@ module Aws::Health
     #   resp.entities[0].entity_arn #=> String
     #   resp.entities[0].event_arn #=> String
     #   resp.entities[0].entity_value #=> String
+    #   resp.entities[0].entity_url #=> String
     #   resp.entities[0].aws_account_id #=> String
     #   resp.entities[0].last_updated_time #=> Time
     #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN"
@@ -643,7 +644,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

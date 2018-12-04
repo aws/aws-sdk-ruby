@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.43.0 (2018-12-04)
+------------------
+
 * Feature - Update user agent structure.
 
 3.42.0 (2018-11-29)

@@ -4082,7 +4082,7 @@ module Aws::S3
     #           s3_bucket_destination: { # required
     #             account_id: "AccountId",
     #             bucket: "BucketName", # required
-    #             format: "CSV", # required, accepts CSV, ORC
+    #             format: "CSV", # required, accepts CSV, ORC, Parquet
     #             prefix: "Prefix",
     #             encryption: {
     #               sses3: {
@@ -4156,7 +4156,7 @@ module Aws::S3
     #         s3_bucket_destination: { # required
     #           account_id: "AccountId",
     #           bucket: "BucketName", # required
-    #           format: "CSV", # required, accepts CSV, ORC
+    #           format: "CSV", # required, accepts CSV, ORC, Parquet
     #           prefix: "Prefix",
     #           encryption: {
     #             sses3: {
@@ -4235,7 +4235,7 @@ module Aws::S3
     #       {
     #         account_id: "AccountId",
     #         bucket: "BucketName", # required
-    #         format: "CSV", # required, accepts CSV, ORC
+    #         format: "CSV", # required, accepts CSV, ORC, Parquet
     #         prefix: "Prefix",
     #         encryption: {
     #           sses3: {
@@ -6696,7 +6696,7 @@ module Aws::S3
     #             s3_bucket_destination: { # required
     #               account_id: "AccountId",
     #               bucket: "BucketName", # required
-    #               format: "CSV", # required, accepts CSV, ORC
+    #               format: "CSV", # required, accepts CSV, ORC, Parquet
     #               prefix: "Prefix",
     #               encryption: {
     #                 sses3: {
