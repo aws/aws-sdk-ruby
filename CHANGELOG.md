@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.185 (2018-12-04)
+------------------
+
 * Feature - Aws::Health - Updated the API, and documentation for AWS Health APIs and Notifications.
 
 * Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
