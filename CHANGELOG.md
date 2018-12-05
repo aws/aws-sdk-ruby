@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.186 (2018-12-05)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
