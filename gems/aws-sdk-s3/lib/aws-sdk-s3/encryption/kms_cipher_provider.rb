@@ -13,8 +13,9 @@ module Aws
 
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
         #   envelope and encryption cipher.
-        def encryption_cipher
-          encryption_context = { "kms_cmk_id" => @kms_key_id }
+        def encryption_cipher(options = {})
+          matdesc = { "kms_cmk_id" => @kms_key_id }
+          encryption_context = build_context(options, matdesc)
           key_data = @kms_client.generate_data_key(
             key_id: @kms_key_id,
             encryption_context: encryption_context,
@@ -27,15 +28,16 @@ module Aws
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
             'x-amz-cek-alg' => 'AES/CBC/PKCS5Padding',
             'x-amz-wrap-alg' => 'kms',
-            'x-amz-matdesc' => Json.dump(encryption_context)
+            'x-amz-matdesc' => Json.dump(matdesc)
           }
           [envelope, cipher]
         end
 
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
-        def decryption_cipher(envelope)
-          encryption_context = Json.load(envelope['x-amz-matdesc'])
+        def decryption_cipher(envelope, options = {})
+          matdesc = Json.load(envelope['x-amz-matdesc'])
+          encryption_context = build_context(options, matdesc)
           key = @kms_client.decrypt(
             ciphertext_blob: decode64(envelope['x-amz-key-v2']),
             encryption_context: encryption_context,
@@ -58,6 +60,10 @@ module Aws
         end
 
         private
+
+        def build_context(options, matdesc)
+          matdesc.merge(options[:encryption_context] || {})
+        end
 
         def encode64(str)
           Base64.encode64(str).split("\n") * ""

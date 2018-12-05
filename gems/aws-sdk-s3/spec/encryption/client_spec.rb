@@ -479,6 +479,24 @@ module Aws
             expect(resp.body.read).to eq('plain-text')
           end
 
+          it 'supports encryption with context' do
+            kms_client.stub_responses(:generate_data_key, {
+              plaintext: plaintext_object_key,
+              ciphertext_blob: encrypted_object_key,
+            })
+            client.put_object(bucket:'bucket', key:'key', body:'secret', encryption_context: {'some':'context'})
+            expect(kms_client.api_requests.first[:params][:encryption_context]['some']).to eq('context')
+          end
+
+          it 'supports decryption with context' do
+            kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
+            client.client.stub_responses(:get_object, {
+              body: Base64.decode64("4FAj3kTOIisQ+9b8/kia8g==\n"),
+              metadata: envelope
+            })
+            resp = client.get_object(bucket:'bucket', key:'key', encryption_context: {'some':'context'})
+            expect(kms_client.api_requests.first[:params][:encryption_context]['some']).to eq('context')
+          end
         end
 
         describe 'kms_GCM' do

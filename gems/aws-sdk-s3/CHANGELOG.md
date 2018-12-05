@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support for encryption context
+
 1.30.0 (2018-12-04)
 ------------------
 

@@ -7,7 +7,9 @@ module Aws
       class EncryptHandler < Seahorse::Client::Handler
 
         def call(context)
-          envelope, cipher = context[:encryption][:cipher_provider].encryption_cipher
+          envelope, cipher = context[:encryption][:cipher_provider].encryption_cipher(
+            encryption_context: context[:encryption][:encryption_context]
+          )
           apply_encryption_envelope(context, envelope, cipher)
           apply_encryption_cipher(context, cipher)
           @handler.call(context)
