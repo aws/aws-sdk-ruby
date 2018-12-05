@@ -484,7 +484,7 @@ module Aws
               plaintext: plaintext_object_key,
               ciphertext_blob: encrypted_object_key,
             })
-            client.put_object(bucket:'bucket', key:'key', body:'secret', encryption_context: {'some':'context'})
+            client.put_object(bucket:'bucket', key:'key', body:'secret', encryption_context: {some:'context'})
             expect(kms_client.api_requests.first[:params][:encryption_context]['some']).to eq('context')
           end
 
@@ -494,7 +494,7 @@ module Aws
               body: Base64.decode64("4FAj3kTOIisQ+9b8/kia8g==\n"),
               metadata: envelope
             })
-            resp = client.get_object(bucket:'bucket', key:'key', encryption_context: {'some':'context'})
+            resp = client.get_object(bucket:'bucket', key:'key', encryption_context: {some:'context'})
             expect(kms_client.api_requests.first[:params][:encryption_context]['some']).to eq('context')
           end
         end
