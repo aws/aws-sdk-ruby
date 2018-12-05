@@ -21,8 +21,11 @@ module Aws::CostExplorer
     Context = Shapes::StringShape.new(name: 'Context')
     Coverage = Shapes::StructureShape.new(name: 'Coverage')
     CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
+    CoverageCost = Shapes::StructureShape.new(name: 'CoverageCost')
     CoverageHours = Shapes::StructureShape.new(name: 'CoverageHours')
     CoverageHoursPercentage = Shapes::StringShape.new(name: 'CoverageHoursPercentage')
+    CoverageNormalizedUnits = Shapes::StructureShape.new(name: 'CoverageNormalizedUnits')
+    CoverageNormalizedUnitsPercentage = Shapes::StringShape.new(name: 'CoverageNormalizedUnitsPercentage')
     CoveragesByTime = Shapes::ListShape.new(name: 'CoveragesByTime')
     DataUnavailableException = Shapes::StructureShape.new(name: 'DataUnavailableException')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
@@ -81,12 +84,15 @@ module Aws::CostExplorer
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     OfferingClass = Shapes::StringShape.new(name: 'OfferingClass')
+    OnDemandCost = Shapes::StringShape.new(name: 'OnDemandCost')
     OnDemandCostOfRIHoursUsed = Shapes::StringShape.new(name: 'OnDemandCostOfRIHoursUsed')
     OnDemandHours = Shapes::StringShape.new(name: 'OnDemandHours')
+    OnDemandNormalizedUnits = Shapes::StringShape.new(name: 'OnDemandNormalizedUnits')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PredictionIntervalLevel = Shapes::IntegerShape.new(name: 'PredictionIntervalLevel')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
+    PurchasedUnits = Shapes::StringShape.new(name: 'PurchasedUnits')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
@@ -104,6 +110,7 @@ module Aws::CostExplorer
     ReservationUtilizationGroup = Shapes::StructureShape.new(name: 'ReservationUtilizationGroup')
     ReservationUtilizationGroups = Shapes::ListShape.new(name: 'ReservationUtilizationGroups')
     ReservedHours = Shapes::StringShape.new(name: 'ReservedHours')
+    ReservedNormalizedUnits = Shapes::StringShape.new(name: 'ReservedNormalizedUnits')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
@@ -113,12 +120,16 @@ module Aws::CostExplorer
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
     TermInYears = Shapes::StringShape.new(name: 'TermInYears')
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
+    TotalActualUnits = Shapes::StringShape.new(name: 'TotalActualUnits')
     TotalAmortizedFee = Shapes::StringShape.new(name: 'TotalAmortizedFee')
     TotalPotentialRISavings = Shapes::StringShape.new(name: 'TotalPotentialRISavings')
     TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
+    TotalRunningNormalizedUnits = Shapes::StringShape.new(name: 'TotalRunningNormalizedUnits')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
+    UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
     UtilizationPercentage = Shapes::StringShape.new(name: 'UtilizationPercentage')
+    UtilizationPercentageInUnits = Shapes::StringShape.new(name: 'UtilizationPercentageInUnits')
     UtilizationsByTime = Shapes::ListShape.new(name: 'UtilizationsByTime')
     Value = Shapes::StringShape.new(name: 'Value')
     Values = Shapes::ListShape.new(name: 'Values')
@@ -128,6 +139,8 @@ module Aws::CostExplorer
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
+    Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
+    Coverage.add_member(:coverage_cost, Shapes::ShapeRef.new(shape: CoverageCost, location_name: "CoverageCost"))
     Coverage.struct_class = Types::Coverage
 
     CoverageByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
@@ -135,11 +148,20 @@ module Aws::CostExplorer
     CoverageByTime.add_member(:total, Shapes::ShapeRef.new(shape: Coverage, location_name: "Total"))
     CoverageByTime.struct_class = Types::CoverageByTime
 
+    CoverageCost.add_member(:on_demand_cost, Shapes::ShapeRef.new(shape: OnDemandCost, location_name: "OnDemandCost"))
+    CoverageCost.struct_class = Types::CoverageCost
+
     CoverageHours.add_member(:on_demand_hours, Shapes::ShapeRef.new(shape: OnDemandHours, location_name: "OnDemandHours"))
     CoverageHours.add_member(:reserved_hours, Shapes::ShapeRef.new(shape: ReservedHours, location_name: "ReservedHours"))
     CoverageHours.add_member(:total_running_hours, Shapes::ShapeRef.new(shape: TotalRunningHours, location_name: "TotalRunningHours"))
     CoverageHours.add_member(:coverage_hours_percentage, Shapes::ShapeRef.new(shape: CoverageHoursPercentage, location_name: "CoverageHoursPercentage"))
     CoverageHours.struct_class = Types::CoverageHours
+
+    CoverageNormalizedUnits.add_member(:on_demand_normalized_units, Shapes::ShapeRef.new(shape: OnDemandNormalizedUnits, location_name: "OnDemandNormalizedUnits"))
+    CoverageNormalizedUnits.add_member(:reserved_normalized_units, Shapes::ShapeRef.new(shape: ReservedNormalizedUnits, location_name: "ReservedNormalizedUnits"))
+    CoverageNormalizedUnits.add_member(:total_running_normalized_units, Shapes::ShapeRef.new(shape: TotalRunningNormalizedUnits, location_name: "TotalRunningNormalizedUnits"))
+    CoverageNormalizedUnits.add_member(:coverage_normalized_units_percentage, Shapes::ShapeRef.new(shape: CoverageNormalizedUnitsPercentage, location_name: "CoverageNormalizedUnitsPercentage"))
+    CoverageNormalizedUnits.struct_class = Types::CoverageNormalizedUnits
 
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
@@ -243,6 +265,7 @@ module Aws::CostExplorer
     GetReservationCoverageRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
     GetReservationCoverageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetReservationCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetReservationCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetReservationCoverageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetReservationCoverageRequest.struct_class = Types::GetReservationCoverageRequest
 
@@ -340,9 +363,13 @@ module Aws::CostExplorer
     RedshiftInstanceDetails.struct_class = Types::RedshiftInstanceDetails
 
     ReservationAggregates.add_member(:utilization_percentage, Shapes::ShapeRef.new(shape: UtilizationPercentage, location_name: "UtilizationPercentage"))
+    ReservationAggregates.add_member(:utilization_percentage_in_units, Shapes::ShapeRef.new(shape: UtilizationPercentageInUnits, location_name: "UtilizationPercentageInUnits"))
     ReservationAggregates.add_member(:purchased_hours, Shapes::ShapeRef.new(shape: PurchasedHours, location_name: "PurchasedHours"))
+    ReservationAggregates.add_member(:purchased_units, Shapes::ShapeRef.new(shape: PurchasedUnits, location_name: "PurchasedUnits"))
     ReservationAggregates.add_member(:total_actual_hours, Shapes::ShapeRef.new(shape: TotalActualHours, location_name: "TotalActualHours"))
+    ReservationAggregates.add_member(:total_actual_units, Shapes::ShapeRef.new(shape: TotalActualUnits, location_name: "TotalActualUnits"))
     ReservationAggregates.add_member(:unused_hours, Shapes::ShapeRef.new(shape: UnusedHours, location_name: "UnusedHours"))
+    ReservationAggregates.add_member(:unused_units, Shapes::ShapeRef.new(shape: UnusedUnits, location_name: "UnusedUnits"))
     ReservationAggregates.add_member(:on_demand_cost_of_ri_hours_used, Shapes::ShapeRef.new(shape: OnDemandCostOfRIHoursUsed, location_name: "OnDemandCostOfRIHoursUsed"))
     ReservationAggregates.add_member(:net_ri_savings, Shapes::ShapeRef.new(shape: NetRISavings, location_name: "NetRISavings"))
     ReservationAggregates.add_member(:total_potential_ri_savings, Shapes::ShapeRef.new(shape: TotalPotentialRISavings, location_name: "TotalPotentialRISavings"))

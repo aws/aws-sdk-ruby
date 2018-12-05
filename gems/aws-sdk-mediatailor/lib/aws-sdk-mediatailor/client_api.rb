@@ -13,6 +13,7 @@ module Aws::MediaTailor
 
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
+    DashConfigurationForPut = Shapes::StructureShape.new(name: 'DashConfigurationForPut')
     DeletePlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationRequest')
     GetPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationRequest')
     GetPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationResponse')
@@ -37,7 +38,11 @@ module Aws::MediaTailor
     CdnConfiguration.struct_class = Types::CdnConfiguration
 
     DashConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
+    DashConfiguration.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
     DashConfiguration.struct_class = Types::DashConfiguration
+
+    DashConfigurationForPut.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
+    DashConfigurationForPut.struct_class = Types::DashConfigurationForPut
 
     DeletePlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
     DeletePlaybackConfigurationRequest.struct_class = Types::DeletePlaybackConfigurationRequest
@@ -77,6 +82,7 @@ module Aws::MediaTailor
 
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationRequest.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
+    PutPlaybackConfigurationRequest.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfigurationForPut, location_name: "DashConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     PutPlaybackConfigurationRequest.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
     PutPlaybackConfigurationRequest.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))

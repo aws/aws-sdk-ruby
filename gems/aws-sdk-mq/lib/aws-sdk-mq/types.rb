@@ -98,7 +98,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The version of the broker engine.
+    #   Required. The version of the broker engine. For a list of supported
+    #   engine versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -116,6 +118,10 @@ module Aws::MQ
     #   . \_ ~). This value must be 1-150 characters long.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of all tags associated with this configuration.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Configuration AWS API Documentation
     #
     class Configuration < Struct.new(
@@ -126,7 +132,8 @@ module Aws::MQ
       :engine_version,
       :id,
       :latest_revision,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -239,8 +246,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The version of the broker engine. Note: Currently, Amazon
-    #   MQ supports only 5.15.6 and 5.15.0.
+    #   Required. The version of the broker engine. For a list of supported
+    #   engine versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -273,6 +281,10 @@ module Aws::MQ
     #   two subnets.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   Create tags when creating the broker.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] users
     #   Required. The list of ActiveMQ users (persons or applications) who
     #   can access queues and topics. This value can contain only
@@ -296,6 +308,7 @@ module Aws::MQ
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
+      :tags,
       :users)
       include Aws::Structure
     end
@@ -345,6 +358,9 @@ module Aws::MQ
     #         publicly_accessible: false,
     #         security_groups: ["__string"],
     #         subnet_ids: ["__string"],
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         users: [
     #           {
     #             console_access: false,
@@ -404,6 +420,9 @@ module Aws::MQ
     # @!attribute [rw] subnet_ids
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] users
     #   @return [Array<Types::User>]
     #
@@ -423,6 +442,7 @@ module Aws::MQ
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
+      :tags,
       :users)
       include Aws::Structure
     end
@@ -451,8 +471,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The version of the broker engine. Note: Currently, Amazon
-    #   MQ supports only 5.15.6 and 5.15.0.
+    #   Required. The version of the broker engine. For a list of supported
+    #   engine versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -461,12 +482,17 @@ module Aws::MQ
     #   . \_ ~). This value must be 1-150 characters long.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Create tags when creating the configuration.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationInput AWS API Documentation
     #
     class CreateConfigurationInput < Struct.new(
       :engine_type,
       :engine_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -513,6 +539,9 @@ module Aws::MQ
     #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #         engine_version: "__string",
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] engine_type
@@ -526,12 +555,16 @@ module Aws::MQ
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationRequest AWS API Documentation
     #
     class CreateConfigurationRequest < Struct.new(
       :engine_type,
       :engine_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -559,6 +592,30 @@ module Aws::MQ
       :id,
       :latest_revision,
       :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateTagsRequest AWS API Documentation
+    #
+    class CreateTagsRequest < Struct.new(
+      :resource_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -672,6 +729,28 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteTagsRequest AWS API Documentation
+    #
+    class DeleteTagsRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteUserRequest
     #   data as a hash:
     #
@@ -698,8 +777,9 @@ module Aws::MQ
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
 
-    # The version of the broker engine. Note: Currently, Amazon MQ supports
-    # only 5.15.6 and 5.15.0.
+    # The version of the broker engine. For a list of supported engine
+    # versions, see
+    # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Required. Enables automatic upgrades to new minor versions for
@@ -749,8 +829,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version of the broker engine. Note: Currently, Amazon MQ
-    #   supports only 5.15.6 and 5.15.0.
+    #   The version of the broker engine. For a list of supported engine
+    #   versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -767,7 +848,9 @@ module Aws::MQ
     #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] pending_engine_version
-    #   The version of the broker engine to upgrade to.
+    #   The version of the broker engine to upgrade to. For a list of
+    #   supported engine versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -787,6 +870,10 @@ module Aws::MQ
     #   default subnet). An ACTIVE\_STANDBY\_MULTI\_AZ deployment requires
     #   two subnets.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The list of all tags associated with this broker.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] users
     #   The list of all ActiveMQ usernames for the specified broker.
@@ -813,6 +900,7 @@ module Aws::MQ
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
+      :tags,
       :users)
       include Aws::Structure
     end
@@ -897,6 +985,9 @@ module Aws::MQ
     # @!attribute [rw] subnet_ids
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] users
     #   @return [Array<Types::UserSummary>]
     #
@@ -921,6 +1012,7 @@ module Aws::MQ
       :publicly_accessible,
       :security_groups,
       :subnet_ids,
+      :tags,
       :users)
       include Aws::Structure
     end
@@ -969,6 +1061,9 @@ module Aws::MQ
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationResponse AWS API Documentation
     #
     class DescribeConfigurationResponse < Struct.new(
@@ -979,7 +1074,8 @@ module Aws::MQ
       :engine_version,
       :id,
       :latest_revision,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1364,6 +1460,33 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTagsRequest AWS API Documentation
+    #
+    class ListTagsRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTagsResponse AWS API Documentation
+    #
+    class ListTagsResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Returns a list of all ActiveMQ users.
     #
     # @!attribute [rw] broker_id
@@ -1577,6 +1700,19 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # A map of the key-value pairs for the resource tag.
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair for the resource tag.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Tags AWS API Documentation
+    #
+    class Tags < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Updates the broker using the specified properties.
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -1591,8 +1727,9 @@ module Aws::MQ
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
-    #   The version of the broker engine. Note: Currently, Amazon MQ
-    #   supports only 5.15.6 and 5.15.0.
+    #   The version of the broker engine. For a list of supported engine
+    #   versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] logs
@@ -1625,7 +1762,9 @@ module Aws::MQ
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
-    #   The version of the broker engine to upgrade to.
+    #   The version of the broker engine to upgrade to. For a list of
+    #   supported engine versions, see
+    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] logs

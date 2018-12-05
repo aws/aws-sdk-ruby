@@ -220,9 +220,13 @@ module Aws::CostExplorer
     # `UsageQuantity`, that you want the request to return. You can also
     # filter and group your data by various dimensions, such as `SERVICE` or
     # `AZ`, in a specific time range. For a complete list of valid
-    # dimensions, see the ` GetDimensionValues ` operation. Master accounts
+    # dimensions, see the [GetDimensionValues][1] operation. Master accounts
     # in an organization in AWS Organizations have access to all member
     # accounts.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
     #
     # @option params [Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
@@ -235,6 +239,9 @@ module Aws::CostExplorer
     #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`. If
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, either `MONTHLY` or `DAILY`.
+    #
+    #   The `GetCostAndUsageRequest` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #
     # @option params [Types::Expression] :filter
     #   Filters AWS costs by different dimensions. For example, you can
@@ -258,10 +265,11 @@ module Aws::CostExplorer
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
-    #   you aggregate `usageQuantity` across all of EC2, the results aren't
-    #   meaningful because EC2 compute hours and data transfer are measured in
-    #   different units (for example, hours vs. GB). To get more meaningful
-    #   `UsageQuantity` metrics, filter by `UsageType` or `UsageTypeGroups`.
+    #   you aggregate `usageQuantity` across all of Amazon EC2, the results
+    #   aren't meaningful because Amazon EC2 compute hours and data transfer
+    #   are measured in different units (for example, hours vs. GB). To get
+    #   more meaningful `UsageQuantity` metrics, filter by `UsageType` or
+    #   `UsageTypeGroups`.
     #
     #    </note>
     #
@@ -395,6 +403,9 @@ module Aws::CostExplorer
     #   How granular you want the forecast to be. You can get 3 months of
     #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
     #
+    #   The `GetCostForecast` operation supports only `DAILY` and `MONTHLY`
+    #   granularities.
+    #
     # @option params [Types::Expression] :filter
     #   The filters that you want to use to filter your forecast. Cost
     #   Explorer API supports all of the Cost Explorer filters.
@@ -482,8 +493,8 @@ module Aws::CostExplorer
     #   `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [required, String] :dimension
-    #   The name of the dimension. Each `Dimension` is available for different
-    #   a `Context`. For more information, see `Context`.
+    #   The name of the dimension. Each `Dimension` is available for a
+    #   different `Context`. For more information, see `Context`.
     #
     # @option params [String] :context
     #   The context for the call to `GetDimensionValues`. This can be
@@ -491,7 +502,7 @@ module Aws::CostExplorer
     #   `COST_AND_USAGE`. If the context is set to `RESERVATIONS`, the
     #   resulting dimension values can be used in the
     #   `GetReservationUtilization` operation. If the context is set to
-    #   `COST_AND_USAGE` the resulting dimension values can be used in the
+    #   `COST_AND_USAGE`, the resulting dimension values can be used in the
     #   `GetCostAndUsage` operation.
     #
     #   If you set the context to `COST_AND_USAGE`, you can use the following
@@ -502,7 +513,7 @@ module Aws::CostExplorer
     #   * DATABASE\_ENGINE - The Amazon Relational Database Service database.
     #     Examples are Aurora or MySQL.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
@@ -518,7 +529,8 @@ module Aws::CostExplorer
     #   * OPERATION - The action performed. Examples include `RunInstance` and
     #     `CreateBucket`.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which this
     #     usage is related. Examples include On-Demand Instances and Standard
@@ -531,7 +543,7 @@ module Aws::CostExplorer
     #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An example
-    #     is EC2: CloudWatch – Alarms. The response for this operation
+    #     is Amazon EC2: CloudWatch – Alarms. The response for this operation
     #     includes a unit attribute.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
@@ -548,14 +560,15 @@ module Aws::CostExplorer
     #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database Service
     #     deployments. Valid values are `SingleAZ` and `MultiAZ`.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
     #     AWS ID of the member account.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * REGION - The AWS Region.
     #
@@ -612,7 +625,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves the reservation coverage for your account. This allows you
+    # Retrieves the reservation coverage for your account. This enables you
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
     # usage is covered by a reservation. An organization's master account
@@ -648,13 +661,13 @@ module Aws::CostExplorer
     # `GetDimensionValues` operation.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   The start and end dates of the period for which you want to retrieve
-    #   data about reservation coverage. You can retrieve data for a maximum
-    #   of 13 months: the last 12 months and the current month. The start date
-    #   is inclusive, but the end date is exclusive. For example, if `start`
-    #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
-    #   data is retrieved from `2017-01-01` up to and including `2017-04-30`
-    #   but not including `2017-05-01`.
+    #   The start and end dates of the period that you want to retrieve data
+    #   about reservation coverage for. You can retrieve data for a maximum of
+    #   13 months: the last 12 months and the current month. The start date is
+    #   inclusive, but the end date is exclusive. For example, if `start` is
+    #   `2017-01-01` and `end` is `2017-05-01`, then the cost and usage data
+    #   is retrieved from `2017-01-01` up to and including `2017-04-30` but
+    #   not including `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group the data by the following attributes:
@@ -689,6 +702,9 @@ module Aws::CostExplorer
     #   isn't set, the response object doesn't include `Granularity`, either
     #   `MONTHLY` or `DAILY`.
     #
+    #   The `GetReservationCoverage` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
+    #
     # @option params [Types::Expression] :filter
     #   Filters utilization data by dimensions. You can filter by the
     #   following dimensions:
@@ -717,13 +733,19 @@ module Aws::CostExplorer
     #
     #   * TENANCY
     #
-    #   `GetReservationCoverage` uses the same ` Expression ` object as the
+    #   `GetReservationCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension.
     #   You can nest only one level deep. If there are multiple values for a
     #   dimension, they are OR'd together.
     #
     #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
     #   EC2.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #
+    # @option params [Array<String>] :metrics
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -773,6 +795,7 @@ module Aws::CostExplorer
     #         values: ["Value"],
     #       },
     #     },
+    #     metrics: ["MetricName"],
     #     next_page_token: "NextPageToken",
     #   })
     #
@@ -788,14 +811,29 @@ module Aws::CostExplorer
     #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.reserved_hours #=> String
     #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.total_running_hours #=> String
     #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.on_demand_normalized_units #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.reserved_normalized_units #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.total_running_normalized_units #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.coverage_normalized_units_percentage #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_cost.on_demand_cost #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.on_demand_hours #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.reserved_hours #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.total_running_hours #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.on_demand_normalized_units #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.reserved_normalized_units #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.total_running_normalized_units #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.coverage_normalized_units_percentage #=> String
+    #   resp.coverages_by_time[0].total.coverage_cost.on_demand_cost #=> String
     #   resp.total.coverage_hours.on_demand_hours #=> String
     #   resp.total.coverage_hours.reserved_hours #=> String
     #   resp.total.coverage_hours.total_running_hours #=> String
     #   resp.total.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.total.coverage_normalized_units.on_demand_normalized_units #=> String
+    #   resp.total.coverage_normalized_units.reserved_normalized_units #=> String
+    #   resp.total.coverage_normalized_units.total_running_normalized_units #=> String
+    #   resp.total.coverage_normalized_units.coverage_normalized_units_percentage #=> String
+    #   resp.total.coverage_cost.on_demand_cost #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverage AWS API Documentation
@@ -818,15 +856,15 @@ module Aws::CostExplorer
     # category of usage to identify the best number of each type of RI to
     # purchase to maximize your estimated savings.
     #
-    # For example, AWS automatically aggregates your EC2 Linux, shared
-    # tenancy, and c4 family usage in the US West (Oregon) Region and
+    # For example, AWS automatically aggregates your Amazon EC2 Linux,
+    # shared tenancy, and c4 family usage in the US West (Oregon) Region and
     # recommends that you buy size-flexible regional reservations to apply
     # to the c4 family usage. AWS recommends the smallest size instance in
     # an instance family. This makes it easier to purchase a size-flexible
     # RI. AWS also shows the equal number of normalized units so that you
     # can purchase any instance size that you want. For this example, your
-    # RI recommendation would be for `c4.large`, because that is the
-    # smallest size instance in the c4 instance family.
+    # RI recommendation would be for `c4.large` because that is the smallest
+    # size instance in the c4 instance family.
     #
     # @option params [String] :account_id
     #   The account ID that is associated with the recommendation.
@@ -854,7 +892,8 @@ module Aws::CostExplorer
     #
     # @option params [Types::ServiceSpecification] :service_specification
     #   The hardware specifications for the service instances that you want
-    #   recommendations for, such as standard or convertible EC2 instances.
+    #   recommendations for, such as standard or convertible Amazon EC2
+    #   instances.
     #
     # @option params [Integer] :page_size
     #   The number of recommendations that you want returned in a single
@@ -971,12 +1010,11 @@ module Aws::CostExplorer
     # Currently, you can group only by `SUBSCRIPTION_ID`.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   Sets the start and end dates for retrieving Reserved Instance (RI)
-    #   utilization. The start date is inclusive, but the end date is
-    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
-    #   `2017-05-01`, then the cost and usage data is retrieved from
-    #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`.
+    #   Sets the start and end dates for retrieving RI utilization. The start
+    #   date is inclusive, but the end date is exclusive. For example, if
+    #   `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost and
+    #   usage data is retrieved from `2017-01-01` up to and including
+    #   `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   Groups only by `SUBSCRIPTION_ID`. Metadata is included.
@@ -986,6 +1024,9 @@ module Aws::CostExplorer
     #   isn't set, the response object doesn't include `Granularity`, either
     #   `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity` aren't set,
     #   `GetReservationUtilization` defaults to `DAILY`.
+    #
+    #   The `GetReservationUtilization` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #
     # @option params [Types::Expression] :filter
     #   Filters utilization data by dimensions. You can filter by the
@@ -1015,10 +1056,14 @@ module Aws::CostExplorer
     #
     #   * TENANCY
     #
-    #   `GetReservationUtilization` uses the same ` Expression ` object as the
-    #   other operations, but only `AND` is supported among each dimension,
-    #   and nesting is supported up to only one level deep. If there are
-    #   multiple values for a dimension, they are OR'd together.
+    #   `GetReservationUtilization` uses the same [Expression][1] object as
+    #   the other operations, but only `AND` is supported among each
+    #   dimension, and nesting is supported up to only one level deep. If
+    #   there are multiple values for a dimension, they are OR'd together.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -1082,9 +1127,13 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].groups[0].attributes #=> Hash
     #   resp.utilizations_by_time[0].groups[0].attributes["AttributeType"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.utilizations_by_time[0].groups[0].utilization.utilization_percentage #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.utilization_percentage_in_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.purchased_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.purchased_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_actual_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.total_actual_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.unused_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.unused_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.on_demand_cost_of_ri_hours_used #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.net_ri_savings #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_potential_ri_savings #=> String
@@ -1092,9 +1141,13 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].groups[0].utilization.amortized_recurring_fee #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_amortized_fee #=> String
     #   resp.utilizations_by_time[0].total.utilization_percentage #=> String
+    #   resp.utilizations_by_time[0].total.utilization_percentage_in_units #=> String
     #   resp.utilizations_by_time[0].total.purchased_hours #=> String
+    #   resp.utilizations_by_time[0].total.purchased_units #=> String
     #   resp.utilizations_by_time[0].total.total_actual_hours #=> String
+    #   resp.utilizations_by_time[0].total.total_actual_units #=> String
     #   resp.utilizations_by_time[0].total.unused_hours #=> String
+    #   resp.utilizations_by_time[0].total.unused_units #=> String
     #   resp.utilizations_by_time[0].total.on_demand_cost_of_ri_hours_used #=> String
     #   resp.utilizations_by_time[0].total.net_ri_savings #=> String
     #   resp.utilizations_by_time[0].total.total_potential_ri_savings #=> String
@@ -1102,9 +1155,13 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].total.amortized_recurring_fee #=> String
     #   resp.utilizations_by_time[0].total.total_amortized_fee #=> String
     #   resp.total.utilization_percentage #=> String
+    #   resp.total.utilization_percentage_in_units #=> String
     #   resp.total.purchased_hours #=> String
+    #   resp.total.purchased_units #=> String
     #   resp.total.total_actual_hours #=> String
+    #   resp.total.total_actual_units #=> String
     #   resp.total.unused_hours #=> String
+    #   resp.total.unused_units #=> String
     #   resp.total.on_demand_cost_of_ri_hours_used #=> String
     #   resp.total.net_ri_savings #=> String
     #   resp.total.total_potential_ri_savings #=> String
@@ -1192,7 +1249,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

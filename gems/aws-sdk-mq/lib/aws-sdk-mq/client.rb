@@ -243,6 +243,8 @@ module Aws::MQ
     #
     # @option params [Array<String>] :subnet_ids
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @option params [Array<Types::User>] :users
     #
     # @return [Types::CreateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -276,6 +278,9 @@ module Aws::MQ
     #     publicly_accessible: false,
     #     security_groups: ["__string"],
     #     subnet_ids: ["__string"],
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     users: [
     #       {
     #         console_access: false,
@@ -312,6 +317,8 @@ module Aws::MQ
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConfigurationResponse#arn #arn} => String
@@ -326,6 +333,9 @@ module Aws::MQ
     #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
     #     engine_version: "__string",
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -344,6 +354,32 @@ module Aws::MQ
     # @param [Hash] params ({})
     def create_configuration(params = {}, options = {})
       req = build_request(:create_configuration, params)
+      req.send_request(options)
+    end
+
+    # Add a tag to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tags({
+    #     resource_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateTags AWS API Documentation
+    #
+    # @overload create_tags(params = {})
+    # @param [Hash] params ({})
+    def create_tags(params = {}, options = {})
+      req = build_request(:create_tags, params)
       req.send_request(options)
     end
 
@@ -407,6 +443,30 @@ module Aws::MQ
       req.send_request(options)
     end
 
+    # Remove a tag from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tags({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteTags AWS API Documentation
+    #
+    # @overload delete_tags(params = {})
+    # @param [Hash] params ({})
+    def delete_tags(params = {}, options = {})
+      req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
     # Deletes an ActiveMQ user.
     #
     # @option params [required, String] :broker_id
@@ -455,6 +515,7 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::DescribeBrokerResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeBrokerResponse#users #users} => Array&lt;Types::UserSummary&gt;
     #
     # @example Request syntax with placeholder values
@@ -502,6 +563,8 @@ module Aws::MQ
     #   resp.security_groups[0] #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.users #=> Array
     #   resp.users[0].pending_change #=> String, one of "CREATE", "UPDATE", "DELETE"
     #   resp.users[0].username #=> String
@@ -529,6 +592,7 @@ module Aws::MQ
     #   * {Types::DescribeConfigurationResponse#id #id} => String
     #   * {Types::DescribeConfigurationResponse#latest_revision #latest_revision} => Types::ConfigurationRevision
     #   * {Types::DescribeConfigurationResponse#name #name} => String
+    #   * {Types::DescribeConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -548,6 +612,8 @@ module Aws::MQ
     #   resp.latest_revision.description #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfiguration AWS API Documentation
     #
@@ -750,6 +816,8 @@ module Aws::MQ
     #   resp.configurations[0].latest_revision.description #=> String
     #   resp.configurations[0].latest_revision.revision #=> Integer
     #   resp.configurations[0].name #=> String
+    #   resp.configurations[0].tags #=> Hash
+    #   resp.configurations[0].tags["__string"] #=> String
     #   resp.max_results #=> Integer
     #   resp.next_token #=> String
     #
@@ -759,6 +827,34 @@ module Aws::MQ
     # @param [Hash] params ({})
     def list_configurations(params = {}, options = {})
       req = build_request(:list_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTags AWS API Documentation
+    #
+    # @overload list_tags(params = {})
+    # @param [Hash] params ({})
+    def list_tags(params = {}, options = {})
+      req = build_request(:list_tags, params)
       req.send_request(options)
     end
 
@@ -976,7 +1072,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

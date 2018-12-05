@@ -255,6 +255,7 @@ module Aws::MediaTailor
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
+    #   resp.dash_configuration.mpd_location #=> String
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.name #=> String
     #   resp.playback_endpoint_prefix #=> String
@@ -329,6 +330,8 @@ module Aws::MediaTailor
     #   The configuration for using a content delivery network (CDN), like
     #   Amazon CloudFront, for content and ad segment management.
     #
+    # @option params [Types::DashConfigurationForPut] :dash_configuration
+    #
     # @option params [String] :name
     #   The identifier for the configuration.
     #
@@ -372,6 +375,9 @@ module Aws::MediaTailor
     #       ad_segment_url_prefix: "__string",
     #       content_segment_url_prefix: "__string",
     #     },
+    #     dash_configuration: {
+    #       mpd_location: "__string",
+    #     },
     #     name: "__string",
     #     slate_ad_url: "__string",
     #     transcode_profile_name: "__string",
@@ -384,6 +390,7 @@ module Aws::MediaTailor
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
+    #   resp.dash_configuration.mpd_location #=> String
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.name #=> String
     #   resp.playback_endpoint_prefix #=> String
@@ -414,7 +421,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
