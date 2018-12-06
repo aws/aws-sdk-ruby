@@ -2999,9 +2999,6 @@ module Aws::RDS
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you specify this parameter when you create a Read Replica from an
-    #   unencrypted DB instance, the Read Replica is encrypted.
-    #
     #   If you create an encrypted Read Replica in the same AWS Region as
     #   the source DB instance, then you do not have to specify a value for
     #   this parameter. The Read Replica is encrypted with the same KMS key
@@ -3012,6 +3009,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in
     #   another AWS Region.
+    #
+    #   You can't create an encrypted Read Replica from an unencrypted DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url
@@ -3982,6 +3982,15 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] capacity
+    #   The current capacity of an Aurora Serverless DB cluster. The
+    #   capacity is 0 (zero) when the cluster is paused.
+    #
+    #   For more information about Aurora Serverless, see [Using Amazon
+    #   Aurora Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Integer]
     #
     # @!attribute [rw] engine_mode
@@ -4944,6 +4953,11 @@ module Aws::RDS
     #   Aurora MySQL DB cluster for the Aurora Read Replica is shown. This
     #   output does not contain information about cross region Aurora Read
     #   Replicas.
+    #
+    #   <note markdown="1"> Currently, each RDS DB instance can have only one Aurora Read
+    #   Replica.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_model

@@ -3443,9 +3443,6 @@ module Aws::RDS
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you specify this parameter when you create a Read Replica from an
-    #   unencrypted DB instance, the Read Replica is encrypted.
-    #
     #   If you create an encrypted Read Replica in the same AWS Region as the
     #   source DB instance, then you do not have to specify a value for this
     #   parameter. The Read Replica is encrypted with the same KMS key as the
@@ -3456,6 +3453,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
+    #
+    #   You can't create an encrypted Read Replica from an unencrypted DB
+    #   instance.
     #
     # @option params [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
@@ -15582,7 +15582,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

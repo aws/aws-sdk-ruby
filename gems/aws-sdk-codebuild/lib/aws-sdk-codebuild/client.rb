@@ -1068,6 +1068,35 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source
+    # credentials.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the token.
+    #
+    # @return [Types::DeleteSourceCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSourceCredentialsOutput#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_source_credentials({
+    #     arn: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentials AWS API Documentation
+    #
+    # @overload delete_source_credentials(params = {})
+    # @param [Hash] params ({})
+    def delete_source_credentials(params = {}, options = {})
+      req = build_request(:delete_source_credentials, params)
+      req.send_request(options)
+    end
+
     # For an existing AWS CodeBuild build project that has its source code
     # stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from
     # rebuilding the source code every time a code change is pushed to the
@@ -1090,6 +1119,54 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def delete_webhook(params = {}, options = {})
       req = build_request(:delete_webhook, params)
+      req.send_request(options)
+    end
+
+    # Imports the source repository credentials for an AWS CodeBuild project
+    # that has its source code stored in a GitHub, GitHub Enterprise, or
+    # Bitbucket repository.
+    #
+    # @option params [String] :username
+    #   The Bitbucket username when the `authType` is BASIC\_AUTH. This
+    #   parameter is not valid for other types of source providers or
+    #   connections.
+    #
+    # @option params [required, String] :token
+    #   For GitHub or GitHub Enterprise, this is the personal access token.
+    #   For Bitbucket, this is the app password.
+    #
+    # @option params [required, String] :server_type
+    #   The source provider used for this project.
+    #
+    # @option params [required, String] :auth_type
+    #   The type of authentication used to connect to a GitHub, GitHub
+    #   Enterprise, or Bitbucket repository. An OAUTH connection is not
+    #   supported by the API and must be created using the AWS CodeBuild
+    #   console.
+    #
+    # @return [Types::ImportSourceCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportSourceCredentialsOutput#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_source_credentials({
+    #     username: "NonEmptyString",
+    #     token: "SensitiveNonEmptyString", # required
+    #     server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
+    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentials AWS API Documentation
+    #
+    # @overload import_source_credentials(params = {})
+    # @param [Hash] params ({})
+    def import_source_credentials(params = {}, options = {})
+      req = build_request(:import_source_credentials, params)
       req.send_request(options)
     end
 
@@ -1301,6 +1378,28 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def list_projects(params = {}, options = {})
       req = build_request(:list_projects, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of `SourceCredentialsInfo` objects.
+    #
+    # @return [Types::ListSourceCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSourceCredentialsOutput#source_credentials_infos #source_credentials_infos} => Array&lt;Types::SourceCredentialsInfo&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.source_credentials_infos #=> Array
+    #   resp.source_credentials_infos[0].arn #=> String
+    #   resp.source_credentials_infos[0].server_type #=> String, one of "GITHUB", "BITBUCKET", "GITHUB_ENTERPRISE"
+    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials AWS API Documentation
+    #
+    # @overload list_source_credentials(params = {})
+    # @param [Hash] params ({})
+    def list_source_credentials(params = {}, options = {})
+      req = build_request(:list_source_credentials, params)
       req.send_request(options)
     end
 
@@ -2071,7 +2170,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

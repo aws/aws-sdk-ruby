@@ -15,6 +15,7 @@ module Aws::CodeBuild
     ArtifactNamespace = Shapes::StringShape.new(name: 'ArtifactNamespace')
     ArtifactPackaging = Shapes::StringShape.new(name: 'ArtifactPackaging')
     ArtifactsType = Shapes::StringShape.new(name: 'ArtifactsType')
+    AuthType = Shapes::StringShape.new(name: 'AuthType')
     BatchDeleteBuildsInput = Shapes::StructureShape.new(name: 'BatchDeleteBuildsInput')
     BatchDeleteBuildsOutput = Shapes::StructureShape.new(name: 'BatchDeleteBuildsOutput')
     BatchGetBuildsInput = Shapes::StructureShape.new(name: 'BatchGetBuildsInput')
@@ -41,6 +42,8 @@ module Aws::CodeBuild
     CreateWebhookOutput = Shapes::StructureShape.new(name: 'CreateWebhookOutput')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectOutput = Shapes::StructureShape.new(name: 'DeleteProjectOutput')
+    DeleteSourceCredentialsInput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsInput')
+    DeleteSourceCredentialsOutput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsOutput')
     DeleteWebhookInput = Shapes::StructureShape.new(name: 'DeleteWebhookInput')
     DeleteWebhookOutput = Shapes::StructureShape.new(name: 'DeleteWebhookOutput')
     EnvironmentImage = Shapes::StructureShape.new(name: 'EnvironmentImage')
@@ -55,6 +58,8 @@ module Aws::CodeBuild
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
+    ImportSourceCredentialsInput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsInput')
+    ImportSourceCredentialsOutput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsOutput')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidateProjectCacheInput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheInput')
     InvalidateProjectCacheOutput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheOutput')
@@ -68,6 +73,8 @@ module Aws::CodeBuild
     ListCuratedEnvironmentImagesOutput = Shapes::StructureShape.new(name: 'ListCuratedEnvironmentImagesOutput')
     ListProjectsInput = Shapes::StructureShape.new(name: 'ListProjectsInput')
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
+    ListSourceCredentialsInput = Shapes::StructureShape.new(name: 'ListSourceCredentialsInput')
+    ListSourceCredentialsOutput = Shapes::StructureShape.new(name: 'ListSourceCredentialsOutput')
     LogsConfig = Shapes::StructureShape.new(name: 'LogsConfig')
     LogsConfigStatusType = Shapes::StringShape.new(name: 'LogsConfigStatusType')
     LogsLocation = Shapes::StructureShape.new(name: 'LogsLocation')
@@ -96,9 +103,13 @@ module Aws::CodeBuild
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3LogsConfig = Shapes::StructureShape.new(name: 'S3LogsConfig')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
+    ServerType = Shapes::StringShape.new(name: 'ServerType')
     SortOrderType = Shapes::StringShape.new(name: 'SortOrderType')
     SourceAuth = Shapes::StructureShape.new(name: 'SourceAuth')
     SourceAuthType = Shapes::StringShape.new(name: 'SourceAuthType')
+    SourceCredentialsInfo = Shapes::StructureShape.new(name: 'SourceCredentialsInfo')
+    SourceCredentialsInfos = Shapes::ListShape.new(name: 'SourceCredentialsInfos')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartBuildInput = Shapes::StructureShape.new(name: 'StartBuildInput')
     StartBuildOutput = Shapes::StructureShape.new(name: 'StartBuildOutput')
@@ -239,6 +250,12 @@ module Aws::CodeBuild
 
     DeleteProjectOutput.struct_class = Types::DeleteProjectOutput
 
+    DeleteSourceCredentialsInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
+    DeleteSourceCredentialsInput.struct_class = Types::DeleteSourceCredentialsInput
+
+    DeleteSourceCredentialsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    DeleteSourceCredentialsOutput.struct_class = Types::DeleteSourceCredentialsOutput
+
     DeleteWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     DeleteWebhookInput.struct_class = Types::DeleteWebhookInput
 
@@ -271,6 +288,15 @@ module Aws::CodeBuild
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
 
     ImageVersions.member = Shapes::ShapeRef.new(shape: String)
+
+    ImportSourceCredentialsInput.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "username"))
+    ImportSourceCredentialsInput.add_member(:token, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "token"))
+    ImportSourceCredentialsInput.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, required: true, location_name: "serverType"))
+    ImportSourceCredentialsInput.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "authType"))
+    ImportSourceCredentialsInput.struct_class = Types::ImportSourceCredentialsInput
+
+    ImportSourceCredentialsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    ImportSourceCredentialsOutput.struct_class = Types::ImportSourceCredentialsOutput
 
     InvalidateProjectCacheInput.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectName"))
     InvalidateProjectCacheInput.struct_class = Types::InvalidateProjectCacheInput
@@ -307,6 +333,11 @@ module Aws::CodeBuild
     ListProjectsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListProjectsOutput.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectNames, location_name: "projects"))
     ListProjectsOutput.struct_class = Types::ListProjectsOutput
+
+    ListSourceCredentialsInput.struct_class = Types::ListSourceCredentialsInput
+
+    ListSourceCredentialsOutput.add_member(:source_credentials_infos, Shapes::ShapeRef.new(shape: SourceCredentialsInfos, location_name: "sourceCredentialsInfos"))
+    ListSourceCredentialsOutput.struct_class = Types::ListSourceCredentialsOutput
 
     LogsConfig.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsConfig, location_name: "cloudWatchLogs"))
     LogsConfig.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfig, location_name: "s3Logs"))
@@ -412,6 +443,13 @@ module Aws::CodeBuild
     SourceAuth.add_member(:type, Shapes::ShapeRef.new(shape: SourceAuthType, required: true, location_name: "type"))
     SourceAuth.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
     SourceAuth.struct_class = Types::SourceAuth
+
+    SourceCredentialsInfo.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    SourceCredentialsInfo.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, location_name: "serverType"))
+    SourceCredentialsInfo.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    SourceCredentialsInfo.struct_class = Types::SourceCredentialsInfo
+
+    SourceCredentialsInfos.member = Shapes::ShapeRef.new(shape: SourceCredentialsInfo)
 
     StartBuildInput.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectName"))
     StartBuildInput.add_member(:secondary_sources_override, Shapes::ShapeRef.new(shape: ProjectSources, location_name: "secondarySourcesOverride"))
@@ -575,6 +613,16 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
+      api.add_operation(:delete_source_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSourceCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSourceCredentialsInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSourceCredentialsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_webhook, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteWebhook"
         o.http_method = "POST"
@@ -584,6 +632,16 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OAuthProviderException)
+      end)
+
+      api.add_operation(:import_source_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportSourceCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportSourceCredentialsInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportSourceCredentialsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
       end)
 
       api.add_operation(:invalidate_project_cache, Seahorse::Model::Operation.new.tap do |o|
@@ -630,6 +688,14 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListProjectsInput)
         o.output = Shapes::ShapeRef.new(shape: ListProjectsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:list_source_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSourceCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSourceCredentialsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSourceCredentialsOutput)
       end)
 
       api.add_operation(:start_build, Seahorse::Model::Operation.new.tap do |o|

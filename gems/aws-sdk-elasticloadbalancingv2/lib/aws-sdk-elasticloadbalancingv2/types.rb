@@ -14,7 +14,7 @@ module Aws::ElasticLoadBalancingV2
     #   data as a hash:
     #
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -22,7 +22,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret",
+    #           client_secret: "AuthenticateOidcActionClientSecret", # required
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -30,7 +30,6 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -282,7 +281,7 @@ module Aws::ElasticLoadBalancingV2
     #         token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #         user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #         client_id: "AuthenticateOidcActionClientId", # required
-    #         client_secret: "AuthenticateOidcActionClientSecret",
+    #         client_secret: "AuthenticateOidcActionClientSecret", # required
     #         session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #         scope: "AuthenticateOidcActionScope",
     #         session_timeout: 1,
@@ -290,7 +289,6 @@ module Aws::ElasticLoadBalancingV2
     #           "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #         },
     #         on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #         use_existing_client_secret: false,
     #       }
     #
     # @!attribute [rw] issuer
@@ -356,9 +354,6 @@ module Aws::ElasticLoadBalancingV2
     #     endpoint. This is the default value.
     #   @return [String]
     #
-    # @!attribute [rw] use_existing_client_secret
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateOidcActionConfig AWS API Documentation
     #
     class AuthenticateOidcActionConfig < Struct.new(
@@ -372,8 +367,7 @@ module Aws::ElasticLoadBalancingV2
       :scope,
       :session_timeout,
       :authentication_request_extra_params,
-      :on_unauthenticated_request,
-      :use_existing_client_secret)
+      :on_unauthenticated_request)
       include Aws::Structure
     end
 
@@ -391,16 +385,12 @@ module Aws::ElasticLoadBalancingV2
     #   \[Network Load Balancers\] The static IP address.
     #   @return [Array<Types::LoadBalancerAddress>]
     #
-    # @!attribute [rw] static_ip
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id,
-      :load_balancer_addresses,
-      :static_ip)
+      :load_balancer_addresses)
       include Aws::Structure
     end
 
@@ -454,7 +444,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         load_balancer_arn: "LoadBalancerArn", # required
-    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
     #         port: 1, # required
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
@@ -465,7 +455,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -473,7 +463,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -481,7 +471,6 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -598,7 +587,6 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
-    #             static_ip: false,
     #           },
     #         ],
     #         security_groups: ["SecurityGroupId"],
@@ -718,28 +706,12 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             field: "ConditionFieldName",
     #             values: ["StringValue"],
-    #             host_header_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             path_pattern_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             http_header_config: {
-    #               http_header_name: "HttpHeaderConditionName",
-    #               values: ["StringValue"],
-    #             },
-    #             query_string_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             http_request_method_config: {
-    #               values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #             },
     #           },
     #         ],
     #         priority: 1, # required
     #         actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -747,7 +719,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -755,7 +727,6 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -880,10 +851,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         name: "TargetGroupName", # required
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         port: 1,
     #         vpc_id: "VpcId",
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         health_check_port: "HealthCheckPort",
     #         health_check_enabled: false,
     #         health_check_path: "Path",
@@ -1384,33 +1355,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeProvisionedCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #       }
-    #
-    # @!attribute [rw] load_balancer_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacityInput AWS API Documentation
-    #
-    class DescribeProvisionedCapacityInput < Struct.new(
-      :load_balancer_arn)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] provisioned_capacity
-    #   @return [Types::ProvisionedCapacity]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacityOutput AWS API Documentation
-    #
-    class DescribeProvisionedCapacityOutput < Struct.new(
-      :provisioned_capacity)
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass DescribeRulesInput
     #   data as a hash:
     #
@@ -1704,62 +1648,6 @@ module Aws::ElasticLoadBalancingV2
       :message_body,
       :status_code,
       :content_type)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass HostHeaderConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
-    #
-    # @!attribute [rw] values
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig AWS API Documentation
-    #
-    class HostHeaderConditionConfig < Struct.new(
-      :values)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass HttpHeaderConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         http_header_name: "HttpHeaderConditionName",
-    #         values: ["StringValue"],
-    #       }
-    #
-    # @!attribute [rw] http_header_name
-    #   @return [String]
-    #
-    # @!attribute [rw] values
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig AWS API Documentation
-    #
-    class HttpHeaderConditionConfig < Struct.new(
-      :http_header_name,
-      :values)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass HttpRequestMethodConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #       }
-    #
-    # @!attribute [rw] values
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpRequestMethodConditionConfig AWS API Documentation
-    #
-    class HttpRequestMethodConditionConfig < Struct.new(
-      :values)
       include Aws::Structure
     end
 
@@ -2066,7 +1954,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         listener_arn: "ListenerArn", # required
     #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
     #           {
@@ -2076,7 +1964,7 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -2084,7 +1972,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -2092,7 +1980,6 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -2243,38 +2130,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ModifyProvisionedCapacityInput
-    #   data as a hash:
-    #
-    #       {
-    #         load_balancer_arn: "LoadBalancerArn", # required
-    #         minimum_lb_capacity_units: 1, # required
-    #       }
-    #
-    # @!attribute [rw] load_balancer_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] minimum_lb_capacity_units
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacityInput AWS API Documentation
-    #
-    class ModifyProvisionedCapacityInput < Struct.new(
-      :load_balancer_arn,
-      :minimum_lb_capacity_units)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] provisioned_capacity
-    #   @return [Types::ProvisionedCapacity]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacityOutput AWS API Documentation
-    #
-    class ModifyProvisionedCapacityOutput < Struct.new(
-      :provisioned_capacity)
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass ModifyRuleInput
     #   data as a hash:
     #
@@ -2284,27 +2139,11 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             field: "ConditionFieldName",
     #             values: ["StringValue"],
-    #             host_header_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             path_pattern_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             http_header_config: {
-    #               http_header_name: "HttpHeaderConditionName",
-    #               values: ["StringValue"],
-    #             },
-    #             query_string_config: {
-    #               values: ["StringValue"],
-    #             },
-    #             http_request_method_config: {
-    #               values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #             },
     #           },
     #         ],
     #         actions: [
     #           {
-    #             type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #             target_group_arn: "TargetGroupArn",
     #             authenticate_oidc_config: {
     #               issuer: "AuthenticateOidcActionIssuer", # required
@@ -2312,7 +2151,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret",
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -2320,7 +2159,6 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -2478,7 +2316,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         target_group_arn: "TargetGroupArn", # required
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         health_check_port: "HealthCheckPort",
     #         health_check_path: "Path",
     #         health_check_enabled: false,
@@ -2579,62 +2417,6 @@ module Aws::ElasticLoadBalancingV2
     #
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass PathPatternConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
-    #
-    # @!attribute [rw] values
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig AWS API Documentation
-    #
-    class PathPatternConditionConfig < Struct.new(
-      :values)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] minimum_lb_capacity_units
-    #   @return [Integer]
-    #
-    # @!attribute [rw] status
-    #   @return [String]
-    #
-    # @!attribute [rw] decreases_remaining
-    #   @return [Integer]
-    #
-    # @!attribute [rw] last_modified_time
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ProvisionedCapacity AWS API Documentation
-    #
-    class ProvisionedCapacity < Struct.new(
-      :minimum_lb_capacity_units,
-      :status,
-      :decreases_remaining,
-      :last_modified_time)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass QueryStringConditionConfig
-    #   data as a hash:
-    #
-    #       {
-    #         values: ["StringValue"],
-    #       }
-    #
-    # @!attribute [rw] values
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringConditionConfig AWS API Documentation
-    #
-    class QueryStringConditionConfig < Struct.new(
-      :values)
       include Aws::Structure
     end
 
@@ -2860,22 +2642,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         field: "ConditionFieldName",
     #         values: ["StringValue"],
-    #         host_header_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         path_pattern_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_header_config: {
-    #           http_header_name: "HttpHeaderConditionName",
-    #           values: ["StringValue"],
-    #         },
-    #         query_string_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_request_method_config: {
-    #           values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #         },
     #       }
     #
     # @!attribute [rw] field
@@ -2917,31 +2683,11 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #   @return [Array<String>]
     #
-    # @!attribute [rw] host_header_config
-    #   @return [Types::HostHeaderConditionConfig]
-    #
-    # @!attribute [rw] path_pattern_config
-    #   @return [Types::PathPatternConditionConfig]
-    #
-    # @!attribute [rw] http_header_config
-    #   @return [Types::HttpHeaderConditionConfig]
-    #
-    # @!attribute [rw] query_string_config
-    #   @return [Types::QueryStringConditionConfig]
-    #
-    # @!attribute [rw] http_request_method_config
-    #   @return [Types::HttpRequestMethodConditionConfig]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition AWS API Documentation
     #
     class RuleCondition < Struct.new(
       :field,
-      :values,
-      :host_header_config,
-      :path_pattern_config,
-      :http_header_config,
-      :query_string_config,
-      :http_request_method_config)
+      :values)
       include Aws::Structure
     end
 
@@ -3087,7 +2833,6 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
-    #             static_ip: false,
     #           },
     #         ],
     #       }
@@ -3163,7 +2908,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
-    #         static_ip: false,
     #       }
     #
     # @!attribute [rw] subnet_id
@@ -3175,15 +2919,11 @@ module Aws::ElasticLoadBalancingV2
     #   address.
     #   @return [String]
     #
-    # @!attribute [rw] static_ip
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping AWS API Documentation
     #
     class SubnetMapping < Struct.new(
       :subnet_id,
-      :allocation_id,
-      :static_ip)
+      :allocation_id)
       include Aws::Structure
     end
 

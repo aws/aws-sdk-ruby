@@ -316,6 +316,15 @@ module Aws::RDS
       data[:enabled_cloudwatch_logs_exports]
     end
 
+    # The current capacity of an Aurora Serverless DB cluster. The capacity
+    # is 0 (zero) when the cluster is paused.
+    #
+    # For more information about Aurora Serverless, see [Using Amazon Aurora
+    # Serverless][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     # @return [Integer]
     def capacity
       data[:capacity]

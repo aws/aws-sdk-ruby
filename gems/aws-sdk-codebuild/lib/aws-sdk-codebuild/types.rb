@@ -804,6 +804,35 @@ module Aws::CodeBuild
     #
     class DeleteProjectOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteSourceCredentialsInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentialsInput AWS API Documentation
+    #
+    class DeleteSourceCredentialsInput < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentialsOutput AWS API Documentation
+    #
+    class DeleteSourceCredentialsOutput < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteWebhookInput
     #   data as a hash:
     #
@@ -929,6 +958,59 @@ module Aws::CodeBuild
       :name,
       :value,
       :type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportSourceCredentialsInput
+    #   data as a hash:
+    #
+    #       {
+    #         username: "NonEmptyString",
+    #         token: "SensitiveNonEmptyString", # required
+    #         server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
+    #         auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
+    #       }
+    #
+    # @!attribute [rw] username
+    #   The Bitbucket username when the `authType` is BASIC\_AUTH. This
+    #   parameter is not valid for other types of source providers or
+    #   connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   For GitHub or GitHub Enterprise, this is the personal access token.
+    #   For Bitbucket, this is the app password.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_type
+    #   The source provider used for this project.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication used to connect to a GitHub, GitHub
+    #   Enterprise, or Bitbucket repository. An OAUTH connection is not
+    #   supported by the API and must be created using the AWS CodeBuild
+    #   console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsInput AWS API Documentation
+    #
+    class ImportSourceCredentialsInput < Struct.new(
+      :username,
+      :token,
+      :server_type,
+      :auth_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsOutput AWS API Documentation
+    #
+    class ImportSourceCredentialsOutput < Struct.new(
+      :arn)
       include Aws::Structure
     end
 
@@ -1158,6 +1240,25 @@ module Aws::CodeBuild
     class ListProjectsOutput < Struct.new(
       :next_token,
       :projects)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsInput AWS API Documentation
+    #
+    class ListSourceCredentialsInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] source_credentials_infos
+    #   A list of `SourceCredentialsInfo` objects. Each
+    #   `SourceCredentialsInfo` object includes the authentication type,
+    #   token ARN, and type of source provider for one set of credentials.
+    #   @return [Array<Types::SourceCredentialsInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsOutput AWS API Documentation
+    #
+    class ListSourceCredentialsOutput < Struct.new(
+      :source_credentials_infos)
       include Aws::Structure
     end
 
@@ -1822,8 +1923,7 @@ module Aws::CodeBuild
     #   access the source code to be built.
     #
     #   This information is for the AWS CodeBuild console's use only. Your
-    #   code should not get or set this information directly (unless the
-    #   build project's source `type` value is `BITBUCKET` or `GITHUB`).
+    #   code should not get or set this information directly.
     #   @return [Types::SourceAuth]
     #
     # @!attribute [rw] report_build_status
@@ -1939,8 +2039,7 @@ module Aws::CodeBuild
     # access the source code to be built.
     #
     # This information is for the AWS CodeBuild console's use only. Your
-    # code should not get or set this information directly (unless the build
-    # project's source `type` value is `BITBUCKET` or `GITHUB`).
+    # code should not get or set this information directly.
     #
     # @note When making an API call, you may pass SourceAuth
     #   data as a hash:
@@ -1951,6 +2050,10 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] type
+    #   <note markdown="1"> This data type is deprecated and is no longer accurate or used.
+    #
+    #    </note>
+    #
     #   The authorization type to use. The only valid value is `OAUTH`,
     #   which represents the OAuth authorization type.
     #   @return [String]
@@ -1964,6 +2067,32 @@ module Aws::CodeBuild
     class SourceAuth < Struct.new(
       :type,
       :resource)
+      include Aws::Structure
+    end
+
+    # Information about the credentials for a GitHub, GitHub Enterprise, or
+    # Bitbucket repository.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_type
+    #   The type of source provider. The valid options are GITHUB,
+    #   GITHUB\_ENTERPRISE, or BITBUCKET.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication used by the credentials. Valid options
+    #   are OAUTH, BASIC\_AUTH, or PERSONAL\_ACCESS\_TOKEN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo AWS API Documentation
+    #
+    class SourceCredentialsInfo < Struct.new(
+      :arn,
+      :server_type,
+      :auth_type)
       include Aws::Structure
     end
 

@@ -2811,6 +2811,14 @@ module Aws::MediaLive
     #   A list of security groups referenced by IDs to attach to the input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   A list of the MediaConnect Flows that you want to use in this input.
+    #   You can specify as few as one Flow and presently, as many as two.
+    #   The only requirement is when you have more than one is that each
+    #   Flow is in a separate Availability Zone as this ensures your EML
+    #   input is redundant to AZ issues.
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
     #   Name of the input.
     #   @return [String]
@@ -2818,6 +2826,11 @@ module Aws::MediaLive
     # @!attribute [rw] request_id
     #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role this input assumes during
+    #   and after creation.
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -2834,8 +2847,10 @@ module Aws::MediaLive
     class CreateInput < Struct.new(
       :destinations,
       :input_security_groups,
+      :media_connect_flows,
       :name,
       :request_id,
+      :role_arn,
       :sources,
       :type)
       include Aws::Structure
@@ -2851,8 +2866,14 @@ module Aws::MediaLive
     #           },
     #         ],
     #         input_security_groups: ["__string"],
+    #         media_connect_flows: [
+    #           {
+    #             flow_arn: "__string",
+    #           },
+    #         ],
     #         name: "__string",
     #         request_id: "__string",
+    #         role_arn: "__string",
     #         sources: [
     #           {
     #             password_param: "__string",
@@ -2860,7 +2881,7 @@ module Aws::MediaLive
     #             username: "__string",
     #           },
     #         ],
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE
+    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
     #       }
     #
     # @!attribute [rw] destinations
@@ -2869,12 +2890,18 @@ module Aws::MediaLive
     # @!attribute [rw] input_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
     # @!attribute [rw] request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -2888,8 +2915,10 @@ module Aws::MediaLive
     class CreateInputRequest < Struct.new(
       :destinations,
       :input_security_groups,
+      :media_connect_flows,
       :name,
       :request_id,
+      :role_arn,
       :sources,
       :type)
       include Aws::Structure
@@ -3268,7 +3297,13 @@ module Aws::MediaLive
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] media_connect_flows
+    #   @return [Array<Types::MediaConnectFlow>]
+    #
     # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -3290,7 +3325,9 @@ module Aws::MediaLive
       :attached_channels,
       :destinations,
       :id,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :security_groups,
       :sources,
       :state,
@@ -4913,9 +4950,10 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Average bitrate in bits/second. Required for VBR, CBR, and ABR. For
-    #   MS Smooth outputs, bitrates must be unique when rounded down to the
-    #   nearest multiple of 1000.
+    #   Average bitrate in bits/second. Required when the rate control mode
+    #   is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each
+    #   output must have a unique value when its bitrate is rounded down to
+    #   the nearest multiple of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] buf_fill_pct
@@ -5001,8 +5039,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second (for VBR and QVBR modes only).
-    #   Required when rateControlMode is "qvbr".
+    #   For QVBR: See the tooltip for Quality level For VBR: Set the maximum
+    #   bitrate in order to accommodate expected spikes in the complexity of
+    #   the video.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -5043,18 +5082,24 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Target quality value. Applicable only to QVBR mode. 1 is the lowest
-    #   quality and 10 is the highest and approaches lossless. Typical
-    #   levels for content distribution are between 6 and 8.
+    #   Controls the target quality for the video encode. Applies only when
+    #   the rate control mode is QVBR. Set values for the QVBR quality level
+    #   field and Max bitrate field that suit your most important viewing
+    #   devices. Recommended values are: - Primary screen: Quality level: 8
+    #   to 10. Max bitrate: 4M - PC or tablet: Quality level: 7. Max
+    #   bitrate: 1.5M to 3M - Smartphone: Quality level: 6. Max bitrate: 1M
+    #   to 1.5M
     #   @return [Integer]
     #
     # @!attribute [rw] rate_control_mode
-    #   Rate control mode. - CBR: Constant Bit Rate - VBR: Variable Bit Rate
-    #   - QVBR: Encoder dynamically controls the bitrate to meet the desired
-    #   quality (specified through the qvbrQualityLevel field). The bitrate
-    #   will not exceed the bitrate specified in the maxBitrate field and
-    #   will not fall below the bitrate required to meet the desired quality
-    #   level.
+    #   Rate control mode. QVBR: Quality will match the specified quality
+    #   level except when it is constrained by the maximum bitrate.
+    #   Recommended if you or your viewers pay for bandwidth. VBR: Quality
+    #   and bitrate vary, depending on the video complexity. Recommended
+    #   instead of QVBR if you want to maintain a specific average bitrate
+    #   over the duration of the channel. CBR: Quality varies, depending on
+    #   the video complexity. Recommended only if you distribute your assets
+    #   to devices that cannot handle variable bitrates.
     #   @return [String]
     #
     # @!attribute [rw] scan_type
@@ -5902,8 +5947,17 @@ module Aws::MediaLive
     #   The generated ID of the input (unique for user account, immutable).
     #   @return [String]
     #
+    # @!attribute [rw] media_connect_flows
+    #   A list of MediaConnect Flows for this input.
+    #   @return [Array<Types::MediaConnectFlow>]
+    #
     # @!attribute [rw] name
     #   The user-assigned name (This is a mutable value).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role this input assumes during
+    #   and after creation.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -5927,7 +5981,9 @@ module Aws::MediaLive
       :attached_channels,
       :destinations,
       :id,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :security_groups,
       :sources,
       :state,
@@ -7443,6 +7499,39 @@ module Aws::MediaLive
       :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
+      include Aws::Structure
+    end
+
+    # The settings for a MediaConnect Flow.
+    #
+    # @!attribute [rw] flow_arn
+    #   The unique ARN of the MediaConnect Flow being used as a source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlow AWS API Documentation
+    #
+    class MediaConnectFlow < Struct.new(
+      :flow_arn)
+      include Aws::Structure
+    end
+
+    # The settings for a MediaConnect Flow.
+    #
+    # @note When making an API call, you may pass MediaConnectFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the MediaConnect Flow that you want to use as a source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlowRequest AWS API Documentation
+    #
+    class MediaConnectFlowRequest < Struct.new(
+      :flow_arn)
       include Aws::Structure
     end
 
@@ -11393,8 +11482,21 @@ module Aws::MediaLive
     #   A list of security groups referenced by IDs to attach to the input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   A list of the MediaConnect Flow ARNs that you want to use as the
+    #   source of the input. You can specify as few as one Flow and
+    #   presently, as many as two. The only requirement is when you have
+    #   more than one is that each Flow is in a separate Availability Zone
+    #   as this ensures your EML input is redundant to AZ issues.
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
     #   Name of the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role this input assumes during
+    #   and after creation.
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -11408,7 +11510,9 @@ module Aws::MediaLive
     class UpdateInput < Struct.new(
       :destinations,
       :input_security_groups,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :sources)
       include Aws::Structure
     end
@@ -11424,7 +11528,13 @@ module Aws::MediaLive
     #         ],
     #         input_id: "__string", # required
     #         input_security_groups: ["__string"],
+    #         media_connect_flows: [
+    #           {
+    #             flow_arn: "__string",
+    #           },
+    #         ],
     #         name: "__string",
+    #         role_arn: "__string",
     #         sources: [
     #           {
     #             password_param: "__string",
@@ -11443,7 +11553,13 @@ module Aws::MediaLive
     # @!attribute [rw] input_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -11455,7 +11571,9 @@ module Aws::MediaLive
       :destinations,
       :input_id,
       :input_security_groups,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :sources)
       include Aws::Structure
     end

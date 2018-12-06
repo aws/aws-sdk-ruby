@@ -472,7 +472,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_listener({
     #     load_balancer_arn: "LoadBalancerArn", # required
-    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
     #     port: 1, # required
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
@@ -483,7 +483,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -491,7 +491,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret",
+    #           client_secret: "AuthenticateOidcActionClientSecret", # required
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -499,7 +499,6 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -537,13 +536,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -557,7 +556,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -783,7 +781,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
-    #         static_ip: false,
     #       },
     #     ],
     #     security_groups: ["SecurityGroupId"],
@@ -817,7 +814,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
-    #   resp.load_balancers[0].availability_zones[0].static_ip #=> Boolean
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -970,28 +966,12 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         field: "ConditionFieldName",
     #         values: ["StringValue"],
-    #         host_header_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         path_pattern_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_header_config: {
-    #           http_header_name: "HttpHeaderConditionName",
-    #           values: ["StringValue"],
-    #         },
-    #         query_string_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_request_method_config: {
-    #           values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #         },
     #       },
     #     ],
     #     priority: 1, # required
     #     actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -999,7 +979,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret",
+    #           client_secret: "AuthenticateOidcActionClientSecret", # required
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -1007,7 +987,6 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -1048,19 +1027,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
-    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
-    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
-    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1074,7 +1042,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1265,10 +1232,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_target_group({
     #     name: "TargetGroupName", # required
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #     port: 1,
     #     vpc_id: "VpcId",
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #     health_check_port: "HealthCheckPort",
     #     health_check_enabled: false,
     #     health_check_path: "Path",
@@ -1287,10 +1254,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -1656,13 +1623,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1676,7 +1643,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1878,7 +1844,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
-    #   resp.load_balancers[0].availability_zones[0].static_ip #=> Boolean
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -1890,34 +1855,6 @@ module Aws::ElasticLoadBalancingV2
     # @param [Hash] params ({})
     def describe_load_balancers(params = {}, options = {})
       req = build_request(:describe_load_balancers, params)
-      req.send_request(options)
-    end
-
-    # @option params [required, String] :load_balancer_arn
-    #
-    # @return [Types::DescribeProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeProvisionedCapacityOutput#provisioned_capacity #provisioned_capacity} => Types::ProvisionedCapacity
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_provisioned_capacity({
-    #     load_balancer_arn: "LoadBalancerArn", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.provisioned_capacity.minimum_lb_capacity_units #=> Integer
-    #   resp.provisioned_capacity.status #=> String, one of "disabled", "pending", "provisioned", "pre-warmed"
-    #   resp.provisioned_capacity.decreases_remaining #=> Integer
-    #   resp.provisioned_capacity.last_modified_time #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacity AWS API Documentation
-    #
-    # @overload describe_provisioned_capacity(params = {})
-    # @param [Hash] params ({})
-    def describe_provisioned_capacity(params = {}, options = {})
-      req = build_request(:describe_provisioned_capacity, params)
       req.send_request(options)
     end
 
@@ -1996,19 +1933,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
-    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
-    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
-    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2022,7 +1948,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -2427,10 +2352,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -2700,7 +2625,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.modify_listener({
     #     listener_arn: "ListenerArn", # required
     #     port: 1,
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
     #       {
@@ -2710,7 +2635,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -2718,7 +2643,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret",
+    #           client_secret: "AuthenticateOidcActionClientSecret", # required
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -2726,7 +2651,6 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -2764,13 +2688,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2784,7 +2708,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -2988,37 +2911,6 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # @option params [required, String] :load_balancer_arn
-    #
-    # @option params [required, Integer] :minimum_lb_capacity_units
-    #
-    # @return [Types::ModifyProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ModifyProvisionedCapacityOutput#provisioned_capacity #provisioned_capacity} => Types::ProvisionedCapacity
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.modify_provisioned_capacity({
-    #     load_balancer_arn: "LoadBalancerArn", # required
-    #     minimum_lb_capacity_units: 1, # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.provisioned_capacity.minimum_lb_capacity_units #=> Integer
-    #   resp.provisioned_capacity.status #=> String, one of "disabled", "pending", "provisioned", "pre-warmed"
-    #   resp.provisioned_capacity.decreases_remaining #=> Integer
-    #   resp.provisioned_capacity.last_modified_time #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacity AWS API Documentation
-    #
-    # @overload modify_provisioned_capacity(params = {})
-    # @param [Hash] params ({})
-    def modify_provisioned_capacity(params = {}, options = {})
-      req = build_request(:modify_provisioned_capacity, params)
-      req.send_request(options)
-    end
-
     # Modifies the specified rule.
     #
     # Any existing properties that you do not modify retain their current
@@ -3135,27 +3027,11 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         field: "ConditionFieldName",
     #         values: ["StringValue"],
-    #         host_header_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         path_pattern_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_header_config: {
-    #           http_header_name: "HttpHeaderConditionName",
-    #           values: ["StringValue"],
-    #         },
-    #         query_string_config: {
-    #           values: ["StringValue"],
-    #         },
-    #         http_request_method_config: {
-    #           values: ["GET"], # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #         },
     #       },
     #     ],
     #     actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, redirect, authenticate-cognito, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -3163,7 +3039,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret",
+    #           client_secret: "AuthenticateOidcActionClientSecret", # required
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -3171,7 +3047,6 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
-    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -3212,19 +3087,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
-    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
-    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
-    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -3238,7 +3102,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3373,7 +3236,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.modify_target_group({
     #     target_group_arn: "TargetGroupArn", # required
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #     health_check_port: "HealthCheckPort",
     #     health_check_path: "Path",
     #     health_check_enabled: false,
@@ -3391,10 +3254,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -3772,19 +3635,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
-    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
-    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
-    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
-    #   resp.rules[0].conditions[0].query_string_config.values[0] #=> String
-    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
-    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "redirect", "authenticate-cognito", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -3798,7 +3650,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
-    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3946,7 +3797,6 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
-    #         static_ip: false,
     #       },
     #     ],
     #   })
@@ -3959,7 +3809,6 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones[0].load_balancer_addresses #=> Array
     #   resp.availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
-    #   resp.availability_zones[0].static_ip #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets AWS API Documentation
     #
@@ -3983,7 +3832,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -285,6 +285,8 @@ module Aws::MediaLive
     M3u8Settings = Shapes::StructureShape.new(name: 'M3u8Settings')
     M3u8TimedMetadataBehavior = Shapes::StringShape.new(name: 'M3u8TimedMetadataBehavior')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MediaConnectFlow = Shapes::StructureShape.new(name: 'MediaConnectFlow')
+    MediaConnectFlowRequest = Shapes::StructureShape.new(name: 'MediaConnectFlowRequest')
     Mp2CodingMode = Shapes::StringShape.new(name: 'Mp2CodingMode')
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
@@ -472,6 +474,8 @@ module Aws::MediaLive
     __listOfInputSourceRequest = Shapes::ListShape.new(name: '__listOfInputSourceRequest')
     __listOfInputWhitelistRule = Shapes::ListShape.new(name: '__listOfInputWhitelistRule')
     __listOfInputWhitelistRuleCidr = Shapes::ListShape.new(name: '__listOfInputWhitelistRuleCidr')
+    __listOfMediaConnectFlow = Shapes::ListShape.new(name: '__listOfMediaConnectFlow')
+    __listOfMediaConnectFlowRequest = Shapes::ListShape.new(name: '__listOfMediaConnectFlowRequest')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
@@ -748,16 +752,20 @@ module Aws::MediaLive
 
     CreateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
     CreateInput.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
+    CreateInput.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     CreateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     CreateInput.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInput.struct_class = Types::CreateInput
 
     CreateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
     CreateInputRequest.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
+    CreateInputRequest.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     CreateInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateInputRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     CreateInputRequest.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInputRequest.struct_class = Types::CreateInputRequest
@@ -850,7 +858,9 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:attached_channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "attachedChannels"))
     DescribeInputResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     DescribeInputResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeInputResponse.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     DescribeInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeInputResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DescribeInputResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     DescribeInputResponse.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSource, location_name: "sources"))
     DescribeInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputState, location_name: "state"))
@@ -1144,7 +1154,9 @@ module Aws::MediaLive
     Input.add_member(:attached_channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "attachedChannels"))
     Input.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     Input.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Input.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     Input.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    Input.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     Input.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     Input.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSource, location_name: "sources"))
     Input.add_member(:state, Shapes::ShapeRef.new(shape: InputState, location_name: "state"))
@@ -1377,6 +1389,12 @@ module Aws::MediaLive
     M3u8Settings.add_member(:transport_stream_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "transportStreamId"))
     M3u8Settings.add_member(:video_pid, Shapes::ShapeRef.new(shape: __string, location_name: "videoPid"))
     M3u8Settings.struct_class = Types::M3u8Settings
+
+    MediaConnectFlow.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    MediaConnectFlow.struct_class = Types::MediaConnectFlow
+
+    MediaConnectFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    MediaConnectFlowRequest.struct_class = Types::MediaConnectFlowRequest
 
     Mp2Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
     Mp2Settings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Mp2CodingMode, location_name: "codingMode"))
@@ -1729,14 +1747,18 @@ module Aws::MediaLive
 
     UpdateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
     UpdateInput.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
+    UpdateInput.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     UpdateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     UpdateInput.struct_class = Types::UpdateInput
 
     UpdateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
     UpdateInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
     UpdateInputRequest.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
+    UpdateInputRequest.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     UpdateInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInputRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     UpdateInputRequest.struct_class = Types::UpdateInputRequest
 
@@ -1826,6 +1848,10 @@ module Aws::MediaLive
     __listOfInputWhitelistRule.member = Shapes::ShapeRef.new(shape: InputWhitelistRule)
 
     __listOfInputWhitelistRuleCidr.member = Shapes::ShapeRef.new(shape: InputWhitelistRuleCidr)
+
+    __listOfMediaConnectFlow.member = Shapes::ShapeRef.new(shape: MediaConnectFlow)
+
+    __listOfMediaConnectFlowRequest.member = Shapes::ShapeRef.new(shape: MediaConnectFlowRequest)
 
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 

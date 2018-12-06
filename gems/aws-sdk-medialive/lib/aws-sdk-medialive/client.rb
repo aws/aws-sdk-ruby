@@ -1607,11 +1607,15 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :input_security_groups
     #
+    # @option params [Array<Types::MediaConnectFlowRequest>] :media_connect_flows
+    #
     # @option params [String] :name
     #
     # @option params [String] :request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :role_arn
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
@@ -1630,8 +1634,14 @@ module Aws::MediaLive
     #       },
     #     ],
     #     input_security_groups: ["__string"],
+    #     media_connect_flows: [
+    #       {
+    #         flow_arn: "__string",
+    #       },
+    #     ],
     #     name: "__string",
     #     request_id: "__string",
+    #     role_arn: "__string",
     #     sources: [
     #       {
     #         password_param: "__string",
@@ -1639,7 +1649,7 @@ module Aws::MediaLive
     #         username: "__string",
     #       },
     #     ],
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
     #   })
     #
     # @example Response structure
@@ -1652,7 +1662,10 @@ module Aws::MediaLive
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
     #   resp.input.id #=> String
+    #   resp.input.media_connect_flows #=> Array
+    #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
+    #   resp.input.role_arn #=> String
     #   resp.input.security_groups #=> Array
     #   resp.input.security_groups[0] #=> String
     #   resp.input.sources #=> Array
@@ -1660,7 +1673,7 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -2837,7 +2850,9 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#attached_channels #attached_channels} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#destinations #destinations} => Array&lt;Types::InputDestination&gt;
     #   * {Types::DescribeInputResponse#id #id} => String
+    #   * {Types::DescribeInputResponse#media_connect_flows #media_connect_flows} => Array&lt;Types::MediaConnectFlow&gt;
     #   * {Types::DescribeInputResponse#name #name} => String
+    #   * {Types::DescribeInputResponse#role_arn #role_arn} => String
     #   * {Types::DescribeInputResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#sources #sources} => Array&lt;Types::InputSource&gt;
     #   * {Types::DescribeInputResponse#state #state} => String
@@ -2859,7 +2874,10 @@ module Aws::MediaLive
     #   resp.destinations[0].port #=> String
     #   resp.destinations[0].url #=> String
     #   resp.id #=> String
+    #   resp.media_connect_flows #=> Array
+    #   resp.media_connect_flows[0].flow_arn #=> String
     #   resp.name #=> String
+    #   resp.role_arn #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
     #   resp.sources #=> Array
@@ -2867,7 +2885,7 @@ module Aws::MediaLive
     #   resp.sources[0].url #=> String
     #   resp.sources[0].username #=> String
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput AWS API Documentation
     #
@@ -3258,7 +3276,10 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].port #=> String
     #   resp.inputs[0].destinations[0].url #=> String
     #   resp.inputs[0].id #=> String
+    #   resp.inputs[0].media_connect_flows #=> Array
+    #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
     #   resp.inputs[0].name #=> String
+    #   resp.inputs[0].role_arn #=> String
     #   resp.inputs[0].security_groups #=> Array
     #   resp.inputs[0].security_groups[0] #=> String
     #   resp.inputs[0].sources #=> Array
@@ -3266,7 +3287,7 @@ module Aws::MediaLive
     #   resp.inputs[0].sources[0].url #=> String
     #   resp.inputs[0].sources[0].username #=> String
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -5715,7 +5736,11 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :input_security_groups
     #
+    # @option params [Array<Types::MediaConnectFlowRequest>] :media_connect_flows
+    #
     # @option params [String] :name
+    #
+    # @option params [String] :role_arn
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
@@ -5733,7 +5758,13 @@ module Aws::MediaLive
     #     ],
     #     input_id: "__string", # required
     #     input_security_groups: ["__string"],
+    #     media_connect_flows: [
+    #       {
+    #         flow_arn: "__string",
+    #       },
+    #     ],
     #     name: "__string",
+    #     role_arn: "__string",
     #     sources: [
     #       {
     #         password_param: "__string",
@@ -5753,7 +5784,10 @@ module Aws::MediaLive
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
     #   resp.input.id #=> String
+    #   resp.input.media_connect_flows #=> Array
+    #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
+    #   resp.input.role_arn #=> String
     #   resp.input.security_groups #=> Array
     #   resp.input.security_groups[0] #=> String
     #   resp.input.sources #=> Array
@@ -5761,7 +5795,7 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -5825,7 +5859,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
