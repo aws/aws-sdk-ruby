@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::ServiceCatalog - Updated the documentation for AWS Service Catalog.
+
 2.11.187 (2018-12-06)
 ------------------
 
