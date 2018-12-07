@@ -387,6 +387,8 @@ module Aws::ServiceCatalog
     #
     #   * `NOTIFICATION`
     #
+    #   * STACKSET
+    #
     #   * `TEMPLATE`
     #   @return [String]
     #
@@ -416,6 +418,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * STACKSET
     #
     #   * `TEMPLATE`
     #   @return [String]
@@ -3720,6 +3724,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # Information about the organization node.
+    #
     # @note When making an API call, you may pass OrganizationNode
     #   data as a hash:
     #
@@ -3729,9 +3735,11 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] type
+    #   The organization node type.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The identifier of the organization node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OrganizationNode AWS API Documentation

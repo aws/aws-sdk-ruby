@@ -37,6 +37,19 @@ module Aws::AlexaForBusiness
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BulletPoint = Shapes::StringShape.new(name: 'BulletPoint')
     BulletPoints = Shapes::ListShape.new(name: 'BulletPoints')
+    BusinessReport = Shapes::StructureShape.new(name: 'BusinessReport')
+    BusinessReportContentRange = Shapes::StructureShape.new(name: 'BusinessReportContentRange')
+    BusinessReportDownloadUrl = Shapes::StringShape.new(name: 'BusinessReportDownloadUrl')
+    BusinessReportFailureCode = Shapes::StringShape.new(name: 'BusinessReportFailureCode')
+    BusinessReportFormat = Shapes::StringShape.new(name: 'BusinessReportFormat')
+    BusinessReportInterval = Shapes::StringShape.new(name: 'BusinessReportInterval')
+    BusinessReportRecurrence = Shapes::StructureShape.new(name: 'BusinessReportRecurrence')
+    BusinessReportS3Location = Shapes::StructureShape.new(name: 'BusinessReportS3Location')
+    BusinessReportS3Path = Shapes::StringShape.new(name: 'BusinessReportS3Path')
+    BusinessReportSchedule = Shapes::StructureShape.new(name: 'BusinessReportSchedule')
+    BusinessReportScheduleList = Shapes::ListShape.new(name: 'BusinessReportScheduleList')
+    BusinessReportScheduleName = Shapes::StringShape.new(name: 'BusinessReportScheduleName')
+    BusinessReportStatus = Shapes::StringShape.new(name: 'BusinessReportStatus')
     Category = Shapes::StructureShape.new(name: 'Category')
     CategoryId = Shapes::IntegerShape.new(name: 'CategoryId')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
@@ -58,6 +71,8 @@ module Aws::AlexaForBusiness
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CreateAddressBookRequest = Shapes::StructureShape.new(name: 'CreateAddressBookRequest')
     CreateAddressBookResponse = Shapes::StructureShape.new(name: 'CreateAddressBookResponse')
+    CreateBusinessReportScheduleRequest = Shapes::StructureShape.new(name: 'CreateBusinessReportScheduleRequest')
+    CreateBusinessReportScheduleResponse = Shapes::StructureShape.new(name: 'CreateBusinessReportScheduleResponse')
     CreateConferenceProviderRequest = Shapes::StructureShape.new(name: 'CreateConferenceProviderRequest')
     CreateConferenceProviderResponse = Shapes::StructureShape.new(name: 'CreateConferenceProviderResponse')
     CreateContactRequest = Shapes::StructureShape.new(name: 'CreateContactRequest')
@@ -70,8 +85,12 @@ module Aws::AlexaForBusiness
     CreateSkillGroupResponse = Shapes::StructureShape.new(name: 'CreateSkillGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    CustomerS3BucketName = Shapes::StringShape.new(name: 'CustomerS3BucketName')
+    Date = Shapes::StringShape.new(name: 'Date')
     DeleteAddressBookRequest = Shapes::StructureShape.new(name: 'DeleteAddressBookRequest')
     DeleteAddressBookResponse = Shapes::StructureShape.new(name: 'DeleteAddressBookResponse')
+    DeleteBusinessReportScheduleRequest = Shapes::StructureShape.new(name: 'DeleteBusinessReportScheduleRequest')
+    DeleteBusinessReportScheduleResponse = Shapes::StructureShape.new(name: 'DeleteBusinessReportScheduleResponse')
     DeleteConferenceProviderRequest = Shapes::StructureShape.new(name: 'DeleteConferenceProviderRequest')
     DeleteConferenceProviderResponse = Shapes::StructureShape.new(name: 'DeleteConferenceProviderResponse')
     DeleteContactRequest = Shapes::StructureShape.new(name: 'DeleteContactRequest')
@@ -164,6 +183,8 @@ module Aws::AlexaForBusiness
     InvocationPhrase = Shapes::StringShape.new(name: 'InvocationPhrase')
     Key = Shapes::StringShape.new(name: 'Key')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListBusinessReportSchedulesRequest = Shapes::StructureShape.new(name: 'ListBusinessReportSchedulesRequest')
+    ListBusinessReportSchedulesResponse = Shapes::StructureShape.new(name: 'ListBusinessReportSchedulesResponse')
     ListConferenceProvidersRequest = Shapes::StructureShape.new(name: 'ListConferenceProvidersRequest')
     ListConferenceProvidersResponse = Shapes::StructureShape.new(name: 'ListConferenceProvidersResponse')
     ListDeviceEventsRequest = Shapes::StructureShape.new(name: 'ListDeviceEventsRequest')
@@ -188,8 +209,8 @@ module Aws::AlexaForBusiness
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OneClickIdDelay = Shapes::StringShape.new(name: 'OneClickIdDelay')
     OneClickPinDelay = Shapes::StringShape.new(name: 'OneClickPinDelay')
+    OutboundPhoneNumber = Shapes::StringShape.new(name: 'OutboundPhoneNumber')
     PSTNDialIn = Shapes::StructureShape.new(name: 'PSTNDialIn')
-    PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PrivacyPolicy = Shapes::StringShape.new(name: 'PrivacyPolicy')
     ProductDescription = Shapes::StringShape.new(name: 'ProductDescription')
     ProductId = Shapes::StringShape.new(name: 'ProductId')
@@ -227,6 +248,7 @@ module Aws::AlexaForBusiness
     RoomSkillParameterKey = Shapes::StringShape.new(name: 'RoomSkillParameterKey')
     RoomSkillParameterValue = Shapes::StringShape.new(name: 'RoomSkillParameterValue')
     RoomSkillParameters = Shapes::ListShape.new(name: 'RoomSkillParameters')
+    S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
     SampleUtterances = Shapes::ListShape.new(name: 'SampleUtterances')
     SearchAddressBooksRequest = Shapes::StructureShape.new(name: 'SearchAddressBooksRequest')
     SearchAddressBooksResponse = Shapes::StructureShape.new(name: 'SearchAddressBooksResponse')
@@ -289,6 +311,8 @@ module Aws::AlexaForBusiness
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAddressBookRequest = Shapes::StructureShape.new(name: 'UpdateAddressBookRequest')
     UpdateAddressBookResponse = Shapes::StructureShape.new(name: 'UpdateAddressBookResponse')
+    UpdateBusinessReportScheduleRequest = Shapes::StructureShape.new(name: 'UpdateBusinessReportScheduleRequest')
+    UpdateBusinessReportScheduleResponse = Shapes::StructureShape.new(name: 'UpdateBusinessReportScheduleResponse')
     UpdateConferenceProviderRequest = Shapes::StructureShape.new(name: 'UpdateConferenceProviderRequest')
     UpdateConferenceProviderResponse = Shapes::StructureShape.new(name: 'UpdateConferenceProviderResponse')
     UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
@@ -360,6 +384,35 @@ module Aws::AlexaForBusiness
 
     BulletPoints.member = Shapes::ShapeRef.new(shape: BulletPoint)
 
+    BusinessReport.add_member(:status, Shapes::ShapeRef.new(shape: BusinessReportStatus, location_name: "Status"))
+    BusinessReport.add_member(:failure_code, Shapes::ShapeRef.new(shape: BusinessReportFailureCode, location_name: "FailureCode"))
+    BusinessReport.add_member(:s3_location, Shapes::ShapeRef.new(shape: BusinessReportS3Location, location_name: "S3Location"))
+    BusinessReport.add_member(:delivery_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeliveryTime"))
+    BusinessReport.add_member(:download_url, Shapes::ShapeRef.new(shape: BusinessReportDownloadUrl, location_name: "DownloadUrl"))
+    BusinessReport.struct_class = Types::BusinessReport
+
+    BusinessReportContentRange.add_member(:interval, Shapes::ShapeRef.new(shape: BusinessReportInterval, location_name: "Interval"))
+    BusinessReportContentRange.struct_class = Types::BusinessReportContentRange
+
+    BusinessReportRecurrence.add_member(:start_date, Shapes::ShapeRef.new(shape: Date, location_name: "StartDate"))
+    BusinessReportRecurrence.struct_class = Types::BusinessReportRecurrence
+
+    BusinessReportS3Location.add_member(:path, Shapes::ShapeRef.new(shape: BusinessReportS3Path, location_name: "Path"))
+    BusinessReportS3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: CustomerS3BucketName, location_name: "BucketName"))
+    BusinessReportS3Location.struct_class = Types::BusinessReportS3Location
+
+    BusinessReportSchedule.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ScheduleArn"))
+    BusinessReportSchedule.add_member(:schedule_name, Shapes::ShapeRef.new(shape: BusinessReportScheduleName, location_name: "ScheduleName"))
+    BusinessReportSchedule.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: CustomerS3BucketName, location_name: "S3BucketName"))
+    BusinessReportSchedule.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "S3KeyPrefix"))
+    BusinessReportSchedule.add_member(:format, Shapes::ShapeRef.new(shape: BusinessReportFormat, location_name: "Format"))
+    BusinessReportSchedule.add_member(:content_range, Shapes::ShapeRef.new(shape: BusinessReportContentRange, location_name: "ContentRange"))
+    BusinessReportSchedule.add_member(:recurrence, Shapes::ShapeRef.new(shape: BusinessReportRecurrence, location_name: "Recurrence"))
+    BusinessReportSchedule.add_member(:last_business_report, Shapes::ShapeRef.new(shape: BusinessReport, location_name: "LastBusinessReport"))
+    BusinessReportSchedule.struct_class = Types::BusinessReportSchedule
+
+    BusinessReportScheduleList.member = Shapes::ShapeRef.new(shape: BusinessReportSchedule)
+
     Category.add_member(:category_id, Shapes::ShapeRef.new(shape: CategoryId, location_name: "CategoryId"))
     Category.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, location_name: "CategoryName"))
     Category.struct_class = Types::Category
@@ -403,6 +456,18 @@ module Aws::AlexaForBusiness
     CreateAddressBookResponse.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
     CreateAddressBookResponse.struct_class = Types::CreateAddressBookResponse
 
+    CreateBusinessReportScheduleRequest.add_member(:schedule_name, Shapes::ShapeRef.new(shape: BusinessReportScheduleName, location_name: "ScheduleName"))
+    CreateBusinessReportScheduleRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: CustomerS3BucketName, location_name: "S3BucketName"))
+    CreateBusinessReportScheduleRequest.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "S3KeyPrefix"))
+    CreateBusinessReportScheduleRequest.add_member(:format, Shapes::ShapeRef.new(shape: BusinessReportFormat, required: true, location_name: "Format"))
+    CreateBusinessReportScheduleRequest.add_member(:content_range, Shapes::ShapeRef.new(shape: BusinessReportContentRange, required: true, location_name: "ContentRange"))
+    CreateBusinessReportScheduleRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: BusinessReportRecurrence, location_name: "Recurrence"))
+    CreateBusinessReportScheduleRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateBusinessReportScheduleRequest.struct_class = Types::CreateBusinessReportScheduleRequest
+
+    CreateBusinessReportScheduleResponse.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ScheduleArn"))
+    CreateBusinessReportScheduleResponse.struct_class = Types::CreateBusinessReportScheduleResponse
+
     CreateConferenceProviderRequest.add_member(:conference_provider_name, Shapes::ShapeRef.new(shape: ConferenceProviderName, required: true, location_name: "ConferenceProviderName"))
     CreateConferenceProviderRequest.add_member(:conference_provider_type, Shapes::ShapeRef.new(shape: ConferenceProviderType, required: true, location_name: "ConferenceProviderType"))
     CreateConferenceProviderRequest.add_member(:ip_dial_in, Shapes::ShapeRef.new(shape: IPDialIn, location_name: "IPDialIn"))
@@ -417,7 +482,7 @@ module Aws::AlexaForBusiness
     CreateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
     CreateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, required: true, location_name: "FirstName"))
     CreateContactRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
-    CreateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "PhoneNumber"))
+    CreateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
     CreateContactRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateContactRequest.struct_class = Types::CreateContactRequest
 
@@ -473,6 +538,11 @@ module Aws::AlexaForBusiness
     DeleteAddressBookRequest.struct_class = Types::DeleteAddressBookRequest
 
     DeleteAddressBookResponse.struct_class = Types::DeleteAddressBookResponse
+
+    DeleteBusinessReportScheduleRequest.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ScheduleArn"))
+    DeleteBusinessReportScheduleRequest.struct_class = Types::DeleteBusinessReportScheduleRequest
+
+    DeleteBusinessReportScheduleResponse.struct_class = Types::DeleteBusinessReportScheduleResponse
 
     DeleteConferenceProviderRequest.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ConferenceProviderArn"))
     DeleteConferenceProviderRequest.struct_class = Types::DeleteConferenceProviderRequest
@@ -669,6 +739,14 @@ module Aws::AlexaForBusiness
     IPDialIn.add_member(:comms_protocol, Shapes::ShapeRef.new(shape: CommsProtocol, required: true, location_name: "CommsProtocol"))
     IPDialIn.struct_class = Types::IPDialIn
 
+    ListBusinessReportSchedulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListBusinessReportSchedulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListBusinessReportSchedulesRequest.struct_class = Types::ListBusinessReportSchedulesRequest
+
+    ListBusinessReportSchedulesResponse.add_member(:business_report_schedules, Shapes::ShapeRef.new(shape: BusinessReportScheduleList, location_name: "BusinessReportSchedules"))
+    ListBusinessReportSchedulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListBusinessReportSchedulesResponse.struct_class = Types::ListBusinessReportSchedulesResponse
+
     ListConferenceProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConferenceProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListConferenceProvidersRequest.struct_class = Types::ListConferenceProvidersRequest
@@ -739,7 +817,7 @@ module Aws::AlexaForBusiness
     NewInThisVersionBulletPoints.member = Shapes::ShapeRef.new(shape: BulletPoint)
 
     PSTNDialIn.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
-    PSTNDialIn.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "PhoneNumber"))
+    PSTNDialIn.add_member(:phone_number, Shapes::ShapeRef.new(shape: OutboundPhoneNumber, required: true, location_name: "PhoneNumber"))
     PSTNDialIn.add_member(:one_click_id_delay, Shapes::ShapeRef.new(shape: OneClickIdDelay, required: true, location_name: "OneClickIdDelay"))
     PSTNDialIn.add_member(:one_click_pin_delay, Shapes::ShapeRef.new(shape: OneClickPinDelay, required: true, location_name: "OneClickPinDelay"))
     PSTNDialIn.struct_class = Types::PSTNDialIn
@@ -1027,6 +1105,16 @@ module Aws::AlexaForBusiness
 
     UpdateAddressBookResponse.struct_class = Types::UpdateAddressBookResponse
 
+    UpdateBusinessReportScheduleRequest.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ScheduleArn"))
+    UpdateBusinessReportScheduleRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: CustomerS3BucketName, location_name: "S3BucketName"))
+    UpdateBusinessReportScheduleRequest.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "S3KeyPrefix"))
+    UpdateBusinessReportScheduleRequest.add_member(:format, Shapes::ShapeRef.new(shape: BusinessReportFormat, location_name: "Format"))
+    UpdateBusinessReportScheduleRequest.add_member(:schedule_name, Shapes::ShapeRef.new(shape: BusinessReportScheduleName, location_name: "ScheduleName"))
+    UpdateBusinessReportScheduleRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: BusinessReportRecurrence, location_name: "Recurrence"))
+    UpdateBusinessReportScheduleRequest.struct_class = Types::UpdateBusinessReportScheduleRequest
+
+    UpdateBusinessReportScheduleResponse.struct_class = Types::UpdateBusinessReportScheduleResponse
+
     UpdateConferenceProviderRequest.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ConferenceProviderArn"))
     UpdateConferenceProviderRequest.add_member(:conference_provider_type, Shapes::ShapeRef.new(shape: ConferenceProviderType, required: true, location_name: "ConferenceProviderType"))
     UpdateConferenceProviderRequest.add_member(:ip_dial_in, Shapes::ShapeRef.new(shape: IPDialIn, location_name: "IPDialIn"))
@@ -1170,6 +1258,15 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_business_report_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBusinessReportSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBusinessReportScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBusinessReportScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+      end)
+
       api.add_operation(:create_conference_provider, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateConferenceProvider"
         o.http_method = "POST"
@@ -1238,6 +1335,16 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_business_report_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBusinessReportSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBusinessReportScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBusinessReportScheduleResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
@@ -1456,6 +1563,20 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: GetSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:list_business_report_schedules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBusinessReportSchedules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBusinessReportSchedulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBusinessReportSchedulesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_conference_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -1780,6 +1901,16 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: UpdateAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_business_report_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBusinessReportSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBusinessReportScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBusinessReportScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 

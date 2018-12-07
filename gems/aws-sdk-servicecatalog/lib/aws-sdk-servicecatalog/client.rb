@@ -2513,9 +2513,10 @@ module Aws::ServiceCatalog
     # order to sync your shares with the current structure. This API can
     # only be called by the master account in the organization.
     #
-    # By calling this API Service Catalog will use FAS credentials to call
-    # organizations:EnableAWSServiceAccess so that your shares can be in
-    # sync with any changes in your AWS Organizations.
+    # By calling this API Service Catalog will make a call to
+    # organizations:EnableAWSServiceAccess on your behalf so that your
+    # shares can be in sync with any changes in your AWS Organizations
+    # structure.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4656,7 +4657,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

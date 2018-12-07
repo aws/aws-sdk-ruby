@@ -387,6 +387,67 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Creates a recurring schedule for usage reports to deliver to the
+    # specified S3 location with a specified daily or weekly interval.
+    #
+    # @option params [String] :schedule_name
+    #   The name identifier of the schedule.
+    #
+    # @option params [String] :s3_bucket_name
+    #   The S3 bucket name of the output reports.
+    #
+    # @option params [String] :s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #
+    # @option params [required, String] :format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #
+    # @option params [required, Types::BusinessReportContentRange] :content_range
+    #   The content range of the reports.
+    #
+    # @option params [Types::BusinessReportRecurrence] :recurrence
+    #   The recurrence of the reports.
+    #
+    # @option params [String] :client_request_token
+    #   The client request token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateBusinessReportScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBusinessReportScheduleResponse#schedule_arn #schedule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_business_report_schedule({
+    #     schedule_name: "BusinessReportScheduleName",
+    #     s3_bucket_name: "CustomerS3BucketName",
+    #     s3_key_prefix: "S3KeyPrefix",
+    #     format: "CSV", # required, accepts CSV, CSV_ZIP
+    #     content_range: { # required
+    #       interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK
+    #     },
+    #     recurrence: {
+    #       start_date: "Date",
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportSchedule AWS API Documentation
+    #
+    # @overload create_business_report_schedule(params = {})
+    # @param [Hash] params ({})
+    def create_business_report_schedule(params = {}, options = {})
+      req = build_request(:create_business_report_schedule, params)
+      req.send_request(options)
+    end
+
     # Adds a new conference provider under the user's AWS account.
     #
     # @option params [required, String] :conference_provider_name
@@ -425,7 +486,7 @@ module Aws::AlexaForBusiness
     #     },
     #     pstn_dial_in: {
     #       country_code: "CountryCode", # required
-    #       phone_number: "PhoneNumber", # required
+    #       phone_number: "OutboundPhoneNumber", # required
     #       one_click_id_delay: "OneClickIdDelay", # required
     #       one_click_pin_delay: "OneClickPinDelay", # required
     #     },
@@ -461,7 +522,7 @@ module Aws::AlexaForBusiness
     #   The last name of the contact that is used to call the contact on the
     #   device.
     #
-    # @option params [required, String] :phone_number
+    # @option params [String] :phone_number
     #   The phone number of the contact in E.164 format.
     #
     # @option params [String] :client_request_token
@@ -481,7 +542,7 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName", # required
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber", # required
+    #     phone_number: "E164PhoneNumber",
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -739,6 +800,29 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def delete_address_book(params = {}, options = {})
       req = build_request(:delete_address_book, params)
+      req.send_request(options)
+    end
+
+    # Deletes the recurring report delivery schedule with the specified
+    # schedule ARN.
+    #
+    # @option params [required, String] :schedule_arn
+    #   The ARN of the business report schedule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_business_report_schedule({
+    #     schedule_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportSchedule AWS API Documentation
+    #
+    # @overload delete_business_report_schedule(params = {})
+    # @param [Hash] params ({})
+    def delete_business_report_schedule(params = {}, options = {})
+      req = build_request(:delete_business_report_schedule, params)
       req.send_request(options)
     end
 
@@ -1379,6 +1463,54 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def get_skill_group(params = {}, options = {})
       req = build_request(:get_skill_group, params)
+      req.send_request(options)
+    end
+
+    # Lists the details of the schedules that a user configured.
+    #
+    # @option params [String] :next_token
+    #   The token used to list the remaining schedules from the previous API
+    #   call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of schedules listed in the call.
+    #
+    # @return [Types::ListBusinessReportSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBusinessReportSchedulesResponse#business_report_schedules #business_report_schedules} => Array&lt;Types::BusinessReportSchedule&gt;
+    #   * {Types::ListBusinessReportSchedulesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_business_report_schedules({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.business_report_schedules #=> Array
+    #   resp.business_report_schedules[0].schedule_arn #=> String
+    #   resp.business_report_schedules[0].schedule_name #=> String
+    #   resp.business_report_schedules[0].s3_bucket_name #=> String
+    #   resp.business_report_schedules[0].s3_key_prefix #=> String
+    #   resp.business_report_schedules[0].format #=> String, one of "CSV", "CSV_ZIP"
+    #   resp.business_report_schedules[0].content_range.interval #=> String, one of "ONE_DAY", "ONE_WEEK"
+    #   resp.business_report_schedules[0].recurrence.start_date #=> String
+    #   resp.business_report_schedules[0].last_business_report.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.business_report_schedules[0].last_business_report.failure_code #=> String, one of "ACCESS_DENIED", "NO_SUCH_BUCKET", "INTERNAL_FAILURE"
+    #   resp.business_report_schedules[0].last_business_report.s3_location.path #=> String
+    #   resp.business_report_schedules[0].last_business_report.s3_location.bucket_name #=> String
+    #   resp.business_report_schedules[0].last_business_report.delivery_time #=> Time
+    #   resp.business_report_schedules[0].last_business_report.download_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedules AWS API Documentation
+    #
+    # @overload list_business_report_schedules(params = {})
+    # @param [Hash] params ({})
+    def list_business_report_schedules(params = {}, options = {})
+      req = build_request(:list_business_report_schedules, params)
       req.send_request(options)
     end
 
@@ -2623,6 +2755,52 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Updates the configuration of the report delivery schedule with the
+    # specified schedule ARN.
+    #
+    # @option params [required, String] :schedule_arn
+    #   The ARN of the business report schedule.
+    #
+    # @option params [String] :s3_bucket_name
+    #   The S3 location of the output reports.
+    #
+    # @option params [String] :s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #
+    # @option params [String] :format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #
+    # @option params [String] :schedule_name
+    #   The name identifier of the schedule.
+    #
+    # @option params [Types::BusinessReportRecurrence] :recurrence
+    #   The recurrence of the reports.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_business_report_schedule({
+    #     schedule_arn: "Arn", # required
+    #     s3_bucket_name: "CustomerS3BucketName",
+    #     s3_key_prefix: "S3KeyPrefix",
+    #     format: "CSV", # accepts CSV, CSV_ZIP
+    #     schedule_name: "BusinessReportScheduleName",
+    #     recurrence: {
+    #       start_date: "Date",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportSchedule AWS API Documentation
+    #
+    # @overload update_business_report_schedule(params = {})
+    # @param [Hash] params ({})
+    def update_business_report_schedule(params = {}, options = {})
+      req = build_request(:update_business_report_schedule, params)
+      req.send_request(options)
+    end
+
     # Updates an existing conference provider's settings.
     #
     # @option params [required, String] :conference_provider_arn
@@ -2653,7 +2831,7 @@ module Aws::AlexaForBusiness
     #     },
     #     pstn_dial_in: {
     #       country_code: "CountryCode", # required
-    #       phone_number: "PhoneNumber", # required
+    #       phone_number: "OutboundPhoneNumber", # required
     #       one_click_id_delay: "OneClickIdDelay", # required
     #       one_click_pin_delay: "OneClickPinDelay", # required
     #     },
@@ -2879,7 +3057,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

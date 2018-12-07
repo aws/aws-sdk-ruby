@@ -189,6 +189,148 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithSkillGroupResponse < Aws::EmptyStructure; end
 
+    # Usage report with specified parameters.
+    #
+    # @!attribute [rw] status
+    #   The status of the report generation execution (RUNNING, SUCCEEDED,
+    #   or FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_location
+    #   The S3 location of the output reports.
+    #   @return [Types::BusinessReportS3Location]
+    #
+    # @!attribute [rw] delivery_time
+    #   The time of report delivery.
+    #   @return [Time]
+    #
+    # @!attribute [rw] download_url
+    #   The download link where a user can download the report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReport AWS API Documentation
+    #
+    class BusinessReport < Struct.new(
+      :status,
+      :failure_code,
+      :s3_location,
+      :delivery_time,
+      :download_url)
+      include Aws::Structure
+    end
+
+    # The content range of the report.
+    #
+    # @note When making an API call, you may pass BusinessReportContentRange
+    #   data as a hash:
+    #
+    #       {
+    #         interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK
+    #       }
+    #
+    # @!attribute [rw] interval
+    #   The interval of the content range.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportContentRange AWS API Documentation
+    #
+    class BusinessReportContentRange < Struct.new(
+      :interval)
+      include Aws::Structure
+    end
+
+    # The recurrence of the reports.
+    #
+    # @note When making an API call, you may pass BusinessReportRecurrence
+    #   data as a hash:
+    #
+    #       {
+    #         start_date: "Date",
+    #       }
+    #
+    # @!attribute [rw] start_date
+    #   The start date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportRecurrence AWS API Documentation
+    #
+    class BusinessReportRecurrence < Struct.new(
+      :start_date)
+      include Aws::Structure
+    end
+
+    # The S3 location of the output reports.
+    #
+    # @!attribute [rw] path
+    #   The path of the business report.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   The S3 bucket name of the output reports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportS3Location AWS API Documentation
+    #
+    class BusinessReportS3Location < Struct.new(
+      :path,
+      :bucket_name)
+      include Aws::Structure
+    end
+
+    # The schedule of the usage report.
+    #
+    # @!attribute [rw] schedule_arn
+    #   The ARN of the business report schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_name
+    #   The name identifier of the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 bucket name of the output reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #   @return [String]
+    #
+    # @!attribute [rw] content_range
+    #   The content range of the reports.
+    #   @return [Types::BusinessReportContentRange]
+    #
+    # @!attribute [rw] recurrence
+    #   The recurrence of the reports.
+    #   @return [Types::BusinessReportRecurrence]
+    #
+    # @!attribute [rw] last_business_report
+    #   The details of the last business report delivery for a specified
+    #   time interval.
+    #   @return [Types::BusinessReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportSchedule AWS API Documentation
+    #
+    class BusinessReportSchedule < Struct.new(
+      :schedule_arn,
+      :schedule_name,
+      :s3_bucket_name,
+      :s3_key_prefix,
+      :format,
+      :content_range,
+      :recurrence,
+      :last_business_report)
+      include Aws::Structure
+    end
+
     # The skill store category that is shown. Alexa skills are assigned a
     # specific skill category during creation, such as News, Social, and
     # Sports.
@@ -386,6 +528,79 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateBusinessReportScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_name: "BusinessReportScheduleName",
+    #         s3_bucket_name: "CustomerS3BucketName",
+    #         s3_key_prefix: "S3KeyPrefix",
+    #         format: "CSV", # required, accepts CSV, CSV_ZIP
+    #         content_range: { # required
+    #           interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK
+    #         },
+    #         recurrence: {
+    #           start_date: "Date",
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] schedule_name
+    #   The name identifier of the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 bucket name of the output reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #   @return [String]
+    #
+    # @!attribute [rw] content_range
+    #   The content range of the reports.
+    #   @return [Types::BusinessReportContentRange]
+    #
+    # @!attribute [rw] recurrence
+    #   The recurrence of the reports.
+    #   @return [Types::BusinessReportRecurrence]
+    #
+    # @!attribute [rw] client_request_token
+    #   The client request token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportScheduleRequest AWS API Documentation
+    #
+    class CreateBusinessReportScheduleRequest < Struct.new(
+      :schedule_name,
+      :s3_bucket_name,
+      :s3_key_prefix,
+      :format,
+      :content_range,
+      :recurrence,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule_arn
+    #   The ARN of the business report schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportScheduleResponse AWS API Documentation
+    #
+    class CreateBusinessReportScheduleResponse < Struct.new(
+      :schedule_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateConferenceProviderRequest
     #   data as a hash:
     #
@@ -398,7 +613,7 @@ module Aws::AlexaForBusiness
     #         },
     #         pstn_dial_in: {
     #           country_code: "CountryCode", # required
-    #           phone_number: "PhoneNumber", # required
+    #           phone_number: "OutboundPhoneNumber", # required
     #           one_click_id_delay: "OneClickIdDelay", # required
     #           one_click_pin_delay: "OneClickPinDelay", # required
     #         },
@@ -465,7 +680,7 @@ module Aws::AlexaForBusiness
     #         display_name: "ContactName",
     #         first_name: "ContactName", # required
     #         last_name: "ContactName",
-    #         phone_number: "E164PhoneNumber", # required
+    #         phone_number: "E164PhoneNumber",
     #         client_request_token: "ClientRequestToken",
     #       }
     #
@@ -806,6 +1021,28 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBookResponse AWS API Documentation
     #
     class DeleteAddressBookResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteBusinessReportScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] schedule_arn
+    #   The ARN of the business report schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportScheduleRequest AWS API Documentation
+    #
+    class DeleteBusinessReportScheduleRequest < Struct.new(
+      :schedule_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportScheduleResponse AWS API Documentation
+    #
+    class DeleteBusinessReportScheduleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteConferenceProviderRequest
     #   data as a hash:
@@ -1672,6 +1909,48 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListBusinessReportSchedulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token used to list the remaining schedules from the previous API
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of schedules listed in the call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedulesRequest AWS API Documentation
+    #
+    class ListBusinessReportSchedulesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] business_report_schedules
+    #   The schedule of the reports.
+    #   @return [Array<Types::BusinessReportSchedule>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to list the remaining schedules from the previous API
+    #   call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedulesResponse AWS API Documentation
+    #
+    class ListBusinessReportSchedulesResponse < Struct.new(
+      :business_report_schedules,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListConferenceProvidersRequest
     #   data as a hash:
     #
@@ -2063,7 +2342,7 @@ module Aws::AlexaForBusiness
     #
     #       {
     #         country_code: "CountryCode", # required
-    #         phone_number: "PhoneNumber", # required
+    #         phone_number: "OutboundPhoneNumber", # required
     #         one_click_id_delay: "OneClickIdDelay", # required
     #         one_click_pin_delay: "OneClickPinDelay", # required
     #       }
@@ -3544,6 +3823,61 @@ module Aws::AlexaForBusiness
     #
     class UpdateAddressBookResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateBusinessReportScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_arn: "Arn", # required
+    #         s3_bucket_name: "CustomerS3BucketName",
+    #         s3_key_prefix: "S3KeyPrefix",
+    #         format: "CSV", # accepts CSV, CSV_ZIP
+    #         schedule_name: "BusinessReportScheduleName",
+    #         recurrence: {
+    #           start_date: "Date",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schedule_arn
+    #   The ARN of the business report schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 location of the output reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_name
+    #   The name identifier of the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurrence
+    #   The recurrence of the reports.
+    #   @return [Types::BusinessReportRecurrence]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportScheduleRequest AWS API Documentation
+    #
+    class UpdateBusinessReportScheduleRequest < Struct.new(
+      :schedule_arn,
+      :s3_bucket_name,
+      :s3_key_prefix,
+      :format,
+      :schedule_name,
+      :recurrence)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportScheduleResponse AWS API Documentation
+    #
+    class UpdateBusinessReportScheduleResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateConferenceProviderRequest
     #   data as a hash:
     #
@@ -3556,7 +3890,7 @@ module Aws::AlexaForBusiness
     #         },
     #         pstn_dial_in: {
     #           country_code: "CountryCode", # required
-    #           phone_number: "PhoneNumber", # required
+    #           phone_number: "OutboundPhoneNumber", # required
     #           one_click_id_delay: "OneClickIdDelay", # required
     #           one_click_pin_delay: "OneClickPinDelay", # required
     #         },
