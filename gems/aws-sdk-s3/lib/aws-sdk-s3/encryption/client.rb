@@ -295,6 +295,7 @@ module Aws
             options.delete(:encryption_key)
             options.delete(:envelope_location)
             options.delete(:instruction_file_suffix)
+            options.delete(:authenticated_encryption)
             S3::Client.new(options)
           end
         end
@@ -313,10 +314,14 @@ module Aws
             KmsCipherProvider.new(
               kms_key_id: options[:kms_key_id],
               kms_client: kms_client(options),
+              authenticated_encryption: options[:authenticated_encryption]
             )
           else
             # kept here for backwards compatability, {#key_provider} is deprecated
             @key_provider = extract_key_provider(options)
+            if options[:authenticated_encryption]
+              raise NotImplementedError, ':authenticated_encryption not supported for default cipher yet'
+            end
             DefaultCipherProvider.new(key_provider: @key_provider)
           end
         end

@@ -7,7 +7,7 @@ module Aws
 
       # Provides an IO wrapper encrpyting a stream of data.
       # It is possible to use this same object for decrypting. You must
-      # initialize it with a decryptiion cipher in that case and the
+      # initialize it with a decryption cipher in that case and the
       # IO object must contain cipher text instead of plain text.
       # @api private
       class IOEncrypter
@@ -45,11 +45,11 @@ module Aws
         private
 
         def encrypt_to_stringio(cipher, plain_text)
-          if plain_text.empty?
-            StringIO.new(cipher.final)
-          else
-            StringIO.new(cipher.update(plain_text) + cipher.final)
-          end
+          data = String.new
+          data << cipher.update(plain_text) unless plain_text.empty?
+          data << cipher.final
+          data << cipher.auth_tag if Utils.cipher_authenticated?(cipher)
+          StringIO.new(data)
         end
 
         def encrypt_to_tempfile(cipher, io)
@@ -59,6 +59,7 @@ module Aws
             encrypted.write(cipher.update(chunk))
           end
           encrypted.write(cipher.final)
+          encrypted.write(cipher.auth_tag) if Utils.cipher_authenticated?(cipher)
           encrypted.rewind
           encrypted
         end

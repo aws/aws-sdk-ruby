@@ -509,7 +509,40 @@ module Aws
             "\xACb.\xEB\x16\x19(\x9AJ\xE0uCA\x034z\xF6&\x7F\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
           }
 
+          let(:encrypted_object_key) { 'encrypted-object-key' }
+
           if !ENV['TRAVIS'] && RUBY_VERSION > '1.9.3'
+            it 'supports encryption via KMS w/ GCM' do
+              if !OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
+                pending('aes-256-gcm not supported')
+              end
+
+              client = S3::Encryption::Client.new(
+                access_key_id: 'akid',
+                secret_access_key: 'secret',
+                region: 'us-west-1',
+                kms_key_id: 'kms-key-id',
+                kms_client: kms_client,
+                authenticated_encryption: true
+              )
+
+              kms_client.stub_responses(:generate_data_key, {
+                plaintext: plaintext_object_key,
+                ciphertext_blob: encrypted_object_key,
+              })
+              stub_request(:put, "https://bucket.s3.us-west-1.amazonaws.com/key")
+
+              client.put_object(bucket:'bucket', key:'key', body:'secret')
+
+              expect(
+                a_request(:put, "https://bucket.s3.us-west-1.amazonaws.com/key").
+                  with(:headers => {
+                    "x-amz-meta-x-amz-cek-alg" => "AES/GCM/NoPadding",
+                    "x-amz-meta-x-amz-tag-len" => "128",
+                  })
+              ).to have_been_made.once
+            end
+
             it 'supports decryption via KMS w/ GCM' do
               if !OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
                 pending('aes-256-gcm not supported')

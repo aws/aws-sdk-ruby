@@ -9,6 +9,7 @@ module Aws
         def initialize(options = {})
           @kms_key_id = options[:kms_key_id]
           @kms_client = options[:kms_client]
+          @authenticated_encryption = options[:authenticated_encryption]
         end
 
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
@@ -20,12 +21,14 @@ module Aws
             encryption_context: encryption_context,
             key_spec: 'AES_256',
           )
-          cipher = Utils.aes_encryption_cipher(:CBC)
+          authenticated = @authenticated_encryption
+          cipher = Utils.aes_encryption_cipher(authenticated ? :GCM : :CBC)
+          cek_alg = authenticated ? 'AES/GCM/NoPadding' : 'AES/CBC/PKCS5Padding'
           cipher.key = key_data.plaintext
           envelope = {
             'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
-            'x-amz-cek-alg' => 'AES/CBC/PKCS5Padding',
+            'x-amz-cek-alg' => cek_alg,
             'x-amz-wrap-alg' => 'kms',
             'x-amz-matdesc' => Json.dump(encryption_context)
           }

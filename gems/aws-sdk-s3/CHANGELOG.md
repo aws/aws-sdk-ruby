@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adds support for authenticated encryption.
+
 1.30.0 (2018-12-04)
 ------------------
 

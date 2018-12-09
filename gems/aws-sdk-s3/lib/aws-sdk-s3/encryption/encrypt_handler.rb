@@ -36,6 +36,7 @@ module Aws
           context.params[:body] = IOEncrypter.new(cipher, io)
           context.params[:metadata] ||= {}
           context.params[:metadata]['x-amz-unencrypted-content-length'] = io.size
+          context.params[:metadata]['x-amz-tag-len'] = cipher.auth_tag.bytesize * 8 if Utils.cipher_authenticated?(cipher)
           if md5 = context.params.delete(:content_md5)
             context.params[:metadata]['x-amz-unencrypted-content-md5'] = md5
           end

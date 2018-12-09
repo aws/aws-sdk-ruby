@@ -72,6 +72,9 @@ module Aws
             key.bytesize * 8
           end
 
+          def cipher_authenticated?(cipher)
+            cipher.respond_to?(:authenticated?) && cipher.authenticated?
+          end
         end
       end
     end
