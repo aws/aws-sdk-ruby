@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.189 (2018-12-11)
+------------------
+
 * Feature - Aws::Connect - Updated the API, and documentation for Amazon Connect Service.
 
 * Feature - Aws::ECS - Updated the documentation for Amazon EC2 Container Service.
