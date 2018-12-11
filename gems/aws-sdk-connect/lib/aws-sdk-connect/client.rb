@@ -208,7 +208,10 @@ module Aws::Connect
     # Creates a new user account in your Amazon Connect instance.
     #
     # @option params [required, String] :username
-    #   The user name in Amazon Connect for the account to create.
+    #   The user name in Amazon Connect for the account to create. If you are
+    #   using SAML for identity management in your Amazon Connect, the value
+    #   for `Username` can include up to 64 characters from
+    #   \[a-zA-Z0-9\_-.\\@\]+.
     #
     # @option params [String] :password
     #   The password for the user account to create. This is required if you
@@ -222,7 +225,8 @@ module Aws::Connect
     #
     # @option params [required, Types::UserPhoneConfig] :phone_config
     #   Specifies the phone settings for the user, including
-    #   AfterContactWorkTimeLimit, AutoAccept, DeskPhoneNumber, and PhoneType.
+    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
+    #   `PhoneType`.
     #
     # @option params [String] :directory_user_id
     #   The unique identifier for the user account in the directory service
@@ -230,8 +234,8 @@ module Aws::Connect
     #   access the existing directory, you can use the `DirectoryUserId` to
     #   authenticate users. If you include the parameter, it is assumed that
     #   Amazon Connect cannot access the directory. If the parameter is not
-    #   included, the UserIdentityInfo is used to authenticate users from your
-    #   existing directory.
+    #   included, the `UserIdentityInfo` is used to authenticate users from
+    #   your existing directory.
     #
     #   This parameter is required if you are using an existing directory for
     #   identity management in Amazon Connect when Amazon Connect cannot
@@ -493,6 +497,41 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieves the contact attributes associated with a contact.
+    #
+    # @option params [required, String] :instance_id
+    #   The instance ID for the instance from which to retrieve contact
+    #   attributes.
+    #
+    # @option params [required, String] :initial_contact_id
+    #   The ID for the initial contact in Amazon Connect associated with the
+    #   attributes to update.
+    #
+    # @return [Types::GetContactAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContactAttributesResponse#attributes #attributes} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_contact_attributes({
+    #     instance_id: "InstanceId", # required
+    #     initial_contact_id: "ContactId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Hash
+    #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributes AWS API Documentation
+    #
+    # @overload get_contact_attributes(params = {})
+    # @param [Hash] params ({})
+    def get_contact_attributes(params = {}, options = {})
+      req = build_request(:get_contact_attributes, params)
+      req.send_request(options)
+    end
+
     # The `GetCurrentMetricData` operation retrieves current metric data
     # from your Amazon Connect instance.
     #
@@ -537,7 +576,8 @@ module Aws::Connect
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
     #   A list of `CurrentMetric` objects for the metrics to retrieve. Each
     #   `CurrentMetric` includes a name of a metric to retrieve and the unit
-    #   to use for it.
+    #   to use for it. You must list each metric to retrieve data for in the
+    #   request.
     #
     #   The following metrics are available:
     #
@@ -746,8 +786,9 @@ module Aws::Connect
     #   A `HistoricalMetric` object contains: `HistoricalMetricName`,
     #   `Statistic`, `Threshold`, and `Unit`.
     #
-    #   For each historical metric you include in the request, you must
-    #   include a `Unit` and a `Statistic`.
+    #   You must list each metric to retrieve data for in the request. For
+    #   each historical metric you include in the request, you must include a
+    #   `Unit` and a `Statistic`.
     #
     #   The following historical metrics are available:
     #
@@ -1183,6 +1224,9 @@ module Aws::Connect
     # If you are using an IAM account, it must have permission to the
     # `connect:StartOutboundVoiceContact` action.
     #
+    # There is a 60 second dialing timeout for this operation. If the call
+    # is not connected after 60 seconds, the call fails.
+    #
     # @option params [required, String] :destination_phone_number
     #   The phone number of the customer in E.164 format.
     #
@@ -1234,9 +1278,9 @@ module Aws::Connect
     #   are standard Amazon Connect attributes, and can be accessed in contact
     #   flows just like any other contact attributes.
     #
-    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs.
-    #   Attribute keys can include only alphanumeric, dash, and underscore
-    #   characters.
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #
     #   For example, if you want play a greeting when the customer answers the
     #   call, you can pass the customer name in attributes similar to the
@@ -1350,7 +1394,13 @@ module Aws::Connect
     #   10a4c4eb-f57e-4d4c-b602-bf39176ced07.
     #
     # @option params [required, Hash<String,String>] :attributes
-    #   The key-value pairs for the attribute to update.
+    #   Specify a custom key-value pair using an attribute map. The attributes
+    #   are standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1580,7 +1630,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

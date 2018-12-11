@@ -33,7 +33,10 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] username
-    #   The user name in Amazon Connect for the account to create.
+    #   The user name in Amazon Connect for the account to create. If you
+    #   are using SAML for identity management in your Amazon Connect, the
+    #   value for `Username` can include up to 64 characters from
+    #   \[a-zA-Z0-9\_-.\\@\]+.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -50,8 +53,8 @@ module Aws::Connect
     #
     # @!attribute [rw] phone_config
     #   Specifies the phone settings for the user, including
-    #   AfterContactWorkTimeLimit, AutoAccept, DeskPhoneNumber, and
-    #   PhoneType.
+    #   `AfterContactWorkTimeLimit`, `AutoAccept`, `DeskPhoneNumber`, and
+    #   `PhoneType`.
     #   @return [Types::UserPhoneConfig]
     #
     # @!attribute [rw] directory_user_id
@@ -60,7 +63,7 @@ module Aws::Connect
     #   to access the existing directory, you can use the `DirectoryUserId`
     #   to authenticate users. If you include the parameter, it is assumed
     #   that Amazon Connect cannot access the directory. If the parameter is
-    #   not included, the UserIdentityInfo is used to authenticate users
+    #   not included, the `UserIdentityInfo` is used to authenticate users
     #   from your existing directory.
     #
     #   This parameter is required if you are using an existing directory
@@ -417,6 +420,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetContactAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         initial_contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID for the instance from which to retrieve contact
+    #   attributes.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   The ID for the initial contact in Amazon Connect associated with the
+    #   attributes to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesRequest AWS API Documentation
+    #
+    class GetContactAttributesRequest < Struct.new(
+      :instance_id,
+      :initial_contact_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes to update.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesResponse AWS API Documentation
+    #
+    class GetContactAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCurrentMetricDataRequest
     #   data as a hash:
     #
@@ -478,7 +518,8 @@ module Aws::Connect
     # @!attribute [rw] current_metrics
     #   A list of `CurrentMetric` objects for the metrics to retrieve. Each
     #   `CurrentMetric` includes a name of a metric to retrieve and the unit
-    #   to use for it.
+    #   to use for it. You must list each metric to retrieve data for in the
+    #   request.
     #
     #   The following metrics are available:
     #
@@ -719,8 +760,9 @@ module Aws::Connect
     #   A `HistoricalMetric` object contains: `HistoricalMetricName`,
     #   `Statistic`, `Threshold`, and `Unit`.
     #
-    #   For each historical metric you include in the request, you must
-    #   include a `Unit` and a `Statistic`.
+    #   You must list each metric to retrieve data for in the request. For
+    #   each historical metric you include in the request, you must include
+    #   a `Unit` and a `Statistic`.
     #
     #   The following historical metrics are available:
     #
@@ -1125,11 +1167,11 @@ module Aws::Connect
     #   @return [Types::Threshold]
     #
     # @!attribute [rw] statistic
-    #   The statistic for the metric: SUM, MAX, or SUM.
+    #   The statistic for the metric.
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   The unit for the metric: COUNT, PERCENT, or SECONDS.
+    #   The unit for the metric.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetric AWS API Documentation
@@ -1545,9 +1587,9 @@ module Aws::Connect
     #   attributes are standard Amazon Connect attributes, and can be
     #   accessed in contact flows just like any other contact attributes.
     #
-    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs.
-    #   Attribute keys can include only alphanumeric, dash, and underscore
-    #   characters.
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #
     #   For example, if you want play a greeting when the customer answers
     #   the call, you can pass the customer name in attributes similar to
@@ -1670,7 +1712,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The key-value pairs for the attribute to update.
+    #   Specify a custom key-value pair using an attribute map. The
+    #   attributes are standard Amazon Connect attributes, and can be
+    #   accessed in contact flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest AWS API Documentation

@@ -326,6 +326,28 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Removes an object lifecycle policy from a container.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that holds the object lifecycle policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lifecycle_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicy AWS API Documentation
+    #
+    # @overload delete_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_lifecycle_policy(params = {}, options = {})
+      req = build_request(:delete_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves the properties of the requested container. This request is
     # commonly used to retrieve the endpoint of a container. An endpoint is
     # a value assigned by the service when a new container is created. A
@@ -437,6 +459,35 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def get_cors_policy(params = {}, options = {})
       req = build_request(:get_cors_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the object lifecycle policy that is assigned to a container.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that the object lifecycle policy is assigned
+    #   to.
+    #
+    # @return [Types::GetLifecyclePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLifecyclePolicyOutput#lifecycle_policy #lifecycle_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lifecycle_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicy AWS API Documentation
+    #
+    # @overload get_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def get_lifecycle_policy(params = {}, options = {})
+      req = build_request(:get_lifecycle_policy, params)
       req.send_request(options)
     end
 
@@ -563,9 +614,9 @@ module Aws::MediaStore
     #     container_name: "ContainerName", # required
     #     cors_policy: [ # required
     #       {
-    #         allowed_origins: ["Origin"],
+    #         allowed_origins: ["Origin"], # required
     #         allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
-    #         allowed_headers: ["Header"],
+    #         allowed_headers: ["Header"], # required
     #         max_age_seconds: 1,
     #         expose_headers: ["Header"],
     #       },
@@ -578,6 +629,35 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def put_cors_policy(params = {}, options = {})
       req = build_request(:put_cors_policy, params)
+      req.send_request(options)
+    end
+
+    # Writes an object lifecycle policy to a container. If the container
+    # already has an object lifecycle policy, the service replaces the
+    # existing policy with the new policy.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to assign the object lifecycle
+    #   policy to.
+    #
+    # @option params [required, String] :lifecycle_policy
+    #   The object lifecycle policy to apply to the container.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_lifecycle_policy({
+    #     container_name: "ContainerName", # required
+    #     lifecycle_policy: "LifecyclePolicy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicy AWS API Documentation
+    #
+    # @overload put_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def put_lifecycle_policy(params = {}, options = {})
+      req = build_request(:put_lifecycle_policy, params)
       req.send_request(options)
     end
 
@@ -594,7 +674,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

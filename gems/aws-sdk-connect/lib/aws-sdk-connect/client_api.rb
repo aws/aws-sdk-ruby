@@ -50,6 +50,8 @@ module Aws::Connect
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
     Email = Shapes::StringShape.new(name: 'Email')
     Filters = Shapes::StructureShape.new(name: 'Filters')
+    GetContactAttributesRequest = Shapes::StructureShape.new(name: 'GetContactAttributesRequest')
+    GetContactAttributesResponse = Shapes::StructureShape.new(name: 'GetContactAttributesResponse')
     GetCurrentMetricDataRequest = Shapes::StructureShape.new(name: 'GetCurrentMetricDataRequest')
     GetCurrentMetricDataResponse = Shapes::StructureShape.new(name: 'GetCurrentMetricDataResponse')
     GetFederationTokenRequest = Shapes::StructureShape.new(name: 'GetFederationTokenRequest')
@@ -211,6 +213,13 @@ module Aws::Connect
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Filters.struct_class = Types::Filters
+
+    GetContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "InitialContactId"))
+    GetContactAttributesRequest.struct_class = Types::GetContactAttributesRequest
+
+    GetContactAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    GetContactAttributesResponse.struct_class = Types::GetContactAttributesResponse
 
     GetCurrentMetricDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetCurrentMetricDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, required: true, location_name: "Filters"))
@@ -524,6 +533,17 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_contact_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContactAttributes"
+        o.http_method = "GET"
+        o.http_request_uri = "/contact/attributes/{InstanceId}/{InitialContactId}"
+        o.input = Shapes::ShapeRef.new(shape: GetContactAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContactAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 

@@ -4370,7 +4370,7 @@ module Aws::ECS
     #
     # @!attribute [rw] value
     #   The account setting value for the specified principal ARN. Accepted
-    #   values are `ENABLED` and `DISABLED`.
+    #   values are `enabled` and `disabled`.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
@@ -5678,9 +5678,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The current account setting for the resource name. If `ENABLED`,
+    #   The current account setting for the resource name. If `enabled`,
     #   then the resource will receive the new Amazon Resource Name (ARN)
-    #   and resource identifier (ID) format. If `DISABLED`, then the
+    #   and resource identifier (ID) format. If `disabled`, then the
     #   resource will receive the old Amazon Resource Name (ARN) and
     #   resource identifier (ID) format.
     #   @return [String]

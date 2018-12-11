@@ -63,9 +63,9 @@ module Aws::MediaStore
     #   data as a hash:
     #
     #       {
-    #         allowed_origins: ["Origin"],
+    #         allowed_origins: ["Origin"], # required
     #         allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
-    #         allowed_headers: ["Header"],
+    #         allowed_headers: ["Header"], # required
     #         max_age_seconds: 1,
     #         expose_headers: ["Header"],
     #       }
@@ -75,7 +75,7 @@ module Aws::MediaStore
     #   access from their applications (for example, from a JavaScript
     #   `XMLHttpRequest` object).
     #
-    #   Each CORS rule must have at least one `AllowedOrigin` element. The
+    #   Each CORS rule must have at least one `AllowedOrigins` element. The
     #   string value can include only one wildcard character (*), for
     #   example, http://*.example.com. Additionally, you can specify only
     #   one wildcard character to allow cross-origin access for all origins.
@@ -85,8 +85,8 @@ module Aws::MediaStore
     #   Identifies an HTTP method that the origin that is specified in the
     #   rule is allowed to execute.
     #
-    #   Each CORS rule must contain at least one `AllowedMethod` and one
-    #   `AllowedOrigin` element.
+    #   Each CORS rule must contain at least one `AllowedMethods` and one
+    #   `AllowedOrigins` element.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_headers
@@ -241,6 +241,28 @@ module Aws::MediaStore
     #
     class DeleteCorsPolicyOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteLifecyclePolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that holds the object lifecycle policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicyInput AWS API Documentation
+    #
+    class DeleteLifecyclePolicyInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicyOutput AWS API Documentation
+    #
+    class DeleteLifecyclePolicyOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeContainerInput
     #   data as a hash:
     #
@@ -318,13 +340,43 @@ module Aws::MediaStore
     end
 
     # @!attribute [rw] cors_policy
-    #   The CORS policy of the container.
+    #   The CORS policy assigned to the container.
     #   @return [Array<Types::CorsRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicyOutput AWS API Documentation
     #
     class GetCorsPolicyOutput < Struct.new(
       :cors_policy)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLifecyclePolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that the object lifecycle policy is
+    #   assigned to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicyInput AWS API Documentation
+    #
+    class GetLifecyclePolicyInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_policy
+    #   The object lifecycle policy that is assigned to the container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicyOutput AWS API Documentation
+    #
+    class GetLifecyclePolicyOutput < Struct.new(
+      :lifecycle_policy)
       include Aws::Structure
     end
 
@@ -415,9 +467,9 @@ module Aws::MediaStore
     #         container_name: "ContainerName", # required
     #         cors_policy: [ # required
     #           {
-    #             allowed_origins: ["Origin"],
+    #             allowed_origins: ["Origin"], # required
     #             allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
-    #             allowed_headers: ["Header"],
+    #             allowed_headers: ["Header"], # required
     #             max_age_seconds: 1,
     #             expose_headers: ["Header"],
     #           },
@@ -444,6 +496,35 @@ module Aws::MediaStore
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicyOutput AWS API Documentation
     #
     class PutCorsPolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutLifecyclePolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #         lifecycle_policy: "LifecyclePolicy", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that you want to assign the object
+    #   lifecycle policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy
+    #   The object lifecycle policy to apply to the container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicyInput AWS API Documentation
+    #
+    class PutLifecyclePolicyInput < Struct.new(
+      :container_name,
+      :lifecycle_policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicyOutput AWS API Documentation
+    #
+    class PutLifecyclePolicyOutput < Aws::EmptyStructure; end
 
   end
 end

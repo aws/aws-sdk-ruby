@@ -34,6 +34,8 @@ module Aws::MediaStore
     DeleteContainerPolicyOutput = Shapes::StructureShape.new(name: 'DeleteContainerPolicyOutput')
     DeleteCorsPolicyInput = Shapes::StructureShape.new(name: 'DeleteCorsPolicyInput')
     DeleteCorsPolicyOutput = Shapes::StructureShape.new(name: 'DeleteCorsPolicyOutput')
+    DeleteLifecyclePolicyInput = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyInput')
+    DeleteLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyOutput')
     DescribeContainerInput = Shapes::StructureShape.new(name: 'DescribeContainerInput')
     DescribeContainerOutput = Shapes::StructureShape.new(name: 'DescribeContainerOutput')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
@@ -43,8 +45,11 @@ module Aws::MediaStore
     GetContainerPolicyOutput = Shapes::StructureShape.new(name: 'GetContainerPolicyOutput')
     GetCorsPolicyInput = Shapes::StructureShape.new(name: 'GetCorsPolicyInput')
     GetCorsPolicyOutput = Shapes::StructureShape.new(name: 'GetCorsPolicyOutput')
+    GetLifecyclePolicyInput = Shapes::StructureShape.new(name: 'GetLifecyclePolicyInput')
+    GetLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'GetLifecyclePolicyOutput')
     Header = Shapes::StringShape.new(name: 'Header')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    LifecyclePolicy = Shapes::StringShape.new(name: 'LifecyclePolicy')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListContainersInput = Shapes::StructureShape.new(name: 'ListContainersInput')
     ListContainersOutput = Shapes::StructureShape.new(name: 'ListContainersOutput')
@@ -57,6 +62,8 @@ module Aws::MediaStore
     PutContainerPolicyOutput = Shapes::StructureShape.new(name: 'PutContainerPolicyOutput')
     PutCorsPolicyInput = Shapes::StructureShape.new(name: 'PutCorsPolicyInput')
     PutCorsPolicyOutput = Shapes::StructureShape.new(name: 'PutCorsPolicyOutput')
+    PutLifecyclePolicyInput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyInput')
+    PutLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyOutput')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
 
     AllowedHeaders.member = Shapes::ShapeRef.new(shape: Header)
@@ -76,9 +83,9 @@ module Aws::MediaStore
 
     CorsPolicy.member = Shapes::ShapeRef.new(shape: CorsRule)
 
-    CorsRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, location_name: "AllowedOrigins"))
+    CorsRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, required: true, location_name: "AllowedOrigins"))
     CorsRule.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods"))
-    CorsRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: AllowedHeaders, location_name: "AllowedHeaders"))
+    CorsRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: AllowedHeaders, required: true, location_name: "AllowedHeaders"))
     CorsRule.add_member(:max_age_seconds, Shapes::ShapeRef.new(shape: MaxAgeSeconds, location_name: "MaxAgeSeconds"))
     CorsRule.add_member(:expose_headers, Shapes::ShapeRef.new(shape: ExposeHeaders, location_name: "ExposeHeaders"))
     CorsRule.struct_class = Types::CorsRule
@@ -104,6 +111,11 @@ module Aws::MediaStore
 
     DeleteCorsPolicyOutput.struct_class = Types::DeleteCorsPolicyOutput
 
+    DeleteLifecyclePolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    DeleteLifecyclePolicyInput.struct_class = Types::DeleteLifecyclePolicyInput
+
+    DeleteLifecyclePolicyOutput.struct_class = Types::DeleteLifecyclePolicyOutput
+
     DescribeContainerInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName"))
     DescribeContainerInput.struct_class = Types::DescribeContainerInput
 
@@ -124,6 +136,12 @@ module Aws::MediaStore
     GetCorsPolicyOutput.add_member(:cors_policy, Shapes::ShapeRef.new(shape: CorsPolicy, required: true, location_name: "CorsPolicy"))
     GetCorsPolicyOutput.struct_class = Types::GetCorsPolicyOutput
 
+    GetLifecyclePolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    GetLifecyclePolicyInput.struct_class = Types::GetLifecyclePolicyInput
+
+    GetLifecyclePolicyOutput.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, required: true, location_name: "LifecyclePolicy"))
+    GetLifecyclePolicyOutput.struct_class = Types::GetLifecyclePolicyOutput
+
     ListContainersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ContainerListLimit, location_name: "MaxResults"))
     ListContainersInput.struct_class = Types::ListContainersInput
@@ -143,6 +161,12 @@ module Aws::MediaStore
     PutCorsPolicyInput.struct_class = Types::PutCorsPolicyInput
 
     PutCorsPolicyOutput.struct_class = Types::PutCorsPolicyOutput
+
+    PutLifecyclePolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    PutLifecyclePolicyInput.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, required: true, location_name: "LifecyclePolicy"))
+    PutLifecyclePolicyInput.struct_class = Types::PutLifecyclePolicyInput
+
+    PutLifecyclePolicyOutput.struct_class = Types::PutLifecyclePolicyOutput
 
 
     # @api private
@@ -210,6 +234,18 @@ module Aws::MediaStore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_container, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeContainer"
         o.http_method = "POST"
@@ -244,6 +280,18 @@ module Aws::MediaStore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:get_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:list_containers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListContainers"
         o.http_method = "POST"
@@ -272,6 +320,17 @@ module Aws::MediaStore
         o.output = Shapes::ShapeRef.new(shape: PutCorsPolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:put_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutLifecyclePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
     end

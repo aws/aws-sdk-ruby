@@ -3284,7 +3284,7 @@ module Aws::ECS
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
-    #   values are `ENABLED` and `DISABLED`.
+    #   values are `enabled` and `disabled`.
     #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
@@ -5621,7 +5621,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
