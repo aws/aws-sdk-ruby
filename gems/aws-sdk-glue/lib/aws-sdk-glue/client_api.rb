@@ -77,6 +77,7 @@ module Aws::Glue
     ConnectionInput = Shapes::StructureShape.new(name: 'ConnectionInput')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
     ConnectionName = Shapes::StringShape.new(name: 'ConnectionName')
+    ConnectionPasswordEncryption = Shapes::StructureShape.new(name: 'ConnectionPasswordEncryption')
     ConnectionProperties = Shapes::MapShape.new(name: 'ConnectionProperties')
     ConnectionPropertyKey = Shapes::StringShape.new(name: 'ConnectionPropertyKey')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
@@ -611,6 +612,10 @@ module Aws::Glue
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
+    ConnectionPasswordEncryption.add_member(:return_connection_password_encrypted, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ReturnConnectionPasswordEncrypted"))
+    ConnectionPasswordEncryption.add_member(:aws_kms_key_id, Shapes::ShapeRef.new(shape: NameString, location_name: "AwsKmsKeyId"))
+    ConnectionPasswordEncryption.struct_class = Types::ConnectionPasswordEncryption
+
     ConnectionProperties.key = Shapes::ShapeRef.new(shape: ConnectionPropertyKey)
     ConnectionProperties.value = Shapes::ShapeRef.new(shape: ValueString)
 
@@ -809,6 +814,7 @@ module Aws::Glue
     DagNodes.member = Shapes::ShapeRef.new(shape: CodeGenNode)
 
     DataCatalogEncryptionSettings.add_member(:encryption_at_rest, Shapes::ShapeRef.new(shape: EncryptionAtRest, location_name: "EncryptionAtRest"))
+    DataCatalogEncryptionSettings.add_member(:connection_password_encryption, Shapes::ShapeRef.new(shape: ConnectionPasswordEncryption, location_name: "ConnectionPasswordEncryption"))
     DataCatalogEncryptionSettings.struct_class = Types::DataCatalogEncryptionSettings
 
     Database.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -985,6 +991,7 @@ module Aws::Glue
 
     GetConnectionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetConnectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetConnectionRequest.add_member(:hide_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "HidePassword"))
     GetConnectionRequest.struct_class = Types::GetConnectionRequest
 
     GetConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
@@ -996,6 +1003,7 @@ module Aws::Glue
 
     GetConnectionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetConnectionsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: GetConnectionsFilter, location_name: "Filter"))
+    GetConnectionsRequest.add_member(:hide_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "HidePassword"))
     GetConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     GetConnectionsRequest.struct_class = Types::GetConnectionsRequest

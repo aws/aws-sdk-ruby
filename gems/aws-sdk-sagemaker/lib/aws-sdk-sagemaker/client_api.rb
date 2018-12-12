@@ -468,6 +468,7 @@ module Aws::SageMaker
     TrainingJob = Shapes::StructureShape.new(name: 'TrainingJob')
     TrainingJobArn = Shapes::StringShape.new(name: 'TrainingJobArn')
     TrainingJobDefinition = Shapes::StructureShape.new(name: 'TrainingJobDefinition')
+    TrainingJobEarlyStoppingType = Shapes::StringShape.new(name: 'TrainingJobEarlyStoppingType')
     TrainingJobName = Shapes::StringShape.new(name: 'TrainingJobName')
     TrainingJobSortByOptions = Shapes::StringShape.new(name: 'TrainingJobSortByOptions')
     TrainingJobStatus = Shapes::StringShape.new(name: 'TrainingJobStatus')
@@ -1210,6 +1211,7 @@ module Aws::SageMaker
     HyperParameterTuningJobConfig.add_member(:hyper_parameter_tuning_job_objective, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective, required: true, location_name: "HyperParameterTuningJobObjective"))
     HyperParameterTuningJobConfig.add_member(:resource_limits, Shapes::ShapeRef.new(shape: ResourceLimits, required: true, location_name: "ResourceLimits"))
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, required: true, location_name: "ParameterRanges"))
+    HyperParameterTuningJobConfig.add_member(:training_job_early_stopping_type, Shapes::ShapeRef.new(shape: TrainingJobEarlyStoppingType, location_name: "TrainingJobEarlyStoppingType"))
     HyperParameterTuningJobConfig.struct_class = Types::HyperParameterTuningJobConfig
 
     HyperParameterTuningJobObjective.add_member(:type, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjectiveType, required: true, location_name: "Type"))

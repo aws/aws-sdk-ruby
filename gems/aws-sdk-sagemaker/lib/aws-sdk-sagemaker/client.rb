@@ -945,6 +945,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
+    #       training_job_early_stopping_type: "Off", # accepts Off, Auto
     #     },
     #     training_job_definition: { # required
     #       static_hyper_parameters: {
@@ -2899,6 +2900,7 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].name #=> String
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values #=> Array
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.hyper_parameter_tuning_job_config.training_job_early_stopping_type #=> String, one of "Off", "Auto"
     #   resp.training_job_definition.static_hyper_parameters #=> Hash
     #   resp.training_job_definition.static_hyper_parameters["ParameterKey"] #=> String
     #   resp.training_job_definition.algorithm_specification.training_image #=> String
@@ -5703,7 +5705,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1466,6 +1466,7 @@ module Aws::SageMaker
     #               },
     #             ],
     #           },
+    #           training_job_early_stopping_type: "Off", # accepts Off, Auto
     #         },
     #         training_job_definition: { # required
     #           static_hyper_parameters: {
@@ -5346,6 +5347,7 @@ module Aws::SageMaker
     #             },
     #           ],
     #         },
+    #         training_job_early_stopping_type: "Off", # accepts Off, Auto
     #       }
     #
     # @!attribute [rw] strategy
@@ -5368,13 +5370,30 @@ module Aws::SageMaker
     #   hyperparameters that this tuning job searches.
     #   @return [Types::ParameterRanges]
     #
+    # @!attribute [rw] training_job_early_stopping_type
+    #   Specifies whether to use early stopping for training jobs launched
+    #   by the hyperparameter tuning job. One of the following values:
+    #
+    #   OFF
+    #
+    #   : Training jobs launched by the hyperparameter tuning job do not use
+    #     early stopping.
+    #
+    #   AUTO
+    #
+    #   : Amazon SageMaker stops training jobs launched by the
+    #     hyperparameter tuning job when they are no longer improving as
+    #     measured by the objective metric of the tuning job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConfig AWS API Documentation
     #
     class HyperParameterTuningJobConfig < Struct.new(
       :strategy,
       :hyper_parameter_tuning_job_objective,
       :resource_limits,
-      :parameter_ranges)
+      :parameter_ranges,
+      :training_job_early_stopping_type)
       include Aws::Structure
     end
 

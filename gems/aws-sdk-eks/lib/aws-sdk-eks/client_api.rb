@@ -22,10 +22,19 @@ module Aws::EKS
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
+    DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
+    ErrorDetails = Shapes::ListShape.new(name: 'ErrorDetails')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersRequestMaxResults = Shapes::IntegerShape.new(name: 'ListClustersRequestMaxResults')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListUpdatesRequest = Shapes::StructureShape.new(name: 'ListUpdatesRequest')
+    ListUpdatesRequestMaxResults = Shapes::IntegerShape.new(name: 'ListUpdatesRequestMaxResults')
+    ListUpdatesResponse = Shapes::StructureShape.new(name: 'ListUpdatesResponse')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -35,6 +44,14 @@ module Aws::EKS
     StringList = Shapes::ListShape.new(name: 'StringList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedAvailabilityZoneException = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZoneException')
+    Update = Shapes::StructureShape.new(name: 'Update')
+    UpdateClusterVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterVersionRequest')
+    UpdateClusterVersionResponse = Shapes::StructureShape.new(name: 'UpdateClusterVersionResponse')
+    UpdateParam = Shapes::StructureShape.new(name: 'UpdateParam')
+    UpdateParamType = Shapes::StringShape.new(name: 'UpdateParamType')
+    UpdateParams = Shapes::ListShape.new(name: 'UpdateParams')
+    UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
+    UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
 
@@ -76,6 +93,20 @@ module Aws::EKS
     DescribeClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
 
+    DescribeUpdateRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribeUpdateRequest.add_member(:update_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "updateId"))
+    DescribeUpdateRequest.struct_class = Types::DescribeUpdateRequest
+
+    DescribeUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    DescribeUpdateResponse.struct_class = Types::DescribeUpdateResponse
+
+    ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    ErrorDetail.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "resourceIds"))
+    ErrorDetail.struct_class = Types::ErrorDetail
+
+    ErrorDetails.member = Shapes::ShapeRef.new(shape: ErrorDetail)
+
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListClustersRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListClustersRequest.struct_class = Types::ListClustersRequest
@@ -84,7 +115,38 @@ module Aws::EKS
     ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
 
+    ListUpdatesRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListUpdatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListUpdatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListUpdatesRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListUpdatesRequest.struct_class = Types::ListUpdatesRequest
+
+    ListUpdatesResponse.add_member(:update_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "updateIds"))
+    ListUpdatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListUpdatesResponse.struct_class = Types::ListUpdatesResponse
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    Update.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    Update.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "status"))
+    Update.add_member(:type, Shapes::ShapeRef.new(shape: UpdateType, location_name: "type"))
+    Update.add_member(:params, Shapes::ShapeRef.new(shape: UpdateParams, location_name: "params"))
+    Update.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    Update.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errors"))
+    Update.struct_class = Types::Update
+
+    UpdateClusterVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    UpdateClusterVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
+    UpdateClusterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateClusterVersionRequest.struct_class = Types::UpdateClusterVersionRequest
+
+    UpdateClusterVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    UpdateClusterVersionResponse.struct_class = Types::UpdateClusterVersionResponse
+
+    UpdateParam.add_member(:type, Shapes::ShapeRef.new(shape: UpdateParamType, location_name: "type"))
+    UpdateParam.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    UpdateParam.struct_class = Types::UpdateParam
+
+    UpdateParams.member = Shapes::ShapeRef.new(shape: UpdateParam)
 
     VpcConfigRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnetIds"))
     VpcConfigRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
@@ -154,6 +216,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:describe_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeUpdate"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/updates/{updateId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListClusters"
         o.http_method = "GET"
@@ -164,6 +238,32 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:list_updates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUpdates"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/updates"
+        o.input = Shapes::ShapeRef.new(shape: ListUpdatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUpdatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_cluster_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/updates"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
     end
 

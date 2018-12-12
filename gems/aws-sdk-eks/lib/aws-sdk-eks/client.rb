@@ -257,8 +257,8 @@ module Aws::EKS
     #   with Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You may specify up to 5 security groups, but we recommend that you use
-    #   a dedicated security group for your cluster control plane.
+    #   You may specify up to five security groups, but we recommend that you
+    #   use a dedicated security group for your cluster control plane.
     #
     #
     #
@@ -266,7 +266,7 @@ module Aws::EKS
     #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -500,6 +500,54 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns descriptive information about an update against your Amazon
+    # EKS cluster.
+    #
+    # When the status of the update is `Succeeded`, the update is complete.
+    # If an update fails, the status is `Failed`, and an error detail
+    # explains the reason for the failure.
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon EKS cluster to update.
+    #
+    # @option params [required, String] :update_id
+    #   The ID of the update to describe.
+    #
+    # @return [Types::DescribeUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUpdateResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_update({
+    #     name: "String", # required
+    #     update_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdate AWS API Documentation
+    #
+    # @overload describe_update(params = {})
+    # @param [Hash] params ({})
+    def describe_update(params = {}, options = {})
+      req = build_request(:describe_update, params)
+      req.send_request(options)
+    end
+
     # Lists the Amazon EKS clusters in your AWS account in the specified
     # Region.
     #
@@ -568,6 +616,116 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Lists the updates associated with an Amazon EKS cluster in your AWS
+    # account, in the specified Region.
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon EKS cluster for which to list updates.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated `ListUpdates`
+    #   request where `maxResults` was used and the results exceeded the value
+    #   of that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of update results returned by `ListUpdates` in
+    #   paginated output. When this parameter is used, `ListUpdates` only
+    #   returns `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListUpdates` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter is not used, then `ListUpdates` returns up to 100 results
+    #   and a `nextToken` value if applicable.
+    #
+    # @return [Types::ListUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUpdatesResponse#update_ids #update_ids} => Array&lt;String&gt;
+    #   * {Types::ListUpdatesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_updates({
+    #     name: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_ids #=> Array
+    #   resp.update_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdates AWS API Documentation
+    #
+    # @overload list_updates(params = {})
+    # @param [Hash] params ({})
+    def list_updates(params = {}, options = {})
+      req = build_request(:list_updates, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon EKS cluster to the specified Kubernetes version.
+    # Your cluster continues to function during the update. The response
+    # output includes an update ID that you can use to track the status of
+    # your cluster update with the DescribeUpdate API operation.
+    #
+    # Cluster updates are asynchronous, and they should finish within a few
+    # minutes. During an update, the cluster status moves to `UPDATING`
+    # (this status transition is eventually consistent). When the update is
+    # complete (either `Failed` or `Successful`), the cluster status moves
+    # to `Active`.
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon EKS cluster to update.
+    #
+    # @option params [required, String] :version
+    #   The desired Kubernetes version following a successful update.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateClusterVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterVersionResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_version({
+    #     name: "String", # required
+    #     version: "String", # required
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersion AWS API Documentation
+    #
+    # @overload update_cluster_version(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_version(params = {}, options = {})
+      req = build_request(:update_cluster_version, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -581,7 +739,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

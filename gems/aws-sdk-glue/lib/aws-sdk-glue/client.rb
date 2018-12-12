@@ -2022,6 +2022,15 @@ module Aws::Glue
     # @option params [required, String] :name
     #   The name of the connection definition to retrieve.
     #
+    # @option params [Boolean] :hide_password
+    #   Allow you to retrieve the connection metadata without displaying the
+    #   password. For instance, the AWS Glue console uses this flag to
+    #   retrieve connections, since the console does not display passwords.
+    #   Set this parameter where the caller may not have permission to use the
+    #   KMS key to decrypt the password, but does have permission to access
+    #   the rest of the connection metadata (that is, the other connection
+    #   properties).
+    #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetConnectionResponse#connection #connection} => Types::Connection
@@ -2031,6 +2040,7 @@ module Aws::Glue
     #   resp = client.get_connection({
     #     catalog_id: "CatalogIdString",
     #     name: "NameString", # required
+    #     hide_password: false,
     #   })
     #
     # @example Response structure
@@ -2068,6 +2078,15 @@ module Aws::Glue
     # @option params [Types::GetConnectionsFilter] :filter
     #   A filter that controls which connections will be returned.
     #
+    # @option params [Boolean] :hide_password
+    #   Allow you to retrieve the connection metadata without displaying the
+    #   password. For instance, the AWS Glue console uses this flag to
+    #   retrieve connections, since the console does not display passwords.
+    #   Set this parameter where the caller may not have permission to use the
+    #   KMS key to decrypt the password, but does have permission to access
+    #   the rest of the connection metadata (that is, the other connection
+    #   properties).
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
     #
@@ -2087,6 +2106,7 @@ module Aws::Glue
     #       match_criteria: ["NameString"],
     #       connection_type: "JDBC", # accepts JDBC, SFTP
     #     },
+    #     hide_password: false,
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -2317,6 +2337,8 @@ module Aws::Glue
     #
     #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
     #   resp.data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id #=> String
+    #   resp.data_catalog_encryption_settings.connection_password_encryption.return_connection_password_encrypted #=> Boolean
+    #   resp.data_catalog_encryption_settings.connection_password_encryption.aws_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettings AWS API Documentation
     #
@@ -3922,6 +3944,10 @@ module Aws::Glue
     #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
     #         sse_aws_kms_key_id: "NameString",
     #       },
+    #       connection_password_encryption: {
+    #         return_connection_password_encrypted: false, # required
+    #         aws_kms_key_id: "NameString",
+    #       },
     #     },
     #   })
     #
@@ -4937,7 +4963,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

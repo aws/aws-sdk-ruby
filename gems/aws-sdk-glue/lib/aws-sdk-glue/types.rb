@@ -826,6 +826,11 @@ module Aws::Glue
     #
     #   * `PASSWORD` - A password, if one is used, for the user name.
     #
+    #   * `ENCRYPTED_PASSWORD` - When you enable connection password
+    #     protection by setting `ConnectionPasswordEncryption` in the Data
+    #     Catalog encryption settings, this field stores the key you
+    #     designate to encrypt the password.
+    #
     #   * `JDBC_DRIVER_JAR_URI` - The S3 path of the a jar file that
     #     contains the JDBC driver to use.
     #
@@ -935,6 +940,55 @@ module Aws::Glue
       :match_criteria,
       :connection_properties,
       :physical_connection_requirements)
+      include Aws::Structure
+    end
+
+    # The data structure used by the Data Catalog to encrypt the password as
+    # part of `CreateConnection` or `UpdateConnection` and store it in the
+    # `ENCRYPTED_PASSWORD` field in the connection properties. You can
+    # enable catalog encryption or only password encryption.
+    #
+    # When a `CreationConnection` request arrives containing a password, the
+    # Data Catalog first encrypts the password using your KMS key, and then
+    # encrypts the whole connection object again if catalog encryption is
+    # also enabled.
+    #
+    # This encryption requires that you set KMS key permissions to enable or
+    # restrict access on the password key according to your security
+    # requirements. For example, you may want only admin users to have
+    # decrypt permission on the password key.
+    #
+    # @note When making an API call, you may pass ConnectionPasswordEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         return_connection_password_encrypted: false, # required
+    #         aws_kms_key_id: "NameString",
+    #       }
+    #
+    # @!attribute [rw] return_connection_password_encrypted
+    #   When the `ReturnConnectionPasswordEncrypted` flag is set to
+    #   "true", passwords remain encrypted in the responses of
+    #   `GetConnection` and `GetConnections`. This encryption takes effect
+    #   independently from catalog encryption.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aws_kms_key_id
+    #   A KMS key used to protect access to the JDBC source.
+    #
+    #   All users in your account should be granted the `kms:encrypt`
+    #   permission to encrypt passwords before storing them in the Data
+    #   Catalog (through the AWS Glue `CreateConnection` operation).
+    #
+    #   The decrypt permission should be granted only to KMS key admins and
+    #   IAM roles designated for AWS Glue crawlers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPasswordEncryption AWS API Documentation
+    #
+    class ConnectionPasswordEncryption < Struct.new(
+      :return_connection_password_encrypted,
+      :aws_kms_key_id)
       include Aws::Structure
     end
 
@@ -2302,16 +2356,29 @@ module Aws::Glue
     #           catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
     #           sse_aws_kms_key_id: "NameString",
     #         },
+    #         connection_password_encryption: {
+    #           return_connection_password_encrypted: false, # required
+    #           aws_kms_key_id: "NameString",
+    #         },
     #       }
     #
     # @!attribute [rw] encryption_at_rest
     #   Specifies encryption-at-rest configuration for the Data Catalog.
     #   @return [Types::EncryptionAtRest]
     #
+    # @!attribute [rw] connection_password_encryption
+    #   When password protection is enabled, the Data Catalog uses a
+    #   customer-provided key to encrypt the password as part of
+    #   `CreateConnection` or `UpdateConnection` and store it in the
+    #   `ENCRYPTED_PASSWORD` field in the connection properties. You can
+    #   enable catalog encryption or only password encryption.
+    #   @return [Types::ConnectionPasswordEncryption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataCatalogEncryptionSettings AWS API Documentation
     #
     class DataCatalogEncryptionSettings < Struct.new(
-      :encryption_at_rest)
+      :encryption_at_rest,
+      :connection_password_encryption)
       include Aws::Structure
     end
 
@@ -3200,6 +3267,7 @@ module Aws::Glue
     #       {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
+    #         hide_password: false,
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -3211,11 +3279,22 @@ module Aws::Glue
     #   The name of the connection definition to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] hide_password
+    #   Allow you to retrieve the connection metadata without displaying the
+    #   password. For instance, the AWS Glue console uses this flag to
+    #   retrieve connections, since the console does not display passwords.
+    #   Set this parameter where the caller may not have permission to use
+    #   the KMS key to decrypt the password, but does have permission to
+    #   access the rest of the connection metadata (that is, the other
+    #   connection properties).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionRequest AWS API Documentation
     #
     class GetConnectionRequest < Struct.new(
       :catalog_id,
-      :name)
+      :name,
+      :hide_password)
       include Aws::Structure
     end
 
@@ -3268,6 +3347,7 @@ module Aws::Glue
     #           match_criteria: ["NameString"],
     #           connection_type: "JDBC", # accepts JDBC, SFTP
     #         },
+    #         hide_password: false,
     #         next_token: "Token",
     #         max_results: 1,
     #       }
@@ -3280,6 +3360,16 @@ module Aws::Glue
     # @!attribute [rw] filter
     #   A filter that controls which connections will be returned.
     #   @return [Types::GetConnectionsFilter]
+    #
+    # @!attribute [rw] hide_password
+    #   Allow you to retrieve the connection metadata without displaying the
+    #   password. For instance, the AWS Glue console uses this flag to
+    #   retrieve connections, since the console does not display passwords.
+    #   Set this parameter where the caller may not have permission to use
+    #   the KMS key to decrypt the password, but does have permission to
+    #   access the rest of the connection metadata (that is, the other
+    #   connection properties).
+    #   @return [Boolean]
     #
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation call.
@@ -3294,6 +3384,7 @@ module Aws::Glue
     class GetConnectionsRequest < Struct.new(
       :catalog_id,
       :filter,
+      :hide_password,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -5766,6 +5857,10 @@ module Aws::Glue
     #             catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
     #             sse_aws_kms_key_id: "NameString",
     #           },
+    #           connection_password_encryption: {
+    #             return_connection_password_encrypted: false, # required
+    #             aws_kms_key_id: "NameString",
+    #           },
     #         },
     #       }
     #
@@ -6537,6 +6632,12 @@ module Aws::Glue
     # @!attribute [rw] partition_keys
     #   A list of columns by which the table is partitioned. Only primitive
     #   types are supported as partition keys.
+    #
+    #   When creating a table used by Athena, and you do not specify any
+    #   `partitionKeys`, you must at least set the value of `partitionKeys`
+    #   to an empty list. For example:
+    #
+    #   `"PartitionKeys": []`
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] view_original_text
@@ -6701,6 +6802,12 @@ module Aws::Glue
     # @!attribute [rw] partition_keys
     #   A list of columns by which the table is partitioned. Only primitive
     #   types are supported as partition keys.
+    #
+    #   When creating a table used by Athena, and you do not specify any
+    #   `partitionKeys`, you must at least set the value of `partitionKeys`
+    #   to an empty list. For example:
+    #
+    #   `"PartitionKeys": []`
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] view_original_text

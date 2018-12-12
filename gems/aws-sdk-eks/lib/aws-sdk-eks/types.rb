@@ -35,7 +35,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch time stamp in seconds for when the cluster was
+    #   The Unix epoch timestamp in seconds for when the cluster was
     #   created.
     #   @return [Time]
     #
@@ -75,15 +75,18 @@ module Aws::EKS
     #   @return [Types::Certificate]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
     # @!attribute [rw] platform_version
     #   The platform version of your Amazon EKS cluster. For more
-    #   information, see [Platform
-    #   Versions](eks/latest/userguide/platform-versions.html) in the <i>
-    #   <i>Amazon EKS User Guide</i> </i>.
+    #   information, see [Platform Versions][1] in the <i> <i>Amazon EKS
+    #   User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
@@ -144,8 +147,8 @@ module Aws::EKS
     #   properly with Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You may specify up to 5 security groups, but we recommend that you
-    #   use a dedicated security group for your cluster control plane.
+    #   You may specify up to five security groups, but we recommend that
+    #   you use a dedicated security group for your cluster control plane.
     #
     #
     #
@@ -154,7 +157,7 @@ module Aws::EKS
     #   @return [Types::VpcConfigRequest]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -241,6 +244,87 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         update_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EKS cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_id
+    #   The ID of the update to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateRequest AWS API Documentation
+    #
+    class DescribeUpdateRequest < Struct.new(
+      :name,
+      :update_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   The full description of the specified update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateResponse AWS API Documentation
+    #
+    class DescribeUpdateResponse < Struct.new(
+      :update)
+      include Aws::Structure
+    end
+
+    # An object representing an error when an asynchronous operation fails.
+    #
+    # @!attribute [rw] error_code
+    #   A brief description of the error.
+    #
+    #   * **SubnetNotFound**\: One of the subnets associated with the
+    #     cluster could not be found.
+    #
+    #   * **SecurityGroupNotFound**\: One of the security groups associated
+    #     with the cluster could not be found.
+    #
+    #   * **EniLimitReached**\: You have reached the elastic network
+    #     interface limit for your account.
+    #
+    #   * **IpNotAvailable**\: A subnet associated with the cluster does not
+    #     have any free IP addresses.
+    #
+    #   * **AccessDenied**\: You do not have permissions to perform the
+    #     specified operation.
+    #
+    #   * **OperationNotPermitted**\: The service role associated with the
+    #     cluster does not have the required access permissions for Amazon
+    #     EKS.
+    #
+    #   * **VpcIdNotFound**\: The VPC associated with the cluster could not
+    #     be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A more complete description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   An optional field that contains the resource IDs associated with the
+    #   error.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ErrorDetail AWS API Documentation
+    #
+    class ErrorDetail < Struct.new(
+      :error_code,
+      :error_message,
+      :resource_ids)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListClustersRequest
     #   data as a hash:
     #
@@ -301,6 +385,167 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListUpdatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EKS cluster for which to list updates.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListUpdates` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of update results returned by `ListUpdates` in
+    #   paginated output. When this parameter is used, `ListUpdates` only
+    #   returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another `ListUpdates` request with
+    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   If this parameter is not used, then `ListUpdates` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest AWS API Documentation
+    #
+    class ListUpdatesRequest < Struct.new(
+      :name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_ids
+    #   A list of all the updates for the specified cluster and Region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListUpdates` request.
+    #   When the results of a `ListUpdates` request exceed `maxResults`,
+    #   this value can be used to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse AWS API Documentation
+    #
+    class ListUpdatesResponse < Struct.new(
+      :update_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # An object representing an asynchronous update.
+    #
+    # @!attribute [rw] id
+    #   A UUID that is used to track the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] params
+    #   A key-value map that contains the parameters associated with the
+    #   update.
+    #   @return [Array<Types::UpdateParam>]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the update was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] errors
+    #   Any errors associated with a `Failed` update.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Update AWS API Documentation
+    #
+    class Update < Struct.new(
+      :id,
+      :status,
+      :type,
+      :params,
+      :created_at,
+      :errors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateClusterVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         version: "String", # required
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EKS cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The desired Kubernetes version following a successful update.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersionRequest AWS API Documentation
+    #
+    class UpdateClusterVersionRequest < Struct.new(
+      :name,
+      :version,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   The full description of the specified update
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersionResponse AWS API Documentation
+    #
+    class UpdateClusterVersionResponse < Struct.new(
+      :update)
+      include Aws::Structure
+    end
+
+    # An object representing the details of an update request.
+    #
+    # @!attribute [rw] type
+    #   The keys associated with an update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the keys submitted as part of an update request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateParam AWS API Documentation
+    #
+    class UpdateParam < Struct.new(
+      :type,
+      :value)
+      include Aws::Structure
+    end
+
     # An object representing an Amazon EKS cluster VPC configuration
     # request.
     #
@@ -323,7 +568,8 @@ module Aws::EKS
     #   Specify one or more security groups for the cross-account elastic
     #   network interfaces that Amazon EKS creates to use to allow
     #   communication between your worker nodes and the Kubernetes control
-    #   plane.
+    #   plane. If you do not specify a security group, the default security
+    #   group for your VPC is used.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest AWS API Documentation
