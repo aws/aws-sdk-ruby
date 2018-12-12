@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.190 (2018-12-12)
+------------------
+
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Container Service for Kubernetes.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
