@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Container Service for Kubernetes.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
 2.11.189 (2018-12-11)
 ------------------
 
