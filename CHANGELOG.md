@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.191 (2018-12-13)
+------------------
+
 * Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
 
 * Feature - Aws::PinpointEmail - Updated the API, and documentation for Amazon Pinpoint Email Service.
