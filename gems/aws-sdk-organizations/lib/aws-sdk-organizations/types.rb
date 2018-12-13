@@ -436,7 +436,7 @@ module Aws::Organizations
     #
     #   * *CONSOLIDATED\_BILLING*\: All member accounts have their bills
     #     consolidated to and paid by the master account. For more
-    #     information, see [Consolidated Billing][1] in the *AWS
+    #     information, see [Consolidated billing][1] in the *AWS
     #     Organizations User Guide*.
     #
     #   * *ALL*\: In addition to all the features supported by the

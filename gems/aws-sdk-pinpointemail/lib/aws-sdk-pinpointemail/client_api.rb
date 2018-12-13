@@ -16,6 +16,12 @@ module Aws::PinpointEmail
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BehaviorOnMxFailure = Shapes::StringShape.new(name: 'BehaviorOnMxFailure')
+    BlacklistEntries = Shapes::ListShape.new(name: 'BlacklistEntries')
+    BlacklistEntry = Shapes::StructureShape.new(name: 'BlacklistEntry')
+    BlacklistItemName = Shapes::StringShape.new(name: 'BlacklistItemName')
+    BlacklistItemNames = Shapes::ListShape.new(name: 'BlacklistItemNames')
+    BlacklistReport = Shapes::MapShape.new(name: 'BlacklistReport')
+    BlacklistingDescription = Shapes::StringShape.new(name: 'BlacklistingDescription')
     Body = Shapes::StructureShape.new(name: 'Body')
     Charset = Shapes::StringShape.new(name: 'Charset')
     CloudWatchDestination = Shapes::StructureShape.new(name: 'CloudWatchDestination')
@@ -30,9 +36,13 @@ module Aws::PinpointEmail
     CreateConfigurationSetResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetResponse')
     CreateDedicatedIpPoolRequest = Shapes::StructureShape.new(name: 'CreateDedicatedIpPoolRequest')
     CreateDedicatedIpPoolResponse = Shapes::StructureShape.new(name: 'CreateDedicatedIpPoolResponse')
+    CreateDeliverabilityTestReportRequest = Shapes::StructureShape.new(name: 'CreateDeliverabilityTestReportRequest')
+    CreateDeliverabilityTestReportResponse = Shapes::StructureShape.new(name: 'CreateDeliverabilityTestReportResponse')
     CreateEmailIdentityRequest = Shapes::StructureShape.new(name: 'CreateEmailIdentityRequest')
     CreateEmailIdentityResponse = Shapes::StructureShape.new(name: 'CreateEmailIdentityResponse')
     CustomRedirectDomain = Shapes::StringShape.new(name: 'CustomRedirectDomain')
+    DailyVolume = Shapes::StructureShape.new(name: 'DailyVolume')
+    DailyVolumes = Shapes::ListShape.new(name: 'DailyVolumes')
     DedicatedIp = Shapes::StructureShape.new(name: 'DedicatedIp')
     DedicatedIpList = Shapes::ListShape.new(name: 'DedicatedIpList')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
@@ -44,6 +54,10 @@ module Aws::PinpointEmail
     DeleteDedicatedIpPoolResponse = Shapes::StructureShape.new(name: 'DeleteDedicatedIpPoolResponse')
     DeleteEmailIdentityRequest = Shapes::StructureShape.new(name: 'DeleteEmailIdentityRequest')
     DeleteEmailIdentityResponse = Shapes::StructureShape.new(name: 'DeleteEmailIdentityResponse')
+    DeliverabilityTestReport = Shapes::StructureShape.new(name: 'DeliverabilityTestReport')
+    DeliverabilityTestReports = Shapes::ListShape.new(name: 'DeliverabilityTestReports')
+    DeliverabilityTestStatus = Shapes::StringShape.new(name: 'DeliverabilityTestStatus')
+    DeliverabilityTestSubject = Shapes::StringShape.new(name: 'DeliverabilityTestSubject')
     DeliveryOptions = Shapes::StructureShape.new(name: 'DeliveryOptions')
     Destination = Shapes::StructureShape.new(name: 'Destination')
     DimensionName = Shapes::StringShape.new(name: 'DimensionName')
@@ -52,6 +66,8 @@ module Aws::PinpointEmail
     DkimStatus = Shapes::StringShape.new(name: 'DkimStatus')
     DnsToken = Shapes::StringShape.new(name: 'DnsToken')
     DnsTokenList = Shapes::ListShape.new(name: 'DnsTokenList')
+    DomainIspPlacement = Shapes::StructureShape.new(name: 'DomainIspPlacement')
+    DomainIspPlacements = Shapes::ListShape.new(name: 'DomainIspPlacements')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailAddressList = Shapes::ListShape.new(name: 'EmailAddressList')
     EmailContent = Shapes::StructureShape.new(name: 'EmailContent')
@@ -65,6 +81,8 @@ module Aws::PinpointEmail
     GeneralEnforcementStatus = Shapes::StringShape.new(name: 'GeneralEnforcementStatus')
     GetAccountRequest = Shapes::StructureShape.new(name: 'GetAccountRequest')
     GetAccountResponse = Shapes::StructureShape.new(name: 'GetAccountResponse')
+    GetBlacklistReportsRequest = Shapes::StructureShape.new(name: 'GetBlacklistReportsRequest')
+    GetBlacklistReportsResponse = Shapes::StructureShape.new(name: 'GetBlacklistReportsResponse')
     GetConfigurationSetEventDestinationsRequest = Shapes::StructureShape.new(name: 'GetConfigurationSetEventDestinationsRequest')
     GetConfigurationSetEventDestinationsResponse = Shapes::StructureShape.new(name: 'GetConfigurationSetEventDestinationsResponse')
     GetConfigurationSetRequest = Shapes::StructureShape.new(name: 'GetConfigurationSetRequest')
@@ -73,6 +91,12 @@ module Aws::PinpointEmail
     GetDedicatedIpResponse = Shapes::StructureShape.new(name: 'GetDedicatedIpResponse')
     GetDedicatedIpsRequest = Shapes::StructureShape.new(name: 'GetDedicatedIpsRequest')
     GetDedicatedIpsResponse = Shapes::StructureShape.new(name: 'GetDedicatedIpsResponse')
+    GetDeliverabilityDashboardOptionsRequest = Shapes::StructureShape.new(name: 'GetDeliverabilityDashboardOptionsRequest')
+    GetDeliverabilityDashboardOptionsResponse = Shapes::StructureShape.new(name: 'GetDeliverabilityDashboardOptionsResponse')
+    GetDeliverabilityTestReportRequest = Shapes::StructureShape.new(name: 'GetDeliverabilityTestReportRequest')
+    GetDeliverabilityTestReportResponse = Shapes::StructureShape.new(name: 'GetDeliverabilityTestReportResponse')
+    GetDomainStatisticsReportRequest = Shapes::StructureShape.new(name: 'GetDomainStatisticsReportRequest')
+    GetDomainStatisticsReportResponse = Shapes::StructureShape.new(name: 'GetDomainStatisticsReportResponse')
     GetEmailIdentityRequest = Shapes::StructureShape.new(name: 'GetEmailIdentityRequest')
     GetEmailIdentityResponse = Shapes::StructureShape.new(name: 'GetEmailIdentityResponse')
     Identity = Shapes::StringShape.new(name: 'Identity')
@@ -80,6 +104,9 @@ module Aws::PinpointEmail
     IdentityInfoList = Shapes::ListShape.new(name: 'IdentityInfoList')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     Ip = Shapes::StringShape.new(name: 'Ip')
+    IspName = Shapes::StringShape.new(name: 'IspName')
+    IspPlacement = Shapes::StructureShape.new(name: 'IspPlacement')
+    IspPlacements = Shapes::ListShape.new(name: 'IspPlacements')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
     LastFreshStart = Shapes::TimestampShape.new(name: 'LastFreshStart')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -87,6 +114,8 @@ module Aws::PinpointEmail
     ListConfigurationSetsResponse = Shapes::StructureShape.new(name: 'ListConfigurationSetsResponse')
     ListDedicatedIpPoolsRequest = Shapes::StructureShape.new(name: 'ListDedicatedIpPoolsRequest')
     ListDedicatedIpPoolsResponse = Shapes::StructureShape.new(name: 'ListDedicatedIpPoolsResponse')
+    ListDeliverabilityTestReportsRequest = Shapes::StructureShape.new(name: 'ListDeliverabilityTestReportsRequest')
+    ListDeliverabilityTestReportsResponse = Shapes::StructureShape.new(name: 'ListDeliverabilityTestReportsResponse')
     ListEmailIdentitiesRequest = Shapes::StructureShape.new(name: 'ListEmailIdentitiesRequest')
     ListEmailIdentitiesResponse = Shapes::StructureShape.new(name: 'ListEmailIdentitiesResponse')
     ListOfDedicatedIpPools = Shapes::ListShape.new(name: 'ListOfDedicatedIpPools')
@@ -98,6 +127,7 @@ module Aws::PinpointEmail
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     MaxSendRate = Shapes::FloatShape.new(name: 'MaxSendRate')
     Message = Shapes::StructureShape.new(name: 'Message')
+    MessageContent = Shapes::StringShape.new(name: 'MessageContent')
     MessageData = Shapes::StringShape.new(name: 'MessageData')
     MessageRejected = Shapes::StructureShape.new(name: 'MessageRejected')
     MessageTag = Shapes::StructureShape.new(name: 'MessageTag')
@@ -107,8 +137,11 @@ module Aws::PinpointEmail
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OutboundMessageId = Shapes::StringShape.new(name: 'OutboundMessageId')
+    OverallVolume = Shapes::StructureShape.new(name: 'OverallVolume')
+    Percentage = Shapes::FloatShape.new(name: 'Percentage')
     Percentage100Wrapper = Shapes::IntegerShape.new(name: 'Percentage100Wrapper')
     PinpointDestination = Shapes::StructureShape.new(name: 'PinpointDestination')
+    PlacementStatistics = Shapes::StructureShape.new(name: 'PlacementStatistics')
     PoolName = Shapes::StringShape.new(name: 'PoolName')
     PutAccountDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesRequest')
     PutAccountDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesResponse')
@@ -126,6 +159,8 @@ module Aws::PinpointEmail
     PutDedicatedIpInPoolResponse = Shapes::StructureShape.new(name: 'PutDedicatedIpInPoolResponse')
     PutDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutDedicatedIpWarmupAttributesRequest')
     PutDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutDedicatedIpWarmupAttributesResponse')
+    PutDeliverabilityDashboardOptionRequest = Shapes::StructureShape.new(name: 'PutDeliverabilityDashboardOptionRequest')
+    PutDeliverabilityDashboardOptionResponse = Shapes::StructureShape.new(name: 'PutDeliverabilityDashboardOptionResponse')
     PutEmailIdentityDkimAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimAttributesRequest')
     PutEmailIdentityDkimAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimAttributesResponse')
     PutEmailIdentityFeedbackAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityFeedbackAttributesRequest')
@@ -134,6 +169,9 @@ module Aws::PinpointEmail
     PutEmailIdentityMailFromAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityMailFromAttributesResponse')
     RawMessage = Shapes::StructureShape.new(name: 'RawMessage')
     RawMessageData = Shapes::BlobShape.new(name: 'RawMessageData')
+    RblName = Shapes::StringShape.new(name: 'RblName')
+    ReportId = Shapes::StringShape.new(name: 'ReportId')
+    ReportName = Shapes::StringShape.new(name: 'ReportName')
     ReputationOptions = Shapes::StructureShape.new(name: 'ReputationOptions')
     SendEmailRequest = Shapes::StructureShape.new(name: 'SendEmailRequest')
     SendEmailResponse = Shapes::StructureShape.new(name: 'SendEmailResponse')
@@ -143,11 +181,26 @@ module Aws::PinpointEmail
     SendingPoolName = Shapes::StringShape.new(name: 'SendingPoolName')
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
     SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
     UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
     UpdateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationResponse')
+    Volume = Shapes::IntegerShape.new(name: 'Volume')
+    VolumeStatistics = Shapes::StructureShape.new(name: 'VolumeStatistics')
     WarmupStatus = Shapes::StringShape.new(name: 'WarmupStatus')
+
+    BlacklistEntries.member = Shapes::ShapeRef.new(shape: BlacklistEntry)
+
+    BlacklistEntry.add_member(:rbl_name, Shapes::ShapeRef.new(shape: RblName, location_name: "RblName"))
+    BlacklistEntry.add_member(:listing_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ListingTime"))
+    BlacklistEntry.add_member(:description, Shapes::ShapeRef.new(shape: BlacklistingDescription, location_name: "Description"))
+    BlacklistEntry.struct_class = Types::BlacklistEntry
+
+    BlacklistItemNames.member = Shapes::ShapeRef.new(shape: BlacklistItemName)
+
+    BlacklistReport.key = Shapes::ShapeRef.new(shape: BlacklistItemName)
+    BlacklistReport.value = Shapes::ShapeRef.new(shape: BlacklistEntries)
 
     Body.add_member(:text, Shapes::ShapeRef.new(shape: Content, location_name: "Text"))
     Body.add_member(:html, Shapes::ShapeRef.new(shape: Content, location_name: "Html"))
@@ -190,6 +243,15 @@ module Aws::PinpointEmail
 
     CreateDedicatedIpPoolResponse.struct_class = Types::CreateDedicatedIpPoolResponse
 
+    CreateDeliverabilityTestReportRequest.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
+    CreateDeliverabilityTestReportRequest.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "FromEmailAddress"))
+    CreateDeliverabilityTestReportRequest.add_member(:content, Shapes::ShapeRef.new(shape: EmailContent, required: true, location_name: "Content"))
+    CreateDeliverabilityTestReportRequest.struct_class = Types::CreateDeliverabilityTestReportRequest
+
+    CreateDeliverabilityTestReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "ReportId"))
+    CreateDeliverabilityTestReportResponse.add_member(:deliverability_test_status, Shapes::ShapeRef.new(shape: DeliverabilityTestStatus, required: true, location_name: "DeliverabilityTestStatus"))
+    CreateDeliverabilityTestReportResponse.struct_class = Types::CreateDeliverabilityTestReportResponse
+
     CreateEmailIdentityRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "EmailIdentity"))
     CreateEmailIdentityRequest.struct_class = Types::CreateEmailIdentityRequest
 
@@ -197,6 +259,13 @@ module Aws::PinpointEmail
     CreateEmailIdentityResponse.add_member(:verified_for_sending_status, Shapes::ShapeRef.new(shape: Enabled, location_name: "VerifiedForSendingStatus"))
     CreateEmailIdentityResponse.add_member(:dkim_attributes, Shapes::ShapeRef.new(shape: DkimAttributes, location_name: "DkimAttributes"))
     CreateEmailIdentityResponse.struct_class = Types::CreateEmailIdentityResponse
+
+    DailyVolume.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
+    DailyVolume.add_member(:volume_statistics, Shapes::ShapeRef.new(shape: VolumeStatistics, location_name: "VolumeStatistics"))
+    DailyVolume.add_member(:domain_isp_placements, Shapes::ShapeRef.new(shape: DomainIspPlacements, location_name: "DomainIspPlacements"))
+    DailyVolume.struct_class = Types::DailyVolume
+
+    DailyVolumes.member = Shapes::ShapeRef.new(shape: DailyVolume)
 
     DedicatedIp.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, required: true, location_name: "Ip"))
     DedicatedIp.add_member(:warmup_status, Shapes::ShapeRef.new(shape: WarmupStatus, required: true, location_name: "WarmupStatus"))
@@ -227,6 +296,16 @@ module Aws::PinpointEmail
 
     DeleteEmailIdentityResponse.struct_class = Types::DeleteEmailIdentityResponse
 
+    DeliverabilityTestReport.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId"))
+    DeliverabilityTestReport.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
+    DeliverabilityTestReport.add_member(:subject, Shapes::ShapeRef.new(shape: DeliverabilityTestSubject, location_name: "Subject"))
+    DeliverabilityTestReport.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
+    DeliverabilityTestReport.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
+    DeliverabilityTestReport.add_member(:deliverability_test_status, Shapes::ShapeRef.new(shape: DeliverabilityTestStatus, location_name: "DeliverabilityTestStatus"))
+    DeliverabilityTestReport.struct_class = Types::DeliverabilityTestReport
+
+    DeliverabilityTestReports.member = Shapes::ShapeRef.new(shape: DeliverabilityTestReport)
+
     DeliveryOptions.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: PoolName, location_name: "SendingPoolName"))
     DeliveryOptions.struct_class = Types::DeliveryOptions
 
@@ -241,6 +320,15 @@ module Aws::PinpointEmail
     DkimAttributes.struct_class = Types::DkimAttributes
 
     DnsTokenList.member = Shapes::ShapeRef.new(shape: DnsToken)
+
+    DomainIspPlacement.add_member(:isp_name, Shapes::ShapeRef.new(shape: IspName, location_name: "IspName"))
+    DomainIspPlacement.add_member(:inbox_raw_count, Shapes::ShapeRef.new(shape: Volume, location_name: "InboxRawCount"))
+    DomainIspPlacement.add_member(:spam_raw_count, Shapes::ShapeRef.new(shape: Volume, location_name: "SpamRawCount"))
+    DomainIspPlacement.add_member(:inbox_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "InboxPercentage"))
+    DomainIspPlacement.add_member(:spam_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "SpamPercentage"))
+    DomainIspPlacement.struct_class = Types::DomainIspPlacement
+
+    DomainIspPlacements.member = Shapes::ShapeRef.new(shape: DomainIspPlacement)
 
     EmailAddressList.member = Shapes::ShapeRef.new(shape: EmailAddress)
 
@@ -278,6 +366,12 @@ module Aws::PinpointEmail
     GetAccountResponse.add_member(:production_access_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "ProductionAccessEnabled"))
     GetAccountResponse.struct_class = Types::GetAccountResponse
 
+    GetBlacklistReportsRequest.add_member(:blacklist_item_names, Shapes::ShapeRef.new(shape: BlacklistItemNames, required: true, location_name: "BlacklistItemNames"))
+    GetBlacklistReportsRequest.struct_class = Types::GetBlacklistReportsRequest
+
+    GetBlacklistReportsResponse.add_member(:blacklist_report, Shapes::ShapeRef.new(shape: BlacklistReport, required: true, location_name: "BlacklistReport"))
+    GetBlacklistReportsResponse.struct_class = Types::GetBlacklistReportsResponse
+
     GetConfigurationSetEventDestinationsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     GetConfigurationSetEventDestinationsRequest.struct_class = Types::GetConfigurationSetEventDestinationsRequest
 
@@ -309,6 +403,29 @@ module Aws::PinpointEmail
     GetDedicatedIpsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetDedicatedIpsResponse.struct_class = Types::GetDedicatedIpsResponse
 
+    GetDeliverabilityDashboardOptionsRequest.struct_class = Types::GetDeliverabilityDashboardOptionsRequest
+
+    GetDeliverabilityDashboardOptionsResponse.add_member(:dashboard_enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "DashboardEnabled"))
+    GetDeliverabilityDashboardOptionsResponse.struct_class = Types::GetDeliverabilityDashboardOptionsResponse
+
+    GetDeliverabilityTestReportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location: "uri", location_name: "ReportId"))
+    GetDeliverabilityTestReportRequest.struct_class = Types::GetDeliverabilityTestReportRequest
+
+    GetDeliverabilityTestReportResponse.add_member(:deliverability_test_report, Shapes::ShapeRef.new(shape: DeliverabilityTestReport, required: true, location_name: "DeliverabilityTestReport"))
+    GetDeliverabilityTestReportResponse.add_member(:overall_placement, Shapes::ShapeRef.new(shape: PlacementStatistics, required: true, location_name: "OverallPlacement"))
+    GetDeliverabilityTestReportResponse.add_member(:isp_placements, Shapes::ShapeRef.new(shape: IspPlacements, required: true, location_name: "IspPlacements"))
+    GetDeliverabilityTestReportResponse.add_member(:message, Shapes::ShapeRef.new(shape: MessageContent, location_name: "Message"))
+    GetDeliverabilityTestReportResponse.struct_class = Types::GetDeliverabilityTestReportResponse
+
+    GetDomainStatisticsReportRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "Domain"))
+    GetDomainStatisticsReportRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartDate"))
+    GetDomainStatisticsReportRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndDate"))
+    GetDomainStatisticsReportRequest.struct_class = Types::GetDomainStatisticsReportRequest
+
+    GetDomainStatisticsReportResponse.add_member(:overall_volume, Shapes::ShapeRef.new(shape: OverallVolume, required: true, location_name: "OverallVolume"))
+    GetDomainStatisticsReportResponse.add_member(:daily_volumes, Shapes::ShapeRef.new(shape: DailyVolumes, required: true, location_name: "DailyVolumes"))
+    GetDomainStatisticsReportResponse.struct_class = Types::GetDomainStatisticsReportResponse
+
     GetEmailIdentityRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
     GetEmailIdentityRequest.struct_class = Types::GetEmailIdentityRequest
 
@@ -325,6 +442,12 @@ module Aws::PinpointEmail
     IdentityInfo.struct_class = Types::IdentityInfo
 
     IdentityInfoList.member = Shapes::ShapeRef.new(shape: IdentityInfo)
+
+    IspPlacement.add_member(:isp_name, Shapes::ShapeRef.new(shape: IspName, location_name: "IspName"))
+    IspPlacement.add_member(:placement_statistics, Shapes::ShapeRef.new(shape: PlacementStatistics, location_name: "PlacementStatistics"))
+    IspPlacement.struct_class = Types::IspPlacement
+
+    IspPlacements.member = Shapes::ShapeRef.new(shape: IspPlacement)
 
     KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "IamRoleArn"))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "DeliveryStreamArn"))
@@ -345,6 +468,14 @@ module Aws::PinpointEmail
     ListDedicatedIpPoolsResponse.add_member(:dedicated_ip_pools, Shapes::ShapeRef.new(shape: ListOfDedicatedIpPools, location_name: "DedicatedIpPools"))
     ListDedicatedIpPoolsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDedicatedIpPoolsResponse.struct_class = Types::ListDedicatedIpPoolsResponse
+
+    ListDeliverabilityTestReportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeliverabilityTestReportsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListDeliverabilityTestReportsRequest.struct_class = Types::ListDeliverabilityTestReportsRequest
+
+    ListDeliverabilityTestReportsResponse.add_member(:deliverability_test_reports, Shapes::ShapeRef.new(shape: DeliverabilityTestReports, required: true, location_name: "DeliverabilityTestReports"))
+    ListDeliverabilityTestReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeliverabilityTestReportsResponse.struct_class = Types::ListDeliverabilityTestReportsResponse
 
     ListEmailIdentitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEmailIdentitiesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
@@ -371,8 +502,20 @@ module Aws::PinpointEmail
 
     MessageTagList.member = Shapes::ShapeRef.new(shape: MessageTag)
 
+    OverallVolume.add_member(:volume_statistics, Shapes::ShapeRef.new(shape: VolumeStatistics, location_name: "VolumeStatistics"))
+    OverallVolume.add_member(:read_rate_percent, Shapes::ShapeRef.new(shape: Percentage, location_name: "ReadRatePercent"))
+    OverallVolume.add_member(:domain_isp_placements, Shapes::ShapeRef.new(shape: DomainIspPlacements, location_name: "DomainIspPlacements"))
+    OverallVolume.struct_class = Types::OverallVolume
+
     PinpointDestination.add_member(:application_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ApplicationArn"))
     PinpointDestination.struct_class = Types::PinpointDestination
+
+    PlacementStatistics.add_member(:inbox_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "InboxPercentage"))
+    PlacementStatistics.add_member(:spam_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "SpamPercentage"))
+    PlacementStatistics.add_member(:missing_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "MissingPercentage"))
+    PlacementStatistics.add_member(:spf_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "SpfPercentage"))
+    PlacementStatistics.add_member(:dkim_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "DkimPercentage"))
+    PlacementStatistics.struct_class = Types::PlacementStatistics
 
     PutAccountDedicatedIpWarmupAttributesRequest.add_member(:auto_warmup_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "AutoWarmupEnabled"))
     PutAccountDedicatedIpWarmupAttributesRequest.struct_class = Types::PutAccountDedicatedIpWarmupAttributesRequest
@@ -419,6 +562,11 @@ module Aws::PinpointEmail
     PutDedicatedIpWarmupAttributesRequest.struct_class = Types::PutDedicatedIpWarmupAttributesRequest
 
     PutDedicatedIpWarmupAttributesResponse.struct_class = Types::PutDedicatedIpWarmupAttributesResponse
+
+    PutDeliverabilityDashboardOptionRequest.add_member(:dashboard_enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "DashboardEnabled"))
+    PutDeliverabilityDashboardOptionRequest.struct_class = Types::PutDeliverabilityDashboardOptionRequest
+
+    PutDeliverabilityDashboardOptionResponse.struct_class = Types::PutDeliverabilityDashboardOptionResponse
 
     PutEmailIdentityDkimAttributesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
     PutEmailIdentityDkimAttributesRequest.add_member(:signing_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled"))
@@ -479,6 +627,12 @@ module Aws::PinpointEmail
 
     UpdateConfigurationSetEventDestinationResponse.struct_class = Types::UpdateConfigurationSetEventDestinationResponse
 
+    VolumeStatistics.add_member(:inbox_raw_count, Shapes::ShapeRef.new(shape: Volume, location_name: "InboxRawCount"))
+    VolumeStatistics.add_member(:spam_raw_count, Shapes::ShapeRef.new(shape: Volume, location_name: "SpamRawCount"))
+    VolumeStatistics.add_member(:projected_inbox, Shapes::ShapeRef.new(shape: Volume, location_name: "ProjectedInbox"))
+    VolumeStatistics.add_member(:projected_spam, Shapes::ShapeRef.new(shape: Volume, location_name: "ProjectedSpam"))
+    VolumeStatistics.struct_class = Types::VolumeStatistics
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -534,6 +688,22 @@ module Aws::PinpointEmail
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:create_deliverability_test_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDeliverabilityTestReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/email/deliverability-dashboard/test"
+        o.input = Shapes::ShapeRef.new(shape: CreateDeliverabilityTestReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDeliverabilityTestReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSuspendedException)
+        o.errors << Shapes::ShapeRef.new(shape: SendingPausedException)
+        o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
+        o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
@@ -602,6 +772,17 @@ module Aws::PinpointEmail
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_blacklist_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlacklistReports"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/email/deliverability-dashboard/blacklist-report"
+        o.input = Shapes::ShapeRef.new(shape: GetBlacklistReportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBlacklistReportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_configuration_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetConfigurationSet"
         o.http_method = "GET"
@@ -652,6 +833,39 @@ module Aws::PinpointEmail
         )
       end)
 
+      api.add_operation(:get_deliverability_dashboard_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeliverabilityDashboardOptions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/email/deliverability-dashboard"
+        o.input = Shapes::ShapeRef.new(shape: GetDeliverabilityDashboardOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeliverabilityDashboardOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_deliverability_test_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeliverabilityTestReport"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/email/deliverability-dashboard/test-reports/{ReportId}"
+        o.input = Shapes::ShapeRef.new(shape: GetDeliverabilityTestReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeliverabilityTestReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_domain_statistics_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDomainStatisticsReport"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/email/deliverability-dashboard/statistics-report/{Domain}"
+        o.input = Shapes::ShapeRef.new(shape: GetDomainStatisticsReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDomainStatisticsReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_email_identity, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEmailIdentity"
         o.http_method = "GET"
@@ -686,6 +900,23 @@ module Aws::PinpointEmail
         o.input = Shapes::ShapeRef.new(shape: ListDedicatedIpPoolsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDedicatedIpPoolsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_deliverability_test_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeliverabilityTestReports"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/email/deliverability-dashboard/test-reports"
+        o.input = Shapes::ShapeRef.new(shape: ListDeliverabilityTestReportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDeliverabilityTestReportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o[:pager] = Aws::Pager.new(
           limit_key: "page_size",
@@ -794,6 +1025,19 @@ module Aws::PinpointEmail
         o.output = Shapes::ShapeRef.new(shape: PutDedicatedIpWarmupAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_deliverability_dashboard_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDeliverabilityDashboardOption"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/email/deliverability-dashboard"
+        o.input = Shapes::ShapeRef.new(shape: PutDeliverabilityDashboardOptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDeliverabilityDashboardOptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 

@@ -351,6 +351,75 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Create a new predictive inbox placement test. Predictive inbox
+    # placement tests can help you predict how your messages will be handled
+    # by various email providers around the world. When you perform a
+    # predictive inbox placement test, you provide a sample message that
+    # contains the content that you plan to send to your customers. Amazon
+    # Pinpoint then sends that message to special email addresses spread
+    # across several major email providers. After about 24 hours, the test
+    # is complete, and you can use the `GetDeliverabilityTestReport`
+    # operation to view the results of the test.
+    #
+    # @option params [String] :report_name
+    #   A unique name that helps you to identify the predictive inbox
+    #   placement test when you retrieve the results.
+    #
+    # @option params [required, String] :from_email_address
+    #   The email address that the predictive inbox placement test email was
+    #   sent from.
+    #
+    # @option params [required, Types::EmailContent] :content
+    #   The HTML body of the message that you sent when you performed the
+    #   predictive inbox placement test.
+    #
+    # @return [Types::CreateDeliverabilityTestReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDeliverabilityTestReportResponse#report_id #report_id} => String
+    #   * {Types::CreateDeliverabilityTestReportResponse#deliverability_test_status #deliverability_test_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_deliverability_test_report({
+    #     report_name: "ReportName",
+    #     from_email_address: "EmailAddress", # required
+    #     content: { # required
+    #       simple: {
+    #         subject: { # required
+    #           data: "MessageData", # required
+    #           charset: "Charset",
+    #         },
+    #         body: { # required
+    #           text: {
+    #             data: "MessageData", # required
+    #             charset: "Charset",
+    #           },
+    #           html: {
+    #             data: "MessageData", # required
+    #             charset: "Charset",
+    #           },
+    #         },
+    #       },
+    #       raw: {
+    #         data: "data", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_id #=> String
+    #   resp.deliverability_test_status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReport AWS API Documentation
+    #
+    # @overload create_deliverability_test_report(params = {})
+    # @param [Hash] params ({})
+    def create_deliverability_test_report(params = {}, options = {})
+      req = build_request(:create_deliverability_test_report, params)
+      req.send_request(options)
+    end
+
     # Verifies an email identity for use with Amazon Pinpoint. In Amazon
     # Pinpoint, an identity is an email address or domain that you use when
     # you send email. Before you can use an identity to send email with
@@ -542,6 +611,41 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Retrieve a list of the blacklists that your dedicated IP addresses
+    # appear on.
+    #
+    # @option params [required, Array<String>] :blacklist_item_names
+    #   A list of IP addresses that you want to retrieve blacklist information
+    #   about. You can only specify the dedicated IP addresses that you use to
+    #   send email using Amazon Pinpoint or Amazon SES.
+    #
+    # @return [Types::GetBlacklistReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlacklistReportsResponse#blacklist_report #blacklist_report} => Hash&lt;String,Array&lt;Types::BlacklistEntry&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blacklist_reports({
+    #     blacklist_item_names: ["BlacklistItemName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blacklist_report #=> Hash
+    #   resp.blacklist_report["BlacklistItemName"] #=> Array
+    #   resp.blacklist_report["BlacklistItemName"][0].rbl_name #=> String
+    #   resp.blacklist_report["BlacklistItemName"][0].listing_time #=> Time
+    #   resp.blacklist_report["BlacklistItemName"][0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReports AWS API Documentation
+    #
+    # @overload get_blacklist_reports(params = {})
+    # @param [Hash] params ({})
+    def get_blacklist_reports(params = {}, options = {})
+      req = build_request(:get_blacklist_reports, params)
+      req.send_request(options)
+    end
+
     # Get information about an existing configuration set, including the
     # dedicated IP pool that it's associated with, whether or not it's
     # enabled for sending email, and more.
@@ -719,6 +823,147 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Show the status of the Deliverability dashboard. When the
+    # Deliverability dashboard is enabled, you gain access to reputation
+    # metrics for the domains that you use to send email using Amazon
+    # Pinpoint. You also gain the ability to perform predictive inbox
+    # placement tests.
+    #
+    # When you use the Deliverability dashboard, you pay a monthly charge of
+    # USD$1,250.00, in addition to any other fees that you accrue by using
+    # Amazon Pinpoint. If you enable the Deliverability dashboard after the
+    # first day of a calendar month, AWS prorates the monthly charge based
+    # on how many days have elapsed in the current calendar month.
+    #
+    # @return [Types::GetDeliverabilityDashboardOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliverabilityDashboardOptionsResponse#dashboard_enabled #dashboard_enabled} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.dashboard_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptions AWS API Documentation
+    #
+    # @overload get_deliverability_dashboard_options(params = {})
+    # @param [Hash] params ({})
+    def get_deliverability_dashboard_options(params = {}, options = {})
+      req = build_request(:get_deliverability_dashboard_options, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the results of a predictive inbox placement test.
+    #
+    # @option params [required, String] :report_id
+    #   A unique string that identifies the predictive inbox placement test.
+    #
+    # @return [Types::GetDeliverabilityTestReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeliverabilityTestReportResponse#deliverability_test_report #deliverability_test_report} => Types::DeliverabilityTestReport
+    #   * {Types::GetDeliverabilityTestReportResponse#overall_placement #overall_placement} => Types::PlacementStatistics
+    #   * {Types::GetDeliverabilityTestReportResponse#isp_placements #isp_placements} => Array&lt;Types::IspPlacement&gt;
+    #   * {Types::GetDeliverabilityTestReportResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deliverability_test_report({
+    #     report_id: "ReportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deliverability_test_report.report_id #=> String
+    #   resp.deliverability_test_report.report_name #=> String
+    #   resp.deliverability_test_report.subject #=> String
+    #   resp.deliverability_test_report.from_email_address #=> String
+    #   resp.deliverability_test_report.create_date #=> Time
+    #   resp.deliverability_test_report.deliverability_test_status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #   resp.overall_placement.inbox_percentage #=> Float
+    #   resp.overall_placement.spam_percentage #=> Float
+    #   resp.overall_placement.missing_percentage #=> Float
+    #   resp.overall_placement.spf_percentage #=> Float
+    #   resp.overall_placement.dkim_percentage #=> Float
+    #   resp.isp_placements #=> Array
+    #   resp.isp_placements[0].isp_name #=> String
+    #   resp.isp_placements[0].placement_statistics.inbox_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.spam_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.missing_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.spf_percentage #=> Float
+    #   resp.isp_placements[0].placement_statistics.dkim_percentage #=> Float
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReport AWS API Documentation
+    #
+    # @overload get_deliverability_test_report(params = {})
+    # @param [Hash] params ({})
+    def get_deliverability_test_report(params = {}, options = {})
+      req = build_request(:get_deliverability_test_report, params)
+      req.send_request(options)
+    end
+
+    # Retrieve inbox placement and engagement rates for the domains that you
+    # use to send email.
+    #
+    # @option params [required, String] :domain
+    #   The domain that you want to obtain deliverability metrics for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    #   The first day (in Unix time) that you want to obtain domain
+    #   deliverability metrics for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date
+    #   The last day (in Unix time) that you want to obtain domain
+    #   deliverability metrics for. The `EndDate` that you specify has to be
+    #   less than or equal to 30 days after the `StartDate`.
+    #
+    # @return [Types::GetDomainStatisticsReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainStatisticsReportResponse#overall_volume #overall_volume} => Types::OverallVolume
+    #   * {Types::GetDomainStatisticsReportResponse#daily_volumes #daily_volumes} => Array&lt;Types::DailyVolume&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_statistics_report({
+    #     domain: "Identity", # required
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.overall_volume.volume_statistics.inbox_raw_count #=> Integer
+    #   resp.overall_volume.volume_statistics.spam_raw_count #=> Integer
+    #   resp.overall_volume.volume_statistics.projected_inbox #=> Integer
+    #   resp.overall_volume.volume_statistics.projected_spam #=> Integer
+    #   resp.overall_volume.read_rate_percent #=> Float
+    #   resp.overall_volume.domain_isp_placements #=> Array
+    #   resp.overall_volume.domain_isp_placements[0].isp_name #=> String
+    #   resp.overall_volume.domain_isp_placements[0].inbox_raw_count #=> Integer
+    #   resp.overall_volume.domain_isp_placements[0].spam_raw_count #=> Integer
+    #   resp.overall_volume.domain_isp_placements[0].inbox_percentage #=> Float
+    #   resp.overall_volume.domain_isp_placements[0].spam_percentage #=> Float
+    #   resp.daily_volumes #=> Array
+    #   resp.daily_volumes[0].start_date #=> Time
+    #   resp.daily_volumes[0].volume_statistics.inbox_raw_count #=> Integer
+    #   resp.daily_volumes[0].volume_statistics.spam_raw_count #=> Integer
+    #   resp.daily_volumes[0].volume_statistics.projected_inbox #=> Integer
+    #   resp.daily_volumes[0].volume_statistics.projected_spam #=> Integer
+    #   resp.daily_volumes[0].domain_isp_placements #=> Array
+    #   resp.daily_volumes[0].domain_isp_placements[0].isp_name #=> String
+    #   resp.daily_volumes[0].domain_isp_placements[0].inbox_raw_count #=> Integer
+    #   resp.daily_volumes[0].domain_isp_placements[0].spam_raw_count #=> Integer
+    #   resp.daily_volumes[0].domain_isp_placements[0].inbox_percentage #=> Float
+    #   resp.daily_volumes[0].domain_isp_placements[0].spam_percentage #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReport AWS API Documentation
+    #
+    # @overload get_domain_statistics_report(params = {})
+    # @param [Hash] params ({})
+    def get_domain_statistics_report(params = {}, options = {})
+      req = build_request(:get_domain_statistics_report, params)
+      req.send_request(options)
+    end
+
     # Provides information about a specific identity associated with your
     # Amazon Pinpoint account, including the identity's verification
     # status, its DKIM authentication status, and its custom Mail-From
@@ -846,6 +1091,58 @@ module Aws::PinpointEmail
     # @param [Hash] params ({})
     def list_dedicated_ip_pools(params = {}, options = {})
       req = build_request(:list_dedicated_ip_pools, params)
+      req.send_request(options)
+    end
+
+    # Show a list of the predictive inbox placement tests that you've
+    # performed, regardless of their statuses. For predictive inbox
+    # placement tests that are complete, you can use the
+    # `GetDeliverabilityTestReport` operation to view the results.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to
+    #   `ListDeliverabilityTestReports` to indicate the position in the list
+    #   of predictive inbox placement tests.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListDeliverabilityTestReports`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain additional
+    #   results.
+    #
+    #   The value you specify has to be at least 0, and can be no more than
+    #   1000.
+    #
+    # @return [Types::ListDeliverabilityTestReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeliverabilityTestReportsResponse#deliverability_test_reports #deliverability_test_reports} => Array&lt;Types::DeliverabilityTestReport&gt;
+    #   * {Types::ListDeliverabilityTestReportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deliverability_test_reports({
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deliverability_test_reports #=> Array
+    #   resp.deliverability_test_reports[0].report_id #=> String
+    #   resp.deliverability_test_reports[0].report_name #=> String
+    #   resp.deliverability_test_reports[0].subject #=> String
+    #   resp.deliverability_test_reports[0].from_email_address #=> String
+    #   resp.deliverability_test_reports[0].create_date #=> Time
+    #   resp.deliverability_test_reports[0].deliverability_test_status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReports AWS API Documentation
+    #
+    # @overload list_deliverability_test_reports(params = {})
+    # @param [Hash] params ({})
+    def list_deliverability_test_reports(params = {}, options = {})
+      req = build_request(:list_deliverability_test_reports, params)
       req.send_request(options)
     end
 
@@ -1128,6 +1425,38 @@ module Aws::PinpointEmail
     # @param [Hash] params ({})
     def put_dedicated_ip_warmup_attributes(params = {}, options = {})
       req = build_request(:put_dedicated_ip_warmup_attributes, params)
+      req.send_request(options)
+    end
+
+    # Enable or disable the Deliverability dashboard. When you enable the
+    # Deliverability dashboard, you gain access to reputation metrics for
+    # the domains that you use to send email using Amazon Pinpoint. You also
+    # gain the ability to perform predictive inbox placement tests.
+    #
+    # When you use the Deliverability dashboard, you pay a monthly charge of
+    # USD$1,250.00, in addition to any other fees that you accrue by using
+    # Amazon Pinpoint. If you enable the Deliverability dashboard after the
+    # first day of a calendar month, we prorate the monthly charge based on
+    # how many days have elapsed in the current calendar month.
+    #
+    # @option params [required, Boolean] :dashboard_enabled
+    #   Indicates whether the Deliverability dashboard is enabled. If the
+    #   value is `true`, then the dashboard is enabled.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_deliverability_dashboard_option({
+    #     dashboard_enabled: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOption AWS API Documentation
+    #
+    # @overload put_deliverability_dashboard_option(params = {})
+    # @param [Hash] params ({})
+    def put_deliverability_dashboard_option(params = {}, options = {})
+      req = build_request(:put_deliverability_dashboard_option, params)
       req.send_request(options)
     end
 
@@ -1440,7 +1769,7 @@ module Aws::PinpointEmail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

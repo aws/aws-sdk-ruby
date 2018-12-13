@@ -646,6 +646,13 @@ module Aws::Organizations
     #   because your organization is still initializing, wait one hour and
     #   then try again. If the error persists, contact [AWS Support][5].
     #
+    # * Using CreateAccount to create multiple temporary accounts is not
+    #   recommended. You can only close an account from the Billing and Cost
+    #   Management Console, and you must be signed in as the root user. For
+    #   information on the requirements and process for closing an account,
+    #   see [Closing an AWS Account][6] in the *AWS Organizations User
+    #   Guide*.
+    #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
     # Billing Information** switch enabled. If you enable it, IAM users and
@@ -653,7 +660,7 @@ module Aws::Organizations
     # for the account. If you disable it, only the account root user can
     # access billing information. For information about how to disable this
     # switch for an account, see [Granting Access to Your Billing
-    # Information and Tools][6].
+    # Information and Tools][7].
     #
     #  </note>
     #
@@ -664,7 +671,8 @@ module Aws::Organizations
     # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
     # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     # [5]: https://console.aws.amazon.com/support/home#/
-    # [6]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
+    # [6]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    # [7]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
@@ -800,7 +808,7 @@ module Aws::Organizations
     #
     #   * *CONSOLIDATED\_BILLING*\: All member accounts have their bills
     #     consolidated to and paid by the master account. For more
-    #     information, see [Consolidated Billing][1] in the *AWS Organizations
+    #     information, see [Consolidated billing][1] in the *AWS Organizations
     #     User Guide*.
     #
     #   * *ALL*\: In addition to all the features supported by the
@@ -4270,7 +4278,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
