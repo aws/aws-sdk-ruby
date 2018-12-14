@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
+
+* Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
 2.11.191 (2018-12-13)
 ------------------
 
