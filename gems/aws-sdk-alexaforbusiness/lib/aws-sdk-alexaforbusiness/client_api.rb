@@ -33,6 +33,8 @@ module Aws::AlexaForBusiness
     AssociateSkillGroupWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomResponse')
     AssociateSkillWithSkillGroupRequest = Shapes::StructureShape.new(name: 'AssociateSkillWithSkillGroupRequest')
     AssociateSkillWithSkillGroupResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithSkillGroupResponse')
+    AssociateSkillWithUsersRequest = Shapes::StructureShape.new(name: 'AssociateSkillWithUsersRequest')
+    AssociateSkillWithUsersResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithUsersResponse')
     AuthorizationResult = Shapes::MapShape.new(name: 'AuthorizationResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BulletPoint = Shapes::StringShape.new(name: 'BulletPoint')
@@ -134,6 +136,8 @@ module Aws::AlexaForBusiness
     DisassociateDeviceFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomResponse')
     DisassociateSkillFromSkillGroupRequest = Shapes::StructureShape.new(name: 'DisassociateSkillFromSkillGroupRequest')
     DisassociateSkillFromSkillGroupResponse = Shapes::StructureShape.new(name: 'DisassociateSkillFromSkillGroupResponse')
+    DisassociateSkillFromUsersRequest = Shapes::StructureShape.new(name: 'DisassociateSkillFromUsersRequest')
+    DisassociateSkillFromUsersResponse = Shapes::StructureShape.new(name: 'DisassociateSkillFromUsersResponse')
     DisassociateSkillGroupFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomRequest')
     DisassociateSkillGroupFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomResponse')
     DistanceUnit = Shapes::StringShape.new(name: 'DistanceUnit')
@@ -276,6 +280,7 @@ module Aws::AlexaForBusiness
     SkillId = Shapes::StringShape.new(name: 'SkillId')
     SkillListMaxResults = Shapes::IntegerShape.new(name: 'SkillListMaxResults')
     SkillName = Shapes::StringShape.new(name: 'SkillName')
+    SkillNotLinkedException = Shapes::StructureShape.new(name: 'SkillNotLinkedException')
     SkillStoreType = Shapes::StringShape.new(name: 'SkillStoreType')
     SkillSummary = Shapes::StructureShape.new(name: 'SkillSummary')
     SkillSummaryList = Shapes::ListShape.new(name: 'SkillSummaryList')
@@ -378,6 +383,12 @@ module Aws::AlexaForBusiness
     AssociateSkillWithSkillGroupRequest.struct_class = Types::AssociateSkillWithSkillGroupRequest
 
     AssociateSkillWithSkillGroupResponse.struct_class = Types::AssociateSkillWithSkillGroupResponse
+
+    AssociateSkillWithUsersRequest.add_member(:organization_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "OrganizationArn"))
+    AssociateSkillWithUsersRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    AssociateSkillWithUsersRequest.struct_class = Types::AssociateSkillWithUsersRequest
+
+    AssociateSkillWithUsersResponse.struct_class = Types::AssociateSkillWithUsersResponse
 
     AuthorizationResult.key = Shapes::ShapeRef.new(shape: Key)
     AuthorizationResult.value = Shapes::ShapeRef.new(shape: Value)
@@ -656,6 +667,12 @@ module Aws::AlexaForBusiness
     DisassociateSkillFromSkillGroupRequest.struct_class = Types::DisassociateSkillFromSkillGroupRequest
 
     DisassociateSkillFromSkillGroupResponse.struct_class = Types::DisassociateSkillFromSkillGroupResponse
+
+    DisassociateSkillFromUsersRequest.add_member(:organization_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "OrganizationArn"))
+    DisassociateSkillFromUsersRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
+    DisassociateSkillFromUsersRequest.struct_class = Types::DisassociateSkillFromUsersRequest
+
+    DisassociateSkillFromUsersResponse.struct_class = Types::DisassociateSkillFromUsersResponse
 
     DisassociateSkillGroupFromRoomRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     DisassociateSkillGroupFromRoomRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
@@ -1246,6 +1263,16 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillWithSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: SkillNotLinkedException)
+      end)
+
+      api.add_operation(:associate_skill_with_users, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSkillWithUsers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSkillWithUsersRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSkillWithUsersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -1464,6 +1491,15 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillFromSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:disassociate_skill_from_users, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSkillFromUsers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSkillFromUsersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSkillFromUsersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:disassociate_skill_group_from_room, Seahorse::Model::Operation.new.tap do |o|

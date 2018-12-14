@@ -347,6 +347,33 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Makes a private skill available for enrolled users to enable on their
+    # devices.
+    #
+    # @option params [String] :organization_arn
+    #   The ARN of the organization.
+    #
+    # @option params [required, String] :skill_id
+    #   The private skill ID you want to make available to enrolled users.&gt;
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_skill_with_users({
+    #     organization_arn: "Arn",
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsers AWS API Documentation
+    #
+    # @overload associate_skill_with_users(params = {})
+    # @param [Hash] params ({})
+    def associate_skill_with_users(params = {}, options = {})
+      req = build_request(:associate_skill_with_users, params)
+      req.send_request(options)
+    end
+
     # Creates an address book with the specified details.
     #
     # @option params [required, String] :name
@@ -1119,6 +1146,33 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Makes a private skill unavailable for enrolled users and prevents them
+    # from enabling it on their devices.
+    #
+    # @option params [String] :organization_arn
+    #   The ARN of the organization.
+    #
+    # @option params [required, String] :skill_id
+    #   The private skill ID you want to make unavailable for enrolled users.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_skill_from_users({
+    #     organization_arn: "Arn",
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsers AWS API Documentation
+    #
+    # @overload disassociate_skill_from_users(params = {})
+    # @param [Hash] params ({})
+    def disassociate_skill_from_users(params = {}, options = {})
+      req = build_request(:disassociate_skill_from_users, params)
+      req.send_request(options)
+    end
+
     # Disassociates a skill group from a specified room. This disables all
     # skills in the skill group on all devices in the room.
     #
@@ -1618,7 +1672,7 @@ module Aws::AlexaForBusiness
     # Lists all enabled skills in a specific skill group.
     #
     # @option params [String] :skill_group_arn
-    #   The ARN of the skill group for which to list enabled skills. Required.
+    #   The ARN of the skill group for which to list enabled skills.
     #
     # @option params [String] :enablement_type
     #   Whether the skill is enabled under the user's account, or if it
@@ -1631,13 +1685,13 @@ module Aws::AlexaForBusiness
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up to
-    #   the value specified by `MaxResults`. Required.
+    #   the value specified by `MaxResults`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved. Required.
+    #   retrieved.
     #
     # @return [Types::ListSkillsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3057,7 +3111,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

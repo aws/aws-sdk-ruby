@@ -189,6 +189,35 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithSkillGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AssociateSkillWithUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_arn: "Arn",
+    #         skill_id: "SkillId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_arn
+    #   The ARN of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_id
+    #   The private skill ID you want to make available to enrolled
+    #   users.&gt;
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsersRequest AWS API Documentation
+    #
+    class AssociateSkillWithUsersRequest < Struct.new(
+      :organization_arn,
+      :skill_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsersResponse AWS API Documentation
+    #
+    class AssociateSkillWithUsersResponse < Aws::EmptyStructure; end
+
     # Usage report with specified parameters.
     #
     # @!attribute [rw] status
@@ -1541,6 +1570,35 @@ module Aws::AlexaForBusiness
     #
     class DisassociateSkillFromSkillGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateSkillFromUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_arn: "Arn",
+    #         skill_id: "SkillId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_arn
+    #   The ARN of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] skill_id
+    #   The private skill ID you want to make unavailable for enrolled
+    #   users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsersRequest AWS API Documentation
+    #
+    class DisassociateSkillFromUsersRequest < Struct.new(
+      :organization_arn,
+      :skill_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsersResponse AWS API Documentation
+    #
+    class DisassociateSkillFromUsersResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateSkillGroupFromRoomRequest
     #   data as a hash:
     #
@@ -2067,7 +2125,6 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group for which to list enabled skills.
-    #   Required.
     #   @return [String]
     #
     # @!attribute [rw] enablement_type
@@ -2083,14 +2140,14 @@ module Aws::AlexaForBusiness
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up
-    #   to the value specified by `MaxResults`. Required.
+    #   to the value specified by `MaxResults`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved. Required.
+    #   retrieved.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsRequest AWS API Documentation
