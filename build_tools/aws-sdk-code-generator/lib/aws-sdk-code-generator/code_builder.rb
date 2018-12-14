@@ -59,7 +59,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}.rb", service_module(prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
-        if (@api['metadata']['protocolSettings'].nil? || @api['metadata']['protocolSettings']['h2'].nil?) && has_eventstream
+        if has_eventstream
           y.yield("#{prefix}/event_streams.rb", event_streams_module)
         end
         y.yield("#{prefix}/client_api.rb", client_api_module)

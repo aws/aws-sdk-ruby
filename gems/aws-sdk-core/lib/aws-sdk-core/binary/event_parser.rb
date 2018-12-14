@@ -7,10 +7,12 @@ module Aws
 
       # @param [Class] parser_class
       # @param [Seahorse::Model::ShapeRef] rules (of eventstream member)
+      # @param [Array] error_refs array of errors ShapeRef
       # @param [Seahorse::Model::ShapeRef] output_ref
-      def initialize(parser_class, rules, output_ref)
+      def initialize(parser_class, rules, error_refs, output_ref)
         @parser_class = parser_class
         @rules = rules
+        @error_refs = error_refs
         @output_ref = output_ref
       end
 
@@ -33,7 +35,6 @@ module Aws
           when 'event'
             parse_event(raw_event)
           when 'exception'
-            # TODO need to test
             parse_exception(raw_event)
           else
             raise Aws::Errors::EventStreamParserError.new(
@@ -77,7 +78,10 @@ module Aws
 
         # locate event from eventstream
         name, ref = @rules.shape.member_by_location_name(event_type)
-        raise "Failed to locate event shape for the event" unless ref.event
+        unless ref.event
+          raise Aws::Errors::EventStreamParserError.new(
+            "Failed to locate event shape for the event")
+        end
 
         event = ref.shape.struct_class.new
 
@@ -93,14 +97,9 @@ module Aws
           end
         end
 
-        # handle implicit payload
+        # implicit payload
         if !explicit_payload && !implicit_payload_members.empty?
-          if implicit_payload_members.size > 1
-            event = parse_payload(raw_event.payload.read, ref)
-          else
-            m_name, m_ref = implicit_payload_members.first
-            parse_payload_member(event, raw_event.payload, m_name, m_ref)
-          end
+          event = parse_payload(raw_event.payload.read, ref)
         end
         event.event_type = name
 
@@ -112,16 +111,12 @@ module Aws
               event.send("#{member_name}=", raw_event.headers[member_ref.location_name].value)
             end
           elsif member_ref.eventpayload
-            parse_payload_member(event, raw_event.payload, member_name, member_ref)
+            # explicit payload
+            eventpayload_streaming?(member_ref) ?
+             event.send("#{member_name}=", raw_event.payload) :
+             event.send("#{member_name}=", parse_payload(raw_event.payload.read, member_ref))
           end
         end
-        event
-      end
-
-      def parse_payload_member(event, payload, name, ref)
-        eventpayload_streaming?(ref) ?
-         event.send("#{name}=", payload) :
-         event.send("#{name}=", parse_payload(payload.read, ref))
         event
       end
 

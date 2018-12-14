@@ -38,6 +38,10 @@ module Aws
     # a raw event message
     class EventStreamParserError < RuntimeError; end
 
+    # Raise when EventStream Builder failed to build
+    # an event message with parameters provided
+    class EventStreamBuilderError < RuntimeError; end
+
     # Error event in an event stream which has event_type :error
     # error code and error message can be retrieved when available.
     #

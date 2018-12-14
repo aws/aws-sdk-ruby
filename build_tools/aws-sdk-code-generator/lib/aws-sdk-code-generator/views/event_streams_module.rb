@@ -6,7 +6,16 @@ module AwsSdkCodeGenerator
 
       def initialize(options)
         @service = options.fetch(:service)
+        input, output = extract_eventstreams
+        @input_eventstreams = input
+        @output_eventstreams = output
       end
+
+      # @return [Array<EventStreamClass>]
+      attr_reader :input_eventstreams
+
+      # @return [Array<EventStreamClass>]
+      attr_reader :output_eventstreams
 
       # @return [String|nil]
       def generated_src_warning
@@ -18,18 +27,36 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
-      # @return [Array<EventStreamClass>]
-      def eventstreams
-        @service.api['shapes'].inject([]) do |list, (name, shape)|
-          if shape['eventstream']
-            list << EventStreamClass.new(
-              class_name: name,
-              types: eventstream_members(shape)
-            )
-          else
-            list
+      def extract_eventstreams
+        input_es = []
+        output_es = []
+        @service.api['operations'].each do |_, ref|
+          if input = ref['input']
+            input_shape = @service.api['shapes'][input['shape']]
+            input_shape['members'].each do |_, m_ref|
+              if @service.api['shapes'][m_ref['shape']]['eventstream']
+                shape = @service.api['shapes'][m_ref['shape']]
+                input_es << EventStreamClass.new(
+                  class_name: m_ref['shape'],
+                  types: eventstream_members(shape)
+                )
+              end
+            end
+          end
+          if output = ref['output']
+            output_shape = @service.api['shapes'][output['shape']]
+            output_shape['members'].each do |_, m_ref|
+              if @service.api['shapes'][m_ref['shape']]['eventstream']
+                shape = @service.api['shapes'][m_ref['shape']]
+                output_es << EventStreamClass.new(
+                  class_name: m_ref['shape'],
+                  types: eventstream_members(shape)
+                )
+              end
+            end
           end
         end
+        [input_es, output_es]
       end
 
       def eventstream_members(shape)

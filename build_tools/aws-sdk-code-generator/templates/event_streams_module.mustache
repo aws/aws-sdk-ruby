@@ -3,7 +3,32 @@
 {{/generated_src_warning}}
 module {{module_name}}
   module EventStreams
-    {{#eventstreams}}
+
+    {{#input_eventstreams}}
+    class {{class_name}}
+      def initialize
+
+        @event_emitter = Aws::EventEmitter.new
+      end
+
+      {{#types}}
+      def signal_{{.}}_event(params)
+        @event_emitter.emit(:{{.}}, params)
+      end
+
+      {{/types}}
+      def signal_end_stream
+        @event_emitter.emit(:end_stream, {})
+      end
+
+      # @api private
+      # @return Aws::EventEmitter
+      attr_reader :event_emitter
+
+    end
+
+    {{/input_eventstreams}}
+    {{#output_eventstreams}}
     class {{class_name}}
 
       def initialize
@@ -31,7 +56,7 @@ module {{module_name}}
       attr_reader :event_emitter
 
     end
-    {{/eventstreams}}
+    {{/output_eventstreams}}
 
   end
 end

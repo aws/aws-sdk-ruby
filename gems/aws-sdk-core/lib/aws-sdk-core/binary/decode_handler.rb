@@ -28,8 +28,19 @@ module Aws
             protocol,
             rules,
             context.operation.output,
+            context.operation.errors,
             context.http_response.body,
             output_handler)
+          if input_emitter = context[:input_event_emitter]
+            # TODO maybe multithread? call proc?
+            # no multi thread or audio chunks will be disorder?
+            thread = Thread.new do
+              input_emitter.emit_state = :busy
+              input_emitter.buffer.each {|p| p.call}
+              input_emitter.emit_state = :ready
+            end
+            thread.abort_on_exception = true
+          end
         end
 
         context.http_response.on_success(200) do

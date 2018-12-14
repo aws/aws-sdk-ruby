@@ -9,9 +9,6 @@ module AwsSdkCodeGenerator
       module_name = options.fetch(:module_name)
       client_examples = options.fetch(:client_examples, {})
       @operations = api['operations'].map do |name, operation|
-        if AwsSdkCodeGenerator::Helper.eventstream_input?(operation, api)
-          raise 'eventstream at operation input is not supported'
-        end
         method_name = Underscore.underscore(name)
         Operation.new(
           name: method_name,
@@ -25,7 +22,8 @@ module AwsSdkCodeGenerator
             client_examples: client_examples[method_name] || []
           ).to_s,
           streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
-          eventstream_output: AwsSdkCodeGenerator::Helper.eventstream_output?(operation, api)
+          eventstream_output: AwsSdkCodeGenerator::Helper.eventstream_output?(operation, api),
+          eventstream_input: AwsSdkCodeGenerator::Helper.eventstream_input?(operation, api)
         )
       end
     end
@@ -42,6 +40,7 @@ module AwsSdkCodeGenerator
         @documentation = options.fetch(:documentation)
         @streaming = options.fetch(:streaming)
         @eventstream_output = !!options.fetch(:eventstream_output)
+        @eventstream_input = !!options.fetch(:eventstream_input)
         @eventstream_member = @eventstream_output ?
           options.fetch(:eventstream_output) : nil
       end
@@ -51,6 +50,9 @@ module AwsSdkCodeGenerator
 
       # @return [String, nil]
       attr_reader :documentation
+
+      # @return [Boolean]
+      attr_reader :eventstream_input
 
       # @return [Boolean]
       attr_reader :eventstream_output

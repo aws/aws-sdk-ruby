@@ -6,12 +6,18 @@ module Seahorse
   module Client
     # @api private
     module H2
+
+      # H2 Connection build on top of `http/2` gem
+      # with TLS layer plus ALPN, requires:
+      # Ruby >= 2.3 and OpenSSL >= 1.0.2
       class Connection
 
         OPTIONS = {
           max_concurrent_streams: 100,
-          connection_timeout: 60, # TODO
+          connection_timeout: 60,
+          connection_read_timeout: 60,
           http_wire_trace: false,
+          logger: nil,
           ssl_verify_peer: true,
           ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
@@ -21,6 +27,8 @@ module Seahorse
         # chunk read size at socket
         CHUNKSIZE = 1024
 
+        SOCKET_FAMILY = ::Socket::AF_INET
+
         def initialize(options = {})
           OPTIONS.each_pair do |opt_name, default_value|
             value = options[opt_name].nil? ? default_value : options[opt_name]
@@ -29,6 +37,7 @@ module Seahorse
           @h2_client = HTTP2::Client.new(
             settings_max_concurrent_streams: max_concurrent_streams
           )
+          @logger = options[:logger] || Logger.new($stdout) if @http_wire_trace
           @chunk_size = options[:read_chunk_size] || CHUNKSIZE
           @errors = []
           @status = :ready
@@ -52,43 +61,79 @@ module Seahorse
 
         def connect(endpoint)
           if @status == :ready
-            @socket = _build_tcp_over_tls(endpoint) 
+            tcp, addr = _tcp_socket(endpoint) 
+            debug_output("opening connection to #{endpoint.host}:#{endpoint.port} ...")
+            _nonblocking_connect(tcp, addr)
+            debug_output("opened")
+
+            @socket = OpenSSL::SSL::SSLSocket.new(tcp, _tls_context)
+            @socket.sync_close = true
+            @socket.hostname = endpoint.host
+
+            debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
             @socket.connect
-            unless @socket.alpn_protocol == 'h2'
-              raise Http2NotSupportedError.new
-            end
+            debug_output("TLS over ALPN established")
+            # TODO, confirm with Transcribe
+            #raise Http2NotSupportedError.new unless @socket.alpn_protocol == 'h2'
             _register_h2_callbacks
             @status = :active
           end
         end
 
-        def start
-          return if @socket_thread
-          @socket_thread = Thread.new do
-            while !@socket.closed? && !@socket.eof? && @h2_client.active_stream_count > 0
+        def start(stream)
+          #return if @socket_thread
+          #@socket_thread = Thread.new do
+            while !@socket.closed? && @h2_client.active_stream_count > 0
+            #while !@socket.closed? && !@socket.eof? && @h2_client.active_stream_count > 0
               begin
                 data = @socket.read_nonblock(@chunk_size)
                 @h2_client << data
+              rescue IO::WaitReadable
+                unless IO.select([@socket], nil, nil, connection_read_timeout)
+                  debug_output("socket connection read time out")
+                  @socket.close
+                else
+                  retry
+                end
+              rescue EOFError
+                @socket.close
               rescue => error
-                self.track_error(error)
+                # TODO debug only, to be removed
+                puts error.backtrace
+                debug_output(error.inspect)
+                @errors << error
                 self.close!
               end
-              self.close! if @h2_client.active_stream_count.zero?
+              if @h2_client.active_stream_count.zero?
+                self.close!
+              end
             end
-          end
-          @socket_thread.abort_on_exception = true
+          #end
+          #@socket_thread.abort_on_exception = true
         end
 
         def close!
           @socket.close
-          Thread.kill(@socket_thread)
+          #Thread.kill(@socket_thread)
           @status = :closed
+        end
+
+        def debug_output(msg, type = nil)
+          prefix = case type
+            when :send then "-> "
+            when :receive then "<- "
+            else
+              ""
+            end
+          return unless @logger
+          _debug_entry(prefix + msg)
         end
 
         private
 
-        def track_error(error)
-          @errors << error
+        def _debug_entry(str)
+          @logger << str
+          @logger << "\n"
         end
 
         def _register_h2_callbacks
@@ -96,37 +141,52 @@ module Seahorse
             @socket.print(bytes)
             @socket.flush
           end
+          @h2_client.on(:frame_sent) do |frame|
+            debug_output("frame: #{frame.inspect}", :send)
+          end
+          @h2_client.on(:frame_received) do |frame|
+            debug_output("frame: #{frame.inspect}", :receive)
+          end
         end
 
-        def _build_tcp_over_tls(endpoint)
-          tcp = TCPSocket.new(endpoint.host, endpoint.port)
-          socket = OpenSSL::SSL::SSLSocket.new(tcp, _ssl_context)
-          socket.sync_close = true
-          socket.hostname = endpoint.hostname
-          socket
+        def _tcp_socket(endpoint)
+          tcp = ::Socket.new(SOCKET_FAMILY, ::Socket::SOCK_STREAM, 0)
+          tcp.setsockopt(::Socket::IPPROTO_TCP, ::Socket::TCP_NODELAY, 1)
+
+          address = ::Socket.getaddrinfo(endpoint.host, nil, SOCKET_FAMILY).first[3]
+          sockaddr = ::Socket.sockaddr_in(endpoint.port, address)
+
+          [tcp, sockaddr]
         end
 
-        def _ssl_context
-          ssl_ctx = OpenSSL::SSL::SSLContext.new
-          ssl_ctx.timeout = connection_timeout if connection_timeout
+        def _nonblocking_connect(tcp, addr)
+          begin
+            tcp.connect_nonblock(addr)
+          rescue IO::WaitWritable
+            unless IO.select(nil, [tcp], nil, connection_timeout)
+              tcp.close
+              raise
+            end
+            begin
+              tcp.connect_nonblock(addr)
+            rescue Errno::EISCONN
+              # tcp socket connected, continue
+            end
+          end
+        end
+
+        def _tls_context
+          ssl_ctx = OpenSSL::SSL::SSLContext.new(:TLSv1_2)
           if ssl_verify_peer?
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
             ssl_ctx.ca_file = ssl_ca_bundle if ssl_ca_bundle
             ssl_ctx.ca_path = ssl_ca_directory if ssl_ca_directory
             ssl_ctx.cert_store = ssl_ca_store if ssl_ca_store
-            # TODO
-            # verify / raise error for tls version?
-            ssl_ctx.ssl_version = :TLSv1_2
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
-          ssl_ctx.alpn_protocols = ['h2']
-          ssl_ctx.alpn_select_cb = lambda do |protocols|
-            unless protocols.include? 'h2'
-              raise Http2NotSupportedError.new
-            end
-            'h2'
-          end
+          # TODO confirm with Transcribe
+          #ssl_ctx.alpn_protocols = ['h2']
           ssl_ctx
         end
 

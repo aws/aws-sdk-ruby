@@ -10,6 +10,8 @@ module Seahorse
 
         option(:connection_timeout, default: 60, doc_type: Integer, docstring: '')
 
+        option(:connectioni_read_timeout, default: 60, doc_type: Integer, docstring: '')
+
         option(:read_chunk_size, default: 1024, doc_type: Integer, docstring: '')
 
         option(:raise_response_errors, default: true, doc_type: 'Boolean', docstring: '')
@@ -23,9 +25,9 @@ module Seahorse
 
         option(:ssl_verify_peer, default: true, doc_type: 'Boolean', docstring: '')
 
-        # TODO
         option(:http_wire_trace, default: false, doc_type:  'Boolean', docstring: '')
-        # TODO option(:logger)
+
+        option(:logger)
 
         handler(Client::H2::Handler, step: :send)
 
