@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Change `BigDecimal` usage to be compliant with Ruby 2.6.
+
 1.18.0 (2018-11-28)
 ------------------
 
