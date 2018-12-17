@@ -408,8 +408,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] identity_type
-    #   The authentication method the user uses to sign in (IAM or
-    #   QUICKSIGHT).
+    #   The authentication method the user uses to sign in (IAM only).
     #   @return [String]
     #
     # @!attribute [rw] session_lifetime_in_minutes
@@ -440,10 +439,10 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] embed_url
-    #   Call the GetDashboardEmbedUrl API to get the URL that you can embed
-    #   in your dashboard. This URL is valid for 5 minutes, and the
-    #   resulting session is valid for 10 hours. The API provides the URL
-    #   with an auth\_code that enables a single-signon session.
+    #   URL that you can put into your server-side webpage to embed your
+    #   dashboard. This URL is valid for 5 minutes, and the resulting
+    #   session is valid for 10 hours. The API provides the URL with an
+    #   auth\_code that enables a single-signon session.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -654,12 +653,13 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] user_name
-    #   The name of the user that you want to list groups for.
+    #   The Amazon QuickSight user name that you want to list group
+    #   memberships for.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID that the user is in. Currently, use the AWS
-    #   Account ID which contains your Amazon QuickSight account.
+    #   The AWS Account ID that the user is in. Currently, you use the ID
+    #   for the AWS account that contains your Amazon QuickSight account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -698,7 +698,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The http status of the request.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListUserGroupsResponse AWS API Documentation
@@ -867,6 +867,12 @@ module Aws::QuickSight
     #   The user name.
     #   @return [Types::User]
     #
+    # @!attribute [rw] user_invitation_url
+    #   The URL the user visits to complete registration and provide a
+    #   password. This is returned only for users with an identity type of
+    #   `QUICKSIGHT`.
+    #   @return [String]
+    #
     # @!attribute [rw] request_id
     #   The AWS request ID for this operation.
     #   @return [String]
@@ -879,6 +885,7 @@ module Aws::QuickSight
     #
     class RegisterUserResponse < Struct.new(
       :user,
+      :user_invitation_url,
       :request_id,
       :status)
       include Aws::Structure

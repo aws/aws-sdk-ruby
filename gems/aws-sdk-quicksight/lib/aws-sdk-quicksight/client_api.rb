@@ -237,6 +237,7 @@ module Aws::QuickSight
     RegisterUserRequest.struct_class = Types::RegisterUserRequest
 
     RegisterUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
+    RegisterUserResponse.add_member(:user_invitation_url, Shapes::ShapeRef.new(shape: String, location_name: "UserInvitationUrl"))
     RegisterUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     RegisterUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     RegisterUserResponse.struct_class = Types::RegisterUserResponse

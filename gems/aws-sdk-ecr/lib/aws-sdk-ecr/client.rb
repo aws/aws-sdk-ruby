@@ -522,6 +522,8 @@ module Aws::ECR
     #   with a namespace to group the repository into a category (such as
     #   `project-a/nginx-web-app`).
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryResponse#repository #repository} => Types::Repository
@@ -549,6 +551,12 @@ module Aws::ECR
     #
     #   resp = client.create_repository({
     #     repository_name: "RepositoryName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -743,8 +751,7 @@ module Aws::ECR
     #   registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   A list of repositories to describe. If this parameter is omitted, then
-    #   all repositories in a registry are described.
+    #   A list of repositories to describe.
     #
     # @option params [Array<Types::ImageIdentifier>] :image_ids
     #   The list of image IDs for the requested repository.
@@ -763,7 +770,7 @@ module Aws::ECR
     #   only returns `maxResults` results in a single page along with a
     #   `nextToken` response element. The remaining results of the initial
     #   request can be seen by sending another `DescribeImages` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   the returned `nextToken` value. This value can be between 1 and 1000.
     #   If this parameter is not used, then `DescribeImages` returns up to 100
     #   results and a `nextToken` value, if applicable. This option cannot be
     #   used when you specify images with `imageIds`.
@@ -791,7 +798,7 @@ module Aws::ECR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: {
-    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #     },
     #   })
     #
@@ -849,7 +856,7 @@ module Aws::ECR
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
     #   `DescribeRepositories` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
+    #   This value can be between 1 and 1000. If this parameter is not used,
     #   then `DescribeRepositories` returns up to 100 results and a
     #   `nextToken` value, if applicable. This option cannot be used when you
     #   specify repositories with `repositoryNames`.
@@ -1092,7 +1099,7 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can be
     #   seen by sending  another `GetLifecyclePolicyPreviewRequest` request
     #   with the returned `nextToken`  value. This value can be between 1 and
-    #   100. If this  parameter is not used, then
+    #   1000. If this  parameter is not used, then
     #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when you
     #   specify images with `imageIds`.
@@ -1125,7 +1132,7 @@ module Aws::ECR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: {
-    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #     },
     #   })
     #
@@ -1286,7 +1293,7 @@ module Aws::ECR
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
     #   seen by sending another `ListImages` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   `nextToken` value. This value can be between 1 and 1000. If this
     #   parameter is not used, then `ListImages` returns up to 100 results and
     #   a `nextToken` value, if applicable.
     #
@@ -1326,7 +1333,7 @@ module Aws::ECR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: {
-    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #     },
     #   })
     #
@@ -1343,6 +1350,38 @@ module Aws::ECR
     # @param [Hash] params ({})
     def list_images(params = {}, options = {})
       req = build_request(:list_images, params)
+      req.send_request(options)
+    end
+
+    # List the tags for an Amazon ECR resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the only supported resource is an Amazon
+    #   ECR repository.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1543,6 +1582,71 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Adds specified tags to a resource with the specified ARN. Existing
+    # tags on a resource are not changed if they are not specified in the
+    # request parameters.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the the resource to which to add
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Tag keys can have a maximum character length of 128 characters, and
+    #   tag values can have a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Uploads an image layer part to Amazon ECR.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
@@ -1619,7 +1723,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

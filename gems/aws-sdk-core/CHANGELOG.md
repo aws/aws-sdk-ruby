@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.44.1 (2018-12-17)
+------------------
+
 * Issue - Update sensitive filtering logic to include `#to_s` calls of shapes.
 
 3.44.0 (2018-12-07)
