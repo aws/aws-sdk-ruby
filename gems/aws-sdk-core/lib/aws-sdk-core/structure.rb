@@ -45,6 +45,12 @@ module Aws
     end
     alias to_hash to_h
 
+    # Wraps the default #to_s logic with filtering of sensitive parameters.
+    def to_s(obj = self)
+      param_filter = Aws::Log::ParamFilter.new
+      param_filter.filter(obj).to_s
+    end
+
     class << self
 
       # @api private
