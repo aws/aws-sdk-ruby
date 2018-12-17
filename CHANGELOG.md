@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECR - Updated the API, documentation, and integration test for Amazon EC2 Container Registry.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
 2.11.192 (2018-12-14)
 ------------------
 
