@@ -32,12 +32,15 @@ module Aws
             context.http_response.body,
             output_handler)
           if input_emitter = context[:input_event_emitter]
-            # TODO maybe multithread? call proc?
-            # no multi thread or audio chunks will be disorder?
+            # events need to be send in order
+            # every event signature requries prior signature
             thread = Thread.new do
-              input_emitter.emit_state = :busy
-              input_emitter.buffer.each {|p| p.call}
-              input_emitter.emit_state = :ready
+              # polling for buffered emit events until stream not active
+              while !input_emitter.stream.closed?
+                while callback = input_emitter.buffer.shift
+                  callback.call unless input_emitter.stream.closed?
+                end
+              end
             end
             thread.abort_on_exception = true
           end

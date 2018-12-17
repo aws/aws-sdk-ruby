@@ -10,7 +10,7 @@ module Seahorse
 
         option(:connection_timeout, default: 60, doc_type: Integer, docstring: '')
 
-        option(:connectioni_read_timeout, default: 60, doc_type: Integer, docstring: '')
+        option(:connection_read_timeout, default: 60, doc_type: Integer, docstring: '')
 
         option(:read_chunk_size, default: 1024, doc_type: Integer, docstring: '')
 

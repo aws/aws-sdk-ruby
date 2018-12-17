@@ -54,7 +54,7 @@ module Seahorse
         def new_stream
           begin
             @h2_client.new_stream
-          rescue *STREAM_ERRORS => error
+          rescue => error
             raise Http2StreamInitializeError.new(error)
           end
         end
@@ -81,16 +81,15 @@ module Seahorse
         end
 
         def start(stream)
-          #return if @socket_thread
-          #@socket_thread = Thread.new do
+          return if @socket_thread
+          @socket_thread = Thread.new do
             while !@socket.closed? && @h2_client.active_stream_count > 0
-            #while !@socket.closed? && !@socket.eof? && @h2_client.active_stream_count > 0
               begin
                 data = @socket.read_nonblock(@chunk_size)
                 @h2_client << data
               rescue IO::WaitReadable
                 unless IO.select([@socket], nil, nil, connection_read_timeout)
-                  debug_output("socket connection read time out")
+                  self.debug_output("socket connection read time out")
                   @socket.close
                 else
                   retry
@@ -100,7 +99,7 @@ module Seahorse
               rescue => error
                 # TODO debug only, to be removed
                 puts error.backtrace
-                debug_output(error.inspect)
+                self.debug_output(error.inspect)
                 @errors << error
                 self.close!
               end
@@ -108,13 +107,13 @@ module Seahorse
                 self.close!
               end
             end
-          #end
-          #@socket_thread.abort_on_exception = true
+          end
+          @socket_thread.abort_on_exception = true
         end
 
         def close!
-          @socket.close
-          #Thread.kill(@socket_thread)
+          @socket.close if @socket
+          Thread.kill(@socket_thread) if @socket_thread
           @status = :closed
         end
 

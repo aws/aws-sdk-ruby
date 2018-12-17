@@ -58,9 +58,7 @@ module Seahorse
             # not retryable
             context.http_response.signal_error(error)
           end
-          Response.new(context: context)#, stream: stream)
-          # TODO debug only, to be replaced
-          #AsyncResponse.new(context: context, stream: stream)
+          AsyncResponse.new(context: context, stream: stream)
         end
 
         private

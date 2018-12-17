@@ -21,12 +21,20 @@ module Seahorse
             expect(config.connection_timeout).to eq(60)
           end
 
+          it 'adds a :connection_read_timeout option with default' do
+            expect(config.connection_read_timeout).to eq(60)
+          end
+
           it 'adds a :read_chunk_size option with default' do
             expect(config.read_chunk_size).to eq(1024)
           end
 
           it 'adds a :http_wire_trace option with default' do
             expect(config.http_wire_trace).to eq(false)
+          end
+
+          it 'adds a :logger option without default' do
+            expect(config.logger).to eq(nil)
           end
 
           it 'adds a :ssl_verify_peer option with default' do

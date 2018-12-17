@@ -3,7 +3,7 @@ module Aws
 
     def initialize
       @listeners = {}
-      @buffer = []
+      @buffer = Queue.new
       @emit_state = :sleep
     end
 
@@ -12,8 +12,6 @@ module Aws
     attr_accessor :encoder
 
     attr_reader :buffer
-
-    attr_accessor :emit_state
 
     def on(type, callback)
       (@listeners[type] ||= []) << callback
@@ -27,15 +25,31 @@ module Aws
     end
 
     def emit(type, params)
-      case @emit_state
-      when :ready
-        # TODO, reproduce the scenario
-        @stream.data(@encoder.encode(type, params))
-      else
-        @buffer << Proc.new do |stream, encoder|
-          @stream.data(@encoder.encode(type, params), end_stream: false)
-        end
+      @buffer << Proc.new do |stream, encoder|
+        @stream.data(
+          @encoder.encode(type, params),
+          end_stream: type == :end_stream
+        )
       end
+    end
+
+    private
+
+    class Queue
+
+      def initialize(procs = [])
+        @procs = procs
+        @mutex = Mutex.new
+      end
+
+      def <<(callback)
+        @mutex.synchronize { @procs << callback }
+      end
+
+      def shift
+        @mutex.synchronize { @procs.shift }
+      end
+
     end
 
   end
