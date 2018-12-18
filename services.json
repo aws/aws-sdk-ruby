@@ -17,6 +17,12 @@
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
+  "ApiGatewayManagementApi": {
+    "models": "apigatewaymanagementapi/2018-11-29"
+  },
+  "ApiGatewayV2": {
+    "models": "apigatewayv2/2018-11-29"
+  },
   "AppMesh": {
     "models": "appmesh/2018-10-01"
   },

@@ -42,12 +42,16 @@ module Aws::EC2
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
     AllowedPrincipalSet = Shapes::ListShape.new(name: 'AllowedPrincipalSet')
+    ApplySecurityGroupsToClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkRequest')
+    ApplySecurityGroupsToClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'ApplySecurityGroupsToClientVpnTargetNetworkResult')
     ArchitectureValues = Shapes::StringShape.new(name: 'ArchitectureValues')
     AssignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'AssignIpv6AddressesRequest')
     AssignIpv6AddressesResult = Shapes::StructureShape.new(name: 'AssignIpv6AddressesResult')
     AssignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'AssignPrivateIpAddressesRequest')
     AssociateAddressRequest = Shapes::StructureShape.new(name: 'AssociateAddressRequest')
     AssociateAddressResult = Shapes::StructureShape.new(name: 'AssociateAddressResult')
+    AssociateClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'AssociateClientVpnTargetNetworkRequest')
+    AssociateClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'AssociateClientVpnTargetNetworkResult')
     AssociateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'AssociateDhcpOptionsRequest')
     AssociateIamInstanceProfileRequest = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileRequest')
     AssociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileResult')
@@ -59,7 +63,12 @@ module Aws::EC2
     AssociateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'AssociateTransitGatewayRouteTableResult')
     AssociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockRequest')
     AssociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockResult')
+    AssociatedNetworkType = Shapes::StringShape.new(name: 'AssociatedNetworkType')
+    AssociatedTargetNetwork = Shapes::StructureShape.new(name: 'AssociatedTargetNetwork')
+    AssociatedTargetNetworkSet = Shapes::ListShape.new(name: 'AssociatedTargetNetworkSet')
     AssociationIdList = Shapes::ListShape.new(name: 'AssociationIdList')
+    AssociationStatus = Shapes::StructureShape.new(name: 'AssociationStatus')
+    AssociationStatusCode = Shapes::StringShape.new(name: 'AssociationStatusCode')
     AttachClassicLinkVpcRequest = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcRequest')
     AttachClassicLinkVpcResult = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcResult')
     AttachInternetGatewayRequest = Shapes::StructureShape.new(name: 'AttachInternetGatewayRequest')
@@ -71,6 +80,10 @@ module Aws::EC2
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AttributeBooleanValue = Shapes::StructureShape.new(name: 'AttributeBooleanValue')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
+    AuthorizationRule = Shapes::StructureShape.new(name: 'AuthorizationRule')
+    AuthorizationRuleSet = Shapes::ListShape.new(name: 'AuthorizationRuleSet')
+    AuthorizeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'AuthorizeClientVpnIngressRequest')
+    AuthorizeClientVpnIngressResult = Shapes::StructureShape.new(name: 'AuthorizeClientVpnIngressResult')
     AuthorizeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupEgressRequest')
     AuthorizeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupIngressRequest')
     AutoAcceptSharedAttachmentsValue = Shapes::StringShape.new(name: 'AutoAcceptSharedAttachmentsValue')
@@ -134,6 +147,8 @@ module Aws::EC2
     CapacityReservationTarget = Shapes::StructureShape.new(name: 'CapacityReservationTarget')
     CapacityReservationTargetResponse = Shapes::StructureShape.new(name: 'CapacityReservationTargetResponse')
     CapacityReservationTenancy = Shapes::StringShape.new(name: 'CapacityReservationTenancy')
+    CertificateAuthentication = Shapes::StructureShape.new(name: 'CertificateAuthentication')
+    CertificateAuthenticationRequest = Shapes::StructureShape.new(name: 'CertificateAuthenticationRequest')
     CidrAuthorizationContext = Shapes::StructureShape.new(name: 'CidrAuthorizationContext')
     CidrBlock = Shapes::StructureShape.new(name: 'CidrBlock')
     CidrBlockSet = Shapes::ListShape.new(name: 'CidrBlockSet')
@@ -144,9 +159,32 @@ module Aws::EC2
     ClassicLoadBalancer = Shapes::StructureShape.new(name: 'ClassicLoadBalancer')
     ClassicLoadBalancers = Shapes::ListShape.new(name: 'ClassicLoadBalancers')
     ClassicLoadBalancersConfig = Shapes::StructureShape.new(name: 'ClassicLoadBalancersConfig')
+    ClientCertificateRevocationListStatus = Shapes::StructureShape.new(name: 'ClientCertificateRevocationListStatus')
+    ClientCertificateRevocationListStatusCode = Shapes::StringShape.new(name: 'ClientCertificateRevocationListStatusCode')
     ClientData = Shapes::StructureShape.new(name: 'ClientData')
+    ClientVpnAuthentication = Shapes::StructureShape.new(name: 'ClientVpnAuthentication')
+    ClientVpnAuthenticationList = Shapes::ListShape.new(name: 'ClientVpnAuthenticationList')
+    ClientVpnAuthenticationRequest = Shapes::StructureShape.new(name: 'ClientVpnAuthenticationRequest')
+    ClientVpnAuthenticationRequestList = Shapes::ListShape.new(name: 'ClientVpnAuthenticationRequestList')
+    ClientVpnAuthenticationType = Shapes::StringShape.new(name: 'ClientVpnAuthenticationType')
+    ClientVpnAuthorizationRuleStatus = Shapes::StructureShape.new(name: 'ClientVpnAuthorizationRuleStatus')
+    ClientVpnAuthorizationRuleStatusCode = Shapes::StringShape.new(name: 'ClientVpnAuthorizationRuleStatusCode')
+    ClientVpnConnection = Shapes::StructureShape.new(name: 'ClientVpnConnection')
+    ClientVpnConnectionSet = Shapes::ListShape.new(name: 'ClientVpnConnectionSet')
+    ClientVpnConnectionStatus = Shapes::StructureShape.new(name: 'ClientVpnConnectionStatus')
+    ClientVpnConnectionStatusCode = Shapes::StringShape.new(name: 'ClientVpnConnectionStatusCode')
+    ClientVpnEndpoint = Shapes::StructureShape.new(name: 'ClientVpnEndpoint')
+    ClientVpnEndpointStatus = Shapes::StructureShape.new(name: 'ClientVpnEndpointStatus')
+    ClientVpnEndpointStatusCode = Shapes::StringShape.new(name: 'ClientVpnEndpointStatusCode')
+    ClientVpnRoute = Shapes::StructureShape.new(name: 'ClientVpnRoute')
+    ClientVpnRouteSet = Shapes::ListShape.new(name: 'ClientVpnRouteSet')
+    ClientVpnRouteStatus = Shapes::StructureShape.new(name: 'ClientVpnRouteStatus')
+    ClientVpnRouteStatusCode = Shapes::StringShape.new(name: 'ClientVpnRouteStatusCode')
+    ClientVpnSecurityGroupIdSet = Shapes::ListShape.new(name: 'ClientVpnSecurityGroupIdSet')
     ConfirmProductInstanceRequest = Shapes::StructureShape.new(name: 'ConfirmProductInstanceRequest')
     ConfirmProductInstanceResult = Shapes::StructureShape.new(name: 'ConfirmProductInstanceResult')
+    ConnectionLogOptions = Shapes::StructureShape.new(name: 'ConnectionLogOptions')
+    ConnectionLogResponseOptions = Shapes::StructureShape.new(name: 'ConnectionLogResponseOptions')
     ConnectionNotification = Shapes::StructureShape.new(name: 'ConnectionNotification')
     ConnectionNotificationSet = Shapes::ListShape.new(name: 'ConnectionNotificationSet')
     ConnectionNotificationState = Shapes::StringShape.new(name: 'ConnectionNotificationState')
@@ -165,6 +203,10 @@ module Aws::EC2
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
     CreateCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationRequest')
     CreateCapacityReservationResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationResult')
+    CreateClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'CreateClientVpnEndpointRequest')
+    CreateClientVpnEndpointResult = Shapes::StructureShape.new(name: 'CreateClientVpnEndpointResult')
+    CreateClientVpnRouteRequest = Shapes::StructureShape.new(name: 'CreateClientVpnRouteRequest')
+    CreateClientVpnRouteResult = Shapes::StructureShape.new(name: 'CreateClientVpnRouteResult')
     CreateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'CreateCustomerGatewayRequest')
     CreateCustomerGatewayResult = Shapes::StructureShape.new(name: 'CreateCustomerGatewayResult')
     CreateDefaultSubnetRequest = Shapes::StructureShape.new(name: 'CreateDefaultSubnetRequest')
@@ -259,6 +301,10 @@ module Aws::EC2
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
+    DeleteClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'DeleteClientVpnEndpointRequest')
+    DeleteClientVpnEndpointResult = Shapes::StructureShape.new(name: 'DeleteClientVpnEndpointResult')
+    DeleteClientVpnRouteRequest = Shapes::StructureShape.new(name: 'DeleteClientVpnRouteRequest')
+    DeleteClientVpnRouteResult = Shapes::StructureShape.new(name: 'DeleteClientVpnRouteResult')
     DeleteCustomerGatewayRequest = Shapes::StructureShape.new(name: 'DeleteCustomerGatewayRequest')
     DeleteDhcpOptionsRequest = Shapes::StructureShape.new(name: 'DeleteDhcpOptionsRequest')
     DeleteEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayRequest')
@@ -340,6 +386,16 @@ module Aws::EC2
     DescribeCapacityReservationsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationsResult')
     DescribeClassicLinkInstancesRequest = Shapes::StructureShape.new(name: 'DescribeClassicLinkInstancesRequest')
     DescribeClassicLinkInstancesResult = Shapes::StructureShape.new(name: 'DescribeClassicLinkInstancesResult')
+    DescribeClientVpnAuthorizationRulesRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnAuthorizationRulesRequest')
+    DescribeClientVpnAuthorizationRulesResult = Shapes::StructureShape.new(name: 'DescribeClientVpnAuthorizationRulesResult')
+    DescribeClientVpnConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnConnectionsRequest')
+    DescribeClientVpnConnectionsResult = Shapes::StructureShape.new(name: 'DescribeClientVpnConnectionsResult')
+    DescribeClientVpnEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnEndpointsRequest')
+    DescribeClientVpnEndpointsResult = Shapes::StructureShape.new(name: 'DescribeClientVpnEndpointsResult')
+    DescribeClientVpnRoutesRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnRoutesRequest')
+    DescribeClientVpnRoutesResult = Shapes::StructureShape.new(name: 'DescribeClientVpnRoutesResult')
+    DescribeClientVpnTargetNetworksRequest = Shapes::StructureShape.new(name: 'DescribeClientVpnTargetNetworksRequest')
+    DescribeClientVpnTargetNetworksResult = Shapes::StructureShape.new(name: 'DescribeClientVpnTargetNetworksResult')
     DescribeConversionTaskList = Shapes::ListShape.new(name: 'DescribeConversionTaskList')
     DescribeConversionTasksRequest = Shapes::StructureShape.new(name: 'DescribeConversionTasksRequest')
     DescribeConversionTasksResult = Shapes::StructureShape.new(name: 'DescribeConversionTasksResult')
@@ -520,6 +576,8 @@ module Aws::EC2
     DhcpOptions = Shapes::StructureShape.new(name: 'DhcpOptions')
     DhcpOptionsIdStringList = Shapes::ListShape.new(name: 'DhcpOptionsIdStringList')
     DhcpOptionsList = Shapes::ListShape.new(name: 'DhcpOptionsList')
+    DirectoryServiceAuthentication = Shapes::StructureShape.new(name: 'DirectoryServiceAuthentication')
+    DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
     DisableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationRequest')
     DisableTransitGatewayRouteTablePropagationResult = Shapes::StructureShape.new(name: 'DisableTransitGatewayRouteTablePropagationResult')
     DisableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'DisableVgwRoutePropagationRequest')
@@ -528,6 +586,8 @@ module Aws::EC2
     DisableVpcClassicLinkRequest = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkRequest')
     DisableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkResult')
     DisassociateAddressRequest = Shapes::StructureShape.new(name: 'DisassociateAddressRequest')
+    DisassociateClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'DisassociateClientVpnTargetNetworkRequest')
+    DisassociateClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'DisassociateClientVpnTargetNetworkResult')
     DisassociateIamInstanceProfileRequest = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileRequest')
     DisassociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
@@ -545,6 +605,7 @@ module Aws::EC2
     DiskImageVolumeDescription = Shapes::StructureShape.new(name: 'DiskImageVolumeDescription')
     DnsEntry = Shapes::StructureShape.new(name: 'DnsEntry')
     DnsEntrySet = Shapes::ListShape.new(name: 'DnsEntrySet')
+    DnsServersOptionsModifyStructure = Shapes::StructureShape.new(name: 'DnsServersOptionsModifyStructure')
     DnsSupportValue = Shapes::StringShape.new(name: 'DnsSupportValue')
     DomainType = Shapes::StringShape.new(name: 'DomainType')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -581,11 +642,16 @@ module Aws::EC2
     EnableVpcClassicLinkRequest = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkRequest')
     EnableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkResult')
     EndDateType = Shapes::StringShape.new(name: 'EndDateType')
+    EndpointSet = Shapes::ListShape.new(name: 'EndpointSet')
     EventCode = Shapes::StringShape.new(name: 'EventCode')
     EventInformation = Shapes::StructureShape.new(name: 'EventInformation')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExcessCapacityTerminationPolicy = Shapes::StringShape.new(name: 'ExcessCapacityTerminationPolicy')
     ExecutableByStringList = Shapes::ListShape.new(name: 'ExecutableByStringList')
+    ExportClientVpnClientCertificateRevocationListRequest = Shapes::StructureShape.new(name: 'ExportClientVpnClientCertificateRevocationListRequest')
+    ExportClientVpnClientCertificateRevocationListResult = Shapes::StructureShape.new(name: 'ExportClientVpnClientCertificateRevocationListResult')
+    ExportClientVpnClientConfigurationRequest = Shapes::StructureShape.new(name: 'ExportClientVpnClientConfigurationRequest')
+    ExportClientVpnClientConfigurationResult = Shapes::StructureShape.new(name: 'ExportClientVpnClientConfigurationResult')
     ExportEnvironment = Shapes::StringShape.new(name: 'ExportEnvironment')
     ExportTask = Shapes::StructureShape.new(name: 'ExportTask')
     ExportTaskIdStringList = Shapes::ListShape.new(name: 'ExportTaskIdStringList')
@@ -688,6 +754,8 @@ module Aws::EC2
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageTypeValues = Shapes::StringShape.new(name: 'ImageTypeValues')
+    ImportClientVpnClientCertificateRevocationListRequest = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListRequest')
+    ImportClientVpnClientCertificateRevocationListResult = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListResult')
     ImportImageRequest = Shapes::StructureShape.new(name: 'ImportImageRequest')
     ImportImageResult = Shapes::StructureShape.new(name: 'ImportImageResult')
     ImportImageTask = Shapes::StructureShape.new(name: 'ImportImageTask')
@@ -857,6 +925,8 @@ module Aws::EC2
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     ModifyCapacityReservationRequest = Shapes::StructureShape.new(name: 'ModifyCapacityReservationRequest')
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
+    ModifyClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointRequest')
+    ModifyClientVpnEndpointResult = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointResult')
     ModifyFleetRequest = Shapes::StructureShape.new(name: 'ModifyFleetRequest')
     ModifyFleetResult = Shapes::StructureShape.new(name: 'ModifyFleetResult')
     ModifyFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'ModifyFpgaImageAttributeRequest')
@@ -1095,6 +1165,8 @@ module Aws::EC2
     RestorableByStringList = Shapes::ListShape.new(name: 'RestorableByStringList')
     RestoreAddressToClassicRequest = Shapes::StructureShape.new(name: 'RestoreAddressToClassicRequest')
     RestoreAddressToClassicResult = Shapes::StructureShape.new(name: 'RestoreAddressToClassicResult')
+    RevokeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressRequest')
+    RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
     RevokeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressRequest')
     RevokeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressRequest')
     Route = Shapes::StructureShape.new(name: 'Route')
@@ -1224,10 +1296,16 @@ module Aws::EC2
     TargetGroup = Shapes::StructureShape.new(name: 'TargetGroup')
     TargetGroups = Shapes::ListShape.new(name: 'TargetGroups')
     TargetGroupsConfig = Shapes::StructureShape.new(name: 'TargetGroupsConfig')
+    TargetNetwork = Shapes::StructureShape.new(name: 'TargetNetwork')
+    TargetNetworkSet = Shapes::ListShape.new(name: 'TargetNetworkSet')
     TargetReservationValue = Shapes::StructureShape.new(name: 'TargetReservationValue')
     TargetReservationValueSet = Shapes::ListShape.new(name: 'TargetReservationValueSet')
     TelemetryStatus = Shapes::StringShape.new(name: 'TelemetryStatus')
     Tenancy = Shapes::StringShape.new(name: 'Tenancy')
+    TerminateClientVpnConnectionsRequest = Shapes::StructureShape.new(name: 'TerminateClientVpnConnectionsRequest')
+    TerminateClientVpnConnectionsResult = Shapes::StructureShape.new(name: 'TerminateClientVpnConnectionsResult')
+    TerminateConnectionStatus = Shapes::StructureShape.new(name: 'TerminateConnectionStatus')
+    TerminateConnectionStatusSet = Shapes::ListShape.new(name: 'TerminateConnectionStatusSet')
     TerminateInstancesRequest = Shapes::StructureShape.new(name: 'TerminateInstancesRequest')
     TerminateInstancesResult = Shapes::StructureShape.new(name: 'TerminateInstancesResult')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
@@ -1267,6 +1345,7 @@ module Aws::EC2
     TransitGatewayVpcAttachment = Shapes::StructureShape.new(name: 'TransitGatewayVpcAttachment')
     TransitGatewayVpcAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayVpcAttachmentList')
     TransitGatewayVpcAttachmentOptions = Shapes::StructureShape.new(name: 'TransitGatewayVpcAttachmentOptions')
+    TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
     TunnelOptionsList = Shapes::ListShape.new(name: 'TunnelOptionsList')
     UnassignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesRequest')
     UnassignIpv6AddressesResult = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesResult')
@@ -1360,6 +1439,7 @@ module Aws::EC2
     VpnGateway = Shapes::StructureShape.new(name: 'VpnGateway')
     VpnGatewayIdStringList = Shapes::ListShape.new(name: 'VpnGatewayIdStringList')
     VpnGatewayList = Shapes::ListShape.new(name: 'VpnGatewayList')
+    VpnProtocol = Shapes::StringShape.new(name: 'VpnProtocol')
     VpnState = Shapes::StringShape.new(name: 'VpnState')
     VpnStaticRoute = Shapes::StructureShape.new(name: 'VpnStaticRoute')
     VpnStaticRouteList = Shapes::ListShape.new(name: 'VpnStaticRouteList')
@@ -1474,6 +1554,15 @@ module Aws::EC2
 
     AllowedPrincipalSet.member = Shapes::ShapeRef.new(shape: AllowedPrincipal, location_name: "item")
 
+    ApplySecurityGroupsToClientVpnTargetNetworkRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    ApplySecurityGroupsToClientVpnTargetNetworkRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+    ApplySecurityGroupsToClientVpnTargetNetworkRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, required: true, location_name: "SecurityGroupId"))
+    ApplySecurityGroupsToClientVpnTargetNetworkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ApplySecurityGroupsToClientVpnTargetNetworkRequest.struct_class = Types::ApplySecurityGroupsToClientVpnTargetNetworkRequest
+
+    ApplySecurityGroupsToClientVpnTargetNetworkResult.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "securityGroupIds"))
+    ApplySecurityGroupsToClientVpnTargetNetworkResult.struct_class = Types::ApplySecurityGroupsToClientVpnTargetNetworkResult
+
     AssignIpv6AddressesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
     AssignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
     AssignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
@@ -1500,6 +1589,15 @@ module Aws::EC2
 
     AssociateAddressResult.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
     AssociateAddressResult.struct_class = Types::AssociateAddressResult
+
+    AssociateClientVpnTargetNetworkRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    AssociateClientVpnTargetNetworkRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubnetId"))
+    AssociateClientVpnTargetNetworkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateClientVpnTargetNetworkRequest.struct_class = Types::AssociateClientVpnTargetNetworkRequest
+
+    AssociateClientVpnTargetNetworkResult.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    AssociateClientVpnTargetNetworkResult.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "status"))
+    AssociateClientVpnTargetNetworkResult.struct_class = Types::AssociateClientVpnTargetNetworkResult
 
     AssociateDhcpOptionsRequest.add_member(:dhcp_options_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DhcpOptionsId"))
     AssociateDhcpOptionsRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
@@ -1547,7 +1645,17 @@ module Aws::EC2
     AssociateVpcCidrBlockResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     AssociateVpcCidrBlockResult.struct_class = Types::AssociateVpcCidrBlockResult
 
+    AssociatedTargetNetwork.add_member(:network_id, Shapes::ShapeRef.new(shape: String, location_name: "networkId"))
+    AssociatedTargetNetwork.add_member(:network_type, Shapes::ShapeRef.new(shape: AssociatedNetworkType, location_name: "networkType"))
+    AssociatedTargetNetwork.struct_class = Types::AssociatedTargetNetwork
+
+    AssociatedTargetNetworkSet.member = Shapes::ShapeRef.new(shape: AssociatedTargetNetwork, location_name: "item")
+
     AssociationIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "AssociationId")
+
+    AssociationStatus.add_member(:code, Shapes::ShapeRef.new(shape: AssociationStatusCode, location_name: "code"))
+    AssociationStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    AssociationStatus.struct_class = Types::AssociationStatus
 
     AttachClassicLinkVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AttachClassicLinkVpcRequest.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdStringList, required: true, location_name: "SecurityGroupId"))
@@ -1591,6 +1699,27 @@ module Aws::EC2
 
     AttributeValue.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     AttributeValue.struct_class = Types::AttributeValue
+
+    AuthorizationRule.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    AuthorizationRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    AuthorizationRule.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    AuthorizationRule.add_member(:access_all, Shapes::ShapeRef.new(shape: Boolean, location_name: "accessAll"))
+    AuthorizationRule.add_member(:destination_cidr, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidr"))
+    AuthorizationRule.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnAuthorizationRuleStatus, location_name: "status"))
+    AuthorizationRule.struct_class = Types::AuthorizationRule
+
+    AuthorizationRuleSet.member = Shapes::ShapeRef.new(shape: AuthorizationRule, location_name: "item")
+
+    AuthorizeClientVpnIngressRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    AuthorizeClientVpnIngressRequest.add_member(:target_network_cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetNetworkCidr"))
+    AuthorizeClientVpnIngressRequest.add_member(:access_group_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessGroupId"))
+    AuthorizeClientVpnIngressRequest.add_member(:authorize_all_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "AuthorizeAllGroups"))
+    AuthorizeClientVpnIngressRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    AuthorizeClientVpnIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AuthorizeClientVpnIngressRequest.struct_class = Types::AuthorizeClientVpnIngressRequest
+
+    AuthorizeClientVpnIngressResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnAuthorizationRuleStatus, location_name: "status"))
+    AuthorizeClientVpnIngressResult.struct_class = Types::AuthorizeClientVpnIngressResult
 
     AuthorizeSecurityGroupEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AuthorizeSecurityGroupEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupId"))
@@ -1722,12 +1851,12 @@ module Aws::EC2
     CancelReservedInstancesListingResult.add_member(:reserved_instances_listings, Shapes::ShapeRef.new(shape: ReservedInstancesListingList, location_name: "reservedInstancesListingsSet"))
     CancelReservedInstancesListingResult.struct_class = Types::CancelReservedInstancesListingResult
 
-    CancelSpotFleetRequestsError.add_member(:code, Shapes::ShapeRef.new(shape: CancelBatchErrorCode, required: true, location_name: "code"))
-    CancelSpotFleetRequestsError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    CancelSpotFleetRequestsError.add_member(:code, Shapes::ShapeRef.new(shape: CancelBatchErrorCode, location_name: "code"))
+    CancelSpotFleetRequestsError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     CancelSpotFleetRequestsError.struct_class = Types::CancelSpotFleetRequestsError
 
-    CancelSpotFleetRequestsErrorItem.add_member(:error, Shapes::ShapeRef.new(shape: CancelSpotFleetRequestsError, required: true, location_name: "error"))
-    CancelSpotFleetRequestsErrorItem.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
+    CancelSpotFleetRequestsErrorItem.add_member(:error, Shapes::ShapeRef.new(shape: CancelSpotFleetRequestsError, location_name: "error"))
+    CancelSpotFleetRequestsErrorItem.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
     CancelSpotFleetRequestsErrorItem.struct_class = Types::CancelSpotFleetRequestsErrorItem
 
     CancelSpotFleetRequestsErrorSet.member = Shapes::ShapeRef.new(shape: CancelSpotFleetRequestsErrorItem, location_name: "item")
@@ -1741,9 +1870,9 @@ module Aws::EC2
     CancelSpotFleetRequestsResponse.add_member(:unsuccessful_fleet_requests, Shapes::ShapeRef.new(shape: CancelSpotFleetRequestsErrorSet, location_name: "unsuccessfulFleetRequestSet"))
     CancelSpotFleetRequestsResponse.struct_class = Types::CancelSpotFleetRequestsResponse
 
-    CancelSpotFleetRequestsSuccessItem.add_member(:current_spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, required: true, location_name: "currentSpotFleetRequestState"))
-    CancelSpotFleetRequestsSuccessItem.add_member(:previous_spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, required: true, location_name: "previousSpotFleetRequestState"))
-    CancelSpotFleetRequestsSuccessItem.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
+    CancelSpotFleetRequestsSuccessItem.add_member(:current_spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, location_name: "currentSpotFleetRequestState"))
+    CancelSpotFleetRequestsSuccessItem.add_member(:previous_spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, location_name: "previousSpotFleetRequestState"))
+    CancelSpotFleetRequestsSuccessItem.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
     CancelSpotFleetRequestsSuccessItem.struct_class = Types::CancelSpotFleetRequestsSuccessItem
 
     CancelSpotFleetRequestsSuccessSet.member = Shapes::ShapeRef.new(shape: CancelSpotFleetRequestsSuccessItem, location_name: "item")
@@ -1796,6 +1925,12 @@ module Aws::EC2
     CapacityReservationTargetResponse.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservationTargetResponse.struct_class = Types::CapacityReservationTargetResponse
 
+    CertificateAuthentication.add_member(:client_root_certificate_chain, Shapes::ShapeRef.new(shape: String, location_name: "clientRootCertificateChain"))
+    CertificateAuthentication.struct_class = Types::CertificateAuthentication
+
+    CertificateAuthenticationRequest.add_member(:client_root_certificate_chain_arn, Shapes::ShapeRef.new(shape: String, location_name: "ClientRootCertificateChainArn"))
+    CertificateAuthenticationRequest.struct_class = Types::CertificateAuthenticationRequest
+
     CidrAuthorizationContext.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     CidrAuthorizationContext.add_member(:signature, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Signature"))
     CidrAuthorizationContext.struct_class = Types::CidrAuthorizationContext
@@ -1819,19 +1954,99 @@ module Aws::EC2
 
     ClassicLinkInstanceList.member = Shapes::ShapeRef.new(shape: ClassicLinkInstance, location_name: "item")
 
-    ClassicLoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ClassicLoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ClassicLoadBalancer.struct_class = Types::ClassicLoadBalancer
 
     ClassicLoadBalancers.member = Shapes::ShapeRef.new(shape: ClassicLoadBalancer, location_name: "item")
 
-    ClassicLoadBalancersConfig.add_member(:classic_load_balancers, Shapes::ShapeRef.new(shape: ClassicLoadBalancers, required: true, location_name: "classicLoadBalancers"))
+    ClassicLoadBalancersConfig.add_member(:classic_load_balancers, Shapes::ShapeRef.new(shape: ClassicLoadBalancers, location_name: "classicLoadBalancers"))
     ClassicLoadBalancersConfig.struct_class = Types::ClassicLoadBalancersConfig
+
+    ClientCertificateRevocationListStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientCertificateRevocationListStatusCode, location_name: "code"))
+    ClientCertificateRevocationListStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientCertificateRevocationListStatus.struct_class = Types::ClientCertificateRevocationListStatus
 
     ClientData.add_member(:comment, Shapes::ShapeRef.new(shape: String, location_name: "Comment"))
     ClientData.add_member(:upload_end, Shapes::ShapeRef.new(shape: DateTime, location_name: "UploadEnd"))
     ClientData.add_member(:upload_size, Shapes::ShapeRef.new(shape: Double, location_name: "UploadSize"))
     ClientData.add_member(:upload_start, Shapes::ShapeRef.new(shape: DateTime, location_name: "UploadStart"))
     ClientData.struct_class = Types::ClientData
+
+    ClientVpnAuthentication.add_member(:type, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationType, location_name: "type"))
+    ClientVpnAuthentication.add_member(:active_directory, Shapes::ShapeRef.new(shape: DirectoryServiceAuthentication, location_name: "activeDirectory"))
+    ClientVpnAuthentication.add_member(:mutual_authentication, Shapes::ShapeRef.new(shape: CertificateAuthentication, location_name: "mutualAuthentication"))
+    ClientVpnAuthentication.struct_class = Types::ClientVpnAuthentication
+
+    ClientVpnAuthenticationList.member = Shapes::ShapeRef.new(shape: ClientVpnAuthentication, location_name: "item")
+
+    ClientVpnAuthenticationRequest.add_member(:type, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationType, location_name: "Type"))
+    ClientVpnAuthenticationRequest.add_member(:active_directory, Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationRequest, location_name: "ActiveDirectory"))
+    ClientVpnAuthenticationRequest.add_member(:mutual_authentication, Shapes::ShapeRef.new(shape: CertificateAuthenticationRequest, location_name: "MutualAuthentication"))
+    ClientVpnAuthenticationRequest.struct_class = Types::ClientVpnAuthenticationRequest
+
+    ClientVpnAuthenticationRequestList.member = Shapes::ShapeRef.new(shape: ClientVpnAuthenticationRequest)
+
+    ClientVpnAuthorizationRuleStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnAuthorizationRuleStatusCode, location_name: "code"))
+    ClientVpnAuthorizationRuleStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientVpnAuthorizationRuleStatus.struct_class = Types::ClientVpnAuthorizationRuleStatus
+
+    ClientVpnConnection.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    ClientVpnConnection.add_member(:timestamp, Shapes::ShapeRef.new(shape: String, location_name: "timestamp"))
+    ClientVpnConnection.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, location_name: "connectionId"))
+    ClientVpnConnection.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    ClientVpnConnection.add_member(:connection_established_time, Shapes::ShapeRef.new(shape: String, location_name: "connectionEstablishedTime"))
+    ClientVpnConnection.add_member(:ingress_bytes, Shapes::ShapeRef.new(shape: String, location_name: "ingressBytes"))
+    ClientVpnConnection.add_member(:egress_bytes, Shapes::ShapeRef.new(shape: String, location_name: "egressBytes"))
+    ClientVpnConnection.add_member(:ingress_packets, Shapes::ShapeRef.new(shape: String, location_name: "ingressPackets"))
+    ClientVpnConnection.add_member(:egress_packets, Shapes::ShapeRef.new(shape: String, location_name: "egressPackets"))
+    ClientVpnConnection.add_member(:client_ip, Shapes::ShapeRef.new(shape: String, location_name: "clientIp"))
+    ClientVpnConnection.add_member(:common_name, Shapes::ShapeRef.new(shape: String, location_name: "commonName"))
+    ClientVpnConnection.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnConnectionStatus, location_name: "status"))
+    ClientVpnConnection.add_member(:connection_end_time, Shapes::ShapeRef.new(shape: String, location_name: "connectionEndTime"))
+    ClientVpnConnection.struct_class = Types::ClientVpnConnection
+
+    ClientVpnConnectionSet.member = Shapes::ShapeRef.new(shape: ClientVpnConnection, location_name: "item")
+
+    ClientVpnConnectionStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnConnectionStatusCode, location_name: "code"))
+    ClientVpnConnectionStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientVpnConnectionStatus.struct_class = Types::ClientVpnConnectionStatus
+
+    ClientVpnEndpoint.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    ClientVpnEndpoint.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ClientVpnEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnEndpointStatus, location_name: "status"))
+    ClientVpnEndpoint.add_member(:creation_time, Shapes::ShapeRef.new(shape: String, location_name: "creationTime"))
+    ClientVpnEndpoint.add_member(:deletion_time, Shapes::ShapeRef.new(shape: String, location_name: "deletionTime"))
+    ClientVpnEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    ClientVpnEndpoint.add_member(:client_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "clientCidrBlock"))
+    ClientVpnEndpoint.add_member(:split_tunnel, Shapes::ShapeRef.new(shape: Boolean, location_name: "splitTunnel"))
+    ClientVpnEndpoint.add_member(:vpn_protocol, Shapes::ShapeRef.new(shape: VpnProtocol, location_name: "vpnProtocol"))
+    ClientVpnEndpoint.add_member(:transport_protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "transportProtocol"))
+    ClientVpnEndpoint.add_member(:associated_target_networks, Shapes::ShapeRef.new(shape: AssociatedTargetNetworkSet, location_name: "associatedTargetNetwork"))
+    ClientVpnEndpoint.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "serverCertificateArn"))
+    ClientVpnEndpoint.add_member(:authentication_options, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationList, location_name: "authenticationOptions"))
+    ClientVpnEndpoint.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogResponseOptions, location_name: "connectionLogOptions"))
+    ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
+
+    ClientVpnEndpointStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnEndpointStatusCode, location_name: "code"))
+    ClientVpnEndpointStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientVpnEndpointStatus.struct_class = Types::ClientVpnEndpointStatus
+
+    ClientVpnRoute.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    ClientVpnRoute.add_member(:destination_cidr, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidr"))
+    ClientVpnRoute.add_member(:target_subnet, Shapes::ShapeRef.new(shape: String, location_name: "targetSubnet"))
+    ClientVpnRoute.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    ClientVpnRoute.add_member(:origin, Shapes::ShapeRef.new(shape: String, location_name: "origin"))
+    ClientVpnRoute.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnRouteStatus, location_name: "status"))
+    ClientVpnRoute.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ClientVpnRoute.struct_class = Types::ClientVpnRoute
+
+    ClientVpnRouteSet.member = Shapes::ShapeRef.new(shape: ClientVpnRoute, location_name: "item")
+
+    ClientVpnRouteStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnRouteStatusCode, location_name: "code"))
+    ClientVpnRouteStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientVpnRouteStatus.struct_class = Types::ClientVpnRouteStatus
+
+    ClientVpnSecurityGroupIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     ConfirmProductInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
     ConfirmProductInstanceRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductCode"))
@@ -1841,6 +2056,16 @@ module Aws::EC2
     ConfirmProductInstanceResult.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     ConfirmProductInstanceResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ConfirmProductInstanceResult.struct_class = Types::ConfirmProductInstanceResult
+
+    ConnectionLogOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ConnectionLogOptions.add_member(:cloudwatch_log_group, Shapes::ShapeRef.new(shape: String, location_name: "CloudwatchLogGroup"))
+    ConnectionLogOptions.add_member(:cloudwatch_log_stream, Shapes::ShapeRef.new(shape: String, location_name: "CloudwatchLogStream"))
+    ConnectionLogOptions.struct_class = Types::ConnectionLogOptions
+
+    ConnectionLogResponseOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ConnectionLogResponseOptions.add_member(:cloudwatch_log_group, Shapes::ShapeRef.new(shape: String, location_name: "CloudwatchLogGroup"))
+    ConnectionLogResponseOptions.add_member(:cloudwatch_log_stream, Shapes::ShapeRef.new(shape: String, location_name: "CloudwatchLogStream"))
+    ConnectionLogResponseOptions.struct_class = Types::ConnectionLogResponseOptions
 
     ConnectionNotification.add_member(:connection_notification_id, Shapes::ShapeRef.new(shape: String, location_name: "connectionNotificationId"))
     ConnectionNotification.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
@@ -1926,6 +2151,32 @@ module Aws::EC2
 
     CreateCapacityReservationResult.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "capacityReservation"))
     CreateCapacityReservationResult.struct_class = Types::CreateCapacityReservationResult
+
+    CreateClientVpnEndpointRequest.add_member(:client_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientCidrBlock"))
+    CreateClientVpnEndpointRequest.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerCertificateArn"))
+    CreateClientVpnEndpointRequest.add_member(:authentication_options, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationRequestList, required: true, location_name: "Authentication"))
+    CreateClientVpnEndpointRequest.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogOptions, required: true, location_name: "ConnectionLogOptions"))
+    CreateClientVpnEndpointRequest.add_member(:dns_servers, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "DnsServers"))
+    CreateClientVpnEndpointRequest.add_member(:transport_protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "TransportProtocol"))
+    CreateClientVpnEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateClientVpnEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
+
+    CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    CreateClientVpnEndpointResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnEndpointStatus, location_name: "status"))
+    CreateClientVpnEndpointResult.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    CreateClientVpnEndpointResult.struct_class = Types::CreateClientVpnEndpointResult
+
+    CreateClientVpnRouteRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    CreateClientVpnRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    CreateClientVpnRouteRequest.add_member(:target_vpc_subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetVpcSubnetId"))
+    CreateClientVpnRouteRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateClientVpnRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateClientVpnRouteRequest.struct_class = Types::CreateClientVpnRouteRequest
+
+    CreateClientVpnRouteResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnRouteStatus, location_name: "status"))
+    CreateClientVpnRouteResult.struct_class = Types::CreateClientVpnRouteResult
 
     CreateCustomerGatewayRequest.add_member(:bgp_asn, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BgpAsn"))
     CreateCustomerGatewayRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IpAddress"))
@@ -2372,6 +2623,22 @@ module Aws::EC2
 
     CustomerGatewayList.member = Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "item")
 
+    DeleteClientVpnEndpointRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DeleteClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteClientVpnEndpointRequest.struct_class = Types::DeleteClientVpnEndpointRequest
+
+    DeleteClientVpnEndpointResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnEndpointStatus, location_name: "status"))
+    DeleteClientVpnEndpointResult.struct_class = Types::DeleteClientVpnEndpointResult
+
+    DeleteClientVpnRouteRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DeleteClientVpnRouteRequest.add_member(:target_vpc_subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "TargetVpcSubnetId"))
+    DeleteClientVpnRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
+    DeleteClientVpnRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteClientVpnRouteRequest.struct_class = Types::DeleteClientVpnRouteRequest
+
+    DeleteClientVpnRouteResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnRouteStatus, location_name: "status"))
+    DeleteClientVpnRouteResult.struct_class = Types::DeleteClientVpnRouteResult
+
     DeleteCustomerGatewayRequest.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CustomerGatewayId"))
     DeleteCustomerGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteCustomerGatewayRequest.struct_class = Types::DeleteCustomerGatewayRequest
@@ -2689,6 +2956,62 @@ module Aws::EC2
     DescribeClassicLinkInstancesResult.add_member(:instances, Shapes::ShapeRef.new(shape: ClassicLinkInstanceList, location_name: "instancesSet"))
     DescribeClassicLinkInstancesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeClassicLinkInstancesResult.struct_class = Types::DescribeClassicLinkInstancesResult
+
+    DescribeClientVpnAuthorizationRulesRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DescribeClientVpnAuthorizationRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeClientVpnAuthorizationRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientVpnAuthorizationRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeClientVpnAuthorizationRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnAuthorizationRulesRequest.struct_class = Types::DescribeClientVpnAuthorizationRulesRequest
+
+    DescribeClientVpnAuthorizationRulesResult.add_member(:authorization_rules, Shapes::ShapeRef.new(shape: AuthorizationRuleSet, location_name: "authorizationRule"))
+    DescribeClientVpnAuthorizationRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeClientVpnAuthorizationRulesResult.struct_class = Types::DescribeClientVpnAuthorizationRulesResult
+
+    DescribeClientVpnConnectionsRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DescribeClientVpnConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeClientVpnConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientVpnConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnConnectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeClientVpnConnectionsRequest.struct_class = Types::DescribeClientVpnConnectionsRequest
+
+    DescribeClientVpnConnectionsResult.add_member(:connections, Shapes::ShapeRef.new(shape: ClientVpnConnectionSet, location_name: "connections"))
+    DescribeClientVpnConnectionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeClientVpnConnectionsResult.struct_class = Types::DescribeClientVpnConnectionsResult
+
+    DescribeClientVpnEndpointsRequest.add_member(:client_vpn_endpoint_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "ClientVpnEndpointId"))
+    DescribeClientVpnEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientVpnEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeClientVpnEndpointsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeClientVpnEndpointsRequest.struct_class = Types::DescribeClientVpnEndpointsRequest
+
+    DescribeClientVpnEndpointsResult.add_member(:client_vpn_endpoints, Shapes::ShapeRef.new(shape: EndpointSet, location_name: "clientVpnEndpoint"))
+    DescribeClientVpnEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeClientVpnEndpointsResult.struct_class = Types::DescribeClientVpnEndpointsResult
+
+    DescribeClientVpnRoutesRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DescribeClientVpnRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeClientVpnRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientVpnRoutesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeClientVpnRoutesRequest.struct_class = Types::DescribeClientVpnRoutesRequest
+
+    DescribeClientVpnRoutesResult.add_member(:routes, Shapes::ShapeRef.new(shape: ClientVpnRouteSet, location_name: "routes"))
+    DescribeClientVpnRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeClientVpnRoutesResult.struct_class = Types::DescribeClientVpnRoutesResult
+
+    DescribeClientVpnTargetNetworksRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DescribeClientVpnTargetNetworksRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AssociationIds"))
+    DescribeClientVpnTargetNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeClientVpnTargetNetworksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientVpnTargetNetworksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeClientVpnTargetNetworksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeClientVpnTargetNetworksRequest.struct_class = Types::DescribeClientVpnTargetNetworksRequest
+
+    DescribeClientVpnTargetNetworksResult.add_member(:client_vpn_target_networks, Shapes::ShapeRef.new(shape: TargetNetworkSet, location_name: "clientVpnTargetNetworks"))
+    DescribeClientVpnTargetNetworksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeClientVpnTargetNetworksResult.struct_class = Types::DescribeClientVpnTargetNetworksResult
 
     DescribeConversionTaskList.member = Shapes::ShapeRef.new(shape: ConversionTask, location_name: "item")
 
@@ -3250,9 +3573,9 @@ module Aws::EC2
     DescribeSpotFleetInstancesRequest.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
     DescribeSpotFleetInstancesRequest.struct_class = Types::DescribeSpotFleetInstancesRequest
 
-    DescribeSpotFleetInstancesResponse.add_member(:active_instances, Shapes::ShapeRef.new(shape: ActiveInstanceSet, required: true, location_name: "activeInstanceSet"))
+    DescribeSpotFleetInstancesResponse.add_member(:active_instances, Shapes::ShapeRef.new(shape: ActiveInstanceSet, location_name: "activeInstanceSet"))
     DescribeSpotFleetInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    DescribeSpotFleetInstancesResponse.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
+    DescribeSpotFleetInstancesResponse.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
     DescribeSpotFleetInstancesResponse.struct_class = Types::DescribeSpotFleetInstancesResponse
 
     DescribeSpotFleetRequestHistoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -3263,11 +3586,11 @@ module Aws::EC2
     DescribeSpotFleetRequestHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "startTime"))
     DescribeSpotFleetRequestHistoryRequest.struct_class = Types::DescribeSpotFleetRequestHistoryRequest
 
-    DescribeSpotFleetRequestHistoryResponse.add_member(:history_records, Shapes::ShapeRef.new(shape: HistoryRecords, required: true, location_name: "historyRecordSet"))
-    DescribeSpotFleetRequestHistoryResponse.add_member(:last_evaluated_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "lastEvaluatedTime"))
+    DescribeSpotFleetRequestHistoryResponse.add_member(:history_records, Shapes::ShapeRef.new(shape: HistoryRecords, location_name: "historyRecordSet"))
+    DescribeSpotFleetRequestHistoryResponse.add_member(:last_evaluated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastEvaluatedTime"))
     DescribeSpotFleetRequestHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    DescribeSpotFleetRequestHistoryResponse.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
-    DescribeSpotFleetRequestHistoryResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "startTime"))
+    DescribeSpotFleetRequestHistoryResponse.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
+    DescribeSpotFleetRequestHistoryResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     DescribeSpotFleetRequestHistoryResponse.struct_class = Types::DescribeSpotFleetRequestHistoryResponse
 
     DescribeSpotFleetRequestsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -3277,7 +3600,7 @@ module Aws::EC2
     DescribeSpotFleetRequestsRequest.struct_class = Types::DescribeSpotFleetRequestsRequest
 
     DescribeSpotFleetRequestsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    DescribeSpotFleetRequestsResponse.add_member(:spot_fleet_request_configs, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigSet, required: true, location_name: "spotFleetRequestConfigSet"))
+    DescribeSpotFleetRequestsResponse.add_member(:spot_fleet_request_configs, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigSet, location_name: "spotFleetRequestConfigSet"))
     DescribeSpotFleetRequestsResponse.struct_class = Types::DescribeSpotFleetRequestsResponse
 
     DescribeSpotInstanceRequestsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -3591,6 +3914,12 @@ module Aws::EC2
 
     DhcpOptionsList.member = Shapes::ShapeRef.new(shape: DhcpOptions, location_name: "item")
 
+    DirectoryServiceAuthentication.add_member(:directory_id, Shapes::ShapeRef.new(shape: String, location_name: "directoryId"))
+    DirectoryServiceAuthentication.struct_class = Types::DirectoryServiceAuthentication
+
+    DirectoryServiceAuthenticationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: String, location_name: "DirectoryId"))
+    DirectoryServiceAuthenticationRequest.struct_class = Types::DirectoryServiceAuthenticationRequest
+
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayRouteTableId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayAttachmentId"))
     DisableTransitGatewayRouteTablePropagationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -3620,6 +3949,15 @@ module Aws::EC2
     DisassociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
     DisassociateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateAddressRequest.struct_class = Types::DisassociateAddressRequest
+
+    DisassociateClientVpnTargetNetworkRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    DisassociateClientVpnTargetNetworkRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssociationId"))
+    DisassociateClientVpnTargetNetworkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateClientVpnTargetNetworkRequest.struct_class = Types::DisassociateClientVpnTargetNetworkRequest
+
+    DisassociateClientVpnTargetNetworkResult.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    DisassociateClientVpnTargetNetworkResult.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "status"))
+    DisassociateClientVpnTargetNetworkResult.struct_class = Types::DisassociateClientVpnTargetNetworkResult
 
     DisassociateIamInstanceProfileRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssociationId"))
     DisassociateIamInstanceProfileRequest.struct_class = Types::DisassociateIamInstanceProfileRequest
@@ -3681,6 +4019,10 @@ module Aws::EC2
     DnsEntry.struct_class = Types::DnsEntry
 
     DnsEntrySet.member = Shapes::ShapeRef.new(shape: DnsEntry, location_name: "item")
+
+    DnsServersOptionsModifyStructure.add_member(:custom_dns_servers, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "CustomDnsServers"))
+    DnsServersOptionsModifyStructure.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    DnsServersOptionsModifyStructure.struct_class = Types::DnsServersOptionsModifyStructure
 
     EbsBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     EbsBlockDevice.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
@@ -3786,12 +4128,29 @@ module Aws::EC2
     EnableVpcClassicLinkResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     EnableVpcClassicLinkResult.struct_class = Types::EnableVpcClassicLinkResult
 
+    EndpointSet.member = Shapes::ShapeRef.new(shape: ClientVpnEndpoint, location_name: "item")
+
     EventInformation.add_member(:event_description, Shapes::ShapeRef.new(shape: String, location_name: "eventDescription"))
     EventInformation.add_member(:event_sub_type, Shapes::ShapeRef.new(shape: String, location_name: "eventSubType"))
     EventInformation.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     EventInformation.struct_class = Types::EventInformation
 
     ExecutableByStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ExecutableBy")
+
+    ExportClientVpnClientCertificateRevocationListRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    ExportClientVpnClientCertificateRevocationListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ExportClientVpnClientCertificateRevocationListRequest.struct_class = Types::ExportClientVpnClientCertificateRevocationListRequest
+
+    ExportClientVpnClientCertificateRevocationListResult.add_member(:certificate_revocation_list, Shapes::ShapeRef.new(shape: String, location_name: "certificateRevocationList"))
+    ExportClientVpnClientCertificateRevocationListResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientCertificateRevocationListStatus, location_name: "status"))
+    ExportClientVpnClientCertificateRevocationListResult.struct_class = Types::ExportClientVpnClientCertificateRevocationListResult
+
+    ExportClientVpnClientConfigurationRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    ExportClientVpnClientConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ExportClientVpnClientConfigurationRequest.struct_class = Types::ExportClientVpnClientConfigurationRequest
+
+    ExportClientVpnClientConfigurationResult.add_member(:client_configuration, Shapes::ShapeRef.new(shape: String, location_name: "clientConfiguration"))
+    ExportClientVpnClientConfigurationResult.struct_class = Types::ExportClientVpnClientConfigurationResult
 
     ExportTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ExportTask.add_member(:export_task_id, Shapes::ShapeRef.new(shape: String, location_name: "exportTaskId"))
@@ -4062,9 +4421,9 @@ module Aws::EC2
     HibernationOptionsRequest.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "Configured"))
     HibernationOptionsRequest.struct_class = Types::HibernationOptionsRequest
 
-    HistoryRecord.add_member(:event_information, Shapes::ShapeRef.new(shape: EventInformation, required: true, location_name: "eventInformation"))
-    HistoryRecord.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "eventType"))
-    HistoryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "timestamp"))
+    HistoryRecord.add_member(:event_information, Shapes::ShapeRef.new(shape: EventInformation, location_name: "eventInformation"))
+    HistoryRecord.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
+    HistoryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "timestamp"))
     HistoryRecord.struct_class = Types::HistoryRecord
 
     HistoryRecordEntry.add_member(:event_information, Shapes::ShapeRef.new(shape: EventInformation, location_name: "eventInformation"))
@@ -4211,6 +4570,14 @@ module Aws::EC2
     ImageIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ImageId")
 
     ImageList.member = Shapes::ShapeRef.new(shape: Image, location_name: "item")
+
+    ImportClientVpnClientCertificateRevocationListRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    ImportClientVpnClientCertificateRevocationListRequest.add_member(:certificate_revocation_list, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateRevocationList"))
+    ImportClientVpnClientCertificateRevocationListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ImportClientVpnClientCertificateRevocationListRequest.struct_class = Types::ImportClientVpnClientCertificateRevocationListRequest
+
+    ImportClientVpnClientCertificateRevocationListResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ImportClientVpnClientCertificateRevocationListResult.struct_class = Types::ImportClientVpnClientCertificateRevocationListResult
 
     ImportImageRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "Architecture"))
     ImportImageRequest.add_member(:client_data, Shapes::ShapeRef.new(shape: ClientData, location_name: "ClientData"))
@@ -4927,6 +5294,17 @@ module Aws::EC2
 
     ModifyCapacityReservationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyCapacityReservationResult.struct_class = Types::ModifyCapacityReservationResult
+
+    ModifyClientVpnEndpointRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    ModifyClientVpnEndpointRequest.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServerCertificateArn"))
+    ModifyClientVpnEndpointRequest.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogOptions, location_name: "ConnectionLogOptions"))
+    ModifyClientVpnEndpointRequest.add_member(:dns_servers, Shapes::ShapeRef.new(shape: DnsServersOptionsModifyStructure, location_name: "DnsServers"))
+    ModifyClientVpnEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyClientVpnEndpointRequest.struct_class = Types::ModifyClientVpnEndpointRequest
+
+    ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyClientVpnEndpointResult.struct_class = Types::ModifyClientVpnEndpointResult
 
     ModifyFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
@@ -5711,7 +6089,7 @@ module Aws::EC2
     RequestSpotFleetRequest.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, required: true, location_name: "spotFleetRequestConfig"))
     RequestSpotFleetRequest.struct_class = Types::RequestSpotFleetRequest
 
-    RequestSpotFleetResponse.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
+    RequestSpotFleetResponse.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
     RequestSpotFleetResponse.struct_class = Types::RequestSpotFleetResponse
 
     RequestSpotInstancesRequest.add_member(:availability_zone_group, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneGroup"))
@@ -5945,6 +6323,16 @@ module Aws::EC2
     RestoreAddressToClassicResult.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
     RestoreAddressToClassicResult.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     RestoreAddressToClassicResult.struct_class = Types::RestoreAddressToClassicResult
+
+    RevokeClientVpnIngressRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    RevokeClientVpnIngressRequest.add_member(:target_network_cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetNetworkCidr"))
+    RevokeClientVpnIngressRequest.add_member(:access_group_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessGroupId"))
+    RevokeClientVpnIngressRequest.add_member(:revoke_all_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "RevokeAllGroups"))
+    RevokeClientVpnIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RevokeClientVpnIngressRequest.struct_class = Types::RevokeClientVpnIngressRequest
+
+    RevokeClientVpnIngressResult.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnAuthorizationRuleStatus, location_name: "status"))
+    RevokeClientVpnIngressResult.struct_class = Types::RevokeClientVpnIngressResult
 
     RevokeSecurityGroupEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RevokeSecurityGroupEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupId"))
@@ -6343,10 +6731,10 @@ module Aws::EC2
     SpotFleetMonitoring.struct_class = Types::SpotFleetMonitoring
 
     SpotFleetRequestConfig.add_member(:activity_status, Shapes::ShapeRef.new(shape: ActivityStatus, location_name: "activityStatus"))
-    SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "createTime"))
-    SpotFleetRequestConfig.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, required: true, location_name: "spotFleetRequestConfig"))
-    SpotFleetRequestConfig.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spotFleetRequestId"))
-    SpotFleetRequestConfig.add_member(:spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, required: true, location_name: "spotFleetRequestState"))
+    SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
+    SpotFleetRequestConfig.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, location_name: "spotFleetRequestConfig"))
+    SpotFleetRequestConfig.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
+    SpotFleetRequestConfig.add_member(:spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, location_name: "spotFleetRequestState"))
     SpotFleetRequestConfig.struct_class = Types::SpotFleetRequestConfig
 
     SpotFleetRequestConfigData.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
@@ -6574,19 +6962,47 @@ module Aws::EC2
 
     TargetConfigurationRequestSet.member = Shapes::ShapeRef.new(shape: TargetConfigurationRequest, location_name: "TargetConfigurationRequest")
 
-    TargetGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
+    TargetGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroups.member = Shapes::ShapeRef.new(shape: TargetGroup, location_name: "item")
 
-    TargetGroupsConfig.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, required: true, location_name: "targetGroups"))
+    TargetGroupsConfig.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "targetGroups"))
     TargetGroupsConfig.struct_class = Types::TargetGroupsConfig
+
+    TargetNetwork.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    TargetNetwork.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    TargetNetwork.add_member(:target_network_id, Shapes::ShapeRef.new(shape: String, location_name: "targetNetworkId"))
+    TargetNetwork.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    TargetNetwork.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "status"))
+    TargetNetwork.add_member(:security_groups, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "securityGroups"))
+    TargetNetwork.struct_class = Types::TargetNetwork
+
+    TargetNetworkSet.member = Shapes::ShapeRef.new(shape: TargetNetwork, location_name: "item")
 
     TargetReservationValue.add_member(:reservation_value, Shapes::ShapeRef.new(shape: ReservationValue, location_name: "reservationValue"))
     TargetReservationValue.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, location_name: "targetConfiguration"))
     TargetReservationValue.struct_class = Types::TargetReservationValue
 
     TargetReservationValueSet.member = Shapes::ShapeRef.new(shape: TargetReservationValue, location_name: "item")
+
+    TerminateClientVpnConnectionsRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientVpnEndpointId"))
+    TerminateClientVpnConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, location_name: "ConnectionId"))
+    TerminateClientVpnConnectionsRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    TerminateClientVpnConnectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    TerminateClientVpnConnectionsRequest.struct_class = Types::TerminateClientVpnConnectionsRequest
+
+    TerminateClientVpnConnectionsResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
+    TerminateClientVpnConnectionsResult.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    TerminateClientVpnConnectionsResult.add_member(:connection_statuses, Shapes::ShapeRef.new(shape: TerminateConnectionStatusSet, location_name: "connectionStatuses"))
+    TerminateClientVpnConnectionsResult.struct_class = Types::TerminateClientVpnConnectionsResult
+
+    TerminateConnectionStatus.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, location_name: "connectionId"))
+    TerminateConnectionStatus.add_member(:previous_status, Shapes::ShapeRef.new(shape: ClientVpnConnectionStatus, location_name: "previousStatus"))
+    TerminateConnectionStatus.add_member(:current_status, Shapes::ShapeRef.new(shape: ClientVpnConnectionStatus, location_name: "currentStatus"))
+    TerminateConnectionStatus.struct_class = Types::TerminateConnectionStatus
+
+    TerminateConnectionStatusSet.member = Shapes::ShapeRef.new(shape: TerminateConnectionStatus, location_name: "item")
 
     TerminateInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
     TerminateInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -6759,12 +7175,12 @@ module Aws::EC2
 
     UnsuccessfulInstanceCreditSpecificationSet.member = Shapes::ShapeRef.new(shape: UnsuccessfulInstanceCreditSpecificationItem, location_name: "item")
 
-    UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
+    UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, location_name: "error"))
     UnsuccessfulItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     UnsuccessfulItem.struct_class = Types::UnsuccessfulItem
 
-    UnsuccessfulItemError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
-    UnsuccessfulItemError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    UnsuccessfulItemError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    UnsuccessfulItemError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsuccessfulItemError.struct_class = Types::UnsuccessfulItemError
 
     UnsuccessfulItemList.member = Shapes::ShapeRef.new(shape: UnsuccessfulItem, location_name: "item")
@@ -7150,6 +7566,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AllocateHostsResult)
       end)
 
+      api.add_operation(:apply_security_groups_to_client_vpn_target_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ApplySecurityGroupsToClientVpnTargetNetwork"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ApplySecurityGroupsToClientVpnTargetNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: ApplySecurityGroupsToClientVpnTargetNetworkResult)
+      end)
+
       api.add_operation(:assign_ipv_6_addresses, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssignIpv6Addresses"
         o.http_method = "POST"
@@ -7172,6 +7596,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateAddressRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateAddressResult)
+      end)
+
+      api.add_operation(:associate_client_vpn_target_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateClientVpnTargetNetwork"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateClientVpnTargetNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateClientVpnTargetNetworkResult)
       end)
 
       api.add_operation(:associate_dhcp_options, Seahorse::Model::Operation.new.tap do |o|
@@ -7260,6 +7692,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AttachVpnGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: AttachVpnGatewayResult)
+      end)
+
+      api.add_operation(:authorize_client_vpn_ingress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AuthorizeClientVpnIngress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AuthorizeClientVpnIngressRequest)
+        o.output = Shapes::ShapeRef.new(shape: AuthorizeClientVpnIngressResult)
       end)
 
       api.add_operation(:authorize_security_group_egress, Seahorse::Model::Operation.new.tap do |o|
@@ -7388,6 +7828,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationResult)
+      end)
+
+      api.add_operation(:create_client_vpn_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateClientVpnEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateClientVpnEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateClientVpnEndpointResult)
+      end)
+
+      api.add_operation(:create_client_vpn_route, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateClientVpnRoute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateClientVpnRouteRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateClientVpnRouteResult)
       end)
 
       api.add_operation(:create_customer_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -7716,6 +8172,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateVpnGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateVpnGatewayResult)
+      end)
+
+      api.add_operation(:delete_client_vpn_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteClientVpnEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteClientVpnEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteClientVpnEndpointResult)
+      end)
+
+      api.add_operation(:delete_client_vpn_route, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteClientVpnRoute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteClientVpnRouteRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteClientVpnRouteResult)
       end)
 
       api.add_operation(:delete_customer_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -8084,6 +8556,46 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClassicLinkInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClassicLinkInstancesResult)
+      end)
+
+      api.add_operation(:describe_client_vpn_authorization_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientVpnAuthorizationRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnAuthorizationRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnAuthorizationRulesResult)
+      end)
+
+      api.add_operation(:describe_client_vpn_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientVpnConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnConnectionsResult)
+      end)
+
+      api.add_operation(:describe_client_vpn_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientVpnEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnEndpointsResult)
+      end)
+
+      api.add_operation(:describe_client_vpn_routes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientVpnRoutes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnRoutesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnRoutesResult)
+      end)
+
+      api.add_operation(:describe_client_vpn_target_networks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientVpnTargetNetworks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnTargetNetworksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnTargetNetworksResult)
       end)
 
       api.add_operation(:describe_conversion_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -8905,6 +9417,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:disassociate_client_vpn_target_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateClientVpnTargetNetwork"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateClientVpnTargetNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateClientVpnTargetNetworkResult)
+      end)
+
       api.add_operation(:disassociate_iam_instance_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateIamInstanceProfile"
         o.http_method = "POST"
@@ -8983,6 +9503,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableVpcClassicLinkDnsSupportRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableVpcClassicLinkDnsSupportResult)
+      end)
+
+      api.add_operation(:export_client_vpn_client_certificate_revocation_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportClientVpnClientCertificateRevocationList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportClientVpnClientCertificateRevocationListRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportClientVpnClientCertificateRevocationListResult)
+      end)
+
+      api.add_operation(:export_client_vpn_client_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportClientVpnClientConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportClientVpnClientConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportClientVpnClientConfigurationResult)
       end)
 
       api.add_operation(:export_transit_gateway_routes, Seahorse::Model::Operation.new.tap do |o|
@@ -9065,6 +9601,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTablePropagationsResult)
       end)
 
+      api.add_operation(:import_client_vpn_client_certificate_revocation_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportClientVpnClientCertificateRevocationList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportClientVpnClientCertificateRevocationListRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportClientVpnClientCertificateRevocationListResult)
+      end)
+
       api.add_operation(:import_image, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportImage"
         o.http_method = "POST"
@@ -9111,6 +9655,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyCapacityReservationRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyCapacityReservationResult)
+      end)
+
+      api.add_operation(:modify_client_vpn_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyClientVpnEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyClientVpnEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyClientVpnEndpointResult)
       end)
 
       api.add_operation(:modify_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -9545,6 +10097,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: RestoreAddressToClassicResult)
       end)
 
+      api.add_operation(:revoke_client_vpn_ingress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeClientVpnIngress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RevokeClientVpnIngressRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeClientVpnIngressResult)
+      end)
+
       api.add_operation(:revoke_security_group_egress, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RevokeSecurityGroupEgress"
         o.http_method = "POST"
@@ -9599,6 +10159,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: StopInstancesResult)
+      end)
+
+      api.add_operation(:terminate_client_vpn_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TerminateClientVpnConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TerminateClientVpnConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: TerminateClientVpnConnectionsResult)
       end)
 
       api.add_operation(:terminate_instances, Seahorse::Model::Operation.new.tap do |o|

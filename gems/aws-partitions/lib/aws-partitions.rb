@@ -226,6 +226,8 @@ module Aws
             'APIGateway' => 'apigateway',
             'AlexaForBusiness' => 'a4b',
             'Amplify' => 'amplify',
+            'ApiGatewayManagementApi' => 'execute-api',
+            'ApiGatewayV2' => 'apigateway',
             'AppMesh' => 'appmesh',
             'AppStream' => 'appstream2',
             'AppSync' => 'appsync',

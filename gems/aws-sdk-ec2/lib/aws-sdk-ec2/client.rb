@@ -662,6 +662,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Applies a security group to the association between the target network
+    # and the Client VPN endpoint. This action replaces the existing
+    # security groups with the specified security groups.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC in which the associated target network is located.
+    #
+    # @option params [required, Array<String>] :security_group_ids
+    #   The IDs of the security groups to apply to the associated target
+    #   network. Up to 5 security groups can be applied to an associated
+    #   target network.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ApplySecurityGroupsToClientVpnTargetNetworkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ApplySecurityGroupsToClientVpnTargetNetworkResult#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.apply_security_groups_to_client_vpn_target_network({
+    #     client_vpn_endpoint_id: "String", # required
+    #     vpc_id: "String", # required
+    #     security_group_ids: ["String"], # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ApplySecurityGroupsToClientVpnTargetNetwork AWS API Documentation
+    #
+    # @overload apply_security_groups_to_client_vpn_target_network(params = {})
+    # @param [Hash] params ({})
+    def apply_security_groups_to_client_vpn_target_network(params = {}, options = {})
+      req = build_request(:apply_security_groups_to_client_vpn_target_network, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more IPv6 addresses to the specified network interface.
     # You can specify one or more specific IPv6 addresses, or you can
     # specify the number of IPv6 addresses to be automatically assigned from
@@ -943,6 +991,52 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_address(params = {}, options = {})
       req = build_request(:associate_address, params)
+      req.send_request(options)
+    end
+
+    # Associates a target network with a Client VPN endpoint. A target
+    # network is a subnet in a VPC. You can associate multiple subnets from
+    # the same VPC with a Client VPN endpoint. You can associate only one
+    # subnet in each Availability Zone. We recommend that you associate at
+    # least two subnets to provide Availability Zone redundancy.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of the subnet to associate with the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateClientVpnTargetNetworkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateClientVpnTargetNetworkResult#association_id #association_id} => String
+    #   * {Types::AssociateClientVpnTargetNetworkResult#status #status} => Types::AssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_client_vpn_target_network({
+    #     client_vpn_endpoint_id: "String", # required
+    #     subnet_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #   resp.status.code #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateClientVpnTargetNetwork AWS API Documentation
+    #
+    # @overload associate_client_vpn_target_network(params = {})
+    # @param [Hash] params ({})
+    def associate_client_vpn_target_network(params = {}, options = {})
+      req = build_request(:associate_client_vpn_target_network, params)
       req.send_request(options)
     end
 
@@ -1608,6 +1702,64 @@ module Aws::EC2
     # @param [Hash] params ({})
     def attach_vpn_gateway(params = {}, options = {})
       req = build_request(:attach_vpn_gateway, params)
+      req.send_request(options)
+    end
+
+    # Adds an ingress authorization rule to a Client VPN endpoint. Ingress
+    # authorization rules act as firewall rules that grant access to
+    # networks. You must configure ingress authorization rules to enable
+    # clients to access resources in AWS or on-premises networks.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [required, String] :target_network_cidr
+    #   The IPv4 address range, in CIDR notation, of the network for which
+    #   access is being authorized.
+    #
+    # @option params [String] :access_group_id
+    #   The ID of the Active Directory group to grant access.
+    #
+    # @option params [Boolean] :authorize_all_groups
+    #   Indicates whether to grant access to all clients. Use `true` to grant
+    #   all clients who successfully establish a VPN connection access to the
+    #   network.
+    #
+    # @option params [String] :description
+    #   A brief description of the authorization rule.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AuthorizeClientVpnIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AuthorizeClientVpnIngressResult#status #status} => Types::ClientVpnAuthorizationRuleStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_client_vpn_ingress({
+    #     client_vpn_endpoint_id: "String", # required
+    #     target_network_cidr: "String", # required
+    #     access_group_id: "String",
+    #     authorize_all_groups: false,
+    #     description: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "authorizing", "active", "failed", "revoking"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeClientVpnIngress AWS API Documentation
+    #
+    # @overload authorize_client_vpn_ingress(params = {})
+    # @param [Hash] params ({})
+    def authorize_client_vpn_ingress(params = {}, options = {})
+      req = build_request(:authorize_client_vpn_ingress, params)
       req.send_request(options)
     end
 
@@ -3141,6 +3293,190 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_capacity_reservation(params = {}, options = {})
       req = build_request(:create_capacity_reservation, params)
+      req.send_request(options)
+    end
+
+    # Creates a Client VPN endpoint. A Client VPN endpoint is the resource
+    # you create and configure to enable and manage client VPN sessions. It
+    # is the destination endpoint at which all client VPN sessions are
+    # terminated.
+    #
+    # @option params [required, String] :client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which to assign client
+    #   IP addresses. The address range cannot overlap with the local CIDR of
+    #   the VPC in which the associated subnet is located, or the routes that
+    #   you add manually. The address range cannot be changed after the Client
+    #   VPN endpoint has been created. The CIDR block should be /22 or
+    #   greater.
+    #
+    # @option params [required, String] :server_certificate_arn
+    #   The ARN of the server certificate. For more information, see the [AWS
+    #   Certificate Manager User
+    #   Guide](acm/latest/userguide/acm-overview.html) .
+    #
+    # @option params [required, Array<Types::ClientVpnAuthenticationRequest>] :authentication_options
+    #   Information about the authentication method to be used to authenticate
+    #   clients.
+    #
+    # @option params [required, Types::ConnectionLogOptions] :connection_log_options
+    #   Information about the client connection logging options.
+    #
+    #   If you enable client connection logging, data about client connections
+    #   is sent to a Cloudwatch Logs log stream. The following information is
+    #   logged:
+    #
+    #   * Client connection requests
+    #
+    #   * Client connection results (successful and unsuccessful)
+    #
+    #   * Reasons for unsuccessful client connection requests
+    #
+    #   * Client connection termination time
+    #
+    # @option params [Array<String>] :dns_servers
+    #   Information about the DNS servers to be used for DNS resolution. A
+    #   Client VPN endpoint can have up to two DNS servers. If no DNS server
+    #   is specified, the DNS address of the VPC that is to be associated with
+    #   Client VPN endpoint is used as the DNS server.
+    #
+    # @option params [String] :transport_protocol
+    #   The transport protocol to be used by the VPN session.
+    #
+    #   Default value: `udp`
+    #
+    # @option params [String] :description
+    #   A brief description of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [ How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
+    #   * {Types::CreateClientVpnEndpointResult#status #status} => Types::ClientVpnEndpointStatus
+    #   * {Types::CreateClientVpnEndpointResult#dns_name #dns_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_client_vpn_endpoint({
+    #     client_cidr_block: "String", # required
+    #     server_certificate_arn: "String", # required
+    #     authentication_options: [ # required
+    #       {
+    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #         active_directory: {
+    #           directory_id: "String",
+    #         },
+    #         mutual_authentication: {
+    #           client_root_certificate_chain_arn: "String",
+    #         },
+    #       },
+    #     ],
+    #     connection_log_options: { # required
+    #       enabled: false,
+    #       cloudwatch_log_group: "String",
+    #       cloudwatch_log_stream: "String",
+    #     },
+    #     dns_servers: ["String"],
+    #     transport_protocol: "tcp", # accepts tcp, udp
+    #     description: "String",
+    #     dry_run: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoint_id #=> String
+    #   resp.status.code #=> String, one of "pending-associate", "available", "deleting", "deleted"
+    #   resp.status.message #=> String
+    #   resp.dns_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpoint AWS API Documentation
+    #
+    # @overload create_client_vpn_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_client_vpn_endpoint(params = {}, options = {})
+      req = build_request(:create_client_vpn_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Adds a route to a network to a Client VPN endpoint. Each Client VPN
+    # endpoint has a route table that describes the available destination
+    # network routes. Each route in the route table specifies the path for
+    # traﬃc to speciﬁc resources or networks.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which to add the route.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The IPv4 address range, in CIDR notation, of the route destination.
+    #   For example:
+    #
+    #   * To add a route for Internet access, enter `0.0.0.0/0`
+    #
+    #   * To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR
+    #     range
+    #
+    #   * To add a route for an on-premises network, enter the AWS
+    #     Site-to-Site VPN connection's IPv4 CIDR range
+    #
+    #   Route address ranges cannot overlap with the CIDR range specified for
+    #   client allocation.
+    #
+    # @option params [required, String] :target_vpc_subnet_id
+    #   The ID of the subnet through which you want to route traffic. The
+    #   specified subnet must be an existing target network of the Client VPN
+    #   endpoint.
+    #
+    # @option params [String] :description
+    #   A brief description of the route.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateClientVpnRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClientVpnRouteResult#status #status} => Types::ClientVpnRouteStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_client_vpn_route({
+    #     client_vpn_endpoint_id: "String", # required
+    #     destination_cidr_block: "String", # required
+    #     target_vpc_subnet_id: "String", # required
+    #     description: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "creating", "active", "failed", "deleting"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnRoute AWS API Documentation
+    #
+    # @overload create_client_vpn_route(params = {})
+    # @param [Hash] params ({})
+    def create_client_vpn_route(params = {}, options = {})
+      req = build_request(:create_client_vpn_route, params)
       req.send_request(options)
     end
 
@@ -6274,6 +6610,9 @@ module Aws::EC2
     # @option params [required, Array<String>] :resources
     #   The IDs of one or more resources, separated by spaces.
     #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
+    #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags. The `value` parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and
@@ -6667,9 +7006,9 @@ module Aws::EC2
     #
     # @option params [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to
-    #   64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is
-    #   guaranteed only on [Nitro-based
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
+    #   IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed
+    #   only on [Nitro-based
     #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
     #   Other instance families guarantee performance up to 32,000 IOPS. For
     #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
@@ -7588,6 +7927,92 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_vpn_gateway(params = {}, options = {})
       req = build_request(:create_vpn_gateway, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Client VPN endpoint. You must disassociate all
+    # target networks before you can delete a Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN to be deleted.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClientVpnEndpointResult#status #status} => Types::ClientVpnEndpointStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_client_vpn_endpoint({
+    #     client_vpn_endpoint_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "pending-associate", "available", "deleting", "deleted"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpoint AWS API Documentation
+    #
+    # @overload delete_client_vpn_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_client_vpn_endpoint(params = {}, options = {})
+      req = build_request(:delete_client_vpn_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes a route from a Client VPN endpoint. You can only delete routes
+    # that you manually added using the **CreateClientVpnRoute** action. You
+    # cannot delete routes that were automatically added when associating a
+    # subnet. To remove routes that have been automatically added,
+    # disassociate the target subnet from the Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint from which the route is to be
+    #   deleted.
+    #
+    # @option params [String] :target_vpc_subnet_id
+    #   The ID of the target subnet used by the route.
+    #
+    # @option params [required, String] :destination_cidr_block
+    #   The IPv4 address range, in CIDR notation, of the route to be deleted.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteClientVpnRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClientVpnRouteResult#status #status} => Types::ClientVpnRouteStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_client_vpn_route({
+    #     client_vpn_endpoint_id: "String", # required
+    #     target_vpc_subnet_id: "String",
+    #     destination_cidr_block: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "creating", "active", "failed", "deleting"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnRoute AWS API Documentation
+    #
+    # @overload delete_client_vpn_route(params = {})
+    # @param [Hash] params ({})
+    def delete_client_vpn_route(params = {}, options = {})
+      req = build_request(:delete_client_vpn_route, params)
       req.send_request(options)
     end
 
@@ -8625,6 +9050,9 @@ module Aws::EC2
     #
     # @option params [required, Array<String>] :resources
     #   The IDs of one or more resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to delete. Specify a tag key and an optional tag
@@ -10129,6 +10557,352 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_classic_link_instances(params = {}, options = {})
       req = build_request(:describe_classic_link_instances, params)
+      req.send_request(options)
+    end
+
+    # Describes the authorization rules for a specified Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @return [Types::DescribeClientVpnAuthorizationRulesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnAuthorizationRulesResult#authorization_rules #authorization_rules} => Array&lt;Types::AuthorizationRule&gt;
+    #   * {Types::DescribeClientVpnAuthorizationRulesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_authorization_rules({
+    #     client_vpn_endpoint_id: "String", # required
+    #     dry_run: false,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorization_rules #=> Array
+    #   resp.authorization_rules[0].client_vpn_endpoint_id #=> String
+    #   resp.authorization_rules[0].description #=> String
+    #   resp.authorization_rules[0].group_id #=> String
+    #   resp.authorization_rules[0].access_all #=> Boolean
+    #   resp.authorization_rules[0].destination_cidr #=> String
+    #   resp.authorization_rules[0].status.code #=> String, one of "authorizing", "active", "failed", "revoking"
+    #   resp.authorization_rules[0].status.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnAuthorizationRules AWS API Documentation
+    #
+    # @overload describe_client_vpn_authorization_rules(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_authorization_rules(params = {}, options = {})
+      req = build_request(:describe_client_vpn_authorization_rules, params)
+      req.send_request(options)
+    end
+
+    # Describes active client connections and connections that have been
+    # terminated within the last 60 minutes for the specified Client VPN
+    # endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnConnectionsResult#connections #connections} => Array&lt;Types::ClientVpnConnection&gt;
+    #   * {Types::DescribeClientVpnConnectionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_connections({
+    #     client_vpn_endpoint_id: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections #=> Array
+    #   resp.connections[0].client_vpn_endpoint_id #=> String
+    #   resp.connections[0].timestamp #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].username #=> String
+    #   resp.connections[0].connection_established_time #=> String
+    #   resp.connections[0].ingress_bytes #=> String
+    #   resp.connections[0].egress_bytes #=> String
+    #   resp.connections[0].ingress_packets #=> String
+    #   resp.connections[0].egress_packets #=> String
+    #   resp.connections[0].client_ip #=> String
+    #   resp.connections[0].common_name #=> String
+    #   resp.connections[0].status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
+    #   resp.connections[0].status.message #=> String
+    #   resp.connections[0].connection_end_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnections AWS API Documentation
+    #
+    # @overload describe_client_vpn_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_connections(params = {}, options = {})
+      req = build_request(:describe_client_vpn_connections, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Client VPN endpoints in the account.
+    #
+    # @option params [Array<String>] :client_vpn_endpoint_ids
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnEndpointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnEndpointsResult#client_vpn_endpoints #client_vpn_endpoints} => Array&lt;Types::ClientVpnEndpoint&gt;
+    #   * {Types::DescribeClientVpnEndpointsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_endpoints({
+    #     client_vpn_endpoint_ids: ["String"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoints #=> Array
+    #   resp.client_vpn_endpoints[0].client_vpn_endpoint_id #=> String
+    #   resp.client_vpn_endpoints[0].description #=> String
+    #   resp.client_vpn_endpoints[0].status.code #=> String, one of "pending-associate", "available", "deleting", "deleted"
+    #   resp.client_vpn_endpoints[0].status.message #=> String
+    #   resp.client_vpn_endpoints[0].creation_time #=> String
+    #   resp.client_vpn_endpoints[0].deletion_time #=> String
+    #   resp.client_vpn_endpoints[0].dns_name #=> String
+    #   resp.client_vpn_endpoints[0].client_cidr_block #=> String
+    #   resp.client_vpn_endpoints[0].split_tunnel #=> Boolean
+    #   resp.client_vpn_endpoints[0].vpn_protocol #=> String, one of "openvpn"
+    #   resp.client_vpn_endpoints[0].transport_protocol #=> String, one of "tcp", "udp"
+    #   resp.client_vpn_endpoints[0].associated_target_networks #=> Array
+    #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_id #=> String
+    #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_type #=> String, one of "vpc"
+    #   resp.client_vpn_endpoints[0].server_certificate_arn #=> String
+    #   resp.client_vpn_endpoints[0].authentication_options #=> Array
+    #   resp.client_vpn_endpoints[0].authentication_options[0].type #=> String, one of "certificate-authentication", "directory-service-authentication"
+    #   resp.client_vpn_endpoints[0].authentication_options[0].active_directory.directory_id #=> String
+    #   resp.client_vpn_endpoints[0].authentication_options[0].mutual_authentication.client_root_certificate_chain #=> String
+    #   resp.client_vpn_endpoints[0].connection_log_options.enabled #=> Boolean
+    #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_group #=> String
+    #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_stream #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
+    #
+    # @overload describe_client_vpn_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_endpoints(params = {}, options = {})
+      req = build_request(:describe_client_vpn_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Describes the routes for the specified Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnRoutesResult#routes #routes} => Array&lt;Types::ClientVpnRoute&gt;
+    #   * {Types::DescribeClientVpnRoutesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_routes({
+    #     client_vpn_endpoint_id: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.routes #=> Array
+    #   resp.routes[0].client_vpn_endpoint_id #=> String
+    #   resp.routes[0].destination_cidr #=> String
+    #   resp.routes[0].target_subnet #=> String
+    #   resp.routes[0].type #=> String
+    #   resp.routes[0].origin #=> String
+    #   resp.routes[0].status.code #=> String, one of "creating", "active", "failed", "deleting"
+    #   resp.routes[0].status.message #=> String
+    #   resp.routes[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnRoutes AWS API Documentation
+    #
+    # @overload describe_client_vpn_routes(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_routes(params = {}, options = {})
+      req = build_request(:describe_client_vpn_routes, params)
+      req.send_request(options)
+    end
+
+    # Describes the target networks associated with the specified Client VPN
+    # endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Array<String>] :association_ids
+    #   The IDs of the target network associations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeClientVpnTargetNetworksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientVpnTargetNetworksResult#client_vpn_target_networks #client_vpn_target_networks} => Array&lt;Types::TargetNetwork&gt;
+    #   * {Types::DescribeClientVpnTargetNetworksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_vpn_target_networks({
+    #     client_vpn_endpoint_id: "String", # required
+    #     association_ids: ["String"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_target_networks #=> Array
+    #   resp.client_vpn_target_networks[0].association_id #=> String
+    #   resp.client_vpn_target_networks[0].vpc_id #=> String
+    #   resp.client_vpn_target_networks[0].target_network_id #=> String
+    #   resp.client_vpn_target_networks[0].client_vpn_endpoint_id #=> String
+    #   resp.client_vpn_target_networks[0].status.code #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated"
+    #   resp.client_vpn_target_networks[0].status.message #=> String
+    #   resp.client_vpn_target_networks[0].security_groups #=> Array
+    #   resp.client_vpn_target_networks[0].security_groups[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnTargetNetworks AWS API Documentation
+    #
+    # @overload describe_client_vpn_target_networks(params = {})
+    # @param [Hash] params ({})
+    def describe_client_vpn_target_networks(params = {}, options = {})
+      req = build_request(:describe_client_vpn_target_networks, params)
       req.send_request(options)
     end
 
@@ -20327,6 +21101,59 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disassociates a target network from the specified Client VPN endpoint.
+    # When you disassociate the last target network from a Client VPN, the
+    # following happens:
+    #
+    # * The route that was automatically added for the VPC is deleted
+    #
+    # * All active client connections are terminated
+    #
+    # * New client connections are disallowed
+    #
+    # * The Client VPN endpoint's status changes to `pending-associate`
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint from which to disassociate the
+    #   target network.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the target network association.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateClientVpnTargetNetworkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateClientVpnTargetNetworkResult#association_id #association_id} => String
+    #   * {Types::DisassociateClientVpnTargetNetworkResult#status #status} => Types::AssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_client_vpn_target_network({
+    #     client_vpn_endpoint_id: "String", # required
+    #     association_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #   resp.status.code #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateClientVpnTargetNetwork AWS API Documentation
+    #
+    # @overload disassociate_client_vpn_target_network(params = {})
+    # @param [Hash] params ({})
+    def disassociate_client_vpn_target_network(params = {}, options = {})
+      req = build_request(:disassociate_client_vpn_target_network, params)
+      req.send_request(options)
+    end
+
     # Disassociates an IAM instance profile from a running or stopped
     # instance.
     #
@@ -20759,6 +21586,83 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_vpc_classic_link_dns_support(params = {}, options = {})
       req = build_request(:enable_vpc_classic_link_dns_support, params)
+      req.send_request(options)
+    end
+
+    # Downloads the client certificate revocation list for the specified
+    # Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ExportClientVpnClientCertificateRevocationListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportClientVpnClientCertificateRevocationListResult#certificate_revocation_list #certificate_revocation_list} => String
+    #   * {Types::ExportClientVpnClientCertificateRevocationListResult#status #status} => Types::ClientCertificateRevocationListStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_client_vpn_client_certificate_revocation_list({
+    #     client_vpn_endpoint_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_revocation_list #=> String
+    #   resp.status.code #=> String, one of "pending", "active"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientCertificateRevocationList AWS API Documentation
+    #
+    # @overload export_client_vpn_client_certificate_revocation_list(params = {})
+    # @param [Hash] params ({})
+    def export_client_vpn_client_certificate_revocation_list(params = {}, options = {})
+      req = build_request(:export_client_vpn_client_certificate_revocation_list, params)
+      req.send_request(options)
+    end
+
+    # Downloads the contents of the client configuration file for the
+    # specified Client VPN endpoint. The client configuration file includes
+    # the Client VPN endpoint and certificate information clients need to
+    # establish a connection with the Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ExportClientVpnClientConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportClientVpnClientConfigurationResult#client_configuration #client_configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_client_vpn_client_configuration({
+    #     client_vpn_endpoint_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientConfiguration AWS API Documentation
+    #
+    # @overload export_client_vpn_client_configuration(params = {})
+    # @param [Hash] params ({})
+    def export_client_vpn_client_configuration(params = {}, options = {})
+      req = build_request(:export_client_vpn_client_configuration, params)
       req.send_request(options)
     end
 
@@ -21518,6 +22422,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Uploads a client certificate revocation list to the specified Client
+    # VPN endpoint. Uploading a client certificate revocation list
+    # overwrites the existing client certificate revocation list.
+    #
+    # Uploading a client certificate revocation list resets existing client
+    # connections.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client certificate
+    #   revocation list applies.
+    #
+    # @option params [required, String] :certificate_revocation_list
+    #   The client certificate revocation list file. For more information, see
+    #   [Generate a Client Certificate Revocation
+    #   List](vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
+    #   in the *AWS Client VPN Admin Guide*.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ImportClientVpnClientCertificateRevocationListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportClientVpnClientCertificateRevocationListResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_client_vpn_client_certificate_revocation_list({
+    #     client_vpn_endpoint_id: "String", # required
+    #     certificate_revocation_list: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportClientVpnClientCertificateRevocationList AWS API Documentation
+    #
+    # @overload import_client_vpn_client_certificate_revocation_list(params = {})
+    # @param [Hash] params ({})
+    def import_client_vpn_client_certificate_revocation_list(params = {}, options = {})
+      req = build_request(:import_client_vpn_client_certificate_revocation_list, params)
+      req.send_request(options)
+    end
+
     # Import single or multi-volume disk images or EBS snapshots into an
     # Amazon Machine Image (AMI). For more information, see [Importing a VM
     # as an Image Using VM Import/Export][1] in the *VM Import/Export User
@@ -22169,6 +23121,81 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_capacity_reservation(params = {}, options = {})
       req = build_request(:modify_capacity_reservation, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified Client VPN endpoint. You can only modify an
+    # endpoint's server certificate information, client connection logging
+    # information, DNS server, and description. Modifying the DNS server
+    # resets existing client connections.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to modify.
+    #
+    # @option params [String] :server_certificate_arn
+    #   The ARN of the server certificate to be used. The server certificate
+    #   must be provisioned in AWS Certificate Manager (ACM).
+    #
+    # @option params [Types::ConnectionLogOptions] :connection_log_options
+    #   Information about the client connection logging options.
+    #
+    #   If you enable client connection logging, data about client connections
+    #   is sent to a Cloudwatch Logs log stream. The following information is
+    #   logged:
+    #
+    #   * Client connection requests
+    #
+    #   * Client connection results (successful and unsuccessful)
+    #
+    #   * Reasons for unsuccessful client connection requests
+    #
+    #   * Client connection termination time
+    #
+    # @option params [Types::DnsServersOptionsModifyStructure] :dns_servers
+    #   Information about the DNS servers to be used by Client VPN
+    #   connections. A Client VPN endpoint can have up to two DNS servers.
+    #
+    # @option params [String] :description
+    #   A brief description of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_client_vpn_endpoint({
+    #     client_vpn_endpoint_id: "String", # required
+    #     server_certificate_arn: "String",
+    #     connection_log_options: {
+    #       enabled: false,
+    #       cloudwatch_log_group: "String",
+    #       cloudwatch_log_stream: "String",
+    #     },
+    #     dns_servers: {
+    #       custom_dns_servers: ["String"],
+    #       enabled: false,
+    #     },
+    #     description: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpoint AWS API Documentation
+    #
+    # @overload modify_client_vpn_endpoint(params = {})
+    # @param [Hash] params ({})
+    def modify_client_vpn_endpoint(params = {}, options = {})
+      req = build_request(:modify_client_vpn_endpoint, params)
       req.send_request(options)
     end
 
@@ -26013,16 +27040,16 @@ module Aws::EC2
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       load_balancers_config: {
     #         classic_load_balancers_config: {
-    #           classic_load_balancers: [ # required
+    #           classic_load_balancers: [
     #             {
-    #               name: "String", # required
+    #               name: "String",
     #             },
     #           ],
     #         },
     #         target_groups_config: {
-    #           target_groups: [ # required
+    #           target_groups: [
     #             {
-    #               arn: "String", # required
+    #               arn: "String",
     #             },
     #           ],
     #         },
@@ -26666,6 +27693,56 @@ module Aws::EC2
     # @param [Hash] params ({})
     def restore_address_to_classic(params = {}, options = {})
       req = build_request(:restore_address_to_classic, params)
+      req.send_request(options)
+    end
+
+    # Removes an ingress authorization rule from a Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint with which the authorization rule is
+    #   associated.
+    #
+    # @option params [required, String] :target_network_cidr
+    #   The IPv4 address range, in CIDR notation, of the network for which
+    #   access is being removed.
+    #
+    # @option params [String] :access_group_id
+    #   The ID of the Active Directory group for which to revoke access.
+    #
+    # @option params [Boolean] :revoke_all_groups
+    #   Indicates whether access should be revoked for all clients.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::RevokeClientVpnIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokeClientVpnIngressResult#status #status} => Types::ClientVpnAuthorizationRuleStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_client_vpn_ingress({
+    #     client_vpn_endpoint_id: "String", # required
+    #     target_network_cidr: "String", # required
+    #     access_group_id: "String",
+    #     revoke_all_groups: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.code #=> String, one of "authorizing", "active", "failed", "revoking"
+    #   resp.status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeClientVpnIngress AWS API Documentation
+    #
+    # @overload revoke_client_vpn_ingress(params = {})
+    # @param [Hash] params ({})
+    def revoke_client_vpn_ingress(params = {}, options = {})
+      req = build_request(:revoke_client_vpn_ingress, params)
       req.send_request(options)
     end
 
@@ -28069,6 +29146,62 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Terminates active Client VPN endpoint connections. This action can be
+    # used to terminate a specific client connection, or up to five
+    # connections established by a specific user.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client is connected.
+    #
+    # @option params [String] :connection_id
+    #   The ID of the client connection to be terminated.
+    #
+    # @option params [String] :username
+    #   The name of the user who initiated the connection. Use this option to
+    #   terminate all active connections for the specified user. This option
+    #   can only be used if the user has established up to five connections.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::TerminateClientVpnConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateClientVpnConnectionsResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
+    #   * {Types::TerminateClientVpnConnectionsResult#username #username} => String
+    #   * {Types::TerminateClientVpnConnectionsResult#connection_statuses #connection_statuses} => Array&lt;Types::TerminateConnectionStatus&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_client_vpn_connections({
+    #     client_vpn_endpoint_id: "String", # required
+    #     connection_id: "String",
+    #     username: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoint_id #=> String
+    #   resp.username #=> String
+    #   resp.connection_statuses #=> Array
+    #   resp.connection_statuses[0].connection_id #=> String
+    #   resp.connection_statuses[0].previous_status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
+    #   resp.connection_statuses[0].previous_status.message #=> String
+    #   resp.connection_statuses[0].current_status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
+    #   resp.connection_statuses[0].current_status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateClientVpnConnections AWS API Documentation
+    #
+    # @overload terminate_client_vpn_connections(params = {})
+    # @param [Hash] params ({})
+    def terminate_client_vpn_connections(params = {}, options = {})
+      req = build_request(:terminate_client_vpn_connections, params)
+      req.send_request(options)
+    end
+
     # Shuts down one or more instances. This operation is idempotent; if you
     # terminate an instance more than once, each call succeeds.
     #
@@ -28577,7 +29710,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

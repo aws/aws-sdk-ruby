@@ -8,6 +8,8 @@ module Aws
   autoload :APIGateway, 'aws-sdk-apigateway'
   autoload :AlexaForBusiness, 'aws-sdk-alexaforbusiness'
   autoload :Amplify, 'aws-sdk-amplify'
+  autoload :ApiGatewayManagementApi, 'aws-sdk-apigatewaymanagementapi'
+  autoload :ApiGatewayV2, 'aws-sdk-apigatewayv2'
   autoload :AppMesh, 'aws-sdk-appmesh'
   autoload :AppStream, 'aws-sdk-appstream'
   autoload :AppSync, 'aws-sdk-appsync'

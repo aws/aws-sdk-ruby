@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.36.0 (2018-12-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-apigatewayv2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-apigatewaymanagementapi` gem.
+
 3.35.0 (2018-11-29)
 ------------------
 

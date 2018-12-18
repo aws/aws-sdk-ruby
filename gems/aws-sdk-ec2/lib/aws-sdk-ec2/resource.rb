@@ -771,6 +771,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<String>] :resources
     #   The IDs of one or more resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     # @option options [required, Array<Types::Tag>] :tags
     #   One or more tags. The `value` parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and
@@ -824,9 +827,9 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to
-    #   64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is
-    #   guaranteed only on [Nitro-based
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
+    #   IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed
+    #   only on [Nitro-based
     #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
     #   Other instance families guarantee performance up to 32,000 IOPS. For
     #   more information, see [Amazon EBS Volume Types][1] in the *Amazon

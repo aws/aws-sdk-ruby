@@ -523,6 +523,58 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ApplySecurityGroupsToClientVpnTargetNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         vpc_id: "String", # required
+    #         security_group_ids: ["String"], # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the associated target network is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups to apply to the associated target
+    #   network. Up to 5 security groups can be applied to an associated
+    #   target network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ApplySecurityGroupsToClientVpnTargetNetworkRequest AWS API Documentation
+    #
+    class ApplySecurityGroupsToClientVpnTargetNetworkRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :vpc_id,
+      :security_group_ids,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the applied security groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ApplySecurityGroupsToClientVpnTargetNetworkResult AWS API Documentation
+    #
+    class ApplySecurityGroupsToClientVpnTargetNetworkResult < Struct.new(
+      :security_group_ids)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssignIpv6AddressesRequest
     #   data as a hash:
     #
@@ -701,6 +753,55 @@ module Aws::EC2
     #
     class AssociateAddressResult < Struct.new(
       :association_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateClientVpnTargetNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         subnet_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet to associate with the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateClientVpnTargetNetworkRequest AWS API Documentation
+    #
+    class AssociateClientVpnTargetNetworkRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :subnet_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_id
+    #   The unique ID of the target network association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the target network association.
+    #   @return [Types::AssociationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateClientVpnTargetNetworkResult AWS API Documentation
+    #
+    class AssociateClientVpnTargetNetworkResult < Struct.new(
+      :association_id,
+      :status)
       include Aws::Structure
     end
 
@@ -956,6 +1057,44 @@ module Aws::EC2
       :ipv_6_cidr_block_association,
       :cidr_block_association,
       :vpc_id)
+      include Aws::Structure
+    end
+
+    # Describes a target network that is associated with a Client VPN
+    # endpoint. A target network is a subnet in a VPC.
+    #
+    # @!attribute [rw] network_id
+    #   **The ID of the subnet.**
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   **The target network type.**
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedTargetNetwork AWS API Documentation
+    #
+    class AssociatedTargetNetwork < Struct.new(
+      :network_id,
+      :network_type)
+      include Aws::Structure
+    end
+
+    # Describes the state of a target network association.
+    #
+    # @!attribute [rw] code
+    #   The state of the target network association.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the status of the target network association, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociationStatus AWS API Documentation
+    #
+    class AssociationStatus < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -1226,6 +1365,113 @@ module Aws::EC2
     #
     class AttributeValue < Struct.new(
       :value)
+      include Aws::Structure
+    end
+
+    # **Information about an authorization rule.**
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint with which the authorization rule
+    #   is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the authorization rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the Active Directory group to which the authorization rule
+    #   grants access.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_all
+    #   Indicates whether the authorization rule grants access to all
+    #   clients.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] destination_cidr
+    #   The IPv4 address range, in CIDR notation, of the network to which
+    #   the authorization rule applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the authorization rule.
+    #   @return [Types::ClientVpnAuthorizationRuleStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizationRule AWS API Documentation
+    #
+    class AuthorizationRule < Struct.new(
+      :client_vpn_endpoint_id,
+      :description,
+      :group_id,
+      :access_all,
+      :destination_cidr,
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AuthorizeClientVpnIngressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         target_network_cidr: "String", # required
+    #         access_group_id: "String",
+    #         authorize_all_groups: false,
+    #         description: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_network_cidr
+    #   The IPv4 address range, in CIDR notation, of the network for which
+    #   access is being authorized.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_group_id
+    #   The ID of the Active Directory group to grant access.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorize_all_groups
+    #   Indicates whether to grant access to all clients. Use `true` to
+    #   grant all clients who successfully establish a VPN connection access
+    #   to the network.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the authorization rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeClientVpnIngressRequest AWS API Documentation
+    #
+    class AuthorizeClientVpnIngressRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :target_network_cidr,
+      :access_group_id,
+      :authorize_all_groups,
+      :description,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the authorization rule.
+    #   @return [Types::ClientVpnAuthorizationRuleStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeClientVpnIngressResult AWS API Documentation
+    #
+    class AuthorizeClientVpnIngressResult < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -2443,6 +2689,42 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # **Information about the client certificate used for authentication.**
+    #
+    # @!attribute [rw] client_root_certificate_chain
+    #   <b>The ARN of the client certificate. </b>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CertificateAuthentication AWS API Documentation
+    #
+    class CertificateAuthentication < Struct.new(
+      :client_root_certificate_chain)
+      include Aws::Structure
+    end
+
+    # **Information about the client certificate to be used for
+    # authentication.**
+    #
+    # @note When making an API call, you may pass CertificateAuthenticationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_root_certificate_chain_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] client_root_certificate_chain_arn
+    #   **The ARN of the client certificate. The certificate must be signed
+    #   by a certificate authority (CA) and it must be provisioned in AWS
+    #   Certificate Manager (ACM).**
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CertificateAuthenticationRequest AWS API Documentation
+    #
+    class CertificateAuthenticationRequest < Struct.new(
+      :client_root_certificate_chain_arn)
+      include Aws::Structure
+    end
+
     # Provides authorization for Amazon to bring a specific IP address range
     # to a specific AWS account using bring your own IP addresses (BYOIP).
     #
@@ -2535,7 +2817,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         name: "String", # required
+    #         name: "String",
     #       }
     #
     # @!attribute [rw] name
@@ -2557,9 +2839,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         classic_load_balancers: [ # required
+    #         classic_load_balancers: [
     #           {
-    #             name: "String", # required
+    #             name: "String",
     #           },
     #         ],
     #       }
@@ -2572,6 +2854,25 @@ module Aws::EC2
     #
     class ClassicLoadBalancersConfig < Struct.new(
       :classic_load_balancers)
+      include Aws::Structure
+    end
+
+    # Describes the state of a client certificate revocation list.
+    #
+    # @!attribute [rw] code
+    #   The state of the client certificate revocation list.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the status of the client certificate revocation
+    #   list, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientCertificateRevocationListStatus AWS API Documentation
+    #
+    class ClientCertificateRevocationListStatus < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -2610,6 +2911,376 @@ module Aws::EC2
       :upload_end,
       :upload_size,
       :upload_start)
+      include Aws::Structure
+    end
+
+    # Describes the authentication methods used by a Client VPN endpoint.
+    # Client VPN supports Active Directory and mutual authentication. For
+    # more information, see
+    # [Authentication](vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
+    # in the *AWS Client VPN Admin Guide*.
+    #
+    # @!attribute [rw] type
+    #   The authentication type used.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory
+    #   Information about the Active Directory, if applicable.
+    #   @return [Types::DirectoryServiceAuthentication]
+    #
+    # @!attribute [rw] mutual_authentication
+    #   Information about the authentication certificates, if applicable.
+    #   @return [Types::CertificateAuthentication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthentication AWS API Documentation
+    #
+    class ClientVpnAuthentication < Struct.new(
+      :type,
+      :active_directory,
+      :mutual_authentication)
+      include Aws::Structure
+    end
+
+    # Describes the authentication method to be used by a Client VPN
+    # endpoint. Client VPN supports Active Directory and mutual
+    # authentication. For more information, see
+    # [Athentication](vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
+    # in the *AWS Client VPN Admin Guide*.
+    #
+    # @note When making an API call, you may pass ClientVpnAuthenticationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #         active_directory: {
+    #           directory_id: "String",
+    #         },
+    #         mutual_authentication: {
+    #           client_root_certificate_chain_arn: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of client authentication to be used. Specify
+    #   `certificate-authentication` to use certificate-based
+    #   authentication, or `directory-service-authentication` to use Active
+    #   Directory authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory
+    #   Information about the Active Directory to be used, if applicable.
+    #   You must provide this information if **Type** is
+    #   `directory-service-authentication`.
+    #   @return [Types::DirectoryServiceAuthenticationRequest]
+    #
+    # @!attribute [rw] mutual_authentication
+    #   Information about the authentication certificates to be used, if
+    #   applicable. You must provide this information if **Type** is
+    #   `certificate-authentication`.
+    #   @return [Types::CertificateAuthenticationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthenticationRequest AWS API Documentation
+    #
+    class ClientVpnAuthenticationRequest < Struct.new(
+      :type,
+      :active_directory,
+      :mutual_authentication)
+      include Aws::Structure
+    end
+
+    # Describes the state of an authorization rule.
+    #
+    # @!attribute [rw] code
+    #   The state of the authorization rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the status of the authorization rule, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthorizationRuleStatus AWS API Documentation
+    #
+    class ClientVpnAuthorizationRuleStatus < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes a client connection.
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client is connected.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   **The current date and time.**
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the client connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the client who established the client connection.
+    #   This information is only provided if Active Directory client
+    #   authentication is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_established_time
+    #   The date and time the client connection was established.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_bytes
+    #   The number of bytes sent by the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_bytes
+    #   The number of bytes received by the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_packets
+    #   The number of packets sent by the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_packets
+    #   The number of packets received by the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ip
+    #   The IP address of the client.
+    #   @return [String]
+    #
+    # @!attribute [rw] common_name
+    #   **The common name associated with the client. This is either the
+    #   name of the client certificate, or the Active Directory user name.**
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the client connection.
+    #   @return [Types::ClientVpnConnectionStatus]
+    #
+    # @!attribute [rw] connection_end_time
+    #   The date and time the client connection was terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnection AWS API Documentation
+    #
+    class ClientVpnConnection < Struct.new(
+      :client_vpn_endpoint_id,
+      :timestamp,
+      :connection_id,
+      :username,
+      :connection_established_time,
+      :ingress_bytes,
+      :egress_bytes,
+      :ingress_packets,
+      :egress_packets,
+      :client_ip,
+      :common_name,
+      :status,
+      :connection_end_time)
+      include Aws::Structure
+    end
+
+    # Describes the status of a client connection.
+    #
+    # @!attribute [rw] code
+    #   The state of the client connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the status of the client connection, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnectionStatus AWS API Documentation
+    #
+    class ClientVpnConnectionStatus < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes a Client VPN endpoint.
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the Client VPN endpoint.
+    #   @return [Types::ClientVpnEndpointStatus]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time the Client VPN endpoint was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_time
+    #   The date and time the Client VPN endpoint was deleted, if
+    #   applicable. Information about deleted Client VPN endpoints is
+    #   retained for 24 hours, unless a new Client VPN is created with the
+    #   same name.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name to be used by clients when establishing a connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which client IP
+    #   addresses are assigned.
+    #   @return [String]
+    #
+    # @!attribute [rw] split_tunnel
+    #   **Indicates whether VPN split tunneling is supported.**
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpn_protocol
+    #   The protocol used by the VPN session.
+    #   @return [String]
+    #
+    # @!attribute [rw] transport_protocol
+    #   **The transport protocol used by the Client VPN endpoint.**
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_target_networks
+    #   Information about the associated target networks. A target network
+    #   is a subnet in a VPC.
+    #   @return [Array<Types::AssociatedTargetNetwork>]
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The ARN of the server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_options
+    #   Information about the authentication method used by the Client VPN
+    #   endpoint.
+    #   @return [Array<Types::ClientVpnAuthentication>]
+    #
+    # @!attribute [rw] connection_log_options
+    #   Information about the client connection logging options for the
+    #   Client VPN endpoint.
+    #   @return [Types::ConnectionLogResponseOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
+    #
+    class ClientVpnEndpoint < Struct.new(
+      :client_vpn_endpoint_id,
+      :description,
+      :status,
+      :creation_time,
+      :deletion_time,
+      :dns_name,
+      :client_cidr_block,
+      :split_tunnel,
+      :vpn_protocol,
+      :transport_protocol,
+      :associated_target_networks,
+      :server_certificate_arn,
+      :authentication_options,
+      :connection_log_options)
+      include Aws::Structure
+    end
+
+    # Describes the state of a Client VPN endpoint.
+    #
+    # @!attribute [rw] code
+    #   The state of the Client VPN endpoint. Possible states include:
+    #
+    #   * `pending-associate` - The Client VPN endpoint has been created but
+    #     no target networks have been associated. The Client VPN endpoint
+    #     cannot accept connections.
+    #
+    #   * `available` - The Client VPN endpoint has been created and a
+    #     target network has been associated. The Client VPN endpoint can
+    #     accept connections.
+    #
+    #   * `deleting` - The Client VPN endpoint is being deleted. The Client
+    #     VPN endpoint cannot accept connections.
+    #
+    #   * `deleted` - The Client VPN endpoint has been deleted. The Client
+    #     VPN endpoint cannot accept connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the status of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpointStatus AWS API Documentation
+    #
+    class ClientVpnEndpointStatus < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # **Information about a Client VPN endpoint route.**
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint with which the route is
+    #   associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr
+    #   The IPv4 address range, in CIDR notation, of the route destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_subnet
+    #   The ID of the subnet through which traffic is routed.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   **The route type.**
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   Indicates how the route was associated with the Client VPN endpoint.
+    #   `associate` indicates that the route was automatically added when
+    #   the target network was associated with the Client VPN endpoint.
+    #   `add-route` indicates that the route was manually added using the
+    #   **CreateClientVpnRoute** action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the route.
+    #   @return [Types::ClientVpnRouteStatus]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnRoute AWS API Documentation
+    #
+    class ClientVpnRoute < Struct.new(
+      :client_vpn_endpoint_id,
+      :destination_cidr,
+      :target_subnet,
+      :type,
+      :origin,
+      :status,
+      :description)
+      include Aws::Structure
+    end
+
+    # Describes the state of a Client VPN endpoint route.
+    #
+    # @!attribute [rw] code
+    #   The state of the Client VPN endpoint route.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the status of the Client VPN endpoint route, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnRouteStatus AWS API Documentation
+    #
+    class ClientVpnRouteStatus < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -2662,6 +3333,67 @@ module Aws::EC2
     class ConfirmProductInstanceResult < Struct.new(
       :owner_id,
       :return)
+      include Aws::Structure
+    end
+
+    # Describes the client connection logging options for the Client VPN
+    # endpoint.
+    #
+    # @note When making an API call, you may pass ConnectionLogOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         cloudwatch_log_group: "String",
+    #         cloudwatch_log_stream: "String",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether connection logging is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloudwatch_log_group
+    #   The name of the CloudWatch Logs log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloudwatch_log_stream
+    #   The name of the CloudWatch Logs log stream to which the connection
+    #   data is published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogOptions AWS API Documentation
+    #
+    class ConnectionLogOptions < Struct.new(
+      :enabled,
+      :cloudwatch_log_group,
+      :cloudwatch_log_stream)
+      include Aws::Structure
+    end
+
+    # Information about the client connection logging options for a Client
+    # VPN endpoint.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connection logging is enabled for the
+    #   Client VPN endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloudwatch_log_group
+    #   The name of the Amazon CloudWatch Logs log group to which connection
+    #   logging data is published.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloudwatch_log_stream
+    #   The name of the Amazon CloudWatch Logs log stream to which
+    #   connection logging data is published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogResponseOptions AWS API Documentation
+    #
+    class ConnectionLogResponseOptions < Struct.new(
+      :enabled,
+      :cloudwatch_log_group,
+      :cloudwatch_log_stream)
       include Aws::Structure
     end
 
@@ -3308,6 +4040,215 @@ module Aws::EC2
     #
     class CreateCapacityReservationResult < Struct.new(
       :capacity_reservation)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateClientVpnEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_cidr_block: "String", # required
+    #         server_certificate_arn: "String", # required
+    #         authentication_options: [ # required
+    #           {
+    #             type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #             active_directory: {
+    #               directory_id: "String",
+    #             },
+    #             mutual_authentication: {
+    #               client_root_certificate_chain_arn: "String",
+    #             },
+    #           },
+    #         ],
+    #         connection_log_options: { # required
+    #           enabled: false,
+    #           cloudwatch_log_group: "String",
+    #           cloudwatch_log_stream: "String",
+    #         },
+    #         dns_servers: ["String"],
+    #         transport_protocol: "tcp", # accepts tcp, udp
+    #         description: "String",
+    #         dry_run: false,
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which to assign
+    #   client IP addresses. The address range cannot overlap with the local
+    #   CIDR of the VPC in which the associated subnet is located, or the
+    #   routes that you add manually. The address range cannot be changed
+    #   after the Client VPN endpoint has been created. The CIDR block
+    #   should be /22 or greater.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The ARN of the server certificate. For more information, see the
+    #   [AWS Certificate Manager User
+    #   Guide](acm/latest/userguide/acm-overview.html) .
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_options
+    #   Information about the authentication method to be used to
+    #   authenticate clients.
+    #   @return [Array<Types::ClientVpnAuthenticationRequest>]
+    #
+    # @!attribute [rw] connection_log_options
+    #   Information about the client connection logging options.
+    #
+    #   If you enable client connection logging, data about client
+    #   connections is sent to a Cloudwatch Logs log stream. The following
+    #   information is logged:
+    #
+    #   * Client connection requests
+    #
+    #   * Client connection results (successful and unsuccessful)
+    #
+    #   * Reasons for unsuccessful client connection requests
+    #
+    #   * Client connection termination time
+    #   @return [Types::ConnectionLogOptions]
+    #
+    # @!attribute [rw] dns_servers
+    #   Information about the DNS servers to be used for DNS resolution. A
+    #   Client VPN endpoint can have up to two DNS servers. If no DNS server
+    #   is specified, the DNS address of the VPC that is to be associated
+    #   with Client VPN endpoint is used as the DNS server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transport_protocol
+    #   The transport protocol to be used by the VPN session.
+    #
+    #   Default value: `udp`
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [ How to
+    #   Ensure Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
+    #
+    class CreateClientVpnEndpointRequest < Struct.new(
+      :client_cidr_block,
+      :server_certificate_arn,
+      :authentication_options,
+      :connection_log_options,
+      :dns_servers,
+      :transport_protocol,
+      :description,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the Client VPN endpoint.
+    #   @return [Types::ClientVpnEndpointStatus]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name to be used by clients when establishing their VPN
+    #   session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointResult AWS API Documentation
+    #
+    class CreateClientVpnEndpointResult < Struct.new(
+      :client_vpn_endpoint_id,
+      :status,
+      :dns_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateClientVpnRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         destination_cidr_block: "String", # required
+    #         target_vpc_subnet_id: "String", # required
+    #         description: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which to add the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The IPv4 address range, in CIDR notation, of the route destination.
+    #   For example:
+    #
+    #   * To add a route for Internet access, enter `0.0.0.0/0`
+    #
+    #   * To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR
+    #     range
+    #
+    #   * To add a route for an on-premises network, enter the AWS
+    #     Site-to-Site VPN connection's IPv4 CIDR range
+    #
+    #   Route address ranges cannot overlap with the CIDR range specified
+    #   for client allocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_vpc_subnet_id
+    #   The ID of the subnet through which you want to route traffic. The
+    #   specified subnet must be an existing target network of the Client
+    #   VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnRouteRequest AWS API Documentation
+    #
+    class CreateClientVpnRouteRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :destination_cidr_block,
+      :target_vpc_subnet_id,
+      :description,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the route.
+    #   @return [Types::ClientVpnRouteStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnRouteResult AWS API Documentation
+    #
+    class CreateClientVpnRouteResult < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -5480,6 +6421,9 @@ module Aws::EC2
     #
     # @!attribute [rw] resources
     #   The IDs of one or more resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -5896,8 +6840,8 @@ module Aws::EC2
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to
-    #   64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
+    #   IOPS for volumes in most regions. Maximum IOPS of 64,000 is
     #   guaranteed only on [Nitro-based
     #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
     #   Other instance families guarantee performance up to 32,000 IOPS. For
@@ -6620,6 +7564,96 @@ module Aws::EC2
       :state,
       :type,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteClientVpnEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointRequest AWS API Documentation
+    #
+    class DeleteClientVpnEndpointRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the Client VPN endpoint.
+    #   @return [Types::ClientVpnEndpointStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointResult AWS API Documentation
+    #
+    class DeleteClientVpnEndpointResult < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteClientVpnRouteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         target_vpc_subnet_id: "String",
+    #         destination_cidr_block: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint from which the route is to be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_vpc_subnet_id
+    #   The ID of the target subnet used by the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The IPv4 address range, in CIDR notation, of the route to be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnRouteRequest AWS API Documentation
+    #
+    class DeleteClientVpnRouteRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :target_vpc_subnet_id,
+      :destination_cidr_block,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the route.
+    #   @return [Types::ClientVpnRouteStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnRouteResult AWS API Documentation
+    #
+    class DeleteClientVpnRouteResult < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -7519,6 +8553,9 @@ module Aws::EC2
     #
     # @!attribute [rw] resources
     #   The IDs of one or more resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -8597,6 +9634,357 @@ module Aws::EC2
     #
     class DescribeClassicLinkInstancesResult < Struct.new(
       :instances,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientVpnAuthorizationRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         dry_run: false,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnAuthorizationRulesRequest AWS API Documentation
+    #
+    class DescribeClientVpnAuthorizationRulesRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run,
+      :next_token,
+      :filters,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization_rules
+    #   Information about the authorization rules.
+    #   @return [Array<Types::AuthorizationRule>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnAuthorizationRulesResult AWS API Documentation
+    #
+    class DescribeClientVpnAuthorizationRulesResult < Struct.new(
+      :authorization_rules,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientVpnConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnectionsRequest AWS API Documentation
+    #
+    class DescribeClientVpnConnectionsRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :filters,
+      :next_token,
+      :max_results,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connections
+    #   Information about the active and terminated client connections.
+    #   @return [Array<Types::ClientVpnConnection>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnectionsResult AWS API Documentation
+    #
+    class DescribeClientVpnConnectionsResult < Struct.new(
+      :connections,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientVpnEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_ids: ["String"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_ids
+    #   The ID of the Client VPN endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpointsRequest AWS API Documentation
+    #
+    class DescribeClientVpnEndpointsRequest < Struct.new(
+      :client_vpn_endpoint_ids,
+      :max_results,
+      :next_token,
+      :filters,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoints
+    #   Information about the Client VPN endpoints.
+    #   @return [Array<Types::ClientVpnEndpoint>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpointsResult AWS API Documentation
+    #
+    class DescribeClientVpnEndpointsResult < Struct.new(
+      :client_vpn_endpoints,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientVpnRoutesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnRoutesRequest AWS API Documentation
+    #
+    class DescribeClientVpnRoutesRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routes
+    #   Information about the Client VPN endpoint routes.
+    #   @return [Array<Types::ClientVpnRoute>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnRoutesResult AWS API Documentation
+    #
+    class DescribeClientVpnRoutesResult < Struct.new(
+      :routes,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientVpnTargetNetworksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         association_ids: ["String"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_ids
+    #   The IDs of the target network associations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnTargetNetworksRequest AWS API Documentation
+    #
+    class DescribeClientVpnTargetNetworksRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :association_ids,
+      :max_results,
+      :next_token,
+      :filters,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_target_networks
+    #   Information about the associated target networks.
+    #   @return [Array<Types::TargetNetwork>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnTargetNetworksResult AWS API Documentation
+    #
+    class DescribeClientVpnTargetNetworksResult < Struct.new(
+      :client_vpn_target_networks,
       :next_token)
       include Aws::Structure
     end
@@ -16122,6 +17510,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an Active Directory.
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the Active Directory used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DirectoryServiceAuthentication AWS API Documentation
+    #
+    class DirectoryServiceAuthentication < Struct.new(
+      :directory_id)
+      include Aws::Structure
+    end
+
+    # Describes the Active Directory to be used for client authentication.
+    #
+    # @note When making an API call, you may pass DirectoryServiceAuthenticationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "String",
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the Active Directory to be used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DirectoryServiceAuthenticationRequest AWS API Documentation
+    #
+    class DirectoryServiceAuthenticationRequest < Struct.new(
+      :directory_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableTransitGatewayRouteTablePropagationRequest
     #   data as a hash:
     #
@@ -16291,6 +17712,56 @@ module Aws::EC2
       :association_id,
       :public_ip,
       :dry_run)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateClientVpnTargetNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         association_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint from which to disassociate the
+    #   target network.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the target network association.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateClientVpnTargetNetworkRequest AWS API Documentation
+    #
+    class DisassociateClientVpnTargetNetworkRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :association_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_id
+    #   The ID of the target network association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the target network association.
+    #   @return [Types::AssociationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateClientVpnTargetNetworkResult AWS API Documentation
+    #
+    class DisassociateClientVpnTargetNetworkResult < Struct.new(
+      :association_id,
+      :status)
       include Aws::Structure
     end
 
@@ -16627,6 +18098,36 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the DNS server to be used.
+    #
+    # @note When making an API call, you may pass DnsServersOptionsModifyStructure
+    #   data as a hash:
+    #
+    #       {
+    #         custom_dns_servers: ["String"],
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] custom_dns_servers
+    #   The IPv4 address range, in CIDR notation, of the DNS servers to be
+    #   used. You can specify up to two DNS servers. Ensure that the DNS
+    #   servers can be reached by the clients. The specified values
+    #   overwrite the existing values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether DNS servers should be used. Specify `False` to
+    #   delete the existing DNS servers.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsServersOptionsModifyStructure AWS API Documentation
+    #
+    class DnsServersOptionsModifyStructure < Struct.new(
+      :custom_dns_servers,
+      :enabled)
+      include Aws::Structure
+    end
+
     # Describes a block device for an EBS volume.
     #
     # @note When making an API call, you may pass EbsBlockDevice
@@ -16656,8 +18157,8 @@ module Aws::EC2
     #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
-    #   Constraints: Range is 100-10,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
+    #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
+    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1`IOPS of
     #   64,000 is guaranteed only on [Nitro-based
     #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
     #   Other instance families guarantee performance up to 32,000 IOPS. For
@@ -17233,6 +18734,87 @@ module Aws::EC2
       :event_description,
       :event_sub_type,
       :instance_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportClientVpnClientCertificateRevocationListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientCertificateRevocationListRequest AWS API Documentation
+    #
+    class ExportClientVpnClientCertificateRevocationListRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_revocation_list
+    #   Information about the client certificate revocation list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the client certificate revocation list.
+    #   @return [Types::ClientCertificateRevocationListStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientCertificateRevocationListResult AWS API Documentation
+    #
+    class ExportClientVpnClientCertificateRevocationListResult < Struct.new(
+      :certificate_revocation_list,
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportClientVpnClientConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientConfigurationRequest AWS API Documentation
+    #
+    class ExportClientVpnClientConfigurationRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_configuration
+    #   the contents of the client configuration file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientConfigurationResult AWS API Documentation
+    #
+    class ExportClientVpnClientConfigurationResult < Struct.new(
+      :client_configuration)
       include Aws::Structure
     end
 
@@ -19411,6 +20993,55 @@ module Aws::EC2
       :snapshot_id,
       :url,
       :user_bucket)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportClientVpnClientCertificateRevocationListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         certificate_revocation_list: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client certificate
+    #   revocation list applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_revocation_list
+    #   The client certificate revocation list file. For more information,
+    #   see [Generate a Client Certificate Revocation
+    #   List](vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
+    #   in the *AWS Client VPN Admin Guide*.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportClientVpnClientCertificateRevocationListRequest AWS API Documentation
+    #
+    class ImportClientVpnClientCertificateRevocationListRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :certificate_revocation_list,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportClientVpnClientCertificateRevocationListResult AWS API Documentation
+    #
+    class ImportClientVpnClientCertificateRevocationListResult < Struct.new(
+      :return)
       include Aws::Structure
     end
 
@@ -23066,16 +24697,16 @@ module Aws::EC2
     #
     #       {
     #         classic_load_balancers_config: {
-    #           classic_load_balancers: [ # required
+    #           classic_load_balancers: [
     #             {
-    #               name: "String", # required
+    #               name: "String",
     #             },
     #           ],
     #         },
     #         target_groups_config: {
-    #           target_groups: [ # required
+    #           target_groups: [
     #             {
-    #               arn: "String", # required
+    #               arn: "String",
     #             },
     #           ],
     #         },
@@ -23251,6 +24882,90 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationResult AWS API Documentation
     #
     class ModifyCapacityReservationResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClientVpnEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         server_certificate_arn: "String",
+    #         connection_log_options: {
+    #           enabled: false,
+    #           cloudwatch_log_group: "String",
+    #           cloudwatch_log_stream: "String",
+    #         },
+    #         dns_servers: {
+    #           custom_dns_servers: ["String"],
+    #           enabled: false,
+    #         },
+    #         description: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The ARN of the server certificate to be used. The server certificate
+    #   must be provisioned in AWS Certificate Manager (ACM).
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_log_options
+    #   Information about the client connection logging options.
+    #
+    #   If you enable client connection logging, data about client
+    #   connections is sent to a Cloudwatch Logs log stream. The following
+    #   information is logged:
+    #
+    #   * Client connection requests
+    #
+    #   * Client connection results (successful and unsuccessful)
+    #
+    #   * Reasons for unsuccessful client connection requests
+    #
+    #   * Client connection termination time
+    #   @return [Types::ConnectionLogOptions]
+    #
+    # @!attribute [rw] dns_servers
+    #   Information about the DNS servers to be used by Client VPN
+    #   connections. A Client VPN endpoint can have up to two DNS servers.
+    #   @return [Types::DnsServersOptionsModifyStructure]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
+    #
+    class ModifyClientVpnEndpointRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :server_certificate_arn,
+      :connection_log_options,
+      :dns_servers,
+      :description,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointResult AWS API Documentation
+    #
+    class ModifyClientVpnEndpointResult < Struct.new(
       :return)
       include Aws::Structure
     end
@@ -27995,16 +29710,16 @@ module Aws::EC2
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           load_balancers_config: {
     #             classic_load_balancers_config: {
-    #               classic_load_balancers: [ # required
+    #               classic_load_balancers: [
     #                 {
-    #                   name: "String", # required
+    #                   name: "String",
     #                 },
     #               ],
     #             },
     #             target_groups_config: {
-    #               target_groups: [ # required
+    #               target_groups: [
     #                 {
-    #                   arn: "String", # required
+    #                   arn: "String",
     #                 },
     #               ],
     #             },
@@ -29343,6 +31058,64 @@ module Aws::EC2
     #
     class RestoreAddressToClassicResult < Struct.new(
       :public_ip,
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RevokeClientVpnIngressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         target_network_cidr: "String", # required
+    #         access_group_id: "String",
+    #         revoke_all_groups: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint with which the authorization rule
+    #   is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_network_cidr
+    #   The IPv4 address range, in CIDR notation, of the network for which
+    #   access is being removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_group_id
+    #   The ID of the Active Directory group for which to revoke access.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoke_all_groups
+    #   Indicates whether access should be revoked for all clients.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeClientVpnIngressRequest AWS API Documentation
+    #
+    class RevokeClientVpnIngressRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :target_network_cidr,
+      :access_group_id,
+      :revoke_all_groups,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the authorization rule.
+    #   @return [Types::ClientVpnAuthorizationRuleStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeClientVpnIngressResult AWS API Documentation
+    #
+    class RevokeClientVpnIngressResult < Struct.new(
       :status)
       include Aws::Structure
     end
@@ -32229,16 +34002,16 @@ module Aws::EC2
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         load_balancers_config: {
     #           classic_load_balancers_config: {
-    #             classic_load_balancers: [ # required
+    #             classic_load_balancers: [
     #               {
-    #                 name: "String", # required
+    #                 name: "String",
     #               },
     #             ],
     #           },
     #           target_groups_config: {
-    #             target_groups: [ # required
+    #             target_groups: [
     #               {
-    #                 arn: "String", # required
+    #                 arn: "String",
     #               },
     #             ],
     #           },
@@ -33505,7 +35278,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         arn: "String", # required
+    #         arn: "String",
     #       }
     #
     # @!attribute [rw] arn
@@ -33526,9 +35299,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         target_groups: [ # required
+    #         target_groups: [
     #           {
-    #             arn: "String", # required
+    #             arn: "String",
     #           },
     #         ],
     #       }
@@ -33541,6 +35314,46 @@ module Aws::EC2
     #
     class TargetGroupsConfig < Struct.new(
       :target_groups)
+      include Aws::Structure
+    end
+
+    # Describes a target network associated with a Client VPN endpoint.
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the target network (subnet) is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_network_id
+    #   The ID of the subnet specified as the target network.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint with which the target network is
+    #   associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the target network association.
+    #   @return [Types::AssociationStatus]
+    #
+    # @!attribute [rw] security_groups
+    #   The IDs of the security groups applied to the target network
+    #   association.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetNetwork AWS API Documentation
+    #
+    class TargetNetwork < Struct.new(
+      :association_id,
+      :vpc_id,
+      :target_network_id,
+      :client_vpn_endpoint_id,
+      :status,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -33562,6 +35375,92 @@ module Aws::EC2
     class TargetReservationValue < Struct.new(
       :reservation_value,
       :target_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TerminateClientVpnConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_vpn_endpoint_id: "String", # required
+    #         connection_id: "String",
+    #         username: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint to which the client is connected.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the client connection to be terminated.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The name of the user who initiated the connection. Use this option
+    #   to terminate all active connections for the specified user. This
+    #   option can only be used if the user has established up to five
+    #   connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateClientVpnConnectionsRequest AWS API Documentation
+    #
+    class TerminateClientVpnConnectionsRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :connection_id,
+      :username,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The user who established the terminated client connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_statuses
+    #   The current state of the client connections.
+    #   @return [Array<Types::TerminateConnectionStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateClientVpnConnectionsResult AWS API Documentation
+    #
+    class TerminateClientVpnConnectionsResult < Struct.new(
+      :client_vpn_endpoint_id,
+      :username,
+      :connection_statuses)
+      include Aws::Structure
+    end
+
+    # Information about a terminated Client VPN endpoint client connection.
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the client connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_status
+    #   The state of the client connection.
+    #   @return [Types::ClientVpnConnectionStatus]
+    #
+    # @!attribute [rw] current_status
+    #   A message about the status of the client connection, if applicable.
+    #   @return [Types::ClientVpnConnectionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateConnectionStatus AWS API Documentation
+    #
+    class TerminateConnectionStatus < Struct.new(
+      :connection_id,
+      :previous_status,
+      :current_status)
       include Aws::Structure
     end
 
@@ -34734,7 +36633,7 @@ module Aws::EC2
     #   performance, I/O credits, and bursting, see [Amazon EBS Volume
     #   Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraints: Range is 100-10,000 IOPS for `gp2` volumes and 100 to
+    #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
     #   64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
     #   64,000 is guaranteed only on [Nitro-based
     #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).

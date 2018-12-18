@@ -2136,6 +2136,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_resources.instances[0].id #=> String
     #   resp.environment_resources.launch_configurations #=> Array
     #   resp.environment_resources.launch_configurations[0].name #=> String
+    #   resp.environment_resources.launch_templates #=> Array
+    #   resp.environment_resources.launch_templates[0].id #=> String
     #   resp.environment_resources.load_balancers #=> Array
     #   resp.environment_resources.load_balancers[0].name #=> String
     #   resp.environment_resources.triggers #=> Array
@@ -4056,7 +4058,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

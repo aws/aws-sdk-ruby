@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
   spec.add_dependency('aws-sdk-alexaforbusiness', '~> 1')
   spec.add_dependency('aws-sdk-amplify', '~> 1')
+  spec.add_dependency('aws-sdk-apigatewaymanagementapi', '~> 1')
+  spec.add_dependency('aws-sdk-apigatewayv2', '~> 1')
   spec.add_dependency('aws-sdk-appmesh', '~> 1')
   spec.add_dependency('aws-sdk-appstream', '~> 1')
   spec.add_dependency('aws-sdk-appsync', '~> 1')

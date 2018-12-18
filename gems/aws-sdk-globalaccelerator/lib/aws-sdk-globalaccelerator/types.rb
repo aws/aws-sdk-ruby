@@ -68,22 +68,30 @@ module Aws::GlobalAccelerator
     # Attributes of an accelerator.
     #
     # @!attribute [rw] flow_logs_enabled
-    #   Indicates whether flow logs are enabled. The value is true or false.
-    #   The default value is false. If the value is true, FlowLogsS3Bucket
-    #   and FlowLogsS3Prefix must be specified.
+    #   Indicates whether flow logs are enabled. The default value is false.
+    #   If the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must
+    #   be specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
     #   @return [Boolean]
     #
     # @!attribute [rw] flow_logs_s3_bucket
-    #   The name of the Amazon S3 bucket for the flow logs. This attribute
-    #   is required if flow logs are enabled. The bucket must exist and have
-    #   a bucket policy that grants AWS Global Accelerator permission to
-    #   write to the bucket.
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission
+    #   to write to the bucket.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_s3_prefix
     #   The prefix for the location in the Amazon S3 bucket for the flow
-    #   logs. If you don’t specify a prefix, the flow logs are stored in the
-    #   root of the bucket.
+    #   logs. Attribute is required if `FlowLogsEnabled` is `true`. If you
+    #   don’t specify a prefix, the flow logs are stored in the root of the
+    #   bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorAttributes AWS API Documentation
@@ -217,8 +225,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
-    #   The time, in seconds, between each health check for an endpoint. The
-    #   default value is 30.
+    #   The time—10 seconds or 30 seconds—between each health check for an
+    #   endpoint. The default value is 30.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold_count
@@ -298,7 +306,7 @@ module Aws::GlobalAccelerator
     #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
     #   choose the optimal endpoint for a connection. If client affinity is
     #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
-    #   properties—client IP address, client port, destination IP address,
+    #   properties—source IP address, source port, destination IP address,
     #   destination port, and protocol—to select the hash value, and then
     #   chooses the best endpoint. However, with this setting, if someone
     #   uses different ports to connect to Global Accelerator, their
@@ -306,11 +314,10 @@ module Aws::GlobalAccelerator
     #   the hash value changes.
     #
     #   If you want a given client to always be routed to the same endpoint,
-    #   set client affinity to `CLIENT_IP` instead. When you use the
-    #   `CLIENT_IP` setting, Global Accelerator uses the "two-tuple"
-    #   (2-tuple) properties— client IP address and destination IP
-    #   address—to select the hash value. For UDP, Global Accelerator always
-    #   uses two-tuple properties to select the hash value.
+    #   set client affinity to `SOURCE_IP` instead. When you use the
+    #   `SOURCE_IP` setting, Global Accelerator uses the "two-tuple"
+    #   (2-tuple) properties— source (client) IP address and destination IP
+    #   address—to select the hash value.
     #
     #   The default value is `NONE`.
     #   @return [String]
@@ -405,7 +412,7 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the
-    #   attributes that you want to describe.
+    #   attributes that you want to describe. Value is required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeAcceleratorAttributesRequest AWS API Documentation
@@ -543,7 +550,7 @@ module Aws::GlobalAccelerator
     #
     #
     #
-    #   [1]: https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
@@ -577,7 +584,7 @@ module Aws::GlobalAccelerator
     #
     #
     #
-    #   [1]: https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html
     #   @return [Integer]
     #
     # @!attribute [rw] health_state
@@ -667,7 +674,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
-    #   The elapsed time, in seconds, between health checks for each
+    #   The time—10 seconds or 30 seconds—between health checks for each
     #   endpoint. The default value is 30.
     #   @return [Integer]
     #
@@ -869,9 +876,29 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] client_affinity
-    #   The client properties that Global Accelerator uses to select an
-    #   endpoint so that you can choose to route traffic from users to their
-    #   original endpoint. The default value is `NONE`.
+    #   Client affinity lets you direct all requests from a user to the same
+    #   endpoint, if you have stateful applications, regardless of the port
+    #   and protocol of the client request. Clienty affinity gives you
+    #   control over whether to always route each client to the same
+    #   specific endpoint.
+    #
+    #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
+    #   choose the optimal endpoint for a connection. If client affinity is
+    #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
+    #   properties—source IP address, source port, destination IP address,
+    #   destination port, and protocol—to select the hash value, and then
+    #   chooses the best endpoint. However, with this setting, if someone
+    #   uses different ports to connect to Global Accelerator, their
+    #   connections might not be always routed to the same endpoint because
+    #   the hash value changes.
+    #
+    #   If you want a given client to always be routed to the same endpoint,
+    #   set client affinity to `SOURCE_IP` instead. When you use the
+    #   `SOURCE_IP` setting, Global Accelerator uses the "two-tuple"
+    #   (2-tuple) properties— source (client) IP address and destination IP
+    #   address—to select the hash value.
+    #
+    #   The default value is `NONE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Listener AWS API Documentation
@@ -922,20 +949,34 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
-    #   update.
+    #   update. Attribute is required.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_enabled
-    #   Update whether flow logs are enabled.
+    #   Update whether flow logs are enabled. The default value is false. If
+    #   the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must be
+    #   specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
     #   @return [Boolean]
     #
     # @!attribute [rw] flow_logs_s3_bucket
-    #   Update the name of the Amazon S3 bucket for the flow logs.
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission
+    #   to write to the bucket.
     #   @return [String]
     #
     # @!attribute [rw] flow_logs_s3_prefix
     #   Update the prefix for the location in the Amazon S3 bucket for the
-    #   flow logs.
+    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`. If
+    #   you don’t specify a prefix, the flow logs are stored in the root of
+    #   the bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAcceleratorAttributesRequest AWS API Documentation
@@ -1072,8 +1113,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
-    #   The time, in seconds, between each health check for an endpoint. The
-    #   default value is 30.
+    #   The time—10 seconds or 30 seconds—between each health check for an
+    #   endpoint. The default value is 30.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold_count
@@ -1138,10 +1179,26 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] client_affinity
     #   Client affinity lets you direct all requests from a user to the same
-    #   endpoint, if you have stateful applications, regardless of the
-    #   source port and protocol of the user request. This gives you control
-    #   over whether and how to maintain client affinity to a given
-    #   endpoint.
+    #   endpoint, if you have stateful applications, regardless of the port
+    #   and protocol of the client request. Clienty affinity gives you
+    #   control over whether to always route each client to the same
+    #   specific endpoint.
+    #
+    #   AWS Global Accelerator uses a consistent-flow hashing algorithm to
+    #   choose the optimal endpoint for a connection. If client affinity is
+    #   `NONE`, Global Accelerator uses the "five-tuple" (5-tuple)
+    #   properties—source IP address, source port, destination IP address,
+    #   destination port, and protocol—to select the hash value, and then
+    #   chooses the best endpoint. However, with this setting, if someone
+    #   uses different ports to connect to Global Accelerator, their
+    #   connections might not be always routed to the same endpoint because
+    #   the hash value changes.
+    #
+    #   If you want a given client to always be routed to the same endpoint,
+    #   set client affinity to `SOURCE_IP` instead. When you use the
+    #   `SOURCE_IP` setting, Global Accelerator uses the "two-tuple"
+    #   (2-tuple) properties— source (client) IP address and destination IP
+    #   address—to select the hash value.
     #
     #   The default value is `NONE`.
     #   @return [String]

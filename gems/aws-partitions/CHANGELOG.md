@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2018-12-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ApiGatewayV2`.
+
+* Feature - Added support for enumerating regions for `Aws::ApiGatewayManagementApi`.
+
 1.125.0 (2018-12-14)
 ------------------
 
