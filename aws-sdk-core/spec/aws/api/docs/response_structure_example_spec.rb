@@ -221,10 +221,18 @@ resp.item #=> Hash
 resp.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
 resp.consumed_capacity.table_name #=> String
 resp.consumed_capacity.capacity_units #=> Float
+resp.consumed_capacity.read_capacity_units #=> Float
+resp.consumed_capacity.write_capacity_units #=> Float
+resp.consumed_capacity.table.read_capacity_units #=> Float
+resp.consumed_capacity.table.write_capacity_units #=> Float
 resp.consumed_capacity.table.capacity_units #=> Float
 resp.consumed_capacity.local_secondary_indexes #=> Hash
+resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
 resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
 resp.consumed_capacity.global_secondary_indexes #=> Hash
+resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
 resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
           EXAMPLE
         end
