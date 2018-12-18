@@ -19,6 +19,14 @@
     "models": "amplify/2017-07-25",
     "endpoint": "amplify"
   },
+  "ApiGatewayManagementApi": {
+    "models": "apigatewaymanagementapi/2018-11-29",
+    "endpoint": "execute-api"
+  },
+  "ApiGatewayV2": {
+    "models": "apigatewayv2/2018-11-29",
+    "endpoint": "apigateway"
+  },
   "AppMesh": {
     "models": "appmesh/2018-10-01",
     "endpoint": "appmesh"

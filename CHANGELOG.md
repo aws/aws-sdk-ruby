@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::GlobalAccelerator - Updated the documentation for AWS Global Accelerator.
+
+* Feature - Aws::ApiGatewayManagementApi - Added support for a new service, AmazonApiGatewayManagementApi.
+
+* Feature - Aws::ApiGatewayV2 - Added support for a new service, AmazonApiGatewayV2.
+
 2.11.193 (2018-12-17)
 ------------------
 

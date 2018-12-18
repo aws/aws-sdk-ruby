@@ -28,6 +28,8 @@ module Aws
     APIGateway
     AlexaForBusiness
     Amplify
+    ApiGatewayManagementApi
+    ApiGatewayV2
     AppMesh
     AppStream
     AppSync
