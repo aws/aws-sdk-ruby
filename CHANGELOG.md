@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.194 (2018-12-18)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
