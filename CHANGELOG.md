@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.195 (2018-12-19)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
