@@ -283,8 +283,7 @@ module Aws::SageMaker
     # SageMaker and list in the AWS Marketplace.
     #
     # @option params [required, String] :algorithm_name
-    #   The name of the algorithm. The name must have 1 to 63 characters.
-    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   The name of the algorithm.
     #
     # @option params [String] :algorithm_description
     #   A description of the algorithm.
@@ -469,7 +468,7 @@ module Aws::SageMaker
     #               },
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
-    #               split_type: "None", # accepts None, Line, RecordIO
+    #               split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #             },
     #             transform_output: { # required
     #               s3_output_path: "S3Uri", # required
@@ -535,7 +534,7 @@ module Aws::SageMaker
     #   resp = client.create_code_repository({
     #     code_repository_name: "EntityName", # required
     #     git_config: { # required
-    #       repository_url: "Url", # required
+    #       repository_url: "GitConfigUrl", # required
     #       branch: "Branch",
     #       secret_arn: "SecretArn",
     #     },
@@ -1031,19 +1030,19 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a job that uses human workers to label the data objects in
-    # your input dataset. You can use the labeled data to train machine
-    # learning models
+    # Creates a job that uses workers to label the data objects in your
+    # input dataset. You can use the labeled data to train machine learning
+    # models.
     #
     # You can select your workforce from one of three providers:
     #
     # * A private workforce that you create. It can include employees,
-    #   contractors, and outside experts. Use a private workforce when the
-    #   data is highly confidential or a specific set of skills is required.
+    #   contractors, and outside experts. Use a private workforce when want
+    #   the data to stay within your organization or when a specific set of
+    #   skills is required.
     #
-    # * One or more vendors that you select from the Amazon Marketplace.
-    #   Vendors provide expertise in specific areas. Vendors are selected by
-    #   AWS and meet a minimum standard of data security requirements.
+    # * One or more vendors that you select from the AWS Marketplace.
+    #   Vendors provide expertise in specific areas.
     #
     # * The Amazon Mechanical Turk workforce. This is the largest workforce,
     #   but it should only be used for public data or data that has been
@@ -1052,18 +1051,20 @@ module Aws::SageMaker
     # You can also use *automated data labeling* to reduce the number of
     # data objects that need to be labeled by a human. Automated data
     # labeling uses *active learning* to determine if a data object can be
-    # labeled by machine or if it needs to be sent to a human worker.
+    # labeled by machine or if it needs to be sent to a human worker. For
+    # more information, see [Using Automated Data Labeling][1].
     #
     # The data objects to be labeled are contained in an Amazon S3 bucket.
     # You create a *manifest file* that describes the location of each
-    # object. For more information, see [Using Input and Output Data][1].
+    # object. For more information, see [Using Input and Output Data][2].
     #
     # The output can be used as the manifest file for another labeling job
     # or as training data for your machine learning models.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html
+    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html
     #
     # @option params [required, String] :labeling_job_name
     #   The name of the labeling job. This name is used to identify the job in
@@ -1072,8 +1073,10 @@ module Aws::SageMaker
     # @option params [required, String] :label_attribute_name
     #   The attribute name to use for the label in the output manifest file.
     #   This is the key for the key/value pair formed with the label that a
-    #   worker assigns to the object. The name can't end with "-metadata"
-    #   or "-ref".
+    #   worker assigns to the object. The name can't end with "-metadata".
+    #   If you are running a semantic segmentation labeling job, the attribute
+    #   name must end with "-ref". If you are running any other kind of
+    #   labeling job, the attribute name must not end with "-ref".
     #
     # @option params [required, Types::LabelingJobInputConfig] :input_config
     #   Input data for the labeling job, such as the Amazon S3 location of the
@@ -1093,6 +1096,38 @@ module Aws::SageMaker
     # @option params [String] :label_category_config_s3_uri
     #   The S3 URL of the file that defines the categories used to label the
     #   data objects.
+    #
+    #   The file is a JSON structure in the following format:
+    #
+    #   `\{`
+    #
+    #   ` "document-version": "2018-11-28"`
+    #
+    #   ` "labels": [`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label 1"`
+    #
+    #   ` \},`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label 2"`
+    #
+    #   ` \},`
+    #
+    #   ` ...`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label n"`
+    #
+    #   ` \}`
+    #
+    #   ` ]`
+    #
+    #   `\}`
     #
     # @option params [Types::LabelingJobStoppingConditions] :stopping_conditions
     #   A set of conditions for stopping the labeling job. If any of the
@@ -1344,6 +1379,12 @@ module Aws::SageMaker
     # packages listed on AWS Marketplace to create models in Amazon
     # SageMaker.
     #
+    # To create a model package by specifying a Docker container that
+    # contains your inference code and the Amazon S3 location of your model
+    # artifacts, provide values for `InferenceSpecification`. To create a
+    # model from an algorithm resource that you created or subscribed to in
+    # AWS Marketplace, provide a value for `SourceAlgorithmSpecification`.
+    #
     # @option params [required, String] :model_package_name
     #   The name of the model package. The name must have 1 to 63 characters.
     #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
@@ -1419,7 +1460,7 @@ module Aws::SageMaker
     #               },
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
-    #               split_type: "None", # accepts None, Line, RecordIO
+    #               split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #             },
     #             transform_output: { # required
     #               s3_output_path: "S3Uri", # required
@@ -1541,7 +1582,13 @@ module Aws::SageMaker
     # @option params [String] :kms_key_id
     #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
     #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance.
+    #   notebook instance. The KMS key you provide must be enabled. For
+    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the notebook instance. You can add
@@ -1740,7 +1787,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter
+    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance.
@@ -1850,7 +1897,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   assumes to perform tasks on your behalf.
+    #   can assume to perform tasks on your behalf.
     #
     #   During model training, Amazon SageMaker needs your permission to read
     #   input data from an S3 bucket, download a Docker image that contains
@@ -2150,7 +2197,7 @@ module Aws::SageMaker
     #       },
     #       content_type: "ContentType",
     #       compression_type: "None", # accepts None, Gzip
-    #       split_type: "None", # accepts None, Line, RecordIO
+    #       split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #     },
     #     transform_output: { # required
     #       s3_output_path: "S3Uri", # required
@@ -2631,7 +2678,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.data_source.s3_data_source.s3_uri #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.content_type #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.compression_type #=> String, one of "None", "Gzip"
-    #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.split_type #=> String, one of "None", "Line", "RecordIO"
+    #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.split_type #=> String, one of "None", "Line", "RecordIO", "TFRecord"
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_output.s3_output_path #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_output.accept #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_output.assemble_with #=> String, one of "None", "Line"
@@ -3134,10 +3181,10 @@ module Aws::SageMaker
     end
 
     # Returns a description of the specified model package, which is used to
-    # create Amazon SageMaker models or list on AWS Marketplace.
+    # create Amazon SageMaker models or list them on AWS Marketplace.
     #
-    # Buyers can subscribe to model packages listed on AWS Marketplace to
-    # create models in Amazon SageMaker.
+    # To create models in Amazon SageMaker, buyers can subscribe to model
+    # packages listed on AWS Marketplace.
     #
     # @option params [required, String] :model_package_name
     #   The name of the model package to describe.
@@ -3196,7 +3243,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.data_source.s3_data_source.s3_uri #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.content_type #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.compression_type #=> String, one of "None", "Gzip"
-    #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.split_type #=> String, one of "None", "Line", "RecordIO"
+    #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_input.split_type #=> String, one of "None", "Line", "RecordIO", "TFRecord"
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_output.s3_output_path #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_output.accept #=> String
     #   resp.validation_specification.validation_profiles[0].transform_job_definition.transform_output.assemble_with #=> String, one of "None", "Line"
@@ -3521,7 +3568,7 @@ module Aws::SageMaker
     #   resp.transform_input.data_source.s3_data_source.s3_uri #=> String
     #   resp.transform_input.content_type #=> String
     #   resp.transform_input.compression_type #=> String, one of "None", "Gzip"
-    #   resp.transform_input.split_type #=> String, one of "None", "Line", "RecordIO"
+    #   resp.transform_input.split_type #=> String, one of "None", "Line", "RecordIO", "TFRecord"
     #   resp.transform_output.s3_output_path #=> String
     #   resp.transform_output.accept #=> String
     #   resp.transform_output.assemble_with #=> String, one of "None", "Line"
@@ -3584,8 +3631,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns suggestions for the property name to use in `Search` queries.
-    # Provides suggestions for `HyperParameters`, `Tags`, and `Metrics`.
+    # An auto-complete API for the search functionality in the Amazon
+    # SageMaker console. It returns suggestions of possible matches for the
+    # property name to use in `Search` queries. Provides suggestions for
+    # `HyperParameters`, `Tags`, and `Metrics`.
     #
     # @option params [required, String] :resource
     #   The name of the Amazon SageMaker resource to Search for. The only
@@ -3803,6 +3852,12 @@ module Aws::SageMaker
     #   A filter that retrieves model compilation jobs with a specific
     #   DescribeCompilationJobResponse$CompilationJobStatus status.
     #
+    # @option params [String] :sort_by
+    #   The field by which to sort results. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #
     # @return [Types::ListCompilationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCompilationJobsResponse#compilation_job_summaries #compilation_job_summaries} => Array&lt;Types::CompilationJobSummary&gt;
@@ -3819,6 +3874,8 @@ module Aws::SageMaker
     #     last_modified_time_before: Time.now,
     #     name_contains: "NameContains",
     #     status_equals: "INPROGRESS", # accepts INPROGRESS, COMPLETED, FAILED, STARTING, STOPPING, STOPPED
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
     #   })
     #
     # @example Response structure
@@ -3827,6 +3884,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].compilation_job_name #=> String
     #   resp.compilation_job_summaries[0].compilation_job_arn #=> String
     #   resp.compilation_job_summaries[0].creation_time #=> Time
+    #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
@@ -4948,7 +5006,7 @@ module Aws::SageMaker
     # experience.
     #
     # @option params [required, Types::UiTemplate] :ui_template
-    #   A `Tempate`object containing the worker UI template to render.
+    #   A `Template`object containing the worker UI template to render.
     #
     # @option params [required, Types::RenderableTask] :task
     #   A `RenderableTask` object containing a representative task to render.
@@ -4992,8 +5050,8 @@ module Aws::SageMaker
 
     # Finds Amazon SageMaker resources that match a search query. Matching
     # resource objects are returned as a list of `SearchResult` objects in
-    # the response. The search results can be sorted by any resrouce
-    # property in a ascending or descending order.
+    # the response. You can sort the search results by any resource property
+    # in a ascending or descending order.
     #
     # You can query against the following value types: numerical, text,
     # Booleans, and timestamps.
@@ -5004,14 +5062,18 @@ module Aws::SageMaker
     #
     # @option params [Types::SearchExpression] :search_expression
     #   A Boolean conditional statement. Resource objects must satisfy this
-    #   condition to be included in search results.
+    #   condition to be included in search results. You must provide at least
+    #   one subexpression, filter, or nested filter. The maximum number of
+    #   recursive `SubExpressions`, `NestedFilters`, and `Filters` that can be
+    #   included in a `SearchExpression` object is 50.
     #
     # @option params [String] :sort_by
     #   The name of the resource property used to sort the `SearchResults`.
+    #   The default is `LastModifiedTime`.
     #
     # @option params [String] :sort_order
     #   How `SearchResults` are ordered. Valid values are `Ascending` or
-    #   `Descending`.
+    #   `Descending`. The default is `Descending`.
     #
     # @option params [String] :next_token
     #   If more than `MaxResults` resource objects match the specified
@@ -5165,8 +5227,8 @@ module Aws::SageMaker
     # Stops a model compilation job.
     #
     # To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-    # signal. This gracefully shuts the job down. If the job hasn’t stopped,
-    # it sends the SIGKILL signal.
+    # signal. This gracefully shuts the job down. If the job hasn't
+    # stopped, it sends the SIGKILL signal.
     #
     # When it receives a `StopCompilationJob` request, Amazon SageMaker
     # changes the CompilationJobSummary$CompilationJobStatus of the job to
@@ -5705,7 +5767,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

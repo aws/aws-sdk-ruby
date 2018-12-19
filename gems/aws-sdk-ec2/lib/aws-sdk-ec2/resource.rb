@@ -88,6 +88,7 @@ module Aws::EC2
     #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "String",
+    #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
@@ -577,8 +578,9 @@ module Aws::EC2
     #
     #   placementgroup = ec2.create_placement_group({
     #     dry_run: false,
-    #     group_name: "String", # required
-    #     strategy: "cluster", # required, accepts cluster, spread
+    #     group_name: "String",
+    #     strategy: "cluster", # accepts cluster, spread, partition
+    #     partition_count: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -586,13 +588,16 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :group_name
+    # @option options [String] :group_name
     #   A name for the placement group. Must be unique within the scope of
-    #   your account for the region.
+    #   your account for the Region.
     #
     #   Constraints: Up to 255 ASCII characters
-    # @option options [required, String] :strategy
+    # @option options [String] :strategy
     #   The placement strategy.
+    # @option options [Integer] :partition_count
+    #   The number of partitions. Valid only when **Strategy** is set to
+    #   `partition`.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
       resp = @client.create_placement_group(options)
@@ -1636,6 +1641,8 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
+    #   * `partition-number` - The partition in which the instance is located.
+    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
@@ -2157,7 +2164,7 @@ module Aws::EC2
     #     \| `deleting` \| `deleted`).
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
-    #     `spread`).
+    #     `spread` \| `partition`).
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

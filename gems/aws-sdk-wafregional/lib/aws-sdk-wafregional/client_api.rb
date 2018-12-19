@@ -83,6 +83,8 @@ module Aws::WAFRegional
     DeleteXssMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteXssMatchSetResponse')
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
+    ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
+    ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     GeoMatchConstraint = Shapes::StructureShape.new(name: 'GeoMatchConstraint')
     GeoMatchConstraintType = Shapes::StringShape.new(name: 'GeoMatchConstraintType')
@@ -327,6 +329,7 @@ module Aws::WAFRegional
     ActivatedRule.add_member(:action, Shapes::ShapeRef.new(shape: WafAction, location_name: "Action"))
     ActivatedRule.add_member(:override_action, Shapes::ShapeRef.new(shape: WafOverrideAction, location_name: "OverrideAction"))
     ActivatedRule.add_member(:type, Shapes::ShapeRef.new(shape: WafRuleType, location_name: "Type"))
+    ActivatedRule.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
     ActivatedRule.struct_class = Types::ActivatedRule
 
     ActivatedRules.member = Shapes::ShapeRef.new(shape: ActivatedRule)
@@ -563,6 +566,11 @@ module Aws::WAFRegional
     DisassociateWebACLRequest.struct_class = Types::DisassociateWebACLRequest
 
     DisassociateWebACLResponse.struct_class = Types::DisassociateWebACLResponse
+
+    ExcludedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    ExcludedRule.struct_class = Types::ExcludedRule
+
+    ExcludedRules.member = Shapes::ShapeRef.new(shape: ExcludedRule)
 
     FieldToMatch.add_member(:type, Shapes::ShapeRef.new(shape: MatchFieldType, required: true, location_name: "Type"))
     FieldToMatch.add_member(:data, Shapes::ShapeRef.new(shape: MatchFieldData, location_name: "Data"))

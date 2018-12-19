@@ -2386,8 +2386,9 @@ module Aws::EC2
     CreateNetworkInterfaceResult.struct_class = Types::CreateNetworkInterfaceResult
 
     CreatePlacementGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    CreatePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupName"))
-    CreatePlacementGroupRequest.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, required: true, location_name: "strategy"))
+    CreatePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    CreatePlacementGroupRequest.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, location_name: "strategy"))
+    CreatePlacementGroupRequest.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionCount"))
     CreatePlacementGroupRequest.struct_class = Types::CreatePlacementGroupRequest
 
     CreateReservedInstancesListingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken"))
@@ -5399,6 +5400,7 @@ module Aws::EC2
     ModifyInstancePlacementRequest.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
     ModifyInstancePlacementRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
     ModifyInstancePlacementRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: HostTenancy, location_name: "tenancy"))
+    ModifyInstancePlacementRequest.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionNumber"))
     ModifyInstancePlacementRequest.struct_class = Types::ModifyInstancePlacementRequest
 
     ModifyInstancePlacementResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -5741,6 +5743,7 @@ module Aws::EC2
     Placement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     Placement.add_member(:affinity, Shapes::ShapeRef.new(shape: String, location_name: "affinity"))
     Placement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    Placement.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionNumber"))
     Placement.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
     Placement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
     Placement.add_member(:spread_domain, Shapes::ShapeRef.new(shape: String, location_name: "spreadDomain"))
@@ -5749,6 +5752,7 @@ module Aws::EC2
     PlacementGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     PlacementGroup.add_member(:state, Shapes::ShapeRef.new(shape: PlacementGroupState, location_name: "state"))
     PlacementGroup.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, location_name: "strategy"))
+    PlacementGroup.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionCount"))
     PlacementGroup.struct_class = Types::PlacementGroup
 
     PlacementGroupList.member = Shapes::ShapeRef.new(shape: PlacementGroup, location_name: "item")

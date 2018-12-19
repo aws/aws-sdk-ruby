@@ -192,6 +192,7 @@ module Aws::SageMaker
     GetSearchSuggestionsResponse = Shapes::StructureShape.new(name: 'GetSearchSuggestionsResponse')
     GitConfig = Shapes::StructureShape.new(name: 'GitConfig')
     GitConfigForUpdate = Shapes::StructureShape.new(name: 'GitConfigForUpdate')
+    GitConfigUrl = Shapes::StringShape.new(name: 'GitConfigUrl')
     HumanTaskConfig = Shapes::StructureShape.new(name: 'HumanTaskConfig')
     HyperParameterAlgorithmSpecification = Shapes::StructureShape.new(name: 'HyperParameterAlgorithmSpecification')
     HyperParameterSpecification = Shapes::StructureShape.new(name: 'HyperParameterSpecification')
@@ -255,6 +256,7 @@ module Aws::SageMaker
     ListCodeRepositoriesOutput = Shapes::StructureShape.new(name: 'ListCodeRepositoriesOutput')
     ListCompilationJobsRequest = Shapes::StructureShape.new(name: 'ListCompilationJobsRequest')
     ListCompilationJobsResponse = Shapes::StructureShape.new(name: 'ListCompilationJobsResponse')
+    ListCompilationJobsSortBy = Shapes::StringShape.new(name: 'ListCompilationJobsSortBy')
     ListEndpointConfigsInput = Shapes::StructureShape.new(name: 'ListEndpointConfigsInput')
     ListEndpointConfigsOutput = Shapes::StructureShape.new(name: 'ListEndpointConfigsOutput')
     ListEndpointsInput = Shapes::StructureShape.new(name: 'ListEndpointsInput')
@@ -618,6 +620,7 @@ module Aws::SageMaker
     CompilationJobSummary.add_member(:compilation_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CompilationJobName"))
     CompilationJobSummary.add_member(:compilation_job_arn, Shapes::ShapeRef.new(shape: CompilationJobArn, required: true, location_name: "CompilationJobArn"))
     CompilationJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    CompilationJobSummary.add_member(:compilation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationStartTime"))
     CompilationJobSummary.add_member(:compilation_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationEndTime"))
     CompilationJobSummary.add_member(:compilation_target_device, Shapes::ShapeRef.new(shape: TargetDevice, required: true, location_name: "CompilationTargetDevice"))
     CompilationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
@@ -1142,7 +1145,7 @@ module Aws::SageMaker
     GetSearchSuggestionsResponse.add_member(:property_name_suggestions, Shapes::ShapeRef.new(shape: PropertyNameSuggestionList, location_name: "PropertyNameSuggestions"))
     GetSearchSuggestionsResponse.struct_class = Types::GetSearchSuggestionsResponse
 
-    GitConfig.add_member(:repository_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "RepositoryUrl"))
+    GitConfig.add_member(:repository_url, Shapes::ShapeRef.new(shape: GitConfigUrl, required: true, location_name: "RepositoryUrl"))
     GitConfig.add_member(:branch, Shapes::ShapeRef.new(shape: Branch, location_name: "Branch"))
     GitConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     GitConfig.struct_class = Types::GitConfig
@@ -1374,6 +1377,8 @@ module Aws::SageMaker
     ListCompilationJobsRequest.add_member(:last_modified_time_before, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTimeBefore"))
     ListCompilationJobsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "NameContains"))
     ListCompilationJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: CompilationJobStatus, location_name: "StatusEquals"))
+    ListCompilationJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListCompilationJobsSortBy, location_name: "SortBy"))
+    ListCompilationJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListCompilationJobsRequest.struct_class = Types::ListCompilationJobsRequest
 
     ListCompilationJobsResponse.add_member(:compilation_job_summaries, Shapes::ShapeRef.new(shape: CompilationJobSummaries, required: true, location_name: "CompilationJobSummaries"))

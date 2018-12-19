@@ -284,6 +284,7 @@ module Aws::EC2
     #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "String",
+    #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
@@ -950,6 +951,8 @@ module Aws::EC2
     #     interface.
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
+    #
+    #   * `partition-number` - The partition in which the instance is located.
     #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.

@@ -347,8 +347,8 @@ module Aws::WAF
       req.send_request(options)
     end
 
-    # Creates an IPSet, which you use to specify which web requests you want
-    # to allow or block based on the IP addresses that the requests
+    # Creates an IPSet, which you use to specify which web requests that you
+    # want to allow or block based on the IP addresses that the requests
     # originate from. For example, if you're receiving a lot of requests
     # from one or more individual IP addresses or one or more ranges of IP
     # addresses and you want to block the requests, you can create an
@@ -710,7 +710,7 @@ module Aws::WAF
     # objects, and other predicates that identify the requests that you want
     # to block. If you add more than one predicate to a `Rule`, a request
     # must match all of the specifications to be allowed or blocked. For
-    # example, suppose you add the following to a `Rule`\:
+    # example, suppose that you add the following to a `Rule`\:
     #
     # * An `IPSet` that matches the IP address `192.0.2.44/32`
     #
@@ -755,7 +755,7 @@ module Aws::WAF
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
     #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
+    #   name can't contain white space. You can't change the name of the
     #   metric after you create the `Rule`.
     #
     # @option params [required, String] :change_token
@@ -1123,7 +1123,7 @@ module Aws::WAF
     # @option params [required, String] :metric_name
     #   A friendly name or description for the metrics for this `WebACL`. The
     #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change `MetricName` after
+    #   name can't contain white space. You can't change `MetricName` after
     #   you create the `WebACL`.
     #
     # @option params [required, Types::WafAction] :default_action
@@ -1198,6 +1198,9 @@ module Aws::WAF
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.web_acl.rules[0].excluded_rules #=> Array
+    #   resp.web_acl.rules[0].excluded_rules[0].rule_id #=> String
+    #   resp.web_acl.web_acl_arn #=> String
     #   resp.change_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACL AWS API Documentation
@@ -2905,6 +2908,9 @@ module Aws::WAF
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.web_acl.rules[0].excluded_rules #=> Array
+    #   resp.web_acl.rules[0].excluded_rules[0].rule_id #=> String
+    #   resp.web_acl.web_acl_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACL AWS API Documentation
     #
@@ -3018,6 +3024,8 @@ module Aws::WAF
     #   resp.activated_rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.activated_rules[0].override_action.type #=> String, one of "NONE", "COUNT"
     #   resp.activated_rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #   resp.activated_rules[0].excluded_rules #=> Array
+    #   resp.activated_rules[0].excluded_rules[0].rule_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroup AWS API Documentation
     #
@@ -3781,28 +3789,25 @@ module Aws::WAF
     # You can access information about all traffic that AWS WAF inspects
     # using the following steps:
     #
-    # 1.  Create an Amazon Kinesis Data Firehose delivery stream. For more
-    #     information, see [Creating an Amazon Kinesis Data Firehose
-    #     Delivery Stream][1].
+    # 1.  Create an Amazon Kinesis Data Firehose .
     #
-    # 2.  Associate that delivery stream to your web ACL using a
+    # 2.  Associate that firehose to your web ACL using a
     #     `PutLoggingConfiguration` request.
     #
     # When you successfully enable logging using a `PutLoggingConfiguration`
     # request, AWS WAF will create a service linked role with the necessary
-    # permissions to write logs to the Amazon Kinesis Data Firehose delivery
-    # stream. For more information, see [Logging Web ACL Traffic
-    # Information][2] in the *AWS WAF Developer Guide*.
+    # permissions to write logs to the Amazon Kinesis Data Firehose. For
+    # more information, see [Logging Web ACL Traffic Information][1] in the
+    # *AWS WAF Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html
-    # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
     #
     # @option params [required, Types::LoggingConfiguration] :logging_configuration
-    #   The Amazon Kinesis Data Firehose delivery streams that contains the
-    #   inspected traffic information, the redacted fields details, and the
-    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #   The Amazon Kinesis Data Firehose that contains the inspected traffic
+    #   information, the redacted fields details, and the Amazon Resource Name
+    #   (ARN) of the web ACL to monitor.
     #
     # @return [Types::PutLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4534,7 +4539,7 @@ module Aws::WAF
     # that specifies the web requests that you want to allow, block, or
     # count. If you add more than one predicate to a `Rule`, a request must
     # match all of the specifications to be allowed, blocked, or counted.
-    # For example, suppose you add the following to a `Rule`\:
+    # For example, suppose that you add the following to a `Rule`\:
     #
     # * A `ByteMatchSet` that matches the value `BadBot` in the `User-Agent`
     #   header
@@ -4718,6 +4723,11 @@ module Aws::WAF
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -4897,9 +4907,9 @@ module Aws::WAF
     #   You can only specify a single type of TextTransformation.
     #
     # You use `SqlInjectionMatchSet` objects to specify which CloudFront
-    # requests you want to allow, block, or count. For example, if you're
-    # receiving requests that contain snippets of SQL code in the query
-    # string and you want to block the requests, you can create a
+    # requests that you want to allow, block, or count. For example, if
+    # you're receiving requests that contain snippets of SQL code in the
+    # query string and you want to block the requests, you can create a
     # `SqlInjectionMatchSet` with the applicable settings, and then
     # configure AWS WAF to block the requests.
     #
@@ -5014,9 +5024,9 @@ module Aws::WAF
     #   WAF performs the default action if a request doesn't match the
     #   criteria in any of the `Rules` in a `WebACL`.
     #
-    # * The `Rules` that you want to add and/or delete. If you want to
-    #   replace one `Rule` with another, you delete the existing `Rule` and
-    #   add the new one.
+    # * The `Rules` that you want to add or delete. If you want to replace
+    #   one `Rule` with another, you delete the existing `Rule` and add the
+    #   new one.
     #
     # * For each `Rule`, whether you want AWS WAF to allow requests, block
     #   requests, or count requests that match the conditions in the `Rule`.
@@ -5025,11 +5035,11 @@ module Aws::WAF
     #   `WebACL`. If you add more than one `Rule` to a `WebACL`, AWS WAF
     #   evaluates each request against the `Rules` in order based on the
     #   value of `Priority`. (The `Rule` that has the lowest value for
-    #   `Priority` is evaluated first.) When a web request matches all of
-    #   the predicates (such as `ByteMatchSets` and `IPSets`) in a `Rule`,
-    #   AWS WAF immediately takes the corresponding action, allow or block,
-    #   and doesn't evaluate the request against the remaining `Rules` in
-    #   the `WebACL`, if any.
+    #   `Priority` is evaluated first.) When a web request matches all the
+    #   predicates (such as `ByteMatchSets` and `IPSets`) in a `Rule`, AWS
+    #   WAF immediately takes the corresponding action, allow or block, and
+    #   doesn't evaluate the request against the remaining `Rules` in the
+    #   `WebACL`, if any.
     #
     # To create and configure a `WebACL`, perform the following steps:
     #
@@ -5049,6 +5059,16 @@ module Aws::WAF
     # 5.  Submit an `UpdateWebACL` request to specify the `Rules` that you
     #     want to include in the `WebACL`, to specify the default action,
     #     and to associate the `WebACL` with a CloudFront distribution.
+    #
+    #     The `ActivatedRule` can be a rule group. If you specify a rule
+    #     group as your `ActivatedRule`, you can exclude specific rules from
+    #     that rule group.
+    #
+    #     If you already have a rule group associated with a web ACL and
+    #     want to submit an `UpdateWebACL` request to exclude certain rules
+    #     from that rule group, you must first remove the rule group from
+    #     the web ACL, the re-insert it again, specifying the excluded
+    #     rules. For details, see ActivatedRule$ExcludedRules.
     #
     # Be aware that if you try to add a RATE\_BASED rule to a web ACL
     # without setting the rule type when first creating the rule, the
@@ -5081,7 +5101,7 @@ module Aws::WAF
     #
     #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
     #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
-    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case,
     #     you do not use `ActivatedRule|Action`. For all other update
     #     requests, `ActivatedRule|Action` is used instead of
     #     `ActivatedRule|OverrideAction`.
@@ -5145,6 +5165,11 @@ module Aws::WAF
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -5170,8 +5195,8 @@ module Aws::WAF
     # For each `XssMatchTuple` object, you specify the following values:
     #
     # * `Action`\: Whether to insert the object into or delete the object
-    #   from the array. To change a `XssMatchTuple`, you delete the existing
-    #   object and add a new one.
+    #   from the array. To change an `XssMatchTuple`, you delete the
+    #   existing object and add a new one.
     #
     # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
     #   inspect and, if you want AWS WAF to inspect a header or custom query
@@ -5183,12 +5208,12 @@ module Aws::WAF
     #
     #   You can only specify a single type of TextTransformation.
     #
-    # You use `XssMatchSet` objects to specify which CloudFront requests you
-    # want to allow, block, or count. For example, if you're receiving
-    # requests that contain cross-site scripting attacks in the request body
-    # and you want to block the requests, you can create an `XssMatchSet`
-    # with the applicable settings, and then configure AWS WAF to block the
-    # requests.
+    # You use `XssMatchSet` objects to specify which CloudFront requests
+    # that you want to allow, block, or count. For example, if you're
+    # receiving requests that contain cross-site scripting attacks in the
+    # request body and you want to block the requests, you can create an
+    # `XssMatchSet` with the applicable settings, and then configure AWS WAF
+    # to block the requests.
     #
     # To create and configure an `XssMatchSet`, perform the following steps:
     #
@@ -5218,8 +5243,8 @@ module Aws::WAF
     #
     # @option params [required, Array<Types::XssMatchSetUpdate>] :updates
     #   An array of `XssMatchSetUpdate` objects that you want to insert into
-    #   or delete from a XssMatchSet. For more information, see the applicable
-    #   data types:
+    #   or delete from an XssMatchSet. For more information, see the
+    #   applicable data types:
     #
     #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
     #
@@ -5303,7 +5328,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

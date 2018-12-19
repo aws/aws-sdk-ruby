@@ -2944,7 +2944,7 @@ module Aws::EC2
     # Describes the authentication method to be used by a Client VPN
     # endpoint. Client VPN supports Active Directory and mutual
     # authentication. For more information, see
-    # [Athentication](vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
+    # [Authentication](vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
     # in the *AWS Client VPN Admin Guide*.
     #
     # @note When making an API call, you may pass ClientVpnAuthenticationRequest
@@ -4597,6 +4597,7 @@ module Aws::EC2
     #                   availability_zone: "String",
     #                   affinity: "String",
     #                   group_name: "String",
+    #                   partition_number: 1,
     #                   host_id: "String",
     #                   tenancy: "default", # accepts default, dedicated, host
     #                   spread_domain: "String",
@@ -5932,8 +5933,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         group_name: "String", # required
-    #         strategy: "cluster", # required, accepts cluster, spread
+    #         group_name: "String",
+    #         strategy: "cluster", # accepts cluster, spread, partition
+    #         partition_count: 1,
     #       }
     #
     # @!attribute [rw] dry_run
@@ -5945,7 +5947,7 @@ module Aws::EC2
     #
     # @!attribute [rw] group_name
     #   A name for the placement group. Must be unique within the scope of
-    #   your account for the region.
+    #   your account for the Region.
     #
     #   Constraints: Up to 255 ASCII characters
     #   @return [String]
@@ -5954,12 +5956,18 @@ module Aws::EC2
     #   The placement strategy.
     #   @return [String]
     #
+    # @!attribute [rw] partition_count
+    #   The number of partitions. Valid only when **Strategy** is set to
+    #   `partition`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupRequest AWS API Documentation
     #
     class CreatePlacementGroupRequest < Struct.new(
       :dry_run,
       :group_name,
-      :strategy)
+      :strategy,
+      :partition_count)
       include Aws::Structure
     end
 
@@ -12129,6 +12137,9 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
+    #   * `partition-number` - The partition in which the instance is
+    #     located.
+    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
@@ -13204,7 +13215,7 @@ module Aws::EC2
     #     `available` \| `deleting` \| `deleted`).
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
-    #     `spread`).
+    #     `spread` \| `partition`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -18808,7 +18819,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] client_configuration
-    #   the contents of the client configuration file.
+    #   The contents of the Client VPN endpoint configuration file.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientConfigurationResult AWS API Documentation
@@ -19236,6 +19247,7 @@ module Aws::EC2
     #               availability_zone: "String",
     #               affinity: "String",
     #               group_name: "String",
+    #               partition_number: 1,
     #               host_id: "String",
     #               tenancy: "default", # accepts default, dedicated, host
     #               spread_domain: "String",
@@ -19328,6 +19340,7 @@ module Aws::EC2
     #           availability_zone: "String",
     #           affinity: "String",
     #           group_name: "String",
+    #           partition_number: 1,
     #           host_id: "String",
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",
@@ -21376,6 +21389,7 @@ module Aws::EC2
     #           availability_zone: "String",
     #           affinity: "String",
     #           group_name: "String",
+    #           partition_number: 1,
     #           host_id: "String",
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",
@@ -21490,6 +21504,7 @@ module Aws::EC2
     #             availability_zone: "String",
     #             affinity: "String",
     #             group_name: "String",
+    #             partition_number: 1,
     #             host_id: "String",
     #             tenancy: "default", # accepts default, dedicated, host
     #             spread_domain: "String",
@@ -25663,6 +25678,7 @@ module Aws::EC2
     #         host_id: "String",
     #         instance_id: "String", # required
     #         tenancy: "dedicated", # accepts dedicated, host
+    #         partition_number: 1,
     #       }
     #
     # @!attribute [rw] affinity
@@ -25672,8 +25688,8 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   The name of the placement group in which to place the instance. For
     #   spread placement groups, the instance must have a tenancy of
-    #   `default`. For cluster placement groups, the instance must have a
-    #   tenancy of `default` or `dedicated`.
+    #   `default`. For cluster and partition placement groups, the instance
+    #   must have a tenancy of `default` or `dedicated`.
     #
     #   To remove an instance from a placement group, specify an empty
     #   string ("").
@@ -25691,6 +25707,10 @@ module Aws::EC2
     #   The tenancy for the instance.
     #   @return [String]
     #
+    # @!attribute [rw] partition_number
+    #   Reserved for future use.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementRequest AWS API Documentation
     #
     class ModifyInstancePlacementRequest < Struct.new(
@@ -25698,7 +25718,8 @@ module Aws::EC2
       :group_name,
       :host_id,
       :instance_id,
-      :tenancy)
+      :tenancy,
+      :partition_number)
       include Aws::Structure
     end
 
@@ -27589,6 +27610,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         affinity: "String",
     #         group_name: "String",
+    #         partition_number: 1,
     #         host_id: "String",
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
@@ -27606,6 +27628,11 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   The name of the placement group the instance is in.
     #   @return [String]
+    #
+    # @!attribute [rw] partition_number
+    #   The number of the partition the instance is in. Valid only if the
+    #   placement group strategy is set to `partition`.
+    #   @return [Integer]
     #
     # @!attribute [rw] host_id
     #   The ID of the Dedicated Host on which the instance resides. This
@@ -27629,6 +27656,7 @@ module Aws::EC2
       :availability_zone,
       :affinity,
       :group_name,
+      :partition_number,
       :host_id,
       :tenancy,
       :spread_domain)
@@ -27649,12 +27677,18 @@ module Aws::EC2
     #   The placement strategy.
     #   @return [String]
     #
+    # @!attribute [rw] partition_count
+    #   The number of partitions. Valid only if **strategy** is set to
+    #   `partition`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
       :group_name,
       :state,
-      :strategy)
+      :strategy,
+      :partition_count)
       include Aws::Structure
     end
 
@@ -31582,6 +31616,7 @@ module Aws::EC2
     #           availability_zone: "String",
     #           affinity: "String",
     #           group_name: "String",
+    #           partition_number: 1,
     #           host_id: "String",
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",

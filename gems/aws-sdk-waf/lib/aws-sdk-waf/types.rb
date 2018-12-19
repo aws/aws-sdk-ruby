@@ -29,6 +29,11 @@ module Aws::WAF
     #           type: "NONE", # required, accepts NONE, COUNT
     #         },
     #         type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #         excluded_rules: [
+    #           {
+    #             rule_id: "ResourceId", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] priority
@@ -63,7 +68,7 @@ module Aws::WAF
     #     request based on the remaining rules in the web ACL.
     #
     #   `ActivatedRule|OverrideAction` applies only when updating or adding
-    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   a `RuleGroup` to a `WebACL`. In this case, you do not use
     #   `ActivatedRule|Action`. For all other update requests,
     #   `ActivatedRule|Action` is used instead of
     #   `ActivatedRule|OverrideAction`.
@@ -99,6 +104,51 @@ module Aws::WAF
     #   does not exist.
     #   @return [String]
     #
+    # @!attribute [rw] excluded_rules
+    #   An array of rules to exclude from a rule group. This is applicable
+    #   only when the `ActivatedRule` refers to a `RuleGroup`.
+    #
+    #   Sometimes it is necessary to troubleshoot rule groups that are
+    #   blocking traffic unexpectedly (false positives). One troubleshooting
+    #   technique is to identify the specific rule within the rule group
+    #   that is blocking the legitimate traffic and then disable (exclude)
+    #   that particular rule. You can exclude rules from both your own rule
+    #   groups and AWS Marketplace rule groups that have been associated
+    #   with a web ACL.
+    #
+    #   Specifying `ExcludedRules` does not remove those rules from the rule
+    #   group. Rather, it changes the action for the rules to `COUNT`.
+    #   Therefore, requests that match an `ExcludedRule` are counted but not
+    #   blocked. The `RuleGroup` owner will receive COUNT metrics for each
+    #   `ExcludedRule`.
+    #
+    #   If you want to exclude rules from a rule group that is already
+    #   associated with a web ACL, perform the following steps:
+    #
+    #   1.  Use the AWS WAF logs to identify the IDs of the rules that you
+    #       want to exclude. For more information about the logs, see
+    #       [Logging Web ACL Traffic Information][1].
+    #
+    #   2.  Submit an UpdateWebACL request that has two actions:
+    #
+    #       * The first action deletes the existing rule group from the web
+    #         ACL. That is, in the UpdateWebACL request, the first
+    #         `Updates:Action` should be `DELETE` and
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         contains the rules that you want to exclude.
+    #
+    #       * The second action inserts the same rule group back in, but
+    #         specifying the rules to exclude. That is, the second
+    #         `Updates:Action` should be `INSERT`,
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         you just removed, and `ExcludedRules` should contain the rules
+    #         that you want to exclude.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    #   @return [Array<Types::ExcludedRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ActivatedRule AWS API Documentation
     #
     class ActivatedRule < Struct.new(
@@ -106,7 +156,8 @@ module Aws::WAF
       :rule_id,
       :action,
       :override_action,
-      :type)
+      :type,
+      :excluded_rules)
       include Aws::Structure
     end
 
@@ -297,7 +348,7 @@ module Aws::WAF
     #   For example, suppose the value of `Type` is `HEADER` and the value
     #   of `Data` is `User-Agent`. If you want to search the `User-Agent`
     #   header for the value `BadBot`, you base64-encode `BadBot` using MIME
-    #   base64 encoding and include the resulting value, `QmFkQm90`, in the
+    #   base64-encoding and include the resulting value, `QmFkQm90`, in the
     #   value of `TargetString`.
     #
     #   **If you're using the AWS CLI or one of the AWS SDKs**
@@ -804,7 +855,7 @@ module Aws::WAF
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
     #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
+    #   name can't contain white space. You can't change the name of the
     #   metric after you create the `Rule`.
     #   @return [String]
     #
@@ -952,7 +1003,7 @@ module Aws::WAF
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `WebACL`.
     #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
+    #   the name can't contain white space. You can't change `MetricName`
     #   after you create the `WebACL`.
     #   @return [String]
     #
@@ -1562,6 +1613,28 @@ module Aws::WAF
     #
     class DeleteXssMatchSetResponse < Struct.new(
       :change_token)
+      include Aws::Structure
+    end
+
+    # The rule to exclude from a rule group. This is applicable only when
+    # the `ActivatedRule` refers to a `RuleGroup`. The rule must belong to
+    # the `RuleGroup` that is specified by the `ActivatedRule`.
+    #
+    # @note When making an API call, you may pass ExcludedRule
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the rule to exclude from the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ExcludedRule AWS API Documentation
+    #
+    class ExcludedRule < Struct.new(
+      :rule_id)
       include Aws::Structure
     end
 
@@ -3497,8 +3570,8 @@ module Aws::WAF
       include Aws::Structure
     end
 
-    # The Amazon Kinesis Data Firehose delivery streams, `RedactedFields`
-    # information, and the web ACL Amazon Resource Name (ARN).
+    # The Amazon Kinesis Data Firehose, `RedactedFields` information, and
+    # the web ACL Amazon Resource Name (ARN).
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -3520,13 +3593,13 @@ module Aws::WAF
     #   @return [String]
     #
     # @!attribute [rw] log_destination_configs
-    #   An array of Amazon Kinesis Data Firehose delivery stream ARNs.
+    #   An array of Amazon Kinesis Data Firehose ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want redacted from the logs. For
     #   example, if you redact the cookie field, the cookie field in the
-    #   delivery stream will be `xxx`.
+    #   firehose will be `xxx`.
     #   @return [Array<Types::FieldToMatch>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/LoggingConfiguration AWS API Documentation
@@ -3605,9 +3678,9 @@ module Aws::WAF
     #       }
     #
     # @!attribute [rw] logging_configuration
-    #   The Amazon Kinesis Data Firehose delivery streams that contains the
-    #   inspected traffic information, the redacted fields details, and the
-    #   Amazon Resource Name (ARN) of the web ACL to monitor.
+    #   The Amazon Kinesis Data Firehose that contains the inspected traffic
+    #   information, the redacted fields details, and the Amazon Resource
+    #   Name (ARN) of the web ACL to monitor.
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutLoggingConfigurationRequest AWS API Documentation
@@ -4203,6 +4276,11 @@ module Aws::WAF
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -5257,6 +5335,11 @@ module Aws::WAF
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5526,6 +5609,11 @@ module Aws::WAF
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5554,7 +5642,7 @@ module Aws::WAF
     #
     #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
     #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
-    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case,
     #     you do not use `ActivatedRule|Action`. For all other update
     #     requests, `ActivatedRule|Action` is used instead of
     #     `ActivatedRule|OverrideAction`.
@@ -5625,7 +5713,7 @@ module Aws::WAF
     #
     # @!attribute [rw] updates
     #   An array of `XssMatchSetUpdate` objects that you want to insert into
-    #   or delete from a XssMatchSet. For more information, see the
+    #   or delete from an XssMatchSet. For more information, see the
     #   applicable data types:
     #
     #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
@@ -5760,6 +5848,10 @@ module Aws::WAF
     #   priority of the `Rule`, and the ID of the `Rule`.
     #   @return [Array<Types::ActivatedRule>]
     #
+    # @!attribute [rw] web_acl_arn
+    #   Tha Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -5767,7 +5859,8 @@ module Aws::WAF
       :name,
       :metric_name,
       :default_action,
-      :rules)
+      :rules,
+      :web_acl_arn)
       include Aws::Structure
     end
 
@@ -5813,6 +5906,11 @@ module Aws::WAF
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -5917,8 +6015,8 @@ module Aws::WAF
     #       }
     #
     # @!attribute [rw] action
-    #   Specify `INSERT` to add a XssMatchSetUpdate to an XssMatchSet. Use
-    #   `DELETE` to remove a `XssMatchSetUpdate` from an `XssMatchSet`.
+    #   Specify `INSERT` to add an XssMatchSetUpdate to an XssMatchSet. Use
+    #   `DELETE` to remove an `XssMatchSetUpdate` from an `XssMatchSet`.
     #   @return [String]
     #
     # @!attribute [rw] xss_match_tuple

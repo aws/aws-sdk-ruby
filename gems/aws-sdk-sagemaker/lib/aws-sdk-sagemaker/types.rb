@@ -143,7 +143,7 @@ module Aws::SageMaker
     # Specifies the validation and image scan statuses of the algorithm.
     #
     # @!attribute [rw] validation_statuses
-    #   The status of the validation of the algorithm.
+    #   The status of algorithm validation.
     #   @return [Array<Types::AlgorithmStatusItem>]
     #
     # @!attribute [rw] image_scan_statuses
@@ -162,7 +162,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] name
     #   The name of the algorithm for which the overall status is being
-    #   repoorted.
+    #   reported.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -170,7 +170,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for failure, if the overall status is a failed state.
+    #   if the overall status is `Failed`, the reason for the failure.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusItem AWS API Documentation
@@ -185,7 +185,7 @@ module Aws::SageMaker
     # Provides summary information about an algorithm.
     #
     # @!attribute [rw] algorithm_name
-    #   The name of the algorithm which is described by the summary.
+    #   The name of the algorithm that is described by the summary.
     #   @return [String]
     #
     # @!attribute [rw] algorithm_arn
@@ -193,7 +193,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] algorithm_description
-    #   A brief statement describing the algorithm.
+    #   A brief description of the algorithm.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -281,7 +281,7 @@ module Aws::SageMaker
     #             },
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
-    #             split_type: "None", # accepts None, Line, RecordIO
+    #             split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #           },
     #           transform_output: { # required
     #             s3_output_path: "S3Uri", # required
@@ -387,7 +387,7 @@ module Aws::SageMaker
     #                 },
     #                 content_type: "ContentType",
     #                 compression_type: "None", # accepts None, Gzip
-    #                 split_type: "None", # accepts None, Line, RecordIO
+    #                 split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #               },
     #               transform_output: { # required
     #                 s3_output_path: "S3Uri", # required
@@ -436,25 +436,64 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of a Lambda function implements the
     #   logic for annotation consolidation.
     #
-    #   Amazon SageMaker Ground Truth provides three annotation
-    #   consolidation functions that you can choose to use. They are:
+    #   For the built-in bounding box, image classification, semantic
+    #   segmentation, and text classification task types, Amazon SageMaker
+    #   Ground Truth provides the following Lambda functions:
     #
     #   * *Bounding box* - Finds the most similar boxes from different
     #     workers based on the Jaccard index of the boxes.
     #
-    #     `arn:aws:lambda:region:432418664414:function:ACS-BoundingBox`
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox`
     #
     #   * *Image classification* - Uses a variant of the Expectation
     #     Maximization approach to estimate the true class of an image based
     #     on annotations from individual workers.
     #
-    #     `arn:aws:lambda:region:432418664414:function:ACS-ImageMultiClass`
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass`
+    #
+    #   * *Semantic segmentation* - Treats each pixel in an image as a
+    #     multi-class classification and treats pixel annotations from
+    #     workers as "votes" for the correct label.
+    #
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation`
     #
     #   * *Text classification* - Uses a variant of the Expectation
     #     Maximization approach to estimate the true class of text based on
     #     annotations from individual workers.
     #
-    #     `arn:aws:lambda:region:432418664414:function:ACS-TextMultiClass`
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass`
     #
     #   For more information, see [Annotation Consolidation][1].
     #
@@ -637,7 +676,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the channel./sagemaker/eia
+    #   The name of the channel.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -764,6 +803,10 @@ module Aws::SageMaker
     #   The time when the model compilation job was created.
     #   @return [Time]
     #
+    # @!attribute [rw] compilation_start_time
+    #   The time when the model compilation job started.
+    #   @return [Time]
+    #
     # @!attribute [rw] compilation_end_time
     #   The time when the model compilation job completed.
     #   @return [Time]
@@ -787,6 +830,7 @@ module Aws::SageMaker
       :compilation_job_name,
       :compilation_job_arn,
       :creation_time,
+      :compilation_start_time,
       :compilation_end_time,
       :compilation_target_device,
       :last_modified_time,
@@ -838,7 +882,7 @@ module Aws::SageMaker
     #   you provide. AWS STS is activated in your IAM user account by
     #   default. If you previously deactivated AWS STS for a region, you
     #   need to reactivate AWS STS for that region. For more information,
-    #   see [Activating and Deactivating AWS STS i an AWS Region][1] in the
+    #   see [Activating and Deactivating AWS STS in an AWS Region][1] in the
     #   *AWS Identity and Access Management User Guide*.
     #
     #
@@ -853,7 +897,7 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] model_package_name
-    #   The name of the model package in this container.
+    #   The name of the model package to use to create the model.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition AWS API Documentation
@@ -1060,7 +1104,7 @@ module Aws::SageMaker
     #                   },
     #                   content_type: "ContentType",
     #                   compression_type: "None", # accepts None, Gzip
-    #                   split_type: "None", # accepts None, Line, RecordIO
+    #                   split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #                 },
     #                 transform_output: { # required
     #                   s3_output_path: "S3Uri", # required
@@ -1081,8 +1125,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] algorithm_name
-    #   The name of the algorithm. The name must have 1 to 63 characters.
-    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   The name of the algorithm.
     #   @return [String]
     #
     # @!attribute [rw] algorithm_description
@@ -1167,7 +1210,7 @@ module Aws::SageMaker
     #       {
     #         code_repository_name: "EntityName", # required
     #         git_config: { # required
-    #           repository_url: "Url", # required
+    #           repository_url: "GitConfigUrl", # required
     #           branch: "Branch",
     #           secret_arn: "SecretArn",
     #         },
@@ -1694,8 +1737,11 @@ module Aws::SageMaker
     # @!attribute [rw] label_attribute_name
     #   The attribute name to use for the label in the output manifest file.
     #   This is the key for the key/value pair formed with the label that a
-    #   worker assigns to the object. The name can't end with "-metadata"
-    #   or "-ref".
+    #   worker assigns to the object. The name can't end with
+    #   "-metadata". If you are running a semantic segmentation labeling
+    #   job, the attribute name must end with "-ref". If you are running
+    #   any other kind of labeling job, the attribute name must not end with
+    #   "-ref".
     #   @return [String]
     #
     # @!attribute [rw] input_config
@@ -1719,6 +1765,38 @@ module Aws::SageMaker
     # @!attribute [rw] label_category_config_s3_uri
     #   The S3 URL of the file that defines the categories used to label the
     #   data objects.
+    #
+    #   The file is a JSON structure in the following format:
+    #
+    #   `\{`
+    #
+    #   ` "document-version": "2018-11-28"`
+    #
+    #   ` "labels": [`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label 1"`
+    #
+    #   ` \},`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label 2"`
+    #
+    #   ` \},`
+    #
+    #   ` ...`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label n"`
+    #
+    #   ` \}`
+    #
+    #   ` ]`
+    #
+    #   `\}`
     #   @return [String]
     #
     # @!attribute [rw] stopping_conditions
@@ -1945,7 +2023,7 @@ module Aws::SageMaker
     #                   },
     #                   content_type: "ContentType",
     #                   compression_type: "None", # accepts None, Gzip
-    #                   split_type: "None", # accepts None, Line, RecordIO
+    #                   split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #                 },
     #                 transform_output: { # required
     #                   s3_output_path: "S3Uri", # required
@@ -2097,7 +2175,13 @@ module Aws::SageMaker
     # @!attribute [rw] kms_key_id
     #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
     #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance.
+    #   notebook instance. The KMS key you provide must be enabled. For
+    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2396,7 +2480,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   assumes to perform tasks on your behalf.
+    #   can assume to perform tasks on your behalf.
     #
     #   During model training, Amazon SageMaker needs your permission to
     #   read input data from an S3 bucket, download a Docker image that
@@ -2549,7 +2633,7 @@ module Aws::SageMaker
     #           },
     #           content_type: "ContentType",
     #           compression_type: "None", # accepts None, Gzip
-    #           split_type: "None", # accepts None, Line, RecordIO
+    #           split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #         },
     #         transform_output: { # required
     #           s3_output_path: "S3Uri", # required
@@ -3035,7 +3119,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] algorithm_arn
-    #   The Amazon Resource Name (ARN) of the algorithm.&gt;
+    #   The Amazon Resource Name (ARN) of the algorithm.
     #   @return [String]
     #
     # @!attribute [rw] algorithm_description
@@ -3584,6 +3668,38 @@ module Aws::SageMaker
     # @!attribute [rw] label_category_config_s3_uri
     #   The S3 location of the JSON file that defines the categories used to
     #   label data objects.
+    #
+    #   The file is a JSON structure in the following format:
+    #
+    #   `\{`
+    #
+    #   ` "document-version": "2018-11-28"`
+    #
+    #   ` "labels": [`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label 1"`
+    #
+    #   ` \},`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label 2"`
+    #
+    #   ` \},`
+    #
+    #   ` ...`
+    #
+    #   ` \{`
+    #
+    #   ` "label": "label n"`
+    #
+    #   ` \}`
+    #
+    #   ` ]`
+    #
+    #   `\}`
     #   @return [String]
     #
     # @!attribute [rw] stopping_conditions
@@ -3744,7 +3860,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_package_description
-    #   A brief summary about the model package.
+    #   A brief summary of the model package.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -4575,7 +4691,7 @@ module Aws::SageMaker
     # training job objects that have a value in the `FailureReason` field.
     #
     # If you specify a `Value`, but not an `Operator`, Amazon SageMaker uses
-    # the equals operator as a default.
+    # the equals operator as the default.
     #
     # In search, there are several property types:
     #
@@ -4599,11 +4715,11 @@ module Aws::SageMaker
     # HyperParameters
     #
     # : To define a hyperparameter filter, enter a value with the form
-    #   `"HyperParamters.<name>"`. Decimal hyperparameter values are treated
-    #   as a decimal in a comparison if the specified `Value` is also a
-    #   decimal value. If the specified `Value` is an integer, the decimal
-    #   hyperparameter values are treated as integers. For example, the
-    #   following filter is satisfied by training jobs with a
+    #   `"HyperParameters.<name>"`. Decimal hyperparameter values are
+    #   treated as a decimal in a comparison if the specified `Value` is
+    #   also a decimal value. If the specified `Value` is an integer, the
+    #   decimal hyperparameter values are treated as integers. For example,
+    #   the following filter is satisfied by training jobs with a
     #   `"learning_rate"` hyperparameter that is less than `"0.5"`\:
     #
     #   ` \{`
@@ -4630,9 +4746,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] name
-    #   A property name. For example, `TrainingJobName`. See TrainingJob
-    #   properties for the list of valid property names for each supported
-    #   resource.
+    #   A property name. For example, `TrainingJobName`. For the list of
+    #   valid property names returned in a search result for each supported
+    #   resource, see TrainingJob properties. You must specify a valid
+    #   property name for the resource.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -4672,11 +4789,13 @@ module Aws::SageMaker
     #
     #   : Only supported for text-based properties. The word-list of the
     #     property contains the specified `Value`.
+    #
+    #   If you have specified a filter `Value`, the default is `Equals`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A value used with `Resource` and `Operator` to determin if objects
-    #   statisfy the filter's condition. For numerical properties, `Value`
+    #   A value used with `Resource` and `Operator` to determine if objects
+    #   satisfy the filter's condition. For numerical properties, `Value`
     #   must be an integer or floating-point decimal. For timestamp
     #   properties, `Value` must be an ISO 8601 date-time string of the
     #   following format: `YYYY-mm-dd'T'HH:MM:SS`.
@@ -4766,7 +4885,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         repository_url: "Url", # required
+    #         repository_url: "GitConfigUrl", # required
     #         branch: "Branch",
     #         secret_arn: "SecretArn",
     #       }
@@ -4776,7 +4895,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] branch
-    #   The default brach for the git repository.
+    #   The default beach for the git repository.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -4867,6 +4986,60 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of a Lambda function that is run
     #   before a data object is sent to a human worker. Use this function to
     #   provide input to a custom labeling job.
+    #
+    #   For the built-in bounding box, image classification, semantic
+    #   segmentation, and text classification task types, Amazon SageMaker
+    #   Ground Truth provides the following Lambda functions:
+    #
+    #   **US East (Northern Virginia) (us-east-1):**
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox`
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass`
+    #
+    #   **US East (Ohio) (us-east-2):**
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass`
+    #
+    #   **US West (Oregon) (us-west-2):**
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass`
+    #
+    #   **EU (Ireland) (eu-west-1):**
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass`
+    #
+    #   **Asia Pacific (Tokyo (ap-northeast-1):**
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
     #   @return [String]
     #
     # @!attribute [rw] task_keywords
@@ -5138,7 +5311,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] algorithm_specification
     #   The HyperParameterAlgorithmSpecification object that specifies the
-    #   algorithm to use for the training jobs that the tuning job launches.
+    #   resource algorithm to use for the training jobs that the tuning job
+    #   launches.
     #   @return [Types::HyperParameterAlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
@@ -5199,7 +5373,7 @@ module Aws::SageMaker
     #   cluster for distributed training. If network isolation is used for
     #   training jobs that are configured to use a VPC, Amazon SageMaker
     #   downloads and uploads customer data and model artifacts through the
-    #   specifed VPC, but the training container does not have network
+    #   specified VPC, but the training container does not have network
     #   access.
     #
     #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
@@ -5234,8 +5408,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] tuning_job_name
-    #   The name of the hyperparameter tuning job that launched this
-    #   training job.
+    #   The HyperParameter tuning job that launched the training job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -5372,7 +5545,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_job_early_stopping_type
     #   Specifies whether to use early stopping for training jobs launched
-    #   by the hyperparameter tuning job. One of the following values:
+    #   by the hyperparameter tuning job. This can be one of the following
+    #   values (the default value is `OFF`):
     #
     #   OFF
     #
@@ -5382,8 +5556,13 @@ module Aws::SageMaker
     #   AUTO
     #
     #   : Amazon SageMaker stops training jobs launched by the
-    #     hyperparameter tuning job when they are no longer improving as
-    #     measured by the objective metric of the tuning job.
+    #     hyperparameter tuning job when they are unlikely to perform better
+    #     than previously completed training jobs. For more information, see
+    #     [Stop Training Jobs Early][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConfig AWS API Documentation
@@ -5656,28 +5835,68 @@ module Aws::SageMaker
     #   trained model with a JSON dictionary form. The data inputs are
     #   InputConfig$Framework specific.
     #
-    #   * `TENSORFLOW`, `MXNET` and `ONNX`\: You must specify the name and
-    #     shape of the expected data inputs in order using a dictionary
-    #     format for your trained model.
+    #   * `TensorFlow`\: You must specify the name and shape (NHWC format)
+    #     of the expected data inputs using a dictionary format for your
+    #     trained model. The dictionary formats required for the console and
+    #     CLI are different.
     #
-    #     * Example of one input: `\{‘data’:[1,3,1024,1024]\}\}`
+    #     * Examples for one input:
     #
-    #     * Example for two inputs: `\{‘var1’: [1,1,28,28],
-    #       ‘var2’:[1,1,28,28]\}`
+    #       * If using the console, `\{"input":[1,1024,1024,3]\}`
     #
-    #   * `PYTORCH`\: You can either specify the name and shape of expected
-    #     data inputs in order using a dictionary format for your trained
-    #     model or you can specify the shape only using a list format.
+    #       * If using the CLI, `\{"input":[1,1024,1024,3]\}`
     #
-    #     * Example of one input in dictionary format:
-    #       `\{‘input0’:[1,3,224,234]\}`
+    #     * Examples for two inputs:
     #
-    #     * Example of one input in list format: `[1,3,224,224]`
+    #       * If using the console, `\{"data1": [1,28,28,1],
+    #         "data2":[1,28,28,1]\}`
     #
-    #     * Example of two inputs in dictionary format:
-    #       `\{‘input0’:[1,3,224,234], 'input1':[1,3,224,224]\}`
+    #       * If using the CLI, `\{"data1": [1,28,28,1],
+    #         "data2":[1,28,28,1]\}`
     #
-    #     * Example of two inputs in list format: `[[1,3,224,224],
+    #   * `MXNET/ONNX`\: You must specify the name and shape (NCHW format)
+    #     of the expected data inputs in order using a dictionary format for
+    #     your trained model. The dictionary formats required for the
+    #     console and CLI are different.
+    #
+    #     * Examples for one input:
+    #
+    #       * If using the console, `\{"data":[1,3,1024,1024]\}`
+    #
+    #       * If using the CLI, `\{"data":[1,3,1024,1024]\}`
+    #
+    #     * Examples for two inputs:
+    #
+    #       * If using the console, `\{"var1": [1,1,28,28],
+    #         "var2":[1,1,28,28]\} `
+    #
+    #       * If using the CLI, `\{"var1": [1,1,28,28],
+    #         "var2":[1,1,28,28]\}`
+    #
+    #   * `PyTorch`\: You can either specify the name and shape (NCHW
+    #     format) of expected data inputs in order using a dictionary format
+    #     for your trained model or you can specify the shape only using a
+    #     list format. The dictionary formats required for the console and
+    #     CLI are different. The list formats for the console and CLI are
+    #     the same.
+    #
+    #     * Examples for one input in dictionary format:
+    #
+    #       * If using the console, `\{"input0":[1,3,224,224]\}`
+    #
+    #       * If using the CLI, `\{"input0":[1,3,224,224]\}`
+    #
+    #     * Example for one input in list format: `[[1,3,224,224]]`
+    #
+    #     * Examples for two inputs in dictionary format:
+    #
+    #       * If using the console, `\{"input0":[1,3,224,224],
+    #         "input1":[1,3,224,224]\}`
+    #
+    #       * If using the CLI, `\{"input0":[1,3,224,224],
+    #         "input1":[1,3,224,224]\} `
+    #
+    #     * Example for two inputs in list format: `[[1,3,224,224],
     #       [1,3,224,224]]`
     #
     #   * `XGBOOST`\: input data name and shape are not needed.
@@ -6368,6 +6587,8 @@ module Aws::SageMaker
     #         last_modified_time_before: Time.now,
     #         name_contains: "NameContains",
     #         status_equals: "INPROGRESS", # accepts INPROGRESS, COMPLETED, FAILED, STARTING, STOPPING, STOPPED
+    #         sort_by: "Name", # accepts Name, CreationTime, Status
+    #         sort_order: "Ascending", # accepts Ascending, Descending
     #       }
     #
     # @!attribute [rw] next_token
@@ -6411,6 +6632,14 @@ module Aws::SageMaker
     #   DescribeCompilationJobResponse$CompilationJobStatus status.
     #   @return [String]
     #
+    # @!attribute [rw] sort_by
+    #   The field by which to sort results. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobsRequest AWS API Documentation
     #
     class ListCompilationJobsRequest < Struct.new(
@@ -6421,7 +6650,9 @@ module Aws::SageMaker
       :last_modified_time_after,
       :last_modified_time_before,
       :name_contains,
-      :status_equals)
+      :status_equals,
+      :sort_by,
+      :sort_order)
       include Aws::Structure
     end
 
@@ -7842,8 +8073,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The Amazon EC2 Container Registry path where inference code is
-    #   stored.
+    #   The Amazon EC2 Container Registry (Amazon ECR) path where inference
+    #   code is stored.
     #
     #   If you are using your own custom algorithm instead of an algorithm
     #   provided by Amazon SageMaker, the inference code must meet Amazon
@@ -7869,7 +8100,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The ID of the model package.
+    #   The AWS Marketplace product ID of the model package.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
@@ -7886,7 +8117,7 @@ module Aws::SageMaker
     # Specifies the validation and image scan statuses of the model package.
     #
     # @!attribute [rw] validation_statuses
-    #   The status of the validation of the model package.
+    #   The validation status of the model package.
     #   @return [Array<Types::ModelPackageStatusItem>]
     #
     # @!attribute [rw] image_scan_statuses
@@ -7906,7 +8137,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] name
     #   The name of the model package for which the overall status is being
-    #   repoorted.
+    #   reported.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -7914,7 +8145,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for failure, if the overall status is a failed state.
+    #   if the overall status is `Failed`, the reason for the failure.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusItem AWS API Documentation
@@ -7937,7 +8168,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_package_description
-    #   A brief statement describing the model package.
+    #   A brief description of the model package.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -7959,7 +8190,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Contains data such as the inputs and targeted instance types that are
+    # Contains data, such as the inputs and targeted instance types that are
     # used in the process of validating the model package.
     #
     # The data provided in the validation profile is made available to your
@@ -7986,7 +8217,7 @@ module Aws::SageMaker
     #             },
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
-    #             split_type: "None", # accepts None, Line, RecordIO
+    #             split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #           },
     #           transform_output: { # required
     #             s3_output_path: "S3Uri", # required
@@ -8046,7 +8277,7 @@ module Aws::SageMaker
     #                 },
     #                 content_type: "ContentType",
     #                 compression_type: "None", # accepts None, Gzip
-    #                 split_type: "None", # accepts None, Line, RecordIO
+    #                 split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #               },
     #               transform_output: { # required
     #                 s3_output_path: "S3Uri", # required
@@ -8065,7 +8296,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] validation_role
-    #   The IAM roles to be used for the validation of a model package.
+    #   The IAM roles to be used for the validation of the model package.
     #   @return [String]
     #
     # @!attribute [rw] validation_profiles
@@ -8105,26 +8336,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A `NestedFilter` is defined by using a resource name under
-    # `NestedPropertyName`, which entries in a list that properties must
-    # match to be included in the results. To satisfy the conditions
-    # specified in the `NestedFilters` call, each object in the list must
-    # satisfy the conditions of all of the filters.
+    # Defines a list of `NestedFilter` objects. To satisfy the conditions
+    # specified in the `NestedFilters` call, a resource must satisfy the
+    # conditions of all of the filters.
     #
     # For example, a `NestedFilters` could be defined using the training
     # job's `InputDataConfig` property, this would be defined as a list of
     # `Channel` objects.
     #
     # A `NestedFilters` object contains multiple filters. For example, to
-    # find all training jobs that have `train` in their name, and have
-    # `cat/data` in their` S3Uri (under InputDataConfig), you need to create
-    # a NestedFilters object that specfies the InputDataConfig property with
-    # the following Filter objects:</p>
-    # '\{Name:"InputDataConfig.ChannelName", "Operator":"EQUALS",
-    # "Value":"train"\}',
-    # '\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
-    # "Operator":"CONTAINS", "Value":"cat/data"\}'
-    # `
+    # find all training jobs whose name contains `train` and that have
+    # `cat/data` in their `S3Uri` (specified in `InputDataConfig`), you need
+    # to create a `NestedFilters` object that specifies the
+    # `InputDataConfig` property with the following `Filter` objects:
+    #
+    # * `'\{Name:"InputDataConfig.ChannelName", "Operator":"EQUALS",
+    #   "Value":"train"\}',`
+    #
+    # * `'\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
+    #   "Operator":"CONTAINS", "Value":"cat/data"\}'`
     #
     # @note When making an API call, you may pass NestedFilters
     #   data as a hash:
@@ -8141,13 +8371,15 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] nested_property_name
-    #   .The name of the property used in the nested filters.
+    #   The name of the property to use in the nested filters. The value
+    #   must match a listed property name, such as `InputDataConfig`.
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A list of filters. Each filter acts on a property. For example, a
-    #   `NestedFilters` call might include a filter on the `PropertyName`
-    #   parameter fof the `InputDataConfig` property:
+    #   A list of filters. Each filter acts on a property. Filters must
+    #   contain at least one `Filters` value. For example, a `NestedFilters`
+    #   call might include a filter on the `PropertyName` parameter of the
+    #   `InputDataConfig` property:
     #   `InputDataConfig.DataSource.S3DataSource.S3Uri`.
     #   @return [Array<Types::Filter>]
     #
@@ -8415,16 +8647,15 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you don't provide the KMS key ID, Amazon SageMaker uses the
+    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
     #   default KMS key for Amazon S3 for your role's account. For more
-    #   information, see [KMS-Managed Encryption Keys][1] in *Amazon Simple
-    #   Storage Service Developer Guide.*
+    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
     #
-    #   <note markdown="1"> The KMS key policy must grant permission to the IAM role that you
-    #   specify in your `CreateTrainingJob` request. [Using Key Policies in
-    #   AWS KMS][2] in the *AWS Key Management Service Developer Guide*.
-    #
-    #    </note>
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateTramsformJob` request. For more information,
+    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
+    #   Service Developer Guide*.
     #
     #
     #
@@ -8445,7 +8676,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines the possible values for categorical, continous, and integer
+    # Defines the possible values for categorical, continuous, and integer
     # hyperparameters to be used by an algorithm.
     #
     # @note When making an API call, you may pass ParameterRange
@@ -8687,7 +8918,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A suggestion query for retrieving property names.
+    # A type of `SuggestionQuery`. A suggestion query for retrieving
+    # property names that match the specified hint.
     #
     # @note When making an API call, you may pass PropertyNameQuery
     #   data as a hash:
@@ -8697,8 +8929,9 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] property_name_hint
-    #   The hyperparameter, metric, and tag key property names that begin
-    #   with the specified hint.
+    #   Text that is part of a property's name. The property names of
+    #   hyperparameter, metric, and tag key names that begin with the
+    #   specified text in the `PropertyNameHint`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameQuery AWS API Documentation
@@ -8712,7 +8945,8 @@ module Aws::SageMaker
     # specifies a value in the `PropertyNameQuery` field.
     #
     # @!attribute [rw] property_name
-    #   A suggested property name.
+    #   A suggested property name based on what you entered in the search
+    #   textbox in the Amazon SageMaker console.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameSuggestion AWS API Documentation
@@ -8723,12 +8957,84 @@ module Aws::SageMaker
     end
 
     # Defines the amount of money paid to an Amazon Mechanical Turk worker
-    # for each task performed. For more information, see [ Public Workforce
-    # Task Price][1].
+    # for each task performed.
     #
+    # Use one of the following prices for bounding box tasks. Prices are in
+    # US dollars.
     #
+    # * 0\.036
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-public-payment.html
+    # * 0\.048
+    #
+    # * 0\.060
+    #
+    # * 0\.072
+    #
+    # * 0\.120
+    #
+    # * 0\.240
+    #
+    # * 0\.360
+    #
+    # * 0\.480
+    #
+    # * 0\.600
+    #
+    # * 0\.720
+    #
+    # * 0\.840
+    #
+    # * 0\.960
+    #
+    # * 1\.080
+    #
+    # * 1\.200
+    #
+    # Use one of the following prices for image classification, text
+    # classification, and custom tasks. Prices are in US dollars.
+    #
+    # * 0\.012
+    #
+    # * 0\.024
+    #
+    # * 0\.036
+    #
+    # * 0\.048
+    #
+    # * 0\.060
+    #
+    # * 0\.072
+    #
+    # * 0\.120
+    #
+    # * 0\.240
+    #
+    # * 0\.360
+    #
+    # * 0\.480
+    #
+    # * 0\.600
+    #
+    # * 0\.720
+    #
+    # * 0\.840
+    #
+    # * 0\.960
+    #
+    # * 1\.080
+    #
+    # * 1\.200
+    #
+    # Use one of the following prices for semantic segmentation tasks.
+    # Prices are in US dollars.
+    #
+    # * 0\.840
+    #
+    # * 0\.960
+    #
+    # * 1\.080
+    #
+    # * 1\.200
     #
     # @note When making an API call, you may pass PublicWorkforceTaskPrice
     #   data as a hash:
@@ -8767,7 +9073,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] ui_template
-    #   A `Tempate`object containing the worker UI template to render.
+    #   A `Template`object containing the worker UI template to render.
     #   @return [Types::UiTemplate]
     #
     # @!attribute [rw] task
@@ -8999,7 +9305,7 @@ module Aws::SageMaker
     #
     #     `s3://customer_bucket/some/prefix/relative/path/to/custdata-1`
     #
-    #     `s3://customer_bucket/some/prefix/relative/path/custdata-1`
+    #     `s3://customer_bucket/some/prefix/relative/path/custdata-2`
     #
     #     `...`
     #
@@ -9024,7 +9330,7 @@ module Aws::SageMaker
     #   Don't choose more ML compute instances for training than available
     #   S3 objects. If you do, some nodes won't get any data and you will
     #   pay for nodes that aren't getting any training data. This applies
-    #   in both File and Pipemodes. Keep this in mind when developing
+    #   in both File and Pipe modes. Keep this in mind when developing
     #   algorithms.
     #
     #   In distributed training, where you use multiple ML compute EC2
@@ -9050,8 +9356,10 @@ module Aws::SageMaker
     end
 
     # A multi-expression that searches for the specified resource or
-    # resources. All resource objects that satisfy the expression's
-    # condition are included in the search results.
+    # resources in a search. All resource objects that satisfy the
+    # expression's condition are included in the search results. You must
+    # specify at least one subexpression, filter, or nested filter. A
+    # `SearchExpression` can contain up to twenty elements.
     #
     # A `SearchExpression` contains the following components:
     #
@@ -9064,7 +9372,8 @@ module Aws::SageMaker
     #   filter is satisfied if a single object in the list satisfies all
     #   Boolean expressions.
     #
-    # * A list of `SearchExpression` objects.
+    # * A list of `SearchExpression` objects. A search expression object can
+    #   be nested in a list of search expression objects.
     #
     # * A Boolean operator: `And` or `Or`.
     #
@@ -9138,7 +9447,7 @@ module Aws::SageMaker
     #   want every conditional statement in all lists to be satisfied for
     #   the entire search expression to be true, specify `And`. If only a
     #   single conditional statement needs to be true for the entire search
-    #   expression to be true, specify `Or`.
+    #   expression to be true, specify `Or`. The default value is `And`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchExpression AWS API Documentation
@@ -9211,16 +9520,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] search_expression
     #   A Boolean conditional statement. Resource objects must satisfy this
-    #   condition to be included in search results.
+    #   condition to be included in search results. You must provide at
+    #   least one subexpression, filter, or nested filter. The maximum
+    #   number of recursive `SubExpressions`, `NestedFilters`, and `Filters`
+    #   that can be included in a `SearchExpression` object is 50.
     #   @return [Types::SearchExpression]
     #
     # @!attribute [rw] sort_by
     #   The name of the resource property used to sort the `SearchResults`.
+    #   The default is `LastModifiedTime`.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
     #   How `SearchResults` are ordered. Valid values are `Ascending` or
-    #   `Descending`.
+    #   `Descending`. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -9410,7 +9723,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] seed
-    #   Determines the shuffling order in `ShuffleConfig`. value.
+    #   Determines the shuffling order in `ShuffleConfig` value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShuffleConfig AWS API Documentation
@@ -9605,12 +9918,12 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies how long a model training or compilation job can run. When
-    # the job reaches the limit, Amazon SageMaker ends the training job. Use
-    # this API to cap model processing cost.
+    # Specifies how long model training can run. When model training reaches
+    # the limit, Amazon SageMaker ends the training job. Use this API to cap
+    # model training cost.
     #
     # To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    # signal, which delays job termination for 120 seconds. Algorithms might
+    # signal, which delays job termination for120 seconds. Algorithms might
     # use this 120-second window to save the model artifacts, so the results
     # of training is not lost.
     #
@@ -9628,10 +9941,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
-    #   The maximum length of time, in seconds, that the training or
-    #   compilation job can run. If the job does not complete during this
-    #   time, Amazon SageMaker ends the job. If value is not specified,
-    #   default value is 1 day. Maximum value is 5 days.
+    #   The maximum length of time, in seconds, that the training job can
+    #   run. If model training does not complete during this time, Amazon
+    #   SageMaker ends the job. If value is not specified, default value is
+    #   1 day. Maximum value is 5 days.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
@@ -9687,8 +10000,9 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] property_name_query
-    #   Defines a property name hint. Only property names that match the
-    #   specified hint are included in the response.
+    #   A type of `SuggestionQuery`. Defines a property name hint. Only
+    #   property names that match the specified hint are included in the
+    #   response.
     #   @return [Types::PropertyNameQuery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SuggestionQuery AWS API Documentation
@@ -9904,7 +10218,7 @@ module Aws::SageMaker
     #   @return [Array<Types::SecondaryStatusTransition>]
     #
     # @!attribute [rw] final_metric_data_list
-    #   A list of final metric values that are set when the Training Job
+    #   A list of final metric values that are set when the training job
     #   completes. Used only if the training job was configured to use
     #   metrics.
     #   @return [Array<Types::MetricData>]
@@ -10232,7 +10546,7 @@ module Aws::SageMaker
     #   @return [Array<Types::ChannelSpecification>]
     #
     # @!attribute [rw] supported_tuning_job_objective_metrics
-    #   A list of the metrics that the alogorithm emits that can be used as
+    #   A list of the metrics that the algorithm emits that can be used as
     #   the objective metric in a hyperparameter tuning job.
     #   @return [Array<Types::HyperParameterTuningJobObjective>]
     #
@@ -10289,7 +10603,7 @@ module Aws::SageMaker
     #         },
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
-    #         split_type: "None", # accepts None, Line, RecordIO
+    #         split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #       }
     #
     # @!attribute [rw] data_source
@@ -10311,23 +10625,42 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] split_type
-    #   The method to use to split the transform job's data into smaller
-    #   batches. The default value is `None`. If you don't want to split
-    #   the data, specify `None`. If you want to split records on a newline
-    #   character boundary, specify `Line`. To split records according to
-    #   the RecordIO format, specify `RecordIO`.
+    #   The method to use to split the transform job's data files into
+    #   smaller batches. Splitting is necessary when the total size of each
+    #   object is too large to fit in a single request. You can also use
+    #   data splitting to improve performance by processing multiple
+    #   concurrent mini-batches. The default value for `SplitType` is
+    #   `None`, which indicates that input data files are not split, and
+    #   request payloads contain the entire contents of an input object. Set
+    #   the value of this parameter to `Line` to split records on a newline
+    #   character boundary. `SplitType` also supports a number of
+    #   record-oriented binary data formats.
     #
-    #   Amazon SageMaker will send maximum number of records per batch in
-    #   each request up to the MaxPayloadInMB limit. For more information,
-    #   see [RecordIO data format][1].
+    #   When splitting is enabled, the size of a mini-batch depends on the
+    #   values of the `BatchStrategy` and `MaxPayloadInMB` parameters. When
+    #   the value of `BatchStrategy` is `MultiRecord`, Amazon SageMaker
+    #   sends the maximum number of records in each request, up to the
+    #   `MaxPayloadInMB` limit. If the value of `BatchStrategy` is
+    #   `SingleRecord`, Amazon SageMaker sends individual records in each
+    #   request.
     #
-    #   <note markdown="1"> For information about the `RecordIO` format, see [Data Format][1].
+    #   <note markdown="1"> Some data formats represent a record as a binary payload wrapped
+    #   with extra padding bytes. When splitting is applied to a binary data
+    #   format, padding is removed if the value of `BatchStrategy` is set to
+    #   `SingleRecord`. Padding is not removed if the value of
+    #   `BatchStrategy` is set to `MultiRecord`.
     #
     #    </note>
+    #
+    #   For more information about the RecordIO data format, see [Data
+    #   Format][1] in the MXNet documentation. For more information about
+    #   the TFRecord fofmat, see [Consuming TFRecord data][2] in the
+    #   TensorFlow documentation.
     #
     #
     #
     #   [1]: http://mxnet.io/architecture/note_data_loading.html#data-format
+    #   [2]: https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformInput AWS API Documentation
@@ -10362,7 +10695,7 @@ module Aws::SageMaker
     #           },
     #           content_type: "ContentType",
     #           compression_type: "None", # accepts None, Gzip
-    #           split_type: "None", # accepts None, Line, RecordIO
+    #           split_type: "None", # accepts None, Line, RecordIO, TFRecord
     #         },
     #         transform_output: { # required
     #           s3_output_path: "S3Uri", # required
@@ -10722,7 +11055,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] ui_template_s3_uri
-    #   The Amazon S3 bucket location of the UI template.
+    #   The Amazon S3 bucket location of the UI template. For more
+    #   information about the contents of a UI template, see [ Creating Your
+    #   Custom Labeling Task Template][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiConfig AWS API Documentation

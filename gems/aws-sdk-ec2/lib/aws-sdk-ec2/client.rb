@@ -4039,6 +4039,7 @@ module Aws::EC2
     #               availability_zone: "String",
     #               affinity: "String",
     #               group_name: "String",
+    #               partition_number: 1,
     #               host_id: "String",
     #               tenancy: "default", # accepts default, dedicated, host
     #               spread_domain: "String",
@@ -5760,7 +5761,9 @@ module Aws::EC2
     # A `cluster` placement group is a logical grouping of instances within
     # a single Availability Zone that benefit from low network latency, high
     # network throughput. A `spread` placement group places instances on
-    # distinct hardware.
+    # distinct hardware. A `partition` placement group places groups of
+    # instances in different partitions, where instances in one partition do
+    # not share the same hardware with instances in another partition.
     #
     # For more information, see [Placement Groups][1] in the *Amazon Elastic
     # Compute Cloud User Guide*.
@@ -5775,14 +5778,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, String] :group_name
+    # @option params [String] :group_name
     #   A name for the placement group. Must be unique within the scope of
-    #   your account for the region.
+    #   your account for the Region.
     #
     #   Constraints: Up to 255 ASCII characters
     #
-    # @option params [required, String] :strategy
+    # @option params [String] :strategy
     #   The placement strategy.
+    #
+    # @option params [Integer] :partition_count
+    #   The number of partitions. Valid only when **Strategy** is set to
+    #   `partition`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5804,8 +5811,9 @@ module Aws::EC2
     #
     #   resp = client.create_placement_group({
     #     dry_run: false,
-    #     group_name: "String", # required
-    #     strategy: "cluster", # required, accepts cluster, spread
+    #     group_name: "String",
+    #     strategy: "cluster", # accepts cluster, spread, partition
+    #     partition_count: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup AWS API Documentation
@@ -11913,7 +11921,7 @@ module Aws::EC2
     # purchase.
     #
     # The results describe all the Dedicated Host reservation offerings,
-    # including offerings that may not match the instance family and region
+    # including offerings that may not match the instance family and Region
     # of your Dedicated Hosts. When purchasing an offering, ensure that the
     # instance family and Region of the offering matches that of the
     # Dedicated Hosts with which it is to be associated. For more
@@ -12078,7 +12086,7 @@ module Aws::EC2
 
     # Describes one or more of your Dedicated Hosts.
     #
-    # The results describe only the Dedicated Hosts in the region you're
+    # The results describe only the Dedicated Hosts in the Region you're
     # currently using. All listed instances consume capacity on your
     # Dedicated Host. Dedicated Hosts that have recently been released are
     # listed with the state `released`.
@@ -13529,6 +13537,8 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
+    #   * `partition-number` - The partition in which the instance is located.
+    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
@@ -13723,6 +13733,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].placement.availability_zone #=> String
     #   resp.reservations[0].instances[0].placement.affinity #=> String
     #   resp.reservations[0].instances[0].placement.group_name #=> String
+    #   resp.reservations[0].instances[0].placement.partition_number #=> Integer
     #   resp.reservations[0].instances[0].placement.host_id #=> String
     #   resp.reservations[0].instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.reservations[0].instances[0].placement.spread_domain #=> String
@@ -15249,7 +15260,7 @@ module Aws::EC2
     #     \| `deleting` \| `deleted`).
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
-    #     `spread`).
+    #     `spread` \| `partition`).
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15285,7 +15296,8 @@ module Aws::EC2
     #   resp.placement_groups #=> Array
     #   resp.placement_groups[0].group_name #=> String
     #   resp.placement_groups[0].state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.placement_groups[0].strategy #=> String, one of "cluster", "spread"
+    #   resp.placement_groups[0].strategy #=> String, one of "cluster", "spread", "partition"
+    #   resp.placement_groups[0].partition_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroups AWS API Documentation
     #
@@ -21628,10 +21640,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Downloads the contents of the client configuration file for the
-    # specified Client VPN endpoint. The client configuration file includes
-    # the Client VPN endpoint and certificate information clients need to
-    # establish a connection with the Client VPN endpoint.
+    # Downloads the contents of the Client VPN endpoint configuration file
+    # for the specified Client VPN endpoint. The Client VPN endpoint
+    # configuration file includes the Client VPN endpoint and certificate
+    # information clients need to establish a connection with the Client VPN
+    # endpoint.
     #
     # @option params [required, String] :client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint.
@@ -22724,6 +22737,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         affinity: "String",
     #         group_name: "String",
+    #         partition_number: 1,
     #         host_id: "String",
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
@@ -24009,8 +24023,8 @@ module Aws::EC2
     # group name must be specified in the request. Affinity and tenancy can
     # be modified in the same request.
     #
-    # To modify the host ID, tenancy, or placement group for an instance,
-    # the instance must be in the `stopped` state.
+    # To modify the host ID, tenancy, placement group, or partition for an
+    # instance, the instance must be in the `stopped` state.
     #
     #
     #
@@ -24023,8 +24037,8 @@ module Aws::EC2
     # @option params [String] :group_name
     #   The name of the placement group in which to place the instance. For
     #   spread placement groups, the instance must have a tenancy of
-    #   `default`. For cluster placement groups, the instance must have a
-    #   tenancy of `default` or `dedicated`.
+    #   `default`. For cluster and partition placement groups, the instance
+    #   must have a tenancy of `default` or `dedicated`.
     #
     #   To remove an instance from a placement group, specify an empty string
     #   ("").
@@ -24038,6 +24052,9 @@ module Aws::EC2
     # @option params [String] :tenancy
     #   The tenancy for the instance.
     #
+    # @option params [Integer] :partition_number
+    #   Reserved for future use.
+    #
     # @return [Types::ModifyInstancePlacementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyInstancePlacementResult#return #return} => Boolean
@@ -24050,6 +24067,7 @@ module Aws::EC2
     #     host_id: "String",
     #     instance_id: "String", # required
     #     tenancy: "dedicated", # accepts dedicated, host
+    #     partition_number: 1,
     #   })
     #
     # @example Response structure
@@ -28404,6 +28422,7 @@ module Aws::EC2
     #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "String",
+    #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
@@ -28525,6 +28544,7 @@ module Aws::EC2
     #   resp.instances[0].placement.availability_zone #=> String
     #   resp.instances[0].placement.affinity #=> String
     #   resp.instances[0].placement.group_name #=> String
+    #   resp.instances[0].placement.partition_number #=> Integer
     #   resp.instances[0].placement.host_id #=> String
     #   resp.instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.instances[0].placement.spread_domain #=> String
@@ -29710,7 +29730,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
