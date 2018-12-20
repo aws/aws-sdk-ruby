@@ -458,7 +458,8 @@ module Aws::Comprehend
     # documents. To create a classifier you provide a set of training
     # documents that labeled with the categories that you want to use. After
     # the classifier is trained you can use it to categorize a set of
-    # labeled documents into the categories.
+    # labeled documents into the categories. For more information, see
+    # how-document-classification.
     #
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
@@ -707,7 +708,7 @@ module Aws::Comprehend
     #
     #   resp.document_classifier_properties.document_classifier_arn #=> String
     #   resp.document_classifier_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.document_classifier_properties.message #=> String
     #   resp.document_classifier_properties.submit_time #=> Time
     #   resp.document_classifier_properties.end_time #=> Time
@@ -833,7 +834,7 @@ module Aws::Comprehend
     #
     #   resp.entity_recognizer_properties.entity_recognizer_arn #=> String
     #   resp.entity_recognizer_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.entity_recognizer_properties.message #=> String
     #   resp.entity_recognizer_properties.submit_time #=> Time
     #   resp.entity_recognizer_properties.end_time #=> Time
@@ -1257,7 +1258,7 @@ module Aws::Comprehend
     #
     #   resp = client.list_document_classifiers({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -1270,7 +1271,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list #=> Array
     #   resp.document_classifier_properties_list[0].document_classifier_arn #=> String
     #   resp.document_classifier_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.document_classifier_properties_list[0].message #=> String
     #   resp.document_classifier_properties_list[0].submit_time #=> Time
     #   resp.document_classifier_properties_list[0].end_time #=> Time
@@ -1441,7 +1442,7 @@ module Aws::Comprehend
     #
     #   resp = client.list_entity_recognizers({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -1454,7 +1455,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list #=> Array
     #   resp.entity_recognizer_properties_list[0].entity_recognizer_arn #=> String
     #   resp.entity_recognizer_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
-    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
     #   resp.entity_recognizer_properties_list[0].message #=> String
     #   resp.entity_recognizer_properties_list[0].submit_time #=> Time
     #   resp.entity_recognizer_properties_list[0].end_time #=> Time
@@ -2238,6 +2239,66 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Stops a document classifier training job while in progress.
+    #
+    # If the training job state is `TRAINING`, the job is marked for
+    # termination and put into the `STOP_REQUESTED` state. If the training
+    # job completes before it can be stopped, it is put into the `TRAINED`;
+    # otherwise the training job is stopped and put into the `STOPPED` state
+    # and the service sends back an HTTP 200 response with an empty HTTP
+    # body.
+    #
+    # @option params [required, String] :document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document classifier
+    #   currently being trained.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_training_document_classifier({
+    #     document_classifier_arn: "DocumentClassifierArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifier AWS API Documentation
+    #
+    # @overload stop_training_document_classifier(params = {})
+    # @param [Hash] params ({})
+    def stop_training_document_classifier(params = {}, options = {})
+      req = build_request(:stop_training_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Stops an entity recognizer training job while in progress.
+    #
+    # If the training job state is `TRAINING`, the job is marked for
+    # termination and put into the `STOP_REQUESTED` state. If the training
+    # job completes before it can be stopped, it is put into the `TRAINED`;
+    # otherwise the training job is stopped and putted into the `STOPPED`
+    # state and the service sends back an HTTP 200 response with an empty
+    # HTTP body.
+    #
+    # @option params [required, String] :entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity recognizer
+    #   currently being trained.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_training_entity_recognizer({
+    #     entity_recognizer_arn: "EntityRecognizerArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizer AWS API Documentation
+    #
+    # @overload stop_training_entity_recognizer(params = {})
+    # @param [Hash] params ({})
+    def stop_training_entity_recognizer(params = {}, options = {})
+      req = build_request(:stop_training_entity_recognizer, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2251,7 +2312,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

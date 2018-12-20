@@ -391,6 +391,8 @@ module Aws::CognitoIdentityProvider
     UpdateUserAttributesResponse = Shapes::StructureShape.new(name: 'UpdateUserAttributesResponse')
     UpdateUserPoolClientRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolClientRequest')
     UpdateUserPoolClientResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolClientResponse')
+    UpdateUserPoolDomainRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolDomainRequest')
+    UpdateUserPoolDomainResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolDomainResponse')
     UpdateUserPoolRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolRequest')
     UpdateUserPoolResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolResponse')
     UserContextDataType = Shapes::StructureShape.new(name: 'UserContextDataType')
@@ -1552,6 +1554,14 @@ module Aws::CognitoIdentityProvider
 
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
     UpdateUserPoolClientResponse.struct_class = Types::UpdateUserPoolClientResponse
+
+    UpdateUserPoolDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, required: true, location_name: "Domain"))
+    UpdateUserPoolDomainRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    UpdateUserPoolDomainRequest.add_member(:custom_domain_config, Shapes::ShapeRef.new(shape: CustomDomainConfigType, required: true, location_name: "CustomDomainConfig"))
+    UpdateUserPoolDomainRequest.struct_class = Types::UpdateUserPoolDomainRequest
+
+    UpdateUserPoolDomainResponse.add_member(:cloud_front_domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "CloudFrontDomain"))
+    UpdateUserPoolDomainResponse.struct_class = Types::UpdateUserPoolDomainResponse
 
     UpdateUserPoolRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     UpdateUserPoolRequest.add_member(:policies, Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
@@ -3196,6 +3206,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ScopeDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOAuthFlowException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:update_user_pool_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserPoolDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserPoolDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUserPoolDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

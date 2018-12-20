@@ -2361,7 +2361,20 @@ module Aws::CognitoIdentityProvider
     #   The read attributes.
     #
     # @option params [Array<String>] :write_attributes
-    #   The write attributes.
+    #   The user pool attributes that the app client can write to.
+    #
+    #   If your app client allows users to sign in through an identity
+    #   provider, this array must include all attributes that are mapped to
+    #   identity provider attributes. Amazon Cognito updates mapped attributes
+    #   when users sign in to your application through an identity provider.
+    #   If your app client lacks write access to a mapped attribute, Amazon
+    #   Cognito throws an error when it attempts to update the attribute. For
+    #   more information, see [Specifying Identity Provider Attribute Mappings
+    #   for Your User Pool][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #
     # @option params [Array<String>] :explicit_auth_flows
     #   The explicit authentication flows.
@@ -2519,7 +2532,7 @@ module Aws::CognitoIdentityProvider
     #   The configuration for a custom domain that hosts the sign-up and
     #   sign-in webpages for your application.
     #
-    #   Provide this parameter only if you want to use own custom domain for
+    #   Provide this parameter only if you want to use a custom domain for
     #   your user pool. Otherwise, you can exclude this parameter and use the
     #   Amazon Cognito hosted domain instead.
     #
@@ -5428,6 +5441,85 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Updates the Secure Sockets Layer (SSL) certificate for the custom
+    # domain for your user pool.
+    #
+    # You can use this operation to provide the Amazon Resource Name (ARN)
+    # of a new certificate to Amazon Cognito. You cannot use it to change
+    # the domain for a user pool.
+    #
+    # A custom domain is used to host the Amazon Cognito hosted UI, which
+    # provides sign-up and sign-in pages for your application. When you set
+    # up a custom domain, you provide a certificate that you manage with AWS
+    # Certificate Manager (ACM). When necessary, you can use this operation
+    # to change the certificate that you applied to your custom domain.
+    #
+    # Usually, this is unnecessary following routine certificate renewal
+    # with ACM. When you renew your existing certificate in ACM, the ARN for
+    # your certificate remains the same, and your custom domain uses the new
+    # certificate automatically.
+    #
+    # However, if you replace your existing certificate with a new one, ACM
+    # gives the new certificate a new ARN. To apply the new certificate to
+    # your custom domain, you must provide this ARN to Amazon Cognito.
+    #
+    # When you add your new certificate in ACM, you must choose US East (N.
+    # Virginia) as the AWS Region.
+    #
+    # After you submit your request, Amazon Cognito requires up to 1 hour to
+    # distribute your new certificate to your custom domain.
+    #
+    # For more information about adding a custom domain to your user pool,
+    # see [Using Your Own Domain for the Hosted UI][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
+    #
+    # @option params [required, String] :domain
+    #   The domain name for the custom domain that hosts the sign-up and
+    #   sign-in pages for your application. For example: `auth.example.com`.
+    #
+    #   This string can include only lowercase letters, numbers, and hyphens.
+    #   Do not use a hyphen for the first or last character. Use periods to
+    #   separate subdomain names.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that is associated with the custom domain that
+    #   you are updating the certificate for.
+    #
+    # @option params [required, Types::CustomDomainConfigType] :custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in pages for your application. Use this object to specify an SSL
+    #   certificate that is managed by ACM.
+    #
+    # @return [Types::UpdateUserPoolDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUserPoolDomainResponse#cloud_front_domain #cloud_front_domain} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_pool_domain({
+    #     domain: "DomainType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #     custom_domain_config: { # required
+    #       certificate_arn: "ArnType", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_front_domain #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomain AWS API Documentation
+    #
+    # @overload update_user_pool_domain(params = {})
+    # @param [Hash] params ({})
+    def update_user_pool_domain(params = {}, options = {})
+      req = build_request(:update_user_pool_domain, params)
+      req.send_request(options)
+    end
+
     # Use this API to register a user's entered TOTP code and mark the
     # user's software token MFA status as "verified" if successful. The
     # request takes an access token or a session string, but not both.
@@ -5516,7 +5608,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

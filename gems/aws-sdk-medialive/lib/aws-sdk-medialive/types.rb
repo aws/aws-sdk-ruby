@@ -935,6 +935,9 @@ module Aws::MediaLive
     #           {
     #             action_name: "__string", # required
     #             schedule_action_settings: { # required
+    #               hls_timed_metadata_settings: {
+    #                 id_3: "__string", # required
+    #               },
     #               input_switch_settings: {
     #                 input_attachment_name_reference: "__string", # required
     #               },
@@ -1076,6 +1079,9 @@ module Aws::MediaLive
     #             {
     #               action_name: "__string", # required
     #               schedule_action_settings: { # required
+    #                 hls_timed_metadata_settings: {
+    #                   id_3: "__string", # required
+    #                 },
     #                 input_switch_settings: {
     #                   input_attachment_name_reference: "__string", # required
     #                 },
@@ -2635,6 +2641,7 @@ module Aws::MediaLive
     #                   slices: 1,
     #                   softness: 1,
     #                   spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -4678,6 +4685,7 @@ module Aws::MediaLive
     #                 slices: 1,
     #                 softness: 1,
     #                 spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                 subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                 syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                 temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -4931,6 +4939,7 @@ module Aws::MediaLive
     #         slices: 1,
     #         softness: 1,
     #         spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #         subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #         syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #         temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -5131,6 +5140,12 @@ module Aws::MediaLive
     #   spatial variation of content complexity.
     #   @return [String]
     #
+    # @!attribute [rw] subgop_length
+    #   If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to
+    #   dynamic, optimize the number of B-frames used for each sub-GOP to
+    #   improve visual quality.
+    #   @return [String]
+    #
     # @!attribute [rw] syntax
     #   Produces a bitstream compliant with SMPTE RP-2027.
     #   @return [String]
@@ -5183,6 +5198,7 @@ module Aws::MediaLive
       :slices,
       :softness,
       :spatial_aq,
+      :subgop_length,
       :syntax,
       :temporal_aq,
       :timecode_insertion)
@@ -5605,8 +5621,8 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_mode
-    #   When set to useInputSegmentation, the output segment or fragment
-    #   points are set by the RAI markers from the input streams.
+    #   useInputSegmentation has been deprecated. The configured segment
+    #   size is always used.
     #   @return [String]
     #
     # @!attribute [rw] segments_per_subdirectory
@@ -5882,6 +5898,27 @@ module Aws::MediaLive
     class HlsSettings < Struct.new(
       :audio_only_hls_settings,
       :standard_hls_settings)
+      include Aws::Structure
+    end
+
+    # Settings for the action to emit HLS metadata
+    #
+    # @note When making an API call, you may pass HlsTimedMetadataScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         id_3: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id_3
+    #   Base64 string formatted according to the ID3 specification:
+    #   http://id3.org/id3v2.4.0-structure
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsTimedMetadataScheduleActionSettings AWS API Documentation
+    #
+    class HlsTimedMetadataScheduleActionSettings < Struct.new(
+      :id_3)
       include Aws::Structure
     end
 
@@ -7667,8 +7704,8 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_mode
-    #   When set to useInputSegmentation, the output segment or fragment
-    #   points are set by the RAI markers from the input streams.
+    #   useInputSegmentation has been deprecated. The configured segment
+    #   size is always used.
     #   @return [String]
     #
     # @!attribute [rw] send_delay_ms
@@ -9318,6 +9355,9 @@ module Aws::MediaLive
     #       {
     #         action_name: "__string", # required
     #         schedule_action_settings: { # required
+    #           hls_timed_metadata_settings: {
+    #             id_3: "__string", # required
+    #           },
     #           input_switch_settings: {
     #             input_attachment_name_reference: "__string", # required
     #           },
@@ -9418,6 +9458,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         hls_timed_metadata_settings: {
+    #           id_3: "__string", # required
+    #         },
     #         input_switch_settings: {
     #           input_attachment_name_reference: "__string", # required
     #         },
@@ -9476,6 +9519,10 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] hls_timed_metadata_settings
+    #   Settings to emit HLS metadata
+    #   @return [Types::HlsTimedMetadataScheduleActionSettings]
+    #
     # @!attribute [rw] input_switch_settings
     #   Settings to switch an input
     #   @return [Types::InputSwitchScheduleActionSettings]
@@ -9503,6 +9550,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
+      :hls_timed_metadata_settings,
       :input_switch_settings,
       :scte_35_return_to_network_settings,
       :scte_35_splice_insert_settings,
@@ -11312,6 +11360,7 @@ module Aws::MediaLive
     #                   slices: 1,
     #                   softness: 1,
     #                   spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -11698,6 +11747,7 @@ module Aws::MediaLive
     #           slices: 1,
     #           softness: 1,
     #           spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #           subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #           syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #           temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -11755,6 +11805,7 @@ module Aws::MediaLive
     #             slices: 1,
     #             softness: 1,
     #             spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #             subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #             syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #             temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI

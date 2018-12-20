@@ -229,6 +229,9 @@ module Aws::MediaLive
     #         {
     #           action_name: "__string", # required
     #           schedule_action_settings: { # required
+    #             hls_timed_metadata_settings: {
+    #               id_3: "__string", # required
+    #             },
     #             input_switch_settings: {
     #               input_attachment_name_reference: "__string", # required
     #             },
@@ -307,6 +310,7 @@ module Aws::MediaLive
     #
     #   resp.creates.schedule_actions #=> Array
     #   resp.creates.schedule_actions[0].action_name #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
@@ -345,6 +349,7 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
     #   resp.deletes.schedule_actions #=> Array
     #   resp.deletes.schedule_actions[0].action_name #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
@@ -1017,6 +1022,7 @@ module Aws::MediaLive
     #               slices: 1,
     #               softness: 1,
     #               spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #               syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #               temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -1539,6 +1545,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -2165,6 +2172,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -2778,6 +2786,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -3077,6 +3086,7 @@ module Aws::MediaLive
     #   resp.next_token #=> String
     #   resp.schedule_actions #=> Array
     #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
@@ -3955,6 +3965,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -4461,6 +4472,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -5146,6 +5158,7 @@ module Aws::MediaLive
     #               slices: 1,
     #               softness: 1,
     #               spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #               syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #               temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -5666,6 +5679,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -5859,7 +5873,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

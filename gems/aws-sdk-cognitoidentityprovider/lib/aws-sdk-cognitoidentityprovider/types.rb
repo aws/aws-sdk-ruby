@@ -2619,7 +2619,20 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] write_attributes
-    #   The write attributes.
+    #   The user pool attributes that the app client can write to.
+    #
+    #   If your app client allows users to sign in through an identity
+    #   provider, this array must include all attributes that are mapped to
+    #   identity provider attributes. Amazon Cognito updates mapped
+    #   attributes when users sign in to your application through an
+    #   identity provider. If your app client lacks write access to a mapped
+    #   attribute, Amazon Cognito throws an error when it attempts to update
+    #   the attribute. For more information, see [Specifying Identity
+    #   Provider Attribute Mappings for Your User Pool][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] explicit_auth_flows
@@ -2763,7 +2776,7 @@ module Aws::CognitoIdentityProvider
     #   The configuration for a custom domain that hosts the sign-up and
     #   sign-in webpages for your application.
     #
-    #   Provide this parameter only if you want to use own custom domain for
+    #   Provide this parameter only if you want to use a custom domain for
     #   your user pool. Otherwise, you can exclude this parameter and use
     #   the Amazon Cognito hosted domain instead.
     #
@@ -5818,6 +5831,18 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] mutable
     #   Specifies whether the value of the attribute can be changed.
+    #
+    #   For any user pool attribute that's mapped to an identity provider
+    #   attribute, you must set this parameter to `true`. Amazon Cognito
+    #   updates mapped attributes when users sign in to your application
+    #   through an identity provider. If an attribute is immutable, Amazon
+    #   Cognito throws an error when it attempts to update the attribute.
+    #   For more information, see [Specifying Identity Provider Attribute
+    #   Mappings for Your User Pool][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Boolean]
     #
     # @!attribute [rw] required
@@ -6973,6 +6998,62 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateUserPoolClientResponse < Struct.new(
       :user_pool_client)
+      include Aws::Structure
+    end
+
+    # The UpdateUserPoolDomain request input.
+    #
+    # @note When making an API call, you may pass UpdateUserPoolDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "DomainType", # required
+    #         user_pool_id: "UserPoolIdType", # required
+    #         custom_domain_config: { # required
+    #           certificate_arn: "ArnType", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The domain name for the custom domain that hosts the sign-up and
+    #   sign-in pages for your application. For example: `auth.example.com`.
+    #
+    #   This string can include only lowercase letters, numbers, and
+    #   hyphens. Do not use a hyphen for the first or last character. Use
+    #   periods to separate subdomain names.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that is associated with the custom domain
+    #   that you are updating the certificate for.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in pages for your application. Use this object to specify an
+    #   SSL certificate that is managed by ACM.
+    #   @return [Types::CustomDomainConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomainRequest AWS API Documentation
+    #
+    class UpdateUserPoolDomainRequest < Struct.new(
+      :domain,
+      :user_pool_id,
+      :custom_domain_config)
+      include Aws::Structure
+    end
+
+    # The UpdateUserPoolDomain response output.
+    #
+    # @!attribute [rw] cloud_front_domain
+    #   The Amazon CloudFront endpoint that Amazon Cognito set up when you
+    #   added the custom domain to your user pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomainResponse AWS API Documentation
+    #
+    class UpdateUserPoolDomainResponse < Struct.new(
+      :cloud_front_domain)
       include Aws::Structure
     end
 

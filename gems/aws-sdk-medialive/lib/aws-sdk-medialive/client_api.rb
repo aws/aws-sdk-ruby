@@ -176,6 +176,7 @@ module Aws::MediaLive
     H264SceneChangeDetect = Shapes::StringShape.new(name: 'H264SceneChangeDetect')
     H264Settings = Shapes::StructureShape.new(name: 'H264Settings')
     H264SpatialAq = Shapes::StringShape.new(name: 'H264SpatialAq')
+    H264SubGopLength = Shapes::StringShape.new(name: 'H264SubGopLength')
     H264Syntax = Shapes::StringShape.new(name: 'H264Syntax')
     H264TemporalAq = Shapes::StringShape.new(name: 'H264TemporalAq')
     H264TimecodeInsertionBehavior = Shapes::StringShape.new(name: 'H264TimecodeInsertionBehavior')
@@ -206,6 +207,7 @@ module Aws::MediaLive
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
     HlsTimedMetadataId3Frame = Shapes::StringShape.new(name: 'HlsTimedMetadataId3Frame')
+    HlsTimedMetadataScheduleActionSettings = Shapes::StructureShape.new(name: 'HlsTimedMetadataScheduleActionSettings')
     HlsTsFileMode = Shapes::StringShape.new(name: 'HlsTsFileMode')
     HlsWebdavHttpTransferMode = Shapes::StringShape.new(name: 'HlsWebdavHttpTransferMode')
     HlsWebdavSettings = Shapes::StructureShape.new(name: 'HlsWebdavSettings')
@@ -1057,6 +1059,7 @@ module Aws::MediaLive
     H264Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
     H264Settings.add_member(:softness, Shapes::ShapeRef.new(shape: __integerMin0Max128, location_name: "softness"))
     H264Settings.add_member(:spatial_aq, Shapes::ShapeRef.new(shape: H264SpatialAq, location_name: "spatialAq"))
+    H264Settings.add_member(:subgop_length, Shapes::ShapeRef.new(shape: H264SubGopLength, location_name: "subgopLength"))
     H264Settings.add_member(:syntax, Shapes::ShapeRef.new(shape: H264Syntax, location_name: "syntax"))
     H264Settings.add_member(:temporal_aq, Shapes::ShapeRef.new(shape: H264TemporalAq, location_name: "temporalAq"))
     H264Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H264TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
@@ -1142,6 +1145,9 @@ module Aws::MediaLive
     HlsSettings.add_member(:audio_only_hls_settings, Shapes::ShapeRef.new(shape: AudioOnlyHlsSettings, location_name: "audioOnlyHlsSettings"))
     HlsSettings.add_member(:standard_hls_settings, Shapes::ShapeRef.new(shape: StandardHlsSettings, location_name: "standardHlsSettings"))
     HlsSettings.struct_class = Types::HlsSettings
+
+    HlsTimedMetadataScheduleActionSettings.add_member(:id_3, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id3"))
+    HlsTimedMetadataScheduleActionSettings.struct_class = Types::HlsTimedMetadataScheduleActionSettings
 
     HlsWebdavSettings.add_member(:connection_retry_interval, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "connectionRetryInterval"))
     HlsWebdavSettings.add_member(:filecache_duration, Shapes::ShapeRef.new(shape: __integerMin0Max600, location_name: "filecacheDuration"))
@@ -1562,6 +1568,7 @@ module Aws::MediaLive
     ScheduleAction.add_member(:schedule_action_start_settings, Shapes::ShapeRef.new(shape: ScheduleActionStartSettings, required: true, location_name: "scheduleActionStartSettings"))
     ScheduleAction.struct_class = Types::ScheduleAction
 
+    ScheduleActionSettings.add_member(:hls_timed_metadata_settings, Shapes::ShapeRef.new(shape: HlsTimedMetadataScheduleActionSettings, location_name: "hlsTimedMetadataSettings"))
     ScheduleActionSettings.add_member(:input_switch_settings, Shapes::ShapeRef.new(shape: InputSwitchScheduleActionSettings, location_name: "inputSwitchSettings"))
     ScheduleActionSettings.add_member(:scte_35_return_to_network_settings, Shapes::ShapeRef.new(shape: Scte35ReturnToNetworkScheduleActionSettings, location_name: "scte35ReturnToNetworkSettings"))
     ScheduleActionSettings.add_member(:scte_35_splice_insert_settings, Shapes::ShapeRef.new(shape: Scte35SpliceInsertScheduleActionSettings, location_name: "scte35SpliceInsertSettings"))

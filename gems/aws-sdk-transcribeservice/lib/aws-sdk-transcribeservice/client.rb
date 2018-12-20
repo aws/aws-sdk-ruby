@@ -216,10 +216,7 @@ module Aws::TranscribeService
     # @!group API Operations
 
     # Creates a new custom vocabulary that you can use to change the way
-    # Amazon Transcribe handles transcription of an audio file. Note that
-    # vocabularies for en-AU, en-UK, and fr-CA languages that are in preview
-    # are not available. In the console, the vocabulary section will be
-    # greyed-out and SDK will return error message.
+    # Amazon Transcribe handles transcription of an audio file.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
@@ -243,14 +240,14 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT
     #     phrases: ["Phrase"], # required
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -331,7 +328,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -353,10 +350,7 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Gets information about a vocabulary. Note that vocabularies for en-AU,
-    # en-UK, and fr-CA languages that are in preview are not available. In
-    # the console, the vocabulary section will be greyed-out and SDK will
-    # return error message.
+    # Gets information about a vocabulary.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to return information about. The name is
@@ -380,7 +374,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -399,7 +393,9 @@ module Aws::TranscribeService
     #
     # @option params [String] :status
     #   When specified, returns only transcription jobs with the specified
-    #   status.
+    #   status. Jobs are ordered by creation date, with the newest jobs
+    #   returned first. If you don’t specify a status, Amazon Transcribe
+    #   returns all transcription jobs ordered by creation date.
     #
     # @option params [String] :job_name_contains
     #   When specified, the jobs returned in the list are limited to jobs
@@ -437,7 +433,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].transcription_job_name #=> String
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -494,7 +490,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -507,9 +503,7 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Starts an asynchronous job to transcribe speech to text. Note that
-    # en-AU, en-UK, and fr-CA languages are in preview and are only
-    # available to whitelisted customers.
+    # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
     #   The name of the job. Note that you can't use the strings "." or
@@ -559,7 +553,7 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #     media: { # required
@@ -578,7 +572,7 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
@@ -602,10 +596,7 @@ module Aws::TranscribeService
 
     # Updates an existing vocabulary with new values. The `UpdateVocabulary`
     # operation overwrites all of the existing information with the values
-    # that you provide in the request. Note that vocabularies for en-AU,
-    # en-UK, and fr-CA languages that are in preview are not available. In
-    # the console, the vocabulary section will be greyed-out and SDK will
-    # return error message.
+    # that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary to update. The name is case-sensitive.
@@ -627,14 +618,14 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT
     #     phrases: ["Phrase"], # required
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR"
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -660,7 +651,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

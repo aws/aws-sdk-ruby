@@ -1218,7 +1218,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #         submit_time_before: Time.now,
     #         submit_time_after: Time.now,
     #       }
@@ -1294,7 +1294,7 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the document classifier. The the status is `TRAINED`
+    #   The status of the document classifier. If the status is `TRAINED`
     #   the classifier is ready to use. If the status is `FAILED` you can
     #   see additional information about why the classifier wasn't trained
     #   in the `Message` field.
@@ -1753,7 +1753,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #         submit_time_before: Time.now,
     #         submit_time_after: Time.now,
     #       }
@@ -2215,7 +2215,7 @@ module Aws::Comprehend
     #
     #       {
     #         filter: {
-    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #           submit_time_before: Time.now,
     #           submit_time_after: Time.now,
     #         },
@@ -2376,7 +2376,7 @@ module Aws::Comprehend
     #
     #       {
     #         filter: {
-    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, IN_ERROR, TRAINED
+    #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
     #           submit_time_before: Time.now,
     #           submit_time_after: Time.now,
     #         },
@@ -3493,6 +3493,52 @@ module Aws::Comprehend
       :job_status)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StopTrainingDocumentClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_classifier_arn: "DocumentClassifierArn", # required
+    #       }
+    #
+    # @!attribute [rw] document_classifier_arn
+    #   The Amazon Resource Name (ARN) that identifies the document
+    #   classifier currently being trained.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifierRequest AWS API Documentation
+    #
+    class StopTrainingDocumentClassifierRequest < Struct.new(
+      :document_classifier_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifierResponse AWS API Documentation
+    #
+    class StopTrainingDocumentClassifierResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopTrainingEntityRecognizerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entity_recognizer_arn: "EntityRecognizerArn", # required
+    #       }
+    #
+    # @!attribute [rw] entity_recognizer_arn
+    #   The Amazon Resource Name (ARN) that identifies the entity recognizer
+    #   currently being trained.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizerRequest AWS API Documentation
+    #
+    class StopTrainingEntityRecognizerRequest < Struct.new(
+      :entity_recognizer_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizerResponse AWS API Documentation
+    #
+    class StopTrainingEntityRecognizerResponse < Aws::EmptyStructure; end
 
     # Represents a work in the input text that was recognized and assigned a
     # part of speech. There is one syntax token record for each word in the

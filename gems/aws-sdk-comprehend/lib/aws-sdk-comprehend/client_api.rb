@@ -179,6 +179,10 @@ module Aws::Comprehend
     StopKeyPhrasesDetectionJobResponse = Shapes::StructureShape.new(name: 'StopKeyPhrasesDetectionJobResponse')
     StopSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'StopSentimentDetectionJobRequest')
     StopSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'StopSentimentDetectionJobResponse')
+    StopTrainingDocumentClassifierRequest = Shapes::StructureShape.new(name: 'StopTrainingDocumentClassifierRequest')
+    StopTrainingDocumentClassifierResponse = Shapes::StructureShape.new(name: 'StopTrainingDocumentClassifierResponse')
+    StopTrainingEntityRecognizerRequest = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerRequest')
+    StopTrainingEntityRecognizerResponse = Shapes::StructureShape.new(name: 'StopTrainingEntityRecognizerResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SyntaxLanguageCode = Shapes::StringShape.new(name: 'SyntaxLanguageCode')
@@ -786,6 +790,16 @@ module Aws::Comprehend
     StopSentimentDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StopSentimentDetectionJobResponse.struct_class = Types::StopSentimentDetectionJobResponse
 
+    StopTrainingDocumentClassifierRequest.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, required: true, location_name: "DocumentClassifierArn"))
+    StopTrainingDocumentClassifierRequest.struct_class = Types::StopTrainingDocumentClassifierRequest
+
+    StopTrainingDocumentClassifierResponse.struct_class = Types::StopTrainingDocumentClassifierResponse
+
+    StopTrainingEntityRecognizerRequest.add_member(:entity_recognizer_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, required: true, location_name: "EntityRecognizerArn"))
+    StopTrainingEntityRecognizerRequest.struct_class = Types::StopTrainingEntityRecognizerRequest
+
+    StopTrainingEntityRecognizerResponse.struct_class = Types::StopTrainingEntityRecognizerResponse
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SyntaxToken.add_member(:token_id, Shapes::ShapeRef.new(shape: Integer, location_name: "TokenId"))
@@ -1345,6 +1359,30 @@ module Aws::Comprehend
         o.output = Shapes::ShapeRef.new(shape: StopSentimentDetectionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_training_document_classifier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTrainingDocumentClassifier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopTrainingDocumentClassifierRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopTrainingDocumentClassifierResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_training_entity_recognizer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTrainingEntityRecognizer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopTrainingEntityRecognizerRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopTrainingEntityRecognizerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
