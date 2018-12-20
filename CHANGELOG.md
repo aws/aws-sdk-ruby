@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.196 (2018-12-20)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
