@@ -125,7 +125,7 @@ module AwsSdkCodeGenerator
     end
 
     def shared_examples(examples, operation, api)
-      return if examples.nil? || examples['examples'][@name].nil?
+      return if examples.nil? || examples['examples'].nil? || examples['examples'][@name].nil?
       begin # skip broken/nil examples
         example_block = []
         examples['examples'][@name].each do |example|

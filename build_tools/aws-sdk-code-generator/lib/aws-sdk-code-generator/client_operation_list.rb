@@ -41,8 +41,11 @@ module AwsSdkCodeGenerator
         @streaming = options.fetch(:streaming)
         @eventstream_output = !!options.fetch(:eventstream_output)
         @eventstream_input = !!options.fetch(:eventstream_input)
-        @eventstream_member = @eventstream_output ?
+        @output_eventstream_member = @eventstream_output ?
           options.fetch(:eventstream_output) : nil
+        @input_eventstream_member = @eventstream_input ?
+          options.fetch(:eventstream_input) : nil
+        @bidirectional = @eventstream_output && @eventstream_input
       end
 
       # @return [String]
@@ -58,7 +61,13 @@ module AwsSdkCodeGenerator
       attr_reader :eventstream_output
 
       # @return [String]
-      attr_reader :eventstream_member
+      attr_reader :input_eventstream_member
+
+      # @return [String]
+      attr_reader :output_eventstream_member
+
+      # @return [Boolean]
+      attr_reader :bidirectional
 
       def block_option
         if @streaming

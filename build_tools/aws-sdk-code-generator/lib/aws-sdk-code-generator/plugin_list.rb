@@ -17,7 +17,7 @@ module AwsSdkCodeGenerator
 
     def compute_plugins(options)
       plugins = {}
-      plugins.update(default_plugins)
+      plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
       plugins.update(signature_plugins(options.fetch(:signature_version)))
       plugins.update(protocol_plugins(options.fetch(:protocol)))
       plugins.update(options.fetch(:add_plugins))
@@ -47,6 +47,26 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::GlobalConfiguration' => "#{core_plugins}/global_configuration.rb",
         'Aws::Plugins::RegionalEndpoint' => "#{core_plugins}/regional_endpoint.rb",
         'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
+        'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
+        'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
+        'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
+      }
+    end
+
+    def default_async_plugins
+      {
+        'Seahorse::Client::Plugins::ContentLength' => "#{seahorse_plugins}/content_length.rb",
+        'Aws::Plugins::CredentialsConfiguration' => "#{core_plugins}/credentials_configuration.rb",
+        'Aws::Plugins::Logging' => "#{core_plugins}/logging.rb",
+        'Aws::Plugins::ParamConverter' => "#{core_plugins}/param_converter.rb",
+        #'Aws::Plugins::ParamValidator' => "#{core_plugins}/param_validator.rb",
+        'Aws::Plugins::UserAgent' => "#{core_plugins}/user_agent.rb",
+        'Aws::Plugins::HelpfulSocketErrors' => "#{core_plugins}/helpful_socket_errors.rb",
+        'Aws::Plugins::RetryErrors' => "#{core_plugins}/retry_errors.rb",
+        'Aws::Plugins::GlobalConfiguration' => "#{core_plugins}/global_configuration.rb",
+        'Aws::Plugins::RegionalEndpoint' => "#{core_plugins}/regional_endpoint.rb",
+        #'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
+        # TODO
         'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
         'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
         'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",

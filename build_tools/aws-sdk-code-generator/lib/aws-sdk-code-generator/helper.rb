@@ -185,13 +185,12 @@ module AwsSdkCodeGenerator
       return false
     end
 
-    # currently not support eventstream input
     def eventstream_input?(operation, api)
       return false unless operation.key? 'input'
       input_shape = api['shapes'][operation['input']['shape']]
       return false unless input_shape.key? 'members'
       input_shape['members'].each do |name, ref|
-        return true if Api.eventstream?(ref, api)
+        return ref['shape'] if Api.eventstream?(ref, api)
       end
       return false
     end

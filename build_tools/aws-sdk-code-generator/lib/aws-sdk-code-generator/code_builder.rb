@@ -64,6 +64,7 @@ module AwsSdkCodeGenerator
         end
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", client_class)
+        y.yield("#{prefix}/async_client.rb", async_client_class) # TODO if 
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
@@ -112,6 +113,23 @@ module AwsSdkCodeGenerator
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway'
+      ).render
+    end
+
+    def async_client_class
+      Views::AsyncClientClass.new(
+        service_identifier: @service.identifier,
+        service_name: @service.name,
+        module_name: @service.module_name,
+        gem_name: @service.gem_name,
+        gem_version: @service.gem_version,
+        aws_sdk_core_lib_path: @aws_sdk_core_lib_path,
+        protocol: @service.protocol,
+        signature_version: @service.signature_version,
+        add_plugins: @service.add_plugins,
+        remove_plugins: @service.remove_plugins,
+        api: @service.api,
+        async_client: true
       ).render
     end
 

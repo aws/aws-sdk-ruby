@@ -36,9 +36,9 @@ module Aws
             # every event signature requries prior signature
             thread = Thread.new do
               # polling for buffered emit events until stream not active
-              while !input_emitter.stream.closed?
+              while input_emitter.stream.state == :open
                 while callback = input_emitter.buffer.shift
-                  callback.call unless input_emitter.stream.closed?
+                  callback.call if input_emitter.stream.state == :open
                 end
               end
             end
