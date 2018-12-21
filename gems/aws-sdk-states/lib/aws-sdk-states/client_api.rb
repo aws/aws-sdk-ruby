@@ -80,10 +80,13 @@ module Aws::States
     ListExecutionsOutput = Shapes::StructureShape.new(name: 'ListExecutionsOutput')
     ListStateMachinesInput = Shapes::StructureShape.new(name: 'ListStateMachinesInput')
     ListStateMachinesOutput = Shapes::StructureShape.new(name: 'ListStateMachinesOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
+    ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     SendTaskFailureInput = Shapes::StructureShape.new(name: 'SendTaskFailureInput')
     SendTaskFailureOutput = Shapes::StructureShape.new(name: 'SendTaskFailureOutput')
@@ -107,6 +110,13 @@ module Aws::States
     StateMachineStatus = Shapes::StringShape.new(name: 'StateMachineStatus')
     StopExecutionInput = Shapes::StructureShape.new(name: 'StopExecutionInput')
     StopExecutionOutput = Shapes::StructureShape.new(name: 'StopExecutionOutput')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaskDoesNotExist = Shapes::StructureShape.new(name: 'TaskDoesNotExist')
     TaskFailedEventDetails = Shapes::StructureShape.new(name: 'TaskFailedEventDetails')
     TaskScheduledEventDetails = Shapes::StructureShape.new(name: 'TaskScheduledEventDetails')
@@ -120,6 +130,9 @@ module Aws::States
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTags = Shapes::StructureShape.new(name: 'TooManyTags')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
     UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
 
@@ -354,6 +367,12 @@ module Aws::States
     ListStateMachinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListStateMachinesOutput.struct_class = Types::ListStateMachinesOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     SendTaskFailureInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
     SendTaskFailureInput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     SendTaskFailureInput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
@@ -404,6 +423,20 @@ module Aws::States
     StopExecutionOutput.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "stopDate"))
     StopExecutionOutput.struct_class = Types::StopExecutionOutput
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     TaskFailedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
     TaskFailedEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
     TaskFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -448,6 +481,12 @@ module Aws::States
     TaskTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     TaskTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     TaskTimedOutEventDetails.struct_class = Types::TaskTimedOutEventDetails
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     UpdateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "definition"))
@@ -633,6 +672,16 @@ module Aws::States
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:send_task_failure, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SendTaskFailure"
         o.http_method = "POST"
@@ -690,6 +739,27 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: StopExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:update_state_machine, Seahorse::Model::Operation.new.tap do |o|

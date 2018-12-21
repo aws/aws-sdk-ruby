@@ -61,6 +61,7 @@ module Aws::DynamoDB
     CancellationReason = Shapes::StructureShape.new(name: 'CancellationReason')
     CancellationReasonList = Shapes::ListShape.new(name: 'CancellationReasonList')
     Capacity = Shapes::StructureShape.new(name: 'Capacity')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -1118,7 +1119,7 @@ module Aws::DynamoDB
     TransactWriteItemsInput.add_member(:transact_items, Shapes::ShapeRef.new(shape: TransactWriteItemList, required: true, location_name: "TransactItems"))
     TransactWriteItemsInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     TransactWriteItemsInput.add_member(:return_item_collection_metrics, Shapes::ShapeRef.new(shape: ReturnItemCollectionMetrics, location_name: "ReturnItemCollectionMetrics"))
-    TransactWriteItemsInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    TransactWriteItemsInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     TransactWriteItemsInput.struct_class = Types::TransactWriteItemsInput
 
     TransactWriteItemsOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacityMultiple, location_name: "ConsumedCapacity"))
@@ -1625,6 +1626,7 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: TransactGetItemsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -1640,6 +1642,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: TransactionCanceledException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

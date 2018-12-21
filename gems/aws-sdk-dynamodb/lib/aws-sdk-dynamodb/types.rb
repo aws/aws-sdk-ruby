@@ -7128,7 +7128,7 @@ module Aws::DynamoDB
     #         ],
     #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
     #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #         client_request_token: "String",
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] transact_items

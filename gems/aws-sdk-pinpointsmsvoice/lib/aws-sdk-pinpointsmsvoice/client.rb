@@ -255,6 +255,9 @@ module Aws::PinpointSMSVoice
     #         iam_role_arn: "String",
     #       },
     #       matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #       sns_destination: {
+    #         topic_arn: "String",
+    #       },
     #     },
     #     event_destination_name: "NonEmptyString",
     #   })
@@ -340,6 +343,7 @@ module Aws::PinpointSMSVoice
     #   resp.event_destinations[0].matching_event_types #=> Array
     #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "INITIATED_CALL", "RINGING", "ANSWERED", "COMPLETED_CALL", "BUSY", "FAILED", "NO_ANSWER"
     #   resp.event_destinations[0].name #=> String
+    #   resp.event_destinations[0].sns_destination.topic_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/GetConfigurationSetEventDestinations AWS API Documentation
     #
@@ -443,6 +447,9 @@ module Aws::PinpointSMSVoice
     #         iam_role_arn: "String",
     #       },
     #       matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #       sns_destination: {
+    #         topic_arn: "String",
+    #       },
     #     },
     #     event_destination_name: "__string", # required
     #   })
@@ -469,7 +476,7 @@ module Aws::PinpointSMSVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointsmsvoice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

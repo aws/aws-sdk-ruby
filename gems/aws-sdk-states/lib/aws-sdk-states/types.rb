@@ -798,7 +798,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -821,7 +821,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -897,19 +897,21 @@ module Aws::States
     #   @return [Types::TaskStartedEventDetails]
     #
     # @!attribute [rw] task_submit_failed_event_details
+    #   Contains details about a task that failed to submit during an
+    #   execution.
     #   @return [Types::TaskSubmitFailedEventDetails]
     #
     # @!attribute [rw] task_submitted_event_details
+    #   Contains details about a task submitted to a resource .
     #   @return [Types::TaskSubmittedEventDetails]
     #
     # @!attribute [rw] task_succeeded_event_details
-    #   Contains details about the start of connected service by a task
-    #   state.
+    #   Contains details about the successful completion of a task state.
     #   @return [Types::TaskSucceededEventDetails]
     #
     # @!attribute [rw] task_timed_out_event_details
-    #   Contains details about a connected service timeout that occured
-    #   during an execution.
+    #   Contains details about a resource timeout that occurred during an
+    #   execution.
     #   @return [Types::TaskTimedOutEventDetails]
     #
     # @!attribute [rw] execution_failed_event_details
@@ -1145,7 +1147,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -1166,7 +1168,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -1213,7 +1215,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -1236,7 +1238,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -1271,7 +1273,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -1291,7 +1293,7 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return an *HTTP 400 InvalidToken* error.
     #   @return [String]
     #
@@ -1300,6 +1302,36 @@ module Aws::States
     class ListStateMachinesOutput < Struct.new(
       :state_machines,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine
+    #   or activity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array of tags associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1590,14 +1622,78 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Tags are key-value pairs that can be associated with Step Functions
+    # state machines and activities.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of a tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine
+    #   or activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to a resource.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Contains details about a task failure event.
     #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1621,19 +1717,19 @@ module Aws::States
     # Contains details about a task scheduled during an execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] region
+    #   The region of the scheduled task
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The JSON data passed to the connected service referenced in a task
-    #   state.
+    #   The JSON data passed to the resource referenced in a task state.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_seconds
@@ -1655,11 +1751,11 @@ module Aws::States
     # execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1683,11 +1779,11 @@ module Aws::States
     # Contains details about the start of a task during an execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartedEventDetails AWS API Documentation
@@ -1698,12 +1794,15 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Contains details about a task that failed to submit during an
+    # execution.
+    #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1724,16 +1823,18 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Contains details about a task submitted to a resource .
+    #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The response from a connected service when a task has started.
+    #   The response from a resource when a task has started.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmittedEventDetails AWS API Documentation
@@ -1745,19 +1846,19 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about the start of connected service by a task state.
+    # Contains details about the successful completion of a task state.
     #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The full JSON response from a connected service when a task has
-    #   succeeded. This response becomes the output of the related task.
+    #   The full JSON response from a resource when a task has succeeded.
+    #   This response becomes the output of the related task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSucceededEventDetails AWS API Documentation
@@ -1769,15 +1870,15 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a connected service timeout that occured during
-    # an execution.
+    # Contains details about a resource timeout that occurred during an
+    # execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the connected service called by a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the connected service in a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1797,6 +1898,35 @@ module Aws::States
       :cause)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine
+    #   or activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateStateMachineInput
     #   data as a hash:

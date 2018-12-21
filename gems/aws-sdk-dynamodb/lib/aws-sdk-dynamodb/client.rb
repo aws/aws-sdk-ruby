@@ -4706,7 +4706,7 @@ module Aws::DynamoDB
     #     ],
     #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
     #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
-    #     client_request_token: "String",
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @example Response structure
@@ -5837,7 +5837,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.18.1'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

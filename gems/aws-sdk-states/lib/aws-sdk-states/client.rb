@@ -616,8 +616,8 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
@@ -638,8 +638,8 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::GetExecutionHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -745,8 +745,8 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -766,8 +766,8 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListActivitiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -806,8 +806,8 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -835,8 +835,8 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -878,8 +878,8 @@ module Aws::States
     # value of `nextToken` is a unique pagination token for each page. Make
     # the call again using the returned token to retrieve the next page.
     # Keep all other arguments unchanged. Each pagination token expires
-    # after 60 seconds. Using an expired pagination token will return an
-    # *HTTP 400 InvalidToken* error.
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -899,8 +899,8 @@ module Aws::States
     #   value of `nextToken` is a unique pagination token for each page. Make
     #   the call again using the returned token to retrieve the next page.
     #   Keep all other arguments unchanged. Each pagination token expires
-    #   after 60 seconds. Using an expired pagination token will return an
-    #   *HTTP 400 InvalidToken* error.
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListStateMachinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -928,6 +928,37 @@ module Aws::States
     # @param [Hash] params ({})
     def list_state_machines(params = {}, options = {})
       req = build_request(:list_state_machines, params)
+      req.send_request(options)
+    end
+
+    # List tags for a given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1143,6 +1174,68 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Add a tag to a Step Functions resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The list of tags to add to a resource.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove a tag from a Step Functions resource
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing state machine by modifying its `definition` and/or
     # `roleArn`. Running executions will continue to use the previous
     # `definition` and `roleArn`. You must include at least one of
@@ -1208,7 +1301,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

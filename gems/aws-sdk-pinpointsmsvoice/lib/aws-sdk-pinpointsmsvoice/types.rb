@@ -30,7 +30,7 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
-    # An object that contains information about a event destination that
+    # An object that contains information about an event destination that
     # sends data to Amazon CloudWatch Logs.
     #
     # @note When making an API call, you may pass CloudWatchLogsDestination
@@ -78,6 +78,9 @@ module Aws::PinpointSMSVoice
     #             iam_role_arn: "String",
     #           },
     #           matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #           sns_destination: {
+    #             topic_arn: "String",
+    #           },
     #         },
     #         event_destination_name: "NonEmptyString",
     #       }
@@ -192,7 +195,7 @@ module Aws::PinpointSMSVoice
     # An object that defines an event destination.
     #
     # @!attribute [rw] cloud_watch_logs_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon CloudWatch Logs.
     #   @return [Types::CloudWatchLogsDestination]
     #
@@ -203,7 +206,7 @@ module Aws::PinpointSMSVoice
     #   @return [Boolean]
     #
     # @!attribute [rw] kinesis_firehose_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon Kinesis Data Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
@@ -217,6 +220,11 @@ module Aws::PinpointSMSVoice
     #   A name that identifies the event destination configuration.
     #   @return [String]
     #
+    # @!attribute [rw] sns_destination
+    #   An object that contains information about an event destination that
+    #   sends data to Amazon SNS.
+    #   @return [Types::SnsDestination]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/EventDestination AWS API Documentation
     #
     class EventDestination < Struct.new(
@@ -224,7 +232,8 @@ module Aws::PinpointSMSVoice
       :enabled,
       :kinesis_firehose_destination,
       :matching_event_types,
-      :name)
+      :name,
+      :sns_destination)
       include Aws::Structure
     end
 
@@ -244,10 +253,13 @@ module Aws::PinpointSMSVoice
     #           iam_role_arn: "String",
     #         },
     #         matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #         sns_destination: {
+    #           topic_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] cloud_watch_logs_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon CloudWatch Logs.
     #   @return [Types::CloudWatchLogsDestination]
     #
@@ -258,7 +270,7 @@ module Aws::PinpointSMSVoice
     #   @return [Boolean]
     #
     # @!attribute [rw] kinesis_firehose_destination
-    #   An object that contains information about a event destination that
+    #   An object that contains information about an event destination that
     #   sends data to Amazon Kinesis Data Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
@@ -268,13 +280,19 @@ module Aws::PinpointSMSVoice
     #   destination.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] sns_destination
+    #   An object that contains information about an event destination that
+    #   sends data to Amazon SNS.
+    #   @return [Types::SnsDestination]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/EventDestinationDefinition AWS API Documentation
     #
     class EventDestinationDefinition < Struct.new(
       :cloud_watch_logs_destination,
       :enabled,
       :kinesis_firehose_destination,
-      :matching_event_types)
+      :matching_event_types,
+      :sns_destination)
       include Aws::Structure
     end
 
@@ -310,7 +328,7 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
-    # An object that contains information about a event destination that
+    # An object that contains information about an event destination that
     # sends data to Amazon Kinesis Data Firehose.
     #
     # @note When making an API call, you may pass KinesisFirehoseDestination
@@ -360,6 +378,9 @@ module Aws::PinpointSMSVoice
     #   @return [String]
     #
     # @!attribute [rw] voice_id
+    #   The name of the voice that you want to use to deliver the message.
+    #   For a complete list of supported voices, see the Amazon Polly
+    #   Developer Guide.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/PlainTextMessageType AWS API Documentation
@@ -484,6 +505,28 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
+    # An object that contains information about an event destination that
+    # sends data to Amazon SNS.
+    #
+    # @note When making an API call, you may pass SnsDestination
+    #   data as a hash:
+    #
+    #       {
+    #         topic_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic that you want
+    #   to publish events to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SnsDestination AWS API Documentation
+    #
+    class SnsDestination < Struct.new(
+      :topic_arn)
+      include Aws::Structure
+    end
+
     # An object that defines a request to update an existing event
     # destination.
     #
@@ -503,6 +546,9 @@ module Aws::PinpointSMSVoice
     #             iam_role_arn: "String",
     #           },
     #           matching_event_types: ["INITIATED_CALL"], # accepts INITIATED_CALL, RINGING, ANSWERED, COMPLETED_CALL, BUSY, FAILED, NO_ANSWER
+    #           sns_destination: {
+    #             topic_arn: "String",
+    #           },
     #         },
     #         event_destination_name: "__string", # required
     #       }

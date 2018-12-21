@@ -40,6 +40,7 @@ module Aws::PinpointSMSVoice
     SSMLMessageType = Shapes::StructureShape.new(name: 'SSMLMessageType')
     SendVoiceMessageRequest = Shapes::StructureShape.new(name: 'SendVoiceMessageRequest')
     SendVoiceMessageResponse = Shapes::StructureShape.new(name: 'SendVoiceMessageResponse')
+    SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
     String = Shapes::StringShape.new(name: 'String')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
@@ -89,12 +90,14 @@ module Aws::PinpointSMSVoice
     EventDestination.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestination.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, location_name: "MatchingEventTypes"))
     EventDestination.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    EventDestination.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
     EventDestination.struct_class = Types::EventDestination
 
     EventDestinationDefinition.add_member(:cloud_watch_logs_destination, Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
     EventDestinationDefinition.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     EventDestinationDefinition.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestinationDefinition.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, location_name: "MatchingEventTypes"))
+    EventDestinationDefinition.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
     EventDestinationDefinition.struct_class = Types::EventDestinationDefinition
 
     EventDestinations.member = Shapes::ShapeRef.new(shape: EventDestination)
@@ -130,6 +133,9 @@ module Aws::PinpointSMSVoice
 
     SendVoiceMessageResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
     SendVoiceMessageResponse.struct_class = Types::SendVoiceMessageResponse
+
+    SnsDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "TopicArn"))
+    SnsDestination.struct_class = Types::SnsDestination
 
     UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ConfigurationSetName"))
     UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestinationDefinition, location_name: "EventDestination"))
