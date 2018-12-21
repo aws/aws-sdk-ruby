@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACMPCA - Updated the documentation, API, and waiters for AWS Certificate Manager Private Certificate Authority.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::PinpointSMSVoice - Updated the API, and documentation for Amazon Pinpoint SMS and Voice Service.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.11.196 (2018-12-20)
 ------------------
 
