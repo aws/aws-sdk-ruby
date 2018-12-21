@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.197 (2018-12-21)
+------------------
+
 * Feature - Aws::ACMPCA - Updated the documentation, API, and waiters for AWS Certificate Manager Private Certificate Authority.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
