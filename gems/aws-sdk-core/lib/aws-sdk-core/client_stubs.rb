@@ -285,7 +285,7 @@ module Aws
     def data_to_http_resp(operation_name, data)
       api = config.api
       operation = api.operation(operation_name)
-      ParamValidator.validate!(operation.output, data)
+      ParamValidator.new(operation.output, input: false).validate!(data)
       protocol_helper.stub_data(api, operation, data)
     end
 

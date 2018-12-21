@@ -40,6 +40,7 @@ module Seahorse
               # request sigv4 serves as the initial #prior_signature
               input_emitter.encoder.prior_signature =
                 context.http_request.headers['authorization'].split('Signature=').last
+              input_emitter.validate_event = context.config.validate_params
             else
               _send_initial_headers(context.http_request, stream)
               _send_initial_data(context.http_request, stream)

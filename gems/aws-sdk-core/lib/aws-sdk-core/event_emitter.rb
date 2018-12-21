@@ -3,13 +3,15 @@ module Aws
 
     def initialize
       @listeners = {}
+      @validate_event = true
       @buffer = Queue.new
-      @emit_state = :sleep
     end
 
     attr_accessor :stream
 
     attr_accessor :encoder
+
+    attr_accessor :validate_event
 
     attr_reader :buffer
 
@@ -25,7 +27,11 @@ module Aws
     end
 
     def emit(type, params)
-      @buffer << Proc.new do |stream, encoder|
+      @buffer << Proc.new do
+        if @validate_event && type != :end_stream
+          Aws::ParamValidator.validate!(
+            @encoder.rules.shape.member(type), params)
+        end
         @stream.data(
           @encoder.encode(type, params),
           end_stream: type == :end_stream

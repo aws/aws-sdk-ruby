@@ -54,23 +54,9 @@ module AwsSdkCodeGenerator
     end
 
     def default_async_plugins
-      {
-        'Seahorse::Client::Plugins::ContentLength' => "#{seahorse_plugins}/content_length.rb",
-        'Aws::Plugins::CredentialsConfiguration' => "#{core_plugins}/credentials_configuration.rb",
-        'Aws::Plugins::Logging' => "#{core_plugins}/logging.rb",
-        'Aws::Plugins::ParamConverter' => "#{core_plugins}/param_converter.rb",
-        #'Aws::Plugins::ParamValidator' => "#{core_plugins}/param_validator.rb",
-        'Aws::Plugins::UserAgent' => "#{core_plugins}/user_agent.rb",
-        'Aws::Plugins::HelpfulSocketErrors' => "#{core_plugins}/helpful_socket_errors.rb",
-        'Aws::Plugins::RetryErrors' => "#{core_plugins}/retry_errors.rb",
-        'Aws::Plugins::GlobalConfiguration' => "#{core_plugins}/global_configuration.rb",
-        'Aws::Plugins::RegionalEndpoint' => "#{core_plugins}/regional_endpoint.rb",
-        #'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
-        # TODO
-        'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
-        'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
-        'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
-      }
+      plugins = default_plugins.dup
+      plugins.delete('Aws::Plugins::ResponsePaging')
+      plugins
     end
 
     def protocol_plugins(protocol)

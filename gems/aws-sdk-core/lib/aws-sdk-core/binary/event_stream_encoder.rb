@@ -13,9 +13,12 @@ module Aws
         @encoder = Aws::EventStream::Encoder.new
         @event_builder = EventBuilder.new(serializer_class(protocol), rules)
         @input_ref = input_ref
+        @rules = rules
         @signer = signer
         @prior_signature = nil
       end
+
+      attr_reader :rules
 
       attr_accessor :prior_signature
 

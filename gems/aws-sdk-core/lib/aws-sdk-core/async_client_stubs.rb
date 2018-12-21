@@ -27,6 +27,7 @@ module Aws
           stub_stream = StubStream.new
           stub_stream.send_events = send_events
           input_stream.event_emitter.stream = stub_stream 
+          input_stream.event_emitter.validate_event = context.config.validate_params
         end
         requests << {
           operation_name: context.operation_name,
