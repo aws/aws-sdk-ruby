@@ -6,17 +6,18 @@ module {{module_name}}
 
     {{#input_eventstreams}}
     class {{class_name}}
-      def initialize
 
+      def initialize
         @event_emitter = Aws::EventEmitter.new
       end
 
-      {{#types}}
-      def signal_{{.}}_event(params)
-        @event_emitter.emit(:{{.}}, params)
+      {{#event_entries}}
+      {{param_hash}}
+      def signal_{{name}}_event(params = {})
+        @event_emitter.emit(:{{name}}, params)
       end
 
-      {{/types}}
+      {{/event_entries}}
       def signal_end_stream
         @event_emitter.emit(:end_stream, {})
       end

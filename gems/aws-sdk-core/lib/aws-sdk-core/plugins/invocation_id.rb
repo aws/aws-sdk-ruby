@@ -18,8 +18,6 @@ module Aws
 
         def apply_invocation_id(context)
           context.http_request.headers['amz-sdk-invocation-id'] = SecureRandom.uuid
-          # TODO hard code, need to figure out retry story
-          context.http_request.headers['amz-sdk-retry'] = '0/0/500'
           context.http_request.headers['x-amz-content-sha256'] = 'STREAMING-AWS4-HMAC-SHA256-EVENTS'
         end
 
