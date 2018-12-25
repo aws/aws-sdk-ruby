@@ -305,7 +305,8 @@ module Aws
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
           client: client)
-        uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
+        response = uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
+        yield response if block_given?
         true
       end
 
