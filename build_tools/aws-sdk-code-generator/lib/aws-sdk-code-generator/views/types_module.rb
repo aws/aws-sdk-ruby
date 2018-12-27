@@ -25,11 +25,15 @@ module AwsSdkCodeGenerator
 
       # @return [Array<StructClass>]
       def structures
-        @service.api['shapes'].each do |_, shape|
-          if shape['eventstream']
-            # add event trait to all members if not exists
-            shape['members'].each do |name, ref|
-              @service.api['shapes'][ref['shape']]['event'] = true
+        unless @service.protocol_settings.empty?
+          if @service.protocol_settings['h2'] == 'eventstream'
+            @service.api['shapes'].each do |_, shape|
+              if shape['eventstream']
+                # add event trait to all members if not exists
+                shape['members'].each do |name, ref|
+                  @service.api['shapes'][ref['shape']]['event'] = true
+                end
+              end
             end
           end
         end
@@ -152,9 +156,13 @@ module AwsSdkCodeGenerator
       end
 
       def struct_type?(shape)
-        shape['type'] == 'structure' &&
-        !shape['error'] &&
-        !shape['exception']
+        if !!shape['event']
+          shape['type'] == 'structure'
+        else
+          shape['type'] == 'structure' &&
+          !shape['error'] &&
+          !shape['exception']
+        end
       end
 
       def compute_input_shapes(api)
