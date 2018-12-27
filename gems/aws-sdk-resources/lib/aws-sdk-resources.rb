@@ -141,6 +141,7 @@ module Aws
   autoload :StorageGateway, 'aws-sdk-storagegateway'
   autoload :Support, 'aws-sdk-support'
   autoload :TranscribeService, 'aws-sdk-transcribeservice'
+  autoload :TranscribeStreamingService, 'aws-sdk-transcribestreamingservice'
   autoload :Translate, 'aws-sdk-translate'
   autoload :WAF, 'aws-sdk-waf'
   autoload :WAFRegional, 'aws-sdk-wafregional'
