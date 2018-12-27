@@ -19,7 +19,8 @@ module AwsSdkCodeGenerator
             operation: operation,
             api: api,
             examples: examples,
-            client_examples: client_examples[method_name] || []
+            client_examples: client_examples[method_name] || [],
+            async_client: options[:async_client] || false
           ).to_s,
           streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
           eventstream_output: AwsSdkCodeGenerator::Helper.eventstream_output?(operation, api),

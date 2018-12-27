@@ -13,7 +13,8 @@ module AwsSdkCodeGenerator
       @receiver = options.fetch(:receiver)
       @resp_var = options[:resp_var] ? "#{options[:resp_var]} = " : ''
       @shape = filter_shape(options)
-      @hash = SyntaxExampleHash.new(api: @api, shape: @shape).format('#   ') if @shape
+      @async = options[:async] || false
+      @hash = SyntaxExampleHash.new(api: @api, shape: @shape, async: @async).format('#   ') if @shape
     end
 
     def format
@@ -22,7 +23,21 @@ module AwsSdkCodeGenerator
 # @example Request syntax with placeholder values
 #
 #   #{@resp_var}#{@receiver}.#{@method_name}(#{@hash})
+#{async_format}
         EXAMPLE
+      else
+        nil
+      end
+    end
+
+    def async_format
+      if @async
+        <<-ASYNC.strip
+#   # => Seahorse::Client::AsyncResponse
+#   async_resp.wait
+#   # => Seahorse::Client::Response
+#   # Or use async_resp.join!
+        ASYNC
       else
         nil
       end
