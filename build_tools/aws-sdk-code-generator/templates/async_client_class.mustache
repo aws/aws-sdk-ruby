@@ -24,6 +24,10 @@ module {{module_name}}
     {{>documentation}}
     {{/client_constructor}}
     def initialize(*args)
+      unless RUBY_VERSION >= '2.3'
+        raise "API operations over HTTP2 protocol is not supported"\
+          " for Ruby Version < 2.3 and OpenSSL version < 1.0.2"
+      end
       super
     end
 

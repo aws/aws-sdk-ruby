@@ -740,73 +740,7 @@
     ]
   },
   {
-    "description": "event with both eventheader and implicit eventpayload",
-    "metadata": {
-      "protocol": "json"
-    },
-    "shapes": {
-      "OutputShape": {
-        "type": "structure",
-        "members": {
-          "Payload": {
-            "shape": "EventStreamShape"
-          }
-        },
-        "payload": "Payload"
-      },
-      "EventStreamShape": {
-        "type": "structure",
-        "members": {
-          "EventMember": {
-            "shape": "EventShape"
-          }
-        },
-        "eventstream": true
-      },
-      "EventShape": {
-        "type": "structure",
-        "members": {
-          "Str": {
-            "shape": "StringType"
-          },
-          "HeaderStr": {
-            "shape": "StringType",
-            "eventheader": true
-          }
-        },
-        "event": true
-      },
-      "StringType": {
-        "type": "string"
-      }
-    },
-    "cases": [
-      {
-        "given": {
-          "output": {
-            "shape": "OutputShape"
-          },
-          "name": "OperationName"
-        },
-        "result": {
-          "Payload": {
-            "EventMember": {
-              "Str": "foo",
-              "HeaderStr": "bar"
-            }
-          }
-        },
-        "response": {
-          "eventstream": true,
-          "status_code": 200,
-          "headers": {},
-          "body": "AAAAUwAAAEBsTSviCzpldmVudC10eXBlBwALRXZlbnRNZW1iZXINOm1lc3NhZ2UtdHlwZQcABWV2ZW50CUhlYWRlclN0cgcAA2JhcmZvb2nR2pg="
-        }
-      }
-    ]
-  },
-  {
-    "description": "event with both eventheader and implicit eventpayloads",
+    "description": "event with explicit eventheader and implicit eventpayloads",
     "metadata": {
       "protocol": "json"
     },

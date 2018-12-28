@@ -58,8 +58,8 @@ module Aws
 
       attr_reader :state
 
-      def data(bytes, end_stream: false)
-        if end_stream
+      def data(bytes, options = {})
+        if options[:end_stream]
           @state = :closed
         else
           decoder = Aws::EventStream::Decoder.new

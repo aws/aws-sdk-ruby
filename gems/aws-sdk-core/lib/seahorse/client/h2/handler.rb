@@ -1,4 +1,6 @@
-require 'http/2'
+if RUBY_VERSION >= '2.3'
+  require 'http/2'
+end
 require 'securerandom'
 
 module Seahorse
@@ -10,7 +12,7 @@ module Seahorse
         SocketError, EOFError, IOError, Timeout::Error,
         Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
         Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
-        Errno::EHOSTUNREACH, Errno::ECONNREFUSED, OpenSSL::SSL::SSLErrorWaitReadable
+        Errno::EHOSTUNREACH, Errno::ECONNREFUSED,# OpenSSL::SSL::SSLErrorWaitReadable
       ]
 
       # @api private

@@ -16,7 +16,6 @@ module Seahorse
       # @return [H2::Connection]
       attr_reader :connection
 
-      # rename?
       def close_connection
         @connection.close!
       end
