@@ -400,12 +400,16 @@ module Aws::Snowball
       api.version = "2016-06-30"
 
       api.metadata = {
+        "apiVersion" => "2016-06-30",
         "endpointPrefix" => "snowball",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon Snowball",
         "serviceFullName" => "Amazon Import/Export Snowball",
+        "serviceId" => "Snowball",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSIESnowballJobManagementService",
+        "uid" => "snowball-2016-06-30",
       }
 
       api.add_operation(:cancel_cluster, Seahorse::Model::Operation.new.tap do |o|

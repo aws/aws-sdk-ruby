@@ -527,11 +527,15 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] nice
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `Nice` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] system
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `System` state over
     #   the last 10 seconds.
     #   @return [Float]
@@ -542,17 +546,30 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] io_wait
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `I/O Wait` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `IRQ` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] soft_irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `SoftIRQ` state
+    #   over the last 10 seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] privileged
+    #   Available on Windows environments only.
+    #
+    #   Percentage of time that the CPU has spent in the `Privileged` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
@@ -565,7 +582,8 @@ module Aws::ElasticBeanstalk
       :idle,
       :io_wait,
       :irq,
-      :soft_irq)
+      :soft_irq,
+      :privileged)
       include Aws::Structure
     end
 
@@ -2293,6 +2311,10 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] instance_health_list
     #   Detailed health information about each instance.
+    #
+    #   The output differs slightly between Linux and Windows environments.
+    #   There is a difference in the members that are supported under the
+    #   `<CPUUtilization>` type.
     #   @return [Array<Types::SingleInstanceHealth>]
     #
     # @!attribute [rw] refreshed_at
@@ -2435,7 +2457,7 @@ module Aws::ElasticBeanstalk
     #   * `Grey`\: Default health for a new environment. The environment is
     #     not fully launched and health checks have not started or health
     #     checks are suspended during an `UpdateEnvironment` or
-    #     `RestartEnvironement` request.
+    #     `RestartEnvironment` request.
     #
     #   Default: `Grey`
     #   @return [String]
@@ -2527,7 +2549,11 @@ module Aws::ElasticBeanstalk
     #   @return [Time]
     #
     # @!attribute [rw] message
-    #   The retrieved information.
+    #   The retrieved information. Currently contains a presigned Amazon S3
+    #   URL. The files are deleted after 15 minutes.
+    #
+    #   Anyone in possession of this URL can access the files before they
+    #   are deleted. Make the URL available only to trusted parties.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentInfoDescription AWS API Documentation
@@ -2584,6 +2610,10 @@ module Aws::ElasticBeanstalk
     #   The Auto Scaling launch configurations in use by this environment.
     #   @return [Array<Types::LaunchConfiguration>]
     #
+    # @!attribute [rw] launch_templates
+    #   The Amazon EC2 launch templates in use by this environment.
+    #   @return [Array<Types::LaunchTemplate>]
+    #
     # @!attribute [rw] load_balancers
     #   The LoadBalancers in use by this environment.
     #   @return [Array<Types::LoadBalancer>]
@@ -2603,6 +2633,7 @@ module Aws::ElasticBeanstalk
       :auto_scaling_groups,
       :instances,
       :launch_configurations,
+      :launch_templates,
       :load_balancers,
       :triggers,
       :queues)
@@ -2649,10 +2680,22 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] name
     #   The name of this environment tier.
+    #
+    #   Valid values:
+    #
+    #   * For *Web server tier* – `WebServer`
+    #
+    #   * For *Worker tier* – `Worker`
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of this environment tier.
+    #
+    #   Valid values:
+    #
+    #   * For *Web server tier* – `Standard`
+    #
+    #   * For *Worker tier* – `SQS/HTTP`
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2889,6 +2932,19 @@ module Aws::ElasticBeanstalk
     #
     class LaunchConfiguration < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Describes an Amazon EC2 launch template.
+    #
+    # @!attribute [rw] id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchTemplate AWS API Documentation
+    #
+    class LaunchTemplate < Struct.new(
+      :id)
       include Aws::Structure
     end
 

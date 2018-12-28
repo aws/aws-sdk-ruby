@@ -22,6 +22,7 @@ module Aws::ConfigService
     AggregateComplianceCountList = Shapes::ListShape.new(name: 'AggregateComplianceCountList')
     AggregateEvaluationResult = Shapes::StructureShape.new(name: 'AggregateEvaluationResult')
     AggregateEvaluationResultList = Shapes::ListShape.new(name: 'AggregateEvaluationResultList')
+    AggregateResourceIdentifier = Shapes::StructureShape.new(name: 'AggregateResourceIdentifier')
     AggregatedSourceStatus = Shapes::StructureShape.new(name: 'AggregatedSourceStatus')
     AggregatedSourceStatusList = Shapes::ListShape.new(name: 'AggregatedSourceStatusList')
     AggregatedSourceStatusType = Shapes::StringShape.new(name: 'AggregatedSourceStatusType')
@@ -36,6 +37,8 @@ module Aws::ConfigService
     BaseConfigurationItem = Shapes::StructureShape.new(name: 'BaseConfigurationItem')
     BaseConfigurationItems = Shapes::ListShape.new(name: 'BaseConfigurationItems')
     BaseResourceId = Shapes::StringShape.new(name: 'BaseResourceId')
+    BatchGetAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'BatchGetAggregateResourceConfigRequest')
+    BatchGetAggregateResourceConfigResponse = Shapes::StructureShape.new(name: 'BatchGetAggregateResourceConfigResponse')
     BatchGetResourceConfigRequest = Shapes::StructureShape.new(name: 'BatchGetResourceConfigRequest')
     BatchGetResourceConfigResponse = Shapes::StructureShape.new(name: 'BatchGetResourceConfigResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -130,6 +133,7 @@ module Aws::ConfigService
     DescribePendingAggregationRequestsResponse = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsResponse')
     DescribeRetentionConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsRequest')
     DescribeRetentionConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsResponse')
+    DiscoveredResourceIdentifierList = Shapes::ListShape.new(name: 'DiscoveredResourceIdentifierList')
     EarlierTime = Shapes::TimestampShape.new(name: 'EarlierTime')
     EmptiableStringWithCharLimit256 = Shapes::StringShape.new(name: 'EmptiableStringWithCharLimit256')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
@@ -143,6 +147,10 @@ module Aws::ConfigService
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
     GetAggregateConfigRuleComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryResponse')
+    GetAggregateDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetAggregateDiscoveredResourceCountsRequest')
+    GetAggregateDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetAggregateDiscoveredResourceCountsResponse')
+    GetAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'GetAggregateResourceConfigRequest')
+    GetAggregateResourceConfigResponse = Shapes::StructureShape.new(name: 'GetAggregateResourceConfigResponse')
     GetComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetComplianceDetailsByConfigRuleRequest')
     GetComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetComplianceDetailsByConfigRuleResponse')
     GetComplianceDetailsByResourceRequest = Shapes::StructureShape.new(name: 'GetComplianceDetailsByResourceRequest')
@@ -155,6 +163,8 @@ module Aws::ConfigService
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
     GroupByAPILimit = Shapes::IntegerShape.new(name: 'GroupByAPILimit')
+    GroupedResourceCount = Shapes::StructureShape.new(name: 'GroupedResourceCount')
+    GroupedResourceCountList = Shapes::ListShape.new(name: 'GroupedResourceCountList')
     IncludeGlobalResourceTypes = Shapes::BooleanShape.new(name: 'IncludeGlobalResourceTypes')
     InsufficientDeliveryPolicyException = Shapes::StructureShape.new(name: 'InsufficientDeliveryPolicyException')
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
@@ -174,6 +184,8 @@ module Aws::ConfigService
     LaterTime = Shapes::TimestampShape.new(name: 'LaterTime')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAggregateDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListAggregateDiscoveredResourcesRequest')
+    ListAggregateDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListAggregateDiscoveredResourcesResponse')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
     ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -199,6 +211,7 @@ module Aws::ConfigService
     OrganizationAccessDeniedException = Shapes::StructureShape.new(name: 'OrganizationAccessDeniedException')
     OrganizationAggregationSource = Shapes::StructureShape.new(name: 'OrganizationAggregationSource')
     OrganizationAllFeaturesNotEnabledException = Shapes::StructureShape.new(name: 'OrganizationAllFeaturesNotEnabledException')
+    OversizedConfigurationItemException = Shapes::StructureShape.new(name: 'OversizedConfigurationItemException')
     Owner = Shapes::StringShape.new(name: 'Owner')
     PendingAggregationRequest = Shapes::StructureShape.new(name: 'PendingAggregationRequest')
     PendingAggregationRequestList = Shapes::ListShape.new(name: 'PendingAggregationRequestList')
@@ -223,13 +236,17 @@ module Aws::ConfigService
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     RelationshipName = Shapes::StringShape.new(name: 'RelationshipName')
     ResourceCount = Shapes::StructureShape.new(name: 'ResourceCount')
+    ResourceCountFilters = Shapes::StructureShape.new(name: 'ResourceCountFilters')
+    ResourceCountGroupKey = Shapes::StringShape.new(name: 'ResourceCountGroupKey')
     ResourceCounts = Shapes::ListShape.new(name: 'ResourceCounts')
     ResourceCreationTime = Shapes::TimestampShape.new(name: 'ResourceCreationTime')
     ResourceDeletionTime = Shapes::TimestampShape.new(name: 'ResourceDeletionTime')
+    ResourceFilters = Shapes::StructureShape.new(name: 'ResourceFilters')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
     ResourceIdentifier = Shapes::StructureShape.new(name: 'ResourceIdentifier')
     ResourceIdentifierList = Shapes::ListShape.new(name: 'ResourceIdentifierList')
+    ResourceIdentifiersList = Shapes::ListShape.new(name: 'ResourceIdentifiersList')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceKey = Shapes::StructureShape.new(name: 'ResourceKey')
     ResourceKeys = Shapes::ListShape.new(name: 'ResourceKeys')
@@ -261,6 +278,7 @@ module Aws::ConfigService
     SupplementaryConfigurationName = Shapes::StringShape.new(name: 'SupplementaryConfigurationName')
     SupplementaryConfigurationValue = Shapes::StringShape.new(name: 'SupplementaryConfigurationValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    UnprocessedResourceIdentifierList = Shapes::ListShape.new(name: 'UnprocessedResourceIdentifierList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
@@ -298,6 +316,13 @@ module Aws::ConfigService
     AggregateEvaluationResult.struct_class = Types::AggregateEvaluationResult
 
     AggregateEvaluationResultList.member = Shapes::ShapeRef.new(shape: AggregateEvaluationResult)
+
+    AggregateResourceIdentifier.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "SourceAccountId"))
+    AggregateResourceIdentifier.add_member(:source_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "SourceRegion"))
+    AggregateResourceIdentifier.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    AggregateResourceIdentifier.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    AggregateResourceIdentifier.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
+    AggregateResourceIdentifier.struct_class = Types::AggregateResourceIdentifier
 
     AggregatedSourceStatus.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceId"))
     AggregatedSourceStatus.add_member(:source_type, Shapes::ShapeRef.new(shape: AggregatedSourceType, location_name: "SourceType"))
@@ -339,6 +364,14 @@ module Aws::ConfigService
     BaseConfigurationItem.struct_class = Types::BaseConfigurationItem
 
     BaseConfigurationItems.member = Shapes::ShapeRef.new(shape: BaseConfigurationItem)
+
+    BatchGetAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    BatchGetAggregateResourceConfigRequest.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifiersList, required: true, location_name: "ResourceIdentifiers"))
+    BatchGetAggregateResourceConfigRequest.struct_class = Types::BatchGetAggregateResourceConfigRequest
+
+    BatchGetAggregateResourceConfigResponse.add_member(:base_configuration_items, Shapes::ShapeRef.new(shape: BaseConfigurationItems, location_name: "BaseConfigurationItems"))
+    BatchGetAggregateResourceConfigResponse.add_member(:unprocessed_resource_identifiers, Shapes::ShapeRef.new(shape: UnprocessedResourceIdentifierList, location_name: "UnprocessedResourceIdentifiers"))
+    BatchGetAggregateResourceConfigResponse.struct_class = Types::BatchGetAggregateResourceConfigResponse
 
     BatchGetResourceConfigRequest.add_member(:resource_keys, Shapes::ShapeRef.new(shape: ResourceKeys, required: true, location_name: "resourceKeys"))
     BatchGetResourceConfigRequest.struct_class = Types::BatchGetResourceConfigRequest
@@ -400,6 +433,7 @@ module Aws::ConfigService
     ConfigRule.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
     ConfigRule.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     ConfigRule.add_member(:config_rule_state, Shapes::ShapeRef.new(shape: ConfigRuleState, location_name: "ConfigRuleState"))
+    ConfigRule.add_member(:created_by, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
     ConfigRule.struct_class = Types::ConfigRule
 
     ConfigRuleComplianceFilters.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
@@ -662,6 +696,8 @@ module Aws::ConfigService
     DescribeRetentionConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeRetentionConfigurationsResponse.struct_class = Types::DescribeRetentionConfigurationsResponse
 
+    DiscoveredResourceIdentifierList.member = Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
+
     Evaluation.add_member(:compliance_resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceType"))
     Evaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ComplianceResourceId"))
     Evaluation.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, required: true, location_name: "ComplianceType"))
@@ -715,6 +751,26 @@ module Aws::ConfigService
     GetAggregateConfigRuleComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetAggregateConfigRuleComplianceSummaryResponse.struct_class = Types::GetAggregateConfigRuleComplianceSummaryResponse
 
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ResourceCountFilters, location_name: "Filters"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:group_by_key, Shapes::ShapeRef.new(shape: ResourceCountGroupKey, location_name: "GroupByKey"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: GroupByAPILimit, location_name: "Limit"))
+    GetAggregateDiscoveredResourceCountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateDiscoveredResourceCountsRequest.struct_class = Types::GetAggregateDiscoveredResourceCountsRequest
+
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:total_discovered_resources, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "TotalDiscoveredResources"))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:group_by_key, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:grouped_resource_counts, Shapes::ShapeRef.new(shape: GroupedResourceCountList, location_name: "GroupedResourceCounts"))
+    GetAggregateDiscoveredResourceCountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateDiscoveredResourceCountsResponse.struct_class = Types::GetAggregateDiscoveredResourceCountsResponse
+
+    GetAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    GetAggregateResourceConfigRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: AggregateResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
+    GetAggregateResourceConfigRequest.struct_class = Types::GetAggregateResourceConfigRequest
+
+    GetAggregateResourceConfigResponse.add_member(:configuration_item, Shapes::ShapeRef.new(shape: ConfigurationItem, location_name: "ConfigurationItem"))
+    GetAggregateResourceConfigResponse.struct_class = Types::GetAggregateResourceConfigResponse
+
     GetComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
     GetComplianceDetailsByConfigRuleRequest.add_member(:compliance_types, Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
     GetComplianceDetailsByConfigRuleRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -766,6 +822,23 @@ module Aws::ConfigService
     GetResourceConfigHistoryResponse.add_member(:configuration_items, Shapes::ShapeRef.new(shape: ConfigurationItemList, location_name: "configurationItems"))
     GetResourceConfigHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetResourceConfigHistoryResponse.struct_class = Types::GetResourceConfigHistoryResponse
+
+    GroupedResourceCount.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "GroupName"))
+    GroupedResourceCount.add_member(:resource_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ResourceCount"))
+    GroupedResourceCount.struct_class = Types::GroupedResourceCount
+
+    GroupedResourceCountList.member = Shapes::ShapeRef.new(shape: GroupedResourceCount)
+
+    ListAggregateDiscoveredResourcesRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    ListAggregateDiscoveredResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ListAggregateDiscoveredResourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ResourceFilters, location_name: "Filters"))
+    ListAggregateDiscoveredResourcesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    ListAggregateDiscoveredResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAggregateDiscoveredResourcesRequest.struct_class = Types::ListAggregateDiscoveredResourcesRequest
+
+    ListAggregateDiscoveredResourcesResponse.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: DiscoveredResourceIdentifierList, location_name: "ResourceIdentifiers"))
+    ListAggregateDiscoveredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAggregateDiscoveredResourcesResponse.struct_class = Types::ListAggregateDiscoveredResourcesResponse
 
     ListDiscoveredResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ListDiscoveredResourcesRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "resourceIds"))
@@ -849,7 +922,18 @@ module Aws::ConfigService
     ResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
     ResourceCount.struct_class = Types::ResourceCount
 
+    ResourceCountFilters.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceCountFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ResourceCountFilters.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ResourceCountFilters.struct_class = Types::ResourceCountFilters
+
     ResourceCounts.member = Shapes::ShapeRef.new(shape: ResourceCount)
+
+    ResourceFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ResourceFilters.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    ResourceFilters.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ResourceName"))
+    ResourceFilters.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ResourceFilters.struct_class = Types::ResourceFilters
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
@@ -860,6 +944,8 @@ module Aws::ConfigService
     ResourceIdentifier.struct_class = Types::ResourceIdentifier
 
     ResourceIdentifierList.member = Shapes::ShapeRef.new(shape: ResourceIdentifier)
+
+    ResourceIdentifiersList.member = Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
 
     ResourceKey.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ResourceKey.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
@@ -914,6 +1000,8 @@ module Aws::ConfigService
     Tags.key = Shapes::ShapeRef.new(shape: Name)
     Tags.value = Shapes::ShapeRef.new(shape: Value)
 
+    UnprocessedResourceIdentifierList.member = Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -921,13 +1009,27 @@ module Aws::ConfigService
       api.version = "2014-11-12"
 
       api.metadata = {
+        "apiVersion" => "2014-11-12",
         "endpointPrefix" => "config",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Config Service",
         "serviceFullName" => "AWS Config",
+        "serviceId" => "Config Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "StarlingDoveService",
+        "uid" => "config-2014-11-12",
       }
+
+      api.add_operation(:batch_get_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAggregateResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAggregateResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAggregateResourceConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+      end)
 
       api.add_operation(:batch_get_resource_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetResourceConfig"
@@ -1197,6 +1299,30 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
       end)
 
+      api.add_operation(:get_aggregate_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAggregateDiscoveredResourceCounts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAggregateDiscoveredResourceCountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAggregateDiscoveredResourceCountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+      end)
+
+      api.add_operation(:get_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAggregateResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAggregateResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAggregateResourceConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o.errors << Shapes::ShapeRef.new(shape: OversizedConfigurationItemException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotDiscoveredException)
+      end)
+
       api.add_operation(:get_compliance_details_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetComplianceDetailsByConfigRule"
         o.http_method = "POST"
@@ -1263,6 +1389,18 @@ module Aws::ConfigService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_aggregate_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAggregateDiscoveredResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAggregateDiscoveredResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAggregateDiscoveredResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
       end)
 
       api.add_operation(:list_discovered_resources, Seahorse::Model::Operation.new.tap do |o|

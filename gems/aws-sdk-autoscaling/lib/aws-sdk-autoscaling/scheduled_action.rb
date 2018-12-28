@@ -53,7 +53,7 @@ module Aws::AutoScaling
     # time can be up to one month in the future.
     #
     # When `StartTime` and `EndTime` are specified with `Recurrence`, they
-    # form the boundaries of when the recurring action will start and stop.
+    # form the boundaries of when the recurring action starts and stops.
     # @return [Time]
     def start_time
       data[:start_time]

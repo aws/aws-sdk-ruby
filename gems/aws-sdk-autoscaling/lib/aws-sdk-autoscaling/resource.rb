@@ -31,6 +31,28 @@ module Aws::AutoScaling
     #       launch_template_name: "LaunchTemplateName",
     #       version: "XmlStringMaxLen255",
     #     },
+    #     mixed_instances_policy: {
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_id: "XmlStringMaxLen255",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "XmlStringMaxLen255",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "XmlStringMaxLen255",
+    #           },
+    #         ],
+    #       },
+    #       instances_distribution: {
+    #         on_demand_allocation_strategy: "XmlString",
+    #         on_demand_base_capacity: 1,
+    #         on_demand_percentage_above_base_capacity: 1,
+    #         spot_allocation_strategy: "XmlString",
+    #         spot_instance_pools: 1,
+    #         spot_max_price: "SpotPrice",
+    #       },
+    #     },
     #     instance_id: "XmlStringMaxLen19",
     #     min_size: 1, # required
     #     max_size: 1, # required
@@ -72,22 +94,26 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group. This name must be unique within
     #   the scope of your AWS account.
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. You must specify one of the
-    #   following: a launch configuration, a launch template, or an EC2
-    #   instance.
+    #   The name of the launch configuration. This parameter, a launch
+    #   template, a mixed instances policy, or an EC2 instance must be
+    #   specified.
     # @option options [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to launch instances. You must specify one
-    #   of the following: a launch template, a launch configuration, or an EC2
-    #   instance.
+    #   The launch template to use to launch instances. This parameter, a
+    #   launch configuration, a mixed instances policy, or an EC2 instance
+    #   must be specified.
+    # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
+    #   The mixed instances policy to use to launch instances. This parameter,
+    #   a launch template, a launch configuration, or an EC2 instance must be
+    #   specified.
     # @option options [String] :instance_id
     #   The ID of the instance used to create a launch configuration for the
-    #   group. You must specify one of the following: an EC2 instance, a
-    #   launch configuration, or a launch template.
+    #   group. This parameter, a launch configuration, a launch template, or a
+    #   mixed instances policy must be specified.
     #
     #   When you specify an ID of an instance, Amazon EC2 Auto Scaling creates
     #   a new launch configuration and associates it with the group. This
     #   launch configuration derives its attributes from the specified
-    #   instance, with the exception of the block device mapping.
+    #   instance, except for the block device mapping.
     #
     #   For more information, see [Create an Auto Scaling Group Using an EC2
     #   Instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -156,9 +182,9 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [String] :placement_group
-    #   The name of the placement group into which you'll launch your
-    #   instances, if any. For more information, see [Placement Groups][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   The name of the placement group into which to launch your instances,
+    #   if any. For more information, see [Placement Groups][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -281,9 +307,9 @@ module Aws::AutoScaling
     #   One or more security groups with which to associate the instances.
     #
     #   If your instances are launched in EC2-Classic, you can either specify
-    #   security group names or the security group IDs. For more information
-    #   about security groups for EC2-Classic, see [Amazon EC2 Security
-    #   Groups][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   security group names or the security group IDs. For more information,
+    #   see [Amazon EC2 Security Groups][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
     #   If your instances are launched into a VPC, specify security group IDs.
     #   For more information, see [Security Groups for Your VPC][2] in the
@@ -322,8 +348,8 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @option options [String] :instance_id
     #   The ID of the instance to use to create the launch configuration. The
-    #   new launch configuration derives attributes from the instance, with
-    #   the exception of the block device mapping.
+    #   new launch configuration derives attributes from the instance, except
+    #   for the block device mapping.
     #
     #   If you do not specify `InstanceId`, you must specify both `ImageId`
     #   and `InstanceType`.
@@ -378,7 +404,7 @@ module Aws::AutoScaling
     #   The name or the Amazon Resource Name (ARN) of the instance profile
     #   associated with the IAM role for the instance.
     #
-    #   EC2 instances launched with an IAM role will automatically have AWS
+    #   EC2 instances launched with an IAM role automatically have AWS
     #   security credentials available. You can use IAM roles with Amazon EC2
     #   Auto Scaling to automatically enable applications running on your EC2
     #   instances to securely access other AWS resources. For more
@@ -421,9 +447,9 @@ module Aws::AutoScaling
     #   The tenancy of the instance. An instance with a tenancy of `dedicated`
     #   runs on single-tenant hardware and can only be launched into a VPC.
     #
-    #   You must set the value of this parameter to `dedicated` if want to
-    #   launch Dedicated Instances into a shared tenancy VPC (VPC with
-    #   instance placement tenancy attribute set to `default`).
+    #   To launch Dedicated Instances into a shared tenancy VPC (a VPC with
+    #   the instance placement tenancy attribute set to `default`), you must
+    #   set the value of this parameter to `dedicated`.
     #
     #   If you specify this parameter, be sure to specify at least one subnet
     #   when you create your group.
@@ -607,7 +633,7 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     # @option options [Array<String>] :policy_names
     #   The names of one or more policies. If you omit this parameter, all
-    #   policies are described. If an group name is provided, the results are
+    #   policies are described. If a group name is provided, the results are
     #   limited to that group. This list is limited to 50 items. If you
     #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types
@@ -703,7 +729,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   A filter used to scope the tags to return.
+    #   One or more filters to scope the tags to return. The maximum number of
+    #   filters per filter type (for example, `auto-scaling-group`) is 1000.
     # @return [Tag::Collection]
     def tags(options = {})
       batches = Enumerator.new do |y|

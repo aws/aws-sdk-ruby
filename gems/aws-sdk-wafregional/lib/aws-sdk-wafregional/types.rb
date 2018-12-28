@@ -29,6 +29,11 @@ module Aws::WAFRegional
     #           type: "NONE", # required, accepts NONE, COUNT
     #         },
     #         type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #         excluded_rules: [
+    #           {
+    #             rule_id: "ResourceId", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] priority
@@ -63,7 +68,7 @@ module Aws::WAFRegional
     #     request based on the remaining rules in the web ACL.
     #
     #   `ActivatedRule|OverrideAction` applies only when updating or adding
-    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   a `RuleGroup` to a `WebACL`. In this case, you do not use
     #   `ActivatedRule|Action`. For all other update requests,
     #   `ActivatedRule|Action` is used instead of
     #   `ActivatedRule|OverrideAction`.
@@ -99,6 +104,51 @@ module Aws::WAFRegional
     #   does not exist.
     #   @return [String]
     #
+    # @!attribute [rw] excluded_rules
+    #   An array of rules to exclude from a rule group. This is applicable
+    #   only when the `ActivatedRule` refers to a `RuleGroup`.
+    #
+    #   Sometimes it is necessary to troubleshoot rule groups that are
+    #   blocking traffic unexpectedly (false positives). One troubleshooting
+    #   technique is to identify the specific rule within the rule group
+    #   that is blocking the legitimate traffic and then disable (exclude)
+    #   that particular rule. You can exclude rules from both your own rule
+    #   groups and AWS Marketplace rule groups that have been associated
+    #   with a web ACL.
+    #
+    #   Specifying `ExcludedRules` does not remove those rules from the rule
+    #   group. Rather, it changes the action for the rules to `COUNT`.
+    #   Therefore, requests that match an `ExcludedRule` are counted but not
+    #   blocked. The `RuleGroup` owner will receive COUNT metrics for each
+    #   `ExcludedRule`.
+    #
+    #   If you want to exclude rules from a rule group that is already
+    #   associated with a web ACL, perform the following steps:
+    #
+    #   1.  Use the AWS WAF logs to identify the IDs of the rules that you
+    #       want to exclude. For more information about the logs, see
+    #       [Logging Web ACL Traffic Information][1].
+    #
+    #   2.  Submit an UpdateWebACL request that has two actions:
+    #
+    #       * The first action deletes the existing rule group from the web
+    #         ACL. That is, in the UpdateWebACL request, the first
+    #         `Updates:Action` should be `DELETE` and
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         contains the rules that you want to exclude.
+    #
+    #       * The second action inserts the same rule group back in, but
+    #         specifying the rules to exclude. That is, the second
+    #         `Updates:Action` should be `INSERT`,
+    #         `Updates:ActivatedRule:RuleId` should be the rule group that
+    #         you just removed, and `ExcludedRules` should contain the rules
+    #         that you want to exclude.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    #   @return [Array<Types::ExcludedRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ActivatedRule AWS API Documentation
     #
     class ActivatedRule < Struct.new(
@@ -106,7 +156,8 @@ module Aws::WAFRegional
       :rule_id,
       :action,
       :override_action,
-      :type)
+      :type,
+      :excluded_rules)
       include Aws::Structure
     end
 
@@ -123,7 +174,17 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN (Amazon Resource Name) of the resource to be protected.
+    #   The ARN (Amazon Resource Name) of the resource to be protected,
+    #   either an application load balancer or Amazon API Gateway stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACLRequest AWS API Documentation
@@ -219,7 +280,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         byte_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           target_string: "data", # required
@@ -257,7 +318,7 @@ module Aws::WAFRegional
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         target_string: "data", # required
@@ -305,6 +366,15 @@ module Aws::WAFRegional
     #     size constraint set. For more information, see
     #     CreateSizeConstraintSet.
     #
+    #   * `SINGLE_QUERY_ARG`\: The parameter in the query string that you
+    #     will inspect, such as *UserName* or *SalesRegion*. The maximum
+    #     length for `SINGLE_QUERY_ARG` is 30 characters.
+    #
+    #   * `ALL_QUERY_ARGS`\: Similar to `SINGLE_QUERY_ARG`, but instead of
+    #     inspecting a single parameter, AWS WAF inspects all parameters
+    #     within the query string for the value or regex pattern that you
+    #     specify in `TargetString`.
+    #
     #   If `TargetString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
     #
@@ -316,7 +386,7 @@ module Aws::WAFRegional
     #   For example, suppose the value of `Type` is `HEADER` and the value
     #   of `Data` is `User-Agent`. If you want to search the `User-Agent`
     #   header for the value `BadBot`, you base64-encode `BadBot` using MIME
-    #   base64 encoding and include the resulting value, `QmFkQm90`, in the
+    #   base64-encoding and include the resulting value, `QmFkQm90`, in the
     #   value of `TargetString`.
     #
     #   **If you're using the AWS CLI or one of the AWS SDKs**
@@ -331,10 +401,12 @@ module Aws::WAFRegional
     #   specify a transformation, AWS WAF performs the transformation on
     #   `TargetString` before inspecting a request for a match.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     #   **CMD\_LINE**
     #
     #   When you're concerned that attackers are injecting an operating
-    #   system commandline command and using unusual formatting to disguise
+    #   system command line command and using unusual formatting to disguise
     #   some or all of the command, use this option to perform the following
     #   transformations:
     #
@@ -821,7 +893,7 @@ module Aws::WAFRegional
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `Rule`. The
     #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-    #   name can't contain whitespace. You can't change the name of the
+    #   name can't contain white space. You can't change the name of the
     #   metric after you create the `Rule`.
     #   @return [String]
     #
@@ -969,7 +1041,7 @@ module Aws::WAFRegional
     # @!attribute [rw] metric_name
     #   A friendly name or description for the metrics for this `WebACL`.
     #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-    #   the name can't contain whitespace. You can't change `MetricName`
+    #   the name can't contain white space. You can't change `MetricName`
     #   after you create the `WebACL`.
     #   @return [String]
     #
@@ -1174,6 +1246,29 @@ module Aws::WAFRegional
       :change_token)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL from which you want to
+    #   delete the LoggingConfiguration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteLoggingConfigurationRequest AWS API Documentation
+    #
+    class DeleteLoggingConfigurationRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteLoggingConfigurationResponse AWS API Documentation
+    #
+    class DeleteLoggingConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePermissionPolicyRequest
     #   data as a hash:
@@ -1568,7 +1663,17 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the resource from which the web
-    #   ACL is being removed.
+    #   ACL is being removed, either an application load balancer or Amazon
+    #   API Gateway stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLRequest AWS API Documentation
@@ -1582,13 +1687,35 @@ module Aws::WAFRegional
     #
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
 
+    # The rule to exclude from a rule group. This is applicable only when
+    # the `ActivatedRule` refers to a `RuleGroup`. The rule must belong to
+    # the `RuleGroup` that is specified by the `ActivatedRule`.
+    #
+    # @note When making an API call, you may pass ExcludedRule
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the rule to exclude from the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ExcludedRule AWS API Documentation
+    #
+    class ExcludedRule < Struct.new(
+      :rule_id)
+      include Aws::Structure
+    end
+
     # Specifies where in a web request to look for `TargetString`.
     #
     # @note When making an API call, you may pass FieldToMatch
     #   data as a hash:
     #
     #       {
-    #         type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #         type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #         data: "MatchFieldData",
     #       }
     #
@@ -1620,14 +1747,28 @@ module Aws::WAFRegional
     #     block requests based on the length of the body, you can create a
     #     size constraint set. For more information, see
     #     CreateSizeConstraintSet.
+    #
+    #   * `SINGLE_QUERY_ARG`\: The parameter in the query string that you
+    #     will inspect, such as *UserName* or *SalesRegion*. The maximum
+    #     length for `SINGLE_QUERY_ARG` is 30 characters.
+    #
+    #   * `ALL_QUERY_ARGS`\: Similar to `SINGLE_QUERY_ARG`, but rather than
+    #     inspecting a single parameter, AWS WAF will inspect all parameters
+    #     within the query for the value or regex pattern that you specify
+    #     in `TargetString`.
     #   @return [String]
     #
     # @!attribute [rw] data
     #   When the value of `Type` is `HEADER`, enter the name of the header
     #   that you want AWS WAF to search, for example, `User-Agent` or
-    #   `Referer`. If the value of `Type` is any other value, omit `Data`.
+    #   `Referer`. The name of the header is not case sensitive.
     #
-    #   The name of the header is not case sensitive.
+    #   When the value of `Type` is `SINGLE_QUERY_ARG`, enter the name of
+    #   the parameter that you want AWS WAF to search, for example,
+    #   `UserName` or `SalesRegion`. The parameter name is not case
+    #   sensitive.
+    #
+    #   If the value of `Type` is any other value, omit `Data`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/FieldToMatch AWS API Documentation
@@ -1909,6 +2050,36 @@ module Aws::WAFRegional
     #
     class GetIPSetResponse < Struct.new(
       :ip_set)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL for which you want to
+    #   get the LoggingConfiguration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetLoggingConfigurationRequest AWS API Documentation
+    #
+    class GetLoggingConfigurationRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configuration
+    #   The LoggingConfiguration for the specified web ACL.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetLoggingConfigurationResponse AWS API Documentation
+    #
+    class GetLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
       include Aws::Structure
     end
 
@@ -2333,7 +2504,17 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the resource for which to get the
-    #   web ACL.
+    #   web ACL, either an application load balancer or Amazon API Gateway
+    #   stage.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceRequest AWS API Documentation
@@ -2527,14 +2708,15 @@ module Aws::WAFRegional
 
     # Contains one or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-    # /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48,
-    # /56, /64 and /128 for IPv6.
+    # IPv4 address ranges: /8 and any range between /16 through /32. AWS WAF
+    # supports IPv6 address ranges: /16, /24, /32, /48, /56, /64, and /128.
     #
     # To specify an individual IP address, you specify the four-part IP
     # address followed by a `/32`, for example, 192.0.2.0/31. To block a
-    # range of IP addresses, you can specify a `/128`, `/64`, `/56`, `/48`,
-    # `/32`, `/24`, `/16`, or `/8` CIDR. For more information about CIDR
-    # notation, see the Wikipedia entry [Classless Inter-Domain Routing][1].
+    # range of IP addresses, you can specify /8 or any range between /16
+    # through /32 (for IPv4) or /16, /24, /32, /48, /56, /64, or /128 (for
+    # IPv6). For more information about CIDR notation, see the Wikipedia
+    # entry [Classless Inter-Domain Routing][1].
     #
     #
     #
@@ -2900,6 +3082,61 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLoggingConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `LoggingConfigurations` than the value of `Limit`, AWS WAF returns a
+    #   `NextMarker` value in the response that allows you to list another
+    #   group of `LoggingConfigurations`. For the second and subsequent
+    #   `ListLoggingConfigurations` requests, specify the value of
+    #   `NextMarker` from the previous response to get information about
+    #   another batch of `ListLoggingConfigurations`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `LoggingConfigurations` that you want AWS
+    #   WAF to return for this request. If you have more
+    #   `LoggingConfigurations` than the number that you specify for
+    #   `Limit`, the response includes a `NextMarker` value that you can use
+    #   to get another batch of `LoggingConfigurations`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListLoggingConfigurationsRequest AWS API Documentation
+    #
+    class ListLoggingConfigurationsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configurations
+    #   An array of LoggingConfiguration objects.
+    #   @return [Array<Types::LoggingConfiguration>]
+    #
+    # @!attribute [rw] next_marker
+    #   If you have more `LoggingConfigurations` than the number that you
+    #   specified for `Limit` in the request, the response includes a
+    #   `NextMarker` value. To list more `LoggingConfigurations`, submit
+    #   another `ListLoggingConfigurations` request, and specify the
+    #   `NextMarker` value from the response in the `NextMarker` value in
+    #   the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListLoggingConfigurationsResponse AWS API Documentation
+    #
+    class ListLoggingConfigurationsResponse < Struct.new(
+      :logging_configurations,
+      :next_marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRateBasedRulesRequest
     #   data as a hash:
     #
@@ -3067,6 +3304,7 @@ module Aws::WAFRegional
     #
     #       {
     #         web_acl_id: "ResourceId", # required
+    #         resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY
     #       }
     #
     # @!attribute [rw] web_acl_id
@@ -3074,10 +3312,16 @@ module Aws::WAFRegional
     #   associated resources.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   The type of resource to list, either an application load balancer or
+    #   Amazon API Gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACLRequest AWS API Documentation
     #
     class ListResourcesForWebACLRequest < Struct.new(
-      :web_acl_id)
+      :web_acl_id,
+      :resource_type)
       include Aws::Structure
     end
 
@@ -3478,6 +3722,47 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # The Amazon Kinesis Data Firehose, `RedactedFields` information, and
+    # the web ACL Amazon Resource Name (ARN).
+    #
+    # @note When making an API call, you may pass LoggingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         log_destination_configs: ["ResourceArn"], # required
+    #         redacted_fields: [
+    #           {
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
+    #             data: "MatchFieldData",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the web ACL that you want to
+    #   associate with `LogDestinationConfigs`.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination_configs
+    #   An array of Amazon Kinesis Data Firehose ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] redacted_fields
+    #   The parts of the request that you want redacted from the logs. For
+    #   example, if you redact the cookie field, the cookie field in the
+    #   firehose will be `xxx`.
+    #   @return [Array<Types::FieldToMatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/LoggingConfiguration AWS API Documentation
+    #
+    class LoggingConfiguration < Struct.new(
+      :resource_arn,
+      :log_destination_configs,
+      :redacted_fields)
+      include Aws::Structure
+    end
+
     # Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
     # RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
     # want to add to a `Rule` and, for each object, indicates whether you
@@ -3510,8 +3795,7 @@ module Aws::WAFRegional
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of predicate in a `Rule`, such as `ByteMatchSet` or
-    #   `IPSet`.
+    #   The type of predicate in a `Rule`, such as `ByteMatch` or `IPSet`.
     #   @return [String]
     #
     # @!attribute [rw] data_id
@@ -3526,6 +3810,46 @@ module Aws::WAFRegional
       :negated,
       :type,
       :data_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutLoggingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         logging_configuration: { # required
+    #           resource_arn: "ResourceArn", # required
+    #           log_destination_configs: ["ResourceArn"], # required
+    #           redacted_fields: [
+    #             {
+    #               type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
+    #               data: "MatchFieldData",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] logging_configuration
+    #   The Amazon Kinesis Data Firehose that contains the inspected traffic
+    #   information, the redacted fields details, and the Amazon Resource
+    #   Name (ARN) of the web ACL to monitor.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/PutLoggingConfigurationRequest AWS API Documentation
+    #
+    class PutLoggingConfigurationRequest < Struct.new(
+      :logging_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logging_configuration
+    #   The LoggingConfiguration that you submitted in the request.
+    #   @return [Types::LoggingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/PutLoggingConfigurationResponse AWS API Documentation
+    #
+    class PutLoggingConfigurationResponse < Struct.new(
+      :logging_configuration)
       include Aws::Structure
     end
 
@@ -3718,7 +4042,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         regex_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -3766,7 +4090,7 @@ module Aws::WAFRegional
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -3782,6 +4106,8 @@ module Aws::WAFRegional
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
     #   `RegexPatternSet` before inspecting a request for a match.
+    #
+    #   You can only specify a single type of TextTransformation.
     #
     #   **CMD\_LINE**
     #
@@ -4102,6 +4428,11 @@ module Aws::WAFRegional
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4240,7 +4571,7 @@ module Aws::WAFRegional
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4257,6 +4588,8 @@ module Aws::WAFRegional
     #   attackers use in web requests in an effort to bypass AWS WAF. If you
     #   specify a transformation, AWS WAF performs the transformation on
     #   `FieldToMatch` before inspecting a request for a match.
+    #
+    #   You can only specify a single type of TextTransformation.
     #
     #   Note that if you choose `BODY` for the value of `Type`, you must
     #   choose `NONE` for `TextTransformation` because CloudFront forwards
@@ -4456,7 +4789,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         size_constraint: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4565,7 +4898,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         sql_injection_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4601,7 +4934,7 @@ module Aws::WAFRegional
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -4618,10 +4951,12 @@ module Aws::WAFRegional
     #   specify a transformation, AWS WAF performs the transformation on
     #   `FieldToMatch` before inspecting a request for a match.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     #   **CMD\_LINE**
     #
     #   When you're concerned that attackers are injecting an operating
-    #   system commandline command and using unusual formatting to disguise
+    #   system command line command and using unusual formatting to disguise
     #   some or all of the command, use this option to perform the following
     #   transformations:
     #
@@ -4779,7 +5114,7 @@ module Aws::WAFRegional
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             byte_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               target_string: "data", # required
@@ -4932,6 +5267,8 @@ module Aws::WAFRegional
     #   * IPSetUpdate: Contains `Action` and `IPSetDescriptor`
     #
     #   * IPSetDescriptor: Contains `Type` and `Value`
+    #
+    #   You can insert a maximum of 1000 addresses in a single request.
     #   @return [Array<Types::IPSetUpdate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSetRequest AWS API Documentation
@@ -5031,7 +5368,7 @@ module Aws::WAFRegional
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             regex_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5150,6 +5487,11 @@ module Aws::WAFRegional
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5272,7 +5614,7 @@ module Aws::WAFRegional
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             size_constraint: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5342,7 +5684,7 @@ module Aws::WAFRegional
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             sql_injection_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5419,6 +5761,11 @@ module Aws::WAFRegional
     #                 type: "NONE", # required, accepts NONE, COUNT
     #               },
     #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #               excluded_rules: [
+    #                 {
+    #                   rule_id: "ResourceId", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -5447,7 +5794,7 @@ module Aws::WAFRegional
     #
     #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
     #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
-    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case,
     #     you do not use `ActivatedRule|Action`. For all other update
     #     requests, `ActivatedRule|Action` is used instead of
     #     `ActivatedRule|OverrideAction`.
@@ -5497,7 +5844,7 @@ module Aws::WAFRegional
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             xss_match_tuple: { # required
     #               field_to_match: { # required
-    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #                 data: "MatchFieldData",
     #               },
     #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5518,7 +5865,7 @@ module Aws::WAFRegional
     #
     # @!attribute [rw] updates
     #   An array of `XssMatchSetUpdate` objects that you want to insert into
-    #   or delete from a XssMatchSet. For more information, see the
+    #   or delete from an XssMatchSet. For more information, see the
     #   applicable data types:
     #
     #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
@@ -5653,6 +6000,10 @@ module Aws::WAFRegional
     #   priority of the `Rule`, and the ID of the `Rule`.
     #   @return [Array<Types::ActivatedRule>]
     #
+    # @!attribute [rw] web_acl_arn
+    #   Tha Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -5660,7 +6011,8 @@ module Aws::WAFRegional
       :name,
       :metric_name,
       :default_action,
-      :rules)
+      :rules,
+      :web_acl_arn)
       include Aws::Structure
     end
 
@@ -5706,6 +6058,11 @@ module Aws::WAFRegional
     #             type: "NONE", # required, accepts NONE, COUNT
     #           },
     #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #           excluded_rules: [
+    #             {
+    #               rule_id: "ResourceId", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -5802,7 +6159,7 @@ module Aws::WAFRegional
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         xss_match_tuple: { # required
     #           field_to_match: { # required
-    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #             data: "MatchFieldData",
     #           },
     #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5810,8 +6167,8 @@ module Aws::WAFRegional
     #       }
     #
     # @!attribute [rw] action
-    #   Specify `INSERT` to add a XssMatchSetUpdate to an XssMatchSet. Use
-    #   `DELETE` to remove a `XssMatchSetUpdate` from an `XssMatchSet`.
+    #   Specify `INSERT` to add an XssMatchSetUpdate to an XssMatchSet. Use
+    #   `DELETE` to remove an `XssMatchSetUpdate` from an `XssMatchSet`.
     #   @return [String]
     #
     # @!attribute [rw] xss_match_tuple
@@ -5837,7 +6194,7 @@ module Aws::WAFRegional
     #
     #       {
     #         field_to_match: { # required
-    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY, SINGLE_QUERY_ARG, ALL_QUERY_ARGS
     #           data: "MatchFieldData",
     #         },
     #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
@@ -5854,10 +6211,12 @@ module Aws::WAFRegional
     #   specify a transformation, AWS WAF performs the transformation on
     #   `FieldToMatch` before inspecting a request for a match.
     #
+    #   You can only specify a single type of TextTransformation.
+    #
     #   **CMD\_LINE**
     #
     #   When you're concerned that attackers are injecting an operating
-    #   system commandline command and using unusual formatting to disguise
+    #   system command line command and using unusual formatting to disguise
     #   some or all of the command, use this option to perform the following
     #   transformations:
     #

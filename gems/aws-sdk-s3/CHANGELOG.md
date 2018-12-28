@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2018-12-04)
+------------------
+
+* Feature - API update.
+
+1.29.0 (2018-11-30)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2018-11-29)
+------------------
+
+* Feature - API update.
+
+* Issue - Update operations needs Content-MD5 header
+
+1.27.0 (2018-11-27)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2018-11-26)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.24.1 (2018-11-16)
+------------------
+
+* Issue - Update version dependency on `aws-sdk-core` to support endpoint discovery.
+
+1.24.0 (2018-11-15)
+------------------
+
+* Feature - API update.
+
+1.23.1 (2018-10-30)
+------------------
+
+* Issue - Support multipart upload empty stream (GitHub Issue #1880)
+* Issue - Aws::S3::Encryption::IOAuthDecrypter - Fixes issue where the body tag being split across packets could cause GCM decryption to fail intermittently.
+
+1.23.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2018-10-04)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2018-09-19)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.18.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.17.1 (2018-08-29)
+------------------
+
+* Issue - Update example for bucket#url (Github Issue#1868)
+
+* Issue - Support opt-out counting #presigned_url as #api_requests (Github Issue#1866)
+
 1.17.0 (2018-07-11)
 ------------------
 

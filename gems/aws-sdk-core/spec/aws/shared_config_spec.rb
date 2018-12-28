@@ -106,5 +106,25 @@ module Aws
       end
     end
 
+    context 'endpoint_discovery selection' do
+
+      it 'can resolves endpoint_discovery from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "endpoint_discovery_enabled"
+        )
+        expect(config.endpoint_discovery).to eq("true")
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "endpoint_discovery_disabled"
+        )
+        expect(config.endpoint_discovery).to eq("false")
+      end
+
+    end
+
   end
 end

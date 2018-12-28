@@ -16,6 +16,7 @@ module Aws::CloudTrail
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ByteBuffer = Shapes::BlobShape.new(name: 'ByteBuffer')
     CloudTrailARNInvalidException = Shapes::StructureShape.new(name: 'CloudTrailARNInvalidException')
+    CloudTrailAccessNotEnabledException = Shapes::StructureShape.new(name: 'CloudTrailAccessNotEnabledException')
     CloudWatchLogsDeliveryUnavailableException = Shapes::StructureShape.new(name: 'CloudWatchLogsDeliveryUnavailableException')
     CreateTrailRequest = Shapes::StructureShape.new(name: 'CreateTrailRequest')
     CreateTrailResponse = Shapes::StructureShape.new(name: 'CreateTrailResponse')
@@ -35,6 +36,7 @@ module Aws::CloudTrail
     GetEventSelectorsResponse = Shapes::StructureShape.new(name: 'GetEventSelectorsResponse')
     GetTrailStatusRequest = Shapes::StructureShape.new(name: 'GetTrailStatusRequest')
     GetTrailStatusResponse = Shapes::StructureShape.new(name: 'GetTrailStatusResponse')
+    InsufficientDependencyServiceAccessPermissionException = Shapes::StructureShape.new(name: 'InsufficientDependencyServiceAccessPermissionException')
     InsufficientEncryptionPolicyException = Shapes::StructureShape.new(name: 'InsufficientEncryptionPolicyException')
     InsufficientS3BucketPolicyException = Shapes::StructureShape.new(name: 'InsufficientS3BucketPolicyException')
     InsufficientSnsTopicPolicyException = Shapes::StructureShape.new(name: 'InsufficientSnsTopicPolicyException')
@@ -69,7 +71,10 @@ module Aws::CloudTrail
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumNumberOfTrailsExceededException = Shapes::StructureShape.new(name: 'MaximumNumberOfTrailsExceededException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NotOrganizationMasterAccountException = Shapes::StructureShape.new(name: 'NotOrganizationMasterAccountException')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
+    OrganizationNotInAllFeaturesModeException = Shapes::StructureShape.new(name: 'OrganizationNotInAllFeaturesModeException')
+    OrganizationsNotInUseException = Shapes::StructureShape.new(name: 'OrganizationsNotInUseException')
     PublicKey = Shapes::StructureShape.new(name: 'PublicKey')
     PublicKeyList = Shapes::ListShape.new(name: 'PublicKeyList')
     PutEventSelectorsRequest = Shapes::StructureShape.new(name: 'PutEventSelectorsRequest')
@@ -119,6 +124,7 @@ module Aws::CloudTrail
     CreateTrailRequest.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsLogGroupArn"))
     CreateTrailRequest.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     CreateTrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateTrailRequest.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     CreateTrailRequest.struct_class = Types::CreateTrailRequest
 
     CreateTrailResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -133,6 +139,7 @@ module Aws::CloudTrail
     CreateTrailResponse.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsLogGroupArn"))
     CreateTrailResponse.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     CreateTrailResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateTrailResponse.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     CreateTrailResponse.struct_class = Types::CreateTrailResponse
 
     DataResource.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
@@ -157,6 +164,8 @@ module Aws::CloudTrail
 
     Event.add_member(:event_id, Shapes::ShapeRef.new(shape: String, location_name: "EventId"))
     Event.add_member(:event_name, Shapes::ShapeRef.new(shape: String, location_name: "EventName"))
+    Event.add_member(:read_only, Shapes::ShapeRef.new(shape: String, location_name: "ReadOnly"))
+    Event.add_member(:access_key_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessKeyId"))
     Event.add_member(:event_time, Shapes::ShapeRef.new(shape: Date, location_name: "EventTime"))
     Event.add_member(:event_source, Shapes::ShapeRef.new(shape: String, location_name: "EventSource"))
     Event.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
@@ -302,6 +311,7 @@ module Aws::CloudTrail
     Trail.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     Trail.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Trail.add_member(:has_custom_event_selectors, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasCustomEventSelectors"))
+    Trail.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     Trail.struct_class = Types::Trail
 
     TrailList.member = Shapes::ShapeRef.new(shape: Trail)
@@ -318,6 +328,7 @@ module Aws::CloudTrail
     UpdateTrailRequest.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsLogGroupArn"))
     UpdateTrailRequest.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     UpdateTrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    UpdateTrailRequest.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     UpdateTrailRequest.struct_class = Types::UpdateTrailRequest
 
     UpdateTrailResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -332,6 +343,7 @@ module Aws::CloudTrail
     UpdateTrailResponse.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsLogGroupArn"))
     UpdateTrailResponse.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     UpdateTrailResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    UpdateTrailResponse.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     UpdateTrailResponse.struct_class = Types::UpdateTrailResponse
 
 
@@ -341,12 +353,16 @@ module Aws::CloudTrail
       api.version = "2013-11-01"
 
       api.metadata = {
+        "apiVersion" => "2013-11-01",
         "endpointPrefix" => "cloudtrail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CloudTrail",
         "serviceFullName" => "AWS CloudTrail",
+        "serviceId" => "CloudTrail",
         "signatureVersion" => "v4",
         "targetPrefix" => "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
+        "uid" => "cloudtrail-2013-11-01",
       }
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -363,6 +379,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
       end)
 
       api.add_operation(:create_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -392,6 +409,11 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: CloudWatchLogsDeliveryUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailAccessNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
       end)
 
       api.add_operation(:delete_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -403,6 +425,10 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
       end)
 
       api.add_operation(:describe_trails, Seahorse::Model::Operation.new.tap do |o|
@@ -494,6 +520,8 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidEventSelectorsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
       end)
 
       api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -509,6 +537,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
       end)
 
       api.add_operation(:start_logging, Seahorse::Model::Operation.new.tap do |o|
@@ -520,6 +549,10 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
       end)
 
       api.add_operation(:stop_logging, Seahorse::Model::Operation.new.tap do |o|
@@ -531,6 +564,10 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidHomeRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
       end)
 
       api.add_operation(:update_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -560,6 +597,11 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: CloudWatchLogsDeliveryUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailAccessNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
       end)
     end
 

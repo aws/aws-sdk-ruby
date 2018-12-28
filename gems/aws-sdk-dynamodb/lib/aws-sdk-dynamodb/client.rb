@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
@@ -46,146 +50,191 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
     add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
     add_plugin(Aws::DynamoDB::Plugins::CRC32Validation)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :compute_checksums (true)
-    #   When `true`, a CRC32 checksum is computed of every HTTP
-    #   response body and compared against the `X-Amz-Crc32` header.
-    #   If the checksums do not match, the request is re-sent.
-    #   Failures can be retried up to `:retry_limit` times.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Boolean] :compute_checksums (true)
+    #     When `true`, a CRC32 checksum is computed of every HTTP
+    #     response body and compared against the `X-Amz-Crc32` header.
+    #     If the checksums do not match, the request is re-sent.
+    #     Failures can be retried up to `:retry_limit` times.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (10)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [String] :session_token
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :simple_attributes (true)
-    #   Enables working with DynamoDB attribute values using
-    #   hashes, arrays, sets, integers, floats, booleans, and nil.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   Disabling this option requires that all attribute values have
-    #   their types specified, e.g. `{ s: 'abc' }` instead of simply
-    #   `'abc'`.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :retry_limit (10)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_attributes (true)
+    #     Enables working with DynamoDB attribute values using
+    #     hashes, arrays, sets, integers, floats, booleans, and nil.
+    #
+    #     Disabling this option requires that all attribute values have
+    #     their types specified, e.g. `{ s: 'abc' }` instead of simply
+    #     `'abc'`.
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -468,10 +517,18 @@ module Aws::DynamoDB
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
     #   resp.consumed_capacity[0].table.capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem AWS API Documentation
@@ -731,10 +788,18 @@ module Aws::DynamoDB
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
     #   resp.consumed_capacity[0].table.capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem AWS API Documentation
@@ -1041,10 +1106,24 @@ module Aws::DynamoDB
     #     the global secondary index, consisting of read and write capacity
     #     units.
     #
-    # @option params [required, Types::ProvisionedThroughput] :provisioned_throughput
+    # @option params [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. This setting can be changed later.
+    #
+    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
+    #     using `PROVISIONED` for predictable workloads.
+    #
+    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
+    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #
+    # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
     #   or index. The settings can be modified using the `UpdateTable`
     #   operation.
+    #
+    #   If you set BillingMode as `PROVISIONED`, you must specify this
+    #   property. If you set BillingMode as `PAY_PER_REQUEST`, you cannot
+    #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
     #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
@@ -1195,13 +1274,14 @@ module Aws::DynamoDB
     #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #           non_key_attributes: ["NonKeyAttributeName"],
     #         },
-    #         provisioned_throughput: { # required
+    #         provisioned_throughput: {
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
     #       },
     #     ],
-    #     provisioned_throughput: { # required
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
     #     },
@@ -1210,7 +1290,9 @@ module Aws::DynamoDB
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
-    #       enabled: false, # required
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -1234,6 +1316,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -1271,7 +1355,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -1321,6 +1405,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.item_count #=> Integer
+    #   resp.backup_description.source_table_details.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].index_name #=> String
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema #=> Array
@@ -1343,7 +1428,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
@@ -1606,10 +1691,18 @@ module Aws::DynamoDB
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -1705,6 +1798,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -1742,7 +1837,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -1793,6 +1888,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.item_count #=> Integer
+    #   resp.backup_description.source_table_details.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].index_name #=> String
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema #=> Array
@@ -1815,7 +1911,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
-    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
     #
@@ -1874,6 +1970,25 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].address #=> String
+    #   resp.endpoints[0].cache_period_in_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpoints AWS API Documentation
+    #
+    # @overload describe_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoints(params = {}, options = {})
+      req = build_request(:describe_endpoints, params)
+      req.send_request(options)
+    end
+
     # Returns information about the specified global table.
     #
     # @option params [required, String] :global_table_name
@@ -1929,6 +2044,8 @@ module Aws::DynamoDB
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
@@ -2186,6 +2303,8 @@ module Aws::DynamoDB
     #   resp.table.item_count #=> Integer
     #   resp.table.table_arn #=> String
     #   resp.table.table_id #=> String
+    #   resp.table.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table.local_secondary_indexes #=> Array
     #   resp.table.local_secondary_indexes[0].index_name #=> String
     #   resp.table.local_secondary_indexes[0].key_schema #=> Array
@@ -2223,7 +2342,7 @@ module Aws::DynamoDB
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
     #   resp.table.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table.sse_description.kms_master_key_arn #=> String
     #
@@ -2448,10 +2567,18 @@ module Aws::DynamoDB
     #   resp.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem AWS API Documentation
@@ -2476,7 +2603,7 @@ module Aws::DynamoDB
     # You can call `ListBackups` a maximum of 5 times per second.
     #
     # @option params [String] :table_name
-    #   The backups from the table specified by TableName are listed.
+    #   The backups from the table specified by `TableName` are listed.
     #
     # @option params [Integer] :limit
     #   Maximum number of backups to return at once.
@@ -2497,15 +2624,15 @@ module Aws::DynamoDB
     #   fetch the next page of results.
     #
     # @option params [String] :backup_type
-    #   The backups from the table specified by BackupType are listed.
+    #   The backups from the table specified by `BackupType` are listed.
     #
-    #   Where BackupType can be:
+    #   Where `BackupType` can be:
     #
-    #   * `USER` - On demand backup created by you.
+    #   * `USER` - On-demand backup created by you.
     #
-    #   * `SYSTEM` - On demand backup automatically created by DynamoDB.
+    #   * `SYSTEM` - On-demand backup automatically created by DynamoDB.
     #
-    #   * `ALL` - All types of on demand backups (USER and SYSTEM).
+    #   * `ALL` - All types of on-demand backups (USER and SYSTEM).
     #
     # @return [Types::ListBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3009,10 +3136,18 @@ module Aws::DynamoDB
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -3541,10 +3676,18 @@ module Aws::DynamoDB
     #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query AWS API Documentation
@@ -3614,6 +3757,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -3651,7 +3796,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -3751,6 +3896,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -3788,7 +3935,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -4228,10 +4375,18 @@ module Aws::DynamoDB
     #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan AWS API Documentation
@@ -4282,6 +4437,309 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # `TransactGetItems` is a synchronous operation that atomically
+    # retrieves multiple items from one or more tables (but not from
+    # indexes) in a single account and region. A `TransactGetItems` call can
+    # contain up to 10 `TransactGetItem` objects, each of which contains a
+    # `Get` structure that specifies an item to retrieve from a table in the
+    # account and region. A call to `TransactGetItems` cannot retrieve items
+    # from tables in more than one AWS account or region.
+    #
+    # DynamoDB rejects the entire `TransactGetItems` request if any of the
+    # following is true:
+    #
+    # * A conflicting operation is in the process of updating an item to be
+    #   read.
+    #
+    # * There is insufficient provisioned capacity for the transaction to be
+    #   completed.
+    #
+    # * There is a user error, such as an invalid data format.
+    #
+    # @option params [required, Array<Types::TransactGetItem>] :transact_items
+    #   An ordered array of up to 10 `TransactGetItem` objects, each of which
+    #   contains a `Get` structure.
+    #
+    # @option params [String] :return_consumed_capacity
+    #   A value of `TOTAL` causes consumed capacity information to be
+    #   returned, and a value of `NONE` prevents that information from being
+    #   returned. No other value is valid.
+    #
+    # @return [Types::TransactGetItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransactGetItemsOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #   * {Types::TransactGetItemsOutput#responses #responses} => Array&lt;Types::ItemResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transact_get_items({
+    #     transact_items: [ # required
+    #       {
+    #         get: { # required
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           projection_expression: "ProjectionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumed_capacity #=> Array
+    #   resp.consumed_capacity[0].table_name #=> String
+    #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.responses #=> Array
+    #   resp.responses[0].item #=> Hash
+    #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactGetItems AWS API Documentation
+    #
+    # @overload transact_get_items(params = {})
+    # @param [Hash] params ({})
+    def transact_get_items(params = {}, options = {})
+      req = build_request(:transact_get_items, params)
+      req.send_request(options)
+    end
+
+    # `TransactWriteItems` is a synchronous write operation that groups up
+    # to 10 action requests. These actions can target items in different
+    # tables, but not in different AWS accounts or regions, and no two
+    # actions can target the same item. For example, you cannot both
+    # `ConditionCheck` and `Update` the same item.
+    #
+    # The actions are completed atomically so that either all of them
+    # succeed, or all of them fail. They are defined by the following
+    # objects:
+    #
+    # * `Put`  —   Initiates a `PutItem` operation to write a new item. This
+    #   structure specifies the primary key of the item to be written, the
+    #   name of the table to write it in, an optional condition expression
+    #   that must be satisfied for the write to succeed, a list of the
+    #   item's attributes, and a field indicating whether or not to
+    #   retrieve the item's attributes if the condition is not met.
+    #
+    # * `Update`  —   Initiates an `UpdateItem` operation to update an
+    #   existing item. This structure specifies the primary key of the item
+    #   to be updated, the name of the table where it resides, an optional
+    #   condition expression that must be satisfied for the update to
+    #   succeed, an expression that defines one or more attributes to be
+    #   updated, and a field indicating whether or not to retrieve the
+    #   item's attributes if the condition is not met.
+    #
+    # * `Delete`  —   Initiates a `DeleteItem` operation to delete an
+    #   existing item. This structure specifies the primary key of the item
+    #   to be deleted, the name of the table where it resides, an optional
+    #   condition expression that must be satisfied for the deletion to
+    #   succeed, and a field indicating whether or not to retrieve the
+    #   item's attributes if the condition is not met.
+    #
+    # * `ConditionCheck`  —   Applies a condition to an item that is not
+    #   being modified by the transaction. This structure specifies the
+    #   primary key of the item to be checked, the name of the table where
+    #   it resides, a condition expression that must be satisfied for the
+    #   transaction to succeed, and a field indicating whether or not to
+    #   retrieve the item's attributes if the condition is not met.
+    #
+    # DynamoDB rejects the entire `TransactWriteItems` request if any of the
+    # following is true:
+    #
+    # * A condition in one of the condition expressions is not met.
+    #
+    # * A conflicting operation is in the process of updating the same item.
+    #
+    # * There is insufficient provisioned capacity for the transaction to be
+    #   completed.
+    #
+    # * An item size becomes too large (bigger than 400 KB), a Local
+    #   Secondary Index (LSI) becomes too large, or a similar validation
+    #   error occurs because of changes made by the transaction.
+    #
+    # * There is a user error, such as an invalid data format.
+    #
+    # @option params [required, Array<Types::TransactWriteItem>] :transact_items
+    #   An ordered array of up to 10 `TransactWriteItem` objects, each of
+    #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
+    #   object. These can operate on items in different tables, but the tables
+    #   must reside in the same AWS account and region, and no two of them can
+    #   operate on the same item.
+    #
+    # @option params [String] :return_consumed_capacity
+    #   Determines the level of detail about provisioned throughput
+    #   consumption that is returned in the response:
+    #
+    #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
+    #     for the operation, together with `ConsumedCapacity` for each table
+    #     and secondary index that was accessed.
+    #
+    #     Note that some operations, such as `GetItem` and `BatchGetItem`, do
+    #     not access any indexes at all. In these cases, specifying `INDEXES`
+    #     will only return `ConsumedCapacity` information for table(s).
+    #
+    #   * `TOTAL` - The response includes only the aggregate
+    #     `ConsumedCapacity` for the operation.
+    #
+    #   * `NONE` - No `ConsumedCapacity` details are included in the response.
+    #
+    # @option params [String] :return_item_collection_metrics
+    #   Determines whether item collection metrics are returned. If set to
+    #   `SIZE`, the response includes statistics about item collections (if
+    #   any), that were modified during the operation and are returned in the
+    #   response. If set to `NONE` (the default), no statistics are returned.
+    #
+    # @option params [String] :client_request_token
+    #   Providing a `ClientRequestToken` makes the call to
+    #   `TransactWriteItems` idempotent, meaning that multiple identical calls
+    #   have the same effect as one single call.
+    #
+    #   Although multiple identical calls using the same client request token
+    #   produce the same result on the server (no side effects), the responses
+    #   to the calls may not be the same. If the `ReturnConsumedCapacity>`
+    #   parameter is set, then the initial `TransactWriteItems` call returns
+    #   the amount of write capacity units consumed in making the changes, and
+    #   subsequent `TransactWriteItems` calls with the same client token
+    #   return the amount of read capacity units consumed in reading the item.
+    #
+    #   A client request token is valid for 10 minutes after the first request
+    #   that uses it completes. After 10 minutes, any request with the same
+    #   client token is treated as a new request. Do not resubmit the same
+    #   request with the same client token for more than 10 minutes or the
+    #   result may not be idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 10 minute idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::TransactWriteItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransactWriteItemsOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #   * {Types::TransactWriteItemsOutput#item_collection_metrics #item_collection_metrics} => Hash&lt;String,Array&lt;Types::ItemCollectionMetrics&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transact_write_items({
+    #     transact_items: [ # required
+    #       {
+    #         condition_check: {
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression", # required
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #         put: {
+    #           item: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #         delete: {
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #         update: {
+    #           key: { # required
+    #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           update_expression: "UpdateExpression", # required
+    #           table_name: "TableName", # required
+    #           condition_expression: "ConditionExpression",
+    #           expression_attribute_names: {
+    #             "ExpressionAttributeNameVariable" => "AttributeName",
+    #           },
+    #           expression_attribute_values: {
+    #             "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
+    #         },
+    #       },
+    #     ],
+    #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consumed_capacity #=> Array
+    #   resp.consumed_capacity[0].table_name #=> String
+    #   resp.consumed_capacity[0].capacity_units #=> Float
+    #   resp.consumed_capacity[0].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].table.capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
+    #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.item_collection_metrics #=> Hash
+    #   resp.item_collection_metrics["TableName"] #=> Array
+    #   resp.item_collection_metrics["TableName"][0].item_collection_key #=> Hash
+    #   resp.item_collection_metrics["TableName"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb #=> Array
+    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb[0] #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactWriteItems AWS API Documentation
+    #
+    # @overload transact_write_items(params = {})
+    # @param [Hash] params ({})
+    def transact_write_items(params = {}, options = {})
+      req = build_request(:transact_write_items, params)
       req.send_request(options)
     end
 
@@ -4446,6 +4904,11 @@ module Aws::DynamoDB
     # @option params [required, String] :global_table_name
     #   The name of the global table
     #
+    # @option params [String] :global_table_billing_mode
+    #   The billing mode of the global table. If `GlobalTableBillingMode` is
+    #   not specified, the global table defaults to `PROVISIONED` capacity
+    #   billing mode.
+    #
     # @option params [Integer] :global_table_provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException.`
@@ -4471,6 +4934,7 @@ module Aws::DynamoDB
     #
     #   resp = client.update_global_table_settings({
     #     global_table_name: "TableName", # required
+    #     global_table_billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     global_table_provisioned_write_capacity_units: 1,
     #     global_table_provisioned_write_capacity_auto_scaling_settings_update: {
     #       minimum_units: 1,
@@ -4558,6 +5022,8 @@ module Aws::DynamoDB
     #   resp.replica_settings #=> Array
     #   resp.replica_settings[0].region_name #=> String
     #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.replica_settings[0].replica_billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.minimum_units #=> Integer
     #   resp.replica_settings[0].replica_provisioned_read_capacity_auto_scaling_settings.maximum_units #=> Integer
@@ -4998,10 +5464,18 @@ module Aws::DynamoDB
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.consumed_capacity.table_name #=> String
     #   resp.consumed_capacity.capacity_units #=> Float
+    #   resp.consumed_capacity.read_capacity_units #=> Float
+    #   resp.consumed_capacity.write_capacity_units #=> Float
+    #   resp.consumed_capacity.table.read_capacity_units #=> Float
+    #   resp.consumed_capacity.table.write_capacity_units #=> Float
     #   resp.consumed_capacity.table.capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.local_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
+    #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics.item_collection_key #=> Hash
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -5047,6 +5521,20 @@ module Aws::DynamoDB
     # @option params [required, String] :table_name
     #   The name of the table to be updated.
     #
+    # @option params [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. When switching from pay-per-request to provisioned
+    #   capacity, initial provisioned capacity values must be set. The initial
+    #   provisioned capacity values are estimated based on the consumed read
+    #   and write capacity of your table and global secondary indexes over the
+    #   past 30 minutes.
+    #
+    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
+    #     using `PROVISIONED` for predictable workloads.
+    #
+    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
+    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
+    #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
     #   index.
@@ -5077,6 +5565,9 @@ module Aws::DynamoDB
     #   disable a stream on a table which does not have a stream.
     #
     #    </note>
+    #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   The new server-side encryption settings for the specified table.
     #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5142,6 +5633,7 @@ module Aws::DynamoDB
     #       },
     #     ],
     #     table_name: "TableName", # required
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
@@ -5167,7 +5659,7 @@ module Aws::DynamoDB
     #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #             non_key_attributes: ["NonKeyAttributeName"],
     #           },
-    #           provisioned_throughput: { # required
+    #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
     #           },
@@ -5180,6 +5672,11 @@ module Aws::DynamoDB
     #     stream_specification: {
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
+    #     },
+    #     sse_specification: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -5203,6 +5700,8 @@ module Aws::DynamoDB
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
     #   resp.table_description.table_id #=> String
+    #   resp.table_description.billing_mode_summary.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
+    #   resp.table_description.billing_mode_summary.last_update_to_pay_per_request_date_time #=> Time
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -5240,7 +5739,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
-    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
     #
@@ -5338,7 +5837,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -265,6 +265,41 @@ module Aws::SSM
     #   The association name.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_severity
+    #   The severity level that is assigned to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -283,7 +318,10 @@ module Aws::SSM
       :output_location,
       :last_execution_date,
       :last_successful_execution_date,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -590,6 +628,41 @@ module Aws::SSM
     #   version was created.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_severity
+    #   The severity level that is assigned to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -602,7 +675,85 @@ module Aws::SSM
       :targets,
       :schedule_expression,
       :output_location,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency,
+      :compliance_severity)
+      include Aws::Structure
+    end
+
+    # A structure that includes attributes that describe a document
+    # attachment.
+    #
+    # @!attribute [rw] name
+    #   The name of an attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of an attachment in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hash
+    #   The cryptographic hash value of the document content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash_type
+    #   The hash algorithm used to calculate the hash value.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL location of the attachment content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentContent AWS API Documentation
+    #
+    class AttachmentContent < Struct.new(
+      :name,
+      :size,
+      :hash,
+      :hash_type,
+      :url)
+      include Aws::Structure
+    end
+
+    # An attribute of an attachment, such as the attachment name or size.
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentInformation AWS API Documentation
+    #
+    class AttachmentInformation < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # A key and value pair that identifies the location of an attachment to
+    # a document.
+    #
+    # @note When making an API call, you may pass AttachmentsSource
+    #   data as a hash:
+    #
+    #       {
+    #         key: "SourceUrl", # accepts SourceUrl
+    #         values: ["AttachmentsSourceValue"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of a key and value pair that identifies the location of an
+    #   attachment to a document.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The URL of the location of a document attachment, such as the URL of
+    #   an Amazon S3 bucket.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentsSource AWS API Documentation
+    #
+    class AttachmentsSource < Struct.new(
+      :key,
+      :values)
       include Aws::Structure
     end
 
@@ -712,6 +863,16 @@ module Aws::SSM
     #   The target of the execution.
     #   @return [String]
     #
+    # @!attribute [rw] target_locations
+    #   The combination of AWS Regions and/or AWS accounts where you want to
+    #   execute the Automation.
+    #   @return [Array<Types::TargetLocation>]
+    #
+    # @!attribute [rw] progress_counters
+    #   An aggregate of step execution statuses displayed in the AWS Console
+    #   for a multi-Region and multi-account Automation execution.
+    #   @return [Types::ProgressCounters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
@@ -737,7 +898,9 @@ module Aws::SSM
       :resolved_targets,
       :max_concurrency,
       :max_errors,
-      :target)
+      :target,
+      :target_locations,
+      :progress_counters)
       include Aws::Structure
     end
 
@@ -748,7 +911,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
@@ -862,6 +1025,18 @@ module Aws::SSM
     #   The list of execution outputs as defined in the Automation document.
     #   @return [String]
     #
+    # @!attribute [rw] automation_type
+    #   Use this filter with DescribeAutomationExecution. Specify either
+    #   Local of CrossAccount. CrossAccount is an Automation that executes
+    #   in multiple AWS Regions and accounts. For more information, see
+    #   [Concurrently Executing Automations in Multiple AWS Regions and
+    #   Accounts][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata AWS API Documentation
     #
     class AutomationExecutionMetadata < Struct.new(
@@ -885,7 +1060,8 @@ module Aws::SSM
       :resolved_targets,
       :max_concurrency,
       :max_errors,
-      :target)
+      :target,
+      :automation_type)
       include Aws::Structure
     end
 
@@ -921,6 +1097,35 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommandResult AWS API Documentation
     #
     class CancelCommandResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CancelMaintenanceWindowExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_execution_id: "MaintenanceWindowExecutionId", # required
+    #       }
+    #
+    # @!attribute [rw] window_execution_id
+    #   The ID of the Maintenance Window execution to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionRequest AWS API Documentation
+    #
+    class CancelMaintenanceWindowExecutionRequest < Struct.new(
+      :window_execution_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_execution_id
+    #   The ID of the Maintenance Window execution that has been stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionResult AWS API Documentation
+    #
+    class CancelMaintenanceWindowExecutionResult < Struct.new(
+      :window_execution_id)
+      include Aws::Structure
+    end
 
     # Configuration options for sending command output to CloudWatch Logs.
     #
@@ -1158,7 +1363,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #         value: "CommandFilterValue", # required
     #       }
     #
@@ -1167,7 +1372,46 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value.
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * **InvokedAfter**\: Specify a timestamp to limit your results. For
+    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
+    #     executions occurring July 7, 2018, and later.
+    #
+    #   * **InvokedBefore**\: Specify a timestamp to limit your results. For
+    #     example, specify `2018-07-07T00:00:00Z` to see a list of command
+    #     executions from before July 7, 2018.
+    #
+    #   * **Status**\: Specify a valid command status to see a list of all
+    #     command executions with that status. Status values you can specify
+    #     include:
+    #
+    #     * `Pending`
+    #
+    #     * `InProgress`
+    #
+    #     * `Success`
+    #
+    #     * `Cancelled`
+    #
+    #     * `Failed`
+    #
+    #     * `TimedOut`
+    #
+    #     * `Cancelling`
+    #
+    #   * **DocumentName**\: Specify name of the SSM document for which you
+    #     want to see command execution results. For example, specify
+    #     `AWS-RunPatchBaseline` to see command executions that used this
+    #     SSM document to perform security patching operations on instances.
+    #
+    #   * **ExecutionStage**\: Specify one of the following values:
+    #
+    #     * `Executing`\: Returns a list of command executions that are
+    #       currently still running.
+    #
+    #     * `Complete`\: Returns a list of command executions that have
+    #       already completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
@@ -1822,6 +2066,9 @@ module Aws::SSM
     #               },
     #             },
     #             association_name: "AssociationName",
+    #             max_errors: "MaxErrors",
+    #             max_concurrency: "MaxConcurrency",
+    #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #           },
     #         ],
     #       }
@@ -1837,7 +2084,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes the association of a Systems Manager document and an
+    # Describes the association of a Systems Manager SSM document and an
     # instance.
     #
     # @note When making an API call, you may pass CreateAssociationBatchRequestEntry
@@ -1865,6 +2112,9 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] name
@@ -1901,6 +2151,41 @@ module Aws::SSM
     #   Specify a descriptive name for the association.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_severity
+    #   The severity level to assign to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -1911,7 +2196,10 @@ module Aws::SSM
       :targets,
       :schedule_expression,
       :output_location,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -1956,6 +2244,9 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] name
@@ -1993,6 +2284,41 @@ module Aws::SSM
     #   Specify a descriptive name for the association.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_severity
+    #   The severity level to assign to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2003,7 +2329,10 @@ module Aws::SSM
       :targets,
       :schedule_expression,
       :output_location,
-      :association_name)
+      :association_name,
+      :max_errors,
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -2023,8 +2352,15 @@ module Aws::SSM
     #
     #       {
     #         content: "DocumentContent", # required
+    #         attachments: [
+    #           {
+    #             key: "SourceUrl", # accepts SourceUrl
+    #             values: ["AttachmentsSourceValue"],
+    #           },
+    #         ],
     #         name: "DocumentName", # required
-    #         document_type: "Command", # accepts Command, Policy, Automation
+    #         version_name: "DocumentVersionName",
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #       }
@@ -2032,6 +2368,11 @@ module Aws::SSM
     # @!attribute [rw] content
     #   A valid JSON or YAML string.
     #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   A list of key and value pairs that describe attachments to a version
+    #   of a document.
+    #   @return [Array<Types::AttachmentsSource>]
     #
     # @!attribute [rw] name
     #   A name for the Systems Manager document.
@@ -2046,9 +2387,16 @@ module Aws::SSM
     #   * `amzn`
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact you are
+    #   creating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and cannot
+    #   be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] document_type
     #   The type of document to create. Valid document types include:
-    #   Policy, Automation, and Command.
+    #   `Command`, `Policy`, `Automation`, `Session`, and `Package`.
     #   @return [String]
     #
     # @!attribute [rw] document_format
@@ -2074,7 +2422,9 @@ module Aws::SSM
     #
     class CreateDocumentRequest < Struct.new(
       :content,
+      :attachments,
       :name,
+      :version_name,
       :document_type,
       :document_format,
       :target_type)
@@ -2098,7 +2448,10 @@ module Aws::SSM
     #       {
     #         name: "MaintenanceWindowName", # required
     #         description: "MaintenanceWindowDescription",
+    #         start_date: "MaintenanceWindowStringDateTime",
+    #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule", # required
+    #         schedule_timezone: "MaintenanceWindowTimezone",
     #         duration: 1, # required
     #         cutoff: 1, # required
     #         allow_unassociated_targets: false, # required
@@ -2115,9 +2468,35 @@ module Aws::SSM
     #   Windows.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the Maintenance Window to become active. StartDate allows you to
+    #   delay activation of the Maintenance Window until the specified
+    #   future date.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the Maintenance Window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the Maintenance Window will no
+    #   longer run.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -2152,7 +2531,10 @@ module Aws::SSM
     class CreateMaintenanceWindowRequest < Struct.new(
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -2206,6 +2588,7 @@ module Aws::SSM
     #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approved_patches_enable_non_security: false,
     #         rejected_patches: ["PatchId"],
+    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #         description: "BaselineDescription",
     #         sources: [
     #           {
@@ -2270,6 +2653,23 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages
+    #     that include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to
+    #     the Rejected patches list, it is considered non-compliant with the
+    #     patch baseline, and its status is reported as *InstalledRejected*.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the patch baseline.
     #   @return [String]
@@ -2298,6 +2698,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :description,
       :sources,
       :client_token)
@@ -3084,7 +3485,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -3301,6 +3702,7 @@ module Aws::SSM
     #       {
     #         name: "DocumentARN", # required
     #         document_version: "DocumentVersion",
+    #         version_name: "DocumentVersionName",
     #       }
     #
     # @!attribute [rw] name
@@ -3312,11 +3714,18 @@ module Aws::SSM
     #   specific version or the default version.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentRequest AWS API Documentation
     #
     class DescribeDocumentRequest < Struct.new(
       :name,
-      :document_version)
+      :document_version,
+      :version_name)
       include Aws::Structure
     end
 
@@ -3500,13 +3909,20 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_information_filter_list
-    #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   This is a legacy method. We recommend that you don't use this
+    #   method. Instead, use the InstanceInformationFilter action. The
+    #   `InstanceInformationFilter` action enables you to return instance
+    #   information by using tags that are specified as a key-value mapping.
+    #
+    #   If you do use this method, then you can't use the
+    #   `InstanceInformationFilter` action. Using this method and the
+    #   `InstanceInformationFilter` action causes an exception error.
     #   @return [Array<Types::InstanceInformationFilter>]
     #
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances.
+    #   instances. You can filter on Amazon EC2 tag. Specify tags by using a
+    #   key-value mapping.
     #   @return [Array<Types::InstanceInformationStringFilter>]
     #
     # @!attribute [rw] max_results
@@ -3721,8 +4137,7 @@ module Aws::SSM
     #
     #   Severity (string)
     #
-    #   State (string: "INSTALLED", "INSTALLED OTHER", "MISSING",
-    #   "NOT APPLICABLE", "FAILED")
+    #   State (string, such as "INSTALLED" or "FAILED")
     #
     #   InstalledTime (DateTime)
     #
@@ -3999,6 +4414,88 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeMaintenanceWindowScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_id: "MaintenanceWindowId",
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         resource_type: "INSTANCE", # accepts INSTANCE
+    #         filters: [
+    #           {
+    #             key: "PatchOrchestratorFilterKey",
+    #             values: ["PatchOrchestratorFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] window_id
+    #   The ID of the Maintenance Window to retrieve information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters used to limit the range of results. For example, you can
+    #   limit Maintenance Window executions to only those scheduled before
+    #   or after a certain date and time.
+    #   @return [Array<Types::PatchOrchestratorFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowScheduleRequest AWS API Documentation
+    #
+    class DescribeMaintenanceWindowScheduleRequest < Struct.new(
+      :window_id,
+      :targets,
+      :resource_type,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_window_executions
+    #   Information about Maintenance Window executions scheduled for the
+    #   specified time range.
+    #   @return [Array<Types::ScheduledWindowExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You use this token
+    #   in the next call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowScheduleResult AWS API Documentation
+    #
+    class DescribeMaintenanceWindowScheduleResult < Struct.new(
+      :scheduled_window_executions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMaintenanceWindowTargetsRequest
     #   data as a hash:
     #
@@ -4125,6 +4622,69 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeMaintenanceWindowsForTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         targets: [ # required
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         resource_type: "INSTANCE", # required, accepts INSTANCE
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] targets
+    #   The instance ID or key/value pair to retrieve information about.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource you want to retrieve information about. For
+    #   example, "INSTANCE".
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTargetRequest AWS API Documentation
+    #
+    class DescribeMaintenanceWindowsForTargetRequest < Struct.new(
+      :targets,
+      :resource_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_identities
+    #   Information about the Maintenance Window targets and tasks an
+    #   instance is associated with.
+    #   @return [Array<Types::MaintenanceWindowIdentityForTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You use this token
+    #   in the next call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTargetResult AWS API Documentation
+    #
+    class DescribeMaintenanceWindowsForTargetResult < Struct.new(
+      :window_identities,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMaintenanceWindowsRequest
     #   data as a hash:
     #
@@ -4141,7 +4701,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are Name and Enabled.
+    #   Maintenance Windows. Supported filter keys are **Name** and
+    #   **Enabled**.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
     # @!attribute [rw] max_results
@@ -4339,6 +4900,19 @@ module Aws::SSM
     #   in the patch baseline.
     #   @return [Integer]
     #
+    # @!attribute [rw] instances_with_installed_rejected_patches
+    #   The number of instances with patches installed that are specified in
+    #   a RejectedPatches list. Patches with a status of
+    #   *INSTALLED\_REJECTED* were typically installed before they were
+    #   added to a RejectedPatches list.
+    #
+    #   <note markdown="1"> If ALLOW\_AS\_DEPENDENCY is the specified option for
+    #   RejectedPatchesAction, the value of
+    #   InstancesWithInstalledRejectedPatches will always be 0 (zero).
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] instances_with_missing_patches
     #   The number of instances with missing patches from the patch
     #   baseline.
@@ -4359,6 +4933,7 @@ module Aws::SSM
       :instances,
       :instances_with_installed_patches,
       :instances_with_installed_other_patches,
+      :instances_with_installed_rejected_patches,
       :instances_with_missing_patches,
       :instances_with_failed_patches,
       :instances_with_not_applicable_patches)
@@ -4424,6 +4999,69 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         state: "Active", # required, accepts Active, History
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #             value: "SessionFilterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The session status to retrieve a list of sessions for. For example,
+    #   "Active".
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the type of sessions returned by the
+    #   request.
+    #   @return [Array<Types::SessionFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessionsRequest AWS API Documentation
+    #
+    class DescribeSessionsRequest < Struct.new(
+      :state,
+      :max_results,
+      :next_token,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of sessions meeting the request parameters.
+    #   @return [Array<Types::Session>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessionsResponse AWS API Documentation
+    #
+    class DescribeSessionsResponse < Struct.new(
+      :sessions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A default version of a document.
     #
     # @!attribute [rw] name
@@ -4434,11 +5072,16 @@ module Aws::SSM
     #   The default version of the document.
     #   @return [String]
     #
+    # @!attribute [rw] default_version_name
+    #   The default version of the artifact associated with the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDefaultVersionDescription AWS API Documentation
     #
     class DocumentDefaultVersionDescription < Struct.new(
       :name,
-      :default_version)
+      :default_version,
+      :default_version_name)
       include Aws::Structure
     end
 
@@ -4458,7 +5101,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] hash_type
-    #   Sha256 or Sha1.
+    #   The hash type of the document. Valid values include `Sha256` or
+    #   `Sha1`.
     #
     #   <note markdown="1"> Sha1 hashes have been deprecated.
     #
@@ -4467,6 +5111,10 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The version of the artifact associated with the document.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -4479,6 +5127,13 @@ module Aws::SSM
     #
     # @!attribute [rw] status
     #   The status of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_information
+    #   A message returned by AWS Systems Manager that explains the `Status`
+    #   value. For example, a `Failed` status might be explained by the
+    #   `StatusInformation` message, "The specified S3 bucket does not
+    #   exist. Verify that the URL of the S3 bucket is correct."
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -4533,6 +5188,11 @@ module Aws::SSM
     #   The tags, or metadata, that have been applied to the document.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] attachments_information
+    #   Details about the document attachments, including names, locations,
+    #   sizes, etc.
+    #   @return [Array<Types::AttachmentInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -4540,9 +5200,11 @@ module Aws::SSM
       :hash,
       :hash_type,
       :name,
+      :version_name,
       :owner,
       :created_date,
       :status,
+      :status_information,
       :document_version,
       :description,
       :parameters,
@@ -4553,7 +5215,8 @@ module Aws::SSM
       :default_version,
       :document_format,
       :target_type,
-      :tags)
+      :tags,
+      :attachments_information)
       include Aws::Structure
     end
 
@@ -4591,6 +5254,12 @@ module Aws::SSM
     #
     # @!attribute [rw] owner
     #   The AWS user account that created the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
     #   @return [String]
     #
     # @!attribute [rw] platform_types
@@ -4633,6 +5302,7 @@ module Aws::SSM
     class DocumentIdentifier < Struct.new(
       :name,
       :owner,
+      :version_name,
       :platform_types,
       :document_version,
       :document_type,
@@ -4741,6 +5411,12 @@ module Aws::SSM
     #   The document version.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version of the artifact associated with the document. For
+    #   example, "Release 12, Update 6". This value is unique across all
+    #   versions of a document, and cannot be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] created_date
     #   The date the document was created.
     #   @return [Time]
@@ -4753,14 +5429,29 @@ module Aws::SSM
     #   The document format, either JSON or YAML.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the Systems Manager document, such as `Creating`,
+    #   `Active`, `Failed`, and `Deleting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_information
+    #   A message returned by AWS Systems Manager that explains the `Status`
+    #   value. For example, a `Failed` status might be explained by the
+    #   `StatusInformation` message, "The specified S3 bucket does not
+    #   exist. Verify that the URL of the S3 bucket is correct."
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
       :name,
       :document_version,
+      :version_name,
       :created_date,
       :is_default_version,
-      :document_format)
+      :document_format,
+      :status,
+      :status_information)
       include Aws::Structure
     end
 
@@ -5082,6 +5773,41 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetConnectionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target: "SessionTarget", # required
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusRequest AWS API Documentation
+    #
+    class GetConnectionStatusRequest < Struct.new(
+      :target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target
+    #   The ID of the instance to check connection status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection to the instance. For example,
+    #   'Connected' or 'Not Connected'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusResponse AWS API Documentation
+    #
+    class GetConnectionStatusResponse < Struct.new(
+      :target,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDefaultPatchBaselineRequest
     #   data as a hash:
     #
@@ -5176,12 +5902,19 @@ module Aws::SSM
     #
     #       {
     #         name: "DocumentARN", # required
+    #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
     #         document_format: "YAML", # accepts YAML, JSON
     #       }
     #
     # @!attribute [rw] name
     #   The name of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact associated
+    #   with the document. For example, "Release 12, Update 6". This value
+    #   is unique across all versions of a document, and cannot be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -5197,6 +5930,7 @@ module Aws::SSM
     #
     class GetDocumentRequest < Struct.new(
       :name,
+      :version_name,
       :document_version,
       :document_format)
       include Aws::Structure
@@ -5206,8 +5940,26 @@ module Aws::SSM
     #   The name of the Systems Manager document.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version of the artifact associated with the document. For
+    #   example, "Release 12, Update 6". This value is unique across all
+    #   versions of a document, and cannot be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] document_version
     #   The document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Systems Manager document, such as `Creating`,
+    #   `Active`, `Updating`, `Failed`, and `Deleting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_information
+    #   A message returned by AWS Systems Manager that explains the `Status`
+    #   value. For example, a `Failed` status might be explained by the
+    #   `StatusInformation` message, "The specified S3 bucket does not
+    #   exist. Verify that the URL of the S3 bucket is correct."
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -5222,14 +5974,23 @@ module Aws::SSM
     #   The document format, either JSON or YAML.
     #   @return [String]
     #
+    # @!attribute [rw] attachments_content
+    #   A description of the document attachments, including names,
+    #   locations, sizes, etc.
+    #   @return [Array<Types::AttachmentContent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentResult AWS API Documentation
     #
     class GetDocumentResult < Struct.new(
       :name,
+      :version_name,
       :document_version,
+      :status,
+      :status_information,
       :content,
       :document_type,
-      :document_format)
+      :document_format,
+      :attachments_content)
       include Aws::Structure
     end
 
@@ -5241,7 +6002,7 @@ module Aws::SSM
     #           {
     #             key: "InventoryFilterKey", # required
     #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
     #         aggregators: [
@@ -5250,6 +6011,18 @@ module Aws::SSM
     #             aggregators: {
     #               # recursive InventoryAggregatorList
     #             },
+    #             groups: [
+    #               {
+    #                 name: "InventoryGroupName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     key: "InventoryFilterKey", # required
+    #                     values: ["InventoryFilterValue"], # required
+    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         ],
     #         result_attributes: [
@@ -5684,9 +6457,39 @@ module Aws::SSM
     #   The description of the Maintenance Window.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become active. The Maintenance
+    #   Window will not run before this specified time.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become inactive. The Maintenance
+    #   Window will not run after this specified time.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #   @return [String]
+    #
+    # @!attribute [rw] next_execution_time
+    #   The next time the Maintenance Window will actually run, taking into
+    #   account any specified times for the Maintenance Window to become
+    #   active or inactive.
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -5721,7 +6524,11 @@ module Aws::SSM
       :window_id,
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
+      :next_execution_time,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -6185,6 +6992,13 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action specified to take on patches included in the
+    #   RejectedPatches list. A patch can be allowed only if it is a
+    #   dependency of another package, or blocked entirely along with
+    #   packages that include it as a dependency.
+    #   @return [String]
+    #
     # @!attribute [rw] patch_groups
     #   Patch groups included in the patch baseline.
     #   @return [Array<String>]
@@ -6219,6 +7033,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :patch_groups,
       :created_date,
       :modified_date,
@@ -6495,7 +7310,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes a filter for a specific list of instances.
+    # Describes a filter for a specific list of instances. You can filter
+    # instances information by using tags. You specify tags by using a
+    # key-value mapping.
+    #
+    # Use this action instead of the
+    # DescribeInstanceInformationRequest$InstanceInformationFilterList
+    # method. The `InstanceInformationFilterList` method is a legacy method
+    # and does not support tags.
     #
     # @note When making an API call, you may pass InstanceInformationFilter
     #   data as a hash:
@@ -6574,6 +7396,22 @@ module Aws::SSM
     #   operation when this compliance data was collected.
     #   @return [String]
     #
+    # @!attribute [rw] install_override_list
+    #   An https URL or an Amazon S3 path-style URL to a list of patches to
+    #   be installed. This patch installation list, which you maintain in an
+    #   Amazon S3 bucket in YAML format and specify in the SSM document
+    #   `AWS-RunPatchBaseline`, overrides the patches specified by the
+    #   default patch baseline.
+    #
+    #   For more information about the `InstallOverrideList` parameter, see
+    #   [About the SSM Document AWS-RunPatchBaseline][1] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html
+    #   @return [String]
+    #
     # @!attribute [rw] owner_information
     #   Placeholder information. This field will always be empty in the
     #   current release of the service.
@@ -6587,6 +7425,19 @@ module Aws::SSM
     # @!attribute [rw] installed_other_count
     #   The number of patches not specified in the patch baseline that are
     #   installed on the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] installed_rejected_count
+    #   The number of instances with patches installed that are specified in
+    #   a RejectedPatches list. Patches with a status of *InstalledRejected*
+    #   were typically installed before they were added to a RejectedPatches
+    #   list.
+    #
+    #   <note markdown="1"> If ALLOW\_AS\_DEPENDENCY is the specified option for
+    #   RejectedPatchesAction, the value of InstalledRejectedCount will
+    #   always be 0 (zero).
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] missing_count
@@ -6628,9 +7479,11 @@ module Aws::SSM
       :patch_group,
       :baseline_id,
       :snapshot_id,
+      :install_override_list,
       :owner_information,
       :installed_count,
       :installed_other_count,
+      :installed_rejected_count,
       :missing_count,
       :failed_count,
       :not_applicable_count,
@@ -6691,6 +7544,30 @@ module Aws::SSM
     #             aggregators: {
     #               # recursive InventoryAggregatorList
     #             },
+    #             groups: [
+    #               {
+    #                 name: "InventoryGroupName", # required
+    #                 filters: [ # required
+    #                   {
+    #                     key: "InventoryFilterKey", # required
+    #                     values: ["InventoryFilterValue"], # required
+    #                     type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         groups: [
+    #           {
+    #             name: "InventoryGroupName", # required
+    #             filters: [ # required
+    #               {
+    #                 key: "InventoryFilterKey", # required
+    #                 values: ["InventoryFilterValue"], # required
+    #                 type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -6704,11 +7581,18 @@ module Aws::SSM
     #   type.
     #   @return [Array<Types::InventoryAggregator>]
     #
+    # @!attribute [rw] groups
+    #   A user-defined set of one or more filters on which to aggregate
+    #   inventory data. Groups return a count of resources that match and
+    #   don't match the specified criteria.
+    #   @return [Array<Types::InventoryGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryAggregator AWS API Documentation
     #
     class InventoryAggregator < Struct.new(
       :expression,
-      :aggregators)
+      :aggregators,
+      :groups)
       include Aws::Structure
     end
 
@@ -6819,7 +7703,7 @@ module Aws::SSM
     #       {
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
-    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #       }
     #
     # @!attribute [rw] key
@@ -6844,6 +7728,43 @@ module Aws::SSM
       :key,
       :values,
       :type)
+      include Aws::Structure
+    end
+
+    # A user-defined set of one or more filters on which to aggregate
+    # inventory data. Groups return a count of resources that match and
+    # don't match the specified criteria.
+    #
+    # @note When making an API call, you may pass InventoryGroup
+    #   data as a hash:
+    #
+    #       {
+    #         name: "InventoryGroupName", # required
+    #         filters: [ # required
+    #           {
+    #             key: "InventoryFilterKey", # required
+    #             values: ["InventoryFilterValue"], # required
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters define the criteria for the group. The `matchingCount` field
+    #   displays the number of resources that match the criteria. The
+    #   `notMatchingCount` field displays the number of resources that
+    #   don't match the criteria.
+    #   @return [Array<Types::InventoryFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryGroup AWS API Documentation
+    #
+    class InventoryGroup < Struct.new(
+      :name,
+      :filters)
       include Aws::Structure
     end
 
@@ -7191,7 +8112,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7266,7 +8187,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status, ExecutionStage, DocumentName
     #             value: "CommandFilterValue", # required
     #           },
     #         ],
@@ -7583,7 +8504,7 @@ module Aws::SSM
     #           {
     #             key: "InventoryFilterKey", # required
     #             values: ["InventoryFilterValue"], # required
-    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan, Exists
     #           },
     #         ],
     #         next_token: "NextToken",
@@ -8062,7 +8983,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Filter used in the request.
+    # Filter used in the request. Supported filter keys are Name and
+    # Enabled.
     #
     # @note When making an API call, you may pass MaintenanceWindowFilter
     #   data as a hash:
@@ -8115,6 +9037,32 @@ module Aws::SSM
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
     #
+    # @!attribute [rw] schedule
+    #   The schedule of the Maintenance Window in the form of a cron or rate
+    #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become inactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become active.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_execution_time
+    #   The next time the Maintenance Window will actually run, taking into
+    #   account any specified times for the Maintenance Window to become
+    #   active or inactive.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentity AWS API Documentation
     #
     class MaintenanceWindowIdentity < Struct.new(
@@ -8123,7 +9071,30 @@ module Aws::SSM
       :description,
       :enabled,
       :duration,
-      :cutoff)
+      :cutoff,
+      :schedule,
+      :schedule_timezone,
+      :end_date,
+      :start_date,
+      :next_execution_time)
+      include Aws::Structure
+    end
+
+    # The Maintenance Window to which the specified target belongs.
+    #
+    # @!attribute [rw] window_id
+    #   The ID of the Maintenance Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Maintenance Window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget AWS API Documentation
+    #
+    class MaintenanceWindowIdentityForTarget < Struct.new(
+      :window_id,
+      :name)
       include Aws::Structure
     end
 
@@ -8267,7 +9238,7 @@ module Aws::SSM
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it doesn not execute.
+    #   executing, it doesn't run.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowRunCommandParameters AWS API Documentation
@@ -9072,8 +10043,14 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the patch on the instance (INSTALLED, INSTALLED\_OTHER,
-    #   MISSING, NOT\_APPLICABLE or FAILED).
+    #   The state of the patch on the instance, such as INSTALLED or FAILED.
+    #
+    #   For descriptions of each patch state, see [About Patch
+    #   Compliance][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch
     #   @return [String]
     #
     # @!attribute [rw] installed_time
@@ -9770,6 +10747,46 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # An aggregate of step execution statuses displayed in the AWS Console
+    # for a multi-Region and multi-account Automation execution.
+    #
+    # @!attribute [rw] total_steps
+    #   The total number of steps executed in all specified AWS Regions and
+    #   accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] success_steps
+    #   The total number of steps that successfully completed in all
+    #   specified AWS Regions and accounts for the current Automation
+    #   execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_steps
+    #   The total number of steps that failed to execute in all specified
+    #   AWS Regions and accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cancelled_steps
+    #   The total number of steps that the system cancelled in all specified
+    #   AWS Regions and accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timed_out_steps
+    #   The total number of steps that timed out in all specified AWS
+    #   Regions and accounts for the current Automation execution.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ProgressCounters AWS API Documentation
+    #
+    class ProgressCounters < Struct.new(
+      :total_steps,
+      :success_steps,
+      :failed_steps,
+      :cancelled_steps,
+      :timed_out_steps)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutComplianceItemsRequest
     #   data as a hash:
     #
@@ -10387,7 +11404,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_task_id
-    #   The id of the task in the Maintenance Window.
+    #   The ID of the task in the Maintenance Window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowResult AWS API Documentation
@@ -10639,6 +11656,62 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "SessionId", # required
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the disconnected session to resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionRequest AWS API Documentation
+    #
+    class ResumeSessionRequest < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   Used to authenticate the connection to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A URL back to SSM Agent on the instance that the Session Manager
+    #   client uses to send commands and receive output from the instance.
+    #   Format:
+    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`.
+    #
+    #   **region** represents the Region identifier for an AWS Region
+    #   supported by AWS Systems Manager, such as `us-east-2` for the US
+    #   East (Ohio) Region. For a list of supported **region** values, see
+    #   the **Region** column in the [AWS Systems Manager table of regions
+    #   and endpoints][1] in the *AWS General Reference*.
+    #
+    #   **session-id** represents the ID of a Session Manager session, such
+    #   as `1a2b3c4dEXAMPLE`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionResponse AWS API Documentation
+    #
+    class ResumeSessionResponse < Struct.new(
+      :session_id,
+      :token_value,
+      :stream_url)
+      include Aws::Structure
+    end
+
     # An Amazon S3 bucket where you want to store the results of this
     # request.
     #
@@ -10686,6 +11759,30 @@ module Aws::SSM
     #
     class S3OutputUrl < Struct.new(
       :output_url)
+      include Aws::Structure
+    end
+
+    # Information about a scheduled execution for a Maintenance Window.
+    #
+    # @!attribute [rw] window_id
+    #   The ID of the Maintenance Window to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Maintenance Window to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_time
+    #   The time, in ISO-8601 Extended format, that the Maintenance Window
+    #   is scheduled to be run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ScheduledWindowExecution AWS API Documentation
+    #
+    class ScheduledWindowExecution < Struct.new(
+      :window_id,
+      :name,
+      :execution_time)
       include Aws::Structure
     end
 
@@ -10770,7 +11867,7 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information
-    #   about how to use Targets, see [Sending Commands to a Fleet][1] in
+    #   about how to use targets, see [Sending Commands to a Fleet][1] in
     #   the *AWS Systems Manager User Guide*.
     #
     #
@@ -10782,7 +11879,7 @@ module Aws::SSM
     #   (Optional) An array of search criteria that targets instances using
     #   a Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use Targets, see [Sending Commands to a
+    #   information about how to use targets, see [Sending Commands to a
     #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
@@ -10930,6 +12027,137 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about a Session Manager connection to an instance.
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The instance that the Session Manager session connected to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the session. For example, "Connected" or
+    #   "Terminated".
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, when the session
+    #   began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, when the session was
+    #   terminated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the Session Manager SSM document used to define the
+    #   parameters and plugin settings for the session. For example,
+    #   `SSM-SessionManagerRunShell`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The ID of the AWS user account that started the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_url
+    #   Reserved for future use.
+    #   @return [Types::SessionManagerOutputUrl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :session_id,
+      :target,
+      :status,
+      :start_date,
+      :end_date,
+      :document_name,
+      :owner,
+      :details,
+      :output_url)
+      include Aws::Structure
+    end
+
+    # Describes a filter for Session Manager information.
+    #
+    # @note When making an API call, you may pass SessionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #         value: "SessionFilterValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter value. Valid values for each filter key are as follows:
+    #
+    #   * InvokedAfter: Specify a timestamp to limit your results. For
+    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
+    #     August 29, 2018, and later.
+    #
+    #   * InvokedBefore: Specify a timestamp to limit your results. For
+    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
+    #     before August 29, 2018.
+    #
+    #   * Target: Specify an instance to which session connections have been
+    #     made.
+    #
+    #   * Owner: Specify an AWS user account to see a list of sessions
+    #     started by that user.
+    #
+    #   * Status: Specify a valid session status to see a list of all
+    #     sessions with that status. Status values you can specify include:
+    #
+    #     * Connected
+    #
+    #     * Connecting
+    #
+    #     * Disconnected
+    #
+    #     * Terminated
+    #
+    #     * Terminating
+    #
+    #     * Failed
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionFilter AWS API Documentation
+    #
+    class SessionFilter < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] s3_output_url
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_output_url
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionManagerOutputUrl AWS API Documentation
+    #
+    class SessionManagerOutputUrl < Struct.new(
+      :s3_output_url,
+      :cloud_watch_output_url)
+      include Aws::Structure
+    end
+
     # The number of managed instances found for each patch severity level
     # defined in the request filter.
     #
@@ -11029,6 +12257,15 @@ module Aws::SSM
     #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
+    #         target_locations: [
+    #           {
+    #             accounts: ["Account"],
+    #             regions: ["Region"],
+    #             target_location_max_concurrency: "MaxConcurrency",
+    #             target_location_max_errors: "MaxErrors",
+    #             execution_role_name: "ExecutionRoleName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] document_name
@@ -11056,7 +12293,7 @@ module Aws::SSM
     #
     # @!attribute [rw] target_parameter_name
     #   The name of the parameter used as the target resource for the
-    #   rate-controlled execution. Required if you specify Targets.
+    #   rate-controlled execution. Required if you specify targets.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -11094,6 +12331,18 @@ module Aws::SSM
     #   executions proceed one at a time.
     #   @return [String]
     #
+    # @!attribute [rw] target_locations
+    #   A location is a combination of AWS Regions and/or AWS accounts where
+    #   you want to execute the Automation. Use this action to start an
+    #   Automation in multiple Regions and multiple accounts. For more
+    #   information, see [Concurrently Executing Automations in Multiple AWS
+    #   Regions and Accounts][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
@@ -11106,7 +12355,8 @@ module Aws::SSM
       :targets,
       :target_maps,
       :max_concurrency,
-      :max_errors)
+      :max_errors,
+      :target_locations)
       include Aws::Structure
     end
 
@@ -11118,6 +12368,79 @@ module Aws::SSM
     #
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target: "SessionTarget", # required
+    #         document_name: "DocumentARN",
+    #         parameters: {
+    #           "SessionManagerParameterName" => ["SessionManagerParameterValue"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target
+    #   The instance to connect to for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the SSM document to define the parameters and plugin
+    #   settings for the session. For example, `SSM-SessionManagerRunShell`.
+    #   If no document name is provided, a shell to the instance is launched
+    #   by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Reserved for future use.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionRequest AWS API Documentation
+    #
+    class StartSessionRequest < Struct.new(
+      :target,
+      :document_name,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   An encrypted token value containing session and caller information.
+    #   Used to authenticate the connection to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_url
+    #   A URL back to SSM Agent on the instance that the Session Manager
+    #   client uses to send commands and receive output from the instance.
+    #   Format:
+    #   `wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)`
+    #
+    #   **region** represents the Region identifier for an AWS Region
+    #   supported by AWS Systems Manager, such as `us-east-2` for the US
+    #   East (Ohio) Region. For a list of supported **region** values, see
+    #   the **Region** column in the [AWS Systems Manager table of regions
+    #   and endpoints][1] in the *AWS General Reference*.
+    #
+    #   **session-id** represents the ID of a Session Manager session, such
+    #   as `1a2b3c4dEXAMPLE`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionResponse AWS API Documentation
+    #
+    class StartSessionResponse < Struct.new(
+      :session_id,
+      :token_value,
+      :stream_url)
       include Aws::Structure
     end
 
@@ -11218,6 +12541,15 @@ module Aws::SSM
     #   support the automation to go to another specific step.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] targets
+    #   The targets for the step execution.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] target_location
+    #   The combination of AWS Regions and accounts targeted by the current
+    #   Automation execution.
+    #   @return [Types::TargetLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -11240,7 +12572,9 @@ module Aws::SSM
       :is_end,
       :next_step,
       :is_critical,
-      :valid_next_steps)
+      :valid_next_steps,
+      :targets,
+      :target_location)
       include Aws::Structure
     end
 
@@ -11378,6 +12712,84 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The combination of AWS Regions and accounts targeted by the current
+    # Automation execution.
+    #
+    # @note When making an API call, you may pass TargetLocation
+    #   data as a hash:
+    #
+    #       {
+    #         accounts: ["Account"],
+    #         regions: ["Region"],
+    #         target_location_max_concurrency: "MaxConcurrency",
+    #         target_location_max_errors: "MaxErrors",
+    #         execution_role_name: "ExecutionRoleName",
+    #       }
+    #
+    # @!attribute [rw] accounts
+    #   The AWS accounts targeted by the current Automation execution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The AWS Regions targeted by the current Automation execution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_location_max_concurrency
+    #   The maxium number of AWS accounts and AWS regions allowed to run the
+    #   Automation concurrently
+    #   @return [String]
+    #
+    # @!attribute [rw] target_location_max_errors
+    #   The maxium number of errors allowed before the system stops queueing
+    #   additional Automation executions for the currently executing
+    #   Automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_name
+    #   The Automation execution role used by the currently executing
+    #   Automation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation AWS API Documentation
+    #
+    class TargetLocation < Struct.new(
+      :accounts,
+      :regions,
+      :target_location_max_concurrency,
+      :target_location_max_errors,
+      :execution_role_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TerminateSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "SessionId", # required
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to terminate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionRequest AWS API Documentation
+    #
+    class TerminateSessionRequest < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The ID of the session that has been terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionResponse AWS API Documentation
+    #
+    class TerminateSessionResponse < Struct.new(
+      :session_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateAssociationRequest
     #   data as a hash:
     #
@@ -11404,6 +12816,9 @@ module Aws::SSM
     #         ],
     #         association_name: "AssociationName",
     #         association_version: "AssociationVersion",
+    #         max_errors: "MaxErrors",
+    #         max_concurrency: "MaxConcurrency",
+    #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] association_id
@@ -11449,6 +12864,41 @@ module Aws::SSM
     #   or omit this parameter.
     #   @return [String]
     #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   sending requests to run the association on additional targets. You
+    #   can specify either an absolute number of errors, for example 10, or
+    #   a percentage of the target set, for example 10%. If you specify 3,
+    #   for example, the system stops sending requests when the fourth error
+    #   is received. If you specify 0, then the system stops sending
+    #   requests after the first error is returned. If you run an
+    #   association on 50 instances and set MaxError to 10%, then the system
+    #   stops sending the request when the sixth error is received.
+    #
+    #   Executions that are already running an association when MaxErrors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set MaxConcurrency to 1 so that
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run the association at the
+    #   same time. You can specify a number, for example 10, or a percentage
+    #   of the target set, for example 10%. The default value is 100%, which
+    #   means all targets run the association at the same time.
+    #
+    #   If a new instance starts and attempts to execute an association
+    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   association is allowed to run. During the next association interval,
+    #   the new instance will process its association within the limit
+    #   specified for MaxConcurrency.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_severity
+    #   The severity level to assign to the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -11460,7 +12910,10 @@ module Aws::SSM
       :name,
       :targets,
       :association_name,
-      :association_version)
+      :association_version,
+      :max_errors,
+      :max_concurrency,
+      :compliance_severity)
       include Aws::Structure
     end
 
@@ -11564,18 +13017,37 @@ module Aws::SSM
     #
     #       {
     #         content: "DocumentContent", # required
+    #         attachments: [
+    #           {
+    #             key: "SourceUrl", # accepts SourceUrl
+    #             values: ["AttachmentsSourceValue"],
+    #           },
+    #         ],
     #         name: "DocumentName", # required
+    #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #       }
     #
     # @!attribute [rw] content
-    #   The content in a document that you want to update.
+    #   A valid JSON or YAML string.
     #   @return [String]
+    #
+    # @!attribute [rw] attachments
+    #   A list of key and value pairs that describe attachments to a version
+    #   of a document.
+    #   @return [Array<Types::AttachmentsSource>]
     #
     # @!attribute [rw] name
     #   The name of the document that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   An optional field specifying the version of the artifact you are
+    #   updating with the document. For example, "Release 12, Update 6".
+    #   This value is unique across all versions of a document, and cannot
+    #   be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -11596,7 +13068,9 @@ module Aws::SSM
     #
     class UpdateDocumentRequest < Struct.new(
       :content,
+      :attachments,
       :name,
+      :version_name,
       :document_version,
       :document_format,
       :target_type)
@@ -11621,7 +13095,10 @@ module Aws::SSM
     #         window_id: "MaintenanceWindowId", # required
     #         name: "MaintenanceWindowName",
     #         description: "MaintenanceWindowDescription",
+    #         start_date: "MaintenanceWindowStringDateTime",
+    #         end_date: "MaintenanceWindowStringDateTime",
     #         schedule: "MaintenanceWindowSchedule",
+    #         schedule_timezone: "MaintenanceWindowTimezone",
     #         duration: 1,
     #         cutoff: 1,
     #         allow_unassociated_targets: false,
@@ -11641,9 +13118,40 @@ module Aws::SSM
     #   An optional description for the update request.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the Maintenance Window to become inactive. EndDate allows you to set
+    #   a date and time in the future when the Maintenance Window will no
+    #   longer run.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -11676,7 +13184,10 @@ module Aws::SSM
       :window_id,
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -11697,9 +13208,33 @@ module Aws::SSM
     #   An optional description of the update.
     #   @return [String]
     #
+    # @!attribute [rw] start_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become active. The Maintenance
+    #   Window will not run before this specified time.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date
+    #   The date and time, in ISO-8601 Extended format, for when the
+    #   Maintenance Window is scheduled to become inactive. The Maintenance
+    #   Window will not run after this specified time.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_timezone
+    #   The time zone that the scheduled Maintenance Window executions are
+    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
+    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
+    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -11726,7 +13261,10 @@ module Aws::SSM
       :window_id,
       :name,
       :description,
+      :start_date,
+      :end_date,
       :schedule,
+      :schedule_timezone,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
@@ -12181,6 +13719,7 @@ module Aws::SSM
     #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approved_patches_enable_non_security: false,
     #         rejected_patches: ["PatchId"],
+    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
     #         description: "BaselineDescription",
     #         sources: [
     #           {
@@ -12243,6 +13782,23 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list.
+    #
+    #   * **ALLOW\_AS\_DEPENDENCY**\: A package in the Rejected patches list
+    #     is installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as *InstalledOther*. This is the default action if no
+    #     option is specified.
+    #
+    #   * **BLOCK**\: Packages in the RejectedPatches list, and packages
+    #     that include them as dependencies, are not installed under any
+    #     circumstances. If a package was installed before it was added to
+    #     the Rejected patches list, it is considered non-compliant with the
+    #     patch baseline, and its status is reported as *InstalledRejected*.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the patch baseline.
     #   @return [String]
@@ -12270,6 +13826,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :description,
       :sources,
       :replace)
@@ -12315,6 +13872,13 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rejected_patches_action
+    #   The action specified to take on patches included in the
+    #   RejectedPatches list. A patch can be allowed only if it is a
+    #   dependency of another package, or blocked entirely along with
+    #   packages that include it as a dependency.
+    #   @return [String]
+    #
     # @!attribute [rw] created_date
     #   The date when the patch baseline was created.
     #   @return [Time]
@@ -12345,6 +13909,7 @@ module Aws::SSM
       :approved_patches_compliance_level,
       :approved_patches_enable_non_security,
       :rejected_patches,
+      :rejected_patches_action,
       :created_date,
       :modified_date,
       :description,

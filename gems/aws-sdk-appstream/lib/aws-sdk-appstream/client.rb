@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -189,6 +238,90 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def associate_fleet(params = {}, options = {})
       req = build_request(:associate_fleet, params)
+      req.send_request(options)
+    end
+
+    # Associates the specified users with the specified stacks. Users in a
+    # user pool cannot be assigned to stacks with fleets that are joined to
+    # an Active Directory domain.
+    #
+    # @option params [required, Array<Types::UserStackAssociation>] :user_stack_associations
+    #   The list of UserStackAssociation objects.
+    #
+    # @return [Types::BatchAssociateUserStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateUserStackResult#errors #errors} => Array&lt;Types::UserStackAssociationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_user_stack({
+    #     user_stack_associations: [ # required
+    #       {
+    #         stack_name: "String", # required
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         send_email_notification: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].user_stack_association.stack_name #=> String
+    #   resp.errors[0].user_stack_association.user_name #=> String
+    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
+    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStack AWS API Documentation
+    #
+    # @overload batch_associate_user_stack(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_user_stack(params = {}, options = {})
+      req = build_request(:batch_associate_user_stack, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the specified users from the specified stacks.
+    #
+    # @option params [required, Array<Types::UserStackAssociation>] :user_stack_associations
+    #   The list of UserStackAssociation objects.
+    #
+    # @return [Types::BatchDisassociateUserStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateUserStackResult#errors #errors} => Array&lt;Types::UserStackAssociationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_user_stack({
+    #     user_stack_associations: [ # required
+    #       {
+    #         stack_name: "String", # required
+    #         user_name: "Username", # required
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         send_email_notification: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].user_stack_association.stack_name #=> String
+    #   resp.errors[0].user_stack_association.user_name #=> String
+    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
+    #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStack AWS API Documentation
+    #
+    # @overload batch_disassociate_user_stack(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_user_stack(params = {}, options = {})
+      req = build_request(:batch_disassociate_user_stack, params)
       req.send_request(options)
     end
 
@@ -618,6 +751,12 @@ module Aws::AppStream
     #   The actions that are enabled or disabled for users during their
     #   streaming sessions. By default, these actions are enabled.
     #
+    # @option params [Types::ApplicationSettings] :application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -643,6 +782,10 @@ module Aws::AppStream
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #       },
     #     ],
+    #     application_settings: {
+    #       enabled: false, # required
+    #       settings_group: "SettingsGroup",
+    #     },
     #   })
     #
     # @example Response structure
@@ -665,6 +808,9 @@ module Aws::AppStream
     #   resp.stack.user_settings #=> Array
     #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.application_settings.enabled #=> Boolean
+    #   resp.stack.application_settings.settings_group #=> String
+    #   resp.stack.application_settings.s3_bucket_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -731,6 +877,53 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def create_streaming_url(params = {}, options = {})
       req = build_request(:create_streaming_url, params)
+      req.send_request(options)
+    end
+
+    # Creates a new user in the user pool.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [String] :message_action
+    #   The action to take for the welcome email that is sent to a user after
+    #   the user is created in the user pool. If you specify SUPPRESS, no
+    #   email is sent. If you specify RESEND, do not specify the first name or
+    #   last name of the user. If the value is null, the email is sent.
+    #
+    #   <note markdown="1"> The temporary password in the welcome email is valid for only 7 days.
+    #   If users don’t set their passwords within 7 days, you must send them a
+    #   new welcome email.
+    #
+    #    </note>
+    #
+    # @option params [String] :first_name
+    #   The first name, or given name, of the user.
+    #
+    # @option params [String] :last_name
+    #   The last name, or surname, of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     user_name: "Username", # required
+    #     message_action: "SUPPRESS", # accepts SUPPRESS, RESEND
+    #     first_name: "UserAttributeValue",
+    #     last_name: "UserAttributeValue",
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
       req.send_request(options)
     end
 
@@ -938,6 +1131,32 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes a user from the user pool.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user({
+    #     user_name: "Username", # required
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUser AWS API Documentation
+    #
+    # @overload delete_user(params = {})
+    # @param [Hash] params ({})
+    def delete_user(params = {}, options = {})
+      req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes one or more specified Directory Config
     # objects for AppStream 2.0, if the names for these objects are
     # provided. Otherwise, all Directory Config objects in the account are
@@ -1117,23 +1336,23 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Retrieves a list that describes the permissions for a private image
-    # that you own.
+    # Retrieves a list that describes the permissions for shared AWS account
+    # IDs on a private image that you own.
     #
     # @option params [required, String] :name
     #   The name of the private image for which to describe permissions. The
     #   image must be one that you own.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of each results page.
+    #   The maximum size of each page of results.
     #
     # @option params [Array<String>] :shared_aws_account_ids
     #   The 12-digit ID of one or more AWS accounts with which the image is
     #   shared.
     #
     # @option params [String] :next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #
     # @return [Types::DescribeImagePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1169,11 +1388,11 @@ module Aws::AppStream
     end
 
     # Retrieves a list that describes one or more specified images, if the
-    # image names are provided. Otherwise, all images in the account are
-    # described.
+    # image names or image ARNs are provided. Otherwise, all images in the
+    # account are described.
     #
     # @option params [Array<String>] :names
-    #   The names of the images to describe.
+    #   The names of the public or private images to describe.
     #
     # @option params [Array<String>] :arns
     #   The ARNs of the public, private, and shared images to describe.
@@ -1182,8 +1401,8 @@ module Aws::AppStream
     #   The type of image (public, private, or shared) to describe.
     #
     # @option params [String] :next_token
-    #   The pagination token to use to retrieve the next page of results. If
-    #   this value is empty, only the first page is retrieved.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #
     # @option params [Integer] :max_results
     #   The maximum size of each page of results.
@@ -1352,6 +1571,9 @@ module Aws::AppStream
     #   resp.stacks[0].user_settings #=> Array
     #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
     #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stacks[0].application_settings.enabled #=> Boolean
+    #   resp.stacks[0].application_settings.settings_group #=> String
+    #   resp.stacks[0].application_settings.s3_bucket_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -1360,6 +1582,142 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
       req = build_request(:describe_stacks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the UserStackAssociation objects. You
+    # must specify either or both of the following:
+    #
+    # * The stack name
+    #
+    # * The user name (email address of the user associated with the stack)
+    #   and the authentication type for the user
+    #
+    # @option params [String] :stack_name
+    #   The name of the stack that is associated with the user.
+    #
+    # @option params [String] :user_name
+    #   The email address of the user who is associated with the stack.
+    #
+    # @option params [String] :authentication_type
+    #   The authentication type for the user who is associated with the stack.
+    #   You must specify USERPOOL.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::DescribeUserStackAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUserStackAssociationsResult#user_stack_associations #user_stack_associations} => Array&lt;Types::UserStackAssociation&gt;
+    #   * {Types::DescribeUserStackAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_user_stack_associations({
+    #     stack_name: "String",
+    #     user_name: "Username",
+    #     authentication_type: "API", # accepts API, SAML, USERPOOL
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_stack_associations #=> Array
+    #   resp.user_stack_associations[0].stack_name #=> String
+    #   resp.user_stack_associations[0].user_name #=> String
+    #   resp.user_stack_associations[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.user_stack_associations[0].send_email_notification #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociations AWS API Documentation
+    #
+    # @overload describe_user_stack_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_user_stack_associations(params = {}, options = {})
+      req = build_request(:describe_user_stack_associations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more specified users in the
+    # user pool, if user names are provided. Otherwise, all users in the
+    # user pool are described.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the users in the user pool to describe.
+    #   You must specify USERPOOL.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::DescribeUsersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUsersResult#users #users} => Array&lt;Types::User&gt;
+    #   * {Types::DescribeUsersResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_users({
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].arn #=> String
+    #   resp.users[0].user_name #=> String
+    #   resp.users[0].enabled #=> Boolean
+    #   resp.users[0].status #=> String
+    #   resp.users[0].first_name #=> String
+    #   resp.users[0].last_name #=> String
+    #   resp.users[0].created_time #=> Time
+    #   resp.users[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsers AWS API Documentation
+    #
+    # @overload describe_users(params = {})
+    # @param [Hash] params ({})
+    def describe_users(params = {}, options = {})
+      req = build_request(:describe_users, params)
+      req.send_request(options)
+    end
+
+    # Disables the specified user in the user pool. Users can't sign in to
+    # AppStream 2.0 until they are re-enabled. This action does not delete
+    # the user.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_user({
+    #     user_name: "Username", # required
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUser AWS API Documentation
+    #
+    # @overload disable_user(params = {})
+    # @param [Hash] params ({})
+    def disable_user(params = {}, options = {})
+      req = build_request(:disable_user, params)
       req.send_request(options)
     end
 
@@ -1386,6 +1744,34 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def disassociate_fleet(params = {}, options = {})
       req = build_request(:disassociate_fleet, params)
+      req.send_request(options)
+    end
+
+    # Enables a user in the user pool. After being enabled, users can sign
+    # in to AppStream 2.0 and open applications from the stacks to which
+    # they are assigned.
+    #
+    # @option params [required, String] :user_name
+    #   The email address of the user.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication type for the user. You must specify USERPOOL.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_user({
+    #     user_name: "Username", # required
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUser AWS API Documentation
+    #
+    # @overload enable_user(params = {})
+    # @param [Hash] params ({})
+    def enable_user(params = {}, options = {})
+      req = build_request(:enable_user, params)
       req.send_request(options)
     end
 
@@ -2033,6 +2419,12 @@ module Aws::AppStream
     #   The actions that are enabled or disabled for users during their
     #   streaming sessions. By default, these actions are enabled.
     #
+    # @option params [Types::ApplicationSettings] :application_settings
+    #   The persistent application settings for users of a stack. When these
+    #   settings are enabled, changes that users make to applications and
+    #   Windows settings are automatically saved after each session and
+    #   applied to the next session.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -2060,6 +2452,10 @@ module Aws::AppStream
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #       },
     #     ],
+    #     application_settings: {
+    #       enabled: false, # required
+    #       settings_group: "SettingsGroup",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2082,6 +2478,9 @@ module Aws::AppStream
     #   resp.stack.user_settings #=> Array
     #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.application_settings.enabled #=> Boolean
+    #   resp.stack.application_settings.settings_group #=> String
+    #   resp.stack.application_settings.s3_bucket_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -2105,7 +2504,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

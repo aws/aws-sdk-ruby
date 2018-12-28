@@ -1,6 +1,170 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2018-12-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.126.0 (2018-12-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ApiGatewayV2`.
+
+* Feature - Added support for enumerating regions for `Aws::ApiGatewayManagementApi`.
+
+1.125.0 (2018-12-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.124.0 (2018-12-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.123.0 (2018-12-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.122.0 (2018-12-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.121.0 (2018-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Kafka`.
+
+1.120.0 (2018-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LicenseManager`.
+
+* Feature - Added support for enumerating regions for `Aws::AppMesh`.
+
+1.119.0 (2018-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SecurityHub`.
+
+* Feature - Added support for enumerating regions for `Aws::FSx`.
+
+1.118.0 (2018-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaConnect`.
+
+* Feature - Added support for enumerating regions for `Aws::KinesisAnalyticsV2`.
+
+* Feature - Added support for enumerating regions for `Aws::ComprehendMedical`.
+
+1.117.0 (2018-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::GlobalAccelerator`.
+
+1.116.0 (2018-11-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Transfer`.
+
+* Feature - Added support for enumerating regions for `Aws::RoboMaker`.
+
+* Feature - Added support for enumerating regions for `Aws::DataSync`.
+
+* Feature - Added support for enumerating regions for `Aws::Amplify`.
+
+1.115.0 (2018-11-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RDSDataService`.
+
+* Feature - Added support for enumerating regions for `Aws::QuickSight`.
+
+1.114.0 (2018-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::S3Control`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53Resolver`.
+
+* Feature - Added support for enumerating regions for `Aws::RAM`.
+
+* Feature - Added support for enumerating regions for `Aws::PinpointSMSVoice`.
+
+1.113.0 (2018-11-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.112.0 (2018-11-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.111.0 (2018-11-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.110.0 (2018-11-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.109.0 (2018-11-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.108.0 (2018-11-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PinpointEmail`.
+
+1.107.0 (2018-10-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Chime`.
+
+1.106.0 (2018-10-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.105.0 (2018-09-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.104.0 (2018-09-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.103.0 (2018-09-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.102.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Signer`.
+
+1.101.0 (2018-08-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::signer`.
+
+1.100.0 (2018-08-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.99.0 (2018-08-14)
 ------------------
 

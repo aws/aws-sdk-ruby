@@ -77,10 +77,12 @@ module Aws::IoTDataPlane
       api.version = "2015-05-28"
 
       api.metadata = {
+        "apiVersion" => "2015-05-28",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT Data Plane",
         "signatureVersion" => "v4",
         "signingName" => "iotdata",
+        "uid" => "iot-data-2015-05-28",
       }
 
       api.add_operation(:delete_thing_shadow, Seahorse::Model::Operation.new.tap do |o|

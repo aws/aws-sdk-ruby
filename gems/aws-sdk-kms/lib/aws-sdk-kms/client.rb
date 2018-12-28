@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::KMS
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -236,9 +285,79 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Creates a display name for a customer-managed customer master key
-    # (CMK). You can use an alias to identify a CMK in selected operations,
-    # such as Encrypt and GenerateDataKey.
+    # Connects or reconnects a [custom key store][1] to its associated AWS
+    # CloudHSM cluster.
+    #
+    # The custom key store must be connected before you can create customer
+    # master keys (CMKs) in the key store or use the CMKs it contains. You
+    # can disconnect and reconnect a custom key store at any time.
+    #
+    # To connect a custom key store, its associated AWS CloudHSM cluster
+    # must have at least one active HSM. To get the number of active HSMs in
+    # a cluster, use the [DescribeClusters][2] operation. To add HSMs to the
+    # cluster, use the [CreateHsm][3] operation.
+    #
+    # The connection process can take an extended amount of time to
+    # complete; up to 20 minutes. This operation starts the connection
+    # process, but it does not wait for it to complete. When it succeeds,
+    # this operation quickly returns an HTTP 200 response and a JSON object
+    # with no properties. However, this response does not indicate that the
+    # custom key store is connected. To get the connection state of the
+    # custom key store, use the DescribeCustomKeyStores operation.
+    #
+    # During the connection process, AWS KMS finds the AWS CloudHSM cluster
+    # that is associated with the custom key store, creates the connection
+    # infrastructure, connects to the cluster, logs into the AWS CloudHSM
+    # client as the [ `kmsuser` crypto user][4] (CU), and rotates its
+    # password.
+    #
+    # The `ConnectCustomKeyStore` operation might fail for various reasons.
+    # To find the reason, use the DescribeCustomKeyStores operation and see
+    # the `ConnectionErrorCode` in the response. For help interpreting the
+    # `ConnectionErrorCode`, see CustomKeyStoresListEntry.
+    #
+    # To fix the failure, use the DisconnectCustomKeyStore operation to
+    # disconnect the custom key store, correct the error, use the
+    # UpdateCustomKeyStore operation if necessary, and then use
+    # `ConnectCustomKeyStore` again.
+    #
+    # If you are having trouble connecting or disconnecting a custom key
+    # store, see [Troubleshooting a Custom Key Store][5] in the *AWS Key
+    # Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters
+    # [3]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm
+    # [4]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    # [5]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #
+    # @option params [required, String] :custom_key_store_id
+    #   Enter the key store ID of the custom key store that you want to
+    #   connect. To find the ID of a custom key store, use the
+    #   DescribeCustomKeyStores operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.connect_custom_key_store({
+    #     custom_key_store_id: "CustomKeyStoreIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ConnectCustomKeyStore AWS API Documentation
+    #
+    # @overload connect_custom_key_store(params = {})
+    # @param [Hash] params ({})
+    def connect_custom_key_store(params = {}, options = {})
+      req = build_request(:connect_custom_key_store, params)
+      req.send_request(options)
+    end
+
+    # Creates a display name for a customer master key (CMK). You can use an
+    # alias to identify a CMK in selected operations, such as Encrypt and
+    # GenerateDataKey.
     #
     # Each CMK can have multiple aliases, but each alias points to only one
     # CMK. The alias name must be unique in the AWS account and region. To
@@ -250,10 +369,11 @@ module Aws::KMS
     # appear in the response from the DescribeKey operation. To get the
     # aliases of all CMKs, use the ListAliases operation.
     #
-    # The alias name can contain only alphanumeric characters, forward
-    # slashes (/), underscores (\_), and dashes (-). Alias names cannot
-    # begin with **aws/**. That alias name prefix is reserved for AWS
-    # managed CMKs.
+    # An alias must start with the word `alias` followed by a forward slash
+    # (`alias/`). The alias name can contain only alphanumeric characters,
+    # forward slashes (/), underscores (\_), and dashes (-). Alias names
+    # cannot begin with `aws`; that alias name prefix is reserved by Amazon
+    # Web Services (AWS).
     #
     # The alias and the CMK it is mapped to must be in the same AWS account
     # and the same region. You cannot perform this operation on an alias in
@@ -270,10 +390,9 @@ module Aws::KMS
     # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :alias_name
-    #   Specifies the alias name. This value must begin with `alias/` followed
-    #   by the alias name, such as `alias/ExampleAlias`. The alias name cannot
-    #   begin with `aws/`. The `alias/aws/` prefix is reserved for AWS managed
-    #   CMKs.
+    #   String that contains the display name. The name must start with the
+    #   word "alias" followed by a forward slash (alias/). Aliases that
+    #   begin with "alias/AWS" are reserved.
     #
     # @option params [required, String] :target_key_id
     #   Identifies the CMK for which you are creating the alias. This value
@@ -315,6 +434,147 @@ module Aws::KMS
     # @param [Hash] params ({})
     def create_alias(params = {}, options = {})
       req = build_request(:create_alias, params)
+      req.send_request(options)
+    end
+
+    # Creates a [custom key store][1] that is associated with an [AWS
+    # CloudHSM cluster][2] that you own and manage.
+    #
+    # This operation is part of the [Custom Key Store feature][3] feature in
+    # AWS KMS, which combines the convenience and extensive integration of
+    # AWS KMS with the isolation and control of a single-tenant key store.
+    #
+    # When the operation completes successfully, it returns the ID of the
+    # new custom key store. Before you can use your new custom key store,
+    # you need to use the ConnectCustomKeyStore operation to connect the new
+    # key store to its AWS CloudHSM cluster.
+    #
+    # The `CreateCustomKeyStore` operation requires the following elements.
+    #
+    # * You must specify an active AWS CloudHSM cluster in the same account
+    #   and AWS Region as the custom key store. You can use an existing
+    #   cluster or [create and activate a new AWS CloudHSM cluster][4] for
+    #   the key store. AWS KMS does not require exclusive use of the
+    #   cluster.
+    #
+    # * You must include the content of the *trust anchor certificate* for
+    #   the cluster. You created this certificate, and saved it in the
+    #   `customerCA.crt` file, when you [initialized the cluster][5].
+    #
+    # * You must provide the password of the dedicated [ `kmsuser` crypto
+    #   user][6] (CU) account in the cluster.
+    #
+    #   Before you create the custom key store, use the [createUser][7]
+    #   command in `cloudhsm_mgmt_util` to create [a crypto user (CU) named
+    #   `kmsuser` ][6]in specified AWS CloudHSM cluster. AWS KMS uses the
+    #   `kmsuser` CU account to create and manage key material on your
+    #   behalf. For instructions, see [Create the kmsuser Crypto User][8] in
+    #   the *AWS Key Management Service Developer Guide*.
+    #
+    # The AWS CloudHSM cluster that you specify must meet the following
+    # requirements.
+    #
+    # * The cluster must be active and be in the same AWS account and Region
+    #   as the custom key store.
+    #
+    # * Each custom key store must be associated with a different AWS
+    #   CloudHSM cluster. The cluster cannot be associated with another
+    #   custom key store or have the same cluster certificate as a cluster
+    #   that is associated with another custom key store. To view the
+    #   cluster certificate, use the AWS CloudHSM [DescribeClusters][9]
+    #   operation. Clusters that share a backup history have the same
+    #   cluster certificate.
+    #
+    # * The cluster must be configured with subnets in at least two
+    #   different Availability Zones in the Region. Because AWS CloudHSM is
+    #   not supported in all Availability Zones, we recommend that the
+    #   cluster have subnets in all Availability Zones in the Region.
+    #
+    # * The cluster must contain at least two active HSMs, each in a
+    #   different Availability Zone.
+    #
+    # New custom key stores are not automatically connected. After you
+    # create your custom key store, use the ConnectCustomKeyStore operation
+    # to connect the custom key store to its associated AWS CloudHSM
+    # cluster. Even if you are not going to use your custom key store
+    # immediately, you might want to connect it to verify that all settings
+    # are correct and then disconnect it until you are ready to use it.
+    #
+    # If this operation succeeds, it returns the ID of the new custom key
+    # store. For help with failures, see [Troubleshoot a Custom Key
+    # Store][10] in the *AWS KMS Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/clusters.html
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [4]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/create-cluster.html
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr
+    # [6]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    # [7]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/cloudhsm_mgmt_util-createUser.html
+    # [8]: http://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore
+    # [9]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    # [10]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #
+    # @option params [required, String] :custom_key_store_name
+    #   Specifies a friendly name for the custom key store. The name must be
+    #   unique in your AWS account.
+    #
+    # @option params [required, String] :cloud_hsm_cluster_id
+    #   Identifies the AWS CloudHSM cluster for the custom key store. Enter
+    #   the cluster ID of any active AWS CloudHSM cluster that is not already
+    #   associated with a custom key store. To find the cluster ID, use the
+    #   [DescribeClusters][1] operation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #
+    # @option params [required, String] :trust_anchor_certificate
+    #   Enter the content of the trust anchor certificate for the cluster.
+    #   This is the content of the `customerCA.crt` file that you created when
+    #   you [initialized the cluster][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html
+    #
+    # @option params [required, String] :key_store_password
+    #   Enter the password of the [ `kmsuser` crypto user (CU) account][1] in
+    #   the specified AWS CloudHSM cluster. AWS KMS logs into the cluster as
+    #   this user to manage key material on your behalf.
+    #
+    #   This parameter tells AWS KMS the `kmsuser` account password; it does
+    #   not change the password in the AWS CloudHSM cluster.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    #
+    # @return [Types::CreateCustomKeyStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomKeyStoreResponse#custom_key_store_id #custom_key_store_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_key_store({
+    #     custom_key_store_name: "CustomKeyStoreNameType", # required
+    #     cloud_hsm_cluster_id: "CloudHsmClusterIdType", # required
+    #     trust_anchor_certificate: "TrustAnchorCertificateType", # required
+    #     key_store_password: "KeyStorePasswordType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_key_store_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStore AWS API Documentation
+    #
+    # @overload create_custom_key_store(params = {})
+    # @param [Hash] params ({})
+    def create_custom_key_store(params = {}, options = {})
+      req = build_request(:create_custom_key_store, params)
       req.send_request(options)
     end
 
@@ -409,8 +669,7 @@ module Aws::KMS
     #
     # @option params [String] :name
     #   A friendly name for identifying the grant. Use this value to prevent
-    #   the unintended creation of duplicate grants when retrying this
-    #   request.
+    #   unintended creation of duplicate grants when retrying this request.
     #
     #   When this value is absent, all `CreateGrant` requests result in a new
     #   grant with a unique `GrantId` even if all the supplied parameters are
@@ -486,15 +745,24 @@ module Aws::KMS
     # Creates a customer master key (CMK) in the caller's AWS account.
     #
     # You can use a CMK to encrypt small amounts of data (4 KiB or less)
-    # directly. But CMKs are more commonly used to encrypt data encryption
-    # keys (DEKs), which are used to encrypt raw data. For more information
-    # about DEKs and the difference between CMKs and DEKs, see the
-    # following:
+    # directly, but CMKs are more commonly used to encrypt data keys, which
+    # are used to encrypt raw data. For more information about data keys and
+    # the difference between CMKs and data keys, see the following:
     #
     # * The GenerateDataKey operation
     #
     # * [AWS Key Management Service Concepts][1] in the *AWS Key Management
     #   Service Developer Guide*
+    #
+    # If you plan to [import key material][2], use the `Origin` parameter
+    # with a value of `EXTERNAL` to create a CMK with no key material.
+    #
+    # To create a CMK in a [custom key store][3], use `CustomKeyStoreId`
+    # parameter to specify the custom key store. You must also use the
+    # `Origin` parameter with a value of `AWS_CLOUDHSM`. The AWS CloudHSM
+    # cluster that is associated with the custom key store must have at
+    # least two active HSMs, each in a different Availability Zone in the
+    # Region.
     #
     # You cannot use this operation to create a CMK in a different AWS
     # account.
@@ -502,6 +770,8 @@ module Aws::KMS
     #
     #
     # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
+    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     #
     # @option params [String] :policy
     #   The key policy to attach to the CMK.
@@ -519,11 +789,10 @@ module Aws::KMS
     #     principals. The principals in the key policy must exist and be
     #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy. The reason for
-    #     this is that the new principal might not be immediately visible to
-    #     AWS KMS. For more information, see [Changes that I make are not
-    #     always immediately visible][2] in the *AWS Identity and Access
-    #     Management User Guide*.
+    #     before including the new principal in a key policy because the new
+    #     principal might not be immediately visible to AWS KMS. For more
+    #     information, see [Changes that I make are not always immediately
+    #     visible][2] in the *AWS Identity and Access Management User Guide*.
     #
     #   If you do not provide a key policy, AWS KMS attaches a default key
     #   policy to the CMK. For more information, see [Default Key Policy][3]
@@ -549,20 +818,50 @@ module Aws::KMS
     #   You can use CMKs only for symmetric encryption and decryption.
     #
     # @option params [String] :origin
-    #   The source of the CMK's key material.
+    #   The source of the CMK's key material. You cannot change the origin
+    #   after you create the CMK.
     #
-    #   The default is `AWS_KMS`, which means AWS KMS creates the key
-    #   material. When this parameter is set to `EXTERNAL`, the request
-    #   creates a CMK without key material so that you can import key material
-    #   from your existing key management infrastructure. For more information
-    #   about importing key material into AWS KMS, see [Importing Key
-    #   Material][1] in the *AWS Key Management Service Developer Guide*.
+    #   The default is `AWS_KMS`, which means AWS KMS creates the key material
+    #   in its own key store.
     #
-    #   The CMK's `Origin` is immutable and is set when the CMK is created.
+    #   When the parameter value is `EXTERNAL`, AWS KMS creates a CMK without
+    #   key material so that you can import key material from your existing
+    #   key management infrastructure. For more information about importing
+    #   key material into AWS KMS, see [Importing Key Material][1] in the *AWS
+    #   Key Management Service Developer Guide*.
+    #
+    #   When the parameter value is `AWS_CLOUDHSM`, AWS KMS creates the CMK in
+    #   a AWS KMS [custom key store][2] and creates its key material in the
+    #   associated AWS CloudHSM cluster. You must also use the
+    #   `CustomKeyStoreId` parameter to identify the custom key store.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #
+    # @option params [String] :custom_key_store_id
+    #   Creates the CMK in the specified [custom key store][1] and the key
+    #   material in its associated AWS CloudHSM cluster. To create a CMK in a
+    #   custom key store, you must also specify the `Origin` parameter with a
+    #   value of `AWS_CLOUDHSM`. The AWS CloudHSM cluster that is associated
+    #   with the custom key store must have at least two active HSMs, each in
+    #   a different Availability Zone in the Region.
+    #
+    #   To find the ID of a custom key store, use the DescribeCustomKeyStores
+    #   operation.
+    #
+    #   The response includes the custom key store ID and the ID of the AWS
+    #   CloudHSM cluster.
+    #
+    #   This operation is part of the [Custom Key Store feature][2] feature in
+    #   AWS KMS, which combines the convenience and extensive integration of
+    #   AWS KMS with the isolation and control of a single-tenant key store.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
     #   A flag to indicate whether to bypass the key policy lockout safety
@@ -634,7 +933,8 @@ module Aws::KMS
     #     policy: "PolicyType",
     #     description: "DescriptionType",
     #     key_usage: "ENCRYPT_DECRYPT", # accepts ENCRYPT_DECRYPT
-    #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
+    #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM
+    #     custom_key_store_id: "CustomKeyStoreIdType",
     #     bypass_policy_lockout_safety_check: false,
     #     tags: [
     #       {
@@ -653,10 +953,12 @@ module Aws::KMS
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
     #   resp.key_metadata.key_usage #=> String, one of "ENCRYPT_DECRYPT"
-    #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport"
+    #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport", "Unavailable"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
-    #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
+    #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM"
+    #   resp.key_metadata.custom_key_store_id #=> String
+    #   resp.key_metadata.cloud_hsm_cluster_id #=> String
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #
@@ -678,14 +980,15 @@ module Aws::KMS
     #
     # * Encrypt
     #
-    # Whenever possible, use key policies to give users permission to call
-    # the Decrypt operation on the CMK, instead of IAM policies. Otherwise,
-    # you might create an IAM user policy that gives the user Decrypt
-    # permission on all CMKs. This user could decrypt ciphertext that was
-    # encrypted by CMKs in other accounts if the key policy for the
-    # cross-account CMK permits it. If you must use an IAM policy for
-    # `Decrypt` permissions, limit the user to particular CMKs or particular
-    # trusted accounts.
+    # Note that if a caller has been granted access permissions to all keys
+    # (through, for example, IAM user policies that grant `Decrypt`
+    # permission on all resources), then ciphertext encrypted by using keys
+    # in other accounts where the key grants access to the caller can be
+    # decrypted. To remedy this, we recommend that you do not grant
+    # `Decrypt` access in an IAM user policy. Instead grant `Decrypt` access
+    # only in key policies. If you must grant `Decrypt` access in an IAM
+    # user policy, you should scope the resource to specific keys or to
+    # specific trusted accounts.
     #
     # The result of this operation varies with the key state of the CMK. For
     # details, see [How Key State Affects Use of a Customer Master Key][1]
@@ -805,6 +1108,66 @@ module Aws::KMS
       req.send_request(options)
     end
 
+    # Deletes a [custom key store][1]. This operation does not delete the
+    # AWS CloudHSM cluster that is associated with the custom key store, or
+    # affect any users or keys in the cluster.
+    #
+    # The custom key store that you delete cannot contain any AWS KMS
+    # [customer master keys (CMKs)][2]. Before deleting the key store,
+    # verify that you will never need to use any of the CMKs in the key
+    # store for any cryptographic operations. Then, use ScheduleKeyDeletion
+    # to delete the AWS KMS customer master keys (CMKs) from the key store.
+    # When the scheduled waiting period expires, the `ScheduleKeyDeletion`
+    # operation deletes the CMKs. Then it makes a best effort to delete the
+    # key material from the associated cluster. However, you might need to
+    # manually [delete the orphaned key material][3] from the cluster and
+    # its backups.
+    #
+    # After all CMKs are deleted from AWS KMS, use DisconnectCustomKeyStore
+    # to disconnect the key store from AWS KMS. Then, you can delete the
+    # custom key store.
+    #
+    # Instead of deleting the custom key store, consider using
+    # DisconnectCustomKeyStore to disconnect it from AWS KMS. While the key
+    # store is disconnected, you cannot create or use the CMKs in the key
+    # store. But, you do not need to delete CMKs and you can reconnect a
+    # disconnected custom key store at any time.
+    #
+    # If the operation succeeds, it returns a JSON object with no
+    # properties.
+    #
+    # This operation is part of the [Custom Key Store feature][4] feature in
+    # AWS KMS, which combines the convenience and extensive integration of
+    # AWS KMS with the isolation and control of a single-tenant key store.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
+    # [4]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #
+    # @option params [required, String] :custom_key_store_id
+    #   Enter the ID of the custom key store you want to delete. To find the
+    #   ID of a custom key store, use the DescribeCustomKeyStores operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_key_store({
+    #     custom_key_store_id: "CustomKeyStoreIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteCustomKeyStore AWS API Documentation
+    #
+    # @overload delete_custom_key_store(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_key_store(params = {}, options = {})
+      req = build_request(:delete_custom_key_store, params)
+      req.send_request(options)
+    end
+
     # Deletes key material that you previously imported. This operation
     # makes the specified customer master key (CMK) unusable. For more
     # information about importing key material into AWS KMS, see [Importing
@@ -868,13 +1231,113 @@ module Aws::KMS
       req.send_request(options)
     end
 
+    # Gets information about [custom key stores][1] in the account and
+    # region.
+    #
+    # This operation is part of the [Custom Key Store feature][2] feature in
+    # AWS KMS, which combines the convenience and extensive integration of
+    # AWS KMS with the isolation and control of a single-tenant key store.
+    #
+    # By default, this operation returns information about all custom key
+    # stores in the account and region. To get only information about a
+    # particular custom key store, use either the `CustomKeyStoreName` or
+    # `CustomKeyStoreId` parameter (but not both).
+    #
+    # To determine whether the custom key store is connected to its AWS
+    # CloudHSM cluster, use the `ConnectionState` element in the response.
+    # If an attempt to connect the custom key store failed, the
+    # `ConnectionState` value is `FAILED` and the `ConnectionErrorCode`
+    # element in the response indicates the cause of the failure. For help
+    # interpreting the `ConnectionErrorCode`, see CustomKeyStoresListEntry.
+    #
+    # Custom key stores have a `DISCONNECTED` connection state if the key
+    # store has never been connected or you use the DisconnectCustomKeyStore
+    # operation to disconnect it. If your custom key store state is
+    # `CONNECTED` but you are having trouble using it, make sure that its
+    # associated AWS CloudHSM cluster is active and contains the minimum
+    # number of HSMs required for the operation, if any.
+    #
+    # For help repairing your custom key store, see the [Troubleshooting
+    # Custom Key Stores][3] topic in the *AWS Key Management Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore-html
+    #
+    # @option params [String] :custom_key_store_id
+    #   Gets only information about the specified custom key store. Enter the
+    #   key store ID.
+    #
+    #   By default, this operation gets information about all custom key
+    #   stores in the account and region. To limit the output to a particular
+    #   custom key store, you can use either the `CustomKeyStoreId` or
+    #   `CustomKeyStoreName` parameter, but not both.
+    #
+    # @option params [String] :custom_key_store_name
+    #   Gets only information about the specified custom key store. Enter the
+    #   friendly name of the custom key store.
+    #
+    #   By default, this operation gets information about all custom key
+    #   stores in the account and region. To limit the output to a particular
+    #   custom key store, you can use either the `CustomKeyStoreId` or
+    #   `CustomKeyStoreName` parameter, but not both.
+    #
+    # @option params [Integer] :limit
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
+    #
+    # @option params [String] :marker
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
+    #
+    # @return [Types::DescribeCustomKeyStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomKeyStoresResponse#custom_key_stores #custom_key_stores} => Array&lt;Types::CustomKeyStoresListEntry&gt;
+    #   * {Types::DescribeCustomKeyStoresResponse#next_marker #next_marker} => String
+    #   * {Types::DescribeCustomKeyStoresResponse#truncated #truncated} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_key_stores({
+    #     custom_key_store_id: "CustomKeyStoreIdType",
+    #     custom_key_store_name: "CustomKeyStoreNameType",
+    #     limit: 1,
+    #     marker: "MarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_key_stores #=> Array
+    #   resp.custom_key_stores[0].custom_key_store_id #=> String
+    #   resp.custom_key_stores[0].custom_key_store_name #=> String
+    #   resp.custom_key_stores[0].cloud_hsm_cluster_id #=> String
+    #   resp.custom_key_stores[0].trust_anchor_certificate #=> String
+    #   resp.custom_key_stores[0].connection_state #=> String, one of "CONNECTED", "CONNECTING", "FAILED", "DISCONNECTED", "DISCONNECTING"
+    #   resp.custom_key_stores[0].connection_error_code #=> String, one of "INVALID_CREDENTIALS", "CLUSTER_NOT_FOUND", "NETWORK_ERRORS", "INSUFFICIENT_CLOUDHSM_HSMS", "USER_LOCKED_OUT"
+    #   resp.custom_key_stores[0].creation_date #=> Time
+    #   resp.next_marker #=> String
+    #   resp.truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStores AWS API Documentation
+    #
+    # @overload describe_custom_key_stores(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_key_stores(params = {}, options = {})
+      req = build_request(:describe_custom_key_stores, params)
+      req.send_request(options)
+    end
+
     # Provides detailed information about the specified customer master key
     # (CMK).
     #
-    # You can use `DescribeKey` on a predefined AWS alias, that is, an AWS
-    # alias with no key ID. When you do, AWS KMS associates the alias with
-    # an [AWS managed CMK][1] and returns its `KeyId` and `Arn` in the
-    # response.
+    # If you use `DescribeKey` on a predefined AWS alias, that is, an AWS
+    # alias with no key ID, AWS KMS associates the alias with an [AWS
+    # managed CMK][1] and returns its `KeyId` and `Arn` in the response.
     #
     # To perform this operation on a CMK in a different AWS account, specify
     # the key ARN or alias ARN in the value of the KeyId parameter.
@@ -892,7 +1355,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   "alias/". To specify a CMK in a different AWS account, you must use
     #   the key ARN or alias ARN.
     #
     #   For example:
@@ -968,10 +1431,12 @@ module Aws::KMS
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
     #   resp.key_metadata.key_usage #=> String, one of "ENCRYPT_DECRYPT"
-    #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport"
+    #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport", "Unavailable"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
-    #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
+    #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM"
+    #   resp.key_metadata.custom_key_store_id #=> String
+    #   resp.key_metadata.cloud_hsm_cluster_id #=> String
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #
@@ -1093,9 +1558,62 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Sets the state of a customer master key (CMK) to enabled, thereby
-    # permitting its use for cryptographic operations. You cannot perform
-    # this operation on a CMK in a different AWS account.
+    # Disconnects the [custom key store][1] from its associated AWS CloudHSM
+    # cluster. While a custom key store is disconnected, you can manage the
+    # custom key store and its customer master keys (CMKs), but you cannot
+    # create or use CMKs in the custom key store. You can reconnect the
+    # custom key store at any time.
+    #
+    # <note markdown="1"> While a custom key store is disconnected, all attempts to create
+    # customer master keys (CMKs) in the custom key store or to use existing
+    # CMKs in cryptographic operations will fail. This action can prevent
+    # users from storing and accessing sensitive data.
+    #
+    #  </note>
+    #
+    #
+    #
+    # To find the connection state of a custom key store, use the
+    # DescribeCustomKeyStores operation. To reconnect a custom key store,
+    # use the ConnectCustomKeyStore operation.
+    #
+    # If the operation succeeds, it returns a JSON object with no
+    # properties.
+    #
+    # This operation is part of the [Custom Key Store feature][2] feature in
+    # AWS KMS, which combines the convenience and extensive integration of
+    # AWS KMS with the isolation and control of a single-tenant key store.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #
+    # @option params [required, String] :custom_key_store_id
+    #   Enter the ID of the custom key store you want to disconnect. To find
+    #   the ID of a custom key store, use the DescribeCustomKeyStores
+    #   operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disconnect_custom_key_store({
+    #     custom_key_store_id: "CustomKeyStoreIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisconnectCustomKeyStore AWS API Documentation
+    #
+    # @overload disconnect_custom_key_store(params = {})
+    # @param [Hash] params ({})
+    def disconnect_custom_key_store(params = {}, options = {})
+      req = build_request(:disconnect_custom_key_store, params)
+      req.send_request(options)
+    end
+
+    # Sets the key state of a customer master key (CMK) to enabled. This
+    # allows you to use the CMK for cryptographic operations. You cannot
+    # perform this operation on a CMK in a different AWS account.
     #
     # The result of this operation varies with the key state of the CMK. For
     # details, see [How Key State Affects Use of a Customer Master Key][1]
@@ -1149,14 +1667,18 @@ module Aws::KMS
     # customer master key (CMK). You cannot perform this operation on a CMK
     # in a different AWS account.
     #
+    # You cannot enable automatic rotation of CMKs with imported key
+    # material or CMKs in a [custom key store][2].
+    #
     # The result of this operation varies with the key state of the CMK. For
-    # details, see [How Key State Affects Use of a Customer Master Key][2]
+    # details, see [How Key State Affects Use of a Customer Master Key][3]
     # in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :key_id
     #   A unique identifier for the customer master key (CMK).
@@ -1205,27 +1727,29 @@ module Aws::KMS
     #   such as an RSA key, a database password, or other sensitive
     #   information.
     #
-    # * You can use the `Encrypt` operation to move encrypted data from one
-    #   AWS region to another. In the first region, generate a data key and
-    #   use the plaintext key to encrypt the data. Then, in the new region,
-    #   call the `Encrypt` method on same plaintext data key. Now, you can
-    #   safely move the encrypted data and encrypted data key to the new
-    #   region, and decrypt in the new region when necessary.
+    # * To move encrypted data from one AWS region to another, you can use
+    #   this operation to encrypt in the new region the plaintext data key
+    #   that was used to encrypt the data in the original region. This
+    #   provides you with an encrypted copy of the data key that can be
+    #   decrypted in the new region and used there to decrypt the encrypted
+    #   data.
     #
-    # You don't need use this operation to encrypt a data key within a
-    # region. The GenerateDataKey and GenerateDataKeyWithoutPlaintext
-    # operations return an encrypted data key.
+    # To perform this operation on a CMK in a different AWS account, specify
+    # the key ARN or alias ARN in the value of the KeyId parameter.
     #
-    # Also, you don't need to use this operation to encrypt data in your
-    # application. You can use the plaintext and encrypted data keys that
-    # the `GenerateDataKey` operation returns.
+    # Unless you are moving encrypted data from one region to another, you
+    # don't use this operation to encrypt a generated data key within a
+    # region. To get data keys that are already encrypted, call the
+    # GenerateDataKey or GenerateDataKeyWithoutPlaintext operation. Data
+    # keys don't need to be encrypted again by calling `Encrypt`.
+    #
+    # To encrypt data locally in your application, use the GenerateDataKey
+    # operation to return a plaintext data encryption key and a copy of the
+    # key encrypted under the CMK of your choosing.
     #
     # The result of this operation varies with the key state of the CMK. For
     # details, see [How Key State Affects Use of a Customer Master Key][1]
     # in the *AWS Key Management Service Developer Guide*.
-    #
-    # To perform this operation on a CMK in a different AWS account, specify
-    # the key ARN or alias ARN in the value of the KeyId parameter.
     #
     #
     #
@@ -1236,7 +1760,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   "alias/". To specify a CMK in a different AWS account, you must use
     #   the key ARN or alias ARN.
     #
     #   For example:
@@ -1386,7 +1910,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   "alias/". To specify a CMK in a different AWS account, you must use
     #   the key ARN or alias ARN.
     #
     #   For example:
@@ -1503,8 +2027,8 @@ module Aws::KMS
     # then stores it in the container. Later, a different component of the
     # system, called the *data plane*, puts encrypted data into the
     # containers. To do this, it passes the encrypted data key to the
-    # Decrypt operation. It then uses the returned plaintext data key to
-    # encrypt data and finally stores the encrypted data in the container.
+    # Decrypt operation, then uses the returned plaintext data key to
+    # encrypt data, and finally stores the encrypted data in the container.
     # In this system, the control plane never sees the plaintext data key.
     #
     # The result of this operation varies with the key state of the CMK. For
@@ -1521,7 +2045,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   "alias/". To specify a CMK in a different AWS account, you must use
     #   the key ARN or alias ARN.
     #
     #   For example:
@@ -1620,15 +2144,30 @@ module Aws::KMS
 
     # Returns a random byte string that is cryptographically secure.
     #
+    # By default, the random byte string is generated in AWS KMS. To
+    # generate the byte string in the AWS CloudHSM cluster that is
+    # associated with a [custom key store][1], specify the custom key store
+    # ID.
+    #
     # For more information about entropy and random number generation, see
-    # the [AWS Key Management Service Cryptographic Details][1] whitepaper.
+    # the [AWS Key Management Service Cryptographic Details][2] whitepaper.
     #
     #
     #
-    # [1]: https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf
     #
     # @option params [Integer] :number_of_bytes
     #   The length of the byte string.
+    #
+    # @option params [String] :custom_key_store_id
+    #   Generates the random byte string in the AWS CloudHSM cluster that is
+    #   associated with the specified [custom key store][1]. To find the ID of
+    #   a custom key store, use the DescribeCustomKeyStores operation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     #
     # @return [Types::GenerateRandomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1652,6 +2191,7 @@ module Aws::KMS
     #
     #   resp = client.generate_random({
     #     number_of_bytes: 1,
+    #     custom_key_store_id: "CustomKeyStoreIdType",
     #   })
     #
     # @example Response structure
@@ -1849,9 +2389,10 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #
     # @option params [required, String] :wrapping_algorithm
-    #   The algorithm you use to encrypt the key material before importing it
-    #   with ImportKeyMaterial. For more information, see [Encrypt the Key
-    #   Material][1] in the *AWS Key Management Service Developer Guide*.
+    #   The algorithm you will use to encrypt the key material before
+    #   importing it with ImportKeyMaterial. For more information, see
+    #   [Encrypt the Key Material][1] in the *AWS Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -1946,8 +2487,8 @@ module Aws::KMS
     #   unusable. To use the CMK again, you must reimport the same key
     #   material.
     #
-    # When this operation is successful, the CMK's key state changes from
-    # `PendingImport` to `Enabled`, and you can use the CMK. After you
+    # When this operation is successful, the key state of the CMK changes
+    # from `PendingImport` to `Enabled`, and you can use the CMK. After you
     # successfully import key material into a CMK, you can reimport the same
     # key material into that CMK, but you cannot import different key
     # material.
@@ -2033,25 +2574,19 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Gets a list of aliases in the caller's AWS account and region. You
-    # cannot list aliases in other accounts. For more information about
+    # Gets a list of all aliases in the caller's AWS account and region.
+    # You cannot list aliases in other accounts. For more information about
     # aliases, see CreateAlias.
     #
-    # By default, the ListAliases command returns all aliases in the account
-    # and region. To get only the aliases that point to a particular
+    # By default, the `ListAliases` command returns all aliases in the
+    # account and region. To get only the aliases that point to a particular
     # customer master key (CMK), use the `KeyId` parameter.
     #
-    # The `ListAliases` response can include aliases that you created and
-    # associated with your customer managed CMKs, and aliases that AWS
-    # created and associated with AWS managed CMKs in your account. You can
-    # recognize AWS aliases because their names have the format
-    # `aws/<service-name>`, such as `aws/dynamodb`.
-    #
-    # The response might also include aliases that have no `TargetKeyId`
-    # field. These are predefined aliases that AWS has created but has not
-    # yet associated with a CMK. Aliases that AWS creates in your account,
-    # including predefined aliases, do not count against your [AWS KMS
-    # aliases limit][1].
+    # The `ListAliases` response might include several aliases have no
+    # `TargetKeyId` field. These are predefined aliases that AWS has created
+    # but has not yet associated with a CMK. Aliases that AWS creates in
+    # your account, including predefined aliases, do not count against your
+    # [AWS KMS aliases limit][1].
     #
     #
     #
@@ -2722,11 +3257,10 @@ module Aws::KMS
     #     principals. The principals in the key policy must exist and be
     #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy. The reason for
-    #     this is that the new principal might not be immediately visible to
-    #     AWS KMS. For more information, see [Changes that I make are not
-    #     always immediately visible][2] in the *AWS Identity and Access
-    #     Management User Guide*.
+    #     before including the new principal in a key policy because the new
+    #     principal might not be immediately visible to AWS KMS. For more
+    #     information, see [Changes that I make are not always immediately
+    #     visible][2] in the *AWS Identity and Access Management User Guide*.
     #
     #   The key policy size limit is 32 kilobytes (32768 bytes).
     #
@@ -2799,7 +3333,7 @@ module Aws::KMS
     # destination CMK. We recommend that you include the `"kms:ReEncrypt*"`
     # permission in your [key policies][1] to permit reencryption from or to
     # the CMK. This permission is automatically included in the key policy
-    # when you create a CMK through the console. But you must include it
+    # when you create a CMK through the console, but you must include it
     # manually when you create a CMK programmatically or when you set a key
     # policy with the PutKeyPolicy operation.
     #
@@ -2824,7 +3358,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   "alias/". To specify a CMK in a different AWS account, you must use
     #   the key ARN or alias ARN.
     #
     #   For example:
@@ -3028,31 +3562,40 @@ module Aws::KMS
     # Schedules the deletion of a customer master key (CMK). You may provide
     # a waiting period, specified in days, before deletion occurs. If you do
     # not provide a waiting period, the default period of 30 days is used.
-    # When this operation is successful, the state of the CMK changes to
+    # When this operation is successful, the key state of the CMK changes to
     # `PendingDeletion`. Before the waiting period ends, you can use
     # CancelKeyDeletion to cancel the deletion of the CMK. After the waiting
     # period ends, AWS KMS deletes the CMK and all AWS KMS data associated
     # with it, including all aliases that refer to it.
     #
-    # You cannot perform this operation on a CMK in a different AWS account.
-    #
     # Deleting a CMK is a destructive and potentially dangerous operation.
     # When a CMK is deleted, all data that was encrypted under the CMK is
-    # rendered unrecoverable. To restrict the use of a CMK without deleting
-    # it, use DisableKey.
+    # unrecoverable. To prevent the use of a CMK without deleting it, use
+    # DisableKey.
+    #
+    # If you schedule deletion of a CMK from a [custom key store][1], when
+    # the waiting period expires, `ScheduleKeyDeletion` deletes the CMK from
+    # AWS KMS. Then AWS KMS makes a best effort to delete the key material
+    # from the associated AWS CloudHSM cluster. However, you might need to
+    # manually [delete the orphaned key material][2] from the cluster and
+    # its backups.
+    #
+    # You cannot perform this operation on a CMK in a different AWS account.
     #
     # For more information about scheduling a CMK for deletion, see
-    # [Deleting Customer Master Keys][1] in the *AWS Key Management Service
+    # [Deleting Customer Master Keys][3] in the *AWS Key Management Service
     # Developer Guide*.
     #
     # The result of this operation varies with the key state of the CMK. For
-    # details, see [How Key State Affects Use of a Customer Master Key][2]
+    # details, see [How Key State Affects Use of a Customer Master Key][4]
     # in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
-    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    # [2]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
+    # [4]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :key_id
     #   The unique identifier of the customer master key (CMK) to delete.
@@ -3340,8 +3883,123 @@ module Aws::KMS
       req.send_request(options)
     end
 
+    # Changes the properties of a custom key store. Use the
+    # `CustomKeyStoreId` parameter to identify the custom key store you want
+    # to edit. Use the remaining parameters to change the properties of the
+    # custom key store.
+    #
+    # You can only update a custom key store that is disconnected. To
+    # disconnect the custom key store, use DisconnectCustomKeyStore. To
+    # reconnect the custom key store after the update completes, use
+    # ConnectCustomKeyStore. To find the connection state of a custom key
+    # store, use the DescribeCustomKeyStores operation.
+    #
+    # Use the `NewCustomKeyStoreName` parameter to change the friendly name
+    # of the custom key store to the value that you specify.
+    #
+    # Use the `KeyStorePassword` parameter tell AWS KMS the current password
+    # of the [ `kmsuser` crypto user (CU)][1] in the associated AWS CloudHSM
+    # cluster. You can use this parameter to fix connection failures that
+    # occur when AWS KMS cannot log into the associated cluster because the
+    # `kmsuser` password has changed. This value does not change the
+    # password in the AWS CloudHSM cluster.
+    #
+    # Use the `CloudHsmClusterId` parameter to associate the custom key
+    # store with a related AWS CloudHSM cluster, that is, a cluster that
+    # shares a backup history with the original cluster. You can use this
+    # parameter to repair a custom key store if its AWS CloudHSM cluster
+    # becomes corrupted or is deleted, or when you need to create or restore
+    # a cluster from a backup.
+    #
+    # The cluster ID must identify a AWS CloudHSM cluster with the following
+    # requirements.
+    #
+    # * The cluster must be active and be in the same AWS account and Region
+    #   as the custom key store.
+    #
+    # * The cluster must have the same cluster certificate as the original
+    #   cluster. You cannot use this parameter to associate the custom key
+    #   store with an unrelated cluster. To view the cluster certificate,
+    #   use the AWS CloudHSM [DescribeClusters][2] operation. Clusters that
+    #   share a backup history have the same cluster certificate.
+    #
+    # * The cluster must be configured with subnets in at least two
+    #   different Availability Zones in the Region. Because AWS CloudHSM is
+    #   not supported in all Availability Zones, we recommend that the
+    #   cluster have subnets in all Availability Zones in the Region.
+    #
+    # * The cluster must contain at least two active HSMs, each in a
+    #   different Availability Zone.
+    #
+    # If the operation succeeds, it returns a JSON object with no
+    # properties.
+    #
+    # This operation is part of the [Custom Key Store feature][3] feature in
+    # AWS KMS, which combines the convenience and extensive integration of
+    # AWS KMS with the isolation and control of a single-tenant key store.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    # [2]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    # [3]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #
+    # @option params [required, String] :custom_key_store_id
+    #   Identifies the custom key store that you want to update. Enter the ID
+    #   of the custom key store. To find the ID of a custom key store, use the
+    #   DescribeCustomKeyStores operation.
+    #
+    # @option params [String] :new_custom_key_store_name
+    #   Changes the friendly name of the custom key store to the value that
+    #   you specify. The custom key store name must be unique in the AWS
+    #   account.
+    #
+    # @option params [String] :key_store_password
+    #   Enter the current password of the `kmsuser` crypto user (CU) in the
+    #   AWS CloudHSM cluster that is associated with the custom key store.
+    #
+    #   This parameter tells AWS KMS the current password of the `kmsuser`
+    #   crypto user (CU). It does not set or change the password of any users
+    #   in the AWS CloudHSM cluster.
+    #
+    # @option params [String] :cloud_hsm_cluster_id
+    #   Associates the custom key store with a related AWS CloudHSM cluster.
+    #
+    #   Enter the cluster ID of the cluster that you used to create the custom
+    #   key store or a cluster that shares a backup history with the original
+    #   cluster. You cannot use this parameter to associate a custom key store
+    #   with a different cluster.
+    #
+    #   Clusters that share a backup history have the same cluster
+    #   certificate. To view the cluster certificate of a cluster, use the
+    #   [DescribeClusters][1] operation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_key_store({
+    #     custom_key_store_id: "CustomKeyStoreIdType", # required
+    #     new_custom_key_store_name: "CustomKeyStoreNameType",
+    #     key_store_password: "KeyStorePasswordType",
+    #     cloud_hsm_cluster_id: "CloudHsmClusterIdType",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStore AWS API Documentation
+    #
+    # @overload update_custom_key_store(params = {})
+    # @param [Hash] params ({})
+    def update_custom_key_store(params = {}, options = {})
+      req = build_request(:update_custom_key_store, params)
+      req.send_request(options)
+    end
+
     # Updates the description of a customer master key (CMK). To see the
-    # description of a CMK, use DescribeKey.
+    # decription of a CMK, use DescribeKey.
     #
     # You cannot perform this operation on a CMK in a different AWS account.
     #
@@ -3411,7 +4069,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

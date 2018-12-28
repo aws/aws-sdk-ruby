@@ -14,6 +14,7 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #       }
     #
     # @!attribute [rw] accept_language
@@ -30,11 +31,29 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @!attribute [rw] portfolio_share_type
+    #   The type of shared portfolios to accept. The default is to accept
+    #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the master
+    #     account of your organization.
+    #
+    #   * `IMPORTED` - Accept imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - Not supported. (Throws
+    #     ResourceNotFoundException.)
+    #
+    #   For example, `aws servicecatalog accept-portfolio-share
+    #   --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type
+    #   AWS_ORGANIZATIONS`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareInput AWS API Documentation
     #
     class AcceptPortfolioShareInput < Struct.new(
       :accept_language,
-      :portfolio_id)
+      :portfolio_id,
+      :portfolio_share_type)
       include Aws::Structure
     end
 
@@ -168,6 +187,54 @@ module Aws::ServiceCatalog
     #
     class AssociateProductWithPortfolioOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AssociateServiceActionWithProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifactInput AWS API Documentation
+    #
+    class AssociateServiceActionWithProvisioningArtifactInput < Struct.new(
+      :product_id,
+      :provisioning_artifact_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifactOutput AWS API Documentation
+    #
+    class AssociateServiceActionWithProvisioningArtifactOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateTagOptionWithResourceInput
     #   data as a hash:
     #
@@ -196,6 +263,104 @@ module Aws::ServiceCatalog
     #
     class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass BatchAssociateServiceActionWithProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_associations: [ # required
+    #           {
+    #             service_action_id: "Id", # required
+    #             product_id: "Id", # required
+    #             provisioning_artifact_id: "Id", # required
+    #           },
+    #         ],
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] service_action_associations
+    #   One or more associations, each consisting of the Action ID, the
+    #   Product ID, and the Provisioning Artifact ID.
+    #   @return [Array<Types::ServiceActionAssociation>]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifactInput AWS API Documentation
+    #
+    class BatchAssociateServiceActionWithProvisioningArtifactInput < Struct.new(
+      :service_action_associations,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_service_action_associations
+    #   An object that contains a list of errors, along with information to
+    #   help you identify the self-service action.
+    #   @return [Array<Types::FailedServiceActionAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifactOutput AWS API Documentation
+    #
+    class BatchAssociateServiceActionWithProvisioningArtifactOutput < Struct.new(
+      :failed_service_action_associations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateServiceActionFromProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_associations: [ # required
+    #           {
+    #             service_action_id: "Id", # required
+    #             product_id: "Id", # required
+    #             provisioning_artifact_id: "Id", # required
+    #           },
+    #         ],
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] service_action_associations
+    #   One or more associations, each consisting of the Action ID, the
+    #   Product ID, and the Provisioning Artifact ID.
+    #   @return [Array<Types::ServiceActionAssociation>]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchDisassociateServiceActionFromProvisioningArtifactInput AWS API Documentation
+    #
+    class BatchDisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
+      :service_action_associations,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_service_action_associations
+    #   An object that contains a list of errors, along with information to
+    #   help you identify the self-service action.
+    #   @return [Array<Types::FailedServiceActionAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchDisassociateServiceActionFromProvisioningArtifactOutput AWS API Documentation
+    #
+    class BatchDisassociateServiceActionFromProvisioningArtifactOutput < Struct.new(
+      :failed_service_action_associations)
+      include Aws::Structure
+    end
+
     # Information about a CloudWatch dashboard.
     #
     # @!attribute [rw] name
@@ -221,6 +386,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * STACKSET
     #
     #   * `TEMPLATE`
     #   @return [String]
@@ -251,6 +418,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * STACKSET
     #
     #   * `TEMPLATE`
     #   @return [String]
@@ -391,15 +560,35 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `RoleArn` property as follows:
     #
-    #     \\"RoleArn\\" :
-    #     \\"arn:aws:iam::123456789012:role/LaunchRole\\"
+    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `LAUNCH` constraint on a
+    #     product and portfolio.
     #
     #   NOTIFICATION
     #
     #   : Specify the `NotificationArns` property as follows:
     #
-    #     \\"NotificationArns\\" :
-    #     \[\\"arn:aws:sns:us-east-1:123456789012:Topic\\"\]
+    #     `\{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #
+    #   STACKSET
+    #
+    #   : Specify the `Parameters` property as follows:
+    #
+    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String"
+    #     ], "RegionList": [ "String" ], "AdminRole": "String",
+    #     "ExecutionRole": "String"\}\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `STACKSET` constraint on a
+    #     product and portfolio.
+    #
+    #     Products with a `STACKSET` constraint will launch an AWS
+    #     CloudFormation stack set.
     #
     #   TEMPLATE
     #
@@ -417,6 +606,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * `STACKSET`
     #
     #   * `TEMPLATE`
     #   @return [String]
@@ -554,7 +745,11 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
+    #         organization_node: {
+    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #           value: "OrganizationNodeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] accept_language
@@ -572,21 +767,39 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID.
+    #   The AWS account ID. For example, `123456789012`.
     #   @return [String]
+    #
+    # @!attribute [rw] organization_node
+    #   The organization node to whom you are going to share. If
+    #   `OrganizationNode` is passed in, `PortfolioShare` will be created
+    #   for the node and its children (when applies), and a
+    #   `PortfolioShareToken` will be returned in the output in order for
+    #   the administrator to monitor the status of the `PortfolioShare`
+    #   creation process.
+    #   @return [Types::OrganizationNode]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
     #
     class CreatePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
-      :account_id)
+      :account_id,
+      :organization_node)
       include Aws::Structure
     end
 
+    # @!attribute [rw] portfolio_share_token
+    #   The portfolio share unique identifier. This will only be returned if
+    #   portfolio is shared to an organization node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareOutput AWS API Documentation
     #
-    class CreatePortfolioShareOutput < Aws::EmptyStructure; end
+    class CreatePortfolioShareOutput < Struct.new(
+      :portfolio_share_token)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateProductInput
     #   data as a hash:
@@ -928,6 +1141,103 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ServiceActionName", # required
+    #         definition_type: "SSM_AUTOMATION", # required, accepts SSM_AUTOMATION
+    #         definition: { # required
+    #           "Name" => "ServiceActionDefinitionValue",
+    #         },
+    #         description: "ServiceActionDescription",
+    #         accept_language: "AcceptLanguage",
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The self-service action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition_type
+    #   The service action definition type. For example, `SSM_AUTOMATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The self-service action definition. Can be one of the following:
+    #
+    #   Name
+    #
+    #   : The name of the AWS Systems Manager Document. For example,
+    #     `AWS-RestartEC2Instance`.
+    #
+    #   Version
+    #
+    #   : The AWS Systems Manager automation document version. For example,
+    #     `"Version": "1"`
+    #
+    #   AssumeRole
+    #
+    #   : The Amazon Resource Name (ARN) of the role that performs the
+    #     self-service actions on your behalf. For example, `"AssumeRole":
+    #     "arn:aws:iam::12345678910:role/ActionRole"`.
+    #
+    #     To reuse the provisioned product launch role, set to
+    #     `"AssumeRole": "LAUNCH_ROLE"`.
+    #
+    #   Parameters
+    #
+    #   : The list of parameters in JSON format.
+    #
+    #     For example: `[\{"Name":"InstanceId","Type":"TARGET"\}]`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] description
+    #   The self-service action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateServiceActionInput AWS API Documentation
+    #
+    class CreateServiceActionInput < Struct.new(
+      :name,
+      :definition_type,
+      :definition,
+      :description,
+      :accept_language,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_detail
+    #   An object containing information about the self-service action.
+    #   @return [Types::ServiceActionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateServiceActionOutput AWS API Documentation
+    #
+    class CreateServiceActionOutput < Struct.new(
+      :service_action_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTagOptionInput
     #   data as a hash:
     #
@@ -1037,7 +1347,11 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
+    #         organization_node: {
+    #           type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #           value: "OrganizationNodeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1058,18 +1372,31 @@ module Aws::ServiceCatalog
     #   The AWS account ID.
     #   @return [String]
     #
+    # @!attribute [rw] organization_node
+    #   The organization node to whom you are going to stop sharing.
+    #   @return [Types::OrganizationNode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareInput AWS API Documentation
     #
     class DeletePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
-      :account_id)
+      :account_id,
+      :organization_node)
       include Aws::Structure
     end
 
+    # @!attribute [rw] portfolio_share_token
+    #   The portfolio share unique identifier. This will only be returned if
+    #   delete is made to an organization node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareOutput AWS API Documentation
     #
-    class DeletePortfolioShareOutput < Aws::EmptyStructure; end
+    class DeletePortfolioShareOutput < Struct.new(
+      :portfolio_share_token)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteProductInput
     #   data as a hash:
@@ -1186,6 +1513,41 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactOutput AWS API Documentation
     #
     class DeleteProvisioningArtifactOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceActionInput AWS API Documentation
+    #
+    class DeleteServiceActionInput < Struct.new(
+      :id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceActionOutput AWS API Documentation
+    #
+    class DeleteServiceActionOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteTagOptionInput
     #   data as a hash:
@@ -1360,6 +1722,58 @@ module Aws::ServiceCatalog
       :portfolio_detail,
       :tags,
       :tag_options)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePortfolioShareStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         portfolio_share_token: "PortfolioShareToken", # required
+    #       }
+    #
+    # @!attribute [rw] portfolio_share_token
+    #   The token for the portfolio share operation. This token is returned
+    #   either by CreatePortfolioShare or by DeletePortfolioShare.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShareStatusInput AWS API Documentation
+    #
+    class DescribePortfolioShareStatusInput < Struct.new(
+      :portfolio_share_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portfolio_share_token
+    #   The token for the portfolio share operation. For example,
+    #   `share-6v24abcdefghi`.
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The portfolio identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_node_value
+    #   Organization node identifier. It can be either account id,
+    #   organizational unit id or organization id.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the portfolio share operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_details
+    #   Information about the portfolio share operation.
+    #   @return [Types::ShareDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShareStatusOutput AWS API Documentation
+    #
+    class DescribePortfolioShareStatusOutput < Struct.new(
+      :portfolio_share_token,
+      :portfolio_id,
+      :organization_node_value,
+      :status,
+      :share_details)
       include Aws::Structure
     end
 
@@ -1751,13 +2165,19 @@ module Aws::ServiceCatalog
     #   Information about the TagOptions associated with the resource.
     #   @return [Array<Types::TagOptionSummary>]
     #
+    # @!attribute [rw] provisioning_artifact_preferences
+    #   An object that contains information about preferences, such as
+    #   regions and accounts, for the provisioning artifact.
+    #   @return [Types::ProvisioningArtifactPreferences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
       :provisioning_artifact_parameters,
       :constraint_summaries,
       :usage_instructions,
-      :tag_options)
+      :tag_options,
+      :provisioning_artifact_preferences)
       include Aws::Structure
     end
 
@@ -1829,6 +2249,47 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionInput AWS API Documentation
+    #
+    class DescribeServiceActionInput < Struct.new(
+      :id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_detail
+    #   Detailed information about the self-service action.
+    #   @return [Types::ServiceActionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionOutput AWS API Documentation
+    #
+    class DescribeServiceActionOutput < Struct.new(
+      :service_action_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTagOptionInput
     #   data as a hash:
     #
@@ -1857,6 +2318,16 @@ module Aws::ServiceCatalog
       :tag_option_detail)
       include Aws::Structure
     end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessInput AWS API Documentation
+    #
+    class DisableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccessOutput AWS API Documentation
+    #
+    class DisableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociatePrincipalFromPortfolioInput
     #   data as a hash:
@@ -1938,6 +2409,54 @@ module Aws::ServiceCatalog
     #
     class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateServiceActionFromProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactInput AWS API Documentation
+    #
+    class DisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
+      :product_id,
+      :provisioning_artifact_id,
+      :service_action_id,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactOutput AWS API Documentation
+    #
+    class DisassociateServiceActionFromProvisioningArtifactOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateTagOptionFromResourceInput
     #   data as a hash:
     #
@@ -1965,6 +2484,16 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceOutput AWS API Documentation
     #
     class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessInput AWS API Documentation
+    #
+    class EnableAWSOrganizationsAccessInput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessOutput AWS API Documentation
+    #
+    class EnableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ExecuteProvisionedProductPlanInput
     #   data as a hash:
@@ -2018,6 +2547,118 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExecuteProvisionedProductServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         provisioned_product_id: "Id", # required
+    #         service_action_id: "Id", # required
+    #         execute_token: "IdempotencyToken", # required
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] execute_token
+    #   An idempotency token that uniquely identifies the execute request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionInput AWS API Documentation
+    #
+    class ExecuteProvisionedProductServiceActionInput < Struct.new(
+      :provisioned_product_id,
+      :service_action_id,
+      :execute_token,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_detail
+    #   An object containing detailed information about the result of
+    #   provisioning the product.
+    #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceActionOutput AWS API Documentation
+    #
+    class ExecuteProvisionedProductServiceActionOutput < Struct.new(
+      :record_detail)
+      include Aws::Structure
+    end
+
+    # An object containing information about the error, along with
+    # identifying information about the self-service action and its
+    # associations.
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code. Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A text description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/FailedServiceActionAssociation AWS API Documentation
+    #
+    class FailedServiceActionAssociation < Struct.new(
+      :service_action_id,
+      :product_id,
+      :provisioning_artifact_id,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatusInput AWS API Documentation
+    #
+    class GetAWSOrganizationsAccessStatusInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] access_status
+    #   The status of the portfolio share feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatusOutput AWS API Documentation
+    #
+    class GetAWSOrganizationsAccessStatusOutput < Struct.new(
+      :access_status)
+      include Aws::Structure
+    end
+
     # Summary information about a product path for a user.
     #
     # @!attribute [rw] id
@@ -2053,7 +2694,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         page_token: "PageToken",
     #         page_size: 1,
-    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2078,6 +2719,9 @@ module Aws::ServiceCatalog
     # @!attribute [rw] portfolio_share_type
     #   The type of shared portfolios to list. The default is to list
     #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the master account
+    #     of your organization
     #
     #   * `AWS_SERVICECATALOG` - List default portfolios
     #
@@ -2233,6 +2877,80 @@ module Aws::ServiceCatalog
     #
     class ListLaunchPathsOutput < Struct.new(
       :launch_path_summaries,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOrganizationPortfolioAccessInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         portfolio_id: "Id", # required
+    #         organization_node_type: "ORGANIZATION", # required, accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #         page_token: "PageToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The portfolio identifier. For example, `port-2abcdext3y5fk`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_node_type
+    #   The organization node type that will be returned in the output.
+    #
+    #   * `ORGANIZATION` - Organization that has access to the portfolio.
+    #
+    #   * `ORGANIZATIONAL_UNIT` - Organizational unit that has access to the
+    #     portfolio within your organization.
+    #
+    #   * `ACCOUNT` - Account that has access to the portfolio within your
+    #     organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListOrganizationPortfolioAccessInput AWS API Documentation
+    #
+    class ListOrganizationPortfolioAccessInput < Struct.new(
+      :accept_language,
+      :portfolio_id,
+      :organization_node_type,
+      :page_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_nodes
+    #   Displays information about the organization nodes.
+    #   @return [Array<Types::OrganizationNode>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListOrganizationPortfolioAccessOutput AWS API Documentation
+    #
+    class ListOrganizationPortfolioAccessOutput < Struct.new(
+      :organization_nodes,
       :next_page_token)
       include Aws::Structure
     end
@@ -2527,6 +3245,68 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListProvisioningArtifactsForServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceActionInput AWS API Documentation
+    #
+    class ListProvisioningArtifactsForServiceActionInput < Struct.new(
+      :service_action_id,
+      :page_size,
+      :page_token,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioning_artifact_views
+    #   An array of objects with information about product views and
+    #   provisioning artifacts.
+    #   @return [Array<Types::ProvisioningArtifactView>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceActionOutput AWS API Documentation
+    #
+    class ListProvisioningArtifactsForServiceActionOutput < Struct.new(
+      :provisioning_artifact_views,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListProvisioningArtifactsInput
     #   data as a hash:
     #
@@ -2736,6 +3516,129 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListServiceActionsForProvisioningArtifactInput
+    #   data as a hash:
+    #
+    #       {
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsForProvisioningArtifactInput AWS API Documentation
+    #
+    class ListServiceActionsForProvisioningArtifactInput < Struct.new(
+      :product_id,
+      :provisioning_artifact_id,
+      :page_size,
+      :page_token,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_summaries
+    #   An object containing information about the self-service actions
+    #   associated with the provisioning artifact.
+    #   @return [Array<Types::ServiceActionSummary>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsForProvisioningArtifactOutput AWS API Documentation
+    #
+    class ListServiceActionsForProvisioningArtifactOutput < Struct.new(
+      :service_action_summaries,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServiceActionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsInput AWS API Documentation
+    #
+    class ListServiceActionsInput < Struct.new(
+      :accept_language,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_summaries
+    #   An object containing information about the service actions
+    #   associated with the provisioning artifact.
+    #   @return [Array<Types::ServiceActionSummary>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActionsOutput AWS API Documentation
+    #
+    class ListServiceActionsOutput < Struct.new(
+      :service_action_summaries,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # Filters to use when listing TagOptions.
     #
     # @note When making an API call, you may pass ListTagOptionsFilters
@@ -2818,6 +3721,32 @@ module Aws::ServiceCatalog
     class ListTagOptionsOutput < Struct.new(
       :tag_option_details,
       :page_token)
+      include Aws::Structure
+    end
+
+    # Information about the organization node.
+    #
+    # @note When making an API call, you may pass OrganizationNode
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #         value: "OrganizationNodeValue",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The organization node type.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The identifier of the organization node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OrganizationNode AWS API Documentation
+    #
+    class OrganizationNode < Struct.new(
+      :type,
+      :value)
       include Aws::Structure
     end
 
@@ -3030,6 +3959,14 @@ module Aws::ServiceCatalog
     #             value: "ParameterValue",
     #           },
     #         ],
+    #         provisioning_preferences: {
+    #           stack_set_accounts: ["AccountId"],
+    #           stack_set_regions: ["Region"],
+    #           stack_set_failure_tolerance_count: 1,
+    #           stack_set_failure_tolerance_percentage: 1,
+    #           stack_set_max_concurrency_count: 1,
+    #           stack_set_max_concurrency_percentage: 1,
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -3075,6 +4012,11 @@ module Aws::ServiceCatalog
     #   provisioning the product.
     #   @return [Array<Types::ProvisioningParameter>]
     #
+    # @!attribute [rw] provisioning_preferences
+    #   An object that contains information about the provisioning
+    #   preferences for a stack set.
+    #   @return [Types::ProvisioningPreferences]
+    #
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Array<Types::Tag>]
@@ -3101,6 +4043,7 @@ module Aws::ServiceCatalog
       :path_id,
       :provisioned_product_name,
       :provisioning_parameters,
+      :provisioning_preferences,
       :tags,
       :notification_arns,
       :provision_token)
@@ -3129,7 +4072,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   The type of provisioned product. The supported values are
+    #   `CFN_STACK` and `CFN_STACKSET`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -3234,7 +4178,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   The type of provisioned product. The supported values are
+    #   `CFN_STACK` and `CFN_STACKSET`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -3281,6 +4226,15 @@ module Aws::ServiceCatalog
     #   provisioned product.
     #   @return [String]
     #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail AWS API Documentation
     #
     class ProvisionedProductDetail < Struct.new(
@@ -3292,7 +4246,9 @@ module Aws::ServiceCatalog
       :status_message,
       :created_time,
       :idempotency_token,
-      :last_record_id)
+      :last_record_id,
+      :product_id,
+      :provisioning_artifact_id)
       include Aws::Structure
     end
 
@@ -3535,6 +4491,44 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # The user-defined preferences that will be applied during product
+    # provisioning, unless overridden by `ProvisioningPreferences` or
+    # `UpdateProvisioningPreferences`.
+    #
+    # For more information on maximum concurrent accounts and failure
+    # tolerance, see [Stack set operation options][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #
+    # @!attribute [rw] stack_set_accounts
+    #   One or more AWS accounts where stack instances are deployed from the
+    #   stack set. These accounts can be scoped in
+    #   `ProvisioningPreferences$StackSetAccounts` and
+    #   `UpdateProvisioningPreferences$StackSetAccounts`.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_regions
+    #   One or more AWS Regions where stack instances are deployed from the
+    #   stack set. These regions can be scoped in
+    #   `ProvisioningPreferences$StackSetRegions` and
+    #   `UpdateProvisioningPreferences$StackSetRegions`.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactPreferences AWS API Documentation
+    #
+    class ProvisioningArtifactPreferences < Struct.new(
+      :stack_set_accounts,
+      :stack_set_regions)
+      include Aws::Structure
+    end
+
     # Information about a provisioning artifact (also known as a version)
     # for a product.
     #
@@ -3623,6 +4617,26 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # An object that contains summary information about a product view and a
+    # provisioning artifact.
+    #
+    # @!attribute [rw] product_view_summary
+    #   Summary information about a product view.
+    #   @return [Types::ProductViewSummary]
+    #
+    # @!attribute [rw] provisioning_artifact
+    #   Information about a provisioning artifact. A provisioning artifact
+    #   is also known as a product version.
+    #   @return [Types::ProvisioningArtifact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactView AWS API Documentation
+    #
+    class ProvisioningArtifactView < Struct.new(
+      :product_view_summary,
+      :provisioning_artifact)
+      include Aws::Structure
+    end
+
     # Information about a parameter used to provision a product.
     #
     # @note When making an API call, you may pass ProvisioningParameter
@@ -3646,6 +4660,131 @@ module Aws::ServiceCatalog
     class ProvisioningParameter < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The user-defined preferences that will be applied when updating a
+    # provisioned product. Not all preferences are applicable to all
+    # provisioned product types.
+    #
+    # @note When making an API call, you may pass ProvisioningPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_accounts: ["AccountId"],
+    #         stack_set_regions: ["Region"],
+    #         stack_set_failure_tolerance_count: 1,
+    #         stack_set_failure_tolerance_percentage: 1,
+    #         stack_set_max_concurrency_count: 1,
+    #         stack_set_max_concurrency_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] stack_set_accounts
+    #   One or more AWS accounts that will have access to the provisioned
+    #   product.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The AWS accounts specified should be within the list of accounts in
+    #   the `STACKSET` constraint. To get the list of accounts in the
+    #   `STACKSET` constraint, use the `DescribeProvisioningParameters`
+    #   operation.
+    #
+    #   If no values are specified, the default value is all accounts from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_regions
+    #   One or more AWS Regions where the provisioned product will be
+    #   available.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The specified regions should be within the list of regions from the
+    #   `STACKSET` constraint. To get the list of regions in the `STACKSET`
+    #   constraint, use the `DescribeProvisioningParameters` operation.
+    #
+    #   If no values are specified, the default value is all regions from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_count
+    #   The number of accounts, per region, for which this operation can
+    #   fail before AWS Service Catalog stops the operation in that region.
+    #   If the operation is stopped in a region, AWS Service Catalog
+    #   doesn't attempt the operation in any subsequent regions.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #
+    #   The default value is `0` if no value is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_percentage
+    #   The percentage of accounts, per region, for which this stack
+    #   operation can fail before AWS Service Catalog stops the operation in
+    #   that region. If the operation is stopped in a region, AWS Service
+    #   Catalog doesn't attempt the operation in any subsequent regions.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_count
+    #   The maximum number of accounts in which to perform this operation at
+    #   one time. This is dependent on the value of
+    #   `StackSetFailureToleranceCount`. `StackSetMaxConcurrentCount` is at
+    #   most one more than the `StackSetFailureToleranceCount`.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_percentage
+    #   The maximum percentage of accounts in which to perform this
+    #   operation at one time.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number. This is true except in cases where rounding down would
+    #   result is zero. In this case, AWS Service Catalog sets the number as
+    #   `1` instead.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningPreferences AWS API Documentation
+    #
+    class ProvisioningPreferences < Struct.new(
+      :stack_set_accounts,
+      :stack_set_regions,
+      :stack_set_failure_tolerance_count,
+      :stack_set_failure_tolerance_percentage,
+      :stack_set_max_concurrency_count,
+      :stack_set_max_concurrency_percentage)
       include Aws::Structure
     end
 
@@ -3686,7 +4825,8 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] provisioned_product_type
-    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   The type of provisioned product. The supported values are
+    #   `CFN_STACK` and `CFN_STACKSET`.
     #   @return [String]
     #
     # @!attribute [rw] record_type
@@ -3809,6 +4949,7 @@ module Aws::ServiceCatalog
     #       {
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
+    #         portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG, AWS_ORGANIZATIONS
     #       }
     #
     # @!attribute [rw] accept_language
@@ -3825,11 +4966,29 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @!attribute [rw] portfolio_share_type
+    #   The type of shared portfolios to reject. The default is to reject
+    #   imported portfolios.
+    #
+    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the master
+    #     account of your organization.
+    #
+    #   * `IMPORTED` - Reject imported portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - Not supported. (Throws
+    #     ResourceNotFoundException.)
+    #
+    #   For example, `aws servicecatalog reject-portfolio-share
+    #   --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type
+    #   AWS_ORGANIZATIONS`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareInput AWS API Documentation
     #
     class RejectPortfolioShareInput < Struct.new(
       :accept_language,
-      :portfolio_id)
+      :portfolio_id,
+      :portfolio_share_type)
       include Aws::Structure
     end
 
@@ -4298,6 +5457,130 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # A self-service action association consisting of the Action ID, the
+    # Product ID, and the Provisioning Artifact ID.
+    #
+    # @note When making an API call, you may pass ServiceActionAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         service_action_id: "Id", # required
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] service_action_id
+    #   The self-service action identifier. For example,
+    #   `act-fs7abcd89wxyz`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier. For example, `prod-abcdzk7xy33qa`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact. For example,
+    #   `pa-4abcdjnxjj6ne`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionAssociation AWS API Documentation
+    #
+    class ServiceActionAssociation < Struct.new(
+      :service_action_id,
+      :product_id,
+      :provisioning_artifact_id)
+      include Aws::Structure
+    end
+
+    # An object containing detailed information about the self-service
+    # action.
+    #
+    # @!attribute [rw] service_action_summary
+    #   Summary information about the self-service action.
+    #   @return [Types::ServiceActionSummary]
+    #
+    # @!attribute [rw] definition
+    #   A map that defines the self-service action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionDetail AWS API Documentation
+    #
+    class ServiceActionDetail < Struct.new(
+      :service_action_summary,
+      :definition)
+      include Aws::Structure
+    end
+
+    # Detailed information about the self-service action.
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The self-service action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The self-service action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition_type
+    #   The self-service action definition type. For example,
+    #   `SSM_AUTOMATION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ServiceActionSummary AWS API Documentation
+    #
+    class ServiceActionSummary < Struct.new(
+      :id,
+      :name,
+      :description,
+      :definition_type)
+      include Aws::Structure
+    end
+
+    # Information about the portfolio share operation.
+    #
+    # @!attribute [rw] successful_shares
+    #   List of accounts for whom the operation succeeded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] share_errors
+    #   List of errors.
+    #   @return [Array<Types::ShareError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ShareDetails AWS API Documentation
+    #
+    class ShareDetails < Struct.new(
+      :successful_shares,
+      :share_errors)
+      include Aws::Structure
+    end
+
+    # Errors that occurred during the portfolio share operation.
+    #
+    # @!attribute [rw] accounts
+    #   List of accounts impacted by the error.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   Information about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Error type that happened when processing the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ShareError AWS API Documentation
+    #
+    class ShareError < Struct.new(
+      :accounts,
+      :message,
+      :error)
+      include Aws::Structure
+    end
+
     # Information about a tag. A tag is a key-value pair. Tags are
     # propagated to the resources created when provisioning a product.
     #
@@ -4701,6 +5984,15 @@ module Aws::ServiceCatalog
     #             use_previous_value: false,
     #           },
     #         ],
+    #         provisioning_preferences: {
+    #           stack_set_accounts: ["AccountId"],
+    #           stack_set_regions: ["Region"],
+    #           stack_set_failure_tolerance_count: 1,
+    #           stack_set_failure_tolerance_percentage: 1,
+    #           stack_set_max_concurrency_count: 1,
+    #           stack_set_max_concurrency_percentage: 1,
+    #           stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
+    #         },
     #         update_token: "IdempotencyToken", # required
     #       }
     #
@@ -4725,7 +6017,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The identifier of the provisioned product.
+    #   The identifier of the product.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
@@ -4740,6 +6032,11 @@ module Aws::ServiceCatalog
     # @!attribute [rw] provisioning_parameters
     #   The new parameters.
     #   @return [Array<Types::UpdateProvisioningParameter>]
+    #
+    # @!attribute [rw] provisioning_preferences
+    #   An object that contains information about the provisioning
+    #   preferences for a stack set.
+    #   @return [Types::UpdateProvisioningPreferences]
     #
     # @!attribute [rw] update_token
     #   The idempotency token that uniquely identifies the provisioning
@@ -4759,6 +6056,7 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :path_id,
       :provisioning_parameters,
+      :provisioning_preferences,
       :update_token)
       include Aws::Structure
     end
@@ -4879,6 +6177,219 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :use_previous_value)
+      include Aws::Structure
+    end
+
+    # The user-defined preferences that will be applied when updating a
+    # provisioned product. Not all preferences are applicable to all
+    # provisioned product types.
+    #
+    # @note When making an API call, you may pass UpdateProvisioningPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_accounts: ["AccountId"],
+    #         stack_set_regions: ["Region"],
+    #         stack_set_failure_tolerance_count: 1,
+    #         stack_set_failure_tolerance_percentage: 1,
+    #         stack_set_max_concurrency_count: 1,
+    #         stack_set_max_concurrency_percentage: 1,
+    #         stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
+    #       }
+    #
+    # @!attribute [rw] stack_set_accounts
+    #   One or more AWS accounts that will have access to the provisioned
+    #   product.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The AWS accounts specified should be within the list of accounts in
+    #   the `STACKSET` constraint. To get the list of accounts in the
+    #   `STACKSET` constraint, use the `DescribeProvisioningParameters`
+    #   operation.
+    #
+    #   If no values are specified, the default value is all accounts from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_regions
+    #   One or more AWS Regions where the provisioned product will be
+    #   available.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   The specified regions should be within the list of regions from the
+    #   `STACKSET` constraint. To get the list of regions in the `STACKSET`
+    #   constraint, use the `DescribeProvisioningParameters` operation.
+    #
+    #   If no values are specified, the default value is all regions from
+    #   the `STACKSET` constraint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_count
+    #   The number of accounts, per region, for which this operation can
+    #   fail before AWS Service Catalog stops the operation in that region.
+    #   If the operation is stopped in a region, AWS Service Catalog
+    #   doesn't attempt the operation in any subsequent regions.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #
+    #   The default value is `0` if no value is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_failure_tolerance_percentage
+    #   The percentage of accounts, per region, for which this stack
+    #   operation can fail before AWS Service Catalog stops the operation in
+    #   that region. If the operation is stopped in a region, AWS Service
+    #   Catalog doesn't attempt the operation in any subsequent regions.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetFailureToleranceCount`
+    #   or `StackSetFailureTolerancePercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_count
+    #   The maximum number of accounts in which to perform this operation at
+    #   one time. This is dependent on the value of
+    #   `StackSetFailureToleranceCount`. `StackSetMaxConcurrentCount` is at
+    #   most one more than the `StackSetFailureToleranceCount`.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_max_concurrency_percentage
+    #   The maximum percentage of accounts in which to perform this
+    #   operation at one time.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS Service Catalog rounds down to the next whole
+    #   number. This is true except in cases where rounding down would
+    #   result is zero. In this case, AWS Service Catalog sets the number as
+    #   `1` instead.
+    #
+    #   Note that this setting lets you specify the maximum for operations.
+    #   For large deployments, under certain circumstances the actual number
+    #   of accounts acted upon concurrently may be lower due to service
+    #   throttling.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   Conditional: You must specify either `StackSetMaxConcurrentCount` or
+    #   `StackSetMaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_set_operation_type
+    #   Determines what action AWS Service Catalog performs to a stack set
+    #   or a stack instance represented by the provisioned product. The
+    #   default value is `UPDATE` if nothing is specified.
+    #
+    #   Applicable only to a `CFN_STACKSET` provisioned product type.
+    #
+    #   CREATE
+    #
+    #   : Creates a new stack instance in the stack set represented by the
+    #     provisioned product. In this case, only new stack instances are
+    #     created based on accounts and regions; if new ProductId or
+    #     ProvisioningArtifactID are passed, they will be ignored.
+    #
+    #   UPDATE
+    #
+    #   : Updates the stack set represented by the provisioned product and
+    #     also its stack instances.
+    #
+    #   DELETE
+    #
+    #   : Deletes a stack instance in the stack set represented by the
+    #     provisioned product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningPreferences AWS API Documentation
+    #
+    class UpdateProvisioningPreferences < Struct.new(
+      :stack_set_accounts,
+      :stack_set_regions,
+      :stack_set_failure_tolerance_count,
+      :stack_set_failure_tolerance_percentage,
+      :stack_set_max_concurrency_count,
+      :stack_set_max_concurrency_percentage,
+      :stack_set_operation_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateServiceActionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Id", # required
+    #         name: "ServiceActionName",
+    #         definition: {
+    #           "Name" => "ServiceActionDefinitionValue",
+    #         },
+    #         description: "ServiceActionDescription",
+    #         accept_language: "AcceptLanguage",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The self-service action identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The self-service action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   A map that defines the self-service action.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] description
+    #   The self-service action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateServiceActionInput AWS API Documentation
+    #
+    class UpdateServiceActionInput < Struct.new(
+      :id,
+      :name,
+      :definition,
+      :description,
+      :accept_language)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_action_detail
+    #   Detailed information about the self-service action.
+    #   @return [Types::ServiceActionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateServiceActionOutput AWS API Documentation
+    #
+    class UpdateServiceActionOutput < Struct.new(
+      :service_action_detail)
       include Aws::Structure
     end
 

@@ -22,6 +22,8 @@ module Aws::CloudFormation
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    BoxedMaxResults = Shapes::IntegerShape.new(name: 'BoxedMaxResults')
     CancelUpdateStackInput = Shapes::StructureShape.new(name: 'CancelUpdateStackInput')
     Capabilities = Shapes::ListShape.new(name: 'Capabilities')
     CapabilitiesReason = Shapes::StringShape.new(name: 'CapabilitiesReason')
@@ -67,10 +69,14 @@ module Aws::CloudFormation
     DescribeAccountLimitsOutput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsOutput')
     DescribeChangeSetInput = Shapes::StructureShape.new(name: 'DescribeChangeSetInput')
     DescribeChangeSetOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetOutput')
+    DescribeStackDriftDetectionStatusInput = Shapes::StructureShape.new(name: 'DescribeStackDriftDetectionStatusInput')
+    DescribeStackDriftDetectionStatusOutput = Shapes::StructureShape.new(name: 'DescribeStackDriftDetectionStatusOutput')
     DescribeStackEventsInput = Shapes::StructureShape.new(name: 'DescribeStackEventsInput')
     DescribeStackEventsOutput = Shapes::StructureShape.new(name: 'DescribeStackEventsOutput')
     DescribeStackInstanceInput = Shapes::StructureShape.new(name: 'DescribeStackInstanceInput')
     DescribeStackInstanceOutput = Shapes::StructureShape.new(name: 'DescribeStackInstanceOutput')
+    DescribeStackResourceDriftsInput = Shapes::StructureShape.new(name: 'DescribeStackResourceDriftsInput')
+    DescribeStackResourceDriftsOutput = Shapes::StructureShape.new(name: 'DescribeStackResourceDriftsOutput')
     DescribeStackResourceInput = Shapes::StructureShape.new(name: 'DescribeStackResourceInput')
     DescribeStackResourceOutput = Shapes::StructureShape.new(name: 'DescribeStackResourceOutput')
     DescribeStackResourcesInput = Shapes::StructureShape.new(name: 'DescribeStackResourcesInput')
@@ -82,6 +88,11 @@ module Aws::CloudFormation
     DescribeStacksInput = Shapes::StructureShape.new(name: 'DescribeStacksInput')
     DescribeStacksOutput = Shapes::StructureShape.new(name: 'DescribeStacksOutput')
     Description = Shapes::StringShape.new(name: 'Description')
+    DetectStackDriftInput = Shapes::StructureShape.new(name: 'DetectStackDriftInput')
+    DetectStackDriftOutput = Shapes::StructureShape.new(name: 'DetectStackDriftOutput')
+    DetectStackResourceDriftInput = Shapes::StructureShape.new(name: 'DetectStackResourceDriftInput')
+    DetectStackResourceDriftOutput = Shapes::StructureShape.new(name: 'DetectStackResourceDriftOutput')
+    DifferenceType = Shapes::StringShape.new(name: 'DifferenceType')
     DisableRollback = Shapes::BooleanShape.new(name: 'DisableRollback')
     EnableTerminationProtection = Shapes::BooleanShape.new(name: 'EnableTerminationProtection')
     EstimateTemplateCostInput = Shapes::StructureShape.new(name: 'EstimateTemplateCostInput')
@@ -108,6 +119,7 @@ module Aws::CloudFormation
     InsufficientCapabilitiesException = Shapes::StructureShape.new(name: 'InsufficientCapabilitiesException')
     InvalidChangeSetStatusException = Shapes::StructureShape.new(name: 'InvalidChangeSetStatusException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
+    Key = Shapes::StringShape.new(name: 'Key')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
@@ -131,6 +143,7 @@ module Aws::CloudFormation
     ListStacksInput = Shapes::StructureShape.new(name: 'ListStacksInput')
     ListStacksOutput = Shapes::StructureShape.new(name: 'ListStacksOutput')
     LogicalResourceId = Shapes::StringShape.new(name: 'LogicalResourceId')
+    LogicalResourceIds = Shapes::ListShape.new(name: 'LogicalResourceIds')
     MaxConcurrentCount = Shapes::IntegerShape.new(name: 'MaxConcurrentCount')
     MaxConcurrentPercentage = Shapes::IntegerShape.new(name: 'MaxConcurrentPercentage')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -158,7 +171,14 @@ module Aws::CloudFormation
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     Parameters = Shapes::ListShape.new(name: 'Parameters')
     PhysicalResourceId = Shapes::StringShape.new(name: 'PhysicalResourceId')
+    PhysicalResourceIdContext = Shapes::ListShape.new(name: 'PhysicalResourceIdContext')
+    PhysicalResourceIdContextKeyValuePair = Shapes::StructureShape.new(name: 'PhysicalResourceIdContextKeyValuePair')
+    Properties = Shapes::StringShape.new(name: 'Properties')
+    PropertyDifference = Shapes::StructureShape.new(name: 'PropertyDifference')
+    PropertyDifferences = Shapes::ListShape.new(name: 'PropertyDifferences')
     PropertyName = Shapes::StringShape.new(name: 'PropertyName')
+    PropertyPath = Shapes::StringShape.new(name: 'PropertyPath')
+    PropertyValue = Shapes::StringShape.new(name: 'PropertyValue')
     Reason = Shapes::StringShape.new(name: 'Reason')
     Region = Shapes::StringShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
@@ -189,6 +209,12 @@ module Aws::CloudFormation
     SetStackPolicyInput = Shapes::StructureShape.new(name: 'SetStackPolicyInput')
     SignalResourceInput = Shapes::StructureShape.new(name: 'SignalResourceInput')
     Stack = Shapes::StructureShape.new(name: 'Stack')
+    StackDriftDetectionId = Shapes::StringShape.new(name: 'StackDriftDetectionId')
+    StackDriftDetectionStatus = Shapes::StringShape.new(name: 'StackDriftDetectionStatus')
+    StackDriftDetectionStatusReason = Shapes::StringShape.new(name: 'StackDriftDetectionStatusReason')
+    StackDriftInformation = Shapes::StructureShape.new(name: 'StackDriftInformation')
+    StackDriftInformationSummary = Shapes::StructureShape.new(name: 'StackDriftInformationSummary')
+    StackDriftStatus = Shapes::StringShape.new(name: 'StackDriftStatus')
     StackEvent = Shapes::StructureShape.new(name: 'StackEvent')
     StackEvents = Shapes::ListShape.new(name: 'StackEvents')
     StackId = Shapes::StringShape.new(name: 'StackId')
@@ -205,6 +231,12 @@ module Aws::CloudFormation
     StackPolicyURL = Shapes::StringShape.new(name: 'StackPolicyURL')
     StackResource = Shapes::StructureShape.new(name: 'StackResource')
     StackResourceDetail = Shapes::StructureShape.new(name: 'StackResourceDetail')
+    StackResourceDrift = Shapes::StructureShape.new(name: 'StackResourceDrift')
+    StackResourceDriftInformation = Shapes::StructureShape.new(name: 'StackResourceDriftInformation')
+    StackResourceDriftInformationSummary = Shapes::StructureShape.new(name: 'StackResourceDriftInformationSummary')
+    StackResourceDriftStatus = Shapes::StringShape.new(name: 'StackResourceDriftStatus')
+    StackResourceDriftStatusFilters = Shapes::ListShape.new(name: 'StackResourceDriftStatusFilters')
+    StackResourceDrifts = Shapes::ListShape.new(name: 'StackResourceDrifts')
     StackResourceSummaries = Shapes::ListShape.new(name: 'StackResourceSummaries')
     StackResourceSummary = Shapes::StructureShape.new(name: 'StackResourceSummary')
     StackResources = Shapes::ListShape.new(name: 'StackResources')
@@ -266,6 +298,7 @@ module Aws::CloudFormation
     UsePreviousValue = Shapes::BooleanShape.new(name: 'UsePreviousValue')
     ValidateTemplateInput = Shapes::StructureShape.new(name: 'ValidateTemplateInput')
     ValidateTemplateOutput = Shapes::StructureShape.new(name: 'ValidateTemplateOutput')
+    Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
 
     AccountGateResult.add_member(:status, Shapes::ShapeRef.new(shape: AccountGateStatus, location_name: "Status"))
@@ -442,6 +475,18 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
 
+    DescribeStackDriftDetectionStatusInput.add_member(:stack_drift_detection_id, Shapes::ShapeRef.new(shape: StackDriftDetectionId, required: true, location_name: "StackDriftDetectionId"))
+    DescribeStackDriftDetectionStatusInput.struct_class = Types::DescribeStackDriftDetectionStatusInput
+
+    DescribeStackDriftDetectionStatusOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
+    DescribeStackDriftDetectionStatusOutput.add_member(:stack_drift_detection_id, Shapes::ShapeRef.new(shape: StackDriftDetectionId, required: true, location_name: "StackDriftDetectionId"))
+    DescribeStackDriftDetectionStatusOutput.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "StackDriftStatus"))
+    DescribeStackDriftDetectionStatusOutput.add_member(:detection_status, Shapes::ShapeRef.new(shape: StackDriftDetectionStatus, required: true, location_name: "DetectionStatus"))
+    DescribeStackDriftDetectionStatusOutput.add_member(:detection_status_reason, Shapes::ShapeRef.new(shape: StackDriftDetectionStatusReason, location_name: "DetectionStatusReason"))
+    DescribeStackDriftDetectionStatusOutput.add_member(:drifted_stack_resource_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "DriftedStackResourceCount"))
+    DescribeStackDriftDetectionStatusOutput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    DescribeStackDriftDetectionStatusOutput.struct_class = Types::DescribeStackDriftDetectionStatusOutput
+
     DescribeStackEventsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
     DescribeStackEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeStackEventsInput.struct_class = Types::DescribeStackEventsInput
@@ -457,6 +502,16 @@ module Aws::CloudFormation
 
     DescribeStackInstanceOutput.add_member(:stack_instance, Shapes::ShapeRef.new(shape: StackInstance, location_name: "StackInstance"))
     DescribeStackInstanceOutput.struct_class = Types::DescribeStackInstanceOutput
+
+    DescribeStackResourceDriftsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
+    DescribeStackResourceDriftsInput.add_member(:stack_resource_drift_status_filters, Shapes::ShapeRef.new(shape: StackResourceDriftStatusFilters, location_name: "StackResourceDriftStatusFilters"))
+    DescribeStackResourceDriftsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStackResourceDriftsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedMaxResults, location_name: "MaxResults"))
+    DescribeStackResourceDriftsInput.struct_class = Types::DescribeStackResourceDriftsInput
+
+    DescribeStackResourceDriftsOutput.add_member(:stack_resource_drifts, Shapes::ShapeRef.new(shape: StackResourceDrifts, required: true, location_name: "StackResourceDrifts"))
+    DescribeStackResourceDriftsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStackResourceDriftsOutput.struct_class = Types::DescribeStackResourceDriftsOutput
 
     DescribeStackResourceInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
     DescribeStackResourceInput.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
@@ -493,6 +548,20 @@ module Aws::CloudFormation
     DescribeStacksOutput.add_member(:stacks, Shapes::ShapeRef.new(shape: Stacks, location_name: "Stacks"))
     DescribeStacksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeStacksOutput.struct_class = Types::DescribeStacksOutput
+
+    DetectStackDriftInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
+    DetectStackDriftInput.add_member(:logical_resource_ids, Shapes::ShapeRef.new(shape: LogicalResourceIds, location_name: "LogicalResourceIds"))
+    DetectStackDriftInput.struct_class = Types::DetectStackDriftInput
+
+    DetectStackDriftOutput.add_member(:stack_drift_detection_id, Shapes::ShapeRef.new(shape: StackDriftDetectionId, required: true, location_name: "StackDriftDetectionId"))
+    DetectStackDriftOutput.struct_class = Types::DetectStackDriftOutput
+
+    DetectStackResourceDriftInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
+    DetectStackResourceDriftInput.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
+    DetectStackResourceDriftInput.struct_class = Types::DetectStackResourceDriftInput
+
+    DetectStackResourceDriftOutput.add_member(:stack_resource_drift, Shapes::ShapeRef.new(shape: StackResourceDrift, required: true, location_name: "StackResourceDrift"))
+    DetectStackResourceDriftOutput.struct_class = Types::DetectStackResourceDriftOutput
 
     EstimateTemplateCostInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
     EstimateTemplateCostInput.add_member(:template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "TemplateURL"))
@@ -627,6 +696,8 @@ module Aws::CloudFormation
     ListStacksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStacksOutput.struct_class = Types::ListStacksOutput
 
+    LogicalResourceIds.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
+
     NotificationARNs.member = Shapes::ShapeRef.new(shape: NotificationARN)
 
     Output.add_member(:output_key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "OutputKey"))
@@ -657,6 +728,20 @@ module Aws::CloudFormation
     ParameterDeclarations.member = Shapes::ShapeRef.new(shape: ParameterDeclaration)
 
     Parameters.member = Shapes::ShapeRef.new(shape: Parameter)
+
+    PhysicalResourceIdContext.member = Shapes::ShapeRef.new(shape: PhysicalResourceIdContextKeyValuePair)
+
+    PhysicalResourceIdContextKeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
+    PhysicalResourceIdContextKeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
+    PhysicalResourceIdContextKeyValuePair.struct_class = Types::PhysicalResourceIdContextKeyValuePair
+
+    PropertyDifference.add_member(:property_path, Shapes::ShapeRef.new(shape: PropertyPath, required: true, location_name: "PropertyPath"))
+    PropertyDifference.add_member(:expected_value, Shapes::ShapeRef.new(shape: PropertyValue, required: true, location_name: "ExpectedValue"))
+    PropertyDifference.add_member(:actual_value, Shapes::ShapeRef.new(shape: PropertyValue, required: true, location_name: "ActualValue"))
+    PropertyDifference.add_member(:difference_type, Shapes::ShapeRef.new(shape: DifferenceType, required: true, location_name: "DifferenceType"))
+    PropertyDifference.struct_class = Types::PropertyDifference
+
+    PropertyDifferences.member = Shapes::ShapeRef.new(shape: PropertyDifference)
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region)
 
@@ -732,7 +817,16 @@ module Aws::CloudFormation
     Stack.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, location_name: "EnableTerminationProtection"))
     Stack.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
     Stack.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
+    Stack.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformation, location_name: "DriftInformation"))
     Stack.struct_class = Types::Stack
+
+    StackDriftInformation.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, required: true, location_name: "StackDriftStatus"))
+    StackDriftInformation.add_member(:last_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastCheckTimestamp"))
+    StackDriftInformation.struct_class = Types::StackDriftInformation
+
+    StackDriftInformationSummary.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, required: true, location_name: "StackDriftStatus"))
+    StackDriftInformationSummary.add_member(:last_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastCheckTimestamp"))
+    StackDriftInformationSummary.struct_class = Types::StackDriftInformationSummary
 
     StackEvent.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
     StackEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "EventId"))
@@ -777,6 +871,7 @@ module Aws::CloudFormation
     StackResource.add_member(:resource_status, Shapes::ShapeRef.new(shape: ResourceStatus, required: true, location_name: "ResourceStatus"))
     StackResource.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
     StackResource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StackResource.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackResourceDriftInformation, location_name: "DriftInformation"))
     StackResource.struct_class = Types::StackResource
 
     StackResourceDetail.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
@@ -789,7 +884,32 @@ module Aws::CloudFormation
     StackResourceDetail.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
     StackResourceDetail.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StackResourceDetail.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    StackResourceDetail.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackResourceDriftInformation, location_name: "DriftInformation"))
     StackResourceDetail.struct_class = Types::StackResourceDetail
+
+    StackResourceDrift.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
+    StackResourceDrift.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
+    StackResourceDrift.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))
+    StackResourceDrift.add_member(:physical_resource_id_context, Shapes::ShapeRef.new(shape: PhysicalResourceIdContext, location_name: "PhysicalResourceIdContext"))
+    StackResourceDrift.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    StackResourceDrift.add_member(:expected_properties, Shapes::ShapeRef.new(shape: Properties, location_name: "ExpectedProperties"))
+    StackResourceDrift.add_member(:actual_properties, Shapes::ShapeRef.new(shape: Properties, location_name: "ActualProperties"))
+    StackResourceDrift.add_member(:property_differences, Shapes::ShapeRef.new(shape: PropertyDifferences, location_name: "PropertyDifferences"))
+    StackResourceDrift.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
+    StackResourceDrift.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    StackResourceDrift.struct_class = Types::StackResourceDrift
+
+    StackResourceDriftInformation.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
+    StackResourceDriftInformation.add_member(:last_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastCheckTimestamp"))
+    StackResourceDriftInformation.struct_class = Types::StackResourceDriftInformation
+
+    StackResourceDriftInformationSummary.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
+    StackResourceDriftInformationSummary.add_member(:last_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastCheckTimestamp"))
+    StackResourceDriftInformationSummary.struct_class = Types::StackResourceDriftInformationSummary
+
+    StackResourceDriftStatusFilters.member = Shapes::ShapeRef.new(shape: StackResourceDriftStatus)
+
+    StackResourceDrifts.member = Shapes::ShapeRef.new(shape: StackResourceDrift)
 
     StackResourceSummaries.member = Shapes::ShapeRef.new(shape: StackResourceSummary)
 
@@ -799,6 +919,7 @@ module Aws::CloudFormation
     StackResourceSummary.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTimestamp"))
     StackResourceSummary.add_member(:resource_status, Shapes::ShapeRef.new(shape: ResourceStatus, required: true, location_name: "ResourceStatus"))
     StackResourceSummary.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
+    StackResourceSummary.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackResourceDriftInformationSummary, location_name: "DriftInformation"))
     StackResourceSummary.struct_class = Types::StackResourceSummary
 
     StackResources.member = Shapes::ShapeRef.new(shape: StackResource)
@@ -875,6 +996,7 @@ module Aws::CloudFormation
     StackSummary.add_member(:stack_status_reason, Shapes::ShapeRef.new(shape: StackStatusReason, location_name: "StackStatusReason"))
     StackSummary.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
     StackSummary.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
+    StackSummary.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformationSummary, location_name: "DriftInformation"))
     StackSummary.struct_class = Types::StackSummary
 
     Stacks.member = Shapes::ShapeRef.new(shape: Stack)
@@ -979,10 +1101,13 @@ module Aws::CloudFormation
       api.version = "2010-05-15"
 
       api.metadata = {
+        "apiVersion" => "2010-05-15",
         "endpointPrefix" => "cloudformation",
         "protocol" => "query",
         "serviceFullName" => "AWS CloudFormation",
+        "serviceId" => "CloudFormation",
         "signatureVersion" => "v4",
+        "uid" => "cloudformation-2010-05-15",
         "xmlNamespace" => "http://cloudformation.amazonaws.com/doc/2010-05-15/",
       }
 
@@ -1110,6 +1235,14 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
       end)
 
+      api.add_operation(:describe_stack_drift_detection_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStackDriftDetectionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStackDriftDetectionStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStackDriftDetectionStatusOutput)
+      end)
+
       api.add_operation(:describe_stack_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeStackEvents"
         o.http_method = "POST"
@@ -1139,6 +1272,20 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeStackResourceInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeStackResourceOutput)
+      end)
+
+      api.add_operation(:describe_stack_resource_drifts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStackResourceDrifts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStackResourceDriftsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStackResourceDriftsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_stack_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -1179,6 +1326,22 @@ module Aws::CloudFormation
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:detect_stack_drift, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectStackDrift"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectStackDriftInput)
+        o.output = Shapes::ShapeRef.new(shape: DetectStackDriftOutput)
+      end)
+
+      api.add_operation(:detect_stack_resource_drift, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectStackResourceDrift"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectStackResourceDriftInput)
+        o.output = Shapes::ShapeRef.new(shape: DetectStackResourceDriftOutput)
       end)
 
       api.add_operation(:estimate_template_cost, Seahorse::Model::Operation.new.tap do |o|

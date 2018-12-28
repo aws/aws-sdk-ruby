@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -43,112 +47,157 @@ module Aws::CloudWatch
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -337,6 +386,19 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
     #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
+    #   resp.metric_alarms[0].metrics #=> Array
+    #   resp.metric_alarms[0].metrics[0].id #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.period #=> Integer
+    #   resp.metric_alarms[0].metrics[0].metric_stat.stat #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.metric_alarms[0].metrics[0].expression #=> String
+    #   resp.metric_alarms[0].metrics[0].label #=> String
+    #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
@@ -430,6 +492,19 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
     #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
+    #   resp.metric_alarms[0].metrics #=> Array
+    #   resp.metric_alarms[0].metrics[0].id #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.namespace #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.metric_name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions #=> Array
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.period #=> Integer
+    #   resp.metric_alarms[0].metrics[0].metric_stat.stat #=> String
+    #   resp.metric_alarms[0].metrics[0].metric_stat.unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.metric_alarms[0].metrics[0].expression #=> String
+    #   resp.metric_alarms[0].metrics[0].label #=> String
+    #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -536,6 +611,30 @@ module Aws::CloudWatch
     # than calls to `GetMetricStatistics`. For more information about
     # pricing, see [Amazon CloudWatch Pricing][2].
     #
+    # Amazon CloudWatch retains metric data as follows:
+    #
+    # * Data points with a period of less than 60 seconds are available for
+    #   3 hours. These data points are high-resolution metrics and are
+    #   available only for custom metrics that have been defined with a
+    #   `StorageResolution` of 1.
+    #
+    # * Data points with a period of 60 seconds (1-minute) are available for
+    #   15 days.
+    #
+    # * Data points with a period of 300 seconds (5-minute) are available
+    #   for 63 days.
+    #
+    # * Data points with a period of 3600 seconds (1 hour) are available for
+    #   455 days (15 months).
+    #
+    # Data points that are initially published with a shorter period are
+    # aggregated together for long-term storage. For example, if you collect
+    # data using a period of 1 minute, the data remains available for 15
+    # days with 1-minute resolution. After 15 days, this data is still
+    # available, but is aggregated and retrievable only with a resolution of
+    # 5 minutes. After 63 days, the data is further aggregated and is
+    # available with a resolution of 1 hour.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
@@ -550,8 +649,21 @@ module Aws::CloudWatch
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp indicating the earliest data to be returned.
     #
+    #   For better performance, specify `StartTime` and `EndTime` values that
+    #   align with the value of the metric's `Period` and sync up with the
+    #   beginning and end of an hour. For example, if the `Period` of a metric
+    #   is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can get a
+    #   faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   `StartTime`.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp indicating the latest data to be returned.
+    #
+    #   For better performance, specify `StartTime` and `EndTime` values that
+    #   align with the value of the metric's `Period` and sync up with the
+    #   beginning and end of an hour. For example, if the `Period` of a metric
+    #   is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get a faster
+    #   response from CloudWatch then setting 12:07 or 12:29 as the `EndTime`.
     #
     # @option params [String] :next_token
     #   Include this value, if it was returned by the previous call, to get
@@ -654,6 +766,9 @@ module Aws::CloudWatch
     # * The SampleCount value of the statistic set is 1.
     #
     # * The Min and the Max values of the statistic set are equal.
+    #
+    # Percentile statistics are not available for metrics when any of the
+    # metric values are negative numbers.
     #
     # Amazon CloudWatch retains metric data as follows:
     #
@@ -781,7 +896,9 @@ module Aws::CloudWatch
     # @option params [Array<String>] :extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100. When
     #   calling `GetMetricStatistics`, you must specify either `Statistics` or
-    #   `ExtendedStatistics`, but not both.
+    #   `ExtendedStatistics`, but not both. Percentile statistics are not
+    #   available for metrics when any of the metric values are negative
+    #   numbers.
     #
     # @option params [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
@@ -836,10 +953,104 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # You can use the `GetMetricWidgetImage` API to retrieve a snapshot
+    # graph of one or more Amazon CloudWatch metrics as a bitmap image. You
+    # can then embed this image into your services and products, such as
+    # wiki pages, reports, and documents. You could also retrieve images
+    # regularly, such as every minute, and create your own custom live
+    # dashboard.
+    #
+    # The graph you retrieve can include all CloudWatch metric graph
+    # features, including metric math and horizontal and vertical
+    # annotations.
+    #
+    # There is a limit of 20 transactions per second for this API. Each
+    # `GetMetricWidgetImage` action has the following limits:
+    #
+    # * As many as 100 metrics in the graph.
+    #
+    # * Up to 100 KB uncompressed payload.
+    #
+    # @option params [required, String] :metric_widget
+    #   A JSON string that defines the bitmap graph to be retrieved. The
+    #   string includes the metrics to include in the graph, statistics,
+    #   annotations, title, axis limits, and so on. You can include only one
+    #   `MetricWidget` parameter in each `GetMetricWidgetImage` call.
+    #
+    #   For more information about the syntax of `MetricWidget` see
+    #   CloudWatch-Metric-Widget-Structure.
+    #
+    #   If any metric on the graph could not load all the requested data
+    #   points, an orange triangle with an exclamation point appears next to
+    #   the graph legend.
+    #
+    # @option params [String] :output_format
+    #   The format of the resulting image. Only PNG images are supported.
+    #
+    #   The default is `png`. If you specify `png`, the API returns an HTTP
+    #   response with the content-type set to `text/xml`. The image data is in
+    #   a `MetricWidgetImage` field. For example:
+    #
+    #   ` <GetMetricWidgetImageResponse
+    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #
+    #   ` <GetMetricWidgetImageResult>`
+    #
+    #   ` <MetricWidgetImage>`
+    #
+    #   ` iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...`
+    #
+    #   ` </MetricWidgetImage>`
+    #
+    #   ` </GetMetricWidgetImageResult>`
+    #
+    #   ` <ResponseMetadata>`
+    #
+    #   ` <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId>`
+    #
+    #   ` </ResponseMetadata>`
+    #
+    #   `</GetMetricWidgetImageResponse>`
+    #
+    #   The `image/png` setting is intended only for custom HTTP requests. For
+    #   most use cases, and all actions using an AWS SDK, you should use
+    #   `png`. If you specify `image/png`, the HTTP response has a
+    #   content-type set to `image/png`, and the body of the response is a PNG
+    #   image.
+    #
+    # @return [Types::GetMetricWidgetImageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricWidgetImageOutput#metric_widget_image #metric_widget_image} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_widget_image({
+    #     metric_widget: "MetricWidget", # required
+    #     output_format: "OutputFormat",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_widget_image #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImage AWS API Documentation
+    #
+    # @overload get_metric_widget_image(params = {})
+    # @param [Hash] params ({})
+    def get_metric_widget_image(params = {}, options = {})
+      req = build_request(:get_metric_widget_image, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the dashboards for your account. If you include
     # `DashboardNamePrefix`, only those dashboards with names starting with
     # the prefix are listed. Otherwise, all dashboards in your account are
     # listed.
+    #
+    # `ListDashboards` returns up to 1000 results on one page. If there are
+    # more than 1000 dashboards, you can call `ListDashboards` again and
+    # include the value you received for `NextToken` in the first call, to
+    # receive the next 1000 results.
     #
     # @option params [String] :dashboard_name_prefix
     #   If you specify this parameter, only the dashboards with names starting
@@ -881,14 +1092,14 @@ module Aws::CloudWatch
     end
 
     # List the specified metrics. You can use the returned metrics with
-    # GetMetricStatistics to obtain statistical data.
+    # GetMetricData or GetMetricStatistics to obtain statistical data.
     #
     # Up to 500 results are returned for any one call. To retrieve
     # additional results, use the returned token with subsequent calls.
     #
     # After you create a metric, allow up to fifteen minutes before the
     # metric appears. Statistics about the metric, however, are available
-    # sooner using GetMetricStatistics.
+    # sooner using GetMetricData or GetMetricStatistics.
     #
     # @option params [String] :namespace
     #   The namespace to filter against.
@@ -945,8 +1156,8 @@ module Aws::CloudWatch
     # existing dashboard. If you update a dashboard, the entire contents are
     # replaced with what you specify here.
     #
-    # You can have up to 500 dashboards per account. All dashboards in your
-    # account are global, not region-specific.
+    # There is no limit to the number of dashboards in your account. All
+    # dashboards in your account are global, not region-specific.
     #
     # A simple way to create a dashboard using `PutDashboard` is to copy an
     # existing dashboard. To copy an existing dashboard using the console,
@@ -1005,20 +1216,19 @@ module Aws::CloudWatch
     end
 
     # Creates or updates an alarm and associates it with the specified
-    # metric. Optionally, this operation can associate one or more Amazon
-    # SNS resources with the alarm.
+    # metric or metric math expression.
     #
     # When this operation creates an alarm, the alarm state is immediately
-    # set to `INSUFFICIENT_DATA`. The alarm is evaluated and its state is
-    # set appropriately. Any actions associated with the state are then
-    # executed.
+    # set to `INSUFFICIENT_DATA`. The alarm is then evaluated and its state
+    # is set appropriately. Any actions associated with the new state are
+    # then executed.
     #
     # When you update an existing alarm, its state is left unchanged, but
     # the update completely overwrites the previous configuration of the
     # alarm.
     #
     # If you are an IAM user, you must have Amazon EC2 permissions for some
-    # operations:
+    # alarm operations:
     #
     # * `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
     #
@@ -1046,14 +1256,18 @@ module Aws::CloudWatch
     # If you are using temporary security credentials granted using AWS STS,
     # you cannot stop or terminate an EC2 instance using alarm actions.
     #
-    # You must create at least one stop, terminate, or reboot alarm using
-    # either the Amazon EC2 or CloudWatch consoles to create the
-    # **EC2ActionsAccess** IAM role. After this IAM role is created, you can
-    # create stop, terminate, or reboot alarms using a command-line
-    # interface or API.
+    # The first time you create an alarm in the AWS Management Console, the
+    # CLI, or by using the PutMetricAlarm API, CloudWatch creates the
+    # necessary service-linked role for you. The service-linked role is
+    # called `AWSServiceRoleForCloudWatchEvents`. For more information, see
+    # [AWS service-linked role][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
     #
     # @option params [required, String] :alarm_name
-    #   The name for the alarm. This name must be unique within the AWS
+    #   The name for the alarm. This name must be unique within your AWS
     #   account.
     #
     # @option params [String] :alarm_description
@@ -1061,89 +1275,96 @@ module Aws::CloudWatch
     #
     # @option params [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
-    #   alarm state.
+    #   alarm state. The default is TRUE.
     #
     # @option params [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
     # @option params [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
     # @option params [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #
-    # @option params [required, String] :metric_name
+    # @option params [String] :metric_name
     #   The name for the metric associated with the alarm.
     #
-    # @option params [required, String] :namespace
-    #   The namespace for the metric associated with the alarm.
+    #   If you are creating an alarm based on a math expression, you cannot
+    #   specify this parameter, or any of the `Dimensions`, `Period`,
+    #   `Namespace`, `Statistic`, or `ExtendedStatistic` parameters. Instead,
+    #   you specify all this information in the `Metrics` array.
+    #
+    # @option params [String] :namespace
+    #   The namespace for the metric associated specified in `MetricName`.
     #
     # @option params [String] :statistic
-    #   The statistic for the metric associated with the alarm, other than
+    #   The statistic for the metric specified in `MetricName`, other than
     #   percentile. For percentile statistics, use `ExtendedStatistic`. When
-    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   you call `PutMetricAlarm` and specify a `MetricName`, you must specify
+    #   either `Statistic` or `ExtendedStatistic,` but not both.
     #
     # @option params [String] :extended_statistic
-    #   The percentile statistic for the metric associated with the alarm.
-    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`,
-    #   you must specify either `Statistic` or `ExtendedStatistic,` but not
-    #   both.
+    #   The percentile statistic for the metric specified in `MetricName`.
+    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`
+    #   and specify a `MetricName`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     #
     # @option params [Array<Types::Dimension>] :dimensions
-    #   The dimensions for the metric associated with the alarm.
+    #   The dimensions for the metric specified in `MetricName`.
     #
-    # @option params [required, Integer] :period
-    #   The period, in seconds, over which the specified statistic is applied.
-    #   Valid values are 10, 30, and any multiple of 60.
+    # @option params [Integer] :period
+    #   The length, in seconds, used each time the metric specified in
+    #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
+    #   of 60.
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
@@ -1178,7 +1399,7 @@ module Aws::CloudWatch
     #
     # @option params [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold. If you are setting an alarm which requires that a number of
+    #   threshold. If you are setting an alarm that requires that a number of
     #   consecutive data points be breaching to trigger the alarm, this value
     #   specifies that number. If you are setting an "M out of N" alarm,
     #   this value is the N.
@@ -1232,6 +1453,18 @@ module Aws::CloudWatch
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     #
+    # @option params [Array<Types::MetricDataQuery>] :metrics
+    #   An array of `MetricDataQuery` structures that enable you to create an
+    #   alarm based on the result of a metric math expression. Each item in
+    #   the `Metrics` array either retrieves a metric or performs a math
+    #   expression.
+    #
+    #   If you use the `Metrics` parameter, you cannot include the
+    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
+    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, you retrieve the metrics you are using in your
+    #   math expression as part of the `Metrics` array.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1243,8 +1476,8 @@ module Aws::CloudWatch
     #     ok_actions: ["ResourceName"],
     #     alarm_actions: ["ResourceName"],
     #     insufficient_data_actions: ["ResourceName"],
-    #     metric_name: "MetricName", # required
-    #     namespace: "Namespace", # required
+    #     metric_name: "MetricName",
+    #     namespace: "Namespace",
     #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
     #     extended_statistic: "ExtendedStatistic",
     #     dimensions: [
@@ -1253,7 +1486,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     period: 1, # required
+    #     period: 1,
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
     #     datapoints_to_alarm: 1,
@@ -1261,6 +1494,29 @@ module Aws::CloudWatch
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
+    #     metrics: [
+    #       {
+    #         id: "MetricId", # required
+    #         metric_stat: {
+    #           metric: { # required
+    #             namespace: "Namespace",
+    #             metric_name: "MetricName",
+    #             dimensions: [
+    #               {
+    #                 name: "DimensionName", # required
+    #                 value: "DimensionValue", # required
+    #               },
+    #             ],
+    #           },
+    #           period: 1, # required
+    #           stat: "Stat", # required
+    #           unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         },
+    #         expression: "MetricExpression",
+    #         label: "MetricLabel",
+    #         return_data: false,
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -1278,8 +1534,17 @@ module Aws::CloudWatch
     # creates a metric, it can take up to fifteen minutes for the metric to
     # appear in calls to ListMetrics.
     #
+    # You can publish either individual data points in the `Value` field, or
+    # arrays of values and the number of times each value occurred during
+    # the period by using the `Values` and `Counts` fields in the
+    # `MetricDatum` structure. Using the `Values` and `Counts` method
+    # enables you to publish up to 150 values per metric with one
+    # `PutMetricData` request, and supports retrieving percentile statistics
+    # on this data.
+    #
     # Each `PutMetricData` request is limited to 40 KB in size for HTTP POST
-    # requests.
+    # requests. You can send a payload compressed by gzip. Each request is
+    # also limited to no more than 20 different metrics.
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # CloudWatch rejects values that are either too small or too large.
@@ -1293,17 +1558,19 @@ module Aws::CloudWatch
     # Guide*.
     #
     # Data points with time stamps from 24 hours ago or longer can take at
-    # least 48 hours to become available for GetMetricStatistics from the
-    # time they are submitted.
+    # least 48 hours to become available for GetMetricData or
+    # GetMetricStatistics from the time they are submitted.
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
     # If you publish data using a statistic set instead, you can only
     # retrieve percentile statistics for this data if one of the following
     # conditions is true:
     #
-    # * The SampleCount value of the statistic set is 1
+    # * The `SampleCount` value of the statistic set is 1 and `Min`, `Max`,
+    #   and `Sum` are all equal.
     #
-    # * The Min and the Max values of the statistic set are equal
+    # * The `Min` and `Max` are equal, and `Sum` is equal to `Min`
+    #   multiplied by `SampleCount`.
     #
     #
     #
@@ -1317,7 +1584,8 @@ module Aws::CloudWatch
     #   products.
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric.
+    #   The data for the metric. The array can include no more than 20 metrics
+    #   per call.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1342,6 +1610,8 @@ module Aws::CloudWatch
     #           minimum: 1.0, # required
     #           maximum: 1.0, # required
     #         },
+    #         values: [1.0],
+    #         counts: [1.0],
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         storage_resolution: 1,
     #       },
@@ -1415,7 +1685,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

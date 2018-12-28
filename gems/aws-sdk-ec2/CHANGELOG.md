@@ -1,6 +1,131 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2018-12-19)
+------------------
+
+* Feature - API update.
+
+1.64.0 (2018-12-18)
+------------------
+
+* Feature - API update.
+
+1.63.0 (2018-12-07)
+------------------
+
+* Feature - API update.
+
+1.62.0 (2018-11-29)
+------------------
+
+* Feature - API update.
+
+1.61.0 (2018-11-28)
+------------------
+
+* Feature - API update.
+
+1.60.0 (2018-11-27)
+------------------
+
+* Feature - API update.
+
+1.59.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.58.0 (2018-11-19)
+------------------
+
+* Feature - API update.
+
+1.57.1 (2018-11-16)
+------------------
+
+* Issue - Update version dependency on `aws-sdk-core` to support endpoint discovery.
+
+1.57.0 (2018-11-14)
+------------------
+
+* Feature - API update.
+
+1.56.0 (2018-11-07)
+------------------
+
+* Feature - API update.
+
+1.55.0 (2018-11-06)
+------------------
+
+* Feature - API update.
+
+1.54.0 (2018-10-25)
+------------------
+
+* Feature - API update.
+
+1.53.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.52.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.51.0 (2018-10-11)
+------------------
+
+* Feature - API update.
+
+1.50.0 (2018-09-28)
+------------------
+
+* Feature - API update.
+
+1.49.0 (2018-09-25)
+------------------
+
+* Feature - API update.
+
+1.48.0 (2018-09-20)
+------------------
+
+* Feature - API update.
+
+1.47.0 (2018-09-17)
+------------------
+
+* Feature - API update.
+
+1.46.0 (2018-09-12)
+------------------
+
+* Feature - API update.
+
+1.45.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.44.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.43.0 (2018-08-21)
+------------------
+
+* Feature - API update.
+
+1.42.0 (2018-08-16)
+------------------
+
+* Feature - API update.
+
 1.41.0 (2018-08-07)
 ------------------
 

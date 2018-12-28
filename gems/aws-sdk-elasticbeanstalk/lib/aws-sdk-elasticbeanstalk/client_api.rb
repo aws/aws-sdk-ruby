@@ -166,6 +166,8 @@ module Aws::ElasticBeanstalk
     Latency = Shapes::StructureShape.new(name: 'Latency')
     LaunchConfiguration = Shapes::StructureShape.new(name: 'LaunchConfiguration')
     LaunchConfigurationList = Shapes::ListShape.new(name: 'LaunchConfigurationList')
+    LaunchTemplate = Shapes::StructureShape.new(name: 'LaunchTemplate')
+    LaunchTemplateList = Shapes::ListShape.new(name: 'LaunchTemplateList')
     LaunchedAt = Shapes::TimestampShape.new(name: 'LaunchedAt')
     ListAvailableSolutionStacksResultMessage = Shapes::StructureShape.new(name: 'ListAvailableSolutionStacksResultMessage')
     ListPlatformVersionsRequest = Shapes::StructureShape.new(name: 'ListPlatformVersionsRequest')
@@ -408,6 +410,7 @@ module Aws::ElasticBeanstalk
     CPUUtilization.add_member(:io_wait, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "IOWait"))
     CPUUtilization.add_member(:irq, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "IRQ"))
     CPUUtilization.add_member(:soft_irq, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "SoftIRQ"))
+    CPUUtilization.add_member(:privileged, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Privileged"))
     CPUUtilization.struct_class = Types::CPUUtilization
 
     Causes.member = Shapes::ShapeRef.new(shape: Cause)
@@ -720,6 +723,7 @@ module Aws::ElasticBeanstalk
     EnvironmentResourceDescription.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "AutoScalingGroups"))
     EnvironmentResourceDescription.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, location_name: "Instances"))
     EnvironmentResourceDescription.add_member(:launch_configurations, Shapes::ShapeRef.new(shape: LaunchConfigurationList, location_name: "LaunchConfigurations"))
+    EnvironmentResourceDescription.add_member(:launch_templates, Shapes::ShapeRef.new(shape: LaunchTemplateList, location_name: "LaunchTemplates"))
     EnvironmentResourceDescription.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancerList, location_name: "LoadBalancers"))
     EnvironmentResourceDescription.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "Triggers"))
     EnvironmentResourceDescription.add_member(:queues, Shapes::ShapeRef.new(shape: QueueList, location_name: "Queues"))
@@ -786,6 +790,11 @@ module Aws::ElasticBeanstalk
     LaunchConfiguration.struct_class = Types::LaunchConfiguration
 
     LaunchConfigurationList.member = Shapes::ShapeRef.new(shape: LaunchConfiguration)
+
+    LaunchTemplate.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
+    LaunchTemplate.struct_class = Types::LaunchTemplate
+
+    LaunchTemplateList.member = Shapes::ShapeRef.new(shape: LaunchTemplate)
 
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stacks, Shapes::ShapeRef.new(shape: AvailableSolutionStackNamesList, location_name: "SolutionStacks"))
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stack_details, Shapes::ShapeRef.new(shape: AvailableSolutionStackDetailsList, location_name: "SolutionStackDetails"))
@@ -1093,10 +1102,14 @@ module Aws::ElasticBeanstalk
       api.version = "2010-12-01"
 
       api.metadata = {
+        "apiVersion" => "2010-12-01",
         "endpointPrefix" => "elasticbeanstalk",
         "protocol" => "query",
+        "serviceAbbreviation" => "Elastic Beanstalk",
         "serviceFullName" => "AWS Elastic Beanstalk",
+        "serviceId" => "Elastic Beanstalk",
         "signatureVersion" => "v4",
+        "uid" => "elasticbeanstalk-2010-12-01",
         "xmlNamespace" => "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/",
       }
 

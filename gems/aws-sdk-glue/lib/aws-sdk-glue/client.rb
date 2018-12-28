@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::Glue
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -353,6 +402,19 @@ module Aws::Glue
 
     # Deletes multiple tables at once.
     #
+    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # table versions and partitions that belong to the deleted table. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # manner, at the discretion of the service.
+    #
+    #  To ensure immediate deletion of all related resources, before calling
+    # `BatchDeleteTable`, use `DeleteTableVersion` or
+    # `BatchDeleteTableVersion`, and `DeletePartition` or
+    # `BatchDeletePartition`, to delete any resources that belong to the
+    # table.
+    #
+    #  </note>
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
     #   supplied, the AWS account ID is used by default.
@@ -407,7 +469,8 @@ module Aws::Glue
     #   lowercase.
     #
     # @option params [required, Array<String>] :version_ids
-    #   A list of the IDs of versions to be deleted.
+    #   A list of the IDs of versions to be deleted. A `VersionId` is a string
+    #   representation of an integer. Each version is incremented by 1.
     #
     # @return [Types::BatchDeleteTableVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -701,6 +764,10 @@ module Aws::Glue
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
+    # @option params [String] :crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -738,6 +805,7 @@ module Aws::Glue
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
     #     configuration: "CrawlerConfiguration",
+    #     crawler_security_configuration: "CrawlerSecurityConfiguration",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler AWS API Documentation
@@ -839,6 +907,10 @@ module Aws::Glue
     #   Path to one or more Java Jars in an S3 bucket that should be loaded in
     #   your DevEndpoint.
     #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   DevEndpoint.
+    #
     # @return [Types::CreateDevEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDevEndpointResponse#endpoint_name #endpoint_name} => String
@@ -854,6 +926,7 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#extra_python_libs_s3_path #extra_python_libs_s3_path} => String
     #   * {Types::CreateDevEndpointResponse#extra_jars_s3_path #extra_jars_s3_path} => String
     #   * {Types::CreateDevEndpointResponse#failure_reason #failure_reason} => String
+    #   * {Types::CreateDevEndpointResponse#security_configuration #security_configuration} => String
     #   * {Types::CreateDevEndpointResponse#created_timestamp #created_timestamp} => Time
     #
     # @example Request syntax with placeholder values
@@ -868,6 +941,7 @@ module Aws::Glue
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
+    #     security_configuration: "NameString",
     #   })
     #
     # @example Response structure
@@ -886,6 +960,7 @@ module Aws::Glue
     #   resp.extra_python_libs_s3_path #=> String
     #   resp.extra_jars_s3_path #=> String
     #   resp.failure_reason #=> String
+    #   resp.security_configuration #=> String
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpoint AWS API Documentation
@@ -956,10 +1031,16 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
-    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #   The job timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
     #
     # @option params [Types::NotificationProperty] :notification_property
     #   Specifies configuration properties of a job notification.
+    #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -991,6 +1072,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
+    #     security_configuration: "NameString",
     #   })
     #
     # @example Response structure
@@ -1143,6 +1225,55 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_script(params = {}, options = {})
       req = build_request(:create_script, params)
+      req.send_request(options)
+    end
+
+    # Creates a new security configuration.
+    #
+    # @option params [required, String] :name
+    #   The name for the new security configuration.
+    #
+    # @option params [required, Types::EncryptionConfiguration] :encryption_configuration
+    #   The encryption configuration for the new security configuration.
+    #
+    # @return [Types::CreateSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSecurityConfigurationResponse#name #name} => String
+    #   * {Types::CreateSecurityConfigurationResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_security_configuration({
+    #     name: "NameString", # required
+    #     encryption_configuration: { # required
+    #       s3_encryption: [
+    #         {
+    #           s3_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS, SSE-S3
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       ],
+    #       cloud_watch_encryption: {
+    #         cloud_watch_encryption_mode: "DISABLED", # accepts DISABLED, SSE-KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #       job_bookmarks_encryption: {
+    #         job_bookmarks_encryption_mode: "DISABLED", # accepts DISABLED, CSE-KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSecurityConfiguration AWS API Documentation
+    #
+    # @overload create_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_security_configuration(params = {}, options = {})
+      req = build_request(:create_security_configuration, params)
       req.send_request(options)
     end
 
@@ -1302,6 +1433,7 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         security_configuration: "NameString",
     #       },
     #     ],
     #     description: "DescriptionString",
@@ -1438,6 +1570,21 @@ module Aws::Glue
 
     # Removes a specified Database from a Data Catalog.
     #
+    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # tables (and all table versions and partitions that might belong to the
+    # tables) and the user-defined functions in the deleted database. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # manner, at the discretion of the service.
+    #
+    #  To ensure immediate deletion of all related resources, before calling
+    # `DeleteDatabase`, use `DeleteTableVersion` or
+    # `BatchDeleteTableVersion`, `DeletePartition` or
+    # `BatchDeletePartition`, `DeleteUserDefinedFunction`, and `DeleteTable`
+    # or `BatchDeleteTable`, to delete any resources that belong to the
+    # database.
+    #
+    #  </note>
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
     #   supplied, the AWS account ID is used by default.
@@ -1551,7 +1698,63 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a specified policy.
+    #
+    # @option params [String] :policy_hash_condition
+    #   The hash value returned when this policy was set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     policy_hash_condition: "HashString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified security configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the security configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_security_configuration({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSecurityConfiguration AWS API Documentation
+    #
+    # @overload delete_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_security_configuration(params = {}, options = {})
+      req = build_request(:delete_security_configuration, params)
+      req.send_request(options)
+    end
+
     # Removes a table definition from the Data Catalog.
+    #
+    # <note markdown="1"> After completing this operation, you will no longer have access to the
+    # table versions and partitions that belong to the deleted table. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
+    # manner, at the discretion of the service.
+    #
+    #  To ensure immediate deletion of all related resources, before calling
+    # `DeleteTable`, use `DeleteTableVersion` or `BatchDeleteTableVersion`,
+    # and `DeletePartition` or `BatchDeletePartition`, to delete any
+    # resources that belong to the table.
+    #
+    #  </note>
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
@@ -1599,7 +1802,8 @@ module Aws::Glue
     #   lowercase.
     #
     # @option params [required, String] :version_id
-    #   The ID of the table version to be deleted.
+    #   The ID of the table version to be deleted. A `VersionID` is a string
+    #   representation of an integer. Each version is incremented by 1.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1818,6 +2022,15 @@ module Aws::Glue
     # @option params [required, String] :name
     #   The name of the connection definition to retrieve.
     #
+    # @option params [Boolean] :hide_password
+    #   Allow you to retrieve the connection metadata without displaying the
+    #   password. For instance, the AWS Glue console uses this flag to
+    #   retrieve connections, since the console does not display passwords.
+    #   Set this parameter where the caller may not have permission to use the
+    #   KMS key to decrypt the password, but does have permission to access
+    #   the rest of the connection metadata (that is, the other connection
+    #   properties).
+    #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetConnectionResponse#connection #connection} => Types::Connection
@@ -1827,6 +2040,7 @@ module Aws::Glue
     #   resp = client.get_connection({
     #     catalog_id: "CatalogIdString",
     #     name: "NameString", # required
+    #     hide_password: false,
     #   })
     #
     # @example Response structure
@@ -1864,6 +2078,15 @@ module Aws::Glue
     # @option params [Types::GetConnectionsFilter] :filter
     #   A filter that controls which connections will be returned.
     #
+    # @option params [Boolean] :hide_password
+    #   Allow you to retrieve the connection metadata without displaying the
+    #   password. For instance, the AWS Glue console uses this flag to
+    #   retrieve connections, since the console does not display passwords.
+    #   Set this parameter where the caller may not have permission to use the
+    #   KMS key to decrypt the password, but does have permission to access
+    #   the rest of the connection metadata (that is, the other connection
+    #   properties).
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
     #
@@ -1883,6 +2106,7 @@ module Aws::Glue
     #       match_criteria: ["NameString"],
     #       connection_type: "JDBC", # accepts JDBC, SFTP
     #     },
+    #     hide_password: false,
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -1966,6 +2190,7 @@ module Aws::Glue
     #   resp.crawler.last_crawl.start_time #=> Time
     #   resp.crawler.version #=> Integer
     #   resp.crawler.configuration #=> String
+    #   resp.crawler.crawler_security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler AWS API Documentation
     #
@@ -2079,6 +2304,7 @@ module Aws::Glue
     #   resp.crawlers[0].last_crawl.start_time #=> Time
     #   resp.crawlers[0].version #=> Integer
     #   resp.crawlers[0].configuration #=> String
+    #   resp.crawlers[0].crawler_security_configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers AWS API Documentation
@@ -2087,6 +2313,39 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_crawlers(params = {}, options = {})
       req = build_request(:get_crawlers, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the security configuration for a specified catalog.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog for which to retrieve the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #
+    # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataCatalogEncryptionSettingsResponse#data_catalog_encryption_settings #data_catalog_encryption_settings} => Types::DataCatalogEncryptionSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_catalog_encryption_settings({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id #=> String
+    #   resp.data_catalog_encryption_settings.connection_password_encryption.return_connection_password_encrypted #=> Boolean
+    #   resp.data_catalog_encryption_settings.connection_password_encryption.aws_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettings AWS API Documentation
+    #
+    # @overload get_data_catalog_encryption_settings(params = {})
+    # @param [Hash] params ({})
+    def get_data_catalog_encryption_settings(params = {}, options = {})
+      req = build_request(:get_data_catalog_encryption_settings, params)
       req.send_request(options)
     end
 
@@ -2216,6 +2475,13 @@ module Aws::Glue
 
     # Retrieves information about a specified DevEndpoint.
     #
+    # <note markdown="1"> When you create a development endpoint in a virtual private cloud
+    # (VPC), AWS Glue returns only a private IP address, and the public IP
+    # address field is not populated. When you create a non-VPC development
+    # endpoint, AWS Glue returns only a public IP address.
+    #
+    #  </note>
+    #
     # @option params [required, String] :endpoint_name
     #   Name of the DevEndpoint for which to retrieve information.
     #
@@ -2253,6 +2519,7 @@ module Aws::Glue
     #   resp.dev_endpoint.public_key #=> String
     #   resp.dev_endpoint.public_keys #=> Array
     #   resp.dev_endpoint.public_keys[0] #=> String
+    #   resp.dev_endpoint.security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint AWS API Documentation
     #
@@ -2264,6 +2531,13 @@ module Aws::Glue
     end
 
     # Retrieves all the DevEndpoints in this AWS account.
+    #
+    # <note markdown="1"> When you create a development endpoint in a virtual private cloud
+    # (VPC), AWS Glue returns only a private IP address and the public IP
+    # address field is not populated. When you create a non-VPC development
+    # endpoint, AWS Glue returns only a public IP address.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   The maximum size of information to return.
@@ -2308,6 +2582,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_key #=> String
     #   resp.dev_endpoints[0].public_keys #=> Array
     #   resp.dev_endpoints[0].public_keys[0] #=> String
+    #   resp.dev_endpoints[0].security_configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints AWS API Documentation
@@ -2353,6 +2628,7 @@ module Aws::Glue
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
     #   resp.job.notification_property.notify_delay_after #=> Integer
+    #   resp.job.security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -2407,6 +2683,8 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.notification_property.notify_delay_after #=> Integer
+    #   resp.job_run.security_configuration #=> String
+    #   resp.job_run.log_group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -2463,6 +2741,8 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.job_runs[0].security_configuration #=> String
+    #   resp.job_runs[0].log_group_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -2514,6 +2794,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.jobs[0].security_configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -2688,6 +2969,95 @@ module Aws::Glue
     # @option params [String] :expression
     #   An expression filtering the partitions to be returned.
     #
+    #   The expression uses SQL syntax similar to the SQL `WHERE` filter
+    #   clause. The SQL statement parser [JSQLParser][1] parses the
+    #   expression.
+    #
+    #   *Operators*\: The following are the operators that you can use in the
+    #   `Expression` API call:
+    #
+    #   =
+    #
+    #   : Checks if the values of the two operands are equal or not; if yes,
+    #     then the condition becomes true.
+    #
+    #     Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+    #
+    #     (a = b) is not true.
+    #
+    #   &lt; &gt;
+    #
+    #   : Checks if the values of two operands are equal or not; if the values
+    #     are not equal, then the condition becomes true.
+    #
+    #     Example: (a &lt; &gt; b) is true.
+    #
+    #   &gt;
+    #
+    #   : Checks if the value of the left operand is greater than the value of
+    #     the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &gt; b) is not true.
+    #
+    #   &lt;
+    #
+    #   : Checks if the value of the left operand is less than the value of
+    #     the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &lt; b) is true.
+    #
+    #   &gt;=
+    #
+    #   : Checks if the value of the left operand is greater than or equal to
+    #     the value of the right operand; if yes, then the condition becomes
+    #     true.
+    #
+    #     Example: (a &gt;= b) is not true.
+    #
+    #   &lt;=
+    #
+    #   : Checks if the value of the left operand is less than or equal to the
+    #     value of the right operand; if yes, then the condition becomes true.
+    #
+    #     Example: (a &lt;= b) is true.
+    #
+    #   AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+    #
+    #   : Logical operators.
+    #
+    #   *Supported Partition Key Types*\: The following are the the supported
+    #   partition keys.
+    #
+    #   * `string`
+    #
+    #   * `date`
+    #
+    #   * `timestamp`
+    #
+    #   * `int`
+    #
+    #   * `bigint`
+    #
+    #   * `long`
+    #
+    #   * `tinyint`
+    #
+    #   * `smallint`
+    #
+    #   * `decimal`
+    #
+    #   If an invalid type is encountered, an exception is thrown.
+    #
+    #   The following list shows the valid operators on each type. When you
+    #   define a crawler, the `partitionKey` type is created as a `STRING`, to
+    #   be compatible with the catalog partitions.
+    #
+    #   *Sample API Call*\:
+    #
+    #
+    #
+    #   [1]: http://jsqlparser.sourceforge.net/home.php
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is not the first call to retrieve these
     #   partitions.
@@ -2853,6 +3223,110 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves a specified resource policy.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy_in_json #policy_in_json} => String
+    #   * {Types::GetResourcePolicyResponse#policy_hash #policy_hash} => String
+    #   * {Types::GetResourcePolicyResponse#create_time #create_time} => Time
+    #   * {Types::GetResourcePolicyResponse#update_time #update_time} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.policy_in_json #=> String
+    #   resp.policy_hash #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a specified security configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the security configuration to retrieve.
+    #
+    # @return [Types::GetSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityConfigurationResponse#security_configuration #security_configuration} => Types::SecurityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_configuration({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configuration.name #=> String
+    #   resp.security_configuration.created_time_stamp #=> Time
+    #   resp.security_configuration.encryption_configuration.s3_encryption #=> Array
+    #   resp.security_configuration.encryption_configuration.s3_encryption[0].s3_encryption_mode #=> String, one of "DISABLED", "SSE-KMS", "SSE-S3"
+    #   resp.security_configuration.encryption_configuration.s3_encryption[0].kms_key_arn #=> String
+    #   resp.security_configuration.encryption_configuration.cloud_watch_encryption.cloud_watch_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.security_configuration.encryption_configuration.cloud_watch_encryption.kms_key_arn #=> String
+    #   resp.security_configuration.encryption_configuration.job_bookmarks_encryption.job_bookmarks_encryption_mode #=> String, one of "DISABLED", "CSE-KMS"
+    #   resp.security_configuration.encryption_configuration.job_bookmarks_encryption.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfiguration AWS API Documentation
+    #
+    # @overload get_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_security_configuration(params = {}, options = {})
+      req = build_request(:get_security_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all security configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::GetSecurityConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityConfigurationsResponse#security_configurations #security_configurations} => Array&lt;Types::SecurityConfiguration&gt;
+    #   * {Types::GetSecurityConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_configurations({
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configurations #=> Array
+    #   resp.security_configurations[0].name #=> String
+    #   resp.security_configurations[0].created_time_stamp #=> Time
+    #   resp.security_configurations[0].encryption_configuration.s3_encryption #=> Array
+    #   resp.security_configurations[0].encryption_configuration.s3_encryption[0].s3_encryption_mode #=> String, one of "DISABLED", "SSE-KMS", "SSE-S3"
+    #   resp.security_configurations[0].encryption_configuration.s3_encryption[0].kms_key_arn #=> String
+    #   resp.security_configurations[0].encryption_configuration.cloud_watch_encryption.cloud_watch_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.security_configurations[0].encryption_configuration.cloud_watch_encryption.kms_key_arn #=> String
+    #   resp.security_configurations[0].encryption_configuration.job_bookmarks_encryption.job_bookmarks_encryption_mode #=> String, one of "DISABLED", "CSE-KMS"
+    #   resp.security_configurations[0].encryption_configuration.job_bookmarks_encryption.kms_key_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurations AWS API Documentation
+    #
+    # @overload get_security_configurations(params = {})
+    # @param [Hash] params ({})
+    def get_security_configurations(params = {}, options = {})
+      req = build_request(:get_security_configurations, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `Table` definition in a Data Catalog for a specified
     # table.
     #
@@ -2953,7 +3427,8 @@ module Aws::Glue
     #   lowercase.
     #
     # @option params [String] :version_id
-    #   The ID value of the table version to be retrieved.
+    #   The ID value of the table version to be retrieved. A `VersionID` is a
+    #   string representation of an integer. Each version is incremented by 1.
     #
     # @return [Types::GetTableVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3249,6 +3724,7 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
     #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.trigger.actions[0].security_configuration #=> String
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -3305,6 +3781,7 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
     #   resp.triggers[0].actions[0].timeout #=> Integer
     #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.triggers[0].actions[0].security_configuration #=> String
     #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -3444,6 +3921,87 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Sets the security configuration for a specified catalog. Once the
+    # configuration has been set, the specified encryption is applied to
+    # every catalog write thereafter.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog for which to set the security
+    #   configuration. If none is supplied, the AWS account ID is used by
+    #   default.
+    #
+    # @option params [required, Types::DataCatalogEncryptionSettings] :data_catalog_encryption_settings
+    #   The security configuration to set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_catalog_encryption_settings({
+    #     catalog_id: "CatalogIdString",
+    #     data_catalog_encryption_settings: { # required
+    #       encryption_at_rest: {
+    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         sse_aws_kms_key_id: "NameString",
+    #       },
+    #       connection_password_encryption: {
+    #         return_connection_password_encrypted: false, # required
+    #         aws_kms_key_id: "NameString",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettings AWS API Documentation
+    #
+    # @overload put_data_catalog_encryption_settings(params = {})
+    # @param [Hash] params ({})
+    def put_data_catalog_encryption_settings(params = {}, options = {})
+      req = build_request(:put_data_catalog_encryption_settings, params)
+      req.send_request(options)
+    end
+
+    # Sets the Data Catalog resource policy for access control.
+    #
+    # @option params [required, String] :policy_in_json
+    #   Contains the policy document to set, in JSON format.
+    #
+    # @option params [String] :policy_hash_condition
+    #   This is the hash value returned when the previous policy was set using
+    #   PutResourcePolicy. Its purpose is to prevent concurrent modifications
+    #   of a policy. Do not use this parameter if no previous policy has been
+    #   set.
+    #
+    # @option params [String] :policy_exists_condition
+    #   A value of `MUST_EXIST` is used to update a policy. A value of
+    #   `NOT_EXIST` is used to create a new policy. If a value of `NONE` or a
+    #   null value is used, the call will not depend on the existence of a
+    #   policy.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy_hash #policy_hash} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy_in_json: "PolicyJsonString", # required
+    #     policy_hash_condition: "HashString",
+    #     policy_exists_condition: "MUST_EXIST", # accepts MUST_EXIST, NOT_EXIST, NONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_hash #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Resets a bookmark entry.
     #
     # @option params [required, String] :job_name
@@ -3568,11 +4126,17 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
-    #   The job run timeout in minutes. It overrides the timeout value of the
-    #   job.
+    #   The JobRun timeout in minutes. This is the maximum time that a job run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours). This overrides the
+    #   timeout value set in the parent job.
     #
     # @option params [Types::NotificationProperty] :notification_property
     #   Specifies configuration properties of a job run notification.
+    #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with this
+    #   job run.
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3591,6 +4155,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
+    #     security_configuration: "NameString",
     #   })
     #
     # @example Response structure
@@ -3849,6 +4414,10 @@ module Aws::Glue
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
+    # @option params [String] :crawler_security_configuration
+    #   The name of the SecurityConfiguration structure to be used by this
+    #   Crawler.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3886,6 +4455,7 @@ module Aws::Glue
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
     #     configuration: "CrawlerConfiguration",
+    #     crawler_security_configuration: "CrawlerSecurityConfiguration",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler AWS API Documentation
@@ -4055,6 +4625,7 @@ module Aws::Glue
     #       notification_property: {
     #         notify_delay_after: 1,
     #       },
+    #       security_configuration: "NameString",
     #     },
     #   })
     #
@@ -4285,6 +4856,7 @@ module Aws::Glue
     #           notification_property: {
     #             notify_delay_after: 1,
     #           },
+    #           security_configuration: "NameString",
     #         },
     #       ],
     #       predicate: {
@@ -4314,6 +4886,7 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
     #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.trigger.actions[0].security_configuration #=> String
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -4390,7 +4963,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

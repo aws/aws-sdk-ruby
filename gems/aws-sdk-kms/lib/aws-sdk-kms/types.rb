@@ -74,6 +74,30 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ConnectCustomKeyStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_key_store_id: "CustomKeyStoreIdType", # required
+    #       }
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   Enter the key store ID of the custom key store that you want to
+    #   connect. To find the ID of a custom key store, use the
+    #   DescribeCustomKeyStores operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ConnectCustomKeyStoreRequest AWS API Documentation
+    #
+    class ConnectCustomKeyStoreRequest < Struct.new(
+      :custom_key_store_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ConnectCustomKeyStoreResponse AWS API Documentation
+    #
+    class ConnectCustomKeyStoreResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateAliasRequest
     #   data as a hash:
     #
@@ -83,10 +107,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] alias_name
-    #   Specifies the alias name. This value must begin with `alias/`
-    #   followed by the alias name, such as `alias/ExampleAlias`. The alias
-    #   name cannot begin with `aws/`. The `alias/aws/` prefix is reserved
-    #   for AWS managed CMKs.
+    #   String that contains the display name. The name must start with the
+    #   word "alias" followed by a forward slash (alias/). Aliases that
+    #   begin with "alias/AWS" are reserved.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
@@ -111,6 +134,76 @@ module Aws::KMS
     class CreateAliasRequest < Struct.new(
       :alias_name,
       :target_key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCustomKeyStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_key_store_name: "CustomKeyStoreNameType", # required
+    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType", # required
+    #         trust_anchor_certificate: "TrustAnchorCertificateType", # required
+    #         key_store_password: "KeyStorePasswordType", # required
+    #       }
+    #
+    # @!attribute [rw] custom_key_store_name
+    #   Specifies a friendly name for the custom key store. The name must be
+    #   unique in your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_hsm_cluster_id
+    #   Identifies the AWS CloudHSM cluster for the custom key store. Enter
+    #   the cluster ID of any active AWS CloudHSM cluster that is not
+    #   already associated with a custom key store. To find the cluster ID,
+    #   use the [DescribeClusters][1] operation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_anchor_certificate
+    #   Enter the content of the trust anchor certificate for the cluster.
+    #   This is the content of the `customerCA.crt` file that you created
+    #   when you [initialized the cluster][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key_store_password
+    #   Enter the password of the [ `kmsuser` crypto user (CU) account][1]
+    #   in the specified AWS CloudHSM cluster. AWS KMS logs into the cluster
+    #   as this user to manage key material on your behalf.
+    #
+    #   This parameter tells AWS KMS the `kmsuser` account password; it does
+    #   not change the password in the AWS CloudHSM cluster.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStoreRequest AWS API Documentation
+    #
+    class CreateCustomKeyStoreRequest < Struct.new(
+      :custom_key_store_name,
+      :cloud_hsm_cluster_id,
+      :trust_anchor_certificate,
+      :key_store_password)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_key_store_id
+    #   A unique identifier for the new custom key store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStoreResponse AWS API Documentation
+    #
+    class CreateCustomKeyStoreResponse < Struct.new(
+      :custom_key_store_id)
       include Aws::Structure
     end
 
@@ -214,8 +307,7 @@ module Aws::KMS
     #
     # @!attribute [rw] name
     #   A friendly name for identifying the grant. Use this value to prevent
-    #   the unintended creation of duplicate grants when retrying this
-    #   request.
+    #   unintended creation of duplicate grants when retrying this request.
     #
     #   When this value is absent, all `CreateGrant` requests result in a
     #   new grant with a unique `GrantId` even if all the supplied
@@ -276,7 +368,8 @@ module Aws::KMS
     #         policy: "PolicyType",
     #         description: "DescriptionType",
     #         key_usage: "ENCRYPT_DECRYPT", # accepts ENCRYPT_DECRYPT
-    #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
+    #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM
+    #         custom_key_store_id: "CustomKeyStoreIdType",
     #         bypass_policy_lockout_safety_check: false,
     #         tags: [
     #           {
@@ -302,11 +395,11 @@ module Aws::KMS
     #     principals. The principals in the key policy must exist and be
     #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy. The reason for
-    #     this is that the new principal might not be immediately visible to
-    #     AWS KMS. For more information, see [Changes that I make are not
-    #     always immediately visible][2] in the *AWS Identity and Access
-    #     Management User Guide*.
+    #     before including the new principal in a key policy because the new
+    #     principal might not be immediately visible to AWS KMS. For more
+    #     information, see [Changes that I make are not always immediately
+    #     visible][2] in the *AWS Identity and Access Management User
+    #     Guide*.
     #
     #   If you do not provide a key policy, AWS KMS attaches a default key
     #   policy to the CMK. For more information, see [Default Key Policy][3]
@@ -335,21 +428,52 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] origin
-    #   The source of the CMK's key material.
+    #   The source of the CMK's key material. You cannot change the origin
+    #   after you create the CMK.
     #
     #   The default is `AWS_KMS`, which means AWS KMS creates the key
-    #   material. When this parameter is set to `EXTERNAL`, the request
-    #   creates a CMK without key material so that you can import key
-    #   material from your existing key management infrastructure. For more
-    #   information about importing key material into AWS KMS, see
-    #   [Importing Key Material][1] in the *AWS Key Management Service
-    #   Developer Guide*.
+    #   material in its own key store.
     #
-    #   The CMK's `Origin` is immutable and is set when the CMK is created.
+    #   When the parameter value is `EXTERNAL`, AWS KMS creates a CMK
+    #   without key material so that you can import key material from your
+    #   existing key management infrastructure. For more information about
+    #   importing key material into AWS KMS, see [Importing Key Material][1]
+    #   in the *AWS Key Management Service Developer Guide*.
+    #
+    #   When the parameter value is `AWS_CLOUDHSM`, AWS KMS creates the CMK
+    #   in a AWS KMS [custom key store][2] and creates its key material in
+    #   the associated AWS CloudHSM cluster. You must also use the
+    #   `CustomKeyStoreId` parameter to identify the custom key store.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   Creates the CMK in the specified [custom key store][1] and the key
+    #   material in its associated AWS CloudHSM cluster. To create a CMK in
+    #   a custom key store, you must also specify the `Origin` parameter
+    #   with a value of `AWS_CLOUDHSM`. The AWS CloudHSM cluster that is
+    #   associated with the custom key store must have at least two active
+    #   HSMs, each in a different Availability Zone in the Region.
+    #
+    #   To find the ID of a custom key store, use the
+    #   DescribeCustomKeyStores operation.
+    #
+    #   The response includes the custom key store ID and the ID of the AWS
+    #   CloudHSM cluster.
+    #
+    #   This operation is part of the [Custom Key Store feature][2] feature
+    #   in AWS KMS, which combines the convenience and extensive integration
+    #   of AWS KMS with the isolation and control of a single-tenant key
+    #   store.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -391,6 +515,7 @@ module Aws::KMS
       :description,
       :key_usage,
       :origin,
+      :custom_key_store_id,
       :bypass_policy_lockout_safety_check,
       :tags)
       include Aws::Structure
@@ -404,6 +529,103 @@ module Aws::KMS
     #
     class CreateKeyResponse < Struct.new(
       :key_metadata)
+      include Aws::Structure
+    end
+
+    # Contains information about each custom key store in the custom key
+    # store list.
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   A unique identifier for the custom key store.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_key_store_name
+    #   The user-specified friendly name for the custom key store.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_hsm_cluster_id
+    #   A unique identifier for the AWS CloudHSM cluster that is associated
+    #   with the custom key store.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_anchor_certificate
+    #   The trust anchor certificate of the associated AWS CloudHSM cluster.
+    #   When you [initialize the cluster][1], you create this certificate
+    #   and save it in the `customerCA.crt` file.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Indicates whether the custom key store is connected to its AWS
+    #   CloudHSM cluster.
+    #
+    #   You can create and use CMKs in your custom key stores only when its
+    #   connection state is `CONNECTED`.
+    #
+    #   The value is `DISCONNECTED` if the key store has never been
+    #   connected or you use the DisconnectCustomKeyStore operation to
+    #   disconnect it. If the value is `CONNECTED` but you are having
+    #   trouble using the custom key store, make sure that its associated
+    #   AWS CloudHSM cluster is active and contains at least one active HSM.
+    #
+    #   A value of `FAILED` indicates that an attempt to connect was
+    #   unsuccessful. For help resolving a connection failure, see
+    #   [Troubleshooting a Custom Key Store][1] in the *AWS Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_error_code
+    #   Describes the connection error. Valid values are:
+    #
+    #   * `CLUSTER_NOT_FOUND` - AWS KMS cannot find the AWS CloudHSM cluster
+    #     with the specified cluster ID.
+    #
+    #   * `INSUFFICIENT_CLOUDHSM_HSMS` - The associated AWS CloudHSM cluster
+    #     does not contain any active HSMs. To connect a custom key store to
+    #     its AWS CloudHSM cluster, the cluster must contain at least one
+    #     active HSM.
+    #
+    #   * `INVALID_CREDENTIALS` - AWS KMS does not have the correct password
+    #     for the `kmsuser` crypto user in the AWS CloudHSM cluster.
+    #
+    #   * `NETWORK_ERRORS` - Network errors are preventing AWS KMS from
+    #     connecting to the custom key store.
+    #
+    #   * `USER_LOCKED_OUT` - The `kmsuser` CU account is locked out of the
+    #     associated AWS CloudHSM cluster due to too many failed password
+    #     attempts. Before you can connect your custom key store to its AWS
+    #     CloudHSM cluster, you must change the `kmsuser` account password
+    #     and update the password value for the custom key store.
+    #
+    #   For help with connection failures, see [Troubleshooting Custom Key
+    #   Stores][1] in the *AWS Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the custom key store was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoresListEntry AWS API Documentation
+    #
+    class CustomKeyStoresListEntry < Struct.new(
+      :custom_key_store_id,
+      :custom_key_store_name,
+      :cloud_hsm_cluster_id,
+      :trust_anchor_certificate,
+      :connection_state,
+      :connection_error_code,
+      :creation_date)
       include Aws::Structure
     end
 
@@ -459,7 +681,7 @@ module Aws::KMS
     #
     # @!attribute [rw] plaintext
     #   Decrypted plaintext data. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encdoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptResponse AWS API Documentation
@@ -489,6 +711,29 @@ module Aws::KMS
       :alias_name)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteCustomKeyStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_key_store_id: "CustomKeyStoreIdType", # required
+    #       }
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   Enter the ID of the custom key store you want to delete. To find the
+    #   ID of a custom key store, use the DescribeCustomKeyStores operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteCustomKeyStoreRequest AWS API Documentation
+    #
+    class DeleteCustomKeyStoreRequest < Struct.new(
+      :custom_key_store_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteCustomKeyStoreResponse AWS API Documentation
+    #
+    class DeleteCustomKeyStoreResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteImportedKeyMaterialRequest
     #   data as a hash:
@@ -521,6 +766,83 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCustomKeyStoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_key_store_id: "CustomKeyStoreIdType",
+    #         custom_key_store_name: "CustomKeyStoreNameType",
+    #         limit: 1,
+    #         marker: "MarkerType",
+    #       }
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   Gets only information about the specified custom key store. Enter
+    #   the key store ID.
+    #
+    #   By default, this operation gets information about all custom key
+    #   stores in the account and region. To limit the output to a
+    #   particular custom key store, you can use either the
+    #   `CustomKeyStoreId` or `CustomKeyStoreName` parameter, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_key_store_name
+    #   Gets only information about the specified custom key store. Enter
+    #   the friendly name of the custom key store.
+    #
+    #   By default, this operation gets information about all custom key
+    #   stores in the account and region. To limit the output to a
+    #   particular custom key store, you can use either the
+    #   `CustomKeyStoreId` or `CustomKeyStoreName` parameter, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStoresRequest AWS API Documentation
+    #
+    class DescribeCustomKeyStoresRequest < Struct.new(
+      :custom_key_store_id,
+      :custom_key_store_name,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_key_stores
+    #   Contains metadata about each custom key store.
+    #   @return [Array<Types::CustomKeyStoresListEntry>]
+    #
+    # @!attribute [rw] next_marker
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStoresResponse AWS API Documentation
+    #
+    class DescribeCustomKeyStoresResponse < Struct.new(
+      :custom_key_stores,
+      :next_marker,
+      :truncated)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeKeyRequest
     #   data as a hash:
     #
@@ -538,7 +860,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   "alias/". To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -650,6 +972,30 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisconnectCustomKeyStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_key_store_id: "CustomKeyStoreIdType", # required
+    #       }
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   Enter the ID of the custom key store you want to disconnect. To find
+    #   the ID of a custom key store, use the DescribeCustomKeyStores
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisconnectCustomKeyStoreRequest AWS API Documentation
+    #
+    class DisconnectCustomKeyStoreRequest < Struct.new(
+      :custom_key_store_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisconnectCustomKeyStoreResponse AWS API Documentation
+    #
+    class DisconnectCustomKeyStoreResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass EnableKeyRequest
     #   data as a hash:
     #
@@ -727,7 +1073,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   "alias/". To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -783,7 +1129,7 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted plaintext. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encdoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -817,7 +1163,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   "alias/". To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -884,12 +1230,12 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted data encryption key. When you use the HTTP API or the
-    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.
+    #   AWS CLI, the value is Base64-encdoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] plaintext
     #   The data encryption key. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded. Use this
+    #   the value is Base64-encdoded. Otherwise, it is not encoded. Use this
     #   data key for local encryption and decryption, then remove it from
     #   memory as soon as possible.
     #   @return [String]
@@ -927,7 +1273,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   "alias/". To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -994,7 +1340,7 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted data encryption key. When you use the HTTP API or the
-    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.
+    #   AWS CLI, the value is Base64-encdoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -1015,22 +1361,34 @@ module Aws::KMS
     #
     #       {
     #         number_of_bytes: 1,
+    #         custom_key_store_id: "CustomKeyStoreIdType",
     #       }
     #
     # @!attribute [rw] number_of_bytes
     #   The length of the byte string.
     #   @return [Integer]
     #
+    # @!attribute [rw] custom_key_store_id
+    #   Generates the random byte string in the AWS CloudHSM cluster that is
+    #   associated with the specified [custom key store][1]. To find the ID
+    #   of a custom key store, use the DescribeCustomKeyStores operation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomRequest AWS API Documentation
     #
     class GenerateRandomRequest < Struct.new(
-      :number_of_bytes)
+      :number_of_bytes,
+      :custom_key_store_id)
       include Aws::Structure
     end
 
     # @!attribute [rw] plaintext
     #   The random byte string. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encdoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse AWS API Documentation
@@ -1157,10 +1515,10 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] wrapping_algorithm
-    #   The algorithm you use to encrypt the key material before importing
-    #   it with ImportKeyMaterial. For more information, see [Encrypt the
-    #   Key Material][1] in the *AWS Key Management Service Developer
-    #   Guide*.
+    #   The algorithm you will use to encrypt the key material before
+    #   importing it with ImportKeyMaterial. For more information, see
+    #   [Encrypt the Key Material][1] in the *AWS Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -1214,7 +1572,7 @@ module Aws::KMS
     end
 
     # A structure that you can use to allow certain operations in the grant
-    # only when the preferred encryption context is present. For more
+    # only when the desired encryption context is present. For more
     # information about encryption context, see [Encryption Context][1] in
     # the *AWS Key Management Service Developer Guide*.
     #
@@ -1222,7 +1580,7 @@ module Aws::KMS
     # context as input. For example, the ` DescribeKey ` operation does not
     # accept encryption context as input. A grant that allows the
     # `DescribeKey` operation does so regardless of the grant constraints.
-    # In contrast, the ` Encrypt ` operation accepts encryption context as
+    # In constrast, the ` Encrypt ` operation accepts encryption context as
     # input. A grant that allows the `Encrypt` operation does so only when
     # the encryption context of the `Encrypt` operation satisfies the grant
     # constraints.
@@ -1472,8 +1830,7 @@ module Aws::KMS
     #
     # @!attribute [rw] deletion_date
     #   The date and time after which AWS KMS deletes the CMK. This value is
-    #   present only when `KeyState` is `PendingDeletion`, otherwise this
-    #   value is omitted.
+    #   present only when `KeyState` is `PendingDeletion`.
     #   @return [Time]
     #
     # @!attribute [rw] valid_to
@@ -1488,7 +1845,31 @@ module Aws::KMS
     #   The source of the CMK's key material. When this value is `AWS_KMS`,
     #   AWS KMS created the key material. When this value is `EXTERNAL`, the
     #   key material was imported from your existing key management
-    #   infrastructure or the CMK lacks key material.
+    #   infrastructure or the CMK lacks key material. When this value is
+    #   `AWS_CLOUDHSM`, the key material was created in the AWS CloudHSM
+    #   cluster associated with a custom key store.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   A unique identifier for the [custom key store][1] that contains the
+    #   CMK. This value is present only when the CMK is created in a custom
+    #   key store.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_hsm_cluster_id
+    #   The cluster ID of the AWS CloudHSM cluster that contains the key
+    #   material for the CMK. When you create a CMK in a [custom key
+    #   store][1], AWS KMS creates the key material for the CMK in the
+    #   associated AWS CloudHSM cluster. This value is present only when the
+    #   CMK is created in a custom key store.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html
     #   @return [String]
     #
     # @!attribute [rw] expiration_model
@@ -1498,7 +1879,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_manager
-    #   The CMK's manager. CMKs are either customer managed or AWS managed.
+    #   The CMK's manager. CMKs are either customer-managed or AWS-managed.
     #   For more information about the difference, see [Customer Master
     #   Keys][1] in the *AWS Key Management Service Developer Guide*.
     #
@@ -1521,6 +1902,8 @@ module Aws::KMS
       :deletion_date,
       :valid_to,
       :origin,
+      :custom_key_store_id,
+      :cloud_hsm_cluster_id,
       :expiration_model,
       :key_manager)
       include Aws::Structure
@@ -1982,11 +2365,11 @@ module Aws::KMS
     #     principals. The principals in the key policy must exist and be
     #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy. The reason for
-    #     this is that the new principal might not be immediately visible to
-    #     AWS KMS. For more information, see [Changes that I make are not
-    #     always immediately visible][2] in the *AWS Identity and Access
-    #     Management User Guide*.
+    #     before including the new principal in a key policy because the new
+    #     principal might not be immediately visible to AWS KMS. For more
+    #     information, see [Changes that I make are not always immediately
+    #     visible][2] in the *AWS Identity and Access Management User
+    #     Guide*.
     #
     #   The key policy size limit is 32 kilobytes (32768 bytes).
     #
@@ -2057,7 +2440,7 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   "alias/". To specify a CMK in a different AWS account, you must
     #   use the key ARN or alias ARN.
     #
     #   For example:
@@ -2103,7 +2486,7 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The reencrypted data. When you use the HTTP API or the AWS CLI, the
-    #   value is Base64-encoded. Otherwise, it is not encoded.
+    #   value is Base64-encdoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] source_key_id
@@ -2412,6 +2795,68 @@ module Aws::KMS
       :target_key_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateCustomKeyStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         custom_key_store_id: "CustomKeyStoreIdType", # required
+    #         new_custom_key_store_name: "CustomKeyStoreNameType",
+    #         key_store_password: "KeyStorePasswordType",
+    #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
+    #       }
+    #
+    # @!attribute [rw] custom_key_store_id
+    #   Identifies the custom key store that you want to update. Enter the
+    #   ID of the custom key store. To find the ID of a custom key store,
+    #   use the DescribeCustomKeyStores operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_custom_key_store_name
+    #   Changes the friendly name of the custom key store to the value that
+    #   you specify. The custom key store name must be unique in the AWS
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_store_password
+    #   Enter the current password of the `kmsuser` crypto user (CU) in the
+    #   AWS CloudHSM cluster that is associated with the custom key store.
+    #
+    #   This parameter tells AWS KMS the current password of the `kmsuser`
+    #   crypto user (CU). It does not set or change the password of any
+    #   users in the AWS CloudHSM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_hsm_cluster_id
+    #   Associates the custom key store with a related AWS CloudHSM cluster.
+    #
+    #   Enter the cluster ID of the cluster that you used to create the
+    #   custom key store or a cluster that shares a backup history with the
+    #   original cluster. You cannot use this parameter to associate a
+    #   custom key store with a different cluster.
+    #
+    #   Clusters that share a backup history have the same cluster
+    #   certificate. To view the cluster certificate of a cluster, use the
+    #   [DescribeClusters][1] operation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStoreRequest AWS API Documentation
+    #
+    class UpdateCustomKeyStoreRequest < Struct.new(
+      :custom_key_store_id,
+      :new_custom_key_store_name,
+      :key_store_password,
+      :cloud_hsm_cluster_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStoreResponse AWS API Documentation
+    #
+    class UpdateCustomKeyStoreResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateKeyDescriptionRequest
     #   data as a hash:

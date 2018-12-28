@@ -282,6 +282,12 @@ module Aws::ECR
     #
     #       {
     #         repository_name: "RepositoryName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] repository_name
@@ -291,10 +297,14 @@ module Aws::ECR
     #   (such as `project-a/nginx-web-app`).
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
-      :repository_name)
+      :repository_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -458,7 +468,7 @@ module Aws::ECR
     #   data as a hash:
     #
     #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #       }
     #
     # @!attribute [rw] tag_status
@@ -488,7 +498,7 @@ module Aws::ECR
     #         next_token: "NextToken",
     #         max_results: 1,
     #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #         },
     #       }
     #
@@ -499,8 +509,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   A list of repositories to describe. If this parameter is omitted,
-    #   then all repositories in a registry are described.
+    #   A list of repositories to describe.
     #   @return [String]
     #
     # @!attribute [rw] image_ids
@@ -523,7 +532,7 @@ module Aws::ECR
     #   along with a `nextToken` response element. The remaining results of
     #   the initial request can be seen by sending another `DescribeImages`
     #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 100. If this parameter is not used, then
+    #   between 1 and 1000. If this parameter is not used, then
     #   `DescribeImages` returns up to 100 results and a `nextToken` value,
     #   if applicable. This option cannot be used when you specify images
     #   with `imageIds`.
@@ -610,7 +619,7 @@ module Aws::ECR
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
     #   `DescribeRepositories` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
+    #   This value can be between 1 and 1000. If this parameter is not used,
     #   then `DescribeRepositories` returns up to 100 results and a
     #   `nextToken` value, if applicable. This option cannot be used when
     #   you specify repositories with `repositoryNames`.
@@ -742,7 +751,7 @@ module Aws::ECR
     #         next_token: "NextToken",
     #         max_results: 1,
     #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #         },
     #       }
     #
@@ -778,7 +787,7 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can
     #   be seen by sending  another `GetLifecyclePolicyPreviewRequest`
     #   request with the returned `nextToken`  value. This value can be
-    #   between 1 and 100. If this  parameter is not used, then
+    #   between 1 and 1000. If this  parameter is not used, then
     #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when
     #   you specify images with `imageIds`.
@@ -1176,7 +1185,7 @@ module Aws::ECR
     #   data as a hash:
     #
     #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #       }
     #
     # @!attribute [rw] tag_status
@@ -1256,7 +1265,7 @@ module Aws::ECR
     #   data as a hash:
     #
     #       {
-    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #       }
     #
     # @!attribute [rw] tag_status
@@ -1280,7 +1289,7 @@ module Aws::ECR
     #         next_token: "NextToken",
     #         max_results: 1,
     #         filter: {
-    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #         },
     #       }
     #
@@ -1314,7 +1323,7 @@ module Aws::ECR
     #   returns `maxResults` results in a single page along with a
     #   `nextToken` response element. The remaining results of the initial
     #   request can be seen by sending another `ListImages` request with the
-    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   returned `nextToken` value. This value can be between 1 and 1000. If
     #   this parameter is not used, then `ListImages` returns up to 100
     #   results and a `nextToken` value, if applicable.
     #   @return [Integer]
@@ -1351,6 +1360,37 @@ module Aws::ECR
     class ListImagesResponse < Struct.new(
       :image_ids,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the only supported resource is an
+    #   Amazon ECR repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1618,6 +1658,107 @@ module Aws::ECR
       :status)
       include Aws::Structure
     end
+
+    # The metadata that you apply to a resource to help you categorize and
+    # organize them. Each tag consists of a key and an optional value, both
+    # of which you define. Tag keys can have a maximum character length of
+    # 128 characters, and tag values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the the resource to which to add
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UploadLayerPartRequest
     #   data as a hash:

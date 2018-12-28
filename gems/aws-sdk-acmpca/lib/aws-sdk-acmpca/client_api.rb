@@ -277,12 +277,16 @@ module Aws::ACMPCA
       api.version = "2017-08-22"
 
       api.metadata = {
+        "apiVersion" => "2017-08-22",
         "endpointPrefix" => "acm-pca",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "ACM-PCA",
         "serviceFullName" => "AWS Certificate Manager Private Certificate Authority",
+        "serviceId" => "ACM PCA",
         "signatureVersion" => "v4",
         "targetPrefix" => "ACMPrivateCA",
+        "uid" => "acm-pca-2017-08-22",
       }
 
       api.add_operation(:create_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
@@ -417,6 +421,12 @@ module Aws::ACMPCA
         o.input = Shapes::ShapeRef.new(shape: ListCertificateAuthoritiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCertificateAuthoritiesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|

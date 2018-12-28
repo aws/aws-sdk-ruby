@@ -512,10 +512,12 @@ module Aws::CloudSearch
       api.version = "2013-01-01"
 
       api.metadata = {
+        "apiVersion" => "2013-01-01",
         "endpointPrefix" => "cloudsearch",
         "protocol" => "query",
         "serviceFullName" => "Amazon CloudSearch",
         "signatureVersion" => "v4",
+        "uid" => "cloudsearch-2013-01-01",
         "xmlNamespace" => "http://cloudsearch.amazonaws.com/doc/2013-01-01/",
       }
 

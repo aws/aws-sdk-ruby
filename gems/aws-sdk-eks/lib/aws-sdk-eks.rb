@@ -12,6 +12,7 @@ require_relative 'aws-sdk-eks/types'
 require_relative 'aws-sdk-eks/client_api'
 require_relative 'aws-sdk-eks/client'
 require_relative 'aws-sdk-eks/errors'
+require_relative 'aws-sdk-eks/waiters'
 require_relative 'aws-sdk-eks/resource'
 require_relative 'aws-sdk-eks/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-eks/customizations'
 # @service
 module Aws::EKS
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.9.0'
 
 end

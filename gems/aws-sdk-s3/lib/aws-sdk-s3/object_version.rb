@@ -225,6 +225,7 @@ module Aws::S3
     #   object_version.delete({
     #     mfa: "MFA",
     #     request_payer: "requester", # accepts requester
+    #     bypass_governance_retention: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :mfa
@@ -236,6 +237,9 @@ module Aws::S3
     #   requests. Documentation on downloading objects from requester pays
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [Boolean] :bypass_governance_retention
+    #   Indicates whether S3 Object Lock should bypass Governance-mode
+    #   restrictions to process this operation.
     # @return [Types::DeleteObjectOutput]
     def delete(options = {})
       options = options.merge(
@@ -463,6 +467,7 @@ module Aws::S3
       #   object_version.batch_delete!({
       #     mfa: "MFA",
       #     request_payer: "requester", # accepts requester
+      #     bypass_governance_retention: false,
       #   })
       # @param options ({})
       # @option options [String] :mfa
@@ -474,6 +479,10 @@ module Aws::S3
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option options [Boolean] :bypass_governance_retention
+      #   Specifies whether you want to delete this object even if it has a
+      #   Governance-type Object Lock in place. You must have sufficient
+      #   permissions to perform this operation.
       # @return [void]
       def batch_delete!(options = {})
         batch_enum.each do |batch|

@@ -202,8 +202,15 @@ module Aws::RDS
       data[:read_replica_db_instance_identifiers]
     end
 
-    # Contains one or more identifiers of Aurora DB clusters that are Read
-    # Replicas of this DB instance.
+    # Contains one or more identifiers of Aurora DB clusters to which the
+    # RDS DB instance is replicated as a Read Replica. For example, when you
+    # create an Aurora Read Replica of an RDS MySQL DB instance, the Aurora
+    # MySQL DB cluster for the Aurora Read Replica is shown. This output
+    # does not contain information about cross region Aurora Read Replicas.
+    #
+    # <note markdown="1"> Currently, each RDS DB instance can have only one Aurora Read Replica.
+    #
+    #  </note>
     # @return [Array<String>]
     def read_replica_db_cluster_identifiers
       data[:read_replica_db_cluster_identifiers]
@@ -352,11 +359,11 @@ module Aws::RDS
     # A value that specifies the order in which an Aurora Replica is
     # promoted to the primary instance after a failure of the existing
     # primary instance. For more information, see [ Fault Tolerance for an
-    # Aurora DB Cluster][1].
+    # Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @return [Integer]
     def promotion_tier
       data[:promotion_tier]
@@ -435,6 +442,24 @@ module Aws::RDS
     # @return [Array<Types::ProcessorFeature>]
     def processor_features
       data[:processor_features]
+    end
+
+    # Indicates if the DB instance has deletion protection enabled. The
+    # database can't be deleted when this value is set to true. For more
+    # information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @return [Boolean]
+    def deletion_protection
+      data[:deletion_protection]
+    end
+
+    # Specifies the listener connection endpoint for SQL Server Always On.
+    # @return [Types::Endpoint]
+    def listener_endpoint
+      data[:listener_endpoint]
     end
 
     # @!endgroup
@@ -625,6 +650,7 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -643,7 +669,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **MariaDB**
     #
@@ -655,7 +681,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **PostgreSQL**
     #
@@ -670,7 +696,7 @@ module Aws::RDS
     #   * Must begin with a letter or an underscore. Subsequent characters can
     #     be letters, underscores, or digits (0-9).
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     #
     #   **Oracle**
     #
@@ -682,7 +708,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be longer than 8 characters
+    #   * Can't be longer than 8 characters
     #
     #   ^
     #
@@ -700,7 +726,7 @@ module Aws::RDS
     #
     #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
+    #   * Can't be a word reserved by the specified database engine
     # @option options [Integer] :allocated_storage
     #   The amount of storage (in gibibytes) to allocate for the DB instance.
     #
@@ -757,10 +783,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     16384.
+    #     32768.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     16384.
+    #     32768.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -849,7 +875,7 @@ module Aws::RDS
     #
     #   * Must be 1 to 16 letters or numbers.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Microsoft SQL Server**
     #
@@ -861,7 +887,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **MySQL**
     #
@@ -873,7 +899,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **Oracle**
     #
@@ -885,7 +911,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     #
     #   **PostgreSQL**
     #
@@ -897,7 +923,7 @@ module Aws::RDS
     #
     #   * First character must be a letter.
     #
-    #   * Cannot be a reserved word for the chosen database engine.
+    #   * Can't be a reserved word for the chosen database engine.
     # @option options [String] :master_user_password
     #   The password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
@@ -931,7 +957,8 @@ module Aws::RDS
     #
     #   Default: The default DB security group for the database engine.
     # @option options [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with this DB instance.
+    #   A list of Amazon EC2 VPC security groups to associate with this DB
+    #   instance.
     #
     #   **Amazon Aurora**
     #
@@ -990,7 +1017,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     # @option options [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained. Setting
     #   this parameter to a positive number enables backups. Setting this
@@ -1007,11 +1034,12 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [The Backup Window][1].
+    #   parameter. For more information, see [The Backup Window][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -1020,7 +1048,8 @@ module Aws::RDS
     #
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2].
+    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2] in
+    #   the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -1084,9 +1113,9 @@ module Aws::RDS
     #
     #   Type: Integer
     # @option options [Boolean] :multi_az
-    #   Specifies if the DB instance is a Multi-AZ deployment. You can't set
-    #   the AvailabilityZone parameter if the MultiAZ parameter is set to
-    #   true.
+    #   A value that specifies whether the DB instance is a Multi-AZ
+    #   deployment. You can't set the AvailabilityZone parameter if the
+    #   MultiAZ parameter is set to true.
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
@@ -1147,12 +1176,10 @@ module Aws::RDS
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
     #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
-    #   Improve Performance][1].
+    #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between 1 and 50 of the storage amount
-    #   for the DB instance. Must also be an integer multiple of 1000. For
-    #   example, if the size of your DB instance is 500 GiB, then your `Iops`
-    #   value can be 2000, 3000, 4000, or 5000.
+    #   for the DB instance.
     #
     #
     #
@@ -1202,7 +1229,7 @@ module Aws::RDS
     #     attached to it, the DB instance is public.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1276,7 +1303,7 @@ module Aws::RDS
     #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [Setting Up and Enabling Enhanced
-    #   Monitoring][1].
+    #   Monitoring][1] in the *Amazon RDS User Guide*.
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
@@ -1291,7 +1318,7 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #   Default: 1
     #
@@ -1299,7 +1326,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @option options [String] :timezone
     #   The time zone of the DB instance. The time zone parameter is currently
     #   supported only by [Microsoft SQL Server][1].
@@ -1356,6 +1383,15 @@ module Aws::RDS
     # @option options [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1386,6 +1422,7 @@ module Aws::RDS
     #       },
     #     ],
     #     db_subnet_group_name: "String",
+    #     vpc_security_group_ids: ["String"],
     #     storage_type: "String",
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
@@ -1404,6 +1441,7 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1463,7 +1501,7 @@ module Aws::RDS
     #   private IP address. For more information, see CreateDBInstance.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1494,6 +1532,11 @@ module Aws::RDS
     #       outside of any VPC.
     #
     #   Example: `mySubnetgroup`
+    # @option options [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with the Read Replica.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the Read Replica.
     #
@@ -1521,7 +1564,7 @@ module Aws::RDS
     #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [To create an IAM role for Amazon RDS
-    #   Enhanced Monitoring][1].
+    #   Enhanced Monitoring][1] in the *Amazon RDS User Guide*.
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
@@ -1534,9 +1577,6 @@ module Aws::RDS
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you specify this parameter when you create a Read Replica from an
-    #   unencrypted DB instance, the Read Replica is encrypted.
-    #
     #   If you create an encrypted Read Replica in the same AWS Region as the
     #   source DB instance, then you do not have to specify a value for this
     #   parameter. The Read Replica is encrypted with the same KMS key as the
@@ -1547,6 +1587,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
+    #
+    #   You can't create an encrypted Read Replica from an unencrypted DB
+    #   instance.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CreateDBInstanceReadReplica` API action in the source AWS Region that
@@ -1609,7 +1652,7 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
+    #   * Aurora MySQL 5.6 or higher
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
@@ -1617,7 +1660,7 @@ module Aws::RDS
     #   otherwise false.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1633,7 +1676,7 @@ module Aws::RDS
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs. The values in the list depend on the DB engine being used. For
     #   more information, see [Publishing Database Logs to Amazon CloudWatch
-    #   Logs ][1] in the *Amazon Relational Database Service User Guide*.
+    #   Logs ][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1644,6 +1687,15 @@ module Aws::RDS
     # @option options [Boolean] :use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1676,18 +1728,18 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Can't be null, empty, or blank
     #
     #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1709,33 +1761,33 @@ module Aws::RDS
     #   dbinstance = db_instance.delete({
     #     skip_final_snapshot: false,
     #     final_db_snapshot_identifier: "String",
+    #     delete_automated_backups: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :skip_final_snapshot
-    #   Determines whether a final DB snapshot is created before the DB
-    #   instance is deleted. If `true` is specified, no DBSnapshot is created.
-    #   If `false` is specified, a DB snapshot is created before the DB
-    #   instance is deleted.
+    #   A value that indicates whether a final DB snapshot is created before
+    #   the DB instance is deleted. If `true` is specified, no DB snapshot is
+    #   created. If `false` is specified, a DB snapshot is created before the
+    #   DB instance is deleted.
     #
-    #   Note that when a DB instance is in a failure state and has a status of
-    #   'failed', 'incompatible-restore', or 'incompatible-network', it
-    #   can only be deleted when the SkipFinalSnapshot parameter is set to
-    #   "true".
+    #   When a DB instance is in a failure state and has a status of `failed`,
+    #   `incompatible-restore`, or `incompatible-network`, you can only delete
+    #   it when the `SkipFinalSnapshot` parameter is set to `true`.
     #
     #   Specify `true` when deleting a Read Replica.
     #
-    #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if
-    #   SkipFinalSnapshot is `false`.
+    #   <note markdown="1"> The `FinalDBSnapshotIdentifier` parameter must be specified if
+    #   `SkipFinalSnapshot` is `false`.
     #
     #    </note>
     #
     #   Default: `false`
     # @option options [String] :final_db_snapshot_identifier
-    #   The DBSnapshotIdentifier of the new DBSnapshot created when
-    #   SkipFinalSnapshot is set to `false`.
+    #   The `DBSnapshotIdentifier` of the new DB snapshot created when
+    #   `SkipFinalSnapshot` is set to `false`.
     #
-    #   <note markdown="1"> Specifying this parameter and also setting the SkipFinalShapshot
-    #   parameter to true results in an error.
+    #   <note markdown="1"> Specifying this parameter and also setting the `SkipFinalShapshot`
+    #   parameter to `true` results in an error.
     #
     #    </note>
     #
@@ -1743,11 +1795,15 @@ module Aws::RDS
     #
     #   * Must be 1 to 255 letters or numbers.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Cannot be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a Read Replica.
+    # @option options [Boolean] :delete_automated_backups
+    #   A value that indicates whether to remove automated backups immediately
+    #   after the DB instance is deleted. This parameter isn't
+    #   case-sensitive. This parameter defaults to `true`.
     # @return [DBInstance]
     def delete(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1808,6 +1864,7 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     deletion_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -1842,7 +1899,7 @@ module Aws::RDS
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance is not in a VPC, you can also use this parameter to move your
     #   DB instance into a VPC. For more information, see [Updating the VPC
-    #   for a DB Instance][1].
+    #   for a DB Instance][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -1891,9 +1948,9 @@ module Aws::RDS
     #   cause an outage and are applied on the next call to RebootDBInstance,
     #   or the next failure reboot. Review the table of parameters in
     #   [Modifying a DB Instance and Using the Apply Immediately Parameter][1]
-    #   to see the impact that setting `ApplyImmediately` to `true` or `false`
-    #   has for each modified parameter and to determine when the changes are
-    #   applied.
+    #   in the *Amazon RDS User Guide.* to see the impact that setting
+    #   `ApplyImmediately` to `true` or `false` has for each modified
+    #   parameter and to determine when the changes are applied.
     #
     #   Default: `false`
     #
@@ -1980,12 +2037,12 @@ module Aws::RDS
     #   * Must be a value from 0 to 35
     #
     #   * Can be specified for a MySQL Read Replica only if the source is
-    #     running MySQL 5.6
+    #     running MySQL 5.6 or later
     #
     #   * Can be specified for a PostgreSQL Read Replica only if the source is
     #     running PostgreSQL 9.3.5
     #
-    #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
@@ -2123,7 +2180,7 @@ module Aws::RDS
     #
     #   * The first character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `mydbinstance`
     # @option options [String] :storage_type
@@ -2245,7 +2302,7 @@ module Aws::RDS
     #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [To create an IAM role for Amazon RDS
-    #   Enhanced Monitoring][1].
+    #   Enhanced Monitoring][1] in the *Amazon RDS User Guide.*
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
@@ -2260,7 +2317,7 @@ module Aws::RDS
     #   A value that specifies the order in which an Aurora Replica is
     #   promoted to the primary instance after a failure of the existing
     #   primary instance. For more information, see [ Fault Tolerance for an
-    #   Aurora DB Cluster][1].
+    #   Aurora DB Cluster][1] in the *Amazon Aurora User Guide*.
     #
     #   Default: 1
     #
@@ -2268,7 +2325,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance
     # @option options [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
     #   accounts to database accounts, and otherwise false.
@@ -2314,6 +2371,14 @@ module Aws::RDS
     # @option options [Boolean] :use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance has deletion protection enabled. The
+    #   database can't be deleted when this value is set to true. For more
+    #   information, see [ Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2428,6 +2493,7 @@ module Aws::RDS
     #     storage_type: "String",
     #     tde_credential_arn: "String",
     #     tde_credential_password: "String",
+    #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
@@ -2439,6 +2505,9 @@ module Aws::RDS
     #       },
     #     ],
     #     use_default_processor_features: false,
+    #     db_parameter_group_name: "String",
+    #     deletion_protection: false,
+    #     source_dbi_resource_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -2450,7 +2519,7 @@ module Aws::RDS
     #
     #   * First character must be a letter
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens
     # @option options [Time,DateTime,Date,Integer,String] :restore_time
     #   The date and time to restore from.
     #
@@ -2461,7 +2530,7 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
-    #   * Cannot be specified if UseLatestRestorableTime parameter is true
+    #   * Can't be specified if UseLatestRestorableTime parameter is true
     #
     #   Example: `2009-09-07T23:45:00Z`
     # @option options [Boolean] :use_latest_restorable_time
@@ -2470,7 +2539,7 @@ module Aws::RDS
     #
     #   Default: `false`
     #
-    #   Constraints: Cannot be specified if RestoreTime parameter is provided.
+    #   Constraints: Can't be specified if RestoreTime parameter is provided.
     # @option options [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
     #   example, `db.m4.large`. Not all DB instance classes are available in
@@ -2584,7 +2653,7 @@ module Aws::RDS
     #   the DB instance, and otherwise false. The default is false.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
+    #   Resources][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -2605,6 +2674,11 @@ module Aws::RDS
     # @option options [String] :tde_credential_password
     #   The password for the given ARN from the key store in order to access
     #   the device.
+    # @option options [Array<String>] :vpc_security_group_ids
+    #   A list of EC2 VPC security groups to associate with this DB instance.
+    #
+    #   Default: The default EC2 VPC security group for the DB subnet group's
+    #   VPC.
     # @option options [String] :domain
     #   Specify the Active Directory Domain to restore the instance in.
     # @option options [String] :domain_iam_role_name
@@ -2626,8 +2700,7 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   CloudWatch Logs][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -2638,6 +2711,31 @@ module Aws::RDS
     # @option options [Boolean] :use_default_processor_features
     #   A value that specifies that the DB instance class of the DB instance
     #   uses its default processor features.
+    # @option options [String] :db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB instance.
+    #   If this argument is omitted, the default DBParameterGroup for the
+    #   specified engine is used.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    # @option options [Boolean] :deletion_protection
+    #   Indicates if the DB instance should have deletion protection enabled.
+    #   The database can't be deleted when this value is set to true. The
+    #   default is false. For more information, see [ Deleting a DB
+    #   Instance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @option options [String] :source_dbi_resource_id
+    #   The resource ID of the source DB instance from which to restore.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)
@@ -2956,6 +3054,7 @@ module Aws::RDS
     #     ],
     #     include_shared: false,
     #     include_public: false,
+    #     dbi_resource_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_snapshot_identifier
@@ -3013,6 +3112,8 @@ module Aws::RDS
     #
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.
+    # @option options [String] :dbi_resource_id
+    #   A specific DB resource ID to describe.
     # @return [DBSnapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|

@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -43,118 +47,354 @@ module Aws::MediaLive
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Update a channel schedule
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Types::BatchScheduleActionCreateRequest] :creates
+    #   Schedule actions to create in the schedule.
+    #
+    # @option params [Types::BatchScheduleActionDeleteRequest] :deletes
+    #   Schedule actions to delete from the schedule.
+    #
+    # @return [Types::BatchUpdateScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateScheduleResponse#creates #creates} => Types::BatchScheduleActionCreateResult
+    #   * {Types::BatchUpdateScheduleResponse#deletes #deletes} => Types::BatchScheduleActionDeleteResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_schedule({
+    #     channel_id: "__string", # required
+    #     creates: {
+    #       schedule_actions: [ # required
+    #         {
+    #           action_name: "__string", # required
+    #           schedule_action_settings: { # required
+    #             hls_timed_metadata_settings: {
+    #               id_3: "__string", # required
+    #             },
+    #             input_switch_settings: {
+    #               input_attachment_name_reference: "__string", # required
+    #             },
+    #             scte_35_return_to_network_settings: {
+    #               splice_event_id: 1, # required
+    #             },
+    #             scte_35_splice_insert_settings: {
+    #               duration: 1,
+    #               splice_event_id: 1, # required
+    #             },
+    #             scte_35_time_signal_settings: {
+    #               scte_35_descriptors: [ # required
+    #                 {
+    #                   scte_35_descriptor_settings: { # required
+    #                     segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                       delivery_restrictions: {
+    #                         archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                         device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                         no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                         web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                       },
+    #                       segment_num: 1,
+    #                       segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                       segmentation_duration: 1,
+    #                       segmentation_event_id: 1, # required
+    #                       segmentation_type_id: 1,
+    #                       segmentation_upid: "__string",
+    #                       segmentation_upid_type: 1,
+    #                       segments_expected: 1,
+    #                       sub_segment_num: 1,
+    #                       sub_segments_expected: 1,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             static_image_activate_settings: {
+    #               duration: 1,
+    #               fade_in: 1,
+    #               fade_out: 1,
+    #               height: 1,
+    #               image: { # required
+    #                 password_param: "__string",
+    #                 uri: "__string", # required
+    #                 username: "__string",
+    #               },
+    #               image_x: 1,
+    #               image_y: 1,
+    #               layer: 1,
+    #               opacity: 1,
+    #               width: 1,
+    #             },
+    #             static_image_deactivate_settings: {
+    #               fade_out: 1,
+    #               layer: 1,
+    #             },
+    #           },
+    #           schedule_action_start_settings: { # required
+    #             fixed_mode_schedule_action_start_settings: {
+    #               time: "__string", # required
+    #             },
+    #             follow_mode_schedule_action_start_settings: {
+    #               follow_point: "END", # required, accepts END, START
+    #               reference_action_name: "__string", # required
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     deletes: {
+    #       action_names: ["__string"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creates.schedule_actions #=> Array
+    #   resp.creates.schedule_actions[0].action_name #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
+    #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
+    #   resp.deletes.schedule_actions #=> Array
+    #   resp.deletes.schedule_actions[0].action_name #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
+    #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateSchedule AWS API Documentation
+    #
+    # @overload batch_update_schedule(params = {})
+    # @param [Hash] params ({})
+    def batch_update_schedule(params = {}, options = {})
+      req = build_request(:batch_update_schedule, params)
+      req.send_request(options)
+    end
 
     # Creates a new channel
     #
@@ -167,6 +407,7 @@ module Aws::MediaLive
     # @option params [Types::InputSpecification] :input_specification
     #
     # @option params [String] :log_level
+    #   The log level the user wants for their channel.
     #
     # @option params [String] :name
     #
@@ -482,7 +723,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: { # required
+    #                   key_provider_server: {
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -497,6 +738,7 @@ module Aws::MediaLive
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #               program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #               program_date_time_period: 1,
+    #               redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               segment_length: 1,
     #               segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #               segments_per_subdirectory: 1,
@@ -534,6 +776,7 @@ module Aws::MediaLive
     #               cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #               cache_length: 1,
     #               caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #               restart_delay: 1,
     #             },
     #             udp_group_settings: {
@@ -772,12 +1015,14 @@ module Aws::MediaLive
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               qvbr_quality_level: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
     #               softness: 1,
     #               spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #               syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #               temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -794,11 +1039,12 @@ module Aws::MediaLive
     #     },
     #     input_attachments: [
     #       {
+    #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
@@ -813,7 +1059,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -1081,6 +1327,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
@@ -1112,6 +1359,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.caption_data #=> String, one of "ALL", "FIELD1_608", "FIELD1_AND_FIELD2_608"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
@@ -1290,12 +1538,14 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -1307,6 +1557,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -1363,11 +1614,15 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :input_security_groups
     #
+    # @option params [Array<Types::MediaConnectFlowRequest>] :media_connect_flows
+    #
     # @option params [String] :name
     #
     # @option params [String] :request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :role_arn
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
@@ -1386,8 +1641,14 @@ module Aws::MediaLive
     #       },
     #     ],
     #     input_security_groups: ["__string"],
+    #     media_connect_flows: [
+    #       {
+    #         flow_arn: "__string",
+    #       },
+    #     ],
     #     name: "__string",
     #     request_id: "__string",
+    #     role_arn: "__string",
     #     sources: [
     #       {
     #         password_param: "__string",
@@ -1395,7 +1656,7 @@ module Aws::MediaLive
     #         username: "__string",
     #       },
     #     ],
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
     #   })
     #
     # @example Response structure
@@ -1408,7 +1669,10 @@ module Aws::MediaLive
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
     #   resp.input.id #=> String
+    #   resp.input.media_connect_flows #=> Array
+    #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
+    #   resp.input.role_arn #=> String
     #   resp.input.security_groups #=> Array
     #   resp.input.security_groups[0] #=> String
     #   resp.input.sources #=> Array
@@ -1416,7 +1680,7 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -1690,6 +1954,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
@@ -1721,6 +1986,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.caption_data #=> String, one of "ALL", "FIELD1_608", "FIELD1_AND_FIELD2_608"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
@@ -1899,12 +2165,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -1916,6 +2184,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -2299,6 +2568,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
@@ -2330,6 +2600,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.caption_data #=> String, one of "ALL", "FIELD1_608", "FIELD1_AND_FIELD2_608"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
@@ -2508,12 +2779,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -2525,6 +2798,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -2585,7 +2859,9 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#attached_channels #attached_channels} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#destinations #destinations} => Array&lt;Types::InputDestination&gt;
     #   * {Types::DescribeInputResponse#id #id} => String
+    #   * {Types::DescribeInputResponse#media_connect_flows #media_connect_flows} => Array&lt;Types::MediaConnectFlow&gt;
     #   * {Types::DescribeInputResponse#name #name} => String
+    #   * {Types::DescribeInputResponse#role_arn #role_arn} => String
     #   * {Types::DescribeInputResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#sources #sources} => Array&lt;Types::InputSource&gt;
     #   * {Types::DescribeInputResponse#state #state} => String
@@ -2607,7 +2883,10 @@ module Aws::MediaLive
     #   resp.destinations[0].port #=> String
     #   resp.destinations[0].url #=> String
     #   resp.id #=> String
+    #   resp.media_connect_flows #=> Array
+    #   resp.media_connect_flows[0].flow_arn #=> String
     #   resp.name #=> String
+    #   resp.role_arn #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
     #   resp.sources #=> Array
@@ -2615,7 +2894,7 @@ module Aws::MediaLive
     #   resp.sources[0].url #=> String
     #   resp.sources[0].username #=> String
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput AWS API Documentation
     #
@@ -2781,6 +3060,79 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Get a channel schedule
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduleResponse#next_token #next_token} => String
+    #   * {Types::DescribeScheduleResponse#schedule_actions #schedule_actions} => Array&lt;Types::ScheduleAction&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_schedule({
+    #     channel_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.schedule_actions #=> Array
+    #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.archive_allowed_flag #=> String, one of "ARCHIVE_NOT_ALLOWED", "ARCHIVE_ALLOWED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.device_restrictions #=> String, one of "NONE", "RESTRICT_GROUP0", "RESTRICT_GROUP1", "RESTRICT_GROUP2"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.no_regional_blackout_flag #=> String, one of "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.delivery_restrictions.web_delivery_allowed_flag #=> String, one of "WEB_DELIVERY_NOT_ALLOWED", "WEB_DELIVERY_ALLOWED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segment_num #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_cancel_indicator #=> String, one of "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED"
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_event_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_type_id #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segmentation_upid_type #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.segments_expected #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segment_num #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.scte_35_time_signal_settings.scte_35_descriptors[0].scte_35_descriptor_settings.segmentation_descriptor_scte_35_descriptor_settings.sub_segments_expected #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_in #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.height #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.password_param #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.uri #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image.username #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_x #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.image_y #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.opacity #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_activate_settings.width #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.fade_out #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.static_image_deactivate_settings.layer #=> Integer
+    #   resp.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
+    #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
+    #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeSchedule AWS API Documentation
+    #
+    # @overload describe_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_schedule(params = {}, options = {})
+      req = build_request(:describe_schedule, params)
+      req.send_request(options)
+    end
+
     # Produces list of channels that have been created
     #
     # @option params [Integer] :max_results
@@ -2814,6 +3166,7 @@ module Aws::MediaLive
     #   resp.channels[0].egress_endpoints[0].source_ip #=> String
     #   resp.channels[0].id #=> String
     #   resp.channels[0].input_attachments #=> Array
+    #   resp.channels[0].input_attachments[0].input_attachment_name #=> String
     #   resp.channels[0].input_attachments[0].input_id #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -2933,7 +3286,10 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].port #=> String
     #   resp.inputs[0].destinations[0].url #=> String
     #   resp.inputs[0].id #=> String
+    #   resp.inputs[0].media_connect_flows #=> Array
+    #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
     #   resp.inputs[0].name #=> String
+    #   resp.inputs[0].role_arn #=> String
     #   resp.inputs[0].security_groups #=> Array
     #   resp.inputs[0].security_groups[0] #=> String
     #   resp.inputs[0].sources #=> Array
@@ -2941,7 +3297,7 @@ module Aws::MediaLive
     #   resp.inputs[0].sources[0].url #=> String
     #   resp.inputs[0].sources[0].username #=> String
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -3104,7 +3460,7 @@ module Aws::MediaLive
 
     # Purchase an offering and create a reservation.
     #
-    # @option params [Integer] :count
+    # @option params [required, Integer] :count
     #
     # @option params [String] :name
     #
@@ -3114,6 +3470,8 @@ module Aws::MediaLive
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :start
+    #
     # @return [Types::PurchaseOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseOfferingResponse#reservation #reservation} => Types::Reservation
@@ -3121,10 +3479,11 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.purchase_offering({
-    #     count: 1,
+    #     count: 1, # required
     #     name: "__string",
     #     offering_id: "__string", # required
     #     request_id: "__string",
+    #     start: "__string",
     #   })
     #
     # @example Response structure
@@ -3388,6 +3747,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
@@ -3419,6 +3779,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.caption_data #=> String, one of "ALL", "FIELD1_608", "FIELD1_AND_FIELD2_608"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
@@ -3597,12 +3958,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -3614,6 +3977,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -3890,6 +4254,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
@@ -3921,6 +4286,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.caption_data #=> String, one of "ALL", "FIELD1_608", "FIELD1_AND_FIELD2_608"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
@@ -4099,12 +4465,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -4116,6 +4484,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -4179,6 +4548,7 @@ module Aws::MediaLive
     # @option params [Types::InputSpecification] :input_specification
     #
     # @option params [String] :log_level
+    #   The log level the user wants for their channel.
     #
     # @option params [String] :name
     #
@@ -4489,7 +4859,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: { # required
+    #                   key_provider_server: {
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -4504,6 +4874,7 @@ module Aws::MediaLive
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #               program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #               program_date_time_period: 1,
+    #               redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               segment_length: 1,
     #               segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #               segments_per_subdirectory: 1,
@@ -4541,6 +4912,7 @@ module Aws::MediaLive
     #               cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #               cache_length: 1,
     #               caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #               restart_delay: 1,
     #             },
     #             udp_group_settings: {
@@ -4779,12 +5151,14 @@ module Aws::MediaLive
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               qvbr_quality_level: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
     #               softness: 1,
     #               spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #               syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #               temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #               timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -4801,11 +5175,12 @@ module Aws::MediaLive
     #     },
     #     input_attachments: [
     #       {
+    #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
@@ -4820,7 +5195,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -5086,6 +5461,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
@@ -5117,6 +5493,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_full_behavior #=> String, one of "DISCONNECT_IMMEDIATELY", "WAIT_FOR_SERVER"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.cache_length #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.caption_data #=> String, one of "ALL", "FIELD1_608", "FIELD1_AND_FIELD2_608"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.rtmp_group_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
@@ -5295,12 +5672,14 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.slices #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.softness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.subgop_length #=> String, one of "DYNAMIC", "FIXED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.syntax #=> String, one of "DEFAULT", "RP2027"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_insertion #=> String, one of "DISABLED", "PIC_TIMING_SEI"
@@ -5312,6 +5691,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
@@ -5370,7 +5750,11 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :input_security_groups
     #
+    # @option params [Array<Types::MediaConnectFlowRequest>] :media_connect_flows
+    #
     # @option params [String] :name
+    #
+    # @option params [String] :role_arn
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
@@ -5388,7 +5772,13 @@ module Aws::MediaLive
     #     ],
     #     input_id: "__string", # required
     #     input_security_groups: ["__string"],
+    #     media_connect_flows: [
+    #       {
+    #         flow_arn: "__string",
+    #       },
+    #     ],
     #     name: "__string",
+    #     role_arn: "__string",
     #     sources: [
     #       {
     #         password_param: "__string",
@@ -5408,7 +5798,10 @@ module Aws::MediaLive
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
     #   resp.input.id #=> String
+    #   resp.input.media_connect_flows #=> Array
+    #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
+    #   resp.input.role_arn #=> String
     #   resp.input.security_groups #=> Array
     #   resp.input.security_groups[0] #=> String
     #   resp.input.sources #=> Array
@@ -5416,7 +5809,7 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -5480,7 +5873,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

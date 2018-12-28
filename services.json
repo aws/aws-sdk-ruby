@@ -14,6 +14,18 @@
   "AlexaForBusiness": {
     "models": "alexaforbusiness/2017-11-09"
   },
+  "Amplify": {
+    "models": "amplify/2017-07-25"
+  },
+  "ApiGatewayManagementApi": {
+    "models": "apigatewaymanagementapi/2018-11-29"
+  },
+  "ApiGatewayV2": {
+    "models": "apigatewayv2/2018-11-29"
+  },
+  "AppMesh": {
+    "models": "appmesh/2018-10-01"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
@@ -42,6 +54,9 @@
   "Budgets": {
     "models": "budgets/2016-10-20"
   },
+  "Chime": {
+    "models": "chime/2018-05-01"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },
@@ -52,7 +67,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2018-06-18"
+    "models": "cloudfront/2018-11-05"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -71,7 +86,9 @@
       "Aws::CloudSearchDomain::Plugins::SwitchToPost"
     ],
     "removePlugins": [
-      "Aws::Plugins::RegionalEndpoint"
+      "Aws::Plugins::RegionalEndpoint",
+      "Aws::Plugins::EndpointDiscovery",
+      "Aws::Plugins::EndpointPattern"
     ]
   },
   "CloudTrail": {
@@ -113,6 +130,9 @@
   "Comprehend": {
     "models": "comprehend/2017-11-27"
   },
+  "ComprehendMedical": {
+    "models": "comprehendmedical/2018-10-30"
+  },
   "ConfigService": {
     "models": "config/2014-11-12"
   },
@@ -133,6 +153,9 @@
   },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29"
+  },
+  "DataSync": {
+    "models": "datasync/2018-11-09"
   },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
@@ -203,6 +226,9 @@
   "FMS": {
     "models": "fms/2018-01-01"
   },
+  "FSx": {
+    "models": "fsx/2018-03-01"
+  },
   "Firehose": {
     "models": "firehose/2015-08-04"
   },
@@ -216,6 +242,9 @@
       "Aws::Glacier::Plugins::ApiVersion",
       "Aws::Glacier::Plugins::Checksums"
     ]
+  },
+  "GlobalAccelerator": {
+    "models": "globalaccelerator/2018-08-08"
   },
   "Glue": {
     "models": "glue/2017-03-31"
@@ -260,11 +289,17 @@
   "KMS": {
     "models": "kms/2014-11-01"
   },
+  "Kafka": {
+    "models": "kafka/2018-11-14"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14"
+  },
+  "KinesisAnalyticsV2": {
+    "models": "kinesisanalyticsv2/2018-05-23"
   },
   "KinesisVideo": {
     "models": "kinesisvideo/2017-09-30"
@@ -286,6 +321,9 @@
   },
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19"
+  },
+  "LicenseManager": {
+    "models": "license-manager/2018-08-01"
   },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
@@ -313,6 +351,9 @@
   },
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14"
+  },
+  "MediaConnect": {
+    "models": "mediaconnect/2018-11-14"
   },
   "MediaConvert": {
     "models": "mediaconvert/2017-08-29"
@@ -356,11 +397,23 @@
   "Pinpoint": {
     "models": "pinpoint/2016-12-01"
   },
+  "PinpointEmail": {
+    "models": "pinpoint-email/2018-07-26"
+  },
+  "PinpointSMSVoice": {
+    "models": "sms-voice/2018-09-05"
+  },
   "Polly": {
     "models": "polly/2016-06-10"
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "QuickSight": {
+    "models": "quicksight/2018-04-01"
+  },
+  "RAM": {
+    "models": "ram/2018-01-04"
   },
   "RDS": {
     "models": "rds/2014-10-31",
@@ -370,6 +423,9 @@
     "dependencies": {
       "aws-sigv4": "~> 1.0"
     }
+  },
+  "RDSDataService": {
+    "models": "rds-data/2018-08-01"
   },
   "Redshift": {
     "models": "redshift/2012-12-01"
@@ -383,6 +439,9 @@
   "ResourceGroupsTaggingAPI": {
     "models": "resourcegroupstaggingapi/2017-01-26"
   },
+  "RoboMaker": {
+    "models": "robomaker/2018-06-29"
+  },
   "Route53": {
     "models": "route53/2013-04-01",
     "addPlugins": [
@@ -391,6 +450,9 @@
   },
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
+  },
+  "Route53Resolver": {
+    "models": "route53resolver/2018-04-01"
   },
   "S3": {
     "models": "s3/2006-03-01",
@@ -416,6 +478,21 @@
       "Aws::S3::Plugins::UrlEncodedKeys",
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::BucketNameRestrictions"
+    ]
+  },
+  "S3Control": {
+    "models": "s3control/2018-08-20",
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    },
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ],
+    "addPlugins": [
+      "Aws::S3Control::Plugins::S3ControlDns",
+      "Aws::S3Control::Plugins::S3Signer",
+      "Aws::S3Control::Plugins::Dualstack",
+      "Aws::S3Control::Plugins::S3HostId"
     ]
   },
   "SES": {
@@ -456,6 +533,9 @@
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17"
   },
+  "SecurityHub": {
+    "models": "securityhub/2018-10-26"
+  },
   "ServerlessApplicationRepository": {
     "models": "serverlessrepo/2017-09-08"
   },
@@ -467,6 +547,9 @@
   },
   "Shield": {
     "models": "shield/2016-06-02"
+  },
+  "Signer": {
+    "models": "signer/2017-08-25"
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15"
@@ -485,6 +568,9 @@
   },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
+  },
+  "Transfer": {
+    "models": "transfer/2018-11-05"
   },
   "Translate": {
     "models": "translate/2017-07-01"

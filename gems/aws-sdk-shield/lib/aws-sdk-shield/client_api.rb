@@ -11,6 +11,7 @@ module Aws::Shield
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedForDependencyException = Shapes::StructureShape.new(name: 'AccessDeniedForDependencyException')
     AssociateDRTLogBucketRequest = Shapes::StructureShape.new(name: 'AssociateDRTLogBucketRequest')
     AssociateDRTLogBucketResponse = Shapes::StructureShape.new(name: 'AssociateDRTLogBucketResponse')
@@ -321,12 +322,16 @@ module Aws::Shield
       api.version = "2016-06-02"
 
       api.metadata = {
+        "apiVersion" => "2016-06-02",
         "endpointPrefix" => "shield",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Shield",
         "serviceFullName" => "AWS Shield",
+        "serviceId" => "Shield",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSShield_20160616",
+        "uid" => "shield-2016-06-02",
       }
 
       api.add_operation(:associate_drt_log_bucket, Seahorse::Model::Operation.new.tap do |o|
@@ -414,7 +419,7 @@ module Aws::Shield
         o.input = Shapes::ShapeRef.new(shape: DescribeAttackRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAttackResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_drt_access, Seahorse::Model::Operation.new.tap do |o|

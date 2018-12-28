@@ -160,7 +160,7 @@ module Aws::DAX
     CreateClusterRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdentifierList, location_name: "SecurityGroupIds"))
     CreateClusterRequest.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
     CreateClusterRequest.add_member(:notification_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "NotificationTopicArn"))
-    CreateClusterRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
+    CreateClusterRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
     CreateClusterRequest.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateClusterRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
@@ -447,12 +447,16 @@ module Aws::DAX
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "dax",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon DAX",
         "serviceFullName" => "Amazon DynamoDB Accelerator (DAX)",
+        "serviceId" => "DAX",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonDAXV3",
+        "uid" => "dax-2017-04-19",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|

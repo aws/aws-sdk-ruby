@@ -43,6 +43,7 @@ module Aws::Glue
     BooleanNullable = Shapes::BooleanShape.new(name: 'BooleanNullable')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     BoundedPartitionValueList = Shapes::ListShape.new(name: 'BoundedPartitionValueList')
+    CatalogEncryptionMode = Shapes::StringShape.new(name: 'CatalogEncryptionMode')
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
     CatalogIdString = Shapes::StringShape.new(name: 'CatalogIdString')
@@ -51,6 +52,8 @@ module Aws::Glue
     Classifier = Shapes::StructureShape.new(name: 'Classifier')
     ClassifierList = Shapes::ListShape.new(name: 'ClassifierList')
     ClassifierNameList = Shapes::ListShape.new(name: 'ClassifierNameList')
+    CloudWatchEncryption = Shapes::StructureShape.new(name: 'CloudWatchEncryption')
+    CloudWatchEncryptionMode = Shapes::StringShape.new(name: 'CloudWatchEncryptionMode')
     CodeGenArgName = Shapes::StringShape.new(name: 'CodeGenArgName')
     CodeGenArgValue = Shapes::StringShape.new(name: 'CodeGenArgValue')
     CodeGenEdge = Shapes::StructureShape.new(name: 'CodeGenEdge')
@@ -68,11 +71,13 @@ module Aws::Glue
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConcurrentRunsExceededException = Shapes::StructureShape.new(name: 'ConcurrentRunsExceededException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
+    ConditionCheckFailureException = Shapes::StructureShape.new(name: 'ConditionCheckFailureException')
     ConditionList = Shapes::ListShape.new(name: 'ConditionList')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionInput = Shapes::StructureShape.new(name: 'ConnectionInput')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
     ConnectionName = Shapes::StringShape.new(name: 'ConnectionName')
+    ConnectionPasswordEncryption = Shapes::StructureShape.new(name: 'ConnectionPasswordEncryption')
     ConnectionProperties = Shapes::MapShape.new(name: 'ConnectionProperties')
     ConnectionPropertyKey = Shapes::StringShape.new(name: 'ConnectionPropertyKey')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
@@ -85,6 +90,7 @@ module Aws::Glue
     CrawlerNameList = Shapes::ListShape.new(name: 'CrawlerNameList')
     CrawlerNotRunningException = Shapes::StructureShape.new(name: 'CrawlerNotRunningException')
     CrawlerRunningException = Shapes::StructureShape.new(name: 'CrawlerRunningException')
+    CrawlerSecurityConfiguration = Shapes::StringShape.new(name: 'CrawlerSecurityConfiguration')
     CrawlerState = Shapes::StringShape.new(name: 'CrawlerState')
     CrawlerStoppingException = Shapes::StructureShape.new(name: 'CrawlerStoppingException')
     CrawlerTargets = Shapes::StructureShape.new(name: 'CrawlerTargets')
@@ -106,6 +112,8 @@ module Aws::Glue
     CreatePartitionResponse = Shapes::StructureShape.new(name: 'CreatePartitionResponse')
     CreateScriptRequest = Shapes::StructureShape.new(name: 'CreateScriptRequest')
     CreateScriptResponse = Shapes::StructureShape.new(name: 'CreateScriptResponse')
+    CreateSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationRequest')
+    CreateSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationResponse')
     CreateTableRequest = Shapes::StructureShape.new(name: 'CreateTableRequest')
     CreateTableResponse = Shapes::StructureShape.new(name: 'CreateTableResponse')
     CreateTriggerRequest = Shapes::StructureShape.new(name: 'CreateTriggerRequest')
@@ -117,6 +125,7 @@ module Aws::Glue
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
     DagNodes = Shapes::ListShape.new(name: 'DagNodes')
+    DataCatalogEncryptionSettings = Shapes::StructureShape.new(name: 'DataCatalogEncryptionSettings')
     Database = Shapes::StructureShape.new(name: 'Database')
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
@@ -137,6 +146,10 @@ module Aws::Glue
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
     DeletePartitionRequest = Shapes::StructureShape.new(name: 'DeletePartitionRequest')
     DeletePartitionResponse = Shapes::StructureShape.new(name: 'DeletePartitionResponse')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeleteSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationRequest')
+    DeleteSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
     DeleteTableResponse = Shapes::StructureShape.new(name: 'DeleteTableResponse')
     DeleteTableVersionRequest = Shapes::StructureShape.new(name: 'DeleteTableVersionRequest')
@@ -152,12 +165,15 @@ module Aws::Glue
     DevEndpointList = Shapes::ListShape.new(name: 'DevEndpointList')
     DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
+    EncryptionAtRest = Shapes::StructureShape.new(name: 'EncryptionAtRest')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     ErrorByName = Shapes::MapShape.new(name: 'ErrorByName')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
+    ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
     FormatString = Shapes::StringShape.new(name: 'FormatString')
@@ -180,6 +196,8 @@ module Aws::Glue
     GetCrawlerResponse = Shapes::StructureShape.new(name: 'GetCrawlerResponse')
     GetCrawlersRequest = Shapes::StructureShape.new(name: 'GetCrawlersRequest')
     GetCrawlersResponse = Shapes::StructureShape.new(name: 'GetCrawlersResponse')
+    GetDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsRequest')
+    GetDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsResponse')
     GetDatabaseRequest = Shapes::StructureShape.new(name: 'GetDatabaseRequest')
     GetDatabaseResponse = Shapes::StructureShape.new(name: 'GetDatabaseResponse')
     GetDatabasesRequest = Shapes::StructureShape.new(name: 'GetDatabasesRequest')
@@ -206,6 +224,12 @@ module Aws::Glue
     GetPartitionsResponse = Shapes::StructureShape.new(name: 'GetPartitionsResponse')
     GetPlanRequest = Shapes::StructureShape.new(name: 'GetPlanRequest')
     GetPlanResponse = Shapes::StructureShape.new(name: 'GetPlanResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationRequest')
+    GetSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigurationResponse')
+    GetSecurityConfigurationsRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationsRequest')
+    GetSecurityConfigurationsResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigurationsResponse')
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
     GetTableVersionRequest = Shapes::StructureShape.new(name: 'GetTableVersionRequest')
@@ -223,8 +247,10 @@ module Aws::Glue
     GetUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionResponse')
     GetUserDefinedFunctionsRequest = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionsRequest')
     GetUserDefinedFunctionsResponse = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionsResponse')
+    GlueEncryptionException = Shapes::StructureShape.new(name: 'GlueEncryptionException')
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
+    HashString = Shapes::StringShape.new(name: 'HashString')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     ImportCatalogToGlueRequest = Shapes::StructureShape.new(name: 'ImportCatalogToGlueRequest')
@@ -238,6 +264,8 @@ module Aws::Glue
     JdbcTargetList = Shapes::ListShape.new(name: 'JdbcTargetList')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobBookmarkEntry = Shapes::StructureShape.new(name: 'JobBookmarkEntry')
+    JobBookmarksEncryption = Shapes::StructureShape.new(name: 'JobBookmarksEncryption')
+    JobBookmarksEncryptionMode = Shapes::StringShape.new(name: 'JobBookmarksEncryptionMode')
     JobCommand = Shapes::StructureShape.new(name: 'JobCommand')
     JobList = Shapes::ListShape.new(name: 'JobList')
     JobName = Shapes::StringShape.new(name: 'JobName')
@@ -249,6 +277,7 @@ module Aws::Glue
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     KeyString = Shapes::StringShape.new(name: 'KeyString')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     Language = Shapes::StringShape.new(name: 'Language')
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
@@ -290,12 +319,17 @@ module Aws::Glue
     Path = Shapes::StringShape.new(name: 'Path')
     PathList = Shapes::ListShape.new(name: 'PathList')
     PhysicalConnectionRequirements = Shapes::StructureShape.new(name: 'PhysicalConnectionRequirements')
+    PolicyJsonString = Shapes::StringShape.new(name: 'PolicyJsonString')
     Predecessor = Shapes::StructureShape.new(name: 'Predecessor')
     PredecessorList = Shapes::ListShape.new(name: 'PredecessorList')
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateString = Shapes::StringShape.new(name: 'PredicateString')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PublicKeysList = Shapes::ListShape.new(name: 'PublicKeysList')
+    PutDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsRequest')
+    PutDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsResponse')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PythonScript = Shapes::StringShape.new(name: 'PythonScript')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
@@ -307,6 +341,9 @@ module Aws::Glue
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
+    S3Encryption = Shapes::StructureShape.new(name: 'S3Encryption')
+    S3EncryptionList = Shapes::ListShape.new(name: 'S3EncryptionList')
+    S3EncryptionMode = Shapes::StringShape.new(name: 'S3EncryptionMode')
     S3Target = Shapes::StructureShape.new(name: 'S3Target')
     S3TargetList = Shapes::ListShape.new(name: 'S3TargetList')
     ScalaCode = Shapes::StringShape.new(name: 'ScalaCode')
@@ -318,6 +355,8 @@ module Aws::Glue
     SchemaChangePolicy = Shapes::StructureShape.new(name: 'SchemaChangePolicy')
     SchemaPathString = Shapes::StringShape.new(name: 'SchemaPathString')
     ScriptLocationString = Shapes::StringShape.new(name: 'ScriptLocationString')
+    SecurityConfiguration = Shapes::StructureShape.new(name: 'SecurityConfiguration')
+    SecurityConfigurationList = Shapes::ListShape.new(name: 'SecurityConfigurationList')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SerDeInfo = Shapes::StructureShape.new(name: 'SerDeInfo')
@@ -403,6 +442,7 @@ module Aws::Glue
     Action.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
     Action.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     Action.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
+    Action.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -513,6 +553,10 @@ module Aws::Glue
 
     ClassifierNameList.member = Shapes::ShapeRef.new(shape: NameString)
 
+    CloudWatchEncryption.add_member(:cloud_watch_encryption_mode, Shapes::ShapeRef.new(shape: CloudWatchEncryptionMode, location_name: "CloudWatchEncryptionMode"))
+    CloudWatchEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CloudWatchEncryption.struct_class = Types::CloudWatchEncryption
+
     CodeGenEdge.add_member(:source, Shapes::ShapeRef.new(shape: CodeGenIdentifier, required: true, location_name: "Source"))
     CodeGenEdge.add_member(:target, Shapes::ShapeRef.new(shape: CodeGenIdentifier, required: true, location_name: "Target"))
     CodeGenEdge.add_member(:target_parameter, Shapes::ShapeRef.new(shape: CodeGenArgName, location_name: "TargetParameter"))
@@ -568,6 +612,10 @@ module Aws::Glue
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
+    ConnectionPasswordEncryption.add_member(:return_connection_password_encrypted, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ReturnConnectionPasswordEncrypted"))
+    ConnectionPasswordEncryption.add_member(:aws_kms_key_id, Shapes::ShapeRef.new(shape: NameString, location_name: "AwsKmsKeyId"))
+    ConnectionPasswordEncryption.struct_class = Types::ConnectionPasswordEncryption
+
     ConnectionProperties.key = Shapes::ShapeRef.new(shape: ConnectionPropertyKey)
     ConnectionProperties.value = Shapes::ShapeRef.new(shape: ValueString)
 
@@ -590,6 +638,7 @@ module Aws::Glue
     Crawler.add_member(:last_crawl, Shapes::ShapeRef.new(shape: LastCrawlInfo, location_name: "LastCrawl"))
     Crawler.add_member(:version, Shapes::ShapeRef.new(shape: VersionId, location_name: "Version"))
     Crawler.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
+    Crawler.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     Crawler.struct_class = Types::Crawler
 
     CrawlerList.member = Shapes::ShapeRef.new(shape: Crawler)
@@ -636,6 +685,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     CreateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
     CreateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
+    CreateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     CreateCrawlerRequest.struct_class = Types::CreateCrawlerRequest
 
     CreateCrawlerResponse.struct_class = Types::CreateCrawlerResponse
@@ -655,6 +705,7 @@ module Aws::Glue
     CreateDevEndpointRequest.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     CreateDevEndpointRequest.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
     CreateDevEndpointRequest.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
+    CreateDevEndpointRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     CreateDevEndpointRequest.struct_class = Types::CreateDevEndpointRequest
 
     CreateDevEndpointResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointName"))
@@ -670,6 +721,7 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
     CreateDevEndpointResponse.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
     CreateDevEndpointResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "FailureReason"))
+    CreateDevEndpointResponse.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     CreateDevEndpointResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimestamp"))
     CreateDevEndpointResponse.struct_class = Types::CreateDevEndpointResponse
 
@@ -691,6 +743,7 @@ module Aws::Glue
     CreateJobRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     CreateJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     CreateJobRequest.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
+    CreateJobRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -716,6 +769,14 @@ module Aws::Glue
     CreateScriptResponse.add_member(:python_script, Shapes::ShapeRef.new(shape: PythonScript, location_name: "PythonScript"))
     CreateScriptResponse.add_member(:scala_code, Shapes::ShapeRef.new(shape: ScalaCode, location_name: "ScalaCode"))
     CreateScriptResponse.struct_class = Types::CreateScriptResponse
+
+    CreateSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateSecurityConfigurationRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "EncryptionConfiguration"))
+    CreateSecurityConfigurationRequest.struct_class = Types::CreateSecurityConfigurationRequest
+
+    CreateSecurityConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    CreateSecurityConfigurationResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimestamp"))
+    CreateSecurityConfigurationResponse.struct_class = Types::CreateSecurityConfigurationResponse
 
     CreateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -751,6 +812,10 @@ module Aws::Glue
     DagEdges.member = Shapes::ShapeRef.new(shape: CodeGenEdge)
 
     DagNodes.member = Shapes::ShapeRef.new(shape: CodeGenNode)
+
+    DataCatalogEncryptionSettings.add_member(:encryption_at_rest, Shapes::ShapeRef.new(shape: EncryptionAtRest, location_name: "EncryptionAtRest"))
+    DataCatalogEncryptionSettings.add_member(:connection_password_encryption, Shapes::ShapeRef.new(shape: ConnectionPasswordEncryption, location_name: "ConnectionPasswordEncryption"))
+    DataCatalogEncryptionSettings.struct_class = Types::DataCatalogEncryptionSettings
 
     Database.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Database.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -810,6 +875,16 @@ module Aws::Glue
 
     DeletePartitionResponse.struct_class = Types::DeletePartitionResponse
 
+    DeleteResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeleteSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteSecurityConfigurationRequest.struct_class = Types::DeleteSecurityConfigurationRequest
+
+    DeleteSecurityConfigurationResponse.struct_class = Types::DeleteSecurityConfigurationResponse
+
     DeleteTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     DeleteTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -858,6 +933,7 @@ module Aws::Glue
     DevEndpoint.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedTimestamp"))
     DevEndpoint.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
     DevEndpoint.add_member(:public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "PublicKeys"))
+    DevEndpoint.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     DevEndpoint.struct_class = Types::DevEndpoint
 
     DevEndpointCustomLibraries.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
@@ -870,6 +946,15 @@ module Aws::Glue
     DynamoDBTarget.struct_class = Types::DynamoDBTarget
 
     DynamoDBTargetList.member = Shapes::ShapeRef.new(shape: DynamoDBTarget)
+
+    EncryptionAtRest.add_member(:catalog_encryption_mode, Shapes::ShapeRef.new(shape: CatalogEncryptionMode, required: true, location_name: "CatalogEncryptionMode"))
+    EncryptionAtRest.add_member(:sse_aws_kms_key_id, Shapes::ShapeRef.new(shape: NameString, location_name: "SseAwsKmsKeyId"))
+    EncryptionAtRest.struct_class = Types::EncryptionAtRest
+
+    EncryptionConfiguration.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionList, location_name: "S3Encryption"))
+    EncryptionConfiguration.add_member(:cloud_watch_encryption, Shapes::ShapeRef.new(shape: CloudWatchEncryption, location_name: "CloudWatchEncryption"))
+    EncryptionConfiguration.add_member(:job_bookmarks_encryption, Shapes::ShapeRef.new(shape: JobBookmarksEncryption, location_name: "JobBookmarksEncryption"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     ErrorByName.key = Shapes::ShapeRef.new(shape: NameString)
     ErrorByName.value = Shapes::ShapeRef.new(shape: ErrorDetail)
@@ -906,6 +991,7 @@ module Aws::Glue
 
     GetConnectionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetConnectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetConnectionRequest.add_member(:hide_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "HidePassword"))
     GetConnectionRequest.struct_class = Types::GetConnectionRequest
 
     GetConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
@@ -917,6 +1003,7 @@ module Aws::Glue
 
     GetConnectionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetConnectionsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: GetConnectionsFilter, location_name: "Filter"))
+    GetConnectionsRequest.add_member(:hide_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "HidePassword"))
     GetConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     GetConnectionsRequest.struct_class = Types::GetConnectionsRequest
@@ -947,6 +1034,12 @@ module Aws::Glue
     GetCrawlersResponse.add_member(:crawlers, Shapes::ShapeRef.new(shape: CrawlerList, location_name: "Crawlers"))
     GetCrawlersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetCrawlersResponse.struct_class = Types::GetCrawlersResponse
+
+    GetDataCatalogEncryptionSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetDataCatalogEncryptionSettingsRequest.struct_class = Types::GetDataCatalogEncryptionSettingsRequest
+
+    GetDataCatalogEncryptionSettingsResponse.add_member(:data_catalog_encryption_settings, Shapes::ShapeRef.new(shape: DataCatalogEncryptionSettings, location_name: "DataCatalogEncryptionSettings"))
+    GetDataCatalogEncryptionSettingsResponse.struct_class = Types::GetDataCatalogEncryptionSettingsResponse
 
     GetDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -1056,6 +1149,28 @@ module Aws::Glue
     GetPlanResponse.add_member(:python_script, Shapes::ShapeRef.new(shape: PythonScript, location_name: "PythonScript"))
     GetPlanResponse.add_member(:scala_code, Shapes::ShapeRef.new(shape: ScalaCode, location_name: "ScalaCode"))
     GetPlanResponse.struct_class = Types::GetPlanResponse
+
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, location_name: "PolicyInJson"))
+    GetResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
+    GetResourcePolicyResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
+    GetResourcePolicyResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
+    GetSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetSecurityConfigurationRequest.struct_class = Types::GetSecurityConfigurationRequest
+
+    GetSecurityConfigurationResponse.add_member(:security_configuration, Shapes::ShapeRef.new(shape: SecurityConfiguration, location_name: "SecurityConfiguration"))
+    GetSecurityConfigurationResponse.struct_class = Types::GetSecurityConfigurationResponse
+
+    GetSecurityConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetSecurityConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    GetSecurityConfigurationsRequest.struct_class = Types::GetSecurityConfigurationsRequest
+
+    GetSecurityConfigurationsResponse.add_member(:security_configurations, Shapes::ShapeRef.new(shape: SecurityConfigurationList, location_name: "SecurityConfigurations"))
+    GetSecurityConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    GetSecurityConfigurationsResponse.struct_class = Types::GetSecurityConfigurationsResponse
 
     GetTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1167,6 +1282,7 @@ module Aws::Glue
     Job.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     Job.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     Job.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
+    Job.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -1175,6 +1291,10 @@ module Aws::Glue
     JobBookmarkEntry.add_member(:attempt, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Attempt"))
     JobBookmarkEntry.add_member(:job_bookmark, Shapes::ShapeRef.new(shape: JsonValue, location_name: "JobBookmark"))
     JobBookmarkEntry.struct_class = Types::JobBookmarkEntry
+
+    JobBookmarksEncryption.add_member(:job_bookmarks_encryption_mode, Shapes::ShapeRef.new(shape: JobBookmarksEncryptionMode, location_name: "JobBookmarksEncryptionMode"))
+    JobBookmarksEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    JobBookmarksEncryption.struct_class = Types::JobBookmarksEncryption
 
     JobCommand.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     JobCommand.add_member(:script_location, Shapes::ShapeRef.new(shape: ScriptLocationString, location_name: "ScriptLocation"))
@@ -1198,6 +1318,8 @@ module Aws::Glue
     JobRun.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
     JobRun.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     JobRun.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
+    JobRun.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    JobRun.add_member(:log_group_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "LogGroupName"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -1213,6 +1335,7 @@ module Aws::Glue
     JobUpdate.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     JobUpdate.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     JobUpdate.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
+    JobUpdate.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     JobUpdate.struct_class = Types::JobUpdate
 
     JsonClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -1313,6 +1436,20 @@ module Aws::Glue
 
     PublicKeysList.member = Shapes::ShapeRef.new(shape: GenericString)
 
+    PutDataCatalogEncryptionSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    PutDataCatalogEncryptionSettingsRequest.add_member(:data_catalog_encryption_settings, Shapes::ShapeRef.new(shape: DataCatalogEncryptionSettings, required: true, location_name: "DataCatalogEncryptionSettings"))
+    PutDataCatalogEncryptionSettingsRequest.struct_class = Types::PutDataCatalogEncryptionSettingsRequest
+
+    PutDataCatalogEncryptionSettingsResponse.struct_class = Types::PutDataCatalogEncryptionSettingsResponse
+
+    PutResourcePolicyRequest.add_member(:policy_in_json, Shapes::ShapeRef.new(shape: PolicyJsonString, required: true, location_name: "PolicyInJson"))
+    PutResourcePolicyRequest.add_member(:policy_hash_condition, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHashCondition"))
+    PutResourcePolicyRequest.add_member(:policy_exists_condition, Shapes::ShapeRef.new(shape: ExistCondition, location_name: "PolicyExistsCondition"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: HashString, location_name: "PolicyHash"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
     ResetJobBookmarkRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     ResetJobBookmarkRequest.struct_class = Types::ResetJobBookmarkRequest
 
@@ -1324,6 +1461,12 @@ module Aws::Glue
     ResourceUri.struct_class = Types::ResourceUri
 
     ResourceUriList.member = Shapes::ShapeRef.new(shape: ResourceUri)
+
+    S3Encryption.add_member(:s3_encryption_mode, Shapes::ShapeRef.new(shape: S3EncryptionMode, location_name: "S3EncryptionMode"))
+    S3Encryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    S3Encryption.struct_class = Types::S3Encryption
+
+    S3EncryptionList.member = Shapes::ShapeRef.new(shape: S3Encryption)
 
     S3Target.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     S3Target.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
@@ -1338,6 +1481,13 @@ module Aws::Glue
     SchemaChangePolicy.add_member(:update_behavior, Shapes::ShapeRef.new(shape: UpdateBehavior, location_name: "UpdateBehavior"))
     SchemaChangePolicy.add_member(:delete_behavior, Shapes::ShapeRef.new(shape: DeleteBehavior, location_name: "DeleteBehavior"))
     SchemaChangePolicy.struct_class = Types::SchemaChangePolicy
+
+    SecurityConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    SecurityConfiguration.add_member(:created_time_stamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimeStamp"))
+    SecurityConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    SecurityConfiguration.struct_class = Types::SecurityConfiguration
+
+    SecurityConfigurationList.member = Shapes::ShapeRef.new(shape: SecurityConfiguration)
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: NameString)
 
@@ -1371,6 +1521,7 @@ module Aws::Glue
     StartJobRunRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     StartJobRunRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     StartJobRunRequest.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
+    StartJobRunRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
@@ -1508,6 +1659,7 @@ module Aws::Glue
     UpdateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     UpdateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
     UpdateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
+    UpdateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     UpdateCrawlerRequest.struct_class = Types::UpdateCrawlerRequest
 
     UpdateCrawlerResponse.struct_class = Types::UpdateCrawlerResponse
@@ -1623,12 +1775,15 @@ module Aws::Glue
       api.version = "2017-03-31"
 
       api.metadata = {
+        "apiVersion" => "2017-03-31",
         "endpointPrefix" => "glue",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Glue",
+        "serviceId" => "Glue",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSGlue",
+        "uid" => "glue-2017-03-31",
       }
 
       api.add_operation(:batch_create_partition, Seahorse::Model::Operation.new.tap do |o|
@@ -1643,6 +1798,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:batch_delete_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -1701,6 +1857,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:batch_stop_job_run, Seahorse::Model::Operation.new.tap do |o|
@@ -1735,6 +1892,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:create_crawler, Seahorse::Model::Operation.new.tap do |o|
@@ -1760,6 +1918,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:create_dev_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -1805,6 +1964,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:create_script, Seahorse::Model::Operation.new.tap do |o|
@@ -1816,6 +1976,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:create_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSecurityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSecurityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSecurityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
       api.add_operation(:create_table, Seahorse::Model::Operation.new.tap do |o|
@@ -1830,6 +2003,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:create_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -1859,6 +2033,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:delete_classifier, Seahorse::Model::Operation.new.tap do |o|
@@ -1934,6 +2109,31 @@ module Aws::Glue
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeletePartitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePartitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionCheckFailureException)
+      end)
+
+      api.add_operation(:delete_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSecurityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSecurityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSecurityConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
@@ -2031,6 +2231,8 @@ module Aws::Glue
         o.output = Shapes::ShapeRef.new(shape: GetConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -2041,6 +2243,8 @@ module Aws::Glue
         o.output = Shapes::ShapeRef.new(shape: GetConnectionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2089,6 +2293,17 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:get_data_catalog_encryption_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataCatalogEncryptionSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataCatalogEncryptionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataCatalogEncryptionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
       api.add_operation(:get_database, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDatabase"
         o.http_method = "POST"
@@ -2099,6 +2314,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_databases, Seahorse::Model::Operation.new.tap do |o|
@@ -2110,6 +2326,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2241,6 +2458,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_partitions, Seahorse::Model::Operation.new.tap do |o|
@@ -2253,6 +2471,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2272,6 +2491,42 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:get_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSecurityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSecurityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSecurityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:get_security_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSecurityConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSecurityConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSecurityConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
       api.add_operation(:get_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTable"
         o.http_method = "POST"
@@ -2282,6 +2537,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -2294,6 +2550,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_table_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -2306,6 +2563,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2324,6 +2582,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2372,6 +2631,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:get_user_defined_functions, Seahorse::Model::Operation.new.tap do |o|
@@ -2384,6 +2644,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2400,6 +2661,30 @@ module Aws::Glue
         o.output = Shapes::ShapeRef.new(shape: ImportCatalogToGlueResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:put_data_catalog_encryption_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDataCatalogEncryptionSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutDataCatalogEncryptionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDataCatalogEncryptionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionCheckFailureException)
       end)
 
       api.add_operation(:reset_job_bookmark, Seahorse::Model::Operation.new.tap do |o|
@@ -2524,6 +2809,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:update_crawler, Seahorse::Model::Operation.new.tap do |o|
@@ -2562,6 +2849,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:update_dev_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -2600,6 +2888,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:update_table, Seahorse::Model::Operation.new.tap do |o|
@@ -2614,6 +2903,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
 
       api.add_operation(:update_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -2639,6 +2929,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
       end)
     end
 

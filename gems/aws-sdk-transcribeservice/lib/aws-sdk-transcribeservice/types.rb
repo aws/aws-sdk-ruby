@@ -13,7 +13,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT
     #         phrases: ["Phrase"], # required
     #       }
     #
@@ -70,6 +70,24 @@ module Aws::TranscribeService
       :vocabulary_state,
       :last_modified_time,
       :failure_reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteTranscriptionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transcription_job_name: "TranscriptionJobName", # required
+    #       }
+    #
+    # @!attribute [rw] transcription_job_name
+    #   The name of the transcription job to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJobRequest AWS API Documentation
+    #
+    class DeleteTranscriptionJobRequest < Struct.new(
+      :transcription_job_name)
       include Aws::Structure
     end
 
@@ -190,7 +208,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] status
     #   When specified, returns only transcription jobs with the specified
-    #   status.
+    #   status. Jobs are ordered by creation date, with the newest jobs
+    #   returned first. If you don’t specify a status, Amazon Transcribe
+    #   returns all transcription jobs ordered by creation date.
     #   @return [String]
     #
     # @!attribute [rw] job_name_contains
@@ -331,7 +351,7 @@ module Aws::TranscribeService
     #   is:
     #
     #   `
-    #   https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
     #   `
     #
     #   For example:
@@ -422,7 +442,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #         media: { # required
@@ -438,8 +458,9 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] transcription_job_name
-    #   The name of the job. You can't use the strings "." or ".." in
-    #   the job name. The name must be unique within an AWS account.
+    #   The name of the job. Note that you can't use the strings "." or
+    #   ".." by themselves as the job name. The name must also be unique
+    #   within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -598,7 +619,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Provides a summary of information about a transcription job.
+    # Provides a summary of information about a transcription job. .
     #
     # @!attribute [rw] transcription_job_name
     #   The name of the transcription job.
@@ -657,7 +678,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT
     #         phrases: ["Phrase"], # required
     #       }
     #

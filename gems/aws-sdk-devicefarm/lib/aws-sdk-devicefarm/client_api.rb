@@ -231,6 +231,8 @@ module Aws::DeviceFarm
     ServiceDnsName = Shapes::StringShape.new(name: 'ServiceDnsName')
     SkipAppResign = Shapes::BooleanShape.new(name: 'SkipAppResign')
     SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
+    StopJobRequest = Shapes::StructureShape.new(name: 'StopJobRequest')
+    StopJobResult = Shapes::StructureShape.new(name: 'StopJobResult')
     StopRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionRequest')
     StopRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionResult')
     StopRunRequest = Shapes::StructureShape.new(name: 'StopRunRequest')
@@ -258,9 +260,12 @@ module Aws::DeviceFarm
     UpdateNetworkProfileResult = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResult')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
     UpdateProjectResult = Shapes::StructureShape.new(name: 'UpdateProjectResult')
+    UpdateUploadRequest = Shapes::StructureShape.new(name: 'UpdateUploadRequest')
+    UpdateUploadResult = Shapes::StructureShape.new(name: 'UpdateUploadResult')
     UpdateVPCEConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateVPCEConfigurationRequest')
     UpdateVPCEConfigurationResult = Shapes::StructureShape.new(name: 'UpdateVPCEConfigurationResult')
     Upload = Shapes::StructureShape.new(name: 'Upload')
+    UploadCategory = Shapes::StringShape.new(name: 'UploadCategory')
     UploadStatus = Shapes::StringShape.new(name: 'UploadStatus')
     UploadType = Shapes::StringShape.new(name: 'UploadType')
     Uploads = Shapes::ListShape.new(name: 'Uploads')
@@ -269,6 +274,7 @@ module Aws::DeviceFarm
     VPCEConfigurationName = Shapes::StringShape.new(name: 'VPCEConfigurationName')
     VPCEConfigurations = Shapes::ListShape.new(name: 'VPCEConfigurations')
     VPCEServiceName = Shapes::StringShape.new(name: 'VPCEServiceName')
+    VideoCapture = Shapes::BooleanShape.new(name: 'VideoCapture')
 
     AccountSettings.add_member(:aws_account_number, Shapes::ShapeRef.new(shape: AWSAccountNumber, location_name: "awsAccountNumber"))
     AccountSettings.add_member(:unmetered_devices, Shapes::ShapeRef.new(shape: PurchasedDevicesMap, location_name: "unmeteredDevices"))
@@ -494,6 +500,7 @@ module Aws::DeviceFarm
     ExecutionConfiguration.add_member(:job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "jobTimeoutMinutes"))
     ExecutionConfiguration.add_member(:accounts_cleanup, Shapes::ShapeRef.new(shape: AccountsCleanup, location_name: "accountsCleanup"))
     ExecutionConfiguration.add_member(:app_packages_cleanup, Shapes::ShapeRef.new(shape: AppPackagesCleanup, location_name: "appPackagesCleanup"))
+    ExecutionConfiguration.add_member(:video_capture, Shapes::ShapeRef.new(shape: VideoCapture, location_name: "videoCapture"))
     ExecutionConfiguration.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     ExecutionConfiguration.struct_class = Types::ExecutionConfiguration
 
@@ -639,6 +646,8 @@ module Aws::DeviceFarm
     Job.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
     Job.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
     Job.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
+    Job.add_member(:video_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "videoEndpoint"))
+    Job.add_member(:video_capture, Shapes::ShapeRef.new(shape: VideoCapture, location_name: "videoCapture"))
     Job.struct_class = Types::Job
 
     Jobs.member = Shapes::ShapeRef.new(shape: Job)
@@ -780,6 +789,7 @@ module Aws::DeviceFarm
     ListUniqueProblemsResult.struct_class = Types::ListUniqueProblemsResult
 
     ListUploadsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    ListUploadsRequest.add_member(:type, Shapes::ShapeRef.new(shape: UploadType, location_name: "type"))
     ListUploadsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListUploadsRequest.struct_class = Types::ListUploadsRequest
 
@@ -975,6 +985,7 @@ module Aws::DeviceFarm
     Run.add_member(:customer_artifact_paths, Shapes::ShapeRef.new(shape: CustomerArtifactPaths, location_name: "customerArtifactPaths"))
     Run.add_member(:web_url, Shapes::ShapeRef.new(shape: String, location_name: "webUrl"))
     Run.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
+    Run.add_member(:test_spec_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testSpecArn"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -1011,9 +1022,16 @@ module Aws::DeviceFarm
 
     ScheduleRunTest.add_member(:type, Shapes::ShapeRef.new(shape: TestType, required: true, location_name: "type"))
     ScheduleRunTest.add_member(:test_package_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testPackageArn"))
+    ScheduleRunTest.add_member(:test_spec_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testSpecArn"))
     ScheduleRunTest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
     ScheduleRunTest.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
     ScheduleRunTest.struct_class = Types::ScheduleRunTest
+
+    StopJobRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    StopJobRequest.struct_class = Types::StopJobRequest
+
+    StopJobResult.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "job"))
+    StopJobResult.struct_class = Types::StopJobResult
 
     StopRemoteAccessSessionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     StopRemoteAccessSessionRequest.struct_class = Types::StopRemoteAccessSessionRequest
@@ -1126,6 +1144,15 @@ module Aws::DeviceFarm
     UpdateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectResult.struct_class = Types::UpdateProjectResult
 
+    UpdateUploadRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    UpdateUploadRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateUploadRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType"))
+    UpdateUploadRequest.add_member(:edit_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "editContent"))
+    UpdateUploadRequest.struct_class = Types::UpdateUploadRequest
+
+    UpdateUploadResult.add_member(:upload, Shapes::ShapeRef.new(shape: Upload, location_name: "upload"))
+    UpdateUploadResult.struct_class = Types::UpdateUploadResult
+
     UpdateVPCEConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     UpdateVPCEConfigurationRequest.add_member(:vpce_configuration_name, Shapes::ShapeRef.new(shape: VPCEConfigurationName, location_name: "vpceConfigurationName"))
     UpdateVPCEConfigurationRequest.add_member(:vpce_service_name, Shapes::ShapeRef.new(shape: VPCEServiceName, location_name: "vpceServiceName"))
@@ -1145,6 +1172,7 @@ module Aws::DeviceFarm
     Upload.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     Upload.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType"))
     Upload.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    Upload.add_member(:category, Shapes::ShapeRef.new(shape: UploadCategory, location_name: "category"))
     Upload.struct_class = Types::Upload
 
     Uploads.member = Shapes::ShapeRef.new(shape: Upload)
@@ -1165,12 +1193,15 @@ module Aws::DeviceFarm
       api.version = "2015-06-23"
 
       api.metadata = {
+        "apiVersion" => "2015-06-23",
         "endpointPrefix" => "devicefarm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Device Farm",
+        "serviceId" => "Device Farm",
         "signatureVersion" => "v4",
         "targetPrefix" => "DeviceFarm_20150623",
+        "uid" => "devicefarm-2015-06-23",
       }
 
       api.add_operation(:create_device_pool, Seahorse::Model::Operation.new.tap do |o|
@@ -1894,6 +1925,18 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
+      api.add_operation(:stop_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:stop_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopRemoteAccessSession"
         o.http_method = "POST"
@@ -1972,6 +2015,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:update_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUploadResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

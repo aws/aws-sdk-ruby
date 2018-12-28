@@ -66,7 +66,7 @@ module Aws::S3
       data[:etag]
     end
 
-    # Size of the uploaded part data.
+    # Size in bytes of the uploaded part data.
     # @return [Integer]
     def size
       data[:size]

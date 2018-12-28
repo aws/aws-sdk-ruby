@@ -135,10 +135,16 @@ module Aws::FMS
     #   administrator.
     #   @return [String]
     #
+    # @!attribute [rw] role_status
+    #   The status of the AWS account that you set as the AWS Firewall
+    #   Manager administrator.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountResponse AWS API Documentation
     #
     class GetAdminAccountResponse < Struct.new(
-      :admin_account)
+      :admin_account,
+      :role_status)
       include Aws::Structure
     end
 
@@ -302,6 +308,60 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMemberAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If you specify a value for `MaxResults` and you have more account
+    #   IDs than the number that you specify for `MaxResults`, AWS Firewall
+    #   Manager returns a `NextToken` value in the response that allows you
+    #   to list another group of IDs. For the second and subsequent
+    #   `ListMemberAccountsRequest` requests, specify the value of
+    #   `NextToken` from the previous response to get information about
+    #   another batch of member account IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the number of member account IDs that you want AWS
+    #   Firewall Manager to return for this request. If you have more IDs
+    #   than the number that you specify for `MaxResults`, the response
+    #   includes a `NextToken` value that you can use to get another batch
+    #   of member account IDs. The maximum value for `MaxResults` is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsRequest AWS API Documentation
+    #
+    class ListMemberAccountsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] member_accounts
+    #   An array of account IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If you have more member account IDs than the number that you
+    #   specified for `MaxResults` in the request, the response includes a
+    #   `NextToken` value. To list more IDs, submit another
+    #   `ListMemberAccounts` request, and specify the `NextToken` value from
+    #   the response in the `NextToken` value in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsResponse AWS API Documentation
+    #
+    class ListMemberAccountsResponse < Struct.new(
+      :member_accounts,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPoliciesRequest
     #   data as a hash:
     #
@@ -379,6 +439,12 @@ module Aws::FMS
     #         ],
     #         exclude_resource_tags: false, # required
     #         remediation_enabled: false, # required
+    #         include_map: {
+    #           "ACCOUNT" => ["CustomerPolicyScopeId"],
+    #         },
+    #         exclude_map: {
+    #           "ACCOUNT" => ["CustomerPolicyScopeId"],
+    #         },
     #       }
     #
     # @!attribute [rw] policy_id
@@ -430,6 +496,27 @@ module Aws::FMS
     #   resources.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_map
+    #   Specifies the AWS account IDs to include in the policy. If
+    #   `IncludeMap` is null, all accounts in the AWS Organization are
+    #   included in the policy. If `IncludeMap` is not null, only values
+    #   listed in `IncludeMap` will be included in the policy.
+    #
+    #   The key to the map is `ACCOUNT`. For example, a valid `IncludeMap`
+    #   would be `\{“ACCOUNT” : [“accountID1”, “accountID2”]\}`.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] exclude_map
+    #   Specifies the AWS account IDs to exclude from the policy. The
+    #   `IncludeMap` values are evaluated first, with all of the appropriate
+    #   account IDs added to the policy. Then the accounts listed in
+    #   `ExcludeMap` are removed, resulting in the final list of accounts to
+    #   add to the policy.
+    #
+    #   The key to the map is `ACCOUNT`. For example, a valid `ExcludeMap`
+    #   would be `\{“ACCOUNT” : [“accountID1”, “accountID2”]\}`.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Policy AWS API Documentation
     #
     class Policy < Struct.new(
@@ -440,7 +527,9 @@ module Aws::FMS
       :resource_type,
       :resource_tags,
       :exclude_resource_tags,
-      :remediation_enabled)
+      :remediation_enabled,
+      :include_map,
+      :exclude_map)
       include Aws::Structure
     end
 
@@ -475,6 +564,13 @@ module Aws::FMS
     #   considered out-of-date.
     #   @return [Time]
     #
+    # @!attribute [rw] issue_info_map
+    #   Details about problems with dependent services, such as AWS WAF or
+    #   AWS Config, that are causing a resource to be non-compliant. The
+    #   details include the name of the dependent service and the error
+    #   message recieved indicating the problem with the service.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceDetail AWS API Documentation
     #
     class PolicyComplianceDetail < Struct.new(
@@ -483,7 +579,8 @@ module Aws::FMS
       :member_account,
       :violators,
       :evaluation_limit_exceeded,
-      :expired_at)
+      :expired_at,
+      :issue_info_map)
       include Aws::Structure
     end
 
@@ -515,6 +612,13 @@ module Aws::FMS
     #   Time stamp of the last update to the `EvaluationResult` objects.
     #   @return [Time]
     #
+    # @!attribute [rw] issue_info_map
+    #   Details about problems with dependent services, such as AWS WAF or
+    #   AWS Config, that are causing a resource to be non-compliant. The
+    #   details include the name of the dependent service and the error
+    #   message recieved indicating the problem with the service.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceStatus AWS API Documentation
     #
     class PolicyComplianceStatus < Struct.new(
@@ -523,7 +627,8 @@ module Aws::FMS
       :policy_name,
       :member_account,
       :evaluation_results,
-      :last_updated)
+      :last_updated,
+      :issue_info_map)
       include Aws::Structure
     end
 
@@ -622,6 +727,12 @@ module Aws::FMS
     #           ],
     #           exclude_resource_tags: false, # required
     #           remediation_enabled: false, # required
+    #           include_map: {
+    #             "ACCOUNT" => ["CustomerPolicyScopeId"],
+    #           },
+    #           exclude_map: {
+    #             "ACCOUNT" => ["CustomerPolicyScopeId"],
+    #           },
     #         },
     #       }
     #

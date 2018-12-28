@@ -17,6 +17,9 @@ module Aws::AppSync
     ApiKeys = Shapes::ListShape.new(name: 'ApiKeys')
     ApiLimitExceededException = Shapes::StructureShape.new(name: 'ApiLimitExceededException')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
+    AuthorizationConfig = Shapes::StructureShape.new(name: 'AuthorizationConfig')
+    AuthorizationType = Shapes::StringShape.new(name: 'AuthorizationType')
+    AwsIamConfig = Shapes::StructureShape.new(name: 'AwsIamConfig')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -25,6 +28,8 @@ module Aws::AppSync
     CreateApiKeyResponse = Shapes::StructureShape.new(name: 'CreateApiKeyResponse')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
+    CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
+    CreateFunctionResponse = Shapes::StructureShape.new(name: 'CreateFunctionResponse')
     CreateGraphqlApiRequest = Shapes::StructureShape.new(name: 'CreateGraphqlApiRequest')
     CreateGraphqlApiResponse = Shapes::StructureShape.new(name: 'CreateGraphqlApiResponse')
     CreateResolverRequest = Shapes::StructureShape.new(name: 'CreateResolverRequest')
@@ -39,6 +44,8 @@ module Aws::AppSync
     DeleteApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteApiKeyResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
+    DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
+    DeleteFunctionResponse = Shapes::StructureShape.new(name: 'DeleteFunctionResponse')
     DeleteGraphqlApiRequest = Shapes::StructureShape.new(name: 'DeleteGraphqlApiRequest')
     DeleteGraphqlApiResponse = Shapes::StructureShape.new(name: 'DeleteGraphqlApiResponse')
     DeleteResolverRequest = Shapes::StructureShape.new(name: 'DeleteResolverRequest')
@@ -49,8 +56,13 @@ module Aws::AppSync
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FieldLogLevel = Shapes::StringShape.new(name: 'FieldLogLevel')
+    FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
+    Functions = Shapes::ListShape.new(name: 'Functions')
+    FunctionsIds = Shapes::ListShape.new(name: 'FunctionsIds')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
     GetDataSourceResponse = Shapes::StructureShape.new(name: 'GetDataSourceResponse')
+    GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
+    GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
     GetGraphqlApiRequest = Shapes::StructureShape.new(name: 'GetGraphqlApiRequest')
     GetGraphqlApiResponse = Shapes::StructureShape.new(name: 'GetGraphqlApiResponse')
     GetIntrospectionSchemaRequest = Shapes::StructureShape.new(name: 'GetIntrospectionSchemaRequest')
@@ -72,8 +84,12 @@ module Aws::AppSync
     ListApiKeysResponse = Shapes::StructureShape.new(name: 'ListApiKeysResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
+    ListFunctionsRequest = Shapes::StructureShape.new(name: 'ListFunctionsRequest')
+    ListFunctionsResponse = Shapes::StructureShape.new(name: 'ListFunctionsResponse')
     ListGraphqlApisRequest = Shapes::StructureShape.new(name: 'ListGraphqlApisRequest')
     ListGraphqlApisResponse = Shapes::StructureShape.new(name: 'ListGraphqlApisResponse')
+    ListResolversByFunctionRequest = Shapes::StructureShape.new(name: 'ListResolversByFunctionRequest')
+    ListResolversByFunctionResponse = Shapes::StructureShape.new(name: 'ListResolversByFunctionResponse')
     ListResolversRequest = Shapes::StructureShape.new(name: 'ListResolversRequest')
     ListResolversResponse = Shapes::StructureShape.new(name: 'ListResolversResponse')
     ListTypesRequest = Shapes::StructureShape.new(name: 'ListTypesRequest')
@@ -87,7 +103,12 @@ module Aws::AppSync
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
     OutputType = Shapes::StringShape.new(name: 'OutputType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
+    RdsHttpEndpointConfig = Shapes::StructureShape.new(name: 'RdsHttpEndpointConfig')
+    RelationalDatabaseDataSourceConfig = Shapes::StructureShape.new(name: 'RelationalDatabaseDataSourceConfig')
+    RelationalDatabaseSourceType = Shapes::StringShape.new(name: 'RelationalDatabaseSourceType')
     Resolver = Shapes::StructureShape.new(name: 'Resolver')
+    ResolverKind = Shapes::StringShape.new(name: 'ResolverKind')
     Resolvers = Shapes::ListShape.new(name: 'Resolvers')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
@@ -102,6 +123,8 @@ module Aws::AppSync
     UpdateApiKeyResponse = Shapes::StructureShape.new(name: 'UpdateApiKeyResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
+    UpdateFunctionRequest = Shapes::StructureShape.new(name: 'UpdateFunctionRequest')
+    UpdateFunctionResponse = Shapes::StructureShape.new(name: 'UpdateFunctionResponse')
     UpdateGraphqlApiRequest = Shapes::StructureShape.new(name: 'UpdateGraphqlApiRequest')
     UpdateGraphqlApiResponse = Shapes::StructureShape.new(name: 'UpdateGraphqlApiResponse')
     UpdateResolverRequest = Shapes::StructureShape.new(name: 'UpdateResolverRequest')
@@ -116,6 +139,14 @@ module Aws::AppSync
     ApiKey.struct_class = Types::ApiKey
 
     ApiKeys.member = Shapes::ShapeRef.new(shape: ApiKey)
+
+    AuthorizationConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "authorizationType"))
+    AuthorizationConfig.add_member(:aws_iam_config, Shapes::ShapeRef.new(shape: AwsIamConfig, location_name: "awsIamConfig"))
+    AuthorizationConfig.struct_class = Types::AuthorizationConfig
+
+    AwsIamConfig.add_member(:signing_region, Shapes::ShapeRef.new(shape: String, location_name: "signingRegion"))
+    AwsIamConfig.add_member(:signing_service_name, Shapes::ShapeRef.new(shape: String, location_name: "signingServiceName"))
+    AwsIamConfig.struct_class = Types::AwsIamConfig
 
     CreateApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -134,10 +165,23 @@ module Aws::AppSync
     CreateDataSourceRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     CreateDataSourceRequest.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
     CreateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
+    CreateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
+
+    CreateFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    CreateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateFunctionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateFunctionRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "dataSourceName"))
+    CreateFunctionRequest.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, required: true, location_name: "requestMappingTemplate"))
+    CreateFunctionRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
+    CreateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "functionVersion"))
+    CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
+
+    CreateFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
+    CreateFunctionResponse.struct_class = Types::CreateFunctionResponse
 
     CreateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateGraphqlApiRequest.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "logConfig"))
@@ -152,9 +196,11 @@ module Aws::AppSync
     CreateResolverRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateResolverRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "typeName"))
     CreateResolverRequest.add_member(:field_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "fieldName"))
-    CreateResolverRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "dataSourceName"))
+    CreateResolverRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "dataSourceName"))
     CreateResolverRequest.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, required: true, location_name: "requestMappingTemplate"))
     CreateResolverRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
+    CreateResolverRequest.add_member(:kind, Shapes::ShapeRef.new(shape: ResolverKind, location_name: "kind"))
+    CreateResolverRequest.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
     CreateResolverRequest.struct_class = Types::CreateResolverRequest
 
     CreateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -177,6 +223,7 @@ module Aws::AppSync
     DataSource.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     DataSource.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
     DataSource.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
+    DataSource.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     DataSource.struct_class = Types::DataSource
 
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
@@ -192,6 +239,12 @@ module Aws::AppSync
     DeleteDataSourceRequest.struct_class = Types::DeleteDataSourceRequest
 
     DeleteDataSourceResponse.struct_class = Types::DeleteDataSourceResponse
+
+    DeleteFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    DeleteFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "functionId"))
+    DeleteFunctionRequest.struct_class = Types::DeleteFunctionRequest
+
+    DeleteFunctionResponse.struct_class = Types::DeleteFunctionResponse
 
     DeleteGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     DeleteGraphqlApiRequest.struct_class = Types::DeleteGraphqlApiRequest
@@ -220,12 +273,33 @@ module Aws::AppSync
     ElasticsearchDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     ElasticsearchDataSourceConfig.struct_class = Types::ElasticsearchDataSourceConfig
 
+    FunctionConfiguration.add_member(:function_id, Shapes::ShapeRef.new(shape: String, location_name: "functionId"))
+    FunctionConfiguration.add_member(:function_arn, Shapes::ShapeRef.new(shape: String, location_name: "functionArn"))
+    FunctionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    FunctionConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    FunctionConfiguration.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "dataSourceName"))
+    FunctionConfiguration.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "requestMappingTemplate"))
+    FunctionConfiguration.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
+    FunctionConfiguration.add_member(:function_version, Shapes::ShapeRef.new(shape: String, location_name: "functionVersion"))
+    FunctionConfiguration.struct_class = Types::FunctionConfiguration
+
+    Functions.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
+
+    FunctionsIds.member = Shapes::ShapeRef.new(shape: String)
+
     GetDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "name"))
     GetDataSourceRequest.struct_class = Types::GetDataSourceRequest
 
     GetDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     GetDataSourceResponse.struct_class = Types::GetDataSourceResponse
+
+    GetFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    GetFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "functionId"))
+    GetFunctionRequest.struct_class = Types::GetFunctionRequest
+
+    GetFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
+    GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
     GetGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetGraphqlApiRequest.struct_class = Types::GetGraphqlApiRequest
@@ -278,6 +352,7 @@ module Aws::AppSync
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
 
     HttpDataSourceConfig.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    HttpDataSourceConfig.add_member(:authorization_config, Shapes::ShapeRef.new(shape: AuthorizationConfig, location_name: "authorizationConfig"))
     HttpDataSourceConfig.struct_class = Types::HttpDataSourceConfig
 
     LambdaDataSourceConfig.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "lambdaFunctionArn"))
@@ -301,6 +376,15 @@ module Aws::AppSync
     ListDataSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDataSourcesResponse.struct_class = Types::ListDataSourcesResponse
 
+    ListFunctionsRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    ListFunctionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListFunctionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListFunctionsRequest.struct_class = Types::ListFunctionsRequest
+
+    ListFunctionsResponse.add_member(:functions, Shapes::ShapeRef.new(shape: Functions, location_name: "functions"))
+    ListFunctionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListFunctionsResponse.struct_class = Types::ListFunctionsResponse
+
     ListGraphqlApisRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListGraphqlApisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListGraphqlApisRequest.struct_class = Types::ListGraphqlApisRequest
@@ -308,6 +392,16 @@ module Aws::AppSync
     ListGraphqlApisResponse.add_member(:graphql_apis, Shapes::ShapeRef.new(shape: GraphqlApis, location_name: "graphqlApis"))
     ListGraphqlApisResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListGraphqlApisResponse.struct_class = Types::ListGraphqlApisResponse
+
+    ListResolversByFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    ListResolversByFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "functionId"))
+    ListResolversByFunctionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListResolversByFunctionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListResolversByFunctionRequest.struct_class = Types::ListResolversByFunctionRequest
+
+    ListResolversByFunctionResponse.add_member(:resolvers, Shapes::ShapeRef.new(shape: Resolvers, location_name: "resolvers"))
+    ListResolversByFunctionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListResolversByFunctionResponse.struct_class = Types::ListResolversByFunctionResponse
 
     ListResolversRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListResolversRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "typeName"))
@@ -342,12 +436,28 @@ module Aws::AppSync
     OpenIDConnectConfig.add_member(:auth_ttl, Shapes::ShapeRef.new(shape: Long, location_name: "authTTL"))
     OpenIDConnectConfig.struct_class = Types::OpenIDConnectConfig
 
+    PipelineConfig.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsIds, location_name: "functions"))
+    PipelineConfig.struct_class = Types::PipelineConfig
+
+    RdsHttpEndpointConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "awsRegion"))
+    RdsHttpEndpointConfig.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "dbClusterIdentifier"))
+    RdsHttpEndpointConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "databaseName"))
+    RdsHttpEndpointConfig.add_member(:schema, Shapes::ShapeRef.new(shape: String, location_name: "schema"))
+    RdsHttpEndpointConfig.add_member(:aws_secret_store_arn, Shapes::ShapeRef.new(shape: String, location_name: "awsSecretStoreArn"))
+    RdsHttpEndpointConfig.struct_class = Types::RdsHttpEndpointConfig
+
+    RelationalDatabaseDataSourceConfig.add_member(:relational_database_source_type, Shapes::ShapeRef.new(shape: RelationalDatabaseSourceType, location_name: "relationalDatabaseSourceType"))
+    RelationalDatabaseDataSourceConfig.add_member(:rds_http_endpoint_config, Shapes::ShapeRef.new(shape: RdsHttpEndpointConfig, location_name: "rdsHttpEndpointConfig"))
+    RelationalDatabaseDataSourceConfig.struct_class = Types::RelationalDatabaseDataSourceConfig
+
     Resolver.add_member(:type_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "typeName"))
     Resolver.add_member(:field_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "fieldName"))
     Resolver.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "dataSourceName"))
     Resolver.add_member(:resolver_arn, Shapes::ShapeRef.new(shape: String, location_name: "resolverArn"))
     Resolver.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "requestMappingTemplate"))
     Resolver.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
+    Resolver.add_member(:kind, Shapes::ShapeRef.new(shape: ResolverKind, location_name: "kind"))
+    Resolver.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
     Resolver.struct_class = Types::Resolver
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
@@ -386,10 +496,24 @@ module Aws::AppSync
     UpdateDataSourceRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     UpdateDataSourceRequest.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
     UpdateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
+    UpdateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
 
     UpdateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
+
+    UpdateFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    UpdateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    UpdateFunctionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "functionId"))
+    UpdateFunctionRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "dataSourceName"))
+    UpdateFunctionRequest.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, required: true, location_name: "requestMappingTemplate"))
+    UpdateFunctionRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
+    UpdateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "functionVersion"))
+    UpdateFunctionRequest.struct_class = Types::UpdateFunctionRequest
+
+    UpdateFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
+    UpdateFunctionResponse.struct_class = Types::UpdateFunctionResponse
 
     UpdateGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
@@ -405,9 +529,11 @@ module Aws::AppSync
     UpdateResolverRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateResolverRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "typeName"))
     UpdateResolverRequest.add_member(:field_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "fieldName"))
-    UpdateResolverRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "dataSourceName"))
+    UpdateResolverRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "dataSourceName"))
     UpdateResolverRequest.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, required: true, location_name: "requestMappingTemplate"))
     UpdateResolverRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
+    UpdateResolverRequest.add_member(:kind, Shapes::ShapeRef.new(shape: ResolverKind, location_name: "kind"))
+    UpdateResolverRequest.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
     UpdateResolverRequest.struct_class = Types::UpdateResolverRequest
 
     UpdateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -435,12 +561,16 @@ module Aws::AppSync
       api.version = "2017-07-25"
 
       api.metadata = {
+        "apiVersion" => "2017-07-25",
         "endpointPrefix" => "appsync",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "AWSAppSync",
         "serviceFullName" => "AWS AppSync",
+        "serviceId" => "AppSync",
         "signatureVersion" => "v4",
         "signingName" => "appsync",
+        "uid" => "appsync-2017-07-25",
       }
 
       api.add_operation(:create_api_key, Seahorse::Model::Operation.new.tap do |o|
@@ -466,6 +596,18 @@ module Aws::AppSync
         o.input = Shapes::ShapeRef.new(shape: CreateDataSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDataSourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFunction"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apis/{apiId}/functions"
+        o.input = Shapes::ShapeRef.new(shape: CreateFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFunctionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -536,6 +678,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFunction"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apis/{apiId}/functions/{functionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFunctionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_graphql_api, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteGraphqlApi"
         o.http_method = "DELETE"
@@ -585,6 +739,17 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFunction"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apis/{apiId}/functions/{functionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFunctionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
       api.add_operation(:get_graphql_api, Seahorse::Model::Operation.new.tap do |o|
@@ -671,6 +836,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:list_functions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFunctions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apis/{apiId}/functions"
+        o.input = Shapes::ShapeRef.new(shape: ListFunctionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFunctionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:list_graphql_apis, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListGraphqlApis"
         o.http_method = "GET"
@@ -688,6 +865,18 @@ module Aws::AppSync
         o.http_request_uri = "/v1/apis/{apiId}/types/{typeName}/resolvers"
         o.input = Shapes::ShapeRef.new(shape: ListResolversRequest)
         o.output = Shapes::ShapeRef.new(shape: ListResolversResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_resolvers_by_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResolversByFunction"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apis/{apiId}/functions/{functionId}/resolvers"
+        o.input = Shapes::ShapeRef.new(shape: ListResolversByFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResolversByFunctionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -741,6 +930,18 @@ module Aws::AppSync
         o.input = Shapes::ShapeRef.new(shape: UpdateDataSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDataSourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFunction"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apis/{apiId}/functions/{functionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFunctionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

@@ -52,7 +52,8 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains information about the last time an AWS access key was used.
+    # Contains information about the last time an AWS access key was used
+    # since IAM began tracking this information on April 22, 2015.
     #
     # This data type is used as a response element in the
     # GetAccessKeyLastUsed operation.
@@ -64,8 +65,8 @@ module Aws::IAM
     #
     #   * The user does not have an access key.
     #
-    #   * An access key exists but has never been used, at least not since
-    #     IAM started tracking this information on April 22nd, 2015.
+    #   * An access key exists but has not been used since IAM began
+    #     tracking this information.
     #
     #   * There is no sign-in data associated with the user
     #
@@ -76,25 +77,25 @@ module Aws::IAM
     #
     # @!attribute [rw] service_name
     #   The name of the AWS service with which this access key was most
-    #   recently used. This field displays "N/A" in the following
+    #   recently used. The value of this field is "N/A" in the following
     #   situations:
     #
     #   * The user does not have an access key.
     #
-    #   * An access key exists but has never been used, at least not since
-    #     IAM started tracking this information on April 22nd, 2015.
+    #   * An access key exists but has not been used since IAM started
+    #     tracking this information.
     #
     #   * There is no sign-in data associated with the user
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region where this access key was most recently used. This
-    #   field is displays "N/A" in the following situations:
+    #   The AWS region where this access key was most recently used. The
+    #   value for this field is "N/A" in the following situations:
     #
     #   * The user does not have an access key.
     #
-    #   * An access key exists but has never been used, at least not since
-    #     IAM started tracking this information on April 22nd, 2015.
+    #   * An access key exists but has not been used since IAM began
+    #     tracking this information.
     #
     #   * There is no sign-in data associated with the user
     #
@@ -129,8 +130,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the access key. `Active` means the key is valid for
-    #   API calls; `Inactive` means it is not.
+    #   The status of the access key. `Active` means that the key is valid
+    #   for API calls; `Inactive` means it is not.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -186,7 +187,7 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -199,7 +200,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to add.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -228,7 +229,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -241,7 +242,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to add.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -271,7 +272,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the group to attach the policy
     #   to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -312,7 +313,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the role to attach the policy
     #   to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -353,7 +354,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to attach the
     #   policy to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -392,7 +393,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #
     # @!attribute [rw] permissions_boundary_type
     #   The permissions boundary usage type that indicates what type of IAM
@@ -544,7 +545,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user that the new key will belong to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -584,7 +585,7 @@ module Aws::IAM
     # @!attribute [rw] account_alias
     #   The account alias to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of lowercase letters, digits, and dashes. You
     #   cannot start or finish with a dash, nor can you have two dashes in a
     #   row.
@@ -616,7 +617,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -633,7 +634,7 @@ module Aws::IAM
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-. The group name must be unique within the
@@ -677,7 +678,7 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -694,7 +695,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -741,7 +742,7 @@ module Aws::IAM
     #   The name of the IAM user to create a password for. The user must
     #   already exist.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -901,7 +902,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The friendly name of the policy.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -920,7 +921,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -1078,6 +1079,12 @@ module Aws::IAM
     #         description: "roleDescriptionType",
     #         max_session_duration: 1,
     #         permissions_boundary: "arnType",
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] path
@@ -1087,7 +1094,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -1103,7 +1110,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1169,6 +1176,23 @@ module Aws::IAM
     #   for the role.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created role.
+    #   Each tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags per role, then the entire request fails and the role
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
     #
     class CreateRoleRequest < Struct.new(
@@ -1177,7 +1201,8 @@ module Aws::IAM
       :assume_role_policy_document,
       :description,
       :max_session_duration,
-      :permissions_boundary)
+      :permissions_boundary,
+      :tags)
       include Aws::Structure
     end
 
@@ -1221,7 +1246,7 @@ module Aws::IAM
     # @!attribute [rw] name
     #   The name of the provider to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1263,9 +1288,20 @@ module Aws::IAM
     #       }
     #
     # @!attribute [rw] aws_service_name
-    #   The AWS service to which this role is attached. You use a string
-    #   similar to a URL but without the http:// in front. For example:
-    #   `elasticbeanstalk.amazonaws.com`
+    #   The service principal for the AWS service to which this role is
+    #   attached. You use a string similar to a URL but without the http://
+    #   in front. For example: `elasticbeanstalk.amazonaws.com`.
+    #
+    #   Service principals are unique and case-sensitive. To find the exact
+    #   service principal for your service-linked role, see [AWS Services
+    #   That Work with IAM][1] in the *IAM User Guide* and look for the
+    #   services that have <b>Yes </b>in the **Service-Linked Role** column.
+    #   Choose the **Yes** link to view the service-linked role
+    #   documentation for that service.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1273,12 +1309,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] custom_suffix
-    #   A string that you provide, which is combined with the service name
-    #   to form the complete role name. If you make multiple requests for
-    #   the same service, then you must supply a different `CustomSuffix`
-    #   for each request. Otherwise the request fails with a duplicate role
-    #   name error. For example, you could add `-1` or `-debug` to the
-    #   suffix.
+    #   A string that you provide, which is combined with the
+    #   service-provided prefix to form the complete role name. If you make
+    #   multiple requests for the same service, then you must supply a
+    #   different `CustomSuffix` for each request. Otherwise the request
+    #   fails with a duplicate role name error. For example, you could add
+    #   `-1` or `-debug` to the suffix.
+    #
+    #   Some services do not support the `CustomSuffix` parameter. If you
+    #   provide an optional suffix and the operation fails, try the
+    #   operation again without the suffix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleRequest AWS API Documentation
@@ -1315,7 +1355,7 @@ module Aws::IAM
     #   permissions as the associated user except that they can be used only
     #   to access the specified service.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1362,6 +1402,12 @@ module Aws::IAM
     #         path: "pathType",
     #         user_name: "userNameType", # required
     #         permissions_boundary: "arnType",
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] path
@@ -1371,7 +1417,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -1387,7 +1433,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-. User names are not distinguished by case. For
@@ -1404,12 +1450,30 @@ module Aws::IAM
     #   for the user.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created user.
+    #   Each tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   number of tags per user, then the entire request fails and the user
+    #   is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
       :path,
       :user_name,
-      :permissions_boundary)
+      :permissions_boundary,
+      :tags)
       include Aws::Structure
     end
 
@@ -1441,7 +1505,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -1458,7 +1522,7 @@ module Aws::IAM
     #   The name of the virtual MFA device. Use with path to uniquely
     #   identify a virtual MFA device.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1500,7 +1564,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to deactivate.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1514,7 +1578,7 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the device ARN.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: =,.@:/-
@@ -1543,7 +1607,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose access key pair you want to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1557,7 +1621,7 @@ module Aws::IAM
     #   The access key ID for the access key ID and secret access key you
     #   want to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -1584,7 +1648,7 @@ module Aws::IAM
     # @!attribute [rw] account_alias
     #   The name of the account alias to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of lowercase letters, digits, and dashes. You
     #   cannot start or finish with a dash, nor can you have two dashes in a
     #   row.
@@ -1613,7 +1677,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) identifying the group that the
     #   policy is embedded in.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1626,7 +1690,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name identifying the policy document to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1654,7 +1718,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the IAM group to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1681,7 +1745,7 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1708,7 +1772,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1794,7 +1858,7 @@ module Aws::IAM
     # @!attribute [rw] version_id
     #   The policy version to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that consists of the lowercase letter 'v' followed by
     #   one or two digits, and optionally followed by a period '.' and a
     #   string of letters and digits.
@@ -1847,7 +1911,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) identifying the role that the
     #   policy is embedded in.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1860,7 +1924,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the inline policy to delete from the specified IAM role.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1888,7 +1952,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1934,7 +1998,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -1947,7 +2011,7 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key_id
     #   The unique identifier for the SSH public key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -1974,7 +2038,7 @@ module Aws::IAM
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate you want to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2035,7 +2099,7 @@ module Aws::IAM
     #   credential. If this value is not specified, then the operation
     #   assumes the user whose credentials are used to call the operation.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2049,7 +2113,7 @@ module Aws::IAM
     #   The unique identifier of the service-specific credential. You can
     #   get this value by calling ListServiceSpecificCredentials.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -2077,7 +2141,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate belongs to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2138,7 +2202,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) identifying the user that the
     #   policy is embedded in.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2151,7 +2215,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name identifying the policy document to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2179,7 +2243,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to delete.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2207,7 +2271,7 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the same as the ARN.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: =,.@:/-
@@ -2264,7 +2328,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM group to detach the
     #   policy from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2305,7 +2369,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM role to detach the
     #   policy from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2346,7 +2410,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to detach the
     #   policy from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2388,7 +2452,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user for whom you want to enable the MFA device.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2402,7 +2466,7 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the device ARN.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: =,.@:/-
@@ -2456,6 +2520,110 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # An object that contains details about when the IAM entities (users or
+    # roles) were last used in an attempt to access the specified AWS
+    # service.
+    #
+    # This data type is a response element in the
+    # GetServiceLastAccessedDetailsWithEntities operation.
+    #
+    # @!attribute [rw] entity_info
+    #   The `EntityInfo` object that contains details about the entity (user
+    #   or role).
+    #   @return [Types::EntityInfo]
+    #
+    # @!attribute [rw] last_authenticated
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   authenticated entity last attempted to access AWS. AWS does not
+    #   report unauthenticated requests.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][2].
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityDetails AWS API Documentation
+    #
+    class EntityDetails < Struct.new(
+      :entity_info,
+      :last_authenticated)
+      include Aws::Structure
+    end
+
+    # Contains details about the specified entity (user or role).
+    #
+    # This data type is an element of the EntityDetails object.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
+    #   resources.
+    #
+    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
+    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the entity (user or role).
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of entity (user or role).
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the entity (user or role).
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path to the entity (user or role). For more information about
+    #   paths, see [IAM Identifiers][1] in the *Using IAM* guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityInfo AWS API Documentation
+    #
+    class EntityInfo < Struct.new(
+      :arn,
+      :name,
+      :type,
+      :id,
+      :path)
+      include Aws::Structure
+    end
+
+    # Contains information about the reason that the operation failed.
+    #
+    # This data type is used as a response element in the
+    # GetServiceLastAccessedDetails operation and the
+    # GetServiceLastAccessedDetailsWithEntities operation.
+    #
+    # @!attribute [rw] message
+    #   Detailed information about the reason that the operation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the operation failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ErrorDetails AWS API Documentation
+    #
+    class ErrorDetails < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # Contains the results of a simulation.
     #
     # This data type is used by the return parameter of `
@@ -2478,8 +2646,9 @@ module Aws::IAM
     #   A list of the statements in the input policies that determine the
     #   result for this scenario. Remember that even if multiple statements
     #   allow the operation on the resource, if only one statement denies
-    #   that operation, then the explicit deny overrides any allow, and the
-    #   deny statement is the only entry included in the result.
+    #   that operation, then the explicit deny overrides any allow.
+    #   Inaddition, the deny statement is the only entry included in the
+    #   result.
     #   @return [Array<Types::Statement>]
     #
     # @!attribute [rw] missing_context_values
@@ -2551,6 +2720,38 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GenerateServiceLastAccessedDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "arnType", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the IAM resource (user, group, role, or managed policy)
+    #   used to generate information about when the resource was last used
+    #   in an attempt to access an AWS service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateServiceLastAccessedDetailsRequest AWS API Documentation
+    #
+    class GenerateServiceLastAccessedDetailsRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The job ID that you can use in the GetServiceLastAccessedDetails or
+    #   GetServiceLastAccessedDetailsWithEntities operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateServiceLastAccessedDetailsResponse AWS API Documentation
+    #
+    class GenerateServiceLastAccessedDetailsResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccessKeyLastUsedRequest
     #   data as a hash:
     #
@@ -2561,7 +2762,7 @@ module Aws::IAM
     # @!attribute [rw] access_key_id
     #   The identifier of an access key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -2617,16 +2818,16 @@ module Aws::IAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -2671,7 +2872,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -2710,7 +2911,7 @@ module Aws::IAM
     # Contains the response to a successful GetAccountSummary request.
     #
     # @!attribute [rw] summary_map
-    #   A set of key value pairs containing information about IAM entity
+    #   A set of key–value pairs containing information about IAM entity
     #   usage and IAM quotas.
     #   @return [Hash<String,Integer>]
     #
@@ -2866,7 +3067,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group the policy is associated with.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2879,7 +3080,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document to get.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2932,7 +3133,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -2950,16 +3151,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupRequest AWS API Documentation
@@ -2988,7 +3189,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -3017,7 +3218,7 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to get information about.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3057,7 +3258,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose login profile you want to retrieve.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3212,7 +3413,7 @@ module Aws::IAM
     # @!attribute [rw] version_id
     #   Identifies the policy version to retrieve.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that consists of the lowercase letter 'v' followed by
     #   one or two digits, and optionally followed by a period '.' and a
     #   string of letters and digits.
@@ -3254,7 +3455,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role associated with the policy.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3267,7 +3468,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document to get.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3318,7 +3519,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the IAM role to get information about.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3410,7 +3611,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3423,7 +3624,7 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key_id
     #   The unique identifier for the SSH public key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -3471,7 +3672,7 @@ module Aws::IAM
     #   The name of the server certificate you want to retrieve information
     #   about.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3498,6 +3699,239 @@ module Aws::IAM
     #
     class GetServerCertificateResponse < Struct.new(
       :server_certificate)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetServiceLastAccessedDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "jobIDType", # required
+    #         max_items: 1,
+    #         marker: "markerType",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the request generated by the
+    #   GenerateServiceLastAccessedDetails operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLastAccessedDetailsRequest AWS API Documentation
+    #
+    class GetServiceLastAccessedDetailsRequest < Struct.new(
+      :job_id,
+      :max_items,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_creation_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   report job was created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] services_last_accessed
+    #   A `ServiceLastAccessed` object that contains details about the most
+    #   recent attempt to access the service.
+    #   @return [Array<Types::ServiceLastAccessed>]
+    #
+    # @!attribute [rw] job_completion_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   generated report job was completed or failed.
+    #
+    #   This field is null if the job is still in progress, as indicated by
+    #   a `JobStatus` value of `IN_PROGRESS`.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can make a subsequent pagination
+    #   request using the `Marker` request parameter to retrieve more items.
+    #   Note that IAM might return fewer than the `MaxItems` number of
+    #   results even when there are more results available. We recommend
+    #   that you check `IsTruncated` after every call to ensure that you
+    #   receive all your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   An object that contains details about the reason the operation
+    #   failed.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLastAccessedDetailsResponse AWS API Documentation
+    #
+    class GetServiceLastAccessedDetailsResponse < Struct.new(
+      :job_status,
+      :job_creation_date,
+      :services_last_accessed,
+      :job_completion_date,
+      :is_truncated,
+      :marker,
+      :error)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetServiceLastAccessedDetailsWithEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "jobIDType", # required
+    #         service_namespace: "serviceNamespaceType", # required
+    #         max_items: 1,
+    #         marker: "markerType",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the request generated by the
+    #   `GenerateServiceLastAccessedDetails` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_namespace
+    #   The service namespace for an AWS service. Provide the service
+    #   namespace to learn when the IAM entity last attempted to access the
+    #   specified service.
+    #
+    #   To learn the service namespace for a service, go to [Actions,
+    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   Guide* and choose the name of the service to view details for that
+    #   service. In the first paragraph, find the service prefix. For
+    #   example, `(service prefix: a4b)`. For more information about service
+    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLastAccessedDetailsWithEntitiesRequest AWS API Documentation
+    #
+    class GetServiceLastAccessedDetailsWithEntitiesRequest < Struct.new(
+      :job_id,
+      :service_namespace,
+      :max_items,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_creation_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   report job was created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_completion_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   generated report job was completed or failed.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] entity_details_list
+    #   An `EntityDetailsList` object that contains details about when an
+    #   IAM entity (user or role) used group or policy permissions in an
+    #   attempt to access the specified AWS service.
+    #   @return [Array<Types::EntityDetails>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can make a subsequent pagination
+    #   request using the `Marker` request parameter to retrieve more items.
+    #   Note that IAM might return fewer than the `MaxItems` number of
+    #   results even when there are more results available. We recommend
+    #   that you check `IsTruncated` after every call to ensure that you
+    #   receive all your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   An object that contains details about the reason the operation
+    #   failed.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLastAccessedDetailsWithEntitiesResponse AWS API Documentation
+    #
+    class GetServiceLastAccessedDetailsWithEntitiesResponse < Struct.new(
+      :job_status,
+      :job_creation_date,
+      :job_completion_date,
+      :entity_details_list,
+      :is_truncated,
+      :marker,
+      :error)
       include Aws::Structure
     end
 
@@ -3549,7 +3983,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user who the policy is associated with.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3562,7 +3996,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document to get.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3614,8 +4048,8 @@ module Aws::IAM
     #   The name of the user to get information about.
     #
     #   This parameter is optional. If it is not included, it defaults to
-    #   the user making the request. This parameter allows (per its [regex
-    #   pattern][1]) a string of characters consisting of upper and
+    #   the user making the request. This parameter allows (through its
+    #   [regex pattern][1]) a string of characters consisting of upper and
     #   lowercase alphanumeric characters with no spaces. You can also
     #   include any of the following characters: \_+=,.@-
     #
@@ -3637,22 +4071,22 @@ module Aws::IAM
     #   A structure containing details about the IAM user.
     #
     #   Due to a service issue, password last used data does not include
-    #   password use from May 3rd 2018 22:50 PDT to May 23rd 2018 14:08 PDT.
+    #   password use from May 3, 2018 22:50 PDT to May 23, 2018 14:08 PDT.
     #   This affects [last sign-in][1] dates shown in the IAM console and
     #   password last used dates in the [IAM credential report][2], and
     #   returned by this GetUser API. If users signed in during the affected
     #   time, the password last used date that is returned is the date the
-    #   user last signed in before May 3rd 2018. For users that signed in
-    #   after May 23rd 2018 14:08 PDT, the returned password last used date
+    #   user last signed in before May 3, 2018. For users that signed in
+    #   after May 23, 2018 14:08 PDT, the returned password last used date
     #   is accurate.
     #
-    #    If you use password last used information to identify unused
-    #   credentials for deletion, such as deleting users who did not sign in
-    #   to AWS in the last 90 days, we recommend that you adjust your
-    #   evaluation window to include dates after May 23rd 2018.
-    #   Alternatively, if your users use access keys to access AWS
-    #   programmatically you can refer to access key last used information
-    #   because it is accurate for all dates.
+    #    You can use password last used information to identify unused
+    #   credentials for deletion. For example, you might delete users who
+    #   did not sign in to AWS in the last 90 days. In cases like this, we
+    #   recommend that you adjust your evaluation window to include dates
+    #   after May 23, 2018. Alternatively, if your users use access keys to
+    #   access AWS programmatically you can refer to access key last used
+    #   information because it is accurate for all dates.
     #
     #
     #
@@ -3880,7 +4314,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -3898,16 +4332,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysRequest AWS API Documentation
@@ -3932,7 +4366,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -3966,16 +4400,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesRequest AWS API Documentation
@@ -4000,7 +4434,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4032,7 +4466,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the group to list attached
     #   policies for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4047,7 +4481,7 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -4067,16 +4501,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesRequest AWS API Documentation
@@ -4103,7 +4537,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4135,7 +4569,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the role to list attached
     #   policies for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4150,7 +4584,7 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -4170,16 +4604,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesRequest AWS API Documentation
@@ -4206,7 +4640,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4238,7 +4672,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the user to list attached
     #   policies for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4253,7 +4687,7 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -4273,16 +4707,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesRequest AWS API Documentation
@@ -4309,7 +4743,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4366,7 +4800,7 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -4398,16 +4832,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyRequest AWS API Documentation
@@ -4443,7 +4877,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4475,7 +4909,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to list policies for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4493,16 +4927,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesRequest AWS API Documentation
@@ -4519,7 +4953,7 @@ module Aws::IAM
     # @!attribute [rw] policy_names
     #   A list of policy names.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4536,7 +4970,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4566,7 +5000,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to list groups for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4584,16 +5018,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserRequest AWS API Documentation
@@ -4618,7 +5052,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4651,12 +5085,13 @@ module Aws::IAM
     #   with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all groups. This parameter allows (per its [regex
-    #   pattern][1]) a string of characters consisting of either a forward
-    #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes. In addition, it can contain any ASCII character from the !
-    #   (\\u0021) through the DEL character (\\u007F), including most
-    #   punctuation characters, digits, and upper and lowercased letters.
+    #   slash (/), listing all groups. This parameter allows (through its
+    #   [regex pattern][1]) a string of characters consisting of either a
+    #   forward slash (/) by itself or a string that must begin and end with
+    #   forward slashes. In addition, it can contain any ASCII character
+    #   from the ! (\\u0021) through the DEL character (\\u007F), including
+    #   most punctuation characters, digits, and upper and lowercased
+    #   letters.
     #
     #
     #
@@ -4671,16 +5106,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsRequest AWS API Documentation
@@ -4705,7 +5140,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4735,7 +5170,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to list instance profiles for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4753,16 +5188,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleRequest AWS API Documentation
@@ -4788,7 +5223,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4821,10 +5256,10 @@ module Aws::IAM
     #   path starts with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all instance profiles. This parameter allows (per
-    #   its [regex pattern][1]) a string of characters consisting of either
-    #   a forward slash (/) by itself or a string that must begin and end
-    #   with forward slashes. In addition, it can contain any ASCII
+    #   slash (/), listing all instance profiles. This parameter allows
+    #   (through its [regex pattern][1]) a string of characters consisting
+    #   of either a forward slash (/) by itself or a string that must begin
+    #   and end with forward slashes. In addition, it can contain any ASCII
     #   character from the ! (\\u0021) through the DEL character (\\u007F),
     #   including most punctuation characters, digits, and upper and
     #   lowercased letters.
@@ -4842,16 +5277,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesRequest AWS API Documentation
@@ -4876,7 +5311,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4906,7 +5341,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA devices you want to list.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -4924,16 +5359,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesRequest AWS API Documentation
@@ -4958,7 +5393,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -4997,6 +5432,119 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains details about the permissions policies that are attached to
+    # the specified identity (user, group, or role).
+    #
+    # This data type is used as a response element in the
+    # ListPoliciesGrantingServiceAccess operation.
+    #
+    # @!attribute [rw] service_namespace
+    #   The namespace of the service that was accessed.
+    #
+    #   To learn the service namespace of a service, go to [Actions,
+    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   Guide*. Choose the name of the service to view details for that
+    #   service. In the first paragraph, find the service prefix. For
+    #   example, `(service prefix: a4b)`. For more information about service
+    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   @return [String]
+    #
+    # @!attribute [rw] policies
+    #   The `PoliciesGrantingServiceAccess` object that contains details
+    #   about the policy.
+    #   @return [Array<Types::PolicyGrantingServiceAccess>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccessEntry AWS API Documentation
+    #
+    class ListPoliciesGrantingServiceAccessEntry < Struct.new(
+      :service_namespace,
+      :policies)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPoliciesGrantingServiceAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "markerType",
+    #         arn: "arnType", # required
+    #         service_namespaces: ["serviceNamespaceType"], # required
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the IAM identity (user, group, or role) whose policies
+    #   you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_namespaces
+    #   The service namespace for the AWS services whose policies you want
+    #   to list.
+    #
+    #   To learn the service namespace for a service, go to [Actions,
+    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   Guide*. Choose the name of the service to view details for that
+    #   service. In the first paragraph, find the service prefix. For
+    #   example, `(service prefix: a4b)`. For more information about service
+    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccessRequest AWS API Documentation
+    #
+    class ListPoliciesGrantingServiceAccessRequest < Struct.new(
+      :marker,
+      :arn,
+      :service_namespaces)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policies_granting_service_access
+    #   A `ListPoliciesGrantingServiceAccess` object that contains details
+    #   about the permissions policies attached to the specified identity
+    #   (user, group, or role).
+    #   @return [Array<Types::ListPoliciesGrantingServiceAccessEntry>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can make a subsequent pagination
+    #   request using the `Marker` request parameter to retrieve more items.
+    #   We recommend that you check `IsTruncated` after every call to ensure
+    #   that you receive all your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccessResponse AWS API Documentation
+    #
+    class ListPoliciesGrantingServiceAccessResponse < Struct.new(
+      :policies_granting_service_access,
+      :is_truncated,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPoliciesRequest
     #   data as a hash:
     #
@@ -5032,8 +5580,8 @@ module Aws::IAM
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. This parameter is
     #   optional. If it is not included, it defaults to a slash (/), listing
-    #   all policies. This parameter allows (per its [regex pattern][1]) a
-    #   string of characters consisting of either a forward slash (/) by
+    #   all policies. This parameter allows (through its [regex pattern][1])
+    #   a string of characters consisting of either a forward slash (/) by
     #   itself or a string that must begin and end with forward slashes. In
     #   addition, it can contain any ASCII character from the ! (\\u0021)
     #   through the DEL character (\\u007F), including most punctuation
@@ -5064,16 +5612,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesRequest AWS API Documentation
@@ -5101,7 +5649,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5148,16 +5696,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsRequest AWS API Documentation
@@ -5189,7 +5737,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5219,7 +5767,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to list policies for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -5237,16 +5785,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesRequest AWS API Documentation
@@ -5271,7 +5819,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5284,6 +5832,88 @@ module Aws::IAM
     #
     class ListRolePoliciesResponse < Struct.new(
       :policy_names,
+      :is_truncated,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRoleTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the IAM role for which you want to see the list of tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response to indicate
+    #   where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoleTagsRequest AWS API Documentation
+    #
+    class ListRoleTagsRequest < Struct.new(
+      :role_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags currently that is attached to the role. Each tag
+    #   consists of a key name and an associated value. If no tags are
+    #   attached to the specified role, the response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoleTagsResponse AWS API Documentation
+    #
+    class ListRoleTagsResponse < Struct.new(
+      :tags,
       :is_truncated,
       :marker)
       include Aws::Structure
@@ -5304,12 +5934,13 @@ module Aws::IAM
     #   with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all roles. This parameter allows (per its [regex
-    #   pattern][1]) a string of characters consisting of either a forward
-    #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes. In addition, it can contain any ASCII character from the !
-    #   (\\u0021) through the DEL character (\\u007F), including most
-    #   punctuation characters, digits, and upper and lowercased letters.
+    #   slash (/), listing all roles. This parameter allows (through its
+    #   [regex pattern][1]) a string of characters consisting of either a
+    #   forward slash (/) by itself or a string that must begin and end with
+    #   forward slashes. In addition, it can contain any ASCII character
+    #   from the ! (\\u0021) through the DEL character (\\u007F), including
+    #   most punctuation characters, digits, and upper and lowercased
+    #   letters.
     #
     #
     #
@@ -5324,16 +5955,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesRequest AWS API Documentation
@@ -5358,7 +5989,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5410,7 +6041,7 @@ module Aws::IAM
     #   specified, the `UserName` field is determined implicitly based on
     #   the AWS access key used to sign the request.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -5428,16 +6059,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysRequest AWS API Documentation
@@ -5462,7 +6093,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5496,9 +6127,9 @@ module Aws::IAM
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/), listing all server certificates. This parameter allows
-    #   (per its [regex pattern][1]) a string of characters consisting of
-    #   either a forward slash (/) by itself or a string that must begin and
-    #   end with forward slashes. In addition, it can contain any ASCII
+    #   (through its [regex pattern][1]) a string of characters consisting
+    #   of either a forward slash (/) by itself or a string that must begin
+    #   and end with forward slashes. In addition, it can contain any ASCII
     #   character from the ! (\\u0021) through the DEL character (\\u007F),
     #   including most punctuation characters, digits, and upper and
     #   lowercased letters.
@@ -5516,16 +6147,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesRequest AWS API Documentation
@@ -5550,7 +6181,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5582,7 +6213,7 @@ module Aws::IAM
     #   operation assumes the user whose credentials are used to call the
     #   operation.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -5631,7 +6262,7 @@ module Aws::IAM
     #   The name of the IAM user whose signing certificates you want to
     #   examine.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -5649,16 +6280,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesRequest AWS API Documentation
@@ -5683,7 +6314,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5713,7 +6344,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to list policies for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -5731,16 +6362,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesRequest AWS API Documentation
@@ -5765,7 +6396,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5778,6 +6409,88 @@ module Aws::IAM
     #
     class ListUserPoliciesResponse < Struct.new(
       :policy_names,
+      :is_truncated,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListUserTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "existingUserNameType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user whose tags you want to see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response to indicate
+    #   where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserTagsRequest AWS API Documentation
+    #
+    class ListUserTagsRequest < Struct.new(
+      :user_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the user. Each tag
+    #   consists of a key name and an associated value. If no tags are
+    #   attached to the specified user, the response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserTagsResponse AWS API Documentation
+    #
+    class ListUserTagsResponse < Struct.new(
+      :tags,
       :is_truncated,
       :marker)
       include Aws::Structure
@@ -5798,13 +6511,13 @@ module Aws::IAM
     #   whose path starts with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all user names. This parameter allows (per its
-    #   [regex pattern][1]) a string of characters consisting of either a
-    #   forward slash (/) by itself or a string that must begin and end with
-    #   forward slashes. In addition, it can contain any ASCII character
-    #   from the ! (\\u0021) through the DEL character (\\u007F), including
-    #   most punctuation characters, digits, and upper and lowercased
-    #   letters.
+    #   slash (/), listing all user names. This parameter allows (through
+    #   its [regex pattern][1]) a string of characters consisting of either
+    #   a forward slash (/) by itself or a string that must begin and end
+    #   with forward slashes. In addition, it can contain any ASCII
+    #   character from the ! (\\u0021) through the DEL character (\\u007F),
+    #   including most punctuation characters, digits, and upper and
+    #   lowercased letters.
     #
     #
     #
@@ -5819,16 +6532,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersRequest AWS API Documentation
@@ -5853,7 +6566,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -5883,7 +6596,8 @@ module Aws::IAM
     # @!attribute [rw] assignment_status
     #   The status (`Unassigned` or `Assigned`) of the devices to list. If
     #   you do not specify an `AssignmentStatus`, the operation defaults to
-    #   `Any` which lists both assigned and unassigned virtual MFA devices.
+    #   `Any`, which lists both assigned and unassigned virtual MFA
+    #   devices.,
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -5894,16 +6608,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesRequest AWS API Documentation
@@ -5929,7 +6643,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -6080,7 +6794,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Integer]
     #
     # @!attribute [rw] is_attachable
@@ -6312,7 +7026,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Integer]
     #
     # @!attribute [rw] is_attachable
@@ -6386,6 +7100,74 @@ module Aws::IAM
     class PolicyDetail < Struct.new(
       :policy_name,
       :policy_document)
+      include Aws::Structure
+    end
+
+    # Contains details about the permissions policies that are attached to
+    # the specified identity (user, group, or role).
+    #
+    # This data type is an element of the
+    # ListPoliciesGrantingServiceAccessEntry object.
+    #
+    # @!attribute [rw] policy_name
+    #   The policy name.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The policy type. For more information about these policy types, see
+    #   [Managed Policies and Inline Policies][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
+    #   resources.
+    #
+    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
+    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity (user or role) that used the policy to access the
+    #   service to which the inline policy is attached.
+    #
+    #   This field is null for managed policies. For more information about
+    #   these policy types, see [Managed Policies and Inline Policies][1] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_name
+    #   The name of the entity (user or role) to which the inline policy is
+    #   attached.
+    #
+    #   This field is null for managed policies. For more information about
+    #   these policy types, see [Managed Policies and Inline Policies][1] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGrantingServiceAccess AWS API Documentation
+    #
+    class PolicyGrantingServiceAccess < Struct.new(
+      :policy_name,
+      :policy_type,
+      :policy_arn,
+      :entity_type,
+      :entity_name)
       include Aws::Structure
     end
 
@@ -6592,7 +7374,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6605,7 +7387,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6682,7 +7464,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to associate the policy with.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6695,7 +7477,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6772,7 +7554,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to associate the policy with.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6785,7 +7567,7 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6870,7 +7652,7 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6883,7 +7665,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to remove.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6912,7 +7694,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6925,7 +7707,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to remove.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6956,7 +7738,7 @@ module Aws::IAM
     #   credential. If this value is not specified, then the operation
     #   assumes the user whose credentials are used to call the operation.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -6969,7 +7751,7 @@ module Aws::IAM
     # @!attribute [rw] service_specific_credential_id
     #   The unique identifier of the service-specific credential.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -7021,8 +7803,8 @@ module Aws::IAM
     #   result for this part of the simulation. Remember that even if
     #   multiple statements allow the operation on the resource, if *any*
     #   statement denies that operation, then the explicit deny overrides
-    #   any allow, and the deny statement is the only entry included in the
-    #   result.
+    #   any allow. In addition, the deny statement is the only entry
+    #   included in the result.
     #   @return [Array<Types::Statement>]
     #
     # @!attribute [rw] missing_context_values
@@ -7070,7 +7852,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to resynchronize.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -7083,7 +7865,7 @@ module Aws::IAM
     # @!attribute [rw] serial_number
     #   Serial number that uniquely identifies the MFA device.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -7170,7 +7952,7 @@ module Aws::IAM
     #
     # @!attribute [rw] max_session_duration
     #   The maximum session duration (in seconds) for the specified role.
-    #   Anyone who uses the AWS CLI or API to assume the role can specify
+    #   Anyone who uses the AWS CLI, or API to assume the role can specify
     #   the duration using the optional `DurationSeconds` API parameter or
     #   `duration-seconds` CLI parameter.
     #   @return [Integer]
@@ -7180,12 +7962,20 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   Boundaries for IAM Identities
+    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
+    #   User Guide*.
     #   @return [Types::AttachedPermissionsBoundary]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the specified role. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
@@ -7198,7 +7988,8 @@ module Aws::IAM
       :assume_role_policy_document,
       :description,
       :max_session_duration,
-      :permissions_boundary)
+      :permissions_boundary,
+      :tags)
       include Aws::Structure
     end
 
@@ -7275,12 +8066,20 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   Boundaries for IAM Identities
+    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
+    #   User Guide*.
     #   @return [Types::AttachedPermissionsBoundary]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the specified role. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail AWS API Documentation
     #
@@ -7294,7 +8093,8 @@ module Aws::IAM
       :instance_profile_list,
       :role_policy_list,
       :attached_managed_policies,
-      :permissions_boundary)
+      :permissions_boundary,
+      :tags)
       include Aws::Structure
     end
 
@@ -7513,6 +8313,82 @@ module Aws::IAM
       :arn,
       :upload_date,
       :expiration)
+      include Aws::Structure
+    end
+
+    # Contains details about the most recent attempt to access the service.
+    #
+    # This data type is used as a response element in the
+    # GetServiceLastAccessedDetails operation.
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service in which access was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_authenticated
+    #   The date and time, in [ISO 8601 date-time format][1], when an
+    #   authenticated entity most recently attempted to access the service.
+    #   AWS does not report unauthenticated requests.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][2].
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_namespace
+    #   The namespace of the service in which access was attempted.
+    #
+    #   To learn the service namespace of a service, go to [Actions,
+    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   Guide*. Choose the name of the service to view details for that
+    #   service. In the first paragraph, find the service prefix. For
+    #   example, `(service prefix: a4b)`. For more information about service
+    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   @return [String]
+    #
+    # @!attribute [rw] last_authenticated_entity
+    #   The ARN of the authenticated entity (user or role) that last
+    #   attempted to access the service. AWS does not report unauthenticated
+    #   requests.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
+    # @!attribute [rw] total_authenticated_entities
+    #   The total number of authenticated entities that have attempted to
+    #   access the service.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceLastAccessed AWS API Documentation
+    #
+    class ServiceLastAccessed < Struct.new(
+      :service_name,
+      :last_authenticated,
+      :service_namespace,
+      :last_authenticated_entity,
+      :total_authenticated_entities)
       include Aws::Structure
     end
 
@@ -7752,7 +8628,7 @@ module Aws::IAM
     #
     # @!attribute [rw] resource_arns
     #   A list of ARNs of AWS resources to include in the simulation. If
-    #   this parameter is not provided then the value defaults to `*` (all
+    #   this parameter is not provided, then the value defaults to `*` (all
     #   resources). Each API in the `ActionNames` parameter is evaluated for
     #   each resource in this list. The simulation determines the access
     #   result (allowed or denied) of each combination and reports it in the
@@ -7882,16 +8758,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -7931,7 +8807,7 @@ module Aws::IAM
     #   Note that IAM might return fewer than the `MaxItems` number of
     #   results even when there are more results available. We recommend
     #   that you check `IsTruncated` after every call to ensure that you
-    #   receive all of your results.
+    #   receive all your results.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -8118,36 +8994,36 @@ module Aws::IAM
     #   simulation.
     #
     #   Each of the EC2 scenarios requires that you specify instance, image,
-    #   and security-group resources. If your scenario includes an EBS
+    #   and security group resources. If your scenario includes an EBS
     #   volume, then you must specify that volume as a resource. If the EC2
-    #   scenario includes VPC, then you must supply the network-interface
+    #   scenario includes VPC, then you must supply the network interface
     #   resource. If it includes an IP subnet, then you must specify the
     #   subnet resource. For more information on the EC2 scenario options,
     #   see [Supported Platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-Classic-InstanceStore**
     #
-    #     instance, image, security-group
+    #     instance, image, security group
     #
     #   * **EC2-Classic-EBS**
     #
-    #     instance, image, security-group, volume
+    #     instance, image, security group, volume
     #
     #   * **EC2-VPC-InstanceStore**
     #
-    #     instance, image, security-group, network-interface
+    #     instance, image, security group, network interface
     #
     #   * **EC2-VPC-InstanceStore-Subnet**
     #
-    #     instance, image, security-group, network-interface, subnet
+    #     instance, image, security group, network interface, subnet
     #
     #   * **EC2-VPC-EBS**
     #
-    #     instance, image, security-group, network-interface, volume
+    #     instance, image, security group, network interface, volume
     #
     #   * **EC2-VPC-EBS-Subnet**
     #
-    #     instance, image, security-group, network-interface, subnet, volume
+    #     instance, image, security group, network interface, subnet, volume
     #
     #
     #
@@ -8155,16 +9031,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   (Optional) Use this only when paginating results to indicate the
-    #   maximum number of items you want in the response. If additional
-    #   items exist beyond the maximum you specify, the `IsTruncated`
-    #   response element is `true`.
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
     #
-    #   If you do not include this parameter, it defaults to 100. Note that
-    #   IAM might return fewer results, even when there are more results
-    #   available. In that case, the `IsTruncated` response element returns
-    #   `true` and `Marker` contains a value to include in the subsequent
-    #   call that tells the service where to continue from.
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM might return fewer results, even when there
+    #   are more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -8224,6 +9100,199 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # A structure that represents user-provided metadata that can be
+    # associated with a resource such as an IAM user or role. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key name that can be used to look up or retrieve the associated
+    #   value. For example, `Department` or `Cost Center` are common
+    #   choices.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with this tag. For example, tags with a key
+    #   name of `Department` could have values such as `Human Resources`,
+    #   `Accounting`, and `Support`. Tags with a key name of `Cost Center`
+    #   might have values that consist of the number associated with the
+    #   different cost centers in your company. Typically, many resources
+    #   have tags with the same key name but with different values.
+    #
+    #   <note markdown="1"> AWS always interprets the tag `Value` as a single string. If you
+    #   need to store an array, you can store comma-separated values in the
+    #   string. However, you must interpret the value in your code.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that you want to add tags to.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the role. Each tag
+    #   consists of a key name and an associated value. You can specify this
+    #   with a JSON string.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagRoleRequest AWS API Documentation
+    #
+    class TagRoleRequest < Struct.new(
+      :role_name,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "existingUserNameType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user that you want to add tags to.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the user. Each tag
+    #   consists of a key name and an associated value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagUserRequest AWS API Documentation
+    #
+    class TagUserRequest < Struct.new(
+      :user_name,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the IAM role from which you want to remove tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: \_+=,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified role.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagRoleRequest AWS API Documentation
+    #
+    class UntagRoleRequest < Struct.new(
+      :role_name,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "existingUserNameType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user from which you want to remove tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified user.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagUserRequest AWS API Documentation
+    #
+    class UntagUserRequest < Struct.new(
+      :user_name,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateAccessKeyRequest
     #   data as a hash:
     #
@@ -8236,7 +9305,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose key you want to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8249,7 +9318,7 @@ module Aws::IAM
     # @!attribute [rw] access_key_id
     #   The access key ID of the secret access key you want to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -8403,7 +9472,7 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to update with the new policy.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8454,7 +9523,7 @@ module Aws::IAM
     #   Name of the IAM group to update. If you're changing the name of the
     #   group, this is the original name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8468,7 +9537,7 @@ module Aws::IAM
     #   New path for the IAM group. Only include this if changing the
     #   group's path.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -8484,7 +9553,7 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the
     #   group's name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8515,7 +9584,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8749,7 +9818,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8762,7 +9831,7 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key_id
     #   The unique identifier for the SSH public key.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -8798,7 +9867,7 @@ module Aws::IAM
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate that you want to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8812,7 +9881,7 @@ module Aws::IAM
     #   The new path for the server certificate. Include this only if you
     #   are updating the server certificate's path.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -8829,7 +9898,7 @@ module Aws::IAM
     #   are updating the server certificate's name. The name of the
     #   certificate cannot contain any spaces.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8862,7 +9931,7 @@ module Aws::IAM
     #   credential. If you do not specify this value, then the operation
     #   assumes the user whose credentials are used to call the operation.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8875,7 +9944,7 @@ module Aws::IAM
     # @!attribute [rw] service_specific_credential_id
     #   The unique identifier of the service-specific credential.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -8909,7 +9978,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user the signing certificate belongs to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8922,7 +9991,7 @@ module Aws::IAM
     # @!attribute [rw] certificate_id
     #   The ID of the signing certificate you want to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters that can consist of any upper or lowercased letter or
     #   digit.
     #
@@ -8959,7 +10028,7 @@ module Aws::IAM
     #   Name of the user to update. If you're changing the name of the
     #   user, this is the original user name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -8973,7 +10042,7 @@ module Aws::IAM
     #   New path for the IAM user. Include this parameter only if you're
     #   changing the user's path.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -8989,7 +10058,7 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're
     #   changing the user's name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -9019,7 +10088,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user to associate the SSH public key with.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -9031,7 +10100,7 @@ module Aws::IAM
     #
     # @!attribute [rw] ssh_public_key_body
     #   The SSH public key. The public key must be encoded in ssh-rsa format
-    #   or PEM format. The miminum bit-length of the public key is 2048
+    #   or PEM format. The minimum bit-length of the public key is 2048
     #   bits. For example, you can generate a 2048-bit key, and the
     #   resulting PEM file is 1679 bytes long.
     #
@@ -9089,7 +10158,7 @@ module Aws::IAM
     #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/). This parameter allows (per its [regex pattern][2]) a
+    #   slash (/). This parameter allows (through its [regex pattern][2]) a
     #   string of characters consisting of either a forward slash (/) by
     #   itself or a string that must begin and end with forward slashes. In
     #   addition, it can contain any ASCII character from the ! (\\u0021)
@@ -9113,7 +10182,7 @@ module Aws::IAM
     #   The name for the server certificate. Do not include the path in this
     #   value. The name of the certificate cannot contain any spaces.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -9221,7 +10290,7 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate is for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
@@ -9332,18 +10401,18 @@ module Aws::IAM
     #   list of AWS websites that capture a user's last sign-in time, see
     #   the [Credential Reports][2] topic in the *Using IAM* guide. If a
     #   password is used more than once in a five-minute span, only the
-    #   first use is returned in this field. If the field is null (no value)
-    #   then it indicates that they never signed in with a password. This
-    #   can be because:
+    #   first use is returned in this field. If the field is null (no
+    #   value), then it indicates that they never signed in with a password.
+    #   This can be because:
     #
     #   * The user never had a password.
     #
     #   * A password exists but has not been used since IAM started tracking
-    #     this information on October 20th, 2014.
+    #     this information on October 20, 2014.
     #
-    #   A null does not mean that the user *never* had a password. Also, if
-    #   the user does not currently have a password, but had one in the
-    #   past, then this field contains the date and time the most recent
+    #   A null valuedoes not mean that the user *never* had a password.
+    #   Also, if the user does not currently have a password, but had one in
+    #   the past, then this field contains the date and time the most recent
     #   password was used.
     #
     #   This value is returned only in the GetUser and ListUsers operations.
@@ -9359,12 +10428,20 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   Boundaries for IAM Identities
+    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
+    #   User Guide*.
     #   @return [Types::AttachedPermissionsBoundary]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that are associated with the specified user. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/User AWS API Documentation
     #
@@ -9375,7 +10452,8 @@ module Aws::IAM
       :arn,
       :create_date,
       :password_last_used,
-      :permissions_boundary)
+      :permissions_boundary,
+      :tags)
       include Aws::Structure
     end
 
@@ -9446,12 +10524,20 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   Boundaries for IAM Identities
+    #   ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
+    #   User Guide*.
     #   @return [Types::AttachedPermissionsBoundary]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that are associated with the specified user. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail AWS API Documentation
     #
@@ -9464,7 +10550,8 @@ module Aws::IAM
       :user_policy_list,
       :group_list,
       :attached_managed_policies,
-      :permissions_boundary)
+      :permissions_boundary,
+      :tags)
       include Aws::Structure
     end
 
@@ -9475,8 +10562,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] base_32_string_seed
-    #   The Base32 seed defined as specified in [RFC3548][1]. The
-    #   `Base32StringSeed` is Base64-encoded.
+    #   The base32 seed defined as specified in [RFC3548][1]. The
+    #   `Base32StringSeed` is base64-encoded.
     #
     #
     #
@@ -9486,10 +10573,10 @@ module Aws::IAM
     # @!attribute [rw] qr_code_png
     #   A QR code PNG image that encodes
     #   `otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String`
-    #   where `$virtualMFADeviceName` is one of the create call arguments,
+    #   where `$virtualMFADeviceName` is one of the create call arguments.
     #   `AccountName` is the user name if set (otherwise, the account ID
-    #   otherwise), and `Base32String` is the seed in Base32 format. The
-    #   `Base32String` value is Base64-encoded.
+    #   otherwise), and `Base32String` is the seed in base32 format. The
+    #   `Base32String` value is base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] user

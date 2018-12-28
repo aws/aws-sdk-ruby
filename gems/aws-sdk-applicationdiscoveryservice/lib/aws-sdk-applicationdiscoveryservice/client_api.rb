@@ -37,12 +37,19 @@ module Aws::ApplicationDiscoveryService
     Configurations = Shapes::ListShape.new(name: 'Configurations')
     ConfigurationsDownloadUrl = Shapes::StringShape.new(name: 'ConfigurationsDownloadUrl')
     ConfigurationsExportId = Shapes::StringShape.new(name: 'ConfigurationsExportId')
+    ConflictErrorException = Shapes::StructureShape.new(name: 'ConflictErrorException')
+    ContinuousExportDescription = Shapes::StructureShape.new(name: 'ContinuousExportDescription')
+    ContinuousExportDescriptions = Shapes::ListShape.new(name: 'ContinuousExportDescriptions')
+    ContinuousExportIds = Shapes::ListShape.new(name: 'ContinuousExportIds')
+    ContinuousExportStatus = Shapes::StringShape.new(name: 'ContinuousExportStatus')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateTagsResponse = Shapes::StructureShape.new(name: 'CreateTagsResponse')
     CustomerAgentInfo = Shapes::StructureShape.new(name: 'CustomerAgentInfo')
     CustomerConnectorInfo = Shapes::StructureShape.new(name: 'CustomerConnectorInfo')
+    DataSource = Shapes::StringShape.new(name: 'DataSource')
+    DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DeleteApplicationsRequest = Shapes::StructureShape.new(name: 'DeleteApplicationsRequest')
     DeleteApplicationsResponse = Shapes::StructureShape.new(name: 'DeleteApplicationsResponse')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
@@ -53,6 +60,9 @@ module Aws::ApplicationDiscoveryService
     DescribeConfigurationsAttributes = Shapes::ListShape.new(name: 'DescribeConfigurationsAttributes')
     DescribeConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationsRequest')
     DescribeConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationsResponse')
+    DescribeContinuousExportsMaxResults = Shapes::IntegerShape.new(name: 'DescribeContinuousExportsMaxResults')
+    DescribeContinuousExportsRequest = Shapes::StructureShape.new(name: 'DescribeContinuousExportsRequest')
+    DescribeContinuousExportsResponse = Shapes::StructureShape.new(name: 'DescribeContinuousExportsResponse')
     DescribeExportConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeExportConfigurationsRequest')
     DescribeExportConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeExportConfigurationsResponse')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
@@ -94,15 +104,23 @@ module Aws::ApplicationDiscoveryService
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrderByElement = Shapes::StructureShape.new(name: 'OrderByElement')
     OrderByList = Shapes::ListShape.new(name: 'OrderByList')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    SchemaStorageConfig = Shapes::MapShape.new(name: 'SchemaStorageConfig')
     ServerInternalErrorException = Shapes::StructureShape.new(name: 'ServerInternalErrorException')
+    StartContinuousExportRequest = Shapes::StructureShape.new(name: 'StartContinuousExportRequest')
+    StartContinuousExportResponse = Shapes::StructureShape.new(name: 'StartContinuousExportResponse')
     StartDataCollectionByAgentIdsRequest = Shapes::StructureShape.new(name: 'StartDataCollectionByAgentIdsRequest')
     StartDataCollectionByAgentIdsResponse = Shapes::StructureShape.new(name: 'StartDataCollectionByAgentIdsResponse')
     StartExportTaskRequest = Shapes::StructureShape.new(name: 'StartExportTaskRequest')
     StartExportTaskResponse = Shapes::StructureShape.new(name: 'StartExportTaskResponse')
+    StopContinuousExportRequest = Shapes::StructureShape.new(name: 'StopContinuousExportRequest')
+    StopContinuousExportResponse = Shapes::StructureShape.new(name: 'StopContinuousExportResponse')
     StopDataCollectionByAgentIdsRequest = Shapes::StructureShape.new(name: 'StopDataCollectionByAgentIdsRequest')
     StopDataCollectionByAgentIdsResponse = Shapes::StructureShape.new(name: 'StopDataCollectionByAgentIdsResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringMax255 = Shapes::StringShape.new(name: 'StringMax255')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagFilter = Shapes::StructureShape.new(name: 'TagFilter')
     TagFilters = Shapes::ListShape.new(name: 'TagFilters')
@@ -167,6 +185,20 @@ module Aws::ApplicationDiscoveryService
 
     Configurations.member = Shapes::ShapeRef.new(shape: Configuration)
 
+    ContinuousExportDescription.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
+    ContinuousExportDescription.add_member(:status, Shapes::ShapeRef.new(shape: ContinuousExportStatus, location_name: "status"))
+    ContinuousExportDescription.add_member(:status_detail, Shapes::ShapeRef.new(shape: StringMax255, location_name: "statusDetail"))
+    ContinuousExportDescription.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
+    ContinuousExportDescription.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
+    ContinuousExportDescription.add_member(:stop_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "stopTime"))
+    ContinuousExportDescription.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
+    ContinuousExportDescription.add_member(:schema_storage_config, Shapes::ShapeRef.new(shape: SchemaStorageConfig, location_name: "schemaStorageConfig"))
+    ContinuousExportDescription.struct_class = Types::ContinuousExportDescription
+
+    ContinuousExportDescriptions.member = Shapes::ShapeRef.new(shape: ContinuousExportDescription)
+
+    ContinuousExportIds.member = Shapes::ShapeRef.new(shape: ConfigurationsExportId)
+
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
@@ -229,6 +261,15 @@ module Aws::ApplicationDiscoveryService
 
     DescribeConfigurationsResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: DescribeConfigurationsAttributes, location_name: "configurations"))
     DescribeConfigurationsResponse.struct_class = Types::DescribeConfigurationsResponse
+
+    DescribeContinuousExportsRequest.add_member(:export_ids, Shapes::ShapeRef.new(shape: ContinuousExportIds, location_name: "exportIds"))
+    DescribeContinuousExportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeContinuousExportsMaxResults, location_name: "maxResults"))
+    DescribeContinuousExportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeContinuousExportsRequest.struct_class = Types::DescribeContinuousExportsRequest
+
+    DescribeContinuousExportsResponse.add_member(:descriptions, Shapes::ShapeRef.new(shape: ContinuousExportDescriptions, location_name: "descriptions"))
+    DescribeContinuousExportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeContinuousExportsResponse.struct_class = Types::DescribeContinuousExportsResponse
 
     DescribeExportConfigurationsRequest.add_member(:export_ids, Shapes::ShapeRef.new(shape: ExportIds, location_name: "exportIds"))
     DescribeExportConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
@@ -347,6 +388,18 @@ module Aws::ApplicationDiscoveryService
 
     OrderByList.member = Shapes::ShapeRef.new(shape: OrderByElement)
 
+    SchemaStorageConfig.key = Shapes::ShapeRef.new(shape: DatabaseName)
+    SchemaStorageConfig.value = Shapes::ShapeRef.new(shape: String)
+
+    StartContinuousExportRequest.struct_class = Types::StartContinuousExportRequest
+
+    StartContinuousExportResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
+    StartContinuousExportResponse.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
+    StartContinuousExportResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
+    StartContinuousExportResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
+    StartContinuousExportResponse.add_member(:schema_storage_config, Shapes::ShapeRef.new(shape: SchemaStorageConfig, location_name: "schemaStorageConfig"))
+    StartContinuousExportResponse.struct_class = Types::StartContinuousExportResponse
+
     StartDataCollectionByAgentIdsRequest.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, required: true, location_name: "agentIds"))
     StartDataCollectionByAgentIdsRequest.struct_class = Types::StartDataCollectionByAgentIdsRequest
 
@@ -361,6 +414,13 @@ module Aws::ApplicationDiscoveryService
 
     StartExportTaskResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
     StartExportTaskResponse.struct_class = Types::StartExportTaskResponse
+
+    StopContinuousExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, required: true, location_name: "exportId"))
+    StopContinuousExportRequest.struct_class = Types::StopContinuousExportRequest
+
+    StopContinuousExportResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
+    StopContinuousExportResponse.add_member(:stop_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "stopTime"))
+    StopContinuousExportResponse.struct_class = Types::StopContinuousExportResponse
 
     StopDataCollectionByAgentIdsRequest.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, required: true, location_name: "agentIds"))
     StopDataCollectionByAgentIdsRequest.struct_class = Types::StopDataCollectionByAgentIdsRequest
@@ -394,12 +454,15 @@ module Aws::ApplicationDiscoveryService
       api.version = "2015-11-01"
 
       api.metadata = {
+        "apiVersion" => "2015-11-01",
         "endpointPrefix" => "discovery",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Application Discovery Service",
+        "serviceId" => "Application Discovery Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSPoseidonService_V2015_11_01",
+        "uid" => "discovery-2015-11-01",
       }
 
       api.add_operation(:associate_configuration_items_to_application, Seahorse::Model::Operation.new.tap do |o|
@@ -486,6 +549,26 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:describe_continuous_exports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeContinuousExports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeContinuousExportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeContinuousExportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_export_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -590,6 +673,21 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
       end)
 
+      api.add_operation(:start_continuous_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartContinuousExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartContinuousExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartContinuousExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:start_data_collection_by_agent_ids, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDataCollectionByAgentIds"
         o.http_method = "POST"
@@ -613,6 +711,21 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:stop_continuous_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopContinuousExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopContinuousExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopContinuousExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:stop_data_collection_by_agent_ids, Seahorse::Model::Operation.new.tap do |o|

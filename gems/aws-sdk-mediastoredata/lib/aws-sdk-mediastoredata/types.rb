@@ -262,13 +262,27 @@ module Aws::MediaStoreData
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum results to return. The service might return fewer
-    #   results.
+    #   The maximum number of results to return per API request. For
+    #   example, you submit a `ListItems` request with `MaxResults` set at
+    #   500. Although 2,000 items match your request, the service returns no
+    #   more than the first 500 items. (The service also returns a
+    #   `NextToken` value that you can use to fetch the next batch of
+    #   results.) The service might return fewer results than the
+    #   `MaxResults` value.
+    #
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 1,000 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` received in the `ListItemsResponse` for the same
-    #   container and path. Tokens expire after 15 minutes.
+    #   The token that identifies which batch of results that you want to
+    #   see. For example, you submit a `ListItems` request with `MaxResults`
+    #   set at 500. The service returns the first batch of results (up to
+    #   500) and a `NextToken` value. To see the next batch of results, you
+    #   can submit the `ListItems` request a second time and specify the
+    #   `NextToken` value.
+    #
+    #   Tokens expire after 15 minutes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsRequest AWS API Documentation
@@ -281,12 +295,16 @@ module Aws::MediaStoreData
     end
 
     # @!attribute [rw] items
-    #   Metadata entries for the folders and objects at the requested path.
+    #   The metadata entries for the folders and objects at the requested
+    #   path.
     #   @return [Array<Types::Item>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` used to request the next page of results using
-    #   `ListItems`.
+    #   The token that can be used in a request to view the next set of
+    #   results. For example, you submit a `ListItems` request that matches
+    #   2,000 items with `MaxResults` set at 500. The service returns the
+    #   first batch of results (up to 500) and a `NextToken` value that can
+    #   be used to fetch the next batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsResponse AWS API Documentation
@@ -389,8 +407,8 @@ module Aws::MediaStoreData
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   The storage class where the object was persisted. Should be
-    #   “Temporal”.
+    #   The storage class where the object was persisted. The class should
+    #   be “Temporal”.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectResponse AWS API Documentation

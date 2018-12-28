@@ -11,6 +11,7 @@ module Aws::DLM
 
     include Seahorse::Model
 
+    CopyTags = Shapes::BooleanShape.new(name: 'CopyTags')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
@@ -126,6 +127,7 @@ module Aws::DLM
     RetainRule.struct_class = Types::RetainRule
 
     Schedule.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, location_name: "Name"))
+    Schedule.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTags, location_name: "CopyTags"))
     Schedule.add_member(:tags_to_add, Shapes::ShapeRef.new(shape: TagsToAddList, location_name: "TagsToAdd"))
     Schedule.add_member(:create_rule, Shapes::ShapeRef.new(shape: CreateRule, location_name: "CreateRule"))
     Schedule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: RetainRule, location_name: "RetainRule"))
@@ -163,12 +165,16 @@ module Aws::DLM
       api.version = "2018-01-12"
 
       api.metadata = {
+        "apiVersion" => "2018-01-12",
         "endpointPrefix" => "dlm",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Amazon DLM",
         "serviceFullName" => "Amazon Data Lifecycle Manager",
+        "serviceId" => "DLM",
         "signatureVersion" => "v4",
         "signingName" => "dlm",
+        "uid" => "dlm-2018-01-12",
       }
 
       api.add_operation(:create_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|

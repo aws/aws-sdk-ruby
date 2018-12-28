@@ -34,6 +34,30 @@ module Aws
       end
     end
 
+    # Rasied when endpoint discovery failed for operations
+    # that requires endpoints from endpoint discovery
+    class EndpointDiscoveryError < RuntimeError
+      def initialize(*args)
+        msg = 'Endpoint discovery failed for the operation or discovered endpoint is not working, '\
+          'request will keep failing until endpoint discovery succeeds or :endpoint option is provided.'
+        super(msg)
+      end
+    end
+
+    # raised when hostLabel member is not provided
+    # at operation input when endpoint trait is available
+    # with 'hostPrefix' requirement
+    class MissingEndpointHostLabelValue < RuntimeError
+
+      def initialize(name)
+        msg = "Missing required parameter #{name} to construct"\
+          " endpoint host prefix. You can disable host prefix by"\
+          " setting :disable_host_prefix_injection to `true`."
+        super(msg)
+      end
+
+    end
+
     # Raised when EventStream Parser failed to parse
     # a raw event message
     class EventStreamParserError < RuntimeError; end

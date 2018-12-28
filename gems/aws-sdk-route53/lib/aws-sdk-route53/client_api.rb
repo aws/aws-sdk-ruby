@@ -82,6 +82,7 @@ module Aws::Route53
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionField = Shapes::StringShape.new(name: 'DimensionField')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
+    Disabled = Shapes::BooleanShape.new(name: 'Disabled')
     DisassociateVPCComment = Shapes::StringShape.new(name: 'DisassociateVPCComment')
     DisassociateVPCFromHostedZoneRequest = Shapes::StructureShape.new(name: 'DisassociateVPCFromHostedZoneRequest')
     DisassociateVPCFromHostedZoneResponse = Shapes::StructureShape.new(name: 'DisassociateVPCFromHostedZoneResponse')
@@ -668,6 +669,7 @@ module Aws::Route53
     HealthCheckConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
     HealthCheckConfig.add_member(:measure_latency, Shapes::ShapeRef.new(shape: MeasureLatency, location_name: "MeasureLatency"))
     HealthCheckConfig.add_member(:inverted, Shapes::ShapeRef.new(shape: Inverted, location_name: "Inverted"))
+    HealthCheckConfig.add_member(:disabled, Shapes::ShapeRef.new(shape: Disabled, location_name: "Disabled"))
     HealthCheckConfig.add_member(:health_threshold, Shapes::ShapeRef.new(shape: HealthThreshold, location_name: "HealthThreshold"))
     HealthCheckConfig.add_member(:child_health_checks, Shapes::ShapeRef.new(shape: ChildHealthCheckList, location_name: "ChildHealthChecks"))
     HealthCheckConfig.add_member(:enable_sni, Shapes::ShapeRef.new(shape: EnableSNI, location_name: "EnableSNI"))
@@ -998,6 +1000,7 @@ module Aws::Route53
     UpdateHealthCheckRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     UpdateHealthCheckRequest.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
     UpdateHealthCheckRequest.add_member(:inverted, Shapes::ShapeRef.new(shape: Inverted, location_name: "Inverted"))
+    UpdateHealthCheckRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: Disabled, location_name: "Disabled"))
     UpdateHealthCheckRequest.add_member(:health_threshold, Shapes::ShapeRef.new(shape: HealthThreshold, location_name: "HealthThreshold"))
     UpdateHealthCheckRequest.add_member(:child_health_checks, Shapes::ShapeRef.new(shape: ChildHealthCheckList, location_name: "ChildHealthChecks"))
     UpdateHealthCheckRequest.add_member(:enable_sni, Shapes::ShapeRef.new(shape: EnableSNI, location_name: "EnableSNI"))
@@ -1047,10 +1050,15 @@ module Aws::Route53
       api.version = "2013-04-01"
 
       api.metadata = {
+        "apiVersion" => "2013-04-01",
         "endpointPrefix" => "route53",
+        "globalEndpoint" => "route53.amazonaws.com",
         "protocol" => "rest-xml",
+        "serviceAbbreviation" => "Route 53",
         "serviceFullName" => "Amazon Route 53",
+        "serviceId" => "Route 53",
         "signatureVersion" => "v4",
+        "uid" => "route53-2013-04-01",
       }
 
       api.add_operation(:associate_vpc_with_hosted_zone, Seahorse::Model::Operation.new.tap do |o|

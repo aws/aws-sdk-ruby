@@ -560,10 +560,14 @@ module Aws::Glacier
       api.version = "2012-06-01"
 
       api.metadata = {
+        "apiVersion" => "2012-06-01",
+        "checksumFormat" => "sha256",
         "endpointPrefix" => "glacier",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Glacier",
+        "serviceId" => "Glacier",
         "signatureVersion" => "v4",
+        "uid" => "glacier-2012-06-01",
       }
 
       api.add_operation(:abort_multipart_upload, Seahorse::Model::Operation.new.tap do |o|

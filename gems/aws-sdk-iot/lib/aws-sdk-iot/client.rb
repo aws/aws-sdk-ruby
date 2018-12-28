@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -43,112 +47,157 @@ module Aws::IoT
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -185,6 +234,38 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Adds a thing to a billing group.
+    #
+    # @option params [String] :billing_group_name
+    #   The name of the billing group.
+    #
+    # @option params [String] :billing_group_arn
+    #   The ARN of the billing group.
+    #
+    # @option params [String] :thing_name
+    #   The name of the thing to be added to the billing group.
+    #
+    # @option params [String] :thing_arn
+    #   The ARN of the thing to be added to the billing group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_thing_to_billing_group({
+    #     billing_group_name: "BillingGroupName",
+    #     billing_group_arn: "BillingGroupArn",
+    #     thing_name: "ThingName",
+    #     thing_arn: "ThingArn",
+    #   })
+    #
+    # @overload add_thing_to_billing_group(params = {})
+    # @param [Hash] params ({})
+    def add_thing_to_billing_group(params = {}, options = {})
+      req = build_request(:add_thing_to_billing_group, params)
+      req.send_request(options)
+    end
+
     # Adds a thing to a thing group.
     #
     # @option params [String] :thing_group_name
@@ -199,6 +280,12 @@ module Aws::IoT
     # @option params [String] :thing_arn
     #   The ARN of the thing to add to a group.
     #
+    # @option params [Boolean] :override_dynamic_groups
+    #   Override dynamic thing groups with static thing groups when 10-group
+    #   limit is reached. If a thing belongs to 10 thing groups, and one or
+    #   more of those groups are dynamic thing groups, adding a thing to a
+    #   static group removes the thing from the last dynamic group.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -208,6 +295,7 @@ module Aws::IoT
     #     thing_group_arn: "ThingGroupArn",
     #     thing_name: "ThingName",
     #     thing_arn: "ThingArn",
+    #     override_dynamic_groups: false,
     #   })
     #
     # @overload add_thing_to_thing_group(params = {})
@@ -271,7 +359,11 @@ module Aws::IoT
     #   The name of the policy to attach.
     #
     # @option params [required, String] :target
-    #   The identity to which the policy is attached.
+    #   The [identity][1] to which the policy is attached.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -427,6 +519,9 @@ module Aws::IoT
     # @option params [required, String] :job_id
     #   The unique identifier you assigned to this job when it was created.
     #
+    # @option params [String] :reason_code
+    #   (Optional)A reason code string that explains why the job was canceled.
+    #
     # @option params [String] :comment
     #   An optional comment string describing why the job was canceled.
     #
@@ -450,6 +545,7 @@ module Aws::IoT
     #
     #   resp = client.cancel_job({
     #     job_id: "JobId", # required
+    #     reason_code: "ReasonCode",
     #     comment: "Comment",
     #     force: false,
     #   })
@@ -581,6 +677,51 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates a billing group.
+    #
+    # @option params [required, String] :billing_group_name
+    #   The name you wish to give to the billing group.
+    #
+    # @option params [Types::BillingGroupProperties] :billing_group_properties
+    #   The properties of the billing group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the billing group.
+    #
+    # @return [Types::CreateBillingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBillingGroupResponse#billing_group_name #billing_group_name} => String
+    #   * {Types::CreateBillingGroupResponse#billing_group_arn #billing_group_arn} => String
+    #   * {Types::CreateBillingGroupResponse#billing_group_id #billing_group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_billing_group({
+    #     billing_group_name: "BillingGroupName", # required
+    #     billing_group_properties: {
+    #       billing_group_description: "BillingGroupDescription",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_group_name #=> String
+    #   resp.billing_group_arn #=> String
+    #   resp.billing_group_id #=> String
+    #
+    # @overload create_billing_group(params = {})
+    # @param [Hash] params ({})
+    def create_billing_group(params = {}, options = {})
+      req = build_request(:create_billing_group, params)
+      req.send_request(options)
+    end
+
     # Creates an X.509 certificate using the specified certificate signing
     # request.
     #
@@ -662,6 +803,90 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates a dynamic thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The dynamic thing group name to create.
+    #
+    # @option params [Types::ThingGroupProperties] :thing_group_properties
+    #   The dynamic thing group properties.
+    #
+    # @option params [String] :index_name
+    #   The dynamic thing group index name.
+    #
+    #   <note markdown="1"> Currently one index is supported: "AWS\_Things".
+    #
+    #    </note>
+    #
+    # @option params [required, String] :query_string
+    #   The dynamic thing group search query string.
+    #
+    #   See [Query Syntax][1] for information about query string syntax.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
+    #
+    # @option params [String] :query_version
+    #   The dynamic thing group query version.
+    #
+    #   <note markdown="1"> Currently one query version is supported: "2017-09-30". If not
+    #   specified, the query version defaults to this value.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the dynamic thing group.
+    #
+    # @return [Types::CreateDynamicThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDynamicThingGroupResponse#thing_group_name #thing_group_name} => String
+    #   * {Types::CreateDynamicThingGroupResponse#thing_group_arn #thing_group_arn} => String
+    #   * {Types::CreateDynamicThingGroupResponse#thing_group_id #thing_group_id} => String
+    #   * {Types::CreateDynamicThingGroupResponse#index_name #index_name} => String
+    #   * {Types::CreateDynamicThingGroupResponse#query_string #query_string} => String
+    #   * {Types::CreateDynamicThingGroupResponse#query_version #query_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dynamic_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     thing_group_properties: {
+    #       thing_group_description: "ThingGroupDescription",
+    #       attribute_payload: {
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         merge: false,
+    #       },
+    #     },
+    #     index_name: "IndexName",
+    #     query_string: "QueryString", # required
+    #     query_version: "QueryVersion",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thing_group_name #=> String
+    #   resp.thing_group_arn #=> String
+    #   resp.thing_group_id #=> String
+    #   resp.index_name #=> String
+    #   resp.query_string #=> String
+    #   resp.query_version #=> String
+    #
+    # @overload create_dynamic_thing_group(params = {})
+    # @param [Hash] params ({})
+    def create_dynamic_thing_group(params = {}, options = {})
+      req = build_request(:create_dynamic_thing_group, params)
+      req.send_request(options)
+    end
+
     # Creates a job.
     #
     # @option params [required, String] :job_id
@@ -677,6 +902,18 @@ module Aws::IoT
     #
     # @option params [String] :document
     #   The job document.
+    #
+    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
+    #   placeholder link when specifying the document.
+    #
+    #    The placeholder link is of the following form:
+    #
+    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
+    #
+    #    where *bucket* is your bucket name and *key* is the object in the
+    #   bucket to which you are linking.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   A short text description of the job.
@@ -694,6 +931,19 @@ module Aws::IoT
     #
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
+    #
+    # @option params [Types::AbortConfig] :abort_config
+    #   Allows you to create criteria to abort a job.
+    #
+    # @option params [Types::TimeoutConfig] :timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the time expires, it will be automatically set
+    #   to `TIMED_OUT`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the job.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -716,7 +966,34 @@ module Aws::IoT
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     job_executions_rollout_config: {
     #       maximum_per_minute: 1,
+    #       exponential_rate: {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       },
     #     },
+    #     abort_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #           action: "CANCEL", # required, accepts CANCEL
+    #           threshold_percentage: 1.0, # required
+    #           min_number_of_executed_things: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     timeout_config: {
+    #       in_progress_timeout_in_minutes: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -789,6 +1066,9 @@ module Aws::IoT
     #   even after the update was completed by all things originally in the
     #   group. Valid values: CONTINUOUS \| SNAPSHOT.
     #
+    # @option params [Types::AwsJobExecutionsRolloutConfig] :aws_job_executions_rollout_config
+    #   Configuration for the rollout of OTA updates.
+    #
     # @option params [required, Array<Types::OTAUpdateFile>] :files
     #   The files to be streamed by the OTA update.
     #
@@ -813,29 +1093,45 @@ module Aws::IoT
     #     description: "OTAUpdateDescription",
     #     targets: ["Target"], # required
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     aws_job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #     },
     #     files: [ # required
     #       {
     #         file_name: "FileName",
     #         file_version: "OTAUpdateFileVersion",
-    #         file_source: {
-    #           stream_id: "StreamId",
-    #           file_id: 1,
+    #         file_location: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           s3_location: {
+    #             bucket: "S3Bucket",
+    #             key: "S3Key",
+    #             version: "S3Version",
+    #           },
     #         },
     #         code_signing: {
     #           aws_signer_job_id: "SigningJobId",
+    #           start_signing_job_parameter: {
+    #             signing_profile_parameter: {
+    #               certificate_arn: "CertificateArn",
+    #               platform: "Platform",
+    #               certificate_path_on_device: "CertificatePathOnDevice",
+    #             },
+    #             signing_profile_name: "SigningProfileName",
+    #             destination: {
+    #               s3_destination: {
+    #                 bucket: "S3Bucket",
+    #                 prefix: "Prefix",
+    #               },
+    #             },
+    #           },
     #           custom_code_signing: {
     #             signature: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               inline_document: "data",
     #             },
     #             certificate_chain: {
-    #               stream: {
-    #                 stream_id: "StreamId",
-    #                 file_id: 1,
-    #               },
     #               certificate_name: "CertificateName",
     #               inline_document: "InlineDocument",
     #             },
@@ -844,13 +1140,13 @@ module Aws::IoT
     #           },
     #         },
     #         attributes: {
-    #           "Key" => "Value",
+    #           "AttributeKey" => "Value",
     #         },
     #       },
     #     ],
     #     role_arn: "RoleArn", # required
     #     additional_parameters: {
-    #       "Key" => "Value",
+    #       "AttributeKey" => "Value",
     #     },
     #   })
     #
@@ -1072,6 +1368,9 @@ module Aws::IoT
     #   always sent to the console.) Alerts are generated when a device
     #   (thing) violates a behavior.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the security profile.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_name #security_profile_name} => String
@@ -1103,6 +1402,12 @@ module Aws::IoT
     #         role_arn: "RoleArn", # required
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1155,8 +1460,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -1201,6 +1506,9 @@ module Aws::IoT
     #
     #   `\{"attributes":\{"string1":"string2"\}\}`
     #
+    # @option params [String] :billing_group_name
+    #   The name of the billing group the thing will be added to.
+    #
     # @return [Types::CreateThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateThingResponse#thing_name #thing_name} => String
@@ -1218,6 +1526,7 @@ module Aws::IoT
     #       },
     #       merge: false,
     #     },
+    #     billing_group_name: "BillingGroupName",
     #   })
     #
     # @example Response structure
@@ -1253,6 +1562,9 @@ module Aws::IoT
     # @option params [Types::ThingGroupProperties] :thing_group_properties
     #   The thing group properties.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the thing group.
+    #
     # @return [Types::CreateThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateThingGroupResponse#thing_group_name #thing_group_name} => String
@@ -1273,6 +1585,12 @@ module Aws::IoT
     #         merge: false,
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1298,6 +1616,9 @@ module Aws::IoT
     #   information about the new thing type including a description, and a
     #   list of searchable thing attribute names.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the thing type.
+    #
     # @return [Types::CreateThingTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateThingTypeResponse#thing_type_name #thing_type_name} => String
@@ -1312,6 +1633,12 @@ module Aws::IoT
     #       thing_type_description: "ThingTypeDescription",
     #       searchable_attributes: ["AttributeName"],
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1429,6 +1756,11 @@ module Aws::IoT
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
     #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             message_id: "MessageId",
+    #             role_arn: "AwsArn", # required
+    #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
@@ -1520,6 +1852,11 @@ module Aws::IoT
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
     #         },
+    #         iot_events: {
+    #           input_name: "InputName", # required
+    #           message_id: "MessageId",
+    #           role_arn: "AwsArn", # required
+    #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
@@ -1578,6 +1915,33 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes the billing group.
+    #
+    # @option params [required, String] :billing_group_name
+    #   The name of the billing group.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the billing group. If the version of the
+    #   billing group does not match the expected version specified in the
+    #   request, the `DeleteBillingGroup` request is rejected with a
+    #   `VersionConflictException`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_billing_group({
+    #     billing_group_name: "BillingGroupName", # required
+    #     expected_version: 1,
+    #   })
+    #
+    # @overload delete_billing_group(params = {})
+    # @param [Hash] params ({})
+    def delete_billing_group(params = {}, options = {})
+      req = build_request(:delete_billing_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
@@ -1626,6 +1990,30 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Deletes a dynamic thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The name of the dynamic thing group to delete.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the dynamic thing group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dynamic_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     expected_version: 1,
+    #   })
+    #
+    # @overload delete_dynamic_thing_group(params = {})
+    # @param [Hash] params ({})
+    def delete_dynamic_thing_group(params = {}, options = {})
+      req = build_request(:delete_dynamic_thing_group, params)
       req.send_request(options)
     end
 
@@ -1730,12 +2118,22 @@ module Aws::IoT
     # @option params [required, String] :ota_update_id
     #   The OTA update ID to delete.
     #
+    # @option params [Boolean] :delete_stream
+    #   Specifies if the stream associated with an OTA update should be
+    #   deleted when the OTA update is deleted.
+    #
+    # @option params [Boolean] :force_delete_aws_job
+    #   Specifies if the AWS Job associated with the OTA update should be
+    #   deleted with the OTA update is deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_ota_update({
     #     ota_update_id: "OTAUpdateId", # required
+    #     delete_stream: false,
+    #     force_delete_aws_job: false,
     #   })
     #
     # @overload delete_ota_update(params = {})
@@ -1902,7 +2300,8 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Deletes the specified thing.
+    # Deletes the specified thing. Returns successfully with no error if the
+    # deletion is successful or you specify a thing that doesn't exist.
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to delete.
@@ -1953,9 +2352,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Deletes the specified thing type . You cannot delete a thing type if
-    # it has things associated with it. To delete a thing type, first mark
-    # it as deprecated by calling DeprecateThingType, then remove any
+    # Deletes the specified thing type. You cannot delete a thing type if it
+    # has things associated with it. To delete a thing type, first mark it
+    # as deprecated by calling DeprecateThingType, then remove any
     # associated things by calling UpdateThing to change the thing type on
     # any associated thing, and finally use DeleteThingType to delete the
     # thing type.
@@ -2159,6 +2558,42 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Returns information about a billing group.
+    #
+    # @option params [required, String] :billing_group_name
+    #   The name of the billing group.
+    #
+    # @return [Types::DescribeBillingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBillingGroupResponse#billing_group_name #billing_group_name} => String
+    #   * {Types::DescribeBillingGroupResponse#billing_group_id #billing_group_id} => String
+    #   * {Types::DescribeBillingGroupResponse#billing_group_arn #billing_group_arn} => String
+    #   * {Types::DescribeBillingGroupResponse#version #version} => Integer
+    #   * {Types::DescribeBillingGroupResponse#billing_group_properties #billing_group_properties} => Types::BillingGroupProperties
+    #   * {Types::DescribeBillingGroupResponse#billing_group_metadata #billing_group_metadata} => Types::BillingGroupMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_billing_group({
+    #     billing_group_name: "BillingGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_group_name #=> String
+    #   resp.billing_group_id #=> String
+    #   resp.billing_group_arn #=> String
+    #   resp.version #=> Integer
+    #   resp.billing_group_properties.billing_group_description #=> String
+    #   resp.billing_group_metadata.creation_date #=> Time
+    #
+    # @overload describe_billing_group(params = {})
+    # @param [Hash] params ({})
+    def describe_billing_group(params = {}, options = {})
+      req = build_request(:describe_billing_group, params)
+      req.send_request(options)
+    end
+
     # Describes a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
@@ -2271,7 +2706,27 @@ module Aws::IoT
     # Returns a unique endpoint specific to the AWS account making the call.
     #
     # @option params [String] :endpoint_type
-    #   The endpoint type.
+    #   The endpoint type. Valid endpoint types include:
+    #
+    #   * `iot:Data` - Returns a VeriSign signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Data-ATS` - Returns an ATS signed data endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:CredentialProvider` - Returns an AWS IoT credentials provider
+    #     API endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API endpoint.
+    #
+    #   ^
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2370,6 +2825,7 @@ module Aws::IoT
     #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
     #   resp.job.force_canceled #=> Boolean
+    #   resp.job.reason_code #=> String
     #   resp.job.comment #=> String
     #   resp.job.targets #=> Array
     #   resp.job.targets[0] #=> String
@@ -2377,6 +2833,15 @@ module Aws::IoT
     #   resp.job.presigned_url_config.role_arn #=> String
     #   resp.job.presigned_url_config.expires_in_sec #=> Integer
     #   resp.job.job_executions_rollout_config.maximum_per_minute #=> Integer
+    #   resp.job.job_executions_rollout_config.exponential_rate.base_rate_per_minute #=> Integer
+    #   resp.job.job_executions_rollout_config.exponential_rate.increment_factor #=> Float
+    #   resp.job.job_executions_rollout_config.exponential_rate.rate_increase_criteria.number_of_notified_things #=> Integer
+    #   resp.job.job_executions_rollout_config.exponential_rate.rate_increase_criteria.number_of_succeeded_things #=> Integer
+    #   resp.job.abort_config.criteria_list #=> Array
+    #   resp.job.abort_config.criteria_list[0].failure_type #=> String, one of "FAILED", "REJECTED", "TIMED_OUT", "ALL"
+    #   resp.job.abort_config.criteria_list[0].action #=> String, one of "CANCEL"
+    #   resp.job.abort_config.criteria_list[0].threshold_percentage #=> Float
+    #   resp.job.abort_config.criteria_list[0].min_number_of_executed_things #=> Integer
     #   resp.job.created_at #=> Time
     #   resp.job.last_updated_at #=> Time
     #   resp.job.completed_at #=> Time
@@ -2389,6 +2854,8 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_queued_things #=> Integer
     #   resp.job.job_process_details.number_of_in_progress_things #=> Integer
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
+    #   resp.job.job_process_details.number_of_timed_out_things #=> Integer
+    #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -2424,7 +2891,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.execution.job_id #=> String
-    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution.force_canceled #=> Boolean
     #   resp.execution.status_details.details_map #=> Hash
     #   resp.execution.status_details.details_map["DetailsKey"] #=> String
@@ -2434,6 +2901,7 @@ module Aws::IoT
     #   resp.execution.last_updated_at #=> Time
     #   resp.execution.execution_number #=> Integer
     #   resp.execution.version_number #=> Integer
+    #   resp.execution.approximate_seconds_before_timed_out #=> Integer
     #
     # @overload describe_job_execution(params = {})
     # @param [Hash] params ({})
@@ -2613,6 +3081,7 @@ module Aws::IoT
     #   * {Types::DescribeThingResponse#thing_type_name #thing_type_name} => String
     #   * {Types::DescribeThingResponse#attributes #attributes} => Hash&lt;String,String&gt;
     #   * {Types::DescribeThingResponse#version #version} => Integer
+    #   * {Types::DescribeThingResponse#billing_group_name #billing_group_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2630,6 +3099,7 @@ module Aws::IoT
     #   resp.attributes #=> Hash
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.version #=> Integer
+    #   resp.billing_group_name #=> String
     #
     # @overload describe_thing(params = {})
     # @param [Hash] params ({})
@@ -2651,6 +3121,10 @@ module Aws::IoT
     #   * {Types::DescribeThingGroupResponse#version #version} => Integer
     #   * {Types::DescribeThingGroupResponse#thing_group_properties #thing_group_properties} => Types::ThingGroupProperties
     #   * {Types::DescribeThingGroupResponse#thing_group_metadata #thing_group_metadata} => Types::ThingGroupMetadata
+    #   * {Types::DescribeThingGroupResponse#index_name #index_name} => String
+    #   * {Types::DescribeThingGroupResponse#query_string #query_string} => String
+    #   * {Types::DescribeThingGroupResponse#query_version #query_version} => String
+    #   * {Types::DescribeThingGroupResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2673,6 +3147,10 @@ module Aws::IoT
     #   resp.thing_group_metadata.root_to_parent_thing_groups[0].group_name #=> String
     #   resp.thing_group_metadata.root_to_parent_thing_groups[0].group_arn #=> String
     #   resp.thing_group_metadata.creation_date #=> Time
+    #   resp.index_name #=> String
+    #   resp.query_string #=> String
+    #   resp.query_version #=> String
+    #   resp.status #=> String, one of "ACTIVE", "BUILDING", "REBUILDING"
     #
     # @overload describe_thing_group(params = {})
     # @param [Hash] params ({})
@@ -2848,6 +3326,11 @@ module Aws::IoT
 
     # Detaches the specified principal from the specified thing.
     #
+    # <note markdown="1"> This call is asynchronous. It might take several seconds for the
+    # detachment to propagate.
+    #
+    #  </note>
+    #
     # @option params [required, String] :thing_name
     #   The name of the thing.
     #
@@ -2956,10 +3439,13 @@ module Aws::IoT
     # @return [Types::GetIndexingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIndexingConfigurationResponse#thing_indexing_configuration #thing_indexing_configuration} => Types::ThingIndexingConfiguration
+    #   * {Types::GetIndexingConfigurationResponse#thing_group_indexing_configuration #thing_group_indexing_configuration} => Types::ThingGroupIndexingConfiguration
     #
     # @example Response structure
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
+    #   resp.thing_indexing_configuration.thing_connectivity_indexing_mode #=> String, one of "OFF", "STATUS"
+    #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #
     # @overload get_indexing_configuration(params = {})
     # @param [Hash] params ({})
@@ -3040,31 +3526,37 @@ module Aws::IoT
     #   resp.ota_update_info.description #=> String
     #   resp.ota_update_info.targets #=> Array
     #   resp.ota_update_info.targets[0] #=> String
+    #   resp.ota_update_info.aws_job_executions_rollout_config.maximum_per_minute #=> Integer
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
     #   resp.ota_update_info.ota_update_files[0].file_version #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].file_source.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.key #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_location.s3_location.version #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.aws_signer_job_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_arn #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.platform #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_parameter.certificate_path_on_device #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.signing_profile_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.bucket #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.start_signing_job_parameter.destination.s3_destination.prefix #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.inline_document #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.stream_id #=> String
-    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.file_id #=> Integer
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.certificate_name #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.inline_document #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.hash_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].attributes #=> Hash
-    #   resp.ota_update_info.ota_update_files[0].attributes["Key"] #=> String
+    #   resp.ota_update_info.ota_update_files[0].attributes["AttributeKey"] #=> String
     #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
     #   resp.ota_update_info.aws_iot_job_id #=> String
     #   resp.ota_update_info.aws_iot_job_arn #=> String
     #   resp.ota_update_info.error_info.code #=> String
     #   resp.ota_update_info.error_info.message #=> String
     #   resp.ota_update_info.additional_parameters #=> Hash
-    #   resp.ota_update_info.additional_parameters["Key"] #=> String
+    #   resp.ota_update_info.additional_parameters["AttributeKey"] #=> String
     #
     # @overload get_ota_update(params = {})
     # @param [Hash] params ({})
@@ -3249,6 +3741,9 @@ module Aws::IoT
     #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
     #   resp.rule.actions[0].iot_analytics.channel_name #=> String
     #   resp.rule.actions[0].iot_analytics.role_arn #=> String
+    #   resp.rule.actions[0].iot_events.input_name #=> String
+    #   resp.rule.actions[0].iot_events.message_id #=> String
+    #   resp.rule.actions[0].iot_events.role_arn #=> String
     #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
     #   resp.rule.actions[0].step_functions.state_machine_name #=> String
     #   resp.rule.actions[0].step_functions.role_arn #=> String
@@ -3305,6 +3800,9 @@ module Aws::IoT
     #   resp.rule.error_action.iot_analytics.channel_arn #=> String
     #   resp.rule.error_action.iot_analytics.channel_name #=> String
     #   resp.rule.error_action.iot_analytics.role_arn #=> String
+    #   resp.rule.error_action.iot_events.input_name #=> String
+    #   resp.rule.error_action.iot_events.message_id #=> String
+    #   resp.rule.error_action.iot_events.role_arn #=> String
     #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
     #   resp.rule.error_action.step_functions.state_machine_name #=> String
     #   resp.rule.error_action.step_functions.role_arn #=> String
@@ -3639,6 +4137,44 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the billing groups you have created.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per request.
+    #
+    # @option params [String] :name_prefix_filter
+    #   Limit the results to billing groups whose names have the given prefix.
+    #
+    # @return [Types::ListBillingGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBillingGroupsResponse#billing_groups #billing_groups} => Array&lt;Types::GroupNameAndArn&gt;
+    #   * {Types::ListBillingGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_billing_groups({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     name_prefix_filter: "BillingGroupName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_groups #=> Array
+    #   resp.billing_groups[0].group_name #=> String
+    #   resp.billing_groups[0].group_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_billing_groups(params = {})
+    # @param [Hash] params ({})
+    def list_billing_groups(params = {}, options = {})
+      req = build_request(:list_billing_groups, params)
+      req.send_request(options)
+    end
+
     # Lists the CA certificates registered for your AWS account.
     #
     # The results are paginated with a default page size of 25. You can use
@@ -3829,7 +4365,7 @@ module Aws::IoT
     #
     #   resp = client.list_job_executions_for_job({
     #     job_id: "JobId", # required
-    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3838,7 +4374,7 @@ module Aws::IoT
     #
     #   resp.execution_summaries #=> Array
     #   resp.execution_summaries[0].thing_arn #=> String
-    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
@@ -3876,7 +4412,7 @@ module Aws::IoT
     #
     #   resp = client.list_job_executions_for_thing({
     #     thing_name: "ThingName", # required
-    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3885,7 +4421,7 @@ module Aws::IoT
     #
     #   resp.execution_summaries #=> Array
     #   resp.execution_summaries[0].job_id #=> String
-    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT", "REJECTED", "REMOVED", "CANCELED"
     #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
@@ -4444,6 +4980,40 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the tags (metadata) you have assigned to the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # List targets for the specified policy.
     #
     # @option params [required, String] :policy_name
@@ -4807,6 +5377,43 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_things(params = {}, options = {})
       req = build_request(:list_things, params)
+      req.send_request(options)
+    end
+
+    # Lists the things you have added to the given billing group.
+    #
+    # @option params [required, String] :billing_group_name
+    #   The name of the billing group.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per request.
+    #
+    # @return [Types::ListThingsInBillingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingsInBillingGroupResponse#things #things} => Array&lt;String&gt;
+    #   * {Types::ListThingsInBillingGroupResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_things_in_billing_group({
+    #     billing_group_name: "BillingGroupName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.things #=> Array
+    #   resp.things[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_things_in_billing_group(params = {})
+    # @param [Hash] params ({})
+    def list_things_in_billing_group(params = {}, options = {})
+      req = build_request(:list_things_in_billing_group, params)
       req.send_request(options)
     end
 
@@ -5188,6 +5795,38 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Removes the given thing from the billing group.
+    #
+    # @option params [String] :billing_group_name
+    #   The name of the billing group.
+    #
+    # @option params [String] :billing_group_arn
+    #   The ARN of the billing group.
+    #
+    # @option params [String] :thing_name
+    #   The name of the thing to be removed from the billing group.
+    #
+    # @option params [String] :thing_arn
+    #   The ARN of the thing to be removed from the billing group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_thing_from_billing_group({
+    #     billing_group_name: "BillingGroupName",
+    #     billing_group_arn: "BillingGroupArn",
+    #     thing_name: "ThingName",
+    #     thing_arn: "ThingArn",
+    #   })
+    #
+    # @overload remove_thing_from_billing_group(params = {})
+    # @param [Hash] params ({})
+    def remove_thing_from_billing_group(params = {}, options = {})
+      req = build_request(:remove_thing_from_billing_group, params)
+      req.send_request(options)
+    end
+
     # Remove the specified thing from the specified group.
     #
     # @option params [String] :thing_group_name
@@ -5323,6 +5962,11 @@ module Aws::IoT
     #             channel_name: "ChannelName",
     #             role_arn: "AwsArn",
     #           },
+    #           iot_events: {
+    #             input_name: "InputName", # required
+    #             message_id: "MessageId",
+    #             role_arn: "AwsArn", # required
+    #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
@@ -5414,6 +6058,11 @@ module Aws::IoT
     #           channel_name: "ChannelName",
     #           role_arn: "AwsArn",
     #         },
+    #         iot_events: {
+    #           input_name: "InputName", # required
+    #           message_id: "MessageId",
+    #           role_arn: "AwsArn", # required
+    #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
@@ -5452,6 +6101,7 @@ module Aws::IoT
     #
     #   * {Types::SearchIndexResponse#next_token #next_token} => String
     #   * {Types::SearchIndexResponse#things #things} => Array&lt;Types::ThingDocument&gt;
+    #   * {Types::SearchIndexResponse#thing_groups #thing_groups} => Array&lt;Types::ThingGroupDocument&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5475,6 +6125,16 @@ module Aws::IoT
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].shadow #=> String
+    #   resp.things[0].connectivity.connected #=> Boolean
+    #   resp.things[0].connectivity.timestamp #=> Integer
+    #   resp.thing_groups #=> Array
+    #   resp.thing_groups[0].thing_group_name #=> String
+    #   resp.thing_groups[0].thing_group_id #=> String
+    #   resp.thing_groups[0].thing_group_description #=> String
+    #   resp.thing_groups[0].attributes #=> Hash
+    #   resp.thing_groups[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.thing_groups[0].parent_group_names #=> Array
+    #   resp.thing_groups[0].parent_group_names[0] #=> String
     #
     # @overload search_index(params = {})
     # @param [Hash] params ({})
@@ -5710,6 +6370,36 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # which can be used to manage a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The new or modified tags for the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Tests if a specified principal is authorized to perform an AWS IoT
     # action on a specified resource. Use this to test and debug the
     # authorization behavior of devices that connect to the AWS IoT device
@@ -5874,6 +6564,30 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Removes the given tags (metadata) from the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of the keys of the tags to be removed from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Configures or reconfigures the Device Defender audit settings for this
     # account. Settings include how audit notifications are sent and which
     # audit checks are enabled or disabled.
@@ -5975,6 +6689,45 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates information about the billing group.
+    #
+    # @option params [required, String] :billing_group_name
+    #   The name of the billing group.
+    #
+    # @option params [required, Types::BillingGroupProperties] :billing_group_properties
+    #   The properties of the billing group.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the billing group. If the version of the
+    #   billing group does not match the expected version specified in the
+    #   request, the `UpdateBillingGroup` request is rejected with a
+    #   `VersionConflictException`.
+    #
+    # @return [Types::UpdateBillingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBillingGroupResponse#version #version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_billing_group({
+    #     billing_group_name: "BillingGroupName", # required
+    #     billing_group_properties: { # required
+    #       billing_group_description: "BillingGroupDescription",
+    #     },
+    #     expected_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> Integer
+    #
+    # @overload update_billing_group(params = {})
+    # @param [Hash] params ({})
+    def update_billing_group(params = {}, options = {})
+      req = build_request(:update_billing_group, params)
+      req.send_request(options)
+    end
+
     # Updates a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
@@ -6058,6 +6811,69 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a dynamic thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The name of the dynamic thing group to update.
+    #
+    # @option params [required, Types::ThingGroupProperties] :thing_group_properties
+    #   The dynamic thing group properties to update.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the dynamic thing group to update.
+    #
+    # @option params [String] :index_name
+    #   The dynamic thing group index to update.
+    #
+    #   <note markdown="1"> Currently one index is supported: 'AWS\_Things'.
+    #
+    #    </note>
+    #
+    # @option params [String] :query_string
+    #   The dynamic thing group search query string to update.
+    #
+    # @option params [String] :query_version
+    #   The dynamic thing group query version to update.
+    #
+    #   <note markdown="1"> Currently one query version is supported: "2017-09-30". If not
+    #   specified, the query version defaults to this value.
+    #
+    #    </note>
+    #
+    # @return [Types::UpdateDynamicThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDynamicThingGroupResponse#version #version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dynamic_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     thing_group_properties: { # required
+    #       thing_group_description: "ThingGroupDescription",
+    #       attribute_payload: {
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         merge: false,
+    #       },
+    #     },
+    #     expected_version: 1,
+    #     index_name: "IndexName",
+    #     query_string: "QueryString",
+    #     query_version: "QueryVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> Integer
+    #
+    # @overload update_dynamic_thing_group(params = {})
+    # @param [Hash] params ({})
+    def update_dynamic_thing_group(params = {}, options = {})
+      req = build_request(:update_dynamic_thing_group, params)
+      req.send_request(options)
+    end
+
     # Updates the event configurations.
     #
     # @option params [Hash<String,Types::Configuration>] :event_configurations
@@ -6087,13 +6903,20 @@ module Aws::IoT
     # @option params [Types::ThingIndexingConfiguration] :thing_indexing_configuration
     #   Thing indexing configuration.
     #
+    # @option params [Types::ThingGroupIndexingConfiguration] :thing_group_indexing_configuration
+    #   Thing group indexing configuration.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_indexing_configuration({
     #     thing_indexing_configuration: {
-    #       thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #       thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #     },
+    #     thing_group_indexing_configuration: {
+    #       thing_group_indexing_mode: "OFF", # required, accepts OFF, ON
     #     },
     #   })
     #
@@ -6101,6 +6924,74 @@ module Aws::IoT
     # @param [Hash] params ({})
     def update_indexing_configuration(params = {}, options = {})
       req = build_request(:update_indexing_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates supported fields of the specified job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be updated.
+    #
+    # @option params [String] :description
+    #   A short text description of the job.
+    #
+    # @option params [Types::PresignedUrlConfig] :presigned_url_config
+    #   Configuration information for pre-signed S3 URLs.
+    #
+    # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
+    #   Allows you to create a staged rollout of the job.
+    #
+    # @option params [Types::AbortConfig] :abort_config
+    #   Allows you to create criteria to abort a job.
+    #
+    # @option params [Types::TimeoutConfig] :timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. The timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the time expires, it will be automatically set
+    #   to `TIMED_OUT`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_job({
+    #     job_id: "JobId", # required
+    #     description: "JobDescription",
+    #     presigned_url_config: {
+    #       role_arn: "RoleArn",
+    #       expires_in_sec: 1,
+    #     },
+    #     job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #       exponential_rate: {
+    #         base_rate_per_minute: 1, # required
+    #         increment_factor: 1.0, # required
+    #         rate_increase_criteria: { # required
+    #           number_of_notified_things: 1,
+    #           number_of_succeeded_things: 1,
+    #         },
+    #       },
+    #     },
+    #     abort_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #           action: "CANCEL", # required, accepts CANCEL
+    #           threshold_percentage: 1.0, # required
+    #           min_number_of_executed_things: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     timeout_config: {
+    #       in_progress_timeout_in_minutes: 1,
+    #     },
+    #   })
+    #
+    # @overload update_job(params = {})
+    # @param [Hash] params ({})
+    def update_job(params = {}, options = {})
+      req = build_request(:update_job, params)
       req.send_request(options)
     end
 
@@ -6317,8 +7208,8 @@ module Aws::IoT
     #       {
     #         file_id: 1,
     #         s3_location: {
-    #           bucket: "S3Bucket", # required
-    #           key: "S3Key", # required
+    #           bucket: "S3Bucket",
+    #           key: "S3Key",
     #           version: "S3Version",
     #         },
     #       },
@@ -6444,6 +7335,12 @@ module Aws::IoT
     # @option params [Array<String>] :thing_groups_to_remove
     #   The groups from which the thing will be removed.
     #
+    # @option params [Boolean] :override_dynamic_groups
+    #   Override dynamic thing groups with static thing groups when 10-group
+    #   limit is reached. If a thing belongs to 10 thing groups, and one or
+    #   more of those groups are dynamic thing groups, adding a thing to a
+    #   static group removes the thing from the last dynamic group.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -6452,6 +7349,7 @@ module Aws::IoT
     #     thing_name: "ThingName",
     #     thing_groups_to_add: ["ThingGroupName"],
     #     thing_groups_to_remove: ["ThingGroupName"],
+    #     override_dynamic_groups: false,
     #   })
     #
     # @overload update_thing_groups_for_thing(params = {})
@@ -6518,7 +7416,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

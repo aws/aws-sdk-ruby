@@ -69,6 +69,7 @@ module Aws::MarketplaceEntitlementService
       api.version = "2017-01-11"
 
       api.metadata = {
+        "apiVersion" => "2017-01-11",
         "endpointPrefix" => "entitlement.marketplace",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -76,6 +77,7 @@ module Aws::MarketplaceEntitlementService
         "signatureVersion" => "v4",
         "signingName" => "aws-marketplace",
         "targetPrefix" => "AWSMPEntitlementService",
+        "uid" => "entitlement.marketplace-2017-01-11",
       }
 
       api.add_operation(:get_entitlements, Seahorse::Model::Operation.new.tap do |o|

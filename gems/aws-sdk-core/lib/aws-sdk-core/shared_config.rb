@@ -44,6 +44,7 @@ module Aws
     #   file and enables new config values outside of the old shared credential
     #   spec.
     def initialize(options = {})
+      @parsed_config = nil
       @profile_name = determine_profile(options)
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
@@ -135,9 +136,61 @@ module Aws
       end
     end
 
+    def endpoint_discovery(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled && @parsed_config
+        @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
+      end
+    end
+
     def credentials_process(profile)
       validate_profile_exists(profile)
       @parsed_config[profile]['credential_process']
+    end
+
+    def csm_enabled(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_enabled"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_enabled"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
+    def csm_client_id(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_client_id"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_client_id"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
+    def csm_port(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["csm_port"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["csm_port"]
+        end
+        value
+      else
+        nil
+      end
     end
 
     private

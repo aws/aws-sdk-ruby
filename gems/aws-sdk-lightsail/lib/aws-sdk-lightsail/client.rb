@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::Lightsail
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -186,13 +235,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -209,6 +258,14 @@ module Aws::Lightsail
 
     # Attaches a block storage disk to a running or stopped Lightsail
     # instance and exposes it to the instance with the specified disk name.
+    #
+    # The `attach disk` operation supports tag-based access control via
+    # resource tags applied to the resource identified by diskName. For more
+    # information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :disk_name
     #   The unique Lightsail disk name (e.g., `my-disk`).
@@ -237,13 +294,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -262,6 +319,15 @@ module Aws::Lightsail
     #
     # After some time, the instances are attached to the load balancer and
     # the health check status is available.
+    #
+    # The `attach instances to load balancer` operation supports tag-based
+    # access control via resource tags applied to the resource identified by
+    # loadBalancerName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer.
@@ -293,13 +359,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -325,6 +391,15 @@ module Aws::Lightsail
     # certificate, and it will replace the existing one and become the
     # attached certificate.
     #
+    # The `attach load balancer tls certificate` operation supports
+    # tag-based access control via resource tags applied to the resource
+    # identified by loadBalancerName. For more information, see the
+    # [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer to which you want to associate the
     #   SSL/TLS certificate.
@@ -348,13 +423,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -393,13 +468,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -415,6 +490,14 @@ module Aws::Lightsail
     end
 
     # Closes the public ports on a specific Amazon Lightsail instance.
+    #
+    # The `close instance public ports` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # instanceName. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, Types::PortInfo] :port_info
     #   Information about the public port you are trying to close.
@@ -442,13 +525,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -463,15 +546,129 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Copies an instance or disk snapshot from one AWS Region to another in
+    # Amazon Lightsail.
+    #
+    # @option params [required, String] :source_snapshot_name
+    #   The name of the source instance or disk snapshot to be copied.
+    #
+    # @option params [required, String] :target_snapshot_name
+    #   The name of the new instance or disk snapshot to be created as a copy.
+    #
+    # @option params [required, String] :source_region
+    #   The AWS Region where the source snapshot is located.
+    #
+    # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopySnapshotResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_snapshot({
+    #     source_snapshot_name: "ResourceName", # required
+    #     target_snapshot_name: "ResourceName", # required
+    #     source_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshot AWS API Documentation
+    #
+    # @overload copy_snapshot(params = {})
+    # @param [Hash] params ({})
+    def copy_snapshot(params = {}, options = {})
+      req = build_request(:copy_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates an AWS CloudFormation stack, which creates a new Amazon EC2
+    # instance from an exported Amazon Lightsail snapshot. This operation
+    # results in a CloudFormation stack record that can be used to track the
+    # AWS CloudFormation stack created. Use the `get cloud formation stack
+    # records` operation to get a list of the CloudFormation stacks created.
+    #
+    # Wait until after your new Amazon EC2 instance is created before
+    # running the `create cloud formation stack` operation again with the
+    # same export snapshot record.
+    #
+    # @option params [required, Array<Types::InstanceEntry>] :instances
+    #   An array of parameters that will be used to create the new Amazon EC2
+    #   instance. You can only pass one instance entry at a time in this
+    #   array. You will get an invalid parameter error if you pass more than
+    #   one instance entry in this array.
+    #
+    # @return [Types::CreateCloudFormationStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCloudFormationStackResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cloud_formation_stack({
+    #     instances: [ # required
+    #       {
+    #         source_name: "ResourceName", # required
+    #         instance_type: "NonEmptyString", # required
+    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #         user_data: "string",
+    #         availability_zone: "string", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCloudFormationStack AWS API Documentation
+    #
+    # @overload create_cloud_formation_stack(params = {})
+    # @param [Hash] params ({})
+    def create_cloud_formation_stack(params = {}, options = {})
+      req = build_request(:create_cloud_formation_stack, params)
+      req.send_request(options)
+    end
+
     # Creates a block storage disk that can be attached to a Lightsail
     # instance in the same Availability Zone (e.g., `us-east-2a`). The disk
     # is created in the regional endpoint that you send the HTTP request to.
     # For more information, see [Regions and Availability Zones in
     # Lightsail][1].
     #
+    # The `create disk` operation supports tag-based access control via
+    # request tags. For more information, see the [Lightsail Dev Guide][2].
+    #
     #
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :disk_name
     #   The unique Lightsail disk name (e.g., `my-disk`).
@@ -487,6 +684,12 @@ module Aws::Lightsail
     # @option params [required, Integer] :size_in_gb
     #   The size of the disk in GB (e.g., `32`).
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
     # @return [Types::CreateDiskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDiskResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -497,6 +700,12 @@ module Aws::Lightsail
     #     disk_name: "ResourceName", # required
     #     availability_zone: "NonEmptyString", # required
     #     size_in_gb: 1, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -504,13 +713,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -531,9 +740,15 @@ module Aws::Lightsail
     # send the HTTP request to. For more information, see [Regions and
     # Availability Zones in Lightsail][1].
     #
+    # The `create disk from snapshot` operation supports tag-based access
+    # control via request tags and resource tags applied to the resource
+    # identified by diskSnapshotName. For more information, see the
+    # [Lightsail Dev Guide][2].
+    #
     #
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :disk_name
     #   The unique Lightsail disk name (e.g., `my-disk`).
@@ -553,6 +768,12 @@ module Aws::Lightsail
     # @option params [required, Integer] :size_in_gb
     #   The size of the disk in GB (e.g., `32`).
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
     # @return [Types::CreateDiskFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDiskFromSnapshotResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -564,6 +785,12 @@ module Aws::Lightsail
     #     disk_snapshot_name: "ResourceName", # required
     #     availability_zone: "NonEmptyString", # required
     #     size_in_gb: 1, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -571,13 +798,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -608,12 +835,26 @@ module Aws::Lightsail
     # You may remount and use your disk while the snapshot status is
     # pending.
     #
+    # The `create disk snapshot` operation supports tag-based access control
+    # via request tags. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :disk_name
     #   The unique name of the source disk (e.g., `my-source-disk`).
     #
     # @option params [required, String] :disk_snapshot_name
     #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
     #   based on the source disk.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
     #
     # @return [Types::CreateDiskSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -624,6 +865,12 @@ module Aws::Lightsail
     #   resp = client.create_disk_snapshot({
     #     disk_name: "ResourceName", # required
     #     disk_snapshot_name: "ResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -631,13 +878,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -655,6 +902,13 @@ module Aws::Lightsail
     # Creates a domain resource for the specified domain (e.g.,
     # example.com).
     #
+    # The `create domain` operation supports tag-based access control via
+    # request tags. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :domain_name
     #   The domain name to manage (e.g., `example.com`).
     #
@@ -665,6 +919,12 @@ module Aws::Lightsail
     #
     #    </note>
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
     # @return [Types::CreateDomainResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResult#operation #operation} => Types::Operation
@@ -673,19 +933,25 @@ module Aws::Lightsail
     #
     #   resp = client.create_domain({
     #     domain_name: "DomainName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -702,6 +968,14 @@ module Aws::Lightsail
 
     # Creates one of the following entry records associated with the domain:
     # A record, CNAME record, TXT record, or MX record.
+    #
+    # The `create domain entry` operation supports tag-based access control
+    # via resource tags applied to the resource identified by domainName.
+    # For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :domain_name
     #   The domain name (e.g., `example.com`) for which you want to create the
@@ -735,13 +1009,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -760,11 +1034,25 @@ module Aws::Lightsail
     # *instance*. You can use a snapshot to create a new instance that is
     # based on that snapshot.
     #
+    # The `create instance snapshot` operation supports tag-based access
+    # control via request tags. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :instance_snapshot_name
     #   The name for your new snapshot.
     #
     # @option params [required, String] :instance_name
     #   The Lightsail instance on which to base your snapshot.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
     #
     # @return [Types::CreateInstanceSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -775,6 +1063,12 @@ module Aws::Lightsail
     #   resp = client.create_instance_snapshot({
     #     instance_snapshot_name: "ResourceName", # required
     #     instance_name: "ResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -782,13 +1076,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -804,7 +1098,19 @@ module Aws::Lightsail
     end
 
     # Creates one or more Amazon Lightsail virtual private servers, or
-    # *instances*.
+    # *instances*. Create instances using active blueprints. Inactive
+    # blueprints are listed to support customers with existing instances but
+    # are not necessarily available for launch of new instances. Blueprints
+    # are marked inactive when they become outdated due to operating system
+    # updates or new application releases. Use the get blueprints operation
+    # to return a list of available blueprints.
+    #
+    # The `create instances` operation supports tag-based access control via
+    # request tags. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, Array<String>] :instance_names
     #   The names to use for your new Lightsail instances. Separate multiple
@@ -814,8 +1120,8 @@ module Aws::Lightsail
     # @option params [required, String] :availability_zone
     #   The Availability Zone in which to create your instance. Use the
     #   following format: `us-east-2a` (case sensitive). You can get a list of
-    #   availability zones by using the [get regions][1] operation. Be sure to
-    #   add the `include availability zones` parameter to your request.
+    #   Availability Zones by using the [get regions][1] operation. Be sure to
+    #   add the `include Availability Zones` parameter to your request.
     #
     #
     #
@@ -858,6 +1164,12 @@ module Aws::Lightsail
     # @option params [String] :key_pair_name
     #   The name of your key pair.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
     # @return [Types::CreateInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInstancesResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -872,6 +1184,12 @@ module Aws::Lightsail
     #     bundle_id: "NonEmptyString", # required
     #     user_data: "string",
     #     key_pair_name: "ResourceName",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -879,13 +1197,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -903,6 +1221,15 @@ module Aws::Lightsail
     # Uses a specific snapshot as a blueprint for creating one or more new
     # instances that are based on that identical configuration.
     #
+    # The `create instances from snapshot` operation supports tag-based
+    # access control via request tags and resource tags applied to the
+    # resource identified by instanceSnapshotName. For more information, see
+    # the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, Array<String>] :instance_names
     #   The names for your new instances.
     #
@@ -912,8 +1239,8 @@ module Aws::Lightsail
     # @option params [required, String] :availability_zone
     #   The Availability Zone where you want to create your instances. Use the
     #   following formatting: `us-east-2a` (case sensitive). You can get a
-    #   list of availability zones by using the [get regions][1] operation. Be
-    #   sure to add the `include availability zones` parameter to your
+    #   list of Availability Zones by using the [get regions][1] operation. Be
+    #   sure to add the `include Availability Zones` parameter to your
     #   request.
     #
     #
@@ -943,10 +1270,16 @@ module Aws::Lightsail
     #
     #
     #
-    #   [1]: http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image
     #
     # @option params [String] :key_pair_name
     #   The name for your key pair.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
     #
     # @return [Types::CreateInstancesFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -969,6 +1302,12 @@ module Aws::Lightsail
     #     bundle_id: "NonEmptyString", # required
     #     user_data: "string",
     #     key_pair_name: "ResourceName",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -976,13 +1315,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -997,10 +1336,23 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Creates sn SSH key pair.
+    # Creates an SSH key pair.
+    #
+    # The `create key pair` operation supports tag-based access control via
+    # request tags. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :key_pair_name
     #   The name for your new key pair.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
     #
     # @return [Types::CreateKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1013,6 +1365,12 @@ module Aws::Lightsail
     #
     #   resp = client.create_key_pair({
     #     key_pair_name: "ResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1022,20 +1380,23 @@ module Aws::Lightsail
     #   resp.key_pair.support_code #=> String
     #   resp.key_pair.created_at #=> Time
     #   resp.key_pair.location.availability_zone #=> String
-    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.key_pair.tags #=> Array
+    #   resp.key_pair.tags[0].key #=> String
+    #   resp.key_pair.tags[0].value #=> String
     #   resp.key_pair.fingerprint #=> String
     #   resp.public_key_base_64 #=> String
     #   resp.private_key_base_64 #=> String
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -1059,9 +1420,14 @@ module Aws::Lightsail
     # port settings. To change additional load balancer settings, use the
     # `UpdateLoadBalancerAttribute` operation.
     #
+    # The `create load balancer` operation supports tag-based access control
+    # via request tags. For more information, see the [Lightsail Dev
+    # Guide][2].
+    #
     #
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :load_balancer_name
     #   The name of your load balancer.
@@ -1096,6 +1462,12 @@ module Aws::Lightsail
     #   SSL/TLS certificate (e.g., `www.example.com`, `example.com`,
     #   `m.example.com`, `blog.example.com`).
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
     # @return [Types::CreateLoadBalancerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoadBalancerResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -1109,6 +1481,12 @@ module Aws::Lightsail
     #     certificate_name: "ResourceName",
     #     certificate_domain_name: "DomainName",
     #     certificate_alternative_names: ["DomainName"],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1116,13 +1494,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1141,6 +1519,15 @@ module Aws::Lightsail
     #
     # TLS is just an updated, more secure version of Secure Socket Layer
     # (SSL).
+    #
+    # The `create load balancer tls certificate` operation supports
+    # tag-based access control via resource tags applied to the resource
+    # identified by loadBalancerName. For more information, see the
+    # [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :load_balancer_name
     #   The load balancer name where you want to create the SSL/TLS
@@ -1168,6 +1555,12 @@ module Aws::Lightsail
     #   You can have a maximum of 9 alternative names (in addition to the 1
     #   primary domain). We do not support wildcards (e.g., `*.example.com`).
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
     # @return [Types::CreateLoadBalancerTlsCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoadBalancerTlsCertificateResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -1179,6 +1572,12 @@ module Aws::Lightsail
     #     certificate_name: "ResourceName", # required
     #     certificate_domain_name: "DomainName", # required
     #     certificate_alternative_names: ["DomainName"],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1186,13 +1585,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1207,12 +1606,421 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Creates a new database in Amazon Lightsail.
+    #
+    # The `create relational database` operation supports tag-based access
+    # control via request tags. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name to use for your new database.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+    #
+    #   * The first and last character must be a letter or number.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone in which to create your new database. Use the
+    #   `us-east-2a` case-sensitive format.
+    #
+    #   You can get a list of Availability Zones by using the `get regions`
+    #   operation. Be sure to add the `include relational database
+    #   Availability Zones` parameter to your request.
+    #
+    # @option params [required, String] :relational_database_blueprint_id
+    #   The blueprint ID for your new database. A blueprint describes the
+    #   major engine version of a database.
+    #
+    #   You can get a list of database blueprints IDs by using the `get
+    #   relational database blueprints` operation.
+    #
+    # @option params [required, String] :relational_database_bundle_id
+    #   The bundle ID for your new database. A bundle describes the
+    #   performance specifications for your database.
+    #
+    #   You can get a list of database bundle IDs by using the `get relational
+    #   database bundles` operation.
+    #
+    # @option params [required, String] :master_database_name
+    #   The name of the master database created when the Lightsail database
+    #   resource is created.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 64 alphanumeric characters.
+    #
+    #   * Cannot be a word reserved by the specified database engine
+    #
+    # @option params [required, String] :master_username
+    #   The master user name for your new database.
+    #
+    #   Constraints:
+    #
+    #   * Master user name is required.
+    #
+    #   * Must contain from 1 to 16 alphanumeric characters.
+    #
+    #   * The first character must be a letter.
+    #
+    #   * Cannot be a reserved word for the database engine you choose.
+    #
+    #     For more information about reserved words in MySQL 5.6 or 5.7, see
+    #     the Keywords and Reserved Words articles for [MySQL 5.6][1] or
+    #     [MySQL 5.7][2] respectively.
+    #
+    #
+    #
+    #   [1]: https://dev.mysql.com/doc/refman/5.6/en/keywords.html
+    #   [2]: https://dev.mysql.com/doc/refman/5.7/en/keywords.html
+    #
+    # @option params [String] :master_user_password
+    #   The password for the master user of your new database. The password
+    #   can include any printable ASCII character except "/", """, or
+    #   "@".
+    #
+    #   Constraints: Must contain 8 to 41 characters.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created for
+    #   your new database if automated backups are enabled.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. For more information about the
+    #   preferred backup window time blocks for each region, see the [Working
+    #   With Backups][1] guide in the Amazon Relational Database Service
+    #   (Amazon RDS) documentation.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the `hh24:mi-hh24:mi` format.
+    #
+    #     Example: `16:00-16:30`
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #
+    # @option params [String] :preferred_maintenance_window
+    #   The weekly time range during which system maintenance can occur on
+    #   your new database.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the `ddd:hh24:mi-ddd:hh24:mi` format.
+    #
+    #   * Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Example: `Tue:17:00-Tue:17:30`
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies the accessibility options for your new database. A value of
+    #   `true` specifies a database that is available to resources outside of
+    #   your Lightsail account. A value of `false` specifies a database that
+    #   is available only to your Lightsail resources in the same region as
+    #   your database.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
+    # @return [Types::CreateRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #     availability_zone: "string",
+    #     relational_database_blueprint_id: "string", # required
+    #     relational_database_bundle_id: "string", # required
+    #     master_database_name: "string", # required
+    #     master_username: "string", # required
+    #     master_user_password: "SensitiveString",
+    #     preferred_backup_window: "string",
+    #     preferred_maintenance_window: "string",
+    #     publicly_accessible: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabase AWS API Documentation
+    #
+    # @overload create_relational_database(params = {})
+    # @param [Hash] params ({})
+    def create_relational_database(params = {}, options = {})
+      req = build_request(:create_relational_database, params)
+      req.send_request(options)
+    end
+
+    # Creates a new database from an existing database snapshot in Amazon
+    # Lightsail.
+    #
+    # You can create a new database from a snapshot in if something goes
+    # wrong with your original database, or to change it to a different
+    # plan, such as a high availability or standard plan.
+    #
+    # The `create relational database from snapshot` operation supports
+    # tag-based access control via request tags and resource tags applied to
+    # the resource identified by relationalDatabaseSnapshotName. For more
+    # information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name to use for your new database.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+    #
+    #   * The first and last character must be a letter or number.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone in which to create your new database. Use the
+    #   `us-east-2a` case-sensitive format.
+    #
+    #   You can get a list of Availability Zones by using the `get regions`
+    #   operation. Be sure to add the `include relational database
+    #   Availability Zones` parameter to your request.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies the accessibility options for your new database. A value of
+    #   `true` specifies a database that is available to resources outside of
+    #   your Lightsail account. A value of `false` specifies a database that
+    #   is available only to your Lightsail resources in the same region as
+    #   your database.
+    #
+    # @option params [String] :relational_database_snapshot_name
+    #   The name of the database snapshot from which to create your new
+    #   database.
+    #
+    # @option params [String] :relational_database_bundle_id
+    #   The bundle ID for your new database. A bundle describes the
+    #   performance specifications for your database.
+    #
+    #   You can get a list of database bundle IDs by using the `get relational
+    #   database bundles` operation.
+    #
+    #   When creating a new database from a snapshot, you cannot choose a
+    #   bundle that is smaller than the bundle of the source database.
+    #
+    # @option params [String] :source_relational_database_name
+    #   The name of the source database.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :restore_time
+    #   The date and time to restore your database from.
+    #
+    #   Constraints:
+    #
+    #   * Must be before the latest restorable time for the database.
+    #
+    #   * Cannot be specified if the `use latest restorable time` parameter is
+    #     `true`.
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use a restore time of October 1, 2018,
+    #     at 8 PM UTC, then you input `1538424000` as the restore time.
+    #
+    # @option params [Boolean] :use_latest_restorable_time
+    #   Specifies whether your database is restored from the latest backup
+    #   time. A value of `true` restores from the latest backup time.
+    #
+    #   Default: `false`
+    #
+    #   Constraints: Cannot be specified if the `restore time` parameter is
+    #   provided.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
+    # @return [Types::CreateRelationalDatabaseFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRelationalDatabaseFromSnapshotResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_relational_database_from_snapshot({
+    #     relational_database_name: "ResourceName", # required
+    #     availability_zone: "string",
+    #     publicly_accessible: false,
+    #     relational_database_snapshot_name: "ResourceName",
+    #     relational_database_bundle_id: "string",
+    #     source_relational_database_name: "ResourceName",
+    #     restore_time: Time.now,
+    #     use_latest_restorable_time: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseFromSnapshot AWS API Documentation
+    #
+    # @overload create_relational_database_from_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_relational_database_from_snapshot(params = {}, options = {})
+      req = build_request(:create_relational_database_from_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates a snapshot of your database in Amazon Lightsail. You can use
+    # snapshots for backups, to make copies of a database, and to save data
+    # before deleting a database.
+    #
+    # The `create relational database snapshot` operation supports tag-based
+    # access control via request tags. For more information, see the
+    # [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of the database on which to base your new snapshot.
+    #
+    # @option params [required, String] :relational_database_snapshot_name
+    #   The name for your new database snapshot.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+    #
+    #   * The first and last character must be a letter or number.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag keys and optional values to add to the resource during create.
+    #
+    #   To tag a resource after it has been created, see the `tag resource`
+    #   operation.
+    #
+    # @return [Types::CreateRelationalDatabaseSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRelationalDatabaseSnapshotResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_relational_database_snapshot({
+    #     relational_database_name: "ResourceName", # required
+    #     relational_database_snapshot_name: "ResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshot AWS API Documentation
+    #
+    # @overload create_relational_database_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_relational_database_snapshot(params = {}, options = {})
+      req = build_request(:create_relational_database_snapshot, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified block storage disk. The disk must be in the
     # `available` state (not attached to a Lightsail instance).
     #
     # <note markdown="1"> The disk may remain in the `deleting` state for several minutes.
     #
     #  </note>
+    #
+    # The `delete disk` operation supports tag-based access control via
+    # resource tags applied to the resource identified by diskName. For more
+    # information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :disk_name
     #   The unique name of the disk you want to delete (e.g., `my-disk`).
@@ -1232,13 +2040,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1263,6 +2071,15 @@ module Aws::Lightsail
     # snapshots will have access to all the information needed to restore
     # the disk.
     #
+    # The `delete disk snapshot` operation supports tag-based access control
+    # via resource tags applied to the resource identified by
+    # diskSnapshotName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :disk_snapshot_name
     #   The name of the disk snapshot you want to delete (e.g.,
     #   `my-disk-snapshot`).
@@ -1282,13 +2099,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1304,6 +2121,14 @@ module Aws::Lightsail
     end
 
     # Deletes the specified domain recordset and all of its domain records.
+    #
+    # The `delete domain` operation supports tag-based access control via
+    # resource tags applied to the resource identified by domainName. For
+    # more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :domain_name
     #   The specific domain name to delete.
@@ -1322,13 +2147,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -1344,6 +2169,14 @@ module Aws::Lightsail
     end
 
     # Deletes a specific domain entry.
+    #
+    # The `delete domain entry` operation supports tag-based access control
+    # via resource tags applied to the resource identified by domainName.
+    # For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :domain_name
     #   The name of the domain entry to delete.
@@ -1376,13 +2209,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -1399,6 +2232,14 @@ module Aws::Lightsail
 
     # Deletes a specific Amazon Lightsail virtual private server, or
     # *instance*.
+    #
+    # The `delete instance` operation supports tag-based access control via
+    # resource tags applied to the resource identified by instanceName. For
+    # more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_name
     #   The name of the instance to delete.
@@ -1418,13 +2259,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1441,6 +2282,15 @@ module Aws::Lightsail
 
     # Deletes a specific snapshot of a virtual private server (or
     # *instance*).
+    #
+    # The `delete instance snapshot` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # instanceSnapshotName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_snapshot_name
     #   The name of the snapshot to delete.
@@ -1460,13 +2310,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1482,6 +2332,14 @@ module Aws::Lightsail
     end
 
     # Deletes a specific SSH key pair.
+    #
+    # The `delete key pair` operation supports tag-based access control via
+    # resource tags applied to the resource identified by keyPairName. For
+    # more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :key_pair_name
     #   The name of the key pair to delete.
@@ -1500,13 +2358,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -1526,6 +2384,15 @@ module Aws::Lightsail
     # create a new load balancer, create a new certificate, and verify
     # domain ownership again.
     #
+    # The `delete load balancer` operation supports tag-based access control
+    # via resource tags applied to the resource identified by
+    # loadBalancerName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer you want to delete.
     #
@@ -1544,13 +2411,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1568,6 +2435,15 @@ module Aws::Lightsail
     # Deletes an SSL/TLS certificate associated with a Lightsail load
     # balancer.
     #
+    # The `delete load balancer tls certificate` operation supports
+    # tag-based access control via resource tags applied to the resource
+    # identified by loadBalancerName. For more information, see the
+    # [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :load_balancer_name
     #   The load balancer name.
     #
@@ -1578,9 +2454,9 @@ module Aws::Lightsail
     #   When `true`, forces the deletion of an SSL/TLS certificate.
     #
     #   There can be two certificates associated with a Lightsail load
-    #   balancer: the primary and the backup. The force parameter is required
-    #   when the primary SSL/TLS certificate is in use by an instance attached
-    #   to the load balancer.
+    #   balancer: the primary and the backup. The `force` parameter is
+    #   required when the primary SSL/TLS certificate is in use by an instance
+    #   attached to the load balancer.
     #
     # @return [Types::DeleteLoadBalancerTlsCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1599,13 +2475,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1620,9 +2496,145 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Deletes a database in Amazon Lightsail.
+    #
+    # The `delete relational database` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # relationalDatabaseName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of the database that you are deleting.
+    #
+    # @option params [Boolean] :skip_final_snapshot
+    #   Determines whether a final database snapshot is created before your
+    #   database is deleted. If `true` is specified, no database snapshot is
+    #   created. If `false` is specified, a database snapshot is created
+    #   before your database is deleted.
+    #
+    #   You must specify the `final relational database snapshot name`
+    #   parameter if the `skip final snapshot` parameter is `false`.
+    #
+    #   Default: `false`
+    #
+    # @option params [String] :final_relational_database_snapshot_name
+    #   The name of the database snapshot created if `skip final snapshot` is
+    #   `false`, which is the default value for that parameter.
+    #
+    #   <note markdown="1"> Specifying this parameter and also specifying the `skip final
+    #   snapshot` parameter to `true` results in an error.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+    #
+    #   * The first and last character must be a letter or number.
+    #
+    # @return [Types::DeleteRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #     skip_final_snapshot: false,
+    #     final_relational_database_snapshot_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabase AWS API Documentation
+    #
+    # @overload delete_relational_database(params = {})
+    # @param [Hash] params ({})
+    def delete_relational_database(params = {}, options = {})
+      req = build_request(:delete_relational_database, params)
+      req.send_request(options)
+    end
+
+    # Deletes a database snapshot in Amazon Lightsail.
+    #
+    # The `delete relational database snapshot` operation supports tag-based
+    # access control via resource tags applied to the resource identified by
+    # relationalDatabaseName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_snapshot_name
+    #   The name of the database snapshot that you are deleting.
+    #
+    # @return [Types::DeleteRelationalDatabaseSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRelationalDatabaseSnapshotResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_relational_database_snapshot({
+    #     relational_database_snapshot_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseSnapshot AWS API Documentation
+    #
+    # @overload delete_relational_database_snapshot(params = {})
+    # @param [Hash] params ({})
+    def delete_relational_database_snapshot(params = {}, options = {})
+      req = build_request(:delete_relational_database_snapshot, params)
+      req.send_request(options)
+    end
+
     # Detaches a stopped block storage disk from a Lightsail instance. Make
     # sure to unmount any file systems on the device within your operating
     # system before stopping the instance and detaching the disk.
+    #
+    # The `detach disk` operation supports tag-based access control via
+    # resource tags applied to the resource identified by diskName. For more
+    # information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :disk_name
     #   The unique name of the disk you want to detach from your instance
@@ -1643,13 +2655,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1668,6 +2680,15 @@ module Aws::Lightsail
     #
     # This operation waits until the instances are no longer needed before
     # they are detached from the load balancer.
+    #
+    # The `detach instances from load balancer` operation supports tag-based
+    # access control via resource tags applied to the resource identified by
+    # loadBalancerName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the Lightsail load balancer.
@@ -1692,13 +2713,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1734,13 +2755,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -1773,6 +2794,74 @@ module Aws::Lightsail
     # @param [Hash] params ({})
     def download_default_key_pair(params = {}, options = {})
       req = build_request(:download_default_key_pair, params)
+      req.send_request(options)
+    end
+
+    # Exports a Amazon Lightsail instance or block storage disk snapshot to
+    # Amazon Elastic Compute Cloud (Amazon EC2). This operation results in
+    # an export snapshot record that can be used with the `create cloud
+    # formation stack` operation to create new Amazon EC2 instances.
+    #
+    # Exported instance snapshots appear in Amazon EC2 as Amazon Machine
+    # Images (AMIs), and the instance system disk appears as an Amazon
+    # Elastic Block Store (Amazon EBS) volume. Exported disk snapshots
+    # appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to
+    # the same Amazon Web Services Region in Amazon EC2 as the source
+    # Lightsail snapshot.
+    #
+    #
+    #
+    # The `export snapshot` operation supports tag-based access control via
+    # resource tags applied to the resource identified by
+    # sourceSnapshotName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    # <note markdown="1"> Use the `get instance snapshots` or `get disk snapshots` operations to
+    # get a list of snapshots that you can export to Amazon EC2.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :source_snapshot_name
+    #   The name of the instance or disk snapshot to be exported to Amazon
+    #   EC2.
+    #
+    # @return [Types::ExportSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportSnapshotResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_snapshot({
+    #     source_snapshot_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshot AWS API Documentation
+    #
+    # @overload export_snapshot(params = {})
+    # @param [Hash] params ({})
+    def export_snapshot(params = {}, options = {})
+      req = build_request(:export_snapshot, params)
       req.send_request(options)
     end
 
@@ -1909,6 +2998,54 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Returns the CloudFormation stack record created as a result of the
+    # `create cloud formation stack` operation.
+    #
+    # An AWS CloudFormation stack is used to create a new Amazon EC2
+    # instance from an exported Lightsail snapshot.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   cloud formation stack records` request.
+    #
+    # @return [Types::GetCloudFormationStackRecordsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCloudFormationStackRecordsResult#cloud_formation_stack_records #cloud_formation_stack_records} => Array&lt;Types::CloudFormationStackRecord&gt;
+    #   * {Types::GetCloudFormationStackRecordsResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cloud_formation_stack_records({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_formation_stack_records #=> Array
+    #   resp.cloud_formation_stack_records[0].name #=> String
+    #   resp.cloud_formation_stack_records[0].arn #=> String
+    #   resp.cloud_formation_stack_records[0].created_at #=> Time
+    #   resp.cloud_formation_stack_records[0].location.availability_zone #=> String
+    #   resp.cloud_formation_stack_records[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.cloud_formation_stack_records[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.cloud_formation_stack_records[0].state #=> String, one of "Started", "Succeeded", "Failed"
+    #   resp.cloud_formation_stack_records[0].source_info #=> Array
+    #   resp.cloud_formation_stack_records[0].source_info[0].resource_type #=> String, one of "ExportSnapshotRecord"
+    #   resp.cloud_formation_stack_records[0].source_info[0].name #=> String
+    #   resp.cloud_formation_stack_records[0].source_info[0].arn #=> String
+    #   resp.cloud_formation_stack_records[0].destination_info.id #=> String
+    #   resp.cloud_formation_stack_records[0].destination_info.service #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecords AWS API Documentation
+    #
+    # @overload get_cloud_formation_stack_records(params = {})
+    # @param [Hash] params ({})
+    def get_cloud_formation_stack_records(params = {}, options = {})
+      req = build_request(:get_cloud_formation_stack_records, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific block storage disk.
     #
     # @option params [required, String] :disk_name
@@ -1931,8 +3068,11 @@ module Aws::Lightsail
     #   resp.disk.support_code #=> String
     #   resp.disk.created_at #=> Time
     #   resp.disk.location.availability_zone #=> String
-    #   resp.disk.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.disk.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.disk.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.disk.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.disk.tags #=> Array
+    #   resp.disk.tags[0].key #=> String
+    #   resp.disk.tags[0].value #=> String
     #   resp.disk.size_in_gb #=> Integer
     #   resp.disk.is_system_disk #=> Boolean
     #   resp.disk.iops #=> Integer
@@ -1974,8 +3114,11 @@ module Aws::Lightsail
     #   resp.disk_snapshot.support_code #=> String
     #   resp.disk_snapshot.created_at #=> Time
     #   resp.disk_snapshot.location.availability_zone #=> String
-    #   resp.disk_snapshot.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.disk_snapshot.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.disk_snapshot.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.disk_snapshot.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.disk_snapshot.tags #=> Array
+    #   resp.disk_snapshot.tags[0].key #=> String
+    #   resp.disk_snapshot.tags[0].value #=> String
     #   resp.disk_snapshot.size_in_gb #=> Integer
     #   resp.disk_snapshot.state #=> String, one of "pending", "completed", "error", "unknown"
     #   resp.disk_snapshot.progress #=> String
@@ -2021,8 +3164,11 @@ module Aws::Lightsail
     #   resp.disk_snapshots[0].support_code #=> String
     #   resp.disk_snapshots[0].created_at #=> Time
     #   resp.disk_snapshots[0].location.availability_zone #=> String
-    #   resp.disk_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.disk_snapshots[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.disk_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.disk_snapshots[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.disk_snapshots[0].tags #=> Array
+    #   resp.disk_snapshots[0].tags[0].key #=> String
+    #   resp.disk_snapshots[0].tags[0].value #=> String
     #   resp.disk_snapshots[0].size_in_gb #=> Integer
     #   resp.disk_snapshots[0].state #=> String, one of "pending", "completed", "error", "unknown"
     #   resp.disk_snapshots[0].progress #=> String
@@ -2069,8 +3215,11 @@ module Aws::Lightsail
     #   resp.disks[0].support_code #=> String
     #   resp.disks[0].created_at #=> Time
     #   resp.disks[0].location.availability_zone #=> String
-    #   resp.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.disks[0].tags #=> Array
+    #   resp.disks[0].tags[0].key #=> String
+    #   resp.disks[0].tags[0].value #=> String
     #   resp.disks[0].size_in_gb #=> Integer
     #   resp.disks[0].is_system_disk #=> Boolean
     #   resp.disks[0].iops #=> Integer
@@ -2113,8 +3262,11 @@ module Aws::Lightsail
     #   resp.domain.support_code #=> String
     #   resp.domain.created_at #=> Time
     #   resp.domain.location.availability_zone #=> String
-    #   resp.domain.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.domain.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.domain.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.domain.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.domain.tags #=> Array
+    #   resp.domain.tags[0].key #=> String
+    #   resp.domain.tags[0].value #=> String
     #   resp.domain.domain_entries #=> Array
     #   resp.domain.domain_entries[0].id #=> String
     #   resp.domain.domain_entries[0].name #=> String
@@ -2158,8 +3310,11 @@ module Aws::Lightsail
     #   resp.domains[0].support_code #=> String
     #   resp.domains[0].created_at #=> Time
     #   resp.domains[0].location.availability_zone #=> String
-    #   resp.domains[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.domains[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.domains[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.domains[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.domains[0].tags #=> Array
+    #   resp.domains[0].tags[0].key #=> String
+    #   resp.domains[0].tags[0].value #=> String
     #   resp.domains[0].domain_entries #=> Array
     #   resp.domains[0].domain_entries[0].id #=> String
     #   resp.domains[0].domain_entries[0].name #=> String
@@ -2176,6 +3331,65 @@ module Aws::Lightsail
     # @param [Hash] params ({})
     def get_domains(params = {}, options = {})
       req = build_request(:get_domains, params)
+      req.send_request(options)
+    end
+
+    # Returns the export snapshot record created as a result of the `export
+    # snapshot` operation.
+    #
+    # An export snapshot record can be used to create a new Amazon EC2
+    # instance and its related resources with the `create cloud formation
+    # stack` operation.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   export snapshot records` request.
+    #
+    # @return [Types::GetExportSnapshotRecordsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportSnapshotRecordsResult#export_snapshot_records #export_snapshot_records} => Array&lt;Types::ExportSnapshotRecord&gt;
+    #   * {Types::GetExportSnapshotRecordsResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export_snapshot_records({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_snapshot_records #=> Array
+    #   resp.export_snapshot_records[0].name #=> String
+    #   resp.export_snapshot_records[0].arn #=> String
+    #   resp.export_snapshot_records[0].created_at #=> Time
+    #   resp.export_snapshot_records[0].location.availability_zone #=> String
+    #   resp.export_snapshot_records[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.export_snapshot_records[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.export_snapshot_records[0].state #=> String, one of "Started", "Succeeded", "Failed"
+    #   resp.export_snapshot_records[0].source_info.resource_type #=> String, one of "InstanceSnapshot", "DiskSnapshot"
+    #   resp.export_snapshot_records[0].source_info.created_at #=> Time
+    #   resp.export_snapshot_records[0].source_info.name #=> String
+    #   resp.export_snapshot_records[0].source_info.arn #=> String
+    #   resp.export_snapshot_records[0].source_info.from_resource_name #=> String
+    #   resp.export_snapshot_records[0].source_info.from_resource_arn #=> String
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_bundle_id #=> String
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_blueprint_id #=> String
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_disk_info #=> Array
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_disk_info[0].name #=> String
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_disk_info[0].path #=> String
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_disk_info[0].size_in_gb #=> Integer
+    #   resp.export_snapshot_records[0].source_info.instance_snapshot_info.from_disk_info[0].is_system_disk #=> Boolean
+    #   resp.export_snapshot_records[0].source_info.disk_snapshot_info.size_in_gb #=> Integer
+    #   resp.export_snapshot_records[0].destination_info.id #=> String
+    #   resp.export_snapshot_records[0].destination_info.service #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecords AWS API Documentation
+    #
+    # @overload get_export_snapshot_records(params = {})
+    # @param [Hash] params ({})
+    def get_export_snapshot_records(params = {}, options = {})
+      req = build_request(:get_export_snapshot_records, params)
       req.send_request(options)
     end
 
@@ -2202,8 +3416,11 @@ module Aws::Lightsail
     #   resp.instance.support_code #=> String
     #   resp.instance.created_at #=> Time
     #   resp.instance.location.availability_zone #=> String
-    #   resp.instance.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instance.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instance.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instance.tags #=> Array
+    #   resp.instance.tags[0].key #=> String
+    #   resp.instance.tags[0].value #=> String
     #   resp.instance.blueprint_id #=> String
     #   resp.instance.blueprint_name #=> String
     #   resp.instance.bundle_id #=> String
@@ -2218,8 +3435,11 @@ module Aws::Lightsail
     #   resp.instance.hardware.disks[0].support_code #=> String
     #   resp.instance.hardware.disks[0].created_at #=> Time
     #   resp.instance.hardware.disks[0].location.availability_zone #=> String
-    #   resp.instance.hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instance.hardware.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instance.hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance.hardware.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instance.hardware.disks[0].tags #=> Array
+    #   resp.instance.hardware.disks[0].tags[0].key #=> String
+    #   resp.instance.hardware.disks[0].tags[0].value #=> String
     #   resp.instance.hardware.disks[0].size_in_gb #=> Integer
     #   resp.instance.hardware.disks[0].is_system_disk #=> Boolean
     #   resp.instance.hardware.disks[0].iops #=> Integer
@@ -2255,6 +3475,14 @@ module Aws::Lightsail
 
     # Returns temporary SSH keys you can use to connect to a specific
     # virtual private server, or *instance*.
+    #
+    # The `get instance access details` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # instanceName. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_name
     #   The name of the instance to access.
@@ -2305,7 +3533,7 @@ module Aws::Lightsail
     #   The metric name to get data about.
     #
     # @option params [required, Integer] :period
-    #   The time period for which you are requesting data.
+    #   The granularity, in seconds, of the returned data points.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start time of the time period.
@@ -2412,8 +3640,11 @@ module Aws::Lightsail
     #   resp.instance_snapshot.support_code #=> String
     #   resp.instance_snapshot.created_at #=> Time
     #   resp.instance_snapshot.location.availability_zone #=> String
-    #   resp.instance_snapshot.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instance_snapshot.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instance_snapshot.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance_snapshot.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instance_snapshot.tags #=> Array
+    #   resp.instance_snapshot.tags[0].key #=> String
+    #   resp.instance_snapshot.tags[0].value #=> String
     #   resp.instance_snapshot.state #=> String, one of "pending", "error", "available"
     #   resp.instance_snapshot.progress #=> String
     #   resp.instance_snapshot.from_attached_disks #=> Array
@@ -2422,8 +3653,11 @@ module Aws::Lightsail
     #   resp.instance_snapshot.from_attached_disks[0].support_code #=> String
     #   resp.instance_snapshot.from_attached_disks[0].created_at #=> Time
     #   resp.instance_snapshot.from_attached_disks[0].location.availability_zone #=> String
-    #   resp.instance_snapshot.from_attached_disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instance_snapshot.from_attached_disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instance_snapshot.from_attached_disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance_snapshot.from_attached_disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instance_snapshot.from_attached_disks[0].tags #=> Array
+    #   resp.instance_snapshot.from_attached_disks[0].tags[0].key #=> String
+    #   resp.instance_snapshot.from_attached_disks[0].tags[0].value #=> String
     #   resp.instance_snapshot.from_attached_disks[0].size_in_gb #=> Integer
     #   resp.instance_snapshot.from_attached_disks[0].is_system_disk #=> Boolean
     #   resp.instance_snapshot.from_attached_disks[0].iops #=> Integer
@@ -2473,8 +3707,11 @@ module Aws::Lightsail
     #   resp.instance_snapshots[0].support_code #=> String
     #   resp.instance_snapshots[0].created_at #=> Time
     #   resp.instance_snapshots[0].location.availability_zone #=> String
-    #   resp.instance_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instance_snapshots[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instance_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance_snapshots[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instance_snapshots[0].tags #=> Array
+    #   resp.instance_snapshots[0].tags[0].key #=> String
+    #   resp.instance_snapshots[0].tags[0].value #=> String
     #   resp.instance_snapshots[0].state #=> String, one of "pending", "error", "available"
     #   resp.instance_snapshots[0].progress #=> String
     #   resp.instance_snapshots[0].from_attached_disks #=> Array
@@ -2483,8 +3720,11 @@ module Aws::Lightsail
     #   resp.instance_snapshots[0].from_attached_disks[0].support_code #=> String
     #   resp.instance_snapshots[0].from_attached_disks[0].created_at #=> Time
     #   resp.instance_snapshots[0].from_attached_disks[0].location.availability_zone #=> String
-    #   resp.instance_snapshots[0].from_attached_disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instance_snapshots[0].from_attached_disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instance_snapshots[0].from_attached_disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance_snapshots[0].from_attached_disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instance_snapshots[0].from_attached_disks[0].tags #=> Array
+    #   resp.instance_snapshots[0].from_attached_disks[0].tags[0].key #=> String
+    #   resp.instance_snapshots[0].from_attached_disks[0].tags[0].value #=> String
     #   resp.instance_snapshots[0].from_attached_disks[0].size_in_gb #=> Integer
     #   resp.instance_snapshots[0].from_attached_disks[0].is_system_disk #=> Boolean
     #   resp.instance_snapshots[0].from_attached_disks[0].iops #=> Integer
@@ -2566,8 +3806,11 @@ module Aws::Lightsail
     #   resp.instances[0].support_code #=> String
     #   resp.instances[0].created_at #=> Time
     #   resp.instances[0].location.availability_zone #=> String
-    #   resp.instances[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instances[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instances[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instances[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instances[0].tags #=> Array
+    #   resp.instances[0].tags[0].key #=> String
+    #   resp.instances[0].tags[0].value #=> String
     #   resp.instances[0].blueprint_id #=> String
     #   resp.instances[0].blueprint_name #=> String
     #   resp.instances[0].bundle_id #=> String
@@ -2582,8 +3825,11 @@ module Aws::Lightsail
     #   resp.instances[0].hardware.disks[0].support_code #=> String
     #   resp.instances[0].hardware.disks[0].created_at #=> Time
     #   resp.instances[0].hardware.disks[0].location.availability_zone #=> String
-    #   resp.instances[0].hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.instances[0].hardware.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.instances[0].hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instances[0].hardware.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.instances[0].hardware.disks[0].tags #=> Array
+    #   resp.instances[0].hardware.disks[0].tags[0].key #=> String
+    #   resp.instances[0].hardware.disks[0].tags[0].value #=> String
     #   resp.instances[0].hardware.disks[0].size_in_gb #=> Integer
     #   resp.instances[0].hardware.disks[0].is_system_disk #=> Boolean
     #   resp.instances[0].hardware.disks[0].iops #=> Integer
@@ -2640,8 +3886,11 @@ module Aws::Lightsail
     #   resp.key_pair.support_code #=> String
     #   resp.key_pair.created_at #=> Time
     #   resp.key_pair.location.availability_zone #=> String
-    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.key_pair.tags #=> Array
+    #   resp.key_pair.tags[0].key #=> String
+    #   resp.key_pair.tags[0].value #=> String
     #   resp.key_pair.fingerprint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPair AWS API Documentation
@@ -2678,8 +3927,11 @@ module Aws::Lightsail
     #   resp.key_pairs[0].support_code #=> String
     #   resp.key_pairs[0].created_at #=> Time
     #   resp.key_pairs[0].location.availability_zone #=> String
-    #   resp.key_pairs[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.key_pairs[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.key_pairs[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.key_pairs[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.key_pairs[0].tags #=> Array
+    #   resp.key_pairs[0].tags[0].key #=> String
+    #   resp.key_pairs[0].tags[0].value #=> String
     #   resp.key_pairs[0].fingerprint #=> String
     #   resp.next_page_token #=> String
     #
@@ -2714,8 +3966,11 @@ module Aws::Lightsail
     #   resp.load_balancer.support_code #=> String
     #   resp.load_balancer.created_at #=> Time
     #   resp.load_balancer.location.availability_zone #=> String
-    #   resp.load_balancer.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.load_balancer.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.load_balancer.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.load_balancer.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.load_balancer.tags #=> Array
+    #   resp.load_balancer.tags[0].key #=> String
+    #   resp.load_balancer.tags[0].value #=> String
     #   resp.load_balancer.dns_name #=> String
     #   resp.load_balancer.state #=> String, one of "active", "provisioning", "active_impaired", "failed", "unknown"
     #   resp.load_balancer.protocol #=> String, one of "HTTP_HTTPS", "HTTP"
@@ -2839,7 +4094,7 @@ module Aws::Lightsail
     #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #
     # @option params [required, Integer] :period
-    #   The time period duration for your health data request.
+    #   The granularity, in seconds, of the returned data points.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start time of the period.
@@ -2945,8 +4200,11 @@ module Aws::Lightsail
     #   resp.tls_certificates[0].support_code #=> String
     #   resp.tls_certificates[0].created_at #=> Time
     #   resp.tls_certificates[0].location.availability_zone #=> String
-    #   resp.tls_certificates[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.tls_certificates[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.tls_certificates[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.tls_certificates[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.tls_certificates[0].tags #=> Array
+    #   resp.tls_certificates[0].tags[0].key #=> String
+    #   resp.tls_certificates[0].tags[0].value #=> String
     #   resp.tls_certificates[0].load_balancer_name #=> String
     #   resp.tls_certificates[0].is_attached #=> Boolean
     #   resp.tls_certificates[0].status #=> String, one of "PENDING_VALIDATION", "ISSUED", "INACTIVE", "EXPIRED", "VALIDATION_TIMED_OUT", "REVOKED", "FAILED", "UNKNOWN"
@@ -3013,8 +4271,11 @@ module Aws::Lightsail
     #   resp.load_balancers[0].support_code #=> String
     #   resp.load_balancers[0].created_at #=> Time
     #   resp.load_balancers[0].location.availability_zone #=> String
-    #   resp.load_balancers[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.load_balancers[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.load_balancers[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.load_balancers[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.load_balancers[0].tags #=> Array
+    #   resp.load_balancers[0].tags[0].key #=> String
+    #   resp.load_balancers[0].tags[0].value #=> String
     #   resp.load_balancers[0].dns_name #=> String
     #   resp.load_balancers[0].state #=> String, one of "active", "provisioning", "active_impaired", "failed", "unknown"
     #   resp.load_balancers[0].protocol #=> String, one of "HTTP_HTTPS", "HTTP"
@@ -3063,13 +4324,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -3111,13 +4372,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3161,13 +4422,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3185,13 +4446,18 @@ module Aws::Lightsail
     end
 
     # Returns a list of all valid regions for Amazon Lightsail. Use the
-    # `include availability zones` parameter to also return the availability
-    # zones in a region.
+    # `include availability zones` parameter to also return the Availability
+    # Zones in a region.
     #
     # @option params [Boolean] :include_availability_zones
     #   A Boolean value indicating whether to also include Availability Zones
     #   in your get regions request. Availability Zones are indicated with a
     #   letter: e.g., `us-east-2a`.
+    #
+    # @option params [Boolean] :include_relational_database_availability_zones
+    #   &gt;A Boolean value indicating whether to also include Availability
+    #   Zones for databases in your get regions request. Availability Zones
+    #   are indicated with a letter (e.g., `us-east-2a`).
     #
     # @return [Types::GetRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3201,6 +4467,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_regions({
     #     include_availability_zones: false,
+    #     include_relational_database_availability_zones: false,
     #   })
     #
     # @example Response structure
@@ -3209,10 +4476,13 @@ module Aws::Lightsail
     #   resp.regions[0].continent_code #=> String
     #   resp.regions[0].description #=> String
     #   resp.regions[0].display_name #=> String
-    #   resp.regions[0].name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.regions[0].name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.regions[0].availability_zones #=> Array
     #   resp.regions[0].availability_zones[0].zone_name #=> String
     #   resp.regions[0].availability_zones[0].state #=> String
+    #   resp.regions[0].relational_database_availability_zones #=> Array
+    #   resp.regions[0].relational_database_availability_zones[0].zone_name #=> String
+    #   resp.regions[0].relational_database_availability_zones[0].state #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegions AWS API Documentation
     #
@@ -3220,6 +4490,653 @@ module Aws::Lightsail
     # @param [Hash] params ({})
     def get_regions(params = {}, options = {})
       req = build_request(:get_regions, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific database in Amazon Lightsail.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of the database that you are looking up.
+    #
+    # @return [Types::GetRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseResult#relational_database #relational_database} => Types::RelationalDatabase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.relational_database.name #=> String
+    #   resp.relational_database.arn #=> String
+    #   resp.relational_database.support_code #=> String
+    #   resp.relational_database.created_at #=> Time
+    #   resp.relational_database.location.availability_zone #=> String
+    #   resp.relational_database.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.relational_database.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.relational_database.tags #=> Array
+    #   resp.relational_database.tags[0].key #=> String
+    #   resp.relational_database.tags[0].value #=> String
+    #   resp.relational_database.relational_database_blueprint_id #=> String
+    #   resp.relational_database.relational_database_bundle_id #=> String
+    #   resp.relational_database.master_database_name #=> String
+    #   resp.relational_database.hardware.cpu_count #=> Integer
+    #   resp.relational_database.hardware.disk_size_in_gb #=> Integer
+    #   resp.relational_database.hardware.ram_size_in_gb #=> Float
+    #   resp.relational_database.state #=> String
+    #   resp.relational_database.secondary_availability_zone #=> String
+    #   resp.relational_database.backup_retention_enabled #=> Boolean
+    #   resp.relational_database.pending_modified_values.master_user_password #=> String
+    #   resp.relational_database.pending_modified_values.engine_version #=> String
+    #   resp.relational_database.pending_modified_values.backup_retention_enabled #=> Boolean
+    #   resp.relational_database.engine #=> String
+    #   resp.relational_database.engine_version #=> String
+    #   resp.relational_database.latest_restorable_time #=> Time
+    #   resp.relational_database.master_username #=> String
+    #   resp.relational_database.parameter_apply_status #=> String
+    #   resp.relational_database.preferred_backup_window #=> String
+    #   resp.relational_database.preferred_maintenance_window #=> String
+    #   resp.relational_database.publicly_accessible #=> Boolean
+    #   resp.relational_database.master_endpoint.port #=> Integer
+    #   resp.relational_database.master_endpoint.address #=> String
+    #   resp.relational_database.pending_maintenance_actions #=> Array
+    #   resp.relational_database.pending_maintenance_actions[0].action #=> String
+    #   resp.relational_database.pending_maintenance_actions[0].description #=> String
+    #   resp.relational_database.pending_maintenance_actions[0].current_apply_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabase AWS API Documentation
+    #
+    # @overload get_relational_database(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database(params = {}, options = {})
+      req = build_request(:get_relational_database, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of available database blueprints in Amazon Lightsail. A
+    # blueprint describes the major engine version of a database.
+    #
+    # You can use a blueprint ID to create a new database that runs a
+    # specific database engine.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   relational database blueprints` request.
+    #
+    # @return [Types::GetRelationalDatabaseBlueprintsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseBlueprintsResult#blueprints #blueprints} => Array&lt;Types::RelationalDatabaseBlueprint&gt;
+    #   * {Types::GetRelationalDatabaseBlueprintsResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_blueprints({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprints #=> Array
+    #   resp.blueprints[0].blueprint_id #=> String
+    #   resp.blueprints[0].engine #=> String, one of "mysql"
+    #   resp.blueprints[0].engine_version #=> String
+    #   resp.blueprints[0].engine_description #=> String
+    #   resp.blueprints[0].engine_version_description #=> String
+    #   resp.blueprints[0].is_engine_default #=> Boolean
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprints AWS API Documentation
+    #
+    # @overload get_relational_database_blueprints(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_blueprints(params = {}, options = {})
+      req = build_request(:get_relational_database_blueprints, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of bundles that are available in Amazon Lightsail. A
+    # bundle describes the performance specifications for a database.
+    #
+    # You can use a bundle ID to create a new database with explicit
+    # performance specifications.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   relational database bundles` request.
+    #
+    # @return [Types::GetRelationalDatabaseBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseBundlesResult#bundles #bundles} => Array&lt;Types::RelationalDatabaseBundle&gt;
+    #   * {Types::GetRelationalDatabaseBundlesResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_bundles({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bundles #=> Array
+    #   resp.bundles[0].bundle_id #=> String
+    #   resp.bundles[0].name #=> String
+    #   resp.bundles[0].price #=> Float
+    #   resp.bundles[0].ram_size_in_gb #=> Float
+    #   resp.bundles[0].disk_size_in_gb #=> Integer
+    #   resp.bundles[0].transfer_per_month_in_gb #=> Integer
+    #   resp.bundles[0].cpu_count #=> Integer
+    #   resp.bundles[0].is_encrypted #=> Boolean
+    #   resp.bundles[0].is_active #=> Boolean
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundles AWS API Documentation
+    #
+    # @overload get_relational_database_bundles(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_bundles(params = {}, options = {})
+      req = build_request(:get_relational_database_bundles, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of events for a specific database in Amazon Lightsail.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of the database from which to get events.
+    #
+    # @option params [Integer] :duration_in_minutes
+    #   The number of minutes in the past from which to retrieve events. For
+    #   example, to get all events from the past 2 hours, enter 120.
+    #
+    #   Default: `60`
+    #
+    #   The minimum is 1 and the maximum is 14 days (20160 minutes).
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results from for get
+    #   relational database events request.
+    #
+    # @return [Types::GetRelationalDatabaseEventsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseEventsResult#relational_database_events #relational_database_events} => Array&lt;Types::RelationalDatabaseEvent&gt;
+    #   * {Types::GetRelationalDatabaseEventsResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_events({
+    #     relational_database_name: "ResourceName", # required
+    #     duration_in_minutes: 1,
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.relational_database_events #=> Array
+    #   resp.relational_database_events[0].resource #=> String
+    #   resp.relational_database_events[0].created_at #=> Time
+    #   resp.relational_database_events[0].message #=> String
+    #   resp.relational_database_events[0].event_categories #=> Array
+    #   resp.relational_database_events[0].event_categories[0] #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEvents AWS API Documentation
+    #
+    # @overload get_relational_database_events(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_events(params = {}, options = {})
+      req = build_request(:get_relational_database_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of log events for a database in Amazon Lightsail.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database for which to get log events.
+    #
+    # @option params [required, String] :log_stream_name
+    #   The name of the log stream.
+    #
+    #   Use the `get relational database log streams` operation to get a list
+    #   of available log streams.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time interval from which to get log events.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use a start time of October 1, 2018, at
+    #     8 PM UTC, then you input `1538424000` as the start time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time interval from which to get log events.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use an end time of October 1, 2018, at 8
+    #     PM UTC, then you input `1538424000` as the end time.
+    #
+    # @option params [Boolean] :start_from_head
+    #   Parameter to specify if the log should start from head or tail. If
+    #   `true` is specified, the log event starts from the head of the log. If
+    #   `false` is specified, the log event starts from the tail of the log.
+    #
+    #   Default: `false`
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   relational database log events` request.
+    #
+    # @return [Types::GetRelationalDatabaseLogEventsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseLogEventsResult#resource_log_events #resource_log_events} => Array&lt;Types::LogEvent&gt;
+    #   * {Types::GetRelationalDatabaseLogEventsResult#next_backward_token #next_backward_token} => String
+    #   * {Types::GetRelationalDatabaseLogEventsResult#next_forward_token #next_forward_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_log_events({
+    #     relational_database_name: "ResourceName", # required
+    #     log_stream_name: "string", # required
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     start_from_head: false,
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_log_events #=> Array
+    #   resp.resource_log_events[0].created_at #=> Time
+    #   resp.resource_log_events[0].message #=> String
+    #   resp.next_backward_token #=> String
+    #   resp.next_forward_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogEvents AWS API Documentation
+    #
+    # @overload get_relational_database_log_events(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_log_events(params = {}, options = {})
+      req = build_request(:get_relational_database_log_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of available log streams for a specific database in
+    # Amazon Lightsail.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database for which to get log streams.
+    #
+    # @return [Types::GetRelationalDatabaseLogStreamsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseLogStreamsResult#log_streams #log_streams} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_log_streams({
+    #     relational_database_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_streams #=> Array
+    #   resp.log_streams[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogStreams AWS API Documentation
+    #
+    # @overload get_relational_database_log_streams(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_log_streams(params = {}, options = {})
+      req = build_request(:get_relational_database_log_streams, params)
+      req.send_request(options)
+    end
+
+    # Returns the current, previous, or pending versions of the master user
+    # password for a Lightsail database.
+    #
+    # The `asdf` operation GetRelationalDatabaseMasterUserPassword supports
+    # tag-based access control via resource tags applied to the resource
+    # identified by relationalDatabaseName.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database for which to get the master user password.
+    #
+    # @option params [String] :password_version
+    #   The password version to return.
+    #
+    #   Specifying `CURRENT` or `PREVIOUS` returns the current or previous
+    #   passwords respectively. Specifying `PENDING` returns the newest
+    #   version of the password that will rotate to `CURRENT`. After the
+    #   `PENDING` password rotates to `CURRENT`, the `PENDING` password is no
+    #   longer available.
+    #
+    #   Default: `CURRENT`
+    #
+    # @return [Types::GetRelationalDatabaseMasterUserPasswordResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseMasterUserPasswordResult#master_user_password #master_user_password} => String
+    #   * {Types::GetRelationalDatabaseMasterUserPasswordResult#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_master_user_password({
+    #     relational_database_name: "ResourceName", # required
+    #     password_version: "CURRENT", # accepts CURRENT, PREVIOUS, PENDING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.master_user_password #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPassword AWS API Documentation
+    #
+    # @overload get_relational_database_master_user_password(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_master_user_password(params = {}, options = {})
+      req = build_request(:get_relational_database_master_user_password, params)
+      req.send_request(options)
+    end
+
+    # Returns the data points of the specified metric for a database in
+    # Amazon Lightsail.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database from which to get metric data.
+    #
+    # @option params [required, String] :metric_name
+    #   The name of the metric data to return.
+    #
+    # @option params [required, Integer] :period
+    #   The granularity, in seconds, of the returned data points.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time interval from which to get metric data.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use a start time of October 1, 2018, at
+    #     8 PM UTC, then you input `1538424000` as the start time.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time interval from which to get metric data.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use an end time of October 1, 2018, at 8
+    #     PM UTC, then you input `1538424000` as the end time.
+    #
+    # @option params [required, String] :unit
+    #   The unit for the metric data request.
+    #
+    # @option params [required, Array<String>] :statistics
+    #   The array of statistics for your metric data request.
+    #
+    # @return [Types::GetRelationalDatabaseMetricDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseMetricDataResult#metric_name #metric_name} => String
+    #   * {Types::GetRelationalDatabaseMetricDataResult#metric_data #metric_data} => Array&lt;Types::MetricDatapoint&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_metric_data({
+    #     relational_database_name: "ResourceName", # required
+    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput
+    #     period: 1, # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #     statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_name #=> String, one of "CPUUtilization", "DatabaseConnections", "DiskQueueDepth", "FreeStorageSpace", "NetworkReceiveThroughput", "NetworkTransmitThroughput"
+    #   resp.metric_data #=> Array
+    #   resp.metric_data[0].average #=> Float
+    #   resp.metric_data[0].maximum #=> Float
+    #   resp.metric_data[0].minimum #=> Float
+    #   resp.metric_data[0].sample_count #=> Float
+    #   resp.metric_data[0].sum #=> Float
+    #   resp.metric_data[0].timestamp #=> Time
+    #   resp.metric_data[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricData AWS API Documentation
+    #
+    # @overload get_relational_database_metric_data(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_metric_data(params = {}, options = {})
+      req = build_request(:get_relational_database_metric_data, params)
+      req.send_request(options)
+    end
+
+    # Returns all of the runtime parameters offered by the underlying
+    # database software, or engine, for a specific database in Amazon
+    # Lightsail.
+    #
+    # In addition to the parameter names and values, this operation returns
+    # other information about each parameter. This information includes
+    # whether changes require a reboot, whether the parameter is modifiable,
+    # the allowed values, and the data types.
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database for which to get parameters.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   relational database parameters` request.
+    #
+    # @return [Types::GetRelationalDatabaseParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseParametersResult#parameters #parameters} => Array&lt;Types::RelationalDatabaseParameter&gt;
+    #   * {Types::GetRelationalDatabaseParametersResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_parameters({
+    #     relational_database_name: "ResourceName", # required
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.parameters #=> Array
+    #   resp.parameters[0].allowed_values #=> String
+    #   resp.parameters[0].apply_method #=> String
+    #   resp.parameters[0].apply_type #=> String
+    #   resp.parameters[0].data_type #=> String
+    #   resp.parameters[0].description #=> String
+    #   resp.parameters[0].is_modifiable #=> Boolean
+    #   resp.parameters[0].parameter_name #=> String
+    #   resp.parameters[0].parameter_value #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParameters AWS API Documentation
+    #
+    # @overload get_relational_database_parameters(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_parameters(params = {}, options = {})
+      req = build_request(:get_relational_database_parameters, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific database snapshot in Amazon
+    # Lightsail.
+    #
+    # @option params [required, String] :relational_database_snapshot_name
+    #   The name of the database snapshot for which to get information.
+    #
+    # @return [Types::GetRelationalDatabaseSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseSnapshotResult#relational_database_snapshot #relational_database_snapshot} => Types::RelationalDatabaseSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_snapshot({
+    #     relational_database_snapshot_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.relational_database_snapshot.name #=> String
+    #   resp.relational_database_snapshot.arn #=> String
+    #   resp.relational_database_snapshot.support_code #=> String
+    #   resp.relational_database_snapshot.created_at #=> Time
+    #   resp.relational_database_snapshot.location.availability_zone #=> String
+    #   resp.relational_database_snapshot.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.relational_database_snapshot.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.relational_database_snapshot.tags #=> Array
+    #   resp.relational_database_snapshot.tags[0].key #=> String
+    #   resp.relational_database_snapshot.tags[0].value #=> String
+    #   resp.relational_database_snapshot.engine #=> String
+    #   resp.relational_database_snapshot.engine_version #=> String
+    #   resp.relational_database_snapshot.size_in_gb #=> Integer
+    #   resp.relational_database_snapshot.state #=> String
+    #   resp.relational_database_snapshot.from_relational_database_name #=> String
+    #   resp.relational_database_snapshot.from_relational_database_arn #=> String
+    #   resp.relational_database_snapshot.from_relational_database_bundle_id #=> String
+    #   resp.relational_database_snapshot.from_relational_database_blueprint_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshot AWS API Documentation
+    #
+    # @overload get_relational_database_snapshot(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_snapshot(params = {}, options = {})
+      req = build_request(:get_relational_database_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Returns information about all of your database snapshots in Amazon
+    # Lightsail.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   relational database snapshots` request.
+    #
+    # @return [Types::GetRelationalDatabaseSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabaseSnapshotsResult#relational_database_snapshots #relational_database_snapshots} => Array&lt;Types::RelationalDatabaseSnapshot&gt;
+    #   * {Types::GetRelationalDatabaseSnapshotsResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_database_snapshots({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.relational_database_snapshots #=> Array
+    #   resp.relational_database_snapshots[0].name #=> String
+    #   resp.relational_database_snapshots[0].arn #=> String
+    #   resp.relational_database_snapshots[0].support_code #=> String
+    #   resp.relational_database_snapshots[0].created_at #=> Time
+    #   resp.relational_database_snapshots[0].location.availability_zone #=> String
+    #   resp.relational_database_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.relational_database_snapshots[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.relational_database_snapshots[0].tags #=> Array
+    #   resp.relational_database_snapshots[0].tags[0].key #=> String
+    #   resp.relational_database_snapshots[0].tags[0].value #=> String
+    #   resp.relational_database_snapshots[0].engine #=> String
+    #   resp.relational_database_snapshots[0].engine_version #=> String
+    #   resp.relational_database_snapshots[0].size_in_gb #=> Integer
+    #   resp.relational_database_snapshots[0].state #=> String
+    #   resp.relational_database_snapshots[0].from_relational_database_name #=> String
+    #   resp.relational_database_snapshots[0].from_relational_database_arn #=> String
+    #   resp.relational_database_snapshots[0].from_relational_database_bundle_id #=> String
+    #   resp.relational_database_snapshots[0].from_relational_database_blueprint_id #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshots AWS API Documentation
+    #
+    # @overload get_relational_database_snapshots(params = {})
+    # @param [Hash] params ({})
+    def get_relational_database_snapshots(params = {}, options = {})
+      req = build_request(:get_relational_database_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Returns information about all of your databases in Amazon Lightsail.
+    #
+    # @option params [String] :page_token
+    #   A token used for advancing to a specific page of results for your `get
+    #   relational database` request.
+    #
+    # @return [Types::GetRelationalDatabasesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRelationalDatabasesResult#relational_databases #relational_databases} => Array&lt;Types::RelationalDatabase&gt;
+    #   * {Types::GetRelationalDatabasesResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_relational_databases({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.relational_databases #=> Array
+    #   resp.relational_databases[0].name #=> String
+    #   resp.relational_databases[0].arn #=> String
+    #   resp.relational_databases[0].support_code #=> String
+    #   resp.relational_databases[0].created_at #=> Time
+    #   resp.relational_databases[0].location.availability_zone #=> String
+    #   resp.relational_databases[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.relational_databases[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.relational_databases[0].tags #=> Array
+    #   resp.relational_databases[0].tags[0].key #=> String
+    #   resp.relational_databases[0].tags[0].value #=> String
+    #   resp.relational_databases[0].relational_database_blueprint_id #=> String
+    #   resp.relational_databases[0].relational_database_bundle_id #=> String
+    #   resp.relational_databases[0].master_database_name #=> String
+    #   resp.relational_databases[0].hardware.cpu_count #=> Integer
+    #   resp.relational_databases[0].hardware.disk_size_in_gb #=> Integer
+    #   resp.relational_databases[0].hardware.ram_size_in_gb #=> Float
+    #   resp.relational_databases[0].state #=> String
+    #   resp.relational_databases[0].secondary_availability_zone #=> String
+    #   resp.relational_databases[0].backup_retention_enabled #=> Boolean
+    #   resp.relational_databases[0].pending_modified_values.master_user_password #=> String
+    #   resp.relational_databases[0].pending_modified_values.engine_version #=> String
+    #   resp.relational_databases[0].pending_modified_values.backup_retention_enabled #=> Boolean
+    #   resp.relational_databases[0].engine #=> String
+    #   resp.relational_databases[0].engine_version #=> String
+    #   resp.relational_databases[0].latest_restorable_time #=> Time
+    #   resp.relational_databases[0].master_username #=> String
+    #   resp.relational_databases[0].parameter_apply_status #=> String
+    #   resp.relational_databases[0].preferred_backup_window #=> String
+    #   resp.relational_databases[0].preferred_maintenance_window #=> String
+    #   resp.relational_databases[0].publicly_accessible #=> Boolean
+    #   resp.relational_databases[0].master_endpoint.port #=> Integer
+    #   resp.relational_databases[0].master_endpoint.address #=> String
+    #   resp.relational_databases[0].pending_maintenance_actions #=> Array
+    #   resp.relational_databases[0].pending_maintenance_actions[0].action #=> String
+    #   resp.relational_databases[0].pending_maintenance_actions[0].description #=> String
+    #   resp.relational_databases[0].pending_maintenance_actions[0].current_apply_date #=> Time
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabases AWS API Documentation
+    #
+    # @overload get_relational_databases(params = {})
+    # @param [Hash] params ({})
+    def get_relational_databases(params = {}, options = {})
+      req = build_request(:get_relational_databases, params)
       req.send_request(options)
     end
 
@@ -3245,8 +5162,8 @@ module Aws::Lightsail
     #   resp.static_ip.support_code #=> String
     #   resp.static_ip.created_at #=> Time
     #   resp.static_ip.location.availability_zone #=> String
-    #   resp.static_ip.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.static_ip.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.static_ip.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.static_ip.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.static_ip.ip_address #=> String
     #   resp.static_ip.attached_to #=> String
     #   resp.static_ip.is_attached #=> Boolean
@@ -3285,8 +5202,8 @@ module Aws::Lightsail
     #   resp.static_ips[0].support_code #=> String
     #   resp.static_ips[0].created_at #=> Time
     #   resp.static_ips[0].location.availability_zone #=> String
-    #   resp.static_ips[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
-    #   resp.static_ips[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.static_ips[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.static_ips[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.static_ips[0].ip_address #=> String
     #   resp.static_ips[0].attached_to #=> String
     #   resp.static_ips[0].is_attached #=> Boolean
@@ -3324,13 +5241,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -3367,6 +5284,14 @@ module Aws::Lightsail
 
     # Adds public ports to an Amazon Lightsail instance.
     #
+    # The `open instance public ports` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # instanceName. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, Types::PortInfo] :port_info
     #   An array of key-value pairs containing information about the port
     #   mappings.
@@ -3393,13 +5318,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -3424,13 +5349,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -3448,6 +5373,14 @@ module Aws::Lightsail
     # Sets the specified open ports for an Amazon Lightsail instance, and
     # closes all ports for every protocol not included in the current
     # request.
+    #
+    # The `put instance public ports` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # instanceName. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, Array<Types::PortInfo>] :port_infos
     #   Specifies information about the public port(s).
@@ -3476,13 +5409,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -3502,6 +5435,14 @@ module Aws::Lightsail
     # the same IP address after restarting, create a static IP address and
     # attach it to the instance.
     #
+    # The `reboot instance` operation supports tag-based access control via
+    # resource tags applied to the resource identified by instanceName. For
+    # more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
     # @option params [required, String] :instance_name
     #   The name of the instance to reboot.
     #
@@ -3520,13 +5461,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3538,6 +5479,56 @@ module Aws::Lightsail
     # @param [Hash] params ({})
     def reboot_instance(params = {}, options = {})
       req = build_request(:reboot_instance, params)
+      req.send_request(options)
+    end
+
+    # Restarts a specific database in Amazon Lightsail.
+    #
+    # The `reboot relational database` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # relationalDatabaseName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database to reboot.
+    #
+    # @return [Types::RebootRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebootRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootRelationalDatabase AWS API Documentation
+    #
+    # @overload reboot_relational_database(params = {})
+    # @param [Hash] params ({})
+    def reboot_relational_database(params = {}, options = {})
+      req = build_request(:reboot_relational_database, params)
       req.send_request(options)
     end
 
@@ -3561,13 +5552,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3584,6 +5575,14 @@ module Aws::Lightsail
 
     # Starts a specific Amazon Lightsail instance from a stopped state. To
     # restart an instance, use the reboot instance operation.
+    #
+    # The `start instance` operation supports tag-based access control via
+    # resource tags applied to the resource identified by instanceName. For
+    # more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_name
     #   The name of the instance (a virtual private server) to start.
@@ -3603,13 +5602,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3624,7 +5623,66 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Starts a specific database from a stopped state in Amazon Lightsail.
+    # To restart a database, use the `reboot relational database` operation.
+    #
+    # The `start relational database` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # relationalDatabaseName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database to start.
+    #
+    # @return [Types::StartRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartRelationalDatabase AWS API Documentation
+    #
+    # @overload start_relational_database(params = {})
+    # @param [Hash] params ({})
+    def start_relational_database(params = {}, options = {})
+      req = build_request(:start_relational_database, params)
+      req.send_request(options)
+    end
+
     # Stops a specific Amazon Lightsail instance that is currently running.
+    #
+    # The `stop instance` operation supports tag-based access control via
+    # resource tags applied to the resource identified by instanceName. For
+    # more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_name
     #   The name of the instance (a virtual private server) to stop.
@@ -3653,13 +5711,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3674,6 +5732,124 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Stops a specific database that is currently running in Amazon
+    # Lightsail.
+    #
+    # The `stop relational database` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # relationalDatabaseName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database to stop.
+    #
+    # @option params [String] :relational_database_snapshot_name
+    #   The name of your new database snapshot to be created before stopping
+    #   your database.
+    #
+    # @return [Types::StopRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #     relational_database_snapshot_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopRelationalDatabase AWS API Documentation
+    #
+    # @overload stop_relational_database(params = {})
+    # @param [Hash] params ({})
+    def stop_relational_database(params = {}, options = {})
+      req = build_request(:stop_relational_database, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more tags to the specified Amazon Lightsail resource. Each
+    # resource can have a maximum of 50 tags. Each tag consists of a key and
+    # an optional value. Tag keys must be unique per resource. For more
+    # information about tags, see the [Lightsail Dev Guide][1].
+    #
+    # The `tag resource` operation supports tag-based access control via
+    # request tags and resource tags applied to the resource identified by
+    # resourceName. For more information, see the [Lightsail Dev Guide][2].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the resource to which you are adding tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag key and optional value.
+    #
+    # @return [Types::TagResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TagResourceResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_name: "ResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Attempts to unpeer the Lightsail VPC from the user's default VPC.
     #
     # @return [Types::UnpeerVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3684,13 +5860,13 @@ module Aws::Lightsail
     #
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
-    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
-    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operation.status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
@@ -3705,7 +5881,69 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Deletes the specified set of tag keys and their values from the
+    # specified Amazon Lightsail resource.
+    #
+    # The `untag resource` operation supports tag-based access control via
+    # request tags and resource tags applied to the resource identified by
+    # resourceName. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the resource from which you are removing a tag.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys to delete from the specified resource.
+    #
+    # @return [Types::UntagResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UntagResourceResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_name: "ResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates a domain recordset after it is created.
+    #
+    # The `update domain entry` operation supports tag-based access control
+    # via resource tags applied to the resource identified by domainName.
+    # For more information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :domain_name
     #   The name of the domain recordset to update.
@@ -3739,13 +5977,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3762,6 +6000,15 @@ module Aws::Lightsail
 
     # Updates the specified attribute for a load balancer. You can only
     # update one attribute at a time.
+    #
+    # The `update load balancer attribute` operation supports tag-based
+    # access control via resource tags applied to the resource identified by
+    # loadBalancerName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :load_balancer_name
     #   The name of the load balancer that you want to modify (e.g.,
@@ -3790,13 +6037,13 @@ module Aws::Lightsail
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
-    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot"
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "eu-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
-    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot"
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
     #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
@@ -3808,6 +6055,222 @@ module Aws::Lightsail
     # @param [Hash] params ({})
     def update_load_balancer_attribute(params = {}, options = {})
       req = build_request(:update_load_balancer_attribute, params)
+      req.send_request(options)
+    end
+
+    # Allows the update of one or more attributes of a database in Amazon
+    # Lightsail.
+    #
+    # Updates are applied immediately, or in cases where the updates could
+    # result in an outage, are applied during the database's predefined
+    # maintenance window.
+    #
+    # The `update relational database` operation supports tag-based access
+    # control via resource tags applied to the resource identified by
+    # relationalDatabaseName. For more information, see the [Lightsail Dev
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database to update.
+    #
+    # @option params [String] :master_user_password
+    #   The password for the master user of your database. The password can
+    #   include any printable ASCII character except "/", """, or "@".
+    #
+    #   Constraints: Must contain 8 to 41 characters.
+    #
+    # @option params [Boolean] :rotate_master_user_password
+    #   When `true`, the master user password is changed to a new strong
+    #   password generated by Lightsail.
+    #
+    #   Use the `get relational database master user password` operation to
+    #   get the new password.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created for
+    #   your database if automated backups are enabled.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the `hh24:mi-hh24:mi` format.
+    #
+    #     Example: `16:00-16:30`
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    # @option params [String] :preferred_maintenance_window
+    #   The weekly time range during which system maintenance can occur on
+    #   your database.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the `ddd:hh24:mi-ddd:hh24:mi` format.
+    #
+    #   * Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #   * Specified in Universal Coordinated Time (UTC).
+    #
+    #   * Example: `Tue:17:00-Tue:17:30`
+    #
+    # @option params [Boolean] :enable_backup_retention
+    #   When `true`, enables automated backup retention for your database.
+    #
+    #   Updates are applied during the next maintenance window because this
+    #   can result in an outage.
+    #
+    # @option params [Boolean] :disable_backup_retention
+    #   When `true`, disables automated backup retention for your database.
+    #
+    #   Disabling backup retention deletes all automated database backups.
+    #   Before disabling this, you may want to create a snapshot of your
+    #   database using the `create relational database snapshot` operation.
+    #
+    #   Updates are applied during the next maintenance window because this
+    #   can result in an outage.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies the accessibility options for your database. A value of
+    #   `true` specifies a database that is available to resources outside of
+    #   your Lightsail account. A value of `false` specifies a database that
+    #   is available only to your Lightsail resources in the same region as
+    #   your database.
+    #
+    # @option params [Boolean] :apply_immediately
+    #   When `true`, applies changes immediately. When `false`, applies
+    #   changes during the preferred maintenance window. Some changes may
+    #   cause an outage.
+    #
+    #   Default: `false`
+    #
+    # @return [Types::UpdateRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_relational_database({
+    #     relational_database_name: "ResourceName", # required
+    #     master_user_password: "SensitiveString",
+    #     rotate_master_user_password: false,
+    #     preferred_backup_window: "string",
+    #     preferred_maintenance_window: "string",
+    #     enable_backup_retention: false,
+    #     disable_backup_retention: false,
+    #     publicly_accessible: false,
+    #     apply_immediately: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabase AWS API Documentation
+    #
+    # @overload update_relational_database(params = {})
+    # @param [Hash] params ({})
+    def update_relational_database(params = {}, options = {})
+      req = build_request(:update_relational_database, params)
+      req.send_request(options)
+    end
+
+    # Allows the update of one or more parameters of a database in Amazon
+    # Lightsail.
+    #
+    # Parameter updates don't cause outages; therefore, their application
+    # is not subject to the preferred maintenance window. However, there are
+    # two ways in which paramater updates are applied: `dynamic` or
+    # `pending-reboot`. Parameters marked with a `dynamic` apply type are
+    # applied immediately. Parameters marked with a `pending-reboot` apply
+    # type are applied only after the database is rebooted using the `reboot
+    # relational database` operation.
+    #
+    # The `update relational database parameters` operation supports
+    # tag-based access control via resource tags applied to the resource
+    # identified by relationalDatabaseName. For more information, see the
+    # [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    #
+    # @option params [required, String] :relational_database_name
+    #   The name of your database for which to update parameters.
+    #
+    # @option params [required, Array<Types::RelationalDatabaseParameter>] :parameters
+    #   The database parameters to update.
+    #
+    # @return [Types::UpdateRelationalDatabaseParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRelationalDatabaseParametersResult#operations #operations} => Array&lt;Types::Operation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_relational_database_parameters({
+    #     relational_database_name: "ResourceName", # required
+    #     parameters: [ # required
+    #       {
+    #         allowed_values: "string",
+    #         apply_method: "string",
+    #         apply_type: "string",
+    #         data_type: "string",
+    #         description: "string",
+    #         is_modifiable: false,
+    #         parameter_name: "string",
+    #         parameter_value: "string",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operations #=> Array
+    #   resp.operations[0].id #=> String
+    #   resp.operations[0].resource_name #=> String
+    #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord"
+    #   resp.operations[0].created_at #=> Time
+    #   resp.operations[0].location.availability_zone #=> String
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].is_terminal #=> Boolean
+    #   resp.operations[0].operation_details #=> String
+    #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot", "CreateLoadBalancer", "DeleteLoadBalancer", "AttachInstancesToLoadBalancer", "DetachInstancesFromLoadBalancer", "UpdateLoadBalancerAttribute", "CreateLoadBalancerTlsCertificate", "DeleteLoadBalancerTlsCertificate", "AttachLoadBalancerTlsCertificate", "CreateDisk", "DeleteDisk", "AttachDisk", "DetachDisk", "CreateDiskSnapshot", "DeleteDiskSnapshot", "CreateDiskFromSnapshot", "CreateRelationalDatabase", "UpdateRelationalDatabase", "DeleteRelationalDatabase", "CreateRelationalDatabaseFromSnapshot", "CreateRelationalDatabaseSnapshot", "DeleteRelationalDatabaseSnapshot", "UpdateRelationalDatabaseParameters", "StartRelationalDatabase", "RebootRelationalDatabase", "StopRelationalDatabase"
+    #   resp.operations[0].status #=> String, one of "NotStarted", "Started", "Failed", "Completed", "Succeeded"
+    #   resp.operations[0].status_changed_at #=> Time
+    #   resp.operations[0].error_code #=> String
+    #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseParameters AWS API Documentation
+    #
+    # @overload update_relational_database_parameters(params = {})
+    # @param [Hash] params ({})
+    def update_relational_database_parameters(params = {}, options = {})
+      req = build_request(:update_relational_database_parameters, params)
       req.send_request(options)
     end
 
@@ -3824,7 +6287,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

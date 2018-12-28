@@ -38,6 +38,9 @@ module Aws
       #   bucket name will be used as the hostname. This will cause
       #   the returned URL to be 'http' and not 'https'.
       #
+      # @option params [Boolean] :use_accelerate_endpoint (false) When `true`, Presigner
+      #   will attempt to use accelerated endpoint
+      #
       # @raise [ArgumentError] Raises an ArgumentError if `:expires_in`
       #   exceeds one week.
       #
@@ -98,6 +101,7 @@ module Aws
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
         signer = build_signer(req.context.config)
+        req.context[:presigned_url] = true
 
         req.handle(step: :send) do |context|
 

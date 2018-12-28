@@ -99,6 +99,20 @@ module Aws::CloudFormation
       data[:metadata]
     end
 
+    # Information about whether the resource's actual configuration
+    # differs, or has *drifted*, from its expected configuration, as defined
+    # in the stack template and any values specified as template parameters.
+    # For more information, see [Detecting Unregulated Configuration Changes
+    # to Stacks and Resources][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # @return [Types::StackResourceDriftInformation]
+    def drift_information
+      data[:drift_information]
+    end
+
     # @!endgroup
 
     # @return [Client]

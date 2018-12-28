@@ -468,12 +468,14 @@ module Aws::WorkMail
       api.version = "2017-10-01"
 
       api.metadata = {
+        "apiVersion" => "2017-10-01",
         "endpointPrefix" => "workmail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon WorkMail",
         "signatureVersion" => "v4",
         "targetPrefix" => "WorkMailService",
+        "uid" => "workmail-2017-10-01",
       }
 
       api.add_operation(:associate_delegate_to_resource, Seahorse::Model::Operation.new.tap do |o|

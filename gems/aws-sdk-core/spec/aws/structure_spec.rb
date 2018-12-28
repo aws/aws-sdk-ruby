@@ -66,5 +66,15 @@ module Aws
       end
 
     end
+
+    describe "#to_s" do
+      it 'filters sensitive parameters' do
+        struct = Structure.new(:trait, :access_token).new
+        struct.trait = "Trait"
+        struct.access_token = "asdf1234"
+        expect(struct.to_s).to eq("{:trait=>\"Trait\", :access_token=>\"[FILTERED]\"}")
+      end
+    end
+
   end
 end

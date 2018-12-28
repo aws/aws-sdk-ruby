@@ -305,7 +305,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :option_group_name
-    #   The name of the option group to describe. Cannot be supplied together
+    #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.

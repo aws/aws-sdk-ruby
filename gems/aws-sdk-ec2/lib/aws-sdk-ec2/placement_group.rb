@@ -43,6 +43,13 @@ module Aws::EC2
       data[:strategy]
     end
 
+    # The number of partitions. Valid only if **strategy** is set to
+    # `partition`.
+    # @return [Integer]
+    def partition_count
+      data[:partition_count]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -244,6 +251,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
@@ -390,6 +401,8 @@ module Aws::EC2
     #     interface.
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
+    #
+    #   * `partition-number` - The partition in which the instance is located.
     #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.

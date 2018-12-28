@@ -26,6 +26,8 @@ a default `:region` is search for in the following locations:
         resolve_region(cfg)
       end
 
+      option(:regional_endpoint, false)
+
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting

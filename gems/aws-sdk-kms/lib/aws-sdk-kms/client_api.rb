@@ -22,24 +22,50 @@ module Aws::KMS
     CancelKeyDeletionRequest = Shapes::StructureShape.new(name: 'CancelKeyDeletionRequest')
     CancelKeyDeletionResponse = Shapes::StructureShape.new(name: 'CancelKeyDeletionResponse')
     CiphertextType = Shapes::BlobShape.new(name: 'CiphertextType')
+    CloudHsmClusterIdType = Shapes::StringShape.new(name: 'CloudHsmClusterIdType')
+    CloudHsmClusterInUseException = Shapes::StructureShape.new(name: 'CloudHsmClusterInUseException')
+    CloudHsmClusterInvalidConfigurationException = Shapes::StructureShape.new(name: 'CloudHsmClusterInvalidConfigurationException')
+    CloudHsmClusterNotActiveException = Shapes::StructureShape.new(name: 'CloudHsmClusterNotActiveException')
+    CloudHsmClusterNotFoundException = Shapes::StructureShape.new(name: 'CloudHsmClusterNotFoundException')
+    CloudHsmClusterNotRelatedException = Shapes::StructureShape.new(name: 'CloudHsmClusterNotRelatedException')
+    ConnectCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'ConnectCustomKeyStoreRequest')
+    ConnectCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'ConnectCustomKeyStoreResponse')
+    ConnectionErrorCodeType = Shapes::StringShape.new(name: 'ConnectionErrorCodeType')
+    ConnectionStateType = Shapes::StringShape.new(name: 'ConnectionStateType')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
+    CreateCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'CreateCustomKeyStoreRequest')
+    CreateCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'CreateCustomKeyStoreResponse')
     CreateGrantRequest = Shapes::StructureShape.new(name: 'CreateGrantRequest')
     CreateGrantResponse = Shapes::StructureShape.new(name: 'CreateGrantResponse')
     CreateKeyRequest = Shapes::StructureShape.new(name: 'CreateKeyRequest')
     CreateKeyResponse = Shapes::StructureShape.new(name: 'CreateKeyResponse')
+    CustomKeyStoreHasCMKsException = Shapes::StructureShape.new(name: 'CustomKeyStoreHasCMKsException')
+    CustomKeyStoreIdType = Shapes::StringShape.new(name: 'CustomKeyStoreIdType')
+    CustomKeyStoreInvalidStateException = Shapes::StructureShape.new(name: 'CustomKeyStoreInvalidStateException')
+    CustomKeyStoreNameInUseException = Shapes::StructureShape.new(name: 'CustomKeyStoreNameInUseException')
+    CustomKeyStoreNameType = Shapes::StringShape.new(name: 'CustomKeyStoreNameType')
+    CustomKeyStoreNotFoundException = Shapes::StructureShape.new(name: 'CustomKeyStoreNotFoundException')
+    CustomKeyStoresList = Shapes::ListShape.new(name: 'CustomKeyStoresList')
+    CustomKeyStoresListEntry = Shapes::StructureShape.new(name: 'CustomKeyStoresListEntry')
     DataKeySpec = Shapes::StringShape.new(name: 'DataKeySpec')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DecryptRequest = Shapes::StructureShape.new(name: 'DecryptRequest')
     DecryptResponse = Shapes::StructureShape.new(name: 'DecryptResponse')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
+    DeleteCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'DeleteCustomKeyStoreRequest')
+    DeleteCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'DeleteCustomKeyStoreResponse')
     DeleteImportedKeyMaterialRequest = Shapes::StructureShape.new(name: 'DeleteImportedKeyMaterialRequest')
     DependencyTimeoutException = Shapes::StructureShape.new(name: 'DependencyTimeoutException')
+    DescribeCustomKeyStoresRequest = Shapes::StructureShape.new(name: 'DescribeCustomKeyStoresRequest')
+    DescribeCustomKeyStoresResponse = Shapes::StructureShape.new(name: 'DescribeCustomKeyStoresResponse')
     DescribeKeyRequest = Shapes::StructureShape.new(name: 'DescribeKeyRequest')
     DescribeKeyResponse = Shapes::StructureShape.new(name: 'DescribeKeyResponse')
     DescriptionType = Shapes::StringShape.new(name: 'DescriptionType')
     DisableKeyRequest = Shapes::StructureShape.new(name: 'DisableKeyRequest')
     DisableKeyRotationRequest = Shapes::StructureShape.new(name: 'DisableKeyRotationRequest')
     DisabledException = Shapes::StructureShape.new(name: 'DisabledException')
+    DisconnectCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'DisconnectCustomKeyStoreRequest')
+    DisconnectCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'DisconnectCustomKeyStoreResponse')
     EnableKeyRequest = Shapes::StructureShape.new(name: 'EnableKeyRequest')
     EnableKeyRotationRequest = Shapes::StructureShape.new(name: 'EnableKeyRotationRequest')
     EncryptRequest = Shapes::StructureShape.new(name: 'EncryptRequest')
@@ -74,6 +100,7 @@ module Aws::KMS
     ImportKeyMaterialRequest = Shapes::StructureShape.new(name: 'ImportKeyMaterialRequest')
     ImportKeyMaterialResponse = Shapes::StructureShape.new(name: 'ImportKeyMaterialResponse')
     IncorrectKeyMaterialException = Shapes::StructureShape.new(name: 'IncorrectKeyMaterialException')
+    IncorrectTrustAnchorException = Shapes::StructureShape.new(name: 'IncorrectTrustAnchorException')
     InvalidAliasNameException = Shapes::StructureShape.new(name: 'InvalidAliasNameException')
     InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidCiphertextException = Shapes::StructureShape.new(name: 'InvalidCiphertextException')
@@ -90,6 +117,7 @@ module Aws::KMS
     KeyManagerType = Shapes::StringShape.new(name: 'KeyManagerType')
     KeyMetadata = Shapes::StructureShape.new(name: 'KeyMetadata')
     KeyState = Shapes::StringShape.new(name: 'KeyState')
+    KeyStorePasswordType = Shapes::StringShape.new(name: 'KeyStorePasswordType')
     KeyUnavailableException = Shapes::StructureShape.new(name: 'KeyUnavailableException')
     KeyUsageType = Shapes::StringShape.new(name: 'KeyUsageType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -130,9 +158,12 @@ module Aws::KMS
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValueType = Shapes::StringShape.new(name: 'TagValueType')
+    TrustAnchorCertificateType = Shapes::StringShape.new(name: 'TrustAnchorCertificateType')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAliasRequest = Shapes::StructureShape.new(name: 'UpdateAliasRequest')
+    UpdateCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'UpdateCustomKeyStoreRequest')
+    UpdateCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'UpdateCustomKeyStoreResponse')
     UpdateKeyDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateKeyDescriptionRequest')
     WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
 
@@ -149,9 +180,23 @@ module Aws::KMS
     CancelKeyDeletionResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     CancelKeyDeletionResponse.struct_class = Types::CancelKeyDeletionResponse
 
+    ConnectCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
+    ConnectCustomKeyStoreRequest.struct_class = Types::ConnectCustomKeyStoreRequest
+
+    ConnectCustomKeyStoreResponse.struct_class = Types::ConnectCustomKeyStoreResponse
+
     CreateAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, required: true, location_name: "AliasName"))
     CreateAliasRequest.add_member(:target_key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "TargetKeyId"))
     CreateAliasRequest.struct_class = Types::CreateAliasRequest
+
+    CreateCustomKeyStoreRequest.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, required: true, location_name: "CustomKeyStoreName"))
+    CreateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, required: true, location_name: "CloudHsmClusterId"))
+    CreateCustomKeyStoreRequest.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, required: true, location_name: "TrustAnchorCertificate"))
+    CreateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, required: true, location_name: "KeyStorePassword"))
+    CreateCustomKeyStoreRequest.struct_class = Types::CreateCustomKeyStoreRequest
+
+    CreateCustomKeyStoreResponse.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
+    CreateCustomKeyStoreResponse.struct_class = Types::CreateCustomKeyStoreResponse
 
     CreateGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     CreateGrantRequest.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "GranteePrincipal"))
@@ -170,12 +215,24 @@ module Aws::KMS
     CreateKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
     CreateKeyRequest.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageType, location_name: "KeyUsage"))
     CreateKeyRequest.add_member(:origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "Origin"))
+    CreateKeyRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
     CreateKeyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
     CreateKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateKeyRequest.struct_class = Types::CreateKeyRequest
 
     CreateKeyResponse.add_member(:key_metadata, Shapes::ShapeRef.new(shape: KeyMetadata, location_name: "KeyMetadata"))
     CreateKeyResponse.struct_class = Types::CreateKeyResponse
+
+    CustomKeyStoresList.member = Shapes::ShapeRef.new(shape: CustomKeyStoresListEntry)
+
+    CustomKeyStoresListEntry.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
+    CustomKeyStoresListEntry.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, location_name: "CustomKeyStoreName"))
+    CustomKeyStoresListEntry.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
+    CustomKeyStoresListEntry.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, location_name: "TrustAnchorCertificate"))
+    CustomKeyStoresListEntry.add_member(:connection_state, Shapes::ShapeRef.new(shape: ConnectionStateType, location_name: "ConnectionState"))
+    CustomKeyStoresListEntry.add_member(:connection_error_code, Shapes::ShapeRef.new(shape: ConnectionErrorCodeType, location_name: "ConnectionErrorCode"))
+    CustomKeyStoresListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    CustomKeyStoresListEntry.struct_class = Types::CustomKeyStoresListEntry
 
     DecryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "CiphertextBlob"))
     DecryptRequest.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContext"))
@@ -189,8 +246,24 @@ module Aws::KMS
     DeleteAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, required: true, location_name: "AliasName"))
     DeleteAliasRequest.struct_class = Types::DeleteAliasRequest
 
+    DeleteCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
+    DeleteCustomKeyStoreRequest.struct_class = Types::DeleteCustomKeyStoreRequest
+
+    DeleteCustomKeyStoreResponse.struct_class = Types::DeleteCustomKeyStoreResponse
+
     DeleteImportedKeyMaterialRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     DeleteImportedKeyMaterialRequest.struct_class = Types::DeleteImportedKeyMaterialRequest
+
+    DescribeCustomKeyStoresRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
+    DescribeCustomKeyStoresRequest.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, location_name: "CustomKeyStoreName"))
+    DescribeCustomKeyStoresRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
+    DescribeCustomKeyStoresRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
+    DescribeCustomKeyStoresRequest.struct_class = Types::DescribeCustomKeyStoresRequest
+
+    DescribeCustomKeyStoresResponse.add_member(:custom_key_stores, Shapes::ShapeRef.new(shape: CustomKeyStoresList, location_name: "CustomKeyStores"))
+    DescribeCustomKeyStoresResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "NextMarker"))
+    DescribeCustomKeyStoresResponse.add_member(:truncated, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Truncated"))
+    DescribeCustomKeyStoresResponse.struct_class = Types::DescribeCustomKeyStoresResponse
 
     DescribeKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     DescribeKeyRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
@@ -204,6 +277,11 @@ module Aws::KMS
 
     DisableKeyRotationRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     DisableKeyRotationRequest.struct_class = Types::DisableKeyRotationRequest
+
+    DisconnectCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
+    DisconnectCustomKeyStoreRequest.struct_class = Types::DisconnectCustomKeyStoreRequest
+
+    DisconnectCustomKeyStoreResponse.struct_class = Types::DisconnectCustomKeyStoreResponse
 
     EnableKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     EnableKeyRequest.struct_class = Types::EnableKeyRequest
@@ -248,6 +326,7 @@ module Aws::KMS
     GenerateDataKeyWithoutPlaintextResponse.struct_class = Types::GenerateDataKeyWithoutPlaintextResponse
 
     GenerateRandomRequest.add_member(:number_of_bytes, Shapes::ShapeRef.new(shape: NumberOfBytesType, location_name: "NumberOfBytes"))
+    GenerateRandomRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
     GenerateRandomRequest.struct_class = Types::GenerateRandomRequest
 
     GenerateRandomResponse.add_member(:plaintext, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "Plaintext"))
@@ -324,6 +403,8 @@ module Aws::KMS
     KeyMetadata.add_member(:deletion_date, Shapes::ShapeRef.new(shape: DateType, location_name: "DeletionDate"))
     KeyMetadata.add_member(:valid_to, Shapes::ShapeRef.new(shape: DateType, location_name: "ValidTo"))
     KeyMetadata.add_member(:origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "Origin"))
+    KeyMetadata.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
+    KeyMetadata.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
     KeyMetadata.add_member(:expiration_model, Shapes::ShapeRef.new(shape: ExpirationModelType, location_name: "ExpirationModel"))
     KeyMetadata.add_member(:key_manager, Shapes::ShapeRef.new(shape: KeyManagerType, location_name: "KeyManager"))
     KeyMetadata.struct_class = Types::KeyMetadata
@@ -439,6 +520,14 @@ module Aws::KMS
     UpdateAliasRequest.add_member(:target_key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "TargetKeyId"))
     UpdateAliasRequest.struct_class = Types::UpdateAliasRequest
 
+    UpdateCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
+    UpdateCustomKeyStoreRequest.add_member(:new_custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, location_name: "NewCustomKeyStoreName"))
+    UpdateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, location_name: "KeyStorePassword"))
+    UpdateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
+    UpdateCustomKeyStoreRequest.struct_class = Types::UpdateCustomKeyStoreRequest
+
+    UpdateCustomKeyStoreResponse.struct_class = Types::UpdateCustomKeyStoreResponse
+
     UpdateKeyDescriptionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     UpdateKeyDescriptionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionType, required: true, location_name: "Description"))
     UpdateKeyDescriptionRequest.struct_class = Types::UpdateKeyDescriptionRequest
@@ -450,12 +539,16 @@ module Aws::KMS
       api.version = "2014-11-01"
 
       api.metadata = {
+        "apiVersion" => "2014-11-01",
         "endpointPrefix" => "kms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "KMS",
         "serviceFullName" => "AWS Key Management Service",
+        "serviceId" => "KMS",
         "signatureVersion" => "v4",
         "targetPrefix" => "TrentService",
+        "uid" => "kms-2014-11-01",
       }
 
       api.add_operation(:cancel_key_deletion, Seahorse::Model::Operation.new.tap do |o|
@@ -471,6 +564,19 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
       end)
 
+      api.add_operation(:connect_custom_key_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConnectCustomKeyStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ConnectCustomKeyStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConnectCustomKeyStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
+      end)
+
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAlias"
         o.http_method = "POST"
@@ -484,6 +590,21 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:create_custom_key_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomKeyStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomKeyStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomKeyStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNameInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectTrustAnchorException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
       end)
 
       api.add_operation(:create_grant, Seahorse::Model::Operation.new.tap do |o|
@@ -515,6 +636,9 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TagException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
       end)
 
       api.add_operation(:decrypt, Seahorse::Model::Operation.new.tap do |o|
@@ -545,6 +669,18 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
       end)
 
+      api.add_operation(:delete_custom_key_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomKeyStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomKeyStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomKeyStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreHasCMKsException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+      end)
+
       api.add_operation(:delete_imported_key_material, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteImportedKeyMaterial"
         o.http_method = "POST"
@@ -557,6 +693,16 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:describe_custom_key_stores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCustomKeyStores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCustomKeyStoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCustomKeyStoresResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
       end)
 
       api.add_operation(:describe_key, Seahorse::Model::Operation.new.tap do |o|
@@ -597,6 +743,17 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:disconnect_custom_key_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisconnectCustomKeyStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisconnectCustomKeyStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisconnectCustomKeyStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
       end)
 
       api.add_operation(:enable_key, Seahorse::Model::Operation.new.tap do |o|
@@ -684,6 +841,8 @@ module Aws::KMS
         o.output = Shapes::ShapeRef.new(shape: GenerateRandomResponse)
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
       end)
 
       api.add_operation(:get_key_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -754,6 +913,8 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o[:pager] = Aws::Pager.new(
           more_results: "truncated",
           limit_key: "limit",
@@ -959,6 +1120,21 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:update_custom_key_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomKeyStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomKeyStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCustomKeyStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotRelatedException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
       end)
 
       api.add_operation(:update_key_description, Seahorse::Model::Operation.new.tap do |o|

@@ -664,7 +664,7 @@ module Aws::DeviceFarm
     #       {
     #         project_arn: "AmazonResourceName", # required
     #         name: "Name", # required
-    #         type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE
+    #         type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
     #         content_type: "ContentType",
     #       }
     #
@@ -689,7 +689,7 @@ module Aws::DeviceFarm
     #
     #   * IOS\_APP: An iOS upload.
     #
-    #   * WEB\_APP: A web appliction upload.
+    #   * WEB\_APP: A web application upload.
     #
     #   * EXTERNAL\_DATA: An external data upload.
     #
@@ -722,6 +722,27 @@ module Aws::DeviceFarm
     #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
     #
     #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
+    #     upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec
+    #     upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #
+    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
     #
     #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
     #   Device Farm throws an `ArgumentException` error.
@@ -1318,6 +1339,7 @@ module Aws::DeviceFarm
     #         job_timeout_minutes: 1,
     #         accounts_cleanup: false,
     #         app_packages_cleanup: false,
+    #         video_capture: false,
     #         skip_app_resign: false,
     #       }
     #
@@ -1333,6 +1355,11 @@ module Aws::DeviceFarm
     # @!attribute [rw] app_packages_cleanup
     #   True if app package cleanup is enabled at the beginning of the test;
     #   otherwise, false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] video_capture
+    #   Set to true to enable video capture; otherwise, set to false. The
+    #   default is true.
     #   @return [Boolean]
     #
     # @!attribute [rw] skip_app_resign
@@ -1354,6 +1381,7 @@ module Aws::DeviceFarm
       :job_timeout_minutes,
       :accounts_cleanup,
       :app_packages_cleanup,
+      :video_capture,
       :skip_app_resign)
       include Aws::Structure
     end
@@ -1422,6 +1450,7 @@ module Aws::DeviceFarm
     #         test: {
     #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #           test_package_arn: "AmazonResourceName",
+    #           test_spec_arn: "AmazonResourceName",
     #           filter: "Filter",
     #           parameters: {
     #             "String" => "String",
@@ -2220,6 +2249,15 @@ module Aws::DeviceFarm
     #   Represents the total (metered or unmetered) minutes used by the job.
     #   @return [Types::DeviceMinutes]
     #
+    # @!attribute [rw] video_endpoint
+    #   The endpoint for streaming device video.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_capture
+    #   This value is set to true if video capture is enabled; otherwise, it
+    #   is set to false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -2235,7 +2273,9 @@ module Aws::DeviceFarm
       :message,
       :device,
       :instance_arn,
-      :device_minutes)
+      :device_minutes,
+      :video_endpoint,
+      :video_capture)
       include Aws::Structure
     end
 
@@ -2889,8 +2929,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the project for which you want to
-    #   list samples.
+    #   The Amazon Resource Name (ARN) of the job used to list samples.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3098,12 +3137,78 @@ module Aws::DeviceFarm
     #
     #       {
     #         arn: "AmazonResourceName", # required
+    #         type: "ANDROID_APP", # accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
     #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the project for which you want to
     #   list uploads.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of upload.
+    #
+    #   Must be one of the following values:
+    #
+    #   * ANDROID\_APP: An Android upload.
+    #
+    #   * IOS\_APP: An iOS upload.
+    #
+    #   * WEB\_APP: A web appliction upload.
+    #
+    #   * EXTERNAL\_DATA: An external data upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
+    #     package upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
+    #     package upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
+    #     upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
+    #     package upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG
+    #     test package upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
+    #     upload.
+    #
+    #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_PACKAGE: An instrumentation upload.
+    #
+    #   * UIAUTOMATION\_TEST\_PACKAGE: A uiautomation test package upload.
+    #
+    #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
+    #
+    #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
+    #
+    #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
+    #     upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec
+    #     upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #
+    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3116,6 +3221,7 @@ module Aws::DeviceFarm
     #
     class ListUploadsRequest < Struct.new(
       :arn,
+      :type,
       :next_token)
       include Aws::Structure
     end
@@ -4160,6 +4266,10 @@ module Aws::DeviceFarm
     #   [1]: https://aws.amazon.com/device-farm/faq/
     #   @return [Boolean]
     #
+    # @!attribute [rw] test_spec_arn
+    #   The ARN of the YAML-formatted test specification for the run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
     class Run < Struct.new(
@@ -4191,7 +4301,8 @@ module Aws::DeviceFarm
       :location,
       :customer_artifact_paths,
       :web_url,
-      :skip_app_resign)
+      :skip_app_resign,
+      :test_spec_arn)
       include Aws::Structure
     end
 
@@ -4361,6 +4472,7 @@ module Aws::DeviceFarm
     #         test: { # required
     #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #           test_package_arn: "AmazonResourceName",
+    #           test_spec_arn: "AmazonResourceName",
     #           filter: "Filter",
     #           parameters: {
     #             "String" => "String",
@@ -4393,6 +4505,7 @@ module Aws::DeviceFarm
     #           job_timeout_minutes: 1,
     #           accounts_cleanup: false,
     #           app_packages_cleanup: false,
+    #           video_capture: false,
     #           skip_app_resign: false,
     #         },
     #       }
@@ -4452,7 +4565,9 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
-    # Represents additional test settings.
+    # Represents test settings. This data structure is passed in as the
+    # "test" parameter to ScheduleRun. For an example of the JSON request
+    # syntax, see ScheduleRun.
     #
     # @note When making an API call, you may pass ScheduleRunTest
     #   data as a hash:
@@ -4460,6 +4575,7 @@ module Aws::DeviceFarm
     #       {
     #         type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #         test_package_arn: "AmazonResourceName",
+    #         test_spec_arn: "AmazonResourceName",
     #         filter: "Filter",
     #         parameters: {
     #           "String" => "String",
@@ -4507,13 +4623,25 @@ module Aws::DeviceFarm
     #   The ARN of the uploaded test that will be run.
     #   @return [String]
     #
+    # @!attribute [rw] test_spec_arn
+    #   The ARN of the YAML-formatted test specification.
+    #   @return [String]
+    #
     # @!attribute [rw] filter
     #   The test's filter.
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The test's parameters, such as the following test framework
-    #   parameters and fixture settings:
+    #   The test's parameters, such as test framework parameters and
+    #   fixture settings. Parameters are represented by name-value pairs of
+    #   strings.
+    #
+    #   For all tests:
+    #
+    #   * app\_performance\_monitoring: Performance monitoring is enabled by
+    #     default. Set this parameter to "false" to disable it.
+    #
+    #   ^
     #
     #   For Calabash tests:
     #
@@ -4526,14 +4654,14 @@ module Aws::DeviceFarm
     #   For Appium tests (all types):
     #
     #   * appium\_version: The Appium version. Currently supported values
-    #     are "1.4.16", "1.6.3", "latest", and "default".
+    #     are "1.7.2", "1.7.1", "1.6.5", "latest", and "default".
     #
     #     * “latest” will run the latest Appium version supported by Device
-    #       Farm (1.6.3).
+    #       Farm (1.7.2).
     #
     #     * For “default”, Device Farm will choose a compatible version of
-    #       Appium for the device. The current behavior is to run 1.4.16 on
-    #       Android devices and iOS 9 and earlier, 1.6.3 for iOS 10 and
+    #       Appium for the device. The current behavior is to run 1.7.2 on
+    #       Android devices and iOS 9 and earlier, 1.7.2 for iOS 10 and
     #       later.
     #
     #     * This behavior is subject to change.
@@ -4598,8 +4726,39 @@ module Aws::DeviceFarm
     class ScheduleRunTest < Struct.new(
       :type,
       :test_package_arn,
+      :test_spec_arn,
       :filter,
       :parameters)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   Represents the Amazon Resource Name (ARN) of the Device Farm job you
+    #   wish to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJobRequest AWS API Documentation
+    #
+    class StopJobRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job
+    #   The job that was stopped.
+    #   @return [Types::Job]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJobResult AWS API Documentation
+    #
+    class StopJobResult < Struct.new(
+      :job)
       include Aws::Structure
     end
 
@@ -5301,6 +5460,56 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateUploadRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #         name: "Name",
+    #         content_type: "ContentType",
+    #         edit_content: false,
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the uploaded test spec.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The upload's test spec file name. The name should not contain the
+    #   '/' character. The test spec file name must end with the `.yaml`
+    #   or `.yml` file extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The upload's content type (for example, "application/x-yaml").
+    #   @return [String]
+    #
+    # @!attribute [rw] edit_content
+    #   Set to true if the YAML file has changed and needs to be updated;
+    #   otherwise, set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUploadRequest AWS API Documentation
+    #
+    class UpdateUploadRequest < Struct.new(
+      :arn,
+      :name,
+      :content_type,
+      :edit_content)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upload
+    #   A test spec uploaded to Device Farm.
+    #   @return [Types::Upload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUploadResult AWS API Documentation
+    #
+    class UpdateUploadResult < Struct.new(
+      :upload)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateVPCEConfigurationRequest
     #   data as a hash:
     #
@@ -5418,6 +5627,27 @@ module Aws::DeviceFarm
     #   * XCTEST\_TEST\_PACKAGE: An XCode test package upload.
     #
     #   * XCTEST\_UI\_TEST\_PACKAGE: An XCode UI test package upload.
+    #
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
+    #     upload.
+    #
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
+    #     upload.
+    #
+    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
+    #     spec upload.
+    #
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec
+    #     upload.
+    #
+    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #
+    #   * XCTEST\_UI\_TEST\_SPEC: An XCode UI test spec upload.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5454,6 +5684,14 @@ module Aws::DeviceFarm
     #   A message about the upload's result.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   The upload's category. Allowed values include:
+    #
+    #   * CURATED: An upload managed by AWS Device Farm.
+    #
+    #   * PRIVATE: An upload managed by the AWS Device Farm customer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Upload AWS API Documentation
     #
     class Upload < Struct.new(
@@ -5465,7 +5703,8 @@ module Aws::DeviceFarm
       :url,
       :metadata,
       :content_type,
-      :message)
+      :message,
+      :category)
       include Aws::Structure
     end
 

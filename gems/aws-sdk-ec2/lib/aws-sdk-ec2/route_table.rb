@@ -49,6 +49,12 @@ module Aws::EC2
       data[:vpc_id]
     end
 
+    # The ID of the AWS account that owns the route table.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -215,6 +221,7 @@ module Aws::EC2
     #     gateway_id: "String",
     #     instance_id: "String",
     #     nat_gateway_id: "String",
+    #     transit_gateway_id: "String",
     #     network_interface_id: "String",
     #     vpc_peering_connection_id: "String",
     #   })
@@ -241,6 +248,8 @@ module Aws::EC2
     #   attached.
     # @option options [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    # @option options [String] :transit_gateway_id
+    #   The ID of a transit gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

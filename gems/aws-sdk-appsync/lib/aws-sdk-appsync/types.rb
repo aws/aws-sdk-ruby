@@ -10,13 +10,13 @@ module Aws::AppSync
 
     # Describes an API key.
     #
-    # Customers invoke AWS AppSync GraphQL APIs with API keys as an identity
-    # mechanism. There are two key versions:
+    # Customers invoke AWS AppSync GraphQL API operations with API keys as
+    # an identity mechanism. There are two key versions:
     #
     # **da1**\: This version was introduced at launch in November 2017.
     # These keys always expire after 7 days. Key expiration is managed by
-    # DynamoDB TTL. The keys will cease to be valid after Feb 21, 2018 and
-    # should not be used after that date.
+    # Amazon DynamoDB TTL. The keys ceased to be valid after February 21,
+    # 2018 and should not be used after that date.
     #
     # * `ListApiKeys` returns the expiration time in milliseconds.
     #
@@ -26,10 +26,11 @@ module Aws::AppSync
     #
     # * `DeleteApiKey` deletes the item from the table.
     #
-    # * Expiration is stored in DynamoDB as milliseconds. This results in a
-    #   bug where keys are not automatically deleted because DynamoDB
-    #   expects the TTL to be stored in seconds. As a one-time action, we
-    #   will delete these keys from the table after Feb 21, 2018.
+    # * Expiration is stored in Amazon DynamoDB as milliseconds. This
+    #   results in a bug where keys are not automatically deleted because
+    #   DynamoDB expects the TTL to be stored in seconds. As a one-time
+    #   action, we will delete these keys from the table after February 21,
+    #   2018.
     #
     # **da2**\: This version was introduced in February 2018 when AppSync
     # added support to extend key expiration.
@@ -45,7 +46,7 @@ module Aws::AppSync
     #
     # * `DeleteApiKey` deletes the item from the table.
     #
-    # * Expiration is stored in DynamoDB as seconds.
+    # * Expiration is stored in Amazon DynamoDB as seconds.
     #
     # @!attribute [rw] id
     #   The API key ID.
@@ -66,6 +67,66 @@ module Aws::AppSync
       :id,
       :description,
       :expires)
+      include Aws::Structure
+    end
+
+    # The authorization config in case the HTTP endpoint requires
+    # authorization.
+    #
+    # @note When making an API call, you may pass AuthorizationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         authorization_type: "AWS_IAM", # required, accepts AWS_IAM
+    #         aws_iam_config: {
+    #           signing_region: "String",
+    #           signing_service_name: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] authorization_type
+    #   The authorization type required by the HTTP endpoint.
+    #
+    #   * **AWS\_IAM**\: The authorization type is Sigv4.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_iam_config
+    #   The AWS IAM settings.
+    #   @return [Types::AwsIamConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AuthorizationConfig AWS API Documentation
+    #
+    class AuthorizationConfig < Struct.new(
+      :authorization_type,
+      :aws_iam_config)
+      include Aws::Structure
+    end
+
+    # The AWS IAM configuration.
+    #
+    # @note When making an API call, you may pass AwsIamConfig
+    #   data as a hash:
+    #
+    #       {
+    #         signing_region: "String",
+    #         signing_service_name: "String",
+    #       }
+    #
+    # @!attribute [rw] signing_region
+    #   The signing region for AWS IAM authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_service_name
+    #   The signing service name for AWS IAM authorization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AwsIamConfig AWS API Documentation
+    #
+    class AwsIamConfig < Struct.new(
+      :signing_region,
+      :signing_service_name)
       include Aws::Structure
     end
 
@@ -120,7 +181,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -136,6 +197,23 @@ module Aws::AppSync
     #         },
     #         http_config: {
     #           endpoint: "String",
+    #           authorization_config: {
+    #             authorization_type: "AWS_IAM", # required, accepts AWS_IAM
+    #             aws_iam_config: {
+    #               signing_region: "String",
+    #               signing_service_name: "String",
+    #             },
+    #           },
+    #         },
+    #         relational_database_config: {
+    #           relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
+    #           rds_http_endpoint_config: {
+    #             aws_region: "String",
+    #             db_cluster_identifier: "String",
+    #             database_name: "String",
+    #             schema: "String",
+    #             aws_secret_store_arn: "String",
+    #           },
     #         },
     #       }
     #
@@ -156,12 +234,12 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role ARN for the data source. The system assumes
+    #   The AWS IAM service role ARN for the data source. The system assumes
     #   this role when accessing the data source.
     #   @return [String]
     #
     # @!attribute [rw] dynamodb_config
-    #   DynamoDB settings.
+    #   Amazon DynamoDB settings.
     #   @return [Types::DynamodbDataSourceConfig]
     #
     # @!attribute [rw] lambda_config
@@ -169,12 +247,16 @@ module Aws::AppSync
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
-    #   Amazon Elasticsearch settings.
+    #   Amazon Elasticsearch Service settings.
     #   @return [Types::ElasticsearchDataSourceConfig]
     #
     # @!attribute [rw] http_config
-    #   Http endpoint settings.
+    #   HTTP endpoint settings.
     #   @return [Types::HttpDataSourceConfig]
+    #
+    # @!attribute [rw] relational_database_config
+    #   Relational database settings.
+    #   @return [Types::RelationalDatabaseDataSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest AWS API Documentation
     #
@@ -187,7 +269,8 @@ module Aws::AppSync
       :dynamodb_config,
       :lambda_config,
       :elasticsearch_config,
-      :http_config)
+      :http_config,
+      :relational_database_config)
       include Aws::Structure
     end
 
@@ -199,6 +282,73 @@ module Aws::AppSync
     #
     class CreateDataSourceResponse < Struct.new(
       :data_source)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         name: "ResourceName", # required
+    #         description: "String",
+    #         data_source_name: "ResourceName", # required
+    #         request_mapping_template: "MappingTemplate", # required
+    #         response_mapping_template: "MappingTemplate",
+    #         function_version: "String", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The `Function` name. The function name does not have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The `Function` description.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_name
+    #   The `Function` `DataSource` name.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_mapping_template
+    #   The `Function` request mapping template. Functions support only the
+    #   2018-05-29 version of the request mapping template.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_mapping_template
+    #   The `Function` response mapping template.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   The `version` of the request mapping template. Currently the
+    #   supported value is 2018-05-29.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionRequest AWS API Documentation
+    #
+    class CreateFunctionRequest < Struct.new(
+      :api_id,
+      :name,
+      :description,
+      :data_source_name,
+      :request_mapping_template,
+      :response_mapping_template,
+      :function_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_configuration
+    #   The `Function` object.
+    #   @return [Types::FunctionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionResponse AWS API Documentation
+    #
+    class CreateFunctionResponse < Struct.new(
+      :function_configuration)
       include Aws::Structure
     end
 
@@ -231,19 +381,20 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   The Amazon CloudWatch logs configuration.
+    #   The Amazon CloudWatch Logs configuration.
     #   @return [Types::LogConfig]
     #
     # @!attribute [rw] authentication_type
-    #   The authentication type: API key, IAM, or Amazon Cognito User Pools.
+    #   The authentication type: API key, AWS IAM, or Amazon Cognito user
+    #   pools.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_config
-    #   The Amazon Cognito User Pool configuration.
+    #   The Amazon Cognito user pool configuration.
     #   @return [Types::UserPoolConfig]
     #
     # @!attribute [rw] open_id_connect_config
-    #   The Open Id Connect configuration configuration.
+    #   The OpenID Connect configuration.
     #   @return [Types::OpenIDConnectConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
@@ -275,9 +426,13 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         type_name: "ResourceName", # required
     #         field_name: "ResourceName", # required
-    #         data_source_name: "ResourceName", # required
+    #         data_source_name: "ResourceName",
     #         request_mapping_template: "MappingTemplate", # required
     #         response_mapping_template: "MappingTemplate",
+    #         kind: "UNIT", # accepts UNIT, PIPELINE
+    #         pipeline_config: {
+    #           functions: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -308,6 +463,23 @@ module Aws::AppSync
     #   The mapping template to be used for responses from the data source.
     #   @return [String]
     #
+    # @!attribute [rw] kind
+    #   The resolver type.
+    #
+    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #     resolver type. A UNIT resolver enables you to execute a GraphQL
+    #     query against a single data source.
+    #
+    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver
+    #     enables you to execute a series of `Function` in a serial manner.
+    #     You can use a pipeline resolver to execute a GraphQL query against
+    #     multiple data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_config
+    #   The `PipelineConfig`.
+    #   @return [Types::PipelineConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest AWS API Documentation
     #
     class CreateResolverRequest < Struct.new(
@@ -316,7 +488,9 @@ module Aws::AppSync
       :field_name,
       :data_source_name,
       :request_mapping_template,
-      :response_mapping_template)
+      :response_mapping_template,
+      :kind,
+      :pipeline_config)
       include Aws::Structure
     end
 
@@ -404,34 +578,41 @@ module Aws::AppSync
     #
     #   * **AWS\_LAMBDA**\: The data source is an AWS Lambda function.
     #
-    #   * **NONE**\: There is no data source. This type is used when when
-    #     you wish to invoke a GraphQL operation without connecting to a
-    #     data source, such as performing data transformation with resolvers
-    #     or triggering a subscription to be invoked from a mutation.
+    #   * **NONE**\: There is no data source. This type is used when you
+    #     wish to invoke a GraphQL operation without connecting to a data
+    #     source, such as performing data transformation with resolvers or
+    #     triggering a subscription to be invoked from a mutation.
     #
     #   * **HTTP**\: The data source is an HTTP endpoint.
+    #
+    #   * **RELATIONAL\_DATABASE**\: The data source is a relational
+    #     database.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role ARN for the data source. The system assumes
+    #   The AWS IAM service role ARN for the data source. The system assumes
     #   this role when accessing the data source.
     #   @return [String]
     #
     # @!attribute [rw] dynamodb_config
-    #   DynamoDB settings.
+    #   Amazon DynamoDB settings.
     #   @return [Types::DynamodbDataSourceConfig]
     #
     # @!attribute [rw] lambda_config
-    #   Lambda settings.
+    #   AWS Lambda settings.
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
-    #   Amazon Elasticsearch settings.
+    #   Amazon Elasticsearch Service settings.
     #   @return [Types::ElasticsearchDataSourceConfig]
     #
     # @!attribute [rw] http_config
-    #   Http endpoint settings.
+    #   HTTP endpoint settings.
     #   @return [Types::HttpDataSourceConfig]
+    #
+    # @!attribute [rw] relational_database_config
+    #   Relational database settings.
+    #   @return [Types::RelationalDatabaseDataSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSource AWS API Documentation
     #
@@ -444,7 +625,8 @@ module Aws::AppSync
       :dynamodb_config,
       :lambda_config,
       :elasticsearch_config,
-      :http_config)
+      :http_config,
+      :relational_database_config)
       include Aws::Structure
     end
 
@@ -503,6 +685,34 @@ module Aws::AppSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteDataSourceResponse AWS API Documentation
     #
     class DeleteDataSourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         function_id: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_id
+    #   The `Function` ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunctionRequest AWS API Documentation
+    #
+    class DeleteFunctionRequest < Struct.new(
+      :api_id,
+      :function_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunctionResponse AWS API Documentation
+    #
+    class DeleteFunctionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteGraphqlApiRequest
     #   data as a hash:
@@ -588,7 +798,7 @@ module Aws::AppSync
     #
     class DeleteTypeResponse < Aws::EmptyStructure; end
 
-    # Describes a DynamoDB data source configuration.
+    # Describes an Amazon DynamoDB data source configuration.
     #
     # @note When making an API call, you may pass DynamodbDataSourceConfig
     #   data as a hash:
@@ -604,7 +814,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS region.
+    #   The AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] use_caller_credentials
@@ -635,7 +845,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS region.
+    #   The AWS Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ElasticsearchDataSourceConfig AWS API Documentation
@@ -643,6 +853,57 @@ module Aws::AppSync
     class ElasticsearchDataSourceConfig < Struct.new(
       :endpoint,
       :aws_region)
+      include Aws::Structure
+    end
+
+    # A function is a reusable entity. Multiple functions can be used to
+    # compose the resolver logic.
+    #
+    # @!attribute [rw] function_id
+    #   A unique ID representing the `Function` object.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The ARN of the `Function` object.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `Function` object.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The `Function` description.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_name
+    #   The name of the `DataSource`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_mapping_template
+    #   The `Function` request mapping template. Functions support only the
+    #   2018-05-29 version of the request mapping template.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_mapping_template
+    #   The `Function` response mapping template.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   The version of the request mapping template. Currently only the
+    #   2018-05-29 version of the template is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FunctionConfiguration AWS API Documentation
+    #
+    class FunctionConfiguration < Struct.new(
+      :function_id,
+      :function_arn,
+      :name,
+      :description,
+      :data_source_name,
+      :request_mapping_template,
+      :response_mapping_template,
+      :function_version)
       include Aws::Structure
     end
 
@@ -678,6 +939,41 @@ module Aws::AppSync
     #
     class GetDataSourceResponse < Struct.new(
       :data_source)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         function_id: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_id
+    #   The `Function` ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunctionRequest AWS API Documentation
+    #
+    class GetFunctionRequest < Struct.new(
+      :api_id,
+      :function_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_configuration
+    #   The `Function` object.
+    #   @return [Types::FunctionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunctionResponse AWS API Documentation
+    #
+    class GetFunctionResponse < Struct.new(
+      :function_configuration)
       include Aws::Structure
     end
 
@@ -888,11 +1184,11 @@ module Aws::AppSync
     #   @return [Types::LogConfig]
     #
     # @!attribute [rw] user_pool_config
-    #   The Amazon Cognito User Pool configuration.
+    #   The Amazon Cognito user pool configuration.
     #   @return [Types::UserPoolConfig]
     #
     # @!attribute [rw] open_id_connect_config
-    #   The Open Id Connect configuration.
+    #   The OpenID Connect configuration.
     #   @return [Types::OpenIDConnectConfig]
     #
     # @!attribute [rw] arn
@@ -917,30 +1213,43 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # Describes a Http data source configuration.
+    # Describes an HTTP data source configuration.
     #
     # @note When making an API call, you may pass HttpDataSourceConfig
     #   data as a hash:
     #
     #       {
     #         endpoint: "String",
+    #         authorization_config: {
+    #           authorization_type: "AWS_IAM", # required, accepts AWS_IAM
+    #           aws_iam_config: {
+    #             signing_region: "String",
+    #             signing_service_name: "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint
-    #   The Http url endpoint. You can either specify the domain name or ip
-    #   and port combination and the url scheme must be http(s). If the port
-    #   is not specified, AWS AppSync will use the default port 80 for http
-    #   endpoint and port 443 for https endpoints.
+    #   The HTTP URL endpoint. You can either specify the domain name or IP,
+    #   and port combination, and the URL scheme must be HTTP or HTTPS. If
+    #   the port is not specified, AWS AppSync uses the default port 80 for
+    #   the HTTP endpoint and port 443 for HTTPS endpoints.
     #   @return [String]
+    #
+    # @!attribute [rw] authorization_config
+    #   The authorization config in case the HTTP endpoint requires
+    #   authorization.
+    #   @return [Types::AuthorizationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/HttpDataSourceConfig AWS API Documentation
     #
     class HttpDataSourceConfig < Struct.new(
-      :endpoint)
+      :endpoint,
+      :authorization_config)
       include Aws::Structure
     end
 
-    # Describes a Lambda data source configuration.
+    # Describes an AWS Lambda data source configuration.
     #
     # @note When making an API call, you may pass LambdaDataSourceConfig
     #   data as a hash:
@@ -1058,6 +1367,56 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListFunctionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results you want the request to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctionsRequest AWS API Documentation
+    #
+    class ListFunctionsRequest < Struct.new(
+      :api_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] functions
+    #   A list of `Function` objects.
+    #   @return [Array<Types::FunctionConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctionsResponse AWS API Documentation
+    #
+    class ListFunctionsResponse < Struct.new(
+      :functions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListGraphqlApisRequest
     #   data as a hash:
     #
@@ -1097,6 +1456,61 @@ module Aws::AppSync
     #
     class ListGraphqlApisResponse < Struct.new(
       :graphql_apis,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResolversByFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         function_id: "String", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_id
+    #   The Function ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results you want the request to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunctionRequest AWS API Documentation
+    #
+    class ListResolversByFunctionRequest < Struct.new(
+      :api_id,
+      :function_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolvers
+    #   The list of resolvers.
+    #   @return [Array<Types::Resolver>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that can be used to return the next set of items in
+    #   the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunctionResponse AWS API Documentation
+    #
+    class ListResolversByFunctionResponse < Struct.new(
+      :resolvers,
       :next_token)
       include Aws::Structure
     end
@@ -1222,7 +1636,7 @@ module Aws::AppSync
     #       }
     #
     # @!attribute [rw] field_log_level
-    #   The field logging level. Values can be NONE, ERROR, ALL.
+    #   The field logging level. Values can be NONE, ERROR, or ALL.
     #
     #   * **NONE**\: No field-level logs are captured.
     #
@@ -1258,7 +1672,7 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # Describes an Open Id Connect configuration.
+    # Describes an OpenID Connect configuration.
     #
     # @note When making an API call, you may pass OpenIDConnectConfig
     #   data as a hash:
@@ -1271,17 +1685,16 @@ module Aws::AppSync
     #       }
     #
     # @!attribute [rw] issuer
-    #   The issuer for the open id connect configuration. The issuer
-    #   returned by discovery MUST exactly match the value of iss in the ID
-    #   Token.
+    #   The issuer for the OpenID Connect configuration. The issuer returned
+    #   by discovery must exactly match the value of `iss` in the ID token.
     #   @return [String]
     #
     # @!attribute [rw] client_id
-    #   The client identifier of the Relying party at the OpenID Provider.
-    #   This identifier is typically obtained when the Relying party is
-    #   registered with the OpenID Provider. You can specify a regular
-    #   expression so the AWS AppSync can validate against multiple client
-    #   identifiers at a time
+    #   The client identifier of the Relying party at the OpenID identity
+    #   provider. This identifier is typically obtained when the Relying
+    #   party is registered with the OpenID identity provider. You can
+    #   specify a regular expression so the AWS AppSync can validate against
+    #   multiple client identifiers at a time.
     #   @return [String]
     #
     # @!attribute [rw] iat_ttl
@@ -1301,6 +1714,107 @@ module Aws::AppSync
       :client_id,
       :iat_ttl,
       :auth_ttl)
+      include Aws::Structure
+    end
+
+    # The pipeline configuration for a resolver of kind `PIPELINE`.
+    #
+    # @note When making an API call, you may pass PipelineConfig
+    #   data as a hash:
+    #
+    #       {
+    #         functions: ["String"],
+    #       }
+    #
+    # @!attribute [rw] functions
+    #   A list of `Function` objects.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PipelineConfig AWS API Documentation
+    #
+    class PipelineConfig < Struct.new(
+      :functions)
+      include Aws::Structure
+    end
+
+    # The Amazon RDS HTTP endpoint configuration.
+    #
+    # @note When making an API call, you may pass RdsHttpEndpointConfig
+    #   data as a hash:
+    #
+    #       {
+    #         aws_region: "String",
+    #         db_cluster_identifier: "String",
+    #         database_name: "String",
+    #         schema: "String",
+    #         aws_secret_store_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] aws_region
+    #   AWS Region for RDS HTTP endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   Amazon RDS cluster identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Logical database name.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   Logical schema name.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_secret_store_arn
+    #   AWS secret store ARN for database credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RdsHttpEndpointConfig AWS API Documentation
+    #
+    class RdsHttpEndpointConfig < Struct.new(
+      :aws_region,
+      :db_cluster_identifier,
+      :database_name,
+      :schema,
+      :aws_secret_store_arn)
+      include Aws::Structure
+    end
+
+    # Describes a relational database data source configuration.
+    #
+    # @note When making an API call, you may pass RelationalDatabaseDataSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
+    #         rds_http_endpoint_config: {
+    #           aws_region: "String",
+    #           db_cluster_identifier: "String",
+    #           database_name: "String",
+    #           schema: "String",
+    #           aws_secret_store_arn: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] relational_database_source_type
+    #   Source type for the relational database.
+    #
+    #   * **RDS\_HTTP\_ENDPOINT**\: The relational database source type is
+    #     an Amazon RDS HTTP endpoint.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_http_endpoint_config
+    #   Amazon RDS HTTP endpoint settings.
+    #   @return [Types::RdsHttpEndpointConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RelationalDatabaseDataSourceConfig AWS API Documentation
+    #
+    class RelationalDatabaseDataSourceConfig < Struct.new(
+      :relational_database_source_type,
+      :rds_http_endpoint_config)
       include Aws::Structure
     end
 
@@ -1330,6 +1844,23 @@ module Aws::AppSync
     #   The response mapping template.
     #   @return [String]
     #
+    # @!attribute [rw] kind
+    #   The resolver type.
+    #
+    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #     resolver type. A UNIT resolver enables you to execute a GraphQL
+    #     query against a single data source.
+    #
+    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver
+    #     enables you to execute a series of `Function` in a serial manner.
+    #     You can use a pipeline resolver to execute a GraphQL query against
+    #     multiple data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_config
+    #   The `PipelineConfig`.
+    #   @return [Types::PipelineConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver AWS API Documentation
     #
     class Resolver < Struct.new(
@@ -1338,7 +1869,9 @@ module Aws::AppSync
       :data_source_name,
       :resolver_arn,
       :request_mapping_template,
-      :response_mapping_template)
+      :response_mapping_template,
+      :kind,
+      :pipeline_config)
       include Aws::Structure
     end
 
@@ -1368,7 +1901,7 @@ module Aws::AppSync
 
     # @!attribute [rw] status
     #   The current state of the schema (PROCESSING, ACTIVE, or DELETING).
-    #   Once the schema is in the ACTIVE state, you can add data.
+    #   When the schema is in the ACTIVE state, you can add data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreationResponse AWS API Documentation
@@ -1422,7 +1955,7 @@ module Aws::AppSync
     #       }
     #
     # @!attribute [rw] api_id
-    #   The ID for the GraphQL API
+    #   The ID for the GraphQL API.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1467,7 +2000,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -1483,6 +2016,23 @@ module Aws::AppSync
     #         },
     #         http_config: {
     #           endpoint: "String",
+    #           authorization_config: {
+    #             authorization_type: "AWS_IAM", # required, accepts AWS_IAM
+    #             aws_iam_config: {
+    #               signing_region: "String",
+    #               signing_service_name: "String",
+    #             },
+    #           },
+    #         },
+    #         relational_database_config: {
+    #           relational_database_source_type: "RDS_HTTP_ENDPOINT", # accepts RDS_HTTP_ENDPOINT
+    #           rds_http_endpoint_config: {
+    #             aws_region: "String",
+    #             db_cluster_identifier: "String",
+    #             database_name: "String",
+    #             schema: "String",
+    #             aws_secret_store_arn: "String",
+    #           },
     #         },
     #       }
     #
@@ -1507,20 +2057,24 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] dynamodb_config
-    #   The new DynamoDB configuration.
+    #   The new Amazon DynamoDB configuration.
     #   @return [Types::DynamodbDataSourceConfig]
     #
     # @!attribute [rw] lambda_config
-    #   The new Lambda configuration.
+    #   The new AWS Lambda configuration.
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
-    #   The new Elasticsearch configuration.
+    #   The new Elasticsearch Service configuration.
     #   @return [Types::ElasticsearchDataSourceConfig]
     #
     # @!attribute [rw] http_config
-    #   The new http endpoint configuration
+    #   The new HTTP endpoint configuration.
     #   @return [Types::HttpDataSourceConfig]
+    #
+    # @!attribute [rw] relational_database_config
+    #   The new relational database configuration.
+    #   @return [Types::RelationalDatabaseDataSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest AWS API Documentation
     #
@@ -1533,7 +2087,8 @@ module Aws::AppSync
       :dynamodb_config,
       :lambda_config,
       :elasticsearch_config,
-      :http_config)
+      :http_config,
+      :relational_database_config)
       include Aws::Structure
     end
 
@@ -1545,6 +2100,79 @@ module Aws::AppSync
     #
     class UpdateDataSourceResponse < Struct.new(
       :data_source)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         name: "ResourceName", # required
+    #         description: "String",
+    #         function_id: "ResourceName", # required
+    #         data_source_name: "ResourceName", # required
+    #         request_mapping_template: "MappingTemplate", # required
+    #         response_mapping_template: "MappingTemplate",
+    #         function_version: "String", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The GraphQL API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The `Function` name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The `Function` description.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_id
+    #   The function ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_name
+    #   The `Function` `DataSource` name.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_mapping_template
+    #   The `Function` request mapping template. Functions support only the
+    #   2018-05-29 version of the request mapping template.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_mapping_template
+    #   The `Function` request mapping template.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   The `version` of the request mapping template. Currently the
+    #   supported value is 2018-05-29.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionRequest AWS API Documentation
+    #
+    class UpdateFunctionRequest < Struct.new(
+      :api_id,
+      :name,
+      :description,
+      :function_id,
+      :data_source_name,
+      :request_mapping_template,
+      :response_mapping_template,
+      :function_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_configuration
+    #   The `Function` object.
+    #   @return [Types::FunctionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionResponse AWS API Documentation
+    #
+    class UpdateFunctionResponse < Struct.new(
+      :function_configuration)
       include Aws::Structure
     end
 
@@ -1582,7 +2210,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   The Amazon CloudWatch logs configuration for the `GraphqlApi`
+    #   The Amazon CloudWatch Logs configuration for the `GraphqlApi`
     #   object.
     #   @return [Types::LogConfig]
     #
@@ -1591,13 +2219,12 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] user_pool_config
-    #   The new Amazon Cognito User Pool configuration for the `GraphqlApi`
+    #   The new Amazon Cognito user pool configuration for the `GraphqlApi`
     #   object.
     #   @return [Types::UserPoolConfig]
     #
     # @!attribute [rw] open_id_connect_config
-    #   The Open Id Connect configuration configuration for the `GraphqlApi`
-    #   object.
+    #   The OpenID Connect configuration for the `GraphqlApi` object.
     #   @return [Types::OpenIDConnectConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
@@ -1630,9 +2257,13 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         type_name: "ResourceName", # required
     #         field_name: "ResourceName", # required
-    #         data_source_name: "ResourceName", # required
+    #         data_source_name: "ResourceName",
     #         request_mapping_template: "MappingTemplate", # required
     #         response_mapping_template: "MappingTemplate",
+    #         kind: "UNIT", # accepts UNIT, PIPELINE
+    #         pipeline_config: {
+    #           functions: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -1659,6 +2290,23 @@ module Aws::AppSync
     #   The new response mapping template.
     #   @return [String]
     #
+    # @!attribute [rw] kind
+    #   The resolver type.
+    #
+    #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
+    #     resolver type. A UNIT resolver enables you to execute a GraphQL
+    #     query against a single data source.
+    #
+    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver
+    #     enables you to execute a series of `Function` in a serial manner.
+    #     You can use a pipeline resolver to execute a GraphQL query against
+    #     multiple data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_config
+    #   The `PipelineConfig`.
+    #   @return [Types::PipelineConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest AWS API Documentation
     #
     class UpdateResolverRequest < Struct.new(
@@ -1667,7 +2315,9 @@ module Aws::AppSync
       :field_name,
       :data_source_name,
       :request_mapping_template,
-      :response_mapping_template)
+      :response_mapping_template,
+      :kind,
+      :pipeline_config)
       include Aws::Structure
     end
 
@@ -1729,7 +2379,7 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # Describes an Amazon Cognito User Pool configuration.
+    # Describes an Amazon Cognito user pool configuration.
     #
     # @note When making an API call, you may pass UserPoolConfig
     #   data as a hash:
@@ -1746,18 +2396,18 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS region in which the user pool was created.
+    #   The AWS Region in which the user pool was created.
     #   @return [String]
     #
     # @!attribute [rw] default_action
     #   The action that you want your GraphQL API to take when a request
-    #   that uses Amazon Cognito User Pool authentication doesn't match the
-    #   Amazon Cognito User Pool configuration.
+    #   that uses Amazon Cognito user pool authentication doesn't match the
+    #   Amazon Cognito user pool configuration.
     #   @return [String]
     #
     # @!attribute [rw] app_id_client_regex
-    #   A regular expression for validating the incoming Amazon Cognito User
-    #   Pool app client ID.
+    #   A regular expression for validating the incoming Amazon Cognito user
+    #   pool app client ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UserPoolConfig AWS API Documentation

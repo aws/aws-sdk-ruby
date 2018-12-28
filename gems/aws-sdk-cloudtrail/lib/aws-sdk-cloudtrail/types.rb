@@ -27,7 +27,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail to which one or more tags will be
     #   added. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] tags_list
@@ -65,6 +65,7 @@ module Aws::CloudTrail
     #         cloud_watch_logs_log_group_arn: "String",
     #         cloud_watch_logs_role_arn: "String",
     #         kms_key_id: "String",
+    #         is_organization_trail: false,
     #       }
     #
     # @!attribute [rw] name
@@ -158,12 +159,20 @@ module Aws::CloudTrail
     #
     #   * alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   * arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
     #
     #   * 12345678-1234-1234-1234-123456789012
     #   @return [String]
+    #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is created for all accounts in an
+    #   organization in AWS Organizations, or only for the current AWS
+    #   account. The default is false, and cannot be true unless the call is
+    #   made on behalf of an AWS account that is the master account for an
+    #   organization in AWS Organizations.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailRequest AWS API Documentation
     #
@@ -177,7 +186,8 @@ module Aws::CloudTrail
       :enable_log_file_validation,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -212,7 +222,7 @@ module Aws::CloudTrail
     #   send notifications when log files are delivered. The format of a
     #   topic ARN is:
     #
-    #   `arn:aws:sns:us-east-1:123456789012:MyTopic`
+    #   `arn:aws:sns:us-east-2:123456789012:MyTopic`
     #   @return [String]
     #
     # @!attribute [rw] include_global_service_events
@@ -228,7 +238,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail that was created. The format of a
     #   trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] log_file_validation_enabled
@@ -250,8 +260,12 @@ module Aws::CloudTrail
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
     #   format:
     #
-    #   `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
+    #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is an organization trail.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailResponse AWS API Documentation
     #
@@ -267,32 +281,62 @@ module Aws::CloudTrail
       :log_file_validation_enabled,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 
-    # The Amazon S3 objects that you specify in your event selectors for
-    # your trail to log data events. Data events are object-level API
-    # operations that access S3 objects, such as `GetObject`,
-    # `DeleteObject`, and `PutObject`. You can specify up to 250 S3 buckets
-    # and object prefixes for a trail.
+    # The Amazon S3 buckets or AWS Lambda functions that you specify in your
+    # event selectors for your trail to log data events. Data events provide
+    # insight into the resource operations performed on or within a resource
+    # itself. These are also known as data plane operations. You can specify
+    # up to 250 data resources for a trail.
     #
-    # Example
+    # <note markdown="1"> The total number of allowed data resources is 250. This number can be
+    # distributed between 1 and 5 event selectors, but the total cannot
+    # exceed 250 across all selectors.
     #
-    # 1.  You create an event selector for a trail and specify an S3 bucket
-    #     and an empty prefix, such as `arn:aws:s3:::bucket-1/`.
+    #  </note>
     #
-    # 2.  You upload an image file to `bucket-1`.
+    # The following example demonstrates how logging works when you
+    # configure logging of all data events for an S3 bucket named
+    # `bucket-1`. In this example, the CloudTrail user spcified an empty
+    # prefix, and the option to log both `Read` and `Write` data events.
     #
-    # 3.  The `PutObject` API operation occurs on an object in the S3 bucket
-    #     that you specified in the event selector. The trail processes and
-    #     logs the event.
+    # 1.  A user uploads an image file to `bucket-1`.
     #
-    # 4.  You upload another image file to a different S3 bucket named
+    # 2.  The `PutObject` API operation is an Amazon S3 object-level API. It
+    #     is recorded as a data event in CloudTrail. Because the CloudTrail
+    #     user specified an S3 bucket with an empty prefix, events that
+    #     occur on any object in that bucket are logged. The trail processes
+    #     and logs the event.
+    #
+    # 3.  A user uploads an object to an Amazon S3 bucket named
     #     `arn:aws:s3:::bucket-2`.
     #
-    # 5.  The event occurs on an object in an S3 bucket that you didn't
-    #     specify in the event selector. The trail doesn’t log the event.
+    # 4.  The `PutObject` API operation occurred for an object in an S3
+    #     bucket that the CloudTrail user didn't specify for the trail. The
+    #     trail doesn’t log the event.
+    #
+    # The following example demonstrates how logging works when you
+    # configure logging of AWS Lambda data events for a Lambda function
+    # named *MyLambdaFunction*, but not for all AWS Lambda functions.
+    #
+    # 1.  A user runs a script that includes a call to the
+    #     *MyLambdaFunction* function and the *MyOtherLambdaFunction*
+    #     function.
+    #
+    # 2.  The `Invoke` API operation on *MyLambdaFunction* is an AWS Lambda
+    #     API. It is recorded as a data event in CloudTrail. Because the
+    #     CloudTrail user specified logging data events for
+    #     *MyLambdaFunction*, any invocations of that function are logged.
+    #     The trail processes and logs the event.
+    #
+    # 3.  The `Invoke` API operation on *MyOtherLambdaFunction* is an AWS
+    #     Lambda API. Because the CloudTrail user did not specify logging
+    #     data events for all Lambda functions, the `Invoke` operation for
+    #     *MyOtherLambdaFunction* does not match the function specified for
+    #     the trail. The trail doesn’t log the event.
     #
     # @note When making an API call, you may pass DataResource
     #   data as a hash:
@@ -304,20 +348,58 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] type
     #   The resource type in which you want to log data events. You can
-    #   specify only the following value: `AWS::S3::Object`.
+    #   specify `AWS::S3::Object` or `AWS::Lambda::Function` resources.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   A list of ARN-like strings for the specified S3 objects.
+    #   An array of Amazon Resource Name (ARN) strings or partial ARN
+    #   strings for the specified objects.
     #
-    #   To log data events for all objects in an S3 bucket, specify the
-    #   bucket and an empty object prefix such as `arn:aws:s3:::bucket-1/`.
-    #   The trail logs data events for all objects in this S3 bucket.
+    #   * To log data events for all objects in all S3 buckets in your AWS
+    #     account, specify the prefix as `arn:aws:s3:::`.
     #
-    #   To log data events for specific objects, specify the S3 bucket and
-    #   object prefix such as `arn:aws:s3:::bucket-1/example-images`. The
-    #   trail logs data events for objects in this S3 bucket that match the
-    #   prefix.
+    #     <note markdown="1"> This will also enable logging of data event activity performed by
+    #     any user or role in your AWS account, even if that activity is
+    #     performed on a bucket that belongs to another AWS account.
+    #
+    #      </note>
+    #
+    #   * To log data events for all objects in all S3 buckets that include
+    #     *my-bucket* in their names, specify the prefix as
+    #     `aws:s3:::my-bucket`. The trail logs data events for all objects
+    #     in all buckets whose name contains a match for *my-bucket*.
+    #
+    #   * To log data events for all objects in an S3 bucket, specify the
+    #     bucket and an empty object prefix such as
+    #     `arn:aws:s3:::bucket-1/`. The trail logs data events for all
+    #     objects in this S3 bucket.
+    #
+    #   * To log data events for specific objects, specify the S3 bucket and
+    #     object prefix such as `arn:aws:s3:::bucket-1/example-images`. The
+    #     trail logs data events for objects in this S3 bucket that match
+    #     the prefix.
+    #
+    #   * To log data events for all functions in your AWS account, specify
+    #     the prefix as `arn:aws:lambda`.
+    #
+    #     <note markdown="1"> This will also enable logging of `Invoke` activity performed by
+    #     any user or role in your AWS account, even if that activity is
+    #     performed on a function that belongs to another AWS account.
+    #
+    #      </note>
+    #
+    #   * To log data eents for a specific Lambda function, specify the
+    #     function ARN.
+    #
+    #     <note markdown="1"> Lambda function ARNs are exact. Unlike S3, you cannot use
+    #     matching. For example, if you specify a function ARN
+    #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld*, data
+    #     events will only be logged for
+    #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld*. They
+    #     will not be logged for
+    #     *arn:aws:lambda:us-west-2:111111111111:function:helloworld2*.
+    #
+    #      </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DataResource AWS API Documentation
@@ -340,7 +422,7 @@ module Aws::CloudTrail
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
     #   The format of a trail ARN is:
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailRequest AWS API Documentation
@@ -371,7 +453,7 @@ module Aws::CloudTrail
     #   Specifies a list of trail names, trail ARNs, or both, of the trails
     #   to describe. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   If an empty list is specified, information for the trail in the
     #   current region is returned.
@@ -394,7 +476,11 @@ module Aws::CloudTrail
     # @!attribute [rw] include_shadow_trails
     #   Specifies whether to include shadow trails in the response. A shadow
     #   trail is the replication in a region of a trail that was created in
-    #   a different region. The default is true.
+    #   a different region, or in the case of an organization trail, the
+    #   replication of an organization trail in member accounts. If you do
+    #   not include shadow trails, organization trails in a member account
+    #   and region replication trails will not be returned. The default is
+    #   true.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsRequest AWS API Documentation
@@ -430,6 +516,17 @@ module Aws::CloudTrail
     #   The name of the event returned.
     #   @return [String]
     #
+    # @!attribute [rw] read_only
+    #   Information about whether the event is a write event or a read
+    #   event.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key_id
+    #   The AWS access key ID that was used to sign the request. If the
+    #   request was made with temporary security credentials, this is the
+    #   access key ID of the temporary credentials.
+    #   @return [String]
+    #
     # @!attribute [rw] event_time
     #   The date and time of the event returned.
     #   @return [Time]
@@ -456,6 +553,8 @@ module Aws::CloudTrail
     class Event < Struct.new(
       :event_id,
       :event_name,
+      :read_only,
+      :access_key_id,
       :event_time,
       :event_source,
       :username,
@@ -464,12 +563,14 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Use event selectors to specify whether you want your trail to log
-    # management and/or data events. When an event occurs in your account,
-    # CloudTrail evaluates the event selector for all trails. For each
-    # trail, if the event matches any event selector, the trail processes
-    # and logs the event. If the event doesn't match any event selector,
-    # the trail doesn't log the event.
+    # Use event selectors to further specify the management and data event
+    # settings for your trail. By default, trails created without specific
+    # event selectors will be configured to log all read and write
+    # management events, and no data events. When an event occurs in your
+    # account, CloudTrail evaluates the event selector for all trails. For
+    # each trail, if the event matches any event selector, the trail
+    # processes and logs the event. If the event doesn't match any event
+    # selector, the trail doesn't log the event.
     #
     # You can configure up to five event selectors for a trail.
     #
@@ -511,15 +612,20 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] data_resources
-    #   CloudTrail supports logging only data events for S3 objects. You can
-    #   specify up to 250 S3 buckets and object prefixes for a trail.
+    #   CloudTrail supports data event logging for Amazon S3 objects and AWS
+    #   Lambda functions. You can specify up to 250 resources for an
+    #   individual event selector, but the total number of data resources
+    #   cannot exceed 250 across all event selectors in a trail. This limit
+    #   does not apply if you configure resource logging for all data
+    #   events.
     #
-    #   For more information, see [Data Events][1] in the *AWS CloudTrail
-    #   User Guide*.
+    #   For more information, see [Data Events][1] and [Limits in AWS
+    #   CloudTrail][2] in the *AWS CloudTrail User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #   @return [Array<Types::DataResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
@@ -550,13 +656,13 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
     #   If you specify a trail ARN, it must be in the format:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectorsRequest AWS API Documentation
@@ -597,7 +703,7 @@ module Aws::CloudTrail
     #   replication of the trail in another region), you must specify its
     #   ARN. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusRequest AWS API Documentation
@@ -818,7 +924,7 @@ module Aws::CloudTrail
     #   Specifies a list of trail ARNs whose tags will be listed. The list
     #   has a limit of 20 ARNs. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -858,7 +964,7 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName, EventSource
+    #         attribute_key: "EventId", # required, accepts EventId, EventName, ReadOnly, Username, ResourceType, ResourceName, EventSource, AccessKeyId
     #         attribute_value: "String", # required
     #       }
     #
@@ -886,7 +992,7 @@ module Aws::CloudTrail
     #       {
     #         lookup_attributes: [
     #           {
-    #             attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName, EventSource
+    #             attribute_key: "EventId", # required, accepts EventId, EventName, ReadOnly, Username, ResourceType, ResourceName, EventSource, AccessKeyId
     #             attribute_value: "String", # required
     #           },
     #         ],
@@ -915,7 +1021,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] max_results
     #   The number of events to return. Possible values are 1 through 50.
-    #   The default is 10.
+    #   The default is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1028,7 +1134,7 @@ module Aws::CloudTrail
     #
     #   If you specify a trail ARN, it must be in the format:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] event_selectors
@@ -1048,7 +1154,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail that was updated with event
     #   selectors. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] event_selectors
@@ -1082,7 +1188,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail from which tags should be removed.
     #   The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] tags_list
@@ -1166,7 +1272,7 @@ module Aws::CloudTrail
     #   Specifies the name or the CloudTrail ARN of the trail for which
     #   CloudTrail logs AWS API calls. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLoggingRequest AWS API Documentation
@@ -1198,7 +1304,7 @@ module Aws::CloudTrail
     #   CloudTrail will stop logging AWS API calls. The format of a trail
     #   ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLoggingRequest AWS API Documentation
@@ -1281,7 +1387,7 @@ module Aws::CloudTrail
     #   send notifications when log files are delivered. The format of a
     #   topic ARN is:
     #
-    #   `arn:aws:sns:us-east-1:123456789012:MyTopic`
+    #   `arn:aws:sns:us-east-2:123456789012:MyTopic`
     #   @return [String]
     #
     # @!attribute [rw] include_global_service_events
@@ -1301,7 +1407,7 @@ module Aws::CloudTrail
     # @!attribute [rw] trail_arn
     #   Specifies the ARN of the trail. The format of a trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] log_file_validation_enabled
@@ -1323,11 +1429,15 @@ module Aws::CloudTrail
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
     #   format:
     #
-    #   `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
     # @!attribute [rw] has_custom_event_selectors
     #   Specifies if the trail has custom event selectors.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is an organization trail.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Trail AWS API Documentation
@@ -1346,7 +1456,8 @@ module Aws::CloudTrail
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
       :kms_key_id,
-      :has_custom_event_selectors)
+      :has_custom_event_selectors,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -1366,6 +1477,7 @@ module Aws::CloudTrail
     #         cloud_watch_logs_log_group_arn: "String",
     #         cloud_watch_logs_role_arn: "String",
     #         kms_key_id: "String",
+    #         is_organization_trail: false,
     #       }
     #
     # @!attribute [rw] name
@@ -1386,7 +1498,7 @@ module Aws::CloudTrail
     #
     #   If `Name` is a trail ARN, it must be in the format:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
@@ -1468,12 +1580,25 @@ module Aws::CloudTrail
     #
     #   * alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   * arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
     #
-    #   * arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
     #
     #   * 12345678-1234-1234-1234-123456789012
     #   @return [String]
+    #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is applied to all accounts in an
+    #   organization in AWS Organizations, or only for the current AWS
+    #   account. The default is false, and cannot be true unless the call is
+    #   made on behalf of an AWS account that is the master account for an
+    #   organization in AWS Organizations. If the trail is not an
+    #   organization trail and this is set to true, the trail will be
+    #   created in all AWS accounts that belong to the organization. If the
+    #   trail is an organization trail and this is set to false, the trail
+    #   will remain in the current AWS account but be deleted from all
+    #   member accounts in the organization.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailRequest AWS API Documentation
     #
@@ -1487,7 +1612,8 @@ module Aws::CloudTrail
       :enable_log_file_validation,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 
@@ -1522,7 +1648,7 @@ module Aws::CloudTrail
     #   send notifications when log files are delivered. The format of a
     #   topic ARN is:
     #
-    #   `arn:aws:sns:us-east-1:123456789012:MyTopic`
+    #   `arn:aws:sns:us-east-2:123456789012:MyTopic`
     #   @return [String]
     #
     # @!attribute [rw] include_global_service_events
@@ -1538,7 +1664,7 @@ module Aws::CloudTrail
     #   Specifies the ARN of the trail that was updated. The format of a
     #   trail ARN is:
     #
-    #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
     # @!attribute [rw] log_file_validation_enabled
@@ -1560,8 +1686,12 @@ module Aws::CloudTrail
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
     #   format:
     #
-    #   `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
+    #
+    # @!attribute [rw] is_organization_trail
+    #   Specifies whether the trail is an organization trail.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailResponse AWS API Documentation
     #
@@ -1577,7 +1707,8 @@ module Aws::CloudTrail
       :log_file_validation_enabled,
       :cloud_watch_logs_log_group_arn,
       :cloud_watch_logs_role_arn,
-      :kms_key_id)
+      :kms_key_id,
+      :is_organization_trail)
       include Aws::Structure
     end
 

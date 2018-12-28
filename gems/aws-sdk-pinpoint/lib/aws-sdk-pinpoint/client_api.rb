@@ -38,6 +38,7 @@ module Aws::Pinpoint
     BaiduChannelResponse = Shapes::StructureShape.new(name: 'BaiduChannelResponse')
     BaiduMessage = Shapes::StructureShape.new(name: 'BaiduMessage')
     CampaignEmailMessage = Shapes::StructureShape.new(name: 'CampaignEmailMessage')
+    CampaignEventFilter = Shapes::StructureShape.new(name: 'CampaignEventFilter')
     CampaignHook = Shapes::StructureShape.new(name: 'CampaignHook')
     CampaignLimits = Shapes::StructureShape.new(name: 'CampaignLimits')
     CampaignResponse = Shapes::StructureShape.new(name: 'CampaignResponse')
@@ -91,12 +92,15 @@ module Aws::Pinpoint
     DeleteSmsChannelResponse = Shapes::StructureShape.new(name: 'DeleteSmsChannelResponse')
     DeleteUserEndpointsRequest = Shapes::StructureShape.new(name: 'DeleteUserEndpointsRequest')
     DeleteUserEndpointsResponse = Shapes::StructureShape.new(name: 'DeleteUserEndpointsResponse')
+    DeleteVoiceChannelRequest = Shapes::StructureShape.new(name: 'DeleteVoiceChannelRequest')
+    DeleteVoiceChannelResponse = Shapes::StructureShape.new(name: 'DeleteVoiceChannelResponse')
     DeliveryStatus = Shapes::StringShape.new(name: 'DeliveryStatus')
     DimensionType = Shapes::StringShape.new(name: 'DimensionType')
     DirectMessageConfiguration = Shapes::StructureShape.new(name: 'DirectMessageConfiguration')
     Duration = Shapes::StringShape.new(name: 'Duration')
     EmailChannelRequest = Shapes::StructureShape.new(name: 'EmailChannelRequest')
     EmailChannelResponse = Shapes::StructureShape.new(name: 'EmailChannelResponse')
+    EmailMessage = Shapes::StructureShape.new(name: 'EmailMessage')
     EndpointBatchItem = Shapes::StructureShape.new(name: 'EndpointBatchItem')
     EndpointBatchRequest = Shapes::StructureShape.new(name: 'EndpointBatchRequest')
     EndpointDemographic = Shapes::StructureShape.new(name: 'EndpointDemographic')
@@ -109,6 +113,7 @@ module Aws::Pinpoint
     EndpointUser = Shapes::StructureShape.new(name: 'EndpointUser')
     EndpointsResponse = Shapes::StructureShape.new(name: 'EndpointsResponse')
     Event = Shapes::StructureShape.new(name: 'Event')
+    EventDimensions = Shapes::StructureShape.new(name: 'EventDimensions')
     EventItemResponse = Shapes::StructureShape.new(name: 'EventItemResponse')
     EventStream = Shapes::StructureShape.new(name: 'EventStream')
     EventsBatch = Shapes::StructureShape.new(name: 'EventsBatch')
@@ -118,6 +123,7 @@ module Aws::Pinpoint
     ExportJobResource = Shapes::StructureShape.new(name: 'ExportJobResource')
     ExportJobResponse = Shapes::StructureShape.new(name: 'ExportJobResponse')
     ExportJobsResponse = Shapes::StructureShape.new(name: 'ExportJobsResponse')
+    FilterType = Shapes::StringShape.new(name: 'FilterType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     Format = Shapes::StringShape.new(name: 'Format')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
@@ -188,6 +194,8 @@ module Aws::Pinpoint
     GetSmsChannelResponse = Shapes::StructureShape.new(name: 'GetSmsChannelResponse')
     GetUserEndpointsRequest = Shapes::StructureShape.new(name: 'GetUserEndpointsRequest')
     GetUserEndpointsResponse = Shapes::StructureShape.new(name: 'GetUserEndpointsResponse')
+    GetVoiceChannelRequest = Shapes::StructureShape.new(name: 'GetVoiceChannelRequest')
+    GetVoiceChannelResponse = Shapes::StructureShape.new(name: 'GetVoiceChannelResponse')
     ImportJobRequest = Shapes::StructureShape.new(name: 'ImportJobRequest')
     ImportJobResource = Shapes::StructureShape.new(name: 'ImportJobResource')
     ImportJobResponse = Shapes::StructureShape.new(name: 'ImportJobResponse')
@@ -247,6 +255,7 @@ module Aws::Pinpoint
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
     PutEventsResponse = Shapes::StructureShape.new(name: 'PutEventsResponse')
     QuietTime = Shapes::StructureShape.new(name: 'QuietTime')
+    RawEmail = Shapes::StructureShape.new(name: 'RawEmail')
     RecencyDimension = Shapes::StructureShape.new(name: 'RecencyDimension')
     RecencyType = Shapes::StringShape.new(name: 'RecencyType')
     RemoveAttributesRequest = Shapes::StructureShape.new(name: 'RemoveAttributesRequest')
@@ -274,6 +283,8 @@ module Aws::Pinpoint
     SendUsersMessagesResponse = Shapes::StructureShape.new(name: 'SendUsersMessagesResponse')
     Session = Shapes::StructureShape.new(name: 'Session')
     SetDimension = Shapes::StructureShape.new(name: 'SetDimension')
+    SimpleEmail = Shapes::StructureShape.new(name: 'SimpleEmail')
+    SimpleEmailPart = Shapes::StructureShape.new(name: 'SimpleEmailPart')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TreatmentResource = Shapes::StructureShape.new(name: 'TreatmentResource')
@@ -307,11 +318,17 @@ module Aws::Pinpoint
     UpdateSegmentResponse = Shapes::StructureShape.new(name: 'UpdateSegmentResponse')
     UpdateSmsChannelRequest = Shapes::StructureShape.new(name: 'UpdateSmsChannelRequest')
     UpdateSmsChannelResponse = Shapes::StructureShape.new(name: 'UpdateSmsChannelResponse')
+    UpdateVoiceChannelRequest = Shapes::StructureShape.new(name: 'UpdateVoiceChannelRequest')
+    UpdateVoiceChannelResponse = Shapes::StructureShape.new(name: 'UpdateVoiceChannelResponse')
+    VoiceChannelRequest = Shapes::StructureShape.new(name: 'VoiceChannelRequest')
+    VoiceChannelResponse = Shapes::StructureShape.new(name: 'VoiceChannelResponse')
+    VoiceMessage = Shapes::StructureShape.new(name: 'VoiceMessage')
     WriteApplicationSettingsRequest = Shapes::StructureShape.new(name: 'WriteApplicationSettingsRequest')
     WriteCampaignRequest = Shapes::StructureShape.new(name: 'WriteCampaignRequest')
     WriteEventStream = Shapes::StructureShape.new(name: 'WriteEventStream')
     WriteSegmentRequest = Shapes::StructureShape.new(name: 'WriteSegmentRequest')
     WriteTreatmentResource = Shapes::StructureShape.new(name: 'WriteTreatmentResource')
+    __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -560,6 +577,10 @@ module Aws::Pinpoint
     CampaignEmailMessage.add_member(:html_body, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlBody"))
     CampaignEmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     CampaignEmailMessage.struct_class = Types::CampaignEmailMessage
+
+    CampaignEventFilter.add_member(:dimensions, Shapes::ShapeRef.new(shape: EventDimensions, location_name: "Dimensions"))
+    CampaignEventFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: FilterType, location_name: "FilterType"))
+    CampaignEventFilter.struct_class = Types::CampaignEventFilter
 
     CampaignHook.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: __string, location_name: "LambdaFunctionName"))
     CampaignHook.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
@@ -814,15 +835,26 @@ module Aws::Pinpoint
     DeleteUserEndpointsResponse[:payload] = :endpoints_response
     DeleteUserEndpointsResponse[:payload_member] = DeleteUserEndpointsResponse.member(:endpoints_response)
 
+    DeleteVoiceChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteVoiceChannelRequest.struct_class = Types::DeleteVoiceChannelRequest
+
+    DeleteVoiceChannelResponse.add_member(:voice_channel_response, Shapes::ShapeRef.new(shape: VoiceChannelResponse, required: true, location_name: "VoiceChannelResponse"))
+    DeleteVoiceChannelResponse.struct_class = Types::DeleteVoiceChannelResponse
+    DeleteVoiceChannelResponse[:payload] = :voice_channel_response
+    DeleteVoiceChannelResponse[:payload_member] = DeleteVoiceChannelResponse.member(:voice_channel_response)
+
     DirectMessageConfiguration.add_member(:adm_message, Shapes::ShapeRef.new(shape: ADMMessage, location_name: "ADMMessage"))
     DirectMessageConfiguration.add_member(:apns_message, Shapes::ShapeRef.new(shape: APNSMessage, location_name: "APNSMessage"))
     DirectMessageConfiguration.add_member(:baidu_message, Shapes::ShapeRef.new(shape: BaiduMessage, location_name: "BaiduMessage"))
     DirectMessageConfiguration.add_member(:default_message, Shapes::ShapeRef.new(shape: DefaultMessage, location_name: "DefaultMessage"))
     DirectMessageConfiguration.add_member(:default_push_notification_message, Shapes::ShapeRef.new(shape: DefaultPushNotificationMessage, location_name: "DefaultPushNotificationMessage"))
+    DirectMessageConfiguration.add_member(:email_message, Shapes::ShapeRef.new(shape: EmailMessage, location_name: "EmailMessage"))
     DirectMessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: GCMMessage, location_name: "GCMMessage"))
     DirectMessageConfiguration.add_member(:sms_message, Shapes::ShapeRef.new(shape: SMSMessage, location_name: "SMSMessage"))
+    DirectMessageConfiguration.add_member(:voice_message, Shapes::ShapeRef.new(shape: VoiceMessage, location_name: "VoiceMessage"))
     DirectMessageConfiguration.struct_class = Types::DirectMessageConfiguration
 
+    EmailChannelRequest.add_member(:configuration_set, Shapes::ShapeRef.new(shape: __string, location_name: "ConfigurationSet"))
     EmailChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     EmailChannelRequest.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
     EmailChannelRequest.add_member(:identity, Shapes::ShapeRef.new(shape: __string, location_name: "Identity"))
@@ -830,6 +862,7 @@ module Aws::Pinpoint
     EmailChannelRequest.struct_class = Types::EmailChannelRequest
 
     EmailChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    EmailChannelResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: __string, location_name: "ConfigurationSet"))
     EmailChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     EmailChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     EmailChannelResponse.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
@@ -844,6 +877,15 @@ module Aws::Pinpoint
     EmailChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     EmailChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     EmailChannelResponse.struct_class = Types::EmailChannelResponse
+
+    EmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    EmailMessage.add_member(:feedback_forwarding_address, Shapes::ShapeRef.new(shape: __string, location_name: "FeedbackForwardingAddress"))
+    EmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
+    EmailMessage.add_member(:raw_email, Shapes::ShapeRef.new(shape: RawEmail, location_name: "RawEmail"))
+    EmailMessage.add_member(:reply_to_addresses, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "ReplyToAddresses"))
+    EmailMessage.add_member(:simple_email, Shapes::ShapeRef.new(shape: SimpleEmail, location_name: "SimpleEmail"))
+    EmailMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
+    EmailMessage.struct_class = Types::EmailMessage
 
     EndpointBatchItem.add_member(:address, Shapes::ShapeRef.new(shape: __string, location_name: "Address"))
     EndpointBatchItem.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Attributes"))
@@ -943,6 +985,11 @@ module Aws::Pinpoint
     Event.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "Session"))
     Event.add_member(:timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "Timestamp"))
     Event.struct_class = Types::Event
+
+    EventDimensions.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOfAttributeDimension, location_name: "Attributes"))
+    EventDimensions.add_member(:event_type, Shapes::ShapeRef.new(shape: SetDimension, location_name: "EventType"))
+    EventDimensions.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOfMetricDimension, location_name: "Metrics"))
+    EventDimensions.struct_class = Types::EventDimensions
 
     EventItemResponse.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     EventItemResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: __integer, location_name: "StatusCode"))
@@ -1323,6 +1370,14 @@ module Aws::Pinpoint
     GetUserEndpointsResponse[:payload] = :endpoints_response
     GetUserEndpointsResponse[:payload_member] = GetUserEndpointsResponse.member(:endpoints_response)
 
+    GetVoiceChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetVoiceChannelRequest.struct_class = Types::GetVoiceChannelRequest
+
+    GetVoiceChannelResponse.add_member(:voice_channel_response, Shapes::ShapeRef.new(shape: VoiceChannelResponse, required: true, location_name: "VoiceChannelResponse"))
+    GetVoiceChannelResponse.struct_class = Types::GetVoiceChannelResponse
+    GetVoiceChannelResponse[:payload] = :voice_channel_response
+    GetVoiceChannelResponse[:payload_member] = GetVoiceChannelResponse.member(:voice_channel_response)
+
     ImportJobRequest.add_member(:define_segment, Shapes::ShapeRef.new(shape: __boolean, location_name: "DefineSegment"))
     ImportJobRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "ExternalId"))
     ImportJobRequest.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
@@ -1562,6 +1617,9 @@ module Aws::Pinpoint
     QuietTime.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "Start"))
     QuietTime.struct_class = Types::QuietTime
 
+    RawEmail.add_member(:data, Shapes::ShapeRef.new(shape: __blob, location_name: "Data"))
+    RawEmail.struct_class = Types::RawEmail
+
     RecencyDimension.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "Duration"))
     RecencyDimension.add_member(:recency_type, Shapes::ShapeRef.new(shape: RecencyType, location_name: "RecencyType"))
     RecencyDimension.struct_class = Types::RecencyDimension
@@ -1608,6 +1666,7 @@ module Aws::Pinpoint
     SMSMessage.struct_class = Types::SMSMessage
 
     Schedule.add_member(:end_time, Shapes::ShapeRef.new(shape: __string, location_name: "EndTime"))
+    Schedule.add_member(:event_filter, Shapes::ShapeRef.new(shape: CampaignEventFilter, location_name: "EventFilter"))
     Schedule.add_member(:frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "Frequency"))
     Schedule.add_member(:is_local_time, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsLocalTime"))
     Schedule.add_member(:quiet_time, Shapes::ShapeRef.new(shape: QuietTime, location_name: "QuietTime"))
@@ -1718,6 +1777,15 @@ module Aws::Pinpoint
     SetDimension.add_member(:dimension_type, Shapes::ShapeRef.new(shape: DimensionType, location_name: "DimensionType"))
     SetDimension.add_member(:values, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Values"))
     SetDimension.struct_class = Types::SetDimension
+
+    SimpleEmail.add_member(:html_part, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "HtmlPart"))
+    SimpleEmail.add_member(:subject, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "Subject"))
+    SimpleEmail.add_member(:text_part, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "TextPart"))
+    SimpleEmail.struct_class = Types::SimpleEmail
+
+    SimpleEmailPart.add_member(:charset, Shapes::ShapeRef.new(shape: __string, location_name: "Charset"))
+    SimpleEmailPart.add_member(:data, Shapes::ShapeRef.new(shape: __string, location_name: "Data"))
+    SimpleEmailPart.struct_class = Types::SimpleEmailPart
 
     TreatmentResource.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     TreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
@@ -1888,6 +1956,39 @@ module Aws::Pinpoint
     UpdateSmsChannelResponse[:payload] = :sms_channel_response
     UpdateSmsChannelResponse[:payload_member] = UpdateSmsChannelResponse.member(:sms_channel_response)
 
+    UpdateVoiceChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    UpdateVoiceChannelRequest.add_member(:voice_channel_request, Shapes::ShapeRef.new(shape: VoiceChannelRequest, required: true, location_name: "VoiceChannelRequest"))
+    UpdateVoiceChannelRequest.struct_class = Types::UpdateVoiceChannelRequest
+    UpdateVoiceChannelRequest[:payload] = :voice_channel_request
+    UpdateVoiceChannelRequest[:payload_member] = UpdateVoiceChannelRequest.member(:voice_channel_request)
+
+    UpdateVoiceChannelResponse.add_member(:voice_channel_response, Shapes::ShapeRef.new(shape: VoiceChannelResponse, required: true, location_name: "VoiceChannelResponse"))
+    UpdateVoiceChannelResponse.struct_class = Types::UpdateVoiceChannelResponse
+    UpdateVoiceChannelResponse[:payload] = :voice_channel_response
+    UpdateVoiceChannelResponse[:payload_member] = UpdateVoiceChannelResponse.member(:voice_channel_response)
+
+    VoiceChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    VoiceChannelRequest.struct_class = Types::VoiceChannelRequest
+
+    VoiceChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    VoiceChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
+    VoiceChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    VoiceChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
+    VoiceChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    VoiceChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
+    VoiceChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
+    VoiceChannelResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
+    VoiceChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, location_name: "Platform"))
+    VoiceChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
+    VoiceChannelResponse.struct_class = Types::VoiceChannelResponse
+
+    VoiceMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    VoiceMessage.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, location_name: "LanguageCode"))
+    VoiceMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
+    VoiceMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
+    VoiceMessage.add_member(:voice_id, Shapes::ShapeRef.new(shape: __string, location_name: "VoiceId"))
+    VoiceMessage.struct_class = Types::VoiceMessage
+
     WriteApplicationSettingsRequest.add_member(:campaign_hook, Shapes::ShapeRef.new(shape: CampaignHook, location_name: "CampaignHook"))
     WriteApplicationSettingsRequest.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "CloudWatchMetricsEnabled"))
     WriteApplicationSettingsRequest.add_member(:limits, Shapes::ShapeRef.new(shape: CampaignLimits, location_name: "Limits"))
@@ -1932,12 +2033,15 @@ module Aws::Pinpoint
       api.version = "2016-12-01"
 
       api.metadata = {
+        "apiVersion" => "2016-12-01",
         "endpointPrefix" => "pinpoint",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Pinpoint",
+        "serviceId" => "Pinpoint",
         "signatureVersion" => "v4",
         "signingName" => "mobiletargeting",
+        "uid" => "pinpoint-2016-12-01",
       }
 
       api.add_operation(:create_app, Seahorse::Model::Operation.new.tap do |o|
@@ -2212,6 +2316,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/users/{user-id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteUserEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteUserEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_voice_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVoiceChannel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/voice"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVoiceChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVoiceChannelResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2654,6 +2772,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_voice_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVoiceChannel"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/voice"
+        o.input = Shapes::ShapeRef.new(shape: GetVoiceChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVoiceChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:phone_number_validate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PhoneNumberValidate"
         o.http_method = "POST"
@@ -2926,6 +3058,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/sms"
         o.input = Shapes::ShapeRef.new(shape: UpdateSmsChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSmsChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_voice_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVoiceChannel"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/voice"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVoiceChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVoiceChannelResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

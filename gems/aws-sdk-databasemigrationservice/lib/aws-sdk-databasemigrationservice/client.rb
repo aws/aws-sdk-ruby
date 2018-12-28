@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::DatabaseMigrationService
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -236,15 +285,15 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
-    #   mongodb, and sqlserver.
+    #   `EndPointType` value, include `mysql`, `oracle`, `postgres`,
+    #   `mariadb`, `aurora`, `aurora-postgresql`, `redshift`, `s3`, `db2`,
+    #   `azuredb`, `sybase`, `dynamodb`, `mongodb`, and `sqlserver`.
     #
     # @option params [String] :username
-    #   The user name to be used to login to the endpoint database.
+    #   The user name to be used to log in to the endpoint database.
     #
     # @option params [String] :password
-    #   The password to be used to login to the endpoint database.
+    #   The password to be used to log in to the endpoint database.
     #
     # @option params [String] :server_name
     #   The name of the server where the endpoint database resides.
@@ -259,11 +308,11 @@ module Aws::DatabaseMigrationService
     #   Additional attributes associated with the connection.
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier that will be used to encrypt the connection
-    #   parameters. If you do not specify a value for the KmsKeyId parameter,
-    #   then AWS DMS will use your default encryption key. AWS KMS creates the
-    #   default encryption key for your AWS account. Your AWS account has a
-    #   different default encryption key for each AWS region.
+    #   The AWS KMS key identifier to use to encrypt the connection
+    #   parameters. If you don't specify a value for the `KmsKeyId`
+    #   parameter, then AWS DMS uses your default encryption key. AWS KMS
+    #   creates the default encryption key for your AWS account. Your AWS
+    #   account has a different default encryption key for each AWS Region.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be added to the endpoint.
@@ -272,25 +321,22 @@ module Aws::DatabaseMigrationService
     #   The Amazon Resource Name (ARN) for the certificate.
     #
     # @option params [String] :ssl_mode
-    #   The SSL mode to use for the SSL connection.
-    #
-    #   SSL mode can be one of four values: none, require, verify-ca,
-    #   verify-full.
-    #
-    #   The default value is none.
+    #   The Secure Sockets Layer (SSL) mode to use for the SSL connection. The
+    #   SSL mode can be one of four values: `none`, `require`, `verify-ca`,
+    #   `verify-full`. The default value is `none`.
     #
     # @option params [String] :service_access_role_arn
-    #   The Amazon Resource Name (ARN) for the service access role you want to
-    #   use to create the endpoint.
+    #   The Amazon Resource Name (ARN) for the service access role that you
+    #   want to use to create the endpoint.
     #
     # @option params [String] :external_table_definition
     #   The external table definition.
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see the **Using Object
-    #   Mapping to Migrate Data to DynamoDB** section at [ Using an Amazon
-    #   DynamoDB Database as a Target for AWS Database Migration Service][1].
+    #   more information about the available settings, see [Using Object
+    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database Migration
+    #   Service User Guide.*
     #
     #
     #
@@ -298,46 +344,66 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::S3Settings] :s3_settings
     #   Settings in JSON format for the target Amazon S3 endpoint. For more
-    #   information about the available settings, see the **Extra Connection
-    #   Attributes** section at [ Using Amazon S3 as a Target for AWS Database
-    #   Migration Service][1].
+    #   information about the available settings, see [Extra Connection
+    #   Attributes When Using Amazon S3 as a Target for AWS DMS][1] in the
+    #   *AWS Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #
     # @option params [Types::DmsTransferSettings] :dms_transfer_settings
-    #   The settings in JSON format for the DMS Transfer type source endpoint.
+    #   The settings in JSON format for the DMS transfer type of source
+    #   endpoint.
     #
-    #   Attributes include:
+    #   Possible attributes include the following:
     #
-    #   * serviceAccessRoleArn - The IAM role that has permission to access
+    #   * `serviceAccessRoleArn` - The IAM role that has permission to access
     #     the Amazon S3 bucket.
     #
-    #   * bucketName - The name of the S3 bucket to use.
+    #   * `bucketName` - The name of the S3 bucket to use.
     #
-    #   * compressionType - An optional parameter to use GZIP to compress the
-    #     target files. Set to NONE (the default) or do not use to leave the
-    #     files uncompressed.
+    #   * `compressionType` - An optional parameter to use GZIP to compress
+    #     the target files. To use GZIP, set this value to `NONE` (the
+    #     default). To keep the files uncompressed, don't use this value.
     #
-    #   Shorthand syntax: ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string
+    #   Shorthand syntax for these attributes is as follows:
+    #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax:
-    #
-    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName": "string",
-    #   "CompressionType": "none"\|"gzip" \\}
+    #   JSON syntax for these attributes is as follows: `\{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"|"gzip" \} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see the **Configuration
-    #   Properties When Using MongoDB as a Source for AWS Database Migration
-    #   Service** section at [ Using MongoDB as a Target for AWS Database
-    #   Migration Service][1].
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using MongoDB as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #
+    # @option params [Types::KinesisSettings] :kinesis_settings
+    #   Settings in JSON format for the target Amazon Kinesis Data Streams
+    #   endpoint. For more information about the available settings, see
+    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
+    #   the *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #
+    # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
+    #   Settings in JSON format for the target Elasticsearch endpoint. For
+    #   more information about the available settings, see [Extra Connection
+    #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in the
+    #   *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
     #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -437,6 +503,17 @@ module Aws::DatabaseMigrationService
     #       auth_source: "String",
     #       kms_key_id: "String",
     #     },
+    #     kinesis_settings: {
+    #       stream_arn: "String",
+    #       message_format: "json", # accepts json
+    #       service_access_role_arn: "String",
+    #     },
+    #     elasticsearch_settings: {
+    #       service_access_role_arn: "String", # required
+    #       endpoint_uri: "String", # required
+    #       full_load_error_percentage: 1,
+    #       error_retry_duration: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -480,6 +557,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoint.kinesis_settings.stream_arn #=> String
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
+    #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
+    #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
+    #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -505,9 +589,9 @@ module Aws::DatabaseMigrationService
     # `SourceType` nor `SourceIdentifier`, you will be notified of events
     # generated from all AWS DMS sources belonging to your customer account.
     #
-    # For more information about AWS DMS events, see [ Working with Events
-    # and Notifications ][1] in the AWS Database MIgration Service User
-    # Guide.
+    # For more information about AWS DMS events, see [Working with Events
+    # and Notifications][1] in the *AWS Database Migration Service User
+    # Guide.*
     #
     #
     #
@@ -534,9 +618,9 @@ module Aws::DatabaseMigrationService
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a source type that you want to
     #   subscribe to. You can see a list of the categories for a given source
-    #   type by calling the **DescribeEventCategories** action or in the topic
-    #   [ Working with Events and Notifications][1] in the AWS Database
-    #   Migration Service User Guide.
+    #   type by calling the `DescribeEventCategories` action or in the topic
+    #   [Working with Events and Notifications][1] in the *AWS Database
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -550,8 +634,8 @@ module Aws::DatabaseMigrationService
     #   contain two consecutive hyphens.
     #
     # @option params [Boolean] :enabled
-    #   A Boolean value; set to **true** to activate the subscription, or set
-    #   to **false** to create the subscription but not activate it.
+    #   A Boolean value; set to `true` to activate the subscription, or set to
+    #   `false` to create the subscription but not activate it.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A tag to be attached to the event subscription.
@@ -676,17 +760,20 @@ module Aws::DatabaseMigrationService
     #   Tags to be associated with the replication instance.
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier that will be used to encrypt the content on the
-    #   replication instance. If you do not specify a value for the KmsKeyId
-    #   parameter, then AWS DMS will use your default encryption key. AWS KMS
+    #   The AWS KMS key identifier that is used to encrypt the content on the
+    #   replication instance. If you don't specify a value for the `KmsKeyId`
+    #   parameter, then AWS DMS uses your default encryption key. AWS KMS
     #   creates the default encryption key for your AWS account. Your AWS
-    #   account has a different default encryption key for each AWS region.
+    #   account has a different default encryption key for each AWS Region.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the replication instance. A
     #   value of `true` represents an instance with a public IP address. A
     #   value of `false` represents an instance with a private IP address. The
     #   default value is `true`.
+    #
+    # @option params [String] :dns_name_servers
+    #   A list of DNS name servers supported for the replication instance.
     #
     # @return [Types::CreateReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -794,6 +881,7 @@ module Aws::DatabaseMigrationService
     #     ],
     #     kms_key_id: "String",
     #     publicly_accessible: false,
+    #     dns_name_servers: "String",
     #   })
     #
     # @example Response structure
@@ -834,6 +922,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
+    #   resp.replication_instance.dns_name_servers #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance AWS API Documentation
     #
@@ -967,7 +1056,8 @@ module Aws::DatabaseMigrationService
     # @option params [String] :replication_task_settings
     #   Settings for the task, such as target metadata settings. For a
     #   complete list of task settings, see [Task Settings for AWS Database
-    #   Migration Service Tasks][1].
+    #   Migration Service Tasks][1] in the *AWS Database Migration User
+    #   Guide.*
     #
     #
     #
@@ -1244,6 +1334,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoint.kinesis_settings.stream_arn #=> String
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
+    #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
+    #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
+    #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -1415,6 +1512,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
+    #   resp.replication_instance.dns_name_servers #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance AWS API Documentation
     #
@@ -1971,6 +2069,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoints[0].mongo_db_settings.auth_source #=> String
     #   resp.endpoints[0].mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoints[0].kinesis_settings.stream_arn #=> String
+    #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoints[0].kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
+    #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
+    #   resp.endpoints[0].elasticsearch_settings.error_retry_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints AWS API Documentation
     #
@@ -1983,8 +2088,8 @@ module Aws::DatabaseMigrationService
 
     # Lists categories for all event source types, or, if specified, for a
     # specified source type. You can see a list of the event categories and
-    # source types in [ Working with Events and Notifications ][1] in the
-    # AWS Database Migration Service User Guide.
+    # source types in [Working with Events and Notifications][1] in the *AWS
+    # Database Migration Service User Guide.*
     #
     #
     #
@@ -2105,7 +2210,8 @@ module Aws::DatabaseMigrationService
 
     # Lists events for a given source identifier and source type. You can
     # also specify a start and end time. For more information on AWS DMS
-    # events, see [ Working with Events and Notifications ][1].
+    # events, see [Working with Events and Notifications][1] in the *AWS
+    # Database Migration User Guide.*
     #
     #
     #
@@ -2473,6 +2579,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].publicly_accessible #=> Boolean
     #   resp.replication_instances[0].secondary_availability_zone #=> String
     #   resp.replication_instances[0].free_until #=> Time
+    #   resp.replication_instances[0].dns_name_servers #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances AWS API Documentation
     #
@@ -3082,28 +3189,29 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see the **Using Object
-    #   Mapping to Migrate Data to DynamoDB** section at [ Using an Amazon
-    #   DynamoDB Database as a Target for AWS Database Migration Service][1].
+    #   more information about the available settings, see [Using Object
+    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database Migration
+    #   Service User Guide.*
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
     #
     # @option params [Types::S3Settings] :s3_settings
-    #   Settings in JSON format for the target S3 endpoint. For more
-    #   information about the available settings, see the **Extra Connection
-    #   Attributes** section at [ Using Amazon S3 as a Target for AWS Database
-    #   Migration Service][1].
+    #   Settings in JSON format for the target Amazon S3 endpoint. For more
+    #   information about the available settings, see [Extra Connection
+    #   Attributes When Using Amazon S3 as a Target for AWS DMS][1] in the
+    #   *AWS Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #
     # @option params [Types::DmsTransferSettings] :dms_transfer_settings
-    #   The settings in JSON format for the DMS Transfer type source endpoint.
+    #   The settings in JSON format for the DMS transfer type of source
+    #   endpoint.
     #
-    #   Attributes include:
+    #   Attributes include the following:
     #
     #   * serviceAccessRoleArn - The IAM role that has permission to access
     #     the Amazon S3 bucket.
@@ -3124,14 +3232,34 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see the **Configuration
-    #   Properties When Using MongoDB as a Source for AWS Database Migration
-    #   Service** section at [ Using Amazon S3 as a Target for AWS Database
-    #   Migration Service][1].
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using MongoDB as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #
+    # @option params [Types::KinesisSettings] :kinesis_settings
+    #   Settings in JSON format for the target Amazon Kinesis Data Streams
+    #   endpoint. For more information about the available settings, see
+    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
+    #   the *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #
+    # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
+    #   Settings in JSON format for the target Elasticsearch endpoint. For
+    #   more information about the available settings, see [Extra Connection
+    #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in the
+    #   *AWS Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
     #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3210,6 +3338,17 @@ module Aws::DatabaseMigrationService
     #       auth_source: "String",
     #       kms_key_id: "String",
     #     },
+    #     kinesis_settings: {
+    #       stream_arn: "String",
+    #       message_format: "json", # accepts json
+    #       service_access_role_arn: "String",
+    #     },
+    #     elasticsearch_settings: {
+    #       service_access_role_arn: "String", # required
+    #       endpoint_uri: "String", # required
+    #       full_load_error_percentage: 1,
+    #       error_retry_duration: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3253,6 +3392,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoint.kinesis_settings.stream_arn #=> String
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
+    #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
+    #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
+    #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -3534,6 +3680,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
+    #   resp.replication_instance.dns_name_servers #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance AWS API Documentation
     #
@@ -3610,8 +3757,8 @@ module Aws::DatabaseMigrationService
     # You can't modify the task endpoints. The task must be stopped before
     # you can modify it.
     #
-    # For more information about AWS DMS tasks, see the AWS DMS user guide
-    # at [ Working with Migration Tasks ][1]
+    # For more information about AWS DMS tasks, see [Working with Migration
+    # Tasks][1] in the *AWS Database Migration Service User Guide*.
     #
     #
     #
@@ -3791,6 +3938,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
+    #   resp.replication_instance.dns_name_servers #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstance AWS API Documentation
     #
@@ -3950,8 +4098,8 @@ module Aws::DatabaseMigrationService
 
     # Starts the replication task.
     #
-    # For more information about AWS DMS tasks, see the AWS DMS user guide
-    # at [ Working with Migration Tasks ][1]
+    # For more information about AWS DMS tasks, see [Working with Migration
+    # Tasks ][1] in the *AWS Database Migration Service User Guide.*
     #
     #
     #
@@ -4262,14 +4410,141 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.waiter_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name                    | params                            | :delay   | :max_attempts |
+    # | ------------------------------ | --------------------------------- | -------- | ------------- |
+    # | endpoint_deleted               | {#describe_endpoints}             | 5        | 60            |
+    # | replication_instance_available | {#describe_replication_instances} | 60       | 60            |
+    # | replication_instance_deleted   | {#describe_replication_instances} | 15       | 60            |
+    # | replication_task_deleted       | {#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_ready         | {#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_running       | {#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_stopped       | {#describe_replication_tasks}     | 15       | 60            |
+    # | test_connection_succeeds       | {#test_connection}                | 5        | 60            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        endpoint_deleted: Waiters::EndpointDeleted,
+        replication_instance_available: Waiters::ReplicationInstanceAvailable,
+        replication_instance_deleted: Waiters::ReplicationInstanceDeleted,
+        replication_task_deleted: Waiters::ReplicationTaskDeleted,
+        replication_task_ready: Waiters::ReplicationTaskReady,
+        replication_task_running: Waiters::ReplicationTaskRunning,
+        replication_task_stopped: Waiters::ReplicationTaskStopped,
+        test_connection_succeeds: Waiters::TestConnectionSucceeds
+      }
     end
 
     class << self

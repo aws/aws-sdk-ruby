@@ -58,6 +58,9 @@ module Aws::SNS
     #
     #   topic = sns.create_topic({
     #     name: "topicName", # required
+    #     attributes: {
+    #       "attributeName" => "attributeValue",
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :name
@@ -66,6 +69,20 @@ module Aws::SNS
     #   Constraints: Topic names must be made up of only uppercase and
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
+    # @option options [Hash<String,String>] :attributes
+    #   A map of attributes with their corresponding values.
+    #
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `CreateTopic` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `DisplayName` – The display name to use for a topic with SMS
+    #     subscriptions.
+    #
+    #   * `Policy` – The policy that defines who can access your topic. By
+    #     default, only the topic owner can publish or subscribe to the topic.
     # @return [Topic]
     def create_topic(options = {})
       resp = @client.create_topic(options)

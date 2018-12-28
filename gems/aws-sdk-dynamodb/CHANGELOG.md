@@ -1,6 +1,58 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2018-12-21)
+------------------
+
+* Feature - API update.
+
+1.18.1 (2018-12-17)
+------------------
+
+* Issue - Change `BigDecimal` usage to be compliant with Ruby 2.6.
+
+1.18.0 (2018-11-28)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2018-11-08)
+------------------
+
+* Feature - Support `endpointdiscovery` for DynamoDB operations, set `:endpoint_discovery` to `true` to enable this feature
+
+1.15.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2018-09-06)
+------------------
+
+* Feature - API update.
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.12.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-08-20)
+------------------
+
+* Feature - API update.
+
 1.10.0 (2018-08-06)
 ------------------
 

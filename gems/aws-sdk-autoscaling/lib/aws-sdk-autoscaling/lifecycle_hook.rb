@@ -40,8 +40,8 @@ module Aws::AutoScaling
     end
     alias :lifecycle_hook_name :name
 
-    # The state of the EC2 instance to which you want to attach the
-    # lifecycle hook. The following are possible values:
+    # The state of the EC2 instance to which to attach the lifecycle hook.
+    # The following are possible values:
     #
     # * autoscaling:EC2\_INSTANCE\_LAUNCHING
     #
@@ -305,18 +305,18 @@ module Aws::AutoScaling
     #   This parameter is required for new lifecycle hooks, but optional when
     #   updating existing hooks.
     # @option options [String] :notification_target_arn
-    #   The ARN of the notification target that Amazon EC2 Auto Scaling will
-    #   use to notify you when an instance is in the transition state for the
+    #   The ARN of the notification target that Amazon EC2 Auto Scaling uses
+    #   to notify you when an instance is in the transition state for the
     #   lifecycle hook. This target can be either an SQS queue or an SNS
     #   topic. If you specify an empty string, this overrides the current ARN.
     #
     #   This operation uses the JSON format when sending notifications to an
-    #   Amazon SQS queue, and an email key/value pair format when sending
+    #   Amazon SQS queue, and an email key-value pair format when sending
     #   notifications to an Amazon SNS topic.
     #
     #   When you specify a notification target, Amazon EC2 Auto Scaling sends
-    #   it a test message. Test messages contains the following additional
-    #   key/value pair: `"Event": "autoscaling:TEST_NOTIFICATION"`.
+    #   it a test message. Test messages contain the following additional
+    #   key-value pair: `"Event": "autoscaling:TEST_NOTIFICATION"`.
     # @option options [String] :notification_metadata
     #   Contains additional information that you want to include any time
     #   Amazon EC2 Auto Scaling sends a message to the notification target.
@@ -353,7 +353,7 @@ module Aws::AutoScaling
     # @option options [String] :lifecycle_action_token
     #   A token that uniquely identifies a specific lifecycle action
     #   associated with an instance. Amazon EC2 Auto Scaling sends this token
-    #   to the notification target you specified when you created the
+    #   to the notification target that you specified when you created the
     #   lifecycle hook.
     # @option options [String] :instance_id
     #   The ID of the instance.

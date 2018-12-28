@@ -136,13 +136,17 @@ module Aws::PI
       api.version = "2018-02-27"
 
       api.metadata = {
+        "apiVersion" => "2018-02-27",
         "endpointPrefix" => "pi",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS PI",
         "serviceFullName" => "AWS Performance Insights",
+        "serviceId" => "PI",
         "signatureVersion" => "v4",
         "signingName" => "pi",
         "targetPrefix" => "PerformanceInsightsv20180227",
+        "uid" => "pi-2018-02-27",
       }
 
       api.add_operation(:describe_dimension_keys, Seahorse::Model::Operation.new.tap do |o|
