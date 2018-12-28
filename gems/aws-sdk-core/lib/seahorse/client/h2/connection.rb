@@ -97,8 +97,6 @@ module Seahorse
               rescue EOFError
                 @socket.close
               rescue => error
-                # TODO debug only, to be removed
-                puts error.backtrace
                 self.debug_output(error.inspect)
                 @errors << error
                 self.close!

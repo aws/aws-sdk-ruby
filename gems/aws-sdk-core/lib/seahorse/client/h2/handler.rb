@@ -6,7 +6,6 @@ module Seahorse
     # @api private
     module H2
 
-      # TODO, retry?
       NETWORK_ERRORS = [
         SocketError, EOFError, IOError, Timeout::Error,
         Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
@@ -48,13 +47,10 @@ module Seahorse
 
             conn.start(stream)
           rescue *NETWORK_ERRORS => error
-            # TODO reconsider H2 retry scenarios
             error = NetworkingError.new(
               error, error_message(context.http_request, error))
             context.http_response.signal_error(error)
           rescue => error
-            # TODO debug only, to be removed
-            puts error.backtrace
             conn.debug_output(error.inspect)
             # not retryable
             context.http_response.signal_error(error)
