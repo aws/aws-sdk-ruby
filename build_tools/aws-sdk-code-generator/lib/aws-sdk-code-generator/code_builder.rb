@@ -64,7 +64,9 @@ module AwsSdkCodeGenerator
         end
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", client_class)
-        y.yield("#{prefix}/async_client.rb", async_client_class) # TODO if 
+        if @service.protocol_settings['h2'] == 'eventstream'
+          y.yield("#{prefix}/async_client.rb", async_client_class)
+        end
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
