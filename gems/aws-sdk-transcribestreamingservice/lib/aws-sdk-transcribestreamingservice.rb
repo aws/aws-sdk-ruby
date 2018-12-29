@@ -14,6 +14,7 @@ require_relative 'aws-sdk-transcribestreamingservice/client'
 require_relative 'aws-sdk-transcribestreamingservice/errors'
 require_relative 'aws-sdk-transcribestreamingservice/resource'
 require_relative 'aws-sdk-transcribestreamingservice/customizations'
+require_relative 'aws-sdk-transcribestreamingservice/async_client'
 require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 
 # This module provides support for Amazon Transcribe Streaming Service. This module is available in the

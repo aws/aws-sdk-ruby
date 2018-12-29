@@ -122,12 +122,15 @@ module Aws::TranscribeStreamingService
       api.version = "2017-10-26"
 
       api.metadata = {
+        "apiVersion" => "2017-10-26",
         "endpointPrefix" => "transcribestreaming",
         "protocol" => "rest-json",
         "protocolSettings" => {"h2"=>"eventstream"},
         "serviceFullName" => "Amazon Transcribe Streaming Service",
+        "serviceId" => "Transcribe Streaming",
         "signatureVersion" => "v4",
         "signingName" => "transcribe",
+        "uid" => "transcribe-streaming-2017-10-26",
       }
 
       api.add_operation(:start_stream_transcription, Seahorse::Model::Operation.new.tap do |o|
