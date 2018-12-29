@@ -171,10 +171,12 @@ module Aws::LambdaPreview
       api.version = "2014-11-11"
 
       api.metadata = {
+        "apiVersion" => "2014-11-11",
         "endpointPrefix" => "lambda",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Lambda",
         "signatureVersion" => "v4",
+        "uid" => "lambda-2014-11-11",
       }
 
       api.add_operation(:add_event_source, Seahorse::Model::Operation.new.tap do |o|

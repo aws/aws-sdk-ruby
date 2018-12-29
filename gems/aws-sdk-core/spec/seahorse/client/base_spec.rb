@@ -289,6 +289,7 @@ module Seahorse
           expect(plugin).to receive(:add_options) do |config|
             config.add_option(:foo, 'bar')
             config.add_option(:endpoint, 'http://foo.com')
+            config.add_option(:regional_endpoint, false)
           end
           client_class.add_plugin(plugin)
           expect(client_class.new.config.foo).to eq('bar')

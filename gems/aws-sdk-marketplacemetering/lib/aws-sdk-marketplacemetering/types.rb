@@ -119,12 +119,62 @@ module Aws::MarketplaceMetering
     end
 
     # @!attribute [rw] metering_record_id
+    #   Metering record id.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageResult AWS API Documentation
     #
     class MeterUsageResult < Struct.new(
       :metering_record_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterUsageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         product_code: "ProductCode", # required
+    #         public_key_version: 1, # required
+    #         nonce: "Nonce",
+    #       }
+    #
+    # @!attribute [rw] product_code
+    #   Product code is used to uniquely identify a product in AWS
+    #   Marketplace. The product code should be the same as the one used
+    #   during the publishing of a new product.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_version
+    #   Public Key Version provided by AWS Marketplace
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nonce
+    #   (Optional) To scope down the registration to a specific running
+    #   software instance and guard against replay attacks.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/RegisterUsageRequest AWS API Documentation
+    #
+    class RegisterUsageRequest < Struct.new(
+      :product_code,
+      :public_key_version,
+      :nonce)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_key_rotation_timestamp
+    #   (Optional) Only included when public key version has expired
+    #   @return [Time]
+    #
+    # @!attribute [rw] signature
+    #   JWT Token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/RegisterUsageResult AWS API Documentation
+    #
+    class RegisterUsageResult < Struct.new(
+      :public_key_rotation_timestamp,
+      :signature)
       include Aws::Structure
     end
 

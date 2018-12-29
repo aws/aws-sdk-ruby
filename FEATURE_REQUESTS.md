@@ -345,3 +345,46 @@ and the AWS SDK for Ruby. Supporting a transformation between these two formats
 could be useful if using actual AWS CLI output as stubbed output for Ruby tests.
 
 See [related GitHub issue #970](https://github.com/aws/aws-sdk-ruby/issues/970).
+
+### Force Payload Signing for S3
+
+Support non-AWS S3 endpoints with forced payload signing using payload_signing_enabled configuration.
+
+See [related GitHub issue #1822](https://github.com/aws/aws-sdk-ruby/issues/1822).
+
+### Support non-symbolized keys
+
+To support better cross-use with AWS CLI (specifically, borrowing input from --cli-input-json), the
+AWS SDK for Ruby would need to support non-symbolized keys.
+
+See [related GitHub issue #1685](https://github.com/aws/aws-sdk-ruby/issues/1685).
+
+### Suppport http client configuration of MessageVerifier
+
+Verifier currently makes http call directly, and does not use SNS client or Aws.config.
+
+See [related GitHub issue #1683](https://github.com/aws/aws-sdk-ruby/issues/1683).
+
+### Handle resource model typos
+
+Typos in resource models cannot be fixed directly without causing breaking changes.
+
+See [related GitHub issue #1837](https://github.com/aws/aws-sdk-ruby/issues/1837).
+
+### Support ca_bundle in ~/.aws/config
+
+Match CLI support of ca_bundle being specified in config
+
+See [related GitHub issue #1907](https://github.com/aws/aws-sdk-ruby/issues/1907)
+
+### Retrieve data from response headers for streaming S3 objects
+
+Pull in data from response headers on Object#get
+
+See [related GitHub issue #1913](https://github.com/aws/aws-sdk-ruby/issues/1913)
+
+### Add Aws::S3::Object#head method
+
+Add method for parity with Client#head_object
+
+See [related GitHub issue #1912](https://github.com/aws/aws-sdk-ruby/issues/1912)

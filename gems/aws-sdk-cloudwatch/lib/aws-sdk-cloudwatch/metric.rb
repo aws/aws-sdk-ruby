@@ -277,7 +277,9 @@ module Aws::CloudWatch
     # @option options [Array<String>] :extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100. When
     #   calling `GetMetricStatistics`, you must specify either `Statistics` or
-    #   `ExtendedStatistics`, but not both.
+    #   `ExtendedStatistics`, but not both. Percentile statistics are not
+    #   available for metrics when any of the metric values are negative
+    #   numbers.
     # @option options [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
     #   units. Not supplying a unit results in all units being returned. If
@@ -310,7 +312,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     period: 1, # required
+    #     period: 1,
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
     #     datapoints_to_alarm: 1,
@@ -318,85 +320,110 @@ module Aws::CloudWatch
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
+    #     metrics: [
+    #       {
+    #         id: "MetricId", # required
+    #         metric_stat: {
+    #           metric: { # required
+    #             namespace: "Namespace",
+    #             metric_name: "MetricName",
+    #             dimensions: [
+    #               {
+    #                 name: "DimensionName", # required
+    #                 value: "DimensionValue", # required
+    #               },
+    #             ],
+    #           },
+    #           period: 1, # required
+    #           stat: "Stat", # required
+    #           unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         },
+    #         expression: "MetricExpression",
+    #         label: "MetricLabel",
+    #         return_data: false,
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
-    #   The name for the alarm. This name must be unique within the AWS
+    #   The name for the alarm. This name must be unique within your AWS
     #   account.
     # @option options [String] :alarm_description
     #   The description for the alarm.
     # @option options [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
-    #   alarm state.
+    #   alarm state. The default is TRUE.
     # @option options [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     # @option options [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     # @option options [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     # @option options [String] :statistic
-    #   The statistic for the metric associated with the alarm, other than
+    #   The statistic for the metric specified in `MetricName`, other than
     #   percentile. For percentile statistics, use `ExtendedStatistic`. When
-    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   you call `PutMetricAlarm` and specify a `MetricName`, you must specify
+    #   either `Statistic` or `ExtendedStatistic,` but not both.
     # @option options [String] :extended_statistic
-    #   The percentile statistic for the metric associated with the alarm.
-    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`,
-    #   you must specify either `Statistic` or `ExtendedStatistic,` but not
-    #   both.
+    #   The percentile statistic for the metric specified in `MetricName`.
+    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`
+    #   and specify a `MetricName`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     # @option options [Array<Types::Dimension>] :dimensions
-    #   The dimensions for the metric associated with the alarm.
-    # @option options [required, Integer] :period
-    #   The period, in seconds, over which the specified statistic is applied.
-    #   Valid values are 10, 30, and any multiple of 60.
+    #   The dimensions for the metric specified in `MetricName`.
+    # @option options [Integer] :period
+    #   The length, in seconds, used each time the metric specified in
+    #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
+    #   of 60.
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
@@ -429,7 +456,7 @@ module Aws::CloudWatch
     #   `INSUFFICIENT DATA` state.
     # @option options [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold. If you are setting an alarm which requires that a number of
+    #   threshold. If you are setting an alarm that requires that a number of
     #   consecutive data points be breaching to trigger the alarm, this value
     #   specifies that number. If you are setting an "M out of N" alarm,
     #   this value is the N.
@@ -477,6 +504,17 @@ module Aws::CloudWatch
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
+    # @option options [Array<Types::MetricDataQuery>] :metrics
+    #   An array of `MetricDataQuery` structures that enable you to create an
+    #   alarm based on the result of a metric math expression. Each item in
+    #   the `Metrics` array either retrieves a metric or performs a math
+    #   expression.
+    #
+    #   If you use the `Metrics` parameter, you cannot include the
+    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
+    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, you retrieve the metrics you are using in your
+    #   math expression as part of the `Metrics` array.
     # @return [Alarm]
     def put_alarm(options = {})
       options = options.merge(
@@ -510,6 +548,8 @@ module Aws::CloudWatch
     #           minimum: 1.0, # required
     #           maximum: 1.0, # required
     #         },
+    #         values: [1.0],
+    #         counts: [1.0],
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         storage_resolution: 1,
     #       },
@@ -517,7 +557,8 @@ module Aws::CloudWatch
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric.
+    #   The data for the metric. The array can include no more than 20 metrics
+    #   per call.
     # @return [EmptyStructure]
     def put_data(options = {})
       options = Aws::Util.deep_merge(options,

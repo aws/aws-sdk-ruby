@@ -49,6 +49,12 @@ module Aws::AutoScaling
       data[:launch_template]
     end
 
+    # The mixed instances policy for the group.
+    # @return [Types::MixedInstancesPolicy]
+    def mixed_instances_policy
+      data[:mixed_instances_policy]
+    end
+
     # The minimum size of the group.
     # @return [Integer]
     def min_size
@@ -120,9 +126,9 @@ module Aws::AutoScaling
       data[:suspended_processes]
     end
 
-    # The name of the placement group into which you'll launch your
-    # instances, if any. For more information, see [Placement Groups][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # The name of the placement group into which to launch your instances,
+    # if any. For more information, see [Placement Groups][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -394,7 +400,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :force_delete
-    #   Specifies that the group will be deleted along with all instances
+    #   Specifies that the group is to be deleted along with all instances
     #   associated with the group, without waiting for all instances to be
     #   terminated. This parameter also deletes any lifecycle actions
     #   associated with the group.
@@ -774,6 +780,28 @@ module Aws::AutoScaling
     #       launch_template_name: "LaunchTemplateName",
     #       version: "XmlStringMaxLen255",
     #     },
+    #     mixed_instances_policy: {
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_id: "XmlStringMaxLen255",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "XmlStringMaxLen255",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "XmlStringMaxLen255",
+    #           },
+    #         ],
+    #       },
+    #       instances_distribution: {
+    #         on_demand_allocation_strategy: "XmlString",
+    #         on_demand_base_capacity: 1,
+    #         on_demand_percentage_above_base_capacity: 1,
+    #         spot_allocation_strategy: "XmlString",
+    #         spot_instance_pools: 1,
+    #         spot_max_price: "SpotPrice",
+    #       },
+    #     },
     #     min_size: 1,
     #     max_size: 1,
     #     desired_capacity: 1,
@@ -789,11 +817,16 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. If you specify a launch
-    #   configuration, you can't specify a launch template.
+    #   The name of the launch configuration. If you specify this parameter,
+    #   you can't specify a launch template or a mixed instances policy.
     # @option options [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to specify the updates. If you specify a
-    #   launch template, you can't specify a launch configuration.
+    #   The launch template and version to use to specify the updates. If you
+    #   specify this parameter, you can't specify a launch configuration or a
+    #   mixed instances policy.
+    # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
+    #   The mixed instances policy to use to specify the updates. If you
+    #   specify this parameter, you can't specify a launch configuration or a
+    #   launch template.
     # @option options [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -829,9 +862,9 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [String] :placement_group
-    #   The name of the placement group into which you'll launch your
-    #   instances, if any. For more information, see [Placement Groups][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   The name of the placement group into which to launch your instances,
+    #   if any. For more information, see [Placement Groups][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -1052,7 +1085,7 @@ module Aws::AutoScaling
     # @param [Hash] options ({})
     # @option options [Array<String>] :policy_names
     #   The names of one or more policies. If you omit this parameter, all
-    #   policies are described. If an group name is provided, the results are
+    #   policies are described. If a group name is provided, the results are
     #   limited to that group. This list is limited to 50 items. If you
     #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types

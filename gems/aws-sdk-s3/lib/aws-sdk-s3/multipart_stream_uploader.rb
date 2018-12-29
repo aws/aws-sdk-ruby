@@ -129,7 +129,7 @@ module Aws
                 body, thread_part_number = mutex.synchronize do
                   [read_to_part_body(read_pipe), part_number += 1]
                 end
-                break unless body
+                break unless (body || thread_part_number == 1)
                 begin
                   part = options.merge(
                     body: body,

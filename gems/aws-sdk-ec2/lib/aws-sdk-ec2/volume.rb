@@ -90,8 +90,13 @@ module Aws::EC2
     # credits, and bursting, see [Amazon EBS Volume Types][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
-    # Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000 IOPS
-    # for `gp2` volumes.
+    # Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
+    # 64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
+    # 64,000 is guaranteed only on [Nitro-based
+    # instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+    # Other instance families guarantee performance up to 32,000 IOPS. For
+    # more information, see [Amazon EBS Volume Types][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     # Condition: This parameter is required for requests to create `io1`
     # volumes; it is not used in requests to create `gp2`, `st1`, `sc1`, or
@@ -281,7 +286,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -371,11 +376,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.describe_attribute({
-    #     attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #     attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :attribute
+    # @option options [required, String] :attribute
     #   The attribute of the volume. This parameter is required.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,

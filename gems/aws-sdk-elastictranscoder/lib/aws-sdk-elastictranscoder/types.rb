@@ -1544,12 +1544,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use
     #   with this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`,
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`,
     #   you don't need to provide a key with your job because a default
     #   key, known as an AWS-KMS key, is created for you automatically. You
     #   need to provide an AWS-KMS key only if you want to use a non-default
     #   AWS-KMS key, or if you are using an `Encryption:Mode` of
-    #   `AES-PKCS7`, `AES-CTR`, or `AES-GCM`.
+    #   `aes-cbc-pkcs7`, `aes-ctr`, or `aes-gcm`.
     #   @return [String]
     #
     # @!attribute [rw] notifications
@@ -1566,7 +1566,7 @@ module Aws::ElasticTranscoder
     #     more information, see Create a Topic in the Amazon Simple
     #     Notification Service Developer Guide.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you
     #     want to notify when Elastic Transcoder has finished processing a
     #     job in this pipeline. This is the ARN that Amazon SNS returned
     #     when you created the topic.
@@ -1994,21 +1994,21 @@ module Aws::ElasticTranscoder
     #   your output files. Elastic Transcoder supports the following
     #   options:
     #
-    #   * **S3:** Amazon S3 creates and manages the keys used for encrypting
+    #   * **s3:** Amazon S3 creates and manages the keys used for encrypting
     #     your files.
     #
-    #   * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service,
+    #   * **s3-aws-kms:** Amazon S3 calls the Amazon Key Management Service,
     #     which creates and manages the keys that are used for encrypting
-    #     your files. If you specify `S3-AWS-KMS` and you don't want to use
+    #     your files. If you specify `s3-aws-kms` and you don't want to use
     #     the default key, you must add the AWS-KMS key that you want to use
     #     to your pipeline.
     #
-    #   * **AES-CBC-PKCS7:** A padded cipher-block mode of operation
+    #   * **aes-cbc-pkcs7:** A padded cipher-block mode of operation
     #     originally used for HLS files.
     #
-    #   * **AES-CTR:** AES Counter Mode.
+    #   * **aes-ctr:** AES Counter Mode.
     #
-    #   * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is
+    #   * **aes-gcm:** AES Galois Counter Mode, a mode of operation that is
     #     an authenticated encryption format, meaning that a file, key, or
     #     initialization vector that has been tampered with fails the
     #     decryption process.
@@ -3261,12 +3261,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use
     #   with this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`,
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`,
     #   you don't need to provide a key with your job because a default
     #   key, known as an AWS-KMS key, is created for you automatically. You
     #   need to provide an AWS-KMS key only if you want to use a non-default
     #   AWS-KMS key, or if you are using an `Encryption:Mode` of
-    #   `AES-PKCS7`, `AES-CTR`, or `AES-GCM`.
+    #   `aes-cbc-pkcs7`, `aes-ctr`, or `aes-gcm`.
     #   @return [String]
     #
     # @!attribute [rw] notifications
@@ -3280,7 +3280,7 @@ module Aws::ElasticTranscoder
     #     (Amazon SNS) topic that you want to notify when Elastic Transcoder
     #     has started to process the job.
     #
-    #   * **Completed** (optional): The Amazon SNS topic that you want to
+    #   * **Complete** (optional): The Amazon SNS topic that you want to
     #     notify when Elastic Transcoder has finished processing the job.
     #
     #   * **Warning** (optional): The Amazon SNS topic that you want to
@@ -3484,7 +3484,7 @@ module Aws::ElasticTranscoder
     # The PlayReady DRM settings, if any, that you want Elastic Transcoder
     # to apply to the output files associated with this playlist.
     #
-    # PlayReady DRM encrypts your media files using `AES-CTR` encryption.
+    # PlayReady DRM encrypts your media files using `aes-ctr` encryption.
     #
     # If you use DRM for an `HLSv3` playlist, your outputs must have a
     # master playlist.
@@ -4320,7 +4320,7 @@ module Aws::ElasticTranscoder
     #     pipeline. This is the ARN that Amazon SNS returned when you
     #     created the topic.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you
     #     want to notify when Elastic Transcoder has finished processing a
     #     job. This is the ARN that Amazon SNS returned when you created the
     #     topic.
@@ -4421,12 +4421,12 @@ module Aws::ElasticTranscoder
     #   The AWS Key Management Service (AWS KMS) key that you want to use
     #   with this pipeline.
     #
-    #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`,
+    #   If you use either `s3` or `s3-aws-kms` as your `Encryption:Mode`,
     #   you don't need to provide a key with your job because a default
     #   key, known as an AWS-KMS key, is created for you automatically. You
     #   need to provide an AWS-KMS key only if you want to use a non-default
     #   AWS-KMS key, or if you are using an `Encryption:Mode` of
-    #   `AES-PKCS7`, `AES-CTR`, or `AES-GCM`.
+    #   `aes-cbc-pkcs7`, `aes-ctr`, or `aes-gcm`.
     #   @return [String]
     #
     # @!attribute [rw] notifications
@@ -4442,7 +4442,7 @@ module Aws::ElasticTranscoder
     #     pipeline. This is the ARN that Amazon SNS returned when you
     #     created the topic.
     #
-    #   * **Completed**\: The topic ARN for the Amazon SNS topic that you
+    #   * **Complete**\: The topic ARN for the Amazon SNS topic that you
     #     want to notify when Elastic Transcoder has finished processing a
     #     job. This is the ARN that Amazon SNS returned when you created the
     #     topic.

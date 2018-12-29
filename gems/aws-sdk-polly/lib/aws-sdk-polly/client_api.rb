@@ -234,10 +234,13 @@ module Aws::Polly
       api.version = "2016-06-10"
 
       api.metadata = {
+        "apiVersion" => "2016-06-10",
         "endpointPrefix" => "polly",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Polly",
+        "serviceId" => "Polly",
         "signatureVersion" => "v4",
+        "uid" => "polly-2016-06-10",
       }
 
       api.add_operation(:delete_lexicon, Seahorse::Model::Operation.new.tap do |o|

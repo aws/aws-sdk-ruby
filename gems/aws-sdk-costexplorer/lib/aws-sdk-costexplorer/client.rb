@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::CostExplorer
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -171,9 +220,13 @@ module Aws::CostExplorer
     # `UsageQuantity`, that you want the request to return. You can also
     # filter and group your data by various dimensions, such as `SERVICE` or
     # `AZ`, in a specific time range. For a complete list of valid
-    # dimensions, see the ` GetDimensionValues ` operation. Master accounts
+    # dimensions, see the [GetDimensionValues][1] operation. Master accounts
     # in an organization in AWS Organizations have access to all member
     # accounts.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
     #
     # @option params [Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
@@ -186,6 +239,9 @@ module Aws::CostExplorer
     #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`. If
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, either `MONTHLY` or `DAILY`.
+    #
+    #   The `GetCostAndUsageRequest` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #
     # @option params [Types::Expression] :filter
     #   Filters AWS costs by different dimensions. For example, you can
@@ -203,15 +259,17 @@ module Aws::CostExplorer
     #   blended and unblended rates, see [Why does the "blended" annotation
     #   appear on some line items in my bill?][1].
     #
-    #   Valid values are `AmortizedCost`, `BlendedCost`, `UnblendedCost`, and
+    #   Valid values are `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
     #   `UsageQuantity`.
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
-    #   you aggregate `usageQuantity` across all of EC2, the results aren't
-    #   meaningful because EC2 compute hours and data transfer are measured in
-    #   different units (for example, hours vs. GB). To get more meaningful
-    #   `UsageQuantity` metrics, filter by `UsageType` or `UsageTypeGroups`.
+    #   you aggregate `usageQuantity` across all of Amazon EC2, the results
+    #   aren't meaningful because Amazon EC2 compute hours and data transfer
+    #   are measured in different units (for example, hours vs. GB). To get
+    #   more meaningful `UsageQuantity` metrics, filter by `UsageType` or
+    #   `UsageTypeGroups`.
     #
     #    </note>
     #
@@ -250,7 +308,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     granularity: "DAILY", # accepts DAILY, MONTHLY
+    #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
     #     filter: {
     #       or: [
     #         {
@@ -266,7 +324,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -313,6 +371,113 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves a forecast for how much Amazon Web Services predicts that
+    # you will spend over the forecast time period that you select, based on
+    # your past costs.
+    #
+    # @option params [required, Types::DateInterval] :time_period
+    #   The period of time that you want the forecast to cover.
+    #
+    # @option params [required, String] :metric
+    #   Which metric Cost Explorer uses to create your forecast. For more
+    #   information about blended and unblended rates, see [Why does the
+    #   "blended" annotation appear on some line items in my bill?][1].
+    #
+    #   Valid values for a `GetCostForecast` call are the following:
+    #
+    #   * AmortizedCost
+    #
+    #   * BlendedCost
+    #
+    #   * NetAmortizedCost
+    #
+    #   * NetUnblendedCost
+    #
+    #   * UnblendedCost
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #
+    # @option params [required, String] :granularity
+    #   How granular you want the forecast to be. You can get 3 months of
+    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #
+    #   The `GetCostForecast` operation supports only `DAILY` and `MONTHLY`
+    #   granularities.
+    #
+    # @option params [Types::Expression] :filter
+    #   The filters that you want to use to filter your forecast. Cost
+    #   Explorer API supports all of the Cost Explorer filters.
+    #
+    # @option params [Integer] :prediction_interval_level
+    #   Cost Explorer always returns the mean forecast as a single point. You
+    #   can request a prediction interval around the mean by specifying a
+    #   confidence level. The higher the confidence level, the more confident
+    #   Cost Explorer is about the actual value falling in the prediction
+    #   interval. Higher confidence levels result in wider prediction
+    #   intervals.
+    #
+    # @return [Types::GetCostForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCostForecastResponse#total #total} => Types::MetricValue
+    #   * {Types::GetCostForecastResponse#forecast_results_by_time #forecast_results_by_time} => Array&lt;Types::ForecastResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cost_forecast({
+    #     time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     prediction_interval_level: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.total.amount #=> String
+    #   resp.total.unit #=> String
+    #   resp.forecast_results_by_time #=> Array
+    #   resp.forecast_results_by_time[0].time_period.start #=> String
+    #   resp.forecast_results_by_time[0].time_period.end #=> String
+    #   resp.forecast_results_by_time[0].mean_value #=> String
+    #   resp.forecast_results_by_time[0].prediction_interval_lower_bound #=> String
+    #   resp.forecast_results_by_time[0].prediction_interval_upper_bound #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostForecast AWS API Documentation
+    #
+    # @overload get_cost_forecast(params = {})
+    # @param [Hash] params ({})
+    def get_cost_forecast(params = {}, options = {})
+      req = build_request(:get_cost_forecast, params)
+      req.send_request(options)
+    end
+
     # Retrieves all available filter values for a specified filter over a
     # period of time. You can search the dimension values for an arbitrary
     # string.
@@ -328,8 +493,8 @@ module Aws::CostExplorer
     #   `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [required, String] :dimension
-    #   The name of the dimension. Each `Dimension` is available for different
-    #   a `Context`. For more information, see `Context`.
+    #   The name of the dimension. Each `Dimension` is available for a
+    #   different `Context`. For more information, see `Context`.
     #
     # @option params [String] :context
     #   The context for the call to `GetDimensionValues`. This can be
@@ -337,7 +502,7 @@ module Aws::CostExplorer
     #   `COST_AND_USAGE`. If the context is set to `RESERVATIONS`, the
     #   resulting dimension values can be used in the
     #   `GetReservationUtilization` operation. If the context is set to
-    #   `COST_AND_USAGE` the resulting dimension values can be used in the
+    #   `COST_AND_USAGE`, the resulting dimension values can be used in the
     #   `GetCostAndUsage` operation.
     #
     #   If you set the context to `COST_AND_USAGE`, you can use the following
@@ -348,7 +513,7 @@ module Aws::CostExplorer
     #   * DATABASE\_ENGINE - The Amazon Relational Database Service database.
     #     Examples are Aurora or MySQL.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
@@ -364,7 +529,8 @@ module Aws::CostExplorer
     #   * OPERATION - The action performed. Examples include `RunInstance` and
     #     `CreateBucket`.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which this
     #     usage is related. Examples include On-Demand Instances and Standard
@@ -377,7 +543,7 @@ module Aws::CostExplorer
     #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An example
-    #     is EC2: CloudWatch – Alarms. The response for this operation
+    #     is Amazon EC2: CloudWatch – Alarms. The response for this operation
     #     includes a unit attribute.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
@@ -394,14 +560,15 @@ module Aws::CostExplorer
     #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database Service
     #     deployments. Valid values are `SingleAZ` and `MultiAZ`.
     #
-    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
+    #   * INSTANCE\_TYPE - The type of Amazon EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
     #     AWS ID of the member account.
     #
-    #   * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+    #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * REGION - The AWS Region.
     #
@@ -434,7 +601,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
+    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
     #     context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS
     #     next_page_token: "NextPageToken",
     #   })
@@ -458,7 +625,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves the reservation coverage for your account. This allows you
+    # Retrieves the reservation coverage for your account. This enables you
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
     # usage is covered by a reservation. An organization's master account
@@ -494,13 +661,13 @@ module Aws::CostExplorer
     # `GetDimensionValues` operation.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   The start and end dates of the period for which you want to retrieve
-    #   data about reservation coverage. You can retrieve data for a maximum
-    #   of 13 months: the last 12 months and the current month. The start date
-    #   is inclusive, but the end date is exclusive. For example, if `start`
-    #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
-    #   data is retrieved from `2017-01-01` up to and including `2017-04-30`
-    #   but not including `2017-05-01`.
+    #   The start and end dates of the period that you want to retrieve data
+    #   about reservation coverage for. You can retrieve data for a maximum of
+    #   13 months: the last 12 months and the current month. The start date is
+    #   inclusive, but the end date is exclusive. For example, if `start` is
+    #   `2017-01-01` and `end` is `2017-05-01`, then the cost and usage data
+    #   is retrieved from `2017-01-01` up to and including `2017-04-30` but
+    #   not including `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group the data by the following attributes:
@@ -535,6 +702,9 @@ module Aws::CostExplorer
     #   isn't set, the response object doesn't include `Granularity`, either
     #   `MONTHLY` or `DAILY`.
     #
+    #   The `GetReservationCoverage` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
+    #
     # @option params [Types::Expression] :filter
     #   Filters utilization data by dimensions. You can filter by the
     #   following dimensions:
@@ -563,13 +733,19 @@ module Aws::CostExplorer
     #
     #   * TENANCY
     #
-    #   `GetReservationCoverage` uses the same ` Expression ` object as the
+    #   `GetReservationCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension.
     #   You can nest only one level deep. If there are multiple values for a
     #   dimension, they are OR'd together.
     #
     #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
     #   EC2.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #
+    # @option params [Array<String>] :metrics
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -595,7 +771,7 @@ module Aws::CostExplorer
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
-    #     granularity: "DAILY", # accepts DAILY, MONTHLY
+    #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
     #     filter: {
     #       or: [
     #         {
@@ -611,7 +787,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -619,6 +795,7 @@ module Aws::CostExplorer
     #         values: ["Value"],
     #       },
     #     },
+    #     metrics: ["MetricName"],
     #     next_page_token: "NextPageToken",
     #   })
     #
@@ -634,14 +811,29 @@ module Aws::CostExplorer
     #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.reserved_hours #=> String
     #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.total_running_hours #=> String
     #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.on_demand_normalized_units #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.reserved_normalized_units #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.total_running_normalized_units #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_normalized_units.coverage_normalized_units_percentage #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_cost.on_demand_cost #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.on_demand_hours #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.reserved_hours #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.total_running_hours #=> String
     #   resp.coverages_by_time[0].total.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.on_demand_normalized_units #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.reserved_normalized_units #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.total_running_normalized_units #=> String
+    #   resp.coverages_by_time[0].total.coverage_normalized_units.coverage_normalized_units_percentage #=> String
+    #   resp.coverages_by_time[0].total.coverage_cost.on_demand_cost #=> String
     #   resp.total.coverage_hours.on_demand_hours #=> String
     #   resp.total.coverage_hours.reserved_hours #=> String
     #   resp.total.coverage_hours.total_running_hours #=> String
     #   resp.total.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.total.coverage_normalized_units.on_demand_normalized_units #=> String
+    #   resp.total.coverage_normalized_units.reserved_normalized_units #=> String
+    #   resp.total.coverage_normalized_units.total_running_normalized_units #=> String
+    #   resp.total.coverage_normalized_units.coverage_normalized_units_percentage #=> String
+    #   resp.total.coverage_cost.on_demand_cost #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverage AWS API Documentation
@@ -664,15 +856,15 @@ module Aws::CostExplorer
     # category of usage to identify the best number of each type of RI to
     # purchase to maximize your estimated savings.
     #
-    # For example, AWS automatically aggregates your EC2 Linux, shared
-    # tenancy, and c4 family usage in the US West (Oregon) Region and
+    # For example, AWS automatically aggregates your Amazon EC2 Linux,
+    # shared tenancy, and c4 family usage in the US West (Oregon) Region and
     # recommends that you buy size-flexible regional reservations to apply
     # to the c4 family usage. AWS recommends the smallest size instance in
     # an instance family. This makes it easier to purchase a size-flexible
     # RI. AWS also shows the equal number of normalized units so that you
     # can purchase any instance size that you want. For this example, your
-    # RI recommendation would be for `c4.large`, because that is the
-    # smallest size instance in the c4 instance family.
+    # RI recommendation would be for `c4.large` because that is the smallest
+    # size instance in the c4 instance family.
     #
     # @option params [String] :account_id
     #   The account ID that is associated with the recommendation.
@@ -700,7 +892,8 @@ module Aws::CostExplorer
     #
     # @option params [Types::ServiceSpecification] :service_specification
     #   The hardware specifications for the service instances that you want
-    #   recommendations for, such as standard or convertible EC2 instances.
+    #   recommendations for, such as standard or convertible Amazon EC2
+    #   instances.
     #
     # @option params [Integer] :page_size
     #   The number of recommendations that you want returned in a single
@@ -745,6 +938,7 @@ module Aws::CostExplorer
     #   resp.recommendations[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
     #   resp.recommendations[0].service_specification.ec2_specification.offering_class #=> String, one of "STANDARD", "CONVERTIBLE"
     #   resp.recommendations[0].recommendation_details #=> Array
+    #   resp.recommendations[0].recommendation_details[0].account_id #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.family #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.instance_type #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.region #=> String
@@ -816,12 +1010,11 @@ module Aws::CostExplorer
     # Currently, you can group only by `SUBSCRIPTION_ID`.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   Sets the start and end dates for retrieving Reserved Instance (RI)
-    #   utilization. The start date is inclusive, but the end date is
-    #   exclusive. For example, if `start` is `2017-01-01` and `end` is
-    #   `2017-05-01`, then the cost and usage data is retrieved from
-    #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`.
+    #   Sets the start and end dates for retrieving RI utilization. The start
+    #   date is inclusive, but the end date is exclusive. For example, if
+    #   `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost and
+    #   usage data is retrieved from `2017-01-01` up to and including
+    #   `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   Groups only by `SUBSCRIPTION_ID`. Metadata is included.
@@ -831,6 +1024,9 @@ module Aws::CostExplorer
     #   isn't set, the response object doesn't include `Granularity`, either
     #   `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity` aren't set,
     #   `GetReservationUtilization` defaults to `DAILY`.
+    #
+    #   The `GetReservationUtilization` operation supports only `DAILY` and
+    #   `MONTHLY` granularities.
     #
     # @option params [Types::Expression] :filter
     #   Filters utilization data by dimensions. You can filter by the
@@ -860,10 +1056,14 @@ module Aws::CostExplorer
     #
     #   * TENANCY
     #
-    #   `GetReservationUtilization` uses the same ` Expression ` object as the
-    #   other operations, but only `AND` is supported among each dimension,
-    #   and nesting is supported up to only one level deep. If there are
-    #   multiple values for a dimension, they are OR'd together.
+    #   `GetReservationUtilization` uses the same [Expression][1] object as
+    #   the other operations, but only `AND` is supported among each
+    #   dimension, and nesting is supported up to only one level deep. If
+    #   there are multiple values for a dimension, they are OR'd together.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -889,7 +1089,7 @@ module Aws::CostExplorer
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
-    #     granularity: "DAILY", # accepts DAILY, MONTHLY
+    #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
     #     filter: {
     #       or: [
     #         {
@@ -905,7 +1105,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -927,9 +1127,13 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].groups[0].attributes #=> Hash
     #   resp.utilizations_by_time[0].groups[0].attributes["AttributeType"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.utilizations_by_time[0].groups[0].utilization.utilization_percentage #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.utilization_percentage_in_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.purchased_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.purchased_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_actual_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.total_actual_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.unused_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.unused_units #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.on_demand_cost_of_ri_hours_used #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.net_ri_savings #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_potential_ri_savings #=> String
@@ -937,9 +1141,13 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].groups[0].utilization.amortized_recurring_fee #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_amortized_fee #=> String
     #   resp.utilizations_by_time[0].total.utilization_percentage #=> String
+    #   resp.utilizations_by_time[0].total.utilization_percentage_in_units #=> String
     #   resp.utilizations_by_time[0].total.purchased_hours #=> String
+    #   resp.utilizations_by_time[0].total.purchased_units #=> String
     #   resp.utilizations_by_time[0].total.total_actual_hours #=> String
+    #   resp.utilizations_by_time[0].total.total_actual_units #=> String
     #   resp.utilizations_by_time[0].total.unused_hours #=> String
+    #   resp.utilizations_by_time[0].total.unused_units #=> String
     #   resp.utilizations_by_time[0].total.on_demand_cost_of_ri_hours_used #=> String
     #   resp.utilizations_by_time[0].total.net_ri_savings #=> String
     #   resp.utilizations_by_time[0].total.total_potential_ri_savings #=> String
@@ -947,9 +1155,13 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].total.amortized_recurring_fee #=> String
     #   resp.utilizations_by_time[0].total.total_amortized_fee #=> String
     #   resp.total.utilization_percentage #=> String
+    #   resp.total.utilization_percentage_in_units #=> String
     #   resp.total.purchased_hours #=> String
+    #   resp.total.purchased_units #=> String
     #   resp.total.total_actual_hours #=> String
+    #   resp.total.total_actual_units #=> String
     #   resp.total.unused_hours #=> String
+    #   resp.total.unused_units #=> String
     #   resp.total.on_demand_cost_of_ri_hours_used #=> String
     #   resp.total.net_ri_savings #=> String
     #   resp.total.total_potential_ri_savings #=> String
@@ -1037,7 +1249,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

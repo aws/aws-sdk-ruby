@@ -61,6 +61,50 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration object for dash content.
+    #
+    # @!attribute [rw] manifest_endpoint_prefix
+    #   The URL that is used to initiate a playback session for devices that
+    #   support DASH.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpd_location
+    #   The setting that controls whether MediaTailor includes the Location
+    #   tag in DASH Manifests. MediaTailor populates the Location tag with
+    #   the URL for manifest update requests, to be used by players that
+    #   don't support sticky redirects. Disable this if you have CDN
+    #   routing rules set up for accessing MediaTailor manifests and you are
+    #   either using client-side reporting or your players support sticky
+    #   HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT. The
+    #   EMT\_DEFAULT setting enables the inclusion of the tag and is the
+    #   default value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfiguration AWS API Documentation
+    #
+    class DashConfiguration < Struct.new(
+      :manifest_endpoint_prefix,
+      :mpd_location)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DashConfigurationForPut
+    #   data as a hash:
+    #
+    #       {
+    #         mpd_location: "__string",
+    #       }
+    #
+    # @!attribute [rw] mpd_location
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut AWS API Documentation
+    #
+    class DashConfigurationForPut < Struct.new(
+      :mpd_location)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeletePlaybackConfigurationRequest
     #   data as a hash:
     #
@@ -109,6 +153,10 @@ module Aws::MediaTailor
     #   Amazon CloudFront, for content and ad segment management.
     #   @return [Types::CdnConfiguration]
     #
+    # @!attribute [rw] dash_configuration
+    #   The configuration object for dash content.
+    #   @return [Types::DashConfiguration]
+    #
     # @!attribute [rw] hls_configuration
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
@@ -137,6 +185,13 @@ module Aws::MediaTailor
     #   asset that contains both audio and video.
     #   @return [String]
     #
+    # @!attribute [rw] transcode_profile_name
+    #   Associate this playbackConfiguration with a custom transcode
+    #   profile, overriding MediaTailor's dynamic transcoding defaults. Do
+    #   not include this field if you have not setup custom profiles with
+    #   the MediaTailor service team.
+    #   @return [String]
+    #
     # @!attribute [rw] video_content_source_url
     #   The URL prefix for the master playlist for the stream, minus the
     #   asset ID. The maximum length is 512 characters.
@@ -147,11 +202,13 @@ module Aws::MediaTailor
     class GetPlaybackConfigurationResponse < Struct.new(
       :ad_decision_server_url,
       :cdn_configuration,
+      :dash_configuration,
       :hls_configuration,
       :name,
       :playback_endpoint_prefix,
       :session_initialization_endpoint_prefix,
       :slate_ad_url,
+      :transcode_profile_name,
       :video_content_source_url)
       include Aws::Structure
     end
@@ -235,8 +292,12 @@ module Aws::MediaTailor
     #           ad_segment_url_prefix: "__string",
     #           content_segment_url_prefix: "__string",
     #         },
+    #         dash_configuration: {
+    #           mpd_location: "__string",
+    #         },
     #         name: "__string",
     #         slate_ad_url: "__string",
+    #         transcode_profile_name: "__string",
     #         video_content_source_url: "__string",
     #       }
     #
@@ -254,6 +315,9 @@ module Aws::MediaTailor
     #   Amazon CloudFront, for content and ad segment management.
     #   @return [Types::CdnConfiguration]
     #
+    # @!attribute [rw] dash_configuration
+    #   @return [Types::DashConfigurationForPut]
+    #
     # @!attribute [rw] name
     #   The identifier for the configuration.
     #   @return [String]
@@ -268,6 +332,13 @@ module Aws::MediaTailor
     #   high-quality asset that contains both audio and video.
     #   @return [String]
     #
+    # @!attribute [rw] transcode_profile_name
+    #   Associate this playbackConfiguration with a custom transcode
+    #   profile, overriding MediaTailor's dynamic transcoding defaults. Do
+    #   not include this field if you have not setup custom profiles with
+    #   the MediaTailor service team.
+    #   @return [String]
+    #
     # @!attribute [rw] video_content_source_url
     #   The URL prefix for the master playlist for the stream, minus the
     #   asset ID. The maximum length is 512 characters.
@@ -278,8 +349,10 @@ module Aws::MediaTailor
     class PutPlaybackConfigurationRequest < Struct.new(
       :ad_decision_server_url,
       :cdn_configuration,
+      :dash_configuration,
       :name,
       :slate_ad_url,
+      :transcode_profile_name,
       :video_content_source_url)
       include Aws::Structure
     end
@@ -291,6 +364,10 @@ module Aws::MediaTailor
     #   The configuration for using a content delivery network (CDN), like
     #   Amazon CloudFront, for content and ad segment management.
     #   @return [Types::CdnConfiguration]
+    #
+    # @!attribute [rw] dash_configuration
+    #   The configuration object for dash content.
+    #   @return [Types::DashConfiguration]
     #
     # @!attribute [rw] hls_configuration
     #   The configuration for HLS content.
@@ -308,6 +385,9 @@ module Aws::MediaTailor
     # @!attribute [rw] slate_ad_url
     #   @return [String]
     #
+    # @!attribute [rw] transcode_profile_name
+    #   @return [String]
+    #
     # @!attribute [rw] video_content_source_url
     #   @return [String]
     #
@@ -316,11 +396,13 @@ module Aws::MediaTailor
     class PutPlaybackConfigurationResponse < Struct.new(
       :ad_decision_server_url,
       :cdn_configuration,
+      :dash_configuration,
       :hls_configuration,
       :name,
       :playback_endpoint_prefix,
       :session_initialization_endpoint_prefix,
       :slate_ad_url,
+      :transcode_profile_name,
       :video_content_source_url)
       include Aws::Structure
     end

@@ -11,6 +11,7 @@ module Aws::CodePipeline
 
     include Seahorse::Model
 
+    AWSRegionName = Shapes::StringShape.new(name: 'AWSRegionName')
     AWSSessionCredentials = Shapes::StructureShape.new(name: 'AWSSessionCredentials')
     AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -60,12 +61,14 @@ module Aws::CodePipeline
     ArtifactRevisionList = Shapes::ListShape.new(name: 'ArtifactRevisionList')
     ArtifactStore = Shapes::StructureShape.new(name: 'ArtifactStore')
     ArtifactStoreLocation = Shapes::StringShape.new(name: 'ArtifactStoreLocation')
+    ArtifactStoreMap = Shapes::MapShape.new(name: 'ArtifactStoreMap')
     ArtifactStoreType = Shapes::StringShape.new(name: 'ArtifactStoreType')
     BlockerDeclaration = Shapes::StructureShape.new(name: 'BlockerDeclaration')
     BlockerName = Shapes::StringShape.new(name: 'BlockerName')
     BlockerType = Shapes::StringShape.new(name: 'BlockerType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ContinuationToken = Shapes::StringShape.new(name: 'ContinuationToken')
@@ -291,6 +294,7 @@ module Aws::CodePipeline
     ActionDeclaration.add_member(:output_artifacts, Shapes::ShapeRef.new(shape: OutputArtifactList, location_name: "outputArtifacts"))
     ActionDeclaration.add_member(:input_artifacts, Shapes::ShapeRef.new(shape: InputArtifactList, location_name: "inputArtifacts"))
     ActionDeclaration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    ActionDeclaration.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "region"))
     ActionDeclaration.struct_class = Types::ActionDeclaration
 
     ActionExecution.add_member(:status, Shapes::ShapeRef.new(shape: ActionExecutionStatus, location_name: "status"))
@@ -372,6 +376,9 @@ module Aws::CodePipeline
     ArtifactStore.add_member(:location, Shapes::ShapeRef.new(shape: ArtifactStoreLocation, required: true, location_name: "location"))
     ArtifactStore.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "encryptionKey"))
     ArtifactStore.struct_class = Types::ArtifactStore
+
+    ArtifactStoreMap.key = Shapes::ShapeRef.new(shape: AWSRegionName)
+    ArtifactStoreMap.value = Shapes::ShapeRef.new(shape: ArtifactStore)
 
     BlockerDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: BlockerName, required: true, location_name: "name"))
     BlockerDeclaration.add_member(:type, Shapes::ShapeRef.new(shape: BlockerType, required: true, location_name: "type"))
@@ -566,7 +573,8 @@ module Aws::CodePipeline
 
     PipelineDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
     PipelineDeclaration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
-    PipelineDeclaration.add_member(:artifact_store, Shapes::ShapeRef.new(shape: ArtifactStore, required: true, location_name: "artifactStore"))
+    PipelineDeclaration.add_member(:artifact_store, Shapes::ShapeRef.new(shape: ArtifactStore, location_name: "artifactStore"))
+    PipelineDeclaration.add_member(:artifact_stores, Shapes::ShapeRef.new(shape: ArtifactStoreMap, location_name: "artifactStores"))
     PipelineDeclaration.add_member(:stages, Shapes::ShapeRef.new(shape: PipelineStageDeclarationList, required: true, location_name: "stages"))
     PipelineDeclaration.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
     PipelineDeclaration.struct_class = Types::PipelineDeclaration
@@ -719,6 +727,7 @@ module Aws::CodePipeline
     StageStateList.member = Shapes::ShapeRef.new(shape: StageState)
 
     StartPipelineExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
+    StartPipelineExecutionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartPipelineExecutionInput.struct_class = Types::StartPipelineExecutionInput
 
     StartPipelineExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
@@ -784,12 +793,16 @@ module Aws::CodePipeline
       api.version = "2015-07-09"
 
       api.metadata = {
+        "apiVersion" => "2015-07-09",
         "endpointPrefix" => "codepipeline",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodePipeline",
         "serviceFullName" => "AWS CodePipeline",
+        "serviceId" => "CodePipeline",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodePipeline_20150709",
+        "uid" => "codepipeline-2015-07-09",
       }
 
       api.add_operation(:acknowledge_job, Seahorse::Model::Operation.new.tap do |o|

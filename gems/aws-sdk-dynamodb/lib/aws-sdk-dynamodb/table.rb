@@ -139,6 +139,12 @@ module Aws::DynamoDB
       data[:table_id]
     end
 
+    # Contains the details for the read/write capacity mode.
+    # @return [Types::BillingModeSummary]
+    def billing_mode_summary
+      data[:billing_mode_summary]
+    end
+
     # Represents one or more local secondary indexes on the table. Each
     # index is scoped to a given partition key value. Tables with one or
     # more local secondary indexes are subject to an item collection size
@@ -1676,6 +1682,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
@@ -1701,7 +1708,7 @@ module Aws::DynamoDB
     #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #             non_key_attributes: ["NonKeyAttributeName"],
     #           },
-    #           provisioned_throughput: { # required
+    #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
     #           },
@@ -1715,6 +1722,11 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1722,6 +1734,19 @@ module Aws::DynamoDB
     #   indexes. If you are adding a new global secondary index to the table,
     #   `AttributeDefinitions` must include the key element(s) of the new
     #   index.
+    # @option options [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. When switching from pay-per-request to provisioned
+    #   capacity, initial provisioned capacity values must be set. The initial
+    #   provisioned capacity values are estimated based on the consumed read
+    #   and write capacity of your table and global secondary indexes over the
+    #   past 30 minutes.
+    #
+    #   * `PROVISIONED` - Sets the billing mode to `PROVISIONED`. We recommend
+    #     using `PROVISIONED` for predictable workloads.
+    #
+    #   * `PAY_PER_REQUEST` - Sets the billing mode to `PAY_PER_REQUEST`. We
+    #     recommend using `PAY_PER_REQUEST` for unpredictable workloads.
     # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
     #   index.
@@ -1750,6 +1775,8 @@ module Aws::DynamoDB
     #   disable a stream on a table which does not have a stream.
     #
     #    </note>
+    # @option options [Types::SSESpecification] :sse_specification
+    #   The new server-side encryption settings for the specified table.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)

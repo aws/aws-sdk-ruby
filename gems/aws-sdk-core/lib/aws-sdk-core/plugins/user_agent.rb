@@ -14,6 +14,8 @@ module Aws
         end
 
         def set_user_agent(context)
+          execution_env = ENV["AWS_EXECUTION_ENV"]
+
           ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
 
           begin
@@ -26,6 +28,10 @@ module Aws
 
           if context[:gem_name] && context[:gem_version]
             ua += " #{context[:gem_name]}/#{context[:gem_version]}"
+          end
+
+          if execution_env
+            ua += " exec-env/#{execution_env}"
           end
 
           ua += " #{context.config.user_agent_suffix}" if context.config.user_agent_suffix

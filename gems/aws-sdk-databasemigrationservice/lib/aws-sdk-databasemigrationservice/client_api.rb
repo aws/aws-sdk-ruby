@@ -86,6 +86,7 @@ module Aws::DatabaseMigrationService
     DmsSslModeValue = Shapes::StringShape.new(name: 'DmsSslModeValue')
     DmsTransferSettings = Shapes::StructureShape.new(name: 'DmsTransferSettings')
     DynamoDbSettings = Shapes::StructureShape.new(name: 'DynamoDbSettings')
+    ElasticsearchSettings = Shapes::StructureShape.new(name: 'ElasticsearchSettings')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointList = Shapes::ListShape.new(name: 'EndpointList')
     Event = Shapes::StructureShape.new(name: 'Event')
@@ -109,9 +110,11 @@ module Aws::DatabaseMigrationService
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    KinesisSettings = Shapes::StructureShape.new(name: 'KinesisSettings')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MessageFormatValue = Shapes::StringShape.new(name: 'MessageFormatValue')
     MigrationTypeValue = Shapes::StringShape.new(name: 'MigrationTypeValue')
     ModifyEndpointMessage = Shapes::StructureShape.new(name: 'ModifyEndpointMessage')
     ModifyEndpointResponse = Shapes::StructureShape.new(name: 'ModifyEndpointResponse')
@@ -252,6 +255,8 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
     CreateEndpointMessage.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     CreateEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
+    CreateEndpointMessage.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
+    CreateEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -282,6 +287,7 @@ module Aws::DatabaseMigrationService
     CreateReplicationInstanceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateReplicationInstanceMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateReplicationInstanceMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    CreateReplicationInstanceMessage.add_member(:dns_name_servers, Shapes::ShapeRef.new(shape: String, location_name: "DnsNameServers"))
     CreateReplicationInstanceMessage.struct_class = Types::CreateReplicationInstanceMessage
 
     CreateReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
@@ -508,6 +514,12 @@ module Aws::DatabaseMigrationService
     DynamoDbSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
     DynamoDbSettings.struct_class = Types::DynamoDbSettings
 
+    ElasticsearchSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
+    ElasticsearchSettings.add_member(:endpoint_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointUri"))
+    ElasticsearchSettings.add_member(:full_load_error_percentage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "FullLoadErrorPercentage"))
+    ElasticsearchSettings.add_member(:error_retry_duration, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ErrorRetryDuration"))
+    ElasticsearchSettings.struct_class = Types::ElasticsearchSettings
+
     Endpoint.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, location_name: "EndpointIdentifier"))
     Endpoint.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, location_name: "EndpointType"))
     Endpoint.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
@@ -529,6 +541,8 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
     Endpoint.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     Endpoint.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
+    Endpoint.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
+    Endpoint.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -582,6 +596,11 @@ module Aws::DatabaseMigrationService
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
+    KinesisSettings.add_member(:stream_arn, Shapes::ShapeRef.new(shape: String, location_name: "StreamArn"))
+    KinesisSettings.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatValue, location_name: "MessageFormat"))
+    KinesisSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    KinesisSettings.struct_class = Types::KinesisSettings
+
     ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
     ListTagsForResourceMessage.struct_class = Types::ListTagsForResourceMessage
 
@@ -606,6 +625,8 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
     ModifyEndpointMessage.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     ModifyEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
+    ModifyEndpointMessage.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
+    ModifyEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -740,6 +761,7 @@ module Aws::DatabaseMigrationService
     ReplicationInstance.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
     ReplicationInstance.add_member(:secondary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SecondaryAvailabilityZone"))
     ReplicationInstance.add_member(:free_until, Shapes::ShapeRef.new(shape: TStamp, location_name: "FreeUntil"))
+    ReplicationInstance.add_member(:dns_name_servers, Shapes::ShapeRef.new(shape: String, location_name: "DnsNameServers"))
     ReplicationInstance.struct_class = Types::ReplicationInstance
 
     ReplicationInstanceList.member = Shapes::ShapeRef.new(shape: ReplicationInstance)
@@ -916,12 +938,15 @@ module Aws::DatabaseMigrationService
       api.version = "2016-01-01"
 
       api.metadata = {
+        "apiVersion" => "2016-01-01",
         "endpointPrefix" => "dms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Database Migration Service",
+        "serviceId" => "Database Migration Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonDMSv20160101",
+        "uid" => "dms-2016-01-01",
       }
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|

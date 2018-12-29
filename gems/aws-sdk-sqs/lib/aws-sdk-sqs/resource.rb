@@ -40,7 +40,7 @@ module Aws::SQS
     #
     #   * A FIFO queue name must end with the `.fifo` suffix.
     #
-    #   Queue names are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
@@ -49,17 +49,17 @@ module Aws::SQS
     #
     #   * `DelaySeconds` - The length of time, in seconds, for which the
     #     delivery of all messages in the queue is delayed. Valid values: An
-    #     integer from 0 to 900 seconds (15 minutes). The default is 0 (zero).
+    #     integer from 0 to 900 seconds (15 minutes). Default: 0.
     #
     #   * `MaximumMessageSize` - The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer from
-    #     1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default is
-    #     262,144 (256 KiB).
+    #     1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). Default: 262,144
+    #     (256 KiB).
     #
     #   * `MessageRetentionPeriod` - The length of time, in seconds, for which
     #     Amazon SQS retains a message. Valid values: An integer from 60
-    #     seconds (1 minute) to 1,209,600 seconds (14 days). The default is
-    #     345,600 (4 days).
+    #     seconds (1 minute) to 1,209,600 seconds (14 days). Default: 345,600
+    #     (4 days).
     #
     #   * `Policy` - The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
@@ -67,8 +67,7 @@ module Aws::SQS
     #
     #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to arrive.
-    #     Valid values: An integer from 0 to 20 (seconds). The default is 0
-    #     (zero).
+    #     Valid values: An integer from 0 to 20 (seconds). Default: 0.
     #
     #   * `RedrivePolicy` - The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue. For more
@@ -81,7 +80,9 @@ module Aws::SQS
     #       value of `maxReceiveCount` is exceeded.
     #
     #     * `maxReceiveCount` - The number of times a message is delivered to
-    #       the source queue before being moved to the dead-letter queue.
+    #       the source queue before being moved to the dead-letter queue. When
+    #       the `ReceiveCount` for a message exceeds the `maxReceiveCount` for
+    #       a queue, Amazon SQS moves the message to the dead-letter-queue.
     #
     #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
     #     Similarly, the dead-letter queue of a standard queue must also be a
@@ -89,10 +90,11 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
-    #     values: An integer from 0 to 43,200 (12 hours). The default is 30.
-    #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
+    #   * `VisibilityTimeout` - The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout, see
+    #     [Visibility Timeout][3] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -107,10 +109,10 @@ module Aws::SQS
     #     which Amazon SQS can reuse a [data key][7] to encrypt or decrypt
     #     messages before calling AWS KMS again. An integer representing
     #     seconds, between 60 seconds (1 minute) and 86,400 seconds (24
-    #     hours). The default is 300 (5 minutes). A shorter time period
-    #     provides better security but results in more calls to KMS which
-    #     might incur charges after Free Tier. For more information, see [How
-    #     Does the Data Key Reuse Period Work?][8].
+    #     hours). Default: 300 (5 minutes). A shorter time period provides
+    #     better security but results in more calls to KMS which might incur
+    #     charges after Free Tier. For more information, see [How Does the
+    #     Data Key Reuse Period Work?][8].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
@@ -157,21 +159,6 @@ module Aws::SQS
     #       `MessageDeduplicationId`, the two messages are treated as
     #       duplicates and only one copy of the message is delivered.
     #
-    #   Any other valid special request parameters (such as the following) are
-    #   ignored:
-    #
-    #   * `ApproximateNumberOfMessages`
-    #
-    #   * `ApproximateNumberOfMessagesDelayed`
-    #
-    #   * `ApproximateNumberOfMessagesNotVisible`
-    #
-    #   * `CreatedTimestamp`
-    #
-    #   * `LastModifiedTimestamp`
-    #
-    #   * `QueueArn`
-    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
@@ -206,7 +193,7 @@ module Aws::SQS
     #   characters. Valid values: alphanumeric characters, hyphens (`-`), and
     #   underscores (`_`).
     #
-    #   Queue names are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     # @option options [String] :queue_owner_aws_account_id
     #   The AWS account ID of the account that created the queue.
     # @return [Queue]
@@ -239,7 +226,7 @@ module Aws::SQS
     #   A string to use for filtering the list results. Only those queues
     #   whose name begins with the specified string are returned.
     #
-    #   Queue names are case-sensitive.
+    #   Queue URLs and names are case-sensitive.
     # @return [Queue::Collection]
     def queues(options = {})
       batches = Enumerator.new do |y|

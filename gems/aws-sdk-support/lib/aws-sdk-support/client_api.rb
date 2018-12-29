@@ -360,12 +360,14 @@ module Aws::Support
       api.version = "2013-04-15"
 
       api.metadata = {
+        "apiVersion" => "2013-04-15",
         "endpointPrefix" => "support",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Support",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSSupport_20130415",
+        "uid" => "support-2013-04-15",
       }
 
       api.add_operation(:add_attachments_to_set, Seahorse::Model::Operation.new.tap do |o|

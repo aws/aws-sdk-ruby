@@ -48,6 +48,35 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A name value pair that describes an aspect of an account.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_values
+    #   A list of attribute values.
+    #   @return [Array<Types::AttributeValueTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttribute AWS API Documentation
+    #
+    class AccountAttribute < Struct.new(
+      :attribute_name,
+      :attribute_values)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_attributes
+    #   A list of attributes assigned to an account.
+    #   @return [Array<Types::AccountAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttributeList AWS API Documentation
+    #
+    class AccountAttributeList < Struct.new(
+      :account_attributes)
+      include Aws::Structure
+    end
+
     # Describes an AWS customer account authorized to restore a snapshot.
     #
     # @!attribute [rw] account_id
@@ -66,6 +95,19 @@ module Aws::Redshift
     class AccountWithRestoreAccess < Struct.new(
       :account_id,
       :account_alias)
+      include Aws::Structure
+    end
+
+    # Describes an attribute value.
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AttributeValueTarget AWS API Documentation
+    #
+    class AttributeValueTarget < Struct.new(
+      :attribute_value)
       include Aws::Structure
     end
 
@@ -186,6 +228,119 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchDeleteClusterSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identifiers: [ # required
+    #           {
+    #             snapshot_identifier: "String", # required
+    #             snapshot_cluster_identifier: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] identifiers
+    #   A list of identifiers for the snapshots that you want to delete.
+    #   @return [Array<Types::DeleteClusterSnapshotMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshotsRequest AWS API Documentation
+    #
+    class BatchDeleteClusterSnapshotsRequest < Struct.new(
+      :identifiers)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   A list of the snapshot identifiers that were deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of any errors returned.
+    #   @return [Array<Types::SnapshotErrorMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshotsResult AWS API Documentation
+    #
+    class BatchDeleteClusterSnapshotsResult < Struct.new(
+      :resources,
+      :errors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchModifyClusterSnapshotsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         snapshot_identifier_list: ["String"], # required
+    #         manual_snapshot_retention_period: 1,
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] snapshot_identifier_list
+    #   A list of snapshot identifiers you want to modify.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If you
+    #   specify the value -1, the manual snapshot is retained indefinitely.
+    #
+    #   The number must be either -1 or an integer between 1 and 3,653.
+    #
+    #   If you decrease the manual snapshot retention period from its
+    #   current value, existing manual snapshots that fall outside of the
+    #   new retention period will return an error. If you want to suppress
+    #   the errors and delete the snapshots, use the force option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force
+    #   A boolean value indicating whether to override an exception if the
+    #   retention period has passed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshotsMessage AWS API Documentation
+    #
+    class BatchModifyClusterSnapshotsMessage < Struct.new(
+      :snapshot_identifier_list,
+      :manual_snapshot_retention_period,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   A list of the snapshots that were modified.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of any errors returned.
+    #   @return [Array<Types::SnapshotErrorMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshotsOutputMessage AWS API Documentation
+    #
+    class BatchModifyClusterSnapshotsOutputMessage < Struct.new(
+      :resources,
+      :errors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelResizeMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster that you want to cancel a
+    #   resize operation for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResizeMessage AWS API Documentation
+    #
+    class CancelResizeMessage < Struct.new(
+      :cluster_identifier)
+      include Aws::Structure
+    end
+
     # Describes a cluster.
     #
     # @!attribute [rw] cluster_identifier
@@ -200,6 +355,12 @@ module Aws::Redshift
     #   The current state of the cluster. Possible values are the following:
     #
     #   * `available`
+    #
+    #   * `available, prep-for-resize`
+    #
+    #   * `available, resize-cleanup`
+    #
+    #   * `cancelling-resize`
     #
     #   * `creating`
     #
@@ -260,6 +421,14 @@ module Aws::Redshift
     #   The number of days that automatic cluster snapshots are retained.
     #   @return [Integer]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The default number of days to retain a manual snapshot. If the value
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
+    #   change the retention period of existing snapshots.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #   @return [Integer]
+    #
     # @!attribute [rw] cluster_security_groups
     #   A list of cluster security group that are associated with the
     #   cluster. Each security group is represented by an element that
@@ -314,7 +483,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] allow_version_upgrade
-    #   A Boolean value that, if `true`, indicates that major version
+    #   A boolean value that, if `true`, indicates that major version
     #   upgrades will be applied automatically to the cluster during the
     #   maintenance window.
     #   @return [Boolean]
@@ -324,12 +493,12 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] publicly_accessible
-    #   A Boolean value that, if `true`, indicates that the cluster can be
+    #   A boolean value that, if `true`, indicates that the cluster can be
     #   accessed from a public network.
     #   @return [Boolean]
     #
     # @!attribute [rw] encrypted
-    #   A Boolean value that, if `true`, indicates that data in the cluster
+    #   A boolean value that, if `true`, indicates that data in the cluster
     #   is encrypted at rest.
     #   @return [Boolean]
     #
@@ -338,6 +507,11 @@ module Aws::Redshift
     #   parameter returns null if the cluster was not created by restoring a
     #   snapshot.
     #   @return [Types::RestoreStatus]
+    #
+    # @!attribute [rw] data_transfer_progress
+    #   Describes the status of a cluster while it is in the process of
+    #   resizing with an incremental resize.
+    #   @return [Types::DataTransferProgress]
     #
     # @!attribute [rw] hsm_status
     #   A value that reports whether the Amazon Redshift cluster has
@@ -406,6 +580,32 @@ module Aws::Redshift
     #   The name of the maintenance track for the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] elastic_resize_number_of_node_options
+    #   The number of nodes that you can resize the cluster to with the
+    #   elastic resize method.
+    #   @return [String]
+    #
+    # @!attribute [rw] deferred_maintenance_windows
+    #   Describes a group of `DeferredMaintenanceWindow` objects.
+    #   @return [Array<Types::DeferredMaintenanceWindow>]
+    #
+    # @!attribute [rw] snapshot_schedule_identifier
+    #   A unique identifier for the cluster snapshot schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_schedule_state
+    #   The current state of the cluster snapshot schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] resize_info
+    #   Returns the following:
+    #
+    #   * AllowCancelResize: a boolean value indicating if the resize
+    #     operation can be cancelled.
+    #
+    #   * ResizeType: Returns ClassicResize
+    #   @return [Types::ResizeInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -418,6 +618,7 @@ module Aws::Redshift
       :endpoint,
       :cluster_create_time,
       :automated_snapshot_retention_period,
+      :manual_snapshot_retention_period,
       :cluster_security_groups,
       :vpc_security_groups,
       :cluster_parameter_groups,
@@ -432,6 +633,7 @@ module Aws::Redshift
       :publicly_accessible,
       :encrypted,
       :restore_status,
+      :data_transfer_progress,
       :hsm_status,
       :cluster_snapshot_copy_status,
       :cluster_public_key,
@@ -443,7 +645,12 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :iam_roles,
       :pending_actions,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :elastic_resize_number_of_node_options,
+      :deferred_maintenance_windows,
+      :snapshot_schedule_identifier,
+      :snapshot_schedule_state,
+      :resize_info)
       include Aws::Structure
     end
 
@@ -842,6 +1049,14 @@ module Aws::Redshift
     #   destination region after they are copied from a source region.
     #   @return [Integer]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that automated snapshots are retained in the
+    #   destination region after they are copied from a source region. If
+    #   the value is -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #   @return [Integer]
+    #
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant.
     #   @return [String]
@@ -851,6 +1066,7 @@ module Aws::Redshift
     class ClusterSnapshotCopyStatus < Struct.new(
       :destination_region,
       :retention_period,
+      :manual_snapshot_retention_period,
       :snapshot_copy_grant_name)
       include Aws::Structure
     end
@@ -995,6 +1211,7 @@ module Aws::Redshift
     #         source_snapshot_identifier: "String", # required
     #         source_snapshot_cluster_identifier: "String",
     #         target_snapshot_identifier: "String", # required
+    #         manual_snapshot_retention_period: 1,
     #       }
     #
     # @!attribute [rw] source_snapshot_identifier
@@ -1037,12 +1254,22 @@ module Aws::Redshift
     #   * Must be unique for the AWS account that is making the request.
     #   @return [String]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value
+    #   is -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshotMessage AWS API Documentation
     #
     class CopyClusterSnapshotMessage < Struct.new(
       :source_snapshot_identifier,
       :source_snapshot_cluster_identifier,
-      :target_snapshot_identifier)
+      :target_snapshot_identifier,
+      :manual_snapshot_retention_period)
       include Aws::Structure
     end
 
@@ -1074,6 +1301,7 @@ module Aws::Redshift
     #         preferred_maintenance_window: "String",
     #         cluster_parameter_group_name: "String",
     #         automated_snapshot_retention_period: 1,
+    #         manual_snapshot_retention_period: 1,
     #         port: 1,
     #         cluster_version: "String",
     #         allow_version_upgrade: false,
@@ -1094,6 +1322,7 @@ module Aws::Redshift
     #         additional_info: "String",
     #         iam_roles: ["String"],
     #         maintenance_track_name: "String",
+    #         snapshot_schedule_identifier: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -1297,6 +1526,14 @@ module Aws::Redshift
     #   Constraints: Must be a value from 0 to 35.
     #   @return [Integer]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The default number of days to retain a manual snapshot. If the value
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
+    #   change the retention period of existing snapshots.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #   @return [Integer]
+    #
     # @!attribute [rw] port
     #   The port number on which the cluster accepts incoming connections.
     #
@@ -1435,6 +1672,10 @@ module Aws::Redshift
     #   is assigned to the `current` track.
     #   @return [String]
     #
+    # @!attribute [rw] snapshot_schedule_identifier
+    #   A unique identifier for the snapshot schedule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -1451,6 +1692,7 @@ module Aws::Redshift
       :preferred_maintenance_window,
       :cluster_parameter_group_name,
       :automated_snapshot_retention_period,
+      :manual_snapshot_retention_period,
       :port,
       :cluster_version,
       :allow_version_upgrade,
@@ -1465,7 +1707,8 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :additional_info,
       :iam_roles,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :snapshot_schedule_identifier)
       include Aws::Structure
     end
 
@@ -1620,6 +1863,7 @@ module Aws::Redshift
     #       {
     #         snapshot_identifier: "String", # required
     #         cluster_identifier: "String", # required
+    #         manual_snapshot_retention_period: 1,
     #         tags: [
     #           {
     #             key: "String",
@@ -1649,6 +1893,15 @@ module Aws::Redshift
     #   The cluster identifier for which you want a snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value
+    #   is -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
@@ -1658,6 +1911,7 @@ module Aws::Redshift
     class CreateClusterSnapshotMessage < Struct.new(
       :snapshot_identifier,
       :cluster_identifier,
+      :manual_snapshot_retention_period,
       :tags)
       include Aws::Structure
     end
@@ -1806,7 +2060,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by
     #   the event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -1817,8 +2071,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value; set to `true` to activate the subscription, set to
-    #   `false` to create the subscription but not active it.
+    #   A boolean value; set to `true` to activate the subscription, and set
+    #   to `false` to create the subscription but not activate it.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2044,6 +2298,59 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSnapshotScheduleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_definitions: ["String"],
+    #         schedule_identifier: "String",
+    #         schedule_description: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         dry_run: false,
+    #         next_invocations: 1,
+    #       }
+    #
+    # @!attribute [rw] schedule_definitions
+    #   The definition of the snapshot schedule. The definition is made up
+    #   of schedule expressions, for example "cron(30 12 *)" or "rate(12
+    #   hours)".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_identifier
+    #   A unique identifier for a snapshot schedule. Only alphanumeric
+    #   characters are allowed for the identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_description
+    #   The description of the snapshot schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] dry_run
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_invocations
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotScheduleMessage AWS API Documentation
+    #
+    class CreateSnapshotScheduleMessage < Struct.new(
+      :schedule_definitions,
+      :schedule_identifier,
+      :schedule_description,
+      :tags,
+      :dry_run,
+      :next_invocations)
+      include Aws::Structure
+    end
+
     # Contains the output from the `CreateTags` action.
     #
     # @note When making an API call, you may pass CreateTagsMessage
@@ -2083,6 +2390,65 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] total_backup_size_in_mega_bytes
+    #   The total amount of storage currently used for snapshots.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_provisioned_storage_in_mega_bytes
+    #   The total amount of storage currently provisioned.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CustomerStorageMessage AWS API Documentation
+    #
+    class CustomerStorageMessage < Struct.new(
+      :total_backup_size_in_mega_bytes,
+      :total_provisioned_storage_in_mega_bytes)
+      include Aws::Structure
+    end
+
+    # Describes the status of a cluster while it is in the process of
+    # resizing with an incremental resize.
+    #
+    # @!attribute [rw] status
+    #   Describes the status of the cluster. While the transfer is in
+    #   progress the status is `transferringdata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_rate_in_mega_bytes_per_second
+    #   Describes the data transfer rate in MB's per second.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_data_in_mega_bytes
+    #   Describes the total amount of data to be transfered in megabytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_transferred_in_mega_bytes
+    #   Describes the total amount of data that has been transfered in
+    #   MB's.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_time_to_completion_in_seconds
+    #   Describes the estimated number of seconds remaining to complete the
+    #   transfer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] elapsed_time_in_seconds
+    #   Describes the number of seconds that have elapsed during the data
+    #   transfer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataTransferProgress AWS API Documentation
+    #
+    class DataTransferProgress < Struct.new(
+      :status,
+      :current_rate_in_mega_bytes_per_second,
+      :total_data_in_mega_bytes,
+      :data_transferred_in_mega_bytes,
+      :estimated_time_to_completion_in_seconds,
+      :elapsed_time_in_seconds)
+      include Aws::Structure
+    end
+
     # Describes the default cluster parameters for a parameter group family.
     #
     # @!attribute [rw] parameter_group_family
@@ -2112,6 +2478,31 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a deferred maintenance window
+    #
+    # @!attribute [rw] defer_maintenance_identifier
+    #   A unique identifier for the maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance_start_time
+    #   A timestamp for the beginning of the time period when we defer
+    #   maintenance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] defer_maintenance_end_time
+    #   A timestamp for the end of the time period when we defer
+    #   maintenance.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeferredMaintenanceWindow AWS API Documentation
+    #
+    class DeferredMaintenanceWindow < Struct.new(
+      :defer_maintenance_identifier,
+      :defer_maintenance_start_time,
+      :defer_maintenance_end_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteClusterMessage
     #   data as a hash:
     #
@@ -2119,6 +2510,7 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         skip_final_cluster_snapshot: false,
     #         final_cluster_snapshot_identifier: "String",
+    #         final_cluster_snapshot_retention_period: 1,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -2163,12 +2555,22 @@ module Aws::Redshift
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] final_cluster_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value
+    #   is -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterMessage AWS API Documentation
     #
     class DeleteClusterMessage < Struct.new(
       :cluster_identifier,
       :skip_final_cluster_snapshot,
-      :final_cluster_snapshot_identifier)
+      :final_cluster_snapshot_identifier,
+      :final_cluster_snapshot_retention_period)
       include Aws::Structure
     end
 
@@ -2237,7 +2639,7 @@ module Aws::Redshift
     #   The unique identifier of the manual snapshot to be deleted.
     #
     #   Constraints: Must be the name of an existing snapshot that is in the
-    #   `available` state.
+    #   `available`, `failed`, or `cancelled` state.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
@@ -2362,6 +2764,24 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteSnapshotScheduleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] schedule_identifier
+    #   A unique identifier of the snapshot schedule to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotScheduleMessage AWS API Documentation
+    #
+    class DeleteSnapshotScheduleMessage < Struct.new(
+      :schedule_identifier)
+      include Aws::Structure
+    end
+
     # Contains the output from the `DeleteTags` action.
     #
     # @note When making an API call, you may pass DeleteTagsMessage
@@ -2387,6 +2807,24 @@ module Aws::Redshift
     class DeleteTagsMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAccountAttributesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_names: ["String"],
+    #       }
+    #
+    # @!attribute [rw] attribute_names
+    #   A list of attribute names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributesMessage AWS API Documentation
+    #
+    class DescribeAccountAttributesMessage < Struct.new(
+      :attribute_names)
       include Aws::Structure
     end
 
@@ -2657,6 +3095,12 @@ module Aws::Redshift
     #         tag_keys: ["String"],
     #         tag_values: ["String"],
     #         cluster_exists: false,
+    #         sorting_entities: [
+    #           {
+    #             attribute: "SOURCE_TYPE", # required, accepts SOURCE_TYPE, TOTAL_SIZE, CREATE_TIME
+    #             sort_order: "ASC", # accepts ASC, DESC
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -2755,9 +3199,25 @@ module Aws::Redshift
     #   A value that indicates whether to return snapshots only for an
     #   existing cluster. Table-level restore can be performed only using a
     #   snapshot of an existing cluster, that is, a cluster that has not
-    #   been deleted. If `ClusterExists` is set to `true`,
-    #   `ClusterIdentifier` is required.
+    #   been deleted.
+    #
+    #   * If `ClusterExists` is set to `true`, `ClusterIdentifier` is
+    #     required.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     not specified, all snapshots associated with deleted clusters
+    #     (orphaned snapshots) are returned.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     specified for a deleted cluster, snapshots associated with that
+    #     cluster are returned.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     specified for an existing cluster, no snapshots are returned.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] sorting_entities
+    #   @return [Array<Types::SnapshotSortingEntity>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshotsMessage AWS API Documentation
     #
@@ -2772,7 +3232,8 @@ module Aws::Redshift
       :owner_account,
       :tag_keys,
       :tag_values,
-      :cluster_exists)
+      :cluster_exists,
+      :sorting_entities)
       include Aws::Structure
     end
 
@@ -3685,6 +4146,85 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSnapshotSchedulesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         schedule_identifier: "String",
+    #         tag_keys: ["String"],
+    #         tag_values: ["String"],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster whose snapshot schedules you
+    #   want to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_identifier
+    #   A unique identifier for a snapshot schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The key value for a snapshot schedule tag.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_values
+    #   The value corresponding to the key of the snapshot schedule tag.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the `marker` parameter and retrying
+    #   the command. If the `marker` field is empty, all response records
+    #   have been retrieved for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number or response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned `marker` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedulesMessage AWS API Documentation
+    #
+    class DescribeSnapshotSchedulesMessage < Struct.new(
+      :cluster_identifier,
+      :schedule_identifier,
+      :tag_keys,
+      :tag_values,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_schedules
+    #   A list of SnapshotSchedules.
+    #   @return [Array<Types::SnapshotSchedule>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the `marker` parameter and retrying
+    #   the command. If the `marker` field is empty, all response records
+    #   have been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedulesOutputMessage AWS API Documentation
+    #
+    class DescribeSnapshotSchedulesOutputMessage < Struct.new(
+      :snapshot_schedules,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTableRestoreStatusMessage
     #   data as a hash:
     #
@@ -3995,6 +4535,7 @@ module Aws::Redshift
     #         destination_region: "String", # required
     #         retention_period: 1,
     #         snapshot_copy_grant_name: "String",
+    #         manual_snapshot_retention_period: 1,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -4005,9 +4546,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] destination_region
-    #   The destination region that you want to copy snapshots to.
+    #   The destination AWS Region that you want to copy snapshots to.
     #
-    #   Constraints: Must be the name of a valid region. For more
+    #   Constraints: Must be the name of a valid AWS Region. For more
     #   information, see [Regions and Endpoints][1] in the Amazon Web
     #   Services General Reference.
     #
@@ -4030,13 +4571,23 @@ module Aws::Redshift
     #   KMS-encrypted cluster are copied to the destination region.
     #   @return [String]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days to retain newly copied snapshots in the
+    #   destination AWS Region after they are copied from the source AWS
+    #   Region. If the value is -1, the manual snapshot is retained
+    #   indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopyMessage AWS API Documentation
     #
     class EnableSnapshotCopyMessage < Struct.new(
       :cluster_identifier,
       :destination_region,
       :retention_period,
-      :snapshot_copy_grant_name)
+      :snapshot_copy_grant_name,
+      :manual_snapshot_retention_period)
       include Aws::Structure
     end
 
@@ -4236,8 +4787,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value indicating whether the subscription is enabled.
-    #   `true` indicates the subscription is enabled.
+    #   A boolean value indicating whether the subscription is enabled;
+    #   `true` indicates that the subscription is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -4802,6 +5353,70 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyClusterMaintenanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         defer_maintenance: false,
+    #         defer_maintenance_identifier: "String",
+    #         defer_maintenance_start_time: Time.now,
+    #         defer_maintenance_end_time: Time.now,
+    #         defer_maintenance_duration: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   A unique identifier for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance
+    #   A boolean indicating whether to enable the deferred maintenance
+    #   window.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] defer_maintenance_identifier
+    #   A unique identifier for the deferred maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance_start_time
+    #   A timestamp indicating the start time for the deferred maintenance
+    #   window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] defer_maintenance_end_time
+    #   A timestamp indicating end time for the deferred maintenance window.
+    #   If you specify an end time, you can't specify a duration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] defer_maintenance_duration
+    #   An integer indicating the duration of the maintenance window in
+    #   days. If you specify a duration, you can't specify an end time. The
+    #   duration must be 14 days or less.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceMessage AWS API Documentation
+    #
+    class ModifyClusterMaintenanceMessage < Struct.new(
+      :cluster_identifier,
+      :defer_maintenance,
+      :defer_maintenance_identifier,
+      :defer_maintenance_start_time,
+      :defer_maintenance_end_time,
+      :defer_maintenance_duration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceResult AWS API Documentation
+    #
+    class ModifyClusterMaintenanceResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyClusterMessage
     #   data as a hash:
     #
@@ -4815,6 +5430,7 @@ module Aws::Redshift
     #         master_user_password: "String",
     #         cluster_parameter_group_name: "String",
     #         automated_snapshot_retention_period: 1,
+    #         manual_snapshot_retention_period: 1,
     #         preferred_maintenance_window: "String",
     #         cluster_version: "String",
     #         allow_version_upgrade: false,
@@ -4825,6 +5441,8 @@ module Aws::Redshift
     #         elastic_ip: "String",
     #         enhanced_vpc_routing: false,
     #         maintenance_track_name: "String",
+    #         encrypted: false,
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -4956,6 +5574,17 @@ module Aws::Redshift
     #   Constraints: Must be a value from 0 to 35.
     #   @return [Integer]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The default for number of days that a newly created manual snapshot
+    #   is retained. If the value is -1, the manual snapshot is retained
+    #   indefinitely. This value doesn't retroactively change the retention
+    #   periods of existing manual snapshots.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #
+    #   The default value is -1.
+    #   @return [Integer]
+    #
     # @!attribute [rw] preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
     #   occur, if necessary. If system maintenance is necessary during the
@@ -5074,6 +5703,20 @@ module Aws::Redshift
     #   applied.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the cluster is encrypted. If the cluster is
+    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
+    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
+    #   China region we will use legacy encryption if you specify that the
+    #   cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (KMS) key ID of the encryption key
+    #   that you want to use to encrypt data in the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -5086,6 +5729,7 @@ module Aws::Redshift
       :master_user_password,
       :cluster_parameter_group_name,
       :automated_snapshot_retention_period,
+      :manual_snapshot_retention_period,
       :preferred_maintenance_window,
       :cluster_version,
       :allow_version_upgrade,
@@ -5095,7 +5739,9 @@ module Aws::Redshift
       :publicly_accessible,
       :elastic_ip,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -5151,6 +5797,87 @@ module Aws::Redshift
     #
     class ModifyClusterResult < Struct.new(
       :cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClusterSnapshotMessage
+    #   data as a hash:
+    #
+    #       {
+    #         snapshot_identifier: "String", # required
+    #         manual_snapshot_retention_period: 1,
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] snapshot_identifier
+    #   The identifier of the snapshot whose setting you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value
+    #   is -1, the manual snapshot is retained indefinitely.
+    #
+    #   If the manual snapshot falls outside of the new retention period,
+    #   you can specify the force option to immediately delete the snapshot.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force
+    #   A Boolean option to override an exception if the retention period
+    #   has already passed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotMessage AWS API Documentation
+    #
+    class ModifyClusterSnapshotMessage < Struct.new(
+      :snapshot_identifier,
+      :manual_snapshot_retention_period,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot
+    #   Describes a snapshot.
+    #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotResult AWS API Documentation
+    #
+    class ModifyClusterSnapshotResult < Struct.new(
+      :snapshot)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClusterSnapshotScheduleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         schedule_identifier: "String",
+    #         disassociate_schedule: false,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   A unique identifier for the cluster whose snapshot schedule you want
+    #   to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_identifier
+    #   A unique alphanumeric identifier for the schedule that you want to
+    #   associate with the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] disassociate_schedule
+    #   A boolean to indicate whether to remove the assoiciation between the
+    #   cluster and the schedule.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotScheduleMessage AWS API Documentation
+    #
+    class ModifyClusterSnapshotScheduleMessage < Struct.new(
+      :cluster_identifier,
+      :schedule_identifier,
+      :disassociate_schedule)
       include Aws::Structure
     end
 
@@ -5248,7 +5975,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by
     #   the event notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: configuration, management, monitoring, security
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -5293,12 +6020,13 @@ module Aws::Redshift
     #       {
     #         cluster_identifier: "String", # required
     #         retention_period: 1, # required
+    #         manual: false,
     #       }
     #
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster for which you want to change
-    #   the retention period for automated snapshots that are copied to a
-    #   destination region.
+    #   the retention period for either automated or manual snapshots that
+    #   are copied to a destination AWS Region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
@@ -5306,21 +6034,40 @@ module Aws::Redshift
     #
     # @!attribute [rw] retention_period
     #   The number of days to retain automated snapshots in the destination
-    #   region after they are copied from the source region.
+    #   AWS Region after they are copied from the source AWS Region.
+    #
+    #   By default, this only changes the retention period of copied
+    #   automated snapshots.
     #
     #   If you decrease the retention period for automated snapshots that
-    #   are copied to a destination region, Amazon Redshift will delete any
-    #   existing automated snapshots that were copied to the destination
-    #   region and that fall outside of the new retention period.
+    #   are copied to a destination AWS Region, Amazon Redshift deletes any
+    #   existing automated snapshots that were copied to the destination AWS
+    #   Region and that fall outside of the new retention period.
     #
-    #   Constraints: Must be at least 1 and no more than 35.
+    #   Constraints: Must be at least 1 and no more than 35 for automated
+    #   snapshots.
+    #
+    #   If you specify the `manual` option, only newly copied manual
+    #   snapshots will have the new retention period.
+    #
+    #   If you specify the value of -1 newly copied manual snapshots are
+    #   retained indefinitely.
+    #
+    #   Constraints: The number of days must be either -1 or an integer
+    #   between 1 and 3,653 for manual snapshots.
     #   @return [Integer]
+    #
+    # @!attribute [rw] manual
+    #   Indicates whether to apply the snapshot retention period to newly
+    #   copied manual snapshots instead of automated snapshots.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriodMessage AWS API Documentation
     #
     class ModifySnapshotCopyRetentionPeriodMessage < Struct.new(
       :cluster_identifier,
-      :retention_period)
+      :retention_period,
+      :manual)
       include Aws::Structure
     end
 
@@ -5332,6 +6079,32 @@ module Aws::Redshift
     #
     class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
       :cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifySnapshotScheduleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_identifier: "String", # required
+    #         schedule_definitions: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] schedule_identifier
+    #   A unique alphanumeric identifier of the schedule to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_definitions
+    #   An updated list of schedule definitions. A schedule definition is
+    #   made up of schedule expressions, for example, "cron(30 12 *)" or
+    #   "rate(12 hours)".
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotScheduleMessage AWS API Documentation
+    #
+    class ModifySnapshotScheduleMessage < Struct.new(
+      :schedule_identifier,
+      :schedule_definitions)
       include Aws::Structure
     end
 
@@ -5529,6 +6302,11 @@ module Aws::Redshift
     #   during the next maintenance window.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_type
+    #   The encryption type for a cluster. Possible values are: KMS and
+    #   None. For the China region the possible values are None, and Legacy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -5541,7 +6319,8 @@ module Aws::Redshift
       :cluster_identifier,
       :publicly_accessible,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -5875,6 +6654,79 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResizeClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         cluster_type: "String",
+    #         node_type: "String",
+    #         number_of_nodes: 1, # required
+    #         classic: false,
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier for the cluster to resize.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The new cluster type for the specified cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The new node type for the nodes you are adding.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The new number of nodes for the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] classic
+    #   A boolean value indicating whether the resize operation is using the
+    #   classic resize process. If you don't provide this parameter or set
+    #   the value to `false`, the resize type is elastic.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage AWS API Documentation
+    #
+    class ResizeClusterMessage < Struct.new(
+      :cluster_identifier,
+      :cluster_type,
+      :node_type,
+      :number_of_nodes,
+      :classic)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterResult AWS API Documentation
+    #
+    class ResizeClusterResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
+    # Describes a resize operation.
+    #
+    # @!attribute [rw] resize_type
+    #   Returns the value `ClassicResize`.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_cancel_resize
+    #   A boolean value indicating if the resize operation can be cancelled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeInfo AWS API Documentation
+    #
+    class ResizeInfo < Struct.new(
+      :resize_type,
+      :allow_cancel_resize)
+      include Aws::Structure
+    end
+
     # Describes the result of a cluster resize operation.
     #
     # @!attribute [rw] target_node_type
@@ -5896,7 +6748,8 @@ module Aws::Redshift
     # @!attribute [rw] status
     #   The status of the resize operation.
     #
-    #   Valid Values: `NONE` \| `IN_PROGRESS` \| `FAILED` \| `SUCCEEDED`
+    #   Valid Values: `NONE` \| `IN_PROGRESS` \| `FAILED` \| `SUCCEEDED` \|
+    #   `CANCELLING`
     #   @return [String]
     #
     # @!attribute [rw] import_tables_completed
@@ -5951,6 +6804,23 @@ module Aws::Redshift
     #   Once the resize operation is complete, this value will be 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] resize_type
+    #   An enum with possible values of `ClassicResize` and `ElasticResize`.
+    #   These values describe the type of resize operation being performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An optional string to provide additional details about the resize
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_encryption_type
+    #   The type of encryption for the cluster after the resize is complete.
+    #
+    #   Possible values are `KMS` and `None`. In the China region possible
+    #   values are: `Legacy` and `None`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
@@ -5965,7 +6835,10 @@ module Aws::Redshift
       :total_resize_data_in_mega_bytes,
       :progress_in_mega_bytes,
       :elapsed_time_in_seconds,
-      :estimated_time_to_completion_in_seconds)
+      :estimated_time_to_completion_in_seconds,
+      :resize_type,
+      :message,
+      :target_encryption_type)
       include Aws::Structure
     end
 
@@ -5990,12 +6863,14 @@ module Aws::Redshift
     #         vpc_security_group_ids: ["String"],
     #         preferred_maintenance_window: "String",
     #         automated_snapshot_retention_period: 1,
+    #         manual_snapshot_retention_period: 1,
     #         kms_key_id: "String",
     #         node_type: "String",
     #         enhanced_vpc_routing: false,
     #         additional_info: "String",
     #         iam_roles: ["String"],
     #         maintenance_track_name: "String",
+    #         snapshot_schedule_identifier: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -6156,6 +7031,9 @@ module Aws::Redshift
     #   Constraints: Must be a value from 0 to 35.
     #   @return [Integer]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   @return [Integer]
+    #
     # @!attribute [rw] kms_key_id
     #   The AWS Key Management Service (KMS) key ID of the encryption key
     #   that you want to use to encrypt data in the cluster that you restore
@@ -6223,6 +7101,10 @@ module Aws::Redshift
     #   tracks.
     #   @return [String]
     #
+    # @!attribute [rw] snapshot_schedule_identifier
+    #   A unique identifier for the snapshot schedule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -6243,12 +7125,14 @@ module Aws::Redshift
       :vpc_security_group_ids,
       :preferred_maintenance_window,
       :automated_snapshot_retention_period,
+      :manual_snapshot_retention_period,
       :kms_key_id,
       :node_type,
       :enhanced_vpc_routing,
       :additional_info,
       :iam_roles,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :snapshot_schedule_identifier)
       include Aws::Structure
     end
 
@@ -6559,13 +7443,13 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] snapshot_create_time
-    #   The time (UTC) when Amazon Redshift began the snapshot. A snapshot
-    #   contains a copy of the cluster data as of this exact time.
+    #   The time (in UTC format) when Amazon Redshift began the snapshot. A
+    #   snapshot contains a copy of the cluster data as of this exact time.
     #   @return [Time]
     #
     # @!attribute [rw] status
     #   The snapshot status. The value of the status depends on the API
-    #   operation used.
+    #   operation used:
     #
     #   * CreateClusterSnapshot and CopyClusterSnapshot returns status as
     #     "creating".
@@ -6599,7 +7483,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_type
     #   The snapshot type. Snapshots created using CreateClusterSnapshot and
-    #   CopyClusterSnapshot will be of type "manual".
+    #   CopyClusterSnapshot are of type "manual".
     #   @return [String]
     #
     # @!attribute [rw] node_type
@@ -6711,6 +7595,23 @@ module Aws::Redshift
     #   The name of the maintenance track for the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that a manual snapshot is retained. If the value
+    #   is -1, the manual snapshot is retained indefinitely.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] manual_snapshot_remaining_days
+    #   The number of days until a manual snapshot will pass its retention
+    #   period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_retention_start_time
+    #   A timestamp representing the start of the retention period for the
+    #   snapshot.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -6743,7 +7644,10 @@ module Aws::Redshift
       :tags,
       :restorable_node_types,
       :enhanced_vpc_routing,
-      :maintenance_track_name)
+      :maintenance_track_name,
+      :manual_snapshot_retention_period,
+      :manual_snapshot_remaining_days,
+      :snapshot_retention_start_time)
       include Aws::Structure
     end
 
@@ -6806,6 +7710,34 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes the errors returned by a snapshot.
+    #
+    # @!attribute [rw] snapshot_identifier
+    #   A unique identifier for the snapshot returning the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_cluster_identifier
+    #   A unique identifier for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The text message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotErrorMessage AWS API Documentation
+    #
+    class SnapshotErrorMessage < Struct.new(
+      :snapshot_identifier,
+      :snapshot_cluster_identifier,
+      :failure_code,
+      :failure_reason)
+      include Aws::Structure
+    end
+
     # Contains the output from the DescribeClusterSnapshots action.
     #
     # @!attribute [rw] marker
@@ -6829,6 +7761,66 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a snapshot schedule. You can set a regular interval for
+    # creating snapshots of a cluster. You can also schedule snapshots for
+    # specific dates.
+    #
+    # @!attribute [rw] schedule_definitions
+    #   A list of ScheduleDefinitions
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_identifier
+    #   A unique identifier for the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_description
+    #   The description of the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An optional set of tags describing the schedule.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_invocations
+    #   @return [Array<Time>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSchedule AWS API Documentation
+    #
+    class SnapshotSchedule < Struct.new(
+      :schedule_definitions,
+      :schedule_identifier,
+      :schedule_description,
+      :tags,
+      :next_invocations)
+      include Aws::Structure
+    end
+
+    # Describes a sorting entity
+    #
+    # @note When making an API call, you may pass SnapshotSortingEntity
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: "SOURCE_TYPE", # required, accepts SOURCE_TYPE, TOTAL_SIZE, CREATE_TIME
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The category for sorting the snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order for listing the attributes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSortingEntity AWS API Documentation
+    #
+    class SnapshotSortingEntity < Struct.new(
+      :attribute,
+      :sort_order)
+      include Aws::Structure
+    end
+
     # Describes a subnet.
     #
     # @!attribute [rw] subnet_identifier
@@ -6849,6 +7841,19 @@ module Aws::Redshift
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      include Aws::Structure
+    end
+
+    # Describes the operations that are allowed on a maintenance track.
+    #
+    # @!attribute [rw] operation_name
+    #   A list of the supported operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SupportedOperation AWS API Documentation
+    #
+    class SupportedOperation < Struct.new(
+      :operation_name)
       include Aws::Structure
     end
 
@@ -7006,8 +8011,8 @@ module Aws::Redshift
     #   @return [Types::Tag]
     #
     # @!attribute [rw] resource_name
-    #   The Amazon Resource Name (ARN) with which the tag is associated. For
-    #   example, `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
+    #   The Amazon Resource Name (ARN) with which the tag is associated, for
+    #   example: `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -7102,11 +8107,16 @@ module Aws::Redshift
     #   The cluster version for the new maintenance track.
     #   @return [String]
     #
+    # @!attribute [rw] supported_operations
+    #   A list of operations supported by the maintenance track.
+    #   @return [Array<Types::SupportedOperation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdateTarget AWS API Documentation
     #
     class UpdateTarget < Struct.new(
       :maintenance_track_name,
-      :database_version)
+      :database_version,
+      :supported_operations)
       include Aws::Structure
     end
 

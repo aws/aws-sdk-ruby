@@ -303,13 +303,16 @@ module Aws::ApplicationAutoScaling
       api.version = "2016-02-06"
 
       api.metadata = {
+        "apiVersion" => "2016-02-06",
         "endpointPrefix" => "autoscaling",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Application Auto Scaling",
+        "serviceId" => "Application Auto Scaling",
         "signatureVersion" => "v4",
         "signingName" => "application-autoscaling",
         "targetPrefix" => "AnyScaleFrontendService",
+        "uid" => "application-autoscaling-2016-02-06",
       }
 
       api.add_operation(:delete_scaling_policy, Seahorse::Model::Operation.new.tap do |o|

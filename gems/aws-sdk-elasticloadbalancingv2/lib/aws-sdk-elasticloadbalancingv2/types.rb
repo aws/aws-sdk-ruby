@@ -132,6 +132,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   The certificate to add. You can specify one certificate per call.
+    #   Set `CertificateArn` to the certificate ARN but do not set
+    #   `IsDefault`.
     #   @return [Array<Types::Certificate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificatesInput AWS API Documentation
@@ -407,7 +409,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] is_default
-    #   Indicates whether the certificate is the default certificate.
+    #   Indicates whether the certificate is the default certificate. Do not
+    #   set `IsDefault` when specifying a certificate as an input parameter.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Certificate AWS API Documentation
@@ -521,31 +524,34 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one default certificate. To create a certificate
-    #   list, use AddListenerCertificates.
+    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   certificate ARN but do not set `IsDefault`.
+    #
+    #   To create a certificate list, use AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group. The protocol of the target group must be HTTP or HTTPS for an
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an
     #   Application Load Balancer or TCP for a Network Load Balancer.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
-    #   can use an identity provider that is OpenID Connect (OIDC) compliant
-    #   to authenticate users as they access your application.
+    #   authenticate users through an identity provider that is OpenID
+    #   Connect (OIDC) compliant.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   can use Amazon Cognito to authenticate users as they access your
-    #   application.
+    #   authenticate users through the user pools supported by Amazon
+    #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
-    #   can redirect HTTP and HTTPS requests.
+    #   redirect specified client requests from one URL to another.
     #
     #   \[Application Load Balancer\] If the action type is
-    #   `fixed-response`, you can return a custom HTTP response.
+    #   `fixed-response`, you drop specified client requests and return a
+    #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
@@ -799,22 +805,24 @@ module Aws::ElasticLoadBalancingV2
     #   The actions. Each rule must include exactly one of the following
     #   types of actions: `forward`, `fixed-response`, or `redirect`.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group.
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer or TCP for a Network Load Balancer.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
-    #   can use an identity provider that is OpenID Connect (OIDC) compliant
-    #   to authenticate users as they access your application.
+    #   authenticate users through an identity provider that is OpenID
+    #   Connect (OIDC) compliant.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   can use Amazon Cognito to authenticate users as they access your
-    #   application.
+    #   authenticate users through the user pools supported by Amazon
+    #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
-    #   can redirect HTTP and HTTPS requests.
+    #   redirect specified client requests from one URL to another.
     #
     #   \[Application Load Balancer\] If the action type is
-    #   `fixed-response`, you can return a custom HTTP response.
+    #   `fixed-response`, you drop specified client requests and return a
+    #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
@@ -843,11 +851,12 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         name: "TargetGroupName", # required
-    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
-    #         port: 1, # required
-    #         vpc_id: "VpcId", # required
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #         port: 1,
+    #         vpc_id: "VpcId",
     #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         health_check_port: "HealthCheckPort",
+    #         health_check_enabled: false,
     #         health_check_path: "Path",
     #         health_check_interval_seconds: 1,
     #         health_check_timeout_seconds: 1,
@@ -856,7 +865,7 @@ module Aws::ElasticLoadBalancingV2
     #         matcher: {
     #           http_code: "HttpCode", # required
     #         },
-    #         target_type: "instance", # accepts instance, ip
+    #         target_type: "instance", # accepts instance, ip, lambda
     #       }
     #
     # @!attribute [rw] name
@@ -870,16 +879,19 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
+    #   HTTPS. For Network Load Balancers, the supported protocol is TCP. If
+    #   the target is a Lambda function, this parameter does not apply.
     #   @return [String]
     #
     # @!attribute [rw] port
     #   The port on which the targets receive traffic. This port is used
-    #   unless you specify a port override when registering the target.
+    #   unless you specify a port override when registering the target. If
+    #   the target is a Lambda function, this parameter does not apply.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_id
-    #   The identifier of the virtual private cloud (VPC).
+    #   The identifier of the virtual private cloud (VPC). If the target is
+    #   a Lambda function, this parameter does not apply.
     #   @return [String]
     #
     # @!attribute [rw] health_check_protocol
@@ -895,6 +907,12 @@ module Aws::ElasticLoadBalancingV2
     #   each target receives traffic from the load balancer.
     #   @return [String]
     #
+    # @!attribute [rw] health_check_enabled
+    #   Indicates whether health checks are enabled. If the target type is
+    #   `instance` or `ip`, the default is `true`. If the target type is
+    #   `lambda`, the default is `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] health_check_path
     #   \[HTTP/HTTPS health checks\] The ping path that is the destination
     #   on the targets for health checks. The default is /.
@@ -904,15 +922,18 @@ module Aws::ElasticLoadBalancingV2
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. For Application Load Balancers, the range is
     #   5–300 seconds. For Network Load Balancers, the supported values are
-    #   10 or 30 seconds. The default is 30 seconds.
+    #   10 or 30 seconds. If the target type is `instance` or `ip`, the
+    #   default is 30 seconds. If the target type is `lambda`, the default
+    #   is 35 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a
     #   target means a failed health check. For Application Load Balancers,
-    #   the range is 2–60 seconds and the default is 5 seconds. For Network
-    #   Load Balancers, this is 10 seconds for TCP and HTTPS health checks
-    #   and 6 seconds for HTTP health checks.
+    #   the range is 2–120 seconds and the default is 5 seconds if the
+    #   target type is `instance` or `ip` and 30 seconds if the target type
+    #   is `lambda`. For Network Load Balancers, this is 10 seconds for TCP
+    #   and HTTPS health checks and 6 seconds for HTTP health checks.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
@@ -936,16 +957,19 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] target_type
     #   The type of target that you must specify when registering targets
-    #   with this target group. The possible values are `instance` (targets
-    #   are specified by instance ID) or `ip` (targets are specified by IP
-    #   address). The default is `instance`. You can't specify targets for
-    #   a target group using both instance IDs and IP addresses.
+    #   with this target group. You can't specify targets for a target
+    #   group using more than one target type.
     #
-    #   If the target type is `ip`, specify IP addresses from the subnets of
-    #   the virtual private cloud (VPC) for the target group, the RFC 1918
-    #   range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC
-    #   6598 range (100.64.0.0/10). You can't specify publicly routable IP
-    #   addresses.
+    #   * `instance` - Targets are specified by instance ID. This is the
+    #     default value.
+    #
+    #   * `ip` - Targets are specified by IP address. You can specify IP
+    #     addresses from the subnets of the virtual private cloud (VPC) for
+    #     the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12,
+    #     and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You
+    #     can't specify publicly routable IP addresses.
+    #
+    #   * `lambda` - The target groups contains a single Lambda function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
@@ -957,6 +981,7 @@ module Aws::ElasticLoadBalancingV2
       :vpc_id,
       :health_check_protocol,
       :health_check_port,
+      :health_check_enabled,
       :health_check_path,
       :health_check_interval_seconds,
       :health_check_timeout_seconds,
@@ -2012,31 +2037,34 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one default certificate. To create a certificate
-    #   list, use AddListenerCertificates.
+    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   certificate ARN but do not set `IsDefault`.
+    #
+    #   To create a certificate list, use AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group. The protocol of the target group must be HTTP or HTTPS for an
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an
     #   Application Load Balancer or TCP for a Network Load Balancer.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
-    #   can use an identity provider that is OpenID Connect (OIDC) compliant
-    #   to authenticate users as they access your application.
+    #   authenticate users through an identity provider that is OpenID
+    #   Connect (OIDC) compliant.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   can use Amazon Cognito to authenticate users as they access your
-    #   application.
+    #   authenticate users through the user pools supported by Amazon
+    #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
-    #   can redirect HTTP and HTTPS requests.
+    #   redirect specified client requests from one URL to another.
     #
     #   \[Application Load Balancer\] If the action type is
-    #   `fixed-response`, you can return a custom HTTP response.
+    #   `fixed-response`, you drop specified client requests and return a
+    #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
@@ -2203,15 +2231,24 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] actions
     #   The actions.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group.
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer or TCP for a Network Load Balancer.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate
-    #   users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   authenticate users through an identity provider that is OpenID
+    #   Connect (OIDC) compliant.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   authenticate users through the user pools supported by Amazon
+    #   Cognito.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   redirect specified client requests from one URL to another.
+    #
+    #   \[Application Load Balancer\] If the action type is
+    #   `fixed-response`, you drop specified client requests and return a
+    #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput AWS API Documentation
@@ -2282,6 +2319,7 @@ module Aws::ElasticLoadBalancingV2
     #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         health_check_port: "HealthCheckPort",
     #         health_check_path: "Path",
+    #         health_check_enabled: false,
     #         health_check_interval_seconds: 1,
     #         health_check_timeout_seconds: 1,
     #         healthy_threshold_count: 1,
@@ -2299,6 +2337,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol the load balancer uses when performing health checks on
     #   targets. The TCP protocol is supported only if the protocol of the
     #   target group is TCP.
+    #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -2311,16 +2352,26 @@ module Aws::ElasticLoadBalancingV2
     #   for the health check request.
     #   @return [String]
     #
+    # @!attribute [rw] health_check_enabled
+    #   Indicates whether health checks are enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. For Application Load Balancers, the range is
     #   5–300 seconds. For Network Load Balancers, the supported values are
     #   10 or 30 seconds.
+    #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
     #   which no response means a failed health check.
+    #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
@@ -2337,6 +2388,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for
     #   a successful response from a target.
+    #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
     #   @return [Types::Matcher]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupInput AWS API Documentation
@@ -2346,6 +2400,7 @@ module Aws::ElasticLoadBalancingV2
       :health_check_protocol,
       :health_check_port,
       :health_check_path,
+      :health_check_enabled,
       :health_check_interval_seconds,
       :health_check_timeout_seconds,
       :healthy_threshold_count,
@@ -2465,6 +2520,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] targets
     #   The targets.
+    #
+    #   To register a target by instance ID, specify the instance ID. To
+    #   register a target by IP address, specify the IP address. To register
+    #   a Lambda function, specify the ARN of the Lambda function.
     #   @return [Array<Types::TargetDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargetsInput AWS API Documentation
@@ -2498,6 +2557,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   The certificate to remove. You can specify one certificate per call.
+    #   Set `CertificateArn` to the certificate ARN but do not set
+    #   `IsDefault`.
     #   @return [Array<Types::Certificate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificatesInput AWS API Documentation
@@ -2924,7 +2985,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] id
     #   The ID of the target. If the target type of the target group is
     #   `instance`, specify an instance ID. If the target type is `ip`,
-    #   specify an IP address.
+    #   specify an IP address. If the target type is `lambda`, specify the
+    #   ARN of the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -2938,13 +3000,19 @@ module Aws::ElasticLoadBalancingV2
     #   load balancer.
     #
     #   This parameter is not supported if the target type of the target
-    #   group is `instance`. If the IP address is in a subnet of the VPC for
-    #   the target group, the Availability Zone is automatically detected
-    #   and this parameter is optional. If the IP address is outside the
-    #   VPC, this parameter is required.
+    #   group is `instance`.
     #
-    #   With an Application Load Balancer, if the IP address is outside the
-    #   VPC for the target group, the only supported value is `all`.
+    #   If the target type is `ip` and the IP address is in a subnet of the
+    #   VPC for the target group, the Availability Zone is automatically
+    #   detected and this parameter is optional. If the IP address is
+    #   outside the VPC, this parameter is required.
+    #
+    #   With an Application Load Balancer, if the target type is `ip` and
+    #   the IP address is outside the VPC for the target group, the only
+    #   supported value is `all`.
+    #
+    #   If the target type is `lambda`, this parameter is optional and the
+    #   only supported value is `all`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetDescription AWS API Documentation
@@ -2985,6 +3053,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] health_check_port
     #   The port to use to connect with the target.
     #   @return [String]
+    #
+    # @!attribute [rw] health_check_enabled
+    #   Indicates whether health checks are enabled.
+    #   @return [Boolean]
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
@@ -3037,6 +3109,7 @@ module Aws::ElasticLoadBalancingV2
       :vpc_id,
       :health_check_protocol,
       :health_check_port,
+      :health_check_enabled,
       :health_check_interval_seconds,
       :health_check_timeout_seconds,
       :healthy_threshold_count,
@@ -3061,18 +3134,19 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] key
     #   The name of the attribute.
     #
-    #   The following attributes are supported by both Application Load
+    #   The following attribute is supported by both Application Load
     #   Balancers and Network Load Balancers:
     #
     #   * `deregistration_delay.timeout_seconds` - The amount of time, in
     #     seconds, for Elastic Load Balancing to wait before changing the
     #     state of a deregistering target from `draining` to `unused`. The
-    #     range is 0-3600 seconds. The default value is 300 seconds.
+    #     range is 0-3600 seconds. The default value is 300 seconds. If the
+    #     target is a Lambda function, this attribute is not supported.
     #
     #   ^
     #
-    #   The following attributes are supported by only Application Load
-    #   Balancers:
+    #   The following attributes are supported by Application Load Balancers
+    #   if the target is not a Lambda function:
     #
     #   * `slow_start.duration_seconds` - The time period, in seconds,
     #     during which a newly registered target receives a linearly
@@ -3094,8 +3168,20 @@ module Aws::ElasticLoadBalancingV2
     #     second to 1 week (604800 seconds). The default value is 1 day
     #     (86400 seconds).
     #
-    #   The following attributes are supported by only Network Load
-    #   Balancers:
+    #   The following attribute is supported only if the target is a Lambda
+    #   function.
+    #
+    #   * `lambda.multi_value_headers.enabled` - Indicates whether the
+    #     request and response headers exchanged between the load balancer
+    #     and the Lambda function include arrays of values or strings. The
+    #     value is `true` or `false`. The default is `false`. If the value
+    #     is `false` and the request contains a duplicate header field name
+    #     or query parameter key, the load balancer uses the last value sent
+    #     by the client.
+    #
+    #   ^
+    #
+    #   The following attribute is supported only by Network Load Balancers:
     #
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
     #     version 2 is enabled. The value is `true` or `false`. The default
@@ -3123,8 +3209,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason code. If the target state is `healthy`, a reason code is
-    #   not provided.
+    #   The reason code.
+    #
+    #   If the target state is `healthy`, a reason code is not provided.
     #
     #   If the target state is `initial`, the reason code can be one of the
     #   following values:
@@ -3174,6 +3261,14 @@ module Aws::ElasticLoadBalancingV2
     #   * `Target.DeregistrationInProgress` - The target is in the process
     #     of being deregistered and the deregistration delay period has not
     #     expired.
+    #
+    #   ^
+    #
+    #   If the target state is `unavailable`, the reason code can be the
+    #   following value:
+    #
+    #   * `Target.HealthCheckDisabled` - Health checks are disabled for the
+    #     target group.
     #
     #   ^
     #   @return [String]

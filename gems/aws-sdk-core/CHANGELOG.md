@@ -1,6 +1,130 @@
 Unreleased Changes
 ------------------
 
+3.44.1 (2018-12-17)
+------------------
+
+* Issue - Update sensitive filtering logic to include `#to_s` calls of shapes.
+
+3.44.0 (2018-12-07)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.43.0 (2018-12-04)
+------------------
+
+* Feature - Update user agent structure.
+
+3.42.0 (2018-11-29)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.41.0 (2018-11-28)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.40.0 (2018-11-27)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.39.0 (2018-11-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Feature - Adding support for endpoint trait (host prefix) per operation, to disable this feature, set `:disable_host_prefix_injection` to `false` for the client.
+
+3.38.0 (2018-11-12)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Feature - Adding `TransactionInProgressException` for throttling retry
+
+3.37.0 (2018-11-08)
+------------------
+
+* Feature - Adding support for endpoint discovery per operation, to enable this feature, set `:endpoint_discovery` to `true` for the client. Note: only available for services with endpoint discovery support.
+
+3.36.0 (2018-10-30)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.35.0 (2018-10-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.34.0 (2018-10-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Allow 429 response code to trigger throttle detection
+
+3.33.0 (2018-10-22)
+------------------
+
+* Feature - Update to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.32.0 (2018-10-18)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.31.0 (2018-10-16)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.30.0 (2018-10-04)
+------------------
+
+* Feature - Adds to code paths and plugins for future SDK instrumentation and telemetry.
+
+3.29.0 (2018-09-28)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.28.0 (2018-09-25)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.27.1 (2018-09-21)
+------------------
+
+* Issue - Fixes a bug in the `:response_target` plugin error callback. Under certain circumstances a special body object can be removed before its error callback is triggered, breaking retry logic.
+
+3.27.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry to aws-sdk-sts.
+
+3.26.0 (2018-09-05)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+3.25.0 (2018-08-29)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Add `:exclude_presign` option for #api_requests at client stubbing to allow excluding non-sent request from presigned url (Github Issue #1866)
+
 3.24.1 (2018-08-13)
 ------------------
 

@@ -559,10 +559,24 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] start_time
     #   The time stamp indicating the earliest data to be returned.
+    #
+    #   For better performance, specify `StartTime` and `EndTime` values
+    #   that align with the value of the metric's `Period` and sync up with
+    #   the beginning and end of an hour. For example, if the `Period` of a
+    #   metric is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can
+    #   get a faster response from CloudWatch then setting 12:07 or 12:29 as
+    #   the `StartTime`.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The time stamp indicating the latest data to be returned.
+    #
+    #   For better performance, specify `StartTime` and `EndTime` values
+    #   that align with the value of the metric's `Period` and sync up with
+    #   the beginning and end of an hour. For example, if the `Period` of a
+    #   metric is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get
+    #   a faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   `EndTime`.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -731,7 +745,9 @@ module Aws::CloudWatch
     # @!attribute [rw] extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100.
     #   When calling `GetMetricStatistics`, you must specify either
-    #   `Statistics` or `ExtendedStatistics`, but not both.
+    #   `Statistics` or `ExtendedStatistics`, but not both. Percentile
+    #   statistics are not available for metrics when any of the metric
+    #   values are negative numbers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] unit
@@ -769,6 +785,82 @@ module Aws::CloudWatch
     class GetMetricStatisticsOutput < Struct.new(
       :label,
       :datapoints)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMetricWidgetImageInput
+    #   data as a hash:
+    #
+    #       {
+    #         metric_widget: "MetricWidget", # required
+    #         output_format: "OutputFormat",
+    #       }
+    #
+    # @!attribute [rw] metric_widget
+    #   A JSON string that defines the bitmap graph to be retrieved. The
+    #   string includes the metrics to include in the graph, statistics,
+    #   annotations, title, axis limits, and so on. You can include only one
+    #   `MetricWidget` parameter in each `GetMetricWidgetImage` call.
+    #
+    #   For more information about the syntax of `MetricWidget` see
+    #   CloudWatch-Metric-Widget-Structure.
+    #
+    #   If any metric on the graph could not load all the requested data
+    #   points, an orange triangle with an exclamation point appears next to
+    #   the graph legend.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The format of the resulting image. Only PNG images are supported.
+    #
+    #   The default is `png`. If you specify `png`, the API returns an HTTP
+    #   response with the content-type set to `text/xml`. The image data is
+    #   in a `MetricWidgetImage` field. For example:
+    #
+    #   ` <GetMetricWidgetImageResponse
+    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #
+    #   ` <GetMetricWidgetImageResult>`
+    #
+    #   ` <MetricWidgetImage>`
+    #
+    #   ` iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...`
+    #
+    #   ` </MetricWidgetImage>`
+    #
+    #   ` </GetMetricWidgetImageResult>`
+    #
+    #   ` <ResponseMetadata>`
+    #
+    #   ` <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId>`
+    #
+    #   ` </ResponseMetadata>`
+    #
+    #   `</GetMetricWidgetImageResponse>`
+    #
+    #   The `image/png` setting is intended only for custom HTTP requests.
+    #   For most use cases, and all actions using an AWS SDK, you should use
+    #   `png`. If you specify `image/png`, the HTTP response has a
+    #   content-type set to `image/png`, and the body of the response is a
+    #   PNG image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageInput AWS API Documentation
+    #
+    class GetMetricWidgetImageInput < Struct.new(
+      :metric_widget,
+      :output_format)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_widget_image
+    #   The image of the graph, in the output format specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageOutput AWS API Documentation
+    #
+    class GetMetricWidgetImageOutput < Struct.new(
+      :metric_widget_image)
       include Aws::Structure
     end
 
@@ -916,7 +1008,7 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the metric. This is a required field.
     #   @return [String]
     #
     # @!attribute [rw] dimensions
@@ -1052,6 +1144,9 @@ module Aws::CloudWatch
     #   matter how many data points are available.
     #   @return [String]
     #
+    # @!attribute [rw] metrics
+    #   @return [Array<Types::MetricDataQuery>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
     #
     class MetricAlarm < Struct.new(
@@ -1079,14 +1174,41 @@ module Aws::CloudWatch
       :threshold,
       :comparison_operator,
       :treat_missing_data,
-      :evaluate_low_sample_count_percentile)
+      :evaluate_low_sample_count_percentile,
+      :metrics)
       include Aws::Structure
     end
 
-    # This structure indicates the metric data to return, and whether this
-    # call is just retrieving a batch set of data for one metric, or is
-    # performing a math expression on metric data. A single `GetMetricData`
-    # call can include up to 100 `MetricDataQuery` structures.
+    # This structure is used in both `GetMetricData` and `PutMetricAlarm`.
+    # The supported use of this structure is different for those two
+    # operations.
+    #
+    # When used in `GetMetricData`, it indicates the metric data to return,
+    # and whether this call is just retrieving a batch set of data for one
+    # metric, or is performing a math expression on metric data. A single
+    # `GetMetricData` call can include up to 100 `MetricDataQuery`
+    # structures.
+    #
+    # When used in `PutMetricAlarm`, it enables you to create an alarm based
+    # on a metric math expression. Each `MetricDataQuery` in the array
+    # specifies either a metric to retrieve, or a math expression to be
+    # performed on retrieved metrics. A single `PutMetricAlarm` call can
+    # include up to 20 `MetricDataQuery` structures in the array. The 20
+    # structures can include as many as 10 structures that contain a
+    # `MetricStat` parameter to retrieve a metric, and as many as 10
+    # structures that contain the `Expression` parameter to perform a math
+    # expression. Any expression used in a `PutMetricAlarm` operation must
+    # return a single time series. For more information, see [Metric Math
+    # Syntax and Functions][1] in the *Amazon CloudWatch User Guide*.
+    #
+    # Some of the parameters of this structure also have different uses
+    # whether you are using this structure in a `GetMetricData` operation or
+    # a `PutMetricAlarm` operation. These differences are explained in the
+    # following parameter list.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
     #
     # @note When making an API call, you may pass MetricDataQuery
     #   data as a hash:
@@ -1114,31 +1236,33 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] id
-    #   A short name used to tie this structure to the results in the
-    #   response. This name must be unique within a single call to
-    #   `GetMetricData`. If you are performing math expressions on this set
-    #   of data, this name represents that data and can serve as a variable
-    #   in the mathematical expression. The valid characters are letters,
-    #   numbers, and underscore. The first character must be a lowercase
-    #   letter.
+    #   A short name used to tie this object to the results in the response.
+    #   This name must be unique within a single call to `GetMetricData`. If
+    #   you are performing math expressions on this set of data, this name
+    #   represents that data and can serve as a variable in the mathematical
+    #   expression. The valid characters are letters, numbers, and
+    #   underscore. The first character must be a lowercase letter.
     #   @return [String]
     #
     # @!attribute [rw] metric_stat
     #   The metric to be returned, along with statistics, period, and units.
-    #   Use this parameter only if this structure is performing a data
-    #   retrieval and not performing a math expression on the returned data.
+    #   Use this parameter only if this object is retrieving a metric and
+    #   not performing a math expression on returned data.
     #
-    #   Within one MetricDataQuery structure, you must specify either
+    #   Within one MetricDataQuery object, you must specify either
     #   `Expression` or `MetricStat` but not both.
     #   @return [Types::MetricStat]
     #
     # @!attribute [rw] expression
     #   The math expression to be performed on the returned data, if this
-    #   structure is performing a math expression. For more information
-    #   about metric math expressions, see [Metric Math Syntax and
-    #   Functions][1] in the *Amazon CloudWatch User Guide*.
+    #   object is performing a math expression. This expression can use the
+    #   `Id` of the other metrics to refer to those metrics, and can also
+    #   use the `Id` of other expressions to use the result of those
+    #   expressions. For more information about metric math expressions, see
+    #   [Metric Math Syntax and Functions][1] in the *Amazon CloudWatch User
+    #   Guide*.
     #
-    #   Within one MetricDataQuery structure, you must specify either
+    #   Within each MetricDataQuery object, you must specify either
     #   `Expression` or `MetricStat` but not both.
     #
     #
@@ -1155,10 +1279,15 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] return_data
-    #   Indicates whether to return the time stamps and raw data values of
-    #   this metric. If you are performing this call just to do math
-    #   expressions and do not also need the raw data returned, you can
-    #   specify `False`. If you omit this, the default of `True` is used.
+    #   When used in `GetMetricData`, this option indicates whether to
+    #   return the timestamps and raw data values of this metric. If you are
+    #   performing this call just to do math expressions and do not also
+    #   need the raw data returned, you can specify `False`. If you omit
+    #   this, the default of `True` is used.
+    #
+    #   When used in `PutMetricAlarm`, specify `True` for the one expression
+    #   result to use as the alarm. For all other metrics and expressions in
+    #   the same `PutMetricAlarm` operation, specify `ReturnData` as False.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery AWS API Documentation
@@ -1174,7 +1303,7 @@ module Aws::CloudWatch
 
     # A `GetMetricData` call returns an array of `MetricDataResult`
     # structures. Each of these structures includes the data points for that
-    # metric, along with the time stamps of those data points and other
+    # metric, along with the timestamps of those data points and other
     # identifying information.
     #
     # @!attribute [rw] id
@@ -1186,15 +1315,15 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] timestamps
-    #   The time stamps for the data points, formatted in Unix timestamp
-    #   format. The number of time stamps always matches the number of
-    #   values and the value for Timestamps\[x\] is Values\[x\].
+    #   The timestamps for the data points, formatted in Unix timestamp
+    #   format. The number of timestamps always matches the number of values
+    #   and the value for Timestamps\[x\] is Values\[x\].
     #   @return [Array<Time>]
     #
     # @!attribute [rw] values
     #   The data points for the metric corresponding to `Timestamps`. The
-    #   number of values always matches the number of time stamps and the
-    #   time stamp for Values\[x\] is Timestamps\[x\].
+    #   number of values always matches the number of timestamps and the
+    #   timestamp for Values\[x\] is Timestamps\[x\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] status_code
@@ -1246,6 +1375,8 @@ module Aws::CloudWatch
     #           minimum: 1.0, # required
     #           maximum: 1.0, # required
     #         },
+    #         values: [1.0],
+    #         counts: [1.0],
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         storage_resolution: 1,
     #       }
@@ -1277,6 +1408,31 @@ module Aws::CloudWatch
     #   The statistical values for the metric.
     #   @return [Types::StatisticSet]
     #
+    # @!attribute [rw] values
+    #   Array of numbers representing the values for the metric during the
+    #   period. Each unique value is listed just once in this array, and the
+    #   corresponding number in the `Counts` array specifies the number of
+    #   times that value occurred during the period. You can include up to
+    #   150 unique values in each `PutMetricData` action that specifies a
+    #   `Values` array.
+    #
+    #   Although the `Values` array accepts numbers of type `Double`,
+    #   CloudWatch rejects values that are either too small or too large.
+    #   Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
+    #   10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
+    #   example, NaN, +Infinity, -Infinity) are not supported.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] counts
+    #   Array of numbers that is used along with the `Values` array. Each
+    #   number in the `Count` array is the number of times the corresponding
+    #   value in the `Values` array occurred during the period.
+    #
+    #   If you omit the `Counts` array, the default of 1 is used as the
+    #   value for each count. If you include a `Counts` array, it must
+    #   include the same amount of values as the `Values` array.
+    #   @return [Array<Float>]
+    #
     # @!attribute [rw] unit
     #   The unit of the metric.
     #   @return [String]
@@ -1307,6 +1463,8 @@ module Aws::CloudWatch
       :timestamp,
       :value,
       :statistic_values,
+      :values,
+      :counts,
       :unit,
       :storage_resolution)
       include Aws::Structure
@@ -1340,7 +1498,7 @@ module Aws::CloudWatch
     #   @return [Types::Metric]
     #
     # @!attribute [rw] period
-    #   The period to use when retrieving the metric.
+    #   The period, in seconds, to use when retrieving the metric.
     #   @return [Integer]
     #
     # @!attribute [rw] stat
@@ -1424,8 +1582,8 @@ module Aws::CloudWatch
     #         ok_actions: ["ResourceName"],
     #         alarm_actions: ["ResourceName"],
     #         insufficient_data_actions: ["ResourceName"],
-    #         metric_name: "MetricName", # required
-    #         namespace: "Namespace", # required
+    #         metric_name: "MetricName",
+    #         namespace: "Namespace",
     #         statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
     #         extended_statistic: "ExtendedStatistic",
     #         dimensions: [
@@ -1434,7 +1592,7 @@ module Aws::CloudWatch
     #             value: "DimensionValue", # required
     #           },
     #         ],
-    #         period: 1, # required
+    #         period: 1,
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         evaluation_periods: 1, # required
     #         datapoints_to_alarm: 1,
@@ -1442,10 +1600,33 @@ module Aws::CloudWatch
     #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #         treat_missing_data: "TreatMissingData",
     #         evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
+    #         metrics: [
+    #           {
+    #             id: "MetricId", # required
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "Namespace",
+    #                 metric_name: "MetricName",
+    #                 dimensions: [
+    #                   {
+    #                     name: "DimensionName", # required
+    #                     value: "DimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               period: 1, # required
+    #               stat: "Stat", # required
+    #               unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             },
+    #             expression: "MetricExpression",
+    #             label: "MetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] alarm_name
-    #   The name for the alarm. This name must be unique within the AWS
+    #   The name for the alarm. This name must be unique within your AWS
     #   account.
     #   @return [String]
     #
@@ -1455,7 +1636,7 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] actions_enabled
     #   Indicates whether actions should be executed during any changes to
-    #   the alarm state.
+    #   the alarm state. The default is TRUE.
     #   @return [Boolean]
     #
     # @!attribute [rw] ok_actions
@@ -1463,19 +1644,20 @@ module Aws::CloudWatch
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_actions
@@ -1483,19 +1665,19 @@ module Aws::CloudWatch
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] insufficient_data_actions
@@ -1503,50 +1685,56 @@ module Aws::CloudWatch
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
-    #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover \|
-    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
-    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
-    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
+    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
+    #   `arn:aws:automate:region:ec2:terminate` \|
+    #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
-    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] metric_name
     #   The name for the metric associated with the alarm.
+    #
+    #   If you are creating an alarm based on a math expression, you cannot
+    #   specify this parameter, or any of the `Dimensions`, `Period`,
+    #   `Namespace`, `Statistic`, or `ExtendedStatistic` parameters.
+    #   Instead, you specify all this information in the `Metrics` array.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace for the metric associated with the alarm.
+    #   The namespace for the metric associated specified in `MetricName`.
     #   @return [String]
     #
     # @!attribute [rw] statistic
-    #   The statistic for the metric associated with the alarm, other than
+    #   The statistic for the metric specified in `MetricName`, other than
     #   percentile. For percentile statistics, use `ExtendedStatistic`. When
-    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   you call `PutMetricAlarm` and specify a `MetricName`, you must
+    #   specify either `Statistic` or `ExtendedStatistic,` but not both.
     #   @return [String]
     #
     # @!attribute [rw] extended_statistic
-    #   The percentile statistic for the metric associated with the alarm.
+    #   The percentile statistic for the metric specified in `MetricName`.
     #   Specify a value between p0.0 and p100. When you call
-    #   `PutMetricAlarm`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   `PutMetricAlarm` and specify a `MetricName`, you must specify either
+    #   `Statistic` or `ExtendedStatistic,` but not both.
     #   @return [String]
     #
     # @!attribute [rw] dimensions
-    #   The dimensions for the metric associated with the alarm.
+    #   The dimensions for the metric specified in `MetricName`.
     #   @return [Array<Types::Dimension>]
     #
     # @!attribute [rw] period
-    #   The period, in seconds, over which the specified statistic is
-    #   applied. Valid values are 10, 30, and any multiple of 60.
+    #   The length, in seconds, used each time the metric specified in
+    #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
+    #   of 60.
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify
@@ -1584,7 +1772,7 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold. If you are setting an alarm which requires that a number
+    #   threshold. If you are setting an alarm that requires that a number
     #   of consecutive data points be breaching to trigger the alarm, this
     #   value specifies that number. If you are setting an "M out of N"
     #   alarm, this value is the N.
@@ -1644,6 +1832,19 @@ module Aws::CloudWatch
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     #   @return [String]
     #
+    # @!attribute [rw] metrics
+    #   An array of `MetricDataQuery` structures that enable you to create
+    #   an alarm based on the result of a metric math expression. Each item
+    #   in the `Metrics` array either retrieves a metric or performs a math
+    #   expression.
+    #
+    #   If you use the `Metrics` parameter, you cannot include the
+    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
+    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, you retrieve the metrics you are using in your
+    #   math expression as part of the `Metrics` array.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
     #
     class PutMetricAlarmInput < Struct.new(
@@ -1665,7 +1866,8 @@ module Aws::CloudWatch
       :threshold,
       :comparison_operator,
       :treat_missing_data,
-      :evaluate_low_sample_count_percentile)
+      :evaluate_low_sample_count_percentile,
+      :metrics)
       include Aws::Structure
     end
 
@@ -1691,6 +1893,8 @@ module Aws::CloudWatch
     #               minimum: 1.0, # required
     #               maximum: 1.0, # required
     #             },
+    #             values: [1.0],
+    #             counts: [1.0],
     #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #             storage_resolution: 1,
     #           },
@@ -1706,7 +1910,8 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   The data for the metric.
+    #   The data for the metric. The array can include no more than 20
+    #   metrics per call.
     #   @return [Array<Types::MetricDatum>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataInput AWS API Documentation

@@ -33,33 +33,32 @@ module Aws::SNS
     # A map of the subscription's attributes. Attributes in this map
     # include the following:
     #
-    # * `ConfirmationWasAuthenticated` -- `true` if the subscription
+    # * `ConfirmationWasAuthenticated` – `true` if the subscription
     #   confirmation request was authenticated.
     #
-    # * `DeliveryPolicy` -- The JSON serialization of the subscription's
+    # * `DeliveryPolicy` – The JSON serialization of the subscription's
     #   delivery policy.
     #
-    # * `EffectiveDeliveryPolicy` -- The JSON serialization of the effective
+    # * `EffectiveDeliveryPolicy` – The JSON serialization of the effective
     #   delivery policy that takes into account the topic delivery policy
     #   and account system defaults.
     #
-    # * `FilterPolicy` -- The filter policy JSON that is assigned to the
+    # * `FilterPolicy` – The filter policy JSON that is assigned to the
     #   subscription.
     #
-    # * `Owner` -- The AWS account ID of the subscription's owner.
+    # * `Owner` – The AWS account ID of the subscription's owner.
     #
-    # * `PendingConfirmation` -- `true` if the subscription hasn't been
+    # * `PendingConfirmation` – `true` if the subscription hasn't been
     #   confirmed. To confirm a pending subscription, call the
     #   `ConfirmSubscription` action with a confirmation token.
     #
-    # * `RawMessageDelivery` -- `true` if raw message delivery is enabled
-    #   for the subscription. Raw messages are free of JSON formatting and
-    #   can be sent to HTTP/S and Amazon SQS endpoints.
+    # * `RawMessageDelivery` – `true` if raw message delivery is enabled for
+    #   the subscription. Raw messages are free of JSON formatting and can
+    #   be sent to HTTP/S and Amazon SQS endpoints.
     #
-    # * `SubscriptionArn` -- The subscription's ARN.
+    # * `SubscriptionArn` – The subscription's ARN.
     #
-    # * `TopicArn` -- The topic ARN that the subscription is associated
-    #   with.
+    # * `TopicArn` – The topic ARN that the subscription is associated with.
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -121,11 +120,22 @@ module Aws::SNS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :attribute_name
-    #   The name of the attribute you want to set. Only a subset of the
-    #   subscriptions attributes are mutable.
+    #   A map of attributes with their corresponding values.
     #
-    #   Valid values: `DeliveryPolicy` \| `FilterPolicy` \|
-    #   `RawMessageDelivery`
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `SetTopicAttributes` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `FilterPolicy` – The simple JSON object that lets your subscriber
+    #     receive only a subset of messages, rather than receiving every
+    #     message published to the topic.
+    #
+    #   * `RawMessageDelivery` – When set to `true`, enables raw message
+    #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
+    #     for the endpoints to process JSON formatting, which is otherwise
+    #     created for Amazon SNS metadata.
     # @option options [String] :attribute_value
     #   The new value for the attribute in JSON format.
     # @return [EmptyStructure]

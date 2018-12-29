@@ -111,6 +111,7 @@ module Aws::ElasticLoadBalancingV2
     FixedResponseActionContentType = Shapes::StringShape.new(name: 'FixedResponseActionContentType')
     FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
     FixedResponseActionStatusCode = Shapes::StringShape.new(name: 'FixedResponseActionStatusCode')
+    HealthCheckEnabled = Shapes::BooleanShape.new(name: 'HealthCheckEnabled')
     HealthCheckIntervalSeconds = Shapes::IntegerShape.new(name: 'HealthCheckIntervalSeconds')
     HealthCheckPort = Shapes::StringShape.new(name: 'HealthCheckPort')
     HealthCheckThresholdCount = Shapes::IntegerShape.new(name: 'HealthCheckThresholdCount')
@@ -370,11 +371,12 @@ module Aws::ElasticLoadBalancingV2
     CreateRuleOutput.struct_class = Types::CreateRuleOutput
 
     CreateTargetGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: TargetGroupName, required: true, location_name: "Name"))
-    CreateTargetGroupInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, required: true, location_name: "Protocol"))
-    CreateTargetGroupInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
-    CreateTargetGroupInput.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    CreateTargetGroupInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "Protocol"))
+    CreateTargetGroupInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
+    CreateTargetGroupInput.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateTargetGroupInput.add_member(:health_check_protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "HealthCheckProtocol"))
     CreateTargetGroupInput.add_member(:health_check_port, Shapes::ShapeRef.new(shape: HealthCheckPort, location_name: "HealthCheckPort"))
+    CreateTargetGroupInput.add_member(:health_check_enabled, Shapes::ShapeRef.new(shape: HealthCheckEnabled, location_name: "HealthCheckEnabled"))
     CreateTargetGroupInput.add_member(:health_check_path, Shapes::ShapeRef.new(shape: Path, location_name: "HealthCheckPath"))
     CreateTargetGroupInput.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     CreateTargetGroupInput.add_member(:health_check_timeout_seconds, Shapes::ShapeRef.new(shape: HealthCheckTimeoutSeconds, location_name: "HealthCheckTimeoutSeconds"))
@@ -607,6 +609,7 @@ module Aws::ElasticLoadBalancingV2
     ModifyTargetGroupInput.add_member(:health_check_protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "HealthCheckProtocol"))
     ModifyTargetGroupInput.add_member(:health_check_port, Shapes::ShapeRef.new(shape: HealthCheckPort, location_name: "HealthCheckPort"))
     ModifyTargetGroupInput.add_member(:health_check_path, Shapes::ShapeRef.new(shape: Path, location_name: "HealthCheckPath"))
+    ModifyTargetGroupInput.add_member(:health_check_enabled, Shapes::ShapeRef.new(shape: HealthCheckEnabled, location_name: "HealthCheckEnabled"))
     ModifyTargetGroupInput.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     ModifyTargetGroupInput.add_member(:health_check_timeout_seconds, Shapes::ShapeRef.new(shape: HealthCheckTimeoutSeconds, location_name: "HealthCheckTimeoutSeconds"))
     ModifyTargetGroupInput.add_member(:healthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckThresholdCount, location_name: "HealthyThresholdCount"))
@@ -745,6 +748,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     TargetGroup.add_member(:health_check_protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "HealthCheckProtocol"))
     TargetGroup.add_member(:health_check_port, Shapes::ShapeRef.new(shape: HealthCheckPort, location_name: "HealthCheckPort"))
+    TargetGroup.add_member(:health_check_enabled, Shapes::ShapeRef.new(shape: HealthCheckEnabled, location_name: "HealthCheckEnabled"))
     TargetGroup.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     TargetGroup.add_member(:health_check_timeout_seconds, Shapes::ShapeRef.new(shape: HealthCheckTimeoutSeconds, location_name: "HealthCheckTimeoutSeconds"))
     TargetGroup.add_member(:healthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckThresholdCount, location_name: "HealthyThresholdCount"))
@@ -786,10 +790,14 @@ module Aws::ElasticLoadBalancingV2
       api.version = "2015-12-01"
 
       api.metadata = {
+        "apiVersion" => "2015-12-01",
         "endpointPrefix" => "elasticloadbalancing",
         "protocol" => "query",
+        "serviceAbbreviation" => "Elastic Load Balancing v2",
         "serviceFullName" => "Elastic Load Balancing",
+        "serviceId" => "Elastic Load Balancing v2",
         "signatureVersion" => "v4",
+        "uid" => "elasticloadbalancingv2-2015-12-01",
         "xmlNamespace" => "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/",
       }
 

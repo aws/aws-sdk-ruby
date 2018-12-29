@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -43,112 +47,157 @@ module Aws::ElastiCache
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -171,7 +220,7 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Tagging.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource to which the tags are
@@ -392,10 +441,10 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
-    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/IAM.html
-    # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket
-    # [4]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
+    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
+    # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket
+    # [4]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
     #
     # @option params [required, String] :source_snapshot_name
     #   The name of an existing snapshot from which to make a copy.
@@ -419,8 +468,8 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
+    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
     #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -506,6 +555,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_cluster_id #=> String
     #   resp.snapshot.node_snapshots[0].node_group_id #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_id #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.node_group_id #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.slots #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_count #=> Integer
     #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
@@ -527,9 +577,8 @@ module Aws::ElastiCache
     # Creates a cluster. All nodes in the cluster run the same
     # protocol-compliant cache engine software, either Memcached or Redis.
     #
-    # Due to current limitations on Redis (cluster mode disabled), this
-    # operation or parameter is not supported on Redis (cluster mode
-    # enabled) replication groups.
+    # This operation is not supported for Redis (cluster mode enabled)
+    # clusters.
     #
     # @option params [required, String] :cache_cluster_id
     #   The node group (shard) identifier. This parameter is stored as a
@@ -544,10 +593,6 @@ module Aws::ElastiCache
     #   * A name cannot end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [String] :replication_group_id
-    #   Due to current limitations on Redis (cluster mode disabled), this
-    #   operation or parameter is not supported on Redis (cluster mode
-    #   enabled) replication groups.
-    #
     #   The ID of the replication group to which this cluster should belong.
     #   If this parameter is specified, the cluster is added to the specified
     #   replication group as a read replica; otherwise, the cluster is a
@@ -658,6 +703,10 @@ module Aws::ElastiCache
     #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
+    #       **R4 node types;** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
+    #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
@@ -677,16 +726,19 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
+    #   For a complete listing of node types and specifications, see:
+    #
+    #   * [Amazon ElastiCache Product Features and Details][1]
+    #
+    #   * [Cache Node Type-Specific Parameters for Memcached][2]
+    #
+    #   * [Cache Node Type-Specific Parameters for Redis][3]
     #
     #
     #
     #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
     #
     # @option params [String] :engine
     #   The name of the cache engine to be used for this cluster.
@@ -706,7 +758,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #
     # @option params [String] :cache_parameter_group_name
     #   The name of the parameter group to associate with this cluster. If
@@ -726,7 +778,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
     #
     # @option params [Array<String>] :cache_security_group_names
     #   A list of security group names to associate with this cluster.
@@ -817,7 +869,8 @@ module Aws::ElastiCache
     #
     #    </note>
     #
-    #   Default: 0 (i.e., automatic backups are disabled for this cluster).
+    #   Default: 0 (i.e., automatic backups are disabled for this cache
+    #   cluster).
     #
     # @option params [String] :snapshot_window
     #   The daily time range (in UTC) during which ElastiCache begins taking a
@@ -835,13 +888,6 @@ module Aws::ElastiCache
     # @option params [String] :auth_token
     #   **Reserved parameter.** The password used to access a password
     #   protected server.
-    #
-    #   This parameter is valid only if:
-    #
-    #   * The parameter `TransitEncryptionEnabled` was set to `true` when the
-    #     cluster was created.
-    #
-    #   * The line `requirepass` was added to the database configuration file.
     #
     #   Password constraints:
     #
@@ -1061,7 +1107,7 @@ module Aws::ElastiCache
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html
-    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ParameterGroups.html
+    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html
     #
     # @option params [required, String] :cache_parameter_group_name
     #   A user-specified name for the cache parameter group.
@@ -1071,7 +1117,7 @@ module Aws::ElastiCache
     #   group can be used with.
     #
     #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   `redis3.2` \| `redis4.0`
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -1311,7 +1357,7 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-restoring.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html
     #
     # @option params [required, String] :replication_group_id
     #   The replication group identifier. This parameter is stored as a
@@ -1368,8 +1414,8 @@ module Aws::ElastiCache
     #   omit this parameter (it will default to 1), or you can explicitly set
     #   it to a value between 2 and 6.
     #
-    #   The maximum permitted value for `NumCacheClusters` is 6 (primary plus
-    #   5 replicas).
+    #   The maximum permitted value for `NumCacheClusters` is 6 (1 primary
+    #   plus 5 replicas).
     #
     # @option params [Array<String>] :preferred_cache_cluster_a_zs
     #   A list of EC2 Availability Zones in which the replication group's
@@ -1405,13 +1451,17 @@ module Aws::ElastiCache
     #
     # @option params [Array<Types::NodeGroupConfiguration>] :node_group_configuration
     #   A list of node group (shard) configuration options. Each node group
-    #   (shard) configuration has the following: Slots,
-    #   PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount.
+    #   (shard) configuration has the following members:
+    #   `PrimaryAvailabilityZone`, `ReplicaAvailabilityZones`, `ReplicaCount`,
+    #   and `Slots`.
     #
     #   If you're creating a Redis (cluster mode disabled) or a Redis
     #   (cluster mode enabled) replication group, you can use this parameter
     #   to individually configure each node group (shard), or you can omit
-    #   this parameter.
+    #   this parameter. However, when seeding a Redis (cluster mode enabled)
+    #   cluster from a S3 rdb file, you must configure each node group (shard)
+    #   using this parameter because you must specify the slots for each node
+    #   group.
     #
     # @option params [String] :cache_node_type
     #   The compute and memory capacity of the nodes in the node group
@@ -1455,6 +1505,10 @@ module Aws::ElastiCache
     #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
+    #       **R4 node types;** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
+    #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
@@ -1474,16 +1528,19 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
+    #   For a complete listing of node types and specifications, see:
+    #
+    #   * [Amazon ElastiCache Product Features and Details][1]
+    #
+    #   * [Cache Node Type-Specific Parameters for Memcached][2]
+    #
+    #   * [Cache Node Type-Specific Parameters for Redis][3]
     #
     #
     #
     #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
     #
     # @option params [String] :engine
     #   The name of the cache engine to be used for the clusters in this
@@ -1503,7 +1560,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #
     # @option params [String] :cache_parameter_group_name
     #   The name of the parameter group to associate with this replication
@@ -1530,7 +1587,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
     #
     # @option params [Array<String>] :cache_security_group_names
     #   A list of cache security group names to associate with this
@@ -1545,8 +1602,7 @@ module Aws::ElastiCache
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of cost allocation tags to be added to this resource. A tag is
-    #   a key-value pair. A tag key does not have to be accompanied by a tag
-    #   value.
+    #   a key-value pair.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A list of Amazon Resource Names (ARN) that uniquely identify the Redis
@@ -1630,12 +1686,11 @@ module Aws::ElastiCache
     #   **Reserved parameter.** The password used to access a password
     #   protected server.
     #
-    #   This parameter is valid only if:
+    #   `AuthToken` can be specified only on replication groups where
+    #   `TransitEncryptionEnabled` is `true`.
     #
-    #   * The parameter `TransitEncryptionEnabled` was set to `true` when the
-    #     cluster was created.
-    #
-    #   * The line `requirepass` was added to the database configuration file.
+    #   For HIPAA compliance, you must specify `TransitEncryptionEnabled` as
+    #   `true`, an `AuthToken`, and a `CacheSubnetGroup`.
     #
     #   Password constraints:
     #
@@ -1663,13 +1718,19 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   This parameter is valid only if the `Engine` parameter is `redis`, the
-    #   `EngineVersion` parameter is `3.2.4` or later, and the cluster is
+    #   `EngineVersion` parameter is `3.2.6` or `4.x`, and the cluster is
     #   being created in an Amazon VPC.
     #
     #   If you enable in-transit encryption, you must also specify a value for
     #   `CacheSubnetGroup`.
     #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6` or `4.x`.
+    #
     #   Default: `false`
+    #
+    #   For HIPAA compliance, you must specify `TransitEncryptionEnabled` as
+    #   `true`, an `AuthToken`, and a `CacheSubnetGroup`.
     #
     # @option params [Boolean] :at_rest_encryption_enabled
     #   A flag that enables encryption at rest when set to `true`.
@@ -1679,10 +1740,8 @@ module Aws::ElastiCache
     #   replication group you must set `AtRestEncryptionEnabled` to `true`
     #   when you create the replication group.
     #
-    #   <note markdown="1"> This parameter is valid only if the `Engine` parameter is `redis` and
-    #   the cluster is being created in an Amazon VPC.
-    #
-    #    </note>
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6` or `4.x`.
     #
     #   Default: `false`
     #
@@ -1794,6 +1853,7 @@ module Aws::ElastiCache
     #     replicas_per_node_group: 1,
     #     node_group_configuration: [
     #       {
+    #         node_group_id: "AllowedNodeGroupId",
     #         slots: "String",
     #         replica_count: 1,
     #         primary_availability_zone: "String",
@@ -2054,6 +2114,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_cluster_id #=> String
     #   resp.snapshot.node_snapshots[0].node_group_id #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_id #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.node_group_id #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.slots #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_count #=> Integer
     #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
@@ -2072,6 +2133,113 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Dynamically decreases the number of replics in a Redis (cluster mode
+    # disabled) replication group or the number of replica nodes in one or
+    # more node groups (shards) of a Redis (cluster mode enabled)
+    # replication group. This operation is performed with no cluster down
+    # time.
+    #
+    # @option params [required, String] :replication_group_id
+    #   The id of the replication group from which you want to remove replica
+    #   nodes.
+    #
+    # @option params [Integer] :new_replica_count
+    #   The number of read replica nodes you want at the completion of this
+    #   operation. For Redis (cluster mode disabled) replication groups, this
+    #   is the number of replica nodes in the replication group. For Redis
+    #   (cluster mode enabled) replication groups, this is the number of
+    #   replica nodes in each of the replication group's node groups.
+    #
+    #   The minimum number of replicas in a shard or replication group is:
+    #
+    #   * Redis (cluster mode disabled)
+    #
+    #     * If Multi-AZ with Automatic Failover is enabled: 1
+    #
+    #     * If Multi-AZ with Automatic Failover is not enabled: 0
+    #
+    #   * Redis (cluster mode enabled): 0 (though you will not be able to
+    #     failover to a replica if your primary node fails)
+    #
+    # @option params [Array<Types::ConfigureShard>] :replica_configuration
+    #   A list of `ConfigureShard` objects that can be used to configure each
+    #   shard in a Redis (cluster mode enabled) replication group. The
+    #   `ConfigureShard` has three members: `NewReplicaCount`, `NodeGroupId`,
+    #   and `PreferredAvailabilityZones`.
+    #
+    # @option params [Array<String>] :replicas_to_remove
+    #   A list of the node ids to remove from the replication group or node
+    #   group (shard).
+    #
+    # @option params [required, Boolean] :apply_immediately
+    #   If `True`, the number of replica nodes is decreased immediately. If
+    #   `False`, the number of replica nodes is decreased during the next
+    #   maintenance window.
+    #
+    # @return [Types::DecreaseReplicaCountResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DecreaseReplicaCountResult#replication_group #replication_group} => Types::ReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.decrease_replica_count({
+    #     replication_group_id: "String", # required
+    #     new_replica_count: 1,
+    #     replica_configuration: [
+    #       {
+    #         node_group_id: "AllowedNodeGroupId", # required
+    #         new_replica_count: 1, # required
+    #         preferred_availability_zones: ["String"],
+    #       },
+    #     ],
+    #     replicas_to_remove: ["String"],
+    #     apply_immediately: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_group.replication_group_id #=> String
+    #   resp.replication_group.description #=> String
+    #   resp.replication_group.status #=> String
+    #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
+    #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.member_clusters #=> Array
+    #   resp.replication_group.member_clusters[0] #=> String
+    #   resp.replication_group.node_groups #=> Array
+    #   resp.replication_group.node_groups[0].node_group_id #=> String
+    #   resp.replication_group.node_groups[0].status #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].slots #=> String
+    #   resp.replication_group.node_groups[0].node_group_members #=> Array
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_node_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
+    #   resp.replication_group.snapshotting_cluster_id #=> String
+    #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.configuration_endpoint.address #=> String
+    #   resp.replication_group.configuration_endpoint.port #=> Integer
+    #   resp.replication_group.snapshot_retention_limit #=> Integer
+    #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
+    #
+    # @overload decrease_replica_count(params = {})
+    # @param [Hash] params ({})
+    def decrease_replica_count(params = {}, options = {})
+      req = build_request(:decrease_replica_count, params)
+      req.send_request(options)
+    end
+
     # Deletes a previously provisioned cluster. `DeleteCacheCluster` deletes
     # all associated cache nodes, node endpoints and the cluster itself.
     # When you receive a successful response from this operation, Amazon
@@ -2083,9 +2251,7 @@ module Aws::ElastiCache
     # Multi-AZ mode enabled or a cluster from a Redis (cluster mode enabled)
     # replication group.
     #
-    # Due to current limitations on Redis (cluster mode disabled), this
-    # operation or parameter is not supported on Redis (cluster mode
-    # enabled) replication groups.
+    # This operation is not valid for Redis (cluster mode enabled) clusters.
     #
     # @option params [required, String] :cache_cluster_id
     #   The cluster identifier for the cluster to be deleted. This parameter
@@ -2520,6 +2686,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_cluster_id #=> String
     #   resp.snapshot.node_snapshots[0].node_group_id #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_id #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.node_group_id #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.slots #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_count #=> Integer
     #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
@@ -2793,7 +2960,7 @@ module Aws::ElastiCache
     #   for.
     #
     #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   `redis3.2` \| `redis4.0`
     #
     #   Constraints:
     #
@@ -3758,7 +3925,7 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family.
     #
     #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   `redis3.2` \| `redis4.0`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -4823,6 +4990,10 @@ module Aws::ElastiCache
     #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
+    #       **R4 node types;** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
+    #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
@@ -4842,16 +5013,19 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
+    #   For a complete listing of node types and specifications, see:
+    #
+    #   * [Amazon ElastiCache Product Features and Details][1]
+    #
+    #   * [Cache Node Type-Specific Parameters for Memcached][2]
+    #
+    #   * [Cache Node Type-Specific Parameters for Redis][3]
     #
     #
     #
     #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
     #
     # @option params [String] :duration
     #   The duration filter value, specified in years or seconds. Use this
@@ -4932,6 +5106,7 @@ module Aws::ElastiCache
     #   resp.reserved_cache_nodes[0].recurring_charges #=> Array
     #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_cache_nodes[0].reservation_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodes AWS API Documentation
     #
@@ -4993,6 +5168,10 @@ module Aws::ElastiCache
     #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
+    #       **R4 node types;** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
+    #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
@@ -5012,16 +5191,19 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
+    #   For a complete listing of node types and specifications, see:
+    #
+    #   * [Amazon ElastiCache Product Features and Details][1]
+    #
+    #   * [Cache Node Type-Specific Parameters for Memcached][2]
+    #
+    #   * [Cache Node Type-Specific Parameters for Redis][3]
     #
     #
     #
     #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
     #
     # @option params [String] :duration
     #   Duration filter value, specified in years or seconds. Use this
@@ -5557,6 +5739,7 @@ module Aws::ElastiCache
     #   resp.snapshots[0].node_snapshots[0].cache_cluster_id #=> String
     #   resp.snapshots[0].node_snapshots[0].node_group_id #=> String
     #   resp.snapshots[0].node_snapshots[0].cache_node_id #=> String
+    #   resp.snapshots[0].node_snapshots[0].node_group_configuration.node_group_id #=> String
     #   resp.snapshots[0].node_snapshots[0].node_group_configuration.slots #=> String
     #   resp.snapshots[0].node_snapshots[0].node_group_configuration.replica_count #=> Integer
     #   resp.snapshots[0].node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
@@ -5572,6 +5755,97 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def describe_snapshots(params = {}, options = {})
       req = build_request(:describe_snapshots, params)
+      req.send_request(options)
+    end
+
+    # Dynamically increases the number of replics in a Redis (cluster mode
+    # disabled) replication group or the number of replica nodes in one or
+    # more node groups (shards) of a Redis (cluster mode enabled)
+    # replication group. This operation is performed with no cluster down
+    # time.
+    #
+    # @option params [required, String] :replication_group_id
+    #   The id of the replication group to which you want to add replica
+    #   nodes.
+    #
+    # @option params [Integer] :new_replica_count
+    #   The number of read replica nodes you want at the completion of this
+    #   operation. For Redis (cluster mode disabled) replication groups, this
+    #   is the number of replica nodes in the replication group. For Redis
+    #   (cluster mode enabled) replication groups, this is the number of
+    #   replica nodes in each of the replication group's node groups.
+    #
+    # @option params [Array<Types::ConfigureShard>] :replica_configuration
+    #   A list of `ConfigureShard` objects that can be used to configure each
+    #   shard in a Redis (cluster mode enabled) replication group. The
+    #   `ConfigureShard` has three members: `NewReplicaCount`, `NodeGroupId`,
+    #   and `PreferredAvailabilityZones`.
+    #
+    # @option params [required, Boolean] :apply_immediately
+    #   If `True`, the number of replica nodes is increased immediately. If
+    #   `False`, the number of replica nodes is increased during the next
+    #   maintenance window.
+    #
+    # @return [Types::IncreaseReplicaCountResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::IncreaseReplicaCountResult#replication_group #replication_group} => Types::ReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.increase_replica_count({
+    #     replication_group_id: "String", # required
+    #     new_replica_count: 1,
+    #     replica_configuration: [
+    #       {
+    #         node_group_id: "AllowedNodeGroupId", # required
+    #         new_replica_count: 1, # required
+    #         preferred_availability_zones: ["String"],
+    #       },
+    #     ],
+    #     apply_immediately: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_group.replication_group_id #=> String
+    #   resp.replication_group.description #=> String
+    #   resp.replication_group.status #=> String
+    #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
+    #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.member_clusters #=> Array
+    #   resp.replication_group.member_clusters[0] #=> String
+    #   resp.replication_group.node_groups #=> Array
+    #   resp.replication_group.node_groups[0].node_group_id #=> String
+    #   resp.replication_group.node_groups[0].status #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].slots #=> String
+    #   resp.replication_group.node_groups[0].node_group_members #=> Array
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_node_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
+    #   resp.replication_group.snapshotting_cluster_id #=> String
+    #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.configuration_endpoint.address #=> String
+    #   resp.replication_group.configuration_endpoint.port #=> Integer
+    #   resp.replication_group.snapshot_retention_limit #=> Integer
+    #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
+    #
+    # @overload increase_replica_count(params = {})
+    # @param [Hash] params ({})
+    def increase_replica_count(params = {}, options = {})
+      req = build_request(:increase_replica_count, params)
       req.send_request(options)
     end
 
@@ -5668,13 +5942,15 @@ module Aws::ElastiCache
     # case-sensitive and the value is optional. You can use cost allocation
     # tags to categorize and track your AWS costs.
     #
+    # If the cluster is not in the *available* state, `ListTagsForResource`
+    # returns an error.
+    #
     # You can have a maximum of 50 cost allocation tags on an ElastiCache
-    # resource. For more information, see [Using Cost Allocation Tags in
-    # Amazon ElastiCache][1].
+    # resource. For more information, see [Monitoring Costs with Tags][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/BestPractices.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource for which you want the
@@ -5820,7 +6096,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html
     #
     # @option params [Array<String>] :new_availability_zones
     #   The list of Availability Zones where the new Memcached cache nodes are
@@ -5902,7 +6178,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html
     #
     # @option params [Array<String>] :cache_security_group_names
     #   A list of cache security group names to authorize on this cluster.
@@ -5992,7 +6268,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   This parameter is currently disabled.
@@ -6308,13 +6584,24 @@ module Aws::ElastiCache
 
     # Modifies the settings for a replication group.
     #
-    # Due to current limitations on Redis (cluster mode disabled), this
-    # operation or parameter is not supported on Redis (cluster mode
-    # enabled) replication groups.
+    # For Redis (cluster mode enabled) clusters, this operation cannot be
+    # used to change a cluster's node type or engine version. For more
+    # information, see:
+    #
+    # * [Scaling for Amazon ElastiCache for Redis—Redis (cluster mode
+    #   enabled)][1] in the ElastiCache User Guide
+    #
+    # * [ModifyReplicationGroupShardConfiguration][2] in the ElastiCache API
+    #   Reference
     #
     # <note markdown="1"> This operation is valid for Redis only.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html
+    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html
     #
     # @option params [required, String] :replication_group_id
     #   The identifier of the replication group to modify.
@@ -6439,7 +6726,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   This parameter is currently disabled.
@@ -6468,7 +6755,7 @@ module Aws::ElastiCache
     #   to.
     #
     # @option params [String] :node_group_id
-    #   The name of the Node Group (called shard in the console).
+    #   Deprecated. This parameter is not used.
     #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6612,18 +6899,9 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Performs horizontal scaling on a Redis (cluster mode enabled) cluster
-    # with no downtime. Requires Redis engine version 3.2.10 or newer. For
-    # information on upgrading your engine to a newer version, see
-    # [Upgrading Engine Versions][1] in the Amazon ElastiCache User Guide.
-    #
-    # For more information on ElastiCache for Redis online horizontal
-    # scaling, see [ElastiCache for Redis Horizontal Scaling][2]
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.html
-    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/redis-cluster-resharding-online.html
+    # Modifies a replication group's shards (node groups) by allowing you
+    # to add shards, remove shards, or rebalance the keyspaces among
+    # exisiting shards.
     #
     # @option params [required, String] :replication_group_id
     #   The name of the Redis (cluster mode enabled) cluster (replication
@@ -6651,8 +6929,21 @@ module Aws::ElastiCache
     #
     # @option params [Array<String>] :node_groups_to_remove
     #   If the value of `NodeGroupCount` is less than the current number of
-    #   node groups (shards), `NodeGroupsToRemove` is a required list of node
-    #   group ids to remove from the cluster.
+    #   node groups (shards), the `NodeGroupsToRemove` or `NodeGroupsToRetain`
+    #   is a required list of node group ids to remove from or retain in the
+    #   cluster.
+    #
+    #   ElastiCache for Redis will attempt to remove all node groups listed by
+    #   `NodeGroupsToRemove` from the cluster.
+    #
+    # @option params [Array<String>] :node_groups_to_retain
+    #   If the value of `NodeGroupCount` is less than the current number of
+    #   node groups (shards), the `NodeGroupsToRemove` or `NodeGroupsToRetain`
+    #   is a required list of node group ids to remove from or retain in the
+    #   cluster.
+    #
+    #   ElastiCache for Redis will attempt to remove all node groups except
+    #   those listed by `NodeGroupsToRetain` from the cluster.
     #
     # @return [Types::ModifyReplicationGroupShardConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6666,10 +6957,12 @@ module Aws::ElastiCache
     #     apply_immediately: false, # required
     #     resharding_configuration: [
     #       {
+    #         node_group_id: "AllowedNodeGroupId",
     #         preferred_availability_zones: ["String"],
     #       },
     #     ],
-    #     node_groups_to_remove: ["String"],
+    #     node_groups_to_remove: ["AllowedNodeGroupId"],
+    #     node_groups_to_retain: ["AllowedNodeGroupId"],
     #   })
     #
     # @example Response structure
@@ -6776,6 +7069,7 @@ module Aws::ElastiCache
     #   resp.reserved_cache_node.recurring_charges #=> Array
     #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_cache_node.reservation_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering AWS API Documentation
     #
@@ -6807,7 +7101,7 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.htm
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
     #
     # @option params [required, String] :cache_cluster_id
     #   The cluster identifier. This parameter is stored as a lowercase
@@ -7193,9 +7487,9 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ECEvents.Viewing.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html
     # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html
-    # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html#auto-failover-test
+    # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test
     #
     # @option params [required, String] :replication_group_id
     #   The name of the replication group (console: cluster) whose automatic
@@ -7215,7 +7509,7 @@ module Aws::ElastiCache
     #
     #   resp = client.test_failover({
     #     replication_group_id: "String", # required
-    #     node_group_id: "String", # required
+    #     node_group_id: "AllowedNodeGroupId", # required
     #   })
     #
     # @example Response structure
@@ -7275,7 +7569,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

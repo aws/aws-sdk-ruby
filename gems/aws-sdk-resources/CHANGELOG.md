@@ -1,6 +1,102 @@
 Unreleased Changes
 ------------------
 
+3.36.0 (2018-12-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-apigatewayv2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-apigatewaymanagementapi` gem.
+
+3.35.0 (2018-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-kafka` gem.
+
+3.34.0 (2018-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-licensemanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appmesh` gem.
+
+3.33.0 (2018-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-securityhub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-fsx` gem.
+
+3.32.0 (2018-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediaconnect` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisanalyticsv2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-comprehendmedical` gem.
+
+3.31.0 (2018-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-globalaccelerator` gem.
+
+3.30.0 (2018-11-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-transfer` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-robomaker` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-datasync` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-amplify` gem.
+
+3.29.0 (2018-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-rdsdataservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-quicksight` gem.
+
+3.28.0 (2018-11-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-s3control` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-route53resolver` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ram` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-pinpointsmsvoice` gem.
+
+3.27.0 (2018-11-06)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pinpointemail` gem.
+
+3.26.0 (2018-10-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chime` gem.
+
+3.25.0 (2018-08-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
+3.24.0 (2018-08-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
+* Issue - Fix the load statement for the `aws-sdk-signer` gem.
+
+3.23.0 (2018-08-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signer` gem.
+
 3.22.0 (2018-07-12)
 ------------------
 

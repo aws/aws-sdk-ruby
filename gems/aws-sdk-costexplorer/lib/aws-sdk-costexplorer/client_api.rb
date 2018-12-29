@@ -21,8 +21,11 @@ module Aws::CostExplorer
     Context = Shapes::StringShape.new(name: 'Context')
     Coverage = Shapes::StructureShape.new(name: 'Coverage')
     CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
+    CoverageCost = Shapes::StructureShape.new(name: 'CoverageCost')
     CoverageHours = Shapes::StructureShape.new(name: 'CoverageHours')
     CoverageHoursPercentage = Shapes::StringShape.new(name: 'CoverageHoursPercentage')
+    CoverageNormalizedUnits = Shapes::StructureShape.new(name: 'CoverageNormalizedUnits')
+    CoverageNormalizedUnitsPercentage = Shapes::StringShape.new(name: 'CoverageNormalizedUnitsPercentage')
     CoveragesByTime = Shapes::ListShape.new(name: 'CoveragesByTime')
     DataUnavailableException = Shapes::StructureShape.new(name: 'DataUnavailableException')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
@@ -39,10 +42,14 @@ module Aws::CostExplorer
     Estimated = Shapes::BooleanShape.new(name: 'Estimated')
     Expression = Shapes::StructureShape.new(name: 'Expression')
     Expressions = Shapes::ListShape.new(name: 'Expressions')
+    ForecastResult = Shapes::StructureShape.new(name: 'ForecastResult')
+    ForecastResultsByTime = Shapes::ListShape.new(name: 'ForecastResultsByTime')
     GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
+    GetCostForecastRequest = Shapes::StructureShape.new(name: 'GetCostForecastRequest')
+    GetCostForecastResponse = Shapes::StructureShape.new(name: 'GetCostForecastResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
     GetDimensionValuesResponse = Shapes::StructureShape.new(name: 'GetDimensionValuesResponse')
     GetReservationCoverageRequest = Shapes::StructureShape.new(name: 'GetReservationCoverageRequest')
@@ -66,6 +73,7 @@ module Aws::CostExplorer
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
+    Metric = Shapes::StringShape.new(name: 'Metric')
     MetricAmount = Shapes::StringShape.new(name: 'MetricAmount')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricNames = Shapes::ListShape.new(name: 'MetricNames')
@@ -76,11 +84,15 @@ module Aws::CostExplorer
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     OfferingClass = Shapes::StringShape.new(name: 'OfferingClass')
+    OnDemandCost = Shapes::StringShape.new(name: 'OnDemandCost')
     OnDemandCostOfRIHoursUsed = Shapes::StringShape.new(name: 'OnDemandCostOfRIHoursUsed')
     OnDemandHours = Shapes::StringShape.new(name: 'OnDemandHours')
+    OnDemandNormalizedUnits = Shapes::StringShape.new(name: 'OnDemandNormalizedUnits')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
+    PredictionIntervalLevel = Shapes::IntegerShape.new(name: 'PredictionIntervalLevel')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
+    PurchasedUnits = Shapes::StringShape.new(name: 'PurchasedUnits')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
@@ -98,6 +110,7 @@ module Aws::CostExplorer
     ReservationUtilizationGroup = Shapes::StructureShape.new(name: 'ReservationUtilizationGroup')
     ReservationUtilizationGroups = Shapes::ListShape.new(name: 'ReservationUtilizationGroups')
     ReservedHours = Shapes::StringShape.new(name: 'ReservedHours')
+    ReservedNormalizedUnits = Shapes::StringShape.new(name: 'ReservedNormalizedUnits')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
@@ -107,12 +120,16 @@ module Aws::CostExplorer
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
     TermInYears = Shapes::StringShape.new(name: 'TermInYears')
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
+    TotalActualUnits = Shapes::StringShape.new(name: 'TotalActualUnits')
     TotalAmortizedFee = Shapes::StringShape.new(name: 'TotalAmortizedFee')
     TotalPotentialRISavings = Shapes::StringShape.new(name: 'TotalPotentialRISavings')
     TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
+    TotalRunningNormalizedUnits = Shapes::StringShape.new(name: 'TotalRunningNormalizedUnits')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
+    UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
     UtilizationPercentage = Shapes::StringShape.new(name: 'UtilizationPercentage')
+    UtilizationPercentageInUnits = Shapes::StringShape.new(name: 'UtilizationPercentageInUnits')
     UtilizationsByTime = Shapes::ListShape.new(name: 'UtilizationsByTime')
     Value = Shapes::StringShape.new(name: 'Value')
     Values = Shapes::ListShape.new(name: 'Values')
@@ -122,6 +139,8 @@ module Aws::CostExplorer
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
+    Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
+    Coverage.add_member(:coverage_cost, Shapes::ShapeRef.new(shape: CoverageCost, location_name: "CoverageCost"))
     Coverage.struct_class = Types::Coverage
 
     CoverageByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
@@ -129,11 +148,20 @@ module Aws::CostExplorer
     CoverageByTime.add_member(:total, Shapes::ShapeRef.new(shape: Coverage, location_name: "Total"))
     CoverageByTime.struct_class = Types::CoverageByTime
 
+    CoverageCost.add_member(:on_demand_cost, Shapes::ShapeRef.new(shape: OnDemandCost, location_name: "OnDemandCost"))
+    CoverageCost.struct_class = Types::CoverageCost
+
     CoverageHours.add_member(:on_demand_hours, Shapes::ShapeRef.new(shape: OnDemandHours, location_name: "OnDemandHours"))
     CoverageHours.add_member(:reserved_hours, Shapes::ShapeRef.new(shape: ReservedHours, location_name: "ReservedHours"))
     CoverageHours.add_member(:total_running_hours, Shapes::ShapeRef.new(shape: TotalRunningHours, location_name: "TotalRunningHours"))
     CoverageHours.add_member(:coverage_hours_percentage, Shapes::ShapeRef.new(shape: CoverageHoursPercentage, location_name: "CoverageHoursPercentage"))
     CoverageHours.struct_class = Types::CoverageHours
+
+    CoverageNormalizedUnits.add_member(:on_demand_normalized_units, Shapes::ShapeRef.new(shape: OnDemandNormalizedUnits, location_name: "OnDemandNormalizedUnits"))
+    CoverageNormalizedUnits.add_member(:reserved_normalized_units, Shapes::ShapeRef.new(shape: ReservedNormalizedUnits, location_name: "ReservedNormalizedUnits"))
+    CoverageNormalizedUnits.add_member(:total_running_normalized_units, Shapes::ShapeRef.new(shape: TotalRunningNormalizedUnits, location_name: "TotalRunningNormalizedUnits"))
+    CoverageNormalizedUnits.add_member(:coverage_normalized_units_percentage, Shapes::ShapeRef.new(shape: CoverageNormalizedUnitsPercentage, location_name: "CoverageNormalizedUnitsPercentage"))
+    CoverageNormalizedUnits.struct_class = Types::CoverageNormalizedUnits
 
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
@@ -188,6 +216,14 @@ module Aws::CostExplorer
 
     Expressions.member = Shapes::ShapeRef.new(shape: Expression)
 
+    ForecastResult.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
+    ForecastResult.add_member(:mean_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "MeanValue"))
+    ForecastResult.add_member(:prediction_interval_lower_bound, Shapes::ShapeRef.new(shape: GenericString, location_name: "PredictionIntervalLowerBound"))
+    ForecastResult.add_member(:prediction_interval_upper_bound, Shapes::ShapeRef.new(shape: GenericString, location_name: "PredictionIntervalUpperBound"))
+    ForecastResult.struct_class = Types::ForecastResult
+
+    ForecastResultsByTime.member = Shapes::ShapeRef.new(shape: ForecastResult)
+
     GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetCostAndUsageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
@@ -200,6 +236,17 @@ module Aws::CostExplorer
     GetCostAndUsageResponse.add_member(:group_definitions, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupDefinitions"))
     GetCostAndUsageResponse.add_member(:results_by_time, Shapes::ShapeRef.new(shape: ResultsByTime, location_name: "ResultsByTime"))
     GetCostAndUsageResponse.struct_class = Types::GetCostAndUsageResponse
+
+    GetCostForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetCostForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    GetCostForecastRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
+    GetCostForecastRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostForecastRequest.add_member(:prediction_interval_level, Shapes::ShapeRef.new(shape: PredictionIntervalLevel, location_name: "PredictionIntervalLevel"))
+    GetCostForecastRequest.struct_class = Types::GetCostForecastRequest
+
+    GetCostForecastResponse.add_member(:total, Shapes::ShapeRef.new(shape: MetricValue, location_name: "Total"))
+    GetCostForecastResponse.add_member(:forecast_results_by_time, Shapes::ShapeRef.new(shape: ForecastResultsByTime, location_name: "ForecastResultsByTime"))
+    GetCostForecastResponse.struct_class = Types::GetCostForecastResponse
 
     GetDimensionValuesRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     GetDimensionValuesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
@@ -218,6 +265,7 @@ module Aws::CostExplorer
     GetReservationCoverageRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
     GetReservationCoverageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetReservationCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetReservationCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetReservationCoverageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetReservationCoverageRequest.struct_class = Types::GetReservationCoverageRequest
 
@@ -315,9 +363,13 @@ module Aws::CostExplorer
     RedshiftInstanceDetails.struct_class = Types::RedshiftInstanceDetails
 
     ReservationAggregates.add_member(:utilization_percentage, Shapes::ShapeRef.new(shape: UtilizationPercentage, location_name: "UtilizationPercentage"))
+    ReservationAggregates.add_member(:utilization_percentage_in_units, Shapes::ShapeRef.new(shape: UtilizationPercentageInUnits, location_name: "UtilizationPercentageInUnits"))
     ReservationAggregates.add_member(:purchased_hours, Shapes::ShapeRef.new(shape: PurchasedHours, location_name: "PurchasedHours"))
+    ReservationAggregates.add_member(:purchased_units, Shapes::ShapeRef.new(shape: PurchasedUnits, location_name: "PurchasedUnits"))
     ReservationAggregates.add_member(:total_actual_hours, Shapes::ShapeRef.new(shape: TotalActualHours, location_name: "TotalActualHours"))
+    ReservationAggregates.add_member(:total_actual_units, Shapes::ShapeRef.new(shape: TotalActualUnits, location_name: "TotalActualUnits"))
     ReservationAggregates.add_member(:unused_hours, Shapes::ShapeRef.new(shape: UnusedHours, location_name: "UnusedHours"))
+    ReservationAggregates.add_member(:unused_units, Shapes::ShapeRef.new(shape: UnusedUnits, location_name: "UnusedUnits"))
     ReservationAggregates.add_member(:on_demand_cost_of_ri_hours_used, Shapes::ShapeRef.new(shape: OnDemandCostOfRIHoursUsed, location_name: "OnDemandCostOfRIHoursUsed"))
     ReservationAggregates.add_member(:net_ri_savings, Shapes::ShapeRef.new(shape: NetRISavings, location_name: "NetRISavings"))
     ReservationAggregates.add_member(:total_potential_ri_savings, Shapes::ShapeRef.new(shape: TotalPotentialRISavings, location_name: "TotalPotentialRISavings"))
@@ -341,6 +393,7 @@ module Aws::CostExplorer
     ReservationPurchaseRecommendation.add_member(:recommendation_summary, Shapes::ShapeRef.new(shape: ReservationPurchaseRecommendationSummary, location_name: "RecommendationSummary"))
     ReservationPurchaseRecommendation.struct_class = Types::ReservationPurchaseRecommendation
 
+    ReservationPurchaseRecommendationDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
     ReservationPurchaseRecommendationDetail.add_member(:instance_details, Shapes::ShapeRef.new(shape: InstanceDetails, location_name: "InstanceDetails"))
     ReservationPurchaseRecommendationDetail.add_member(:recommended_number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendedNumberOfInstancesToPurchase"))
     ReservationPurchaseRecommendationDetail.add_member(:recommended_normalized_units_to_purchase, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendedNormalizedUnitsToPurchase"))
@@ -415,13 +468,17 @@ module Aws::CostExplorer
       api.version = "2017-10-25"
 
       api.metadata = {
+        "apiVersion" => "2017-10-25",
         "endpointPrefix" => "ce",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Cost Explorer",
         "serviceFullName" => "AWS Cost Explorer Service",
+        "serviceId" => "Cost Explorer",
         "signatureVersion" => "v4",
         "signingName" => "ce",
         "targetPrefix" => "AWSInsightsIndexService",
+        "uid" => "ce-2017-10-25",
       }
 
       api.add_operation(:get_cost_and_usage, Seahorse::Model::Operation.new.tap do |o|
@@ -435,6 +492,16 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
+      end)
+
+      api.add_operation(:get_cost_forecast, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostForecast"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostForecastRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostForecastResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
       end)
 
       api.add_operation(:get_dimension_values, Seahorse::Model::Operation.new.tap do |o|

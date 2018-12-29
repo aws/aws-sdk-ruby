@@ -115,10 +115,14 @@ module Aws::KinesisVideoArchivedMedia
       api.version = "2017-09-30"
 
       api.metadata = {
+        "apiVersion" => "2017-09-30",
         "endpointPrefix" => "kinesisvideo",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "Kinesis Video Archived Media",
         "serviceFullName" => "Amazon Kinesis Video Streams Archived Media",
+        "serviceId" => "Kinesis Video Archived Media",
         "signatureVersion" => "v4",
+        "uid" => "kinesis-video-archived-media-2017-09-30",
       }
 
       api.add_operation(:get_hls_streaming_session_url, Seahorse::Model::Operation.new.tap do |o|

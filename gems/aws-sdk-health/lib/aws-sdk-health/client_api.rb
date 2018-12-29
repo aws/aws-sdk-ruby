@@ -57,6 +57,7 @@ module Aws::Health
     entityArnList = Shapes::ListShape.new(name: 'entityArnList')
     entityStatusCode = Shapes::StringShape.new(name: 'entityStatusCode')
     entityStatusCodeList = Shapes::ListShape.new(name: 'entityStatusCodeList')
+    entityUrl = Shapes::StringShape.new(name: 'entityUrl')
     entityValue = Shapes::StringShape.new(name: 'entityValue')
     entityValueList = Shapes::ListShape.new(name: 'entityValueList')
     eventAggregateField = Shapes::StringShape.new(name: 'eventAggregateField')
@@ -90,6 +91,7 @@ module Aws::Health
     AffectedEntity.add_member(:entity_arn, Shapes::ShapeRef.new(shape: entityArn, location_name: "entityArn"))
     AffectedEntity.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, location_name: "eventArn"))
     AffectedEntity.add_member(:entity_value, Shapes::ShapeRef.new(shape: entityValue, location_name: "entityValue"))
+    AffectedEntity.add_member(:entity_url, Shapes::ShapeRef.new(shape: entityUrl, location_name: "entityUrl"))
     AffectedEntity.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "awsAccountId"))
     AffectedEntity.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastUpdatedTime"))
     AffectedEntity.add_member(:status_code, Shapes::ShapeRef.new(shape: entityStatusCode, location_name: "statusCode"))
@@ -277,12 +279,16 @@ module Aws::Health
       api.version = "2016-08-04"
 
       api.metadata = {
+        "apiVersion" => "2016-08-04",
         "endpointPrefix" => "health",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWSHealth",
         "serviceFullName" => "AWS Health APIs and Notifications",
+        "serviceId" => "Health",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSHealth_20160804",
+        "uid" => "health-2016-08-04",
       }
 
       api.add_operation(:describe_affected_entities, Seahorse::Model::Operation.new.tap do |o|

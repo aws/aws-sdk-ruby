@@ -25,7 +25,8 @@ module Seahorse
               connect: true,
               start: true,
               h2_client: h2_client,
-              new_stream: stream
+              new_stream: stream,
+              debug_output: true
             )
           }
 
@@ -56,9 +57,9 @@ module Seahorse
 
             it 'sends :scheme, :method, :path headers and others in H2 format' do
               expected_headers = {
-                ":scheme" => "https",
-                ":method" => "Get",
                 ":path" => "/foo/path?query=abc",
+                ":scheme" => "https",
+                ":method" => "GET",
                 "abc" => "xyz"
               }
               expect(stream).to receive(:headers)

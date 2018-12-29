@@ -119,6 +119,7 @@ module Aws::AutoScaling
     InstanceMonitoring = Shapes::StructureShape.new(name: 'InstanceMonitoring')
     InstanceProtected = Shapes::BooleanShape.new(name: 'InstanceProtected')
     Instances = Shapes::ListShape.new(name: 'Instances')
+    InstancesDistribution = Shapes::StructureShape.new(name: 'InstancesDistribution')
     InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
     LaunchConfiguration = Shapes::StructureShape.new(name: 'LaunchConfiguration')
     LaunchConfigurationNameType = Shapes::StructureShape.new(name: 'LaunchConfigurationNameType')
@@ -126,7 +127,9 @@ module Aws::AutoScaling
     LaunchConfigurationNamesType = Shapes::StructureShape.new(name: 'LaunchConfigurationNamesType')
     LaunchConfigurations = Shapes::ListShape.new(name: 'LaunchConfigurations')
     LaunchConfigurationsType = Shapes::StructureShape.new(name: 'LaunchConfigurationsType')
+    LaunchTemplate = Shapes::StructureShape.new(name: 'LaunchTemplate')
     LaunchTemplateName = Shapes::StringShape.new(name: 'LaunchTemplateName')
+    LaunchTemplateOverrides = Shapes::StructureShape.new(name: 'LaunchTemplateOverrides')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LifecycleActionResult = Shapes::StringShape.new(name: 'LifecycleActionResult')
     LifecycleActionToken = Shapes::StringShape.new(name: 'LifecycleActionToken')
@@ -163,6 +166,7 @@ module Aws::AutoScaling
     Metrics = Shapes::ListShape.new(name: 'Metrics')
     MinAdjustmentMagnitude = Shapes::IntegerShape.new(name: 'MinAdjustmentMagnitude')
     MinAdjustmentStep = Shapes::IntegerShape.new(name: 'MinAdjustmentStep')
+    MixedInstancesPolicy = Shapes::StructureShape.new(name: 'MixedInstancesPolicy')
     MonitoringEnabled = Shapes::BooleanShape.new(name: 'MonitoringEnabled')
     NoDevice = Shapes::BooleanShape.new(name: 'NoDevice')
     NotificationConfiguration = Shapes::StructureShape.new(name: 'NotificationConfiguration')
@@ -170,6 +174,9 @@ module Aws::AutoScaling
     NotificationTargetResourceName = Shapes::StringShape.new(name: 'NotificationTargetResourceName')
     NumberOfAutoScalingGroups = Shapes::IntegerShape.new(name: 'NumberOfAutoScalingGroups')
     NumberOfLaunchConfigurations = Shapes::IntegerShape.new(name: 'NumberOfLaunchConfigurations')
+    OnDemandBaseCapacity = Shapes::IntegerShape.new(name: 'OnDemandBaseCapacity')
+    OnDemandPercentageAboveBaseCapacity = Shapes::IntegerShape.new(name: 'OnDemandPercentageAboveBaseCapacity')
+    Overrides = Shapes::ListShape.new(name: 'Overrides')
     PoliciesType = Shapes::StructureShape.new(name: 'PoliciesType')
     PolicyARNType = Shapes::StructureShape.new(name: 'PolicyARNType')
     PolicyIncrement = Shapes::IntegerShape.new(name: 'PolicyIncrement')
@@ -212,6 +219,7 @@ module Aws::AutoScaling
     SetInstanceProtectionQuery = Shapes::StructureShape.new(name: 'SetInstanceProtectionQuery')
     ShouldDecrementDesiredCapacity = Shapes::BooleanShape.new(name: 'ShouldDecrementDesiredCapacity')
     ShouldRespectGracePeriod = Shapes::BooleanShape.new(name: 'ShouldRespectGracePeriod')
+    SpotInstancePools = Shapes::IntegerShape.new(name: 'SpotInstancePools')
     SpotPrice = Shapes::StringShape.new(name: 'SpotPrice')
     StepAdjustment = Shapes::StructureShape.new(name: 'StepAdjustment')
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
@@ -296,6 +304,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupARN"))
     AutoScalingGroup.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
     AutoScalingGroup.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    AutoScalingGroup.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: MixedInstancesPolicy, location_name: "MixedInstancesPolicy"))
     AutoScalingGroup.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, required: true, location_name: "MinSize"))
     AutoScalingGroup.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, required: true, location_name: "MaxSize"))
     AutoScalingGroup.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, required: true, location_name: "DesiredCapacity"))
@@ -387,6 +396,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     CreateAutoScalingGroupType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "LaunchConfigurationName"))
     CreateAutoScalingGroupType.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    CreateAutoScalingGroupType.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: MixedInstancesPolicy, location_name: "MixedInstancesPolicy"))
     CreateAutoScalingGroupType.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, location_name: "InstanceId"))
     CreateAutoScalingGroupType.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, required: true, location_name: "MinSize"))
     CreateAutoScalingGroupType.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, required: true, location_name: "MaxSize"))
@@ -642,6 +652,14 @@ module Aws::AutoScaling
 
     Instances.member = Shapes::ShapeRef.new(shape: Instance)
 
+    InstancesDistribution.add_member(:on_demand_allocation_strategy, Shapes::ShapeRef.new(shape: XmlString, location_name: "OnDemandAllocationStrategy"))
+    InstancesDistribution.add_member(:on_demand_base_capacity, Shapes::ShapeRef.new(shape: OnDemandBaseCapacity, location_name: "OnDemandBaseCapacity"))
+    InstancesDistribution.add_member(:on_demand_percentage_above_base_capacity, Shapes::ShapeRef.new(shape: OnDemandPercentageAboveBaseCapacity, location_name: "OnDemandPercentageAboveBaseCapacity"))
+    InstancesDistribution.add_member(:spot_allocation_strategy, Shapes::ShapeRef.new(shape: XmlString, location_name: "SpotAllocationStrategy"))
+    InstancesDistribution.add_member(:spot_instance_pools, Shapes::ShapeRef.new(shape: SpotInstancePools, location_name: "SpotInstancePools"))
+    InstancesDistribution.add_member(:spot_max_price, Shapes::ShapeRef.new(shape: SpotPrice, location_name: "SpotMaxPrice"))
+    InstancesDistribution.struct_class = Types::InstancesDistribution
+
     LaunchConfiguration.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
     LaunchConfiguration.add_member(:launch_configuration_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "LaunchConfigurationARN"))
     LaunchConfiguration.add_member(:image_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "ImageId"))
@@ -678,6 +696,13 @@ module Aws::AutoScaling
     LaunchConfigurationsType.add_member(:launch_configurations, Shapes::ShapeRef.new(shape: LaunchConfigurations, required: true, location_name: "LaunchConfigurations"))
     LaunchConfigurationsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     LaunchConfigurationsType.struct_class = Types::LaunchConfigurationsType
+
+    LaunchTemplate.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplateSpecification"))
+    LaunchTemplate.add_member(:overrides, Shapes::ShapeRef.new(shape: Overrides, location_name: "Overrides"))
+    LaunchTemplate.struct_class = Types::LaunchTemplate
+
+    LaunchTemplateOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
+    LaunchTemplateOverrides.struct_class = Types::LaunchTemplateOverrides
 
     LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchTemplateId"))
     LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, location_name: "LaunchTemplateName"))
@@ -742,12 +767,18 @@ module Aws::AutoScaling
 
     Metrics.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
+    MixedInstancesPolicy.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "LaunchTemplate"))
+    MixedInstancesPolicy.add_member(:instances_distribution, Shapes::ShapeRef.new(shape: InstancesDistribution, location_name: "InstancesDistribution"))
+    MixedInstancesPolicy.struct_class = Types::MixedInstancesPolicy
+
     NotificationConfiguration.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupName"))
     NotificationConfiguration.add_member(:topic_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "TopicARN"))
     NotificationConfiguration.add_member(:notification_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "NotificationType"))
     NotificationConfiguration.struct_class = Types::NotificationConfiguration
 
     NotificationConfigurations.member = Shapes::ShapeRef.new(shape: NotificationConfiguration)
+
+    Overrides.member = Shapes::ShapeRef.new(shape: LaunchTemplateOverrides)
 
     PoliciesType.add_member(:scaling_policies, Shapes::ShapeRef.new(shape: ScalingPolicies, location_name: "ScalingPolicies"))
     PoliciesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
@@ -949,6 +980,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
     UpdateAutoScalingGroupType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "LaunchConfigurationName"))
     UpdateAutoScalingGroupType.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    UpdateAutoScalingGroupType.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: MixedInstancesPolicy, location_name: "MixedInstancesPolicy"))
     UpdateAutoScalingGroupType.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, location_name: "MinSize"))
     UpdateAutoScalingGroupType.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, location_name: "MaxSize"))
     UpdateAutoScalingGroupType.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
@@ -972,10 +1004,13 @@ module Aws::AutoScaling
       api.version = "2011-01-01"
 
       api.metadata = {
+        "apiVersion" => "2011-01-01",
         "endpointPrefix" => "autoscaling",
         "protocol" => "query",
         "serviceFullName" => "Auto Scaling",
+        "serviceId" => "Auto Scaling",
         "signatureVersion" => "v4",
+        "uid" => "autoscaling-2011-01-01",
         "xmlNamespace" => "http://autoscaling.amazonaws.com/doc/2011-01-01/",
       }
 

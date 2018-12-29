@@ -80,6 +80,12 @@ module Aws::EC2
       data[:nat_gateway_id]
     end
 
+    # The ID of a transit gateway.
+    # @return [String]
+    def transit_gateway_id
+      data[:transit_gateway_id]
+    end
+
     # The ID of the network interface.
     # @return [String]
     def network_interface_id
@@ -109,7 +115,7 @@ module Aws::EC2
       data[:state]
     end
 
-    # The ID of the VPC peering connection.
+    # The ID of a VPC peering connection.
     # @return [String]
     def vpc_peering_connection_id
       data[:vpc_peering_connection_id]
@@ -276,6 +282,7 @@ module Aws::EC2
     #     gateway_id: "String",
     #     instance_id: "String",
     #     nat_gateway_id: "String",
+    #     transit_gateway_id: "String",
     #     network_interface_id: "String",
     #     vpc_peering_connection_id: "String",
     #   })
@@ -297,6 +304,8 @@ module Aws::EC2
     #   The ID of a NAT instance in your VPC.
     # @option options [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    # @option options [String] :transit_gateway_id
+    #   The ID of a transit gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

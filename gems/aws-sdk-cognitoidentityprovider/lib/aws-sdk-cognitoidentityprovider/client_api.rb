@@ -142,6 +142,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolResponse = Shapes::StructureShape.new(name: 'CreateUserPoolResponse')
     CustomAttributeNameType = Shapes::StringShape.new(name: 'CustomAttributeNameType')
     CustomAttributesListType = Shapes::ListShape.new(name: 'CustomAttributesListType')
+    CustomDomainConfigType = Shapes::StructureShape.new(name: 'CustomDomainConfigType')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DefaultEmailOptionType = Shapes::StringShape.new(name: 'DefaultEmailOptionType')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
@@ -390,6 +391,8 @@ module Aws::CognitoIdentityProvider
     UpdateUserAttributesResponse = Shapes::StructureShape.new(name: 'UpdateUserAttributesResponse')
     UpdateUserPoolClientRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolClientRequest')
     UpdateUserPoolClientResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolClientResponse')
+    UpdateUserPoolDomainRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolDomainRequest')
+    UpdateUserPoolDomainResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolDomainResponse')
     UpdateUserPoolRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolRequest')
     UpdateUserPoolResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolResponse')
     UserContextDataType = Shapes::StructureShape.new(name: 'UserContextDataType')
@@ -854,8 +857,10 @@ module Aws::CognitoIdentityProvider
 
     CreateUserPoolDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, required: true, location_name: "Domain"))
     CreateUserPoolDomainRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    CreateUserPoolDomainRequest.add_member(:custom_domain_config, Shapes::ShapeRef.new(shape: CustomDomainConfigType, location_name: "CustomDomainConfig"))
     CreateUserPoolDomainRequest.struct_class = Types::CreateUserPoolDomainRequest
 
+    CreateUserPoolDomainResponse.add_member(:cloud_front_domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "CloudFrontDomain"))
     CreateUserPoolDomainResponse.struct_class = Types::CreateUserPoolDomainResponse
 
     CreateUserPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: UserPoolNameType, required: true, location_name: "PoolName"))
@@ -883,6 +888,9 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolResponse.struct_class = Types::CreateUserPoolResponse
 
     CustomAttributesListType.member = Shapes::ShapeRef.new(shape: SchemaAttributeType)
+
+    CustomDomainConfigType.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "CertificateArn"))
+    CustomDomainConfigType.struct_class = Types::CustomDomainConfigType
 
     DeleteGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupNameType, required: true, location_name: "GroupName"))
     DeleteGroupRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
@@ -988,9 +996,10 @@ module Aws::CognitoIdentityProvider
     DomainDescriptionType.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AWSAccountIdType, location_name: "AWSAccountId"))
     DomainDescriptionType.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
     DomainDescriptionType.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketType, location_name: "S3Bucket"))
-    DomainDescriptionType.add_member(:cloud_front_distribution, Shapes::ShapeRef.new(shape: ArnType, location_name: "CloudFrontDistribution"))
+    DomainDescriptionType.add_member(:cloud_front_distribution, Shapes::ShapeRef.new(shape: StringType, location_name: "CloudFrontDistribution"))
     DomainDescriptionType.add_member(:version, Shapes::ShapeRef.new(shape: DomainVersionType, location_name: "Version"))
     DomainDescriptionType.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatusType, location_name: "Status"))
+    DomainDescriptionType.add_member(:custom_domain_config, Shapes::ShapeRef.new(shape: CustomDomainConfigType, location_name: "CustomDomainConfig"))
     DomainDescriptionType.struct_class = Types::DomainDescriptionType
 
     EmailConfigurationType.add_member(:source_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "SourceArn"))
@@ -1546,6 +1555,14 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
     UpdateUserPoolClientResponse.struct_class = Types::UpdateUserPoolClientResponse
 
+    UpdateUserPoolDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, required: true, location_name: "Domain"))
+    UpdateUserPoolDomainRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    UpdateUserPoolDomainRequest.add_member(:custom_domain_config, Shapes::ShapeRef.new(shape: CustomDomainConfigType, required: true, location_name: "CustomDomainConfig"))
+    UpdateUserPoolDomainRequest.struct_class = Types::UpdateUserPoolDomainRequest
+
+    UpdateUserPoolDomainResponse.add_member(:cloud_front_domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "CloudFrontDomain"))
+    UpdateUserPoolDomainResponse.struct_class = Types::UpdateUserPoolDomainResponse
+
     UpdateUserPoolRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     UpdateUserPoolRequest.add_member(:policies, Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
     UpdateUserPoolRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
@@ -1659,6 +1676,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:sms_configuration_failure, Shapes::ShapeRef.new(shape: StringType, location_name: "SmsConfigurationFailure"))
     UserPoolType.add_member(:email_configuration_failure, Shapes::ShapeRef.new(shape: StringType, location_name: "EmailConfigurationFailure"))
     UserPoolType.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
+    UserPoolType.add_member(:custom_domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "CustomDomain"))
     UserPoolType.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UserPoolType.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
     UserPoolType.add_member(:arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
@@ -1711,12 +1729,15 @@ module Aws::CognitoIdentityProvider
       api.version = "2016-04-18"
 
       api.metadata = {
+        "apiVersion" => "2016-04-18",
         "endpointPrefix" => "cognito-idp",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Cognito Identity Provider",
+        "serviceId" => "Cognito Identity Provider",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSCognitoIdentityProviderService",
+        "uid" => "cognito-idp-2016-04-18",
       }
 
       api.add_operation(:add_custom_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -2338,6 +2359,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -3184,6 +3206,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ScopeDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOAuthFlowException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:update_user_pool_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserPoolDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserPoolDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUserPoolDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

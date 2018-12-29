@@ -235,8 +235,9 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. Currently,
-    #   the only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster. The only
+    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
+    #   `EDGE_CG`.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -254,20 +255,19 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for each node in this cluster. This speed
-    #   doesn't dictate how soon you'll get each Snowball Edge device,
-    #   rather it represents how quickly each device moves to its
-    #   destination while in transit. Regional shipping speeds are as
-    #   follows:
+    #   doesn't dictate how soon you'll get each device, rather it
+    #   represents how quickly each device moves to its destination while in
+    #   transit. Regional shipping speeds are as follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowball Edges shipped express are delivered in about a
-    #     day. In addition, most countries in the EU have access to standard
+    #     Typically, devices shipped express are delivered in about a day.
+    #     In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowball Edges are delivered in one to seven days.
+    #   * In India, devices are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -304,9 +304,13 @@ module Aws::Snowball
     end
 
     # A JSON-formatted object that describes a compatible Amazon Machine
-    # Image (AMI), including the ID and name for a Snowball Edge AMI. This
-    # AMI is compatible with the device's physical hardware requirements,
-    # and it should be able to be run in an SBE1 instance on the device.
+    # Image (AMI). For more information on compatible AMIs, see [Using
+    # Amazon EC2 Compute Instances][1] in the *AWS Snowball Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html
     #
     # @!attribute [rw] ami_id
     #   The unique identifier for an individual Snowball Edge AMI.
@@ -406,11 +410,11 @@ module Aws::Snowball
     #         address_id: "AddressId", # required
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
@@ -457,8 +461,9 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster. Currently,
-    #   the only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this cluster. The only
+    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
+    #   `EDGE_CG`.
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
@@ -476,7 +481,7 @@ module Aws::Snowball
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowball Edges are delivered in one to seven days.
+    #   * In India, devices are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -555,15 +560,15 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
     #         forwarding_address_id: "AddressId",
     #       }
     #
@@ -652,8 +657,9 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this job. Currently, the
-    #   only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snowball device to use for this job. The only
+    #   supported device types for cluster jobs are `EDGE`, `EDGE_C`, and
+    #   `EDGE_CG`.
     #   @return [String]
     #
     # @!attribute [rw] forwarding_address_id
@@ -886,7 +892,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_ami_id
-    #   The ID of the AMI on the Snowball Edge device.
+    #   The ID of the AMI on the supported device.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource AWS API Documentation
@@ -1458,7 +1464,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] max_results
     #   The maximum number of results for the list of compatible images.
-    #   Currently, a Snowball Edge device can store 10 AMIs.
+    #   Currently, each supported device can store 10 AMIs.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1476,8 +1482,7 @@ module Aws::Snowball
     end
 
     # @!attribute [rw] compatible_images
-    #   A JSON-formatted object that describes a compatible AMI, including
-    #   the ID and name for a Snowball Edge AMI.
+    #   A JSON-formatted object that describes a compatible AMI.
     #   @return [Array<Types::CompatibleImage>]
     #
     # @!attribute [rw] next_token
@@ -1555,7 +1560,7 @@ module Aws::Snowball
     #
     #       {
     #         sns_topic_arn: "SnsTopicARN",
-    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #         notify_all: false,
     #       }
     #
@@ -1733,7 +1738,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
@@ -1807,7 +1812,7 @@ module Aws::Snowball
     #         role_arn: "RoleARN",
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
-    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+    #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
     #         resources: {
@@ -1840,7 +1845,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
     #         forwarding_address_id: "AddressId",
     #       }
     #

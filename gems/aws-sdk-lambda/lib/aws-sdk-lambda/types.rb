@@ -9,7 +9,12 @@ module Aws::Lambda
   module Types
 
     # Provides limits of code size and concurrency associated with the
-    # current account and region.
+    # current account and region. For more information or to request a limit
+    # increase for concurrent executions, see [Lambda Limits][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/limits.html
     #
     # @!attribute [rw] total_code_size
     #   Maximum size, in bytes, of a code package you can upload per region.
@@ -29,20 +34,18 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] concurrent_executions
-    #   Number of simultaneous executions of your function per region. For
-    #   more information or to request a limit increase for concurrent
-    #   executions, see [Lambda Function Concurrent Executions][1]. The
+    #   Number of simultaneous executions of your function per region. The
     #   default limit is 1000.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Integer]
     #
     # @!attribute [rw] unreserved_concurrent_executions
     #   The number of concurrent executions available to functions that do
-    #   not have concurrency limits set. For more information, see
-    #   concurrent-executions.
+    #   not have concurrency limits set. For more information, see [Managing
+    #   Concurrency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit AWS API Documentation
@@ -76,6 +79,81 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AddLayerVersionPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #         statement_id: "StatementId", # required
+    #         action: "LayerPermissionAllowedAction", # required
+    #         principal: "LayerPermissionAllowedPrincipal", # required
+    #         organization_id: "OrganizationId",
+    #         revision_id: "String",
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statement_id
+    #   An identifier that distinguishes the policy from others on the same
+    #   layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The API action that grants access to the layer. For example,
+    #   `lambda:GetLayerVersion`.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   An account ID, or `*` to grant permission to all AWS accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   With the principal set to `*`, grant permission to all accounts in
+    #   the specified organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   Only update the policy if the revision ID matches the ID specified.
+    #   Use this option to avoid modifying a policy that has changed since
+    #   you last read it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddLayerVersionPermissionRequest AWS API Documentation
+    #
+    class AddLayerVersionPermissionRequest < Struct.new(
+      :layer_name,
+      :version_number,
+      :statement_id,
+      :action,
+      :principal,
+      :organization_id,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statement
+    #   The permission statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddLayerVersionPermissionResponse AWS API Documentation
+    #
+    class AddLayerVersionPermissionResponse < Struct.new(
+      :statement,
+      :revision_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddPermissionRequest
     #   data as a hash:
     #
@@ -92,16 +170,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Name of the Lambda function whose resource policy you are updating
-    #   by adding a new permission.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -117,24 +198,19 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The principal who is getting this permission. It can be Amazon S3
-    #   service Principal (`s3.amazonaws.com`) if you want Amazon S3 to
-    #   invoke the function, an AWS account ID if you are granting
-    #   cross-account permission, or any valid AWS service principal such as
-    #   `sns.amazonaws.com`. For example, you might want to allow a custom
-    #   application in another AWS account to push events to AWS Lambda by
-    #   invoking your function.
+    #   The principal who is getting this permission. The principal can be
+    #   an AWS service (e.g. `s3.amazonaws.com` or `sns.amazonaws.com`) for
+    #   service triggers, or an account ID for cross-account access. If you
+    #   specify a service as a principal, use the `SourceArn` parameter to
+    #   limit who can invoke the function through that service.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   This is optional; however, when granting permission to invoke your
-    #   function, you should specify this field with the Amazon Resource
-    #   Name (ARN) as its value. This ensures that only events generated
-    #   from the specified source can invoke the function.
+    #   The Amazon Resource Name of the invoker.
     #
-    #   If you add a permission without providing the source ARN, any AWS
-    #   account that creates a mapping to your function ARN can send events
-    #   to invoke your Lambda function.
+    #   If you add a permission to a service principal without providing the
+    #   source ARN, any AWS account that creates a mapping to your function
+    #   ARN can invoke your Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] source_account
@@ -156,23 +232,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   You can use this optional query parameter to describe a qualified
-    #   ARN using a function version or an alias name. The permission will
-    #   then apply to the specific qualified ARN. For example, if you
-    #   specify function version 2 as the qualifier, then permission applies
-    #   only when request is made using qualified function ARN:
-    #
-    #   `arn:aws:lambda:aws-region:acct-id:function:function-name:2`
-    #
-    #   If you specify an alias name, for example `PROD`, then the
-    #   permission is valid only for requests made using the alias ARN:
-    #
-    #   `arn:aws:lambda:aws-region:acct-id:function:function-name:PROD`
-    #
-    #   If the qualifier is not specified, the permission is valid only when
-    #   requests is made using unqualified function ARN.
-    #
-    #   `arn:aws:lambda:aws-region:acct-id:function:function-name`
+    #   Specify a version or alias to add permissions to a published version
+    #   of the function.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -180,7 +241,8 @@ module Aws::Lambda
     #   update of the function version or alias. If the `RevisionID` you
     #   pass doesn't match the latest `RevisionId` of the function or
     #   alias, it will fail with an error message, advising you to retrieve
-    #   the latest function version or alias `RevisionID` using either or .
+    #   the latest function version or alias `RevisionID` using either
+    #   GetFunction or GetAlias
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
@@ -236,8 +298,7 @@ module Aws::Lambda
     # @!attribute [rw] routing_config
     #   Specifies an additional function versions the alias points to,
     #   allowing you to dictate what percentage of traffic will invoke each
-    #   version. For more information, see
-    #   lambda-traffic-shifting-using-aliases.
+    #   version.
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @!attribute [rw] revision_id
@@ -256,9 +317,11 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object that implements what percentage of traffic will
-    # invoke each function version. For more information, see
-    # lambda-traffic-shifting-using-aliases.
+    # The alias's [traffic shifting][1] configuration.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #
     # @note When making an API call, you may pass AliasRoutingConfiguration
     #   data as a hash:
@@ -270,10 +333,8 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] additional_version_weights
-    #   Set this value to dictate what percentage of traffic will invoke the
-    #   updated function version. If set to an empty string, 100 percent of
-    #   traffic will invoke `function-version`. For more information, see
-    #   lambda-traffic-shifting-using-aliases.
+    #   The name of the second alias, and the percentage of traffic that is
+    #   routed to it.
     #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration AWS API Documentation
@@ -285,7 +346,11 @@ module Aws::Lambda
 
     # @!attribute [rw] reserved_concurrent_executions
     #   The number of concurrent executions reserved for this function. For
-    #   more information, see concurrent-executions.
+    #   more information, see [Managing Concurrency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency AWS API Documentation
@@ -311,10 +376,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Name of the Lambda function for which you want to create an alias.
-    #   Note that the length constraint applies only to the ARN. If you
-    #   specify only the function name, it is limited to 64 characters in
-    #   length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -332,7 +406,11 @@ module Aws::Lambda
     # @!attribute [rw] routing_config
     #   Specifies an additional version your alias can point to, allowing
     #   you to dictate what percentage of traffic will invoke each version.
-    #   For more information, see lambda-traffic-shifting-using-aliases.
+    #   For more information, see [Traffic Shifting Using Aliases][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest AWS API Documentation
@@ -359,76 +437,58 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the event source. Any record added
-    #   to this source could cause AWS Lambda to invoke your Lambda
-    #   function, it depends on the `BatchSize`. AWS Lambda POSTs the
-    #   event's records to your Lambda function as JSON.
+    #   The Amazon Resource Name (ARN) of the event source.
+    #
+    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #     consumer.
+    #
+    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #
+    #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The Lambda function to invoke when AWS Lambda detects an event on
-    #   the stream.
+    #   The name of the Lambda function.
     #
-    #   You can specify the function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`).
+    #   **Name formats**
     #
-    #   If you are using versioning, you can also provide a qualified
-    #   function ARN (ARN that is qualified with function version or alias
-    #   name as suffix). For more information about versioning, see [AWS
-    #   Lambda Function Versioning and Aliases][1]
+    #   * **Function name** - `MyFunction`.
     #
-    #   AWS Lambda also allows you to specify only the function name with
-    #   the account ID qualifier (for example, `account-id:Thumbnail`).
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
     #
-    #   Note that the length constraint applies only to the ARN. If you
-    #   specify only the function name, it is limited to 64 characters in
-    #   length.
+    #   * **Version or Alias ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
     #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
-    #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it's limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Indicates whether AWS Lambda should begin polling the event source.
-    #   By default, `Enabled` is true.
+    #   Disables the event source mapping to pause polling and invocation.
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
-    #   The largest number of records that AWS Lambda will retrieve from
-    #   your event source at the time of invoking your function. Your
-    #   function receives an event with all the retrieved records. The
-    #   default for Amazon Kinesis and Amazon DynamoDB is 100 records. For
-    #   SQS, the default is 1.
+    #   The maximum number of items to retrieve in a single batch.
+    #
+    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #
+    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
-    #   The position in the DynamoDB or Kinesis stream where AWS Lambda
-    #   should start reading. For more information, see
-    #   [GetShardIterator][1] in the *Amazon Kinesis API Reference Guide* or
-    #   [GetShardIterator][2] in the *Amazon DynamoDB API Reference Guide*.
-    #   The `AT_TIMESTAMP` value is supported only for [Kinesis streams][3].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html
-    #   [3]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
+    #   The position in a stream from which to start reading. Required for
+    #   Amazon Kinesis and Amazon DynamoDB Streams sources. `AT_TIMESTAMP`
+    #   is only supported for Amazon Kinesis streams.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
-    #   The timestamp of the data record from which to start reading. Used
-    #   with [shard iterator type][1] AT\_TIMESTAMP. If a record with this
-    #   exact timestamp does not exist, the iterator returned is for the
-    #   next (later) record. If the timestamp is older than the current trim
-    #   horizon, the iterator returned is for the oldest untrimmed data
-    #   record (TRIM\_HORIZON). Valid only for [Kinesis streams][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
-    #   [2]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
+    #   With `StartingPosition` set to `AT_TIMESTAMP`, the Unix time in
+    #   seconds from which to start reading.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
@@ -448,7 +508,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -480,88 +540,70 @@ module Aws::Lambda
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         layers: ["LayerVersionArn"],
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name you want to assign to the function you are uploading. The
-    #   function names appear in the console and are returned in the
-    #   ListFunctions API. Function names are used to specify functions to
-    #   other AWS Lambda API operations, such as Invoke. Note that the
-    #   length constraint applies only to the ARN. If you specify only the
-    #   function name, it is limited to 64 characters in length.
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The runtime environment for the Lambda function you are uploading.
-    #
-    #   To use the Python runtime v3.6, set the value to "python3.6". To
-    #   use the Python runtime v2.7, set the value to "python2.7". To use
-    #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
-    #   the Node.js runtime v4.3, set the value to "nodejs4.3". To use the
-    #   .NET Core runtime v1.0, set the value to "dotnetcore1.0". To use
-    #   the .NET Core runtime v2.0, set the value to "dotnetcore2.0".
-    #
-    #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
-    #   existing functions to the newer Node.js runtime versions available
-    #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure
-    #   to do so will result in an invalid parameter error being returned.
-    #   Note that you will have to follow this procedure for each region
-    #   that contains functions written in the Node v0.10.42 runtime.
-    #
-    #    </note>
+    #   The runtime version for the function.
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
-    #   when it executes your function to access any other Amazon Web
-    #   Services (AWS) resources. For more information, see [AWS Lambda: How
-    #   it Works][1].
+    #   The Amazon Resource Name (ARN) of the function's [execution
+    #   role][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role
     #   @return [String]
     #
     # @!attribute [rw] handler
-    #   The function within your code that Lambda calls to begin execution.
-    #   For Node.js, it is the *module-name*.*export* value in your
-    #   function. For Java, it can be `package.class-name::handler` or
-    #   `package.class-name`. For more information, see [Lambda Function
-    #   Handler (Java)][1].
+    #   The name of the method within your code that Lambda calls to execute
+    #   your function. For more information, see [Programming Model][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html
     #   @return [String]
     #
     # @!attribute [rw] code
-    #   The code for the Lambda function.
+    #   The code for the function.
     #   @return [Types::FunctionCode]
     #
     # @!attribute [rw] description
-    #   A short, user-defined function description. Lambda does not use this
-    #   value. Assign a meaningful description as you see fit.
+    #   A description of the function.
     #   @return [String]
     #
     # @!attribute [rw] timeout
-    #   The function execution time at which Lambda should terminate the
-    #   function. Because the execution time has cost implications, we
-    #   recommend you set this value based on your expected execution time.
-    #   The default is 3 seconds.
+    #   The amount of time that Lambda allows a function to run before
+    #   terminating it. The default is 3 seconds. The maximum allowed value
+    #   is 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory, in MB, your Lambda function is given. Lambda
-    #   uses this memory size to infer the amount of CPU and memory
-    #   allocated to your function. Your function use-case determines your
-    #   CPU and memory requirements. For example, a database operation might
-    #   need less memory compared to an image processing function. The
+    #   The amount of memory that your function has access to. Increasing
+    #   the function's memory also increases it's CPU allocation. The
     #   default value is 128 MB. The value must be a multiple of 64 MB.
     #   @return [Integer]
     #
     # @!attribute [rw] publish
-    #   This boolean parameter can be used to request AWS Lambda to create
-    #   the Lambda function and publish a version as an atomic operation.
+    #   Set to true to publish the first version of the function during
+    #   creation.
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_config
@@ -572,24 +614,29 @@ module Aws::Lambda
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic. For more
-    #   information, see dlq.
+    #   A dead letter queue configuration that specifies the queue or topic
+    #   where Lambda sends asynchronous events when they fail processing.
+    #   For more information, see [Dead Letter Queues][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/dlq.html
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
-    #   The parent object that contains your environment's configuration
-    #   settings.
+    #   Environment variables that are accessible from function code during
+    #   execution.
     #   @return [Types::Environment]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
-    #   function's environment variables. If not provided, AWS Lambda will
-    #   use a default service key.
+    #   The ARN of the KMS key used to encrypt your function's environment
+    #   variables. If not provided, AWS Lambda will use a default service
+    #   key.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
-    #   The parent object that contains your function's tracing settings.
+    #   Set `Mode` to `Active` to sample and trace a subset of incoming
+    #   requests with AWS X-Ray.
     #   @return [Types::TracingConfig]
     #
     # @!attribute [rw] tags
@@ -601,6 +648,15 @@ module Aws::Lambda
     #
     #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] layers
+    #   A list of [function layers][1] to add to the function's execution
+    #   environment.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
@@ -619,13 +675,16 @@ module Aws::Lambda
       :environment,
       :kms_key_arn,
       :tracing_config,
-      :tags)
+      :tags,
+      :layers)
       include Aws::Structure
     end
 
-    # The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
-    # topic you specify as your Dead Letter Queue (DLQ). For more
-    # information, see dlq.
+    # The [dead letter queue][1] for failed asynchronous invocations.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/dlq.html
     #
     # @note When making an API call, you may pass DeadLetterConfig
     #   data as a hash:
@@ -636,8 +695,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
-    #   topic you specify as your Dead Letter Queue (DLQ). dlq. For more
-    #   information, see dlq.
+    #   topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig AWS API Documentation
@@ -656,11 +714,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function name for which the alias is created. Deleting an
-    #   alias does not delete the function version to which it is pointing.
-    #   Note that the length constraint applies only to the ARN. If you
-    #   specify only the function name, it is limited to 64 characters in
-    #   length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -683,7 +749,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] uuid
-    #   The event source mapping ID.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMappingRequest AWS API Documentation
@@ -701,8 +767,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the function you are removing concurrent execution
-    #   limits from. For more information, see concurrent-executions.
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest AWS API Documentation
@@ -721,36 +798,24 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function to delete.
+    #   The name of the Lambda function.
     #
-    #   You can specify the function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). If you
-    #   are using versioning, you can also provide a qualified function ARN
-    #   (ARN that is qualified with function version or alias name as
-    #   suffix). AWS Lambda also allows you to specify only the function
-    #   name with the account ID qualifier (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   Using this optional parameter you can specify a function version
-    #   (but not the `$LATEST` version) to direct AWS Lambda to delete a
-    #   specific function version. If the function version has one or more
-    #   aliases pointing to it, you will get an error because you cannot
-    #   have aliases pointing to it. You can delete any function version but
-    #   not the `$LATEST`, that is, you cannot specify `$LATEST` as the
-    #   value of this parameter. The `$LATEST` version can be deleted only
-    #   when you want to delete all the function versions and aliases.
-    #
-    #   You can only specify a function version, not an alias name, using
-    #   this parameter. You cannot delete a function version using its
-    #   alias.
-    #
-    #   If you don't specify this parameter, AWS Lambda will delete the
-    #   function, including all of its versions and aliases.
+    #   Specify a version to delete. You cannot delete a version that is
+    #   referenced by an alias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest AWS API Documentation
@@ -761,8 +826,31 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object that contains your environment's configuration
-    # settings.
+    # @note When making an API call, you may pass DeleteLayerVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteLayerVersionRequest AWS API Documentation
+    #
+    class DeleteLayerVersionRequest < Struct.new(
+      :layer_name,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # A function's environment variable settings.
     #
     # @note When making an API call, you may pass Environment
     #   data as a hash:
@@ -774,8 +862,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] variables
-    #   The key-value pairs that represent your environment's configuration
-    #   settings.
+    #   Environment variable key-value pairs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment AWS API Documentation
@@ -785,15 +872,14 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object that contains error information associated with your
-    # configuration settings.
+    # Error messages for environment variables that could not be applied.
     #
     # @!attribute [rw] error_code
-    #   The error code returned by the environment error object.
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The message returned by the environment error object.
+    #   The error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentError AWS API Documentation
@@ -804,18 +890,15 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object returned that contains your environment's
-    # configuration settings or any error information associated with your
-    # configuration settings.
+    # The results of a configuration update that applied environment
+    # variables.
     #
     # @!attribute [rw] variables
-    #   The key-value pairs returned that represent your environment's
-    #   configuration settings or error information.
+    #   Environment variable key-value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error
-    #   The parent object that contains error information associated with
-    #   your configuration settings.
+    #   Error messages for environment variables that could not be applied.
     #   @return [Types::EnvironmentError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentResponse AWS API Documentation
@@ -826,32 +909,28 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Describes mapping between an Amazon Kinesis or DynamoDB stream or an
-    # Amazon SQS queue and a Lambda function.
+    # A mapping between an AWS resource and an AWS Lambda function. See
+    # CreateEventSourceMapping for details.
     #
     # @!attribute [rw] uuid
-    #   The AWS Lambda assigned opaque identifier for the mapping.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @!attribute [rw] batch_size
-    #   The largest number of records that AWS Lambda will retrieve from
-    #   your event source at the time of invoking your function. Your
-    #   function receives an event with all the retrieved records.
+    #   The maximum number of items to retrieve in a single batch.
     #   @return [Integer]
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
-    #   stream or the SQS queue that is the source of events.
+    #   The Amazon Resource Name (ARN) of the event source.
     #   @return [String]
     #
     # @!attribute [rw] function_arn
-    #   The Lambda function to invoke when AWS Lambda detects an event on
-    #   the poll-based source.
+    #   The ARN of the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   The UTC time string indicating the last time the event mapping was
-    #   updated.
+    #   The date that the event source mapping was last updated, in Unix
+    #   time seconds.
     #   @return [Time]
     #
     # @!attribute [rw] last_processing_result
@@ -860,14 +939,14 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the event source mapping. It can be `Creating`,
-    #   `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or
-    #   `Deleting`.
+    #   The state of the event source mapping. It can be one of the
+    #   following: `Creating`, `Enabling`, `Enabled`, `Disabling`,
+    #   `Disabled`, `Updating`, or `Deleting`.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason the event source mapping is in its current state. It is
-    #   either user-requested or an AWS Lambda-initiated state transition.
+    #   The cause of the last state change, either `User initiated` or
+    #   `Lambda initiated`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
@@ -884,7 +963,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The code for the Lambda function.
+    # The code for the Lambda function. You can specify either an S3
+    # location, or upload a deployment package directly.
     #
     # @note When making an API call, you may pass FunctionCode
     #   data as a hash:
@@ -897,32 +977,22 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] zip_file
-    #   The contents of your zip file containing your deployment package. If
-    #   you are using the web API directly, the contents of the zip file
-    #   must be base64-encoded. If you are using the AWS SDKs or the AWS
-    #   CLI, the SDKs or CLI will do the encoding for you. For more
-    #   information about creating a .zip file, see [Execution
-    #   Permissions][1] in the **AWS Lambda Developer Guide**.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html
+    #   The base64-encoded contents of your zip file containing your
+    #   deployment package. AWS SDK and AWS CLI clients handle the encoding
+    #   for you.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   Amazon S3 bucket name where the .zip file containing your deployment
-    #   package is stored. This bucket must reside in the same AWS region
-    #   where you are creating the Lambda function.
+    #   An Amazon S3 bucket in the same region as your function.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
-    #   The Amazon S3 object (the deployment package) key name you want to
-    #   upload.
+    #   The Amazon S3 key of the deployment package.
     #   @return [String]
     #
     # @!attribute [rw] s3_object_version
-    #   The Amazon S3 object (the deployment package) version you want to
-    #   upload.
+    #   For versioned objects, the version of the deployment package object
+    #   to use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode AWS API Documentation
@@ -954,16 +1024,14 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A complex type that describes function metadata.
+    # A Lambda function's configuration settings.
     #
     # @!attribute [rw] function_name
-    #   The name of the function. Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   The name of the function.
     #   @return [String]
     #
     # @!attribute [rw] function_arn
-    #   The Amazon Resource Name (ARN) assigned to the function.
+    #   The function's Amazon Resource Name.
     #   @return [String]
     #
     # @!attribute [rw] runtime
@@ -971,9 +1039,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
-    #   when it executes your function to access any other Amazon Web
-    #   Services (AWS) resources.
+    #   The function's execution role.
     #   @return [String]
     #
     # @!attribute [rw] handler
@@ -981,30 +1047,25 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] code_size
-    #   The size, in bytes, of the function .zip file you uploaded.
+    #   The size of the function's deployment package in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   The user-provided description.
+    #   The function's description.
     #   @return [String]
     #
     # @!attribute [rw] timeout
-    #   The function execution time at which Lambda should terminate the
-    #   function. Because the execution time has cost implications, we
-    #   recommend you set this value based on your expected execution time.
-    #   The default is 3 seconds.
+    #   The amount of time that Lambda allows a function to run before
+    #   terminating it.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The memory size, in MB, you configured for the function. Must be a
-    #   multiple of 64 MB.
+    #   The memory allocated to the function
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified
-    #   The time stamp of the last time you updated the function. The time
-    #   stamp is conveyed as a string complying with ISO-8601 in this way
-    #   YYYY-MM-DDThh:mm:ssTZD (e.g., 1997-07-16T19:20:30+01:00). For more
-    #   information, see [Date and Time Formats][1].
+    #   The date and time that the function was last updated, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
     #
     #
     #
@@ -1012,7 +1073,7 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] code_sha_256
-    #   It is the SHA256 hash of your function deployment package.
+    #   The SHA256 hash of the function's deployment package.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1020,37 +1081,41 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration associated with your Lambda function.
+    #   The function's networking configuration.
     #   @return [Types::VpcConfigResponse]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic. For more
-    #   information, see dlq.
+    #   The function's dead letter queue.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
-    #   The parent object that contains your environment's configuration
-    #   settings.
+    #   The function's environment variables.
     #   @return [Types::EnvironmentResponse]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
-    #   function's environment variables. If empty, it means you are using
-    #   the AWS Lambda default service key.
+    #   The KMS key used to encrypt the function's environment variables.
+    #   Only returned if you've configured a customer managed CMK.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
-    #   The parent object that contains your function's tracing settings.
+    #   The function's AWS X-Ray tracing configuration.
     #   @return [Types::TracingConfigResponse]
     #
     # @!attribute [rw] master_arn
-    #   Returns the ARN (Amazon Resource Name) of the master function.
+    #   The ARN of the master function.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
     #   Represents the latest updated revision of the function or alias.
     #   @return [String]
+    #
+    # @!attribute [rw] layers
+    #   A list of [function layers][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<Types::Layer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
@@ -1073,7 +1138,8 @@ module Aws::Lambda
       :kms_key_arn,
       :tracing_config,
       :master_arn,
-      :revision_id)
+      :revision_id,
+      :layers)
       include Aws::Structure
     end
 
@@ -1084,13 +1150,11 @@ module Aws::Lambda
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_limit
-    #   Provides limits of code size and concurrency associated with the
-    #   current account and region.
+    #   Limits related to concurrency and code storage.
     #   @return [Types::AccountLimit]
     #
     # @!attribute [rw] account_usage
-    #   Provides code size usage and function count associated with the
-    #   current account and region.
+    #   The number of functions and amount of storage in use.
     #   @return [Types::AccountUsage]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsResponse AWS API Documentation
@@ -1110,11 +1174,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Function name for which the alias is created. An alias is a
-    #   subresource that exists only in the context of an existing Lambda
-    #   function so you must specify the function name. Note that the length
-    #   constraint applies only to the ARN. If you specify only the function
-    #   name, it is limited to 64 characters in length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1137,7 +1209,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] uuid
-    #   The AWS Lambda assigned ID of the event source mapping.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest AWS API Documentation
@@ -1156,29 +1228,24 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function for which you want to retrieve the
-    #   configuration information.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   Using this optional parameter you can specify a function version or
-    #   an alias name. If you specify function version, the API uses
-    #   qualified function ARN and returns information about the specific
-    #   function version. If you specify an alias name, the API uses the
-    #   alias ARN and returns information about the function version to
-    #   which the alias points.
-    #
-    #   If you don't specify this parameter, the API uses unqualified
-    #   function ARN, and returns information about the `$LATEST` function
-    #   version.
+    #   Specify a version or alias to get details about a published version
+    #   of the function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest AWS API Documentation
@@ -1198,26 +1265,24 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function name.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   Use this optional parameter to specify a function version or an
-    #   alias name. If you specify function version, the API uses qualified
-    #   function ARN for the request and returns information about the
-    #   specific Lambda function version. If you specify an alias name, the
-    #   API uses the alias ARN and returns information about the function
-    #   version to which the alias points. If you don't provide this
-    #   parameter, the API uses unqualified function ARN and returns
-    #   information about the `$LATEST` version of the Lambda function.
+    #   Specify a version or alias to get details about a published version
+    #   of the function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRequest AWS API Documentation
@@ -1232,11 +1297,11 @@ module Aws::Lambda
     # (see FunctionCodeLocation.
     #
     # @!attribute [rw] configuration
-    #   A complex type that describes function metadata.
+    #   The function's configuration.
     #   @return [Types::FunctionConfiguration]
     #
     # @!attribute [rw] code
-    #   The object for the Lambda function location.
+    #   The function's code.
     #   @return [Types::FunctionCodeLocation]
     #
     # @!attribute [rw] tags
@@ -1251,7 +1316,11 @@ module Aws::Lambda
     #
     # @!attribute [rw] concurrency
     #   The concurrent execution limit set for this function. For more
-    #   information, see concurrent-executions.
+    #   information, see [Managing Concurrency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Types::Concurrency]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse AWS API Documentation
@@ -1264,6 +1333,121 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLayerVersionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionPolicyRequest AWS API Documentation
+    #
+    class GetLayerVersionPolicyRequest < Struct.new(
+      :layer_name,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy document.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionPolicyResponse AWS API Documentation
+    #
+    class GetLayerVersionPolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLayerVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionRequest AWS API Documentation
+    #
+    class GetLayerVersionRequest < Struct.new(
+      :layer_name,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   Details about the layer version.
+    #   @return [Types::LayerVersionContentOutput]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_version_arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date that the layer version was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   The layer's compatible runtimes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's software license.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionResponse AWS API Documentation
+    #
+    class GetLayerVersionResponse < Struct.new(
+      :content,
+      :layer_arn,
+      :layer_version_arn,
+      :description,
+      :created_date,
+      :version,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPolicyRequest
     #   data as a hash:
     #
@@ -1273,18 +1457,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Function name whose resource policy you want to retrieve.
+    #   The name of the lambda function.
     #
-    #   You can specify the function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). If you
-    #   are using versioning, you can also provide a qualified function ARN
-    #   (ARN that is qualified with function version or alias name as
-    #   suffix). AWS Lambda also allows you to specify only the function
-    #   name with the account ID qualifier (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -1334,27 +1519,34 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function name.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] invocation_type
-    #   By default, the `Invoke` API assumes `RequestResponse` invocation
-    #   type. You can optionally request asynchronous execution by
-    #   specifying `Event` as the `InvocationType`. You can also use this
-    #   parameter to request AWS Lambda to not execute the function but do
-    #   some verification, such as if the caller is authorized to invoke the
-    #   function and if the inputs are valid. You request this by specifying
-    #   `DryRun` as the `InvocationType`. This is useful in a cross-account
-    #   scenario when you want to verify access to a function without
-    #   running it.
+    #   Choose from the following options.
+    #
+    #   * `RequestResponse` (default) - Invoke the function synchronously.
+    #     Keep the connection open until the function returns a response or
+    #     times out.
+    #
+    #   * `Event` - Invoke the function asynchronously. Send events that
+    #     fail multiple times to the function's dead-letter queue (if
+    #     configured).
+    #
+    #   * `DryRun` - Validate parameter values and verify that the user or
+    #     role has permission to invoke the function.
     #   @return [String]
     #
     # @!attribute [rw] log_type
@@ -1376,6 +1568,11 @@ module Aws::Lambda
     #   The ClientContext JSON must be base64-encoded and has a maximum size
     #   of 3583 bytes.
     #
+    #   <note markdown="1"> `ClientContext` information is returned only if you use the
+    #   synchronous (`RequestResponse`) invocation type.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html
@@ -1386,14 +1583,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   You can use this optional parameter to specify a Lambda function
-    #   version or alias name. If you specify a function version, the API
-    #   uses the qualified function ARN to invoke a specific Lambda
-    #   function. If you specify an alias name, the API uses the alias ARN
-    #   to invoke the Lambda function version to which the alias points.
-    #
-    #   If you don't provide this parameter, then the API uses unqualified
-    #   function ARN which results in invocation of the `$LATEST` version.
+    #   Specify a version or alias to invoke a published version of the
+    #   function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest AWS API Documentation
@@ -1453,7 +1644,11 @@ module Aws::Lambda
     # @!attribute [rw] executed_version
     #   The function version that has been executed. This value is returned
     #   only if the invocation type is `RequestResponse`. For more
-    #   information, see lambda-traffic-shifting-using-aliases.
+    #   information, see [Traffic Shifting Using Aliases][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse AWS API Documentation
@@ -1476,9 +1671,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function name. Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] invoke_args
@@ -1507,6 +1712,152 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # A function layer.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_size
+    #   The size of the layer archive in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Layer AWS API Documentation
+    #
+    class Layer < Struct.new(
+      :arn,
+      :code_size)
+      include Aws::Structure
+    end
+
+    # A ZIP archive that contains the contents of the function layer. You
+    # can specify either an Amazon S3 location, or upload a layer archive
+    # directly.
+    #
+    # @note When making an API call, you may pass LayerVersionContentInput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "S3Bucket",
+    #         s3_key: "S3Key",
+    #         s3_object_version: "S3ObjectVersion",
+    #         zip_file: "data",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The Amazon S3 bucket of the layer archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The Amazon S3 key of the layer archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_version
+    #   For versioned objects, the version of the layer archive object to
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] zip_file
+    #   The base64-encoded contents of the layer archive. AWS SDK and AWS
+    #   CLI clients handle the encoding for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentInput AWS API Documentation
+    #
+    class LayerVersionContentInput < Struct.new(
+      :s3_bucket,
+      :s3_key,
+      :s3_object_version,
+      :zip_file)
+      include Aws::Structure
+    end
+
+    # Details about a layer version.
+    #
+    # @!attribute [rw] location
+    #   A link to the layer archive in Amazon S3 that is valid for 10
+    #   minutes.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_sha_256
+    #   The SHA-256 hash of the layer archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_size
+    #   The size of the layer archive in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentOutput AWS API Documentation
+    #
+    class LayerVersionContentOutput < Struct.new(
+      :location,
+      :code_sha_256,
+      :code_size)
+      include Aws::Structure
+    end
+
+    # Details about a layer version.
+    #
+    # @!attribute [rw] layer_version_arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date that the version was created, in ISO 8601 format. For
+    #   example, `2018-11-27T15:10:45.123+0000`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   The layer's compatible runtimes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's open-source license.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionsListItem AWS API Documentation
+    #
+    class LayerVersionsListItem < Struct.new(
+      :layer_version_arn,
+      :version,
+      :description,
+      :created_date,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
+    # Details about a function layer.
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_matching_version
+    #   The newest version of the layer.
+    #   @return [Types::LayerVersionsListItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayersListItem AWS API Documentation
+    #
+    class LayersListItem < Struct.new(
+      :layer_name,
+      :layer_arn,
+      :latest_matching_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAliasesRequest
     #   data as a hash:
     #
@@ -1518,9 +1869,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Lambda function name for which the alias is created. Note that the
-    #   length constraint applies only to the ARN. If you specify only the
-    #   function name, it is limited to 64 characters in length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] function_version
@@ -1578,34 +1939,41 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
-    #   stream, or an SQS queue. (This parameter is optional.)
+    #   The Amazon Resource Name (ARN) of the event source.
+    #
+    #   * **Amazon Kinesis** - The ARN of the data stream or a stream
+    #     consumer.
+    #
+    #   * **Amazon DynamoDB Streams** - The ARN of the stream.
+    #
+    #   * **Amazon Simple Queue Service** - The ARN of the queue.
     #   @return [String]
     #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
-    #   You can specify the function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). If you
-    #   are using versioning, you can also provide a qualified function ARN
-    #   (ARN that is qualified with function version or alias name as
-    #   suffix). AWS Lambda also allows you to specify only the function
-    #   name with the account ID qualifier (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Version or Alias ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it's limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   Optional string. An opaque pagination token returned from a previous
-    #   `ListEventSourceMappings` operation. If present, specifies to
-    #   continue the list from where the returning call left off.
+    #   A pagination token returned by a previous call.
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Optional integer. Specifies the maximum number of event sources to
-    #   return in response. This value must be greater than 0.
+    #   The maximum number of event source mappings to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest AWS API Documentation
@@ -1618,14 +1986,13 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Contains a list of event sources (see EventSourceMappingConfiguration)
-    #
     # @!attribute [rw] next_marker
-    #   A string, present if there are more event source mappings.
+    #   A pagination token that's returned when the response doesn't
+    #   contain all event source mappings.
     #   @return [String]
     #
     # @!attribute [rw] event_source_mappings
-    #   An array of `EventSourceMappingConfiguration` objects.
+    #   A list of event source mappings.
     #   @return [Array<Types::EventSourceMappingConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsResponse AWS API Documentation
@@ -1647,27 +2014,15 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] master_region
-    #   Optional string. If not specified, will return only regular function
-    #   versions (i.e., non-replicated versions).
-    #
-    #   Valid values are:
-    #
-    #   The region from which the functions are replicated. For example, if
-    #   you specify `us-east-1`, only functions replicated from that region
-    #   will be returned.
-    #
-    #   `ALL`\: Will return all functions from any region. If specified, you
-    #   also must specify a valid FunctionVersion parameter.
+    #   Specify a region (e.g. `us-east-2`) to only list functions that were
+    #   created in that region, or `ALL` to include functions replicated
+    #   from any region. If specified, you also must specify the
+    #   `FunctionVersion`.
     #   @return [String]
     #
     # @!attribute [rw] function_version
-    #   Optional string. If not specified, only the unqualified functions
-    #   ARNs (Amazon Resource Names) will be returned.
-    #
-    #   Valid value:
-    #
-    #   `ALL`\: Will return all versions, including `$LATEST` which will
-    #   have fully qualified ARNs (Amazon Resource Names).
+    #   Set to `ALL` to list all published versions. If not specified, only
+    #   the latest unpublished version ARN is returned.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -1679,7 +2034,8 @@ module Aws::Lambda
     # @!attribute [rw] max_items
     #   Optional integer. Specifies the maximum number of AWS Lambda
     #   functions to return in response. This parameter value must be
-    #   greater than 0.
+    #   greater than 0. The absolute maximum of AWS Lambda functions that
+    #   can be returned is 50.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest AWS API Documentation
@@ -1692,8 +2048,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Contains a list of AWS Lambda function configurations (see
-    # FunctionConfiguration.
+    # A list of Lambda functions.
     #
     # @!attribute [rw] next_marker
     #   A string, present if there are more functions.
@@ -1708,6 +2063,106 @@ module Aws::Lambda
     class ListFunctionsResponse < Struct.new(
       :next_marker,
       :functions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLayerVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #         layer_name: "LayerName", # required
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] compatible_runtime
+    #   A runtime identifier. For example, `go1.x`.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token returned by a previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of versions to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsRequest AWS API Documentation
+    #
+    class ListLayerVersionsRequest < Struct.new(
+      :compatible_runtime,
+      :layer_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A pagination token returned when the response doesn't contain all
+    #   versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_versions
+    #   A list of versions.
+    #   @return [Array<Types::LayerVersionsListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsResponse AWS API Documentation
+    #
+    class ListLayerVersionsResponse < Struct.new(
+      :next_marker,
+      :layer_versions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLayersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] compatible_runtime
+    #   A runtime identifier. For example, `go1.x`.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token returned by a previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of layers to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersRequest AWS API Documentation
+    #
+    class ListLayersRequest < Struct.new(
+      :compatible_runtime,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A pagination token returned when the response doesn't contain all
+    #   layers.
+    #   @return [String]
+    #
+    # @!attribute [rw] layers
+    #   A list of function layers.
+    #   @return [Array<Types::LayersListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersResponse AWS API Documentation
+    #
+    class ListLayersResponse < Struct.new(
+      :next_marker,
+      :layers)
       include Aws::Structure
     end
 
@@ -1761,14 +2216,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Function name whose versions to list. You can specify a function
-    #   name (for example, `Thumbnail`) or you can specify Amazon Resource
-    #   Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -1808,6 +2268,120 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PublishLayerVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         description: "Description",
+    #         content: { # required
+    #           s3_bucket: "S3Bucket",
+    #           s3_key: "S3Key",
+    #           s3_object_version: "S3ObjectVersion",
+    #           zip_file: "data",
+    #         },
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #         license_info: "LicenseInfo",
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The function layer archive.
+    #   @return [Types::LayerVersionContentInput]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   A list of compatible [function runtimes][1]. Used for filtering with
+    #   ListLayers and ListLayerVersions.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's software license. It can be any of the following:
+    #
+    #   * An [SPDX license identifier][1]. For example, `MIT`.
+    #
+    #   * The URL of a license hosted on the internet. For example,
+    #     `https://opensource.org/licenses/MIT`.
+    #
+    #   * The full text of the license.
+    #
+    #
+    #
+    #   [1]: https://spdx.org/licenses/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersionRequest AWS API Documentation
+    #
+    class PublishLayerVersionRequest < Struct.new(
+      :layer_name,
+      :description,
+      :content,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   Details about the layer version.
+    #   @return [Types::LayerVersionContentOutput]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_version_arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date that the layer version was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compatible_runtimes
+    #   The layer's compatible runtimes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_info
+    #   The layer's software license.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersionResponse AWS API Documentation
+    #
+    class PublishLayerVersionResponse < Struct.new(
+      :content,
+      :layer_arn,
+      :layer_version_arn,
+      :description,
+      :created_date,
+      :version,
+      :compatible_runtimes,
+      :license_info)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PublishVersionRequest
     #   data as a hash:
     #
@@ -1819,14 +2393,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function name. You can specify a function name (for
-    #   example, `Thumbnail`) or you can specify Amazon Resource Name (ARN)
-    #   of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] code_sha_256
@@ -1847,8 +2426,9 @@ module Aws::Lambda
     #   An optional value you can use to ensure you are updating the latest
     #   update of the function version or alias. If the `RevisionID` you
     #   pass doesn't match the latest `RevisionId` of the function or
-    #   alias, it will fail with an error message, advising you to retrieve
-    #   the latest function version or alias `RevisionID` using either or .
+    #   alias, it will fail with an error message, advising you retrieve the
+    #   latest function version or alias `RevisionID` using either
+    #   GetFunction or GetAlias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersionRequest AWS API Documentation
@@ -1870,13 +2450,23 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the function you are setting concurrent execution limits
-    #   on. For more information, see concurrent-executions.
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] reserved_concurrent_executions
-    #   The concurrent execution limit reserved for this function. For more
-    #   information, see concurrent-executions.
+    #   The concurrent execution limit reserved for this function.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest AWS API Documentation
@@ -1884,6 +2474,44 @@ module Aws::Lambda
     class PutFunctionConcurrencyRequest < Struct.new(
       :function_name,
       :reserved_concurrent_executions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveLayerVersionPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         layer_name: "LayerName", # required
+    #         version_number: 1, # required
+    #         statement_id: "StatementId", # required
+    #         revision_id: "String",
+    #       }
+    #
+    # @!attribute [rw] layer_name
+    #   The name of the layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statement_id
+    #   The identifier that was specified when the statement was added.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   Only update the policy if the revision ID matches the ID specified.
+    #   Use this option to avoid modifying a policy that has changed since
+    #   you last read it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemoveLayerVersionPermissionRequest AWS API Documentation
+    #
+    class RemoveLayerVersionPermissionRequest < Struct.new(
+      :layer_name,
+      :version_number,
+      :statement_id,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1898,16 +2526,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Lambda function whose resource policy you want to remove a
-    #   permission from.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -1915,10 +2546,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   You can specify this optional parameter to remove permission
-    #   associated with a specific function version or function alias. If
-    #   you don't specify this parameter, the API removes permission
-    #   associated with the unqualified function ARN.
+    #   Specify a version or alias to remove permissions from a published
+    #   version of the function.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -1926,7 +2555,8 @@ module Aws::Lambda
     #   update of the function version or alias. If the `RevisionID` you
     #   pass doesn't match the latest `RevisionId` of the function or
     #   alias, it will fail with an error message, advising you to retrieve
-    #   the latest function version or alias `RevisionID` using either or .
+    #   the latest function version or alias `RevisionID` using either
+    #   GetFunction or GetAlias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest AWS API Documentation
@@ -1977,7 +2607,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object that contains your function's tracing settings.
+    # The function's AWS X-Ray tracing configuration.
     #
     # @note When making an API call, you may pass TracingConfig
     #   data as a hash:
@@ -1987,12 +2617,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] mode
-    #   Can be either PassThrough or Active. If PassThrough, Lambda will
-    #   only trace the request from an upstream service if it contains a
-    #   tracing header with "sampled=1". If Active, Lambda will respect
-    #   any tracing header it receives from an upstream service. If no
-    #   tracing header is received, Lambda will call X-Ray for a tracing
-    #   decision.
+    #   The tracing mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfig AWS API Documentation
@@ -2002,11 +2627,10 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Parent object of the tracing information associated with your Lambda
-    # function.
+    # The function's AWS X-Ray tracing configuration.
     #
     # @!attribute [rw] mode
-    #   The tracing mode associated with your Lambda function.
+    #   The tracing mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfigResponse AWS API Documentation
@@ -2069,9 +2693,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The function name for which the alias is created. Note that the
-    #   length constraint applies only to the ARN. If you specify only the
-    #   function name, it is limited to 64 characters in length.
+    #   The name of the lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2090,15 +2724,20 @@ module Aws::Lambda
     # @!attribute [rw] routing_config
     #   Specifies an additional version your alias can point to, allowing
     #   you to dictate what percentage of traffic will invoke each version.
-    #   For more information, see lambda-traffic-shifting-using-aliases.
+    #   For more information, see [Traffic Shifting Using Aliases][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @!attribute [rw] revision_id
     #   An optional value you can use to ensure you are updating the latest
     #   update of the function version or alias. If the `RevisionID` you
     #   pass doesn't match the latest `RevisionId` of the function or
-    #   alias, it will fail with an error message, advising you to retrieve
-    #   the latest function version or alias `RevisionID` using either or .
+    #   alias, it will fail with an error message, advising you retrieve the
+    #   latest function version or alias `RevisionID` using either
+    #   GetFunction or GetAlias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest AWS API Documentation
@@ -2124,42 +2763,40 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] uuid
-    #   The event source mapping identifier.
+    #   The identifier of the event source mapping.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The Lambda function to which you want the stream records sent.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
     #
-    #   If you are using versioning, you can also provide a qualified
-    #   function ARN (ARN that is qualified with function version or alias
-    #   name as suffix). For more information about versioning, see [AWS
-    #   Lambda Function Versioning and Aliases][1]
+    #   * **Function name** - `MyFunction`.
     #
-    #   Note that the length constraint applies only to the ARN. If you
-    #   specify only the function name, it is limited to 64 character in
-    #   length.
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
     #
+    #   * **Version or Alias ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
     #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it's limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Specifies whether AWS Lambda should actively poll the stream or not.
-    #   If disabled, AWS Lambda will not poll the stream.
+    #   Disables the event source mapping to pause polling and invocation.
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
-    #   The maximum number of stream records that can be sent to your Lambda
-    #   function for a single invocation.
+    #   The maximum number of items to retrieve in a single batch.
+    #
+    #   * **Amazon Kinesis** - Default 100. Max 10,000.
+    #
+    #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
+    #
+    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
@@ -2187,15 +2824,19 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The existing Lambda function name whose code you want to replace.
+    #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 characters in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] zip_file
@@ -2247,7 +2888,8 @@ module Aws::Lambda
     #   update of the function version or alias. If the `RevisionID` you
     #   pass doesn't match the latest `RevisionId` of the function or
     #   alias, it will fail with an error message, advising you to retrieve
-    #   the latest function version or alias `RevisionID` using either or .
+    #   the latest function version or alias `RevisionID` using either using
+    #   using either GetFunction or GetAlias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
@@ -2283,7 +2925,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, python3.7, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
@@ -2292,18 +2934,23 @@ module Aws::Lambda
     #           mode: "Active", # accepts Active, PassThrough
     #         },
     #         revision_id: "String",
+    #         layers: ["LayerVersionArn"],
     #       }
     #
     # @!attribute [rw] function_name
     #   The name of the Lambda function.
     #
-    #   You can specify a function name (for example, `Thumbnail`) or you
-    #   can specify Amazon Resource Name (ARN) of the function (for example,
-    #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
-    #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`). Note that the length constraint applies
-    #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -2322,10 +2969,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] timeout
-    #   The function execution time at which AWS Lambda should terminate the
-    #   function. Because the execution time has cost implications, we
-    #   recommend you set this value based on your expected execution time.
-    #   The default is 3 seconds.
+    #   The amount of time that Lambda allows a function to run before
+    #   terminating it. The default is 3 seconds. The maximum allowed value
+    #   is 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
@@ -2338,10 +2984,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_config
-    #   If your Lambda function accesses resources in a VPC, you provide
-    #   this parameter identifying the list of security group IDs and subnet
-    #   IDs. These must belong to the same VPC. You must provide at least
-    #   one security group and one subnet ID.
+    #   Specify security groups and subnets in a VPC to which your Lambda
+    #   function needs access.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] environment
@@ -2350,29 +2994,17 @@ module Aws::Lambda
     #   @return [Types::Environment]
     #
     # @!attribute [rw] runtime
-    #   The runtime environment for the Lambda function.
-    #
-    #   To use the Python runtime v3.6, set the value to "python3.6". To
-    #   use the Python runtime v2.7, set the value to "python2.7". To use
-    #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
-    #   the Node.js runtime v4.3, set the value to "nodejs4.3". To use the
-    #   .NET Core runtime v1.0, set the value to "dotnetcore1.0". To use
-    #   the .NET Core runtime v2.0, set the value to "dotnetcore2.0".
-    #
-    #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
-    #   existing functions to the newer Node.js runtime versions available
-    #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure
-    #   to do so will result in an invalid parameter error being returned.
-    #   Note that you will have to follow this procedure for each region
-    #   that contains functions written in the Node v0.10.42 runtime.
-    #
-    #    </note>
+    #   The runtime version for the function.
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic. For more
-    #   information, see dlq.
+    #   A dead letter queue configuration that specifies the queue or topic
+    #   where Lambda sends asynchronous events when they fail processing.
+    #   For more information, see [Dead Letter Queues][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/dlq.html
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn
@@ -2383,7 +3015,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
-    #   The parent object that contains your function's tracing settings.
+    #   Set `Mode` to `Active` to sample and trace a subset of incoming
+    #   requests with AWS X-Ray.
     #   @return [Types::TracingConfig]
     #
     # @!attribute [rw] revision_id
@@ -2391,8 +3024,18 @@ module Aws::Lambda
     #   update of the function version or alias. If the `RevisionID` you
     #   pass doesn't match the latest `RevisionId` of the function or
     #   alias, it will fail with an error message, advising you to retrieve
-    #   the latest function version or alias `RevisionID` using either or .
+    #   the latest function version or alias `RevisionID` using either
+    #   GetFunction or GetAlias.
     #   @return [String]
+    #
+    # @!attribute [rw] layers
+    #   A list of [function layers][1] to add to the function's execution
+    #   environment.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
@@ -2409,14 +3052,12 @@ module Aws::Lambda
       :dead_letter_config,
       :kms_key_arn,
       :tracing_config,
-      :revision_id)
+      :revision_id,
+      :layers)
       include Aws::Structure
     end
 
-    # If your Lambda function accesses resources in a VPC, you provide this
-    # parameter identifying the list of security group IDs and subnet IDs.
-    # These must belong to the same VPC. You must provide at least one
-    # security group and one subnet ID.
+    # The VPC security groups and subnets attached to a Lambda function.
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:
@@ -2427,11 +3068,11 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] subnet_ids
-    #   A list of one or more subnet IDs in your VPC.
+    #   A list of VPC subnet IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   A list of one or more security groups IDs in your VPC.
+    #   A list of VPC security groups IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig AWS API Documentation
@@ -2442,18 +3083,18 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # VPC configuration associated with your Lambda function.
+    # The VPC security groups and subnets attached to a Lambda function.
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet IDs associated with the Lambda function.
+    #   A list of VPC subnet IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   A list of security group IDs associated with the Lambda function.
+    #   A list of VPC security groups IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id
-    #   The VPC ID associated with you Lambda function.
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse AWS API Documentation

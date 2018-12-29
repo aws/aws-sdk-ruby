@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -43,112 +47,157 @@ module Aws::SNS
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -445,6 +494,21 @@ module Aws::SNS
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
     #
+    # @option params [Hash<String,String>] :attributes
+    #   A map of attributes with their corresponding values.
+    #
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `CreateTopic` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `DisplayName` – The display name to use for a topic with SMS
+    #     subscriptions.
+    #
+    #   * `Policy` – The policy that defines who can access your topic. By
+    #     default, only the topic owner can publish or subscribe to the topic.
+    #
     # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTopicResponse#topic_arn #topic_arn} => String
@@ -453,6 +517,9 @@ module Aws::SNS
     #
     #   resp = client.create_topic({
     #     name: "topicName", # required
+    #     attributes: {
+    #       "attributeName" => "attributeValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1060,6 +1127,10 @@ module Aws::SNS
     # @option params [required, String] :message
     #   The message you want to send.
     #
+    #   The `Message` parameter is always a string. If you set
+    #   `MessageStructure` to `json`, you must string-encode the `Message`
+    #   parameter.
+    #
     #   If you are publishing to a topic and you want to send the same message
     #   to all transport protocols, include the text of the message as a
     #   String value. If you want to send different messages for each
@@ -1071,16 +1142,20 @@ module Aws::SNS
     #   Constraints:
     #
     #   * With the exception of SMS, messages must be UTF-8 encoded strings
-    #     and at most 256 KB in size (262144 bytes, not 262144 characters).
+    #     and at most 256 KB in size (262,144 bytes, not 262,144 characters).
     #
-    #   * For SMS, each message can contain up to 140 bytes, and the character
-    #     limit depends on the encoding scheme. For example, an SMS message
-    #     can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2
-    #     characters. If you publish a message that exceeds the size limit,
-    #     Amazon SNS sends it as multiple messages, each fitting within the
-    #     size limit. Messages are not cut off in the middle of a word but on
-    #     whole-word boundaries. The total size limit for a single SMS publish
-    #     action is 1600 bytes.
+    #   * For SMS, each message can contain up to 140 characters. This
+    #     character limit depends on the encoding schema. For example, an SMS
+    #     message can contain 160 GSM characters, 140 ASCII characters, or 70
+    #     UCS-2 characters.
+    #
+    #     If you publish a message that exceeds this size limit, Amazon SNS
+    #     sends the message as multiple messages, each fitting within the size
+    #     limit. Messages aren't truncated mid-word but are cut off at
+    #     whole-word boundaries.
+    #
+    #     The total size limit for a single SMS `Publish` action is 1,600
+    #     characters.
     #
     #   JSON-specific constraints:
     #
@@ -1223,16 +1298,16 @@ module Aws::SNS
     #   A map of the endpoint attributes. Attributes in this map include the
     #   following:
     #
-    #   * `CustomUserData` -- arbitrary user data to associate with the
+    #   * `CustomUserData` – arbitrary user data to associate with the
     #     endpoint. Amazon SNS does not use this data. The data must be in
     #     UTF-8 format and less than 2KB.
     #
-    #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
+    #   * `Enabled` – flag that enables/disables delivery to the endpoint.
     #     Amazon SNS will set this to false when a notification service
     #     indicates to Amazon SNS that the endpoint is invalid. Users can set
     #     it back to true, typically after updating Token.
     #
-    #   * `Token` -- device token, also referred to as a registration id, for
+    #   * `Token` – device token, also referred to as a registration id, for
     #     an app and mobile device. This is returned from the notification
     #     service when an app and mobile device are registered with the
     #     notification service.
@@ -1276,36 +1351,36 @@ module Aws::SNS
     #   A map of the platform application attributes. Attributes in this map
     #   include the following:
     #
-    #   * `PlatformCredential` -- The credential received from the
-    #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential is
-    #     private key. For GCM, PlatformCredential is "API key". For ADM,
+    #   * `PlatformCredential` – The credential received from the notification
+    #     service. For APNS/APNS\_SANDBOX, PlatformCredential is private key.
+    #     For GCM, PlatformCredential is "API key". For ADM,
     #     PlatformCredential is "client secret".
     #
-    #   * `PlatformPrincipal` -- The principal received from the notification
+    #   * `PlatformPrincipal` – The principal received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
     #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
     #     PlatformPrincipal is "client id".
     #
-    #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
+    #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
     #
-    #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
+    #   * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
     #     notifications should be sent.
     #
-    #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
+    #   * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
     #     notifications should be sent.
     #
-    #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
+    #   * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
     #     notifications should be sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #
-    #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+    #   * `SuccessFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
     #     write access to use CloudWatch Logs on your behalf.
     #
-    #   * `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+    #   * `FailureFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
     #     write access to use CloudWatch Logs on your behalf.
     #
-    #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+    #   * `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
     #     successfully delivered messages.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1450,11 +1525,22 @@ module Aws::SNS
     #   The ARN of the subscription to modify.
     #
     # @option params [required, String] :attribute_name
-    #   The name of the attribute you want to set. Only a subset of the
-    #   subscriptions attributes are mutable.
+    #   A map of attributes with their corresponding values.
     #
-    #   Valid values: `DeliveryPolicy` \| `FilterPolicy` \|
-    #   `RawMessageDelivery`
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `SetTopicAttributes` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `FilterPolicy` – The simple JSON object that lets your subscriber
+    #     receive only a subset of messages, rather than receiving every
+    #     message published to the topic.
+    #
+    #   * `RawMessageDelivery` – When set to `true`, enables raw message
+    #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
+    #     for the endpoints to process JSON formatting, which is otherwise
+    #     created for Amazon SNS metadata.
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute in JSON format.
@@ -1484,10 +1570,19 @@ module Aws::SNS
     #   The ARN of the topic to modify.
     #
     # @option params [required, String] :attribute_name
-    #   The name of the attribute you want to set. Only a subset of the
-    #   topic's attributes are mutable.
+    #   A map of attributes with their corresponding values.
     #
-    #   Valid values: `Policy` \| `DisplayName` \| `DeliveryPolicy`
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `SetTopicAttributes` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `DisplayName` – The display name to use for a topic with SMS
+    #     subscriptions.
+    #
+    #   * `Policy` – The policy that defines who can access your topic. By
+    #     default, only the topic owner can publish or subscribe to the topic.
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute.
@@ -1525,22 +1620,22 @@ module Aws::SNS
     # @option params [required, String] :protocol
     #   The protocol you want to use. Supported protocols include:
     #
-    #   * `http` -- delivery of JSON-encoded message via HTTP POST
+    #   * `http` – delivery of JSON-encoded message via HTTP POST
     #
-    #   * `https` -- delivery of JSON-encoded message via HTTPS POST
+    #   * `https` – delivery of JSON-encoded message via HTTPS POST
     #
-    #   * `email` -- delivery of message via SMTP
+    #   * `email` – delivery of message via SMTP
     #
-    #   * `email-json` -- delivery of JSON-encoded message via SMTP
+    #   * `email-json` – delivery of JSON-encoded message via SMTP
     #
-    #   * `sms` -- delivery of message via SMS
+    #   * `sms` – delivery of message via SMS
     #
-    #   * `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+    #   * `sqs` – delivery of JSON-encoded message to an Amazon SQS queue
     #
-    #   * `application` -- delivery of JSON-encoded message to an EndpointArn
+    #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device.
     #
-    #   * `lambda` -- delivery of JSON-encoded message to an AWS Lambda
+    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
     #     function.
     #
     # @option params [String] :endpoint
@@ -1570,9 +1665,22 @@ module Aws::SNS
     #     function.
     #
     # @option params [Hash<String,String>] :attributes
-    #   Assigns attributes to the subscription as a map of key-value pairs.
-    #   You can assign any attribute that is supported by the
-    #   `SetSubscriptionAttributes` action.
+    #   A map of attributes with their corresponding values.
+    #
+    #   The following lists the names, descriptions, and values of the special
+    #   request parameters that the `SetTopicAttributes` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `FilterPolicy` – The simple JSON object that lets your subscriber
+    #     receive only a subset of messages, rather than receiving every
+    #     message published to the topic.
+    #
+    #   * `RawMessageDelivery` – When set to `true`, enables raw message
+    #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
+    #     for the endpoints to process JSON formatting, which is otherwise
+    #     created for Amazon SNS metadata.
     #
     # @option params [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
@@ -1661,7 +1769,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -32,7 +32,6 @@ module Aws
             },
             config: {
               nested: true,
-              file: File.open(__FILE__),
               path: Pathname.new(__FILE__),
               complex: double('obj', inspect: '"inspected"')
             },
@@ -41,7 +40,7 @@ module Aws
           formatted = format('{:request_params}', max_string_size: 20)
           size = File.size(__FILE__)
           expect(formatted).to eq(<<-FORMATTED.strip)
-{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,file:#<File:#{__FILE__} (#{size} bytes)>,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
+{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
           FORMATTED
         end
 

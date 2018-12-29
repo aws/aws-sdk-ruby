@@ -4404,28 +4404,35 @@ module Aws::SES
     #   @return [Array<String>]
     #
     # @!attribute [rw] raw_message
-    #   The raw text of the message. The client is responsible for ensuring
-    #   the following:
+    #   The raw email message itself. The message has to meet the following
+    #   criteria:
     #
-    #   * Message must contain a header and a body, separated by a blank
-    #     line.
+    #   * The message has to contain a header and a body, separated by a
+    #     blank line.
     #
-    #   * All required header fields must be present.
+    #   * All of the required header fields must be present in the message.
     #
     #   * Each part of a multipart MIME message must be formatted properly.
     #
-    #   * MIME content types must be among those supported by Amazon SES.
-    #     For more information, go to the [Amazon SES Developer Guide][1].
+    #   * Attachments must be of a content type that Amazon SES supports.
+    #     For a list on unsupported content types, see [Unsupported
+    #     Attachment Types][1] in the *Amazon SES Developer Guide*.
     #
-    #   * Must be base64-encoded.
+    #   * The entire message must be base64-encoded.
     #
-    #   * Per [RFC 5321][2], the maximum length of each line of text,
+    #   * If any of the MIME parts in your message contain content that is
+    #     outside of the 7-bit ASCII character range, we highly recommend
+    #     that you encode that content. For more information, see [Sending
+    #     Raw Email][2] in the *Amazon SES Developer Guide*.
+    #
+    #   * Per [RFC 5321][3], the maximum length of each line of text,
     #     including the &lt;CRLF&gt;, must not exceed 1,000 characters.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
-    #   [2]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
+    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [3]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #   @return [Types::RawMessage]
     #
     # @!attribute [rw] from_arn
@@ -4992,9 +4999,14 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] identity
-    #   The identity for which the Amazon SNS topic will be set. You can
-    #   specify an identity by using its name or by using its Amazon
-    #   Resource Name (ARN). Examples: `user@example.com`, `example.com`,
+    #   The identity (email address or domain) that you want to set the
+    #   Amazon SNS topic for.
+    #
+    #   You can only specify a verified identity for this parameter.
+    #
+    #   You can specify an identity by using its name or by using its Amazon
+    #   Resource Name (ARN). The following examples are all valid
+    #   identities: `sender@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #   @return [String]
     #

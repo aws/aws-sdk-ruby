@@ -79,6 +79,7 @@ A delay randomiser function used by the default backoff function. Some predefine
           'ThrottlingException',                    # json services
           'RequestThrottled',                       # sqs
           'ProvisionedThroughputExceededException', # dynamodb
+          'TransactionInProgressException',         # dynamodb
           'RequestLimitExceeded',                   # ec2
           'BandwidthLimitExceeded',                 # cloud search
           'LimitExceededException',                 # kinesis
@@ -104,7 +105,7 @@ A delay randomiser function used by the default backoff function. Some predefine
         end
 
         def throttling_error?
-          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i))
+          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i) || @http_status_code == 429)
         end
 
         def checksum?
@@ -120,7 +121,39 @@ A delay randomiser function used by the default backoff function. Some predefine
           (500..599).include?(@http_status_code)
         end
 
+        def endpoint_discovery?(context)
+          return false unless context.operation.endpoint_discovery
+
+          if @http_status_code == 421 ||
+            extract_name(@error) == 'InvalidEndpointException'
+            @error = Errors::EndpointDiscoveryError.new
+          end
+
+          # When endpoint discovery error occurs
+          # evict the endpoint from cache
+          if @error.is_a?(Errors::EndpointDiscoveryError)
+            key = context.config.endpoint_cache.extract_key(context)
+            context.config.endpoint_cache.delete(key)
+            true
+          else
+            false
+          end
+        end
+          
+        def retryable?(context)
+          (expired_credentials? and refreshable_credentials?(context)) or
+            throttling_error? or
+            checksum? or
+            networking? or
+            server? or
+            endpoint_discovery?(context)
+        end
+
         private
+
+        def refreshable_credentials?(context)
+          context.config.credentials.respond_to?(:refresh!)
+        end
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)
@@ -174,21 +207,9 @@ A delay randomiser function used by the default backoff function. Some predefine
         end
 
         def should_retry?(context, error)
-          retryable?(context, error) and
+          error.retryable?(context) and
           context.retries < retry_limit(context) and
           response_truncatable?(context)
-        end
-
-        def retryable?(context, error)
-          (error.expired_credentials? and refreshable_credentials?(context)) or
-          error.throttling_error? or
-          error.checksum? or
-          error.networking? or
-          error.server?
-        end
-
-        def refreshable_credentials?(context)
-          context.config.credentials.respond_to?(:refresh!)
         end
 
         def retry_limit(context)

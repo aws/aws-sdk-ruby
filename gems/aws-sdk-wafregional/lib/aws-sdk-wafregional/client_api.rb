@@ -59,6 +59,8 @@ module Aws::WAFRegional
     DeleteGeoMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteGeoMatchSetResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
     DeleteIPSetResponse = Shapes::StructureShape.new(name: 'DeleteIPSetResponse')
+    DeleteLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteLoggingConfigurationRequest')
+    DeleteLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteLoggingConfigurationResponse')
     DeletePermissionPolicyRequest = Shapes::StructureShape.new(name: 'DeletePermissionPolicyRequest')
     DeletePermissionPolicyResponse = Shapes::StructureShape.new(name: 'DeletePermissionPolicyResponse')
     DeleteRateBasedRuleRequest = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleRequest')
@@ -81,6 +83,8 @@ module Aws::WAFRegional
     DeleteXssMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteXssMatchSetResponse')
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
+    ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
+    ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     GeoMatchConstraint = Shapes::StructureShape.new(name: 'GeoMatchConstraint')
     GeoMatchConstraintType = Shapes::StringShape.new(name: 'GeoMatchConstraintType')
@@ -101,6 +105,8 @@ module Aws::WAFRegional
     GetGeoMatchSetResponse = Shapes::StructureShape.new(name: 'GetGeoMatchSetResponse')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
+    GetLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetLoggingConfigurationRequest')
+    GetLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetLoggingConfigurationResponse')
     GetPermissionPolicyRequest = Shapes::StructureShape.new(name: 'GetPermissionPolicyRequest')
     GetPermissionPolicyResponse = Shapes::StructureShape.new(name: 'GetPermissionPolicyResponse')
     GetRateBasedRuleManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysRequest')
@@ -153,6 +159,8 @@ module Aws::WAFRegional
     ListGeoMatchSetsResponse = Shapes::StructureShape.new(name: 'ListGeoMatchSetsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
     ListIPSetsResponse = Shapes::StructureShape.new(name: 'ListIPSetsResponse')
+    ListLoggingConfigurationsRequest = Shapes::StructureShape.new(name: 'ListLoggingConfigurationsRequest')
+    ListLoggingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListLoggingConfigurationsResponse')
     ListRateBasedRulesRequest = Shapes::StructureShape.new(name: 'ListRateBasedRulesRequest')
     ListRateBasedRulesResponse = Shapes::StructureShape.new(name: 'ListRateBasedRulesResponse')
     ListRegexMatchSetsRequest = Shapes::StructureShape.new(name: 'ListRegexMatchSetsRequest')
@@ -175,6 +183,9 @@ module Aws::WAFRegional
     ListWebACLsResponse = Shapes::StructureShape.new(name: 'ListWebACLsResponse')
     ListXssMatchSetsRequest = Shapes::StructureShape.new(name: 'ListXssMatchSetsRequest')
     ListXssMatchSetsResponse = Shapes::StructureShape.new(name: 'ListXssMatchSetsResponse')
+    LogDestinationConfigs = Shapes::ListShape.new(name: 'LogDestinationConfigs')
+    LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
+    LoggingConfigurations = Shapes::ListShape.new(name: 'LoggingConfigurations')
     ManagedKey = Shapes::StringShape.new(name: 'ManagedKey')
     ManagedKeys = Shapes::ListShape.new(name: 'ManagedKeys')
     MatchFieldData = Shapes::StringShape.new(name: 'MatchFieldData')
@@ -192,11 +203,14 @@ module Aws::WAFRegional
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateType = Shapes::StringShape.new(name: 'PredicateType')
     Predicates = Shapes::ListShape.new(name: 'Predicates')
+    PutLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutLoggingConfigurationRequest')
+    PutLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutLoggingConfigurationResponse')
     PutPermissionPolicyRequest = Shapes::StructureShape.new(name: 'PutPermissionPolicyRequest')
     PutPermissionPolicyResponse = Shapes::StructureShape.new(name: 'PutPermissionPolicyResponse')
     RateBasedRule = Shapes::StructureShape.new(name: 'RateBasedRule')
     RateKey = Shapes::StringShape.new(name: 'RateKey')
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
+    RedactedFields = Shapes::ListShape.new(name: 'RedactedFields')
     RegexMatchSet = Shapes::StructureShape.new(name: 'RegexMatchSet')
     RegexMatchSetSummaries = Shapes::ListShape.new(name: 'RegexMatchSetSummaries')
     RegexMatchSetSummary = Shapes::StructureShape.new(name: 'RegexMatchSetSummary')
@@ -215,6 +229,7 @@ module Aws::WAFRegional
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleGroup = Shapes::StructureShape.new(name: 'RuleGroup')
     RuleGroupSummaries = Shapes::ListShape.new(name: 'RuleGroupSummaries')
@@ -286,6 +301,7 @@ module Aws::WAFRegional
     WAFNonexistentContainerException = Shapes::StructureShape.new(name: 'WAFNonexistentContainerException')
     WAFNonexistentItemException = Shapes::StructureShape.new(name: 'WAFNonexistentItemException')
     WAFReferencedItemException = Shapes::StructureShape.new(name: 'WAFReferencedItemException')
+    WAFServiceLinkedRoleErrorException = Shapes::StructureShape.new(name: 'WAFServiceLinkedRoleErrorException')
     WAFStaleDataException = Shapes::StructureShape.new(name: 'WAFStaleDataException')
     WAFSubscriptionNotFoundException = Shapes::StructureShape.new(name: 'WAFSubscriptionNotFoundException')
     WAFUnavailableEntityException = Shapes::StructureShape.new(name: 'WAFUnavailableEntityException')
@@ -313,6 +329,7 @@ module Aws::WAFRegional
     ActivatedRule.add_member(:action, Shapes::ShapeRef.new(shape: WafAction, location_name: "Action"))
     ActivatedRule.add_member(:override_action, Shapes::ShapeRef.new(shape: WafOverrideAction, location_name: "OverrideAction"))
     ActivatedRule.add_member(:type, Shapes::ShapeRef.new(shape: WafRuleType, location_name: "Type"))
+    ActivatedRule.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
     ActivatedRule.struct_class = Types::ActivatedRule
 
     ActivatedRules.member = Shapes::ShapeRef.new(shape: ActivatedRule)
@@ -472,6 +489,11 @@ module Aws::WAFRegional
     DeleteIPSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     DeleteIPSetResponse.struct_class = Types::DeleteIPSetResponse
 
+    DeleteLoggingConfigurationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
+
+    DeleteLoggingConfigurationResponse.struct_class = Types::DeleteLoggingConfigurationResponse
+
     DeletePermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DeletePermissionPolicyRequest.struct_class = Types::DeletePermissionPolicyRequest
 
@@ -545,6 +567,11 @@ module Aws::WAFRegional
 
     DisassociateWebACLResponse.struct_class = Types::DisassociateWebACLResponse
 
+    ExcludedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    ExcludedRule.struct_class = Types::ExcludedRule
+
+    ExcludedRules.member = Shapes::ShapeRef.new(shape: ExcludedRule)
+
     FieldToMatch.add_member(:type, Shapes::ShapeRef.new(shape: MatchFieldType, required: true, location_name: "Type"))
     FieldToMatch.add_member(:data, Shapes::ShapeRef.new(shape: MatchFieldData, location_name: "Data"))
     FieldToMatch.struct_class = Types::FieldToMatch
@@ -600,6 +627,12 @@ module Aws::WAFRegional
 
     GetIPSetResponse.add_member(:ip_set, Shapes::ShapeRef.new(shape: IPSet, location_name: "IPSet"))
     GetIPSetResponse.struct_class = Types::GetIPSetResponse
+
+    GetLoggingConfigurationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetLoggingConfigurationRequest.struct_class = Types::GetLoggingConfigurationRequest
+
+    GetLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    GetLoggingConfigurationResponse.struct_class = Types::GetLoggingConfigurationResponse
 
     GetPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     GetPermissionPolicyRequest.struct_class = Types::GetPermissionPolicyRequest
@@ -756,6 +789,14 @@ module Aws::WAFRegional
     ListIPSetsResponse.add_member(:ip_sets, Shapes::ShapeRef.new(shape: IPSetSummaries, location_name: "IPSets"))
     ListIPSetsResponse.struct_class = Types::ListIPSetsResponse
 
+    ListLoggingConfigurationsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListLoggingConfigurationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListLoggingConfigurationsRequest.struct_class = Types::ListLoggingConfigurationsRequest
+
+    ListLoggingConfigurationsResponse.add_member(:logging_configurations, Shapes::ShapeRef.new(shape: LoggingConfigurations, location_name: "LoggingConfigurations"))
+    ListLoggingConfigurationsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListLoggingConfigurationsResponse.struct_class = Types::ListLoggingConfigurationsResponse
+
     ListRateBasedRulesRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListRateBasedRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
     ListRateBasedRulesRequest.struct_class = Types::ListRateBasedRulesRequest
@@ -781,6 +822,7 @@ module Aws::WAFRegional
     ListRegexPatternSetsResponse.struct_class = Types::ListRegexPatternSetsResponse
 
     ListResourcesForWebACLRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "WebACLId"))
+    ListResourcesForWebACLRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ListResourcesForWebACLRequest.struct_class = Types::ListResourcesForWebACLRequest
 
     ListResourcesForWebACLResponse.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "ResourceArns"))
@@ -842,6 +884,15 @@ module Aws::WAFRegional
     ListXssMatchSetsResponse.add_member(:xss_match_sets, Shapes::ShapeRef.new(shape: XssMatchSetSummaries, location_name: "XssMatchSets"))
     ListXssMatchSetsResponse.struct_class = Types::ListXssMatchSetsResponse
 
+    LogDestinationConfigs.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
+    LoggingConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    LoggingConfiguration.add_member(:log_destination_configs, Shapes::ShapeRef.new(shape: LogDestinationConfigs, required: true, location_name: "LogDestinationConfigs"))
+    LoggingConfiguration.add_member(:redacted_fields, Shapes::ShapeRef.new(shape: RedactedFields, location_name: "RedactedFields"))
+    LoggingConfiguration.struct_class = Types::LoggingConfiguration
+
+    LoggingConfigurations.member = Shapes::ShapeRef.new(shape: LoggingConfiguration)
+
     ManagedKeys.member = Shapes::ShapeRef.new(shape: ManagedKey)
 
     Predicate.add_member(:negated, Shapes::ShapeRef.new(shape: Negated, required: true, location_name: "Negated"))
@@ -850,6 +901,12 @@ module Aws::WAFRegional
     Predicate.struct_class = Types::Predicate
 
     Predicates.member = Shapes::ShapeRef.new(shape: Predicate)
+
+    PutLoggingConfigurationRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, required: true, location_name: "LoggingConfiguration"))
+    PutLoggingConfigurationRequest.struct_class = Types::PutLoggingConfigurationRequest
+
+    PutLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    PutLoggingConfigurationResponse.struct_class = Types::PutLoggingConfigurationResponse
 
     PutPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     PutPermissionPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, required: true, location_name: "Policy"))
@@ -864,6 +921,8 @@ module Aws::WAFRegional
     RateBasedRule.add_member(:rate_key, Shapes::ShapeRef.new(shape: RateKey, required: true, location_name: "RateKey"))
     RateBasedRule.add_member(:rate_limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "RateLimit"))
     RateBasedRule.struct_class = Types::RateBasedRule
+
+    RedactedFields.member = Shapes::ShapeRef.new(shape: FieldToMatch)
 
     RegexMatchSet.add_member(:regex_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RegexMatchSetId"))
     RegexMatchSet.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -1122,6 +1181,7 @@ module Aws::WAFRegional
     WebACL.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     WebACL.add_member(:default_action, Shapes::ShapeRef.new(shape: WafAction, required: true, location_name: "DefaultAction"))
     WebACL.add_member(:rules, Shapes::ShapeRef.new(shape: ActivatedRules, required: true, location_name: "Rules"))
+    WebACL.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "WebACLArn"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)
@@ -1166,12 +1226,16 @@ module Aws::WAFRegional
       api.version = "2016-11-28"
 
       api.metadata = {
+        "apiVersion" => "2016-11-28",
         "endpointPrefix" => "waf-regional",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "WAF Regional",
         "serviceFullName" => "AWS WAF Regional",
+        "serviceId" => "WAF Regional",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSWAF_Regional_20161128",
+        "uid" => "waf-regional-2016-11-28",
       }
 
       api.add_operation(:associate_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1389,6 +1453,17 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
       end)
 
+      api.add_operation(:delete_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLoggingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+      end)
+
       api.add_operation(:delete_permission_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePermissionPolicy"
         o.http_method = "POST"
@@ -1467,6 +1542,7 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:delete_size_constraint_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1586,6 +1662,16 @@ module Aws::WAFRegional
         o.output = Shapes::ShapeRef.new(shape: GetIPSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+      end)
+
+      api.add_operation(:get_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoggingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
       end)
 
@@ -1773,6 +1859,17 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
       end)
 
+      api.add_operation(:list_logging_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLoggingConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLoggingConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLoggingConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+      end)
+
       api.add_operation(:list_rate_based_rules, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRateBasedRules"
         o.http_method = "POST"
@@ -1812,6 +1909,7 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
       end)
 
       api.add_operation(:list_rule_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1881,6 +1979,18 @@ module Aws::WAFRegional
         o.output = Shapes::ShapeRef.new(shape: ListXssMatchSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
+      api.add_operation(:put_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLoggingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutLoggingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFServiceLinkedRoleErrorException)
       end)
 
       api.add_operation(:put_permission_policy, Seahorse::Model::Operation.new.tap do |o|

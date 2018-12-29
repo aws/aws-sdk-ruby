@@ -49,6 +49,7 @@ module Aws::S3
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
+    BypassGovernanceRetention = Shapes::BooleanShape.new(name: 'BypassGovernanceRetention')
     BytesProcessed = Shapes::IntegerShape.new(name: 'BytesProcessed')
     BytesReturned = Shapes::IntegerShape.new(name: 'BytesReturned')
     BytesScanned = Shapes::IntegerShape.new(name: 'BytesScanned')
@@ -104,6 +105,7 @@ module Aws::S3
     Date = Shapes::TimestampShape.new(name: 'Date', timestampFormat: "iso8601")
     Days = Shapes::IntegerShape.new(name: 'Days')
     DaysAfterInitiation = Shapes::IntegerShape.new(name: 'DaysAfterInitiation')
+    DefaultRetention = Shapes::StructureShape.new(name: 'DefaultRetention')
     Delete = Shapes::StructureShape.new(name: 'Delete')
     DeleteBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketAnalyticsConfigurationRequest')
     DeleteBucketCorsRequest = Shapes::StructureShape.new(name: 'DeleteBucketCorsRequest')
@@ -118,6 +120,8 @@ module Aws::S3
     DeleteBucketWebsiteRequest = Shapes::StructureShape.new(name: 'DeleteBucketWebsiteRequest')
     DeleteMarker = Shapes::BooleanShape.new(name: 'DeleteMarker')
     DeleteMarkerEntry = Shapes::StructureShape.new(name: 'DeleteMarkerEntry')
+    DeleteMarkerReplication = Shapes::StructureShape.new(name: 'DeleteMarkerReplication')
+    DeleteMarkerReplicationStatus = Shapes::StringShape.new(name: 'DeleteMarkerReplicationStatus')
     DeleteMarkerVersionId = Shapes::StringShape.new(name: 'DeleteMarkerVersionId')
     DeleteMarkers = Shapes::ListShape.new(name: 'DeleteMarkers', flattened: true)
     DeleteObjectOutput = Shapes::StructureShape.new(name: 'DeleteObjectOutput')
@@ -126,6 +130,7 @@ module Aws::S3
     DeleteObjectTaggingRequest = Shapes::StructureShape.new(name: 'DeleteObjectTaggingRequest')
     DeleteObjectsOutput = Shapes::StructureShape.new(name: 'DeleteObjectsOutput')
     DeleteObjectsRequest = Shapes::StructureShape.new(name: 'DeleteObjectsRequest')
+    DeletePublicAccessBlockRequest = Shapes::StructureShape.new(name: 'DeletePublicAccessBlockRequest')
     DeletedObject = Shapes::StructureShape.new(name: 'DeletedObject')
     DeletedObjects = Shapes::ListShape.new(name: 'DeletedObjects', flattened: true)
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
@@ -185,6 +190,8 @@ module Aws::S3
     GetBucketNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketNotificationConfigurationRequest')
     GetBucketPolicyOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyOutput')
     GetBucketPolicyRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyRequest')
+    GetBucketPolicyStatusOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyStatusOutput')
+    GetBucketPolicyStatusRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyStatusRequest')
     GetBucketReplicationOutput = Shapes::StructureShape.new(name: 'GetBucketReplicationOutput')
     GetBucketReplicationRequest = Shapes::StructureShape.new(name: 'GetBucketReplicationRequest')
     GetBucketRequestPaymentOutput = Shapes::StructureShape.new(name: 'GetBucketRequestPaymentOutput')
@@ -197,12 +204,20 @@ module Aws::S3
     GetBucketWebsiteRequest = Shapes::StructureShape.new(name: 'GetBucketWebsiteRequest')
     GetObjectAclOutput = Shapes::StructureShape.new(name: 'GetObjectAclOutput')
     GetObjectAclRequest = Shapes::StructureShape.new(name: 'GetObjectAclRequest')
+    GetObjectLegalHoldOutput = Shapes::StructureShape.new(name: 'GetObjectLegalHoldOutput')
+    GetObjectLegalHoldRequest = Shapes::StructureShape.new(name: 'GetObjectLegalHoldRequest')
+    GetObjectLockConfigurationOutput = Shapes::StructureShape.new(name: 'GetObjectLockConfigurationOutput')
+    GetObjectLockConfigurationRequest = Shapes::StructureShape.new(name: 'GetObjectLockConfigurationRequest')
     GetObjectOutput = Shapes::StructureShape.new(name: 'GetObjectOutput')
     GetObjectRequest = Shapes::StructureShape.new(name: 'GetObjectRequest')
+    GetObjectRetentionOutput = Shapes::StructureShape.new(name: 'GetObjectRetentionOutput')
+    GetObjectRetentionRequest = Shapes::StructureShape.new(name: 'GetObjectRetentionRequest')
     GetObjectTaggingOutput = Shapes::StructureShape.new(name: 'GetObjectTaggingOutput')
     GetObjectTaggingRequest = Shapes::StructureShape.new(name: 'GetObjectTaggingRequest')
     GetObjectTorrentOutput = Shapes::StructureShape.new(name: 'GetObjectTorrentOutput')
     GetObjectTorrentRequest = Shapes::StructureShape.new(name: 'GetObjectTorrentRequest')
+    GetPublicAccessBlockOutput = Shapes::StructureShape.new(name: 'GetPublicAccessBlockOutput')
+    GetPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'GetPublicAccessBlockRequest')
     GlacierJobParameters = Shapes::StructureShape.new(name: 'GlacierJobParameters')
     Grant = Shapes::StructureShape.new(name: 'Grant')
     GrantFullControl = Shapes::StringShape.new(name: 'GrantFullControl')
@@ -242,6 +257,7 @@ module Aws::S3
     InventorySchedule = Shapes::StructureShape.new(name: 'InventorySchedule')
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
+    IsPublic = Shapes::BooleanShape.new(name: 'IsPublic')
     IsTruncated = Shapes::BooleanShape.new(name: 'IsTruncated')
     JSONInput = Shapes::StructureShape.new(name: 'JSONInput')
     JSONOutput = Shapes::StructureShape.new(name: 'JSONOutput')
@@ -326,6 +342,17 @@ module Aws::S3
     ObjectIdentifierList = Shapes::ListShape.new(name: 'ObjectIdentifierList', flattened: true)
     ObjectKey = Shapes::StringShape.new(name: 'ObjectKey')
     ObjectList = Shapes::ListShape.new(name: 'ObjectList', flattened: true)
+    ObjectLockConfiguration = Shapes::StructureShape.new(name: 'ObjectLockConfiguration')
+    ObjectLockEnabled = Shapes::StringShape.new(name: 'ObjectLockEnabled')
+    ObjectLockEnabledForBucket = Shapes::BooleanShape.new(name: 'ObjectLockEnabledForBucket')
+    ObjectLockLegalHold = Shapes::StructureShape.new(name: 'ObjectLockLegalHold')
+    ObjectLockLegalHoldStatus = Shapes::StringShape.new(name: 'ObjectLockLegalHoldStatus')
+    ObjectLockMode = Shapes::StringShape.new(name: 'ObjectLockMode')
+    ObjectLockRetainUntilDate = Shapes::TimestampShape.new(name: 'ObjectLockRetainUntilDate', timestampFormat: "iso8601")
+    ObjectLockRetention = Shapes::StructureShape.new(name: 'ObjectLockRetention')
+    ObjectLockRetentionMode = Shapes::StringShape.new(name: 'ObjectLockRetentionMode')
+    ObjectLockRule = Shapes::StructureShape.new(name: 'ObjectLockRule')
+    ObjectLockToken = Shapes::StringShape.new(name: 'ObjectLockToken')
     ObjectNotInActiveTierError = Shapes::StructureShape.new(name: 'ObjectNotInActiveTierError')
     ObjectStorageClass = Shapes::StringShape.new(name: 'ObjectStorageClass')
     ObjectVersion = Shapes::StructureShape.new(name: 'ObjectVersion')
@@ -336,6 +363,7 @@ module Aws::S3
     OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
+    ParquetInput = Shapes::StructureShape.new(name: 'ParquetInput')
     Part = Shapes::StructureShape.new(name: 'Part')
     PartNumber = Shapes::IntegerShape.new(name: 'PartNumber')
     PartNumberMarker = Shapes::IntegerShape.new(name: 'PartNumberMarker')
@@ -344,10 +372,13 @@ module Aws::S3
     Payer = Shapes::StringShape.new(name: 'Payer')
     Permission = Shapes::StringShape.new(name: 'Permission')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyStatus = Shapes::StructureShape.new(name: 'PolicyStatus')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
+    Priority = Shapes::IntegerShape.new(name: 'Priority')
     Progress = Shapes::StructureShape.new(name: 'Progress')
     ProgressEvent = Shapes::StructureShape.new(name: 'ProgressEvent')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
     PutBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAccelerateConfigurationRequest')
     PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
     PutBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAnalyticsConfigurationRequest')
@@ -368,10 +399,17 @@ module Aws::S3
     PutBucketWebsiteRequest = Shapes::StructureShape.new(name: 'PutBucketWebsiteRequest')
     PutObjectAclOutput = Shapes::StructureShape.new(name: 'PutObjectAclOutput')
     PutObjectAclRequest = Shapes::StructureShape.new(name: 'PutObjectAclRequest')
+    PutObjectLegalHoldOutput = Shapes::StructureShape.new(name: 'PutObjectLegalHoldOutput')
+    PutObjectLegalHoldRequest = Shapes::StructureShape.new(name: 'PutObjectLegalHoldRequest')
+    PutObjectLockConfigurationOutput = Shapes::StructureShape.new(name: 'PutObjectLockConfigurationOutput')
+    PutObjectLockConfigurationRequest = Shapes::StructureShape.new(name: 'PutObjectLockConfigurationRequest')
     PutObjectOutput = Shapes::StructureShape.new(name: 'PutObjectOutput')
     PutObjectRequest = Shapes::StructureShape.new(name: 'PutObjectRequest')
+    PutObjectRetentionOutput = Shapes::StructureShape.new(name: 'PutObjectRetentionOutput')
+    PutObjectRetentionRequest = Shapes::StructureShape.new(name: 'PutObjectRetentionRequest')
     PutObjectTaggingOutput = Shapes::StructureShape.new(name: 'PutObjectTaggingOutput')
     PutObjectTaggingRequest = Shapes::StructureShape.new(name: 'PutObjectTaggingRequest')
+    PutPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'PutPublicAccessBlockRequest')
     QueueArn = Shapes::StringShape.new(name: 'QueueArn')
     QueueConfiguration = Shapes::StructureShape.new(name: 'QueueConfiguration')
     QueueConfigurationDeprecated = Shapes::StructureShape.new(name: 'QueueConfigurationDeprecated')
@@ -390,6 +428,8 @@ module Aws::S3
     ReplicaKmsKeyID = Shapes::StringShape.new(name: 'ReplicaKmsKeyID')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
+    ReplicationRuleAndOperator = Shapes::StructureShape.new(name: 'ReplicationRuleAndOperator')
+    ReplicationRuleFilter = Shapes::StructureShape.new(name: 'ReplicationRuleFilter')
     ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
     ReplicationRules = Shapes::ListShape.new(name: 'ReplicationRules', flattened: true)
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
@@ -431,6 +471,7 @@ module Aws::S3
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServerSideEncryptionRule = Shapes::StructureShape.new(name: 'ServerSideEncryptionRule')
     ServerSideEncryptionRules = Shapes::ListShape.new(name: 'ServerSideEncryptionRules', flattened: true)
+    Setting = Shapes::BooleanShape.new(name: 'Setting')
     Size = Shapes::IntegerShape.new(name: 'Size')
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
@@ -475,6 +516,7 @@ module Aws::S3
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     WebsiteConfiguration = Shapes::StructureShape.new(name: 'WebsiteConfiguration')
     WebsiteRedirectLocation = Shapes::StringShape.new(name: 'WebsiteRedirectLocation')
+    Years = Shapes::IntegerShape.new(name: 'Years')
 
     AbortIncompleteMultipartUpload.add_member(:days_after_initiation, Shapes::ShapeRef.new(shape: DaysAfterInitiation, location_name: "DaysAfterInitiation"))
     AbortIncompleteMultipartUpload.struct_class = Types::AbortIncompleteMultipartUpload
@@ -662,6 +704,9 @@ module Aws::S3
     CopyObjectRequest.add_member(:copy_source_sse_customer_key_md5, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKeyMD5, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key-MD5"))
     CopyObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     CopyObjectRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
+    CopyObjectRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
+    CopyObjectRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
+    CopyObjectRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
     CopyObjectRequest.struct_class = Types::CopyObjectRequest
 
     CopyObjectResult.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -686,6 +731,7 @@ module Aws::S3
     CreateBucketRequest.add_member(:grant_read_acp, Shapes::ShapeRef.new(shape: GrantReadACP, location: "header", location_name: "x-amz-grant-read-acp"))
     CreateBucketRequest.add_member(:grant_write, Shapes::ShapeRef.new(shape: GrantWrite, location: "header", location_name: "x-amz-grant-write"))
     CreateBucketRequest.add_member(:grant_write_acp, Shapes::ShapeRef.new(shape: GrantWriteACP, location: "header", location_name: "x-amz-grant-write-acp"))
+    CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location: "header", location_name: "x-amz-bucket-object-lock-enabled"))
     CreateBucketRequest.struct_class = Types::CreateBucketRequest
     CreateBucketRequest[:payload] = :create_bucket_configuration
     CreateBucketRequest[:payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
@@ -725,7 +771,15 @@ module Aws::S3
     CreateMultipartUploadRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     CreateMultipartUploadRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     CreateMultipartUploadRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
+    CreateMultipartUploadRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
+    CreateMultipartUploadRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
+    CreateMultipartUploadRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
     CreateMultipartUploadRequest.struct_class = Types::CreateMultipartUploadRequest
+
+    DefaultRetention.add_member(:mode, Shapes::ShapeRef.new(shape: ObjectLockRetentionMode, location_name: "Mode"))
+    DefaultRetention.add_member(:days, Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
+    DefaultRetention.add_member(:years, Shapes::ShapeRef.new(shape: Years, location_name: "Years"))
+    DefaultRetention.struct_class = Types::DefaultRetention
 
     Delete.add_member(:objects, Shapes::ShapeRef.new(shape: ObjectIdentifierList, required: true, location_name: "Object"))
     Delete.add_member(:quiet, Shapes::ShapeRef.new(shape: Quiet, location_name: "Quiet"))
@@ -774,6 +828,9 @@ module Aws::S3
     DeleteMarkerEntry.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     DeleteMarkerEntry.struct_class = Types::DeleteMarkerEntry
 
+    DeleteMarkerReplication.add_member(:status, Shapes::ShapeRef.new(shape: DeleteMarkerReplicationStatus, location_name: "Status"))
+    DeleteMarkerReplication.struct_class = Types::DeleteMarkerReplication
+
     DeleteMarkers.member = Shapes::ShapeRef.new(shape: DeleteMarkerEntry)
 
     DeleteObjectOutput.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location: "header", location_name: "x-amz-delete-marker"))
@@ -786,6 +843,7 @@ module Aws::S3
     DeleteObjectRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
     DeleteObjectRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     DeleteObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    DeleteObjectRequest.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location: "header", location_name: "x-amz-bypass-governance-retention"))
     DeleteObjectRequest.struct_class = Types::DeleteObjectRequest
 
     DeleteObjectTaggingOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
@@ -805,9 +863,13 @@ module Aws::S3
     DeleteObjectsRequest.add_member(:delete, Shapes::ShapeRef.new(shape: Delete, required: true, location_name: "Delete", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     DeleteObjectsRequest.add_member(:mfa, Shapes::ShapeRef.new(shape: MFA, location: "header", location_name: "x-amz-mfa"))
     DeleteObjectsRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    DeleteObjectsRequest.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location: "header", location_name: "x-amz-bypass-governance-retention"))
     DeleteObjectsRequest.struct_class = Types::DeleteObjectsRequest
     DeleteObjectsRequest[:payload] = :delete
     DeleteObjectsRequest[:payload_member] = DeleteObjectsRequest.member(:delete)
+
+    DeletePublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
 
     DeletedObject.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
     DeletedObject.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
@@ -944,6 +1006,14 @@ module Aws::S3
     GetBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     GetBucketPolicyRequest.struct_class = Types::GetBucketPolicyRequest
 
+    GetBucketPolicyStatusOutput.add_member(:policy_status, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus"))
+    GetBucketPolicyStatusOutput.struct_class = Types::GetBucketPolicyStatusOutput
+    GetBucketPolicyStatusOutput[:payload] = :policy_status
+    GetBucketPolicyStatusOutput[:payload_member] = GetBucketPolicyStatusOutput.member(:policy_status)
+
+    GetBucketPolicyStatusRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetBucketPolicyStatusRequest.struct_class = Types::GetBucketPolicyStatusRequest
+
     GetBucketReplicationOutput.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "ReplicationConfiguration"))
     GetBucketReplicationOutput.struct_class = Types::GetBucketReplicationOutput
     GetBucketReplicationOutput[:payload] = :replication_configuration
@@ -991,6 +1061,25 @@ module Aws::S3
     GetObjectAclRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     GetObjectAclRequest.struct_class = Types::GetObjectAclRequest
 
+    GetObjectLegalHoldOutput.add_member(:legal_hold, Shapes::ShapeRef.new(shape: ObjectLockLegalHold, location_name: "LegalHold"))
+    GetObjectLegalHoldOutput.struct_class = Types::GetObjectLegalHoldOutput
+    GetObjectLegalHoldOutput[:payload] = :legal_hold
+    GetObjectLegalHoldOutput[:payload_member] = GetObjectLegalHoldOutput.member(:legal_hold)
+
+    GetObjectLegalHoldRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetObjectLegalHoldRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+    GetObjectLegalHoldRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+    GetObjectLegalHoldRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    GetObjectLegalHoldRequest.struct_class = Types::GetObjectLegalHoldRequest
+
+    GetObjectLockConfigurationOutput.add_member(:object_lock_configuration, Shapes::ShapeRef.new(shape: ObjectLockConfiguration, location_name: "ObjectLockConfiguration"))
+    GetObjectLockConfigurationOutput.struct_class = Types::GetObjectLockConfigurationOutput
+    GetObjectLockConfigurationOutput[:payload] = :object_lock_configuration
+    GetObjectLockConfigurationOutput[:payload_member] = GetObjectLockConfigurationOutput.member(:object_lock_configuration)
+
+    GetObjectLockConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetObjectLockConfigurationRequest.struct_class = Types::GetObjectLockConfigurationRequest
+
     GetObjectOutput.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming"=>true}))
     GetObjectOutput.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location: "header", location_name: "x-amz-delete-marker"))
     GetObjectOutput.add_member(:accept_ranges, Shapes::ShapeRef.new(shape: AcceptRanges, location: "header", location_name: "accept-ranges"))
@@ -1020,6 +1109,9 @@ module Aws::S3
     GetObjectOutput.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-replication-status"))
     GetObjectOutput.add_member(:parts_count, Shapes::ShapeRef.new(shape: PartsCount, location: "header", location_name: "x-amz-mp-parts-count"))
     GetObjectOutput.add_member(:tag_count, Shapes::ShapeRef.new(shape: TagCount, location: "header", location_name: "x-amz-tagging-count"))
+    GetObjectOutput.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
+    GetObjectOutput.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
+    GetObjectOutput.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
     GetObjectOutput.struct_class = Types::GetObjectOutput
     GetObjectOutput[:payload] = :body
     GetObjectOutput[:payload_member] = GetObjectOutput.member(:body)
@@ -1045,6 +1137,17 @@ module Aws::S3
     GetObjectRequest.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location: "querystring", location_name: "partNumber"))
     GetObjectRequest.struct_class = Types::GetObjectRequest
 
+    GetObjectRetentionOutput.add_member(:retention, Shapes::ShapeRef.new(shape: ObjectLockRetention, location_name: "Retention"))
+    GetObjectRetentionOutput.struct_class = Types::GetObjectRetentionOutput
+    GetObjectRetentionOutput[:payload] = :retention
+    GetObjectRetentionOutput[:payload_member] = GetObjectRetentionOutput.member(:retention)
+
+    GetObjectRetentionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetObjectRetentionRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+    GetObjectRetentionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+    GetObjectRetentionRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    GetObjectRetentionRequest.struct_class = Types::GetObjectRetentionRequest
+
     GetObjectTaggingOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     GetObjectTaggingOutput.add_member(:tag_set, Shapes::ShapeRef.new(shape: TagSet, required: true, location_name: "TagSet"))
     GetObjectTaggingOutput.struct_class = Types::GetObjectTaggingOutput
@@ -1064,6 +1167,14 @@ module Aws::S3
     GetObjectTorrentRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     GetObjectTorrentRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     GetObjectTorrentRequest.struct_class = Types::GetObjectTorrentRequest
+
+    GetPublicAccessBlockOutput.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
+    GetPublicAccessBlockOutput.struct_class = Types::GetPublicAccessBlockOutput
+    GetPublicAccessBlockOutput[:payload] = :public_access_block_configuration
+    GetPublicAccessBlockOutput[:payload_member] = GetPublicAccessBlockOutput.member(:public_access_block_configuration)
+
+    GetPublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetPublicAccessBlockRequest.struct_class = Types::GetPublicAccessBlockRequest
 
     GlacierJobParameters.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, required: true, location_name: "Tier"))
     GlacierJobParameters.struct_class = Types::GlacierJobParameters
@@ -1110,6 +1221,9 @@ module Aws::S3
     HeadObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     HeadObjectOutput.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-replication-status"))
     HeadObjectOutput.add_member(:parts_count, Shapes::ShapeRef.new(shape: PartsCount, location: "header", location_name: "x-amz-mp-parts-count"))
+    HeadObjectOutput.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
+    HeadObjectOutput.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
+    HeadObjectOutput.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
     HeadObjectOutput.struct_class = Types::HeadObjectOutput
 
     HeadObjectRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
@@ -1137,6 +1251,7 @@ module Aws::S3
     InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "CSV"))
     InputSerialization.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
     InputSerialization.add_member(:json, Shapes::ShapeRef.new(shape: JSONInput, location_name: "JSON"))
+    InputSerialization.add_member(:parquet, Shapes::ShapeRef.new(shape: ParquetInput, location_name: "Parquet"))
     InputSerialization.struct_class = Types::InputSerialization
 
     InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
@@ -1442,6 +1557,20 @@ module Aws::S3
 
     ObjectList.member = Shapes::ShapeRef.new(shape: Object)
 
+    ObjectLockConfiguration.add_member(:object_lock_enabled, Shapes::ShapeRef.new(shape: ObjectLockEnabled, location_name: "ObjectLockEnabled"))
+    ObjectLockConfiguration.add_member(:rule, Shapes::ShapeRef.new(shape: ObjectLockRule, location_name: "Rule"))
+    ObjectLockConfiguration.struct_class = Types::ObjectLockConfiguration
+
+    ObjectLockLegalHold.add_member(:status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "Status"))
+    ObjectLockLegalHold.struct_class = Types::ObjectLockLegalHold
+
+    ObjectLockRetention.add_member(:mode, Shapes::ShapeRef.new(shape: ObjectLockRetentionMode, location_name: "Mode"))
+    ObjectLockRetention.add_member(:retain_until_date, Shapes::ShapeRef.new(shape: Date, location_name: "RetainUntilDate"))
+    ObjectLockRetention.struct_class = Types::ObjectLockRetention
+
+    ObjectLockRule.add_member(:default_retention, Shapes::ShapeRef.new(shape: DefaultRetention, location_name: "DefaultRetention"))
+    ObjectLockRule.struct_class = Types::ObjectLockRule
+
     ObjectVersion.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     ObjectVersion.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     ObjectVersion.add_member(:storage_class, Shapes::ShapeRef.new(shape: ObjectVersionStorageClass, location_name: "StorageClass"))
@@ -1465,6 +1594,8 @@ module Aws::S3
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     Owner.struct_class = Types::Owner
 
+    ParquetInput.struct_class = Types::ParquetInput
+
     Part.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
     Part.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     Part.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -1473,6 +1604,9 @@ module Aws::S3
 
     Parts.member = Shapes::ShapeRef.new(shape: Part)
 
+    PolicyStatus.add_member(:is_public, Shapes::ShapeRef.new(shape: IsPublic, location_name: "IsPublic"))
+    PolicyStatus.struct_class = Types::PolicyStatus
+
     Progress.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
     Progress.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
     Progress.add_member(:bytes_returned, Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
@@ -1480,6 +1614,12 @@ module Aws::S3
 
     ProgressEvent.add_member(:details, Shapes::ShapeRef.new(shape: Progress, eventpayload: true, eventpayload_type: 'structure', location_name: "Details", metadata: {"eventpayload"=>true}))
     ProgressEvent.struct_class = Types::ProgressEvent
+
+    PublicAccessBlockConfiguration.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicAcls"))
+    PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "IgnorePublicAcls"))
+    PublicAccessBlockConfiguration.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicPolicy"))
+    PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets"))
+    PublicAccessBlockConfiguration.struct_class = Types::PublicAccessBlockConfiguration
 
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, Shapes::ShapeRef.new(shape: AccelerateConfiguration, required: true, location_name: "AccelerateConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
@@ -1631,6 +1771,31 @@ module Aws::S3
     PutObjectAclRequest[:payload] = :access_control_policy
     PutObjectAclRequest[:payload_member] = PutObjectAclRequest.member(:access_control_policy)
 
+    PutObjectLegalHoldOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    PutObjectLegalHoldOutput.struct_class = Types::PutObjectLegalHoldOutput
+
+    PutObjectLegalHoldRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutObjectLegalHoldRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+    PutObjectLegalHoldRequest.add_member(:legal_hold, Shapes::ShapeRef.new(shape: ObjectLockLegalHold, location_name: "LegalHold", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutObjectLegalHoldRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    PutObjectLegalHoldRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+    PutObjectLegalHoldRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectLegalHoldRequest.struct_class = Types::PutObjectLegalHoldRequest
+    PutObjectLegalHoldRequest[:payload] = :legal_hold
+    PutObjectLegalHoldRequest[:payload_member] = PutObjectLegalHoldRequest.member(:legal_hold)
+
+    PutObjectLockConfigurationOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    PutObjectLockConfigurationOutput.struct_class = Types::PutObjectLockConfigurationOutput
+
+    PutObjectLockConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutObjectLockConfigurationRequest.add_member(:object_lock_configuration, Shapes::ShapeRef.new(shape: ObjectLockConfiguration, location_name: "ObjectLockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutObjectLockConfigurationRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    PutObjectLockConfigurationRequest.add_member(:token, Shapes::ShapeRef.new(shape: ObjectLockToken, location: "header", location_name: "x-amz-bucket-object-lock-token"))
+    PutObjectLockConfigurationRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectLockConfigurationRequest.struct_class = Types::PutObjectLockConfigurationRequest
+    PutObjectLockConfigurationRequest[:payload] = :object_lock_configuration
+    PutObjectLockConfigurationRequest[:payload_member] = PutObjectLockConfigurationRequest.member(:object_lock_configuration)
+
     PutObjectOutput.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location: "header", location_name: "x-amz-expiration"))
     PutObjectOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     PutObjectOutput.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
@@ -1667,9 +1832,26 @@ module Aws::S3
     PutObjectRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     PutObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
+    PutObjectRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
+    PutObjectRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
+    PutObjectRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
     PutObjectRequest.struct_class = Types::PutObjectRequest
     PutObjectRequest[:payload] = :body
     PutObjectRequest[:payload_member] = PutObjectRequest.member(:body)
+
+    PutObjectRetentionOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    PutObjectRetentionOutput.struct_class = Types::PutObjectRetentionOutput
+
+    PutObjectRetentionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutObjectRetentionRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+    PutObjectRetentionRequest.add_member(:retention, Shapes::ShapeRef.new(shape: ObjectLockRetention, location_name: "Retention", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutObjectRetentionRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    PutObjectRetentionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+    PutObjectRetentionRequest.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location: "header", location_name: "x-amz-bypass-governance-retention"))
+    PutObjectRetentionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutObjectRetentionRequest.struct_class = Types::PutObjectRetentionRequest
+    PutObjectRetentionRequest[:payload] = :retention
+    PutObjectRetentionRequest[:payload_member] = PutObjectRetentionRequest.member(:retention)
 
     PutObjectTaggingOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     PutObjectTaggingOutput.struct_class = Types::PutObjectTaggingOutput
@@ -1682,6 +1864,13 @@ module Aws::S3
     PutObjectTaggingRequest.struct_class = Types::PutObjectTaggingRequest
     PutObjectTaggingRequest[:payload] = :tagging
     PutObjectTaggingRequest[:payload_member] = PutObjectTaggingRequest.member(:tagging)
+
+    PutPublicAccessBlockRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutPublicAccessBlockRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
+    PutPublicAccessBlockRequest[:payload] = :public_access_block_configuration
+    PutPublicAccessBlockRequest[:payload_member] = PutPublicAccessBlockRequest.member(:public_access_block_configuration)
 
     QueueConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
     QueueConfiguration.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueArn, required: true, location_name: "Queue"))
@@ -1716,11 +1905,23 @@ module Aws::S3
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
     ReplicationRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
-    ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "Prefix"))
+    ReplicationRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
+    ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, deprecated: true, location_name: "Prefix"))
+    ReplicationRule.add_member(:filter, Shapes::ShapeRef.new(shape: ReplicationRuleFilter, location_name: "Filter"))
     ReplicationRule.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationRuleStatus, required: true, location_name: "Status"))
     ReplicationRule.add_member(:source_selection_criteria, Shapes::ShapeRef.new(shape: SourceSelectionCriteria, location_name: "SourceSelectionCriteria"))
     ReplicationRule.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    ReplicationRule.add_member(:delete_marker_replication, Shapes::ShapeRef.new(shape: DeleteMarkerReplication, location_name: "DeleteMarkerReplication"))
     ReplicationRule.struct_class = Types::ReplicationRule
+
+    ReplicationRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+    ReplicationRuleAndOperator.struct_class = Types::ReplicationRuleAndOperator
+
+    ReplicationRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    ReplicationRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: ReplicationRuleAndOperator, location_name: "And"))
+    ReplicationRuleFilter.struct_class = Types::ReplicationRuleFilter
 
     ReplicationRules.member = Shapes::ShapeRef.new(shape: ReplicationRule)
 
@@ -1959,10 +2160,15 @@ module Aws::S3
       api.version = "2006-03-01"
 
       api.metadata = {
+        "apiVersion" => "2006-03-01",
+        "checksumFormat" => "md5",
         "endpointPrefix" => "s3",
+        "globalEndpoint" => "s3.amazonaws.com",
         "protocol" => "rest-xml",
+        "serviceAbbreviation" => "Amazon S3",
         "serviceFullName" => "Amazon Simple Storage Service",
-        "timestampFormat" => "rfc822",
+        "serviceId" => "S3",
+        "uid" => "s3-2006-03-01",
       }
 
       api.add_operation(:abort_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -2121,6 +2327,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: DeleteObjectsOutput)
       end)
 
+      api.add_operation(:delete_public_access_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePublicAccessBlock"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.input = Shapes::ShapeRef.new(shape: DeletePublicAccessBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:get_bucket_accelerate_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketAccelerateConfiguration"
         o.http_method = "GET"
@@ -2235,6 +2449,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyOutput)
       end)
 
+      api.add_operation(:get_bucket_policy_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketPolicyStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?policyStatus"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketPolicyStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketPolicyStatusOutput)
+      end)
+
       api.add_operation(:get_bucket_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketReplication"
         o.http_method = "GET"
@@ -2293,6 +2515,30 @@ module Aws::S3
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
       end)
 
+      api.add_operation(:get_object_legal_hold, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetObjectLegalHold"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}/{Key+}?legal-hold"
+        o.input = Shapes::ShapeRef.new(shape: GetObjectLegalHoldRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetObjectLegalHoldOutput)
+      end)
+
+      api.add_operation(:get_object_lock_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetObjectLockConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?object-lock"
+        o.input = Shapes::ShapeRef.new(shape: GetObjectLockConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetObjectLockConfigurationOutput)
+      end)
+
+      api.add_operation(:get_object_retention, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetObjectRetention"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}/{Key+}?retention"
+        o.input = Shapes::ShapeRef.new(shape: GetObjectRetentionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetObjectRetentionOutput)
+      end)
+
       api.add_operation(:get_object_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectTagging"
         o.http_method = "GET"
@@ -2307,6 +2553,14 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}/{Key+}?torrent"
         o.input = Shapes::ShapeRef.new(shape: GetObjectTorrentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectTorrentOutput)
+      end)
+
+      api.add_operation(:get_public_access_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPublicAccessBlock"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.input = Shapes::ShapeRef.new(shape: GetPublicAccessBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPublicAccessBlockOutput)
       end)
 
       api.add_operation(:head_bucket, Seahorse::Model::Operation.new.tap do |o|
@@ -2600,12 +2854,44 @@ module Aws::S3
         o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
       end)
 
+      api.add_operation(:put_object_legal_hold, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutObjectLegalHold"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}/{Key+}?legal-hold"
+        o.input = Shapes::ShapeRef.new(shape: PutObjectLegalHoldRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutObjectLegalHoldOutput)
+      end)
+
+      api.add_operation(:put_object_lock_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutObjectLockConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}?object-lock"
+        o.input = Shapes::ShapeRef.new(shape: PutObjectLockConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutObjectLockConfigurationOutput)
+      end)
+
+      api.add_operation(:put_object_retention, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutObjectRetention"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}/{Key+}?retention"
+        o.input = Shapes::ShapeRef.new(shape: PutObjectRetentionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutObjectRetentionOutput)
+      end)
+
       api.add_operation(:put_object_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutObjectTagging"
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}/{Key+}?tagging"
         o.input = Shapes::ShapeRef.new(shape: PutObjectTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectTaggingOutput)
+      end)
+
+      api.add_operation(:put_public_access_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPublicAccessBlock"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}?publicAccessBlock"
+        o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:restore_object, Seahorse::Model::Operation.new.tap do |o|

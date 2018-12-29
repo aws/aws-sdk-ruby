@@ -142,12 +142,15 @@ module Aws::Macie
       api.version = "2017-12-19"
 
       api.metadata = {
+        "apiVersion" => "2017-12-19",
         "endpointPrefix" => "macie",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Macie",
+        "serviceId" => "Macie",
         "signatureVersion" => "v4",
         "targetPrefix" => "MacieService",
+        "uid" => "macie-2017-12-19",
       }
 
       api.add_operation(:associate_member_account, Seahorse::Model::Operation.new.tap do |o|

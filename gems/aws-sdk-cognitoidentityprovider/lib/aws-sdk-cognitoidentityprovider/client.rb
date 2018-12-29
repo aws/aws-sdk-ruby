@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::CognitoIdentityProvider
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -2273,6 +2322,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
+    #   resp.user_pool.custom_domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
@@ -2311,7 +2361,20 @@ module Aws::CognitoIdentityProvider
     #   The read attributes.
     #
     # @option params [Array<String>] :write_attributes
-    #   The write attributes.
+    #   The user pool attributes that the app client can write to.
+    #
+    #   If your app client allows users to sign in through an identity
+    #   provider, this array must include all attributes that are mapped to
+    #   identity provider attributes. Amazon Cognito updates mapped attributes
+    #   when users sign in to your application through an identity provider.
+    #   If your app client lacks write access to a mapped attribute, Amazon
+    #   Cognito throws an error when it attempts to update the attribute. For
+    #   more information, see [Specifying Identity Provider Attribute Mappings
+    #   for Your User Pool][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #
     # @option params [Array<String>] :explicit_auth_flows
     #   The explicit authentication flows.
@@ -2329,11 +2392,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -2351,11 +2417,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -2459,14 +2528,38 @@ module Aws::CognitoIdentityProvider
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::CustomDomainConfigType] :custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in webpages for your application.
+    #
+    #   Provide this parameter only if you want to use a custom domain for
+    #   your user pool. Otherwise, you can exclude this parameter and use the
+    #   Amazon Cognito hosted domain instead.
+    #
+    #   For more information about the hosted domain and custom domains, see
+    #   [Configuring a User Pool Domain][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #
+    # @return [Types::CreateUserPoolDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserPoolDomainResponse#cloud_front_domain #cloud_front_domain} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user_pool_domain({
     #     domain: "DomainType", # required
     #     user_pool_id: "UserPoolIdType", # required
+    #     custom_domain_config: {
+    #       certificate_arn: "ArnType", # required
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_front_domain #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomain AWS API Documentation
     #
@@ -2944,6 +3037,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
+    #   resp.user_pool.custom_domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
@@ -2962,7 +3056,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # Client method for returning the configuration information and metadata
-    # of the specified user pool client.
+    # of the specified user pool app client.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to describe.
@@ -3046,6 +3140,7 @@ module Aws::CognitoIdentityProvider
     #   resp.domain_description.cloud_front_distribution #=> String
     #   resp.domain_description.version #=> String
     #   resp.domain_description.status #=> String, one of "CREATING", "DELETING", "UPDATING", "ACTIVE", "FAILED"
+    #   resp.domain_description.custom_domain_config.certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomain AWS API Documentation
     #
@@ -4004,10 +4099,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `preferred_username`
     #
-    #   * `cognito:user_status` (called **Enabled** in the Console)
-    #     (case-sensitive)
+    #   * `cognito:user_status` (called **Status** in the Console)
+    #     (case-insensitive)
     #
-    #   * `status` (case-insensitive)
+    #   * `status (called Enabled in the Console) (case-sensitive)`
     #
     #   * `sub`
     #
@@ -5029,7 +5124,9 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Updates the specified user pool with the specified attributes.
+    # Updates the specified user pool with the specified attributes. If you
+    # don't provide a value for an attribute, it will be set to the default
+    # value. You can get a list of the current user pool settings with .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool you want to update.
@@ -5175,8 +5272,10 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Allows the developer to update the specified user pool client and
-    # password policy.
+    # Updates the specified user pool app client with the specified
+    # attributes. If you don't provide a value for an attribute, it will be
+    # set to the default value. You can get a list of the current user pool
+    # app client settings with .
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to update the user
@@ -5214,11 +5313,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -5236,11 +5338,14 @@ module Aws::CognitoIdentityProvider
     #
     #   * Be registered with the authorization server.
     #
-    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
-    #
     #   * Not include a fragment component.
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
+    #   for testing purposes only.
+    #
+    #   App callback URLs such as myapp://example are also supported.
     #
     #
     #
@@ -5336,6 +5441,85 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Updates the Secure Sockets Layer (SSL) certificate for the custom
+    # domain for your user pool.
+    #
+    # You can use this operation to provide the Amazon Resource Name (ARN)
+    # of a new certificate to Amazon Cognito. You cannot use it to change
+    # the domain for a user pool.
+    #
+    # A custom domain is used to host the Amazon Cognito hosted UI, which
+    # provides sign-up and sign-in pages for your application. When you set
+    # up a custom domain, you provide a certificate that you manage with AWS
+    # Certificate Manager (ACM). When necessary, you can use this operation
+    # to change the certificate that you applied to your custom domain.
+    #
+    # Usually, this is unnecessary following routine certificate renewal
+    # with ACM. When you renew your existing certificate in ACM, the ARN for
+    # your certificate remains the same, and your custom domain uses the new
+    # certificate automatically.
+    #
+    # However, if you replace your existing certificate with a new one, ACM
+    # gives the new certificate a new ARN. To apply the new certificate to
+    # your custom domain, you must provide this ARN to Amazon Cognito.
+    #
+    # When you add your new certificate in ACM, you must choose US East (N.
+    # Virginia) as the AWS Region.
+    #
+    # After you submit your request, Amazon Cognito requires up to 1 hour to
+    # distribute your new certificate to your custom domain.
+    #
+    # For more information about adding a custom domain to your user pool,
+    # see [Using Your Own Domain for the Hosted UI][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
+    #
+    # @option params [required, String] :domain
+    #   The domain name for the custom domain that hosts the sign-up and
+    #   sign-in pages for your application. For example: `auth.example.com`.
+    #
+    #   This string can include only lowercase letters, numbers, and hyphens.
+    #   Do not use a hyphen for the first or last character. Use periods to
+    #   separate subdomain names.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that is associated with the custom domain that
+    #   you are updating the certificate for.
+    #
+    # @option params [required, Types::CustomDomainConfigType] :custom_domain_config
+    #   The configuration for a custom domain that hosts the sign-up and
+    #   sign-in pages for your application. Use this object to specify an SSL
+    #   certificate that is managed by ACM.
+    #
+    # @return [Types::UpdateUserPoolDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUserPoolDomainResponse#cloud_front_domain #cloud_front_domain} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_pool_domain({
+    #     domain: "DomainType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #     custom_domain_config: { # required
+    #       certificate_arn: "ArnType", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_front_domain #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomain AWS API Documentation
+    #
+    # @overload update_user_pool_domain(params = {})
+    # @param [Hash] params ({})
+    def update_user_pool_domain(params = {}, options = {})
+      req = build_request(:update_user_pool_domain, params)
+      req.send_request(options)
+    end
+
     # Use this API to register a user's entered TOTP code and mark the
     # user's software token MFA status as "verified" if successful. The
     # request takes an access token or a session string, but not both.
@@ -5424,7 +5608,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

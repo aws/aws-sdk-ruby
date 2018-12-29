@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::States
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -166,8 +215,8 @@ module Aws::States
 
     # @!group API Operations
 
-    # Creates an activity. An activity is a task which you write in any
-    # programming language and host on any machine which has access to AWS
+    # Creates an activity. An activity is a task that you write in any
+    # programming language and host on any machine that has access to AWS
     # Step Functions. Activities must poll Step Functions using the
     # `GetActivityTask` API action and respond using `SendTask*` API
     # actions. This function lets Step Functions know the existence of your
@@ -228,10 +277,7 @@ module Aws::States
     # JSON-based, structured language.
     #
     # @option params [required, String] :name
-    #   The name of the state machine. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   The name of the state machine.
     #
     #   A name must *not* contain:
     #
@@ -245,12 +291,13 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
-    #
     # @option params [required, String] :definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to use for this state
@@ -337,6 +384,11 @@ module Aws::States
 
     # Describes an activity.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
     # @option params [required, String] :activity_arn
     #   The Amazon Resource Name (ARN) of the activity to describe.
     #
@@ -368,6 +420,11 @@ module Aws::States
     end
 
     # Describes an execution.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
@@ -411,6 +468,11 @@ module Aws::States
 
     # Describes a state machine.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to describe.
     #
@@ -448,6 +510,11 @@ module Aws::States
     end
 
     # Describes the state machine associated with a specific execution.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution you want state machine
@@ -497,6 +564,14 @@ module Aws::States
     # seconds (5 seconds higher than the maximum time the service may hold
     # the poll request).
     #
+    #  Polling with `GetActivityTask` can cause latency in some
+    # implementations. See [Avoid Latency When Polling for Activity
+    # Tasks][1] in the Step Functions Developer Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
+    #
     # @option params [required, String] :activity_arn
     #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from
     #   (assigned when you create the task using CreateActivity.)
@@ -537,10 +612,12 @@ module Aws::States
     # `timeStamp` of the events. Use the `reverseOrder` parameter to get the
     # latest events first.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
@@ -548,7 +625,7 @@ module Aws::States
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
@@ -557,13 +634,12 @@ module Aws::States
     #   Lists events in descending order of their `timeStamp`.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::GetExecutionHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -583,7 +659,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "TaskFailed", "TaskScheduled", "TaskStartFailed", "TaskStarted", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -598,6 +674,35 @@ module Aws::States
     #   resp.events[0].activity_succeeded_event_details.output #=> String
     #   resp.events[0].activity_timed_out_event_details.error #=> String
     #   resp.events[0].activity_timed_out_event_details.cause #=> String
+    #   resp.events[0].task_failed_event_details.resource_type #=> String
+    #   resp.events[0].task_failed_event_details.resource #=> String
+    #   resp.events[0].task_failed_event_details.error #=> String
+    #   resp.events[0].task_failed_event_details.cause #=> String
+    #   resp.events[0].task_scheduled_event_details.resource_type #=> String
+    #   resp.events[0].task_scheduled_event_details.resource #=> String
+    #   resp.events[0].task_scheduled_event_details.region #=> String
+    #   resp.events[0].task_scheduled_event_details.parameters #=> String
+    #   resp.events[0].task_scheduled_event_details.timeout_in_seconds #=> Integer
+    #   resp.events[0].task_start_failed_event_details.resource_type #=> String
+    #   resp.events[0].task_start_failed_event_details.resource #=> String
+    #   resp.events[0].task_start_failed_event_details.error #=> String
+    #   resp.events[0].task_start_failed_event_details.cause #=> String
+    #   resp.events[0].task_started_event_details.resource_type #=> String
+    #   resp.events[0].task_started_event_details.resource #=> String
+    #   resp.events[0].task_submit_failed_event_details.resource_type #=> String
+    #   resp.events[0].task_submit_failed_event_details.resource #=> String
+    #   resp.events[0].task_submit_failed_event_details.error #=> String
+    #   resp.events[0].task_submit_failed_event_details.cause #=> String
+    #   resp.events[0].task_submitted_event_details.resource_type #=> String
+    #   resp.events[0].task_submitted_event_details.resource #=> String
+    #   resp.events[0].task_submitted_event_details.output #=> String
+    #   resp.events[0].task_succeeded_event_details.resource_type #=> String
+    #   resp.events[0].task_succeeded_event_details.resource #=> String
+    #   resp.events[0].task_succeeded_event_details.output #=> String
+    #   resp.events[0].task_timed_out_event_details.resource_type #=> String
+    #   resp.events[0].task_timed_out_event_details.resource #=> String
+    #   resp.events[0].task_timed_out_event_details.error #=> String
+    #   resp.events[0].task_timed_out_event_details.cause #=> String
     #   resp.events[0].execution_failed_event_details.error #=> String
     #   resp.events[0].execution_failed_event_details.cause #=> String
     #   resp.events[0].execution_started_event_details.input #=> String
@@ -636,27 +741,33 @@ module Aws::States
 
     # Lists the existing activities.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListActivitiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -688,12 +799,20 @@ module Aws::States
     end
 
     # Lists the executions of a state machine that meet the filtering
-    # criteria.
+    # criteria. Results are sorted by time, with the most recent execution
+    # first.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
@@ -706,19 +825,18 @@ module Aws::States
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -756,27 +874,33 @@ module Aws::States
 
     # Lists the existing state machines.
     #
-    # If a `nextToken` is returned by a previous call, there are more
-    # results available. To retrieve the next page of results, make the call
-    # again using the returned token in `nextToken`. Keep all other
-    # arguments unchanged.
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
+    #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
     #   `nextToken` to obtain further pages of results. The default is 100 and
-    #   the maximum allowed page size is 100. A value of 0 uses the default.
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
     #
     #   This is only an upper limit. The actual number of results returned per
     #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` is returned by a previous call, there are more
-    #   results available. To retrieve the next page of results, make the call
-    #   again using the returned token in `nextToken`. Keep all other
-    #   arguments unchanged.
-    #
-    #   The configured `maxResults` determines how many results can be
-    #   returned in a single call.
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
     #
     # @return [Types::ListStateMachinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -807,6 +931,37 @@ module Aws::States
       req.send_request(options)
     end
 
+    # List tags for a given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Used by workers to report that the task identified by the `taskToken`
     # failed.
     #
@@ -816,7 +971,7 @@ module Aws::States
     #   GetActivityTask::taskToken).
     #
     # @option params [String] :error
-    #   An arbitrary error code that identifies the cause of the failure.
+    #   The error code of the failure.
     #
     # @option params [String] :cause
     #   A more detailed explanation of the cause of the failure.
@@ -827,8 +982,8 @@ module Aws::States
     #
     #   resp = client.send_task_failure({
     #     task_token: "TaskToken", # required
-    #     error: "Error",
-    #     cause: "Cause",
+    #     error: "SensitiveError",
+    #     cause: "SensitiveCause",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailure AWS API Documentation
@@ -898,7 +1053,7 @@ module Aws::States
     #
     #   resp = client.send_task_success({
     #     task_token: "TaskToken", # required
-    #     output: "Data", # required
+    #     output: "SensitiveData", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccess AWS API Documentation
@@ -912,6 +1067,14 @@ module Aws::States
 
     # Starts a state machine execution.
     #
+    # <note markdown="1"> `StartExecution` is idempotent. If `StartExecution` is called with the
+    # same name and input as a running execution, the call will succeed and
+    # return the same response as the original request. If the execution is
+    # closed or if the input is different, it will return a 400
+    # `ExecutionAlreadyExists` error. Names can be reused after 90 days.
+    #
+    #  </note>
+    #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to execute.
     #
@@ -920,22 +1083,6 @@ module Aws::States
     #   account and region for 90 days. For more information, see [ Limits
     #   Related to State Machine Executions][1] in the *AWS Step Functions
     #   Developer Guide*.
-    #
-    #   An execution can't use the name of another execution for 90 days.
-    #
-    #    When you make multiple `StartExecution` calls with the same name, the
-    #   new execution doesn't run and the following rules apply:
-    #
-    #    * When the original execution is open and the execution input from
-    #   the
-    #     new call is *different*, the `ExecutionAlreadyExists` message is
-    #     returned.
-    #
-    #   * When the original execution is open and the execution input from the
-    #     new call is *identical*, the `Success` message is returned.
-    #
-    #   * When the original execution is closed, the `ExecutionAlreadyExists`
-    #     message is returned regardless of input.
     #
     #   A name must *not* contain:
     #
@@ -974,7 +1121,7 @@ module Aws::States
     #   resp = client.start_execution({
     #     state_machine_arn: "Arn", # required
     #     name: "Name",
-    #     input: "Data",
+    #     input: "SensitiveData",
     #   })
     #
     # @example Response structure
@@ -997,10 +1144,10 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the execution to stop.
     #
     # @option params [String] :error
-    #   An arbitrary error code that identifies the cause of the termination.
+    #   The error code of the failure.
     #
     # @option params [String] :cause
-    #   A more detailed explanation of the cause of the termination.
+    #   A more detailed explanation of the cause of the failure.
     #
     # @return [Types::StopExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1010,8 +1157,8 @@ module Aws::States
     #
     #   resp = client.stop_execution({
     #     execution_arn: "Arn", # required
-    #     error: "Error",
-    #     cause: "Cause",
+    #     error: "SensitiveError",
+    #     cause: "SensitiveCause",
     #   })
     #
     # @example Response structure
@@ -1027,16 +1174,78 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Add a tag to a Step Functions resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The list of tags to add to a resource.
+    #
+    #   Tags may only contain unicode letters, digits, whitespace, or these
+    #   symbols: `_ . : / = + - @`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove a tag from a Step Functions resource
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) for the Step Functions state machine or
+    #   activity.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing state machine by modifying its `definition` and/or
     # `roleArn`. Running executions will continue to use the previous
-    # `definition` and `roleArn`.
+    # `definition` and `roleArn`. You must include at least one of
+    # `definition` or `roleArn` or you will receive a
+    # `MissingRequiredParameter` error.
     #
     # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
     # `definition` and `roleArn`. Executions started immediately after
     # calling `UpdateStateMachine` may use the previous state machine
-    # `definition` and `roleArn`. You must include at least one of
-    # `definition` or `roleArn` or you will receive a
-    # `MissingRequiredParameter` error.
+    # `definition` and `roleArn`.
     #
     #  </note>
     #
@@ -1044,7 +1253,12 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the state machine.
     #
     # @option params [String] :definition
-    #   The Amazon States Language definition of the state machine.
+    #   The Amazon States Language definition of the state machine. See
+    #   [Amazon States Language][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
@@ -1087,7 +1301,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

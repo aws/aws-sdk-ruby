@@ -632,6 +632,15 @@ module Aws::Inspector
     #   generated.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The tags related to the EC2 instance where the finding is generated.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] network_interfaces
+    #   An array of the network interfaces interacting with the EC2 instance
+    #   where the finding is generated.
+    #   @return [Array<Types::NetworkInterface>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssetAttributes AWS API Documentation
     #
     class AssetAttributes < Struct.new(
@@ -640,7 +649,9 @@ module Aws::Inspector
       :auto_scaling_group,
       :ami_id,
       :hostname,
-      :ipv4_addresses)
+      :ipv4_addresses,
+      :tags,
+      :network_interfaces)
       include Aws::Structure
     end
 
@@ -2294,6 +2305,68 @@ module Aws::Inspector
       include Aws::Structure
     end
 
+    # Contains information about the network interfaces interacting with an
+    # EC2 instance. This data type is used as one of the elements of the
+    # AssetAttributes data type.
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of a subnet associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of a VPC associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The name of a private DNS associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   A list of the private IP addresses associated with the network
+    #   interface. Includes the privateDnsName and privateIpAddress.
+    #   @return [Array<Types::PrivateIp>]
+    #
+    # @!attribute [rw] public_dns_name
+    #   The name of a public DNS associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The public IP address from which the network interface is reachable.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_addresses
+    #   The IP addresses associated with the network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   A list of the security groups associated with the network interface.
+    #   Includes the groupId and groupName.
+    #   @return [Array<Types::SecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :network_interface_id,
+      :subnet_id,
+      :vpc_id,
+      :private_dns_name,
+      :private_ip_address,
+      :private_ip_addresses,
+      :public_dns_name,
+      :public_ip,
+      :ipv6_addresses,
+      :security_groups)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PreviewAgentsRequest
     #   data as a hash:
     #
@@ -2347,6 +2420,26 @@ module Aws::Inspector
     class PreviewAgentsResponse < Struct.new(
       :agent_previews,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Contains information about a private IP address associated with a
+    # network interface. This data type is used as a response element in the
+    # DescribeFindings action.
+    #
+    # @!attribute [rw] private_dns_name
+    #   The DNS name of the private IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The full IP address of the network inteface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PrivateIp AWS API Documentation
+    #
+    class PrivateIp < Struct.new(
+      :private_dns_name,
+      :private_ip_address)
       include Aws::Structure
     end
 
@@ -2512,6 +2605,26 @@ module Aws::Inspector
     class Scope < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # Contains information about a security group associated with a network
+    # interface. This data type is used as one of the elements of the
+    # NetworkInterface data type.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SecurityGroup AWS API Documentation
+    #
+    class SecurityGroup < Struct.new(
+      :group_name,
+      :group_id)
       include Aws::Structure
     end
 

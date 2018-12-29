@@ -38,6 +38,7 @@ module AwsSdkCodeGenerator
         'fault' => false,
         'error' => false,
         'deprecated' => false,
+        'deprecatedMessage' => false,
         'type' => false,
         'documentation' => false,
         'members' => false,
@@ -59,7 +60,7 @@ module AwsSdkCodeGenerator
       }
 
       METADATA_KEYS = {
-        # keep
+        # keep all
         'endpointPrefix' => true,
         'signatureVersion' => true,
         'signingName' => true,
@@ -72,13 +73,12 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'protocolSettings' => {}, # current unused unless for h2 exclude
 
-        # ignore
-        'apiVersion' => false,
-        'checksumFormat' => false,
-        'globalEndpoint' => false,
-        'serviceAbbreviation' => false,
-        'uid' => false,
-        'serviceId' => false,
+        'serviceId' => true,
+        'apiVersion' => true,
+        'checksumFormat' => true,
+        'globalEndpoint' => true,
+        'serviceAbbreviation' => true,
+        'uid' => true,
       }
 
       # @option options [required, Service] :service
@@ -169,7 +169,7 @@ module AwsSdkCodeGenerator
       def operations
         @service.api['operations'].map do |operation_name, operation|
           Operation.new.tap do |o|
-            o.name = operation_name
+            o.name = operation['name'] || operation_name
             o.method_name = underscore(operation_name)
             o.http_method = operation['http']['method']
             o.http_request_uri = operation['http']['requestUri']
@@ -182,6 +182,25 @@ module AwsSdkCodeGenerator
             end
             o.error_shape_names = operation.fetch('errors', []).map {|e| e['shape'] }
             o.deprecated = true if operation['deprecated']
+            o.endpoint_operation = true if operation['endpointoperation']
+            if operation.key?('endpointdiscovery')
+              # "endpointdiscovery" trait per operation
+              # contains hash values of configuration,
+              # current acked field: "required"
+              o.endpoint_discovery_available = true
+              o.endpoint_discovery = operation['endpointdiscovery'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
+            # endpoint trait cannot be co-exist with endpoint discovery
+            elsif operation.key?('endpoint')
+              # endpoint trait per operation, cannot be enabled with endpoint discovery
+              o.endpoint_trait = true
+              o.endpoint_pattern = operation['endpoint'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
+            end
             o.authorizer = operation['authorizer'] if operation.key?('authorizer')
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
@@ -203,6 +222,13 @@ module AwsSdkCodeGenerator
             end
           end
         end
+      end
+
+      def endpoint_operation
+        @service.api['operations'].each do |name, ref|
+          return underscore(name) if ref['endpointoperation']
+        end
+        nil
       end
 
       private
@@ -290,7 +316,7 @@ module AwsSdkCodeGenerator
         line += shape_ref_eventheader(ref)
         line += shape_ref_location(ref)
         line += shape_ref_location_name(member_name, ref)
-        line += shape_ref_metadata(ref)
+        line += shape_ref_metadata(ref, member_name)
         line += ")"
         line
       end
@@ -359,9 +385,12 @@ module AwsSdkCodeGenerator
         location_name ? ", location_name: #{location_name.inspect}" : ""
       end
 
-      def shape_ref_metadata(member_ref)
+      def shape_ref_metadata(member_ref, member_name)
         metadata = member_ref.inject({}) do |hash, (key, value)|
           hash[key] = value unless SKIP_TRAITS.include?(key)
+          if key == 'hostLabel'
+            hash['hostLabelName'] = member_name
+          end
           hash
         end
         if metadata.empty?
@@ -469,8 +498,23 @@ module AwsSdkCodeGenerator
         # @return [Boolean]
         attr_accessor :deprecated
 
+        # @return [Boolean]
+        attr_accessor :endpoint_discovery_available
+
+        # @return [Boolean]
+        attr_accessor :endpoint_operation
+
+        # @return [Array]
+        attr_accessor :endpoint_discovery
+
         # @return [String,nil]
         attr_accessor :authtype
+
+        # @return [Boolean]
+        attr_accessor :endpoint_trait
+
+        # @return [Array]
+        attr_accessor :endpoint_pattern
 
         # APIG only
         # @return [Boolean]

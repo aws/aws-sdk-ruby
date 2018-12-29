@@ -199,7 +199,7 @@ module Aws::KinesisAnalytics
     #             role_arn: "RoleARN", # required
     #           },
     #           destination_schema: { # required
-    #             record_format_type: "JSON", # accepts JSON, CSV
+    #             record_format_type: "JSON", # required, accepts JSON, CSV
     #           },
     #         },
     #       }
@@ -220,7 +220,7 @@ module Aws::KinesisAnalytics
     #   An array of objects, each describing one output configuration. In
     #   the output configuration, you specify the name of an in-application
     #   stream, a destination (that is, an Amazon Kinesis stream, an Amazon
-    #   Kinesis Firehose delivery stream, or an Amazon Lambda function), and
+    #   Kinesis Firehose delivery stream, or an AWS Lambda function), and
     #   record the formation to use when writing to the destination.
     #   @return [Types::Output]
     #
@@ -496,7 +496,7 @@ module Aws::KinesisAnalytics
     #               role_arn_update: "RoleARN",
     #             },
     #             destination_schema_update: {
-    #               record_format_type: "JSON", # accepts JSON, CSV
+    #               record_format_type: "JSON", # required, accepts JSON, CSV
     #             },
     #           },
     #         ],
@@ -578,9 +578,9 @@ module Aws::KinesisAnalytics
     # CSV format, where the records use the *'\\n'* as the row delimiter
     # and a comma (",") as the column delimiter:
     #
-    # `"name1", "address1" `
+    # `"name1", "address1"`
     #
-    # `"name2, "address2"`
+    # `"name2", "address2"`
     #
     # @note When making an API call, you may pass CSVMappingParameters
     #   data as a hash:
@@ -764,7 +764,7 @@ module Aws::KinesisAnalytics
     #               role_arn: "RoleARN", # required
     #             },
     #             destination_schema: { # required
-    #               record_format_type: "JSON", # accepts JSON, CSV
+    #               record_format_type: "JSON", # required, accepts JSON, CSV
     #             },
     #           },
     #         ],
@@ -811,7 +811,7 @@ module Aws::KinesisAnalytics
     #   in-application streams to up to three destinations.
     #
     #   These destinations can be Amazon Kinesis streams, Amazon Kinesis
-    #   Firehose delivery streams, Amazon Lambda destinations, or any
+    #   Firehose delivery streams, AWS Lambda destinations, or any
     #   combination of the three.
     #
     #   In the configuration, you specify the in-application stream name,
@@ -1115,7 +1115,7 @@ module Aws::KinesisAnalytics
     #   data as a hash:
     #
     #       {
-    #         record_format_type: "JSON", # accepts JSON, CSV
+    #         record_format_type: "JSON", # required, accepts JSON, CSV
     #       }
     #
     # @!attribute [rw] record_format_type
@@ -1166,8 +1166,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::InputStartingPositionConfiguration]
     #
     # @!attribute [rw] s3_configuration
-    #   Specify this parameter to discover a schema from data in an S3
-    #   object.
+    #   Specify this parameter to discover a schema from data in an Amazon
+    #   S3 object.
     #   @return [Types::S3Configuration]
     #
     # @!attribute [rw] input_processing_configuration
@@ -1894,8 +1894,8 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] role_arn
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
-    #   access the stream on your behalf. You need to make sure the role has
-    #   necessary permissions to access the stream.
+    #   access the stream on your behalf. You need to make sure that the
+    #   role has the necessary permissions to access the stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInput AWS API Documentation
@@ -1947,7 +1947,7 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] role_arn_update
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
-    #   access the stream on your behalf. You need to grant necessary
+    #   access the stream on your behalf. You need to grant the necessary
     #   permissions to this role.
     #   @return [String]
     #
@@ -2031,7 +2031,7 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] role_arn_update
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
-    #   access the stream on your behalf. You need to grant necessary
+    #   access the stream on your behalf. You need to grant the necessary
     #   permissions to this role.
     #   @return [String]
     #
@@ -2400,7 +2400,7 @@ module Aws::KinesisAnalytics
     #           role_arn: "RoleARN", # required
     #         },
     #         destination_schema: { # required
-    #           record_format_type: "JSON", # accepts JSON, CSV
+    #           record_format_type: "JSON", # required, accepts JSON, CSV
     #         },
     #       }
     #
@@ -2508,7 +2508,7 @@ module Aws::KinesisAnalytics
     #           role_arn_update: "RoleARN",
     #         },
     #         destination_schema_update: {
-    #           record_format_type: "JSON", # accepts JSON, CSV
+    #           record_format_type: "JSON", # required, accepts JSON, CSV
     #         },
     #       }
     #
@@ -2814,8 +2814,8 @@ module Aws::KinesisAnalytics
 
     # Provides a description of an Amazon S3 data source, including the
     # Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role
-    # that is used to access the bucket, and the name of the S3 object that
-    # contains the data.
+    # that is used to access the bucket, and the name of the Amazon S3
+    # object that contains the data.
     #
     # @note When making an API call, you may pass S3Configuration
     #   data as a hash:
@@ -3131,7 +3131,7 @@ module Aws::KinesisAnalytics
     #                 role_arn_update: "RoleARN",
     #               },
     #               destination_schema_update: {
-    #                 record_format_type: "JSON", # accepts JSON, CSV
+    #                 record_format_type: "JSON", # required, accepts JSON, CSV
     #               },
     #             },
     #           ],

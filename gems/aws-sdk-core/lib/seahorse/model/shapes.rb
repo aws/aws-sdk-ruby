@@ -10,6 +10,8 @@ module Seahorse
           @metadata = {}
           @required = false
           @deprecated = false
+          @location = nil
+          @location_name = nil
           @event = false
           @eventstream = false
           @eventpayload = false

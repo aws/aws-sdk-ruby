@@ -239,8 +239,8 @@ module Aws::Athena
     #
     class DeleteNamedQueryOutput < Aws::EmptyStructure; end
 
-    # If query results are encrypted in Amazon S3, indicates the Amazon S3
-    # encryption option used.
+    # If query results are encrypted in Amazon S3, indicates the encryption
+    # option used (for example, `SSE-KMS` or `CSE-KMS`) and key information.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
     #   data as a hash:
@@ -358,6 +358,10 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] update_count
+    #   The number of rows inserted with a CREATE TABLE AS SELECT statement.
+    #   @return [Integer]
+    #
     # @!attribute [rw] result_set
     #   The results of the query execution.
     #   @return [Types::ResultSet]
@@ -369,6 +373,7 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsOutput AWS API Documentation
     #
     class GetQueryResultsOutput < Struct.new(
+      :update_count,
       :result_set,
       :next_token)
       include Aws::Structure
@@ -500,6 +505,14 @@ module Aws::Athena
     #   The SQL query statements which the query execution ran.
     #   @return [String]
     #
+    # @!attribute [rw] statement_type
+    #   The type of query statement that was run. `DDL` indicates DDL query
+    #   statements. `DML` indicates DML (Data Manipulation Language) query
+    #   statements, such as `CREATE TABLE AS SELECT`. `UTILITY` indicates
+    #   query statements other than DDL and DML, such as `SHOW CREATE
+    #   TABLE`, or `DESCRIBE <table>`.
+    #   @return [String]
+    #
     # @!attribute [rw] result_configuration
     #   The location in Amazon S3 where query results were stored and the
     #   encryption option, if any, used for query results.
@@ -516,7 +529,8 @@ module Aws::Athena
     #
     # @!attribute [rw] statistics
     #   The amount of data scanned during the query execution and the amount
-    #   of time that it took to execute.
+    #   of time that it took to execute, and the type of statement that was
+    #   run.
     #   @return [Types::QueryExecutionStatistics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution AWS API Documentation
@@ -524,6 +538,7 @@ module Aws::Athena
     class QueryExecution < Struct.new(
       :query_execution_id,
       :query,
+      :statement_type,
       :result_configuration,
       :query_execution_context,
       :status,
@@ -552,7 +567,8 @@ module Aws::Athena
     end
 
     # The amount of data scanned during the query execution and the amount
-    # of time that it took to execute.
+    # of time that it took to execute, and the type of statement that was
+    # run.
     #
     # @!attribute [rw] engine_execution_time_in_millis
     #   The number of milliseconds that the query took to execute.
@@ -574,12 +590,14 @@ module Aws::Athena
     # reason (if applicable) for the query execution.
     #
     # @!attribute [rw] state
-    #   The state of query execution. `SUBMITTED` indicates that the query
-    #   is queued for execution. `RUNNING` indicates that the query is
-    #   scanning data and returning results. `SUCCEEDED` indicates that the
-    #   query completed without error. `FAILED` indicates that the query
-    #   experienced an error and did not complete processing. `CANCELLED`
-    #   indicates that user input interrupted query execution.
+    #   The state of query execution. `QUEUED` state is listed but is not
+    #   used by Athena and is reserved for future use. `RUNNING` indicates
+    #   that the query has been submitted to the service, and Athena will
+    #   execute the query as soon as resources are available. `SUCCEEDED`
+    #   indicates that the query completed without error. `FAILED` indicates
+    #   that the query experienced an error and did not complete
+    #   processing.`CANCELLED` indicates that user input interrupted query
+    #   execution.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -619,12 +637,18 @@ module Aws::Athena
     #       }
     #
     # @!attribute [rw] output_location
-    #   The location in S3 where query results are stored.
+    #   The location in Amazon S3 where your query results are stored, such
+    #   as `s3://path/to/query/bucket/`. For more information, see [Queries
+    #   and Query Result Files. ][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/athena/latest/ug/querying.html
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
-    #   If query results are encrypted in S3, indicates the S3 encryption
-    #   option used (for example, `SSE-KMS` or `CSE-KMS` and key
+    #   If query results are encrypted in Amazon S3, indicates the
+    #   encryption option used (for example, `SSE-KMS` or `CSE-KMS`) and key
     #   information.
     #   @return [Types::EncryptionConfiguration]
     #
@@ -660,7 +684,7 @@ module Aws::Athena
     # table of query results.
     #
     # @!attribute [rw] column_info
-    #   Information about the columns in a query execution result.
+    #   Information about the columns returned in a query result metadata.
     #   @return [Array<Types::ColumnInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultSetMetadata AWS API Documentation

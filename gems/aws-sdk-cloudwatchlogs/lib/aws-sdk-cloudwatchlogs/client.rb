@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +47,167 @@ module Aws::CloudWatchLogs
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -265,12 +314,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, Integer] :from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
-    #   stamp earlier than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp earlier than this time are not exported.
     #
     # @option params [required, Integer] :to
     #   The end time of the range for the request, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp
     #   later than this time are not exported.
     #
     # @option params [required, String] :destination
@@ -884,6 +933,59 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns a list of CloudWatch Logs Insights queries that are scheduled,
+    # executing, or have been executed recently in this account. You can
+    # request all queries, or limit it to queries of a specific log group or
+    # queries with a certain status.
+    #
+    # @option params [String] :log_group_name
+    #   Limits the returned queries to only those for the specified log group.
+    #
+    # @option params [String] :status
+    #   Limits the returned queries to only those that have the specified
+    #   status. Valid values are `Cancelled`, `Complete`, `Failed`, `Running`,
+    #   and `Scheduled`.
+    #
+    # @option params [Integer] :max_results
+    #   Limits the number of returned queries to the specified number.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::DescribeQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueriesResponse#queries #queries} => Array&lt;Types::QueryInfo&gt;
+    #   * {Types::DescribeQueriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_queries({
+    #     log_group_name: "LogGroupName",
+    #     status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queries #=> Array
+    #   resp.queries[0].query_id #=> String
+    #   resp.queries[0].query_string #=> String
+    #   resp.queries[0].status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled"
+    #   resp.queries[0].create_time #=> Integer
+    #   resp.queries[0].log_group_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueries AWS API Documentation
+    #
+    # @overload describe_queries(params = {})
+    # @param [Hash] params ({})
+    def describe_queries(params = {}, options = {})
+      req = build_request(:describe_queries, params)
+      req.send_request(options)
+    end
+
     # Lists the resource policies in this account.
     #
     # @option params [String] :next_token
@@ -1020,24 +1122,43 @@ module Aws::CloudWatchLogs
     # specifying the token in a subsequent call.
     #
     # @option params [required, String] :log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #
     # @option params [Array<String>] :log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
+    #
+    # @option params [String] :log_stream_name_prefix
+    #   Filters the results to include only events from log streams that have
+    #   names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
     #   this time are not returned.
     #
     # @option params [String] :filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [String] :next_token
     #   The token for the next set of events to return. (You received this
@@ -1064,6 +1185,7 @@ module Aws::CloudWatchLogs
     #   resp = client.filter_log_events({
     #     log_group_name: "LogGroupName", # required
     #     log_stream_names: ["LogStreamName"],
+    #     log_stream_name_prefix: "LogStreamName",
     #     start_time: 1,
     #     end_time: 1,
     #     filter_pattern: "FilterPattern",
@@ -1109,13 +1231,13 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to this
-    #   time or later than this time are included. Events with a time stamp
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this
+    #   time or later than this time are included. Events with a timestamp
     #   earlier than this time are not included.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to or
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or
     #   later than this time are not included.
     #
     # @option params [String] :next_token
@@ -1165,6 +1287,136 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def get_log_events(params = {}, options = {})
       req = build_request(:get_log_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the fields that are included in log events in the
+    # specified log group, along with the percentage of log events that
+    # contain each field. The search is limited to a time period that you
+    # specify.
+    #
+    # In the results, fields that start with @ are fields generated by
+    # CloudWatch Logs. For example, `@timestamp` is the timestamp of each
+    # log event.
+    #
+    # The response results are sorted by the frequency percentage, starting
+    # with the highest percentage.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group to search.
+    #
+    # @option params [Integer] :time
+    #   The time to set as the center of the query. If you specify `time`, the
+    #   8 minutes before and 8 minutes after this time are searched. If you
+    #   omit `time`, the past 15 minutes are queried.
+    #
+    #   The `time` value is specified as epoch time, the number of seconds
+    #   since January 1, 1970, 00:00:00 UTC.
+    #
+    # @return [Types::GetLogGroupFieldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogGroupFieldsResponse#log_group_fields #log_group_fields} => Array&lt;Types::LogGroupField&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_group_fields({
+    #     log_group_name: "LogGroupName", # required
+    #     time: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_group_fields #=> Array
+    #   resp.log_group_fields[0].name #=> String
+    #   resp.log_group_fields[0].percent #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFields AWS API Documentation
+    #
+    # @overload get_log_group_fields(params = {})
+    # @param [Hash] params ({})
+    def get_log_group_fields(params = {}, options = {})
+      req = build_request(:get_log_group_fields, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all the fields and values of a single log event. All fields
+    # are retrieved, even if the original query that produced the
+    # `logRecordPointer` retrieved only a subset of fields. Fields are
+    # returned as field name/field value pairs.
+    #
+    # Additionally, the entire unparsed log event is returned within
+    # `@message`.
+    #
+    # @option params [required, String] :log_record_pointer
+    #   The pointer corresponding to the log event record you want to
+    #   retrieve. You get this from the response of a `GetQueryResults`
+    #   operation. In that response, the value of the `@ptr` field for a log
+    #   event is the value to use as `logRecordPointer` to retrieve that
+    #   complete log event record.
+    #
+    # @return [Types::GetLogRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogRecordResponse#log_record #log_record} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_record({
+    #     log_record_pointer: "LogRecordPointer", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_record #=> Hash
+    #   resp.log_record["Field"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecord AWS API Documentation
+    #
+    # @overload get_log_record(params = {})
+    # @param [Hash] params ({})
+    def get_log_record(params = {}, options = {})
+      req = build_request(:get_log_record, params)
+      req.send_request(options)
+    end
+
+    # Returns the results from the specified query. If the query is in
+    # progress, partial results of that current execution are returned. Only
+    # the fields requested in the query are returned.
+    #
+    # `GetQueryResults` does not start a query execution. To run a query,
+    # use .
+    #
+    # @option params [required, String] :query_id
+    #   The ID number of the query.
+    #
+    # @return [Types::GetQueryResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryResultsResponse#results #results} => Array&lt;Array&lt;Types::ResultField&gt;&gt;
+    #   * {Types::GetQueryResultsResponse#statistics #statistics} => Types::QueryStatistics
+    #   * {Types::GetQueryResultsResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_results({
+    #     query_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0] #=> Array
+    #   resp.results[0][0].field #=> String
+    #   resp.results[0][0].value #=> String
+    #   resp.statistics.records_matched #=> Float
+    #   resp.statistics.records_scanned #=> Float
+    #   resp.statistics.bytes_scanned #=> Float
+    #   resp.status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResults AWS API Documentation
+    #
+    # @overload get_query_results(params = {})
+    # @param [Hash] params ({})
+    def get_query_results(params = {}, options = {})
+      req = build_request(:get_query_results, params)
       req.send_request(options)
     end
 
@@ -1308,7 +1560,7 @@ module Aws::CloudWatchLogs
     #   retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their time stamp. The time stamp is the time the event occurred,
+    #   their timestamp. The timestamp is the time the event occurred,
     #   expressed as the number of milliseconds after Jan 1, 1970 00:00:00
     #   UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the
     #   timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
@@ -1585,6 +1837,98 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Schedules a query of a log group using CloudWatch Logs Insights. You
+    # specify the log group to query, the query string to use, and the time
+    # to query.
+    #
+    # For more information, see [CloudWatch Logs Insights Query Syntax][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @option params [required, String] :log_group_name
+    #   The log group on which to perform the query.
+    #
+    # @option params [required, Integer] :start_time
+    #   The time to start the query. Specified as epoch time, the number of
+    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #
+    # @option params [required, Integer] :end_time
+    #   The time to end this query, if it is still running. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #
+    # @option params [required, String] :query_string
+    #   The query string to use. For more information, see [CloudWatch Logs
+    #   Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of log events to return in the query. If the query
+    #   string uses the `fields` command, only the specified fields and their
+    #   values are returned.
+    #
+    # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryResponse#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query({
+    #     log_group_name: "LogGroupName", # required
+    #     start_time: 1, # required
+    #     end_time: 1, # required
+    #     query_string: "QueryString", # required
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQuery AWS API Documentation
+    #
+    # @overload start_query(params = {})
+    # @param [Hash] params ({})
+    def start_query(params = {}, options = {})
+      req = build_request(:start_query, params)
+      req.send_request(options)
+    end
+
+    # Stops a CloudWatch Logs Insights query that is in progress. If the
+    # query has already ended, the operation returns an error indicating
+    # that the specified query is not running.
+    #
+    # @option params [required, String] :query_id
+    #   The ID number of the query to stop. If necessary, you can use
+    #   `DescribeQueries` to find this ID number.
+    #
+    # @return [Types::StopQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopQueryResponse#success #success} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_query({
+    #     query_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.success #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQuery AWS API Documentation
+    #
+    # @overload stop_query(params = {})
+    # @param [Hash] params ({})
+    def stop_query(params = {}, options = {})
+      req = build_request(:stop_query, params)
+      req.send_request(options)
+    end
+
     # Adds or updates the specified tags for the specified log group.
     #
     # To list the tags for a log group, use ListTagsLogGroup. To remove
@@ -1629,9 +1973,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain time
-    #   stamps, IP addresses, strings, and so on. You use the filter pattern
-    #   to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
     #
     # @option params [required, Array<String>] :log_event_messages
     #   The log event messages to test.
@@ -1706,7 +2050,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

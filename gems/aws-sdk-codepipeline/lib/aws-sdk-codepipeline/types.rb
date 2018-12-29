@@ -255,6 +255,7 @@ module Aws::CodePipeline
     #           },
     #         ],
     #         role_arn: "RoleArn",
+    #         region: "AWSRegionName",
     #       }
     #
     # @!attribute [rw] name
@@ -288,6 +289,10 @@ module Aws::CodePipeline
     #   action. This is assumed through the roleArn for the pipeline.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   The action declaration's AWS Region, such as us-east-1.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration AWS API Documentation
     #
     class ActionDeclaration < Struct.new(
@@ -297,7 +302,8 @@ module Aws::CodePipeline
       :configuration,
       :output_artifacts,
       :input_artifacts,
-      :role_arn)
+      :role_arn,
+      :region)
       include Aws::Structure
     end
 
@@ -888,12 +894,22 @@ module Aws::CodePipeline
     #         pipeline: { # required
     #           name: "PipelineName", # required
     #           role_arn: "RoleArn", # required
-    #           artifact_store: { # required
+    #           artifact_store: {
     #             type: "S3", # required, accepts S3
     #             location: "ArtifactStoreLocation", # required
     #             encryption_key: {
     #               id: "EncryptionKeyId", # required
     #               type: "KMS", # required, accepts KMS
+    #             },
+    #           },
+    #           artifact_stores: {
+    #             "AWSRegionName" => {
+    #               type: "S3", # required, accepts S3
+    #               location: "ArtifactStoreLocation", # required
+    #               encryption_key: {
+    #                 id: "EncryptionKeyId", # required
+    #                 type: "KMS", # required, accepts KMS
+    #               },
     #             },
     #           },
     #           stages: [ # required
@@ -929,6 +945,7 @@ module Aws::CodePipeline
     #                     },
     #                   ],
     #                   role_arn: "RoleArn",
+    #                   region: "AWSRegionName",
     #                 },
     #               ],
     #             },
@@ -1972,12 +1989,22 @@ module Aws::CodePipeline
     #       {
     #         name: "PipelineName", # required
     #         role_arn: "RoleArn", # required
-    #         artifact_store: { # required
+    #         artifact_store: {
     #           type: "S3", # required, accepts S3
     #           location: "ArtifactStoreLocation", # required
     #           encryption_key: {
     #             id: "EncryptionKeyId", # required
     #             type: "KMS", # required, accepts KMS
+    #           },
+    #         },
+    #         artifact_stores: {
+    #           "AWSRegionName" => {
+    #             type: "S3", # required, accepts S3
+    #             location: "ArtifactStoreLocation", # required
+    #             encryption_key: {
+    #               id: "EncryptionKeyId", # required
+    #               type: "KMS", # required, accepts KMS
+    #             },
     #           },
     #         },
     #         stages: [ # required
@@ -2013,6 +2040,7 @@ module Aws::CodePipeline
     #                   },
     #                 ],
     #                 role_arn: "RoleArn",
+    #                 region: "AWSRegionName",
     #               },
     #             ],
     #           },
@@ -2035,6 +2063,16 @@ module Aws::CodePipeline
     #   are stored for the pipeline.
     #   @return [Types::ArtifactStore]
     #
+    # @!attribute [rw] artifact_stores
+    #   A mapping of artifactStore objects and their corresponding regions.
+    #   There must be an artifact store for the pipeline region and for each
+    #   cross-region action within the pipeline. You can only use either
+    #   artifactStore or artifactStores, not both.
+    #
+    #   If you create a cross-region action in your pipeline, you must use
+    #   artifactStores.
+    #   @return [Hash<String,Types::ArtifactStore>]
+    #
     # @!attribute [rw] stages
     #   The stage in which to perform the action.
     #   @return [Array<Types::StageDeclaration>]
@@ -2051,6 +2089,7 @@ module Aws::CodePipeline
       :name,
       :role_arn,
       :artifact_store,
+      :artifact_stores,
       :stages,
       :version)
       include Aws::Structure
@@ -2130,6 +2169,8 @@ module Aws::CodePipeline
     #   @return [Time]
     #
     # @!attribute [rw] source_revisions
+    #   A list of the source artifact revisions that initiated a pipeline
+    #   execution.
     #   @return [Array<Types::SourceRevision>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
@@ -2756,16 +2797,31 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Information about the version (or revision) of a source artifact that
+    # initiated a pipeline execution.
+    #
     # @!attribute [rw] action_name
+    #   The name of the action that processed the revision to the source
+    #   artifact.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
+    #   The system-generated unique ID that identifies the revision number
+    #   of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] revision_summary
+    #   Summary information about the most recent revision of the artifact.
+    #   For GitHub and AWS CodeCommit repositories, the commit message. For
+    #   Amazon S3 buckets or actions, the user-provided content of a
+    #   `codepipeline-artifact-revision-summary` key specified in the object
+    #   metadata.
     #   @return [String]
     #
     # @!attribute [rw] revision_url
+    #   The commit ID for the artifact revision. For artifacts stored in
+    #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
+    #   commit details page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevision AWS API Documentation
@@ -2828,6 +2884,7 @@ module Aws::CodePipeline
     #               },
     #             ],
     #             role_arn: "RoleArn",
+    #             region: "AWSRegionName",
     #           },
     #         ],
     #       }
@@ -2909,16 +2966,26 @@ module Aws::CodePipeline
     #
     #       {
     #         name: "PipelineName", # required
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the pipeline to start.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   The system-generated unique ID used to identify a unique execution
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecutionInput AWS API Documentation
     #
     class StartPipelineExecutionInput < Struct.new(
-      :name)
+      :name,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -3085,12 +3152,22 @@ module Aws::CodePipeline
     #         pipeline: { # required
     #           name: "PipelineName", # required
     #           role_arn: "RoleArn", # required
-    #           artifact_store: { # required
+    #           artifact_store: {
     #             type: "S3", # required, accepts S3
     #             location: "ArtifactStoreLocation", # required
     #             encryption_key: {
     #               id: "EncryptionKeyId", # required
     #               type: "KMS", # required, accepts KMS
+    #             },
+    #           },
+    #           artifact_stores: {
+    #             "AWSRegionName" => {
+    #               type: "S3", # required, accepts S3
+    #               location: "ArtifactStoreLocation", # required
+    #               encryption_key: {
+    #                 id: "EncryptionKeyId", # required
+    #                 type: "KMS", # required, accepts KMS
+    #               },
     #             },
     #           },
     #           stages: [ # required
@@ -3126,6 +3203,7 @@ module Aws::CodePipeline
     #                     },
     #                   ],
     #                   role_arn: "RoleArn",
+    #                   region: "AWSRegionName",
     #                 },
     #               ],
     #             },
@@ -3158,6 +3236,8 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The authentication applied to incoming webhook trigger requests.
+    #
     # @note When making an API call, you may pass WebhookAuthConfiguration
     #   data as a hash:
     #
@@ -3167,9 +3247,14 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] allowed_ip_range
+    #   The property used to configure acceptance of webhooks within a
+    #   specific IP range. For IP, only the AllowedIPRange property must be
+    #   set, and this property must be set to a valid CIDR range.
     #   @return [String]
     #
     # @!attribute [rw] secret_token
+    #   The property used to configure GitHub authentication. For
+    #   GITHUB\_HMAC, only the SecretToken property must be set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookAuthConfiguration AWS API Documentation

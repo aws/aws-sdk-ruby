@@ -69,11 +69,12 @@ module AwsSdkCodeGenerator
           end
         end
         paths << "#{@prefix}/customizations"
-        if eventstream_shape?
+        if @service.api['metadata']['protocolSettings'] &&
+          @service.api['metadata']['protocolSettings']['h2'] == 'eventstream'
+          paths << "#{@prefix}/async_client"
           paths << "#{@prefix}/event_streams"
-          h2 = @service.api['metadata']['protocolSettings'] &&
-            @service.api['metadata']['protocolSettings']['h2'] == 'eventstream'
-          path << "#{@prefix}/async_client" if h2
+        elsif eventstream_shape?
+          paths << "#{@prefix}/event_streams"
         end
         paths.to_a
       end

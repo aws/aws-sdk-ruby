@@ -29,6 +29,7 @@ module Aws::MQ
     CreateConfigurationOutput = Shapes::StructureShape.new(name: 'CreateConfigurationOutput')
     CreateConfigurationRequest = Shapes::StructureShape.new(name: 'CreateConfigurationRequest')
     CreateConfigurationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationResponse')
+    CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateUserInput = Shapes::StructureShape.new(name: 'CreateUserInput')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
@@ -36,6 +37,7 @@ module Aws::MQ
     DeleteBrokerOutput = Shapes::StructureShape.new(name: 'DeleteBrokerOutput')
     DeleteBrokerRequest = Shapes::StructureShape.new(name: 'DeleteBrokerRequest')
     DeleteBrokerResponse = Shapes::StructureShape.new(name: 'DeleteBrokerResponse')
+    DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteUserResponse = Shapes::StructureShape.new(name: 'DeleteUserResponse')
     DeploymentMode = Shapes::StringShape.new(name: 'DeploymentMode')
@@ -63,6 +65,8 @@ module Aws::MQ
     ListConfigurationsOutput = Shapes::StructureShape.new(name: 'ListConfigurationsOutput')
     ListConfigurationsRequest = Shapes::StructureShape.new(name: 'ListConfigurationsRequest')
     ListConfigurationsResponse = Shapes::StructureShape.new(name: 'ListConfigurationsResponse')
+    ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
+    ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListUsersOutput = Shapes::StructureShape.new(name: 'ListUsersOutput')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
@@ -75,6 +79,7 @@ module Aws::MQ
     RebootBrokerResponse = Shapes::StructureShape.new(name: 'RebootBrokerResponse')
     SanitizationWarning = Shapes::StructureShape.new(name: 'SanitizationWarning')
     SanitizationWarningReason = Shapes::StringShape.new(name: 'SanitizationWarningReason')
+    Tags = Shapes::StructureShape.new(name: 'Tags')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UpdateBrokerInput = Shapes::StructureShape.new(name: 'UpdateBrokerInput')
     UpdateBrokerOutput = Shapes::StructureShape.new(name: 'UpdateBrokerOutput')
@@ -105,6 +110,7 @@ module Aws::MQ
     __listOfUserSummary = Shapes::ListShape.new(name: '__listOfUserSummary')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -131,6 +137,7 @@ module Aws::MQ
     Configuration.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Configuration.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     Configuration.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    Configuration.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     Configuration.struct_class = Types::Configuration
 
     ConfigurationId.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -160,6 +167,7 @@ module Aws::MQ
     CreateBrokerInput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     CreateBrokerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     CreateBrokerInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
+    CreateBrokerInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateBrokerInput.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, location_name: "users"))
     CreateBrokerInput.struct_class = Types::CreateBrokerInput
 
@@ -180,6 +188,7 @@ module Aws::MQ
     CreateBrokerRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     CreateBrokerRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     CreateBrokerRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
+    CreateBrokerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateBrokerRequest.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, location_name: "users"))
     CreateBrokerRequest.struct_class = Types::CreateBrokerRequest
 
@@ -190,6 +199,7 @@ module Aws::MQ
     CreateConfigurationInput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateConfigurationInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateConfigurationInput.struct_class = Types::CreateConfigurationInput
 
     CreateConfigurationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -202,6 +212,7 @@ module Aws::MQ
     CreateConfigurationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateConfigurationRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateConfigurationRequest.struct_class = Types::CreateConfigurationRequest
 
     CreateConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -210,6 +221,10 @@ module Aws::MQ
     CreateConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     CreateConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateConfigurationResponse.struct_class = Types::CreateConfigurationResponse
+
+    CreateTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
     CreateUserInput.add_member(:console_access, Shapes::ShapeRef.new(shape: __boolean, location_name: "consoleAccess"))
     CreateUserInput.add_member(:groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "groups"))
@@ -234,6 +249,10 @@ module Aws::MQ
     DeleteBrokerResponse.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     DeleteBrokerResponse.struct_class = Types::DeleteBrokerResponse
 
+    DeleteTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    DeleteTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    DeleteTagsRequest.struct_class = Types::DeleteTagsRequest
+
     DeleteUserRequest.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "broker-id"))
     DeleteUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "username"))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
@@ -254,9 +273,11 @@ module Aws::MQ
     DescribeBrokerOutput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
     DescribeBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerOutput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
+    DescribeBrokerOutput.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
     DescribeBrokerOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     DescribeBrokerOutput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
+    DescribeBrokerOutput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeBrokerOutput.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUserSummary, location_name: "users"))
     DescribeBrokerOutput.struct_class = Types::DescribeBrokerOutput
 
@@ -277,9 +298,11 @@ module Aws::MQ
     DescribeBrokerResponse.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
     DescribeBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerResponse.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
+    DescribeBrokerResponse.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
     DescribeBrokerResponse.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     DescribeBrokerResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
+    DescribeBrokerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeBrokerResponse.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUserSummary, location_name: "users"))
     DescribeBrokerResponse.struct_class = Types::DescribeBrokerResponse
 
@@ -294,6 +317,7 @@ module Aws::MQ
     DescribeConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     DescribeConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeConfigurationResponse.struct_class = Types::DescribeConfigurationResponse
 
     DescribeConfigurationRevisionOutput.add_member(:configuration_id, Shapes::ShapeRef.new(shape: __string, location_name: "configurationId"))
@@ -377,6 +401,12 @@ module Aws::MQ
     ListConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListConfigurationsResponse.struct_class = Types::ListConfigurationsResponse
 
+    ListTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsRequest.struct_class = Types::ListTagsRequest
+
+    ListTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    ListTagsResponse.struct_class = Types::ListTagsResponse
+
     ListUsersOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     ListUsersOutput.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin5Max100, location_name: "maxResults"))
     ListUsersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
@@ -419,22 +449,33 @@ module Aws::MQ
     SanitizationWarning.add_member(:reason, Shapes::ShapeRef.new(shape: SanitizationWarningReason, location_name: "reason"))
     SanitizationWarning.struct_class = Types::SanitizationWarning
 
+    Tags.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    Tags.struct_class = Types::Tags
+
+    UpdateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerInput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerInput.struct_class = Types::UpdateBrokerInput
 
+    UpdateBrokerOutput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     UpdateBrokerOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerOutput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerOutput.struct_class = Types::UpdateBrokerOutput
 
+    UpdateBrokerRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerRequest.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "broker-id"))
     UpdateBrokerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerRequest.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerRequest.struct_class = Types::UpdateBrokerRequest
 
+    UpdateBrokerResponse.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     UpdateBrokerResponse.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
     UpdateBrokerResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
+    UpdateBrokerResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     UpdateBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     UpdateBrokerResponse.struct_class = Types::UpdateBrokerResponse
 
@@ -515,6 +556,9 @@ module Aws::MQ
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
+    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -522,12 +566,15 @@ module Aws::MQ
       api.version = "2017-11-27"
 
       api.metadata = {
+        "apiVersion" => "2017-11-27",
         "endpointPrefix" => "mq",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "AmazonMQ",
+        "serviceId" => "mq",
         "signatureVersion" => "v4",
         "signingName" => "mq",
+        "uid" => "mq-2017-11-27",
       }
 
       api.add_operation(:create_broker, Seahorse::Model::Operation.new.tap do |o|
@@ -555,6 +602,18 @@ module Aws::MQ
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: CreateTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUser"
         o.http_method = "POST"
@@ -574,6 +633,18 @@ module Aws::MQ
         o.http_request_uri = "/v1/brokers/{broker-id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteBrokerRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBrokerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTags"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -674,6 +745,18 @@ module Aws::MQ
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTags"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListUsers"
         o.http_method = "GET"
@@ -707,6 +790,7 @@ module Aws::MQ
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 

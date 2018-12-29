@@ -95,6 +95,7 @@ module Aws::MediaPackage
     #       {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -164,6 +165,7 @@ module Aws::MediaPackage
     #         encryption: {
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -277,6 +279,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -306,6 +309,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -334,6 +338,7 @@ module Aws::MediaPackage
     #             key_rotation_interval_seconds: 1,
     #             repeat_ext_x_key: false,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -357,6 +362,7 @@ module Aws::MediaPackage
     #         mss_package: {
     #           encryption: {
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -503,6 +509,7 @@ module Aws::MediaPackage
     #       {
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -537,6 +544,7 @@ module Aws::MediaPackage
     #         encryption: {
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -792,6 +800,7 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1002,6 +1011,7 @@ module Aws::MediaPackage
     #           key_rotation_interval_seconds: 1,
     #           repeat_ext_x_key: false,
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -1092,6 +1102,10 @@ module Aws::MediaPackage
 
     # An endpoint for ingesting source content for a Channel.
     #
+    # @!attribute [rw] id
+    #   The system generated unique identifier for the IngestEndpoint
+    #   @return [String]
+    #
     # @!attribute [rw] password
     #   The system generated password for ingest authentication.
     #   @return [String]
@@ -1107,6 +1121,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngestEndpoint AWS API Documentation
     #
     class IngestEndpoint < Struct.new(
+      :id,
       :password,
       :url,
       :username)
@@ -1197,6 +1212,7 @@ module Aws::MediaPackage
     #
     #       {
     #         speke_key_provider: { # required
+    #           certificate_arn: "__string",
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1225,6 +1241,7 @@ module Aws::MediaPackage
     #       {
     #         encryption: {
     #           speke_key_provider: { # required
+    #             certificate_arn: "__string",
     #             resource_id: "__string", # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -1535,6 +1552,51 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RotateIngestEndpointCredentialsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string", # required
+    #         ingest_endpoint_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ingest_endpoint_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsRequest AWS API Documentation
+    #
+    class RotateIngestEndpointCredentialsRequest < Struct.new(
+      :id,
+      :ingest_endpoint_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] hls_ingest
+    #   An HTTP Live Streaming (HLS) ingest resource configuration.
+    #   @return [Types::HlsIngest]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsResponse AWS API Documentation
+    #
+    class RotateIngestEndpointCredentialsResponse < Struct.new(
+      :arn,
+      :description,
+      :hls_ingest,
+      :id)
+      include Aws::Structure
+    end
+
     # A configuration for accessing an external Secure Packager and Encoder
     # Key Exchange (SPEKE) service that will provide encryption keys.
     #
@@ -1542,11 +1604,18 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         certificate_arn: "__string",
     #         resource_id: "__string", # required
     #         role_arn: "__string", # required
     #         system_ids: ["__string"], # required
     #         url: "__string", # required
     #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   An Amazon Resource Name (ARN) of a Certificate Manager certificate
+    #   that MediaPackage will use for enforcing secure end-to-end data
+    #   transfer with the key provider service.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The resource ID to include in key requests.
@@ -1568,6 +1637,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/SpekeKeyProvider AWS API Documentation
     #
     class SpekeKeyProvider < Struct.new(
+      :certificate_arn,
       :resource_id,
       :role_arn,
       :system_ids,
@@ -1660,6 +1730,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -1689,6 +1760,7 @@ module Aws::MediaPackage
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -1717,6 +1789,7 @@ module Aws::MediaPackage
     #             key_rotation_interval_seconds: 1,
     #             repeat_ext_x_key: false,
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required
@@ -1740,6 +1813,7 @@ module Aws::MediaPackage
     #         mss_package: {
     #           encryption: {
     #             speke_key_provider: { # required
+    #               certificate_arn: "__string",
     #               resource_id: "__string", # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required

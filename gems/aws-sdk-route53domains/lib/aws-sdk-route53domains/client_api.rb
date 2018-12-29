@@ -422,12 +422,14 @@ module Aws::Route53Domains
       api.version = "2014-05-15"
 
       api.metadata = {
+        "apiVersion" => "2014-05-15",
         "endpointPrefix" => "route53domains",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Route 53 Domains",
         "signatureVersion" => "v4",
         "targetPrefix" => "Route53Domains_v20140515",
+        "uid" => "route53domains-2014-05-15",
       }
 
       api.add_operation(:check_domain_availability, Seahorse::Model::Operation.new.tap do |o|

@@ -34,6 +34,8 @@ module Aws::Firehose
     DeliveryStartTimestamp = Shapes::TimestampShape.new(name: 'DeliveryStartTimestamp')
     DeliveryStreamARN = Shapes::StringShape.new(name: 'DeliveryStreamARN')
     DeliveryStreamDescription = Shapes::StructureShape.new(name: 'DeliveryStreamDescription')
+    DeliveryStreamEncryptionConfiguration = Shapes::StructureShape.new(name: 'DeliveryStreamEncryptionConfiguration')
+    DeliveryStreamEncryptionStatus = Shapes::StringShape.new(name: 'DeliveryStreamEncryptionStatus')
     DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
     DeliveryStreamNameList = Shapes::ListShape.new(name: 'DeliveryStreamNameList')
     DeliveryStreamStatus = Shapes::StringShape.new(name: 'DeliveryStreamStatus')
@@ -62,6 +64,7 @@ module Aws::Firehose
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorOutputPrefix = Shapes::StringShape.new(name: 'ErrorOutputPrefix')
     ExtendedS3DestinationConfiguration = Shapes::StructureShape.new(name: 'ExtendedS3DestinationConfiguration')
     ExtendedS3DestinationDescription = Shapes::StructureShape.new(name: 'ExtendedS3DestinationDescription')
     ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
@@ -148,6 +151,10 @@ module Aws::Firehose
     SplunkRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'SplunkRetryDurationInSeconds')
     SplunkRetryOptions = Shapes::StructureShape.new(name: 'SplunkRetryOptions')
     SplunkS3BackupMode = Shapes::StringShape.new(name: 'SplunkS3BackupMode')
+    StartDeliveryStreamEncryptionInput = Shapes::StructureShape.new(name: 'StartDeliveryStreamEncryptionInput')
+    StartDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StartDeliveryStreamEncryptionOutput')
+    StopDeliveryStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionInput')
+    StopDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionOutput')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDeliveryStreamInput = Shapes::StructureShape.new(name: 'TagDeliveryStreamInput')
     TagDeliveryStreamInputTagList = Shapes::ListShape.new(name: 'TagDeliveryStreamInputTagList')
@@ -187,6 +194,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:elasticsearch_destination_configuration, Shapes::ShapeRef.new(shape: ElasticsearchDestinationConfiguration, location_name: "ElasticsearchDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:splunk_destination_configuration, Shapes::ShapeRef.new(shape: SplunkDestinationConfiguration, location_name: "SplunkDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -206,6 +214,7 @@ module Aws::Firehose
     DeliveryStreamDescription.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     DeliveryStreamDescription.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, required: true, location_name: "DeliveryStreamARN"))
     DeliveryStreamDescription.add_member(:delivery_stream_status, Shapes::ShapeRef.new(shape: DeliveryStreamStatus, required: true, location_name: "DeliveryStreamStatus"))
+    DeliveryStreamDescription.add_member(:delivery_stream_encryption_configuration, Shapes::ShapeRef.new(shape: DeliveryStreamEncryptionConfiguration, location_name: "DeliveryStreamEncryptionConfiguration"))
     DeliveryStreamDescription.add_member(:delivery_stream_type, Shapes::ShapeRef.new(shape: DeliveryStreamType, required: true, location_name: "DeliveryStreamType"))
     DeliveryStreamDescription.add_member(:version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "VersionId"))
     DeliveryStreamDescription.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
@@ -214,6 +223,9 @@ module Aws::Firehose
     DeliveryStreamDescription.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationDescriptionList, required: true, location_name: "Destinations"))
     DeliveryStreamDescription.add_member(:has_more_destinations, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreDestinations"))
     DeliveryStreamDescription.struct_class = Types::DeliveryStreamDescription
+
+    DeliveryStreamEncryptionConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: DeliveryStreamEncryptionStatus, location_name: "Status"))
+    DeliveryStreamEncryptionConfiguration.struct_class = Types::DeliveryStreamEncryptionConfiguration
 
     DeliveryStreamNameList.member = Shapes::ShapeRef.new(shape: DeliveryStreamName)
 
@@ -291,6 +303,7 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     ExtendedS3DestinationConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     ExtendedS3DestinationConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ExtendedS3DestinationConfiguration.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
     ExtendedS3DestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     ExtendedS3DestinationConfiguration.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
     ExtendedS3DestinationConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
@@ -304,6 +317,7 @@ module Aws::Firehose
     ExtendedS3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     ExtendedS3DestinationDescription.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     ExtendedS3DestinationDescription.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ExtendedS3DestinationDescription.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
     ExtendedS3DestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, required: true, location_name: "BufferingHints"))
     ExtendedS3DestinationDescription.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, required: true, location_name: "CompressionFormat"))
     ExtendedS3DestinationDescription.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "EncryptionConfiguration"))
@@ -317,6 +331,7 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     ExtendedS3DestinationUpdate.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARN"))
     ExtendedS3DestinationUpdate.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ExtendedS3DestinationUpdate.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
     ExtendedS3DestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     ExtendedS3DestinationUpdate.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
     ExtendedS3DestinationUpdate.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
@@ -418,6 +433,7 @@ module Aws::Firehose
     PutRecordBatchInput.struct_class = Types::PutRecordBatchInput
 
     PutRecordBatchOutput.add_member(:failed_put_count, Shapes::ShapeRef.new(shape: NonNegativeIntegerObject, required: true, location_name: "FailedPutCount"))
+    PutRecordBatchOutput.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Encrypted"))
     PutRecordBatchOutput.add_member(:request_responses, Shapes::ShapeRef.new(shape: PutRecordBatchResponseEntryList, required: true, location_name: "RequestResponses"))
     PutRecordBatchOutput.struct_class = Types::PutRecordBatchOutput
 
@@ -435,6 +451,7 @@ module Aws::Firehose
     PutRecordInput.struct_class = Types::PutRecordInput
 
     PutRecordOutput.add_member(:record_id, Shapes::ShapeRef.new(shape: PutResponseRecordId, required: true, location_name: "RecordId"))
+    PutRecordOutput.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Encrypted"))
     PutRecordOutput.struct_class = Types::PutRecordOutput
 
     Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
@@ -484,6 +501,7 @@ module Aws::Firehose
     S3DestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     S3DestinationConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     S3DestinationConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    S3DestinationConfiguration.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
     S3DestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     S3DestinationConfiguration.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
     S3DestinationConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
@@ -493,6 +511,7 @@ module Aws::Firehose
     S3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     S3DestinationDescription.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     S3DestinationDescription.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    S3DestinationDescription.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
     S3DestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, required: true, location_name: "BufferingHints"))
     S3DestinationDescription.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, required: true, location_name: "CompressionFormat"))
     S3DestinationDescription.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "EncryptionConfiguration"))
@@ -502,6 +521,7 @@ module Aws::Firehose
     S3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     S3DestinationUpdate.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARN"))
     S3DestinationUpdate.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    S3DestinationUpdate.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
     S3DestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     S3DestinationUpdate.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
     S3DestinationUpdate.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
@@ -559,6 +579,16 @@ module Aws::Firehose
     SplunkRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SplunkRetryDurationInSeconds, location_name: "DurationInSeconds"))
     SplunkRetryOptions.struct_class = Types::SplunkRetryOptions
 
+    StartDeliveryStreamEncryptionInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    StartDeliveryStreamEncryptionInput.struct_class = Types::StartDeliveryStreamEncryptionInput
+
+    StartDeliveryStreamEncryptionOutput.struct_class = Types::StartDeliveryStreamEncryptionOutput
+
+    StopDeliveryStreamEncryptionInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    StopDeliveryStreamEncryptionInput.struct_class = Types::StopDeliveryStreamEncryptionInput
+
+    StopDeliveryStreamEncryptionOutput.struct_class = Types::StopDeliveryStreamEncryptionOutput
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -598,12 +628,16 @@ module Aws::Firehose
       api.version = "2015-08-04"
 
       api.metadata = {
+        "apiVersion" => "2015-08-04",
         "endpointPrefix" => "firehose",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Firehose",
         "serviceFullName" => "Amazon Kinesis Firehose",
+        "serviceId" => "Firehose",
         "signatureVersion" => "v4",
         "targetPrefix" => "Firehose_20150804",
+        "uid" => "firehose-2015-08-04",
       }
 
       api.add_operation(:create_delivery_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -675,6 +709,30 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:start_delivery_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDeliveryStreamEncryption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDeliveryStreamEncryptionInput)
+        o.output = Shapes::ShapeRef.new(shape: StartDeliveryStreamEncryptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:stop_delivery_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDeliveryStreamEncryption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopDeliveryStreamEncryptionInput)
+        o.output = Shapes::ShapeRef.new(shape: StopDeliveryStreamEncryptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:tag_delivery_stream, Seahorse::Model::Operation.new.tap do |o|

@@ -82,18 +82,18 @@ module Aws::IAM
     # websites that capture a user's last sign-in time, see the [Credential
     # Reports][2] topic in the *Using IAM* guide. If a password is used more
     # than once in a five-minute span, only the first use is returned in
-    # this field. If the field is null (no value) then it indicates that
+    # this field. If the field is null (no value), then it indicates that
     # they never signed in with a password. This can be because:
     #
     # * The user never had a password.
     #
     # * A password exists but has not been used since IAM started tracking
-    #   this information on October 20th, 2014.
+    #   this information on October 20, 2014.
     #
-    # A null does not mean that the user *never* had a password. Also, if
-    # the user does not currently have a password, but had one in the past,
-    # then this field contains the date and time the most recent password
-    # was used.
+    # A null valuedoes not mean that the user *never* had a password. Also,
+    # if the user does not currently have a password, but had one in the
+    # past, then this field contains the date and time the most recent
+    # password was used.
     #
     # This value is returned only in the GetUser and ListUsers operations.
     #
@@ -110,14 +110,24 @@ module Aws::IAM
     # user.
     #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # Boundaries for IAM Identities
+    # ](IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM
+    # User Guide*.
     # @return [Types::AttachedPermissionsBoundary]
     def permissions_boundary
       data[:permissions_boundary]
+    end
+
+    # A list of tags that are associated with the specified user. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -292,7 +302,7 @@ module Aws::IAM
     # @option options [required, String] :group_name
     #   The name of the group to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -334,6 +344,12 @@ module Aws::IAM
     #   user = user.create({
     #     path: "pathType",
     #     permissions_boundary: "arnType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -343,7 +359,7 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -357,6 +373,21 @@ module Aws::IAM
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the user.
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created user. Each
+    #   tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags per user, then the entire request fails and the user is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create(options = {})
       options = options.merge(user_name: @name)
@@ -431,7 +462,7 @@ module Aws::IAM
     # @option options [required, String] :policy_name
     #   The name of the policy document.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -513,7 +544,7 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For virtual
     #   MFA devices, the serial number is the device ARN.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   =,.@:/-
@@ -571,7 +602,7 @@ module Aws::IAM
     # @option options [required, String] :group_name
     #   The name of the group to update.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -597,7 +628,7 @@ module Aws::IAM
     #   New path for the IAM user. Include this parameter only if you're
     #   changing the user's path.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL
@@ -611,7 +642,7 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're changing
     #   the user's name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -677,7 +708,7 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
     #   can contain any ASCII character from the ! (\\u0021) through the DEL

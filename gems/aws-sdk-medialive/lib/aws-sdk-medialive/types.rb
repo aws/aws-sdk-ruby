@@ -778,7 +778,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         name: "__string", # required
+    #         name: "__stringMin1", # required
     #         selector_settings: {
     #           audio_language_selection: {
     #             language_code: "__string", # required
@@ -921,6 +921,292 @@ module Aws::MediaLive
     class AvailSettings < Struct.new(
       :scte_35_splice_insert,
       :scte_35_time_signal_apos)
+      include Aws::Structure
+    end
+
+    # A list of schedule actions to create (in a request) or that have been
+    # created (in a response).
+    #
+    # @note When making an API call, you may pass BatchScheduleActionCreateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_actions: [ # required
+    #           {
+    #             action_name: "__string", # required
+    #             schedule_action_settings: { # required
+    #               hls_timed_metadata_settings: {
+    #                 id_3: "__string", # required
+    #               },
+    #               input_switch_settings: {
+    #                 input_attachment_name_reference: "__string", # required
+    #               },
+    #               scte_35_return_to_network_settings: {
+    #                 splice_event_id: 1, # required
+    #               },
+    #               scte_35_splice_insert_settings: {
+    #                 duration: 1,
+    #                 splice_event_id: 1, # required
+    #               },
+    #               scte_35_time_signal_settings: {
+    #                 scte_35_descriptors: [ # required
+    #                   {
+    #                     scte_35_descriptor_settings: { # required
+    #                       segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                         delivery_restrictions: {
+    #                           archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                           device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                           no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                           web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                         },
+    #                         segment_num: 1,
+    #                         segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                         segmentation_duration: 1,
+    #                         segmentation_event_id: 1, # required
+    #                         segmentation_type_id: 1,
+    #                         segmentation_upid: "__string",
+    #                         segmentation_upid_type: 1,
+    #                         segments_expected: 1,
+    #                         sub_segment_num: 1,
+    #                         sub_segments_expected: 1,
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               static_image_activate_settings: {
+    #                 duration: 1,
+    #                 fade_in: 1,
+    #                 fade_out: 1,
+    #                 height: 1,
+    #                 image: { # required
+    #                   password_param: "__string",
+    #                   uri: "__string", # required
+    #                   username: "__string",
+    #                 },
+    #                 image_x: 1,
+    #                 image_y: 1,
+    #                 layer: 1,
+    #                 opacity: 1,
+    #                 width: 1,
+    #               },
+    #               static_image_deactivate_settings: {
+    #                 fade_out: 1,
+    #                 layer: 1,
+    #               },
+    #             },
+    #             schedule_action_start_settings: { # required
+    #               fixed_mode_schedule_action_start_settings: {
+    #                 time: "__string", # required
+    #               },
+    #               follow_mode_schedule_action_start_settings: {
+    #                 follow_point: "END", # required, accepts END, START
+    #                 reference_action_name: "__string", # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] schedule_actions
+    #   A list of schedule actions to create.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateRequest AWS API Documentation
+    #
+    class BatchScheduleActionCreateRequest < Struct.new(
+      :schedule_actions)
+      include Aws::Structure
+    end
+
+    # List of actions that have been created in the schedule.
+    #
+    # @!attribute [rw] schedule_actions
+    #   List of actions that have been created in the schedule.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionCreateResult AWS API Documentation
+    #
+    class BatchScheduleActionCreateResult < Struct.new(
+      :schedule_actions)
+      include Aws::Structure
+    end
+
+    # A list of schedule actions to delete.
+    #
+    # @note When making an API call, you may pass BatchScheduleActionDeleteRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_names: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] action_names
+    #   A list of schedule actions to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteRequest AWS API Documentation
+    #
+    class BatchScheduleActionDeleteRequest < Struct.new(
+      :action_names)
+      include Aws::Structure
+    end
+
+    # List of actions that have been deleted from the schedule.
+    #
+    # @!attribute [rw] schedule_actions
+    #   List of actions that have been deleted from the schedule.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchScheduleActionDeleteResult AWS API Documentation
+    #
+    class BatchScheduleActionDeleteResult < Struct.new(
+      :schedule_actions)
+      include Aws::Structure
+    end
+
+    # A request to create actions (add actions to the schedule), delete
+    # actions (remove actions from the schedule), or both create and delete
+    # actions.
+    #
+    # @note When making an API call, you may pass BatchUpdateScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__string", # required
+    #         creates: {
+    #           schedule_actions: [ # required
+    #             {
+    #               action_name: "__string", # required
+    #               schedule_action_settings: { # required
+    #                 hls_timed_metadata_settings: {
+    #                   id_3: "__string", # required
+    #                 },
+    #                 input_switch_settings: {
+    #                   input_attachment_name_reference: "__string", # required
+    #                 },
+    #                 scte_35_return_to_network_settings: {
+    #                   splice_event_id: 1, # required
+    #                 },
+    #                 scte_35_splice_insert_settings: {
+    #                   duration: 1,
+    #                   splice_event_id: 1, # required
+    #                 },
+    #                 scte_35_time_signal_settings: {
+    #                   scte_35_descriptors: [ # required
+    #                     {
+    #                       scte_35_descriptor_settings: { # required
+    #                         segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                           delivery_restrictions: {
+    #                             archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                             device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                             no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                             web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                           },
+    #                           segment_num: 1,
+    #                           segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                           segmentation_duration: 1,
+    #                           segmentation_event_id: 1, # required
+    #                           segmentation_type_id: 1,
+    #                           segmentation_upid: "__string",
+    #                           segmentation_upid_type: 1,
+    #                           segments_expected: 1,
+    #                           sub_segment_num: 1,
+    #                           sub_segments_expected: 1,
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 static_image_activate_settings: {
+    #                   duration: 1,
+    #                   fade_in: 1,
+    #                   fade_out: 1,
+    #                   height: 1,
+    #                   image: { # required
+    #                     password_param: "__string",
+    #                     uri: "__string", # required
+    #                     username: "__string",
+    #                   },
+    #                   image_x: 1,
+    #                   image_y: 1,
+    #                   layer: 1,
+    #                   opacity: 1,
+    #                   width: 1,
+    #                 },
+    #                 static_image_deactivate_settings: {
+    #                   fade_out: 1,
+    #                   layer: 1,
+    #                 },
+    #               },
+    #               schedule_action_start_settings: { # required
+    #                 fixed_mode_schedule_action_start_settings: {
+    #                   time: "__string", # required
+    #                 },
+    #                 follow_mode_schedule_action_start_settings: {
+    #                   follow_point: "END", # required, accepts END, START
+    #                   reference_action_name: "__string", # required
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         deletes: {
+    #           action_names: ["__string"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] creates
+    #   Schedule actions to create in the schedule.
+    #   @return [Types::BatchScheduleActionCreateRequest]
+    #
+    # @!attribute [rw] deletes
+    #   Schedule actions to delete from the schedule.
+    #   @return [Types::BatchScheduleActionDeleteRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleRequest AWS API Documentation
+    #
+    class BatchUpdateScheduleRequest < Struct.new(
+      :channel_id,
+      :creates,
+      :deletes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creates
+    #   List of actions that have been created in the schedule.
+    #   @return [Types::BatchScheduleActionCreateResult]
+    #
+    # @!attribute [rw] deletes
+    #   List of actions that have been deleted from the schedule.
+    #   @return [Types::BatchScheduleActionDeleteResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleResponse AWS API Documentation
+    #
+    class BatchUpdateScheduleResponse < Struct.new(
+      :creates,
+      :deletes)
+      include Aws::Structure
+    end
+
+    # Results of a batch schedule update.
+    #
+    # @!attribute [rw] creates
+    #   Schedule actions created in the schedule.
+    #   @return [Types::BatchScheduleActionCreateResult]
+    #
+    # @!attribute [rw] deletes
+    #   Schedule actions deleted from the schedule.
+    #   @return [Types::BatchScheduleActionDeleteResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleResult AWS API Documentation
+    #
+    class BatchUpdateScheduleResult < Struct.new(
+      :creates,
+      :deletes)
       include Aws::Structure
     end
 
@@ -1442,7 +1728,7 @@ module Aws::MediaLive
     #
     #       {
     #         language_code: "__string",
-    #         name: "__string", # required
+    #         name: "__stringMin1", # required
     #         selector_settings: {
     #           arib_source_settings: {
     #           },
@@ -1619,8 +1905,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] validation_errors
-    #   A collection of validation error responses from attempting to create
-    #   a channel with a bouquet of settings.
+    #   A collection of validation error responses.
     #   @return [Array<Types::ValidationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelConfigurationValidationError AWS API Documentation
@@ -2057,7 +2342,7 @@ module Aws::MediaLive
     #                   key_format_versions: "__string",
     #                   key_provider_settings: {
     #                     static_key_settings: {
-    #                       key_provider_server: { # required
+    #                       key_provider_server: {
     #                         password_param: "__string",
     #                         uri: "__string", # required
     #                         username: "__string",
@@ -2072,6 +2357,7 @@ module Aws::MediaLive
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                   program_date_time_period: 1,
+    #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   segment_length: 1,
     #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                   segments_per_subdirectory: 1,
@@ -2109,6 +2395,7 @@ module Aws::MediaLive
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                   cache_length: 1,
     #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   restart_delay: 1,
     #                 },
     #                 udp_group_settings: {
@@ -2347,12 +2634,14 @@ module Aws::MediaLive
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   qvbr_quality_level: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
     #                   softness: 1,
     #                   spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -2369,11 +2658,12 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
     #               audio_selectors: [
     #                 {
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
@@ -2388,7 +2678,7 @@ module Aws::MediaLive
     #               caption_selectors: [
     #                 {
     #                   language_code: "__string",
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     arib_source_settings: {
     #                     },
@@ -2468,6 +2758,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2527,6 +2818,14 @@ module Aws::MediaLive
     #   A list of security groups referenced by IDs to attach to the input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   A list of the MediaConnect Flows that you want to use in this input.
+    #   You can specify as few as one Flow and presently, as many as two.
+    #   The only requirement is when you have more than one is that each
+    #   Flow is in a separate Availability Zone as this ensures your EML
+    #   input is redundant to AZ issues.
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
     #   Name of the input.
     #   @return [String]
@@ -2534,6 +2833,11 @@ module Aws::MediaLive
     # @!attribute [rw] request_id
     #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role this input assumes during
+    #   and after creation.
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -2550,8 +2854,10 @@ module Aws::MediaLive
     class CreateInput < Struct.new(
       :destinations,
       :input_security_groups,
+      :media_connect_flows,
       :name,
       :request_id,
+      :role_arn,
       :sources,
       :type)
       include Aws::Structure
@@ -2567,8 +2873,14 @@ module Aws::MediaLive
     #           },
     #         ],
     #         input_security_groups: ["__string"],
+    #         media_connect_flows: [
+    #           {
+    #             flow_arn: "__string",
+    #           },
+    #         ],
     #         name: "__string",
     #         request_id: "__string",
+    #         role_arn: "__string",
     #         sources: [
     #           {
     #             password_param: "__string",
@@ -2576,7 +2888,7 @@ module Aws::MediaLive
     #             username: "__string",
     #           },
     #         ],
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL
+    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
     #       }
     #
     # @!attribute [rw] destinations
@@ -2585,12 +2897,18 @@ module Aws::MediaLive
     # @!attribute [rw] input_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
     # @!attribute [rw] request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -2604,8 +2922,10 @@ module Aws::MediaLive
     class CreateInputRequest < Struct.new(
       :destinations,
       :input_security_groups,
+      :media_connect_flows,
       :name,
       :request_id,
+      :role_arn,
       :sources,
       :type)
       include Aws::Structure
@@ -2713,6 +3033,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2921,6 +3242,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2982,7 +3304,13 @@ module Aws::MediaLive
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] media_connect_flows
+    #   @return [Array<Types::MediaConnectFlow>]
+    #
     # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -3004,7 +3332,9 @@ module Aws::MediaLive
       :attached_channels,
       :destinations,
       :id,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :security_groups,
       :sources,
       :state,
@@ -3217,6 +3547,47 @@ module Aws::MediaLive
       :start,
       :state,
       :usage_price)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__string", # required
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeScheduleRequest AWS API Documentation
+    #
+    class DescribeScheduleRequest < Struct.new(
+      :channel_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_actions
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeScheduleResponse AWS API Documentation
+    #
+    class DescribeScheduleResponse < Struct.new(
+      :next_token,
+      :schedule_actions)
       include Aws::Structure
     end
 
@@ -4015,7 +4386,7 @@ module Aws::MediaLive
     #                 key_format_versions: "__string",
     #                 key_provider_settings: {
     #                   static_key_settings: {
-    #                     key_provider_server: { # required
+    #                     key_provider_server: {
     #                       password_param: "__string",
     #                       uri: "__string", # required
     #                       username: "__string",
@@ -4030,6 +4401,7 @@ module Aws::MediaLive
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                 program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 program_date_time_period: 1,
+    #                 redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 segment_length: 1,
     #                 segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                 segments_per_subdirectory: 1,
@@ -4067,6 +4439,7 @@ module Aws::MediaLive
     #                 cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                 cache_length: 1,
     #                 caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                 restart_delay: 1,
     #               },
     #               udp_group_settings: {
@@ -4305,12 +4678,14 @@ module Aws::MediaLive
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                 rate_control_mode: "CBR", # accepts CBR, VBR
+    #                 qvbr_quality_level: 1,
+    #                 rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
     #                 softness: 1,
     #                 spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                 subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                 syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                 temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -4413,6 +4788,57 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Start time for the action.
+    #
+    # @note When making an API call, you may pass FixedModeScheduleActionStartSettings
+    #   data as a hash:
+    #
+    #       {
+    #         time: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] time
+    #   Start time for the action to start in the channel. (Not the time for
+    #   the action to be added to the schedule: actions are always added to
+    #   the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All
+    #   the letters are digits (for example, mm might be 01) except for the
+    #   two constants "T" for time and "Z" for "UTC format".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FixedModeScheduleActionStartSettings AWS API Documentation
+    #
+    class FixedModeScheduleActionStartSettings < Struct.new(
+      :time)
+      include Aws::Structure
+    end
+
+    # Settings to specify if an action follows another.
+    #
+    # @note When making an API call, you may pass FollowModeScheduleActionStartSettings
+    #   data as a hash:
+    #
+    #       {
+    #         follow_point: "END", # required, accepts END, START
+    #         reference_action_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] follow_point
+    #   Identifies whether this action starts relative to the start or
+    #   relative to the end of the reference action.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_action_name
+    #   The action name of another action that this one refers to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FollowModeScheduleActionStartSettings AWS API Documentation
+    #
+    class FollowModeScheduleActionStartSettings < Struct.new(
+      :follow_point,
+      :reference_action_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GlobalConfiguration
     #   data as a hash:
     #
@@ -4439,14 +4865,13 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] input_end_action
-    #   Indicates the action to take when an input completes (e.g.
-    #   end-of-file.) Options include immediately switching to the next
-    #   sequential input (via "switchInput"), switching to the next input
-    #   and looping back to the first input when last input ends (via
-    #   "switchAndLoopInputs") or not switching inputs and instead
-    #   transcoding black / color / slate images per the "Input Loss
-    #   Behavior" configuration until an activateInput REST command is
-    #   received (via "none").
+    #   Indicates the action to take when the current input completes (e.g.
+    #   end-of-file). When switchAndLoopInputs is configured the encoder
+    #   will restart at the beginning of the first input. When "none" is
+    #   configured the encoder will transcode either black, a solid color,
+    #   or a user specified slate images per the "Input Loss Behavior"
+    #   configuration until the next input switch occurs (which is
+    #   controlled through the Channel Schedule API).
     #   @return [String]
     #
     # @!attribute [rw] input_loss_behavior
@@ -4507,12 +4932,14 @@ module Aws::MediaLive
     #         par_denominator: 1,
     #         par_numerator: 1,
     #         profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #         rate_control_mode: "CBR", # accepts CBR, VBR
+    #         qvbr_quality_level: 1,
+    #         rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
     #         softness: 1,
     #         spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #         subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #         syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #         temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #         timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -4532,9 +4959,10 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Average bitrate in bits/second. Required for VBR, CBR, and ABR. For
-    #   MS Smooth outputs, bitrates must be unique when rounded down to the
-    #   nearest multiple of 1000.
+    #   Average bitrate in bits/second. Required when the rate control mode
+    #   is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each
+    #   output must have a unique value when its bitrate is rounded down to
+    #   the nearest multiple of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] buf_fill_pct
@@ -4620,7 +5048,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second (for VBR mode only).
+    #   For QVBR: See the tooltip for Quality level For VBR: Set the maximum
+    #   bitrate in order to accommodate expected spikes in the complexity of
+    #   the video.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -4660,8 +5090,25 @@ module Aws::MediaLive
     #   H.264 Profile.
     #   @return [String]
     #
+    # @!attribute [rw] qvbr_quality_level
+    #   Controls the target quality for the video encode. Applies only when
+    #   the rate control mode is QVBR. Set values for the QVBR quality level
+    #   field and Max bitrate field that suit your most important viewing
+    #   devices. Recommended values are: - Primary screen: Quality level: 8
+    #   to 10. Max bitrate: 4M - PC or tablet: Quality level: 7. Max
+    #   bitrate: 1.5M to 3M - Smartphone: Quality level: 6. Max bitrate: 1M
+    #   to 1.5M
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_control_mode
-    #   Rate control mode.
+    #   Rate control mode. QVBR: Quality will match the specified quality
+    #   level except when it is constrained by the maximum bitrate.
+    #   Recommended if you or your viewers pay for bandwidth. VBR: Quality
+    #   and bitrate vary, depending on the video complexity. Recommended
+    #   instead of QVBR if you want to maintain a specific average bitrate
+    #   over the duration of the channel. CBR: Quality varies, depending on
+    #   the video complexity. Recommended only if you distribute your assets
+    #   to devices that cannot handle variable bitrates.
     #   @return [String]
     #
     # @!attribute [rw] scan_type
@@ -4670,8 +5117,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] scene_change_detect
-    #   Scene change detection. Inserts I-frames on scene changes when
-    #   enabled.
+    #   Scene change detection. - On: inserts I-frames when scene change is
+    #   detected. - Off: does not force an I-frame when scene change is
+    #   detected.
     #   @return [String]
     #
     # @!attribute [rw] slices
@@ -4690,6 +5138,12 @@ module Aws::MediaLive
     # @!attribute [rw] spatial_aq
     #   If set to enabled, adjust quantization within each frame based on
     #   spatial variation of content complexity.
+    #   @return [String]
+    #
+    # @!attribute [rw] subgop_length
+    #   If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to
+    #   dynamic, optimize the number of B-frames used for each sub-GOP to
+    #   improve visual quality.
     #   @return [String]
     #
     # @!attribute [rw] syntax
@@ -4737,12 +5191,14 @@ module Aws::MediaLive
       :par_denominator,
       :par_numerator,
       :profile,
+      :qvbr_quality_level,
       :rate_control_mode,
       :scan_type,
       :scene_change_detect,
       :slices,
       :softness,
       :spatial_aq,
+      :subgop_length,
       :syntax,
       :temporal_aq,
       :timecode_insertion)
@@ -4967,7 +5423,7 @@ module Aws::MediaLive
     #         key_format_versions: "__string",
     #         key_provider_settings: {
     #           static_key_settings: {
-    #             key_provider_server: { # required
+    #             key_provider_server: {
     #               password_param: "__string",
     #               uri: "__string", # required
     #               username: "__string",
@@ -4982,6 +5438,7 @@ module Aws::MediaLive
     #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #         program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #         program_date_time_period: 1,
+    #         redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         segment_length: 1,
     #         segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #         segments_per_subdirectory: 1,
@@ -5152,6 +5609,11 @@ module Aws::MediaLive
     #   Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] redundant_manifest
+    #   When set to "enabled", includes the media playlists from both
+    #   pipelines in the master manifest (.m3u8) file.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_length
     #   Length of MPEG-2 Transport Stream segments to create (in seconds).
     #   Note that segments will end on the next keyframe after this number
@@ -5159,8 +5621,8 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_mode
-    #   When set to useInputSegmentation, the output segment or fragment
-    #   points are set by the RAI markers from the input streams.
+    #   useInputSegmentation has been deprecated. The configured segment
+    #   size is always used.
     #   @return [String]
     #
     # @!attribute [rw] segments_per_subdirectory
@@ -5224,6 +5686,7 @@ module Aws::MediaLive
       :output_selection,
       :program_date_time,
       :program_date_time_period,
+      :redundant_manifest,
       :segment_length,
       :segmentation_mode,
       :segments_per_subdirectory,
@@ -5438,6 +5901,27 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for the action to emit HLS metadata
+    #
+    # @note When making an API call, you may pass HlsTimedMetadataScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         id_3: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] id_3
+    #   Base64 string formatted according to the ID3 specification:
+    #   http://id3.org/id3v2.4.0-structure
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsTimedMetadataScheduleActionSettings AWS API Documentation
+    #
+    class HlsTimedMetadataScheduleActionSettings < Struct.new(
+      :id_3)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass HlsWebdavSettings
     #   data as a hash:
     #
@@ -5500,8 +5984,17 @@ module Aws::MediaLive
     #   The generated ID of the input (unique for user account, immutable).
     #   @return [String]
     #
+    # @!attribute [rw] media_connect_flows
+    #   A list of MediaConnect Flows for this input.
+    #   @return [Array<Types::MediaConnectFlow>]
+    #
     # @!attribute [rw] name
     #   The user-assigned name (This is a mutable value).
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role this input assumes during
+    #   and after creation.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -5525,7 +6018,9 @@ module Aws::MediaLive
       :attached_channels,
       :destinations,
       :id,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :security_groups,
       :sources,
       :state,
@@ -5537,11 +6032,12 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
@@ -5556,7 +6052,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string", # required
+    #               name: "__stringMin1", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -5611,6 +6107,11 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] input_attachment_name
+    #   User-specified name for the attachment. This is required if the user
+    #   wants to use this input in an input switch action.
+    #   @return [String]
+    #
     # @!attribute [rw] input_id
     #   The ID of the input
     #   @return [String]
@@ -5622,6 +6123,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment AWS API Documentation
     #
     class InputAttachment < Struct.new(
+      :input_attachment_name,
       :input_id,
       :input_settings)
       include Aws::Structure
@@ -5845,7 +6347,7 @@ module Aws::MediaLive
     #       {
     #         audio_selectors: [
     #           {
-    #             name: "__string", # required
+    #             name: "__stringMin1", # required
     #             selector_settings: {
     #               audio_language_selection: {
     #                 language_code: "__string", # required
@@ -5860,7 +6362,7 @@ module Aws::MediaLive
     #         caption_selectors: [
     #           {
     #             language_code: "__string",
-    #             name: "__string", # required
+    #             name: "__stringMin1", # required
     #             selector_settings: {
     #               arib_source_settings: {
     #               },
@@ -6061,6 +6563,27 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for the action to switch an input.
+    #
+    # @note When making an API call, you may pass InputSwitchScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_attachment_name_reference: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_attachment_name_reference
+    #   The name of the input attachment that should be switched to by this
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSwitchScheduleActionSettings AWS API Documentation
+    #
+    class InputSwitchScheduleActionSettings < Struct.new(
+      :input_attachment_name_reference)
+      include Aws::Structure
+    end
+
     # Whitelist rule
     #
     # @!attribute [rw] cidr
@@ -6119,7 +6642,7 @@ module Aws::MediaLive
     #
     #       {
     #         static_key_settings: {
-    #           key_provider_server: { # required
+    #           key_provider_server: {
     #             password_param: "__string",
     #             uri: "__string", # required
     #             username: "__string",
@@ -7016,6 +7539,39 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # The settings for a MediaConnect Flow.
+    #
+    # @!attribute [rw] flow_arn
+    #   The unique ARN of the MediaConnect Flow being used as a source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlow AWS API Documentation
+    #
+    class MediaConnectFlow < Struct.new(
+      :flow_arn)
+      include Aws::Structure
+    end
+
+    # The settings for a MediaConnect Flow.
+    #
+    # @note When making an API call, you may pass MediaConnectFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the MediaConnect Flow that you want to use as a source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlowRequest AWS API Documentation
+    #
+    class MediaConnectFlowRequest < Struct.new(
+      :flow_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Mp2Settings
     #   data as a hash:
     #
@@ -7148,21 +7704,12 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] segmentation_mode
-    #   When set to useInputSegmentation, the output segment or fragment
-    #   points are set by the RAI markers from the input streams.
+    #   useInputSegmentation has been deprecated. The configured segment
+    #   size is always used.
     #   @return [String]
     #
     # @!attribute [rw] send_delay_ms
-    #   Outputs that are "output locked" can use this delay. Assign a
-    #   delay to the output that is "secondary". Do not assign a delay to
-    #   the "primary" output. The delay means that the primary output will
-    #   always reach the downstream system before the secondary, which helps
-    #   ensure that the downstream system always uses the primary output.
-    #   (If there were no delay, the downstream system might flip-flop
-    #   between whichever output happens to arrive first.) If the primary
-    #   fails, the downstream system will switch to the secondary output.
-    #   When the primary is restarted, the downstream system will switch
-    #   back to the primary (because once again it is always arriving first)
+    #   Number of milliseconds to delay the output from the second pipeline.
     #   @return [Integer]
     #
     # @!attribute [rw] sparse_track_type
@@ -7708,7 +8255,7 @@ module Aws::MediaLive
     #             key_format_versions: "__string",
     #             key_provider_settings: {
     #               static_key_settings: {
-    #                 key_provider_server: { # required
+    #                 key_provider_server: {
     #                   password_param: "__string",
     #                   uri: "__string", # required
     #                   username: "__string",
@@ -7723,6 +8270,7 @@ module Aws::MediaLive
     #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #             program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             program_date_time_period: 1,
+    #             redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             segment_length: 1,
     #             segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #             segments_per_subdirectory: 1,
@@ -7760,6 +8308,7 @@ module Aws::MediaLive
     #             cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #             cache_length: 1,
     #             caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #             restart_delay: 1,
     #           },
     #           udp_group_settings: {
@@ -8056,7 +8605,7 @@ module Aws::MediaLive
     #           key_format_versions: "__string",
     #           key_provider_settings: {
     #             static_key_settings: {
-    #               key_provider_server: { # required
+    #               key_provider_server: {
     #                 password_param: "__string",
     #                 uri: "__string", # required
     #                 username: "__string",
@@ -8071,6 +8620,7 @@ module Aws::MediaLive
     #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #           program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #           program_date_time_period: 1,
+    #           redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           segment_length: 1,
     #           segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #           segments_per_subdirectory: 1,
@@ -8108,6 +8658,7 @@ module Aws::MediaLive
     #           cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #           cache_length: 1,
     #           caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #           restart_delay: 1,
     #         },
     #         udp_group_settings: {
@@ -8399,12 +8950,19 @@ module Aws::MediaLive
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] start
+    #   Requested reservation start time (UTC) in ISO-8601 format. The
+    #   specified time must be between the first day of the current month
+    #   and one year from now. If no value is given, the default is now.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
     #
     class PurchaseOffering < Struct.new(
       :count,
       :name,
-      :request_id)
+      :request_id,
+      :start)
       include Aws::Structure
     end
 
@@ -8412,10 +8970,11 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         count: 1,
+    #         count: 1, # required
     #         name: "__string",
     #         offering_id: "__string", # required
     #         request_id: "__string",
+    #         start: "__string",
     #       }
     #
     # @!attribute [rw] count
@@ -8432,13 +8991,17 @@ module Aws::MediaLive
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] start
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOfferingRequest AWS API Documentation
     #
     class PurchaseOfferingRequest < Struct.new(
       :count,
       :name,
       :offering_id,
-      :request_id)
+      :request_id,
+      :start)
       include Aws::Structure
     end
 
@@ -8684,6 +9247,7 @@ module Aws::MediaLive
     #         cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #         cache_length: 1,
     #         caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #         restart_delay: 1,
     #       }
     #
@@ -8716,6 +9280,13 @@ module Aws::MediaLive
     #   will be passed.
     #   @return [String]
     #
+    # @!attribute [rw] input_loss_action
+    #   Controls the behavior of this RTMP group if input becomes
+    #   unavailable. - emitOutput: Emit a slate until input returns. -
+    #   pauseOutput: Stop transmitting data until input returns. This does
+    #   not close the underlying RTMP connection.
+    #   @return [String]
+    #
     # @!attribute [rw] restart_delay
     #   If a streaming output fails, number of seconds to wait until a
     #   restart is initiated. A value of 0 means never restart.
@@ -8728,6 +9299,7 @@ module Aws::MediaLive
       :cache_full_behavior,
       :cache_length,
       :caption_data,
+      :input_loss_action,
       :restart_delay)
       include Aws::Structure
     end
@@ -8772,6 +9344,268 @@ module Aws::MediaLive
       :connection_retry_interval,
       :destination,
       :num_retries)
+      include Aws::Structure
+    end
+
+    # Contains information on a single schedule action.
+    #
+    # @note When making an API call, you may pass ScheduleAction
+    #   data as a hash:
+    #
+    #       {
+    #         action_name: "__string", # required
+    #         schedule_action_settings: { # required
+    #           hls_timed_metadata_settings: {
+    #             id_3: "__string", # required
+    #           },
+    #           input_switch_settings: {
+    #             input_attachment_name_reference: "__string", # required
+    #           },
+    #           scte_35_return_to_network_settings: {
+    #             splice_event_id: 1, # required
+    #           },
+    #           scte_35_splice_insert_settings: {
+    #             duration: 1,
+    #             splice_event_id: 1, # required
+    #           },
+    #           scte_35_time_signal_settings: {
+    #             scte_35_descriptors: [ # required
+    #               {
+    #                 scte_35_descriptor_settings: { # required
+    #                   segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                     delivery_restrictions: {
+    #                       archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                       device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                       no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                       web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                     },
+    #                     segment_num: 1,
+    #                     segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                     segmentation_duration: 1,
+    #                     segmentation_event_id: 1, # required
+    #                     segmentation_type_id: 1,
+    #                     segmentation_upid: "__string",
+    #                     segmentation_upid_type: 1,
+    #                     segments_expected: 1,
+    #                     sub_segment_num: 1,
+    #                     sub_segments_expected: 1,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           static_image_activate_settings: {
+    #             duration: 1,
+    #             fade_in: 1,
+    #             fade_out: 1,
+    #             height: 1,
+    #             image: { # required
+    #               password_param: "__string",
+    #               uri: "__string", # required
+    #               username: "__string",
+    #             },
+    #             image_x: 1,
+    #             image_y: 1,
+    #             layer: 1,
+    #             opacity: 1,
+    #             width: 1,
+    #           },
+    #           static_image_deactivate_settings: {
+    #             fade_out: 1,
+    #             layer: 1,
+    #           },
+    #         },
+    #         schedule_action_start_settings: { # required
+    #           fixed_mode_schedule_action_start_settings: {
+    #             time: "__string", # required
+    #           },
+    #           follow_mode_schedule_action_start_settings: {
+    #             follow_point: "END", # required, accepts END, START
+    #             reference_action_name: "__string", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action, must be unique within the schedule. This
+    #   name provides the main reference to an action once it is added to
+    #   the schedule. A name is unique if it is no longer in the schedule.
+    #   The schedule is automatically cleaned up to remove actions with a
+    #   start time of more than 1 hour ago (approximately) so at that point
+    #   a name can be reused.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_action_settings
+    #   Settings for this schedule action.
+    #   @return [Types::ScheduleActionSettings]
+    #
+    # @!attribute [rw] schedule_action_start_settings
+    #   The time for the action to start in the channel.
+    #   @return [Types::ScheduleActionStartSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleAction AWS API Documentation
+    #
+    class ScheduleAction < Struct.new(
+      :action_name,
+      :schedule_action_settings,
+      :schedule_action_start_settings)
+      include Aws::Structure
+    end
+
+    # Holds the settings for a single schedule action.
+    #
+    # @note When making an API call, you may pass ScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         hls_timed_metadata_settings: {
+    #           id_3: "__string", # required
+    #         },
+    #         input_switch_settings: {
+    #           input_attachment_name_reference: "__string", # required
+    #         },
+    #         scte_35_return_to_network_settings: {
+    #           splice_event_id: 1, # required
+    #         },
+    #         scte_35_splice_insert_settings: {
+    #           duration: 1,
+    #           splice_event_id: 1, # required
+    #         },
+    #         scte_35_time_signal_settings: {
+    #           scte_35_descriptors: [ # required
+    #             {
+    #               scte_35_descriptor_settings: { # required
+    #                 segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                   delivery_restrictions: {
+    #                     archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                     device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                     no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                     web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                   },
+    #                   segment_num: 1,
+    #                   segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                   segmentation_duration: 1,
+    #                   segmentation_event_id: 1, # required
+    #                   segmentation_type_id: 1,
+    #                   segmentation_upid: "__string",
+    #                   segmentation_upid_type: 1,
+    #                   segments_expected: 1,
+    #                   sub_segment_num: 1,
+    #                   sub_segments_expected: 1,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         static_image_activate_settings: {
+    #           duration: 1,
+    #           fade_in: 1,
+    #           fade_out: 1,
+    #           height: 1,
+    #           image: { # required
+    #             password_param: "__string",
+    #             uri: "__string", # required
+    #             username: "__string",
+    #           },
+    #           image_x: 1,
+    #           image_y: 1,
+    #           layer: 1,
+    #           opacity: 1,
+    #           width: 1,
+    #         },
+    #         static_image_deactivate_settings: {
+    #           fade_out: 1,
+    #           layer: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hls_timed_metadata_settings
+    #   Settings to emit HLS metadata
+    #   @return [Types::HlsTimedMetadataScheduleActionSettings]
+    #
+    # @!attribute [rw] input_switch_settings
+    #   Settings to switch an input
+    #   @return [Types::InputSwitchScheduleActionSettings]
+    #
+    # @!attribute [rw] scte_35_return_to_network_settings
+    #   Settings for SCTE-35 return\_to\_network message
+    #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
+    #
+    # @!attribute [rw] scte_35_splice_insert_settings
+    #   Settings for SCTE-35 splice\_insert message
+    #   @return [Types::Scte35SpliceInsertScheduleActionSettings]
+    #
+    # @!attribute [rw] scte_35_time_signal_settings
+    #   Settings for SCTE-35 time\_signal message
+    #   @return [Types::Scte35TimeSignalScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_activate_settings
+    #   Settings to activate a static image overlay
+    #   @return [Types::StaticImageActivateScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_deactivate_settings
+    #   Settings to deactivate a static image overlay
+    #   @return [Types::StaticImageDeactivateScheduleActionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
+    #
+    class ScheduleActionSettings < Struct.new(
+      :hls_timed_metadata_settings,
+      :input_switch_settings,
+      :scte_35_return_to_network_settings,
+      :scte_35_splice_insert_settings,
+      :scte_35_time_signal_settings,
+      :static_image_activate_settings,
+      :static_image_deactivate_settings)
+      include Aws::Structure
+    end
+
+    # Settings to specify the start time for an action.
+    #
+    # @note When making an API call, you may pass ScheduleActionStartSettings
+    #   data as a hash:
+    #
+    #       {
+    #         fixed_mode_schedule_action_start_settings: {
+    #           time: "__string", # required
+    #         },
+    #         follow_mode_schedule_action_start_settings: {
+    #           follow_point: "END", # required, accepts END, START
+    #           reference_action_name: "__string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fixed_mode_schedule_action_start_settings
+    #   Holds the start time for the action.
+    #   @return [Types::FixedModeScheduleActionStartSettings]
+    #
+    # @!attribute [rw] follow_mode_schedule_action_start_settings
+    #   Specifies an action to follow for scheduling this action.
+    #   @return [Types::FollowModeScheduleActionStartSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings AWS API Documentation
+    #
+    class ScheduleActionStartSettings < Struct.new(
+      :fixed_mode_schedule_action_start_settings,
+      :follow_mode_schedule_action_start_settings)
+      include Aws::Structure
+    end
+
+    # Results of a schedule describe.
+    #
+    # @!attribute [rw] next_token
+    #   The next token; for use in pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_actions
+    #   The list of actions in the schedule.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleDescribeResultModel AWS API Documentation
+    #
+    class ScheduleDescribeResultModel < Struct.new(
+      :next_token,
+      :schedule_actions)
       include Aws::Structure
     end
 
@@ -8840,6 +9674,252 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Corresponds to SCTE-35 delivery\_not\_restricted\_flag parameter. To
+    # declare delivery restrictions, include this element and its four
+    # "restriction" flags. To declare that there are no restrictions, omit
+    # this element.
+    #
+    # @note When making an API call, you may pass Scte35DeliveryRestrictions
+    #   data as a hash:
+    #
+    #       {
+    #         archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #         device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #         no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #         web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #       }
+    #
+    # @!attribute [rw] archive_allowed_flag
+    #   Corresponds to SCTE-35 archive\_allowed\_flag.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_restrictions
+    #   Corresponds to SCTE-35 device\_restrictions parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_regional_blackout_flag
+    #   Corresponds to SCTE-35 no\_regional\_blackout\_flag parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_delivery_allowed_flag
+    #   Corresponds to SCTE-35 web\_delivery\_allowed\_flag parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DeliveryRestrictions AWS API Documentation
+    #
+    class Scte35DeliveryRestrictions < Struct.new(
+      :archive_allowed_flag,
+      :device_restrictions,
+      :no_regional_blackout_flag,
+      :web_delivery_allowed_flag)
+      include Aws::Structure
+    end
+
+    # Holds one set of SCTE-35 Descriptor Settings.
+    #
+    # @note When making an API call, you may pass Scte35Descriptor
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_descriptor_settings: { # required
+    #           segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #             delivery_restrictions: {
+    #               archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #               device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #               no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #               web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #             },
+    #             segment_num: 1,
+    #             segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #             segmentation_duration: 1,
+    #             segmentation_event_id: 1, # required
+    #             segmentation_type_id: 1,
+    #             segmentation_upid: "__string",
+    #             segmentation_upid_type: 1,
+    #             segments_expected: 1,
+    #             sub_segment_num: 1,
+    #             sub_segments_expected: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scte_35_descriptor_settings
+    #   SCTE-35 Descriptor Settings.
+    #   @return [Types::Scte35DescriptorSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35Descriptor AWS API Documentation
+    #
+    class Scte35Descriptor < Struct.new(
+      :scte_35_descriptor_settings)
+      include Aws::Structure
+    end
+
+    # SCTE-35 Descriptor settings.
+    #
+    # @note When making an API call, you may pass Scte35DescriptorSettings
+    #   data as a hash:
+    #
+    #       {
+    #         segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #           delivery_restrictions: {
+    #             archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #             device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #             no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #             web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #           },
+    #           segment_num: 1,
+    #           segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #           segmentation_duration: 1,
+    #           segmentation_event_id: 1, # required
+    #           segmentation_type_id: 1,
+    #           segmentation_upid: "__string",
+    #           segmentation_upid_type: 1,
+    #           segments_expected: 1,
+    #           sub_segment_num: 1,
+    #           sub_segments_expected: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] segmentation_descriptor_scte_35_descriptor_settings
+    #   SCTE-35 Segmentation Descriptor.
+    #   @return [Types::Scte35SegmentationDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35DescriptorSettings AWS API Documentation
+    #
+    class Scte35DescriptorSettings < Struct.new(
+      :segmentation_descriptor_scte_35_descriptor_settings)
+      include Aws::Structure
+    end
+
+    # Settings for a SCTE-35 return\_to\_network message.
+    #
+    # @note When making an API call, you may pass Scte35ReturnToNetworkScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         splice_event_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] splice_event_id
+    #   The splice\_event\_id for the SCTE-35 splice\_insert, as defined in
+    #   SCTE-35.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35ReturnToNetworkScheduleActionSettings AWS API Documentation
+    #
+    class Scte35ReturnToNetworkScheduleActionSettings < Struct.new(
+      :splice_event_id)
+      include Aws::Structure
+    end
+
+    # Corresponds to SCTE-35 segmentation\_descriptor.
+    #
+    # @note When making an API call, you may pass Scte35SegmentationDescriptor
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_restrictions: {
+    #           archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #           device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #           no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #           web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #         },
+    #         segment_num: 1,
+    #         segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #         segmentation_duration: 1,
+    #         segmentation_event_id: 1, # required
+    #         segmentation_type_id: 1,
+    #         segmentation_upid: "__string",
+    #         segmentation_upid_type: 1,
+    #         segments_expected: 1,
+    #         sub_segment_num: 1,
+    #         sub_segments_expected: 1,
+    #       }
+    #
+    # @!attribute [rw] delivery_restrictions
+    #   Holds the four SCTE-35 delivery restriction parameters.
+    #   @return [Types::Scte35DeliveryRestrictions]
+    #
+    # @!attribute [rw] segment_num
+    #   Corresponds to SCTE-35 segment\_num. A value that is valid for the
+    #   specified segmentation\_type\_id.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_cancel_indicator
+    #   Corresponds to SCTE-35 segmentation\_event\_cancel\_indicator.
+    #   @return [String]
+    #
+    # @!attribute [rw] segmentation_duration
+    #   Corresponds to SCTE-35 segmentation\_duration. Optional. The
+    #   duration for the time\_signal, in 90 KHz ticks. To convert seconds
+    #   to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock
+    #   ticks. If you do not enter a duration, the time\_signal will
+    #   continue until you insert a cancellation message.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_event_id
+    #   Corresponds to SCTE-35 segmentation\_event\_id.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_type_id
+    #   Corresponds to SCTE-35 segmentation\_type\_id. One of the
+    #   segmentation\_type\_id values listed in the SCTE-35 specification.
+    #   On the console, enter the ID in decimal (for example, "52"). In
+    #   the CLI, API, or an SDK, enter the ID in hex (for example, "0x34")
+    #   or decimal (for example, "52").
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_upid
+    #   Corresponds to SCTE-35 segmentation\_upid. Enter a string containing
+    #   the hexadecimal representation of the characters that make up the
+    #   SCTE-35 segmentation\_upid value. Must contain an even number of hex
+    #   characters. Do not include spaces between each hex pair. For
+    #   example, the ASCII "ADS Information" becomes hex
+    #   "41445320496e666f726d6174696f6e.
+    #   @return [String]
+    #
+    # @!attribute [rw] segmentation_upid_type
+    #   Corresponds to SCTE-35 segmentation\_upid\_type. On the console,
+    #   enter one of the types listed in the SCTE-35 specification,
+    #   converted to a decimal. For example, "0x0C" hex from the
+    #   specification is "12" in decimal. In the CLI, API, or an SDK,
+    #   enter one of the types listed in the SCTE-35 specification, in
+    #   either hex (for example, "0x0C" ) or in decimal (for example,
+    #   "12").
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segments_expected
+    #   Corresponds to SCTE-35 segments\_expected. A value that is valid for
+    #   the specified segmentation\_type\_id.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub_segment_num
+    #   Corresponds to SCTE-35 sub\_segment\_num. A value that is valid for
+    #   the specified segmentation\_type\_id.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sub_segments_expected
+    #   Corresponds to SCTE-35 sub\_segments\_expected. A value that is
+    #   valid for the specified segmentation\_type\_id.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SegmentationDescriptor AWS API Documentation
+    #
+    class Scte35SegmentationDescriptor < Struct.new(
+      :delivery_restrictions,
+      :segment_num,
+      :segmentation_cancel_indicator,
+      :segmentation_duration,
+      :segmentation_event_id,
+      :segmentation_type_id,
+      :segmentation_upid,
+      :segmentation_upid_type,
+      :segments_expected,
+      :sub_segment_num,
+      :sub_segments_expected)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Scte35SpliceInsert
     #   data as a hash:
     #
@@ -8874,6 +9954,39 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for a SCTE-35 splice\_insert message.
+    #
+    # @note When making an API call, you may pass Scte35SpliceInsertScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #         splice_event_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   Optional, the duration for the splice\_insert, in 90 KHz ticks. To
+    #   convert seconds to ticks, multiple the seconds by 90,000. If you
+    #   enter a duration, there is an expectation that the downstream system
+    #   can read the duration and cue in at that time. If you do not enter a
+    #   duration, the splice\_insert will continue indefinitely and there is
+    #   an expectation that you will enter a return\_to\_network to end the
+    #   splice\_insert at the appropriate time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] splice_event_id
+    #   The splice\_event\_id for the SCTE-35 splice\_insert, as defined in
+    #   SCTE-35.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SpliceInsertScheduleActionSettings AWS API Documentation
+    #
+    class Scte35SpliceInsertScheduleActionSettings < Struct.new(
+      :duration,
+      :splice_event_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Scte35TimeSignalApos
     #   data as a hash:
     #
@@ -8905,6 +10018,50 @@ module Aws::MediaLive
       :ad_avail_offset,
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag)
+      include Aws::Structure
+    end
+
+    # Settings for a SCTE-35 time\_signal.
+    #
+    # @note When making an API call, you may pass Scte35TimeSignalScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_descriptors: [ # required
+    #           {
+    #             scte_35_descriptor_settings: { # required
+    #               segmentation_descriptor_scte_35_descriptor_settings: { # required
+    #                 delivery_restrictions: {
+    #                   archive_allowed_flag: "ARCHIVE_NOT_ALLOWED", # required, accepts ARCHIVE_NOT_ALLOWED, ARCHIVE_ALLOWED
+    #                   device_restrictions: "NONE", # required, accepts NONE, RESTRICT_GROUP0, RESTRICT_GROUP1, RESTRICT_GROUP2
+    #                   no_regional_blackout_flag: "REGIONAL_BLACKOUT", # required, accepts REGIONAL_BLACKOUT, NO_REGIONAL_BLACKOUT
+    #                   web_delivery_allowed_flag: "WEB_DELIVERY_NOT_ALLOWED", # required, accepts WEB_DELIVERY_NOT_ALLOWED, WEB_DELIVERY_ALLOWED
+    #                 },
+    #                 segment_num: 1,
+    #                 segmentation_cancel_indicator: "SEGMENTATION_EVENT_NOT_CANCELED", # required, accepts SEGMENTATION_EVENT_NOT_CANCELED, SEGMENTATION_EVENT_CANCELED
+    #                 segmentation_duration: 1,
+    #                 segmentation_event_id: 1, # required
+    #                 segmentation_type_id: 1,
+    #                 segmentation_upid: "__string",
+    #                 segmentation_upid_type: 1,
+    #                 segments_expected: 1,
+    #                 sub_segment_num: 1,
+    #                 sub_segments_expected: 1,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] scte_35_descriptors
+    #   The list of SCTE-35 descriptors accompanying the SCTE-35
+    #   time\_signal.
+    #   @return [Array<Types::Scte35Descriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35TimeSignalScheduleActionSettings AWS API Documentation
+    #
+    class Scte35TimeSignalScheduleActionSettings < Struct.new(
+      :scte_35_descriptors)
       include Aws::Structure
     end
 
@@ -8996,6 +10153,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9028,11 +10186,141 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for the action to activate a static image.
+    #
+    # @note When making an API call, you may pass StaticImageActivateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #         fade_in: 1,
+    #         fade_out: 1,
+    #         height: 1,
+    #         image: { # required
+    #           password_param: "__string",
+    #           uri: "__string", # required
+    #           username: "__string",
+    #         },
+    #         image_x: 1,
+    #         image_y: 1,
+    #         layer: 1,
+    #         opacity: 1,
+    #         width: 1,
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   The duration in milliseconds for the image to remain on the video.
+    #   If omitted or set to 0 the duration is unlimited and the image will
+    #   remain until it is explicitly deactivated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_in
+    #   The time in milliseconds for the image to fade in. The fade-in
+    #   starts at the start time of the overlay. Default is 0 (no fade-in).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_out
+    #   Applies only if a duration is specified. The time in milliseconds
+    #   for the image to fade out. The fade-out starts when the duration
+    #   time is hit, so it effectively extends the duration. Default is 0
+    #   (no fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   The height of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified height. Leave
+    #   blank to use the native height of the overlay.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image
+    #   The location and filename of the image file to overlay on the video.
+    #   The file must be a 32-bit BMP, PNG, or TGA file, and must not be
+    #   larger (in pixels) than the input video.
+    #   @return [Types::InputLocation]
+    #
+    # @!attribute [rw] image_x
+    #   Placement of the left edge of the overlay relative to the left edge
+    #   of the video frame, in pixels. 0 (the default) is the left edge of
+    #   the frame. If the placement causes the overlay to extend beyond the
+    #   right edge of the underlying video, then the overlay is cropped on
+    #   the right.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image_y
+    #   Placement of the top edge of the overlay relative to the top edge of
+    #   the video frame, in pixels. 0 (the default) is the top edge of the
+    #   frame. If the placement causes the overlay to extend beyond the
+    #   bottom edge of the underlying video, then the overlay is cropped on
+    #   the bottom.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The number of the layer, 0 to 7. There are 8 layers that can be
+    #   overlaid on the video, each layer with a different image. The layers
+    #   are in Z order, which means that overlays with higher values of
+    #   layer are inserted on top of overlays with lower values of layer.
+    #   Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] opacity
+    #   Opacity of image where 0 is transparent and 100 is fully opaque.
+    #   Default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   The width of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified width. Leave
+    #   blank to use the native width of the overlay.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageActivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageActivateScheduleActionSettings < Struct.new(
+      :duration,
+      :fade_in,
+      :fade_out,
+      :height,
+      :image,
+      :image_x,
+      :image_y,
+      :layer,
+      :opacity,
+      :width)
+      include Aws::Structure
+    end
+
+    # Settings for the action to deactivate the image in a specific layer.
+    #
+    # @note When making an API call, you may pass StaticImageDeactivateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         fade_out: 1,
+    #         layer: 1,
+    #       }
+    #
+    # @!attribute [rw] fade_out
+    #   The time in milliseconds for the image to fade out. Default is 0 (no
+    #   fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The image overlay layer to deactivate, 0 to 7. Default is 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageDeactivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageDeactivateScheduleActionSettings < Struct.new(
+      :fade_out,
+      :layer)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StaticKeySettings
     #   data as a hash:
     #
     #       {
-    #         key_provider_server: { # required
+    #         key_provider_server: {
     #           password_param: "__string",
     #           uri: "__string", # required
     #           username: "__string",
@@ -9095,6 +10383,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9772,7 +11061,7 @@ module Aws::MediaLive
     #                   key_format_versions: "__string",
     #                   key_provider_settings: {
     #                     static_key_settings: {
-    #                       key_provider_server: { # required
+    #                       key_provider_server: {
     #                         password_param: "__string",
     #                         uri: "__string", # required
     #                         username: "__string",
@@ -9787,6 +11076,7 @@ module Aws::MediaLive
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                   program_date_time_period: 1,
+    #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   segment_length: 1,
     #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                   segments_per_subdirectory: 1,
@@ -9824,6 +11114,7 @@ module Aws::MediaLive
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
     #                   cache_length: 1,
     #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   restart_delay: 1,
     #                 },
     #                 udp_group_settings: {
@@ -10062,12 +11353,14 @@ module Aws::MediaLive
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   qvbr_quality_level: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
     #                   softness: 1,
     #                   spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #                   syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #                   temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -10084,11 +11377,12 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
     #               audio_selectors: [
     #                 {
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
@@ -10103,7 +11397,7 @@ module Aws::MediaLive
     #               caption_selectors: [
     #                 {
     #                   language_code: "__string",
-    #                   name: "__string", # required
+    #                   name: "__stringMin1", # required
     #                   selector_settings: {
     #                     arib_source_settings: {
     #                     },
@@ -10184,6 +11478,7 @@ module Aws::MediaLive
     #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -10236,8 +11531,21 @@ module Aws::MediaLive
     #   A list of security groups referenced by IDs to attach to the input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   A list of the MediaConnect Flow ARNs that you want to use as the
+    #   source of the input. You can specify as few as one Flow and
+    #   presently, as many as two. The only requirement is when you have
+    #   more than one is that each Flow is in a separate Availability Zone
+    #   as this ensures your EML input is redundant to AZ issues.
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
     #   Name of the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role this input assumes during
+    #   and after creation.
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -10251,7 +11559,9 @@ module Aws::MediaLive
     class UpdateInput < Struct.new(
       :destinations,
       :input_security_groups,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :sources)
       include Aws::Structure
     end
@@ -10267,7 +11577,13 @@ module Aws::MediaLive
     #         ],
     #         input_id: "__string", # required
     #         input_security_groups: ["__string"],
+    #         media_connect_flows: [
+    #           {
+    #             flow_arn: "__string",
+    #           },
+    #         ],
     #         name: "__string",
+    #         role_arn: "__string",
     #         sources: [
     #           {
     #             password_param: "__string",
@@ -10286,7 +11602,13 @@ module Aws::MediaLive
     # @!attribute [rw] input_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_flows
+    #   @return [Array<Types::MediaConnectFlowRequest>]
+    #
     # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -10298,7 +11620,9 @@ module Aws::MediaLive
       :destinations,
       :input_id,
       :input_security_groups,
+      :media_connect_flows,
       :name,
+      :role_arn,
       :sources)
       include Aws::Structure
     end
@@ -10416,12 +11740,14 @@ module Aws::MediaLive
     #           par_denominator: 1,
     #           par_numerator: 1,
     #           profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #           rate_control_mode: "CBR", # accepts CBR, VBR
+    #           qvbr_quality_level: 1,
+    #           rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
     #           softness: 1,
     #           spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #           subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #           syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #           temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
@@ -10472,12 +11798,14 @@ module Aws::MediaLive
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
-    #             rate_control_mode: "CBR", # accepts CBR, VBR
+    #             qvbr_quality_level: 1,
+    #             rate_control_mode: "CBR", # accepts CBR, QVBR, VBR
     #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,
     #             softness: 1,
     #             spatial_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #             subgop_length: "DYNAMIC", # accepts DYNAMIC, FIXED
     #             syntax: "DEFAULT", # accepts DEFAULT, RP2027
     #             temporal_aq: "DISABLED", # accepts DISABLED, ENABLED
     #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI

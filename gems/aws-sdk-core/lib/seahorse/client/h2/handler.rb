@@ -1,4 +1,6 @@
-require 'http/2'
+if RUBY_VERSION >= '2.3'
+  require 'http/2'
+end
 require 'securerandom'
 
 module Seahorse
@@ -6,12 +8,11 @@ module Seahorse
     # @api private
     module H2
 
-      # TODO, retry?
       NETWORK_ERRORS = [
         SocketError, EOFError, IOError, Timeout::Error,
         Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
         Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
-        Errno::EHOSTUNREACH, Errno::ECONNREFUSED, OpenSSL::SSL::SSLErrorWaitReadable
+        Errno::EHOSTUNREACH, Errno::ECONNREFUSED,# OpenSSL::SSL::SSLErrorWaitReadable
       ]
 
       # @api private
@@ -48,13 +49,10 @@ module Seahorse
 
             conn.start(stream)
           rescue *NETWORK_ERRORS => error
-            # TODO reconsider H2 retry scenarios
             error = NetworkingError.new(
               error, error_message(context.http_request, error))
             context.http_response.signal_error(error)
           rescue => error
-            # TODO debug only, to be removed
-            puts error.backtrace
             conn.debug_output(error.inspect)
             # not retryable
             context.http_response.signal_error(error)

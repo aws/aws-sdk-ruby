@@ -28,6 +28,9 @@ module Aws::Health
     #   The ID of the affected entity.
     #   @return [String]
     #
+    # @!attribute [rw] entity_url
+    #   @return [String]
+    #
     # @!attribute [rw] aws_account_id
     #   The 12-digit AWS account number that contains the affected entity.
     #   @return [String]
@@ -51,6 +54,7 @@ module Aws::Health
       :entity_arn,
       :event_arn,
       :entity_value,
+      :entity_url,
       :aws_account_id,
       :last_updated_time,
       :status_code,

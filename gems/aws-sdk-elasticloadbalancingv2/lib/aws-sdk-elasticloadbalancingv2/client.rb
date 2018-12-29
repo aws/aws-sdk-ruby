@@ -15,10 +15,14 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -43,112 +47,157 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [String] :session_token
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
     #
     def initialize(*args)
       super
@@ -163,13 +212,15 @@ module Aws::ElasticLoadBalancingV2
     #
     # To list the certificates for your listener, use
     # DescribeListenerCertificates. To remove certificates from your
-    # listener, use RemoveListenerCertificates.
+    # listener, use RemoveListenerCertificates. To specify the default SSL
+    # server certificate, use ModifyListener.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #
     # @option params [required, Array<Types::Certificate>] :certificates
-    #   The certificate to add. You can specify one certificate per call.
+    #   The certificate to add. You can specify one certificate per call. Set
+    #   `CertificateArn` to the certificate ARN but do not set `IsDefault`.
     #
     # @return [Types::AddListenerCertificatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -302,30 +353,31 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one default certificate. To create a certificate list,
-    #   use AddListenerCertificates.
+    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   certificate ARN but do not set `IsDefault`.
+    #
+    #   To create a certificate list, use AddListenerCertificates.
     #
     # @option params [required, Array<Types::Action>] :default_actions
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group. The protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an Application
+    #   Load Balancer or TCP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you can
-    #   use an identity provider that is OpenID Connect (OIDC) compliant to
-    #   authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   authenticate users through an identity provider that is OpenID Connect
+    #   (OIDC) compliant.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   can use Amazon Cognito to authenticate users as they access your
-    #   application.
+    #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
-    #   can redirect HTTP and HTTPS requests.
+    #   redirect specified client requests from one URL to another.
     #
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
-    #   you can return a custom HTTP response.
+    #   you drop specified client requests and return a custom HTTP response.
     #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -835,22 +887,22 @@ module Aws::ElasticLoadBalancingV2
     #   The actions. Each rule must include exactly one of the following types
     #   of actions: `forward`, `fixed-response`, or `redirect`.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group.
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an Application
+    #   Load Balancer or TCP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you can
-    #   use an identity provider that is OpenID Connect (OIDC) compliant to
-    #   authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   authenticate users through an identity provider that is OpenID Connect
+    #   (OIDC) compliant.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   can use Amazon Cognito to authenticate users as they access your
-    #   application.
+    #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
-    #   can redirect HTTP and HTTPS requests.
+    #   redirect specified client requests from one URL to another.
     #
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
-    #   you can return a custom HTTP response.
+    #   you drop specified client requests and return a custom HTTP response.
     #
     # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1053,17 +1105,20 @@ module Aws::ElasticLoadBalancingV2
     #   32 characters, must contain only alphanumeric characters or hyphens,
     #   and must not begin or end with a hyphen.
     #
-    # @option params [required, String] :protocol
+    # @option params [String] :protocol
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
+    #   HTTPS. For Network Load Balancers, the supported protocol is TCP. If
+    #   the target is a Lambda function, this parameter does not apply.
     #
-    # @option params [required, Integer] :port
+    # @option params [Integer] :port
     #   The port on which the targets receive traffic. This port is used
-    #   unless you specify a port override when registering the target.
+    #   unless you specify a port override when registering the target. If the
+    #   target is a Lambda function, this parameter does not apply.
     #
-    # @option params [required, String] :vpc_id
-    #   The identifier of the virtual private cloud (VPC).
+    # @option params [String] :vpc_id
+    #   The identifier of the virtual private cloud (VPC). If the target is a
+    #   Lambda function, this parameter does not apply.
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
@@ -1076,6 +1131,11 @@ module Aws::ElasticLoadBalancingV2
     #   targets. The default is `traffic-port`, which is the port on which
     #   each target receives traffic from the load balancer.
     #
+    # @option params [Boolean] :health_check_enabled
+    #   Indicates whether health checks are enabled. If the target type is
+    #   `instance` or `ip`, the default is `true`. If the target type is
+    #   `lambda`, the default is `false`.
+    #
     # @option params [String] :health_check_path
     #   \[HTTP/HTTPS health checks\] The ping path that is the destination on
     #   the targets for health checks. The default is /.
@@ -1084,14 +1144,17 @@ module Aws::ElasticLoadBalancingV2
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. For Application Load Balancers, the range is
     #   5–300 seconds. For Network Load Balancers, the supported values are 10
-    #   or 30 seconds. The default is 30 seconds.
+    #   or 30 seconds. If the target type is `instance` or `ip`, the default
+    #   is 30 seconds. If the target type is `lambda`, the default is 35
+    #   seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a target
     #   means a failed health check. For Application Load Balancers, the range
-    #   is 2–60 seconds and the default is 5 seconds. For Network Load
-    #   Balancers, this is 10 seconds for TCP and HTTPS health checks and 6
-    #   seconds for HTTP health checks.
+    #   is 2–120 seconds and the default is 5 seconds if the target type is
+    #   `instance` or `ip` and 30 seconds if the target type is `lambda`. For
+    #   Network Load Balancers, this is 10 seconds for TCP and HTTPS health
+    #   checks and 6 seconds for HTTP health checks.
     #
     # @option params [Integer] :healthy_threshold_count
     #   The number of consecutive health checks successes required before
@@ -1111,16 +1174,19 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :target_type
     #   The type of target that you must specify when registering targets with
-    #   this target group. The possible values are `instance` (targets are
-    #   specified by instance ID) or `ip` (targets are specified by IP
-    #   address). The default is `instance`. You can't specify targets for a
-    #   target group using both instance IDs and IP addresses.
+    #   this target group. You can't specify targets for a target group using
+    #   more than one target type.
     #
-    #   If the target type is `ip`, specify IP addresses from the subnets of
-    #   the virtual private cloud (VPC) for the target group, the RFC 1918
-    #   range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC
-    #   6598 range (100.64.0.0/10). You can't specify publicly routable IP
-    #   addresses.
+    #   * `instance` - Targets are specified by instance ID. This is the
+    #     default value.
+    #
+    #   * `ip` - Targets are specified by IP address. You can specify IP
+    #     addresses from the subnets of the virtual private cloud (VPC) for
+    #     the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and
+    #     192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't
+    #     specify publicly routable IP addresses.
+    #
+    #   * `lambda` - The target groups contains a single Lambda function.
     #
     # @return [Types::CreateTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1166,11 +1232,12 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_target_group({
     #     name: "TargetGroupName", # required
-    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
-    #     port: 1, # required
-    #     vpc_id: "VpcId", # required
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #     port: 1,
+    #     vpc_id: "VpcId",
     #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #     health_check_port: "HealthCheckPort",
+    #     health_check_enabled: false,
     #     health_check_path: "Path",
     #     health_check_interval_seconds: 1,
     #     health_check_timeout_seconds: 1,
@@ -1179,7 +1246,7 @@ module Aws::ElasticLoadBalancingV2
     #     matcher: {
     #       http_code: "HttpCode", # required
     #     },
-    #     target_type: "instance", # accepts instance, ip
+    #     target_type: "instance", # accepts instance, ip, lambda
     #   })
     #
     # @example Response structure
@@ -1192,6 +1259,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].vpc_id #=> String
     #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].health_check_port #=> String
+    #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
     #   resp.target_groups[0].health_check_timeout_seconds #=> Integer
     #   resp.target_groups[0].healthy_threshold_count #=> Integer
@@ -1200,7 +1268,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.http_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
-    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip"
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup AWS API Documentation
     #
@@ -2289,6 +2357,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].vpc_id #=> String
     #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].health_check_port #=> String
+    #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
     #   resp.target_groups[0].health_check_timeout_seconds #=> Integer
     #   resp.target_groups[0].healthy_threshold_count #=> Integer
@@ -2297,7 +2366,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.http_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
-    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip"
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups AWS API Documentation
@@ -2409,7 +2478,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target.availability_zone #=> String
     #   resp.target_health_descriptions[0].health_check_port #=> String
     #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining", "unavailable"
-    #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Elb.InternalError"
+    #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Target.HealthCheckDisabled", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth AWS API Documentation
@@ -2451,30 +2520,31 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one default certificate. To create a certificate list,
-    #   use AddListenerCertificates.
+    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   certificate ARN but do not set `IsDefault`.
+    #
+    #   To create a certificate list, use AddListenerCertificates.
     #
     # @option params [Array<Types::Action>] :default_actions
     #   The actions for the default rule. The rule must include one forward
     #   action or one or more fixed-response actions.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group. The protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an Application
+    #   Load Balancer or TCP for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you can
-    #   use an identity provider that is OpenID Connect (OIDC) compliant to
-    #   authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   authenticate users through an identity provider that is OpenID Connect
+    #   (OIDC) compliant.
     #
     #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   can use Amazon Cognito to authenticate users as they access your
-    #   application.
+    #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
-    #   can redirect HTTP and HTTPS requests.
+    #   redirect specified client requests from one URL to another.
     #
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
-    #   you can return a custom HTTP response.
+    #   you drop specified client requests and return a custom HTTP response.
     #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2886,15 +2956,22 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Action>] :actions
     #   The actions.
     #
-    #   If the action type is `forward`, you can specify a single target
-    #   group.
+    #   If the action type is `forward`, you specify a target group. The
+    #   protocol of the target group must be HTTP or HTTPS for an Application
+    #   Load Balancer or TCP for a Network Load Balancer.
     #
-    #   If the action type is `authenticate-oidc`, you can use an identity
-    #   provider that is OpenID Connect (OIDC) compliant to authenticate users
-    #   as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   authenticate users through an identity provider that is OpenID Connect
+    #   (OIDC) compliant.
     #
-    #   If the action type is `authenticate-cognito`, you can use Amazon
-    #   Cognito to authenticate users as they access your application.
+    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   authenticate users through the user pools supported by Amazon Cognito.
+    #
+    #   \[Application Load Balancer\] If the action type is `redirect`, you
+    #   redirect specified client requests from one URL to another.
+    #
+    #   \[Application Load Balancer\] If the action type is `fixed-response`,
+    #   you drop specified client requests and return a custom HTTP response.
     #
     # @return [Types::ModifyRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3068,6 +3145,9 @@ module Aws::ElasticLoadBalancingV2
     #   targets. The TCP protocol is supported only if the protocol of the
     #   target group is TCP.
     #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
+    #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
     #   targets.
@@ -3076,15 +3156,24 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP/HTTPS health checks\] The ping path that is the destination for
     #   the health check request.
     #
+    # @option params [Boolean] :health_check_enabled
+    #   Indicates whether health checks are enabled.
+    #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. For Application Load Balancers, the range is
     #   5–300 seconds. For Network Load Balancers, the supported values are 10
     #   or 30 seconds.
     #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
+    #
     # @option params [Integer] :health_check_timeout_seconds
     #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
     #   which no response means a failed health check.
+    #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
     #
     # @option params [Integer] :healthy_threshold_count
     #   The number of consecutive health checks successes required before
@@ -3098,6 +3187,9 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Types::Matcher] :matcher
     #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for a
     #   successful response from a target.
+    #
+    #   If the protocol of the target group is TCP, you can't modify this
+    #   setting.
     #
     # @return [Types::ModifyTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3147,6 +3239,7 @@ module Aws::ElasticLoadBalancingV2
     #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #     health_check_port: "HealthCheckPort",
     #     health_check_path: "Path",
+    #     health_check_enabled: false,
     #     health_check_interval_seconds: 1,
     #     health_check_timeout_seconds: 1,
     #     healthy_threshold_count: 1,
@@ -3166,6 +3259,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].vpc_id #=> String
     #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.target_groups[0].health_check_port #=> String
+    #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
     #   resp.target_groups[0].health_check_timeout_seconds #=> Integer
     #   resp.target_groups[0].healthy_threshold_count #=> Integer
@@ -3174,7 +3268,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.http_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
-    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip"
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup AWS API Documentation
     #
@@ -3263,9 +3357,8 @@ module Aws::ElasticLoadBalancingV2
 
     # Registers the specified targets with the specified target group.
     #
-    # You can register targets by instance ID or by IP address. If the
-    # target is an EC2 instance, it must be in the `running` state when you
-    # register it.
+    # If the target is an EC2 instance, it must be in the `running` state
+    # when you register it.
     #
     # By default, the load balancer routes requests to registered targets
     # using the protocol and port for the target group. Alternatively, you
@@ -3285,6 +3378,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [required, Array<Types::TargetDescription>] :targets
     #   The targets.
+    #
+    #   To register a target by instance ID, specify the instance ID. To
+    #   register a target by IP address, specify the IP address. To register a
+    #   Lambda function, specify the ARN of the Lambda function.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3359,6 +3456,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [required, Array<Types::Certificate>] :certificates
     #   The certificate to remove. You can specify one certificate per call.
+    #   Set `CertificateArn` to the certificate ARN but do not set
+    #   `IsDefault`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3733,7 +3832,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -192,6 +192,12 @@ module Aws::CloudWatch
       data[:evaluate_low_sample_count_percentile]
     end
 
+    
+    # @return [Array<Types::MetricDataQuery>]
+    def metrics
+      data[:metrics]
+    end
+
     # @!endgroup
 
     # @return [Client]

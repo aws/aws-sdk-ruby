@@ -50,6 +50,12 @@ module Aws::EC2
       data[:state]
     end
 
+    # The ID of the AWS account that owns the VPC.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
     # The allowed tenancy of instances launched into the VPC.
     # @return [String]
     def instance_tenancy
@@ -418,6 +424,7 @@ module Aws::EC2
     #
     #   subnet = vpc.create_subnet({
     #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     dry_run: false,
@@ -429,6 +436,8 @@ module Aws::EC2
     #   Default: AWS selects one for you. If you create more than one subnet
     #   in your VPC, we may not necessarily select a different zone for each
     #   subnet.
+    # @option options [String] :availability_zone_id
+    #   The AZ ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
@@ -824,6 +833,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
@@ -971,6 +984,8 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
+    #   * `partition-number` - The partition in which the instance is located.
+    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
@@ -1101,6 +1116,9 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
@@ -1170,9 +1188,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -1192,9 +1207,11 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -1374,20 +1391,22 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_interfaces(options)
-        resp.data.network_interfaces.each do |n|
-          batch << NetworkInterface.new(
-            id: n.network_interface_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_interfaces.each do |n|
+            batch << NetworkInterface.new(
+              id: n.network_interface_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkInterface::Collection.new(batches)
     end
@@ -1504,6 +1523,8 @@ module Aws::EC2
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
+    #
     #   * `route-table-id` - The ID of the route table.
     #
     #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in a
@@ -1525,6 +1546,8 @@ module Aws::EC2
     #     the table.
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
+    #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
@@ -1552,6 +1575,8 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
+    #   * `transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1565,20 +1590,22 @@ module Aws::EC2
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_route_tables(options)
-        resp.data.route_tables.each do |r|
-          batch << RouteTable.new(
-            id: r.route_table_id,
-            data: r,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.route_tables.each do |r|
+            batch << RouteTable.new(
+              id: r.route_table_id,
+              data: r,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       RouteTable::Collection.new(batches)
     end
@@ -1595,8 +1622,6 @@ module Aws::EC2
     #     group_ids: ["String"],
     #     group_names: ["String"],
     #     dry_run: false,
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1695,30 +1720,25 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :next_token
-    #   The token to request the next page of results.
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. If this
-    #   parameter is not specified, then all results are returned.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_security_groups(options)
-        resp.data.security_groups.each do |s|
-          batch << SecurityGroup.new(
-            id: s.group_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.security_groups.each do |s|
+            batch << SecurityGroup.new(
+              id: s.group_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       SecurityGroup::Collection.new(batches)
     end
@@ -1739,20 +1759,23 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You can
+    #     also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block you
     #     specify must exactly match the subnet's CIDR block for information
     #     to be returned for the subnet. You can also use `cidr` or
-    #     `cidr-block` as the filter names.
+    #     `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
-    #     filter name.
+    #   * `default-for-az` - Indicates whether this is the default subnet for
+    #     the Availability Zone. You can also use `defaultForAz` as the filter
+    #     name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -1763,7 +1786,11 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #

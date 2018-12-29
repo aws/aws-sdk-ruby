@@ -79,6 +79,7 @@ module Aws::ECR
     InvalidLayerException = Shapes::StructureShape.new(name: 'InvalidLayerException')
     InvalidLayerPartException = Shapes::StructureShape.new(name: 'InvalidLayerPartException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
     Layer = Shapes::StructureShape.new(name: 'Layer')
     LayerAlreadyExistsException = Shapes::StructureShape.new(name: 'LayerAlreadyExistsException')
     LayerAvailability = Shapes::StringShape.new(name: 'LayerAvailability')
@@ -105,10 +106,13 @@ module Aws::ECR
     LifecyclePolicyRuleAction = Shapes::StructureShape.new(name: 'LifecyclePolicyRuleAction')
     LifecyclePolicyRulePriority = Shapes::IntegerShape.new(name: 'LifecyclePolicyRulePriority')
     LifecyclePolicyText = Shapes::StringShape.new(name: 'LifecyclePolicyText')
+    LifecyclePreviewMaxResults = Shapes::IntegerShape.new(name: 'LifecyclePreviewMaxResults')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListImagesFilter = Shapes::StructureShape.new(name: 'ListImagesFilter')
     ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
     ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaType = Shapes::StringShape.new(name: 'MediaType')
     MediaTypeList = Shapes::ListShape.new(name: 'MediaTypeList')
@@ -135,7 +139,17 @@ module Aws::ECR
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
     StartLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewRequest')
     StartLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewResponse')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagStatus = Shapes::StringShape.new(name: 'TagStatus')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
     UploadLayerPartRequest = Shapes::StructureShape.new(name: 'UploadLayerPartRequest')
     UploadLayerPartResponse = Shapes::StructureShape.new(name: 'UploadLayerPartResponse')
@@ -192,6 +206,7 @@ module Aws::ECR
     CompleteLayerUploadResponse.struct_class = Types::CompleteLayerUploadResponse
 
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
 
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
@@ -270,7 +285,7 @@ module Aws::ECR
     GetLifecyclePolicyPreviewRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetLifecyclePolicyPreviewRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
     GetLifecyclePolicyPreviewRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    GetLifecyclePolicyPreviewRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetLifecyclePolicyPreviewRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LifecyclePreviewMaxResults, location_name: "maxResults"))
     GetLifecyclePolicyPreviewRequest.add_member(:filter, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewFilter, location_name: "filter"))
     GetLifecyclePolicyPreviewRequest.struct_class = Types::GetLifecyclePolicyPreviewRequest
 
@@ -392,6 +407,12 @@ module Aws::ECR
     ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListImagesResponse.struct_class = Types::ListImagesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MediaTypeList.member = Shapes::ShapeRef.new(shape: MediaType)
 
     PutImageRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -446,6 +467,26 @@ module Aws::ECR
     StartLifecyclePolicyPreviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewStatus, location_name: "status"))
     StartLifecyclePolicyPreviewResponse.struct_class = Types::StartLifecyclePolicyPreviewResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
     UploadLayerPartRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     UploadLayerPartRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     UploadLayerPartRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
@@ -467,12 +508,16 @@ module Aws::ECR
       api.version = "2015-09-21"
 
       api.metadata = {
+        "apiVersion" => "2015-09-21",
         "endpointPrefix" => "ecr",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon ECR",
         "serviceFullName" => "Amazon EC2 Container Registry",
+        "serviceId" => "ECR",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonEC2ContainerRegistry_V20150921",
+        "uid" => "ecr-2015-09-21",
       }
 
       api.add_operation(:batch_check_layer_availability, Seahorse::Model::Operation.new.tap do |o|
@@ -532,6 +577,8 @@ module Aws::ECR
         o.output = Shapes::ShapeRef.new(shape: CreateRepositoryResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
@@ -694,6 +741,17 @@ module Aws::ECR
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:put_image, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutImage"
         o.http_method = "POST"
@@ -741,6 +799,32 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewInProgressException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
       api.add_operation(:upload_layer_part, Seahorse::Model::Operation.new.tap do |o|

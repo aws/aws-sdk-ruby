@@ -21,6 +21,8 @@ module {{module_name}}
     {{/plugin_class_names}}
 
     {{#client_constructor}}
+    # @overload initialize(options)
+    #   @param [Hash] options
     {{>documentation}}
     {{/client_constructor}}
     def initialize(*args)

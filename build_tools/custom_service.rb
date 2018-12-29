@@ -39,6 +39,8 @@ module BuildTools
         remove_plugins: [
           'Aws::Plugins::UserAgent',
           'Aws::Plugins::RegionalEndpoint',
+          'Aws::Plugins::EndpointDiscovery',
+          'Aws::Plugins::EndpointPattern',
           'Aws::Plugins::CredentialsConfiguration'
         ]
       )

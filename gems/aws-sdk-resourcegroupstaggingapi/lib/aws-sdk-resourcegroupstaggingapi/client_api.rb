@@ -140,12 +140,14 @@ module Aws::ResourceGroupsTaggingAPI
       api.version = "2017-01-26"
 
       api.metadata = {
+        "apiVersion" => "2017-01-26",
         "endpointPrefix" => "tagging",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Resource Groups Tagging API",
         "signatureVersion" => "v4",
         "targetPrefix" => "ResourceGroupsTaggingAPI_20170126",
+        "uid" => "resourcegroupstaggingapi-2017-01-26",
       }
 
       api.add_operation(:get_resources, Seahorse::Model::Operation.new.tap do |o|

@@ -193,17 +193,21 @@ module AwsSdkCodeGenerator
     end
 
     def input_eventstream_shape
-      input_shape = @api['shapes'][@operation['input']['shape']]
-      input_shape['members'].each do |name, ref|
-        return [Underscore.underscore(name), ref['shape']] if Api.eventstream?(ref, @api)
+      input_shape = @api['shapes'][@operation['input']['shape']] if @operation['input']
+      if input_shape
+        input_shape['members'].each do |name, ref|
+          return [Underscore.underscore(name), ref['shape']] if Api.eventstream?(ref, @api)
+        end
       end
       nil
     end
 
     def output_eventstream_shape
-      output_shape = @api['shapes'][@operation['output']['shape']]
-      output_shape['members'].each do |name, ref|
-        return [Underscore.underscore(name), ref['shape']] if Api.eventstream?(ref, @api)
+      output_shape = @api['shapes'][@operation['output']['shape']] if @operation['output']
+      if output_shape
+        output_shape['members'].each do |name, ref|
+          return [Underscore.underscore(name), ref['shape']] if Api.eventstream?(ref, @api)
+        end
       end
       nil
     end

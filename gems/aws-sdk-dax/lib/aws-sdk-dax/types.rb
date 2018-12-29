@@ -129,7 +129,7 @@ module Aws::DAX
     #         security_group_ids: ["String"],
     #         preferred_maintenance_window: "String",
     #         notification_topic_arn: "String",
-    #         iam_role_arn: "String",
+    #         iam_role_arn: "String", # required
     #         parameter_group_name: "String",
     #         tags: [
     #           {

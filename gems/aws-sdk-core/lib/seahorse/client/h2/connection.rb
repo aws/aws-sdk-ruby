@@ -1,4 +1,6 @@
-require 'http/2'
+if RUBY_VERSION >= '2.3'
+  require 'http/2'
+end
 require 'openssl'
 require 'socket'
 
@@ -97,8 +99,6 @@ module Seahorse
               rescue EOFError
                 @socket.close
               rescue => error
-                # TODO debug only, to be removed
-                puts error.backtrace
                 self.debug_output(error.inspect)
                 @errors << error
                 self.close!
