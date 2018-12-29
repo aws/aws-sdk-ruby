@@ -60,6 +60,10 @@ module AwsSdkCodeGenerator
     def default_async_plugins
       plugins = default_plugins.dup
       plugins.delete('Aws::Plugins::ResponsePaging')
+      plugins.delete('Aws::Plugins::EndpointDiscovery')
+      plugins.delete('Aws::Plugins::EndpointPattern')
+      plugins.delete('Aws::Plugins::ClientMetricsPlugin')
+      plugins.delete('Aws::Plugins::ClientMetricsSendPlugin')
       plugins['Aws::Plugins::InvocationId'] = "#{core_plugins}/invocation_id.rb"
       plugins
     end
