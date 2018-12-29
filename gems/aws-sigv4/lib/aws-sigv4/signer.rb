@@ -4,6 +4,7 @@ require 'time'
 require 'uri'
 require 'set'
 require 'cgi'
+require 'aws-eventstream'
 
 module Aws
   module Sigv4
@@ -243,6 +244,24 @@ module Aws
         )
       end
 
+      # Signs a event and returns signature headers and prior signature
+      # used for next event signing.
+      def sign_event(prior_signature, payload, encoder)
+        creds = get_credentials
+        time = Time.now
+        headers = {}
+
+        datetime = time.utc.strftime("%Y%m%dT%H%M%SZ")
+        date = datetime[0,8]
+        headers[':date'] = Aws::EventStream::HeaderValue.new(value: time.to_i*1000, type: 'timestamp')
+
+        sts = event_string_to_sign(datetime, headers, payload, prior_signature, encoder)
+        sig = event_signature(creds.secret_access_key, date, sts)
+
+        headers[':chunk-signature'] = Aws::EventStream::HeaderValue.new(value: sig, type: 'bytes')
+        [headers, sig.unpack('H*').first]
+      end
+
       # Signs a URL with query authentication. Using query parameters
       # to authenticate requests is useful when you want to express a
       # request entirely in a URL. This method is also referred as
@@ -375,6 +394,19 @@ module Aws
         ].join("\n")
       end
 
+      def event_string_to_sign(datetime, headers, payload, prior_signature, encoder)
+        encoded_headers = encoder.encode_headers(
+          Aws::EventStream::Message.new(headers: headers, payload: payload)).read
+        [
+          "AWS4-HMAC-SHA256-PAYLOAD",
+          datetime,
+          credential_scope(datetime[0,8]),
+          prior_signature,
+          sha256_hexdigest(encoded_headers),
+          sha256_hexdigest(payload)
+        ].join("\n")
+      end
+
       def credential_scope(date)
         [
           date,
@@ -395,6 +427,15 @@ module Aws
         k_credentials = hmac(k_service, 'aws4_request')
         hexhmac(k_credentials, string_to_sign)
       end
+
+      def event_signature(secret_access_key, date, string_to_sign)
+        k_date = hmac("AWS4" + secret_access_key, date)
+        k_region = hmac(k_date, @region)
+        k_service = hmac(k_region, @service)
+        k_credentials = hmac(k_service, 'aws4_request')
+        hmac(k_credentials, string_to_sign)
+      end
+
 
       def path(url)
         path = url.path

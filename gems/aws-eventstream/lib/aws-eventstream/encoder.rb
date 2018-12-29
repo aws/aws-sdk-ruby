@@ -62,8 +62,6 @@ module Aws
         end
       end
 
-      private
-
       def encode_message(message)
         # create context buffer with encode headers
         ctx_buffer = encode_headers(message)
@@ -103,6 +101,8 @@ module Aws
         end
         buffer
       end
+
+      private
 
       def prelude(total_len, headers_len)
         BytesBuffer.new(pack_uint32([
