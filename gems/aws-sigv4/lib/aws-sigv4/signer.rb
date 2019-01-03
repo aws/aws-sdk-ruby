@@ -275,7 +275,7 @@ module Aws
       # Note:
       #
       #   Since ':chunk-signature' header value has bytes type, the signature value provided
-      #   needs to be a binary string instead og a hex-encoded string (like original signature
+      #   needs to be a binary string instead of a hex-encoded string (like original signature
       #   V4 algorithm). Thus, when returning signature value used for next event siging, the
       #   signature value (a binary string) used at ':chunk-signature' needs to converted to
       #   hex-encoded string using #unpack
