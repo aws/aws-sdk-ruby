@@ -62,6 +62,12 @@ module Aws
         end
       end
 
+      # Encodes an Aws::EventStream::Message
+      #   into Aws::EventStream::BytesBuffer
+      #
+      # @param [Aws::EventStream::Message] msg
+      #
+      # @return [Aws::EventStream::BytesBuffer]
       def encode_message(message)
         # create context buffer with encode headers
         ctx_buffer = encode_headers(message)
@@ -83,7 +89,7 @@ module Aws
         buffer
       end
 
-      # Encode headers part of an Aws::EventStream::Message
+      # Encodes headers part of an Aws::EventStream::Message
       #   into Aws::EventStream::BytesBuffer
       #
       # @param [Aws::EventStream::Message] msg
