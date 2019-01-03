@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.198 (2019-01-03)
+------------------
+
 * Feature - Aws::OpsWorksCM - Updated the documentation for AWS OpsWorks for Chef Automate.
 
 2.11.197 (2018-12-21)
