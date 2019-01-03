@@ -1,7 +1,7 @@
 language: ruby
 
 before_install:
-  - gem install bundler -v ‘< 2’
+  - gem install bundler -v '< 2'
 
 rvm:
   - 1.9.3
