@@ -83,6 +83,12 @@ module Aws
         buffer
       end
 
+      # Encode headers part of an Aws::EventStream::Message
+      #   into Aws::EventStream::BytesBuffer
+      #
+      # @param [Aws::EventStream::Message] msg
+      #
+      # @return [Aws::EventStream::BytesBuffer]
       def encode_headers(msg)
         buffer = BytesBuffer.new('')
         msg.headers.each do |k, v|

@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - public #enocode_headers method
+* Issue - public #encode_headers method
 
 1.0.1 (2018-06-15)
 ------------------
