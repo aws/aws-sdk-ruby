@@ -97,6 +97,8 @@ module Aws::DeviceFarm
     #
     #   * MESSAGE\_LOG: The message log type.
     #
+    #   * VIDEO\_LOG: The video log type.
+    #
     #   * RESULT\_LOG: The result log type.
     #
     #   * SERVICE\_LOG: The service log type.
@@ -136,6 +138,14 @@ module Aws::DeviceFarm
     #     type.
     #
     #   * XCTEST\_LOG: The XCode test output type.
+    #
+    #   * VIDEO: The Video output type.
+    #
+    #   * CUSTOMER\_ARTIFACT:The Customer Artifact output type.
+    #
+    #   * CUSTOMER\_ARTIFACT\_LOG: The Customer Artifact Log output type.
+    #
+    #   * TESTSPEC\_OUTPUT: The Test Spec Output type.
     #   @return [String]
     #
     # @!attribute [rw] extension
@@ -664,7 +674,7 @@ module Aws::DeviceFarm
     #       {
     #         project_arn: "AmazonResourceName", # required
     #         name: "Name", # required
-    #         type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
+    #         type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_NODE_TEST_PACKAGE, APPIUM_RUBY_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, APPIUM_WEB_NODE_TEST_PACKAGE, APPIUM_WEB_RUBY_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_NODE_TEST_SPEC, APPIUM_RUBY_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, APPIUM_WEB_NODE_TEST_SPEC, APPIUM_WEB_RUBY_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
     #         content_type: "ContentType",
     #       }
     #
@@ -702,14 +712,25 @@ module Aws::DeviceFarm
     #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
     #     upload.
     #
+    #   * APPIUM\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
+    #     upload.
+    #
+    #   * APPIUM\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload.
+    #
     #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload.
+    #     package upload for a web app.
     #
     #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG
-    #     test package upload.
+    #     test package upload for a web app.
     #
     #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
-    #     upload.
+    #     upload for a web app.
+    #
+    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
+    #     upload for a web app.
+    #
+    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package
+    #     upload for a web app.
     #
     #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
     #
@@ -731,14 +752,24 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
     #
+    #   * APPIUM\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload.
+    #
+    #   * APPIUM\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload.
+    #
     #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test
-    #     spec upload.
+    #     spec upload for a web app.
     #
     #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
-    #     spec upload.
+    #     spec upload for a web app.
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec
-    #     upload.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload
+    #     for a web app.
+    #
+    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload
+    #     for a web app.
+    #
+    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload for
+    #     a web app.
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
@@ -1172,6 +1203,11 @@ module Aws::DeviceFarm
     #   The instances belonging to this device.
     #   @return [Array<Types::DeviceInstance>]
     #
+    # @!attribute [rw] availability
+    #   Reflects how likely a device will be available for a test run. It is
+    #   currently available in the ListDevices and GetDevice API methods.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Device AWS API Documentation
     #
     class Device < Struct.new(
@@ -1194,7 +1230,114 @@ module Aws::DeviceFarm
       :remote_debug_enabled,
       :fleet_type,
       :fleet_name,
-      :instances)
+      :instances,
+      :availability)
+      include Aws::Structure
+    end
+
+    # Represents a device filter used to select a set of devices to be
+    # included in a test run. This data structure is passed in as the
+    # `deviceSelectionConfiguration` parameter to ScheduleRun. For an
+    # example of the JSON request syntax, see ScheduleRun.
+    #
+    # It is also passed in as the `filters` parameter to ListDevices. For an
+    # example of the JSON request syntax, see ListDevices.
+    #
+    # @note When making an API call, you may pass DeviceFilter
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #         values: ["String"],
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The aspect of a device such as platform or model used as the
+    #   selection criteria in a device filter.
+    #
+    #   Allowed values include:
+    #
+    #   * ARN: The Amazon Resource Name (ARN) of the device. For example,
+    #     "arn:aws:devicefarm:us-west-2::device:12345Example".
+    #
+    #   * PLATFORM: The device platform. Valid values are "ANDROID" or
+    #     "IOS".
+    #
+    #   * OS\_VERSION: The operating system version. For example,
+    #     "10.3.2".
+    #
+    #   * MODEL: The device model. For example, "iPad 5th Gen".
+    #
+    #   * AVAILABILITY: The current availability of the device. Valid values
+    #     are "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
+    #     "TEMPORARY\_NOT\_AVAILABLE".
+    #
+    #   * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
+    #     or "TABLET".
+    #
+    #   * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #
+    #   * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
+    #     access. Valid values are "TRUE" or "FALSE".
+    #
+    #   * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
+    #     debugging. Valid values are "TRUE" or "FALSE".
+    #
+    #   * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
+    #     instance.
+    #
+    #   * INSTANCE\_LABELS: The label of the device instance.
+    #
+    #   * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
+    #     "PRIVATE".
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The filter operator.
+    #
+    #   * The EQUALS operator is available for every attribute except
+    #     INSTANCE\_LABELS.
+    #
+    #   * The CONTAINS operator is available for the INSTANCE\_LABELS and
+    #     MODEL attributes.
+    #
+    #   * The IN and NOT\_IN operators are available for the ARN,
+    #     OS\_VERSION, MODEL, MANUFACTURER, and INSTANCE\_ARN attributes.
+    #
+    #   * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
+    #     GREATER\_THAN\_OR\_EQUALS operators are also available for the
+    #     OS\_VERSION attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of one or more filter values used in a device filter.
+    #
+    #   **Operator Values**
+    #
+    #   * The IN and NOT\_IN operators can take a values array that has more
+    #     than one element.
+    #
+    #   * The other operators require an array with a single element.
+    #
+    #   **Attribute Values**
+    #
+    #   * The PLATFORM attribute can be set to "ANDROID" or "IOS".
+    #
+    #   * The AVAILABILITY attribute can be set to "AVAILABLE",
+    #     "HIGHLY\_AVAILABLE", "BUSY", or "TEMPORARY\_NOT\_AVAILABLE".
+    #
+    #   * The FORM\_FACTOR attribute can be set to "PHONE" or "TABLET".
+    #
+    #   * The FLEET\_TYPE attribute can be set to "PUBLIC" or "PRIVATE".
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceFilter AWS API Documentation
+    #
+    class DeviceFilter < Struct.new(
+      :attribute,
+      :operator,
+      :values)
       include Aws::Structure
     end
 
@@ -1329,6 +1472,152 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Represents the device filters used in a test run as well as the
+    # maximum number of devices to be included in the run. It is passed in
+    # as the `deviceSelectionConfiguration` request parameter in
+    # ScheduleRun.
+    #
+    # @note When making an API call, you may pass DeviceSelectionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [ # required
+    #           {
+    #             attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_devices: 1, # required
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Used to dynamically select a set of devices for a test run. A filter
+    #   is made up of an attribute, an operator, and one or more values.
+    #
+    #   * **Attribute**
+    #
+    #     The aspect of a device such as platform or model used as the
+    #     selection criteria in a device filter.
+    #
+    #     Allowed values include:
+    #
+    #     * ARN: The Amazon Resource Name (ARN) of the device. For example,
+    #       "arn:aws:devicefarm:us-west-2::device:12345Example".
+    #
+    #     * PLATFORM: The device platform. Valid values are "ANDROID" or
+    #       "IOS".
+    #
+    #     * OS\_VERSION: The operating system version. For example,
+    #       "10.3.2".
+    #
+    #     * MODEL: The device model. For example, "iPad 5th Gen".
+    #
+    #     * AVAILABILITY: The current availability of the device. Valid
+    #       values are "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
+    #       "TEMPORARY\_NOT\_AVAILABLE".
+    #
+    #     * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
+    #       or "TABLET".
+    #
+    #     * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #
+    #     * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for
+    #       remote access. Valid values are "TRUE" or "FALSE".
+    #
+    #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
+    #       debugging. Valid values are "TRUE" or "FALSE".
+    #
+    #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
+    #       instance.
+    #
+    #     * INSTANCE\_LABELS: The label of the device instance.
+    #
+    #     * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
+    #       "PRIVATE".
+    #
+    #   * **Operator**
+    #
+    #     The filter operator.
+    #
+    #     * The EQUALS operator is available for every attribute except
+    #       INSTANCE\_LABELS.
+    #
+    #     * The CONTAINS operator is available for the INSTANCE\_LABELS and
+    #       MODEL attributes.
+    #
+    #     * The IN and NOT\_IN operators are available for the ARN,
+    #       OS\_VERSION, MODEL, MANUFACTURER, and INSTANCE\_ARN attributes.
+    #
+    #     * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
+    #       GREATER\_THAN\_OR\_EQUALS operators are also available for the
+    #       OS\_VERSION attribute.
+    #
+    #   * **Values**
+    #
+    #     An array of one or more filter values.
+    #
+    #     **Operator Values**
+    #
+    #     * The IN and NOT\_IN operators can take a values array that has
+    #       more than one element.
+    #
+    #     * The other operators require an array with a single element.
+    #
+    #     **Attribute Values**
+    #
+    #     * The PLATFORM attribute can be set to "ANDROID" or "IOS".
+    #
+    #     * The AVAILABILITY attribute can be set to "AVAILABLE",
+    #       "HIGHLY\_AVAILABLE", "BUSY", or
+    #       "TEMPORARY\_NOT\_AVAILABLE".
+    #
+    #     * The FORM\_FACTOR attribute can be set to "PHONE" or
+    #       "TABLET".
+    #
+    #     * The FLEET\_TYPE attribute can be set to "PUBLIC" or
+    #       "PRIVATE".
+    #   @return [Array<Types::DeviceFilter>]
+    #
+    # @!attribute [rw] max_devices
+    #   The maximum number of devices to be included in a test run.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceSelectionConfiguration AWS API Documentation
+    #
+    class DeviceSelectionConfiguration < Struct.new(
+      :filters,
+      :max_devices)
+      include Aws::Structure
+    end
+
+    # Contains the run results requested by the device selection
+    # configuration as well as how many devices were returned. For an
+    # example of the JSON response syntax, see ScheduleRun.
+    #
+    # @!attribute [rw] filters
+    #   The filters in a device selection result.
+    #   @return [Array<Types::DeviceFilter>]
+    #
+    # @!attribute [rw] matched_devices_count
+    #   The number of devices that matched the device filter selection
+    #   criteria.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_devices
+    #   The maximum number of devices to be selected by a device filter and
+    #   included in a test run.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceSelectionResult AWS API Documentation
+    #
+    class DeviceSelectionResult < Struct.new(
+      :filters,
+      :matched_devices_count,
+      :max_devices)
+      include Aws::Structure
+    end
+
     # Represents configuration information about a test run, such as the
     # execution timeout (in minutes).
     #
@@ -1446,9 +1735,9 @@ module Aws::DeviceFarm
     #       {
     #         device_pool_arn: "AmazonResourceName", # required
     #         app_arn: "AmazonResourceName",
-    #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
+    #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_NODE, APPIUM_RUBY, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, APPIUM_WEB_NODE, APPIUM_WEB_RUBY, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #         test: {
-    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
+    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_NODE, APPIUM_RUBY, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, APPIUM_WEB_NODE, APPIUM_WEB_RUBY, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #           test_package_arn: "AmazonResourceName",
     #           test_spec_arn: "AmazonResourceName",
     #           filter: "Filter",
@@ -1507,12 +1796,20 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON: The Appium Python type.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for Web apps.
+    #   * APPIUM\_NODE: The Appium Node.js type.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for Web
+    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web
     #     apps.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for Web apps.
+    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY: The Appium Ruby type for web apps.
     #
     #   * CALABASH: The Calabash type.
     #
@@ -2153,12 +2450,20 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON: The Appium Python type.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for Web apps.
+    #   * APPIUM\_NODE: The Appium Node.js type.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for Web
+    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web
     #     apps.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for Web apps.
+    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY: The Appium Ruby test type for web apps.
     #
     #   * CALABASH: The Calabash type.
     #
@@ -2457,6 +2762,13 @@ module Aws::DeviceFarm
     #       {
     #         arn: "AmazonResourceName",
     #         next_token: "PaginationToken",
+    #         filters: [
+    #           {
+    #             attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #             values: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] arn
@@ -2469,11 +2781,82 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   Used to select a set of devices. A filter is made up of an
+    #   attribute, an operator, and one or more values.
+    #
+    #   * Attribute: The aspect of a device such as platform or model used
+    #     as the selction criteria in a device filter.
+    #
+    #     Allowed values include:
+    #
+    #     * ARN: The Amazon Resource Name (ARN) of the device. For example,
+    #       "arn:aws:devicefarm:us-west-2::device:12345Example".
+    #
+    #     * PLATFORM: The device platform. Valid values are "ANDROID" or
+    #       "IOS".
+    #
+    #     * OS\_VERSION: The operating system version. For example,
+    #       "10.3.2".
+    #
+    #     * MODEL: The device model. For example, "iPad 5th Gen".
+    #
+    #     * AVAILABILITY: The current availability of the device. Valid
+    #       values are "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
+    #       "TEMPORARY\_NOT\_AVAILABLE".
+    #
+    #     * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
+    #       or "TABLET".
+    #
+    #     * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #
+    #     * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for
+    #       remote access. Valid values are "TRUE" or "FALSE".
+    #
+    #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
+    #       debugging. Valid values are "TRUE" or "FALSE".
+    #
+    #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
+    #       instance.
+    #
+    #     * INSTANCE\_LABELS: The label of the device instance.
+    #
+    #     * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
+    #       "PRIVATE".
+    #
+    #   * Operator: The filter operator.
+    #
+    #     * The EQUALS operator is available for every attribute except
+    #       INSTANCE\_LABELS.
+    #
+    #     * The CONTAINS operator is available for the INSTANCE\_LABELS and
+    #       MODEL attributes.
+    #
+    #     * The IN and NOT\_IN operators are available for the ARN,
+    #       OS\_VERSION, MODEL, MANUFACTURER, and INSTANCE\_ARN attributes.
+    #
+    #     * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
+    #       GREATER\_THAN\_OR\_EQUALS operators are also available for the
+    #       OS\_VERSION attribute.
+    #
+    #   * Values: An array of one or more filter values.
+    #
+    #     * The IN and NOT\_IN operators take a values array that has one or
+    #       more elements.
+    #
+    #     * The other operators require an array with a single element.
+    #
+    #     * In a request, the AVAILABILITY attribute takes "AVAILABLE",
+    #       "HIGHLY\_AVAILABLE", "BUSY", or
+    #       "TEMPORARY\_NOT\_AVAILABLE" as values.
+    #   @return [Array<Types::DeviceFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesRequest AWS API Documentation
     #
     class ListDevicesRequest < Struct.new(
       :arn,
-      :next_token)
+      :next_token,
+      :filters)
       include Aws::Structure
     end
 
@@ -3137,7 +3520,7 @@ module Aws::DeviceFarm
     #
     #       {
     #         arn: "AmazonResourceName", # required
-    #         type: "ANDROID_APP", # accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
+    #         type: "ANDROID_APP", # accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_NODE_TEST_PACKAGE, APPIUM_RUBY_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, APPIUM_WEB_NODE_TEST_PACKAGE, APPIUM_WEB_RUBY_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE, APPIUM_JAVA_JUNIT_TEST_SPEC, APPIUM_JAVA_TESTNG_TEST_SPEC, APPIUM_PYTHON_TEST_SPEC, APPIUM_NODE_TEST_SPEC, APPIUM_RUBY_TEST_SPEC, APPIUM_WEB_JAVA_JUNIT_TEST_SPEC, APPIUM_WEB_JAVA_TESTNG_TEST_SPEC, APPIUM_WEB_PYTHON_TEST_SPEC, APPIUM_WEB_NODE_TEST_SPEC, APPIUM_WEB_RUBY_TEST_SPEC, INSTRUMENTATION_TEST_SPEC, XCTEST_UI_TEST_SPEC
     #         next_token: "PaginationToken",
     #       }
     #
@@ -3168,14 +3551,25 @@ module Aws::DeviceFarm
     #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
     #     upload.
     #
+    #   * APPIUM\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
+    #     upload.
+    #
+    #   * APPIUM\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload.
+    #
     #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload.
+    #     package upload for a web app.
     #
     #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG
-    #     test package upload.
+    #     test package upload for a web app.
     #
     #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
-    #     upload.
+    #     upload for a web app.
+    #
+    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
+    #     upload for a web app.
+    #
+    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package
+    #     upload for a web app.
     #
     #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
     #
@@ -3197,14 +3591,24 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
     #
+    #   * APPIUM\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload.
+    #
+    #   * APPIUM\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload.
+    #
     #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test
-    #     spec upload.
+    #     spec upload for a web app.
     #
     #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
-    #     spec upload.
+    #     spec upload for a web app.
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec
-    #     upload.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload
+    #     for a web app.
+    #
+    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload
+    #     for a web app.
+    #
+    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload for
+    #     a web app.
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #
@@ -3987,7 +4391,8 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
-    # Represents a condition for a device pool.
+    # Represents a condition for a device pool. It is passed in as the
+    # `rules` parameter to CreateDevicePool and UpdateDevicePool.
     #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
@@ -3999,21 +4404,28 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] attribute
-    #   The rule's stringified attribute. For example, specify the value as
-    #   `""abc""`.
+    #   The rule's attribute. It is the aspect of a device such as platform
+    #   or model used as selection criteria to create or update a device
+    #   pool.
     #
     #   Allowed values include:
     #
-    #   * ARN: The ARN.
+    #   * ARN: The Amazon Resource Name (ARN) of a device. For example,
+    #     "arn:aws:devicefarm:us-west-2::device:12345Example".
     #
-    #   * FORM\_FACTOR: The form factor (for example, phone or tablet).
+    #   * PLATFORM: The device platform. Valid values are "ANDROID" or
+    #     "IOS".
     #
-    #   * MANUFACTURER: The manufacturer.
+    #   * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
+    #     or "TABLET".
     #
-    #   * PLATFORM: The platform (for example, Android or iOS).
+    #   * MANUFACTURER: The device manufacturer. For example, "Apple".
     #
     #   * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
-    #     access.
+    #     access. Valid values are "TRUE" or "FALSE".
+    #
+    #   * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
+    #     debugging. Valid values are "TRUE" or "FALSE".
     #
     #   * APPIUM\_VERSION: The Appium version for the test.
     #
@@ -4021,6 +4433,9 @@ module Aws::DeviceFarm
     #     instance.
     #
     #   * INSTANCE\_LABELS: The label of the device instance.
+    #
+    #   * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
+    #     "PRIVATE".
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -4041,6 +4456,12 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] value
     #   The rule's value.
+    #
+    #   The value must be passed in as a string using escaped quotes.
+    #
+    #   For example:
+    #
+    #   "value": "\\"ANDROID\\""
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Rule AWS API Documentation
@@ -4080,12 +4501,20 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON: The Appium Python type.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for Web apps.
+    #   * APPIUM\_NODE: The Appium Node.js type.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for Web
+    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web
     #     apps.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for Web apps.
+    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY: The Appium Ruby type for web apps.
     #
     #   * CALABASH: The Calabash type.
     #
@@ -4270,6 +4699,11 @@ module Aws::DeviceFarm
     #   The ARN of the YAML-formatted test specification for the run.
     #   @return [String]
     #
+    # @!attribute [rw] device_selection_result
+    #   The results of a device filter used to select the devices for a test
+    #   run.
+    #   @return [Types::DeviceSelectionResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
     class Run < Struct.new(
@@ -4302,7 +4736,8 @@ module Aws::DeviceFarm
       :customer_artifact_paths,
       :web_url,
       :skip_app_resign,
-      :test_spec_arn)
+      :test_spec_arn,
+      :device_selection_result)
       include Aws::Structure
     end
 
@@ -4467,10 +4902,20 @@ module Aws::DeviceFarm
     #       {
     #         project_arn: "AmazonResourceName", # required
     #         app_arn: "AmazonResourceName",
-    #         device_pool_arn: "AmazonResourceName", # required
+    #         device_pool_arn: "AmazonResourceName",
+    #         device_selection_configuration: {
+    #           filters: [ # required
+    #             {
+    #               attribute: "ARN", # accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #               operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
+    #               values: ["String"],
+    #             },
+    #           ],
+    #           max_devices: 1, # required
+    #         },
     #         name: "Name",
     #         test: { # required
-    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
+    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_NODE, APPIUM_RUBY, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, APPIUM_WEB_NODE, APPIUM_WEB_RUBY, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #           test_package_arn: "AmazonResourceName",
     #           test_spec_arn: "AmazonResourceName",
     #           filter: "Filter",
@@ -4520,7 +4965,21 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] device_pool_arn
     #   The ARN of the device pool for the run to be scheduled.
+    #
+    #   Either <b> <code>devicePoolArn</code> </b> or <b>
+    #   <code>deviceSelectionConfiguration</code> </b> is required in a
+    #   request.
     #   @return [String]
+    #
+    # @!attribute [rw] device_selection_configuration
+    #   The filter criteria used to dynamically select a set of devices for
+    #   a test run, as well as the maximum number of devices to be included
+    #   in the run.
+    #
+    #   Either <b> <code>devicePoolArn</code> </b> or <b>
+    #   <code>deviceSelectionConfiguration</code> </b> is required in a
+    #   request.
+    #   @return [Types::DeviceSelectionConfiguration]
     #
     # @!attribute [rw] name
     #   The name for the run to be scheduled.
@@ -4545,6 +5004,7 @@ module Aws::DeviceFarm
       :project_arn,
       :app_arn,
       :device_pool_arn,
+      :device_selection_configuration,
       :name,
       :test,
       :configuration,
@@ -4566,14 +5026,14 @@ module Aws::DeviceFarm
     end
 
     # Represents test settings. This data structure is passed in as the
-    # "test" parameter to ScheduleRun. For an example of the JSON request
+    # `test` parameter to ScheduleRun. For an example of the JSON request
     # syntax, see ScheduleRun.
     #
     # @note When making an API call, you may pass ScheduleRunTest
     #   data as a hash:
     #
     #       {
-    #         type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
+    #         type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_NODE, APPIUM_RUBY, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, APPIUM_WEB_NODE, APPIUM_WEB_RUBY, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #         test_package_arn: "AmazonResourceName",
     #         test_spec_arn: "AmazonResourceName",
     #         filter: "Filter",
@@ -4599,12 +5059,20 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON: The Appium Python type.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for Web apps.
+    #   * APPIUM\_NODE: The Appium Node.js type.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for Web
+    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web
     #     apps.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for Web apps.
+    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY: The Appium Ruby type for web apps.
     #
     #   * CALABASH: The Calabash type.
     #
@@ -4654,10 +5122,10 @@ module Aws::DeviceFarm
     #   For Appium tests (all types):
     #
     #   * appium\_version: The Appium version. Currently supported values
-    #     are "1.7.2", "1.7.1", "1.6.5", "latest", and "default".
+    #     are "1.6.5" (and higher), "latest", and "default".
     #
     #     * “latest” will run the latest Appium version supported by Device
-    #       Farm (1.7.2).
+    #       Farm (1.9.1).
     #
     #     * For “default”, Device Farm will choose a compatible version of
     #       Appium for the device. The current behavior is to run 1.7.2 on
@@ -4859,12 +5327,20 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON: The Appium Python type.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for Web apps.
+    #   * APPIUM\_NODE: The Appium Node.js type.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for Web
+    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web
     #     apps.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for Web apps.
+    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY: The Appium Ruby type for web apps.
     #
     #   * CALABASH: The Calabash type.
     #
@@ -4992,12 +5468,20 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON: The Appium Python type.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for Web apps.
+    #   * APPIUM\_NODE: The Appium Node.js type.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for Web
+    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #
+    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #
+    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web
     #     apps.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for Web apps.
+    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY: The Appium Ruby type for web apps.
     #
     #   * CALABASH: The Calabash type.
     #
@@ -5607,14 +6091,25 @@ module Aws::DeviceFarm
     #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
     #     upload.
     #
+    #   * APPIUM\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
+    #     upload.
+    #
+    #   * APPIUM\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload.
+    #
     #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload.
+    #     package upload for web apps.
     #
     #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG
-    #     test package upload.
+    #     test package upload for web apps.
     #
     #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
-    #     upload.
+    #     upload for web apps.
+    #
+    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
+    #     upload for web apps.
+    #
+    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package
+    #     upload for web apps.
     #
     #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
     #
@@ -5636,14 +6131,24 @@ module Aws::DeviceFarm
     #
     #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
     #
+    #   * APPIUM\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload.
+    #
+    #   * APPIUM\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload.
+    #
     #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test
-    #     spec upload.
+    #     spec upload for a web app.
     #
     #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
-    #     spec upload.
+    #     spec upload for a web app.
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec
-    #     upload.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload
+    #     for a web app.
+    #
+    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload
+    #     for a web app.
+    #
+    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload for
+    #     a web app.
     #
     #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
     #

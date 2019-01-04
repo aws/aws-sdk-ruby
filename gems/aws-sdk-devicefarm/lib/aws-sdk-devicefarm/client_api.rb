@@ -65,6 +65,12 @@ module Aws::DeviceFarm
     DeleteVPCEConfigurationResult = Shapes::StructureShape.new(name: 'DeleteVPCEConfigurationResult')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceAttribute = Shapes::StringShape.new(name: 'DeviceAttribute')
+    DeviceAvailability = Shapes::StringShape.new(name: 'DeviceAvailability')
+    DeviceFilter = Shapes::StructureShape.new(name: 'DeviceFilter')
+    DeviceFilterAttribute = Shapes::StringShape.new(name: 'DeviceFilterAttribute')
+    DeviceFilterOperator = Shapes::StringShape.new(name: 'DeviceFilterOperator')
+    DeviceFilterValues = Shapes::ListShape.new(name: 'DeviceFilterValues')
+    DeviceFilters = Shapes::ListShape.new(name: 'DeviceFilters')
     DeviceFormFactor = Shapes::StringShape.new(name: 'DeviceFormFactor')
     DeviceHostPaths = Shapes::ListShape.new(name: 'DeviceHostPaths')
     DeviceInstance = Shapes::StructureShape.new(name: 'DeviceInstance')
@@ -76,6 +82,8 @@ module Aws::DeviceFarm
     DevicePoolCompatibilityResults = Shapes::ListShape.new(name: 'DevicePoolCompatibilityResults')
     DevicePoolType = Shapes::StringShape.new(name: 'DevicePoolType')
     DevicePools = Shapes::ListShape.new(name: 'DevicePools')
+    DeviceSelectionConfiguration = Shapes::StructureShape.new(name: 'DeviceSelectionConfiguration')
+    DeviceSelectionResult = Shapes::StructureShape.new(name: 'DeviceSelectionResult')
     Devices = Shapes::ListShape.new(name: 'Devices')
     Double = Shapes::FloatShape.new(name: 'Double')
     ExecutionConfiguration = Shapes::StructureShape.new(name: 'ExecutionConfiguration')
@@ -460,7 +468,17 @@ module Aws::DeviceFarm
     Device.add_member(:fleet_type, Shapes::ShapeRef.new(shape: String, location_name: "fleetType"))
     Device.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, location_name: "fleetName"))
     Device.add_member(:instances, Shapes::ShapeRef.new(shape: DeviceInstances, location_name: "instances"))
+    Device.add_member(:availability, Shapes::ShapeRef.new(shape: DeviceAvailability, location_name: "availability"))
     Device.struct_class = Types::Device
+
+    DeviceFilter.add_member(:attribute, Shapes::ShapeRef.new(shape: DeviceFilterAttribute, location_name: "attribute"))
+    DeviceFilter.add_member(:operator, Shapes::ShapeRef.new(shape: DeviceFilterOperator, location_name: "operator"))
+    DeviceFilter.add_member(:values, Shapes::ShapeRef.new(shape: DeviceFilterValues, location_name: "values"))
+    DeviceFilter.struct_class = Types::DeviceFilter
+
+    DeviceFilterValues.member = Shapes::ShapeRef.new(shape: String)
+
+    DeviceFilters.member = Shapes::ShapeRef.new(shape: DeviceFilter)
 
     DeviceHostPaths.member = Shapes::ShapeRef.new(shape: String)
 
@@ -494,6 +512,15 @@ module Aws::DeviceFarm
     DevicePoolCompatibilityResults.member = Shapes::ShapeRef.new(shape: DevicePoolCompatibilityResult)
 
     DevicePools.member = Shapes::ShapeRef.new(shape: DevicePool)
+
+    DeviceSelectionConfiguration.add_member(:filters, Shapes::ShapeRef.new(shape: DeviceFilters, required: true, location_name: "filters"))
+    DeviceSelectionConfiguration.add_member(:max_devices, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxDevices"))
+    DeviceSelectionConfiguration.struct_class = Types::DeviceSelectionConfiguration
+
+    DeviceSelectionResult.add_member(:filters, Shapes::ShapeRef.new(shape: DeviceFilters, location_name: "filters"))
+    DeviceSelectionResult.add_member(:matched_devices_count, Shapes::ShapeRef.new(shape: Integer, location_name: "matchedDevicesCount"))
+    DeviceSelectionResult.add_member(:max_devices, Shapes::ShapeRef.new(shape: Integer, location_name: "maxDevices"))
+    DeviceSelectionResult.struct_class = Types::DeviceSelectionResult
 
     Devices.member = Shapes::ShapeRef.new(shape: Device)
 
@@ -680,6 +707,7 @@ module Aws::DeviceFarm
 
     ListDevicesRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     ListDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListDevicesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DeviceFilters, location_name: "filters"))
     ListDevicesRequest.struct_class = Types::ListDevicesRequest
 
     ListDevicesResult.add_member(:devices, Shapes::ShapeRef.new(shape: Devices, location_name: "devices"))
@@ -986,6 +1014,7 @@ module Aws::DeviceFarm
     Run.add_member(:web_url, Shapes::ShapeRef.new(shape: String, location_name: "webUrl"))
     Run.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     Run.add_member(:test_spec_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testSpecArn"))
+    Run.add_member(:device_selection_result, Shapes::ShapeRef.new(shape: DeviceSelectionResult, location_name: "deviceSelectionResult"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -1010,7 +1039,8 @@ module Aws::DeviceFarm
 
     ScheduleRunRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
     ScheduleRunRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appArn"))
-    ScheduleRunRequest.add_member(:device_pool_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "devicePoolArn"))
+    ScheduleRunRequest.add_member(:device_pool_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "devicePoolArn"))
+    ScheduleRunRequest.add_member(:device_selection_configuration, Shapes::ShapeRef.new(shape: DeviceSelectionConfiguration, location_name: "deviceSelectionConfiguration"))
     ScheduleRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ScheduleRunRequest.add_member(:test, Shapes::ShapeRef.new(shape: ScheduleRunTest, required: true, location_name: "test"))
     ScheduleRunRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ScheduleRunConfiguration, location_name: "configuration"))

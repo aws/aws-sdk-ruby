@@ -620,7 +620,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
@@ -4267,7 +4267,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
@@ -4532,7 +4532,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
@@ -5621,7 +5621,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

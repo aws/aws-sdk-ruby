@@ -1788,7 +1788,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -5256,7 +5256,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -5544,7 +5544,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
@@ -5819,7 +5819,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
