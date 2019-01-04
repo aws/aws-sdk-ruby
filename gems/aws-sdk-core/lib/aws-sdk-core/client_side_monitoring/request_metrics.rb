@@ -4,6 +4,19 @@ module Aws
     class RequestMetrics
       attr_reader :api_call, :api_call_attempts
 
+      FIELD_MAX_LENGTH = {
+        "ClientId" => 255,
+        "UserAgent" => 256,
+        "SdkException" => 128,
+        "SdkExceptionMessage" => 512,
+        "AwsException" => 128,
+        "AwsExceptionMessage" => 512,
+        "FinalAwsException" => 128,
+        "FinalAwsExceptionMessage" => 512,
+        "FinalSdkException" => 128,
+        "FinalSdkExceptionMessage" => 512,
+      }
+
       def initialize(opts = {})
         @service = opts[:service]
         @api = opts[:operation]
@@ -42,7 +55,10 @@ module Aws
 
       class ApiCall
         attr_reader :service, :api, :client_id, :timestamp, :version,
-          :attempt_count, :latency, :region, :max_retries_exceeded
+          :attempt_count, :latency, :region, :max_retries_exceeded,
+          :final_http_status_code, :user_agent, :final_aws_exception,
+          :final_aws_exception_message, :final_sdk_exception,
+          :final_sdk_exception_message
 
         def initialize(service, api, client_id, version, timestamp, region)
           @service = service
@@ -56,15 +72,21 @@ module Aws
         def complete(opts = {})
           @latency = opts[:latency]
           @attempt_count = opts[:attempt_count]
+          @user_agent = opts[:user_agent]
           if opts[:final_error_retryable]
             @max_retries_exceeded = 1
           else
             @max_retries_exceeded = 0
           end
+          @final_http_status_code = opts[:final_http_status_code]
+          @final_aws_exception = opts[:final_aws_exception]
+          @final_aws_exception_message = opts[:final_aws_exception_message]
+          @final_sdk_exception = opts[:final_sdk_exception]
+          @final_sdk_exception_message = opts[:final_sdk_exception_message]
         end
 
         def to_json(*a)
-          {
+          document = {
             "Type" => "ApiCall",
             "Service" => @service,
             "Api" => @api,
@@ -74,8 +96,27 @@ module Aws
             "AttemptCount" => @attempt_count,
             "Latency" => @latency,
             "Region" => @region,
-            "MaxRetriesExceeded" => @max_retries_exceeded
-          }.to_json
+            "MaxRetriesExceeded" => @max_retries_exceeded,
+            "UserAgent" => @user_agent,
+            "FinalHttpStatusCode" => @final_http_status_code,
+          }
+          document["FinalSdkException"] = @final_sdk_exception if @final_sdk_exception
+          document["FinalSdkExceptionMessage"] = @final_sdk_exception_message if @final_sdk_exception_message
+          document["FinalAwsException"] = @final_aws_exception if @final_aws_exception
+          document["FinalAwsExceptionMessage"] = @final_aws_exception_message if @final_aws_exception_message
+          document = _truncate(document)
+          document.to_json
+        end
+
+        private
+        def _truncate(document)
+          document.each do |key, value|
+            limit = FIELD_MAX_LENGTH[key]
+            if limit && value.to_s.length > limit
+              document[key] = value.to_s.slice(0...limit)
+            end
+          end
+          document
         end
       end
 
@@ -134,7 +175,19 @@ module Aws
           json["AttemptLatency"] = @request_latency if @request_latency
           json["SdkException"] = @sdk_exception if @sdk_exception
           json["SdkExceptionMessage"] = @sdk_exception_msg if @sdk_exception_msg
+          json = _truncate(json)
           json.to_json
+        end
+
+        private
+        def _truncate(document)
+          document.each do |key, value|
+            limit = FIELD_MAX_LENGTH[key]
+            if limit && value.to_s.length > limit
+              document[key] = value.to_s.slice(0...limit)
+            end
+          end
+          document
         end
       end
 
