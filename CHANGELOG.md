@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::ECS - Updated the documentation for Amazon EC2 Container Service.
+
 2.11.199 (2019-01-03)
 ------------------
 
