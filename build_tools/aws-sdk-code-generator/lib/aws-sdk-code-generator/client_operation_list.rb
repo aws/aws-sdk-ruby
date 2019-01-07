@@ -24,7 +24,7 @@ module AwsSdkCodeGenerator
               api: api,
               examples: examples,
               client_examples: client_examples[method_name] || [],
-              async_client: async_client
+              async_client: true
             ).to_s,
             streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
             eventstream_output: es_output,
@@ -33,6 +33,7 @@ module AwsSdkCodeGenerator
         elsif !!es_input
           # skip this operation for normal client
           # current don't support streaming input for http1.1
+          raise "input event streaming currently not supported for non h2 services"
         else
           ops << Operation.new(
             name: method_name,
