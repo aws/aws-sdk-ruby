@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
 2.11.200 (2019-01-04)
 ------------------
 
