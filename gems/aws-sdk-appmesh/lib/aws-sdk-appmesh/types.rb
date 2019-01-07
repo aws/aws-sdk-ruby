@@ -228,13 +228,13 @@ module Aws::AppMesh
     #         listeners: [
     #           {
     #             health_check: {
-    #               healthy_threshold: 1,
-    #               interval_millis: 1,
+    #               healthy_threshold: 1, # required
+    #               interval_millis: 1, # required
     #               path: "String",
     #               port: 1,
-    #               protocol: "http", # accepts http, tcp
-    #               timeout_millis: 1,
-    #               unhealthy_threshold: 1,
+    #               protocol: "http", # required, accepts http, tcp
+    #               timeout_millis: 1, # required
+    #               unhealthy_threshold: 1, # required
     #             },
     #             port_mapping: {
     #               port: 1,
@@ -575,13 +575,13 @@ module Aws::AppMesh
     #           listeners: [
     #             {
     #               health_check: {
-    #                 healthy_threshold: 1,
-    #                 interval_millis: 1,
+    #                 healthy_threshold: 1, # required
+    #                 interval_millis: 1, # required
     #                 path: "String",
     #                 port: 1,
-    #                 protocol: "http", # accepts http, tcp
-    #                 timeout_millis: 1,
-    #                 unhealthy_threshold: 1,
+    #                 protocol: "http", # required, accepts http, tcp
+    #                 timeout_millis: 1, # required
+    #                 unhealthy_threshold: 1, # required
     #               },
     #               port_mapping: {
     #                 port: 1,
@@ -1009,12 +1009,12 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the cluster was
+    #   The Unix epoch timestamp in seconds for when the resource was
     #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The Unix epoch timestamp in seconds for when the cluster was last
+    #   The Unix epoch timestamp in seconds for when the resource was last
     #   updated.
     #   @return [Time]
     #
@@ -1269,13 +1269,13 @@ module Aws::AppMesh
     #
     #       {
     #         health_check: {
-    #           healthy_threshold: 1,
-    #           interval_millis: 1,
+    #           healthy_threshold: 1, # required
+    #           interval_millis: 1, # required
     #           path: "String",
     #           port: 1,
-    #           protocol: "http", # accepts http, tcp
-    #           timeout_millis: 1,
-    #           unhealthy_threshold: 1,
+    #           protocol: "http", # required, accepts http, tcp
+    #           timeout_millis: 1, # required
+    #           unhealthy_threshold: 1, # required
     #         },
     #         port_mapping: {
     #           port: 1,
@@ -1285,11 +1285,6 @@ module Aws::AppMesh
     #
     # @!attribute [rw] health_check
     #   The health check information for the listener.
-    #
-    #   <note markdown="1"> Listener health checks are not available during the App Mesh
-    #   preview.
-    #
-    #    </note>
     #   @return [Types::HealthCheckPolicy]
     #
     # @!attribute [rw] port_mapping
@@ -1307,21 +1302,17 @@ module Aws::AppMesh
     # An object representing the health check policy for a virtual node's
     # listener.
     #
-    # <note markdown="1"> Listener health checks are not available during the App Mesh preview.
-    #
-    #  </note>
-    #
     # @note When making an API call, you may pass HealthCheckPolicy
     #   data as a hash:
     #
     #       {
-    #         healthy_threshold: 1,
-    #         interval_millis: 1,
+    #         healthy_threshold: 1, # required
+    #         interval_millis: 1, # required
     #         path: "String",
     #         port: 1,
-    #         protocol: "http", # accepts http, tcp
-    #         timeout_millis: 1,
-    #         unhealthy_threshold: 1,
+    #         protocol: "http", # required, accepts http, tcp
+    #         timeout_millis: 1, # required
+    #         unhealthy_threshold: 1, # required
     #       }
     #
     # @!attribute [rw] healthy_threshold
@@ -1334,11 +1325,14 @@ module Aws::AppMesh
     #   @return [Integer]
     #
     # @!attribute [rw] path
-    #   The destination path for the health check request.
+    #   The destination path for the health check request. This is only
+    #   required if the specified protocol is HTTP; if the protocol is TCP,
+    #   then this parameter is ignored.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The destination port for the health check request.
+    #   The destination port for the health check request. This port must
+    #   match the port defined in the PortMapping for the listener.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -1420,13 +1414,13 @@ module Aws::AppMesh
     #           listeners: [
     #             {
     #               health_check: {
-    #                 healthy_threshold: 1,
-    #                 interval_millis: 1,
+    #                 healthy_threshold: 1, # required
+    #                 interval_millis: 1, # required
     #                 path: "String",
     #                 port: 1,
-    #                 protocol: "http", # accepts http, tcp
-    #                 timeout_millis: 1,
-    #                 unhealthy_threshold: 1,
+    #                 protocol: "http", # required, accepts http, tcp
+    #                 timeout_millis: 1, # required
+    #                 unhealthy_threshold: 1, # required
     #               },
     #               port_mapping: {
     #                 port: 1,

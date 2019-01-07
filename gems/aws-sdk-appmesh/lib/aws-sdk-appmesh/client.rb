@@ -395,13 +395,13 @@ module Aws::AppMesh
     #       listeners: [
     #         {
     #           health_check: {
-    #             healthy_threshold: 1,
-    #             interval_millis: 1,
+    #             healthy_threshold: 1, # required
+    #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "http", # accepts http, tcp
-    #             timeout_millis: 1,
-    #             unhealthy_threshold: 1,
+    #             protocol: "http", # required, accepts http, tcp
+    #             timeout_millis: 1, # required
+    #             unhealthy_threshold: 1, # required
     #           },
     #           port_mapping: {
     #             port: 1,
@@ -693,7 +693,7 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
-    # Describes an existing cluster.
+    # Describes an existing service mesh.
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to describe.
@@ -1189,13 +1189,13 @@ module Aws::AppMesh
     #       listeners: [
     #         {
     #           health_check: {
-    #             healthy_threshold: 1,
-    #             interval_millis: 1,
+    #             healthy_threshold: 1, # required
+    #             interval_millis: 1, # required
     #             path: "String",
     #             port: 1,
-    #             protocol: "http", # accepts http, tcp
-    #             timeout_millis: 1,
-    #             unhealthy_threshold: 1,
+    #             protocol: "http", # required, accepts http, tcp
+    #             timeout_millis: 1, # required
+    #             unhealthy_threshold: 1, # required
     #           },
     #           port_mapping: {
     #             port: 1,
@@ -1315,7 +1315,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
