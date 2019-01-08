@@ -139,18 +139,18 @@ module Aws
       # overhead encode helpers
 
       def pack_uint8(val)
-        [val].pack("C")
+        [val].pack('C')
       end
 
       def pack_uint16(val)
-        [val].pack("S>")
+        [val].pack('S>')
       end
 
       def pack_uint32(val)
         if val.respond_to?(:each)
-          val.pack("N*")
+          val.pack('N*')
         else
-          [val].pack("N")
+          [val].pack('N')
         end
       end
 

@@ -28,8 +28,8 @@ module SpecHelper
     def convert_msg(path)
       hash = JSON.load(File.read(path))
       Aws::EventStream::Message.new(
-        headers: build_headers(hash["headers"]),
-        payload: StringIO.new(Base64.decode64(hash["payload"]))
+        headers: build_headers(hash['headers']),
+        payload: StringIO.new(Base64.decode64(hash['payload']))
       )
     end
 
@@ -42,13 +42,13 @@ module SpecHelper
 
     def build_headers(headers)
       headers.inject({}) do |hash, ctx|
-        value = ctx["value"]
-        if ctx["value"].is_a? String
-          value = Base64.decode64(ctx["value"])
+        value = ctx['value']
+        if ctx['value'].is_a? String
+          value = Base64.decode64(ctx['value'])
         end
-        hash[ctx["name"]] = Aws::EventStream::HeaderValue.new(
+        hash[ctx['name']] = Aws::EventStream::HeaderValue.new(
           value: value,
-          type: Aws::EventStream::Types.types[ctx["type"]]
+          type: Aws::EventStream::Types.types[ctx['type']]
         )
         hash
       end
