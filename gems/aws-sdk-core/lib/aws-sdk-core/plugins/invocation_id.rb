@@ -18,7 +18,10 @@ module Aws
 
         def apply_invocation_id(context)
           context.http_request.headers['amz-sdk-invocation-id'] = SecureRandom.uuid
-          context.http_request.headers['x-amz-content-sha256'] = 'STREAMING-AWS4-HMAC-SHA256-EVENTS'
+          if context[:input_event_emitter]
+            # only used for eventstreaming at input
+            context.http_request.headers['x-amz-content-sha256'] = 'STREAMING-AWS4-HMAC-SHA256-EVENTS'
+          end
         end
 
       end
