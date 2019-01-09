@@ -27,6 +27,8 @@ module Seahorse
 
         option(:http_wire_trace, default: false, doc_type:  'Boolean', docstring: '')
 
+        option(:enable_alpn, default: false, doc_type: 'Boolean', docstring: '')
+
         option(:logger)
 
         handler(Client::H2::Handler, step: :send)

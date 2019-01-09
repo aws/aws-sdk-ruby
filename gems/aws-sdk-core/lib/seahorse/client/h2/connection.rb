@@ -1,4 +1,4 @@
-if RUBY_VERSION >= '2.3'
+if RUBY_VERSION >= '2.1'
   require 'http/2'
 end
 require 'openssl'
@@ -10,6 +10,7 @@ module Seahorse
     module H2
 
       # H2 Connection build on top of `http/2` gem
+      # (requires Ruby >= 2.1)
       # with TLS layer plus ALPN, requires:
       # Ruby >= 2.3 and OpenSSL >= 1.0.2
       class Connection
@@ -21,9 +22,10 @@ module Seahorse
           http_wire_trace: false,
           logger: nil,
           ssl_verify_peer: true,
-          ssl_ca_bundle: nil,
-          ssl_ca_directory: nil,
+          ssl_ca_bundle: OpenSSL::X509::DEFAULT_CERT_FILE,
+          ssl_ca_directory: OpenSSL::X509::DEFAULT_CERT_DIR,
           ssl_ca_store: nil,
+          enable_alpn: false
         }
 
         # chunk read size at socket
@@ -74,7 +76,7 @@ module Seahorse
 
             debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
             @socket.connect
-            debug_output("TLS over ALPN established")
+            debug_output("TLS established")
             # TODO, confirm with Transcribe
             #raise Http2NotSupportedError.new unless @socket.alpn_protocol == 'h2'
             _register_h2_callbacks
@@ -184,8 +186,10 @@ module Seahorse
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
-          # TODO confirm with Transcribe
-          #ssl_ctx.alpn_protocols = ['h2']
+          if enable_alpn
+            debug_output("enable ALPN for TLS ...")
+            ssl_ctx.alpn_protocols = ['h2']
+          end
           ssl_ctx
         end
 

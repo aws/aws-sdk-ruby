@@ -53,6 +53,10 @@ module Seahorse
             expect(config.ssl_ca_store).to eq(nil)
           end
 
+          it 'adds a :enable_alpn option with default' do
+            expect(config.enable_alpn).to eq(false)
+          end
+
           it 'defaults the :raise_response_errors to true' do
             expect(config.raise_response_errors).to eq(true)
           end

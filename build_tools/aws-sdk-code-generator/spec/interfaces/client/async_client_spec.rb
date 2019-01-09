@@ -7,7 +7,7 @@ describe 'Client Interface:' do
       SpecHelper.generate_service(['Async'], multiple_files: false)  
     end
 
-    if RUBY_VERSION >= '2.3'
+    if RUBY_VERSION >= '2.1'
 
       let(:output_stream) {
         [
@@ -144,8 +144,7 @@ describe 'Client Interface:' do
 
       it 'raises error when initializing AsyncClient' do
         expected_msg = "API operations over HTTP2 protocol"\
-          " is not supported for Ruby Version < 2.3 and"\
-          " OpenSSL version < 1.0.2"
+          " is not supported for Ruby Version < 2.1"
         expect {
           Async::AsyncClient.new
         }.to raise_error(RuntimeError, expected_msg)

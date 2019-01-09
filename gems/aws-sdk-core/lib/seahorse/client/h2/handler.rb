@@ -1,4 +1,4 @@
-if RUBY_VERSION >= '2.3'
+if RUBY_VERSION >= '2.1'
   require 'http/2'
 end
 require 'securerandom'
