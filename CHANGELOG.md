@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.202 (2019-01-09)
+------------------
+
 * Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
 
 * Feature - Aws::DocDB - Added support for a new service, Amazon DocumentDB with MongoDB compatibility.
