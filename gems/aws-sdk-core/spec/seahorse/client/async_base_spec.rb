@@ -4,6 +4,28 @@ module Seahorse
   module Client
     describe AsyncBase do
       if RUBY_VERSION >= '2.3'
+
+        describe 'api operations' do
+
+          let(:api) { Seahorse::Model::Api.new }
+
+          let(:client) {
+            AsyncBase.define(api: api).new(endpoint: 'http://example.com')
+          }
+
+          before(:each) do
+            op = Model::Operation.new
+            op.async = true
+            api.add_operation(:op_1, op)
+            api.add_operation(:op_2, Model::Operation.new)
+          end
+
+          it 'returns async operation names' do
+            expect(client.operation_names).to eq([:op_1])
+          end
+
+        end
+
         describe '.connection' do
 
           let(:client_class) { AsyncBase.define(api: Seahorse::Model::Api.new) }

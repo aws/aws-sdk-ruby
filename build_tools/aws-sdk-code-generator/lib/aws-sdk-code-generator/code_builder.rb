@@ -102,6 +102,7 @@ module AwsSdkCodeGenerator
       Views::ClientClass.new(
         service_identifier: @service.identifier,
         service_name: @service.name,
+        protocol_settings: @service.protocol_settings,
         module_name: @service.module_name,
         gem_name: @service.gem_name,
         gem_version: @service.gem_version,
@@ -122,6 +123,7 @@ module AwsSdkCodeGenerator
       Views::AsyncClientClass.new(
         service_identifier: @service.identifier,
         service_name: @service.name,
+        protocol_settings: @service.protocol_settings,
         module_name: @service.module_name,
         gem_name: @service.gem_name,
         gem_version: @service.gem_version,

@@ -205,6 +205,8 @@ module AwsSdkCodeGenerator
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
+            o.async = @service.protocol_settings['h2'] == 'eventstream' &&
+              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
           end
         end
       end
@@ -526,6 +528,9 @@ module AwsSdkCodeGenerator
 
         # @return [Pager, nil]
         attr_accessor :pager
+
+        # @return [Boolean]
+        attr_accessor :async
 
       end
 

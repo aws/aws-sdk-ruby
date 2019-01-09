@@ -126,6 +126,13 @@ module Seahorse
           expect(client.operation_names).to eq([:operation_name])
         end
 
+        it 'does not include async operation names' do
+          op = Model::Operation.new
+          op.async = true
+          api.add_operation(:async_op, op)
+          expect(client.operation_names).to eq([:operation_name])
+        end
+
         it 'responds to each operation name' do
           client.operation_names.each do |operation_name|
             expect(client).to respond_to(operation_name)

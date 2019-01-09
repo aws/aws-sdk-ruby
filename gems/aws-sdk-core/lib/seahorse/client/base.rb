@@ -46,7 +46,7 @@ module Seahorse
       #   names. These are valid arguments to {#build_request} and are also
       #   valid methods.
       def operation_names
-        self.class.api.operation_names
+        self.class.api.operation_names - self.class.api.async_operation_names
       end
 
       private

@@ -7,34 +7,57 @@ module AwsSdkCodeGenerator
       api = options.fetch(:api)
       examples = options.fetch(:examples, {})
       module_name = options.fetch(:module_name)
+      protocol_settings = options.fetch(:protocol_settings, {})
       client_examples = options.fetch(:client_examples, {})
       @operations = api['operations'].inject([]) do |ops, (name, operation)|
         method_name = Underscore.underscore(name)
         async_client = options[:async_client] || false
         es_output = AwsSdkCodeGenerator::Helper.eventstream_output?(operation, api)
         es_input = AwsSdkCodeGenerator::Helper.eventstream_input?(operation, api)
-        if async_client
-          ops << Operation.new(
-            name: method_name,
-            documentation: ClientOperationDocumentation.new(
-              name: name,
-              module_name: module_name,
-              method_name: method_name,
-              operation: operation,
-              api: api,
-              examples: examples,
-              client_examples: client_examples[method_name] || [],
-              async_client: true
-            ).to_s,
-            streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
-            eventstream_output: es_output,
-            eventstream_input: es_input
-          )
-        elsif !!es_input
-          # skip this operation for normal client
-          # current don't support streaming input for http1.1
-          raise "input event streaming currently not supported for non h2 services"
-        else
+        if es_input || es_output
+          # eventstreaming operations
+          if protocol_settings['h2'] == 'eventstream'
+            # h2 supported, only generate for async client
+            if async_client
+              ops << Operation.new(
+                name: method_name,
+                documentation: ClientOperationDocumentation.new(
+                  name: name,
+                  module_name: module_name,
+                  method_name: method_name,
+                  operation: operation,
+                  api: api,
+                  examples: examples,
+                  client_examples: client_examples[method_name] || [],
+                  async_client: true
+                ).to_s,
+                streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
+                eventstream_output: es_output,
+                eventstream_input: es_input
+              )
+            end
+          elsif !es_input && es_output && !async_client
+            # http1.1 only support eventstream at output
+            ops << Operation.new(
+              name: method_name,
+              documentation: ClientOperationDocumentation.new(
+                name: name,
+                module_name: module_name,
+                method_name: method_name,
+                operation: operation,
+                api: api,
+                examples: examples,
+                client_examples: client_examples[method_name] || [],
+                async_client: false
+              ).to_s,
+              streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
+              eventstream_output: es_output,
+              eventstream_input: false
+            )
+          end
+        elsif !async_client
+          # non streaming operations
+          # generate at sync client only
           ops << Operation.new(
             name: method_name,
             documentation: ClientOperationDocumentation.new(
@@ -48,10 +71,11 @@ module AwsSdkCodeGenerator
               async_client: false
             ).to_s,
             streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
-            eventstream_output: es_output,
-            eventstream_input: false,
+            eventstream_output: false,
+            eventstream_input: false
           )
         end
+
         ops
       end
     end

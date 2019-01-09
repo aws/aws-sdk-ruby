@@ -97,7 +97,7 @@ module Seahorse
                   retry
                 end
               rescue EOFError
-                @socket.close
+                self.close!
               rescue => error
                 self.debug_output(error.inspect)
                 @errors << error
