@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2019-01-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::DocDB`.
+
 1.129.0 (2019-01-07)
 ------------------
 

@@ -1907,6 +1907,8 @@ module Aws::Redshift
     #   * {Types::SnapshotSchedule#schedule_description #schedule_description} => String
     #   * {Types::SnapshotSchedule#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::SnapshotSchedule#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #   * {Types::SnapshotSchedule#associated_cluster_count #associated_cluster_count} => Integer
+    #   * {Types::SnapshotSchedule#associated_clusters #associated_clusters} => Array&lt;Types::ClusterAssociatedToSchedule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1935,6 +1937,10 @@ module Aws::Redshift
     #   resp.tags[0].value #=> String
     #   resp.next_invocations #=> Array
     #   resp.next_invocations[0] #=> Time
+    #   resp.associated_cluster_count #=> Integer
+    #   resp.associated_clusters #=> Array
+    #   resp.associated_clusters[0].cluster_identifier #=> String
+    #   resp.associated_clusters[0].schedule_association_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotSchedule AWS API Documentation
     #
@@ -2998,21 +3004,8 @@ module Aws::Redshift
     #   A value that indicates whether to return snapshots only for an
     #   existing cluster. Table-level restore can be performed only using a
     #   snapshot of an existing cluster, that is, a cluster that has not been
-    #   deleted.
-    #
-    #   * If `ClusterExists` is set to `true`, `ClusterIdentifier` is
-    #     required.
-    #
-    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is not
-    #     specified, all snapshots associated with deleted clusters (orphaned
-    #     snapshots) are returned.
-    #
-    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
-    #     specified for a deleted cluster, snapshots associated with that
-    #     cluster are returned.
-    #
-    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
-    #     specified for an existing cluster, no snapshots are returned.
+    #   deleted. If `ClusterExists` is set to `true`, `ClusterIdentifier` is
+    #   required.
     #
     # @option params [Array<Types::SnapshotSortingEntity>] :sorting_entities
     #
@@ -4524,6 +4517,10 @@ module Aws::Redshift
     #   resp.snapshot_schedules[0].tags[0].value #=> String
     #   resp.snapshot_schedules[0].next_invocations #=> Array
     #   resp.snapshot_schedules[0].next_invocations[0] #=> Time
+    #   resp.snapshot_schedules[0].associated_cluster_count #=> Integer
+    #   resp.snapshot_schedules[0].associated_clusters #=> Array
+    #   resp.snapshot_schedules[0].associated_clusters[0].cluster_identifier #=> String
+    #   resp.snapshot_schedules[0].associated_clusters[0].schedule_association_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedules AWS API Documentation
@@ -6668,6 +6665,8 @@ module Aws::Redshift
     #   * {Types::SnapshotSchedule#schedule_description #schedule_description} => String
     #   * {Types::SnapshotSchedule#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::SnapshotSchedule#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #   * {Types::SnapshotSchedule#associated_cluster_count #associated_cluster_count} => Integer
+    #   * {Types::SnapshotSchedule#associated_clusters #associated_clusters} => Array&lt;Types::ClusterAssociatedToSchedule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6687,6 +6686,10 @@ module Aws::Redshift
     #   resp.tags[0].value #=> String
     #   resp.next_invocations #=> Array
     #   resp.next_invocations[0] #=> Time
+    #   resp.associated_cluster_count #=> Integer
+    #   resp.associated_clusters #=> Array
+    #   resp.associated_clusters[0].cluster_identifier #=> String
+    #   resp.associated_clusters[0].schedule_association_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotSchedule AWS API Documentation
     #
@@ -7852,7 +7855,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

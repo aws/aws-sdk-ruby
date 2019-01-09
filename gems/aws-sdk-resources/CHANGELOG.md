@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.37.0 (2019-01-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-docdb` gem.
+
 3.36.0 (2018-12-18)
 ------------------
 

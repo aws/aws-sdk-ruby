@@ -65,6 +65,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-devicefarm', '~> 1')
   spec.add_dependency('aws-sdk-directconnect', '~> 1')
   spec.add_dependency('aws-sdk-directoryservice', '~> 1')
+  spec.add_dependency('aws-sdk-docdb', '~> 1')
   spec.add_dependency('aws-sdk-dynamodb', '~> 1')
   spec.add_dependency('aws-sdk-dynamodbstreams', '~> 1')
   spec.add_dependency('aws-sdk-ec2', '~> 1')

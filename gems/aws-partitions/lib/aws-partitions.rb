@@ -272,6 +272,7 @@ module Aws
             'DeviceFarm' => 'devicefarm',
             'DirectConnect' => 'directconnect',
             'DirectoryService' => 'ds',
+            'DocDB' => 'rds',
             'DynamoDB' => 'dynamodb',
             'DynamoDBStreams' => 'streams.dynamodb',
             'EC2' => 'ec2',

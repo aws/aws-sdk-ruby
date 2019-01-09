@@ -169,6 +169,9 @@
   "DirectoryService": {
     "models": "ds/2015-04-16"
   },
+  "DocDB": {
+    "models": "docdb/2014-10-31"
+  },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",
     "addPlugins": [

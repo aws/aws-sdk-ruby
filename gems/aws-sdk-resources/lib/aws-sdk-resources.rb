@@ -55,6 +55,7 @@ module Aws
   autoload :DeviceFarm, 'aws-sdk-devicefarm'
   autoload :DirectConnect, 'aws-sdk-directconnect'
   autoload :DirectoryService, 'aws-sdk-directoryservice'
+  autoload :DocDB, 'aws-sdk-docdb'
   autoload :DynamoDB, 'aws-sdk-dynamodb'
   autoload :DynamoDBStreams, 'aws-sdk-dynamodbstreams'
   autoload :EC2, 'aws-sdk-ec2'
