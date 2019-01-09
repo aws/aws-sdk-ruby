@@ -304,8 +304,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -359,6 +359,7 @@ to be backwards compatible.
 | Amazon Comprehend                                     | Comprehend                      | 2017-11-27  |
 | Amazon Connect Service                                | Connect                         | 2017-08-08  |
 | Amazon Data Lifecycle Manager                         | DLM                             | 2018-01-12  |
+| Amazon DocumentDB with MongoDB compatibility          | DocDB                           | 2014-10-31  |
 | Amazon DynamoDB                                       | DynamoDB                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | DAX                             | 2017-04-19  |
 | Amazon DynamoDB Streams                               | DynamoDBStreams                 | 2012-08-10  |
@@ -378,8 +379,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |

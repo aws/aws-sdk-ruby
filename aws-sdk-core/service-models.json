@@ -206,6 +206,10 @@
     "models": "ds/2015-04-16",
     "endpoint": "ds"
   },
+  "DocDB": {
+    "models": "docdb/2014-10-31",
+    "endpoint": "rds"
+  },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",
     "endpoint": "dynamodb"

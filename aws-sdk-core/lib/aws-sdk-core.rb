@@ -75,6 +75,7 @@ module Aws
     DeviceFarm
     DirectConnect
     DirectoryService
+    DocDB
     DynamoDB
     DynamoDBStreams
     EC2
