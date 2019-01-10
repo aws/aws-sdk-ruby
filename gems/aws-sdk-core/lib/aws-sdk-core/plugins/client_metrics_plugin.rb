@@ -149,7 +149,7 @@ all generated client side metrics. Defaults to an empty string.
             raise e
           ensure
             end_time = Aws::Util.monotonic_milliseconds
-            request_metrics.api_call.complete(
+            complete_opts = {
               latency: end_time - start_time,
               attempt_count: context.retries + 1,
               user_agent: context.http_request.headers["user-agent"],
@@ -158,8 +158,12 @@ all generated client side metrics. Defaults to an empty string.
               final_aws_exception: final_aws_exception,
               final_aws_exception_message: final_aws_exception_message,
               final_sdk_exception: final_sdk_exception,
-              final_sdk_exception_message: final_sdk_exception_message,
-            )
+              final_sdk_exception_message: final_sdk_exception_message
+            }
+            if context.metadata[:redirect_region]
+              complete_opts[:region] = context.metadata[:redirect_region]
+            end
+            request_metrics.api_call.complete(complete_opts)
             # Report the metrics by passing the complete RequestMetrics object
             if publisher
               publisher.publish(request_metrics)
