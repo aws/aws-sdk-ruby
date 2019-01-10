@@ -106,7 +106,7 @@ module Aws
 
         it 'updates fqdn and region in metrics when an HTTP 400 redirect occurs' do
           stub_request(:put, 'https://bucket.s3.us-west-2.amazonaws.com/key').
-            to_return(status: [400, 'Bad Request'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AuthorizationHeaderMalformed</Code><Message>The authorization header is malformed; the region 'us-east-1' is wrong; expecting 'eu-central-1'</Message><Region>eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId><HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oekWlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>")
+            to_return(status: [400, 'Bad Request'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AuthorizationHeaderMalformed</Code><Message>The authorization header is malformed; the region 'us-west-2' is wrong; expecting 'eu-central-1'</Message><Region>eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId><HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oekWlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>")
           stub_request(:put, 'https://bucket.s3.eu-central-1.amazonaws.com/key').
             to_return(status: [200, 'Ok'])
           resp = client.put_object(bucket:'bucket', key:'key', body:'body')

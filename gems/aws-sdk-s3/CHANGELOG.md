@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Plugin updates to support client-side monitoring.
+
 1.30.0 (2018-12-04)
 ------------------
 
