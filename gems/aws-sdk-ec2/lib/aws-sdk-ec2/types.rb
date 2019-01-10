@@ -4570,11 +4570,13 @@ module Aws::EC2
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           instance_pools_to_use_count: 1,
     #           single_instance_type: false,
+    #           single_availability_zone: false,
     #           min_target_capacity: 1,
     #         },
     #         on_demand_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #           single_instance_type: false,
+    #           single_availability_zone: false,
     #           min_target_capacity: 1,
     #         },
     #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
@@ -12137,11 +12139,11 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
-    #   * `partition-number` - The partition in which the instance is
-    #     located.
-    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
+    #
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
     #
     #   * `platform` - The platform. Use `windows` if you have Windows
     #     instances; otherwise, leave blank.
@@ -15007,6 +15009,8 @@ module Aws::EC2
     #         ],
     #         dry_run: false,
     #         spot_instance_request_ids: ["String"],
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -15143,12 +15147,25 @@ module Aws::EC2
     #   One or more Spot Instance request IDs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token to request the next set of results. This value is `null`
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 5 and 1000. To retrieve the remaining results, make
+    #   another call with the returned `NextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsRequest AWS API Documentation
     #
     class DescribeSpotInstanceRequestsRequest < Struct.new(
       :filters,
       :dry_run,
-      :spot_instance_request_ids)
+      :spot_instance_request_ids,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -15158,10 +15175,16 @@ module Aws::EC2
     #   One or more Spot Instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsResult AWS API Documentation
     #
     class DescribeSpotInstanceRequestsResult < Struct.new(
-      :spot_instance_requests)
+      :spot_instance_requests,
+      :next_token)
       include Aws::Structure
     end
 
@@ -15548,15 +15571,16 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `association-id` - The ID of the association.
+    #   * `association.transit-gateway-route-table-id` - The ID of the route
+    #     table for the transit gateway.
     #
-    #   * `association-route-table-id` - The ID of the route table for the
-    #     transit gateway.
-    #
-    #   * `associate-state` - The state of the association (`associating` \|
-    #     `associated` \| `disassociating`).
+    #   * `association.state` - The state of the association (`associating`
+    #     \| `associated` \| `disassociating`).
     #
     #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-owner` - The ID of the AWS account that owns the
+    #     resource.
     #
     #   * `resource-type` - The resource type (`vpc` \| `vpn`).
     #
@@ -15648,13 +15672,14 @@ module Aws::EC2
     #     default propagation route table for the transit gateway (`true` \|
     #     `false`).
     #
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
+    #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
     #   * `transit-gateway-route-table-id` - The ID of the transit gateway
     #     route table.
-    #
-    #   * `transit-gateway-route-table-state` - The state (`pending` \|
-    #     `available` \| `deleting` \| `deleted`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -15725,11 +15750,11 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
     #
-    #   * `transit-gateway-attachment-state` - The state of the attachment
-    #     (`pendingAcceptance` \| `pending` \| `available` \| `modifying` \|
-    #     `deleting` \| `deleted` \| `failed` \| `rejected`).
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -15804,25 +15829,39 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `amazon-side-asn` - The private ASN for the Amazon side of a BGP
-    #     session.
+    #   * `owner-id` - The ID of the AWS account that owns the transit
+    #     gateway.
     #
-    #   * `association-default-route-table-id` - The ID of the default
-    #     association route table.
+    #   * `options.propagation-default-route-table-id` - The ID of the
+    #     default propagation route table.
     #
-    #   * `default-route-table-association` - Indicates whether resource
-    #     attachments are automatically associated with the default
+    #   * `options.amazon-side-asn` - The private ASN for the Amazon side of
+    #     a BGP session.
+    #
+    #   * `options.association-default-route-table-id` - The ID of the
+    #     default association route table.
+    #
+    #   * `options.auto-accept-shared-attachments` - Indicates whether there
+    #     is automatic acceptance of attachment requests (`enable` \|
+    #     `disable`).
+    #
+    #   * `options.default-route-table-association` - Indicates whether
+    #     resource attachments are automatically associated with the default
     #     association route table (`enable` \| `disable`).
     #
-    #   * `default-route-table-propagation` - Indicates whether resource
-    #     attachments automatically propagate routes to the default
+    #   * `options.default-route-table-propagation` - Indicates whether
+    #     resource attachments automatically propagate routes to the default
     #     propagation route table (`enable` \| `disable`).
     #
-    #   * `owner-account-id` - The ID of the AWS account that owns the
-    #     transit gateway.
+    #   * `options.dns-support` - Indicates whether DNS support is enabled
+    #     (`enable` \| `disable`).
     #
-    #   * `propagation-default-route-table-id` - The ID of the default
-    #     propagation route table.
+    #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost
+    #     Multipath Protocol support is enabled (`enable` \| `disable`).
+    #
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -20118,8 +20157,6 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
-    #
-    #   * `association-id` - The ID of the association.
     #
     #   * `resource-id` - The ID of the resource.
     #
@@ -27450,6 +27487,11 @@ module Aws::EC2
     #   On-Demand Instances in the fleet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] single_availability_zone
+    #   Indicates that the fleet launches all On-Demand Instances into a
+    #   single Availability Zone.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for On-Demand Instances in the fleet. If
     #   the minimum target capacity is not reached, the fleet launches no
@@ -27461,6 +27503,7 @@ module Aws::EC2
     class OnDemandOptions < Struct.new(
       :allocation_strategy,
       :single_instance_type,
+      :single_availability_zone,
       :min_target_capacity)
       include Aws::Structure
     end
@@ -27473,6 +27516,7 @@ module Aws::EC2
     #       {
     #         allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #         single_instance_type: false,
+    #         single_availability_zone: false,
     #         min_target_capacity: 1,
     #       }
     #
@@ -27491,6 +27535,11 @@ module Aws::EC2
     #   On-Demand Instances in the fleet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] single_availability_zone
+    #   Indicates that the fleet launches all On-Demand Instances into a
+    #   single Availability Zone.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for On-Demand Instances in the fleet. If
     #   the minimum target capacity is not reached, the fleet launches no
@@ -27502,6 +27551,7 @@ module Aws::EC2
     class OnDemandOptionsRequest < Struct.new(
       :allocation_strategy,
       :single_instance_type,
+      :single_availability_zone,
       :min_target_capacity)
       include Aws::Structure
     end
@@ -33030,9 +33080,6 @@ module Aws::EC2
     #
     #   * `transit-gateway-route-type` - The route type (`static` \|
     #     `propagated`).
-    #
-    #   * `transit-gateway-route-vpn-connection-id` - The ID of the VPN
-    #     connection.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -33517,7 +33564,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `VHD` \| `VMDK` \| `OVA`
+    #   Valid values: `VHD` \| `VMDK`
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -34142,10 +34189,11 @@ module Aws::EC2
     #   is `request`, the Spot Fleet only places the required requests. It
     #   does not attempt to replenish Spot Instances if capacity is
     #   diminished, nor does it submit requests in alternative Spot pools if
-    #   capacity is not available. To maintain a certain target capacity,
-    #   the Spot Fleet places the required requests to meet capacity and
-    #   automatically replenishes any interrupted instances. Default:
-    #   `maintain`.
+    #   capacity is not available. When this value is `maintain`, the Spot
+    #   Fleet maintains the target capacity. The Spot Fleet places the
+    #   required requests to meet capacity and automatically replenishes any
+    #   interrupted instances. Default: `maintain`. `instant` is listed but
+    #   is not used by Spot Fleet.
     #   @return [String]
     #
     # @!attribute [rw] valid_from
@@ -34499,6 +34547,11 @@ module Aws::EC2
     #   Spot Instances in the fleet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] single_availability_zone
+    #   Indicates that the fleet launches all Spot Instances into a single
+    #   Availability Zone.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for Spot Instances in the fleet. If the
     #   minimum target capacity is not reached, the fleet launches no
@@ -34512,6 +34565,7 @@ module Aws::EC2
       :instance_interruption_behavior,
       :instance_pools_to_use_count,
       :single_instance_type,
+      :single_availability_zone,
       :min_target_capacity)
       include Aws::Structure
     end
@@ -34526,6 +34580,7 @@ module Aws::EC2
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         instance_pools_to_use_count: 1,
     #         single_instance_type: false,
+    #         single_availability_zone: false,
     #         min_target_capacity: 1,
     #       }
     #
@@ -34552,6 +34607,11 @@ module Aws::EC2
     #   Spot Instances in the fleet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] single_availability_zone
+    #   Indicates that the fleet launches all Spot Instances into a single
+    #   Availability Zone.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for Spot Instances in the fleet. If the
     #   minimum target capacity is not reached, the fleet launches no
@@ -34565,6 +34625,7 @@ module Aws::EC2
       :instance_interruption_behavior,
       :instance_pools_to_use_count,
       :single_instance_type,
+      :single_availability_zone,
       :min_target_capacity)
       include Aws::Structure
     end

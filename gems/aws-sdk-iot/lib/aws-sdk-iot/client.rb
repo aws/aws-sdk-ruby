@@ -1664,6 +1664,20 @@ module Aws::IoT
     # @option params [required, Types::TopicRulePayload] :topic_rule_payload
     #   The rule payload.
     #
+    # @option params [String] :tags
+    #   Metadata which can be used to manage the topic rule.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: --tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1688,8 +1702,8 @@ module Aws::IoT
     #             payload_field: "PayloadField",
     #           },
     #           dynamo_d_bv_2: {
-    #             role_arn: "AwsArn",
-    #             put_item: {
+    #             role_arn: "AwsArn", # required
+    #             put_item: { # required
     #               table_name: "TableName", # required
     #             },
     #           },
@@ -1784,8 +1798,8 @@ module Aws::IoT
     #           payload_field: "PayloadField",
     #         },
     #         dynamo_d_bv_2: {
-    #           role_arn: "AwsArn",
-    #           put_item: {
+    #           role_arn: "AwsArn", # required
+    #           put_item: { # required
     #             table_name: "TableName", # required
     #           },
     #         },
@@ -1864,6 +1878,7 @@ module Aws::IoT
     #         },
     #       },
     #     },
+    #     tags: "String",
     #   })
     #
     # @overload create_topic_rule(params = {})
@@ -5894,8 +5909,8 @@ module Aws::IoT
     #             payload_field: "PayloadField",
     #           },
     #           dynamo_d_bv_2: {
-    #             role_arn: "AwsArn",
-    #             put_item: {
+    #             role_arn: "AwsArn", # required
+    #             put_item: { # required
     #               table_name: "TableName", # required
     #             },
     #           },
@@ -5990,8 +6005,8 @@ module Aws::IoT
     #           payload_field: "PayloadField",
     #         },
     #         dynamo_d_bv_2: {
-    #           role_arn: "AwsArn",
-    #           put_item: {
+    #           role_arn: "AwsArn", # required
+    #           put_item: { # required
     #             table_name: "TableName", # required
     #           },
     #         },
@@ -7416,7 +7431,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

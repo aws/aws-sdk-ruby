@@ -1332,6 +1332,7 @@ module Aws::IoT
 
     CreateTopicRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location: "uri", location_name: "ruleName"))
     CreateTopicRuleRequest.add_member(:topic_rule_payload, Shapes::ShapeRef.new(shape: TopicRulePayload, required: true, location_name: "topicRulePayload"))
+    CreateTopicRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-tagging"))
     CreateTopicRuleRequest.struct_class = Types::CreateTopicRuleRequest
     CreateTopicRuleRequest[:payload] = :topic_rule_payload
     CreateTopicRuleRequest[:payload_member] = CreateTopicRuleRequest.member(:topic_rule_payload)
@@ -1677,8 +1678,8 @@ module Aws::IoT
     DynamoDBAction.add_member(:payload_field, Shapes::ShapeRef.new(shape: PayloadField, location_name: "payloadField"))
     DynamoDBAction.struct_class = Types::DynamoDBAction
 
-    DynamoDBv2Action.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
-    DynamoDBv2Action.add_member(:put_item, Shapes::ShapeRef.new(shape: PutItemInput, location_name: "putItem"))
+    DynamoDBv2Action.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    DynamoDBv2Action.add_member(:put_item, Shapes::ShapeRef.new(shape: PutItemInput, required: true, location_name: "putItem"))
     DynamoDBv2Action.struct_class = Types::DynamoDBv2Action
 
     EffectivePolicies.member = Shapes::ShapeRef.new(shape: EffectivePolicy)

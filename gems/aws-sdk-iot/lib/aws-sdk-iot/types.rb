@@ -118,8 +118,8 @@ module Aws::IoT
     #           payload_field: "PayloadField",
     #         },
     #         dynamo_d_bv_2: {
-    #           role_arn: "AwsArn",
-    #           put_item: {
+    #           role_arn: "AwsArn", # required
+    #           put_item: { # required
     #             table_name: "TableName", # required
     #           },
     #         },
@@ -2817,8 +2817,8 @@ module Aws::IoT
     #                 payload_field: "PayloadField",
     #               },
     #               dynamo_d_bv_2: {
-    #                 role_arn: "AwsArn",
-    #                 put_item: {
+    #                 role_arn: "AwsArn", # required
+    #                 put_item: { # required
     #                   table_name: "TableName", # required
     #                 },
     #               },
@@ -2913,8 +2913,8 @@ module Aws::IoT
     #               payload_field: "PayloadField",
     #             },
     #             dynamo_d_bv_2: {
-    #               role_arn: "AwsArn",
-    #               put_item: {
+    #               role_arn: "AwsArn", # required
+    #               put_item: { # required
     #                 table_name: "TableName", # required
     #               },
     #             },
@@ -2993,6 +2993,7 @@ module Aws::IoT
     #             },
     #           },
     #         },
+    #         tags: "String",
     #       }
     #
     # @!attribute [rw] rule_name
@@ -3003,9 +3004,25 @@ module Aws::IoT
     #   The rule payload.
     #   @return [Types::TopicRulePayload]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the topic rule.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: --tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [String]
+    #
     class CreateTopicRuleRequest < Struct.new(
       :rule_name,
-      :topic_rule_payload)
+      :topic_rule_payload,
+      :tags)
       include Aws::Structure
     end
 
@@ -4721,8 +4738,8 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         role_arn: "AwsArn",
-    #         put_item: {
+    #         role_arn: "AwsArn", # required
+    #         put_item: { # required
     #           table_name: "TableName", # required
     #         },
     #       }
@@ -8602,8 +8619,8 @@ module Aws::IoT
     #                 payload_field: "PayloadField",
     #               },
     #               dynamo_d_bv_2: {
-    #                 role_arn: "AwsArn",
-    #                 put_item: {
+    #                 role_arn: "AwsArn", # required
+    #                 put_item: { # required
     #                   table_name: "TableName", # required
     #                 },
     #               },
@@ -8698,8 +8715,8 @@ module Aws::IoT
     #               payload_field: "PayloadField",
     #             },
     #             dynamo_d_bv_2: {
-    #               role_arn: "AwsArn",
-    #               put_item: {
+    #               role_arn: "AwsArn", # required
+    #               put_item: { # required
     #                 table_name: "TableName", # required
     #               },
     #             },
@@ -10359,8 +10376,8 @@ module Aws::IoT
     #               payload_field: "PayloadField",
     #             },
     #             dynamo_d_bv_2: {
-    #               role_arn: "AwsArn",
-    #               put_item: {
+    #               role_arn: "AwsArn", # required
+    #               put_item: { # required
     #                 table_name: "TableName", # required
     #               },
     #             },
@@ -10455,8 +10472,8 @@ module Aws::IoT
     #             payload_field: "PayloadField",
     #           },
     #           dynamo_d_bv_2: {
-    #             role_arn: "AwsArn",
-    #             put_item: {
+    #             role_arn: "AwsArn", # required
+    #             put_item: { # required
     #               table_name: "TableName", # required
     #             },
     #           },

@@ -331,7 +331,7 @@ module Aws::SageMaker
     #
     # @option params [Boolean] :certify_for_marketplace
     #   Whether to certify the algorithm so that it can be listed in AWS
-    #   Marektplace.
+    #   Marketplace.
     #
     # @return [Types::CreateAlgorithmOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -501,23 +501,23 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Create a git repository as a resource in your Amazon SageMaker
+    # Creates a Git repository as a resource in your Amazon SageMaker
     # account. You can associate the repository with notebook instances so
-    # that you can use git source control for the notebooks you create. The
-    # git repository is a resource in your Amazon SageMaker account, so it
+    # that you can use Git source control for the notebooks you create. The
+    # Git repository is a resource in your Amazon SageMaker account, so it
     # can be associated with more than one notebook instance, and it
     # persists independently from the lifecycle of any notebook instances it
     # is associated with.
     #
     # The repository can be hosted either in [AWS CodeCommit][1] or in any
-    # other git repository.
+    # other Git repository.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
     #
     # @option params [required, String] :code_repository_name
-    #   The name of the git repository. The name must have 1 to 63 characters.
+    #   The name of the Git repository. The name must have 1 to 63 characters.
     #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #
     # @option params [required, Types::GitConfig] :git_config
@@ -872,19 +872,19 @@ module Aws::SageMaker
     #   resource configuration, and stopping condition.
     #
     # @option params [Types::HyperParameterTuningJobWarmStartConfig] :warm_start_config
-    #   Specifies configuration for starting the hyperparameter tuning job
+    #   Specifies the configuration for starting the hyperparameter tuning job
     #   using one or more previous tuning jobs as a starting point. The
     #   results of previous tuning jobs are used to inform which combinations
     #   of hyperparameters to search over in the new tuning job.
     #
     #   All training jobs launched by the new hyperparameter tuning job are
     #   evaluated by using the objective metric. If you specify
-    #   `IDENTICAL_DATA_AND_ALGORITHM` as the `WarmStartType` for the warm
-    #   start configuration, the training job that performs the best in the
-    #   new tuning job is compared to the best training jobs from the parent
-    #   tuning jobs. From these, the training job that performs the best as
-    #   measured by the objective metric is returned as the overall best
-    #   training job.
+    #   `IDENTICAL_DATA_AND_ALGORITHM` as the `WarmStartType` value for the
+    #   warm start configuration, the training job that performs the best in
+    #   the new tuning job is compared to the best training jobs from the
+    #   parent tuning jobs. From these, the training job that performs the
+    #   best as measured by the objective metric is returned as the overall
+    #   best training job.
     #
     #   <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
     #   the new hyperparameter tuning jobs count against the limit of training
@@ -1000,6 +1000,7 @@ module Aws::SageMaker
     #         max_runtime_in_seconds: 1,
     #       },
     #       enable_network_isolation: false,
+    #       enable_inter_container_traffic_encryption: false,
     #     },
     #     warm_start_config: {
     #       parent_hyper_parameter_tuning_jobs: [ # required
@@ -1625,7 +1626,7 @@ module Aws::SageMaker
     # @option params [Array<String>] :accelerator_types
     #   A list of Elastic Inference (EI) instance types to associate with this
     #   notebook instance. Currently, only one instance type can be associated
-    #   with a notebook intance. For more information, see [Using Elastic
+    #   with a notebook instance. For more information, see [Using Elastic
     #   Inference in Amazon SageMaker][1].
     #
     #
@@ -1633,10 +1634,10 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
     #
     # @option params [String] :default_code_repository
-    #   A git repository to associate with the notebook instance as its
-    #   default code repository. This can be either the name of a git
-    #   repository stored as a resource in your account, or the URL of a git
-    #   repository in [AWS CodeCommit][1] or in any other git repository. When
+    #   A Git repository to associate with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository. When
     #   you open a notebook instance, it opens in the directory that contains
     #   this repository. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
@@ -1647,13 +1648,13 @@ module Aws::SageMaker
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
     # @option params [Array<String>] :additional_code_repositories
-    #   An array of up to 3 git repositories to associate with the notebook
-    #   instance. These can be either the names of git repositories stored as
-    #   resources in your account, or the URL of git repositories in [AWS
-    #   CodeCommit][1] or in any other git repository. These repositories are
-    #   cloned at the same level as the default repository of your notebook
-    #   instance. For more information, see [Associating Git Repositories with
-    #   Amazon SageMaker Notebook Instances][2].
+    #   An array of up to three Git repositories to associate with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories in
+    #   [AWS CodeCommit][1] or in any other Git repository. These repositories
+    #   are cloned at the same level as the default repository of your
+    #   notebook instance. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
     #
@@ -1982,15 +1983,21 @@ module Aws::SageMaker
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the training container. No inbound or outbound network calls
     #   can be made, except for calls between peers within a training cluster
-    #   for distributed training. If network isolation is used for training
+    #   for distributed training. If you enable network isolation for training
     #   jobs that are configured to use a VPC, Amazon SageMaker downloads and
-    #   uploads customer data and model artifacts through the specifed VPC,
+    #   uploads customer data and model artifacts through the specified VPC,
     #   but the training container does not have network access.
     #
     #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support network
     #   isolation.
     #
     #    </note>
+    #
+    # @option params [Boolean] :enable_inter_container_traffic_encryption
+    #   To encrypt all communications between ML compute instances in
+    #   distributed training, choose `True`,. Encryption provides greater
+    #   security for distributed training, but training can take longer
+    #   because of additional communications between ML compute instances.
     #
     # @return [Types::CreateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2059,6 +2066,7 @@ module Aws::SageMaker
     #       },
     #     ],
     #     enable_network_isolation: false,
+    #     enable_inter_container_traffic_encryption: false,
     #   })
     #
     # @example Response structure
@@ -2117,11 +2125,11 @@ module Aws::SageMaker
     #   within an AWS Region in an AWS account.
     #
     # @option params [Integer] :max_concurrent_transforms
-    #   The maximum number of parallel requests that can be sent to each
-    #   instance in a transform job. This is good for algorithms that
+    #   The maximum number of parallel requests that can be sent to an
+    #   algorithm container on an instance. This is good for algorithms that
     #   implement multiple workers on larger instances . The default value is
     #   `1`. To allow Amazon SageMaker to determine the appropriate number for
-    #   `MaxConcurrentTransforms`, set the value to `0`.
+    #   `MaxConcurrentTransforms`, do not set the value in the API.
     #
     # @option params [Integer] :max_payload_in_mb
     #   The maximum payload size allowed, in MB. A payload is the data portion
@@ -2139,16 +2147,17 @@ module Aws::SageMaker
     #   SageMaker built-in algorithms do not support this feature.
     #
     # @option params [String] :batch_strategy
-    #   Determines the number of records included in a single mini-batch.
-    #   `SingleRecord` means only one record is used per mini-batch.
-    #   `MultiRecord` means a mini-batch is set to contain as many records
-    #   that can fit within the `MaxPayloadInMB` limit.
+    #   Determines the number of records to include in a mini-batch. If you
+    #   want to include only one record in a mini-batch, specify
+    #   `SingleRecord`.. If you want mini-batches to contain a maximum of the
+    #   number of records specified in the `MaxPayloadInMB` parameter, specify
+    #   `MultiRecord`.
     #
-    #   Batch transform will automatically split your input data into whatever
-    #   payload size is specified if you set `SplitType` to `Line` and
-    #   `BatchStrategy` to `MultiRecord`. There's no need to split the
-    #   dataset into smaller files or to use larger payload sizes unless the
-    #   records in your dataset are very large.
+    #   If you set `SplitType` to `Line` and `BatchStrategy` to `MultiRecord`,
+    #   a batch transform automatically splits your input data into the
+    #   specified payload size. There's no need to split the dataset into
+    #   smaller files or to use larger payload sizes unless the records in
+    #   your dataset are very large.
     #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container. We support
@@ -2165,9 +2174,9 @@ module Aws::SageMaker
     #   count, to use for the transform job.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. Adding tags is optional. For more
-    #   information, see [Using Cost Allocation Tags][1] in the *AWS Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management User Guide*.
     #
     #
     #
@@ -2318,10 +2327,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes the specified git repository from your account.
+    # Deletes the specified Git repository from your account.
     #
     # @option params [required, String] :code_repository_name
-    #   The name of the git repository to delete.
+    #   The name of the Git repository to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2707,10 +2716,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets details about the specified git repository.
+    # Gets details about the specified Git repository.
     #
     # @option params [required, String] :code_repository_name
-    #   The name of the git repository to describe.
+    #   The name of the Git repository to describe.
     #
     # @return [Types::DescribeCodeRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2981,6 +2990,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
     #   resp.training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.training_job_definition.enable_network_isolation #=> Boolean
+    #   resp.training_job_definition.enable_inter_container_traffic_encryption #=> Boolean
     #   resp.hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
     #   resp.creation_time #=> Time
     #   resp.hyper_parameter_tuning_end_time #=> Time
@@ -3449,6 +3459,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#secondary_status_transitions #secondary_status_transitions} => Array&lt;Types::SecondaryStatusTransition&gt;
     #   * {Types::DescribeTrainingJobResponse#final_metric_data_list #final_metric_data_list} => Array&lt;Types::MetricData&gt;
     #   * {Types::DescribeTrainingJobResponse#enable_network_isolation #enable_network_isolation} => Boolean
+    #   * {Types::DescribeTrainingJobResponse#enable_inter_container_traffic_encryption #enable_inter_container_traffic_encryption} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3512,6 +3523,7 @@ module Aws::SageMaker
     #   resp.final_metric_data_list[0].value #=> Float
     #   resp.final_metric_data_list[0].timestamp #=> Time
     #   resp.enable_network_isolation #=> Boolean
+    #   resp.enable_inter_container_traffic_encryption #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob AWS API Documentation
     #
@@ -3737,34 +3749,34 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of the git repositories in your account.
+    # Gets a list of the Git repositories in your account.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
-    #   A filter that returns only git repositories that were created after
+    #   A filter that returns only Git repositories that were created after
     #   the specified time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
-    #   A filter that returns only git repositories that were created before
+    #   A filter that returns only Git repositories that were created before
     #   the specified time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
-    #   A filter that returns only git repositories that were last modified
+    #   A filter that returns only Git repositories that were last modified
     #   after the specified time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
-    #   A filter that returns only git repositories that were last modified
+    #   A filter that returns only Git repositories that were last modified
     #   before the specified time.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of git repositories to return in the response.
+    #   The maximum number of Git repositories to return in the response.
     #
     # @option params [String] :name_contains
-    #   A string in the git repositories name. This filter returns only
+    #   A string in the Git repositories name. This filter returns only
     #   repositories whose name contains the specified string.
     #
     # @option params [String] :next_token
     #   If the result of a `ListCodeRepositoriesOutput` request was truncated,
-    #   the response includes a `NextToken`. To get the next set of git
+    #   the response includes a `NextToken`. To get the next set of Git
     #   repositories, use the token in the next request.
     #
     # @option params [String] :sort_by
@@ -4557,14 +4569,14 @@ module Aws::SageMaker
     #   name that contains the specified string.
     #
     # @option params [String] :default_code_repository_contains
-    #   A string in the name or URL of a git repository associated with this
+    #   A string in the name or URL of a Git repository associated with this
     #   notebook instance. This filter returns only notebook instances
     #   associated with a git repository with a name that contains the
     #   specified string.
     #
     # @option params [String] :additional_code_repository_equals
     #   A filter that returns only notebook instances with associated with the
-    #   specified git respository.
+    #   specified git repository.
     #
     # @return [Types::ListNotebookInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5006,7 +5018,7 @@ module Aws::SageMaker
     # experience.
     #
     # @option params [required, Types::UiTemplate] :ui_template
-    #   A `Template`object containing the worker UI template to render.
+    #   A `Template` object containing the worker UI template to render.
     #
     # @option params [required, Types::RenderableTask] :task
     #   A `RenderableTask` object containing a representative task to render.
@@ -5400,10 +5412,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Updates the specified git repository with the specified values.
+    # Updates the specified Git repository with the specified values.
     #
     # @option params [required, String] :code_repository_name
-    #   The name of the git repository to update.
+    #   The name of the Git repository to update.
     #
     # @option params [Types::GitConfigForUpdate] :git_config
     #   The configuration of the git repository, including the URL and the
@@ -5579,10 +5591,10 @@ module Aws::SageMaker
     #   instance. The default value is 5 GB.
     #
     # @option params [String] :default_code_repository
-    #   The git repository to associate with the notebook instance as its
-    #   default code repository. This can be either the name of a git
-    #   repository stored as a resource in your account, or the URL of a git
-    #   repository in [AWS CodeCommit][1] or in any other git repository. When
+    #   The Git repository to associate with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository. When
     #   you open a notebook instance, it opens in the directory that contains
     #   this repository. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
@@ -5593,13 +5605,13 @@ module Aws::SageMaker
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
     # @option params [Array<String>] :additional_code_repositories
-    #   An array of up to 3 git repositories to associate with the notebook
-    #   instance. These can be either the names of git repositories stored as
-    #   resources in your account, or the URL of git repositories in [AWS
-    #   CodeCommit][1] or in any other git repository.. These repositories are
-    #   cloned at the same level as the default repository of your notebook
-    #   instance. For more information, see [Associating Git Repositories with
-    #   Amazon SageMaker Notebook Instances][2].
+    #   An array of up to three Git repositories to associate with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories in
+    #   [AWS CodeCommit][1] or in any other Git repository.. These
+    #   repositories are cloned at the same level as the default repository of
+    #   your notebook instance. For more information, see [Associating Git
+    #   Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
     #
@@ -5621,11 +5633,11 @@ module Aws::SageMaker
     #   this notebook instance.
     #
     # @option params [Boolean] :disassociate_default_code_repository
-    #   The name or URL of the default git repository to remove from this
+    #   The name or URL of the default Git repository to remove from this
     #   notebook instance.
     #
     # @option params [Boolean] :disassociate_additional_code_repositories
-    #   A list of names or URLs of the default git repositories to remove from
+    #   A list of names or URLs of the default Git repositories to remove from
     #   this notebook instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5767,7 +5779,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

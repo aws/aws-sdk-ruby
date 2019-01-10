@@ -3607,9 +3607,12 @@ module Aws::EC2
     DescribeSpotInstanceRequestsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeSpotInstanceRequestsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeSpotInstanceRequestsRequest.add_member(:spot_instance_request_ids, Shapes::ShapeRef.new(shape: SpotInstanceRequestIdList, location_name: "SpotInstanceRequestId"))
+    DescribeSpotInstanceRequestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSpotInstanceRequestsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeSpotInstanceRequestsRequest.struct_class = Types::DescribeSpotInstanceRequestsRequest
 
     DescribeSpotInstanceRequestsResult.add_member(:spot_instance_requests, Shapes::ShapeRef.new(shape: SpotInstanceRequestList, location_name: "spotInstanceRequestSet"))
+    DescribeSpotInstanceRequestsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeSpotInstanceRequestsResult.struct_class = Types::DescribeSpotInstanceRequestsResult
 
     DescribeSpotPriceHistoryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -5714,11 +5717,13 @@ module Aws::EC2
 
     OnDemandOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: FleetOnDemandAllocationStrategy, location_name: "allocationStrategy"))
     OnDemandOptions.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleInstanceType"))
+    OnDemandOptions.add_member(:single_availability_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleAvailabilityZone"))
     OnDemandOptions.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "minTargetCapacity"))
     OnDemandOptions.struct_class = Types::OnDemandOptions
 
     OnDemandOptionsRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: FleetOnDemandAllocationStrategy, location_name: "AllocationStrategy"))
     OnDemandOptionsRequest.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleInstanceType"))
+    OnDemandOptionsRequest.add_member(:single_availability_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleAvailabilityZone"))
     OnDemandOptionsRequest.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MinTargetCapacity"))
     OnDemandOptionsRequest.struct_class = Types::OnDemandOptionsRequest
 
@@ -6816,6 +6821,7 @@ module Aws::EC2
     SpotOptions.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotOptions.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instancePoolsToUseCount"))
     SpotOptions.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleInstanceType"))
+    SpotOptions.add_member(:single_availability_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleAvailabilityZone"))
     SpotOptions.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "minTargetCapacity"))
     SpotOptions.struct_class = Types::SpotOptions
 
@@ -6823,6 +6829,7 @@ module Aws::EC2
     SpotOptionsRequest.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "InstanceInterruptionBehavior"))
     SpotOptionsRequest.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancePoolsToUseCount"))
     SpotOptionsRequest.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleInstanceType"))
+    SpotOptionsRequest.add_member(:single_availability_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleAvailabilityZone"))
     SpotOptionsRequest.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MinTargetCapacity"))
     SpotOptionsRequest.struct_class = Types::SpotOptionsRequest
 

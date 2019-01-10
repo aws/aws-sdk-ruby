@@ -4012,11 +4012,13 @@ module Aws::EC2
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       instance_pools_to_use_count: 1,
     #       single_instance_type: false,
+    #       single_availability_zone: false,
     #       min_target_capacity: 1,
     #     },
     #     on_demand_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #       single_instance_type: false,
+    #       single_availability_zone: false,
     #       min_target_capacity: 1,
     #     },
     #     excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
@@ -11620,9 +11622,11 @@ module Aws::EC2
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
     #   resp.fleets[0].spot_options.single_instance_type #=> Boolean
+    #   resp.fleets[0].spot_options.single_availability_zone #=> Boolean
     #   resp.fleets[0].spot_options.min_target_capacity #=> Integer
     #   resp.fleets[0].on_demand_options.allocation_strategy #=> String, one of "lowest-price", "prioritized"
     #   resp.fleets[0].on_demand_options.single_instance_type #=> Boolean
+    #   resp.fleets[0].on_demand_options.single_availability_zone #=> Boolean
     #   resp.fleets[0].on_demand_options.min_target_capacity #=> Integer
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
@@ -13537,10 +13541,11 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
-    #   * `partition-number` - The partition in which the instance is located.
-    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
+    #
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
     #
     #   * `platform` - The platform. Use `windows` if you have Windows
     #     instances; otherwise, leave blank.
@@ -17753,6 +17758,14 @@ module Aws::EC2
     # DescribeInstances with a filter to look for instances where the
     # instance lifecycle is `spot`.
     #
+    # We recommend that you set `MaxResults` to a value between 5 and 1000
+    # to limit the number of results returned. This paginates the output,
+    # which makes the list more manageable and returns the results faster.
+    # If the list of results exceeds your `MaxResults` value, then that
+    # number of results is returned along with a `NextToken` value that can
+    # be passed to a subsequent `DescribeSpotInstanceRequests` request to
+    # retrieve the remaining results.
+    #
     # Spot Instance requests are deleted four hours after they are canceled
     # and their instances are terminated.
     #
@@ -17887,9 +17900,19 @@ module Aws::EC2
     # @option params [Array<String>] :spot_instance_request_ids
     #   One or more Spot Instance request IDs.
     #
+    # @option params [String] :next_token
+    #   The token to request the next set of results. This value is `null`
+    #   when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 5 and 1000. To retrieve the remaining results, make
+    #   another call with the returned `NextToken` value.
+    #
     # @return [Types::DescribeSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSpotInstanceRequestsResult#spot_instance_requests #spot_instance_requests} => Array&lt;Types::SpotInstanceRequest&gt;
+    #   * {Types::DescribeSpotInstanceRequestsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a Spot Instance request
@@ -17956,6 +17979,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     spot_instance_request_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -18030,6 +18055,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].valid_from #=> Time
     #   resp.spot_instance_requests[0].valid_until #=> Time
     #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests AWS API Documentation
     #
@@ -18554,15 +18580,15 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `association-id` - The ID of the association.
+    #   * `association.transit-gateway-route-table-id` - The ID of the route
+    #     table for the transit gateway.
     #
-    #   * `association-route-table-id` - The ID of the route table for the
-    #     transit gateway.
-    #
-    #   * `associate-state` - The state of the association (`associating` \|
+    #   * `association.state` - The state of the association (`associating` \|
     #     `associated` \| `disassociating`).
     #
     #   * `resource-id` - The ID of the resource.
+    #
+    #   * `resource-owner` - The ID of the AWS account that owns the resource.
     #
     #   * `resource-type` - The resource type (`vpc` \| `vpn`).
     #
@@ -18656,13 +18682,14 @@ module Aws::EC2
     #     default propagation route table for the transit gateway (`true` \|
     #     `false`).
     #
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
+    #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
     #   * `transit-gateway-route-table-id` - The ID of the transit gateway
     #     route table.
-    #
-    #   * `transit-gateway-route-table-state` - The state (`pending` \|
-    #     `available` \| `deleting` \| `deleted`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -18730,11 +18757,11 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
     #
-    #   * `transit-gateway-attachment-state` - The state of the attachment
-    #     (`pendingAcceptance` \| `pending` \| `available` \| `modifying` \|
-    #     `deleting` \| `deleted` \| `failed` \| `rejected`).
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -18810,25 +18837,39 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `amazon-side-asn` - The private ASN for the Amazon side of a BGP
-    #     session.
-    #
-    #   * `association-default-route-table-id` - The ID of the default
-    #     association route table.
-    #
-    #   * `default-route-table-association` - Indicates whether resource
-    #     attachments are automatically associated with the default
-    #     association route table (`enable` \| `disable`).
-    #
-    #   * `default-route-table-propagation` - Indicates whether resource
-    #     attachments automatically propagate routes to the default
-    #     propagation route table (`enable` \| `disable`).
-    #
-    #   * `owner-account-id` - The ID of the AWS account that owns the transit
+    #   * `owner-id` - The ID of the AWS account that owns the transit
     #     gateway.
     #
-    #   * `propagation-default-route-table-id` - The ID of the default
+    #   * `options.propagation-default-route-table-id` - The ID of the default
     #     propagation route table.
+    #
+    #   * `options.amazon-side-asn` - The private ASN for the Amazon side of a
+    #     BGP session.
+    #
+    #   * `options.association-default-route-table-id` - The ID of the default
+    #     association route table.
+    #
+    #   * `options.auto-accept-shared-attachments` - Indicates whether there
+    #     is automatic acceptance of attachment requests (`enable` \|
+    #     `disable`).
+    #
+    #   * `options.default-route-table-association` - Indicates whether
+    #     resource attachments are automatically associated with the default
+    #     association route table (`enable` \| `disable`).
+    #
+    #   * `options.default-route-table-propagation` - Indicates whether
+    #     resource attachments automatically propagate routes to the default
+    #     propagation route table (`enable` \| `disable`).
+    #
+    #   * `options.dns-support` - Indicates whether DNS support is enabled
+    #     (`enable` \| `disable`).
+    #
+    #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost Multipath
+    #     Protocol support is enabled (`enable` \| `disable`).
+    #
+    #   * `state` - The state of the attachment (`pendingAcceptance` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -22307,8 +22348,6 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
-    #
-    #   * `association-id` - The ID of the association.
     #
     #   * `resource-id` - The ID of the resource.
     #
@@ -28871,9 +28910,6 @@ module Aws::EC2
     #   * `transit-gateway-route-type` - The route type (`static` \|
     #     `propagated`).
     #
-    #   * `transit-gateway-route-vpn-connection-id` - The ID of the VPN
-    #     connection.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of routes to return.
     #
@@ -29730,7 +29766,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

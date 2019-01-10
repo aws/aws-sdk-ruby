@@ -790,6 +790,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     CreateTrainingJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTrainingJobRequest.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
+    CreateTrainingJobRequest.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -1069,6 +1070,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:secondary_status_transitions, Shapes::ShapeRef.new(shape: SecondaryStatusTransitions, location_name: "SecondaryStatusTransitions"))
     DescribeTrainingJobResponse.add_member(:final_metric_data_list, Shapes::ShapeRef.new(shape: FinalMetricDataList, location_name: "FinalMetricDataList"))
     DescribeTrainingJobResponse.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
+    DescribeTrainingJobResponse.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
@@ -1193,6 +1195,7 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinition.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, required: true, location_name: "ResourceConfig"))
     HyperParameterTrainingJobDefinition.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     HyperParameterTrainingJobDefinition.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
+    HyperParameterTrainingJobDefinition.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     HyperParameterTrainingJobDefinition.struct_class = Types::HyperParameterTrainingJobDefinition
 
     HyperParameterTrainingJobSummaries.member = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobSummary)
