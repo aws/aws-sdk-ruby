@@ -37,7 +37,7 @@ module Seahorse
 
     end
 
-    # Rasied when ALPN is unavailable for HTTP2
-    class Http2NotSupportedError < StandardError; end
+    # Rasied when trying to use an closed connection
+    class Http2ConnectionClosedError < StandardError; end
   end
 end

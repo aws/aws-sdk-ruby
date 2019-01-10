@@ -77,35 +77,40 @@ module Seahorse
             debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
             @socket.connect
             debug_output("TLS established")
-            # TODO, confirm with Transcribe
-            #raise Http2NotSupportedError.new unless @socket.alpn_protocol == 'h2'
             _register_h2_callbacks
             @status = :active
+          elsif @status == :closed
+            msg = "Async Client HTTP2 Connection is closed, you may"\
+              " use #new_connection to create a new HTTP2 Connection for this client"
+            raise Http2ConnectionClosedError.new(msg)
           end
         end
 
         def start(stream)
           return if @socket_thread
           @socket_thread = Thread.new do
-            while !@socket.closed? && @h2_client.active_stream_count > 0
+            while !@socket.closed?
               begin
                 data = @socket.read_nonblock(@chunk_size)
                 @h2_client << data
               rescue IO::WaitReadable
-                unless IO.select([@socket], nil, nil, connection_read_timeout)
-                  self.debug_output("socket connection read time out")
-                  @socket.close
-                else
-                  retry
+                begin
+                  unless IO.select([@socket], nil, nil, connection_read_timeout)
+                    self.debug_output("socket connection read time out")
+                    self.close!
+                  else
+                    # available, retry to start reading
+                    retry
+                  end
+                rescue
+                  # error can happen when closing the socket
+                  # while it's waiting for read
+                  self.close!
                 end
               rescue EOFError
                 self.close!
               rescue => error
-                self.debug_output(error.inspect)
                 @errors << error
-                self.close!
-              end
-              if @h2_client.active_stream_count.zero?
                 self.close!
               end
             end
@@ -115,8 +120,15 @@ module Seahorse
 
         def close!
           @socket.close if @socket
-          Thread.kill(@socket_thread) if @socket_thread
+          if @socket_thread
+            Thread.kill(@socket_thread)
+            @socket_thread = nil
+          end
           @status = :closed
+        end
+
+        def closed?
+          @status == :closed
         end
 
         def debug_output(msg, type = nil)
@@ -187,7 +199,7 @@ module Seahorse
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
           if enable_alpn
-            debug_output("enable ALPN for TLS ...")
+            debug_output("enabling ALPN for TLS ...")
             ssl_ctx.alpn_protocols = ['h2']
           end
           ssl_ctx

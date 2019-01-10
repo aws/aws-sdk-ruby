@@ -83,6 +83,15 @@ module Seahorse
             client.close_connection
           end
 
+          it 'can #new_connection if previous connection is closed' do
+            old_conn = client.connection.dup
+            expect(client.connection).to receive(:closed?)
+
+            client.close_connection
+            client.new_connection
+            expect(client.connection).to_not eq(old_conn)
+          end
+
           it 'returns array of connection errors' do
             expect(client.connection).to receive(:errors)
             client.connection_errors

@@ -7,7 +7,8 @@ module Seahorse
 
         # H2 Client
         option(:max_concurrent_streams, default: 100, doc_type: Integer, docstring: <<-DOCS)
-Maximum concurrent streams used in HTTP2 connection, defaults to 100.
+Maximum concurrent streams used in HTTP2 connection, defaults to 100. Note that server may send back
+:settings_max_concurrent_streams value which will take priority when initializing new streams.
         DOCS
 
         option(:connection_timeout, default: 60, doc_type: Integer, docstring: <<-DOCS)
