@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.203 (2019-01-10)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the documentation for AWS CodeDeploy.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
