@@ -123,6 +123,28 @@ module Aws
           expect(good_attempt.fqdn).to eq("bucket.s3.eu-central-1.amazonaws.com")
           expect(good_attempt.http_status_code).to eq(200)
         end
+
+        it 'handles 307 redirects' do
+          stub_request(:put, 'https://bucket.s3.us-west-2.amazonaws.com/key').
+            to_return(status: [307, 'Temporary Redirect'], headers: {
+              'Location' => 'https://bucket.s3.eu-central-1.amazonaws.com/key'
+            })
+          stub_request(:put, 'https://bucket.s3.eu-central-1.amazonaws.com/key').
+            to_return(status: [200, 'Ok'])
+          resp = client.put_object(bucket:'bucket', key:'key', body:'body')
+          expect(stub_publisher.metrics.size).to eq(1)
+          metric = stub_publisher.metrics.first
+          expect(metric.api_call.region).to eq("us-west-2")
+          expect(metric.api_call_attempts.size).to eq(2)
+          fail_attempt = metric.api_call_attempts[0]
+          good_attempt = metric.api_call_attempts[1]
+          expect(fail_attempt.region).to eq("us-west-2")
+          expect(fail_attempt.fqdn).to eq("bucket.s3.us-west-2.amazonaws.com")
+          expect(fail_attempt.http_status_code).to eq(307)
+          expect(good_attempt.region).to eq("us-west-2")
+          expect(good_attempt.fqdn).to eq("bucket.s3.eu-central-1.amazonaws.com")
+          expect(good_attempt.http_status_code).to eq(200)
+        end
       end
 
     end
