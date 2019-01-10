@@ -45,6 +45,7 @@ module Seahorse
           @chunk_size = options[:read_chunk_size] || CHUNKSIZE
           @errors = []
           @status = :ready
+          @mutex = Mutex.new # connection can be shared across requests
         end
 
         OPTIONS.keys.each do |attr_name|
@@ -64,67 +65,76 @@ module Seahorse
         end
 
         def connect(endpoint)
-          if @status == :ready
-            tcp, addr = _tcp_socket(endpoint) 
-            debug_output("opening connection to #{endpoint.host}:#{endpoint.port} ...")
-            _nonblocking_connect(tcp, addr)
-            debug_output("opened")
+          @mutex.synchronize {
+            if @status == :ready
+              tcp, addr = _tcp_socket(endpoint) 
+              debug_output("opening connection to #{endpoint.host}:#{endpoint.port} ...")
+              _nonblocking_connect(tcp, addr)
+              debug_output("opened")
 
-            @socket = OpenSSL::SSL::SSLSocket.new(tcp, _tls_context)
-            @socket.sync_close = true
-            @socket.hostname = endpoint.host
+              @socket = OpenSSL::SSL::SSLSocket.new(tcp, _tls_context)
+              @socket.sync_close = true
+              @socket.hostname = endpoint.host
 
-            debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
-            @socket.connect
-            debug_output("TLS established")
-            _register_h2_callbacks
-            @status = :active
-          elsif @status == :closed
-            msg = "Async Client HTTP2 Connection is closed, you may"\
-              " use #new_connection to create a new HTTP2 Connection for this client"
-            raise Http2ConnectionClosedError.new(msg)
-          end
+              debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
+              @socket.connect
+              debug_output("TLS established")
+              _register_h2_callbacks
+              @status = :active
+            elsif @status == :closed
+              msg = "Async Client HTTP2 Connection is closed, you may"\
+                " use #new_connection to create a new HTTP2 Connection for this client"
+              raise Http2ConnectionClosedError.new(msg)
+            end
+          }
         end
 
         def start(stream)
-          return if @socket_thread
-          @socket_thread = Thread.new do
-            while !@socket.closed?
-              begin
-                data = @socket.read_nonblock(@chunk_size)
-                @h2_client << data
-              rescue IO::WaitReadable
+          @mutex.synchronize {
+            return if @socket_thread
+            @socket_thread = Thread.new do
+              while !@socket.closed?
                 begin
-                  unless IO.select([@socket], nil, nil, connection_read_timeout)
-                    self.debug_output("socket connection read time out")
+                  data = @socket.read_nonblock(@chunk_size)
+                  @h2_client << data
+                rescue IO::WaitReadable
+                  begin
+                    unless IO.select([@socket], nil, nil, connection_read_timeout)
+                      self.debug_output("socket connection read time out")
+                      self.close!
+                    else
+                      # available, retry to start reading
+                      retry
+                    end
+                  rescue
+                    # error can happen when closing the socket
+                    # while it's waiting for read
                     self.close!
-                  else
-                    # available, retry to start reading
-                    retry
                   end
-                rescue
-                  # error can happen when closing the socket
-                  # while it's waiting for read
+                rescue EOFError
+                  self.close!
+                rescue => error
+                  @errors << error
                   self.close!
                 end
-              rescue EOFError
-                self.close!
-              rescue => error
-                @errors << error
-                self.close!
               end
             end
-          end
-          @socket_thread.abort_on_exception = true
+            @socket_thread.abort_on_exception = true
+          }
         end
 
         def close!
-          @socket.close if @socket
-          if @socket_thread
-            Thread.kill(@socket_thread)
-            @socket_thread = nil
-          end
-          @status = :closed
+          @mutex.synchronize {
+            if @socket
+              @socket.close
+              @socket = nil
+            end
+            if @socket_thread
+              Thread.kill(@socket_thread)
+              @socket_thread = nil
+            end
+            @status = :closed
+          }
         end
 
         def closed?

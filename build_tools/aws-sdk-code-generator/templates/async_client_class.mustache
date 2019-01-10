@@ -51,7 +51,7 @@ module {{module_name}}
       {{#eventstream_output}}
       output_event_stream_handler = _event_stream_handler(
         :output,
-        params.delete(:output_event_stream_handler),
+        params.delete(:output_event_stream_handler) || params.delete(:event_stream_handler),
         EventStreams::{{output_eventstream_member}}
       )
       {{/eventstream_output}}
