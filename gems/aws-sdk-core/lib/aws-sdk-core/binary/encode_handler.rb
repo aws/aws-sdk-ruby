@@ -6,7 +6,6 @@ module Aws
 
       def call(context)
         if eventstream_member = eventstream_input?(context)
-          # TODO, remove handler? not need? #delete
           input_es_handler = context[:input_event_stream_handler]
           input_es_handler.event_emitter.encoder = EventStreamEncoder.new(
             context.config.api.metadata['protocol'],
