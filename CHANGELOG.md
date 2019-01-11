@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.204 (2019-01-11)
+------------------
+
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
 
 * Feature - Aws::RDSDataService - Updated the API, and documentation for AWS RDS DataService.
