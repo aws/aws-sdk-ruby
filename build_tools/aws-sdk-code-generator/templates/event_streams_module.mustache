@@ -45,10 +45,16 @@ module {{module_name}}
         @event_emitter.on(:error, Proc.new)
       end
 
+      def on_initial_response_event(&block)
+        @event_emitter.on(:initial_response, Proc.new)
+      end
+
       def on_event(&block)
         {{#types}}
         on_{{.}}_event(&block)
         {{/types}}
+        on_error_event(&block)
+        on_initial_response_event(&block)
       end
 
       # @api private
