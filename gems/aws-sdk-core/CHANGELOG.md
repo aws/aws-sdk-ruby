@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.45.0 (2019-01-11)
+------------------
+
 * Feature - Improve Query protocol handling of empty responses, to ensure response is an instance of `Aws::EmptyStructure` rather than the class `Aws::EmptyStructure` itself.
 * Issue - Plugin updates to support client-side monitoring.
 

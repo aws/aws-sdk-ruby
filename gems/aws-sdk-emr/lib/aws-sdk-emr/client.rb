@@ -1746,9 +1746,14 @@ module Aws::EMR
     #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
-    #   For Amazon EMR releases 4.0 and later. A list of applications for the
-    #   cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig",
-    #   and "Spark." They are case insensitive.
+    #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive list
+    #   of applications for Amazon EMR to install and configure when launching
+    #   the cluster. For a list of applications available for each Amazon EMR
+    #   release version, see the [Amazon EMR Release Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [Array<Types::Configuration>] :configurations
     #   For Amazon EMR releases 4.0 and later. The list of configurations
@@ -2219,7 +2224,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
