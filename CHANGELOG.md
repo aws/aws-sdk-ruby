@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.205 (2019-01-14)
+------------------
+
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
 
 * Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
