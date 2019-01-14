@@ -256,6 +256,10 @@ module Aws::MediaConvert
     # settings, see the User Guide at
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
+    # @option params [Types::AccelerationSettings] :acceleration_settings
+    #   This is a beta feature. If you are interested in using this feature,
+    #   please contact AWS customer support.
+    #
     # @option params [String] :billing_tags_source
     #   Optional. Choose a tag type that AWS Billing and Cost Management will
     #   use to sort your AWS Elemental MediaConvert costs on any billing
@@ -297,6 +301,9 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job({
+    #     acceleration_settings: {
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #     },
     #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE
     #     client_request_token: "__string",
     #     job_template: "__string",
@@ -359,9 +366,12 @@ module Aws::MediaConvert
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                 },
+    #                 track_source_settings: {
+    #                   track_number: 1,
     #                 },
     #               },
     #             },
@@ -374,7 +384,7 @@ module Aws::MediaConvert
     #             kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #           },
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #           file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM",
+    #           file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
     #           image_inserter: {
@@ -402,6 +412,7 @@ module Aws::MediaConvert
     #           ],
     #           program_number: 1,
     #           psi_control: "IGNORE_PSI", # accepts IGNORE_PSI, USE_PSI
+    #           supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #           timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #           video_selector: {
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -481,7 +492,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -518,7 +529,7 @@ module Aws::MediaConvert
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -551,7 +562,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -669,6 +680,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -688,6 +700,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -698,6 +711,9 @@ module Aws::MediaConvert
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                       x_position: 1,
     #                       y_position: 1,
+    #                     },
+    #                     embedded_destination_settings: {
+    #                       destination_608_channel_number: 1,
     #                     },
     #                     scc_destination_settings: {
     #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -743,6 +759,7 @@ module Aws::MediaConvert
     #                   ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #                   ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
@@ -1064,6 +1081,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.arn #=> String
     #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.job.created_at #=> Time
@@ -1112,8 +1130,9 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
     #   resp.job.settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
@@ -1140,6 +1159,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].input_clippings[0].start_timecode #=> String
     #   resp.job.settings.inputs[0].program_number #=> Integer
     #   resp.job.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
+    #   resp.job.settings.inputs[0].supplemental_imps #=> Array
+    #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -1334,6 +1355,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -1351,6 +1373,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -1361,6 +1384,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -1388,6 +1412,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -1656,6 +1681,10 @@ module Aws::MediaConvert
     # User Guide at
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
+    # @option params [Types::AccelerationSettings] :acceleration_settings
+    #   This is a beta feature. If you are interested in using this feature
+    #   please contact AWS customer support.
+    #
     # @option params [String] :category
     #   Optional. A category for the job template you are creating
     #
@@ -1684,6 +1713,9 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job_template({
+    #     acceleration_settings: {
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #     },
     #     category: "__string",
     #     description: "__string",
     #     name: "__string", # required
@@ -1745,9 +1777,12 @@ module Aws::MediaConvert
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                 },
+    #                 track_source_settings: {
+    #                   track_number: 1,
     #                 },
     #               },
     #             },
@@ -1860,7 +1895,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1897,7 +1932,7 @@ module Aws::MediaConvert
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -1930,7 +1965,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -2048,6 +2083,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -2067,6 +2103,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -2077,6 +2114,9 @@ module Aws::MediaConvert
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                       x_position: 1,
     #                       y_position: 1,
+    #                     },
+    #                     embedded_destination_settings: {
+    #                       destination_608_channel_number: 1,
     #                     },
     #                     scc_destination_settings: {
     #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -2122,6 +2162,7 @@ module Aws::MediaConvert
     #                   ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #                   ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
@@ -2443,6 +2484,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
@@ -2484,8 +2526,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -2701,6 +2744,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -2718,6 +2762,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -2728,6 +2773,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -2755,6 +2801,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -3149,6 +3196,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -3168,6 +3216,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -3178,6 +3227,9 @@ module Aws::MediaConvert
     #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #               x_position: 1,
     #               y_position: 1,
+    #             },
+    #             embedded_destination_settings: {
+    #               destination_608_channel_number: 1,
     #             },
     #             scc_destination_settings: {
     #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -3223,6 +3275,7 @@ module Aws::MediaConvert
     #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
@@ -3596,6 +3649,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -3613,6 +3667,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -3623,6 +3678,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -3650,6 +3706,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -3894,9 +3951,9 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Create a new transcoding queue. For information about job templates
-    # see the User Guide at
-    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    # Create a new transcoding queue. For information about queues, see
+    # Working With Queues in the User Guide at
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
     #
     # @option params [String] :description
     #   Optional. A description of the queue that you are creating.
@@ -3905,12 +3962,12 @@ module Aws::MediaConvert
     #   The name of the queue that you are creating.
     #
     # @option params [String] :pricing_plan
-    #   Optional; default is on-demand. Specifies whether the pricing plan for
-    #   the queue is on-demand or reserved. The pricing plan for the queue
-    #   determines whether you pay on-demand or reserved pricing for the
-    #   transcoding jobs you run through the queue. For reserved queue
-    #   pricing, you must set up a contract. You can create a reserved queue
-    #   contract through the AWS Elemental MediaConvert console.
+    #   Specifies whether the pricing plan for the queue is on-demand or
+    #   reserved. For on-demand, you pay per minute, billed in increments of
+    #   .01 minute. For reserved, you pay for the transcoding capacity of the
+    #   entire queue, regardless of how much or how little you use it.
+    #   Reserved pricing requires a 12-month commitment. When you use the API
+    #   to create a queue, the default is on-demand.
     #
     # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
     #   Details about the pricing plan for your reserved queue. Required for
@@ -4015,7 +4072,7 @@ module Aws::MediaConvert
     # Permanently delete a queue you have created.
     #
     # @option params [required, String] :name
-    #   The name of the queue to be deleted.
+    #   The name of the queue that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4122,6 +4179,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.arn #=> String
     #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.job.created_at #=> Time
@@ -4170,8 +4228,9 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
     #   resp.job.settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
@@ -4198,6 +4257,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].input_clippings[0].start_timecode #=> String
     #   resp.job.settings.inputs[0].program_number #=> Integer
     #   resp.job.settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
+    #   resp.job.settings.inputs[0].supplemental_imps #=> Array
+    #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -4392,6 +4453,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -4409,6 +4471,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -4419,6 +4482,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -4446,6 +4510,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -4727,6 +4792,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
@@ -4768,8 +4834,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -4985,6 +5052,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -5002,6 +5070,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -5012,6 +5081,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -5039,6 +5109,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -5397,6 +5468,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -5414,6 +5486,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -5424,6 +5497,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -5451,6 +5525,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -5783,6 +5858,7 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.job_templates #=> Array
+    #   resp.job_templates[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].arn #=> String
     #   resp.job_templates[0].category #=> String
     #   resp.job_templates[0].created_at #=> Time
@@ -5824,8 +5900,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -6041,6 +6118,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -6058,6 +6136,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -6068,6 +6147,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -6095,6 +6175,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -6399,6 +6480,7 @@ module Aws::MediaConvert
     # @example Response structure
     #
     #   resp.jobs #=> Array
+    #   resp.jobs[0].acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].arn #=> String
     #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.jobs[0].created_at #=> Time
@@ -6447,8 +6529,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].decryption_settings.decryption_mode #=> String, one of "AES_CTR", "AES_CBC", "AES_GCM"
     #   resp.jobs[0].settings.inputs[0].decryption_settings.encrypted_decryption_key #=> String
@@ -6475,6 +6558,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].input_clippings[0].start_timecode #=> String
     #   resp.jobs[0].settings.inputs[0].program_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].psi_control #=> String, one of "IGNORE_PSI", "USE_PSI"
+    #   resp.jobs[0].settings.inputs[0].supplemental_imps #=> Array
+    #   resp.jobs[0].settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.jobs[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -6669,6 +6754,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -6686,6 +6772,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -6696,6 +6783,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -6723,6 +6811,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -7116,6 +7205,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -7133,6 +7223,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -7143,6 +7234,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -7170,6 +7262,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.presets[0].settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.presets[0].settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.presets[0].settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.presets[0].settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -7574,6 +7667,10 @@ module Aws::MediaConvert
 
     # Modify one of your existing job templates.
     #
+    # @option params [Types::AccelerationSettings] :acceleration_settings
+    #   This is a beta feature. If you are interested in using this feature,
+    #   please contact AWS customer support.
+    #
     # @option params [String] :category
     #   The new category for the job template, if you are changing it.
     #
@@ -7597,6 +7694,9 @@ module Aws::MediaConvert
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job_template({
+    #     acceleration_settings: {
+    #       mode: "DISABLED", # required, accepts DISABLED, ENABLED
+    #     },
     #     category: "__string",
     #     description: "__string",
     #     name: "__string", # required
@@ -7658,9 +7758,12 @@ module Aws::MediaConvert
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                 },
+    #                 track_source_settings: {
+    #                   track_number: 1,
     #                 },
     #               },
     #             },
@@ -7773,7 +7876,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7810,7 +7913,7 @@ module Aws::MediaConvert
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7843,7 +7946,7 @@ module Aws::MediaConvert
     #               destination: "__stringPatternS3",
     #               encryption: {
     #                 speke_key_provider: {
-    #                   certificate_arn: "__stringPatternArnAwsAcm",
+    #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
     #                   system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
     #                   url: "__stringPatternHttps",
@@ -7961,6 +8064,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -7980,6 +8084,7 @@ module Aws::MediaConvert
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
+    #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
@@ -7990,6 +8095,9 @@ module Aws::MediaConvert
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                       x_position: 1,
     #                       y_position: 1,
+    #                     },
+    #                     embedded_destination_settings: {
+    #                       destination_608_channel_number: 1,
     #                     },
     #                     scc_destination_settings: {
     #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -8035,6 +8143,7 @@ module Aws::MediaConvert
     #                   ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #                   ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
@@ -8353,6 +8462,7 @@ module Aws::MediaConvert
     #
     # @example Response structure
     #
+    #   resp.job_template.acceleration_settings.mode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.arn #=> String
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
@@ -8394,8 +8504,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_template.settings.inputs[0].deblock_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].denoise_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].filter_enable #=> String, one of "AUTO", "DISABLE", "FORCE"
@@ -8611,6 +8722,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -8628,6 +8740,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -8638,6 +8751,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -8665,6 +8779,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -9053,6 +9168,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -9072,6 +9188,7 @@ module Aws::MediaConvert
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
+    #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
@@ -9082,6 +9199,9 @@ module Aws::MediaConvert
     #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #               x_position: 1,
     #               y_position: 1,
+    #             },
+    #             embedded_destination_settings: {
+    #               destination_608_channel_number: 1,
     #             },
     #             scc_destination_settings: {
     #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
@@ -9127,6 +9247,7 @@ module Aws::MediaConvert
     #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
     #           ebp_placement: "VIDEO_AND_AUDIO_PIDS", # accepts VIDEO_AND_AUDIO_PIDS, VIDEO_PID
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
@@ -9497,6 +9618,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
@@ -9514,6 +9636,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
@@ -9524,6 +9647,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
@@ -9551,6 +9675,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
     #   resp.preset.settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
@@ -9804,8 +9929,12 @@ module Aws::MediaConvert
     #   The name of the queue that you are modifying.
     #
     # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
-    #   Details about the pricing plan for your reserved queue. Required for
-    #   reserved queues and not applicable to on-demand queues.
+    #   The new details of your pricing plan for your reserved queue. When you
+    #   set up a new pricing plan to replace an expired one, you enter into
+    #   another 12-month commitment. When you add capacity to your queue by
+    #   increasing the number of RTS, you extend the term of your commitment
+    #   to 12 months from when you add capacity. After you make these
+    #   commitments, you can't cancel them.
     #
     # @option params [String] :status
     #   Pause or activate a queue by changing its status between ACTIVE and
@@ -9871,7 +10000,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

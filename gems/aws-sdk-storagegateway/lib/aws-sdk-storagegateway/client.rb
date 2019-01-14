@@ -607,6 +607,72 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Connects a volume to an iSCSI connection and then attaches the volume
+    # to the specified gateway. Detaching and attaching a volume enables you
+    # to recover your data from one gateway to a different gateway without
+    # creating a snapshot. It also makes it easier to move your volumes from
+    # an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway that you want to attach
+    #   the volume to.
+    #
+    # @option params [String] :target_name
+    #   The name of the iSCSI target used by an initiator to connect to a
+    #   volume and used as a suffix for the target ARN. For example,
+    #   specifying `TargetName` as *myvolume* results in the target ARN of
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume`.
+    #   The target name must be unique across all volumes on a gateway.
+    #
+    #   If you don't specify a value, Storage Gateway uses the value that was
+    #   previously used for this volume as the new target name.
+    #
+    # @option params [required, String] :volume_arn
+    #   The Amazon Resource Name (ARN) of the volume to attach to the
+    #   specified gateway.
+    #
+    # @option params [required, String] :network_interface_id
+    #   The network interface of the gateway on which to expose the iSCSI
+    #   target. Only IPv4 addresses are accepted. Use
+    #   DescribeGatewayInformation to get a list of the network interfaces
+    #   available on a gateway.
+    #
+    #   Valid Values: A valid IP address.
+    #
+    # @option params [String] :disk_id
+    #   The unique device ID or other distinguishing data that identifies the
+    #   local disk used to create the volume. This value is only required when
+    #   you are attaching a stored volume.
+    #
+    # @return [Types::AttachVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AttachVolumeOutput#volume_arn #volume_arn} => String
+    #   * {Types::AttachVolumeOutput#target_arn #target_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_volume({
+    #     gateway_arn: "GatewayARN", # required
+    #     target_name: "TargetName",
+    #     volume_arn: "VolumeARN", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
+    #     disk_id: "DiskId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume_arn #=> String
+    #   resp.target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AttachVolume AWS API Documentation
+    #
+    # @overload attach_volume(params = {})
+    # @param [Hash] params ({})
+    def attach_volume(params = {}, options = {})
+      req = build_request(:attach_volume, params)
+      req.send_request(options)
+    end
+
     # Cancels archiving of a virtual tape to the virtual tape shelf (VTS)
     # after the archiving process is initiated. This operation is only
     # supported in the tape gateway type.
@@ -2166,6 +2232,7 @@ module Aws::StorageGateway
     #   resp.cached_iscsi_volumes[0].volume_id #=> String
     #   resp.cached_iscsi_volumes[0].volume_type #=> String
     #   resp.cached_iscsi_volumes[0].volume_status #=> String
+    #   resp.cached_iscsi_volumes[0].volume_attachment_status #=> String
     #   resp.cached_iscsi_volumes[0].volume_size_in_bytes #=> Integer
     #   resp.cached_iscsi_volumes[0].volume_progress #=> Float
     #   resp.cached_iscsi_volumes[0].source_snapshot_id #=> String
@@ -2177,6 +2244,7 @@ module Aws::StorageGateway
     #   resp.cached_iscsi_volumes[0].created_date #=> Time
     #   resp.cached_iscsi_volumes[0].volume_used_in_bytes #=> Integer
     #   resp.cached_iscsi_volumes[0].kms_key #=> String
+    #   resp.cached_iscsi_volumes[0].target_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes AWS API Documentation
     #
@@ -2637,6 +2705,7 @@ module Aws::StorageGateway
     #   resp.stored_iscsi_volumes[0].volume_id #=> String
     #   resp.stored_iscsi_volumes[0].volume_type #=> String
     #   resp.stored_iscsi_volumes[0].volume_status #=> String
+    #   resp.stored_iscsi_volumes[0].volume_attachment_status #=> String
     #   resp.stored_iscsi_volumes[0].volume_size_in_bytes #=> Integer
     #   resp.stored_iscsi_volumes[0].volume_progress #=> Float
     #   resp.stored_iscsi_volumes[0].volume_disk_id #=> String
@@ -2650,6 +2719,7 @@ module Aws::StorageGateway
     #   resp.stored_iscsi_volumes[0].created_date #=> Time
     #   resp.stored_iscsi_volumes[0].volume_used_in_bytes #=> Integer
     #   resp.stored_iscsi_volumes[0].kms_key #=> String
+    #   resp.stored_iscsi_volumes[0].target_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumes AWS API Documentation
     #
@@ -3207,6 +3277,47 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Disconnects a volume from an iSCSI connection and then detaches the
+    # volume from the specified gateway. Detaching and attaching a volume
+    # enables you to recover your data from one gateway to a different
+    # gateway without creating a snapshot. It also makes it easier to move
+    # your volumes from an on-premises gateway to a gateway hosted on an
+    # Amazon EC2 instance.
+    #
+    # @option params [required, String] :volume_arn
+    #   The Amazon Resource Name (ARN) of the volume to detach from the
+    #   gateway.
+    #
+    # @option params [Boolean] :force_detach
+    #   Set to `true` to forcibly remove the iSCSI connection of the target
+    #   volume and detach the volume. The default is `false`. If this value is
+    #   set to `false`, you must manually disconnect the iSCSI connection from
+    #   the target volume.
+    #
+    # @return [Types::DetachVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetachVolumeOutput#volume_arn #volume_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_volume({
+    #     volume_arn: "VolumeARN", # required
+    #     force_detach: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolume AWS API Documentation
+    #
+    # @overload detach_volume(params = {})
+    # @param [Hash] params ({})
+    def detach_volume(params = {}, options = {})
+      req = build_request(:detach_volume, params)
+      req.send_request(options)
+    end
+
     # Disables a tape gateway when the gateway is no longer functioning. For
     # example, if your gateway VM is damaged, you can disable the gateway so
     # you can recover virtual tapes.
@@ -3263,11 +3374,22 @@ module Aws::StorageGateway
     # only supported for file gateways that support the SMB file protocol.
     #
     # @option params [required, String] :gateway_arn
-    #   The unique Amazon Resource Name (ARN) of the file gateway you want to
-    #   add to the Active Directory domain.
+    #   The Amazon Resource Name (ARN) of the gateway. Use the `ListGateways`
+    #   operation to return a list of gateways for your account and region.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want the gateway to join.
+    #
+    # @option params [String] :organizational_unit
+    #   The organizational unit (OU) is a container with an Active Directory
+    #   that can hold users, groups, computers, and other OUs and this
+    #   parameter specifies the OU that the gateway will join within the AD
+    #   domain.
+    #
+    # @option params [Array<String>] :domain_controllers
+    #   List of IPv4 addresses, NetBIOS names, or host names of your domain
+    #   server. If you need to specify the port number include it after the
+    #   colon (“:”). For example, `mydc.mydomain.com:389`.
     #
     # @option params [required, String] :user_name
     #   Sets the user name of user who has permission to add the gateway to
@@ -3286,6 +3408,8 @@ module Aws::StorageGateway
     #   resp = client.join_domain({
     #     gateway_arn: "GatewayARN", # required
     #     domain_name: "DomainName", # required
+    #     organizational_unit: "OrganizationalUnit",
+    #     domain_controllers: ["Host"],
     #     user_name: "DomainUserName", # required
     #     password: "DomainUserPassword", # required
     #   })
@@ -3503,6 +3627,8 @@ module Aws::StorageGateway
     #   resp.disks[0].disk_size_in_bytes #=> Integer
     #   resp.disks[0].disk_allocation_type #=> String
     #   resp.disks[0].disk_allocation_resource #=> String
+    #   resp.disks[0].disk_attribute_list #=> Array
+    #   resp.disks[0].disk_attribute_list[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisks AWS API Documentation
     #
@@ -3826,6 +3952,7 @@ module Aws::StorageGateway
     #   resp.volume_infos[0].gateway_id #=> String
     #   resp.volume_infos[0].volume_type #=> String
     #   resp.volume_infos[0].volume_size_in_bytes #=> Integer
+    #   resp.volume_infos[0].volume_attachment_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumes AWS API Documentation
     #
@@ -3894,7 +4021,7 @@ module Aws::StorageGateway
     # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification
     #
     # @option params [required, String] :file_share_arn
-    #   The Amazon Resource Name (ARN) of the file share.
+    #   The Amazon Resource Name (ARN) of the file share you want to refresh.
     #
     # @option params [Array<String>] :folder_list
     #   A comma-separated list of the paths of folders to refresh in the
@@ -5086,7 +5213,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
