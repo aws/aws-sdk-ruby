@@ -268,6 +268,24 @@ module Aws
           expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
         end
 
+        it 'retains all custom headers from the provided request' do
+          signature = Signer.new(options).sign_request(
+            http_method: 'PUT',
+            url: 'https://domain.com',
+            headers: {
+              'Foo' => 'foo',
+              'Bar' => 'bar  bar',
+              'Bar2' => '"bar  bar"',
+              'Content-Length' => 9,
+              'X-Amz-Date' => '20120101T112233Z',
+            }
+          )
+          expect(signature.headers['foo']).to eq('foo')
+          expect(signature.headers['bar']).to eq('bar  bar')
+          expect(signature.headers['bar2']).to eq('"bar  bar"')
+          expect(signature.headers['content-length']).to eq(9)
+        end
+
       end
 
       context ':canonical_request' do

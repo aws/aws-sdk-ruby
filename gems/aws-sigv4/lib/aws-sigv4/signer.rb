@@ -228,7 +228,7 @@ module Aws
         sig = signature(creds.secret_access_key, date, sts)
 
         # apply signature
-        sigv4_headers['authorization'] = [
+        headers['authorization'] = [
           "AWS4-HMAC-SHA256 Credential=#{credential(creds, date)}",
           "SignedHeaders=#{signed_headers(headers)}",
           "Signature=#{sig}",
@@ -236,7 +236,7 @@ module Aws
 
         # Returning the signature components.
         Signature.new(
-          headers: sigv4_headers,
+          headers: headers,
           string_to_sign: sts,
           canonical_request: creq,
           content_sha256: content_sha256
