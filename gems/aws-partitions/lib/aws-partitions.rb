@@ -236,6 +236,7 @@ module Aws
             'Athena' => 'athena',
             'AutoScaling' => 'autoscaling',
             'AutoScalingPlans' => 'autoscaling',
+            'Backup' => 'backup',
             'Batch' => 'batch',
             'Budgets' => 'budgets',
             'Chime' => 'chime',

@@ -306,6 +306,7 @@ to be backwards compatible.
 | AWS AppSync                                           | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                | aws-sdk-autoscalingplans                | 2018-01-06  |
+| AWS Backup                                            | Aws::Backup                          | aws-sdk-backup                          | 2018-11-15  |
 | AWS Batch                                             | Aws::Batch                           | aws-sdk-batch                           | 2016-08-10  |
 | AWS Budgets                                           | Aws::Budgets                         | aws-sdk-budgets                         | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                             | aws-sdk-acm                             | 2015-12-08  |
@@ -349,8 +350,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
-| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
@@ -467,8 +468,8 @@ to be backwards compatible.
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 

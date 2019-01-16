@@ -867,7 +867,7 @@ module Aws::DynamoDB
     #   resp.backup_details.backup_name #=> String
     #   resp.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_details.backup_creation_date_time #=> Time
     #   resp.backup_details.backup_expiry_date_time #=> Time
     #
@@ -1025,10 +1025,10 @@ module Aws::DynamoDB
     #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
     #
     # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_indexes
-    #   One or more local secondary indexes (the maximum is five) to be
-    #   created on the table. Each index is scoped to a given partition key
-    #   value. There is a 10 GB size limit per partition key value; otherwise,
-    #   the size of a local secondary index is unconstrained.
+    #   One or more local secondary indexes (the maximum is 5) to be created
+    #   on the table. Each index is scoped to a given partition key value.
+    #   There is a 10 GB size limit per partition key value; otherwise, the
+    #   size of a local secondary index is unconstrained.
     #
     #   Each local secondary index in the array includes the following:
     #
@@ -1061,14 +1061,14 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
-    #       the secondary indexes, must not exceed 20. If you project the same
-    #       attribute into two different indexes, this counts as two distinct
-    #       attributes when determining the total.
+    #       the secondary indexes, must not exceed 100. If you project the
+    #       same attribute into two different indexes, this counts as two
+    #       distinct attributes when determining the total.
     #
     # @option params [Array<Types::GlobalSecondaryIndex>] :global_secondary_indexes
-    #   One or more global secondary indexes (the maximum is five) to be
-    #   created on the table. Each global secondary index in the array
-    #   includes the following:
+    #   One or more global secondary indexes (the maximum is 20) to be created
+    #   on the table. Each global secondary index in the array includes the
+    #   following:
     #
     #   * `IndexName` - The name of the global secondary index. Must be unique
     #     only for this table.
@@ -1098,9 +1098,9 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
-    #       the secondary indexes, must not exceed 20. If you project the same
-    #       attribute into two different indexes, this counts as two distinct
-    #       attributes when determining the total.
+    #       the secondary indexes, must not exceed 100. If you project the
+    #       same attribute into two different indexes, this counts as two
+    #       distinct attributes when determining the total.
     #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
@@ -1391,7 +1391,7 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
     #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
@@ -1874,7 +1874,7 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
     #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
@@ -1970,6 +1970,8 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Returns the regional endpoint information.
+    #
     # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
@@ -2647,7 +2649,7 @@ module Aws::DynamoDB
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
     #     exclusive_start_backup_arn: "BackupArn",
-    #     backup_type: "USER", # accepts USER, SYSTEM, ALL
+    #     backup_type: "USER", # accepts USER, SYSTEM, AWS_BACKUP, ALL
     #   })
     #
     # @example Response structure
@@ -2661,7 +2663,7 @@ module Aws::DynamoDB
     #   resp.backup_summaries[0].backup_creation_date_time #=> Time
     #   resp.backup_summaries[0].backup_expiry_date_time #=> Time
     #   resp.backup_summaries[0].backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_summaries[0].backup_size_bytes #=> Integer
     #   resp.last_evaluated_backup_arn #=> String
     #
@@ -5837,7 +5839,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

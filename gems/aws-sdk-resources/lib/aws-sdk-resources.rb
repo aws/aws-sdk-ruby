@@ -18,6 +18,7 @@ module Aws
   autoload :Athena, 'aws-sdk-athena'
   autoload :AutoScaling, 'aws-sdk-autoscaling'
   autoload :AutoScalingPlans, 'aws-sdk-autoscalingplans'
+  autoload :Backup, 'aws-sdk-backup'
   autoload :Batch, 'aws-sdk-batch'
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :Chime, 'aws-sdk-chime'

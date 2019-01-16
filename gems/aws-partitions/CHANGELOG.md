@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2019-01-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Backup`.
+
 1.131.0 (2019-01-10)
 ------------------
 

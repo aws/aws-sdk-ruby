@@ -1132,8 +1132,6 @@ module Aws::CostExplorer
     #
     #   * REGION
     #
-    #   * TAG
-    #
     #   * TENANCY
     #   @return [Array<Types::GroupDefinition>]
     #

@@ -8,17 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-dynamodb/types'
-require_relative 'aws-sdk-dynamodb/client_api'
-require_relative 'aws-sdk-dynamodb/client'
-require_relative 'aws-sdk-dynamodb/errors'
-require_relative 'aws-sdk-dynamodb/waiters'
-require_relative 'aws-sdk-dynamodb/resource'
-require_relative 'aws-sdk-dynamodb/table'
-require_relative 'aws-sdk-dynamodb/customizations'
+require_relative 'aws-sdk-backup/types'
+require_relative 'aws-sdk-backup/client_api'
+require_relative 'aws-sdk-backup/client'
+require_relative 'aws-sdk-backup/errors'
+require_relative 'aws-sdk-backup/resource'
+require_relative 'aws-sdk-backup/customizations'
 
-# This module provides support for Amazon DynamoDB. This module is available in the
-# `aws-sdk-dynamodb` gem.
+# This module provides support for AWS Backup. This module is available in the
+# `aws-sdk-backup` gem.
 #
 # # Client
 #
@@ -30,20 +28,20 @@ require_relative 'aws-sdk-dynamodb/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon DynamoDB all
+# Errors returned from AWS Backup all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::DynamoDB::Errors::ServiceError
+#     rescue Aws::Backup::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::DynamoDB
+module Aws::Backup
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.0.0'
 
 end

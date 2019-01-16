@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.38.0 (2019-01-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-backup` gem.
+
 3.37.0 (2019-01-09)
 ------------------
 

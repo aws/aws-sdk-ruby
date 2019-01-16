@@ -126,7 +126,7 @@ module Aws::DynamoDB
     # @!attribute [rw] l
     #   An attribute of type List. For example:
     #
-    #   `"L": ["Cookies", "Coffee", 3.14159]`
+    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N", "3.14159"\}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null
@@ -577,6 +577,9 @@ module Aws::DynamoDB
     #     retained for 35 days (at no additional cost). System backups allow
     #     you to restore the deleted table to the state it was in just
     #     before the point of deletion.
+    #
+    #   * `AWS_BACKUP` - On-demand backup created by you from AWS Backup
+    #     service.
     #   @return [String]
     #
     # @!attribute [rw] backup_creation_date_time
@@ -651,6 +654,9 @@ module Aws::DynamoDB
     #     retained for 35 days (at no additional cost). System backups allow
     #     you to restore the deleted table to the state it was in just
     #     before the point of deletion.
+    #
+    #   * `AWS_BACKUP` - On-demand backup created by you from AWS Backup
+    #     service.
     #   @return [String]
     #
     # @!attribute [rw] backup_size_bytes
@@ -1772,10 +1778,10 @@ module Aws::DynamoDB
     #   @return [Array<Types::KeySchemaElement>]
     #
     # @!attribute [rw] local_secondary_indexes
-    #   One or more local secondary indexes (the maximum is five) to be
-    #   created on the table. Each index is scoped to a given partition key
-    #   value. There is a 10 GB size limit per partition key value;
-    #   otherwise, the size of a local secondary index is unconstrained.
+    #   One or more local secondary indexes (the maximum is 5) to be created
+    #   on the table. Each index is scoped to a given partition key value.
+    #   There is a 10 GB size limit per partition key value; otherwise, the
+    #   size of a local secondary index is unconstrained.
     #
     #   Each local secondary index in the array includes the following:
     #
@@ -1809,13 +1815,13 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
-    #       across all of the secondary indexes, must not exceed 20. If you
+    #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
     #   @return [Array<Types::LocalSecondaryIndex>]
     #
     # @!attribute [rw] global_secondary_indexes
-    #   One or more global secondary indexes (the maximum is five) to be
+    #   One or more global secondary indexes (the maximum is 20) to be
     #   created on the table. Each global secondary index in the array
     #   includes the following:
     #
@@ -1848,7 +1854,7 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
-    #       across all of the secondary indexes, must not exceed 20. If you
+    #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
     #
@@ -2486,6 +2492,7 @@ module Aws::DynamoDB
     class DescribeEndpointsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] endpoints
+    #   List of endpoints.
     #   @return [Array<Types::Endpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsResponse AWS API Documentation
@@ -2663,10 +2670,14 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # An endpoint information details.
+    #
     # @!attribute [rw] address
+    #   IP address of the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] cache_period_in_minutes
+    #   Endpoint cache time to live (TTL) value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Endpoint AWS API Documentation
@@ -3839,7 +3850,7 @@ module Aws::DynamoDB
     #         time_range_lower_bound: Time.now,
     #         time_range_upper_bound: Time.now,
     #         exclusive_start_backup_arn: "BackupArn",
-    #         backup_type: "USER", # accepts USER, SYSTEM, ALL
+    #         backup_type: "USER", # accepts USER, SYSTEM, AWS_BACKUP, ALL
     #       }
     #
     # @!attribute [rw] table_name
