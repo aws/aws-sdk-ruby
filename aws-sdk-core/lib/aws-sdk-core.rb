@@ -38,6 +38,7 @@ module Aws
     Athena
     AutoScaling
     AutoScalingPlans
+    Backup
     Batch
     Budgets
     Chime

@@ -261,6 +261,7 @@ to be backwards compatible.
 | AWS AppSync                                           | AppSync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | ApplicationDiscoveryService     | 2015-11-01  |
 | AWS Auto Scaling Plans                                | AutoScalingPlans                | 2018-01-06  |
+| AWS Backup                                            | Backup                          | 2018-11-15  |
 | AWS Batch                                             | Batch                           | 2016-08-10  |
 | AWS Budgets                                           | Budgets                         | 2016-10-20  |
 | AWS Certificate Manager                               | ACM                             | 2015-12-08  |
@@ -304,8 +305,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -422,8 +423,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 
