@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.206 (2019-01-16)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
