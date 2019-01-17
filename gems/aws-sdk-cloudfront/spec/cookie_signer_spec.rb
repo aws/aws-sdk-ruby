@@ -29,10 +29,7 @@ module Aws
                 }
               ]
           }
-          cookie = signer.signed_cookie(
-            "http://abc.cloudfront.net/images/image.jpg",
-            policy: policy.to_json
-          )
+          cookie = signer.signed_cookie(nil, policy: policy.to_json)
           expect(cookie['CloudFront-Policy']).to eq('eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaW1hZ2VzL2ltYWdlLmpwZyIsIkNvbmRpdGlvbiI6eyJJcEFkZHJlc3MiOnsiQVdTOlNvdXJjZUlwIjoiMTAuNTIuMTc2LjAvMjQifSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjEzNTcwMzQ0MDB9fX1dfQ__')
           expect(cookie['CloudFront-Signature']).to eq('n4V7xum3wA-w1PaCMyEMpWVXdfw-Yt8I26RpZJKc~Nk8yQh8LYOxewItGJXFq0BxnKuSEKoEVYVTFEteFAGKXwhkbC7K~JfL83aroPbRagjyG-V9Y5wMLccBAzMj5nHXxjvjlOu541VUR-RlR0KK106HT4-Hp1c~nyOmXs4R5mU_')
           expect(cookie['CloudFront-Key-Pair-Id']).to eq('CF_KEYPAIR_ID')
