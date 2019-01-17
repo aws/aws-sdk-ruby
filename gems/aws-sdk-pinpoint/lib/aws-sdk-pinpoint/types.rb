@@ -4179,6 +4179,9 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         app_package_name: "__string",
+    #         app_title: "__string",
+    #         app_version_code: "__string",
     #         attributes: {
     #           "__string" => "__string",
     #         },
@@ -4187,6 +4190,7 @@ module Aws::Pinpoint
     #         metrics: {
     #           "__string" => 1.0,
     #         },
+    #         sdk_name: "__string",
     #         session: {
     #           duration: 1,
     #           id: "__string",
@@ -4195,6 +4199,19 @@ module Aws::Pinpoint
     #         },
     #         timestamp: "__string",
     #       }
+    #
+    # @!attribute [rw] app_package_name
+    #   The package name associated with the app that's recording the
+    #   event.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_title
+    #   The title of the app that's recording the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_version_code
+    #   The version number of the app that's recording the event.
+    #   @return [String]
     #
     # @!attribute [rw] attributes
     #   Custom attributes that are associated with the event you're adding
@@ -4213,6 +4230,10 @@ module Aws::Pinpoint
     #   Custom metrics related to the event.
     #   @return [Hash<String,Float>]
     #
+    # @!attribute [rw] sdk_name
+    #   The name of the SDK that's being used to record the event.
+    #   @return [String]
+    #
     # @!attribute [rw] session
     #   Information about the session in which the event occurred.
     #   @return [Types::Session]
@@ -4224,10 +4245,14 @@ module Aws::Pinpoint
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Event AWS API Documentation
     #
     class Event < Struct.new(
+      :app_package_name,
+      :app_title,
+      :app_version_code,
       :attributes,
       :client_sdk_version,
       :event_type,
       :metrics,
+      :sdk_name,
       :session,
       :timestamp)
       include Aws::Structure
@@ -4397,6 +4422,9 @@ module Aws::Pinpoint
     #         },
     #         events: {
     #           "__string" => {
+    #             app_package_name: "__string",
+    #             app_title: "__string",
+    #             app_version_code: "__string",
     #             attributes: {
     #               "__string" => "__string",
     #             },
@@ -4405,6 +4433,7 @@ module Aws::Pinpoint
     #             metrics: {
     #               "__string" => 1.0,
     #             },
+    #             sdk_name: "__string",
     #             session: {
     #               duration: 1,
     #               id: "__string",
@@ -4481,6 +4510,9 @@ module Aws::Pinpoint
     #             },
     #             events: {
     #               "__string" => {
+    #                 app_package_name: "__string",
+    #                 app_title: "__string",
+    #                 app_version_code: "__string",
     #                 attributes: {
     #                   "__string" => "__string",
     #                 },
@@ -4489,6 +4521,7 @@ module Aws::Pinpoint
     #                 metrics: {
     #                   "__string" => 1.0,
     #                 },
+    #                 sdk_name: "__string",
     #                 session: {
     #                   duration: 1,
     #                   id: "__string",
@@ -7281,6 +7314,9 @@ module Aws::Pinpoint
     #               },
     #               events: {
     #                 "__string" => {
+    #                   app_package_name: "__string",
+    #                   app_title: "__string",
+    #                   app_version_code: "__string",
     #                   attributes: {
     #                     "__string" => "__string",
     #                   },
@@ -7289,6 +7325,7 @@ module Aws::Pinpoint
     #                   metrics: {
     #                     "__string" => 1.0,
     #                   },
+    #                   sdk_name: "__string",
     #                   session: {
     #                     duration: 1,
     #                     id: "__string",

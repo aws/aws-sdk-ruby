@@ -4642,6 +4642,9 @@ module Aws::Pinpoint
     #           },
     #           events: {
     #             "__string" => {
+    #               app_package_name: "__string",
+    #               app_title: "__string",
+    #               app_version_code: "__string",
     #               attributes: {
     #                 "__string" => "__string",
     #               },
@@ -4650,6 +4653,7 @@ module Aws::Pinpoint
     #               metrics: {
     #                 "__string" => 1.0,
     #               },
+    #               sdk_name: "__string",
     #               session: {
     #                 duration: 1,
     #                 id: "__string",
@@ -6625,7 +6629,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -541,7 +541,7 @@ module Aws::Lightsail
     #           {
     #             source_name: "ResourceName", # required
     #             instance_type: "NonEmptyString", # required
-    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #             port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #             user_data: "string",
     #             availability_zone: "string", # required
     #           },
@@ -706,8 +706,9 @@ module Aws::Lightsail
     #   data as a hash:
     #
     #       {
-    #         disk_name: "ResourceName", # required
+    #         disk_name: "ResourceName",
     #         disk_snapshot_name: "ResourceName", # required
+    #         instance_name: "ResourceName",
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -717,12 +718,30 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] disk_name
-    #   The unique name of the source disk (e.g., `my-source-disk`).
+    #   The unique name of the source disk (e.g., `Disk-Virginia-1`).
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `instance name`
+    #   parameter. The `disk name` and `instance name` parameters are
+    #   mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] disk_snapshot_name
     #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
     #   based on the source disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_name
+    #   The unique name of the source instance (e.g.,
+    #   `Amazon_Linux-512MB-Virginia-1`). When this is defined, a snapshot
+    #   of the instance's system volume is created.
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `disk name`
+    #   parameter. The `instance name` and `disk name` parameters are
+    #   mutually exclusive.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -738,6 +757,7 @@ module Aws::Lightsail
     class CreateDiskSnapshotRequest < Struct.new(
       :disk_name,
       :disk_snapshot_name,
+      :instance_name,
       :tags)
       include Aws::Structure
     end
@@ -2460,13 +2480,23 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] from_disk_name
-    #   The unique name of the source disk from which you are creating the
-    #   disk snapshot.
+    #   The unique name of the source disk from which the disk snapshot was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] from_disk_arn
-    #   The Amazon Resource Name (ARN) of the source disk from which you are
-    #   creating the disk snapshot.
+    #   The Amazon Resource Name (ARN) of the source disk from which the
+    #   disk snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_instance_name
+    #   The unique name of the source instance from which the disk (system
+    #   volume) snapshot was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_instance_arn
+    #   The Amazon Resource Name (ARN) of the source instance from which the
+    #   disk (system volume) snapshot was created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshot AWS API Documentation
@@ -2483,7 +2513,9 @@ module Aws::Lightsail
       :state,
       :progress,
       :from_disk_name,
-      :from_disk_arn)
+      :from_disk_arn,
+      :from_instance_name,
+      :from_instance_arn)
       include Aws::Structure
     end
 
@@ -4942,7 +4974,7 @@ module Aws::Lightsail
     #       {
     #         source_name: "ResourceName", # required
     #         instance_type: "NonEmptyString", # required
-    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #         user_data: "string",
     #         availability_zone: "string", # required
     #       }
@@ -4973,6 +5005,8 @@ module Aws::Lightsail
     #     instance.
     #
     #   * NONE — Default to Amazon EC2.
+    #
+    #   * CLOSED — All ports closed.
     #   @return [String]
     #
     # @!attribute [rw] user_data

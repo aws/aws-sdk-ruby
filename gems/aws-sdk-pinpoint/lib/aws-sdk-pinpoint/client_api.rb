@@ -978,10 +978,14 @@ module Aws::Pinpoint
     EndpointsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfEndpointResponse, location_name: "Item"))
     EndpointsResponse.struct_class = Types::EndpointsResponse
 
+    Event.add_member(:app_package_name, Shapes::ShapeRef.new(shape: __string, location_name: "AppPackageName"))
+    Event.add_member(:app_title, Shapes::ShapeRef.new(shape: __string, location_name: "AppTitle"))
+    Event.add_member(:app_version_code, Shapes::ShapeRef.new(shape: __string, location_name: "AppVersionCode"))
     Event.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Attributes"))
     Event.add_member(:client_sdk_version, Shapes::ShapeRef.new(shape: __string, location_name: "ClientSdkVersion"))
     Event.add_member(:event_type, Shapes::ShapeRef.new(shape: __string, location_name: "EventType"))
     Event.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__double, location_name: "Metrics"))
+    Event.add_member(:sdk_name, Shapes::ShapeRef.new(shape: __string, location_name: "SdkName"))
     Event.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "Session"))
     Event.add_member(:timestamp, Shapes::ShapeRef.new(shape: __string, location_name: "Timestamp"))
     Event.struct_class = Types::Event
