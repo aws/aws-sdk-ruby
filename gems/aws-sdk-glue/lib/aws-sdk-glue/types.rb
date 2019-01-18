@@ -1710,6 +1710,7 @@ module Aws::Glue
     #         max_retries: 1,
     #         allocated_capacity: 1,
     #         timeout: 1,
+    #         max_capacity: 1.0,
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
@@ -1771,6 +1772,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
+    #   This parameter is deprecated. Use `MaxCapacity` instead.
+    #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
     #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4
@@ -1787,6 +1790,14 @@ module Aws::Glue
     #   can consume resources before it is terminated and enters `TIMEOUT`
     #   status. The default is 2,880 minutes (48 hours).
     #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   AWS Glue supports running jobs on a
+    #   `JobCommand.Name`="pythonshell" with allocated processing as low
+    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
+    #   jobs running in any other way cannot have fractional DPU
+    #   allocations.
+    #   @return [Float]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
@@ -1811,6 +1822,7 @@ module Aws::Glue
       :max_retries,
       :allocated_capacity,
       :timeout,
+      :max_capacity,
       :notification_property,
       :security_configuration)
       include Aws::Structure
@@ -4968,11 +4980,15 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
+    #   This field is deprecated, use `MaxCapacity` instead.
+    #
     #   The number of AWS Glue data processing units (DPUs) allocated to
     #   runs of this job. From 2 to 100 DPUs can be allocated; the default
     #   is 10. A DPU is a relative measure of processing power that consists
     #   of 4 vCPUs of compute capacity and 16 GB of memory. For more
     #   information, see the [AWS Glue pricing page][1].
+    #
+    #
     #
     #
     #
@@ -4984,6 +5000,14 @@ module Aws::Glue
     #   can consume resources before it is terminated and enters `TIMEOUT`
     #   status. The default is 2,880 minutes (48 hours).
     #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   AWS Glue supports running jobs on a
+    #   `JobCommand.Name`="pythonshell" with allocated processing as low
+    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
+    #   jobs running in any other way cannot have fractional DPU
+    #   allocations.
+    #   @return [Float]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
@@ -5010,6 +5034,7 @@ module Aws::Glue
       :max_retries,
       :allocated_capacity,
       :timeout,
+      :max_capacity,
       :notification_property,
       :security_configuration)
       include Aws::Structure
@@ -5085,7 +5110,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the job command: this must be `glueetl`.
+    #   The name of the job command: this must be `glueetl`, for an Apache
+    #   Spark ETL job, or `pythonshell`, for a Python shell job.
     #   @return [String]
     #
     # @!attribute [rw] script_location
@@ -5169,6 +5195,8 @@ module Aws::Glue
     #   @return [Array<Types::Predecessor>]
     #
     # @!attribute [rw] allocated_capacity
+    #   This field is deprecated, use `MaxCapacity` instead.
+    #
     #   The number of AWS Glue data processing units (DPUs) allocated to
     #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
     #   A DPU is a relative measure of processing power that consists of 4
@@ -5190,6 +5218,14 @@ module Aws::Glue
     #   `TIMEOUT` status. The default is 2,880 minutes (48 hours). This
     #   overrides the timeout value set in the parent job.
     #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   AWS Glue supports running jobs on a
+    #   `JobCommand.Name`="pythonshell" with allocated processing as low
+    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
+    #   jobs running in any other way cannot have fractional DPU
+    #   allocations.
+    #   @return [Float]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
@@ -5228,6 +5264,7 @@ module Aws::Glue
       :allocated_capacity,
       :execution_time,
       :timeout,
+      :max_capacity,
       :notification_property,
       :security_configuration,
       :log_group_name)
@@ -5261,6 +5298,7 @@ module Aws::Glue
     #         max_retries: 1,
     #         allocated_capacity: 1,
     #         timeout: 1,
+    #         max_capacity: 1.0,
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
@@ -5317,6 +5355,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
+    #   This field is deprecated. Use `MaxCapacity` instead.
+    #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
     #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
     #   DPU is a relative measure of processing power that consists of 4
@@ -5333,6 +5373,14 @@ module Aws::Glue
     #   can consume resources before it is terminated and enters `TIMEOUT`
     #   status. The default is 2,880 minutes (48 hours).
     #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   AWS Glue supports running jobs on a
+    #   `JobCommand.Name`="pythonshell" with allocated processing as low
+    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
+    #   jobs running in any other way cannot have fractional DPU
+    #   allocations.
+    #   @return [Float]
     #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
@@ -5356,6 +5404,7 @@ module Aws::Glue
       :max_retries,
       :allocated_capacity,
       :timeout,
+      :max_capacity,
       :notification_property,
       :security_configuration)
       include Aws::Structure
@@ -6277,6 +6326,7 @@ module Aws::Glue
     #         },
     #         allocated_capacity: 1,
     #         timeout: 1,
+    #         max_capacity: 1.0,
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
@@ -6313,6 +6363,8 @@ module Aws::Glue
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allocated_capacity
+    #   This field is deprecated, use `MaxCapacity` instead.
+    #
     #   The number of AWS Glue data processing units (DPUs) to allocate to
     #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
     #   A DPU is a relative measure of processing power that consists of 4
@@ -6331,6 +6383,14 @@ module Aws::Glue
     #   overrides the timeout value set in the parent job.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_capacity
+    #   AWS Glue supports running jobs on a
+    #   `JobCommand.Name`="pythonshell" with allocated processing as low
+    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
+    #   jobs running in any other way cannot have fractional DPU
+    #   allocations.
+    #   @return [Float]
+    #
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
@@ -6348,6 +6408,7 @@ module Aws::Glue
       :arguments,
       :allocated_capacity,
       :timeout,
+      :max_capacity,
       :notification_property,
       :security_configuration)
       include Aws::Structure
@@ -7434,6 +7495,7 @@ module Aws::Glue
     #           max_retries: 1,
     #           allocated_capacity: 1,
     #           timeout: 1,
+    #           max_capacity: 1.0,
     #           notification_property: {
     #             notify_delay_after: 1,
     #           },
