@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
+
+* Feature - Aws::DatabaseMigrationService - Updated the waiters for AWS Database Migration Service.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.208 (2019-01-18)
 ------------------
 
