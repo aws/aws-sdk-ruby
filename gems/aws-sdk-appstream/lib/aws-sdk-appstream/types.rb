@@ -15,7 +15,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The application name for display.
+    #   The application name to display.
     #   @return [String]
     #
     # @!attribute [rw] icon_url
@@ -383,6 +383,9 @@ module Aws::AppStream
     #           directory_name: "DirectoryName",
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -480,11 +483,11 @@ module Aws::AppStream
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -492,8 +495,24 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to
+    #   join the fleet to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the fleet. A tag is a key-value pair (the
+    #   value is optional). For example, Environment=Test, or, if you do not
+    #   specify a value, Environment=.
+    #
+    #   If you do not specify a value, we set the value to an empty string.
+    #
+    #   For more information, see [Tagging Your Resources][1] in the *Amazon
+    #   AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
@@ -510,7 +529,8 @@ module Aws::AppStream
       :description,
       :display_name,
       :enable_default_internet_access,
-      :domain_join_info)
+      :domain_join_info,
+      :tags)
       include Aws::Structure
     end
 
@@ -545,6 +565,9 @@ module Aws::AppStream
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
     #         appstream_agent_version: "AppstreamAgentVersion",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -552,7 +575,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] image_name
-    #   The name of the image used to create the builder.
+    #   The name of the image used to create the image builder.
     #   @return [String]
     #
     # @!attribute [rw] image_arn
@@ -564,11 +587,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The image builder name for display.
+    #   The image builder name to display.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
@@ -581,7 +604,8 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to
+    #   join the image builder to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] appstream_agent_version
@@ -589,6 +613,21 @@ module Aws::AppStream
     #   builder. To use the latest version of the AppStream 2.0 agent,
     #   specify \[LATEST\].
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the image builder. A tag is a key-value
+    #   pair (the value is optional). For example, Environment=Test, or, if
+    #   you do not specify a value, Environment=.
+    #
+    #   If you do not specify a value, we set the value to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
@@ -602,7 +641,8 @@ module Aws::AppStream
       :vpc_config,
       :enable_default_internet_access,
       :domain_join_info,
-      :appstream_agent_version)
+      :appstream_agent_version,
+      :tags)
       include Aws::Structure
     end
 
@@ -685,6 +725,9 @@ module Aws::AppStream
     #           enabled: false, # required
     #           settings_group: "SettingsGroup",
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -692,11 +735,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #   @return [String]
     #
     # @!attribute [rw] storage_connectors
@@ -726,6 +769,21 @@ module Aws::AppStream
     #   applied to the next session.
     #   @return [Types::ApplicationSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags to associate with the stack. A tag is a key-value pair (the
+    #   value is optional). For example, Environment=Test, or, if you do not
+    #   specify a value, Environment=.
+    #
+    #   If you do not specify a value, we set the value to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -736,7 +794,8 @@ module Aws::AppStream
       :redirect_url,
       :feedback_url,
       :user_settings,
-      :application_settings)
+      :application_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -772,7 +831,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The ID of the user.
+    #   The identifier of the user.
     #   @return [String]
     #
     # @!attribute [rw] application_id
@@ -965,7 +1024,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] shared_account_id
-    #   The 12-digit ID of the AWS account for which to delete image
+    #   The 12-digit identifier of the AWS account for which to delete image
     #   permissions.
     #   @return [String]
     #
@@ -1220,8 +1279,8 @@ module Aws::AppStream
     #   @return [Integer]
     #
     # @!attribute [rw] shared_aws_account_ids
-    #   The 12-digit ID of one or more AWS accounts with which the image is
-    #   shared.
+    #   The 12-digit identifier of one or more AWS accounts with which the
+    #   image is shared.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1342,7 +1401,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The user ID.
+    #   The user identifier.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1542,7 +1601,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Configuration information for the directory used to join domains.
+    # Describes the configuration information for the directory used to join
+    # a streaming instance to a Microsoft Active Directory domain.
     #
     # @!attribute [rw] directory_name
     #   The fully qualified name of the directory (for example,
@@ -1629,8 +1689,8 @@ module Aws::AppStream
     #
     class DisassociateFleetResult < Aws::EmptyStructure; end
 
-    # Contains the information needed to join a Microsoft Active Directory
-    # domain.
+    # Describes the configuration information required to join fleets and
+    # image builders to Microsoft Active Directory domains.
     #
     # @note When making an API call, you may pass DomainJoinInfo
     #   data as a hash:
@@ -1694,7 +1754,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] session_id
-    #   The ID of the streaming session.
+    #   The identifier of the streaming session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionRequest AWS API Documentation
@@ -1708,7 +1768,7 @@ module Aws::AppStream
     #
     class ExpireSessionResult < Aws::EmptyStructure; end
 
-    # Contains the parameters for a fleet.
+    # Describes the parameters for a fleet.
     #
     # @!attribute [rw] arn
     #   The ARN for the fleet.
@@ -1719,11 +1779,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -1792,7 +1852,8 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to
+    #   join the fleet to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
@@ -1851,7 +1912,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The image name for display.
+    #   The image name to display.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1873,7 +1934,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -1925,8 +1986,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes a streaming instance used for editing an image. New images
-    # are created from a snapshot through an image builder.
+    # Describes a virtual machine that is used to create an image.
     #
     # @!attribute [rw] name
     #   The name of the image builder.
@@ -1941,11 +2001,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The image builder name for display.
+    #   The image builder name to display.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
@@ -1977,7 +2037,8 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to
+    #   join the image builder to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] image_builder_errors
@@ -1986,7 +2047,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] appstream_agent_version
     #   The version of the AppStream 2.0 agent that is currently being used
-    #   by this image builder.
+    #   by the image builder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
@@ -2185,7 +2246,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The network details of the fleet instance for the streaming session.
+    # Describes the network details of the fleet instance for the streaming
+    # session.
     #
     # @!attribute [rw] eni_private_ip_address
     #   The private IP address of the elastic network interface that is
@@ -2262,7 +2324,7 @@ module Aws::AppStream
     # Describes a streaming session.
     #
     # @!attribute [rw] id
-    #   The ID of the streaming session.
+    #   The identifier of the streaming session.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -2307,7 +2369,8 @@ module Aws::AppStream
     # account for a shared image.
     #
     # @!attribute [rw] shared_account_id
-    #   The 12-digit ID of the AWS account with which the image is shared.
+    #   The 12-digit identifier of the AWS account with which the image is
+    #   shared.
     #   @return [String]
     #
     # @!attribute [rw] image_permissions
@@ -2333,11 +2396,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2537,7 +2600,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] domains
-    #   The names of the domains for the G Suite account.
+    #   The names of the domains for the account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
@@ -2767,11 +2830,11 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -2779,7 +2842,8 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to
+    #   join the fleet to a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] attributes_to_delete
@@ -2834,8 +2898,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] shared_account_id
-    #   The 12-digit ID of the AWS account for which you want add or update
-    #   image permissions.
+    #   The 12-digit identifier of the AWS account for which you want add or
+    #   update image permissions.
     #   @return [String]
     #
     # @!attribute [rw] image_permissions
@@ -2886,11 +2950,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for display.
+    #   The description to display.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2911,7 +2975,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] feedback_url
-    #   The URL that users are redirected to after they click the Send
+    #   The URL that users are redirected to after they choose the Send
     #   Feedback link. If no URL is specified, no Send Feedback link is
     #   displayed.
     #   @return [String]
@@ -3111,7 +3175,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes VPC configuration information.
+    # Describes VPC configuration information for fleets and image builders.
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:
@@ -3122,12 +3186,15 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] subnet_ids
-    #   The subnets to which a network interface is established from the
-    #   fleet instance.
+    #   The identifiers of the subnets to which a network interface is
+    #   attached from the fleet instance or image builder instance. Fleet
+    #   instances use one or two subnets. Image builder instances use one
+    #   subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   The security groups for the fleet.
+    #   The identifiers of the security groups for the fleet or image
+    #   builder.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig AWS API Documentation

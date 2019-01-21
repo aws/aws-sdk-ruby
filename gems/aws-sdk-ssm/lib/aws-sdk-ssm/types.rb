@@ -231,6 +231,12 @@ module Aws::SSM
     #   The document version.
     #   @return [String]
     #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
+    #   @return [String]
+    #
     # @!attribute [rw] parameters
     #   A description of the parameters for a document.
     #   @return [Hash<String,Array<String>>]
@@ -311,6 +317,7 @@ module Aws::SSM
       :status,
       :overview,
       :document_version,
+      :automation_target_parameter_name,
       :parameters,
       :association_id,
       :targets,
@@ -716,9 +723,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # An attribute of an attachment, such as the attachment name or size.
+    # An attribute of an attachment, such as the attachment name.
     #
     # @!attribute [rw] name
+    #   The name of the attachment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentInformation AWS API Documentation
@@ -1026,8 +1034,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] automation_type
-    #   Use this filter with DescribeAutomationExecution. Specify either
-    #   Local of CrossAccount. CrossAccount is an Automation that executes
+    #   Use this filter with DescribeAutomationExecutions. Specify either
+    #   Local or CrossAccount. CrossAccount is an Automation that executes
     #   in multiple AWS Regions and accounts. For more information, see
     #   [Concurrently Executing Automations in Multiple AWS Regions and
     #   Accounts][1] in the *AWS Systems Manager User Guide*.
@@ -2050,6 +2058,7 @@ module Aws::SSM
     #             parameters: {
     #               "ParameterName" => ["ParameterValue"],
     #             },
+    #             automation_target_parameter_name: "AutomationTargetParameterName",
     #             document_version: "DocumentVersion",
     #             targets: [
     #               {
@@ -2096,6 +2105,7 @@ module Aws::SSM
     #         parameters: {
     #           "ParameterName" => ["ParameterValue"],
     #         },
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         document_version: "DocumentVersion",
     #         targets: [
     #           {
@@ -2128,6 +2138,12 @@ module Aws::SSM
     # @!attribute [rw] parameters
     #   A description of the parameters for a document.
     #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
+    #   @return [String]
     #
     # @!attribute [rw] document_version
     #   The document version.
@@ -2192,6 +2208,7 @@ module Aws::SSM
       :name,
       :instance_id,
       :parameters,
+      :automation_target_parameter_name,
       :document_version,
       :targets,
       :schedule_expression,
@@ -2244,6 +2261,7 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -2282,6 +2300,12 @@ module Aws::SSM
     #
     # @!attribute [rw] association_name
     #   Specify a descriptive name for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -2330,6 +2354,7 @@ module Aws::SSM
       :schedule_expression,
       :output_location,
       :association_name,
+      :automation_target_parameter_name,
       :max_errors,
       :max_concurrency,
       :compliance_severity)
@@ -10704,9 +10729,9 @@ module Aws::SSM
     # @!attribute [rw] configuration
     #   The value of the yum repo configuration. For example:
     #
-    #   `cachedir=/var/cache/yum/$basesearch`
+    #   `[main]`
     #
-    #   `$releasever`
+    #   `cachedir=/var/cache/yum/$basesearch$releasever`
     #
     #   `keepcache=0`
     #
@@ -12816,6 +12841,7 @@ module Aws::SSM
     #         ],
     #         association_name: "AssociationName",
     #         association_version: "AssociationVersion",
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -12862,6 +12888,12 @@ module Aws::SSM
     #   must specify the latest association version in the service. If you
     #   want to ensure that this request succeeds, either specify `$LATEST`,
     #   or omit this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -12911,6 +12943,7 @@ module Aws::SSM
       :targets,
       :association_name,
       :association_version,
+      :automation_target_parameter_name,
       :max_errors,
       :max_concurrency,
       :compliance_severity)

@@ -511,18 +511,18 @@ module Aws::DatabaseMigrationService
           max_attempts: 60,
           delay: 5,
           poller: Aws::Waiters::Poller.new(
-            operation_name: :test_connection,
+            operation_name: :describe_connections,
             acceptors: [
               {
-                "argument" => "connection.status",
+                "argument" => "connections[].status",
                 "expected" => "successful",
-                "matcher" => "path",
+                "matcher" => "pathAll",
                 "state" => "success"
               },
               {
-                "argument" => "connection.status",
+                "argument" => "connections[].status",
                 "expected" => "failed",
-                "matcher" => "path",
+                "matcher" => "pathAny",
                 "state" => "failure"
               }
             ]
@@ -530,8 +530,8 @@ module Aws::DatabaseMigrationService
         }.merge(options))
       end
 
-      # @option (see Client#test_connection)
-      # @return (see Client#test_connection)
+      # @option (see Client#describe_connections)
+      # @return (see Client#describe_connections)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

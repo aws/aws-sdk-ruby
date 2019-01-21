@@ -466,6 +466,11 @@ module Aws::SSM
     # @option params [String] :association_name
     #   Specify a descriptive name for the association.
     #
+    # @option params [String] :automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
+    #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops sending
     #   requests to run the association on additional targets. You can specify
@@ -526,6 +531,7 @@ module Aws::SSM
     #       },
     #     },
     #     association_name: "AssociationName",
+    #     automation_target_parameter_name: "AutomationTargetParameterName",
     #     max_errors: "MaxErrors",
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -547,6 +553,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -604,6 +611,7 @@ module Aws::SSM
     #         parameters: {
     #           "ParameterName" => ["ParameterValue"],
     #         },
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         document_version: "DocumentVersion",
     #         targets: [
     #           {
@@ -644,6 +652,7 @@ module Aws::SSM
     #   resp.successful[0].overview.association_status_aggregated_count #=> Hash
     #   resp.successful[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.successful[0].document_version #=> String
+    #   resp.successful[0].automation_target_parameter_name #=> String
     #   resp.successful[0].parameters #=> Hash
     #   resp.successful[0].parameters["ParameterName"] #=> Array
     #   resp.successful[0].parameters["ParameterName"][0] #=> String
@@ -668,6 +677,7 @@ module Aws::SSM
     #   resp.failed[0].entry.parameters #=> Hash
     #   resp.failed[0].entry.parameters["ParameterName"] #=> Array
     #   resp.failed[0].entry.parameters["ParameterName"][0] #=> String
+    #   resp.failed[0].entry.automation_target_parameter_name #=> String
     #   resp.failed[0].entry.document_version #=> String
     #   resp.failed[0].entry.targets #=> Array
     #   resp.failed[0].entry.targets[0].key #=> String
@@ -1634,6 +1644,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -6734,6 +6745,11 @@ module Aws::SSM
     #   ensure that this request succeeds, either specify `$LATEST`, or omit
     #   this parameter.
     #
+    # @option params [String] :automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
+    #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops sending
     #   requests to run the association on additional targets. You can specify
@@ -6795,6 +6811,7 @@ module Aws::SSM
     #     ],
     #     association_name: "AssociationName",
     #     association_version: "AssociationVersion",
+    #     automation_target_parameter_name: "AutomationTargetParameterName",
     #     max_errors: "MaxErrors",
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -6816,6 +6833,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -6889,6 +6907,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -7726,7 +7745,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -298,6 +298,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateFleetRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateFleetRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
+    CreateFleetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -313,6 +314,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateImageBuilderRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     CreateImageBuilderRequest.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
+    CreateImageBuilderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
 
     CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -334,6 +336,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     CreateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     CreateStackRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettings, location_name: "ApplicationSettings"))
+    CreateStackRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
