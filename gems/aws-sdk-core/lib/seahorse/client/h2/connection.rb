@@ -116,6 +116,7 @@ module Seahorse
                 rescue EOFError
                   self.close!
                 rescue => error
+                  self.debug_output(error.inspect)
                   @errors << error
                   self.close!
                 end
@@ -127,6 +128,7 @@ module Seahorse
 
         def close!
           @mutex.synchronize {
+            self.debug_output("closing connection ...")
             if @socket
               @socket.close
               @socket = nil
@@ -167,8 +169,14 @@ module Seahorse
 
         def _register_h2_callbacks
           @h2_client.on(:frame) do |bytes|
-            @socket.print(bytes)
-            @socket.flush
+            if @socket.nil?
+              msg = "Connection is closed due to errors, "\
+                "you can find errors at async_client.connection.errors"
+              raise Http2ConnectionClosedError.new(msg)
+            else
+              @socket.print(bytes)
+              @socket.flush
+            end
           end
           @h2_client.on(:frame_sent) do |frame|
             debug_output("frame: #{frame.inspect}", :send)
