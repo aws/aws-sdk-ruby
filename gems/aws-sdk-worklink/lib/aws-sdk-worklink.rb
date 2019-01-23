@@ -8,16 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-acmpca/types'
-require_relative 'aws-sdk-acmpca/client_api'
-require_relative 'aws-sdk-acmpca/client'
-require_relative 'aws-sdk-acmpca/errors'
-require_relative 'aws-sdk-acmpca/waiters'
-require_relative 'aws-sdk-acmpca/resource'
-require_relative 'aws-sdk-acmpca/customizations'
+require_relative 'aws-sdk-worklink/types'
+require_relative 'aws-sdk-worklink/client_api'
+require_relative 'aws-sdk-worklink/client'
+require_relative 'aws-sdk-worklink/errors'
+require_relative 'aws-sdk-worklink/resource'
+require_relative 'aws-sdk-worklink/customizations'
 
-# This module provides support for AWS Certificate Manager Private Certificate Authority. This module is available in the
-# `aws-sdk-acmpca` gem.
+# This module provides support for Amazon WorkLink. This module is available in the
+# `aws-sdk-worklink` gem.
 #
 # # Client
 #
@@ -29,20 +28,20 @@ require_relative 'aws-sdk-acmpca/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS Certificate Manager Private Certificate Authority all
+# Errors returned from Amazon WorkLink all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::ACMPCA::Errors::ServiceError
+#     rescue Aws::WorkLink::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::ACMPCA
+module Aws::WorkLink
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.0.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2019-01-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkLink`.
+
 1.133.0 (2019-01-17)
 ------------------
 

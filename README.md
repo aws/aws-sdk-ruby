@@ -461,6 +461,7 @@ to be backwards compatible.
 | Amazon Transcribe Service                             | Aws::TranscribeService               | aws-sdk-transcribeservice               | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
+| Amazon WorkLink                                       | Aws::WorkLink                        | aws-sdk-worklink                        | 2018-09-25  |
 | Amazon WorkMail                                       | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |
 | Amazon WorkSpaces                                     | Aws::WorkSpaces                      | aws-sdk-workspaces                      | 2015-04-08  |
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi         | aws-sdk-apigatewaymanagementapi         | 2018-11-29  |

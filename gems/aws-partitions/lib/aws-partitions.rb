@@ -387,6 +387,7 @@ module Aws
             'WAF' => 'waf',
             'WAFRegional' => 'waf-regional',
             'WorkDocs' => 'workdocs',
+            'WorkLink' => 'worklink',
             'WorkMail' => 'workmail',
             'WorkSpaces' => 'workspaces',
             'XRay' => 'xray',

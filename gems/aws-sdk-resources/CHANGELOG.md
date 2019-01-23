@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.39.0 (2019-01-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-worklink` gem.
+
 3.38.0 (2019-01-16)
 ------------------
 

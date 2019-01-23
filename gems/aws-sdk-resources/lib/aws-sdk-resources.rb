@@ -171,6 +171,7 @@ module Aws
   autoload :WAF, 'aws-sdk-waf'
   autoload :WAFRegional, 'aws-sdk-wafregional'
   autoload :WorkDocs, 'aws-sdk-workdocs'
+  autoload :WorkLink, 'aws-sdk-worklink'
   autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :XRay, 'aws-sdk-xray'

@@ -253,6 +253,10 @@ module Aws::ACMPCA
     #   idempotency token for each call, however, ACM PCA recognizes that you
     #   are requesting multiple certificates.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that will be attached to the new private CA. You can
+    #   associate up to 50 tags with a private CA.
+    #
     # @return [Types::CreateCertificateAuthorityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCertificateAuthorityResponse#certificate_authority_arn #certificate_authority_arn} => String
@@ -290,6 +294,12 @@ module Aws::ACMPCA
     #     },
     #     certificate_authority_type: "SUBORDINATE", # required, accepts SUBORDINATE
     #     idempotency_token: "IdempotencyToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1171,7 +1181,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
