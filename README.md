@@ -416,6 +416,7 @@ to be backwards compatible.
 | Amazon Transcribe Service                             | TranscribeService               | 2017-10-26  |
 | Amazon Translate                                      | Translate                       | 2017-07-01  |
 | Amazon WorkDocs                                       | WorkDocs                        | 2016-05-01  |
+| Amazon WorkLink                                       | WorkLink                        | 2018-09-25  |
 | Amazon WorkMail                                       | WorkMail                        | 2017-10-01  |
 | Amazon WorkSpaces                                     | WorkSpaces                      | 2015-04-08  |
 | AmazonApiGatewayManagementApi                         | ApiGatewayManagementApi         | 2018-11-29  |

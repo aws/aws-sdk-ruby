@@ -191,6 +191,7 @@ module Aws
     WAF
     WAFRegional
     WorkDocs
+    WorkLink
     WorkMail
     WorkSpaces
     XRay

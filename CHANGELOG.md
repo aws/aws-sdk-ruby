@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACMPCA - Updated the API, documentation, and waiters for AWS Certificate Manager Private Certificate Authority.
+
+* Feature - Aws::ApiGatewayManagementApi - Updated the API for AmazonApiGatewayManagementApi.
+
+* Feature - Aws::WorkLink - Added support for a new service, Amazon WorkLink.
+
 2.11.209 (2019-01-21)
 ------------------
 

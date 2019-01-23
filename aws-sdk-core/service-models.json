@@ -670,6 +670,10 @@
     "models": "workdocs/2016-05-01",
     "endpoint": "workdocs"
   },
+  "WorkLink": {
+    "models": "worklink/2018-09-25",
+    "endpoint": "worklink"
+  },
   "WorkMail": {
     "models": "workmail/2017-10-01",
     "endpoint": "workmail"
