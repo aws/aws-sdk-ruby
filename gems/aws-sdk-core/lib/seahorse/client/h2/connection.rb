@@ -56,6 +56,8 @@ module Seahorse
 
         attr_reader :errors
 
+        attr_accessor :input_signal_thread
+
         def new_stream
           begin
             @h2_client.new_stream
@@ -132,6 +134,10 @@ module Seahorse
             if @socket_thread
               Thread.kill(@socket_thread)
               @socket_thread = nil
+            end
+            if @input_signal_thread
+              Thread.kill(@input_signal_thread)
+              @input_signal_thread = nil
             end
             @status = :closed
           }

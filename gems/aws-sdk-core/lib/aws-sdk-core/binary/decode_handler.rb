@@ -43,6 +43,10 @@ module Aws
               end
             end
             thread.abort_on_exception = true
+            # attach thread to h2 connection
+            # make sure when connection closes
+            # input signal thread is also killed
+            context.client.connection.input_signal_thread = thread
           end
         end
 
