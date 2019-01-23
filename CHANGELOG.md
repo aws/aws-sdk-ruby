@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.210 (2019-01-23)
+------------------
+
 * Feature - Aws::ACMPCA - Updated the API, documentation, and waiters for AWS Certificate Manager Private Certificate Authority.
 
 * Feature - Aws::ApiGatewayManagementApi - Updated the API for AmazonApiGatewayManagementApi.
