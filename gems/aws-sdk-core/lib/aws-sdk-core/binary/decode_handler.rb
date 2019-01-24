@@ -38,7 +38,7 @@ module Aws
               # polling for buffered emit events until stream not active
               stream_alive = input_emitter.stream.state == :open &&
                 !context.client.connection.closed?
-              while callback = input_emitter.buffer.shift && stream_alive
+              while stream_alive && callback = input_emitter.buffer.shift
                 callback.call
               end
             end
