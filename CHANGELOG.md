@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::ECR - Updated the API for Amazon EC2 Container Registry.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::CloudWatchLogs - Updated the documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::PinpointSMSVoice - Updated the API, and documentation for Amazon Pinpoint SMS and Voice Service.
+
 2.11.210 (2019-01-23)
 ------------------
 
