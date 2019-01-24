@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.211 (2019-01-24)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::ECR - Updated the API for Amazon EC2 Container Registry.
