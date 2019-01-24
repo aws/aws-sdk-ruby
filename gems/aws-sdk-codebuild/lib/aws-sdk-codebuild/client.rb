@@ -584,6 +584,9 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].environment.certificate #=> String
+    #   resp.builds[0].environment.registry_credential.credential #=> String
+    #   resp.builds[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.builds[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.builds[0].service_role #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
@@ -689,6 +692,9 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.projects[0].environment.privileged_mode #=> Boolean
     #   resp.projects[0].environment.certificate #=> String
+    #   resp.projects[0].environment.registry_credential.credential #=> String
+    #   resp.projects[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.projects[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
     #   resp.projects[0].queued_timeout_in_minutes #=> Integer
@@ -871,6 +877,11 @@ module Aws::CodeBuild
     #       ],
     #       privileged_mode: false,
     #       certificate: "String",
+    #       registry_credential: {
+    #         credential: "NonEmptyString", # required
+    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #       },
+    #       image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #     },
     #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
@@ -955,6 +966,9 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.environment.certificate #=> String
+    #   resp.project.environment.registry_credential.credential #=> String
+    #   resp.project.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.project.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -1530,6 +1544,24 @@ module Aws::CodeBuild
     #   Log settings for this build that override the log settings defined in
     #   the build project.
     #
+    # @option params [Types::RegistryCredential] :registry_credential_override
+    #   The credentials for access to a private registry.
+    #
+    # @option params [String] :image_pull_credentials_type_override
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
+    #
+    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #     This requires that you modify your ECR repository policy to trust
+    #     AWS CodeBuild's service principal.
+    #
+    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
+    #     project's service role.
+    #
+    #   When using a cross-account or private registry image, you must use
+    #   SERVICE\_ROLE credentials. When using an AWS CodeBuild curated image,
+    #   you must use CODEBUILD credentials.
+    #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildOutput#build #build} => Types::Build
@@ -1625,6 +1657,11 @@ module Aws::CodeBuild
     #         location: "String",
     #       },
     #     },
+    #     registry_credential_override: {
+    #       credential: "NonEmptyString", # required
+    #       credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #     },
+    #     image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #   })
     #
     # @example Response structure
@@ -1693,6 +1730,9 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.environment.registry_credential.credential #=> String
+    #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -1806,6 +1846,9 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.environment.registry_credential.credential #=> String
+    #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -1988,6 +2031,11 @@ module Aws::CodeBuild
     #       ],
     #       privileged_mode: false,
     #       certificate: "String",
+    #       registry_credential: {
+    #         credential: "NonEmptyString", # required
+    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #       },
+    #       image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -2072,6 +2120,9 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.environment.certificate #=> String
+    #   resp.project.environment.registry_credential.credential #=> String
+    #   resp.project.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.project.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -2170,7 +2221,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -71,13 +71,13 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] authenticate_oidc_config
-    #   \[HTTPS listener\] Information about an identity provider that is
+    #   \[HTTPS listeners\] Information about an identity provider that is
     #   compliant with OpenID Connect (OIDC). Specify only when `Type` is
     #   `authenticate-oidc`.
     #   @return [Types::AuthenticateOidcActionConfig]
     #
     # @!attribute [rw] authenticate_cognito_config
-    #   \[HTTPS listener\] Information for using Amazon Cognito to
+    #   \[HTTPS listeners\] Information for using Amazon Cognito to
     #   authenticate users. Specify only when `Type` is
     #   `authenticate-cognito`.
     #   @return [Types::AuthenticateCognitoActionConfig]
@@ -444,7 +444,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         load_balancer_arn: "LoadBalancerArn", # required
-    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS
     #         port: 1, # required
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
@@ -509,7 +509,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP
+    #   and TLS.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -517,14 +518,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     #
     # @!attribute [rw] ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which ciphers
-    #   and protocols are supported. The default is the current predefined
-    #   security policy.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   ciphers and protocols are supported. The default is the current
+    #   predefined security policy.
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   \[HTTPS and TLS listeners\] The default SSL server certificate. You
+    #   must provide exactly one certificate. Set `CertificateArn` to the
     #   certificate ARN but do not set `IsDefault`.
     #
     #   To create a certificate list, use AddListenerCertificates.
@@ -536,14 +537,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP or TLS for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -807,14 +809,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP or TLS for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -851,10 +854,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         name: "TargetGroupName", # required
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #         port: 1,
     #         vpc_id: "VpcId",
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #         health_check_port: "HealthCheckPort",
     #         health_check_enabled: false,
     #         health_check_path: "Path",
@@ -879,8 +882,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP. If
-    #   the target is a Lambda function, this parameter does not apply.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP
+    #   and TLS. If the target is a Lambda function, this parameter does not
+    #   apply.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -896,9 +900,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP. For Application Load Balancers, the default is
-    #   HTTP. For Network Load Balancers, the default is TCP.
+    #   targets. For Application Load Balancers, the default is HTTP. For
+    #   Network Load Balancers, the default is TCP. The TCP protocol is
+    #   supported for health checks only if the protocol of the target group
+    #   is TCP or TLS. The TLS protocol is not supported for health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -1708,7 +1713,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] certificates
     #   The SSL server certificate. You must provide a certificate if the
-    #   protocol is HTTPS.
+    #   protocol is HTTPS or TLS.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] ssl_policy
@@ -1954,7 +1959,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         listener_arn: "ListenerArn", # required
     #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
     #           {
@@ -2021,14 +2026,14 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer.
-    #   Application Load Balancers support HTTP and HTTPS and Network Load
-    #   Balancers support TCP.
+    #   Application Load Balancers support the HTTP and HTTPS protocols.
+    #   Network Load Balancers support the TCP and TLS protocols.
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which protocols
-    #   and ciphers are supported. For more information, see [Security
-    #   Policies][1] in the *Application Load Balancers Guide*.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   protocols and ciphers are supported. For more information, see
+    #   [Security Policies][1] in the *Application Load Balancers Guide*.
     #
     #
     #
@@ -2036,8 +2041,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   \[HTTPS and TLS listeners\] The default SSL server certificate. You
+    #   must provide exactly one certificate. Set `CertificateArn` to the
     #   certificate ARN but do not set `IsDefault`.
     #
     #   To create a certificate list, use AddListenerCertificates.
@@ -2049,14 +2054,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP or TLS for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -2233,14 +2239,15 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an
-    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #   Application Load Balancer. The protocol of the target group must be
+    #   TCP or TLS for a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID
     #   Connect (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
-    #   authenticate users through the user pools supported by Amazon
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`,
+    #   you authenticate users through the user pools supported by Amazon
     #   Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -2316,7 +2323,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         target_group_arn: "TargetGroupArn", # required
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #         health_check_port: "HealthCheckPort",
     #         health_check_path: "Path",
     #         health_check_enabled: false,
@@ -2335,8 +2342,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP or TLS. The TLS protocol is not
+    #   supported for health checks.
     #
     #   If the protocol of the target group is TCP, you can't modify this
     #   setting.

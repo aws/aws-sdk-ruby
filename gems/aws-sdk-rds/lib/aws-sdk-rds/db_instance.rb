@@ -456,6 +456,13 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
+    # The AWS Identity and Access Management (IAM) roles associated with the
+    # DB instance.
+    # @return [Array<Types::DBInstanceRole>]
+    def associated_roles
+      data[:associated_roles]
+    end
+
     # Specifies the listener connection endpoint for SQL Server Always On.
     # @return [Types::Endpoint]
     def listener_endpoint
@@ -2365,6 +2372,10 @@ module Aws::RDS
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.
+    #
+    #   A change to the `CloudwatchLogsExportConfiguration` parameter is
+    #   always applied to the DB instance immediately. Therefore, the
+    #   `ApplyImmediately` parameter has no effect.
     # @option options [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.

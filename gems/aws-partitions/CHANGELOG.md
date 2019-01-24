@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2019-01-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ECR`.
+
 1.134.0 (2019-01-23)
 ------------------
 

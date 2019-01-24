@@ -598,6 +598,11 @@ module Aws::CodeBuild
     #           ],
     #           privileged_mode: false,
     #           certificate: "String",
+    #           registry_credential: {
+    #             credential: "NonEmptyString", # required
+    #             credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #           },
+    #           image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #         },
     #         service_role: "NonEmptyString", # required
     #         timeout_in_minutes: 1,
@@ -1745,6 +1750,11 @@ module Aws::CodeBuild
     #         ],
     #         privileged_mode: false,
     #         certificate: "String",
+    #         registry_credential: {
+    #           credential: "NonEmptyString", # required
+    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #         },
+    #         image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #       }
     #
     # @!attribute [rw] type
@@ -1752,7 +1762,18 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The ID of the Docker image to use for this build project.
+    #   The image tag or image digest that identifies the Docker image to
+    #   use for this build project. Use the following formats:
+    #
+    #   * For an image tag: `registry/repository:tag`. For example, to
+    #     specify an image with the tag "latest," use
+    #     `registry/repository:latest`.
+    #
+    #   * For an image digest: `registry/repository@digest`. For example, to
+    #     specify an image with the digest
+    #     "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,"
+    #     use
+    #     `registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf`.
     #   @return [String]
     #
     # @!attribute [rw] compute_type
@@ -1804,6 +1825,26 @@ module Aws::CodeBuild
     #   The certificate to use with this build project.
     #   @return [String]
     #
+    # @!attribute [rw] registry_credential
+    #   The credentials for access to a private registry.
+    #   @return [Types::RegistryCredential]
+    #
+    # @!attribute [rw] image_pull_credentials_type
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
+    #
+    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #     This requires that you modify your ECR repository policy to trust
+    #     AWS CodeBuild's service principal.
+    #
+    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
+    #     project's service role.
+    #
+    #   When you use a cross-account or private registry image, you must use
+    #   SERVICE\_ROLE credentials. When you use an AWS CodeBuild curated
+    #   image, you must use CODEBUILD credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
@@ -1812,7 +1853,9 @@ module Aws::CodeBuild
       :compute_type,
       :environment_variables,
       :privileged_mode,
-      :certificate)
+      :certificate,
+      :registry_credential,
+      :image_pull_credentials_type)
       include Aws::Structure
     end
 
@@ -2002,6 +2045,52 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about credentials that provide access to a private Docker
+    # registry. When this is set:
+    #
+    # * `imagePullCredentialsType` must be set to `SERVICE_ROLE`.
+    #
+    # * images cannot be curated or an Amazon ECR image.
+    #
+    # For more information, see [Private Registry with AWS Secrets Manager
+    # Samle for AWS CodeBuild][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html
+    #
+    # @note When making an API call, you may pass RegistryCredential
+    #   data as a hash:
+    #
+    #       {
+    #         credential: "NonEmptyString", # required
+    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #       }
+    #
+    # @!attribute [rw] credential
+    #   The Amazon Resource Name (ARN) or name of credentials created using
+    #   AWS Secrets Manager.
+    #
+    #   <note markdown="1"> The `credential` can use the name of the credentials only if they
+    #   exist in your current region.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider
+    #   The service that created the credentials to access a private Docker
+    #   registry. The valid value, SECRETS\_MANAGER, is for AWS Secrets
+    #   Manager.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RegistryCredential AWS API Documentation
+    #
+    class RegistryCredential < Struct.new(
+      :credential,
+      :credential_provider)
+      include Aws::Structure
+    end
+
     # Information about S3 logs for a build project.
     #
     # @note When making an API call, you may pass S3LogsConfig
@@ -2188,6 +2277,11 @@ module Aws::CodeBuild
     #             location: "String",
     #           },
     #         },
+    #         registry_credential_override: {
+    #           credential: "NonEmptyString", # required
+    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #         },
+    #         image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #       }
     #
     # @!attribute [rw] project_name
@@ -2343,6 +2437,26 @@ module Aws::CodeBuild
     #   in the build project.
     #   @return [Types::LogsConfig]
     #
+    # @!attribute [rw] registry_credential_override
+    #   The credentials for access to a private registry.
+    #   @return [Types::RegistryCredential]
+    #
+    # @!attribute [rw] image_pull_credentials_type_override
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
+    #
+    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #     This requires that you modify your ECR repository policy to trust
+    #     AWS CodeBuild's service principal.
+    #
+    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
+    #     project's service role.
+    #
+    #   When using a cross-account or private registry image, you must use
+    #   SERVICE\_ROLE credentials. When using an AWS CodeBuild curated
+    #   image, you must use CODEBUILD credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -2370,7 +2484,9 @@ module Aws::CodeBuild
       :timeout_in_minutes_override,
       :queued_timeout_in_minutes_override,
       :idempotency_token,
-      :logs_config_override)
+      :logs_config_override,
+      :registry_credential_override,
+      :image_pull_credentials_type_override)
       include Aws::Structure
     end
 
@@ -2518,6 +2634,11 @@ module Aws::CodeBuild
     #           ],
     #           privileged_mode: false,
     #           certificate: "String",
+    #           registry_credential: {
+    #             credential: "NonEmptyString", # required
+    #             credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #           },
+    #           image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,

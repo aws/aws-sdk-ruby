@@ -73,6 +73,40 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AddRoleToDBInstanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_identifier: "String", # required
+    #         role_arn: "String", # required
+    #         feature_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The name of the DB instance to associate the IAM role with.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   DB instance, for example
+    #   `arn:aws:iam::123456789012:role/AccessRole`.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature for the DB instance that the IAM role is to
+    #   be associated with. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBInstanceMessage AWS API Documentation
+    #
+    class AddRoleToDBInstanceMessage < Struct.new(
+      :db_instance_identifier,
+      :role_arn,
+      :feature_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddSourceIdentifierToSubscriptionMessage
     #   data as a hash:
     #
@@ -4768,6 +4802,15 @@ module Aws::RDS
     #   A list of the supported DB engine modes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_feature_names
+    #   A list of features supported by the DB engine. Supported feature
+    #   names include the following.
+    #
+    #   * s3Import
+    #
+    #   ^
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4783,7 +4826,8 @@ module Aws::RDS
       :exportable_log_types,
       :supports_log_exports_to_cloudwatch_logs,
       :supports_read_replica,
-      :supported_engine_modes)
+      :supported_engine_modes,
+      :supported_feature_names)
       include Aws::Structure
     end
 
@@ -5140,6 +5184,11 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_roles
+    #   The AWS Identity and Access Management (IAM) roles associated with
+    #   the DB instance.
+    #   @return [Array<Types::DBInstanceRole>]
+    #
     # @!attribute [rw] listener_endpoint
     #   Specifies the listener connection endpoint for SQL Server Always On.
     #   @return [Types::Endpoint]
@@ -5202,6 +5251,7 @@ module Aws::RDS
       :enabled_cloudwatch_logs_exports,
       :processor_features,
       :deletion_protection,
+      :associated_roles,
       :listener_endpoint)
       include Aws::Structure
     end
@@ -5396,6 +5446,44 @@ module Aws::RDS
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances)
+      include Aws::Structure
+    end
+
+    # Describes an AWS Identity and Access Management (IAM) role that is
+    # associated with a DB instance.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that is associated
+    #   with the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature associated with the AWS Identity and Access
+    #   Management (IAM) role. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes the state of association between the IAM role and the DB
+    #   instance. The Status property returns one of the following values:
+    #
+    #   * `ACTIVE` - the IAM role ARN is associated with the DB instance and
+    #     can be used to access other AWS services on your behalf.
+    #
+    #   * `PENDING` - the IAM role ARN is being associated with the DB
+    #     instance.
+    #
+    #   * `INVALID` - the IAM role ARN is associated with the DB instance,
+    #     but the DB instance is unable to assume the IAM role in order to
+    #     access other AWS services on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRole AWS API Documentation
+    #
+    class DBInstanceRole < Struct.new(
+      :role_arn,
+      :feature_name,
+      :status)
       include Aws::Structure
     end
 
@@ -10593,6 +10681,10 @@ module Aws::RDS
     # @!attribute [rw] cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.
+    #
+    #   A change to the `CloudwatchLogsExportConfiguration` parameter is
+    #   always applied to the DB instance immediately. Therefore, the
+    #   `ApplyImmediately` parameter has no effect.
     #   @return [Types::CloudwatchLogsExportConfiguration]
     #
     # @!attribute [rw] processor_features
@@ -12447,6 +12539,40 @@ module Aws::RDS
     class RemoveRoleFromDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :role_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveRoleFromDBInstanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_identifier: "String", # required
+    #         role_arn: "String", # required
+    #         feature_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The name of the DB instance to disassociate the IAM role from.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to disassociate from
+    #   the DB instance, for example
+    #   `arn:aws:iam::123456789012:role/AccessRole`.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_name
+    #   The name of the feature for the DB instance that the IAM role is to
+    #   be disassociated from. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBInstanceMessage AWS API Documentation
+    #
+    class RemoveRoleFromDBInstanceMessage < Struct.new(
+      :db_instance_identifier,
+      :role_arn,
+      :feature_name)
       include Aws::Structure
     end
 

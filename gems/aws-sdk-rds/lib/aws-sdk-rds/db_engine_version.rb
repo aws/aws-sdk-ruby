@@ -113,6 +113,17 @@ module Aws::RDS
       data[:supported_engine_modes]
     end
 
+    # A list of features supported by the DB engine. Supported feature names
+    # include the following.
+    #
+    # * s3Import
+    #
+    # ^
+    # @return [Array<String>]
+    def supported_feature_names
+      data[:supported_feature_names]
+    end
+
     # @!endgroup
 
     # @return [Client]

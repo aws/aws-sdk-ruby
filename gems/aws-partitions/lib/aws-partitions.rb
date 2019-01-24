@@ -277,7 +277,7 @@ module Aws
             'DynamoDB' => 'dynamodb',
             'DynamoDBStreams' => 'streams.dynamodb',
             'EC2' => 'ec2',
-            'ECR' => 'ecr',
+            'ECR' => 'api.ecr',
             'ECS' => 'ecs',
             'EFS' => 'elasticfilesystem',
             'EKS' => 'eks',

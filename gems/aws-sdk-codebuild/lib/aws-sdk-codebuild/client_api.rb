@@ -40,6 +40,7 @@ module Aws::CodeBuild
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
     CreateWebhookInput = Shapes::StructureShape.new(name: 'CreateWebhookInput')
     CreateWebhookOutput = Shapes::StructureShape.new(name: 'CreateWebhookOutput')
+    CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectOutput = Shapes::StructureShape.new(name: 'DeleteProjectOutput')
     DeleteSourceCredentialsInput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsInput')
@@ -57,6 +58,7 @@ module Aws::CodeBuild
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
+    ImagePullCredentialsType = Shapes::StringShape.new(name: 'ImagePullCredentialsType')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
     ImportSourceCredentialsInput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsInput')
     ImportSourceCredentialsOutput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsOutput')
@@ -99,6 +101,7 @@ module Aws::CodeBuild
     ProjectSourceVersion = Shapes::StructureShape.new(name: 'ProjectSourceVersion')
     ProjectSources = Shapes::ListShape.new(name: 'ProjectSources')
     Projects = Shapes::ListShape.new(name: 'Projects')
+    RegistryCredential = Shapes::StructureShape.new(name: 'RegistryCredential')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3LogsConfig = Shapes::StructureShape.new(name: 'S3LogsConfig')
@@ -410,6 +413,8 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     ProjectEnvironment.add_member(:privileged_mode, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedMode"))
     ProjectEnvironment.add_member(:certificate, Shapes::ShapeRef.new(shape: String, location_name: "certificate"))
+    ProjectEnvironment.add_member(:registry_credential, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredential"))
+    ProjectEnvironment.add_member(:image_pull_credentials_type, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsType"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
 
     ProjectNames.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -433,6 +438,10 @@ module Aws::CodeBuild
     ProjectSources.member = Shapes::ShapeRef.new(shape: ProjectSource)
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
+
+    RegistryCredential.add_member(:credential, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "credential"))
+    RegistryCredential.add_member(:credential_provider, Shapes::ShapeRef.new(shape: CredentialProviderType, required: true, location_name: "credentialProvider"))
+    RegistryCredential.struct_class = Types::RegistryCredential
 
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -476,6 +485,8 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:queued_timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutesOverride"))
     StartBuildInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "idempotencyToken"))
     StartBuildInput.add_member(:logs_config_override, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfigOverride"))
+    StartBuildInput.add_member(:registry_credential_override, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredentialOverride"))
+    StartBuildInput.add_member(:image_pull_credentials_type_override, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsTypeOverride"))
     StartBuildInput.struct_class = Types::StartBuildInput
 
     StartBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "build"))

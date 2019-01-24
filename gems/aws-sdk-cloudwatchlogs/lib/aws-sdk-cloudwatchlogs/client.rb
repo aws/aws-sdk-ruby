@@ -1838,8 +1838,8 @@ module Aws::CloudWatchLogs
     end
 
     # Schedules a query of a log group using CloudWatch Logs Insights. You
-    # specify the log group to query, the query string to use, and the time
-    # to query.
+    # specify the log group and time range to query, and the query string to
+    # use.
     #
     # For more information, see [CloudWatch Logs Insights Query Syntax][1].
     #
@@ -1851,12 +1851,12 @@ module Aws::CloudWatchLogs
     #   The log group on which to perform the query.
     #
     # @option params [required, Integer] :start_time
-    #   The time to start the query. Specified as epoch time, the number of
-    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #   The beginning of the time range to query. Specified as epoch time, the
+    #   number of seconds since January 1, 1970, 00:00:00 UTC.
     #
     # @option params [required, Integer] :end_time
-    #   The time to end this query, if it is still running. Specified as epoch
-    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #   The end of the time range to query. Specified as epoch time, the
+    #   number of seconds since January 1, 1970, 00:00:00 UTC.
     #
     # @option params [required, String] :query_string
     #   The query string to use. For more information, see [CloudWatch Logs
@@ -2050,7 +2050,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

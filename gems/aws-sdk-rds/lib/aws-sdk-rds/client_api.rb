@@ -15,6 +15,7 @@ module Aws::RDS
     AccountQuota = Shapes::StructureShape.new(name: 'AccountQuota')
     AccountQuotaList = Shapes::ListShape.new(name: 'AccountQuotaList')
     AddRoleToDBClusterMessage = Shapes::StructureShape.new(name: 'AddRoleToDBClusterMessage')
+    AddRoleToDBInstanceMessage = Shapes::StructureShape.new(name: 'AddRoleToDBInstanceMessage')
     AddSourceIdentifierToSubscriptionMessage = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionMessage')
     AddSourceIdentifierToSubscriptionResult = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionResult')
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
@@ -130,6 +131,11 @@ module Aws::RDS
     DBInstanceList = Shapes::ListShape.new(name: 'DBInstanceList')
     DBInstanceMessage = Shapes::StructureShape.new(name: 'DBInstanceMessage')
     DBInstanceNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceNotFoundFault')
+    DBInstanceRole = Shapes::StructureShape.new(name: 'DBInstanceRole')
+    DBInstanceRoleAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBInstanceRoleAlreadyExistsFault')
+    DBInstanceRoleNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceRoleNotFoundFault')
+    DBInstanceRoleQuotaExceededFault = Shapes::StructureShape.new(name: 'DBInstanceRoleQuotaExceededFault')
+    DBInstanceRoles = Shapes::ListShape.new(name: 'DBInstanceRoles')
     DBInstanceStatusInfo = Shapes::StructureShape.new(name: 'DBInstanceStatusInfo')
     DBInstanceStatusInfoList = Shapes::ListShape.new(name: 'DBInstanceStatusInfoList')
     DBLogFileNotFoundFault = Shapes::StructureShape.new(name: 'DBLogFileNotFoundFault')
@@ -259,6 +265,7 @@ module Aws::RDS
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
     FailoverDBClusterMessage = Shapes::StructureShape.new(name: 'FailoverDBClusterMessage')
     FailoverDBClusterResult = Shapes::StructureShape.new(name: 'FailoverDBClusterResult')
+    FeatureNameList = Shapes::ListShape.new(name: 'FeatureNameList')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
@@ -386,6 +393,7 @@ module Aws::RDS
     RemoveFromGlobalClusterMessage = Shapes::StructureShape.new(name: 'RemoveFromGlobalClusterMessage')
     RemoveFromGlobalClusterResult = Shapes::StructureShape.new(name: 'RemoveFromGlobalClusterResult')
     RemoveRoleFromDBClusterMessage = Shapes::StructureShape.new(name: 'RemoveRoleFromDBClusterMessage')
+    RemoveRoleFromDBInstanceMessage = Shapes::StructureShape.new(name: 'RemoveRoleFromDBInstanceMessage')
     RemoveSourceIdentifierFromSubscriptionMessage = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionMessage')
     RemoveSourceIdentifierFromSubscriptionResult = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionResult')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
@@ -479,6 +487,11 @@ module Aws::RDS
     AddRoleToDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     AddRoleToDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
     AddRoleToDBClusterMessage.struct_class = Types::AddRoleToDBClusterMessage
+
+    AddRoleToDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    AddRoleToDBInstanceMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    AddRoleToDBInstanceMessage.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FeatureName"))
+    AddRoleToDBInstanceMessage.struct_class = Types::AddRoleToDBInstanceMessage
 
     AddSourceIdentifierToSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
     AddSourceIdentifierToSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
@@ -1001,6 +1014,7 @@ module Aws::RDS
     DBEngineVersion.add_member(:supports_log_exports_to_cloudwatch_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsLogExportsToCloudwatchLogs"))
     DBEngineVersion.add_member(:supports_read_replica, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsReadReplica"))
     DBEngineVersion.add_member(:supported_engine_modes, Shapes::ShapeRef.new(shape: EngineModeList, location_name: "SupportedEngineModes"))
+    DBEngineVersion.add_member(:supported_feature_names, Shapes::ShapeRef.new(shape: FeatureNameList, location_name: "SupportedFeatureNames"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -1064,6 +1078,7 @@ module Aws::RDS
     DBInstance.add_member(:enabled_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnabledCloudwatchLogsExports"))
     DBInstance.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
     DBInstance.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtection"))
+    DBInstance.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBInstanceRoles, location_name: "AssociatedRoles"))
     DBInstance.add_member(:listener_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ListenerEndpoint"))
     DBInstance.struct_class = Types::DBInstance
 
@@ -1103,6 +1118,13 @@ module Aws::RDS
     DBInstanceMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBInstanceMessage.add_member(:db_instances, Shapes::ShapeRef.new(shape: DBInstanceList, location_name: "DBInstances"))
     DBInstanceMessage.struct_class = Types::DBInstanceMessage
+
+    DBInstanceRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
+    DBInstanceRole.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
+    DBInstanceRole.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DBInstanceRole.struct_class = Types::DBInstanceRole
+
+    DBInstanceRoles.member = Shapes::ShapeRef.new(shape: DBInstanceRole, location_name: "DBInstanceRole")
 
     DBInstanceStatusInfo.add_member(:status_type, Shapes::ShapeRef.new(shape: String, location_name: "StatusType"))
     DBInstanceStatusInfo.add_member(:normal, Shapes::ShapeRef.new(shape: Boolean, location_name: "Normal"))
@@ -1634,6 +1656,8 @@ module Aws::RDS
     FailoverDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
     FailoverDBClusterResult.struct_class = Types::FailoverDBClusterResult
 
+    FeatureNameList.member = Shapes::ShapeRef.new(shape: String)
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
     Filter.struct_class = Types::Filter
@@ -2094,6 +2118,11 @@ module Aws::RDS
     RemoveRoleFromDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
     RemoveRoleFromDBClusterMessage.struct_class = Types::RemoveRoleFromDBClusterMessage
 
+    RemoveRoleFromDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    RemoveRoleFromDBInstanceMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    RemoveRoleFromDBInstanceMessage.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FeatureName"))
+    RemoveRoleFromDBInstanceMessage.struct_class = Types::RemoveRoleFromDBInstanceMessage
+
     RemoveSourceIdentifierFromSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
     RemoveSourceIdentifierFromSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
     RemoveSourceIdentifierFromSubscriptionMessage.struct_class = Types::RemoveSourceIdentifierFromSubscriptionMessage
@@ -2503,6 +2532,18 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
+      end)
+
+      api.add_operation(:add_role_to_db_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddRoleToDBInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddRoleToDBInstanceMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceRoleAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceRoleQuotaExceededFault)
       end)
 
       api.add_operation(:add_source_identifier_to_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -3626,6 +3667,17 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+      end)
+
+      api.add_operation(:remove_role_from_db_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveRoleFromDBInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveRoleFromDBInstanceMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:remove_source_identifier_from_subscription, Seahorse::Model::Operation.new.tap do |o|

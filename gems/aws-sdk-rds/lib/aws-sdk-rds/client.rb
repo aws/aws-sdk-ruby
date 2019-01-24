@@ -207,10 +207,10 @@ module Aws::RDS
 
     # @!group API Operations
 
-    # Associates an Identity and Access Management (IAM) role from an Aurora
-    # DB cluster. For more information, see [Authorizing Amazon Aurora MySQL
-    # to Access Other AWS Services on Your Behalf][1] in the *Amazon Aurora
-    # User Guide*.
+    # Associates an Identity and Access Management (IAM) role from an Amazon
+    # Aurora DB cluster. For more information, see [Authorizing Amazon
+    # Aurora MySQL to Access Other AWS Services on Your Behalf][1] in the
+    # *Amazon Aurora User Guide*.
     #
     #
     #
@@ -239,6 +239,40 @@ module Aws::RDS
     # @param [Hash] params ({})
     def add_role_to_db_cluster(params = {}, options = {})
       req = build_request(:add_role_to_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Associates an AWS Identity and Access Management (IAM) role with a DB
+    # instance.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The name of the DB instance to associate the IAM role with.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   DB instance, for example `arn:aws:iam::123456789012:role/AccessRole`.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature for the DB instance that the IAM role is to be
+    #   associated with. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_role_to_db_instance({
+    #     db_instance_identifier: "String", # required
+    #     role_arn: "String", # required
+    #     feature_name: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBInstance AWS API Documentation
+    #
+    # @overload add_role_to_db_instance(params = {})
+    # @param [Hash] params ({})
+    def add_role_to_db_instance(params = {}, options = {})
+      req = build_request(:add_role_to_db_instance, params)
       req.send_request(options)
     end
 
@@ -3230,6 +3264,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -3757,6 +3795,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -5081,6 +5123,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -6530,6 +6576,8 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supports_read_replica #=> Boolean
     #   resp.db_engine_versions[0].supported_engine_modes #=> Array
     #   resp.db_engine_versions[0].supported_engine_modes[0] #=> String
+    #   resp.db_engine_versions[0].supported_feature_names #=> Array
+    #   resp.db_engine_versions[0].supported_feature_names[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -6840,6 +6888,10 @@ module Aws::RDS
     #   resp.db_instances[0].processor_features[0].name #=> String
     #   resp.db_instances[0].processor_features[0].value #=> String
     #   resp.db_instances[0].deletion_protection #=> Boolean
+    #   resp.db_instances[0].associated_roles #=> Array
+    #   resp.db_instances[0].associated_roles[0].role_arn #=> String
+    #   resp.db_instances[0].associated_roles[0].feature_name #=> String
+    #   resp.db_instances[0].associated_roles[0].status #=> String
     #   resp.db_instances[0].listener_endpoint.address #=> String
     #   resp.db_instances[0].listener_endpoint.port #=> Integer
     #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
@@ -10511,6 +10563,10 @@ module Aws::RDS
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.
     #
+    #   A change to the `CloudwatchLogsExportConfiguration` parameter is
+    #   always applied to the DB instance immediately. Therefore, the
+    #   `ApplyImmediately` parameter has no effect.
+    #
     # @option params [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.
@@ -10714,6 +10770,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -11603,6 +11663,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -11969,6 +12033,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -12032,10 +12100,10 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Disassociates an Identity and Access Management (IAM) role from an
-    # Aurora DB cluster. For more information, see [Authorizing Amazon
-    # Aurora MySQL to Access Other AWS Services on Your Behalf ][1] in the
-    # *Amazon Aurora User Guide*.
+    # Disassociates an AWS Identity and Access Management (IAM) role from an
+    # Amazon Aurora DB cluster. For more information, see [Authorizing
+    # Amazon Aurora MySQL to Access Other AWS Services on Your Behalf ][1]
+    # in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -12064,6 +12132,41 @@ module Aws::RDS
     # @param [Hash] params ({})
     def remove_role_from_db_cluster(params = {}, options = {})
       req = build_request(:remove_role_from_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Disassociates an AWS Identity and Access Management (IAM) role from a
+    # DB instance.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The name of the DB instance to disassociate the IAM role from.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to disassociate from
+    #   the DB instance, for example
+    #   `arn:aws:iam::123456789012:role/AccessRole`.
+    #
+    # @option params [required, String] :feature_name
+    #   The name of the feature for the DB instance that the IAM role is to be
+    #   disassociated from. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_role_from_db_instance({
+    #     db_instance_identifier: "String", # required
+    #     role_arn: "String", # required
+    #     feature_name: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBInstance AWS API Documentation
+    #
+    # @overload remove_role_from_db_instance(params = {})
+    # @param [Hash] params ({})
+    def remove_role_from_db_instance(params = {}, options = {})
+      req = build_request(:remove_role_from_db_instance, params)
       req.send_request(options)
     end
 
@@ -13881,6 +13984,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -14411,6 +14518,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -14961,6 +15072,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -15299,6 +15414,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -15556,6 +15675,10 @@ module Aws::RDS
     #   resp.db_instance.processor_features[0].name #=> String
     #   resp.db_instance.processor_features[0].value #=> String
     #   resp.db_instance.deletion_protection #=> Boolean
+    #   resp.db_instance.associated_roles #=> Array
+    #   resp.db_instance.associated_roles[0].role_arn #=> String
+    #   resp.db_instance.associated_roles[0].feature_name #=> String
+    #   resp.db_instance.associated_roles[0].status #=> String
     #   resp.db_instance.listener_endpoint.address #=> String
     #   resp.db_instance.listener_endpoint.port #=> Integer
     #   resp.db_instance.listener_endpoint.hosted_zone_id #=> String
@@ -15582,7 +15705,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
