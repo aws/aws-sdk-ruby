@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.212 (2019-01-25)
+------------------
+
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
 
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
