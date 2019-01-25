@@ -93,8 +93,10 @@ module Aws::CodeCommit
     FileList = Shapes::ListShape.new(name: 'FileList')
     FileModeTypeEnum = Shapes::StringShape.new(name: 'FileModeTypeEnum')
     FileNameConflictsWithDirectoryNameException = Shapes::StructureShape.new(name: 'FileNameConflictsWithDirectoryNameException')
+    FilePathConflictsWithSubmodulePathException = Shapes::StructureShape.new(name: 'FilePathConflictsWithSubmodulePathException')
     FileTooLargeException = Shapes::StructureShape.new(name: 'FileTooLargeException')
     Folder = Shapes::StructureShape.new(name: 'Folder')
+    FolderContentSizeLimitExceededException = Shapes::StructureShape.new(name: 'FolderContentSizeLimitExceededException')
     FolderDoesNotExistException = Shapes::StructureShape.new(name: 'FolderDoesNotExistException')
     FolderList = Shapes::ListShape.new(name: 'FolderList')
     GetBlobInput = Shapes::StructureShape.new(name: 'GetBlobInput')
@@ -1529,6 +1531,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: ParentCommitIdOutdatedException)
         o.errors << Shapes::ShapeRef.new(shape: FileContentRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PathRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPathException)
         o.errors << Shapes::ShapeRef.new(shape: BranchNameRequiredException)
@@ -1548,6 +1551,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: SameFileContentException)
         o.errors << Shapes::ShapeRef.new(shape: FileNameConflictsWithDirectoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: DirectoryNameConflictsWithFileNameException)
+        o.errors << Shapes::ShapeRef.new(shape: FilePathConflictsWithSubmodulePathException)
       end)
 
       api.add_operation(:put_repository_triggers, Seahorse::Model::Operation.new.tap do |o|

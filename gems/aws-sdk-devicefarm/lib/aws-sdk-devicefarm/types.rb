@@ -249,11 +249,12 @@ module Aws::DeviceFarm
     #         description: "Message",
     #         rules: [ # required
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
+    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
+    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #             value: "String",
     #           },
     #         ],
+    #         max_devices: 1,
     #       }
     #
     # @!attribute [rw] project_arn
@@ -272,13 +273,25 @@ module Aws::DeviceFarm
     #   The device pool's rules.
     #   @return [Array<Types::Rule>]
     #
+    # @!attribute [rw] max_devices
+    #   The number of devices that Device Farm can add to your device pool.
+    #   Device Farm adds devices that are available and that meet the
+    #   criteria that you assign for the `rules` parameter. Depending on how
+    #   many devices meet these constraints, your device pool might contain
+    #   fewer devices than the value for this parameter.
+    #
+    #   By specifying the maximum number of devices, you can control the
+    #   costs that you incur by running tests.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePoolRequest AWS API Documentation
     #
     class CreateDevicePoolRequest < Struct.new(
       :project_arn,
       :name,
       :description,
-      :rules)
+      :rules,
+      :max_devices)
       include Aws::Structure
     end
 
@@ -1256,58 +1269,93 @@ module Aws::DeviceFarm
     #   The aspect of a device such as platform or model used as the
     #   selection criteria in a device filter.
     #
-    #   Allowed values include:
+    #   The supported operators for each attribute are provided in the
+    #   following list.
     #
-    #   * ARN: The Amazon Resource Name (ARN) of the device. For example,
+    #   ARN
+    #
+    #   : The Amazon Resource Name (ARN) of the device. For example,
     #     "arn:aws:devicefarm:us-west-2::device:12345Example".
     #
-    #   * PLATFORM: The device platform. Valid values are "ANDROID" or
-    #     "IOS".
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
     #
-    #   * OS\_VERSION: The operating system version. For example,
-    #     "10.3.2".
+    #   PLATFORM
     #
-    #   * MODEL: The device model. For example, "iPad 5th Gen".
+    #   : The device platform. Valid values are "ANDROID" or "IOS".
     #
-    #   * AVAILABILITY: The current availability of the device. Valid values
-    #     are "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
+    #     *Supported operators*\: `EQUALS`
+    #
+    #   OS\_VERSION
+    #
+    #   : The operating system version. For example, "10.3.2".
+    #
+    #     *Supported operators*\: `EQUALS`, `GREATER_THAN`,
+    #     `GREATER_THAN_OR_EQUALS`, `IN`, `LESS_THAN`,
+    #     `LESS_THAN_OR_EQUALS`, `NOT_IN`
+    #
+    #   MODEL
+    #
+    #   : The device model. For example, "iPad 5th Gen".
+    #
+    #     *Supported operators*\: `CONTAINS`, `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   AVAILABILITY
+    #
+    #   : The current availability of the device. Valid values are
+    #     "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
     #     "TEMPORARY\_NOT\_AVAILABLE".
     #
-    #   * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
-    #     or "TABLET".
+    #     *Supported operators*\: `EQUALS`
     #
-    #   * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #   FORM\_FACTOR
     #
-    #   * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
-    #     access. Valid values are "TRUE" or "FALSE".
+    #   : The device form factor. Valid values are "PHONE" or "TABLET".
     #
-    #   * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
-    #     debugging. Valid values are "TRUE" or "FALSE".
+    #     *Supported operators*\: `EQUALS`
     #
-    #   * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
-    #     instance.
+    #   MANUFACTURER
     #
-    #   * INSTANCE\_LABELS: The label of the device instance.
+    #   : The device manufacturer. For example, "Apple".
     #
-    #   * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
-    #     "PRIVATE".
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   REMOTE\_ACCESS\_ENABLED
+    #
+    #   : Whether the device is enabled for remote access. Valid values are
+    #     "TRUE" or "FALSE".
+    #
+    #     *Supported operators*\: `EQUALS`
+    #
+    #   REMOTE\_DEBUG\_ENABLED
+    #
+    #   : Whether the device is enabled for remote debugging. Valid values
+    #     are "TRUE" or "FALSE".
+    #
+    #     *Supported operators*\: `EQUALS`
+    #
+    #   INSTANCE\_ARN
+    #
+    #   : The Amazon Resource Name (ARN) of the device instance.
+    #
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   INSTANCE\_LABELS
+    #
+    #   : The label of the device instance.
+    #
+    #     *Supported operators*\: `CONTAINS`
+    #
+    #   FLEET\_TYPE
+    #
+    #   : The fleet type. Valid values are "PUBLIC" or "PRIVATE".
+    #
+    #     *Supported operators*\: `EQUALS`
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The filter operator.
-    #
-    #   * The EQUALS operator is available for every attribute except
-    #     INSTANCE\_LABELS.
-    #
-    #   * The CONTAINS operator is available for the INSTANCE\_LABELS and
-    #     MODEL attributes.
-    #
-    #   * The IN and NOT\_IN operators are available for the ARN,
-    #     OS\_VERSION, MODEL, MANUFACTURER, and INSTANCE\_ARN attributes.
-    #
-    #   * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
-    #     GREATER\_THAN\_OR\_EQUALS operators are also available for the
-    #     OS\_VERSION attribute.
+    #   Specifies how Device Farm compares the filter's attribute to the
+    #   value. For the operators that are supported by each attribute, see
+    #   the attribute descriptions.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1437,6 +1485,17 @@ module Aws::DeviceFarm
     #   Information about the device pool's rules.
     #   @return [Array<Types::Rule>]
     #
+    # @!attribute [rw] max_devices
+    #   The number of devices that Device Farm can add to your device pool.
+    #   Device Farm adds devices that are available and that meet the
+    #   criteria that you assign for the `rules` parameter. Depending on how
+    #   many devices meet these constraints, your device pool might contain
+    #   fewer devices than the value for this parameter.
+    #
+    #   By specifying the maximum number of devices, you can control the
+    #   costs that you incur by running tests.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DevicePool AWS API Documentation
     #
     class DevicePool < Struct.new(
@@ -1444,7 +1503,8 @@ module Aws::DeviceFarm
       :name,
       :description,
       :type,
-      :rules)
+      :rules,
+      :max_devices)
       include Aws::Structure
     end
 
@@ -4259,7 +4319,7 @@ module Aws::DeviceFarm
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology
     #   @return [String]
     #
     # @!attribute [rw] device_minutes
@@ -4391,77 +4451,119 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
-    # Represents a condition for a device pool. It is passed in as the
-    # `rules` parameter to CreateDevicePool and UpdateDevicePool.
+    # Represents a condition for a device pool.
     #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
     #
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
+    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       }
     #
     # @!attribute [rw] attribute
-    #   The rule's attribute. It is the aspect of a device such as platform
-    #   or model used as selection criteria to create or update a device
-    #   pool.
+    #   The rule's stringified attribute. For example, specify the value as
+    #   `""abc""`.
     #
-    #   Allowed values include:
+    #   The supported operators for each attribute are provided in the
+    #   following list.
     #
-    #   * ARN: The Amazon Resource Name (ARN) of a device. For example,
+    #   APPIUM\_VERSION
+    #
+    #   : The Appium version for the test.
+    #
+    #     *Supported operators*\: `CONTAINS`
+    #
+    #   ARN
+    #
+    #   : The Amazon Resource Name (ARN) of the device. For example,
     #     "arn:aws:devicefarm:us-west-2::device:12345Example".
     #
-    #   * PLATFORM: The device platform. Valid values are "ANDROID" or
-    #     "IOS".
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
     #
-    #   * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
-    #     or "TABLET".
+    #   AVAILABILITY
     #
-    #   * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #   : The current availability of the device. Valid values are
+    #     "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
+    #     "TEMPORARY\_NOT\_AVAILABLE".
     #
-    #   * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
-    #     access. Valid values are "TRUE" or "FALSE".
+    #     *Supported operators*\: `EQUALS`
     #
-    #   * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
-    #     debugging. Valid values are "TRUE" or "FALSE".
+    #   FLEET\_TYPE
     #
-    #   * APPIUM\_VERSION: The Appium version for the test.
+    #   : The fleet type. Valid values are "PUBLIC" or "PRIVATE".
     #
-    #   * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
-    #     instance.
+    #     *Supported operators*\: `EQUALS`
     #
-    #   * INSTANCE\_LABELS: The label of the device instance.
+    #   FORM\_FACTOR
     #
-    #   * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
-    #     "PRIVATE".
+    #   : The device form factor. Valid values are "PHONE" or "TABLET".
+    #
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   INSTANCE\_ARN
+    #
+    #   : The Amazon Resource Name (ARN) of the device instance.
+    #
+    #     *Supported operators*\: `IN`, `NOT_IN`
+    #
+    #   INSTANCE\_LABELS
+    #
+    #   : The label of the device instance.
+    #
+    #     *Supported operators*\: `CONTAINS`
+    #
+    #   MANUFACTURER
+    #
+    #   : The device manufacturer. For example, "Apple".
+    #
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   MODEL
+    #
+    #   : The device model, such as "Apple iPad Air 2" or "Google
+    #     Pixel".
+    #
+    #     *Supported operators*\: `CONTAINS`, `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   OS\_VERSION
+    #
+    #   : The operating system version. For example, "10.3.2".
+    #
+    #     *Supported operators*\: `EQUALS`, `GREATER_THAN`,
+    #     `GREATER_THAN_OR_EQUALS`, `IN`, `LESS_THAN`,
+    #     `LESS_THAN_OR_EQUALS`, `NOT_IN`
+    #
+    #   PLATFORM
+    #
+    #   : The device platform. Valid values are "ANDROID" or "IOS".
+    #
+    #     *Supported operators*\: `EQUALS`, `IN`, `NOT_IN`
+    #
+    #   REMOTE\_ACCESS\_ENABLED
+    #
+    #   : Whether the device is enabled for remote access. Valid values are
+    #     "TRUE" or "FALSE".
+    #
+    #     *Supported operators*\: `EQUALS`
+    #
+    #   REMOTE\_DEBUG\_ENABLED
+    #
+    #   : Whether the device is enabled for remote debugging. Valid values
+    #     are "TRUE" or "FALSE".
+    #
+    #     *Supported operators*\: `EQUALS`
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The rule's operator.
-    #
-    #   * EQUALS: The equals operator.
-    #
-    #   * GREATER\_THAN: The greater-than operator.
-    #
-    #   * IN: The in operator.
-    #
-    #   * LESS\_THAN: The less-than operator.
-    #
-    #   * NOT\_IN: The not-in operator.
-    #
-    #   * CONTAINS: The contains operator.
+    #   Specifies how Device Farm compares the rule's attribute to the
+    #   value. For the operators that are supported by each attribute, see
+    #   the attribute descriptions.
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The rule's value.
-    #
-    #   The value must be passed in as a string using escaped quotes.
-    #
-    #   For example:
-    #
-    #   "value": "\\"ANDROID\\""
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Rule AWS API Documentation
@@ -4965,10 +5067,6 @@ module Aws::DeviceFarm
     #
     # @!attribute [rw] device_pool_arn
     #   The ARN of the device pool for the run to be scheduled.
-    #
-    #   Either <b> <code>devicePoolArn</code> </b> or <b>
-    #   <code>deviceSelectionConfiguration</code> </b> is required in a
-    #   request.
     #   @return [String]
     #
     # @!attribute [rw] device_selection_configuration
@@ -5026,7 +5124,7 @@ module Aws::DeviceFarm
     end
 
     # Represents test settings. This data structure is passed in as the
-    # `test` parameter to ScheduleRun. For an example of the JSON request
+    # "test" parameter to ScheduleRun. For an example of the JSON request
     # syntax, see ScheduleRun.
     #
     # @note When making an API call, you may pass ScheduleRunTest
@@ -5674,11 +5772,13 @@ module Aws::DeviceFarm
     #         description: "Message",
     #         rules: [
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
-    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
+    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
+    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #             value: "String",
     #           },
     #         ],
+    #         max_devices: 1,
+    #         clear_max_devices: false,
     #       }
     #
     # @!attribute [rw] arn
@@ -5701,13 +5801,41 @@ module Aws::DeviceFarm
     #   for your request, the update will replace the existing rules.
     #   @return [Array<Types::Rule>]
     #
+    # @!attribute [rw] max_devices
+    #   The number of devices that Device Farm can add to your device pool.
+    #   Device Farm adds devices that are available and that meet the
+    #   criteria that you assign for the `rules` parameter. Depending on how
+    #   many devices meet these constraints, your device pool might contain
+    #   fewer devices than the value for this parameter.
+    #
+    #   By specifying the maximum number of devices, you can control the
+    #   costs that you incur by running tests.
+    #
+    #   If you use this parameter in your request, you cannot use the
+    #   `clearMaxDevices` parameter in the same request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] clear_max_devices
+    #   Sets whether the `maxDevices` parameter applies to your device pool.
+    #   If you set this parameter to `true`, the `maxDevices` parameter does
+    #   not apply, and Device Farm does not limit the number of devices that
+    #   it adds to your device pool. In this case, Device Farm adds all
+    #   available devices that meet the criteria that are specified for the
+    #   `rules` parameter.
+    #
+    #   If you use this parameter in your request, you cannot use the
+    #   `maxDevices` parameter in the same request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolRequest AWS API Documentation
     #
     class UpdateDevicePoolRequest < Struct.new(
       :arn,
       :name,
       :description,
-      :rules)
+      :rules,
+      :max_devices,
+      :clear_max_devices)
       include Aws::Structure
     end
 

@@ -68,7 +68,6 @@ module Aws::DeviceFarm
     DeviceAvailability = Shapes::StringShape.new(name: 'DeviceAvailability')
     DeviceFilter = Shapes::StructureShape.new(name: 'DeviceFilter')
     DeviceFilterAttribute = Shapes::StringShape.new(name: 'DeviceFilterAttribute')
-    DeviceFilterOperator = Shapes::StringShape.new(name: 'DeviceFilterOperator')
     DeviceFilterValues = Shapes::ListShape.new(name: 'DeviceFilterValues')
     DeviceFilters = Shapes::ListShape.new(name: 'DeviceFilters')
     DeviceFormFactor = Shapes::StringShape.new(name: 'DeviceFormFactor')
@@ -325,6 +324,7 @@ module Aws::DeviceFarm
     CreateDevicePoolRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateDevicePoolRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
     CreateDevicePoolRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, required: true, location_name: "rules"))
+    CreateDevicePoolRequest.add_member(:max_devices, Shapes::ShapeRef.new(shape: Integer, location_name: "maxDevices"))
     CreateDevicePoolRequest.struct_class = Types::CreateDevicePoolRequest
 
     CreateDevicePoolResult.add_member(:device_pool, Shapes::ShapeRef.new(shape: DevicePool, location_name: "devicePool"))
@@ -472,7 +472,7 @@ module Aws::DeviceFarm
     Device.struct_class = Types::Device
 
     DeviceFilter.add_member(:attribute, Shapes::ShapeRef.new(shape: DeviceFilterAttribute, location_name: "attribute"))
-    DeviceFilter.add_member(:operator, Shapes::ShapeRef.new(shape: DeviceFilterOperator, location_name: "operator"))
+    DeviceFilter.add_member(:operator, Shapes::ShapeRef.new(shape: RuleOperator, location_name: "operator"))
     DeviceFilter.add_member(:values, Shapes::ShapeRef.new(shape: DeviceFilterValues, location_name: "values"))
     DeviceFilter.struct_class = Types::DeviceFilter
 
@@ -502,6 +502,7 @@ module Aws::DeviceFarm
     DevicePool.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
     DevicePool.add_member(:type, Shapes::ShapeRef.new(shape: DevicePoolType, location_name: "type"))
     DevicePool.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "rules"))
+    DevicePool.add_member(:max_devices, Shapes::ShapeRef.new(shape: Integer, location_name: "maxDevices"))
     DevicePool.struct_class = Types::DevicePool
 
     DevicePoolCompatibilityResult.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
@@ -1133,6 +1134,8 @@ module Aws::DeviceFarm
     UpdateDevicePoolRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateDevicePoolRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
     UpdateDevicePoolRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "rules"))
+    UpdateDevicePoolRequest.add_member(:max_devices, Shapes::ShapeRef.new(shape: Integer, location_name: "maxDevices"))
+    UpdateDevicePoolRequest.add_member(:clear_max_devices, Shapes::ShapeRef.new(shape: Boolean, location_name: "clearMaxDevices"))
     UpdateDevicePoolRequest.struct_class = Types::UpdateDevicePoolRequest
 
     UpdateDevicePoolResult.add_member(:device_pool, Shapes::ShapeRef.new(shape: DevicePool, location_name: "devicePool"))

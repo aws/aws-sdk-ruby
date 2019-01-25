@@ -248,8 +248,6 @@ module Aws::MediaLive
     #
     # @!attribute [rw] destination
     #   A directory and base filename where archive files should be written.
-    #   If the base filename portion of the URI is left blank, the base
-    #   filename of the first input will be automatically inserted.
     #   @return [Types::OutputLocationRef]
     #
     # @!attribute [rw] rollover_interval
@@ -2282,6 +2280,11 @@ module Aws::MediaLive
     #                   },
     #                   rollover_interval: 1,
     #                 },
+    #                 frame_capture_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
+    #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                   base_url_content: "__string",
@@ -2333,6 +2336,7 @@ module Aws::MediaLive
     #                       restart_delay: 1,
     #                     },
     #                   },
+    #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -2475,6 +2479,9 @@ module Aws::MediaLive
     #                       extension: "__string",
     #                       name_modifier: "__string",
     #                     },
+    #                     frame_capture_output_settings: {
+    #                       name_modifier: "__string",
+    #                     },
     #                     hls_output_settings: {
     #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
@@ -2607,6 +2614,9 @@ module Aws::MediaLive
     #           video_descriptions: [ # required
     #             {
     #               codec_settings: {
+    #                 frame_capture_settings: {
+    #                   capture_interval: 1, # required
+    #                 },
     #                 h264_settings: {
     #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -4326,6 +4336,11 @@ module Aws::MediaLive
     #                 },
     #                 rollover_interval: 1,
     #               },
+    #               frame_capture_group_settings: {
+    #                 destination: { # required
+    #                   destination_ref_id: "__string",
+    #                 },
+    #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                 base_url_content: "__string",
@@ -4377,6 +4392,7 @@ module Aws::MediaLive
     #                     restart_delay: 1,
     #                   },
     #                 },
+    #                 i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                 index_n_segments: 1,
     #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                 iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -4519,6 +4535,9 @@ module Aws::MediaLive
     #                     extension: "__string",
     #                     name_modifier: "__string",
     #                   },
+    #                   frame_capture_output_settings: {
+    #                     name_modifier: "__string",
+    #                   },
     #                   hls_output_settings: {
     #                     hls_settings: { # required
     #                       audio_only_hls_settings: {
@@ -4651,6 +4670,9 @@ module Aws::MediaLive
     #         video_descriptions: [ # required
     #           {
     #             codec_settings: {
+    #               frame_capture_settings: {
+    #                 capture_interval: 1, # required
+    #               },
     #               h264_settings: {
     #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -4836,6 +4858,78 @@ module Aws::MediaLive
     class FollowModeScheduleActionStartSettings < Struct.new(
       :follow_point,
       :reference_action_name)
+      include Aws::Structure
+    end
+
+    # Frame Capture Group Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         destination: { # required
+    #           destination_ref_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   The destination for the frame capture files. Either the URI for an
+    #   Amazon S3 bucket and object, plus a file name prefix (for example,
+    #   s3ssl://sportsDelivery/highlights/20180820/curling\_) or the URI for
+    #   a MediaStore container, plus a file name prefix (for example,
+    #   mediastoressl://sportsDelivery/20180820/curling\_). The final file
+    #   names consist of the prefix from the destination field (for example,
+    #   "curling\_") + name modifier + the counter (5 digits, starting
+    #   from 00001) + extension (which is always .jpg). For example,
+    #   curlingLow.00001.jpg
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureGroupSettings AWS API Documentation
+    #
+    class FrameCaptureGroupSettings < Struct.new(
+      :destination)
+      include Aws::Structure
+    end
+
+    # Frame Capture Output Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureOutputSettings
+    #   data as a hash:
+    #
+    #       {
+    #         name_modifier: "__string",
+    #       }
+    #
+    # @!attribute [rw] name_modifier
+    #   Required if the output group contains more than one output. This
+    #   modifier forms part of the output file name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureOutputSettings AWS API Documentation
+    #
+    class FrameCaptureOutputSettings < Struct.new(
+      :name_modifier)
+      include Aws::Structure
+    end
+
+    # Frame Capture Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureSettings
+    #   data as a hash:
+    #
+    #       {
+    #         capture_interval: 1, # required
+    #       }
+    #
+    # @!attribute [rw] capture_interval
+    #   The frequency, in seconds, for capturing frames for inclusion in the
+    #   output. For example, "10" means capture a frame every 10 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureSettings AWS API Documentation
+    #
+    class FrameCaptureSettings < Struct.new(
+      :capture_interval)
       include Aws::Structure
     end
 
@@ -5414,6 +5508,7 @@ module Aws::MediaLive
     #             restart_delay: 1,
     #           },
     #         },
+    #         i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #         index_n_segments: 1,
     #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #         iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -5519,6 +5614,11 @@ module Aws::MediaLive
     # @!attribute [rw] hls_cdn_settings
     #   Parameters that control interactions with the CDN.
     #   @return [Types::HlsCdnSettings]
+    #
+    # @!attribute [rw] i_frame_only_playlists
+    #   If enabled, writes out I-Frame only playlists in addition to media
+    #   playlists.
+    #   @return [String]
     #
     # @!attribute [rw] index_n_segments
     #   If mode is "live", the number of segments to retain in the
@@ -5671,6 +5771,7 @@ module Aws::MediaLive
       :directory_structure,
       :encryption_type,
       :hls_cdn_settings,
+      :i_frame_only_playlists,
       :index_n_segments,
       :input_loss_action,
       :iv_in_manifest,
@@ -7957,6 +8058,9 @@ module Aws::MediaLive
     #             extension: "__string",
     #             name_modifier: "__string",
     #           },
+    #           frame_capture_output_settings: {
+    #             name_modifier: "__string",
+    #           },
     #           hls_output_settings: {
     #             hls_settings: { # required
     #               audio_only_hls_settings: {
@@ -8195,6 +8299,11 @@ module Aws::MediaLive
     #             },
     #             rollover_interval: 1,
     #           },
+    #           frame_capture_group_settings: {
+    #             destination: { # required
+    #               destination_ref_id: "__string",
+    #             },
+    #           },
     #           hls_group_settings: {
     #             ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #             base_url_content: "__string",
@@ -8246,6 +8355,7 @@ module Aws::MediaLive
     #                 restart_delay: 1,
     #               },
     #             },
+    #             i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #             index_n_segments: 1,
     #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #             iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -8386,6 +8496,9 @@ module Aws::MediaLive
     #                   },
     #                 },
     #                 extension: "__string",
+    #                 name_modifier: "__string",
+    #               },
+    #               frame_capture_output_settings: {
     #                 name_modifier: "__string",
     #               },
     #               hls_output_settings: {
@@ -8545,6 +8658,11 @@ module Aws::MediaLive
     #           },
     #           rollover_interval: 1,
     #         },
+    #         frame_capture_group_settings: {
+    #           destination: { # required
+    #             destination_ref_id: "__string",
+    #           },
+    #         },
     #         hls_group_settings: {
     #           ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #           base_url_content: "__string",
@@ -8596,6 +8714,7 @@ module Aws::MediaLive
     #               restart_delay: 1,
     #             },
     #           },
+    #           i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #           index_n_segments: 1,
     #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #           iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -8671,6 +8790,10 @@ module Aws::MediaLive
     # @!attribute [rw] archive_group_settings
     #   @return [Types::ArchiveGroupSettings]
     #
+    # @!attribute [rw] frame_capture_group_settings
+    #   Frame Capture Group Settings
+    #   @return [Types::FrameCaptureGroupSettings]
+    #
     # @!attribute [rw] hls_group_settings
     #   @return [Types::HlsGroupSettings]
     #
@@ -8687,6 +8810,7 @@ module Aws::MediaLive
     #
     class OutputGroupSettings < Struct.new(
       :archive_group_settings,
+      :frame_capture_group_settings,
       :hls_group_settings,
       :ms_smooth_group_settings,
       :rtmp_group_settings,
@@ -8780,6 +8904,9 @@ module Aws::MediaLive
     #             },
     #           },
     #           extension: "__string",
+    #           name_modifier: "__string",
+    #         },
+    #         frame_capture_output_settings: {
     #           name_modifier: "__string",
     #         },
     #         hls_output_settings: {
@@ -8906,6 +9033,10 @@ module Aws::MediaLive
     # @!attribute [rw] archive_output_settings
     #   @return [Types::ArchiveOutputSettings]
     #
+    # @!attribute [rw] frame_capture_output_settings
+    #   Frame Capture Output Settings
+    #   @return [Types::FrameCaptureOutputSettings]
+    #
     # @!attribute [rw] hls_output_settings
     #   @return [Types::HlsOutputSettings]
     #
@@ -8922,6 +9053,7 @@ module Aws::MediaLive
     #
     class OutputSettings < Struct.new(
       :archive_output_settings,
+      :frame_capture_output_settings,
       :hls_output_settings,
       :ms_smooth_output_settings,
       :rtmp_output_settings,
@@ -11001,6 +11133,11 @@ module Aws::MediaLive
     #                   },
     #                   rollover_interval: 1,
     #                 },
+    #                 frame_capture_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
+    #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                   base_url_content: "__string",
@@ -11052,6 +11189,7 @@ module Aws::MediaLive
     #                       restart_delay: 1,
     #                     },
     #                   },
+    #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -11194,6 +11332,9 @@ module Aws::MediaLive
     #                       extension: "__string",
     #                       name_modifier: "__string",
     #                     },
+    #                     frame_capture_output_settings: {
+    #                       name_modifier: "__string",
+    #                     },
     #                     hls_output_settings: {
     #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
@@ -11326,6 +11467,9 @@ module Aws::MediaLive
     #           video_descriptions: [ # required
     #             {
     #               codec_settings: {
+    #                 frame_capture_settings: {
+    #                   capture_interval: 1, # required
+    #                 },
     #                 h264_settings: {
     #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -11713,6 +11857,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         frame_capture_settings: {
+    #           capture_interval: 1, # required
+    #         },
     #         h264_settings: {
     #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -11754,12 +11901,17 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] frame_capture_settings
+    #   Frame Capture Settings
+    #   @return [Types::FrameCaptureSettings]
+    #
     # @!attribute [rw] h264_settings
     #   @return [Types::H264Settings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
+      :frame_capture_settings,
       :h264_settings)
       include Aws::Structure
     end
@@ -11771,6 +11923,9 @@ module Aws::MediaLive
     #
     #       {
     #         codec_settings: {
+    #           frame_capture_settings: {
+    #             capture_interval: 1, # required
+    #           },
     #           h264_settings: {
     #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -11824,8 +11979,11 @@ module Aws::MediaLive
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] height
-    #   Output video height (in pixels). Leave blank to use source video
-    #   height. If left blank, width must also be unspecified.
+    #   Output video height, in pixels. Must be an even number. For most
+    #   codecs, you can leave this field and width blank in order to use the
+    #   height and width (resolution) from the source. Note, however, that
+    #   leaving blank is not recommended. For the Frame Capture codec,
+    #   height and width are required.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -11836,28 +11994,35 @@ module Aws::MediaLive
     #
     # @!attribute [rw] respond_to_afd
     #   Indicates how to respond to the AFD values in the input stream.
-    #   Setting to "respond" causes input video to be clipped, depending
-    #   on AFD value, input display aspect ratio and output display aspect
-    #   ratio.
+    #   RESPOND causes input video to be clipped, depending on the AFD
+    #   value, input display aspect ratio, and output display aspect ratio,
+    #   and (except for FRAMECAPTURE codec) includes the values in the
+    #   output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores
+    #   the AFD values and includes the values in the output, so input video
+    #   is not clipped. NONE ignores the AFD values and does not include the
+    #   values through to the output, so input video is not clipped.
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior
-    #   When set to "stretchToOutput", automatically configures the output
-    #   position to stretch the video to the specified output resolution.
-    #   This option will override any position value.
+    #   STRETCHTOOUTPUT configures the output position to stretch the video
+    #   to the specified output resolution (height and width). This option
+    #   will override any position value. DEFAULT may insert black boxes
+    #   (pillar boxes or letter boxes) around the video to provide the
+    #   specified output resolution.
     #   @return [String]
     #
     # @!attribute [rw] sharpness
-    #   Changes the width of the anti-alias filter kernel used for scaling.
-    #   Only applies if scaling is being performed and antiAlias is set to
-    #   true. 0 is the softest setting, 100 the sharpest, and 50 recommended
-    #   for most content.
+    #   Changes the strength of the anti-alias filter used for scaling. 0 is
+    #   the softest setting, 100 is the sharpest. A setting of 50 is
+    #   recommended for most content.
     #   @return [Integer]
     #
     # @!attribute [rw] width
-    #   Output video width (in pixels). Leave out to use source video width.
-    #   If left out, height must also be left out. Display aspect ratio is
-    #   always preserved by letterboxing or pillarboxing when necessary.
+    #   Output video width, in pixels. Must be an even number. For most
+    #   codecs, you can leave this field and height blank in order to use
+    #   the height and width (resolution) from the source. Note, however,
+    #   that leaving blank is not recommended. For the Frame Capture codec,
+    #   height and width are required.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoDescription AWS API Documentation
