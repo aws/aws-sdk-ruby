@@ -137,10 +137,6 @@ module Seahorse
               Thread.kill(@socket_thread)
               @socket_thread = nil
             end
-            if @input_signal_thread
-              Thread.kill(@input_signal_thread)
-              @input_signal_thread = nil
-            end
             @status = :closed
           }
         end

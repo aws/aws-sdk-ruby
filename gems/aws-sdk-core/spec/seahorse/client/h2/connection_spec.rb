@@ -15,19 +15,6 @@ module Seahorse
 
           end
 
-          describe '#close!' do
-
-            it 'kills input_signal_thread' do
-              count = 0
-              thread = Thread.new do
-                count += 1
-              end
-              conn.input_signal_thread = thread
-              conn.close!
-              expect(conn.input_signal_thread).to be_nil
-              expect(thread.alive?).to be(false)
-            end
-          end
         end
 
       end

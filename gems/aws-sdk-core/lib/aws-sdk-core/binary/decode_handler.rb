@@ -46,7 +46,7 @@ module Aws
             # attach thread to h2 connection
             # make sure when connection closes
             # input signal thread is also killed
-            context.client.connection.input_signal_thread = thread
+            context[:input_signal_thread] = thread
           end
         end
 

@@ -30,6 +30,7 @@ module Seahorse
           raise error
         elsif @stream
           while !@stream.closed?; end
+          _kill_input_thread
           @response
         end
       end
@@ -39,8 +40,18 @@ module Seahorse
           raise error
         elsif @stream
           @stream.close
+          _kill_input_thread
           @response
         end
+      end
+
+      private
+
+      def _kill_input_thread
+        if thread = context[:input_signal_thread]
+          Thread.kill(thread)
+        end
+        nil
       end
 
     end
