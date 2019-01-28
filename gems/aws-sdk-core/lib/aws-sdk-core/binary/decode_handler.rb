@@ -43,8 +43,8 @@ module Aws
               end
             end
             thread.abort_on_exception = true
-            # attach thread to h2 connection
-            # make sure when connection closes
+            # attach thread to current stream context
+            # make sure when stream closes (#wait or #join! is called)
             # input signal thread is also killed
             context[:input_signal_thread] = thread
           end
