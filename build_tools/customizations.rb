@@ -42,7 +42,7 @@ module BuildTools
 
       def is_eventstream?(api, shape_name)
         shape = api['shapes'][shape_name]
-        if shape['type'] == 'structure'
+        if shape['type'] == 'structure' && shape['members']
           eventstream = false
           shape['members'].each do |_, m_ref|
             eventstream ||= api['shapes'][m_ref['shape']]['eventstream']

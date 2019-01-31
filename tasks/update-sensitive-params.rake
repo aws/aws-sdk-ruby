@@ -3,7 +3,7 @@ task 'update-sensitive-params' do
   sensitive = []
   BuildTools::Services.each do |svc|
     svc.api['shapes'].each_pair do |shape_name, shape|
-      if shape['type'] == 'structure'
+      if shape['type'] == 'structure' && shape['members']
         shape['members'].each_pair do |member_name, member_ref|
           if 
             member_ref['sensitive'] || 
