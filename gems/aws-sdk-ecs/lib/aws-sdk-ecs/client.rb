@@ -624,10 +624,10 @@ module Aws::ECS
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the tasks. If no value is specified, the tags are not
-    #   propagated. Tags can only be propagated to the tasks within the
-    #   service during service creation. To add tags to a task after service
-    #   creation, use the TagResource API action.
+    #   the service to the tasks in the service. If no value is specified, the
+    #   tags are not propagated. Tags can only be propagated to the tasks
+    #   within the service during service creation. To add tags to a task
+    #   after service creation, use the TagResource API action.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1499,6 +1499,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2184,6 +2187,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2324,6 +2330,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -2347,6 +2356,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3415,6 +3429,10 @@ module Aws::ECS
     #   The container instance attributes that this container instance
     #   supports.
     #
+    # @option params [Array<Types::PlatformDevice>] :platform_devices
+    #   The devices that are available on the container instance. The only
+    #   supported device type is a GPU.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
@@ -3454,6 +3472,12 @@ module Aws::ECS
     #         value: "String",
     #         target_type: "container-instance", # accepts container-instance
     #         target_id: "String",
+    #       },
+    #     ],
+    #     platform_devices: [
+    #       {
+    #         id: "String", # required
+    #         type: "GPU", # required, accepts GPU
     #       },
     #     ],
     #     tags: [
@@ -3961,6 +3985,12 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
+    #           },
+    #         ],
     #       },
     #     ],
     #     volumes: [
@@ -4086,6 +4116,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -4270,9 +4303,15 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
-    #   propagated.
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated. Tags
+    #   can only be propagated to the task during task creation. To add tags
+    #   to a task after task creation, use the TagResource API action.
+    #
+    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
+    #   running a task.
+    #
+    #    </note>
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4336,6 +4375,12 @@ module Aws::ECS
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -4392,6 +4437,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -4415,6 +4463,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4563,6 +4616,12 @@ module Aws::ECS
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -4605,6 +4664,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -4628,6 +4690,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4732,6 +4799,9 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].cpu #=> Integer
     #   resp.task.overrides.container_overrides[0].memory #=> Integer
     #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.last_status #=> String
@@ -4755,6 +4825,11 @@ module Aws::ECS
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.task.containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.task.containers[0].cpu #=> String
+    #   resp.task.containers[0].memory #=> String
+    #   resp.task.containers[0].memory_reservation #=> String
+    #   resp.task.containers[0].gpu_ids #=> Array
+    #   resp.task.containers[0].gpu_ids[0] #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -5621,7 +5696,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

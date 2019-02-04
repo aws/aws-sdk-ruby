@@ -446,7 +446,7 @@ module Aws::WorkSpaces
     ModifyAccountResult.struct_class = Types::ModifyAccountResult
 
     ModifyClientPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
-    ModifyClientPropertiesRequest.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, location_name: "ClientProperties"))
+    ModifyClientPropertiesRequest.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, required: true, location_name: "ClientProperties"))
     ModifyClientPropertiesRequest.struct_class = Types::ModifyClientPropertiesRequest
 
     ModifyClientPropertiesResult.struct_class = Types::ModifyClientPropertiesResult

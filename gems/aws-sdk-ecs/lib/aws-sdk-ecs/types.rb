@@ -291,6 +291,24 @@ module Aws::ECS
     #   reports the health status as `UNKNOWN`.
     #   @return [String]
     #
+    # @!attribute [rw] cpu
+    #   The number of CPU units set for the container. The value will be `0`
+    #   if no value was specified in the container definition when the task
+    #   definition was registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The hard limit (in MiB) of memory set for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_reservation
+    #   The soft limit (in MiB) of memory set for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] gpu_ids
+    #   The IDs of each GPU assigned to the container.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -302,7 +320,11 @@ module Aws::ECS
       :reason,
       :network_bindings,
       :network_interfaces,
-      :health_status)
+      :health_status,
+      :cpu,
+      :memory,
+      :memory_reservation,
+      :gpu_ids)
       include Aws::Structure
     end
 
@@ -423,6 +445,12 @@ module Aws::ECS
     #           {
     #             namespace: "String",
     #             value: "String",
+    #           },
+    #         ],
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
     #           },
     #         ],
     #       }
@@ -1136,6 +1164,11 @@ module Aws::ECS
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::SystemControl>]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container. The only
+    #   supported resource is a GPU.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -1171,7 +1204,8 @@ module Aws::ECS
       :ulimits,
       :log_configuration,
       :health_check,
-      :system_controls)
+      :system_controls,
+      :resource_requirements)
       include Aws::Structure
     end
 
@@ -1327,6 +1361,12 @@ module Aws::ECS
     #         cpu: 1,
     #         memory: 1,
     #         memory_reservation: 1,
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1367,6 +1407,12 @@ module Aws::ECS
     #   specify a container name.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container, instead
+    #   of the default value from the task definition. The only supported
+    #   resource is a GPU.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride AWS API Documentation
     #
     class ContainerOverride < Struct.new(
@@ -1375,7 +1421,8 @@ module Aws::ECS
       :environment,
       :cpu,
       :memory,
-      :memory_reservation)
+      :memory_reservation,
+      :resource_requirements)
       include Aws::Structure
     end
 
@@ -1793,10 +1840,10 @@ module Aws::ECS
     #
     # @!attribute [rw] propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the tasks. If no value is specified, the tags are not
-    #   propagated. Tags can only be propagated to the tasks within the
-    #   service during service creation. To add tags to a task after service
-    #   creation, use the TagResource API action.
+    #   the service to the tasks in the service. If no value is specified,
+    #   the tags are not propagated. Tags can only be propagated to the
+    #   tasks within the service during service creation. To add tags to a
+    #   task after service creation, use the TagResource API action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
@@ -4258,6 +4305,36 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The devices that are available on the container instance. The only
+    # supported device type is a GPU.
+    #
+    # @note When making an API call, you may pass PlatformDevice
+    #   data as a hash:
+    #
+    #       {
+    #         id: "String", # required
+    #         type: "GPU", # required, accepts GPU
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID for the GPU(s) on the container instance. The available GPU
+    #   IDs can also be obtained on the container instance in the
+    #   `/var/lib/ecs/gpu/nvidia_gpu_info.json` file.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of device that is available on the container instance. The
+    #   only supported value is `GPU`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlatformDevice AWS API Documentation
+    #
+    class PlatformDevice < Struct.new(
+      :id,
+      :type)
+      include Aws::Structure
+    end
+
     # Port mappings allow containers to access ports on the host container
     # instance to send or receive traffic. Port mappings are specified as
     # part of the container definition.
@@ -4479,6 +4556,12 @@ module Aws::ECS
     #             target_id: "String",
     #           },
     #         ],
+    #         platform_devices: [
+    #           {
+    #             id: "String", # required
+    #             type: "GPU", # required, accepts GPU
+    #           },
+    #         ],
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -4525,6 +4608,11 @@ module Aws::ECS
     #   supports.
     #   @return [Array<Types::Attribute>]
     #
+    # @!attribute [rw] platform_devices
+    #   The devices that are available on the container instance. The only
+    #   supported device type is a GPU.
+    #   @return [Array<Types::PlatformDevice>]
+    #
     # @!attribute [rw] tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
@@ -4543,6 +4631,7 @@ module Aws::ECS
       :version_info,
       :container_instance_arn,
       :attributes,
+      :platform_devices,
       :tags)
       include Aws::Structure
     end
@@ -4678,6 +4767,12 @@ module Aws::ECS
     #               {
     #                 namespace: "String",
     #                 value: "String",
+    #               },
+    #             ],
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
     #               },
     #             ],
     #           },
@@ -5085,6 +5180,34 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The type and amount of a resource to assign to a container. The only
+    # supported resource is a GPU.
+    #
+    # @note When making an API call, you may pass ResourceRequirement
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String", # required
+    #         type: "GPU", # required, accepts GPU
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The number of GPUs to assign to a container.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of resource a container desires. The only supported value
+    #   is `GPU`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement AWS API Documentation
+    #
+    class ResourceRequirement < Struct.new(
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RunTaskRequest
     #   data as a hash:
     #
@@ -5105,6 +5228,12 @@ module Aws::ECS
     #               cpu: 1,
     #               memory: 1,
     #               memory_reservation: 1,
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU
+    #                 },
+    #               ],
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -5260,9 +5389,15 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
-    #   propagated.
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated.
+    #   Tags can only be propagated to the task during task creation. To add
+    #   tags to a task after task creation, use the TagResource API action.
+    #
+    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
+    #   running a task.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
@@ -5720,6 +5855,12 @@ module Aws::ECS
     #               cpu: 1,
     #               memory: 1,
     #               memory_reservation: 1,
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU
+    #                 },
+    #               ],
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -6816,6 +6957,12 @@ module Aws::ECS
     #             cpu: 1,
     #             memory: 1,
     #             memory_reservation: 1,
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
+    #               },
+    #             ],
     #           },
     #         ],
     #         task_role_arn: "String",

@@ -1423,6 +1423,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: TipOfSourceReferenceIsDifferentException)
         o.errors << Shapes::ShapeRef.new(shape: ReferenceDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommitIdException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)

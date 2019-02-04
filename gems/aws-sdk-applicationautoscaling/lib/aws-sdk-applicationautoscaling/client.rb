@@ -273,7 +273,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -304,7 +309,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -400,7 +406,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -431,7 +442,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -513,7 +525,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
@@ -545,7 +562,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -645,7 +663,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
@@ -678,7 +701,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -817,7 +841,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -849,7 +878,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -999,7 +1029,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -1031,7 +1066,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1213,7 +1249,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -1245,7 +1286,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1313,8 +1355,8 @@ module Aws::ApplicationAutoScaling
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scaling policy applies to the scalable
     # target identified by those three attributes. You cannot create a
-    # scaling policy until you register the scalable target using
-    # RegisterScalableTarget.
+    # scaling policy until you have registered the resource as a scalable
+    # target using RegisterScalableTarget.
     #
     # To update a policy, specify its policy name and the parameters that
     # you want to change. Any parameters that you don't specify are not
@@ -1373,7 +1415,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
@@ -1404,7 +1451,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1414,12 +1462,17 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [String] :policy_type
     #   The policy type. This parameter is required if you are creating a
-    #   policy.
+    #   scaling policy.
     #
-    #   For DynamoDB, only `TargetTrackingScaling` is supported. For Amazon
-    #   ECS, Spot Fleet, and Amazon RDS, both `StepScaling` and
-    #   `TargetTrackingScaling` are supported. For any other service, only
-    #   `StepScaling` is supported.
+    #   For information on which services do not support `StepScaling` or
+    #   `TargetTrackingScaling`, see [Step Scaling Policies for Application
+    #   Auto Scaling][1] and [Target Tracking Scaling Policies for Application
+    #   Auto Scaling][2] in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
     #
     # @option params [Types::StepScalingPolicyConfiguration] :step_scaling_policy_configuration
     #   A step scaling policy.
@@ -1562,8 +1615,8 @@ module Aws::ApplicationAutoScaling
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scheduled action applies to the scalable
     # target identified by those three attributes. You cannot create a
-    # scheduled action until you register the scalable target using
-    # RegisterScalableTarget.
+    # scheduled action until you have registered the resource as a scalable
+    # target using RegisterScalableTarget.
     #
     # To update an action, specify its name and the parameters that you want
     # to change. If you don't specify start and end times, the old values
@@ -1587,11 +1640,11 @@ module Aws::ApplicationAutoScaling
     # @option params [String] :schedule
     #   The schedule for this action. The following formats are supported:
     #
-    #   * At expressions - `at(yyyy-mm-ddThh:mm:ss)`
+    #   * At expressions - "`at(yyyy-mm-ddThh:mm:ss)`"
     #
-    #   * Rate expressions - `rate(value unit)`
+    #   * Rate expressions - "`rate(value unit)`"
     #
-    #   * Cron expressions - `cron(fields)`
+    #   * Cron expressions - "`cron(fields)`"
     #
     #   At expressions are useful for one-time schedules. Specify the time, in
     #   UTC.
@@ -1604,7 +1657,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action.
@@ -1645,7 +1698,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This parameter is required if you are creating
@@ -1677,7 +1735,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1726,15 +1785,17 @@ module Aws::ApplicationAutoScaling
     end
 
     # Registers or updates a scalable target. A scalable target is a
-    # resource that Application Auto Scaling can scale out or scale in.
-    # After you have registered a scalable target, you can use this
-    # operation to update the minimum and maximum values for its scalable
-    # dimension.
+    # resource that Application Auto Scaling can scale in and scale out.
+    # Each scalable target has a resource ID, scalable dimension, and
+    # namespace, as well as values for minimum and maximum capacity.
     #
-    # After you register a scalable target, you can create and apply scaling
-    # policies using PutScalingPolicy. You can view the scaling policies for
-    # a service namespace using DescribeScalableTargets. If you no longer
-    # need a scalable target, you can deregister it using
+    # After you register a scalable target, you do not need to register it
+    # again to use other Application Auto Scaling operations. To see which
+    # resources have been registered, use DescribeScalableTargets. You can
+    # also view the scaling policies for a service namespace using
+    # DescribeScalableTargets.
+    #
+    # If you no longer need a scalable target, you can deregister it using
     # DeregisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
@@ -1783,7 +1844,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available in
+    #     our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
@@ -1815,7 +1881,8 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
-    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition and
+    #     Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1825,11 +1892,11 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [Integer] :min_capacity
     #   The minimum value to scale to in response to a scale in event. This
-    #   parameter is required if you are registering a scalable target.
+    #   parameter is required to register a scalable target.
     #
     # @option params [Integer] :max_capacity
     #   The maximum value to scale to in response to a scale out event. This
-    #   parameter is required if you are registering a scalable target.
+    #   parameter is required to register a scalable target.
     #
     # @option params [String] :role_arn
     #   Application Auto Scaling creates a service-linked role that grants it
@@ -1844,7 +1911,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/application/userguide/application-autoscaling-service-linked-roles.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1914,7 +1981,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -96,6 +96,7 @@ module Aws::ECS
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
+    GpuIds = Shapes::ListShape.new(name: 'GpuIds')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
     HostEntry = Shapes::StructureShape.new(name: 'HostEntry')
@@ -149,6 +150,9 @@ module Aws::ECS
     PlacementStrategies = Shapes::ListShape.new(name: 'PlacementStrategies')
     PlacementStrategy = Shapes::StructureShape.new(name: 'PlacementStrategy')
     PlacementStrategyType = Shapes::StringShape.new(name: 'PlacementStrategyType')
+    PlatformDevice = Shapes::StructureShape.new(name: 'PlatformDevice')
+    PlatformDeviceType = Shapes::StringShape.new(name: 'PlatformDeviceType')
+    PlatformDevices = Shapes::ListShape.new(name: 'PlatformDevices')
     PlatformTaskDefinitionIncompatibilityException = Shapes::StructureShape.new(name: 'PlatformTaskDefinitionIncompatibilityException')
     PlatformUnknownException = Shapes::StructureShape.new(name: 'PlatformUnknownException')
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
@@ -166,6 +170,9 @@ module Aws::ECS
     RequiresAttributes = Shapes::ListShape.new(name: 'RequiresAttributes')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
+    ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Resources = Shapes::ListShape.new(name: 'Resources')
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
@@ -308,6 +315,10 @@ module Aws::ECS
     Container.add_member(:network_bindings, Shapes::ShapeRef.new(shape: NetworkBindings, location_name: "networkBindings"))
     Container.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "networkInterfaces"))
     Container.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "healthStatus"))
+    Container.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
+    Container.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
+    Container.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: String, location_name: "memoryReservation"))
+    Container.add_member(:gpu_ids, Shapes::ShapeRef.new(shape: GpuIds, location_name: "gpuIds"))
     Container.struct_class = Types::Container
 
     ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -343,6 +354,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
     ContainerDefinition.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, location_name: "healthCheck"))
     ContainerDefinition.add_member(:system_controls, Shapes::ShapeRef.new(shape: SystemControls, location_name: "systemControls"))
+    ContainerDefinition.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitions.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
@@ -374,6 +386,7 @@ module Aws::ECS
     ContainerOverride.add_member(:cpu, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "cpu"))
     ContainerOverride.add_member(:memory, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memory"))
     ContainerOverride.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memoryReservation"))
+    ContainerOverride.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerOverride.struct_class = Types::ContainerOverride
 
     ContainerOverrides.member = Shapes::ShapeRef.new(shape: ContainerOverride)
@@ -563,6 +576,8 @@ module Aws::ECS
 
     Failures.member = Shapes::ShapeRef.new(shape: Failure)
 
+    GpuIds.member = Shapes::ShapeRef.new(shape: String)
+
     HealthCheck.add_member(:command, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "command"))
     HealthCheck.add_member(:interval, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "interval"))
     HealthCheck.add_member(:timeout, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "timeout"))
@@ -742,6 +757,12 @@ module Aws::ECS
     PlacementStrategy.add_member(:field, Shapes::ShapeRef.new(shape: String, location_name: "field"))
     PlacementStrategy.struct_class = Types::PlacementStrategy
 
+    PlatformDevice.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    PlatformDevice.add_member(:type, Shapes::ShapeRef.new(shape: PlatformDeviceType, required: true, location_name: "type"))
+    PlatformDevice.struct_class = Types::PlatformDevice
+
+    PlatformDevices.member = Shapes::ShapeRef.new(shape: PlatformDevice)
+
     PortMapping.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     PortMapping.add_member(:host_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "hostPort"))
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "protocol"))
@@ -771,6 +792,7 @@ module Aws::ECS
     RegisterContainerInstanceRequest.add_member(:version_info, Shapes::ShapeRef.new(shape: VersionInfo, location_name: "versionInfo"))
     RegisterContainerInstanceRequest.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     RegisterContainerInstanceRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+    RegisterContainerInstanceRequest.add_member(:platform_devices, Shapes::ShapeRef.new(shape: PlatformDevices, location_name: "platformDevices"))
     RegisterContainerInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RegisterContainerInstanceRequest.struct_class = Types::RegisterContainerInstanceRequest
 
@@ -808,6 +830,12 @@ module Aws::ECS
     Resource.add_member(:integer_value, Shapes::ShapeRef.new(shape: Integer, location_name: "integerValue"))
     Resource.add_member(:string_set_value, Shapes::ShapeRef.new(shape: StringList, location_name: "stringSetValue"))
     Resource.struct_class = Types::Resource
+
+    ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    ResourceRequirement.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "type"))
+    ResourceRequirement.struct_class = Types::ResourceRequirement
+
+    ResourceRequirements.member = Shapes::ShapeRef.new(shape: ResourceRequirement)
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
