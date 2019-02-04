@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::CodeCommit - Updated the API for AWS CodeCommit.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::WorkSpaces - Updated the API for Amazon WorkSpaces.
+
 2.11.212 (2019-01-25)
 ------------------
 
