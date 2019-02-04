@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.213 (2019-02-04)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
 
 * Feature - Aws::CodeCommit - Updated the API for AWS CodeCommit.
