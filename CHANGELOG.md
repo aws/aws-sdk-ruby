@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ServiceCatalog - Updated the documentation for AWS Service Catalog.
+
+* Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
+
 2.11.213 (2019-02-04)
 ------------------
 
