@@ -1444,7 +1444,7 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids

@@ -439,7 +439,9 @@ module Aws::EC2
     # To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
     #
     # @option params [required, String] :cidr
-    #   The IPv4 address range, in CIDR notation.
+    #   The IPv4 address range, in CIDR notation. This must be the exact range
+    #   that you provisioned. You can't advertise only a portion of the
+    #   provisioned range.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1660,12 +1662,12 @@ module Aws::EC2
     # Attaches a virtual private gateway to a VPC. You can attach one
     # virtual private gateway to one VPC at a time.
     #
-    # For more information, see [AWS Managed VPN Connections][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -2003,8 +2005,8 @@ module Aws::EC2
     #   EC2-VPC, the source security group must be in the same VPC.
     #
     # @option params [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account ID for the source security group, if
-    #   the source security group is in a different account. You can't
+    #   \[nondefault VPC\] The AWS account ID for the source security group,
+    #   if the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full
@@ -3499,8 +3501,8 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information about VPN customer gateways, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     # You cannot create more than one customer gateway with the same VPN
     # type, IP address, and BGP ASN parameter values. If you run an
@@ -3511,7 +3513,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, Integer] :bgp_asn
     #   For devices that support BGP, the customer gateway's BGP ASN.
@@ -7069,8 +7071,16 @@ module Aws::EC2
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
+    #
     # @option params [String] :snapshot_id
     #   The snapshot from which to create the volume.
+    #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
     #
     # @option params [String] :volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
@@ -7749,12 +7759,12 @@ module Aws::EC2
     # This is an idempotent operation. If you perform the operation more
     # than once, Amazon EC2 doesn't return an error.
     #
-    # For more information, see [AWS Managed VPN Connections][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, String] :customer_gateway_id
     #   The ID of the customer gateway.
@@ -7841,12 +7851,12 @@ module Aws::EC2
     # static route allows traffic to be routed from the virtual private
     # gateway to the VPN customer gateway.
     #
-    # For more information about VPN connections, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [required, String] :destination_cidr_block
     #   The CIDR block associated with the local subnet of the customer
@@ -7877,12 +7887,12 @@ module Aws::EC2
     # endpoint on the VPC side of your VPN connection. You can create a
     # virtual private gateway before creating the VPC itself.
     #
-    # For more information about virtual private gateways, see [AWS Managed
-    # VPN Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [String] :availability_zone
     #   The Availability Zone for the virtual private gateway.
@@ -9941,7 +9951,7 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     # @option params [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     #
@@ -10993,12 +11003,12 @@ module Aws::EC2
 
     # Describes one or more of your VPN customer gateways.
     #
-    # For more information about VPN customer gateways, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [Array<String>] :customer_gateway_ids
     #   One or more customer gateway IDs.
@@ -18580,27 +18590,28 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `association.transit-gateway-route-table-id` - The ID of the route
-    #     table for the transit gateway.
-    #
     #   * `association.state` - The state of the association (`associating` \|
     #     `associated` \| `disassociating`).
     #
+    #   * `association.transit-gateway-route-table-id` - The ID of the route
+    #     table for the transit gateway.
+    #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-owner` - The ID of the AWS account that owns the resource.
+    #   * `resource-owner-id` - The ID of the AWS account that owns the
+    #     resource.
     #
     #   * `resource-type` - The resource type (`vpc` \| `vpn`).
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
-    #   * `transit-gateway-owner` - The ID of the AWS account that owns the
+    #   * `transit-gateway-owner-id` - The ID of the AWS account that owns the
     #     transit gateway.
     #
     # @option params [Integer] :max_results
@@ -18682,9 +18693,9 @@ module Aws::EC2
     #     default propagation route table for the transit gateway (`true` \|
     #     `false`).
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -18757,9 +18768,9 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -18837,9 +18848,6 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `owner-id` - The ID of the AWS account that owns the transit
-    #     gateway.
-    #
     #   * `options.propagation-default-route-table-id` - The ID of the default
     #     propagation route table.
     #
@@ -18867,14 +18875,14 @@ module Aws::EC2
     #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost Multipath
     #     Protocol support is enabled (`enable` \| `disable`).
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `owner-id` - The ID of the AWS account that owns the transit
+    #     gateway.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
-    #
-    #   * `transit-gateway-state` - The state of the transit gateway
-    #     (`pending` \| `available` \| `deleting` \| `deleted`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -20265,9 +20273,19 @@ module Aws::EC2
     #
     #   Default: Describes all your VPC peering connections.
     #
+    # @option params [String] :next_token
+    #   The token to request the next page of results. (You received this
+    #   token from a prior call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
     # @return [Types::DescribeVpcPeeringConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcPeeringConnectionsResult#vpc_peering_connections #vpc_peering_connections} => Array&lt;Types::VpcPeeringConnection&gt;
+    #   * {Types::DescribeVpcPeeringConnectionsResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -20280,6 +20298,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -20314,6 +20334,7 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].tags[0].key #=> String
     #   resp.vpc_peering_connections[0].tags[0].value #=> String
     #   resp.vpc_peering_connections[0].vpc_peering_connection_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnections AWS API Documentation
     #
@@ -20466,12 +20487,12 @@ module Aws::EC2
 
     # Describes one or more of your VPN connections.
     #
-    # For more information about VPN connections, see [AWS Managed VPN
-    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -20578,12 +20599,12 @@ module Aws::EC2
 
     # Describes one or more of your virtual private gateways.
     #
-    # For more information about virtual private gateways, see [AWS Managed
-    # VPN Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html
+    # [1]: http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -21730,19 +21751,34 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
+    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #     gateway attachment.
+    #
+    #   * `attachment.resource-id` - The resource id of the transit gateway
+    #     attachment.
+    #
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that match
+    #     the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+    #     10.0.1.0/31 routes in your route table and you specify
+    #     supernet-of-match as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `transit-gateway-route-state` - The state of the route (`active` \|
-    #     `blackhole`).
-    #
-    #   * `transit-gateway-route-transit-gateway-attachment-id` - The ID of
-    #     the attachment.
-    #
-    #   * `transit-gateway-route-type` - The route type (`static` \|
-    #     `propagated`).
-    #
-    #   * `transit-gateway-route-vpn-connection-id` - The ID of the VPN
-    #     connection.
+    #   * `type` - The type of roue (`active` \| `blackhole`).
     #
     # @option params [required, String] :s3_bucket
     #   The name of the S3 bucket.
@@ -28360,7 +28396,11 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     #
     # @option params [Types::CapacityReservationSpecification] :capacity_reservation_specification
-    #   Information about the Capacity Reservation targeting option.
+    #   Information about the Capacity Reservation targeting option. If you do
+    #   not specify this parameter, the instance's Capacity Reservation
+    #   preference defaults to `open`, which enables it to run in any open
+    #   Capacity Reservation that has matching attributes (instance type,
+    #   platform, Availability Zone).
     #
     # @option params [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
@@ -28899,16 +28939,35 @@ module Aws::EC2
     # @option params [required, Array<Types::Filter>] :filters
     #   One or more filters. The possible values are:
     #
-    #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
+    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #     gateway attachment.
     #
-    #   * `transit-gateway-route-state` - The state of the route (`active` \|
-    #     `blackhole`).
+    #   * `attachment.resource-id` - The resource id of the transit gateway
+    #     attachment.
     #
-    #   * `transit-gateway-route-transit-gateway-attachment-id` - The ID of
-    #     the attachment.
+    #   * `attachment.resource-type` - The attachment resource type (`vpc` \|
+    #     `vpn`).
     #
-    #   * `transit-gateway-route-type` - The route type (`static` \|
-    #     `propagated`).
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that match
+    #     the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+    #     10.0.1.0/31 routes in your route table and you specify
+    #     supernet-of-match as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `type` - The type of roue (`active` \| `blackhole`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of routes to return.
@@ -29766,7 +29825,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

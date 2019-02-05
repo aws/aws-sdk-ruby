@@ -700,6 +700,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -751,6 +753,13 @@ module Aws::EC2
     #   One or more VPC peering connection IDs.
     #
     #   Default: Describes all your VPC peering connections.
+    # @option options [String] :next_token
+    #   The token to request the next page of results. (You received this
+    #   token from a prior call.)
+    # @option options [Integer] :max_results
+    #   The maximum number of results to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
     # @return [VpcPeeringConnection::Collection]
     def accepted_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
@@ -1423,6 +1432,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1474,6 +1485,13 @@ module Aws::EC2
     #   One or more VPC peering connection IDs.
     #
     #   Default: Describes all your VPC peering connections.
+    # @option options [String] :next_token
+    #   The token to request the next page of results. (You received this
+    #   token from a prior call.)
+    # @option options [Integer] :max_results
+    #   The maximum number of results to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
     # @return [VpcPeeringConnection::Collection]
     def requested_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|

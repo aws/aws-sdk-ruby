@@ -401,7 +401,11 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
-    #   Information about the Capacity Reservation targeting option.
+    #   Information about the Capacity Reservation targeting option. If you do
+    #   not specify this parameter, the instance's Capacity Reservation
+    #   preference defaults to `open`, which enables it to run in any open
+    #   Capacity Reservation that has matching attributes (instance type,
+    #   platform, Availability Zone).
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
     #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
@@ -882,8 +886,16 @@ module Aws::EC2
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
+    #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
     # @option options [String] :snapshot_id
     #   The snapshot from which to create the volume.
+    #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
     # @option options [String] :volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
@@ -1184,7 +1196,7 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
@@ -2803,7 +2815,7 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
@@ -2856,6 +2868,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2907,6 +2921,13 @@ module Aws::EC2
     #   One or more VPC peering connection IDs.
     #
     #   Default: Describes all your VPC peering connections.
+    # @option options [String] :next_token
+    #   The token to request the next page of results. (You received this
+    #   token from a prior call.)
+    # @option options [Integer] :max_results
+    #   The maximum number of results to return for this request. The request
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
     # @return [VpcPeeringConnection::Collection]
     def vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|

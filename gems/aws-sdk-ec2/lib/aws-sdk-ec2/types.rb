@@ -317,7 +317,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cidr
-    #   The IPv4 address range, in CIDR notation.
+    #   The IPv4 address range, in CIDR notation. This must be the exact
+    #   range that you provisioned. You can't advertise only a portion of
+    #   the provisioned range.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -1691,8 +1693,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account ID for the source security group, if
-    #   the source security group is in a different account. You can't
+    #   \[nondefault VPC\] The AWS account ID for the source security group,
+    #   if the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full
@@ -2582,12 +2584,15 @@ module Aws::EC2
     end
 
     # Describes an instance's Capacity Reservation targeting option. You
-    # can specify only one option at a time. Use the
-    # `CapacityReservationPreference` parameter to configure the instance to
-    # run as an On-Demand Instance or to run in any `open` Capacity
-    # Reservation that has matching attributes (instance type, platform,
-    # Availability Zone). Use the `CapacityReservationTarget` parameter to
-    # explicitly target a specific Capacity Reservation.
+    # can specify only one parameter at a time. If you specify
+    # `CapacityReservationPreference` and `CapacityReservationTarget`, the
+    # request fails.
+    #
+    # Use the `CapacityReservationPreference` parameter to configure the
+    # instance to run as an On-Demand Instance or to run in any `open`
+    # Capacity Reservation that has matching attributes (instance type,
+    # platform, Availability Zone). Use the `CapacityReservationTarget`
+    # parameter to explicitly target a specific Capacity Reservation.
     #
     # @note When making an API call, you may pass CapacityReservationSpecification
     #   data as a hash:
@@ -6904,10 +6909,18 @@ module Aws::EC2
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
+    #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
     #   The snapshot from which to create the volume.
+    #
+    #   <note markdown="1"> At least one of Size or SnapshotId are required.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -9206,7 +9219,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     #   @return [Array<String>]
@@ -15571,29 +15584,29 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `association.transit-gateway-route-table-id` - The ID of the route
-    #     table for the transit gateway.
-    #
     #   * `association.state` - The state of the association (`associating`
     #     \| `associated` \| `disassociating`).
     #
+    #   * `association.transit-gateway-route-table-id` - The ID of the route
+    #     table for the transit gateway.
+    #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-owner` - The ID of the AWS account that owns the
+    #   * `resource-owner-id` - The ID of the AWS account that owns the
     #     resource.
     #
     #   * `resource-type` - The resource type (`vpc` \| `vpn`).
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
-    #   * `transit-gateway-owner` - The ID of the AWS account that owns the
-    #     transit gateway.
+    #   * `transit-gateway-owner-id` - The ID of the AWS account that owns
+    #     the transit gateway.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -15672,9 +15685,9 @@ module Aws::EC2
     #     default propagation route table for the transit gateway (`true` \|
     #     `false`).
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
@@ -15750,9 +15763,9 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -15829,9 +15842,6 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `owner-id` - The ID of the AWS account that owns the transit
-    #     gateway.
-    #
     #   * `options.propagation-default-route-table-id` - The ID of the
     #     default propagation route table.
     #
@@ -15859,14 +15869,14 @@ module Aws::EC2
     #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost
     #     Multipath Protocol support is enabled (`enable` \| `disable`).
     #
-    #   * `state` - The state of the attachment (`pendingAcceptance` \|
-    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
-    #     \| `failed` \| `rejected`).
+    #   * `owner-id` - The ID of the AWS account that owns the transit
+    #     gateway.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
-    #
-    #   * `transit-gateway-state` - The state of the transit gateway
-    #     (`pending` \| `available` \| `deleting` \| `deleted`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16963,6 +16973,8 @@ module Aws::EC2
     #         ],
     #         dry_run: false,
     #         vpc_peering_connection_ids: ["String"],
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -17021,12 +17033,25 @@ module Aws::EC2
     #   Default: Describes all your VPC peering connections.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results. (You received this
+    #   token from a prior call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request. The
+    #   request returns a token that you can specify in a subsequent call to
+    #   get the next set of results.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsRequest AWS API Documentation
     #
     class DescribeVpcPeeringConnectionsRequest < Struct.new(
       :filters,
       :dry_run,
-      :vpc_peering_connection_ids)
+      :vpc_peering_connection_ids,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -17034,10 +17059,16 @@ module Aws::EC2
     #   Information about the VPC peering connections.
     #   @return [Array<Types::VpcPeeringConnection>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsResult AWS API Documentation
     #
     class DescribeVpcPeeringConnectionsResult < Struct.new(
-      :vpc_peering_connections)
+      :vpc_peering_connections,
+      :next_token)
       include Aws::Structure
     end
 
@@ -19001,19 +19032,34 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
+    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #     gateway attachment.
+    #
+    #   * `attachment.resource-id` - The resource id of the transit gateway
+    #     attachment.
+    #
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that
+    #     match the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29
+    #     and 10.0.1.0/31 routes in your route table and you specify
+    #     supernet-of-match as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
     #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
     #
-    #   * `transit-gateway-route-state` - The state of the route (`active`
-    #     \| `blackhole`).
-    #
-    #   * `transit-gateway-route-transit-gateway-attachment-id` - The ID of
-    #     the attachment.
-    #
-    #   * `transit-gateway-route-type` - The route type (`static` \|
-    #     `propagated`).
-    #
-    #   * `transit-gateway-route-vpn-connection-id` - The ID of the VPN
-    #     connection.
+    #   * `type` - The type of roue (`active` \| `blackhole`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] s3_bucket
@@ -29613,7 +29659,11 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateCpuOptionsRequest]
     #
     # @!attribute [rw] capacity_reservation_specification
-    #   The Capacity Reservation targeting option.
+    #   The Capacity Reservation targeting option. If you do not specify
+    #   this parameter, the instance's Capacity Reservation preference
+    #   defaults to `open`, which enables it to run in any open Capacity
+    #   Reservation that has matching attributes (instance type, platform,
+    #   Availability Zone).
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationRequest]
     #
     # @!attribute [rw] hibernation_options
@@ -30469,6 +30519,10 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_count
     #   The number of modified Reserved Instances.
+    #
+    #   <note markdown="1"> This is a required field for a request.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] instance_type
@@ -32045,7 +32099,11 @@ module Aws::EC2
     #   @return [Types::CpuOptionsRequest]
     #
     # @!attribute [rw] capacity_reservation_specification
-    #   Information about the Capacity Reservation targeting option.
+    #   Information about the Capacity Reservation targeting option. If you
+    #   do not specify this parameter, the instance's Capacity Reservation
+    #   preference defaults to `open`, which enables it to run in any open
+    #   Capacity Reservation that has matching attributes (instance type,
+    #   platform, Availability Zone).
     #   @return [Types::CapacityReservationSpecification]
     #
     # @!attribute [rw] hibernation_options
@@ -33070,16 +33128,35 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. The possible values are:
     #
-    #   * `transit-gateway-route-destination-cidr-block` - The CIDR range.
+    #   * `attachment.transit-gateway-attachment-id`- The id of the transit
+    #     gateway attachment.
     #
-    #   * `transit-gateway-route-state` - The state of the route (`active`
-    #     \| `blackhole`).
+    #   * `attachment.resource-id` - The resource id of the transit gateway
+    #     attachment.
     #
-    #   * `transit-gateway-route-transit-gateway-attachment-id` - The ID of
-    #     the attachment.
+    #   * `attachment.resource-type` - The attachment resource type (`vpc`
+    #     \| `vpn`).
     #
-    #   * `transit-gateway-route-type` - The route type (`static` \|
-    #     `propagated`).
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that
+    #     match the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29
+    #     and 10.0.1.0/31 routes in your route table and you specify
+    #     supernet-of-match as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the attachment (`available` \| `deleted` \|
+    #     `deleting` \| `failed` \| `modifying` \| `pendingAcceptance` \|
+    #     `pending` \| `rollingBack` \| `rejected` \| `rejecting`).
+    #
+    #   * `type` - The type of roue (`active` \| `blackhole`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -37455,12 +37532,7 @@ module Aws::EC2
     # @!attribute [rw] category
     #   The category of the VPN connection. A value of `VPN` indicates an
     #   AWS VPN connection. A value of `VPN-Classic` indicates an AWS
-    #   Classic VPN connection. For more information, see [AWS Managed VPN
-    #   Categories][1] in the *Amazon Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-categories
+    #   Classic VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] state

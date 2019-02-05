@@ -594,7 +594,11 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
-    #   Information about the Capacity Reservation targeting option.
+    #   Information about the Capacity Reservation targeting option. If you do
+    #   not specify this parameter, the instance's Capacity Reservation
+    #   preference defaults to `open`, which enables it to run in any open
+    #   Capacity Reservation that has matching attributes (instance type,
+    #   platform, Availability Zone).
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
     #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic

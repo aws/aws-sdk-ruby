@@ -555,6 +555,7 @@ module Aws::EC2
     DescribeVpcEndpointServicesResult = Shapes::StructureShape.new(name: 'DescribeVpcEndpointServicesResult')
     DescribeVpcEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeVpcEndpointsRequest')
     DescribeVpcEndpointsResult = Shapes::StructureShape.new(name: 'DescribeVpcEndpointsResult')
+    DescribeVpcPeeringConnectionsMaxResults = Shapes::IntegerShape.new(name: 'DescribeVpcPeeringConnectionsMaxResults')
     DescribeVpcPeeringConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeVpcPeeringConnectionsRequest')
     DescribeVpcPeeringConnectionsResult = Shapes::StructureShape.new(name: 'DescribeVpcPeeringConnectionsResult')
     DescribeVpcsRequest = Shapes::StructureShape.new(name: 'DescribeVpcsRequest')
@@ -3841,9 +3842,12 @@ module Aws::EC2
     DescribeVpcPeeringConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeVpcPeeringConnectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeVpcPeeringConnectionsRequest.add_member(:vpc_peering_connection_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "VpcPeeringConnectionId"))
+    DescribeVpcPeeringConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeVpcPeeringConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeVpcPeeringConnectionsMaxResults, location_name: "MaxResults"))
     DescribeVpcPeeringConnectionsRequest.struct_class = Types::DescribeVpcPeeringConnectionsRequest
 
     DescribeVpcPeeringConnectionsResult.add_member(:vpc_peering_connections, Shapes::ShapeRef.new(shape: VpcPeeringConnectionList, location_name: "vpcPeeringConnectionSet"))
+    DescribeVpcPeeringConnectionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeVpcPeeringConnectionsResult.struct_class = Types::DescribeVpcPeeringConnectionsResult
 
     DescribeVpcsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
