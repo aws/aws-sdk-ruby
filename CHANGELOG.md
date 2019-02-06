@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.215 (2019-02-06)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
