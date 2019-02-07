@@ -48,8 +48,6 @@ module Aws::GameLift
 
     # Properties describing a fleet alias.
     #
-    # Alias-related operations include:
-    #
     # * CreateAlias
     #
     # * ListAliases
@@ -187,8 +185,6 @@ module Aws::GameLift
     end
 
     # Properties describing a game build.
-    #
-    # Build-related operations include:
     #
     # * CreateBuild
     #
@@ -483,7 +479,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_instance_type
@@ -544,11 +540,11 @@ module Aws::GameLift
     #   @return [Types::ResourceCreationLimitPolicy]
     #
     # @!attribute [rw] metric_groups
-    #   Name of a metric group to add this fleet to. A metric group tracks
-    #   metrics across all fleets in the group. Use an existing metric group
-    #   name to add this fleet to the group, or use a new name to create a
-    #   new metric group. A fleet can only be included in one metric group
-    #   at a time.
+    #   Name of an Amazon CloudWatch metric group to add this fleet to. A
+    #   metric group aggregates the metrics for all fleets in the group.
+    #   Specify an existing metric group name, or provide a new name to
+    #   create a new metric group. A fleet can only be included in one
+    #   metric group at a time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] peer_vpc_aws_account_id
@@ -560,9 +556,14 @@ module Aws::GameLift
     # @!attribute [rw] peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
@@ -574,11 +575,11 @@ module Aws::GameLift
     #   need them. Spot instances have lower prices, but spot pricing is
     #   variable, and while in use they can be interrupted (with a
     #   two-minute notification). Learn more about Amazon GameLift spot
-    #   instances with at [ Choose Computing Resources][1].
+    #   instances with at [ Set up Access to External Services][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-credentials.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
@@ -666,7 +667,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] creator_id
@@ -705,7 +706,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionInput AWS API Documentation
@@ -858,7 +859,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] request_timeout_seconds
@@ -910,7 +911,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -922,7 +923,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfigurationInput AWS API Documentation
@@ -967,14 +968,16 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] name
-    #   Unique identifier for a matchmaking rule set. This name is used to
-    #   identify the rule set associated with a matchmaking configuration.
+    #   Unique identifier for a matchmaking rule set. A matchmaking
+    #   configuration identifies the rule set it uses by this name value.
+    #   (Note: The rule set name is different from the optional "name"
+    #   field in the rule set body.)
     #   @return [String]
     #
     # @!attribute [rw] rule_set_body
-    #   Collection of matchmaking rules, formatted as a JSON string. (Note
+    #   Collection of matchmaking rules, formatted as a JSON string. Note
     #   that comments are not allowed in JSON, but most elements support a
-    #   description field.)
+    #   description field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSetInput AWS API Documentation
@@ -1115,9 +1118,14 @@ module Aws::GameLift
     # @!attribute [rw] peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorizationInput AWS API Documentation
@@ -1167,9 +1175,14 @@ module Aws::GameLift
     # @!attribute [rw] peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionInput AWS API Documentation
@@ -1297,6 +1310,34 @@ module Aws::GameLift
 
     # Represents the input for a request action.
     #
+    # @note When making an API call, you may pass DeleteMatchmakingRuleSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MatchmakingIdStringModel", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Unique identifier for a matchmaking rule set to be deleted. (Note:
+    #   The rule set name is different from the optional "name" field in
+    #   the rule set body.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSetInput AWS API Documentation
+    #
+    class DeleteMatchmakingRuleSetInput < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSetOutput AWS API Documentation
+    #
+    class DeleteMatchmakingRuleSetOutput < Aws::EmptyStructure; end
+
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass DeleteScalingPolicyInput
     #   data as a hash:
     #
@@ -1341,9 +1382,14 @@ module Aws::GameLift
     # @!attribute [rw] peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorizationInput AWS API Documentation
@@ -2222,8 +2268,9 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] names
-    #   Unique identifier for a matchmaking rule set. This name is used to
-    #   identify the rule set associated with a matchmaking configuration.
+    #   List of one or more matchmaking rule set names to retrieve details
+    #   for. (Note: The rule set name is different from the optional
+    #   "name" field in the rule set body.)
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -2561,8 +2608,6 @@ module Aws::GameLift
     # capacity is adjusting to an UpdateFleetCapacity request, or if access
     # to resources is temporarily affected.
     #
-    # Fleet-related operations include:
-    #
     # * CreateFleet
     #
     # * ListFleets
@@ -2778,7 +2823,7 @@ module Aws::GameLift
     #     CIDR blocks of IPv4 addresses. To resolve this, change the CIDR
     #     block for the VPC in your AWS account. For more information on VPC
     #     peering failures, see
-    #     [http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html][1]
+    #     [https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html][1]
     #
     #   * FLEET\_VPC\_PEERING\_DELETED -- A VPC peering connection has been
     #     successfully deleted.
@@ -2806,7 +2851,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -2839,8 +2884,6 @@ module Aws::GameLift
     end
 
     # General properties describing a fleet.
-    #
-    # Fleet-related operations include:
     #
     # * CreateFleet
     #
@@ -2977,7 +3020,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code
     #   @return [Array<String>]
     #
     # @!attribute [rw] new_game_session_protection_policy
@@ -3042,8 +3085,6 @@ module Aws::GameLift
     # EC2 instances. By default, new fleets have a capacity of one instance,
     # but can be updated as needed. The maximum number of instances for a
     # fleet is determined by the fleet's instance type.
-    #
-    # Fleet-related operations include:
     #
     # * CreateFleet
     #
@@ -3115,8 +3156,6 @@ module Aws::GameLift
 
     # Current status of fleet utilization, including the number of game and
     # player sessions being hosted.
-    #
-    # Fleet-related operations include:
     #
     # * CreateFleet
     #
@@ -3201,7 +3240,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create
     #
     # @note When making an API call, you may pass GameProperty
     #   data as a hash:
@@ -3235,8 +3274,6 @@ module Aws::GameLift
     # Once the session ends, the game session object is retained for 30
     # days. This means you can reuse idempotency token values after this
     # time. Game session logs are retained for 14 days.
-    #
-    # Game-session-related operations include:
     #
     # * CreateGameSession
     #
@@ -3315,7 +3352,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
@@ -3346,7 +3383,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @!attribute [rw] matchmaker_data
@@ -3361,7 +3398,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession AWS API Documentation
@@ -3400,7 +3437,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -3500,7 +3537,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -3580,7 +3617,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @!attribute [rw] matchmaker_data
@@ -3593,7 +3630,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement AWS API Documentation
@@ -3637,8 +3674,7 @@ module Aws::GameLift
     #   from high latencies, preventing game sessions from being placed
     #   where any individual player is reporting latency higher than a
     #   policy's maximum.
-    #
-    # Queue-related operations include:
+    # ^
     #
     # * CreateGameSessionQueue
     #
@@ -3660,7 +3696,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_seconds
@@ -3702,8 +3738,6 @@ module Aws::GameLift
     # Fleet designated in a game session queue. Requests for new game
     # sessions in the queue are fulfilled by starting a new game session on
     # any destination configured for a queue.
-    #
-    # Queue-related operations include:
     #
     # * CreateGameSessionQueue
     #
@@ -3757,6 +3791,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] pre_signed_url
     #   Location of the requested game session logs, available for download.
+    #   This URL is valid for 15 minutes, after which S3 will reject any
+    #   download request using this URL. You can request a new URL any time
+    #   within the 14-day period that the logs are retained.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrlOutput AWS API Documentation
@@ -4228,7 +4265,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] request_timeout_seconds
@@ -4286,7 +4323,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -4298,7 +4335,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingConfiguration AWS API Documentation
@@ -4359,7 +4396,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
     #
     # @!attribute [rw] rule_set_name
     #   Unique identifier for a matchmaking rule set
@@ -4504,8 +4541,6 @@ module Aws::GameLift
     # player ID and player session ID. To retrieve full details on a player
     # session, call DescribePlayerSessions with the player session ID.
     #
-    # Player-session-related operations include:
-    #
     # * CreatePlayerSession
     #
     # * CreatePlayerSessions
@@ -4640,8 +4675,6 @@ module Aws::GameLift
     # Latency policies are only enforced when the placement request contains
     # player latency information.
     #
-    # Queue-related operations include:
-    #
     # * CreateGameSessionQueue
     #
     # * DescribeGameSessionQueues
@@ -4689,8 +4722,6 @@ module Aws::GameLift
     # When a player disconnects, the player session status changes to
     # `COMPLETED`. Once the session ends, the player session object is
     # retained for 30 days and then removed.
-    #
-    # Player-session-related operations include:
     #
     # * CreatePlayerSession
     #
@@ -4899,7 +4930,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -5059,8 +5090,6 @@ module Aws::GameLift
 
     # Routing configuration for a fleet alias.
     #
-    # Fleet-related operations include:
-    #
     # * CreateFleet
     #
     # * ListFleets
@@ -5163,8 +5192,6 @@ module Aws::GameLift
     # parameter for each ` ServerProcess ` object in the run-time
     # configuration.
     #
-    # Fleet-related operations include:
-    #
     # * CreateFleet
     #
     # * ListFleets
@@ -5253,7 +5280,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
@@ -5278,7 +5305,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/S3Location AWS API Documentation
@@ -5292,8 +5319,6 @@ module Aws::GameLift
 
     # Rule that controls how a fleet is scaled. Scaling policies are
     # uniquely identified by the combination of name and fleet ID.
-    #
-    # Operations related to fleet capacity scaling include:
     #
     # * DescribeFleetCapacity
     #
@@ -5430,7 +5455,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -5726,7 +5751,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -5758,7 +5783,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacementInput AWS API Documentation
@@ -5837,7 +5862,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [String]
     #
     # @!attribute [rw] players
@@ -5858,7 +5883,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
     #   @return [Array<Types::Player>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchBackfillInput AWS API Documentation
@@ -6045,8 +6070,6 @@ module Aws::GameLift
     # triggers Amazon GameLift to adjust capacity so that the metric returns
     # to the target value. The target configuration specifies settings as
     # needed for the target based policy, including the target value.
-    #
-    # Operations related to fleet capacity scaling include:
     #
     # * DescribeFleetCapacity
     #
@@ -6573,7 +6596,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] request_timeout_seconds
@@ -6607,7 +6630,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
     #   @return [String]
     #
     # @!attribute [rw] additional_player_count
@@ -6631,7 +6654,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -6643,7 +6666,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfigurationInput AWS API Documentation
@@ -6773,8 +6796,6 @@ module Aws::GameLift
     # peering connection to be established. Authorizations are valid for 24
     # hours after they are issued.
     #
-    # VPC peering connection operations include:
-    #
     # * CreateVpcPeeringAuthorization
     #
     # * DescribeVpcPeeringAuthorizations
@@ -6799,9 +6820,14 @@ module Aws::GameLift
     # @!attribute [rw] peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -6831,8 +6857,6 @@ module Aws::GameLift
     # accounts and the VPC for your Amazon GameLift fleets. This record may
     # be for an active peering connection or a pending connection that has
     # not yet been established.
-    #
-    # VPC peering connection operations include:
     #
     # * CreateVpcPeeringAuthorization
     #
@@ -6872,9 +6896,14 @@ module Aws::GameLift
     # @!attribute [rw] peer_vpc_id
     #   Unique identifier for a VPC with resources to be accessed by your
     #   Amazon GameLift fleet. The VPC must be in the same region where your
-    #   fleet is deployed. To get VPC information, including IDs, use the
-    #   Virtual Private Cloud service tools, including the VPC Dashboard in
-    #   the AWS Management Console.
+    #   fleet is deployed. Look up a VPC ID using the [VPC Dashboard][1] in
+    #   the AWS Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/vpc/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
     #   @return [String]
     #
     # @!attribute [rw] game_lift_vpc_id
@@ -6903,7 +6932,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html
     #
     # @!attribute [rw] code
     #   Code indicating the status of a VPC peering connection.

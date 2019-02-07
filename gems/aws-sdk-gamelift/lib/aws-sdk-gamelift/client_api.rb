@@ -57,6 +57,8 @@ module Aws::GameLift
     DeleteGameSessionQueueOutput = Shapes::StructureShape.new(name: 'DeleteGameSessionQueueOutput')
     DeleteMatchmakingConfigurationInput = Shapes::StructureShape.new(name: 'DeleteMatchmakingConfigurationInput')
     DeleteMatchmakingConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteMatchmakingConfigurationOutput')
+    DeleteMatchmakingRuleSetInput = Shapes::StructureShape.new(name: 'DeleteMatchmakingRuleSetInput')
+    DeleteMatchmakingRuleSetOutput = Shapes::StructureShape.new(name: 'DeleteMatchmakingRuleSetOutput')
     DeleteScalingPolicyInput = Shapes::StructureShape.new(name: 'DeleteScalingPolicyInput')
     DeleteVpcPeeringAuthorizationInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationInput')
     DeleteVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationOutput')
@@ -474,6 +476,11 @@ module Aws::GameLift
     DeleteMatchmakingConfigurationInput.struct_class = Types::DeleteMatchmakingConfigurationInput
 
     DeleteMatchmakingConfigurationOutput.struct_class = Types::DeleteMatchmakingConfigurationOutput
+
+    DeleteMatchmakingRuleSetInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "Name"))
+    DeleteMatchmakingRuleSetInput.struct_class = Types::DeleteMatchmakingRuleSetInput
+
+    DeleteMatchmakingRuleSetOutput.struct_class = Types::DeleteMatchmakingRuleSetOutput
 
     DeleteScalingPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
     DeleteScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
@@ -1259,6 +1266,7 @@ module Aws::GameLift
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon GameLift",
+        "serviceId" => "GameLift",
         "signatureVersion" => "v4",
         "targetPrefix" => "GameLift",
         "uid" => "gamelift-2015-10-01",
@@ -1482,6 +1490,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+      end)
+
+      api.add_operation(:delete_matchmaking_rule_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMatchmakingRuleSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMatchmakingRuleSetInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMatchmakingRuleSetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_scaling_policy, Seahorse::Model::Operation.new.tap do |o|

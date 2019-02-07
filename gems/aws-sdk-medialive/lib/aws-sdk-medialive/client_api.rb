@@ -94,6 +94,7 @@ module Aws::MediaLive
     CreateInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'CreateInputSecurityGroupRequest')
     CreateInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'CreateInputSecurityGroupResponse')
     CreateInputSecurityGroupResultModel = Shapes::StructureShape.new(name: 'CreateInputSecurityGroupResultModel')
+    CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
@@ -102,6 +103,7 @@ module Aws::MediaLive
     DeleteInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupResponse')
     DeleteReservationRequest = Shapes::StructureShape.new(name: 'DeleteReservationRequest')
     DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
+    DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
@@ -266,6 +268,8 @@ module Aws::MediaLive
     ListReservationsRequest = Shapes::StructureShape.new(name: 'ListReservationsRequest')
     ListReservationsResponse = Shapes::StructureShape.new(name: 'ListReservationsResponse')
     ListReservationsResultModel = Shapes::StructureShape.new(name: 'ListReservationsResultModel')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     M2tsAbsentInputAudioBehavior = Shapes::StringShape.new(name: 'M2tsAbsentInputAudioBehavior')
     M2tsArib = Shapes::StringShape.new(name: 'M2tsArib')
@@ -378,6 +382,8 @@ module Aws::MediaLive
     StaticKeySettings = Shapes::StructureShape.new(name: 'StaticKeySettings')
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
+    Tags = Shapes::MapShape.new(name: 'Tags')
+    TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
     TeletextSourceSettings = Shapes::StructureShape.new(name: 'TeletextSourceSettings')
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
@@ -707,6 +713,7 @@ module Aws::MediaLive
     Channel.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     Channel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     Channel.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.struct_class = Types::Channel
 
     ChannelConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -738,6 +745,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateChannel.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
     CreateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
+    CreateChannel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannel.struct_class = Types::CreateChannel
 
     CreateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -749,6 +757,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateChannelRequest.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
     CreateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
+    CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -764,6 +773,7 @@ module Aws::MediaLive
     CreateInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
+    CreateInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInput.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInput.struct_class = Types::CreateInput
 
@@ -774,6 +784,7 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateInputRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
+    CreateInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInputRequest.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInputRequest.struct_class = Types::CreateInputRequest
 
@@ -783,6 +794,7 @@ module Aws::MediaLive
     CreateInputResultModel.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
     CreateInputResultModel.struct_class = Types::CreateInputResultModel
 
+    CreateInputSecurityGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInputSecurityGroupRequest.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRuleCidr, location_name: "whitelistRules"))
     CreateInputSecurityGroupRequest.struct_class = Types::CreateInputSecurityGroupRequest
 
@@ -791,6 +803,10 @@ module Aws::MediaLive
 
     CreateInputSecurityGroupResultModel.add_member(:security_group, Shapes::ShapeRef.new(shape: InputSecurityGroup, location_name: "securityGroup"))
     CreateInputSecurityGroupResultModel.struct_class = Types::CreateInputSecurityGroupResultModel
+
+    CreateTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
     DeleteChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
@@ -807,6 +823,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     DeleteChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DeleteChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    DeleteChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
 
     DeleteInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
@@ -841,6 +858,10 @@ module Aws::MediaLive
     DeleteReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
     DeleteReservationResponse.struct_class = Types::DeleteReservationResponse
 
+    DeleteTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    DeleteTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    DeleteTagsRequest.struct_class = Types::DeleteTagsRequest
+
     DescribeChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
@@ -856,6 +877,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     DescribeChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DescribeChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
@@ -871,6 +893,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     DescribeInputResponse.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSource, location_name: "sources"))
     DescribeInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputState, location_name: "state"))
+    DescribeInputResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeInputResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     DescribeInputResponse.struct_class = Types::DescribeInputResponse
 
@@ -881,6 +904,7 @@ module Aws::MediaLive
     DescribeInputSecurityGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeInputSecurityGroupResponse.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputs"))
     DescribeInputSecurityGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputSecurityGroupState, location_name: "state"))
+    DescribeInputSecurityGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeInputSecurityGroupResponse.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     DescribeInputSecurityGroupResponse.struct_class = Types::DescribeInputSecurityGroupResponse
 
@@ -1181,6 +1205,7 @@ module Aws::MediaLive
     Input.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     Input.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSource, location_name: "sources"))
     Input.add_member(:state, Shapes::ShapeRef.new(shape: InputState, location_name: "state"))
+    Input.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Input.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     Input.struct_class = Types::Input
 
@@ -1217,9 +1242,11 @@ module Aws::MediaLive
     InputSecurityGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     InputSecurityGroup.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputs"))
     InputSecurityGroup.add_member(:state, Shapes::ShapeRef.new(shape: InputSecurityGroupState, location_name: "state"))
+    InputSecurityGroup.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InputSecurityGroup.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     InputSecurityGroup.struct_class = Types::InputSecurityGroup
 
+    InputSecurityGroupWhitelistRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InputSecurityGroupWhitelistRequest.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRuleCidr, location_name: "whitelistRules"))
     InputSecurityGroupWhitelistRequest.struct_class = Types::InputSecurityGroupWhitelistRequest
 
@@ -1344,6 +1371,12 @@ module Aws::MediaLive
     ListReservationsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListReservationsResultModel.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
     ListReservationsResultModel.struct_class = Types::ListReservationsResultModel
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     M2tsSettings.add_member(:absent_input_audio_behavior, Shapes::ShapeRef.new(shape: M2tsAbsentInputAudioBehavior, location_name: "absentInputAudioBehavior"))
     M2tsSettings.add_member(:arib, Shapes::ShapeRef.new(shape: M2tsArib, location_name: "arib"))
@@ -1679,6 +1712,7 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     StartChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StartChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    StartChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
     StaticImageActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "duration"))
@@ -1716,7 +1750,14 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     StopChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StopChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    StopChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
+
+    Tags.key = Shapes::ShapeRef.new(shape: __string)
+    Tags.value = Shapes::ShapeRef.new(shape: __string)
+
+    TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    TagsModel.struct_class = Types::TagsModel
 
     TeletextDestinationSettings.struct_class = Types::TeletextDestinationSettings
 
@@ -1793,6 +1834,7 @@ module Aws::MediaLive
     UpdateInputResultModel.struct_class = Types::UpdateInputResultModel
 
     UpdateInputSecurityGroupRequest.add_member(:input_security_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputSecurityGroupId"))
+    UpdateInputSecurityGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateInputSecurityGroupRequest.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRuleCidr, location_name: "whitelistRules"))
     UpdateInputSecurityGroupRequest.struct_class = Types::UpdateInputSecurityGroupRequest
 
@@ -1979,6 +2021,18 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: CreateTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
       api.add_operation(:delete_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteChannel"
         o.http_method = "DELETE"
@@ -2040,6 +2094,18 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTags"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:describe_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -2236,6 +2302,18 @@ module Aws::MediaLive
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:purchase_offering, Seahorse::Model::Operation.new.tap do |o|

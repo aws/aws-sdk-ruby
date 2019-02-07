@@ -1881,6 +1881,10 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1895,7 +1899,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -2024,6 +2029,10 @@ module Aws::MediaLive
     #   running the Channel.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2035,7 +2044,8 @@ module Aws::MediaLive
       :name,
       :request_id,
       :reserved,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -2753,6 +2763,9 @@ module Aws::MediaLive
     #         request_id: "__string",
     #         reserved: "__string",
     #         role_arn: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] destinations
@@ -2785,6 +2798,9 @@ module Aws::MediaLive
     # @!attribute [rw] role_arn
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2796,7 +2812,8 @@ module Aws::MediaLive
       :name,
       :request_id,
       :reserved,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -2856,6 +2873,10 @@ module Aws::MediaLive
     #   PULL type Inputs. Leave Destinations empty.
     #   @return [Array<Types::InputSourceRequest>]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
     #
@@ -2869,6 +2890,7 @@ module Aws::MediaLive
       :request_id,
       :role_arn,
       :sources,
+      :tags,
       :type)
       include Aws::Structure
     end
@@ -2898,6 +2920,9 @@ module Aws::MediaLive
     #             username: "__string",
     #           },
     #         ],
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
     #       }
     #
@@ -2924,6 +2949,9 @@ module Aws::MediaLive
     # @!attribute [rw] sources
     #   @return [Array<Types::InputSourceRequest>]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
     #
@@ -2937,6 +2965,7 @@ module Aws::MediaLive
       :request_id,
       :role_arn,
       :sources,
+      :tags,
       :type)
       include Aws::Structure
     end
@@ -2965,6 +2994,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         whitelist_rules: [
     #           {
     #             cidr: "__string",
@@ -2972,12 +3004,16 @@ module Aws::MediaLive
     #         ],
     #       }
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRuleCidr>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputSecurityGroupRequest AWS API Documentation
     #
     class CreateInputSecurityGroupRequest < Struct.new(
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -3001,6 +3037,30 @@ module Aws::MediaLive
     #
     class CreateInputSecurityGroupResultModel < Struct.new(
       :security_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateTagsRequest AWS API Documentation
+    #
+    class CreateTagsRequest < Struct.new(
+      :resource_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -3058,6 +3118,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -3072,7 +3135,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -3213,6 +3277,28 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteTagsRequest AWS API Documentation
+    #
+    class DeleteTagsRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeChannelRequest
     #   data as a hash:
     #
@@ -3267,6 +3353,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3281,7 +3370,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -3332,6 +3422,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
     #
@@ -3348,6 +3441,7 @@ module Aws::MediaLive
       :security_groups,
       :sources,
       :state,
+      :tags,
       :type)
       include Aws::Structure
     end
@@ -3381,6 +3475,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRule>]
     #
@@ -3391,6 +3488,7 @@ module Aws::MediaLive
       :id,
       :inputs,
       :state,
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -6109,6 +6207,10 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
     #
@@ -6125,6 +6227,7 @@ module Aws::MediaLive
       :security_groups,
       :sources,
       :state,
+      :tags,
       :type)
       include Aws::Structure
     end
@@ -6411,6 +6514,10 @@ module Aws::MediaLive
     #   The current state of the Input Security Group.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
@@ -6422,11 +6529,16 @@ module Aws::MediaLive
       :id,
       :inputs,
       :state,
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
 
     # Request of IPv4 CIDR addresses to whitelist in a security group.
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] whitelist_rules
     #   List of IPv4 CIDR addresses to whitelist
@@ -6435,6 +6547,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSecurityGroupWhitelistRequest AWS API Documentation
     #
     class InputSecurityGroupWhitelistRequest < Struct.new(
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -7105,6 +7218,33 @@ module Aws::MediaLive
     class ListReservationsResultModel < Struct.new(
       :next_token,
       :reservations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -10300,6 +10440,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -10314,7 +10457,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -10530,6 +10674,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -10544,7 +10691,18 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TagsModel AWS API Documentation
+    #
+    class TagsModel < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -11796,6 +11954,9 @@ module Aws::MediaLive
     #
     #       {
     #         input_security_group_id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         whitelist_rules: [
     #           {
     #             cidr: "__string",
@@ -11806,6 +11967,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_security_group_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRuleCidr>]
     #
@@ -11813,6 +11977,7 @@ module Aws::MediaLive
     #
     class UpdateInputSecurityGroupRequest < Struct.new(
       :input_security_group_id,
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end

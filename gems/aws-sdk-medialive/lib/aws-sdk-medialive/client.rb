@@ -419,6 +419,8 @@ module Aws::MediaLive
     #
     # @option params [String] :role_arn
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1136,6 +1138,9 @@ module Aws::MediaLive
     #     request_id: "__string",
     #     reserved: "__string",
     #     role_arn: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1614,6 +1619,8 @@ module Aws::MediaLive
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.channel.tags #=> Hash
+    #   resp.channel.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -1641,6 +1648,8 @@ module Aws::MediaLive
     # @option params [String] :role_arn
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
+    #
+    # @option params [Hash<String,String>] :tags
     #
     # @option params [String] :type
     #
@@ -1672,6 +1681,9 @@ module Aws::MediaLive
     #         username: "__string",
     #       },
     #     ],
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
     #   })
     #
@@ -1696,6 +1708,8 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.input.tags #=> Hash
+    #   resp.input.tags["__string"] #=> String
     #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
@@ -1709,6 +1723,8 @@ module Aws::MediaLive
 
     # Creates a Input Security Group
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @option params [Array<Types::InputWhitelistRuleCidr>] :whitelist_rules
     #
     # @return [Types::CreateInputSecurityGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1718,6 +1734,9 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_input_security_group({
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     whitelist_rules: [
     #       {
     #         cidr: "__string",
@@ -1732,6 +1751,8 @@ module Aws::MediaLive
     #   resp.security_group.inputs #=> Array
     #   resp.security_group.inputs[0] #=> String
     #   resp.security_group.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.security_group.tags #=> Hash
+    #   resp.security_group.tags["__string"] #=> String
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
     #
@@ -1741,6 +1762,32 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def create_input_security_group(params = {}, options = {})
       req = build_request(:create_input_security_group, params)
+      req.send_request(options)
+    end
+
+    # Create tags for a resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tags({
+    #     resource_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateTags AWS API Documentation
+    #
+    # @overload create_tags(params = {})
+    # @param [Hash] params ({})
+    def create_tags(params = {}, options = {})
+      req = build_request(:create_tags, params)
       req.send_request(options)
     end
 
@@ -1762,6 +1809,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
     #   * {Types::DeleteChannelResponse#state #state} => String
+    #   * {Types::DeleteChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2245,6 +2293,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -2362,6 +2412,30 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Removes tags for a resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tags({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteTags AWS API Documentation
+    #
+    # @overload delete_tags(params = {})
+    # @param [Hash] params ({})
+    def delete_tags(params = {}, options = {})
+      req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
     # Gets details about a channel
     #
     # @option params [required, String] :channel_id
@@ -2380,6 +2454,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
     #   * {Types::DescribeChannelResponse#state #state} => String
+    #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2863,6 +2938,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannel AWS API Documentation
     #
@@ -2889,6 +2966,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#sources #sources} => Array&lt;Types::InputSource&gt;
     #   * {Types::DescribeInputResponse#state #state} => String
+    #   * {Types::DescribeInputResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputResponse#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -2918,6 +2996,8 @@ module Aws::MediaLive
     #   resp.sources[0].url #=> String
     #   resp.sources[0].username #=> String
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput AWS API Documentation
@@ -2939,6 +3019,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputSecurityGroupResponse#id #id} => String
     #   * {Types::DescribeInputSecurityGroupResponse#inputs #inputs} => Array&lt;String&gt;
     #   * {Types::DescribeInputSecurityGroupResponse#state #state} => String
+    #   * {Types::DescribeInputSecurityGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputSecurityGroupResponse#whitelist_rules #whitelist_rules} => Array&lt;Types::InputWhitelistRule&gt;
     #
     # @example Request syntax with placeholder values
@@ -2954,6 +3035,8 @@ module Aws::MediaLive
     #   resp.inputs #=> Array
     #   resp.inputs[0] #=> String
     #   resp.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.whitelist_rules #=> Array
     #   resp.whitelist_rules[0].cidr #=> String
     #
@@ -3268,6 +3351,8 @@ module Aws::MediaLive
     #   resp.input_security_groups[0].inputs #=> Array
     #   resp.input_security_groups[0].inputs[0] #=> String
     #   resp.input_security_groups[0].state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.input_security_groups[0].tags #=> Hash
+    #   resp.input_security_groups[0].tags["__string"] #=> String
     #   resp.input_security_groups[0].whitelist_rules #=> Array
     #   resp.input_security_groups[0].whitelist_rules[0].cidr #=> String
     #   resp.next_token #=> String
@@ -3321,6 +3406,8 @@ module Aws::MediaLive
     #   resp.inputs[0].sources[0].url #=> String
     #   resp.inputs[0].sources[0].username #=> String
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.inputs[0].tags #=> Hash
+    #   resp.inputs[0].tags["__string"] #=> String
     #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #   resp.next_token #=> String
     #
@@ -3482,6 +3569,34 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Produces list of tags that have been created for a resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Purchase an offering and create a reservation.
     #
     # @option params [required, Integer] :count
@@ -3563,6 +3678,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
     #   * {Types::StartChannelResponse#state #state} => String
+    #   * {Types::StartChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4046,6 +4162,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -4074,6 +4192,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
     #   * {Types::StopChannelResponse#state #state} => String
+    #   * {Types::StopChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4557,6 +4676,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -5780,6 +5901,8 @@ module Aws::MediaLive
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.channel.tags #=> Hash
+    #   resp.channel.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -5857,6 +5980,8 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.input.tags #=> Hash
+    #   resp.input.tags["__string"] #=> String
     #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
@@ -5872,6 +5997,8 @@ module Aws::MediaLive
     #
     # @option params [required, String] :input_security_group_id
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @option params [Array<Types::InputWhitelistRuleCidr>] :whitelist_rules
     #
     # @return [Types::UpdateInputSecurityGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5882,6 +6009,9 @@ module Aws::MediaLive
     #
     #   resp = client.update_input_security_group({
     #     input_security_group_id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     whitelist_rules: [
     #       {
     #         cidr: "__string",
@@ -5896,6 +6026,8 @@ module Aws::MediaLive
     #   resp.security_group.inputs #=> Array
     #   resp.security_group.inputs[0] #=> String
     #   resp.security_group.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.security_group.tags #=> Hash
+    #   resp.security_group.tags["__string"] #=> String
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
     #
@@ -5921,7 +6053,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
