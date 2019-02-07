@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.216 (2019-02-07)
+------------------
+
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
 
 * Feature - Aws::GameLift - Updated the API, documentation, and integration test for Amazon GameLift.
