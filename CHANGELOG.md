@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::GameLift - Updated the API, documentation, and integration test for Amazon GameLift.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
+
 2.11.215 (2019-02-06)
 ------------------
 
