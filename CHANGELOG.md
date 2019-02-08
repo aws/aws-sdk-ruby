@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.217 (2019-02-08)
+------------------
+
 * Feature - Aws::ApplicationDiscoveryService - Updated the documentation for AWS Application Discovery Service.
 
 * Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
