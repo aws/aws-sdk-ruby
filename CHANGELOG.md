@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationDiscoveryService - Updated the documentation for AWS Application Discovery Service.
+
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
 2.11.216 (2019-02-07)
 ------------------
 
