@@ -74,7 +74,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
     #
     # @note When making an API call, you may pass Attribute
     #   data as a hash:
@@ -131,7 +131,7 @@ module Aws::ECS
     #
     # @!attribute [rw] subnets
     #   The subnets associated with the task or service. There is a limit of
-    #   16 subnets able to be specified per `AwsVpcConfiguration`.
+    #   16 subnets that can be specified per `AwsVpcConfiguration`.
     #
     #   <note markdown="1"> All specified subnets must be from the same VPC.
     #
@@ -141,8 +141,8 @@ module Aws::ECS
     # @!attribute [rw] security_groups
     #   The security groups associated with the task or service. If you do
     #   not specify a security group, the default security group for the VPC
-    #   is used. There is a limit of five security groups able to be
-    #   specified per `AwsVpcConfiguration`.
+    #   is used. There is a limit of 5 security groups that can be specified
+    #   per `AwsVpcConfiguration`.
     #
     #   <note markdown="1"> All specified security groups must be from the same VPC.
     #
@@ -739,7 +739,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html
     #   @return [Boolean]
     #
     # @!attribute [rw] entry_point
@@ -767,7 +767,9 @@ module Aws::ECS
     #   `Cmd` in the [Create a container][1] section of the [Docker Remote
     #   API][2] and the `COMMAND` parameter to [docker run][3]. For more
     #   information, see
-    #   [https://docs.docker.com/engine/reference/builder/#cmd][4].
+    #   [https://docs.docker.com/engine/reference/builder/#cmd][4]. If there
+    #   are multiple arguments, each argument should be a separated string
+    #   in the array.
     #
     #
     #
@@ -832,7 +834,13 @@ module Aws::ECS
     #   @return [Types::LinuxParameters]
     #
     # @!attribute [rw] secrets
-    #   The secrets to pass to the container.
+    #   The secrets to pass to the container. For more information, see
+    #   [Specifying Sensitive Data][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
     #   @return [Array<Types::Secret>]
     #
     # @!attribute [rw] hostname
@@ -1009,7 +1017,7 @@ module Aws::ECS
     #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
-    #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] interactive
@@ -1124,7 +1132,7 @@ module Aws::ECS
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
-    #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Types::LogConfiguration]
     #
     # @!attribute [rw] health_check
@@ -1275,7 +1283,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html
     #   @return [String]
     #
     # @!attribute [rw] agent_connected
@@ -1693,7 +1701,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -1706,7 +1714,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -1736,7 +1744,7 @@ module Aws::ECS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #   @return [String]
     #
     # @!attribute [rw] deployment_configuration
@@ -2120,7 +2128,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -2133,7 +2141,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -3461,7 +3469,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4062,7 +4070,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
     #   [2]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
@@ -4221,7 +4229,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
     #
     # @note When making an API call, you may pass PlacementConstraint
     #   data as a hash:
@@ -4248,7 +4256,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementConstraint AWS API Documentation
@@ -4265,7 +4273,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
     #
     # @note When making an API call, you may pass PlacementStrategy
     #   data as a hash:
@@ -4403,14 +4411,14 @@ module Aws::ECS
     #    </note>
     #
     #   The default reserved ports are 22 for SSH, the Docker ports 2375 and
-    #   2376, and the Amazon ECS container agent ports 51678 and 51679. Any
-    #   host port that was previously specified in a running task is also
+    #   2376, and the Amazon ECS container agent ports 51678-51680. Any host
+    #   port that was previously specified in a running task is also
     #   reserved while the task is running (after a task stops, the host
     #   port is released). The current reserved ports are displayed in the
     #   `remainingResources` of DescribeContainerInstances output. A
-    #   container instance may have up to 100 reserved ports at a time,
-    #   including the default reserved ports. Aautomatically assigned ports
-    #   do not count toward the 100 reserved ports limit.
+    #   container instance can have up to 100 reserved ports at a time,
+    #   including the default reserved ports. Automatically assigned ports
+    #   don't count toward the 100 reserved ports limit.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -4424,6 +4432,47 @@ module Aws::ECS
       :container_port,
       :host_port,
       :protocol)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAccountSettingDefaultRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The resource type to enable the new format for. If
+    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   services is affected. If `taskLongArnFormat` is specified, the ARN
+    #   and resource ID for your Amazon ECS tasks are affected. If
+    #   `containerInstanceLongArnFormat` is specified, the ARN and resource
+    #   ID for your Amazon ECS container instances are affected.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The account setting value for the specified principal ARN. Accepted
+    #   values are `enabled` and `disabled`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefaultRequest AWS API Documentation
+    #
+    class PutAccountSettingDefaultRequest < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] setting
+    #   The current account setting for a resource.
+    #   @return [Types::Setting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefaultResponse AWS API Documentation
+    #
+    class PutAccountSettingDefaultResponse < Struct.new(
+      :setting)
       include Aws::Structure
     end
 
@@ -4455,7 +4504,7 @@ module Aws::ECS
     #   root user. If you specify the root user, it modifies the ARN and
     #   resource ID format for all IAM users, IAM roles, and the root user
     #   of the account unless an IAM user or role explicitly overrides these
-    #   settings for themselves. If this field is omitted, the setting are
+    #   settings for themselves. If this field is omitted, the settings are
     #   changed only for the authenticated user.
     #   @return [String]
     #
@@ -4832,7 +4881,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -5181,7 +5230,13 @@ module Aws::ECS
     end
 
     # The type and amount of a resource to assign to a container. The only
-    # supported resource is a GPU.
+    # supported resource is a GPU. For more information, see [Working with
+    # GPUs on Amazon ECS][1] in the *Amazon Elastic Container Service
+    # Developer Guide*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
     #
     # @note When making an API call, you may pass ResourceRequirement
     #   data as a hash:
@@ -5192,12 +5247,15 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] value
-    #   The number of GPUs to assign to a container.
+    #   The number of physical `GPUs` the Amazon ECS container agent will
+    #   reserve for the container. The number of GPUs reserved for all
+    #   containers in a task should not exceed the number of available GPUs
+    #   on the container instance the task is launched on.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of resource a container desires. The only supported value
-    #   is `GPU`.
+    #   The type of resource to assign to a container. The only supported
+    #   value is `GPU`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement AWS API Documentation
@@ -5343,7 +5401,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -5355,7 +5413,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -5458,7 +5516,13 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object representing the secret to expose to your container.
+    # An object representing the secret to expose to your container. For
+    # more information, see [Specifying Sensitive Data][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
     #
     # @note When making an API call, you may pass Secret
     #   data as a hash:
@@ -5473,9 +5537,19 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] value_from
-    #   The secret to expose to the container. Supported values are either
-    #   the full ARN or the name of the parameter in the AWS Systems Manager
-    #   Parameter Store.
+    #   The secret to expose to the container. If your task is using the EC2
+    #   launch type, then supported values are either the full ARN of the
+    #   AWS Secrets Manager secret or the full ARN of the parameter in the
+    #   AWS Systems Manager Parameter Store. If your task is using the
+    #   Fargate launch type, then the only supported value is the full ARN
+    #   of the parameter in the AWS Systems Manager Parameter Store.
+    #
+    #   <note markdown="1"> If the AWS Systems Manager Parameter Store parameter exists in the
+    #   same Region as the task you are launching, then you can use either
+    #   the full ARN or name of the parameter. If the parameter exists in a
+    #   different Region, then the full ARN must be specified.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Secret AWS API Documentation
@@ -5554,7 +5628,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -5567,7 +5641,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] task_definition
@@ -6526,7 +6600,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -6539,7 +6613,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] attachments
@@ -6623,7 +6697,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
     #   @return [Array<Types::ContainerDefinition>]
     #
     # @!attribute [rw] family
@@ -6644,7 +6718,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -6723,7 +6797,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
     #   @return [Array<Types::Volume>]
     #
     # @!attribute [rw] status
@@ -6748,7 +6822,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] requires_compatibilities
@@ -6903,7 +6977,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
     #
     # @note When making an API call, you may pass TaskDefinitionPlacementConstraint
     #   data as a hash:
@@ -6927,7 +7001,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinitionPlacementConstraint AWS API Documentation
@@ -7073,7 +7147,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -7086,7 +7160,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -7425,7 +7499,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] force_new_deployment

@@ -290,12 +290,17 @@ module Aws::ApplicationDiscoveryService
     #     Restrictions and Limitations][4] in the Amazon Simple Storage
     #     Service Developer Guide.
     #
+    #   * S3\_NOT\_SIGNED\_UP - Your account is not signed up for the Amazon
+    #     S3 service. You must sign up before you can use Amazon S3. You can
+    #     sign up at the following URL: [https://aws.amazon.com/s3][5].
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html
     #   [2]: http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html
     #   [3]: http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy
     #   [4]: http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
+    #   [5]: https://aws.amazon.com/s3
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket

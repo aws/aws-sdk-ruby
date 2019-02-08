@@ -158,6 +158,8 @@ module Aws::ECS
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
     PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
+    PutAccountSettingDefaultRequest = Shapes::StructureShape.new(name: 'PutAccountSettingDefaultRequest')
+    PutAccountSettingDefaultResponse = Shapes::StructureShape.new(name: 'PutAccountSettingDefaultResponse')
     PutAccountSettingRequest = Shapes::StructureShape.new(name: 'PutAccountSettingRequest')
     PutAccountSettingResponse = Shapes::StructureShape.new(name: 'PutAccountSettingResponse')
     PutAttributesRequest = Shapes::StructureShape.new(name: 'PutAttributesRequest')
@@ -769,6 +771,13 @@ module Aws::ECS
     PortMapping.struct_class = Types::PortMapping
 
     PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)
+
+    PutAccountSettingDefaultRequest.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, required: true, location_name: "name"))
+    PutAccountSettingDefaultRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    PutAccountSettingDefaultRequest.struct_class = Types::PutAccountSettingDefaultRequest
+
+    PutAccountSettingDefaultResponse.add_member(:setting, Shapes::ShapeRef.new(shape: Setting, location_name: "setting"))
+    PutAccountSettingDefaultResponse.struct_class = Types::PutAccountSettingDefaultResponse
 
     PutAccountSettingRequest.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, required: true, location_name: "name"))
     PutAccountSettingRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
@@ -1491,6 +1500,17 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutAccountSettingRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAccountSettingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:put_account_setting_default, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountSettingDefault"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountSettingDefaultRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountSettingDefaultResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)

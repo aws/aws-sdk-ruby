@@ -1205,8 +1205,8 @@ module Aws::ApplicationDiscoveryService
     #
     #
     # [1]: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
-    # [2]: http://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html
-    # [3]: http://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html
+    # [2]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html
+    # [3]: https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html
     #
     # @option params [String] :client_request_token
     #   Optional. A unique token that you can provide to prevent the same
@@ -1369,7 +1369,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
