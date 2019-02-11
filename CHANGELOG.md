@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.218 (2019-02-11)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
