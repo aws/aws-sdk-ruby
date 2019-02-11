@@ -199,7 +199,9 @@ module Seahorse
           value = @struct[opt_name]
           if value.is_a?(Defaults)
             # this config value is used by endpoint discovery
-            @struct[:regional_endpoint] = true if opt_name == :endpoint
+            if opt_name == :endpoint && @struct.members.include?(:regional_endpoint)
+              @struct[:regional_endpoint] = true
+            end
             resolve_defaults(opt_name, value)
           else
             value
