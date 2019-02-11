@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
 2.11.217 (2019-02-08)
 ------------------
 
