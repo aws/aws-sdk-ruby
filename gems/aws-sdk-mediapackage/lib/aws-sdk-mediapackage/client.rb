@@ -334,12 +334,14 @@ module Aws::MediaPackage
     #           url: "__string", # required
     #         },
     #       },
+    #       manifest_layout: "FULL", # accepts FULL, COMPACT
     #       manifest_window_seconds: 1,
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
     #       period_triggers: ["ADS"], # accepts ADS
     #       profile: "NONE", # accepts NONE, HBBTV_1_5
     #       segment_duration_seconds: 1,
+    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
     #       stream_selection: {
     #         max_video_bits_per_second: 1,
     #         min_video_bits_per_second: 1,
@@ -432,6 +434,7 @@ module Aws::MediaPackage
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
@@ -439,6 +442,7 @@ module Aws::MediaPackage
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -629,6 +633,7 @@ module Aws::MediaPackage
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
@@ -636,6 +641,7 @@ module Aws::MediaPackage
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -784,6 +790,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.origin_endpoints[0].dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.origin_endpoints[0].dash_package.manifest_window_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.min_buffer_time_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.min_update_period_seconds #=> Integer
@@ -791,6 +798,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.origin_endpoints[0].dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.origin_endpoints[0].dash_package.segment_duration_seconds #=> Integer
+    #   resp.origin_endpoints[0].dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
     #   resp.origin_endpoints[0].dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -1050,12 +1058,14 @@ module Aws::MediaPackage
     #           url: "__string", # required
     #         },
     #       },
+    #       manifest_layout: "FULL", # accepts FULL, COMPACT
     #       manifest_window_seconds: 1,
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
     #       period_triggers: ["ADS"], # accepts ADS
     #       profile: "NONE", # accepts NONE, HBBTV_1_5
     #       segment_duration_seconds: 1,
+    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
     #       stream_selection: {
     #         max_video_bits_per_second: 1,
     #         min_video_bits_per_second: 1,
@@ -1148,6 +1158,7 @@ module Aws::MediaPackage
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
@@ -1155,6 +1166,7 @@ module Aws::MediaPackage
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.dash_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
@@ -1221,7 +1233,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

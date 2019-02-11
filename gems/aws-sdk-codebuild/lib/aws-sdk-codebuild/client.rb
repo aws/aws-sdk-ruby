@@ -708,6 +708,11 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.payload_url #=> String
     #   resp.projects[0].webhook.secret #=> String
     #   resp.projects[0].webhook.branch_filter #=> String
+    #   resp.projects[0].webhook.filter_groups #=> Array
+    #   resp.projects[0].webhook.filter_groups[0] #=> Array
+    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
+    #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
@@ -777,6 +782,11 @@ module Aws::CodeBuild
     # @option params [String] :encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
     #   be used for encrypting the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name `).
@@ -982,6 +992,11 @@ module Aws::CodeBuild
     #   resp.project.webhook.payload_url #=> String
     #   resp.project.webhook.secret #=> String
     #   resp.project.webhook.branch_filter #=> String
+    #   resp.project.webhook.filter_groups #=> Array
+    #   resp.project.webhook.filter_groups[0] #=> Array
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.project.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -1021,7 +1036,7 @@ module Aws::CodeBuild
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
     #
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild project.
@@ -1032,6 +1047,20 @@ module Aws::CodeBuild
     #   regular expression, then it is built. If `branchFilter` is empty, then
     #   all branches are built.
     #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
+    #
+    # @option params [Array<Array>] :filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine which
+    #   webhooks are triggered. At least one `WebhookFilter` in the array must
+    #   specify `EVENT` as its `type`.
+    #
+    #   For a build to be triggered, at least one filter group in the
+    #   `filterGroups` array must pass. For a filter group to pass, each of
+    #   its filters must pass.
+    #
     # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebhookOutput#webhook #webhook} => Types::Webhook
@@ -1041,6 +1070,15 @@ module Aws::CodeBuild
     #   resp = client.create_webhook({
     #     project_name: "ProjectName", # required
     #     branch_filter: "String",
+    #     filter_groups: [
+    #       [
+    #         {
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #           pattern: "String", # required
+    #           exclude_matched_pattern: false,
+    #         },
+    #       ],
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1049,6 +1087,11 @@ module Aws::CodeBuild
     #   resp.webhook.payload_url #=> String
     #   resp.webhook.secret #=> String
     #   resp.webhook.branch_filter #=> String
+    #   resp.webhook.filter_groups #=> Array
+    #   resp.webhook.filter_groups[0] #=> Array
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
@@ -1930,11 +1973,16 @@ module Aws::CodeBuild
     #   out.
     #
     # @option params [String] :encryption_key
-    #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
+    #   be used for encrypting the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN)of the CMK or, if
-    #   available, the CMK's alias (using the format `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
     # @option params [Array<Types::Tag>] :tags
     #   The replacement set of tags for this build project.
@@ -2136,6 +2184,11 @@ module Aws::CodeBuild
     #   resp.project.webhook.payload_url #=> String
     #   resp.project.webhook.secret #=> String
     #   resp.project.webhook.branch_filter #=> String
+    #   resp.project.webhook.filter_groups #=> Array
+    #   resp.project.webhook.filter_groups[0] #=> Array
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.project.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -2174,6 +2227,16 @@ module Aws::CodeBuild
     #   regular expression, then it is built. If `branchFilter` is empty, then
     #   all branches are built.
     #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
+    #
+    # @option params [Array<Array>] :filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine if a
+    #   webhook event can trigger a build. A filter group must pcontain at
+    #   least one `EVENT` `WebhookFilter`.
+    #
     # @option params [Boolean] :rotate_secret
     #   A boolean value that specifies whether the associated GitHub
     #   repository's secret token should be updated. If you use Bitbucket for
@@ -2188,6 +2251,15 @@ module Aws::CodeBuild
     #   resp = client.update_webhook({
     #     project_name: "ProjectName", # required
     #     branch_filter: "String",
+    #     filter_groups: [
+    #       [
+    #         {
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #           pattern: "String", # required
+    #           exclude_matched_pattern: false,
+    #         },
+    #       ],
+    #     ],
     #     rotate_secret: false,
     #   })
     #
@@ -2197,6 +2269,11 @@ module Aws::CodeBuild
     #   resp.webhook.payload_url #=> String
     #   resp.webhook.secret #=> String
     #   resp.webhook.branch_filter #=> String
+    #   resp.webhook.filter_groups #=> Array
+    #   resp.webhook.filter_groups[0] #=> Array
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
@@ -2221,7 +2298,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

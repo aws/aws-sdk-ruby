@@ -316,12 +316,14 @@ module Aws::MediaPackage
     #               url: "__string", # required
     #             },
     #           },
+    #           manifest_layout: "FULL", # accepts FULL, COMPACT
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
     #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
+    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
     #           stream_selection: {
     #             max_video_bits_per_second: 1,
     #             min_video_bits_per_second: 1,
@@ -551,12 +553,14 @@ module Aws::MediaPackage
     #             url: "__string", # required
     #           },
     #         },
+    #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #         manifest_window_seconds: 1,
     #         min_buffer_time_seconds: 1,
     #         min_update_period_seconds: 1,
     #         period_triggers: ["ADS"], # accepts ADS
     #         profile: "NONE", # accepts NONE, HBBTV_1_5
     #         segment_duration_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
     #         stream_selection: {
     #           max_video_bits_per_second: 1,
     #           min_video_bits_per_second: 1,
@@ -569,6 +573,14 @@ module Aws::MediaPackage
     #   A Dynamic Adaptive Streaming over HTTP (DASH) encryption
     #   configuration.
     #   @return [Types::DashEncryption]
+    #
+    # @!attribute [rw] manifest_layout
+    #   Determines the position of some tags in the Media Presentation
+    #   Description (MPD). When set to FULL, elements like SegmentTemplate
+    #   and ContentProtection are included in each Representation. When set
+    #   to COMPACT, duplicate elements are combined and presented at the
+    #   AdaptationSet level.
+    #   @return [String]
     #
     # @!attribute [rw] manifest_window_seconds
     #   Time window (in seconds) contained in each manifest.
@@ -604,6 +616,14 @@ module Aws::MediaPackage
     #   rounded to the nearest multiple of the source segment duration.
     #   @return [Integer]
     #
+    # @!attribute [rw] segment_template_format
+    #   Determines the type of SegmentTimeline included in the Media
+    #   Presentation Description (MPD). When set to NUMBER\_WITH\_TIMELINE,
+    #   a full timeline is presented in each SegmentTemplate, with $Number$
+    #   media URLs. When set to TIME\_WITH\_TIMELINE, a full timeline is
+    #   presented in each SegmentTemplate, with $Time$ media URLs.
+    #   @return [String]
+    #
     # @!attribute [rw] stream_selection
     #   A StreamSelection configuration.
     #   @return [Types::StreamSelection]
@@ -616,12 +636,14 @@ module Aws::MediaPackage
     #
     class DashPackage < Struct.new(
       :encryption,
+      :manifest_layout,
       :manifest_window_seconds,
       :min_buffer_time_seconds,
       :min_update_period_seconds,
       :period_triggers,
       :profile,
       :segment_duration_seconds,
+      :segment_template_format,
       :stream_selection,
       :suggested_presentation_delay_seconds)
       include Aws::Structure
@@ -1767,12 +1789,14 @@ module Aws::MediaPackage
     #               url: "__string", # required
     #             },
     #           },
+    #           manifest_layout: "FULL", # accepts FULL, COMPACT
     #           manifest_window_seconds: 1,
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
     #           period_triggers: ["ADS"], # accepts ADS
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
     #           segment_duration_seconds: 1,
+    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE
     #           stream_selection: {
     #             max_video_bits_per_second: 1,
     #             min_video_bits_per_second: 1,

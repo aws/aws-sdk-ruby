@@ -158,6 +158,7 @@ module Aws::AppStream
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServiceAccountCredentials = Shapes::StructureShape.new(name: 'ServiceAccountCredentials')
     Session = Shapes::StructureShape.new(name: 'Session')
+    SessionConnectionState = Shapes::StringShape.new(name: 'SessionConnectionState')
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
     SettingsGroup = Shapes::StringShape.new(name: 'SettingsGroup')
@@ -657,6 +658,9 @@ module Aws::AppStream
     Session.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     Session.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     Session.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, required: true, location_name: "State"))
+    Session.add_member(:connection_state, Shapes::ShapeRef.new(shape: SessionConnectionState, location_name: "ConnectionState"))
+    Session.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    Session.add_member(:max_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "MaxExpirationTime"))
     Session.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
     Session.add_member(:network_access_configuration, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "NetworkAccessConfiguration"))
     Session.struct_class = Types::Session

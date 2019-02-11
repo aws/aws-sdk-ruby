@@ -274,9 +274,14 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   This is expressed either as the Amazon Resource Name (ARN) of the
-    #   CMK or, if specified, the CMK's alias (using the format
-    #   `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
@@ -502,7 +507,7 @@ module Aws::CodeBuild
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
     #   @return [String]
     #
     # @!attribute [rw] stream_name
@@ -511,7 +516,7 @@ module Aws::CodeBuild
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CloudWatchLogsConfig AWS API Documentation
@@ -687,6 +692,11 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
     #   `).
@@ -754,6 +764,15 @@ module Aws::CodeBuild
     #       {
     #         project_name: "ProjectName", # required
     #         branch_filter: "String",
+    #         filter_groups: [
+    #           [
+    #             {
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               pattern: "String", # required
+    #               exclude_matched_pattern: false,
+    #             },
+    #           ],
+    #         ],
     #       }
     #
     # @!attribute [rw] project_name
@@ -765,13 +784,29 @@ module Aws::CodeBuild
     #   built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If `branchFilter` is
     #   empty, then all branches are built.
+    #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine
+    #   which webhooks are triggered. At least one `WebhookFilter` in the
+    #   array must specify `EVENT` as its `type`.
+    #
+    #   For a build to be triggered, at least one filter group in the
+    #   `filterGroups` array must pass. For a filter group to pass, each of
+    #   its filters must pass.
+    #   @return [Array<Array<Types::WebhookFilter>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
       :project_name,
-      :branch_filter)
+      :branch_filter,
+      :filter_groups)
       include Aws::Structure
     end
 
@@ -1439,9 +1474,14 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   This is expressed either as the Amazon Resource Name (ARN) of the
-    #   CMK or, if specified, the CMK's alias (using the format
-    #   `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2053,11 +2093,11 @@ module Aws::CodeBuild
     # * images cannot be curated or an Amazon ECR image.
     #
     # For more information, see [Private Registry with AWS Secrets Manager
-    # Samle for AWS CodeBuild][1].
+    # Sample for AWS CodeBuild][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html
     #
     # @note When making an API call, you may pass RegistryCredential
     #   data as a hash:
@@ -2727,10 +2767,15 @@ module Aws::CodeBuild
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
-    #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN)of the CMK or,
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
     #   `).
     #   @return [String]
@@ -2796,6 +2841,15 @@ module Aws::CodeBuild
     #       {
     #         project_name: "ProjectName", # required
     #         branch_filter: "String",
+    #         filter_groups: [
+    #           [
+    #             {
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               pattern: "String", # required
+    #               exclude_matched_pattern: false,
+    #             },
+    #           ],
+    #         ],
     #         rotate_secret: false,
     #       }
     #
@@ -2808,7 +2862,18 @@ module Aws::CodeBuild
     #   built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If `branchFilter` is
     #   empty, then all branches are built.
+    #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine if a
+    #   webhook event can trigger a build. A filter group must pcontain at
+    #   least one `EVENT` `WebhookFilter`.
+    #   @return [Array<Array<Types::WebhookFilter>>]
     #
     # @!attribute [rw] rotate_secret
     #   A boolean value that specifies whether the associated GitHub
@@ -2821,6 +2886,7 @@ module Aws::CodeBuild
     class UpdateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
+      :filter_groups,
       :rotate_secret)
       include Aws::Structure
     end
@@ -2893,7 +2959,22 @@ module Aws::CodeBuild
     #   built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If `branchFilter` is
     #   empty, then all branches are built.
+    #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine
+    #   which webhooks are triggered. At least one `WebhookFilter` in the
+    #   array must specify `EVENT` as its `type`.
+    #
+    #   For a build to be triggered, at least one filter group in the
+    #   `filterGroups` array must pass. For a filter group to pass, each of
+    #   its filters must pass.
+    #   @return [Array<Array<Types::WebhookFilter>>]
     #
     # @!attribute [rw] last_modified_secret
     #   A timestamp that indicates the last time a repository's secret
@@ -2907,7 +2988,103 @@ module Aws::CodeBuild
       :payload_url,
       :secret,
       :branch_filter,
+      :filter_groups,
       :last_modified_secret)
+      include Aws::Structure
+    end
+
+    # A filter used to determine which webhooks trigger a build.
+    #
+    # @note When making an API call, you may pass WebhookFilter
+    #   data as a hash:
+    #
+    #       {
+    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #         pattern: "String", # required
+    #         exclude_matched_pattern: false,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of webhook filter. There are five webhook filter types:
+    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, and
+    #   `FILE_PATH`.
+    #
+    #   EVENT
+    #
+    #   : A webhook event triggers a build when the provided `pattern`
+    #     matches one of four event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #     `PULL_REQUEST_UPDATED`, and `PULL_REQUEST_REOPENED`. The `EVENT`
+    #     patterns are specified as a comma-separated string. For example,
+    #     `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all
+    #     push, pull request created, and pull request updated events.
+    #
+    #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
+    #     Enterprise only.
+    #
+    #      </note>
+    #
+    #   ACTOR\_ACCOUNT\_ID
+    #
+    #   : A webhook event triggers a build when a GitHub, GitHub Enterprise,
+    #     or Bitbucket account ID matches the regular expression `pattern`.
+    #
+    #   HEAD\_REF
+    #
+    #   : A webhook event triggers a build when the head reference matches
+    #     the regular expression `pattern`. For example,
+    #     `refs/heads/branch-name` and `refs/tags/tag-name`.
+    #
+    #     Works with GitHub and GitHub Enterprise push, GitHub and GitHub
+    #     Enterprise pull request, Bitbucket push, and Bitbucket pull
+    #     request events.
+    #
+    #   BASE\_REF
+    #
+    #   : A webhook event triggers a build when the base reference matches
+    #     the regular expression `pattern`. For example,
+    #     `refs/heads/branch-name`.
+    #
+    #     <note markdown="1"> Works with pull request events only.
+    #
+    #      </note>
+    #
+    #   FILE\_PATH
+    #
+    #   : A webhook triggers a build when the path of a changed file matches
+    #     the regular expression `pattern`.
+    #
+    #     <note markdown="1"> Works with GitHub and GitHub Enterprise push events only.
+    #
+    #      </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   For a `WebHookFilter` that uses `EVENT` type, a comma-separated
+    #   string that specifies one or more events. For example, the webhook
+    #   filter `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` allows all
+    #   push, pull request created, and pull request updated events to
+    #   trigger a build.
+    #
+    #   For a `WebHookFilter` that uses any of the other filter types, a
+    #   regular expression pattern. For example, a `WebHookFilter` that uses
+    #   `HEAD_REF` for its `type` and the pattern `^refs/heads/` triggers a
+    #   build when the head reference is a branch with a reference name
+    #   `refs/heads/branch-name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_matched_pattern
+    #   Used to indicate that the `pattern` determines which webhook events
+    #   do not trigger a build. If true, then a webhook event that does not
+    #   match the `pattern` triggers a build. If false, then a webhook event
+    #   that matches the `pattern` triggers a build.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/WebhookFilter AWS API Documentation
+    #
+    class WebhookFilter < Struct.new(
+      :type,
+      :pattern,
+      :exclude_matched_pattern)
       include Aws::Structure
     end
 

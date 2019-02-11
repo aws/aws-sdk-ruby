@@ -46,6 +46,7 @@ module Aws::MediaPackage
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListOriginEndpointsRequest = Shapes::StructureShape.new(name: 'ListOriginEndpointsRequest')
     ListOriginEndpointsResponse = Shapes::StructureShape.new(name: 'ListOriginEndpointsResponse')
+    ManifestLayout = Shapes::StringShape.new(name: 'ManifestLayout')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MssEncryption = Shapes::StructureShape.new(name: 'MssEncryption')
     MssPackage = Shapes::StructureShape.new(name: 'MssPackage')
@@ -60,6 +61,7 @@ module Aws::MediaPackage
     RotateChannelCredentialsResponse = Shapes::StructureShape.new(name: 'RotateChannelCredentialsResponse')
     RotateIngestEndpointCredentialsRequest = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsRequest')
     RotateIngestEndpointCredentialsResponse = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsResponse')
+    SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     StreamOrder = Shapes::StringShape.new(name: 'StreamOrder')
@@ -162,12 +164,14 @@ module Aws::MediaPackage
     DashEncryption.struct_class = Types::DashEncryption
 
     DashPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: DashEncryption, location_name: "encryption"))
+    DashPackage.add_member(:manifest_layout, Shapes::ShapeRef.new(shape: ManifestLayout, location_name: "manifestLayout"))
     DashPackage.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "manifestWindowSeconds"))
     DashPackage.add_member(:min_buffer_time_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minBufferTimeSeconds"))
     DashPackage.add_member(:min_update_period_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minUpdatePeriodSeconds"))
     DashPackage.add_member(:period_triggers, Shapes::ShapeRef.new(shape: __listOf__PeriodTriggersElement, location_name: "periodTriggers"))
     DashPackage.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "profile"))
     DashPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
+    DashPackage.add_member(:segment_template_format, Shapes::ShapeRef.new(shape: SegmentTemplateFormat, location_name: "segmentTemplateFormat"))
     DashPackage.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
     DashPackage.add_member(:suggested_presentation_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "suggestedPresentationDelaySeconds"))
     DashPackage.struct_class = Types::DashPackage

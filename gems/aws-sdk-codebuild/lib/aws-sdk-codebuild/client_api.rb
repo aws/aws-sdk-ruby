@@ -57,6 +57,8 @@ module Aws::CodeBuild
     EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
+    FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
     ImagePullCredentialsType = Shapes::StringShape.new(name: 'ImagePullCredentialsType')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
@@ -132,6 +134,8 @@ module Aws::CodeBuild
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     Webhook = Shapes::StructureShape.new(name: 'Webhook')
+    WebhookFilter = Shapes::StructureShape.new(name: 'WebhookFilter')
+    WebhookFilterType = Shapes::StringShape.new(name: 'WebhookFilterType')
     WrapperBoolean = Shapes::BooleanShape.new(name: 'WrapperBoolean')
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
     WrapperLong = Shapes::IntegerShape.new(name: 'WrapperLong')
@@ -243,6 +247,7 @@ module Aws::CodeBuild
 
     CreateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     CreateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    CreateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     CreateWebhookInput.struct_class = Types::CreateWebhookInput
 
     CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
@@ -289,6 +294,10 @@ module Aws::CodeBuild
     EnvironmentVariable.struct_class = Types::EnvironmentVariable
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
+
+    FilterGroup.member = Shapes::ShapeRef.new(shape: WebhookFilter)
+
+    FilterGroups.member = Shapes::ShapeRef.new(shape: FilterGroup)
 
     ImageVersions.member = Shapes::ShapeRef.new(shape: String)
 
@@ -529,6 +538,7 @@ module Aws::CodeBuild
 
     UpdateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     UpdateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    UpdateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     UpdateWebhookInput.add_member(:rotate_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "rotateSecret"))
     UpdateWebhookInput.struct_class = Types::UpdateWebhookInput
 
@@ -544,8 +554,14 @@ module Aws::CodeBuild
     Webhook.add_member(:payload_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "payloadUrl"))
     Webhook.add_member(:secret, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secret"))
     Webhook.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    Webhook.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     Webhook.add_member(:last_modified_secret, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedSecret"))
     Webhook.struct_class = Types::Webhook
+
+    WebhookFilter.add_member(:type, Shapes::ShapeRef.new(shape: WebhookFilterType, required: true, location_name: "type"))
+    WebhookFilter.add_member(:pattern, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pattern"))
+    WebhookFilter.add_member(:exclude_matched_pattern, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "excludeMatchedPattern"))
+    WebhookFilter.struct_class = Types::WebhookFilter
 
 
     # @api private
