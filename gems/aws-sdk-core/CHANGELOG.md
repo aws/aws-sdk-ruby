@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.46.1 (2019-02-12)
+------------------
+
 * Issue - Fix the issue that APIG SDK doesn't have regional endpoint related plugins.
 
 3.46.0 (2019-01-16)
