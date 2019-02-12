@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Lambda - Updated the documentation for AWS Lambda.
+
 2.11.218 (2019-02-11)
 ------------------
 
