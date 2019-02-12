@@ -22,8 +22,8 @@ module Seahorse
           http_wire_trace: false,
           logger: nil,
           ssl_verify_peer: true,
-          ssl_ca_bundle: OpenSSL::X509::DEFAULT_CERT_FILE,
-          ssl_ca_directory: OpenSSL::X509::DEFAULT_CERT_DIR,
+          ssl_ca_bundle: nil,
+          ssl_ca_directory: nil,
           ssl_ca_store: nil,
           enable_alpn: false
         }
@@ -212,8 +212,8 @@ module Seahorse
           ssl_ctx = OpenSSL::SSL::SSLContext.new(:TLSv1_2)
           if ssl_verify_peer?
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
-            ssl_ctx.ca_file = ssl_ca_bundle if ssl_ca_bundle
-            ssl_ctx.ca_path = ssl_ca_directory if ssl_ca_directory
+            ssl_ctx.ca_file = ssl_ca_bundle ? ssl_ca_bundle : _default_ca_bundle
+            ssl_ctx.ca_path = ssl_ca_directory ? ssl_ca_directory : _default_ca_directory
             ssl_ctx.cert_store = ssl_ca_store if ssl_ca_store
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -223,6 +223,16 @@ module Seahorse
             ssl_ctx.alpn_protocols = ['h2']
           end
           ssl_ctx
+        end
+
+        def _default_ca_bundle
+          File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE) ?
+            OpenSSL::X509::DEFAULT_CERT_FILE : nil
+        end
+
+        def _default_ca_directory
+          Dir.exist?(OpenSSL::X509::DEFAULT_CERT_DIR) ?
+            OpenSSL::X509::DEFAULT_CERT_DIR : nil
         end
 
       end
