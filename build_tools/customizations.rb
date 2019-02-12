@@ -3,6 +3,7 @@ module BuildTools
 
     @api_customizations = {}
     @doc_customizations = {}
+    @example_customizations = {}
 
     class << self
 
@@ -14,6 +15,10 @@ module BuildTools
         @doc_customizations[svc_name] = block
       end
 
+      def example(svc_name, &block)
+        @example_customizations[svc_name] = block
+      end
+
       def apply_api_customizations(svc_name, api)
         if api['metadata']['protocolSettings'] && api['metadata']['protocolSettings']['h2']
           api = exclude_eventstream(api)
@@ -23,6 +28,10 @@ module BuildTools
 
       def apply_doc_customizations(svc_name, docs)
         @doc_customizations[svc_name].call(docs) if @doc_customizations[svc_name]
+      end
+
+      def apply_example_customizations(svc_name, examples)
+        @example_customizations[svc_name].call(examples) if @example_customizations[svc_name]
       end
 
       private
@@ -50,6 +59,24 @@ module BuildTools
           eventstream
         else
           shape['eventstream']
+        end
+      end
+
+      def dynamodb_example_deep_transform(subsegment, keys)
+        if subsegment.is_a?(Hash)
+          if subsegment.keys.size == 1 && keys.include?(subsegment.keys.first)
+            subsegment[subsegment.keys.first] # reduce to value only
+          else
+            subsegment.each do |key, value|
+              subsegment[key] = dynamodb_example_deep_transform(value, keys)
+            end
+          end
+        elsif subsegment.is_a?(Array)
+          subsegment.map do |item|
+            dynamodb_example_deep_transform(item, keys)
+          end
+        else
+          subsegment
         end
       end
 
@@ -193,6 +220,10 @@ module BuildTools
       operations.each do |operation|
         api['operations'][operation]['authtype'] = 'none'
       end
+    end
+
+    example('DynamoDB') do |example|
+      example['examples'] = {}
     end
 
   end
