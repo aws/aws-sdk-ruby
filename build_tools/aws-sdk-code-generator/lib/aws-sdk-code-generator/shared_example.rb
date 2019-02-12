@@ -26,7 +26,12 @@ module AwsSdkCodeGenerator
 
     def entry(json, ref, indent, path)
       case ref['type']
-      when 'structure' then structure(json, ref, indent, path)
+      when 'structure'
+        if ref['members'].keys == ["S", "N", "B", "SS", "NS", "BS", "M", "L", "NULL", "BOOL"] && @api['metadata']['endpointPrefix'] == 'dynamodb'
+          json.first[1]
+        else
+          structure(json, ref, indent, path)
+        end
       when 'map' then map(json, ref, indent, path)
       when 'list' then list(json, ref, indent, path)
       when 'timestamp' then "Time.parse(#{json.inspect})"
