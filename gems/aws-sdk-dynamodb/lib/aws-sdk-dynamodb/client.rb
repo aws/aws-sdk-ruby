@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -426,16 +425,16 @@ module Aws::DynamoDB
     #       "Music" => {
     #         keys: [
     #           {
-    #             "Artist" => No One You Know, 
-    #             "SongTitle" => Call Me Today, 
+    #             "Artist" => "No One You Know", 
+    #             "SongTitle" => "Call Me Today", 
     #           }, 
     #           {
-    #             "Artist" => Acme Band, 
-    #             "SongTitle" => Happy Day, 
+    #             "Artist" => "Acme Band", 
+    #             "SongTitle" => "Happy Day", 
     #           }, 
     #           {
-    #             "Artist" => No One You Know, 
-    #             "SongTitle" => Scared of My Shadow, 
+    #             "Artist" => "No One You Know", 
+    #             "SongTitle" => "Scared of My Shadow", 
     #           }, 
     #         ], 
     #         projection_expression: "AlbumTitle", 
@@ -448,13 +447,13 @@ module Aws::DynamoDB
     #     responses: {
     #       "Music" => [
     #         {
-    #           "AlbumTitle" => Somewhat Famous, 
+    #           "AlbumTitle" => "Somewhat Famous", 
     #         }, 
     #         {
-    #           "AlbumTitle" => Blue Sky Blues, 
+    #           "AlbumTitle" => "Blue Sky Blues", 
     #         }, 
     #         {
-    #           "AlbumTitle" => Louder Than Ever, 
+    #           "AlbumTitle" => "Louder Than Ever", 
     #         }, 
     #       ], 
     #     }, 
@@ -681,27 +680,27 @@ module Aws::DynamoDB
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => Somewhat Famous, 
-    #               "Artist" => No One You Know, 
-    #               "SongTitle" => Call Me Today, 
+    #               "AlbumTitle" => "Somewhat Famous", 
+    #               "Artist" => "No One You Know", 
+    #               "SongTitle" => "Call Me Today", 
     #             }, 
     #           }, 
     #         }, 
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => Songs About Life, 
-    #               "Artist" => Acme Band, 
-    #               "SongTitle" => Happy Day, 
+    #               "AlbumTitle" => "Songs About Life", 
+    #               "Artist" => "Acme Band", 
+    #               "SongTitle" => "Happy Day", 
     #             }, 
     #           }, 
     #         }, 
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => Blue Sky Blues, 
-    #               "Artist" => No One You Know, 
-    #               "SongTitle" => Scared of My Shadow, 
+    #               "AlbumTitle" => "Blue Sky Blues", 
+    #               "Artist" => "No One You Know", 
+    #               "SongTitle" => "Scared of My Shadow", 
     #             }, 
     #           }, 
     #         }, 
@@ -1604,8 +1603,8 @@ module Aws::DynamoDB
     #
     #   resp = client.delete_item({
     #     key: {
-    #       "Artist" => No One You Know, 
-    #       "SongTitle" => Scared of My Shadow, 
+    #       "Artist" => "No One You Know", 
+    #       "SongTitle" => "Scared of My Shadow", 
     #     }, 
     #     table_name: "Music", 
     #   })
@@ -2483,8 +2482,8 @@ module Aws::DynamoDB
     #
     #   resp = client.get_item({
     #     key: {
-    #       "Artist" => Acme Band, 
-    #       "SongTitle" => Happy Day, 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #     table_name: "Music", 
     #   })
@@ -2492,9 +2491,9 @@ module Aws::DynamoDB
     #   resp.to_h outputs the following:
     #   {
     #     item: {
-    #       "AlbumTitle" => Songs About Life, 
-    #       "Artist" => Acme Band, 
-    #       "SongTitle" => Happy Day, 
+    #       "AlbumTitle" => "Songs About Life", 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #   }
     #
@@ -3033,9 +3032,9 @@ module Aws::DynamoDB
     #
     #   resp = client.put_item({
     #     item: {
-    #       "AlbumTitle" => Somewhat Famous, 
-    #       "Artist" => No One You Know, 
-    #       "SongTitle" => Call Me Today, 
+    #       "AlbumTitle" => "Somewhat Famous", 
+    #       "Artist" => "No One You Know", 
+    #       "SongTitle" => "Call Me Today", 
     #     }, 
     #     return_consumed_capacity: "TOTAL", 
     #     table_name: "Music", 
@@ -3550,7 +3549,7 @@ module Aws::DynamoDB
     #
     #   resp = client.query({
     #     expression_attribute_values: {
-    #       ":v1" => No One You Know, 
+    #       ":v1" => "No One You Know", 
     #     }, 
     #     key_condition_expression: "Artist = :v1", 
     #     projection_expression: "SongTitle", 
@@ -3564,7 +3563,7 @@ module Aws::DynamoDB
     #     count: 2, 
     #     items: [
     #       {
-    #         "SongTitle" => Call Me Today, 
+    #         "SongTitle" => "Call Me Today", 
     #       }, 
     #     ], 
     #     scanned_count: 2, 
@@ -4240,7 +4239,7 @@ module Aws::DynamoDB
     #       "ST" => "SongTitle", 
     #     }, 
     #     expression_attribute_values: {
-    #       ":a" => No One You Know, 
+    #       ":a" => "No One You Know", 
     #     }, 
     #     filter_expression: "Artist = :a", 
     #     projection_expression: "#ST, #AT", 
@@ -4254,12 +4253,12 @@ module Aws::DynamoDB
     #     count: 2, 
     #     items: [
     #       {
-    #         "AlbumTitle" => Somewhat Famous, 
-    #         "SongTitle" => Call Me Today, 
+    #         "AlbumTitle" => "Somewhat Famous", 
+    #         "SongTitle" => "Call Me Today", 
     #       }, 
     #       {
-    #         "AlbumTitle" => Blue Sky Blues, 
-    #         "SongTitle" => Scared of My Shadow, 
+    #         "AlbumTitle" => "Blue Sky Blues", 
+    #         "SongTitle" => "Scared of My Shadow", 
     #       }, 
     #     ], 
     #     scanned_count: 3, 
@@ -5318,12 +5317,12 @@ module Aws::DynamoDB
     #       "#Y" => "Year", 
     #     }, 
     #     expression_attribute_values: {
-    #       ":t" => Louder Than Ever, 
-    #       ":y" => 2015, 
+    #       ":t" => "Louder Than Ever", 
+    #       ":y" => "2015", 
     #     }, 
     #     key: {
-    #       "Artist" => Acme Band, 
-    #       "SongTitle" => Happy Day, 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #     return_values: "ALL_NEW", 
     #     table_name: "Music", 
@@ -5333,10 +5332,10 @@ module Aws::DynamoDB
     #   resp.to_h outputs the following:
     #   {
     #     attributes: {
-    #       "AlbumTitle" => Louder Than Ever, 
-    #       "Artist" => Acme Band, 
-    #       "SongTitle" => Happy Day, 
-    #       "Year" => 2015, 
+    #       "AlbumTitle" => "Louder Than Ever", 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
+    #       "Year" => "2015", 
     #     }, 
     #   }
     #

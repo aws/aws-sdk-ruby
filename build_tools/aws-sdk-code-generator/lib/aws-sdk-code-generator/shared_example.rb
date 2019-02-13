@@ -28,7 +28,7 @@ module AwsSdkCodeGenerator
       case ref['type']
       when 'structure'
         if ref['members'].keys == ["S", "N", "B", "SS", "NS", "BS", "M", "L", "NULL", "BOOL"] && @api['metadata']['endpointPrefix'] == 'dynamodb'
-          json.first[1]
+          string(json.first[1])
         else
           structure(json, ref, indent, path)
         end
