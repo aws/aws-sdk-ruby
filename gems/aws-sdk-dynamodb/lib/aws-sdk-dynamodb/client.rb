@@ -1126,74 +1126,6 @@ module Aws::DynamoDB
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
     #
-    #
-    # @example Example: To create a table
-    #
-    #   # This example creates a table named Music.
-    #
-    #   resp = client.create_table({
-    #     attribute_definitions: [
-    #       {
-    #         attribute_name: "Artist", 
-    #         attribute_type: "S", 
-    #       }, 
-    #       {
-    #         attribute_name: "SongTitle", 
-    #         attribute_type: "S", 
-    #       }, 
-    #     ], 
-    #     key_schema: [
-    #       {
-    #         attribute_name: "Artist", 
-    #         key_type: "HASH", 
-    #       }, 
-    #       {
-    #         attribute_name: "SongTitle", 
-    #         key_type: "RANGE", 
-    #       }, 
-    #     ], 
-    #     provisioned_throughput: {
-    #       read_capacity_units: 5, 
-    #       write_capacity_units: 5, 
-    #     }, 
-    #     table_name: "Music", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     table_description: {
-    #       attribute_definitions: [
-    #         {
-    #           attribute_name: "Artist", 
-    #           attribute_type: "S", 
-    #         }, 
-    #         {
-    #           attribute_name: "SongTitle", 
-    #           attribute_type: "S", 
-    #         }, 
-    #       ], 
-    #       creation_date_time: Time.parse("1421866952.062"), 
-    #       item_count: 0, 
-    #       key_schema: [
-    #         {
-    #           attribute_name: "Artist", 
-    #           key_type: "HASH", 
-    #         }, 
-    #         {
-    #           attribute_name: "SongTitle", 
-    #           key_type: "RANGE", 
-    #         }, 
-    #       ], 
-    #       provisioned_throughput: {
-    #         read_capacity_units: 5, 
-    #         write_capacity_units: 5, 
-    #       }, 
-    #       table_name: "Music", 
-    #       table_size_bytes: 0, 
-    #       table_status: "CREATING", 
-    #     }, 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_table({
@@ -1708,30 +1640,6 @@ module Aws::DynamoDB
     #
     #   * {Types::DeleteTableOutput#table_description #table_description} => Types::TableDescription
     #
-    #
-    # @example Example: To delete a table
-    #
-    #   # This example deletes the Music table.
-    #
-    #   resp = client.delete_table({
-    #     table_name: "Music", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     table_description: {
-    #       item_count: 0, 
-    #       provisioned_throughput: {
-    #         number_of_decreases_today: 1, 
-    #         read_capacity_units: 5, 
-    #         write_capacity_units: 5, 
-    #       }, 
-    #       table_name: "Music", 
-    #       table_size_bytes: 0, 
-    #       table_status: "DELETING", 
-    #     }, 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_table({
@@ -2141,23 +2049,6 @@ module Aws::DynamoDB
     #   * {Types::DescribeLimitsOutput#table_max_read_capacity_units #table_max_read_capacity_units} => Integer
     #   * {Types::DescribeLimitsOutput#table_max_write_capacity_units #table_max_write_capacity_units} => Integer
     #
-    #
-    # @example Example: To determine capacity limits per table and account, in the current AWS region
-    #
-    #   # The following example returns the maximum read and write capacity units per table, and for the AWS account, in the
-    #   # current AWS region.
-    #
-    #   resp = client.describe_limits({
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     account_max_read_capacity_units: 20000, 
-    #     account_max_write_capacity_units: 20000, 
-    #     table_max_read_capacity_units: 10000, 
-    #     table_max_write_capacity_units: 10000, 
-    #   }
-    #
     # @example Response structure
     #
     #   resp.account_max_read_capacity_units #=> Integer
@@ -2193,51 +2084,6 @@ module Aws::DynamoDB
     # @return [Types::DescribeTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTableOutput#table #table} => Types::TableDescription
-    #
-    #
-    # @example Example: To describe a table
-    #
-    #   # This example describes the Music table.
-    #
-    #   resp = client.describe_table({
-    #     table_name: "Music", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     table: {
-    #       attribute_definitions: [
-    #         {
-    #           attribute_name: "Artist", 
-    #           attribute_type: "S", 
-    #         }, 
-    #         {
-    #           attribute_name: "SongTitle", 
-    #           attribute_type: "S", 
-    #         }, 
-    #       ], 
-    #       creation_date_time: Time.parse("1421866952.062"), 
-    #       item_count: 0, 
-    #       key_schema: [
-    #         {
-    #           attribute_name: "Artist", 
-    #           key_type: "HASH", 
-    #         }, 
-    #         {
-    #           attribute_name: "SongTitle", 
-    #           key_type: "RANGE", 
-    #         }, 
-    #       ], 
-    #       provisioned_throughput: {
-    #         number_of_decreases_today: 1, 
-    #         read_capacity_units: 5, 
-    #         write_capacity_units: 5, 
-    #       }, 
-    #       table_name: "Music", 
-    #       table_size_bytes: 0, 
-    #       table_status: "ACTIVE", 
-    #     }, 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2684,24 +2530,6 @@ module Aws::DynamoDB
     #
     #   * {Types::ListTablesOutput#table_names #table_names} => Array&lt;String&gt;
     #   * {Types::ListTablesOutput#last_evaluated_table_name #last_evaluated_table_name} => String
-    #
-    #
-    # @example Example: To list tables
-    #
-    #   # This example lists all of the tables associated with the current AWS account and endpoint.
-    #
-    #   resp = client.list_tables({
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     table_names: [
-    #       "Forum", 
-    #       "ProductCatalog", 
-    #       "Reply", 
-    #       "Thread", 
-    #     ], 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5488,56 +5316,6 @@ module Aws::DynamoDB
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
-    #
-    #
-    # @example Example: To modify a table's provisioned throughput
-    #
-    #   # This example increases the provisioned read and write capacity on the Music table.
-    #
-    #   resp = client.update_table({
-    #     provisioned_throughput: {
-    #       read_capacity_units: 10, 
-    #       write_capacity_units: 10, 
-    #     }, 
-    #     table_name: "MusicCollection", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     table_description: {
-    #       attribute_definitions: [
-    #         {
-    #           attribute_name: "Artist", 
-    #           attribute_type: "S", 
-    #         }, 
-    #         {
-    #           attribute_name: "SongTitle", 
-    #           attribute_type: "S", 
-    #         }, 
-    #       ], 
-    #       creation_date_time: Time.parse("1421866952.062"), 
-    #       item_count: 0, 
-    #       key_schema: [
-    #         {
-    #           attribute_name: "Artist", 
-    #           key_type: "HASH", 
-    #         }, 
-    #         {
-    #           attribute_name: "SongTitle", 
-    #           key_type: "RANGE", 
-    #         }, 
-    #       ], 
-    #       provisioned_throughput: {
-    #         last_increase_date_time: Time.parse("1421874759.194"), 
-    #         number_of_decreases_today: 1, 
-    #         read_capacity_units: 1, 
-    #         write_capacity_units: 1, 
-    #       }, 
-    #       table_name: "MusicCollection", 
-    #       table_size_bytes: 0, 
-    #       table_status: "UPDATING", 
-    #     }, 
-    #   }
     #
     # @example Request syntax with placeholder values
     #

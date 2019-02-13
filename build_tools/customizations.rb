@@ -222,5 +222,9 @@ module BuildTools
       end
     end
 
+    example('DynamoDB') do |example|
+      example['examples'] = {}
+    end
+
   end
 end
