@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.220 (2019-02-13)
+------------------
+
 * Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
 
 * Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
