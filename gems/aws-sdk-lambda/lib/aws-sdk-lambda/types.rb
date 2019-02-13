@@ -8,8 +8,8 @@
 module Aws::Lambda
   module Types
 
-    # Limits related to concurrency and code storage. All file and storage
-    # sizes are in bytes.
+    # Limits that are related to concurrency and code storage. All file and
+    # storage sizes are in bytes.
     #
     # @!attribute [rw] total_code_size
     #   The amount of storage space that you can use for all deployment
@@ -17,12 +17,13 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] code_size_unzipped
-    #   The maximum size of your function's code and layers when extracted.
+    #   The maximum size of your function's code and layers when they're
+    #   extracted.
     #   @return [Integer]
     #
     # @!attribute [rw] code_size_zipped
-    #   The maximum size of a deployment package when uploaded direcly to
-    #   AWS Lambda. Use Amazon S3 for larger files.
+    #   The maximum size of a deployment package when it's uploaded
+    #   directly to AWS Lambda. Use Amazon S3 for larger files.
     #   @return [Integer]
     #
     # @!attribute [rw] concurrent_executions
@@ -30,8 +31,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] unreserved_concurrent_executions
-    #   The maximum number of simultaneous function executions, less the
-    #   concurrency reserved for individual functions with
+    #   The maximum number of simultaneous function executions, minus the
+    #   capacity that's reserved for individual functions with
     #   PutFunctionConcurrency.
     #   @return [Integer]
     #
@@ -49,8 +50,8 @@ module Aws::Lambda
     # The number of functions and amount of storage in use.
     #
     # @!attribute [rw] total_code_size
-    #   The amount of storage space, in bytes, in use by deployment packages
-    #   and layer archives.
+    #   The amount of storage space, in bytes, that's being used by
+    #   deployment packages and layer archives.
     #   @return [Integer]
     #
     # @!attribute [rw] function_count
@@ -196,11 +197,12 @@ module Aws::Lambda
     #
     # @!attribute [rw] source_account
     #   For AWS services, the ID of the account that owns the resource. Use
-    #   instead of `SourceArn` to grant permission to resources owned by
-    #   another account (e.g. all of an account's Amazon S3 buckets). Or
-    #   use together with `SourceArn` to ensure that the resource is owned
-    #   by the specified account. For example, an Amazon S3 bucket could be
-    #   deleted by its owner and recreated by another account.
+    #   this instead of `SourceArn` to grant permission to resources that
+    #   are owned by another account (for example, all of an account's
+    #   Amazon S3 buckets). Or use it together with `SourceArn` to ensure
+    #   that the resource is owned by the specified account. For example, an
+    #   Amazon S3 bucket could be deleted by its owner and recreated by
+    #   another account.
     #   @return [String]
     #
     # @!attribute [rw] event_source_token
@@ -214,9 +216,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] revision_id
-    #   Only update the policy if the revision ID matches the ID specified.
-    #   Use this option to avoid modifying a policy that has changed since
-    #   you last read it.
+    #   Only update the policy if the revision ID matches the ID that's
+    #   specified. Use this option to avoid modifying a policy that has
+    #   changed since you last read it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
@@ -235,7 +237,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] statement
-    #   The permission statement added to the function policy.
+    #   The permission statement that's added to the function policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionResponse AWS API Documentation
@@ -249,7 +251,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @!attribute [rw] alias_arn
     #   The Amazon Resource Name (ARN) of the alias.
@@ -272,7 +274,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @!attribute [rw] revision_id
@@ -291,11 +293,11 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A Lambda function alias's [traffic shifting][1] configuration.
+    # The [traffic-shifting][1] configuration of a Lambda function alias.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #
     # @note When making an API call, you may pass AliasRoutingConfiguration
     #   data as a hash:
@@ -307,7 +309,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] additional_version_weights
-    #   The name of the second alias, and the percentage of traffic that is
+    #   The name of the second alias, and the percentage of traffic that's
     #   routed to it.
     #   @return [Hash<String,Float>]
     #
@@ -319,12 +321,12 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] reserved_concurrent_executions
-    #   The number of concurrent executions reserved for this function. For
-    #   more information, see [Managing Concurrency][1].
+    #   The number of concurrent executions that are reserved for this
+    #   function. For more information, see [Managing Concurrency][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency AWS API Documentation
@@ -350,7 +352,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -382,7 +384,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest AWS API Documentation
@@ -536,7 +538,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -545,13 +547,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] handler
     #   The name of the method within your code that Lambda calls to execute
-    #   your function. The format includes the filename and can also include
-    #   namespaces and other qualifiers, depending on the runtime. For more
-    #   information, see [Programming Model][1].
+    #   your function. The format includes the file name. It can also
+    #   include namespaces and other qualifiers, depending on the runtime.
+    #   For more information, see [Programming Model][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html
     #   @return [String]
     #
     # @!attribute [rw] code
@@ -564,13 +566,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] timeout
     #   The amount of time that Lambda allows a function to run before
-    #   terminating it. The default is 3 seconds. The maximum allowed value
-    #   is 900 seconds.
+    #   stopping it. The default is 3 seconds. The maximum allowed value is
+    #   900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
     #   The amount of memory that your function has access to. Increasing
-    #   the function's memory also increases it's CPU allocation. The
+    #   the function's memory also increases its CPU allocation. The
     #   default value is 128 MB. The value must be a multiple of 64 MB.
     #   @return [Integer]
     #
@@ -587,7 +589,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/vpc.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] dead_letter_config
@@ -597,7 +599,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -606,9 +608,9 @@ module Aws::Lambda
     #   @return [Types::Environment]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the AWS Key Management Service key used to encrypt your
-    #   function's environment variables. If not provided, AWS Lambda uses
-    #   a default service key.
+    #   The ARN of the AWS Key Management Service (AWS KMS) key that's used
+    #   to encrypt your function's environment variables. If it's not
+    #   provided, AWS Lambda uses a default service key.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -621,16 +623,16 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] layers
     #   A list of [function layers][1] to add to the function's execution
-    #   environment. Specify each layer by ARN, including the version.
+    #   environment. Specify each layer by its ARN, including the version.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
@@ -659,7 +661,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
     #
     # @note When making an API call, you may pass DeadLetterConfig
     #   data as a hash:
@@ -689,7 +691,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -791,7 +793,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   Specify a version to delete. You cannot delete a version that is
+    #   Specify a version to delete. You can't delete a version that's
     #   referenced by an alias.
     #   @return [String]
     #
@@ -849,7 +851,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Error messages for environment variables that could not be applied.
+    # Error messages for environment variables that couldn't be applied.
     #
     # @!attribute [rw] error_code
     #   The error code.
@@ -875,7 +877,7 @@ module Aws::Lambda
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error
-    #   Error messages for environment variables that could not be applied.
+    #   Error messages for environment variables that couldn't be applied.
     #   @return [Types::EnvironmentError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentResponse AWS API Documentation
@@ -958,8 +960,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   An Amazon S3 bucket in the same region as your function. The bucket
-    #   can be in a different AWS account.
+    #   An Amazon S3 bucket in the same AWS Region as your function. The
+    #   bucket can be in a different AWS account.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -984,12 +986,11 @@ module Aws::Lambda
     # Details about a function's deployment package.
     #
     # @!attribute [rw] repository_type
-    #   The service hosting the file.
+    #   The service that's hosting the file.
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   A pre-signed URL that you can use to download the deployment
-    #   package.
+    #   A presigned URL that you can use to download the deployment package.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation AWS API Documentation
@@ -1019,11 +1020,11 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] handler
-    #   The function Lambda calls to begin executing your function.
+    #   The function that Lambda calls to begin executing your function.
     #   @return [String]
     #
     # @!attribute [rw] code_size
-    #   The size of the function's deployment package in bytes.
+    #   The size of the function's deployment package, in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -1032,11 +1033,11 @@ module Aws::Lambda
     #
     # @!attribute [rw] timeout
     #   The amount of time that Lambda allows a function to run before
-    #   terminating it.
+    #   stopping it.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The memory allocated to the function
+    #   The memory that's allocated to the function.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified
@@ -1069,8 +1070,9 @@ module Aws::Lambda
     #   @return [Types::EnvironmentResponse]
     #
     # @!attribute [rw] kms_key_arn
-    #   The KMS key used to encrypt the function's environment variables.
-    #   Only returned if you've configured a customer managed CMK.
+    #   The KMS key that's used to encrypt the function's environment
+    #   variables. This key is only returned if you've configured a
+    #   customer-managed CMK.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -1082,15 +1084,15 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] revision_id
-    #   Represents the latest updated revision of the function or alias.
+    #   The latest updated revision of the function or alias.
     #   @return [String]
     #
     # @!attribute [rw] layers
-    #   The function's [ layers][1]
+    #   The function's [ layers][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #   @return [Array<Types::Layer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
@@ -1126,7 +1128,7 @@ module Aws::Lambda
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_limit
-    #   Limits related to concurrency and code storage.
+    #   Limits that are related to concurrency and code storage.
     #   @return [Types::AccountLimit]
     #
     # @!attribute [rw] account_usage
@@ -1150,7 +1152,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1286,7 +1288,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] concurrency
@@ -1294,7 +1296,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Types::Concurrency]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse AWS API Documentation
@@ -1515,7 +1517,7 @@ module Aws::Lambda
     #     additional data.
     #
     #   * `Event` - Invoke the function asynchronously. Send events that
-    #     fail multiple times to the function's dead-letter queue (if
+    #     fail multiple times to the function's dead-letter queue (if it's
     #     configured). The API response only includes a status code.
     #
     #   * `DryRun` - Validate parameter values and verify that the user or
@@ -1532,7 +1534,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   JSON that you want to provide to your Lambda function as input.
+    #   The JSON that you want to provide to your Lambda function as input.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -1553,27 +1555,26 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] status_code
-    #   The HTTP status code will be in the 200 range for successful
-    #   request. For the `RequestResponse` invocation type this status code
-    #   will be 200. For the `Event` invocation type this status code will
-    #   be 202. For the `DryRun` invocation type the status code will be
-    #   204.
+    #   The HTTP status code is in the 200 range for a successful request.
+    #   For the `RequestResponse` invocation type, this status code is 200.
+    #   For the `Event` invocation type, this status code is 202. For the
+    #   `DryRun` invocation type, the status code is 204.
     #   @return [Integer]
     #
     # @!attribute [rw] function_error
-    #   If present, indicates that an error occured during function
+    #   If present, indicates that an error occurred during function
     #   execution. Details about the error are included in the response
     #   payload.
     #
     #   * `Handled` - The runtime caught an error thrown by the function and
     #     formatted it into a JSON document.
     #
-    #   * `Unhandled` - The runtime did not handle the error. For example,
+    #   * `Unhandled` - The runtime didn't handle the error. For example,
     #     the function ran out of memory or timed out.
     #   @return [String]
     #
     # @!attribute [rw] log_result
-    #   The last 4 KB of the execution log, base64 encoded.
+    #   The last 4 KB of the execution log, which is base64 encoded.
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -1582,8 +1583,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] executed_version
     #   The version of the function that executed. When you invoke a
-    #   function with an alias, indicates which version the alias resolved
-    #   to.
+    #   function with an alias, this indicates which version the alias
+    #   resolved to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse AWS API Documentation
@@ -1622,7 +1623,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] invoke_args
-    #   JSON that you want to provide to your Lambda function as input.
+    #   The JSON that you want to provide to your Lambda function as input.
     #   @return [IO]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncRequest AWS API Documentation
@@ -1633,11 +1634,11 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Upon success, it returns empty response. Otherwise, throws an
-    # exception.
+    # A success response (`202 Accepted`) indicates that the request is
+    # queued for invocation.
     #
     # @!attribute [rw] status
-    #   It will be 202 upon success.
+    #   The status code.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncResponse AWS API Documentation
@@ -1651,7 +1652,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the function layer.
@@ -1675,7 +1676,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @note When making an API call, you may pass LayerVersionContentInput
     #   data as a hash:
@@ -1719,7 +1720,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @!attribute [rw] location
     #   A link to the layer archive in Amazon S3 that is valid for 10
@@ -1747,7 +1748,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @!attribute [rw] layer_version_arn
     #   The ARN of the layer version.
@@ -1790,7 +1791,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @!attribute [rw] layer_name
     #   The name of the layer.
@@ -1824,7 +1825,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1845,8 +1846,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   Specify the pagination token returned by a previous request to
-    #   retrieve the next page of results.
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -1864,7 +1865,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] next_marker
-    #   Pagination token included if more results are available.
+    #   The pagination token that's included if more results are available.
     #   @return [String]
     #
     # @!attribute [rw] aliases
@@ -1965,8 +1966,8 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] master_region
-    #   For Lambda@Edge functions, the region of the master function. For
-    #   example, `us-east-2` or `ALL`. If specified, you must set
+    #   For Lambda@Edge functions, the AWS Region of the master function.
+    #   For example, `us-east-2` or `ALL`. If specified, you must set
     #   `FunctionVersion` to `ALL`.
     #   @return [String]
     #
@@ -1976,8 +1977,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   Specify the pagination token returned by a previous request to
-    #   retrieve the next page of results.
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -1998,7 +1999,7 @@ module Aws::Lambda
     # A list of Lambda functions.
     #
     # @!attribute [rw] next_marker
-    #   Pagination token included if more results are available.
+    #   The pagination token that's included if more results are available.
     #   @return [String]
     #
     # @!attribute [rw] functions
@@ -2152,7 +2153,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2168,12 +2169,12 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   Specify the pagination token returned by a previous request to
-    #   retrieve the next page of results.
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Limit the number of versions returned.
+    #   Limit the number of versions that are returned.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest AWS API Documentation
@@ -2186,7 +2187,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] next_marker
-    #   Pagination token included if more results are available.
+    #   The pagination token that's included if more results are available.
     #   @return [String]
     #
     # @!attribute [rw] versions
@@ -2235,7 +2236,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -2326,7 +2327,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2342,19 +2343,20 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] code_sha_256
-    #   Only publish a version if the hash matches the value specified. Use
-    #   this option to avoid publishing a version if the function code has
-    #   changed since you last updated it. You can get the hash for the
-    #   version you uploaded from the output of UpdateFunctionCode.
+    #   Only publish a version if the hash value matches the value that's
+    #   specified. Use this option to avoid publishing a version if the
+    #   function code has changed since you last updated it. You can get the
+    #   hash for the version that you uploaded from the output of
+    #   UpdateFunctionCode.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Specify a description for the version to override the description in
-    #   the function configuration.
+    #   A description for the version to override the description in the
+    #   function configuration.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
-    #   Only update the function if the revision ID matches the ID
+    #   Only update the function if the revision ID matches the ID that's
     #   specified. Use this option to avoid publishing a version if the
     #   function configuration has changed since you last updated it.
     #   @return [String]
@@ -2481,9 +2483,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] revision_id
-    #   Only update the policy if the revision ID matches the ID specified.
-    #   Use this option to avoid modifying a policy that has changed since
-    #   you last read it.
+    #   Only update the policy if the revision ID matches the ID that's
+    #   specified. Use this option to avoid modifying a policy that has
+    #   changed since you last read it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest AWS API Documentation
@@ -2596,7 +2598,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The name of the lambda function.
+    #   The name of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2628,13 +2630,13 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
     #   @return [Types::AliasRoutingConfiguration]
     #
     # @!attribute [rw] revision_id
-    #   Only update the alias if the revision ID matches the ID specified.
-    #   Use this option to avoid modifying an alias that has changed since
-    #   you last read it.
+    #   Only update the alias if the revision ID matches the ID that's
+    #   specified. Use this option to avoid modifying an alias that has
+    #   changed since you last read it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest AWS API Documentation
@@ -2742,8 +2744,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   An Amazon S3 bucket in the same region as your function. The bucket
-    #   can be in a different AWS account.
+    #   An Amazon S3 bucket in the same AWS Region as your function. The
+    #   bucket can be in a different AWS account.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -2767,7 +2769,7 @@ module Aws::Lambda
     #   @return [Boolean]
     #
     # @!attribute [rw] revision_id
-    #   Only update the function if the revision ID matches the ID
+    #   Only update the function if the revision ID matches the ID that's
     #   specified. Use this option to avoid modifying a function that has
     #   changed since you last read it.
     #   @return [String]
@@ -2834,47 +2836,58 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The Amazon Resource Name (ARN) of the IAM role that Lambda will
-    #   assume when it executes your function.
+    #   The Amazon Resource Name (ARN) of the function's execution role.
     #   @return [String]
     #
     # @!attribute [rw] handler
-    #   The function that Lambda calls to begin executing your function. For
-    #   Node.js, it is the `module-name.export` value in your function.
+    #   The name of the method within your code that Lambda calls to execute
+    #   your function. The format includes the file name. It can also
+    #   include namespaces and other qualifiers, depending on the runtime.
+    #   For more information, see [Programming Model][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A short user-defined function description. AWS Lambda does not use
-    #   this value. Assign a meaningful description as you see fit.
+    #   A description of the function.
     #   @return [String]
     #
     # @!attribute [rw] timeout
     #   The amount of time that Lambda allows a function to run before
-    #   terminating it. The default is 3 seconds. The maximum allowed value
-    #   is 900 seconds.
+    #   stopping it. The default is 3 seconds. The maximum allowed value is
+    #   900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory, in MB, your Lambda function is given. AWS
-    #   Lambda uses this memory size to infer the amount of CPU allocated to
-    #   your function. Your function use-case determines your CPU and memory
-    #   requirements. For example, a database operation might need less
-    #   memory compared to an image processing function. The default value
-    #   is 128 MB. The value must be a multiple of 64 MB.
+    #   The amount of memory that your function has access to. Increasing
+    #   the function's memory also increases its CPU allocation. The
+    #   default value is 128 MB. The value must be a multiple of 64 MB.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_config
-    #   Specify security groups and subnets in a VPC to which your Lambda
-    #   function needs access.
+    #   For network connectivity to AWS resources in a VPC, specify a list
+    #   of security groups and subnets in the VPC. When you connect a
+    #   function to a VPC, it can only access resources and the internet
+    #   through that VPC. For more information, see [VPC Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] environment
-    #   The parent object that contains your environment's configuration
-    #   settings.
+    #   Environment variables that are accessible from function code during
+    #   execution.
     #   @return [Types::Environment]
     #
     # @!attribute [rw] runtime
-    #   The runtime version for the function.
+    #   The identifier of the function's [runtime][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_config
@@ -2884,14 +2897,13 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
-    #   function's environment variables. If you elect to use the AWS
-    #   Lambda default service key, pass in an empty string ("") for this
-    #   parameter.
+    #   The ARN of the AWS Key Management Service (AWS KMS) key that's used
+    #   to encrypt your function's environment variables. If it's not
+    #   provided, AWS Lambda uses a default service key.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -2900,18 +2912,18 @@ module Aws::Lambda
     #   @return [Types::TracingConfig]
     #
     # @!attribute [rw] revision_id
-    #   Only update the function if the revision ID matches the ID
+    #   Only update the function if the revision ID matches the ID that's
     #   specified. Use this option to avoid modifying a function that has
     #   changed since you last read it.
     #   @return [String]
     #
     # @!attribute [rw] layers
     #   A list of [function layers][1] to add to the function's execution
-    #   environment.
+    #   environment. Specify each layer by its ARN, including the version.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
@@ -2934,7 +2946,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The VPC security groups and subnets attached to a Lambda function.
+    # The VPC security groups and subnets that are attached to a Lambda
+    # function.
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:
@@ -2960,7 +2973,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The VPC security groups and subnets attached to a Lambda function.
+    # The VPC security groups and subnets that are attached to a Lambda
+    # function.
     #
     # @!attribute [rw] subnet_ids
     #   A list of VPC subnet IDs.
