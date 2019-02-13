@@ -23,6 +23,7 @@ module Aws::EFS
     DependencyTimeout = Shapes::StructureShape.new(name: 'DependencyTimeout')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
+    DescribeLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLifecycleConfigurationRequest')
     DescribeMountTargetSecurityGroupsRequest = Shapes::StructureShape.new(name: 'DescribeMountTargetSecurityGroupsRequest')
     DescribeMountTargetSecurityGroupsResponse = Shapes::StructureShape.new(name: 'DescribeMountTargetSecurityGroupsResponse')
     DescribeMountTargetsRequest = Shapes::StructureShape.new(name: 'DescribeMountTargetsRequest')
@@ -39,6 +40,7 @@ module Aws::EFS
     FileSystemInUse = Shapes::StructureShape.new(name: 'FileSystemInUse')
     FileSystemLimitExceeded = Shapes::StructureShape.new(name: 'FileSystemLimitExceeded')
     FileSystemNotFound = Shapes::StructureShape.new(name: 'FileSystemNotFound')
+    FileSystemNullableSizeValue = Shapes::IntegerShape.new(name: 'FileSystemNullableSizeValue')
     FileSystemSize = Shapes::StructureShape.new(name: 'FileSystemSize')
     FileSystemSizeValue = Shapes::IntegerShape.new(name: 'FileSystemSizeValue')
     IncorrectFileSystemLifeCycleState = Shapes::StructureShape.new(name: 'IncorrectFileSystemLifeCycleState')
@@ -49,6 +51,9 @@ module Aws::EFS
     IpAddressInUse = Shapes::StructureShape.new(name: 'IpAddressInUse')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LifeCycleState = Shapes::StringShape.new(name: 'LifeCycleState')
+    LifecycleConfigurationDescription = Shapes::StructureShape.new(name: 'LifecycleConfigurationDescription')
+    LifecyclePolicies = Shapes::ListShape.new(name: 'LifecyclePolicies')
+    LifecyclePolicy = Shapes::StructureShape.new(name: 'LifecyclePolicy')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     ModifyMountTargetSecurityGroupsRequest = Shapes::StructureShape.new(name: 'ModifyMountTargetSecurityGroupsRequest')
@@ -63,6 +68,7 @@ module Aws::EFS
     NoFreeAddressesInSubnet = Shapes::StructureShape.new(name: 'NoFreeAddressesInSubnet')
     PerformanceMode = Shapes::StringShape.new(name: 'PerformanceMode')
     ProvisionedThroughputInMibps = Shapes::FloatShape.new(name: 'ProvisionedThroughputInMibps')
+    PutLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutLifecycleConfigurationRequest')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
     SecurityGroupLimitExceeded = Shapes::StructureShape.new(name: 'SecurityGroupLimitExceeded')
     SecurityGroupNotFound = Shapes::StructureShape.new(name: 'SecurityGroupNotFound')
@@ -78,6 +84,7 @@ module Aws::EFS
     ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequests = Shapes::StructureShape.new(name: 'TooManyRequests')
+    TransitionToIARules = Shapes::StringShape.new(name: 'TransitionToIARules')
     UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
 
@@ -119,6 +126,9 @@ module Aws::EFS
     DescribeFileSystemsResponse.add_member(:file_systems, Shapes::ShapeRef.new(shape: FileSystemDescriptions, location_name: "FileSystems"))
     DescribeFileSystemsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeFileSystemsResponse.struct_class = Types::DescribeFileSystemsResponse
+
+    DescribeLifecycleConfigurationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    DescribeLifecycleConfigurationRequest.struct_class = Types::DescribeLifecycleConfigurationRequest
 
     DescribeMountTargetSecurityGroupsRequest.add_member(:mount_target_id, Shapes::ShapeRef.new(shape: MountTargetId, required: true, location: "uri", location_name: "MountTargetId"))
     DescribeMountTargetSecurityGroupsRequest.struct_class = Types::DescribeMountTargetSecurityGroupsRequest
@@ -166,7 +176,17 @@ module Aws::EFS
 
     FileSystemSize.add_member(:value, Shapes::ShapeRef.new(shape: FileSystemSizeValue, required: true, location_name: "Value"))
     FileSystemSize.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    FileSystemSize.add_member(:value_in_ia, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInIA"))
+    FileSystemSize.add_member(:value_in_standard, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInStandard"))
     FileSystemSize.struct_class = Types::FileSystemSize
+
+    LifecycleConfigurationDescription.add_member(:lifecycle_policies, Shapes::ShapeRef.new(shape: LifecyclePolicies, location_name: "LifecyclePolicies"))
+    LifecycleConfigurationDescription.struct_class = Types::LifecycleConfigurationDescription
+
+    LifecyclePolicies.member = Shapes::ShapeRef.new(shape: LifecyclePolicy)
+
+    LifecyclePolicy.add_member(:transition_to_ia, Shapes::ShapeRef.new(shape: TransitionToIARules, location_name: "TransitionToIA"))
+    LifecyclePolicy.struct_class = Types::LifecyclePolicy
 
     ModifyMountTargetSecurityGroupsRequest.add_member(:mount_target_id, Shapes::ShapeRef.new(shape: MountTargetId, required: true, location: "uri", location_name: "MountTargetId"))
     ModifyMountTargetSecurityGroupsRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
@@ -182,6 +202,10 @@ module Aws::EFS
     MountTargetDescription.struct_class = Types::MountTargetDescription
 
     MountTargetDescriptions.member = Shapes::ShapeRef.new(shape: MountTargetDescription)
+
+    PutLifecycleConfigurationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    PutLifecycleConfigurationRequest.add_member(:lifecycle_policies, Shapes::ShapeRef.new(shape: LifecyclePolicies, required: true, location_name: "LifecyclePolicies"))
+    PutLifecycleConfigurationRequest.struct_class = Types::PutLifecycleConfigurationRequest
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
 
@@ -306,6 +330,17 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
       end)
 
+      api.add_operation(:describe_lifecycle_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLifecycleConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLifecycleConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: LifecycleConfigurationDescription)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+      end)
+
       api.add_operation(:describe_mount_target_security_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeMountTargetSecurityGroups"
         o.http_method = "GET"
@@ -353,6 +388,18 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
+      end)
+
+      api.add_operation(:put_lifecycle_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLifecycleConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutLifecycleConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: LifecycleConfigurationDescription)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
       end)
 
       api.add_operation(:update_file_system, Seahorse::Model::Operation.new.tap do |o|

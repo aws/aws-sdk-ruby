@@ -237,12 +237,22 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
     #   The target image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
@@ -710,6 +720,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
@@ -777,8 +792,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
-    #   the AWS CLI to call Amazon Rekognition operations, passing
-    #   base64-encoded image bytes is not supported.
+    #   the AWS CLI to call Amazon Rekognition operations, passing image
+    #   bytes is not supported. Images stored in an S3 Bucket do not need to
+    #   be base64-encoded.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_labels
@@ -855,6 +876,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] min_confidence
@@ -906,6 +932,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Rekognition operations, you
     #   can't pass image bytes.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class DetectTextRequest < Struct.new(
@@ -1425,12 +1456,18 @@ module Aws::Rekognition
     #   next set of moderation labels.
     #   @return [String]
     #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
+    #   @return [String]
+    #
     class GetContentModerationResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :moderation_labels,
-      :next_token)
+      :next_token,
+      :moderation_model_version)
       include Aws::Structure
     end
 
@@ -1860,6 +1897,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes isn't supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
@@ -2502,6 +2544,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class RecognizeCelebritiesRequest < Struct.new(
@@ -2607,6 +2654,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces

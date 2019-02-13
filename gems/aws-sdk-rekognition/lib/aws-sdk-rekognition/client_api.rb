@@ -505,6 +505,7 @@ module Aws::Rekognition
     GetContentModerationResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetContentModerationResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ContentModerationDetections, location_name: "ModerationLabels"))
     GetContentModerationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetContentModerationResponse.add_member(:moderation_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModerationModelVersion"))
     GetContentModerationResponse.struct_class = Types::GetContentModerationResponse
 
     GetFaceDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))

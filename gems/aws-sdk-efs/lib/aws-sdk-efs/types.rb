@@ -240,10 +240,8 @@ module Aws::EFS
     #
     # @!attribute [rw] max_items
     #   (Optional) Specifies the maximum number of file systems to return in
-    #   the response (integer). This parameter value must be greater than 0.
-    #   The number of items that Amazon EFS returns is the minimum of the
-    #   `MaxItems` parameter specified in the request and the service's
-    #   internal maximum number of items per page.
+    #   the response (integer). Currently, this number is automatically set
+    #   to 10.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -296,6 +294,25 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeLifecycleConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "FileSystemId", # required
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system whose `LifecycleConfiguration` object you
+    #   want to retrieve (String).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfigurationRequest AWS API Documentation
+    #
+    class DescribeLifecycleConfigurationRequest < Struct.new(
+      :file_system_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMountTargetSecurityGroupsRequest
     #   data as a hash:
     #
@@ -337,7 +354,7 @@ module Aws::EFS
     #
     # @!attribute [rw] max_items
     #   (Optional) Maximum number of mount targets to return in the
-    #   response. It must be an integer with a value greater than zero.
+    #   response. Currently, this number is automatically set to 10.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -405,7 +422,7 @@ module Aws::EFS
     #
     # @!attribute [rw] max_items
     #   (Optional) Maximum number of file system tags to return in the
-    #   response. It must be an integer with a value greater than zero.
+    #   response. Currently, this number is automatically set to 10.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -577,11 +594,63 @@ module Aws::EFS
     #   1970-01-01T00:00:00Z.
     #   @return [Time]
     #
+    # @!attribute [rw] value_in_ia
+    #   The latest known metered size (in bytes) of data stored in the
+    #   Infrequent Access storage class.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] value_in_standard
+    #   The latest known metered size (in bytes) of data stored in the
+    #   Standard storage class.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemSize AWS API Documentation
     #
     class FileSystemSize < Struct.new(
       :value,
-      :timestamp)
+      :timestamp,
+      :value_in_ia,
+      :value_in_standard)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_policies
+    #   An array of lifecycle management policies. Currently, EFS supports a
+    #   maximum of one policy per file system.
+    #   @return [Array<Types::LifecyclePolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecycleConfigurationDescription AWS API Documentation
+    #
+    class LifecycleConfigurationDescription < Struct.new(
+      :lifecycle_policies)
+      include Aws::Structure
+    end
+
+    # Describes a policy used by EFS lifecycle management to transition
+    # files to the Infrequent Access (IA) storage class.
+    #
+    # @note When making an API call, you may pass LifecyclePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #       }
+    #
+    # @!attribute [rw] transition_to_ia
+    #   A value that indicates how long it takes to transition to the IA
+    #   storage class. Currently, the only possible value is
+    #   `AFTER_30_DAYS`.
+    #
+    #   `AFTER_30_DAYS` indicates files that have not been read from or
+    #   written to for 30 days are transitioned from the Standard storage
+    #   class to the IA storage class. Metadata operations such as listing
+    #   the contents of a directory don't count as a file access event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecyclePolicy AWS API Documentation
+    #
+    class LifecyclePolicy < Struct.new(
+      :transition_to_ia)
       include Aws::Structure
     end
 
@@ -632,7 +701,7 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   Address at which the file system may be mounted via the mount
+    #   Address at which the file system can be mounted by using the mount
     #   target.
     #   @return [String]
     #
@@ -654,7 +723,39 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # A tag is a key-value pair. Allowed characters: letters, whitespace,
+    # @note When making an API call, you may pass PutLifecycleConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "FileSystemId", # required
+    #         lifecycle_policies: [ # required
+    #           {
+    #             transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system for which you are creating the
+    #   `LifecycleConfiguration` object (String).
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policies
+    #   An array of `LifecyclePolicy` objects that define the file system's
+    #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
+    #   tells lifecycle management when to transition files from the
+    #   Standard storage class to the Infrequent Access storage class.
+    #   @return [Array<Types::LifecyclePolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfigurationRequest AWS API Documentation
+    #
+    class PutLifecycleConfigurationRequest < Struct.new(
+      :file_system_id,
+      :lifecycle_policies)
+      include Aws::Structure
+    end
+
+    # A tag is a key-value pair. Allowed characters: letters, white space,
     # and numbers, representable in UTF-8, and the following characters:` +
     # - = . _ : /`
     #
