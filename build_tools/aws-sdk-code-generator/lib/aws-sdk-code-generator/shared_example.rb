@@ -27,7 +27,7 @@ module AwsSdkCodeGenerator
     def entry(json, ref, indent, path)
       case ref['type']
       when 'structure'
-        if ref['members'].keys == ["S", "N", "B", "SS", "NS", "BS", "M", "L", "NULL", "BOOL"] && @api['metadata']['endpointPrefix'] == 'dynamodb'
+        if is_ddb_simple_attribute?(ref)
           string(json.first[1])
         else
           structure(json, ref, indent, path)
@@ -38,6 +38,11 @@ module AwsSdkCodeGenerator
       when 'string', 'blob' then string(json)
       else json
       end
+    end
+
+    def is_ddb_simple_attribute?(ref)
+      ref['members'].keys == ["S", "N", "B", "SS", "NS", "BS", "M", "L", "NULL", "BOOL"] &&
+        @api['metadata']['serviceFullName'] == 'Amazon DynamoDB'
     end
 
     def string(json)
