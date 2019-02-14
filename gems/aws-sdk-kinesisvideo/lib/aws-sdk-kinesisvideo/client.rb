@@ -219,7 +219,7 @@ module Aws::KinesisVideo
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html
     #
     # @option params [String] :device_name
     #   The name of the device that is writing to the stream.
@@ -241,8 +241,8 @@ module Aws::KinesisVideo
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
     #
-    #   To play video on the console, the media must be H.264 encoded, and you
-    #   need to specify this video type in this parameter as `video/h264`.
+    #   Example valid values include "video/h264" and
+    #   "video/h264,audio/aac".
     #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
@@ -263,7 +263,7 @@ module Aws::KinesisVideo
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #
     # @option params [Integer] :data_retention_in_hours
     #   The number of hours that you want to retain the data in the stream.
@@ -279,6 +279,10 @@ module Aws::KinesisVideo
     #   of 200 MB. Fragments are removed from the buffer when either limit is
     #   reached.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags to associate with the specified stream. Each tag is a
+    #   key-value pair (the value is optional).
+    #
     # @return [Types::CreateStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStreamOutput#stream_arn #stream_arn} => String
@@ -291,6 +295,9 @@ module Aws::KinesisVideo
     #     media_type: "MediaType",
     #     kms_key_id: "KmsKeyId",
     #     data_retention_in_hours: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -563,7 +570,7 @@ module Aws::KinesisVideo
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #
     # @option params [String] :stream_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to add
@@ -677,7 +684,8 @@ module Aws::KinesisVideo
     #
     # @option params [required, Integer] :data_retention_change_in_hours
     #   The retention period, in hours. The value you specify replaces the
-    #   current value.
+    #   current value. The maximum value for this parameter is 87600 (ten
+    #   years).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -783,7 +791,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

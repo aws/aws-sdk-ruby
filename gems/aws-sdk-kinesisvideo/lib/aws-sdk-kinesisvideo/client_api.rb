@@ -72,6 +72,7 @@ module Aws::KinesisVideo
     CreateStreamInput.add_member(:media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "MediaType"))
     CreateStreamInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateStreamInput.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, location_name: "DataRetentionInHours"))
+    CreateStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "Tags"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
 
     CreateStreamOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
@@ -199,6 +200,7 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeviceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagsPerResourceExceededLimitException)
       end)
 
       api.add_operation(:delete_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -211,6 +213,7 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
       end)
 
       api.add_operation(:describe_stream, Seahorse::Model::Operation.new.tap do |o|

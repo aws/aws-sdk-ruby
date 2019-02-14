@@ -2019,13 +2019,15 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:deletion_time, Shapes::ShapeRef.new(shape: String, location_name: "deletionTime"))
     ClientVpnEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
     ClientVpnEndpoint.add_member(:client_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "clientCidrBlock"))
+    ClientVpnEndpoint.add_member(:dns_servers, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "dnsServer"))
     ClientVpnEndpoint.add_member(:split_tunnel, Shapes::ShapeRef.new(shape: Boolean, location_name: "splitTunnel"))
     ClientVpnEndpoint.add_member(:vpn_protocol, Shapes::ShapeRef.new(shape: VpnProtocol, location_name: "vpnProtocol"))
     ClientVpnEndpoint.add_member(:transport_protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "transportProtocol"))
-    ClientVpnEndpoint.add_member(:associated_target_networks, Shapes::ShapeRef.new(shape: AssociatedTargetNetworkSet, location_name: "associatedTargetNetwork"))
+    ClientVpnEndpoint.add_member(:associated_target_networks, Shapes::ShapeRef.new(shape: AssociatedTargetNetworkSet, deprecated: true, location_name: "associatedTargetNetwork", metadata: {"deprecatedMessage"=>"This property is deprecated. To view the target networks associated with a Client VPN endpoint, call DescribeClientVpnTargetNetworks and inspect the clientVpnTargetNetworks response element."}))
     ClientVpnEndpoint.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "serverCertificateArn"))
     ClientVpnEndpoint.add_member(:authentication_options, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationList, location_name: "authenticationOptions"))
     ClientVpnEndpoint.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogResponseOptions, location_name: "connectionLogOptions"))
+    ClientVpnEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
 
     ClientVpnEndpointStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnEndpointStatusCode, location_name: "code"))
@@ -2162,6 +2164,7 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateClientVpnEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClientVpnEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
 
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))

@@ -17,6 +17,9 @@ module Aws::KinesisVideo
     #         media_type: "MediaType",
     #         kms_key_id: "KmsKeyId",
     #         data_retention_in_hours: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] device_name
@@ -41,9 +44,8 @@ module Aws::KinesisVideo
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
     #
-    #   To play video on the console, the media must be H.264 encoded, and
-    #   you need to specify this video type in this parameter as
-    #   `video/h264`.
+    #   Example valid values include "video/h264" and
+    #   "video/h264,audio/aac".
     #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
@@ -65,7 +67,7 @@ module Aws::KinesisVideo
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   @return [String]
     #
     # @!attribute [rw] data_retention_in_hours
@@ -83,6 +85,11 @@ module Aws::KinesisVideo
     #   is reached.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to associate with the specified stream. Each tag is a
+    #   key-value pair (the value is optional).
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
@@ -90,7 +97,8 @@ module Aws::KinesisVideo
       :stream_name,
       :media_type,
       :kms_key_id,
-      :data_retention_in_hours)
+      :data_retention_in_hours,
+      :tags)
       include Aws::Structure
     end
 
@@ -522,7 +530,8 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] data_retention_change_in_hours
     #   The retention period, in hours. The value you specify replaces the
-    #   current value.
+    #   current value. The maximum value for this parameter is 87600 (ten
+    #   years).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionInput AWS API Documentation
