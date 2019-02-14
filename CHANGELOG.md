@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.221 (2019-02-14)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::KinesisVideo - Updated the API, and documentation for Amazon Kinesis Video Streams.
