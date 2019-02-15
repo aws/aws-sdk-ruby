@@ -1270,6 +1270,7 @@ module Aws::IoT
     CreateScheduledAuditRequest.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "dayOfWeek"))
     CreateScheduledAuditRequest.add_member(:target_check_names, Shapes::ShapeRef.new(shape: TargetAuditCheckNames, required: true, location_name: "targetCheckNames"))
     CreateScheduledAuditRequest.add_member(:scheduled_audit_name, Shapes::ShapeRef.new(shape: ScheduledAuditName, required: true, location: "uri", location_name: "scheduledAuditName"))
+    CreateScheduledAuditRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateScheduledAuditRequest.struct_class = Types::CreateScheduledAuditRequest
 
     CreateScheduledAuditResponse.add_member(:scheduled_audit_arn, Shapes::ShapeRef.new(shape: ScheduledAuditArn, location_name: "scheduledAuditArn"))

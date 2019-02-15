@@ -225,7 +225,7 @@ module Aws::Chime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -272,7 +272,7 @@ module Aws::Chime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -357,7 +357,7 @@ module Aws::Chime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
     #
     # @option params [required, String] :name
     #   The name of the Amazon Chime account.
@@ -470,7 +470,7 @@ module Aws::Chime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/chime/latest/ag/policies.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/policies.html
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -808,7 +808,7 @@ module Aws::Chime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/chime/latest/ag/policies.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/policies.html
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -897,7 +897,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

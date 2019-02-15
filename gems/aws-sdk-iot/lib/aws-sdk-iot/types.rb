@@ -998,7 +998,7 @@ module Aws::IoT
     #
     # @!attribute [rw] comparison_operator
     #   The operator that relates the thing measured (`metric`) to the
-    #   criteria (`value`).
+    #   criteria (containing a `value`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1006,7 +1006,7 @@ module Aws::IoT
     #   @return [Types::MetricValue]
     #
     # @!attribute [rw] duration_seconds
-    #   Use this to specify the period of time over which the behavior is
+    #   Use this to specify the time duration over which the behavior is
     #   evaluated, for those criteria which have a time dimension (for
     #   example, `NUM_MESSAGES_SENT`).
     #   @return [Integer]
@@ -1493,7 +1493,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit
     #   @return [String]
     #
     # @!attribute [rw] metric_timestamp
@@ -1501,7 +1501,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp
     #   @return [String]
     #
     class CloudwatchMetricAction < Struct.new(
@@ -1836,7 +1836,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
     #   @return [String]
     #
     # @!attribute [rw] query_version
@@ -2397,6 +2397,12 @@ module Aws::IoT
     #         day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #         target_check_names: ["AuditCheckName"], # required
     #         scheduled_audit_name: "ScheduledAuditName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] frequency
@@ -2433,12 +2439,17 @@ module Aws::IoT
     #   The name you want to give to the scheduled audit. (Max. 128 chars)
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the scheduled audit.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateScheduledAuditRequest < Struct.new(
       :frequency,
       :day_of_month,
       :day_of_week,
       :target_check_names,
-      :scheduled_audit_name)
+      :scheduled_audit_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -5465,17 +5476,15 @@ module Aws::IoT
     #   @return [Types::AbortConfig]
     #
     # @!attribute [rw] created_at
-    #   The time, in milliseconds since the epoch, when the job was created.
+    #   The time, in seconds since the epoch, when the job was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job was last
-    #   updated.
+    #   The time, in seconds since the epoch, when the job was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] completed_at
-    #   The time, in milliseconds since the epoch, when the job was
-    #   completed.
+    #   The time, in seconds since the epoch, when the job was completed.
     #   @return [Time]
     #
     # @!attribute [rw] job_process_details
@@ -5538,18 +5547,18 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] queued_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was queued.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   queued.
     #   @return [Time]
     #
     # @!attribute [rw] started_at
-    #   The time, in milliseconds since the epoch, when the job execution
+    #   The time, in seconds since the epoch, when the job execution
     #   started.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was last updated.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   last updated.
     #   @return [Time]
     #
     # @!attribute [rw] execution_number
@@ -5606,18 +5615,18 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] queued_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was queued.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   queued.
     #   @return [Time]
     #
     # @!attribute [rw] started_at
-    #   The time, in milliseconds since the epoch, when the job execution
+    #   The time, in seconds since the epoch, when the job execution
     #   started.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was last updated.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   last updated.
     #   @return [Time]
     #
     # @!attribute [rw] execution_number
@@ -5785,16 +5794,15 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time, in milliseconds since the epoch, when the job was created.
+    #   The time, in seconds since the epoch, when the job was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job was last
-    #   updated.
+    #   The time, in seconds since the epoch, when the job was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] completed_at
-    #   The time, in milliseconds since the epoch, when the job completed.
+    #   The time, in seconds since the epoch, when the job completed.
     #   @return [Time]
     #
     class JobSummary < Struct.new(
@@ -8420,7 +8428,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -8429,7 +8437,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [Hash<String,String>]
     #
     class RegisterThingRequest < Struct.new(
@@ -8958,7 +8966,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #   @return [String]
     #
     class S3Action < Struct.new(
@@ -9377,12 +9385,12 @@ module Aws::IoT
     #   is "RAW". SNS uses this setting to determine if the payload should
     #   be parsed and relevant platform-specific bits of the payload should
     #   be extracted. To read more about SNS message formats, see
-    #   [http://docs.aws.amazon.com/sns/latest/dg/json-formats.html][1]
+    #   [https://docs.aws.amazon.com/sns/latest/dg/json-formats.html][1]
     #   refer to their official documentation.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/json-formats.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/json-formats.html
     #   @return [String]
     #
     class SnsAction < Struct.new(
@@ -10559,7 +10567,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
     #   @return [String]
     #
     # @!attribute [rw] description

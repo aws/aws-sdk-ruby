@@ -413,7 +413,7 @@ module Aws::ApplicationAutoScaling
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
-    # @option params [String] :scalable_dimension
+    # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
     #
@@ -459,7 +459,7 @@ module Aws::ApplicationAutoScaling
     #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #     scheduled_action_name: "ResourceIdMaxLen1600", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledAction AWS API Documentation
@@ -1366,6 +1366,25 @@ module Aws::ApplicationAutoScaling
     # DescribeScalingPolicies. If you are no longer using a scaling policy,
     # you can delete it using DeleteScalingPolicy.
     #
+    # Multiple scaling policies can be in force at the same time for the
+    # same scalable target. You can have one or more target tracking scaling
+    # policies, one or more step scaling policies, or both. However, there
+    # is a chance that multiple policies could conflict, instructing the
+    # scalable target to scale out or in at the same time. Application Auto
+    # Scaling gives precedence to the policy that provides the largest
+    # capacity for both scale in and scale out. For example, if one policy
+    # increases capacity by 3, another policy increases capacity by 200
+    # percent, and the current capacity is 10, Application Auto Scaling uses
+    # the policy with the highest calculated capacity (200% of 10 = 20) and
+    # scales out to 30.
+    #
+    # Learn more about how to work with scaling policies in the [Application
+    # Auto Scaling User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html
+    #
     # @option params [required, String] :policy_name
     #   The name of the scaling policy.
     #
@@ -1481,7 +1500,8 @@ module Aws::ApplicationAutoScaling
     #   type is `StepScaling`.
     #
     # @option params [Types::TargetTrackingScalingPolicyConfiguration] :target_tracking_scaling_policy_configuration
-    #   A target tracking policy.
+    #   A target tracking scaling policy. Includes support for predefined or
+    #   customized metrics.
     #
     #   This parameter is required if you are creating a policy and the policy
     #   type is `TargetTrackingScaling`.
@@ -1627,6 +1647,13 @@ module Aws::ApplicationAutoScaling
     # you are no longer using a scheduled action, you can delete it using
     # DeleteScheduledAction.
     #
+    # Learn more about how to work with scheduled actions in the
+    # [Application Auto Scaling User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html
+    #
     # @option params [required, String] :service_namespace
     #   The namespace of the AWS service that provides the resource or
     #   `custom-resource` for a resource provided by your own application or
@@ -1705,9 +1732,8 @@ module Aws::ApplicationAutoScaling
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #
-    # @option params [String] :scalable_dimension
-    #   The scalable dimension. This parameter is required if you are creating
-    #   a scheduled action. This string consists of the service namespace,
+    # @option params [required, String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
     #
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
@@ -1766,7 +1792,7 @@ module Aws::ApplicationAutoScaling
     #     schedule: "ResourceIdMaxLen1600",
     #     scheduled_action_name: "ScheduledActionName", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     scalable_target_action: {
@@ -1785,7 +1811,7 @@ module Aws::ApplicationAutoScaling
     end
 
     # Registers or updates a scalable target. A scalable target is a
-    # resource that Application Auto Scaling can scale in and scale out.
+    # resource that Application Auto Scaling can scale out and scale in.
     # Each scalable target has a resource ID, scalable dimension, and
     # namespace, as well as values for minimum and maximum capacity.
     #
@@ -1891,11 +1917,11 @@ module Aws::ApplicationAutoScaling
     #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :min_capacity
-    #   The minimum value to scale to in response to a scale in event. This
+    #   The minimum value to scale to in response to a scale-in event. This
     #   parameter is required to register a scalable target.
     #
     # @option params [Integer] :max_capacity
-    #   The maximum value to scale to in response to a scale out event. This
+    #   The maximum value to scale to in response to a scale-out event. This
     #   parameter is required to register a scalable target.
     #
     # @option params [String] :role_arn
@@ -1981,7 +2007,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

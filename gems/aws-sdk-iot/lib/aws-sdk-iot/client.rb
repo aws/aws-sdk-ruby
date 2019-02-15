@@ -825,7 +825,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
     #
     # @option params [String] :query_version
     #   The dynamic thing group query version.
@@ -1326,6 +1326,9 @@ module Aws::IoT
     # @option params [required, String] :scheduled_audit_name
     #   The name you want to give to the scheduled audit. (Max. 128 chars)
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the scheduled audit.
+    #
     # @return [Types::CreateScheduledAuditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateScheduledAuditResponse#scheduled_audit_arn #scheduled_audit_arn} => String
@@ -1338,6 +1341,12 @@ module Aws::IoT
     #     day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #     target_check_names: ["AuditCheckName"], # required
     #     scheduled_audit_name: "ScheduledAuditName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1492,7 +1501,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
@@ -1551,7 +1560,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_group_name
     #   The thing group name to create.
@@ -4719,7 +4728,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax
     #
     # @option params [required, String] :principal
     #   The principal.
@@ -5739,7 +5748,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @option params [Hash<String,String>] :parameters
     #   The parameters for provisioning a thing. See [Programmatic
@@ -5747,7 +5756,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7431,7 +7440,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
