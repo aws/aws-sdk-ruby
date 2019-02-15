@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.222 (2019-02-15)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::Chime - Updated the documentation for Amazon Chime.
