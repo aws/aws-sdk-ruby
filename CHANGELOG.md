@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::Chime - Updated the documentation for Amazon Chime.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
 2.11.221 (2019-02-14)
 ------------------
 
