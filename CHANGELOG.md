@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.223 (2019-02-18)
+------------------
+
 * Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
 
 * Feature - Aws::SecretsManager - Updated the API, and documentation for AWS Secrets Manager.
