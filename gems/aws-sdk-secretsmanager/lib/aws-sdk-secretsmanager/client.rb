@@ -535,7 +535,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) Specifies a list of user-defined tags that are attached to
@@ -586,7 +586,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Types::CreateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1628,7 +1628,7 @@ module Aws::SecretsManager
     #
     #
     # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to attach the resource-based policy
@@ -1885,7 +1885,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @option params [Array<String>] :version_stages
     #   (Optional) Specifies a list of staging labels that are attached to
@@ -2099,7 +2099,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to rotate. You can specify either
@@ -2267,7 +2267,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2368,7 +2368,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2598,7 +2598,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #
     # @return [Types::UpdateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2726,7 +2726,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret with the version whose list of staging labels you
@@ -2865,7 +2865,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

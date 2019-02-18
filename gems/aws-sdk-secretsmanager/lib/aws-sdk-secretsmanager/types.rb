@@ -215,7 +215,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -267,7 +267,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretRequest AWS API Documentation
@@ -1257,7 +1257,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @!attribute [rw] version_stages
@@ -1516,7 +1516,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1718,7 +1718,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/TagResourceRequest AWS API Documentation
@@ -1771,7 +1771,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UntagResourceRequest AWS API Documentation
@@ -1922,7 +1922,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretRequest AWS API Documentation
