@@ -958,6 +958,11 @@ module Aws::IoT
     #             ports: [1],
     #           },
     #           duration_seconds: 1,
+    #           consecutive_datapoints_to_alarm: 1,
+    #           consecutive_datapoints_to_clear: 1,
+    #           statistical_threshold: {
+    #             statistic: "EvaluationStatistic",
+    #           },
     #         },
     #       }
     #
@@ -994,11 +999,16 @@ module Aws::IoT
     #           ports: [1],
     #         },
     #         duration_seconds: 1,
+    #         consecutive_datapoints_to_alarm: 1,
+    #         consecutive_datapoints_to_clear: 1,
+    #         statistical_threshold: {
+    #           statistic: "EvaluationStatistic",
+    #         },
     #       }
     #
     # @!attribute [rw] comparison_operator
     #   The operator that relates the thing measured (`metric`) to the
-    #   criteria (containing a `value`.
+    #   criteria (containing a `value` or `statisticalThreshold`).
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1008,13 +1018,39 @@ module Aws::IoT
     # @!attribute [rw] duration_seconds
     #   Use this to specify the time duration over which the behavior is
     #   evaluated, for those criteria which have a time dimension (for
-    #   example, `NUM_MESSAGES_SENT`).
+    #   example, `NUM_MESSAGES_SENT`). For a `statisticalThreshhold` metric
+    #   comparison, measurements from all devices are accumulated over this
+    #   time duration before being used to calculate percentiles, and later,
+    #   measurements from an individual device are also accumulated over
+    #   this time duration before being given a percentile rank.
     #   @return [Integer]
+    #
+    # @!attribute [rw] consecutive_datapoints_to_alarm
+    #   If a device is in violation of the behavior for the specified number
+    #   of consecutive datapoints, an alarm occurs. If not specified, the
+    #   default is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consecutive_datapoints_to_clear
+    #   If an alarm has occurred and the offending device is no longer in
+    #   violation of the behavior for the specified number of consecutive
+    #   datapoints, the alarm is cleared. If not specified, the default is
+    #   1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistical_threshold
+    #   A statistical ranking (percentile) which indicates a threshold value
+    #   by which a behavior is determined to be in compliance or in
+    #   violation of the behavior.
+    #   @return [Types::StatisticalThreshold]
     #
     class BehaviorCriteria < Struct.new(
       :comparison_operator,
       :value,
-      :duration_seconds)
+      :duration_seconds,
+      :consecutive_datapoints_to_alarm,
+      :consecutive_datapoints_to_clear,
+      :statistical_threshold)
       include Aws::Structure
     end
 
@@ -2396,13 +2432,13 @@ module Aws::IoT
     #         day_of_month: "DayOfMonth",
     #         day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #         target_check_names: ["AuditCheckName"], # required
-    #         scheduled_audit_name: "ScheduledAuditName", # required
     #         tags: [
     #           {
     #             key: "TagKey",
     #             value: "TagValue",
     #           },
     #         ],
+    #         scheduled_audit_name: "ScheduledAuditName", # required
     #       }
     #
     # @!attribute [rw] frequency
@@ -2435,21 +2471,21 @@ module Aws::IoT
     #   enabled.)
     #   @return [Array<String>]
     #
-    # @!attribute [rw] scheduled_audit_name
-    #   The name you want to give to the scheduled audit. (Max. 128 chars)
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   Metadata which can be used to manage the scheduled audit.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] scheduled_audit_name
+    #   The name you want to give to the scheduled audit. (Max. 128 chars)
+    #   @return [String]
     #
     class CreateScheduledAuditRequest < Struct.new(
       :frequency,
       :day_of_month,
       :day_of_week,
       :target_check_names,
-      :scheduled_audit_name,
-      :tags)
+      :tags,
+      :scheduled_audit_name)
       include Aws::Structure
     end
 
@@ -2468,7 +2504,7 @@ module Aws::IoT
     #       {
     #         security_profile_name: "SecurityProfileName", # required
     #         security_profile_description: "SecurityProfileDescription",
-    #         behaviors: [ # required
+    #         behaviors: [
     #           {
     #             name: "BehaviorName", # required
     #             metric: "BehaviorMetric",
@@ -2480,6 +2516,11 @@ module Aws::IoT
     #                 ports: [1],
     #               },
     #               duration_seconds: 1,
+    #               consecutive_datapoints_to_alarm: 1,
+    #               consecutive_datapoints_to_clear: 1,
+    #               statistical_threshold: {
+    #                 statistic: "EvaluationStatistic",
+    #               },
     #             },
     #           },
     #         ],
@@ -2489,6 +2530,7 @@ module Aws::IoT
     #             role_arn: "RoleArn", # required
     #           },
     #         },
+    #         additional_metrics_to_retain: ["BehaviorMetric"],
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -2516,6 +2558,12 @@ module Aws::IoT
     #   (thing) violates a behavior.
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors` but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
     #   Metadata which can be used to manage the security profile.
     #   @return [Array<Types::Tag>]
@@ -2525,6 +2573,7 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
       :tags)
       include Aws::Structure
     end
@@ -4180,6 +4229,12 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors` but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] version
     #   The version of the security profile. A new version is generated
     #   whenever the security profile is updated.
@@ -4199,6 +4254,7 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
       :version,
       :creation_date,
       :last_modified_date)
@@ -9544,6 +9600,34 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A statistical ranking (percentile) which indicates a threshold value
+    # by which a behavior is determined to be in compliance or in violation
+    # of the behavior.
+    #
+    # @note When making an API call, you may pass StatisticalThreshold
+    #   data as a hash:
+    #
+    #       {
+    #         statistic: "EvaluationStatistic",
+    #       }
+    #
+    # @!attribute [rw] statistic
+    #   The percentile which resolves to a threshold value by which
+    #   compliance with a behavior is determined. Metrics are collected over
+    #   the specified period (`durationSeconds`) from all reporting devices
+    #   in your account and statistical ranks are calculated. Then, the
+    #   measurements from a device are collected over the same period. If
+    #   the accumulated measurements from the device fall above or below
+    #   (`comparisonOperator`) the value associated with the percentile
+    #   specified, then the device is considered to be in compliance with
+    #   the behavior, otherwise a violation occurs.
+    #   @return [String]
+    #
+    class StatisticalThreshold < Struct.new(
+      :statistic)
+      include Aws::Structure
+    end
+
     # Starts execution of a Step Functions state machine.
     #
     # @note When making an API call, you may pass StepFunctionsAction
@@ -11251,6 +11335,11 @@ module Aws::IoT
     #                 ports: [1],
     #               },
     #               duration_seconds: 1,
+    #               consecutive_datapoints_to_alarm: 1,
+    #               consecutive_datapoints_to_clear: 1,
+    #               statistical_threshold: {
+    #                 statistic: "EvaluationStatistic",
+    #               },
     #             },
     #           },
     #         ],
@@ -11260,6 +11349,10 @@ module Aws::IoT
     #             role_arn: "RoleArn", # required
     #           },
     #         },
+    #         additional_metrics_to_retain: ["BehaviorMetric"],
+    #         delete_behaviors: false,
+    #         delete_alert_targets: false,
+    #         delete_additional_metrics_to_retain: false,
     #         expected_version: 1,
     #       }
     #
@@ -11280,6 +11373,30 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors` but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] delete_behaviors
+    #   If true, delete all `behaviors` defined for this security profile.
+    #   If any `behaviors` are defined in the current invocation an
+    #   exception occurs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_alert_targets
+    #   If true, delete all `alertTargets` defined for this security
+    #   profile. If any `alertTargets` are defined in the current invocation
+    #   an exception occurs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_additional_metrics_to_retain
+    #   If true, delete all `additionalMetricsToRetain` defined for this
+    #   security profile. If any `additionalMetricsToRetain` are defined in
+    #   the current invocation an exception occurs.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
@@ -11292,6 +11409,10 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
+      :delete_behaviors,
+      :delete_alert_targets,
+      :delete_additional_metrics_to_retain,
       :expected_version)
       include Aws::Structure
     end
@@ -11317,6 +11438,12 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the security profile's
+    #   `behaviors` but it is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] version
     #   The updated version of the security profile.
     #   @return [Integer]
@@ -11335,6 +11462,7 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
       :version,
       :creation_date,
       :last_modified_date)
@@ -11571,6 +11699,11 @@ module Aws::IoT
     #                 ports: [1],
     #               },
     #               duration_seconds: 1,
+    #               consecutive_datapoints_to_alarm: 1,
+    #               consecutive_datapoints_to_clear: 1,
+    #               statistical_threshold: {
+    #                 statistic: "EvaluationStatistic",
+    #               },
     #             },
     #           },
     #         ],

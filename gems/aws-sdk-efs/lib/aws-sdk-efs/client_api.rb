@@ -94,6 +94,7 @@ module Aws::EFS
     CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemRequest.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
     CreateFileSystemRequest.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
+    CreateFileSystemRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateMountTargetRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -170,6 +171,7 @@ module Aws::EFS
     FileSystemDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     FileSystemDescription.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
     FileSystemDescription.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
+    FileSystemDescription.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     FileSystemDescription.struct_class = Types::FileSystemDescription
 
     FileSystemDescriptions.member = Shapes::ShapeRef.new(shape: FileSystemDescription)

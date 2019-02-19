@@ -53,6 +53,10 @@ module Aws::SSM
     #   The date the activation was created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the activation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Activation AWS API Documentation
     #
     class Activation < Struct.new(
@@ -64,7 +68,8 @@ module Aws::SSM
       :registrations_count,
       :expiration_date,
       :expired,
-      :created_date)
+      :created_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -1985,6 +1990,12 @@ module Aws::SSM
     #         iam_role: "IamRole", # required
     #         registration_limit: 1,
     #         expiration_date: Time.now,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] description
@@ -2017,6 +2028,33 @@ module Aws::SSM
     #   value is 24 hours.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an activation to
+    #   identify which servers or virtual machines (VMs) in your on-premises
+    #   environment you intend to activate. In this case, you could specify
+    #   the following key name/value pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   When you install SSM Agent on your on-premises servers and VMs, you
+    #   specify an activation ID and code. When you specify the activation
+    #   ID and code, tags assigned to the activation are automatically
+    #   applied to the on-premises servers or VMs.
+    #
+    #   You can't add tags to or delete tags from an existing activation.
+    #   You can tag your on-premises servers and VMs after they connect to
+    #   Systems Manager for the first time and are assigned a managed
+    #   instance ID. This means they are listed in the AWS Systems Manager
+    #   console with an ID that is prefixed with "mi-". For information
+    #   about how to add tags to your managed instances, see
+    #   AddTagsToResource. For information about how to remove tags from
+    #   your managed instances, see RemoveTagsFromResource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationRequest AWS API Documentation
     #
     class CreateActivationRequest < Struct.new(
@@ -2024,7 +2062,8 @@ module Aws::SSM
       :default_instance_name,
       :iam_role,
       :registration_limit,
-      :expiration_date)
+      :expiration_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -2388,6 +2427,12 @@ module Aws::SSM
     #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] content
@@ -2443,6 +2488,24 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an SSM document
+    #   to identify the types of targets or the environment where it will
+    #   run. In this case, you could specify the following key name/value
+    #   pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing SSM document, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentRequest AWS API Documentation
     #
     class CreateDocumentRequest < Struct.new(
@@ -2452,7 +2515,8 @@ module Aws::SSM
       :version_name,
       :document_type,
       :document_format,
-      :target_type)
+      :target_type,
+      :tags)
       include Aws::Structure
     end
 
@@ -2481,6 +2545,12 @@ module Aws::SSM
     #         cutoff: 1, # required
     #         allow_unassociated_targets: false, # required
     #         client_token: "ClientToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2551,6 +2621,26 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a Maintenance
+    #   Window to identify the type of tasks it will run, the types of
+    #   targets, and the environment it will run in. In this case, you could
+    #   specify the following key name/value pairs:
+    #
+    #   * `Key=TaskType,Value=AgentUpdate`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowRequest AWS API Documentation
     #
     class CreateMaintenanceWindowRequest < Struct.new(
@@ -2563,7 +2653,8 @@ module Aws::SSM
       :duration,
       :cutoff,
       :allow_unassociated_targets,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -2623,6 +2714,12 @@ module Aws::SSM
     #           },
     #         ],
     #         client_token: "ClientToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] operating_system
@@ -2712,6 +2809,24 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a patch baseline
+    #   to identify the severity level of patches it specifies and the
+    #   operating system family it applies to. In this case, you could
+    #   specify the following key name/value pairs:
+    #
+    #   * `Key=PatchSeverity,Value=Critical`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaselineRequest AWS API Documentation
     #
     class CreatePatchBaselineRequest < Struct.new(
@@ -2726,7 +2841,8 @@ module Aws::SSM
       :rejected_patches_action,
       :description,
       :sources,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -3479,7 +3595,7 @@ module Aws::SSM
     #   Specify the association version to retrieve. To view the latest
     #   version, either specify `$LATEST` for this parameter, or omit this
     #   parameter. To view a list of all associations for an instance, use
-    #   ListInstanceAssociations. To get a list of versions for a specific
+    #   ListAssociations. To get a list of versions for a specific
     #   association, use ListAssociationVersions.
     #   @return [String]
     #
@@ -10139,6 +10255,8 @@ module Aws::SSM
     #
     # * `WindowsServer2016`
     #
+    # * `WindowsServer2019`
+    #
     # * `*`
     #
     #   *Use a wildcard character (*) to target all supported operating
@@ -10359,6 +10477,10 @@ module Aws::SSM
     # * `RedhatEnterpriseLinux7.3`
     #
     # * `RedhatEnterpriseLinux7.4`
+    #
+    # * `RedhatEnterpriseLinux7.5`
+    #
+    # * `RedhatEnterpriseLinux7.6`
     #
     # * `*`
     #
@@ -10951,6 +11073,12 @@ module Aws::SSM
     #         key_id: "ParameterKeyId",
     #         overwrite: false,
     #         allowed_pattern: "AllowedPattern",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -11046,6 +11174,27 @@ module Aws::SSM
     #   specify the following: AllowedPattern=^\\d+$
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a Systems Manager
+    #   parameter to identify the type of resource to which it applies, the
+    #   environment, or the type of configuration data referenced by the
+    #   parameter. In this case, you could specify the following key
+    #   name/value pairs:
+    #
+    #   * `Key=Resource,Value=S3bucket`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=ParameterType,Value=LicenseKey`
+    #
+    #   <note markdown="1"> To add tags to an existing Systems Manager parameter, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
     #
     class PutParameterRequest < Struct.new(
@@ -11055,7 +11204,8 @@ module Aws::SSM
       :type,
       :key_id,
       :overwrite,
-      :allowed_pattern)
+      :allowed_pattern,
+      :tags)
       include Aws::Structure
     end
 

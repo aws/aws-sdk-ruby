@@ -919,6 +919,7 @@ module Aws::SSM
     Activation.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
     Activation.add_member(:expired, Shapes::ShapeRef.new(shape: Boolean, location_name: "Expired"))
     Activation.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
+    Activation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Activation.struct_class = Types::Activation
 
     ActivationList.member = Shapes::ShapeRef.new(shape: Activation)
@@ -1277,6 +1278,7 @@ module Aws::SSM
     CreateActivationRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "IamRole"))
     CreateActivationRequest.add_member(:registration_limit, Shapes::ShapeRef.new(shape: RegistrationLimit, location_name: "RegistrationLimit", metadata: {"box"=>true}))
     CreateActivationRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
+    CreateActivationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateActivationRequest.struct_class = Types::CreateActivationRequest
 
     CreateActivationResult.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
@@ -1330,6 +1332,7 @@ module Aws::SSM
     CreateDocumentRequest.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     CreateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
+    CreateDocumentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDocumentRequest.struct_class = Types::CreateDocumentRequest
 
     CreateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -1345,6 +1348,7 @@ module Aws::SSM
     CreateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, required: true, location_name: "Cutoff"))
     CreateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, required: true, location_name: "AllowUnassociatedTargets"))
     CreateMaintenanceWindowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMaintenanceWindowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMaintenanceWindowRequest.struct_class = Types::CreateMaintenanceWindowRequest
 
     CreateMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
@@ -1362,6 +1366,7 @@ module Aws::SSM
     CreatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     CreatePatchBaselineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     CreatePatchBaselineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePatchBaselineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePatchBaselineRequest.struct_class = Types::CreatePatchBaselineRequest
 
     CreatePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
@@ -2780,6 +2785,7 @@ module Aws::SSM
     PutParameterRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: ParameterKeyId, location_name: "KeyId"))
     PutParameterRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite", metadata: {"box"=>true}))
     PutParameterRequest.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
+    PutParameterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))

@@ -399,6 +399,32 @@ module Aws::SSM
     #   The date by which this activation request should expire. The default
     #   value is 24 hours.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an activation to
+    #   identify which servers or virtual machines (VMs) in your on-premises
+    #   environment you intend to activate. In this case, you could specify
+    #   the following key name/value pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   When you install SSM Agent on your on-premises servers and VMs, you
+    #   specify an activation ID and code. When you specify the activation ID
+    #   and code, tags assigned to the activation are automatically applied to
+    #   the on-premises servers or VMs.
+    #
+    #   You can't add tags to or delete tags from an existing activation. You
+    #   can tag your on-premises servers and VMs after they connect to Systems
+    #   Manager for the first time and are assigned a managed instance ID.
+    #   This means they are listed in the AWS Systems Manager console with an
+    #   ID that is prefixed with "mi-". For information about how to add
+    #   tags to your managed instances, see AddTagsToResource. For information
+    #   about how to remove tags from your managed instances, see
+    #   RemoveTagsFromResource.
+    #
     # @return [Types::CreateActivationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateActivationResult#activation_id #activation_id} => String
@@ -412,6 +438,12 @@ module Aws::SSM
     #     iam_role: "IamRole", # required
     #     registration_limit: 1,
     #     expiration_date: Time.now,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -754,6 +786,22 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an SSM document to
+    #   identify the types of targets or the environment where it will run. In
+    #   this case, you could specify the following key name/value pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing SSM document, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #
     # @return [Types::CreateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentResult#document_description #document_description} => Types::DocumentDescription
@@ -773,6 +821,12 @@ module Aws::SSM
     #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -874,6 +928,25 @@ module Aws::SSM
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag a Maintenance Window
+    #   to identify the type of tasks it will run, the types of targets, and
+    #   the environment it will run in. In this case, you could specify the
+    #   following key name/value pairs:
+    #
+    #   * `Key=TaskType,Value=AgentUpdate`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #
     # @return [Types::CreateMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMaintenanceWindowResult#window_id #window_id} => String
@@ -891,6 +964,12 @@ module Aws::SSM
     #     cutoff: 1, # required
     #     allow_unassociated_targets: false, # required
     #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -992,6 +1071,23 @@ module Aws::SSM
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag a patch baseline to
+    #   identify the severity level of patches it specifies and the operating
+    #   system family it applies to. In this case, you could specify the
+    #   following key name/value pairs:
+    #
+    #   * `Key=PatchSeverity,Value=Critical`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #
     # @return [Types::CreatePatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePatchBaselineResult#baseline_id #baseline_id} => String
@@ -1040,6 +1136,12 @@ module Aws::SSM
     #       },
     #     ],
     #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1581,6 +1683,9 @@ module Aws::SSM
     #   resp.activation_list[0].expiration_date #=> Time
     #   resp.activation_list[0].expired #=> Boolean
     #   resp.activation_list[0].created_date #=> Time
+    #   resp.activation_list[0].tags #=> Array
+    #   resp.activation_list[0].tags[0].key #=> String
+    #   resp.activation_list[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations AWS API Documentation
@@ -1612,7 +1717,7 @@ module Aws::SSM
     #   Specify the association version to retrieve. To view the latest
     #   version, either specify `$LATEST` for this parameter, or omit this
     #   parameter. To view a list of all associations for an instance, use
-    #   ListInstanceAssociations. To get a list of versions for a specific
+    #   ListAssociations. To get a list of versions for a specific
     #   association, use ListAssociationVersions.
     #
     # @return [Types::DescribeAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5779,6 +5884,26 @@ module Aws::SSM
     #   example, for String types with values restricted to numbers, you can
     #   specify the following: AllowedPattern=^\\d+$
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag a Systems Manager
+    #   parameter to identify the type of resource to which it applies, the
+    #   environment, or the type of configuration data referenced by the
+    #   parameter. In this case, you could specify the following key
+    #   name/value pairs:
+    #
+    #   * `Key=Resource,Value=S3bucket`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=ParameterType,Value=LicenseKey`
+    #
+    #   <note markdown="1"> To add tags to an existing Systems Manager parameter, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutParameterResult#version #version} => Integer
@@ -5793,6 +5918,12 @@ module Aws::SSM
     #     key_id: "ParameterKeyId",
     #     overwrite: false,
     #     allowed_pattern: "AllowedPattern",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7745,7 +7876,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
