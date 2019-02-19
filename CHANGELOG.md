@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.224 (2019-02-19)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
 
 * Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
