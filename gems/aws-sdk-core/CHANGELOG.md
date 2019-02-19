@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update NetHttp Patches per Ruby version (Github Issue: #1979)
+
 3.46.1 (2019-02-12)
 ------------------
 
