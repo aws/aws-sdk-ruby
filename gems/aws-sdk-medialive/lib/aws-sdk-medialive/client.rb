@@ -1653,6 +1653,13 @@ module Aws::MediaLive
     #
     # @option params [String] :type
     #
+    # @option params [Types::InputVpcRequest] :vpc
+    #   Settings for a private VPC Input. When this property is specified, the
+    #   input destination addresses will be created in a VPC rather than with
+    #   public Internet addresses. This property requires setting the roleArn
+    #   property on Input creation. Not compatible with the
+    #   inputSecurityGroups property.
+    #
     # @return [Types::CreateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInputResponse#input #input} => Types::Input
@@ -1685,6 +1692,10 @@ module Aws::MediaLive
     #       "__string" => "__string",
     #     },
     #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
+    #     vpc: {
+    #       security_group_ids: ["__string"],
+    #       subnet_ids: ["__string"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1696,6 +1707,8 @@ module Aws::MediaLive
     #   resp.input.destinations[0].ip #=> String
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
+    #   resp.input.destinations[0].vpc.availability_zone #=> String
+    #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -2984,6 +2997,8 @@ module Aws::MediaLive
     #   resp.destinations[0].ip #=> String
     #   resp.destinations[0].port #=> String
     #   resp.destinations[0].url #=> String
+    #   resp.destinations[0].vpc.availability_zone #=> String
+    #   resp.destinations[0].vpc.network_interface_id #=> String
     #   resp.id #=> String
     #   resp.media_connect_flows #=> Array
     #   resp.media_connect_flows[0].flow_arn #=> String
@@ -3394,6 +3409,8 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].ip #=> String
     #   resp.inputs[0].destinations[0].port #=> String
     #   resp.inputs[0].destinations[0].url #=> String
+    #   resp.inputs[0].destinations[0].vpc.availability_zone #=> String
+    #   resp.inputs[0].destinations[0].vpc.network_interface_id #=> String
     #   resp.inputs[0].id #=> String
     #   resp.inputs[0].media_connect_flows #=> Array
     #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
@@ -5968,6 +5985,8 @@ module Aws::MediaLive
     #   resp.input.destinations[0].ip #=> String
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
+    #   resp.input.destinations[0].vpc.availability_zone #=> String
+    #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -6053,7 +6072,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

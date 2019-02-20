@@ -57,6 +57,8 @@ module Aws::CodeCommit
     CommitRequiredException = Shapes::StructureShape.new(name: 'CommitRequiredException')
     Content = Shapes::StringShape.new(name: 'Content')
     CreateBranchInput = Shapes::StructureShape.new(name: 'CreateBranchInput')
+    CreateCommitInput = Shapes::StructureShape.new(name: 'CreateCommitInput')
+    CreateCommitOutput = Shapes::StructureShape.new(name: 'CreateCommitOutput')
     CreatePullRequestInput = Shapes::StructureShape.new(name: 'CreatePullRequestInput')
     CreatePullRequestOutput = Shapes::StructureShape.new(name: 'CreatePullRequestOutput')
     CreateRepositoryInput = Shapes::StructureShape.new(name: 'CreateRepositoryInput')
@@ -68,6 +70,8 @@ module Aws::CodeCommit
     DeleteBranchOutput = Shapes::StructureShape.new(name: 'DeleteBranchOutput')
     DeleteCommentContentInput = Shapes::StructureShape.new(name: 'DeleteCommentContentInput')
     DeleteCommentContentOutput = Shapes::StructureShape.new(name: 'DeleteCommentContentOutput')
+    DeleteFileEntries = Shapes::ListShape.new(name: 'DeleteFileEntries')
+    DeleteFileEntry = Shapes::StructureShape.new(name: 'DeleteFileEntry')
     DeleteFileInput = Shapes::StructureShape.new(name: 'DeleteFileInput')
     DeleteFileOutput = Shapes::StructureShape.new(name: 'DeleteFileOutput')
     DeleteRepositoryInput = Shapes::StructureShape.new(name: 'DeleteRepositoryInput')
@@ -87,14 +91,19 @@ module Aws::CodeCommit
     EventDate = Shapes::TimestampShape.new(name: 'EventDate')
     File = Shapes::StructureShape.new(name: 'File')
     FileContent = Shapes::BlobShape.new(name: 'FileContent')
+    FileContentAndSourceFileSpecifiedException = Shapes::StructureShape.new(name: 'FileContentAndSourceFileSpecifiedException')
     FileContentRequiredException = Shapes::StructureShape.new(name: 'FileContentRequiredException')
     FileContentSizeLimitExceededException = Shapes::StructureShape.new(name: 'FileContentSizeLimitExceededException')
     FileDoesNotExistException = Shapes::StructureShape.new(name: 'FileDoesNotExistException')
+    FileEntryRequiredException = Shapes::StructureShape.new(name: 'FileEntryRequiredException')
     FileList = Shapes::ListShape.new(name: 'FileList')
+    FileMetadata = Shapes::StructureShape.new(name: 'FileMetadata')
+    FileModeRequiredException = Shapes::StructureShape.new(name: 'FileModeRequiredException')
     FileModeTypeEnum = Shapes::StringShape.new(name: 'FileModeTypeEnum')
     FileNameConflictsWithDirectoryNameException = Shapes::StructureShape.new(name: 'FileNameConflictsWithDirectoryNameException')
     FilePathConflictsWithSubmodulePathException = Shapes::StructureShape.new(name: 'FilePathConflictsWithSubmodulePathException')
     FileTooLargeException = Shapes::StructureShape.new(name: 'FileTooLargeException')
+    FilesMetadata = Shapes::ListShape.new(name: 'FilesMetadata')
     Folder = Shapes::StructureShape.new(name: 'Folder')
     FolderContentSizeLimitExceededException = Shapes::StructureShape.new(name: 'FolderContentSizeLimitExceededException')
     FolderDoesNotExistException = Shapes::StructureShape.new(name: 'FolderDoesNotExistException')
@@ -169,6 +178,7 @@ module Aws::CodeCommit
     IsCommentDeleted = Shapes::BooleanShape.new(name: 'IsCommentDeleted')
     IsMergeable = Shapes::BooleanShape.new(name: 'IsMergeable')
     IsMerged = Shapes::BooleanShape.new(name: 'IsMerged')
+    IsMove = Shapes::BooleanShape.new(name: 'IsMove')
     KeepEmptyFolders = Shapes::BooleanShape.new(name: 'KeepEmptyFolders')
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
@@ -182,6 +192,7 @@ module Aws::CodeCommit
     ManualMergeRequiredException = Shapes::StructureShape.new(name: 'ManualMergeRequiredException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumBranchesExceededException = Shapes::StructureShape.new(name: 'MaximumBranchesExceededException')
+    MaximumFileEntriesExceededException = Shapes::StructureShape.new(name: 'MaximumFileEntriesExceededException')
     MaximumOpenPullRequestsExceededException = Shapes::StructureShape.new(name: 'MaximumOpenPullRequestsExceededException')
     MaximumRepositoryNamesExceededException = Shapes::StructureShape.new(name: 'MaximumRepositoryNamesExceededException')
     MaximumRepositoryTriggersExceededException = Shapes::StructureShape.new(name: 'MaximumRepositoryTriggersExceededException')
@@ -196,6 +207,7 @@ module Aws::CodeCommit
     Name = Shapes::StringShape.new(name: 'Name')
     NameLengthExceededException = Shapes::StructureShape.new(name: 'NameLengthExceededException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NoChangeException = Shapes::StructureShape.new(name: 'NoChangeException')
     ObjectId = Shapes::StringShape.new(name: 'ObjectId')
     ObjectSize = Shapes::IntegerShape.new(name: 'ObjectSize')
     OrderEnum = Shapes::StringShape.new(name: 'OrderEnum')
@@ -230,6 +242,9 @@ module Aws::CodeCommit
     PullRequestStatusRequiredException = Shapes::StructureShape.new(name: 'PullRequestStatusRequiredException')
     PullRequestTarget = Shapes::StructureShape.new(name: 'PullRequestTarget')
     PullRequestTargetList = Shapes::ListShape.new(name: 'PullRequestTargetList')
+    PutFileEntries = Shapes::ListShape.new(name: 'PutFileEntries')
+    PutFileEntry = Shapes::StructureShape.new(name: 'PutFileEntry')
+    PutFileEntryConflictException = Shapes::StructureShape.new(name: 'PutFileEntryConflictException')
     PutFileInput = Shapes::StructureShape.new(name: 'PutFileInput')
     PutFileOutput = Shapes::StructureShape.new(name: 'PutFileOutput')
     PutRepositoryTriggersInput = Shapes::StructureShape.new(name: 'PutRepositoryTriggersInput')
@@ -270,9 +285,15 @@ module Aws::CodeCommit
     RepositoryTriggersConfigurationId = Shapes::StringShape.new(name: 'RepositoryTriggersConfigurationId')
     RepositoryTriggersList = Shapes::ListShape.new(name: 'RepositoryTriggersList')
     RepositoryTriggersListRequiredException = Shapes::StructureShape.new(name: 'RepositoryTriggersListRequiredException')
+    RestrictedSourceFileException = Shapes::StructureShape.new(name: 'RestrictedSourceFileException')
     SameFileContentException = Shapes::StructureShape.new(name: 'SameFileContentException')
+    SamePathRequestException = Shapes::StructureShape.new(name: 'SamePathRequestException')
+    SetFileModeEntries = Shapes::ListShape.new(name: 'SetFileModeEntries')
+    SetFileModeEntry = Shapes::StructureShape.new(name: 'SetFileModeEntry')
     SortByEnum = Shapes::StringShape.new(name: 'SortByEnum')
     SourceAndDestinationAreSameException = Shapes::StructureShape.new(name: 'SourceAndDestinationAreSameException')
+    SourceFileOrContentRequiredException = Shapes::StructureShape.new(name: 'SourceFileOrContentRequiredException')
+    SourceFileSpecifier = Shapes::StructureShape.new(name: 'SourceFileSpecifier')
     SubModule = Shapes::StructureShape.new(name: 'SubModule')
     SubModuleList = Shapes::ListShape.new(name: 'SubModuleList')
     SymbolicLink = Shapes::StructureShape.new(name: 'SymbolicLink')
@@ -368,6 +389,25 @@ module Aws::CodeCommit
     CreateBranchInput.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitId, required: true, location_name: "commitId"))
     CreateBranchInput.struct_class = Types::CreateBranchInput
 
+    CreateCommitInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    CreateCommitInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
+    CreateCommitInput.add_member(:parent_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "parentCommitId"))
+    CreateCommitInput.add_member(:author_name, Shapes::ShapeRef.new(shape: Name, location_name: "authorName"))
+    CreateCommitInput.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    CreateCommitInput.add_member(:commit_message, Shapes::ShapeRef.new(shape: Message, location_name: "commitMessage"))
+    CreateCommitInput.add_member(:keep_empty_folders, Shapes::ShapeRef.new(shape: KeepEmptyFolders, location_name: "keepEmptyFolders"))
+    CreateCommitInput.add_member(:put_files, Shapes::ShapeRef.new(shape: PutFileEntries, location_name: "putFiles"))
+    CreateCommitInput.add_member(:delete_files, Shapes::ShapeRef.new(shape: DeleteFileEntries, location_name: "deleteFiles"))
+    CreateCommitInput.add_member(:set_file_modes, Shapes::ShapeRef.new(shape: SetFileModeEntries, location_name: "setFileModes"))
+    CreateCommitInput.struct_class = Types::CreateCommitInput
+
+    CreateCommitOutput.add_member(:commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
+    CreateCommitOutput.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
+    CreateCommitOutput.add_member(:files_added, Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesAdded"))
+    CreateCommitOutput.add_member(:files_updated, Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesUpdated"))
+    CreateCommitOutput.add_member(:files_deleted, Shapes::ShapeRef.new(shape: FilesMetadata, location_name: "filesDeleted"))
+    CreateCommitOutput.struct_class = Types::CreateCommitOutput
+
     CreatePullRequestInput.add_member(:title, Shapes::ShapeRef.new(shape: Title, required: true, location_name: "title"))
     CreatePullRequestInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreatePullRequestInput.add_member(:targets, Shapes::ShapeRef.new(shape: TargetList, required: true, location_name: "targets"))
@@ -396,6 +436,11 @@ module Aws::CodeCommit
 
     DeleteCommentContentOutput.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
     DeleteCommentContentOutput.struct_class = Types::DeleteCommentContentOutput
+
+    DeleteFileEntries.member = Shapes::ShapeRef.new(shape: DeleteFileEntry)
+
+    DeleteFileEntry.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
+    DeleteFileEntry.struct_class = Types::DeleteFileEntry
 
     DeleteFileInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteFileInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
@@ -444,6 +489,13 @@ module Aws::CodeCommit
     File.struct_class = Types::File
 
     FileList.member = Shapes::ShapeRef.new(shape: File)
+
+    FileMetadata.add_member(:absolute_path, Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
+    FileMetadata.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
+    FileMetadata.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
+    FileMetadata.struct_class = Types::FileMetadata
+
+    FilesMetadata.member = Shapes::ShapeRef.new(shape: FileMetadata)
 
     Folder.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
     Folder.add_member(:absolute_path, Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
@@ -719,6 +771,14 @@ module Aws::CodeCommit
 
     PullRequestTargetList.member = Shapes::ShapeRef.new(shape: PullRequestTarget)
 
+    PutFileEntries.member = Shapes::ShapeRef.new(shape: PutFileEntry)
+
+    PutFileEntry.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
+    PutFileEntry.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
+    PutFileEntry.add_member(:file_content, Shapes::ShapeRef.new(shape: FileContent, location_name: "fileContent"))
+    PutFileEntry.add_member(:source_file, Shapes::ShapeRef.new(shape: SourceFileSpecifier, location_name: "sourceFile"))
+    PutFileEntry.struct_class = Types::PutFileEntry
+
     PutFileInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutFileInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
     PutFileInput.add_member(:file_content, Shapes::ShapeRef.new(shape: FileContent, required: true, location_name: "fileContent"))
@@ -784,6 +844,16 @@ module Aws::CodeCommit
     RepositoryTriggerNameList.member = Shapes::ShapeRef.new(shape: RepositoryTriggerName)
 
     RepositoryTriggersList.member = Shapes::ShapeRef.new(shape: RepositoryTrigger)
+
+    SetFileModeEntries.member = Shapes::ShapeRef.new(shape: SetFileModeEntry)
+
+    SetFileModeEntry.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
+    SetFileModeEntry.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, required: true, location_name: "fileMode"))
+    SetFileModeEntry.struct_class = Types::SetFileModeEntry
+
+    SourceFileSpecifier.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
+    SourceFileSpecifier.add_member(:is_move, Shapes::ShapeRef.new(shape: IsMove, location_name: "isMove"))
+    SourceFileSpecifier.struct_class = Types::SourceFileSpecifier
 
     SubModule.add_member(:commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
     SubModule.add_member(:absolute_path, Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
@@ -915,6 +985,52 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:create_commit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCommit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCommitInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateCommitOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ParentCommitIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParentCommitIdException)
+        o.errors << Shapes::ShapeRef.new(shape: ParentCommitDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ParentCommitIdOutdatedException)
+        o.errors << Shapes::ShapeRef.new(shape: BranchNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBranchNameException)
+        o.errors << Shapes::ShapeRef.new(shape: BranchDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: BranchNameIsTagNameException)
+        o.errors << Shapes::ShapeRef.new(shape: FileEntryRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: MaximumFileEntriesExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PutFileEntryConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: SourceFileOrContentRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: FileContentAndSourceFileSpecifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: PathRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPathException)
+        o.errors << Shapes::ShapeRef.new(shape: SamePathRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: FileDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: FileContentSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: FolderContentSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeletionParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RestrictedSourceFileException)
+        o.errors << Shapes::ShapeRef.new(shape: FileModeRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFileModeException)
+        o.errors << Shapes::ShapeRef.new(shape: NameLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailException)
+        o.errors << Shapes::ShapeRef.new(shape: CommitMessageLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoChangeException)
+        o.errors << Shapes::ShapeRef.new(shape: FileNameConflictsWithDirectoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNameConflictsWithFileNameException)
+        o.errors << Shapes::ShapeRef.new(shape: FilePathConflictsWithSubmodulePathException)
       end)
 
       api.add_operation(:create_pull_request, Seahorse::Model::Operation.new.tap do |o|
@@ -1423,7 +1539,6 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: TipOfSourceReferenceIsDifferentException)
         o.errors << Shapes::ShapeRef.new(shape: ReferenceDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCommitIdException)
-        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotAssociatedWithPullRequestException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)

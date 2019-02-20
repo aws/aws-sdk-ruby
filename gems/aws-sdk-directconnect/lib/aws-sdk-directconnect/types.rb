@@ -306,7 +306,7 @@ module Aws::DirectConnect
     #
     #   * `down`\: The BGP peer is down.
     #
-    #   * `unknown`\: The BGP peer status is unknown.
+    #   * `unknown`\: The BGP peer status is not available.
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
@@ -372,6 +372,8 @@ module Aws::DirectConnect
     #
     #   * `rejected`\: A hosted connection in the `ordering` state enters
     #     the `rejected` state if it is deleted by the customer.
+    #
+    #   * `unknown`\: The state of the connection is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionResponse AWS API Documentation
@@ -443,6 +445,8 @@ module Aws::DirectConnect
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
+    #
+    #   * `unknown`\: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceResponse AWS API Documentation
@@ -502,6 +506,8 @@ module Aws::DirectConnect
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
+    #
+    #   * `unknown`\: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceResponse AWS API Documentation
@@ -551,6 +557,8 @@ module Aws::DirectConnect
     #
     #   * `rejected`\: A hosted connection in the `ordering` state enters
     #     the `rejected` state if it is deleted by the customer.
+    #
+    #   * `unknown`\: The state of the connection is not available.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -1102,6 +1110,8 @@ module Aws::DirectConnect
     #   * `deleting`\: The interconnect is being deleted.
     #
     #   * `deleted`\: The interconnect is deleted.
+    #
+    #   * `unknown`\: The state of the interconnect is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnectResponse AWS API Documentation
@@ -1179,6 +1189,8 @@ module Aws::DirectConnect
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
+    #
+    #   * `unknown`\: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceResponse AWS API Documentation
@@ -1817,6 +1829,8 @@ module Aws::DirectConnect
     #   * `deleting`\: The interconnect is being deleted.
     #
     #   * `deleted`\: The interconnect is deleted.
+    #
+    #   * `unknown`\: The state of the interconnect is not available.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -1928,6 +1942,8 @@ module Aws::DirectConnect
     #   * `deleting`\: The LAG is being deleted.
     #
     #   * `deleted`\: The LAG is deleted.
+    #
+    #   * `unknown`\: The state of the LAG is not available.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2693,6 +2709,8 @@ module Aws::DirectConnect
     #     the virtual interface. If a virtual interface in the `Confirming`
     #     state is deleted by the virtual interface owner, the virtual
     #     interface enters the `Rejected` state.
+    #
+    #   * `unknown`\: The state of the virtual interface is not available.
     #   @return [String]
     #
     # @!attribute [rw] customer_router_config

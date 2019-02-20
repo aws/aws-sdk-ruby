@@ -2924,6 +2924,10 @@ module Aws::MediaLive
     #           "__string" => "__string",
     #         },
     #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
+    #         vpc: {
+    #           security_group_ids: ["__string"],
+    #           subnet_ids: ["__string"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] destinations
@@ -2955,6 +2959,14 @@ module Aws::MediaLive
     # @!attribute [rw] type
     #   @return [String]
     #
+    # @!attribute [rw] vpc
+    #   Settings for a private VPC Input. When this property is specified,
+    #   the input destination addresses will be created in a VPC rather than
+    #   with public Internet addresses. This property requires setting the
+    #   roleArn property on Input creation. Not compatible with the
+    #   inputSecurityGroups property.
+    #   @return [Types::InputVpcRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest AWS API Documentation
     #
     class CreateInputRequest < Struct.new(
@@ -2966,7 +2978,8 @@ module Aws::MediaLive
       :role_arn,
       :sources,
       :tags,
-      :type)
+      :type,
+      :vpc)
       include Aws::Structure
     end
 
@@ -6197,7 +6210,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   A list of IDs for all the security groups attached to the input.
+    #   A list of IDs for all the Input Security Groups attached to the
+    #   input.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sources
@@ -6374,12 +6388,17 @@ module Aws::MediaLive
     #   to.
     #   @return [String]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a VPC type input destination.
+    #   @return [Types::InputDestinationVpc]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestination AWS API Documentation
     #
     class InputDestination < Struct.new(
       :ip,
       :port,
-      :url)
+      :url,
+      :vpc)
       include Aws::Structure
     end
 
@@ -6400,6 +6419,24 @@ module Aws::MediaLive
     #
     class InputDestinationRequest < Struct.new(
       :stream_name)
+      include Aws::Structure
+    end
+
+    # The properties for a VPC type input destination.
+    #
+    # @!attribute [rw] availability_zone
+    #   The availability zone of the Input destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID of the Input destination in the VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationVpc AWS API Documentation
+    #
+    class InputDestinationVpc < Struct.new(
+      :availability_zone,
+      :network_interface_id)
       include Aws::Structure
     end
 
@@ -6795,6 +6832,39 @@ module Aws::MediaLive
     #
     class InputSwitchScheduleActionSettings < Struct.new(
       :input_attachment_name_reference)
+      include Aws::Structure
+    end
+
+    # Settings for a private VPC Input. When this property is specified, the
+    # input destination addresses will be created in a VPC rather than with
+    # public Internet addresses. This property requires setting the roleArn
+    # property on Input creation. Not compatible with the
+    # inputSecurityGroups property.
+    #
+    # @note When making an API call, you may pass InputVpcRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["__string"],
+    #         subnet_ids: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of up to 5 EC2 VPC security group IDs to attach to the Input
+    #   VPC network interfaces. Requires subnetIds. If none are specified
+    #   then the VPC default security group will be used.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of 2 VPC subnet IDs from the same VPC. Subnet IDs must be
+    #   mapped to two unique availability zones (AZ).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputVpcRequest AWS API Documentation
+    #
+    class InputVpcRequest < Struct.new(
+      :security_group_ids,
+      :subnet_ids)
       include Aws::Structure
     end
 

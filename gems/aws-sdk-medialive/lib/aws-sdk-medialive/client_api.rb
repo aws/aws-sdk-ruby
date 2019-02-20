@@ -225,6 +225,7 @@ module Aws::MediaLive
     InputDenoiseFilter = Shapes::StringShape.new(name: 'InputDenoiseFilter')
     InputDestination = Shapes::StructureShape.new(name: 'InputDestination')
     InputDestinationRequest = Shapes::StructureShape.new(name: 'InputDestinationRequest')
+    InputDestinationVpc = Shapes::StructureShape.new(name: 'InputDestinationVpc')
     InputFilter = Shapes::StringShape.new(name: 'InputFilter')
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
     InputLossActionForHlsOut = Shapes::StringShape.new(name: 'InputLossActionForHlsOut')
@@ -246,6 +247,7 @@ module Aws::MediaLive
     InputState = Shapes::StringShape.new(name: 'InputState')
     InputSwitchScheduleActionSettings = Shapes::StructureShape.new(name: 'InputSwitchScheduleActionSettings')
     InputType = Shapes::StringShape.new(name: 'InputType')
+    InputVpcRequest = Shapes::StructureShape.new(name: 'InputVpcRequest')
     InputWhitelistRule = Shapes::StructureShape.new(name: 'InputWhitelistRule')
     InputWhitelistRuleCidr = Shapes::StructureShape.new(name: 'InputWhitelistRuleCidr')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
@@ -786,6 +788,7 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     CreateInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInputRequest.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
+    CreateInputRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: InputVpcRequest, location_name: "vpc"))
     CreateInputRequest.struct_class = Types::CreateInputRequest
 
     CreateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -1221,10 +1224,15 @@ module Aws::MediaLive
     InputDestination.add_member(:ip, Shapes::ShapeRef.new(shape: __string, location_name: "ip"))
     InputDestination.add_member(:port, Shapes::ShapeRef.new(shape: __string, location_name: "port"))
     InputDestination.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
+    InputDestination.add_member(:vpc, Shapes::ShapeRef.new(shape: InputDestinationVpc, location_name: "vpc"))
     InputDestination.struct_class = Types::InputDestination
 
     InputDestinationRequest.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     InputDestinationRequest.struct_class = Types::InputDestinationRequest
+
+    InputDestinationVpc.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
+    InputDestinationVpc.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: __string, location_name: "networkInterfaceId"))
+    InputDestinationVpc.struct_class = Types::InputDestinationVpc
 
     InputLocation.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
     InputLocation.add_member(:uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "uri"))
@@ -1278,6 +1286,10 @@ module Aws::MediaLive
 
     InputSwitchScheduleActionSettings.add_member(:input_attachment_name_reference, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "inputAttachmentNameReference"))
     InputSwitchScheduleActionSettings.struct_class = Types::InputSwitchScheduleActionSettings
+
+    InputVpcRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
+    InputVpcRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subnetIds"))
+    InputVpcRequest.struct_class = Types::InputVpcRequest
 
     InputWhitelistRule.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
     InputWhitelistRule.struct_class = Types::InputWhitelistRule

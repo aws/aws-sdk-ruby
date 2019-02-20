@@ -301,6 +301,113 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Creates a commit for a repository on the tip of a specified branch.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you will create the commit.
+    #
+    # @option params [required, String] :branch_name
+    #   The name of the branch where you will create the commit.
+    #
+    # @option params [String] :parent_commit_id
+    #   The ID of the commit that is the parent of the commit you will create.
+    #   If this is an empty repository, this is not required.
+    #
+    # @option params [String] :author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #
+    # @option params [String] :email
+    #   The email address of the person who created the commit.
+    #
+    # @option params [String] :commit_message
+    #   The commit message you want to include as part of creating the commit.
+    #   Commit messages are limited to 256 KB. If no message is specified, a
+    #   default message will be used.
+    #
+    # @option params [Boolean] :keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is specified
+    #   as true, a .gitkeep file will be created for empty folders.
+    #
+    # @option params [Array<Types::PutFileEntry>] :put_files
+    #   The files to add or update in this commit.
+    #
+    # @option params [Array<Types::DeleteFileEntry>] :delete_files
+    #   The files to delete in this commit. These files will still exist in
+    #   prior commits.
+    #
+    # @option params [Array<Types::SetFileModeEntry>] :set_file_modes
+    #   The file modes to update for files in this commit.
+    #
+    # @return [Types::CreateCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCommitOutput#commit_id #commit_id} => String
+    #   * {Types::CreateCommitOutput#tree_id #tree_id} => String
+    #   * {Types::CreateCommitOutput#files_added #files_added} => Array&lt;Types::FileMetadata&gt;
+    #   * {Types::CreateCommitOutput#files_updated #files_updated} => Array&lt;Types::FileMetadata&gt;
+    #   * {Types::CreateCommitOutput#files_deleted #files_deleted} => Array&lt;Types::FileMetadata&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_commit({
+    #     repository_name: "RepositoryName", # required
+    #     branch_name: "BranchName", # required
+    #     parent_commit_id: "CommitId",
+    #     author_name: "Name",
+    #     email: "Email",
+    #     commit_message: "Message",
+    #     keep_empty_folders: false,
+    #     put_files: [
+    #       {
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         file_content: "data",
+    #         source_file: {
+    #           file_path: "Path", # required
+    #           is_move: false,
+    #         },
+    #       },
+    #     ],
+    #     delete_files: [
+    #       {
+    #         file_path: "Path", # required
+    #       },
+    #     ],
+    #     set_file_modes: [
+    #       {
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.tree_id #=> String
+    #   resp.files_added #=> Array
+    #   resp.files_added[0].absolute_path #=> String
+    #   resp.files_added[0].blob_id #=> String
+    #   resp.files_added[0].file_mode #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.files_updated #=> Array
+    #   resp.files_updated[0].absolute_path #=> String
+    #   resp.files_updated[0].blob_id #=> String
+    #   resp.files_updated[0].file_mode #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #   resp.files_deleted #=> Array
+    #   resp.files_deleted[0].absolute_path #=> String
+    #   resp.files_deleted[0].blob_id #=> String
+    #   resp.files_deleted[0].file_mode #=> String, one of "EXECUTABLE", "NORMAL", "SYMLINK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommit AWS API Documentation
+    #
+    # @overload create_commit(params = {})
+    # @param [Hash] params ({})
+    def create_commit(params = {}, options = {})
+      req = build_request(:create_commit, params)
+      req.send_request(options)
+    end
+
     # Creates a pull request in the specified repository.
     #
     # @option params [required, String] :title
@@ -2265,7 +2372,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
