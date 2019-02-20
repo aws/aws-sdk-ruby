@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.225 (2019-02-20)
+------------------
+
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
 
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
