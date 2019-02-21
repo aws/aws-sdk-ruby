@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.226 (2019-02-21)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
