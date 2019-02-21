@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
+
+* Feature - Aws::KinesisVideoMedia - Updated the documentation for Amazon Kinesis Video Streams Media.
+
+* Feature - Aws::KinesisVideo - Updated the documentation for Amazon Kinesis Video Streams.
+
+* Feature - Aws::CloudWatch - Updated the documentation for Amazon CloudWatch.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer for SFTP.
+
+* Feature - Aws::WorkDocs - Updated the documentation for Amazon WorkDocs.
+
 2.11.225 (2019-02-20)
 ------------------
 
