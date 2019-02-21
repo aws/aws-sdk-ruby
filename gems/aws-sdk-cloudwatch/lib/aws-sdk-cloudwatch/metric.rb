@@ -210,8 +210,8 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
-    #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # @option options [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp that determines the first data point to return. Start
     #   times are evaluated relative to the time that CloudWatch receives the
@@ -380,6 +380,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -398,6 +399,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -472,7 +474,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     # @option options [required, Float] :threshold
     #   The value against which the specified statistic is compared.
     # @option options [required, String] :comparison_operator
@@ -489,7 +491,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     # @option options [String] :evaluate_low_sample_count_percentile
     #   Used only for alarms based on percentiles. If you specify `ignore`,
     #   the alarm state does not change during periods with too few data
@@ -503,12 +505,17 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     # @option options [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
     #   alarm based on the result of a metric math expression. Each item in
     #   the `Metrics` array either retrieves a metric or performs a math
     #   expression.
+    #
+    #   One item in the `Metrics` array is the expression that the alarm
+    #   watches. You designate this expression by setting `ReturnValue` to
+    #   true for this object in the array. For more information, see
+    #   MetricDataQuery.
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or

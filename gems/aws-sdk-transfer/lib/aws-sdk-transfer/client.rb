@@ -648,8 +648,14 @@ module Aws::Transfer
     #   server, user, or role.
     #
     # @option params [Integer] :max_results
+    #   Specifies the number of tags to return as a response to the
+    #   `ListTagsForResource` request.
     #
     # @option params [String] :next_token
+    #   When you request additional results from the `ListTagsForResource`
+    #   call, a `NextToken` parameter is returned in the input. You can then
+    #   pass in a subsequent command the `NextToken` parameter to continue
+    #   listing additional tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -690,10 +696,10 @@ module Aws::Transfer
     #   `ListUsers` request.
     #
     # @option params [String] :next_token
-    #   When you can get additional results from the `ListUsers`ListUsers
-    #   call, a `NextToken` parameter is returned in the output. You can then
-    #   pass in a subsequent command the `NextToken` parameter to continue
-    #   listing additional users.
+    #   When you can get additional results from the `ListUsers` call, a
+    #   `NextToken` parameter is returned in the output. You can then pass in
+    #   a subsequent command the `NextToken` parameter to continue listing
+    #   additional users.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a Secure File Transfer
@@ -1042,7 +1048,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

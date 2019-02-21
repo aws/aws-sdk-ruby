@@ -241,9 +241,6 @@ module Aws::KinesisVideo
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
     #
-    #   Example valid values include "video/h264" and
-    #   "video/h264,audio/aac".
-    #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
     #
@@ -791,7 +788,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -573,8 +573,10 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.builds[0].cache.location #=> String
+    #   resp.builds[0].cache.modes #=> Array
+    #   resp.builds[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -681,8 +683,10 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.projects[0].cache.location #=> String
+    #   resp.projects[0].cache.modes #=> Array
+    #   resp.projects[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -783,11 +787,6 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
     #   be used for encrypting the build output artifacts.
     #
-    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
-    #   artifacts if your service role has permission to that key.
-    #
-    #    </note>
-    #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
@@ -871,8 +870,9 @@ module Aws::CodeBuild
     #       },
     #     ],
     #     cache: {
-    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: { # required
     #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -965,8 +965,10 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
+    #   resp.project.cache.modes #=> Array
+    #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1681,8 +1683,9 @@ module Aws::CodeBuild
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #     certificate_override: "String",
     #     cache_override: {
-    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     service_role_override: "NonEmptyString",
     #     privileged_mode_override: false,
@@ -1762,8 +1765,10 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
+    #   resp.build.cache.modes #=> Array
+    #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1878,8 +1883,10 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
+    #   resp.build.cache.modes #=> Array
+    #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1973,16 +1980,11 @@ module Aws::CodeBuild
     #   out.
     #
     # @option params [String] :encryption_key
-    #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
-    #   be used for encrypting the build output artifacts.
+    #   The replacement AWS Key Management Service (AWS KMS) customer master
+    #   key (CMK) to be used for encrypting the build output artifacts.
     #
-    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
-    #   artifacts if your service role has permission to that key.
-    #
-    #    </note>
-    #
-    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #   You can specify either the Amazon Resource Name (ARN)of the CMK or, if
+    #   available, the CMK's alias (using the format `alias/alias-name `).
     #
     # @option params [Array<Types::Tag>] :tags
     #   The replacement set of tags for this build project.
@@ -2063,8 +2065,9 @@ module Aws::CodeBuild
     #       },
     #     ],
     #     cache: {
-    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: {
     #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -2157,8 +2160,10 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
+    #   resp.project.cache.modes #=> Array
+    #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -2232,15 +2237,15 @@ module Aws::CodeBuild
     #
     #    </note>
     #
-    # @option params [Array<Array>] :filter_groups
-    #   An array of arrays of `WebhookFilter` objects used to determine if a
-    #   webhook event can trigger a build. A filter group must pcontain at
-    #   least one `EVENT` `WebhookFilter`.
-    #
     # @option params [Boolean] :rotate_secret
     #   A boolean value that specifies whether the associated GitHub
     #   repository's secret token should be updated. If you use Bitbucket for
     #   your repository, `rotateSecret` is ignored.
+    #
+    # @option params [Array<Array>] :filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine if a
+    #   webhook event can trigger a build. A filter group must pcontain at
+    #   least one `EVENT` `WebhookFilter`.
     #
     # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2251,6 +2256,7 @@ module Aws::CodeBuild
     #   resp = client.update_webhook({
     #     project_name: "ProjectName", # required
     #     branch_filter: "String",
+    #     rotate_secret: false,
     #     filter_groups: [
     #       [
     #         {
@@ -2260,7 +2266,6 @@ module Aws::CodeBuild
     #         },
     #       ],
     #     ],
-    #     rotate_secret: false,
     #   })
     #
     # @example Response structure
@@ -2298,7 +2303,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

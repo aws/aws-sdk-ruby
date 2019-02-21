@@ -567,14 +567,14 @@ module Aws::WorkDocs
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html
+    # [1]: https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html
     #
     # @option params [required, String] :organization_id
     #   The ID of the organization.
     #
     # @option params [required, String] :endpoint
     #   The endpoint to receive the notifications. If the protocol is HTTPS,
-    #   the endpoint is a URL that begins with "https://".
+    #   the endpoint is a URL that begins with `https`.
     #
     # @option params [required, String] :protocol
     #   The protocol to use. The supported value is https, which delivers
@@ -1527,7 +1527,7 @@ module Aws::WorkDocs
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html
+    # [1]: https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html
     #
     # @option params [required, String] :authentication_token
     #   Amazon WorkDocs authentication token. Do not set this field when using
@@ -2478,7 +2478,7 @@ module Aws::WorkDocs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workdocs'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

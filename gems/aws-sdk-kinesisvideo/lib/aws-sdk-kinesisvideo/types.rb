@@ -44,9 +44,6 @@ module Aws::KinesisVideo
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
     #
-    #   Example valid values include "video/h264" and
-    #   "video/h264,audio/aac".
-    #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
     #

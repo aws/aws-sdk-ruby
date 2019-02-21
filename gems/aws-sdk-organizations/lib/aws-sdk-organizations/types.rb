@@ -67,7 +67,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -287,8 +287,8 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
     #   [3]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -306,7 +306,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountRequest AWS API Documentation
@@ -447,8 +447,8 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationRequest AWS API Documentation
@@ -541,8 +541,8 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1142,7 +1142,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] parties
@@ -2404,7 +2404,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] feature_set
@@ -2418,7 +2418,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html
     #   @return [String]
     #
     # @!attribute [rw] master_account_arn
@@ -2431,7 +2431,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] master_account_id
@@ -2503,7 +2503,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2603,7 +2603,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2676,7 +2676,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2779,7 +2779,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2912,7 +2912,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyRequest AWS API Documentation

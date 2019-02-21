@@ -274,14 +274,9 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
-    #   artifacts if your service role has permission to that key.
-    #
-    #    </note>
-    #
-    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   This is expressed either as the Amazon Resource Name (ARN) of the
+    #   CMK or, if specified, the CMK's alias (using the format
+    #   `alias/alias-name `).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
@@ -587,8 +582,9 @@ module Aws::CodeBuild
     #           },
     #         ],
     #         cache: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: { # required
     #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -691,11 +687,6 @@ module Aws::CodeBuild
     # @!attribute [rw] encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
-    #
-    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
-    #   artifacts if your service role has permission to that key.
-    #
-    #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
@@ -1474,14 +1465,9 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
-    #   artifacts if your service role has permission to that key.
-    #
-    #    </note>
-    #
-    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK's alias (using the format `alias/alias-name
-    #   `).
+    #   This is expressed either as the Amazon Resource Name (ARN) of the
+    #   CMK or, if specified, the CMK's alias (using the format
+    #   `alias/alias-name `).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1744,8 +1730,9 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #         type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #         location: "String",
+    #         modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #       }
     #
     # @!attribute [rw] type
@@ -1754,21 +1741,69 @@ module Aws::CodeBuild
     #   * `NO_CACHE`\: The build project does not use any cache.
     #
     #   * `S3`\: The build project reads and writes from and to S3.
+    #
+    #   * `LOCAL`\: The build project stores a cache locally on a build host
+    #     that is only available to that build host.
     #   @return [String]
     #
     # @!attribute [rw] location
     #   Information about the cache location:
     #
-    #   * `NO_CACHE`\: This value is ignored.
+    #   * `NO_CACHE` or `LOCAL`\: This value is ignored.
     #
     #   * `S3`\: This is the S3 bucket name/prefix.
     #   @return [String]
+    #
+    # @!attribute [rw] modes
+    #   If you use a `LOCAL` cache, the local cache mode. You can use one or
+    #   more local cache modes at the same time.
+    #
+    #   * `LOCAL_SOURCE_CACHE` mode caches Git metadata for primary and
+    #     secondary sources. After the cache is created, subsequent builds
+    #     pull only the change between commits. This mode is a good choice
+    #     for projects with a clean working directory and a source that is a
+    #     large Git repository. If your project does not use a Git
+    #     repository (GitHub, GitHub Enterprise, or Bitbucket) and you
+    #     choose this option, then it is ignored.
+    #
+    #   * `LOCAL_DOCKER_LAYER_CACHE` mode caches existing Docker layers.
+    #     This mode is a good choice for projects that build or pull large
+    #     Docker images. It can prevent the performance hit that would be
+    #     caused by pulling large Docker images down from the network.
+    #
+    #     <note markdown="1"> * You can only use a Docker layer cache in the Linux enviornment.
+    #
+    #     * The `privileged` flag must be set so that your project has the
+    #       necessary Docker privileges.
+    #
+    #     * You should consider the security implications before using a
+    #       Docker layer cache.
+    #
+    #      </note>
+    #   ^
+    #
+    #   * `LOCAL_CUSTOM_CACHE` mode caches directories you specify in the
+    #     buildspec file. This mode is a good choice if your build scenario
+    #     does not match one that works well with one of the other three
+    #     local cache modes. If you use a custom cache:
+    #
+    #     * Only directories can be specified for caching. You cannot
+    #       specify individual files.
+    #
+    #     * Symlinks are used to reference cached directories.
+    #
+    #     * Cached directories are linked to your build before it downloads
+    #       its project sources. Cached items are overriden if a source item
+    #       has the same name. Directories are specified using cache paths
+    #       in the buildspec file.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectCache AWS API Documentation
     #
     class ProjectCache < Struct.new(
       :type,
-      :location)
+      :location,
+      :modes)
       include Aws::Structure
     end
 
@@ -2298,8 +2333,9 @@ module Aws::CodeBuild
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         certificate_override: "String",
     #         cache_override: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         service_role_override: "NonEmptyString",
     #         privileged_mode_override: false,
@@ -2658,8 +2694,9 @@ module Aws::CodeBuild
     #           },
     #         ],
     #         cache: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: {
     #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -2767,15 +2804,10 @@ module Aws::CodeBuild
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
-    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
-    #   to be used for encrypting the build output artifacts.
+    #   The replacement AWS Key Management Service (AWS KMS) customer master
+    #   key (CMK) to be used for encrypting the build output artifacts.
     #
-    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
-    #   artifacts if your service role has permission to that key.
-    #
-    #    </note>
-    #
-    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   You can specify either the Amazon Resource Name (ARN)of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
     #   `).
     #   @return [String]
@@ -2841,6 +2873,7 @@ module Aws::CodeBuild
     #       {
     #         project_name: "ProjectName", # required
     #         branch_filter: "String",
+    #         rotate_secret: false,
     #         filter_groups: [
     #           [
     #             {
@@ -2850,7 +2883,6 @@ module Aws::CodeBuild
     #             },
     #           ],
     #         ],
-    #         rotate_secret: false,
     #       }
     #
     # @!attribute [rw] project_name
@@ -2869,25 +2901,25 @@ module Aws::CodeBuild
     #    </note>
     #   @return [String]
     #
-    # @!attribute [rw] filter_groups
-    #   An array of arrays of `WebhookFilter` objects used to determine if a
-    #   webhook event can trigger a build. A filter group must pcontain at
-    #   least one `EVENT` `WebhookFilter`.
-    #   @return [Array<Array<Types::WebhookFilter>>]
-    #
     # @!attribute [rw] rotate_secret
     #   A boolean value that specifies whether the associated GitHub
     #   repository's secret token should be updated. If you use Bitbucket
     #   for your repository, `rotateSecret` is ignored.
     #   @return [Boolean]
     #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine if a
+    #   webhook event can trigger a build. A filter group must pcontain at
+    #   least one `EVENT` `WebhookFilter`.
+    #   @return [Array<Array<Types::WebhookFilter>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
     #
     class UpdateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
-      :filter_groups,
-      :rotate_secret)
+      :rotate_secret,
+      :filter_groups)
       include Aws::Structure
     end
 

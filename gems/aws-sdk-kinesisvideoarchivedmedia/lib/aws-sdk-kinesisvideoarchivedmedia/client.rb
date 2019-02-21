@@ -214,25 +214,32 @@ module Aws::KinesisVideoArchivedMedia
     # An Amazon Kinesis video stream has the following requirements for
     # providing data through HLS:
     #
-    # * The media type must be `video/h264`.
+    # * The media must contain h.264 encoded video and, optionally, AAC
+    #   encoded audio. Specifically, the codec id of track 1 should be
+    #   `V_MPEG/ISO/AVC`. Optionally, the codec id of track 2 should be
+    #   `A_AAC`.
     #
     # * Data retention must be greater than 0.
     #
-    # * The fragments must contain codec private data in the AVC (Advanced
-    #   Video Coding) for H.264 format ([MPEG-4 specification ISO/IEC
-    #   14496-15][1]). For information about adapting stream data to a given
-    #   format, see [NAL Adaptation Flags][2].
+    # * The video track of each fragment must contain codec private data in
+    #   the Advanced Video Coding (AVC) for H.264 format ([MPEG-4
+    #   specification ISO/IEC 14496-15][1]). For information about adapting
+    #   stream data to a given format, see [NAL Adaptation Flags][2].
+    #
+    # * The audio track (if present) of each fragment must contain codec
+    #   private data in the AAC format ([AAC specification ISO/IEC
+    #   13818-7][3]).
     #
     # Kinesis Video Streams HLS sessions contain fragments in the fragmented
     # MPEG-4 form (also called fMP4 or CMAF), rather than the MPEG-2 form
     # (also called TS chunks, which the HLS specification also supports).
     # For more information about HLS fragment types, see the [HLS
-    # specification][3].
+    # specification][4].
     #
     # The following procedure shows how to use HLS with Kinesis Video
     # Streams:
     #
-    # 1.  Get an endpoint using [GetDataEndpoint][4], specifying
+    # 1.  Get an endpoint using [GetDataEndpoint][5], specifying
     #     `GET_HLS_STREAMING_SESSION_URL` for the `APIName` parameter.
     #
     # 2.  Retrieve the HLS URL using `GetHLSStreamingSessionURL`. Kinesis
@@ -253,7 +260,7 @@ module Aws::KinesisVideoArchivedMedia
     #     The media that is made available through the playlist consists
     #     only of the requested stream, time range, and format. No other
     #     media data (such as frames outside the requested window or
-    #     alternate bit rates) is made available.
+    #     alternate bitrates) is made available.
     #
     # 3.  Provide the URL (containing the encrypted session token) for the
     #     HLS master playlist to a media player that supports the HLS
@@ -261,17 +268,17 @@ module Aws::KinesisVideoArchivedMedia
     #     initialization fragment, and media fragments available through the
     #     master playlist URL. The initialization fragment contains the
     #     codec private data for the stream, and other data needed to set up
-    #     the video decoder and renderer. The media fragments contain
-    #     H.264-encoded video frames and time stamps.
+    #     the video or audio decoder and renderer. The media fragments
+    #     contain H.264-encoded video frames or AAC-encoded audio samples.
     #
     # 4.  The media player receives the authenticated URL and requests
     #     stream metadata and media data normally. When the media player
     #     requests data, it calls the following actions:
     #
     #     * **GetHLSMasterPlaylist:** Retrieves an HLS master playlist,
-    #       which contains a URL for the `GetHLSMediaPlaylist` action, and
-    #       additional metadata for the media player, including estimated
-    #       bit rate and resolution.
+    #       which contains a URL for the `GetHLSMediaPlaylist` action for
+    #       each track, and additional metadata for the media player,
+    #       including estimated bitrate and resolution.
     #
     #     * **GetHLSMediaPlaylist:** Retrieves an HLS media playlist, which
     #       contains a URL to access the MP4 initialization fragment with
@@ -282,7 +289,9 @@ module Aws::KinesisVideoArchivedMedia
     #       `LIVE` or `ON_DEMAND`. The HLS media playlist is typically
     #       static for sessions with a `PlaybackType` of `ON_DEMAND`. The
     #       HLS media playlist is continually updated with new fragments for
-    #       sessions with a `PlaybackType` of `LIVE`.
+    #       sessions with a `PlaybackType` of `LIVE`. There is a distinct
+    #       HLS media playlist for the video track and the audio track (if
+    #       applicable) that contains MP4 media URLs for the specific track.
     #
     #     * **GetMP4InitFragment:** Retrieves the MP4 initialization
     #       fragment. The media player typically loads the initialization
@@ -292,32 +301,45 @@ module Aws::KinesisVideoArchivedMedia
     #
     #       The initialization fragment does not correspond to a fragment in
     #       a Kinesis video stream. It contains only the codec private data
-    #       for the stream, which the media player needs to decode video
-    #       frames.
+    #       for the stream and respective track, which the media player
+    #       needs to decode the media frames.
     #
     #     * **GetMP4MediaFragment:** Retrieves MP4 media fragments. These
     #       fragments contain the "`moof`" and "`mdat`" MP4 atoms and
-    #       their child atoms, containing the encoded fragment's video
-    #       frames and their time stamps.
+    #       their child atoms, containing the encoded fragment's media
+    #       frames and their timestamps.
     #
     #       <note markdown="1"> After the first media fragment is made available in a streaming
     #       session, any fragments that don't contain the same codec
-    #       private data are excluded in the HLS media playlist. Therefore,
-    #       the codec private data does not change between fragments in a
-    #       session.
+    #       private data cause an error to be returned when those different
+    #       media fragments are loaded. Therefore, the codec private data
+    #       should not change between fragments in a session. This also
+    #       means that the session fails if the fragments in a stream change
+    #       from having only video to having both audio and video.
     #
     #        </note>
     #
-    #       Data retrieved with this action is billable. See
-    #       [Pricing](aws.amazon.comkinesis/video-streams/pricing/) for
-    #       details.
+    #       Data retrieved with this action is billable. See [Pricing][6]
+    #       for details.
+    #
+    #     * **GetTSFragment:** Retrieves MPEG TS fragments containing both
+    #       initialization and media data for all tracks in the stream.
+    #
+    #       <note markdown="1"> If the `ContainerFormat` is `MPEG_TS`, this API is used instead
+    #       of `GetMP4InitFragment` and `GetMP4MediaFragment` to retrieve
+    #       stream media.
+    #
+    #        </note>
+    #
+    #       Data retrieved with this action is billable. For more
+    #       information, see [Kinesis Video Streams pricing][6].
     #
     # <note markdown="1"> The following restrictions apply to HLS sessions:
     #
     #  * A streaming session URL should not be shared between players. The
     #   service might throttle a session if multiple media players are
     #   sharing it. For connection limits, see [Kinesis Video Streams
-    #   Limits][5].
+    #   Limits][7].
     #
     # * A Kinesis video stream can have a maximum of five active HLS
     #   streaming sessions. If a new session is created when the maximum
@@ -332,26 +354,27 @@ module Aws::KinesisVideoArchivedMedia
     # You can monitor the amount of data that the media player consumes by
     # monitoring the `GetMP4MediaFragment.OutgoingBytes` Amazon CloudWatch
     # metric. For information about using CloudWatch to monitor Kinesis
-    # Video Streams, see [Monitoring Kinesis Video Streams][6]. For pricing
-    # information, see [Amazon Kinesis Video Streams Pricing][7] and [AWS
-    # Pricing][8]. Charges for both HLS sessions and outgoing AWS data
+    # Video Streams, see [Monitoring Kinesis Video Streams][8]. For pricing
+    # information, see [Amazon Kinesis Video Streams Pricing][6] and [AWS
+    # Pricing][9]. Charges for both HLS sessions and outgoing AWS data
     # apply.
     #
-    # For more information about HLS, see [HTTP Live Streaming][9] on the
-    # [Apple Developer site][10].
+    # For more information about HLS, see [HTTP Live Streaming][10] on the
+    # [Apple Developer site][11].
     #
     #
     #
     # [1]: https://www.iso.org/standard/55980.html
-    # [2]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/latest/dg/producer-reference-nal.html
-    # [3]: https://tools.ietf.org/html/draft-pantos-http-live-streaming-23
-    # [4]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetDataEndpoint.html
-    # [5]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html
-    # [6]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html
-    # [7]: https://aws.amazon.com/kinesis/video-streams/pricing/
-    # [8]: https://aws.amazon.com/pricing/
-    # [9]: https://developer.apple.com/streaming/
-    # [10]: https://developer.apple.com
+    # [2]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html
+    # [3]: https://www.iso.org/standard/43345.html
+    # [4]: https://tools.ietf.org/html/draft-pantos-http-live-streaming-23
+    # [5]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetDataEndpoint.html
+    # [6]: https://aws.amazon.com/kinesis/video-streams/pricing/
+    # [7]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html
+    # [8]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html
+    # [9]: https://aws.amazon.com/pricing/
+    # [10]: https://developer.apple.com/streaming/
+    # [11]: https://developer.apple.com
     #
     # @option params [String] :stream_name
     #   The name of the stream for which to retrieve the HLS master playlist
@@ -399,24 +422,37 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   In both playback modes, if `FragmentSelectorType` is
     #   `PRODUCER_TIMESTAMP`, and if there are multiple fragments with the
-    #   same start time stamp, the fragment that has the larger fragment
-    #   number (that is, the newer fragment) is included in the HLS media
-    #   playlist. The other fragments are not included. Fragments that have
-    #   different time stamps but have overlapping durations are still
-    #   included in the HLS media playlist. This can lead to unexpected
-    #   behavior in the media player.
+    #   same start timestamp, the fragment that has the larger fragment number
+    #   (that is, the newer fragment) is included in the HLS media playlist.
+    #   The other fragments are not included. Fragments that have different
+    #   timestamps but have overlapping durations are still included in the
+    #   HLS media playlist. This can lead to unexpected behavior in the media
+    #   player.
     #
     #   The default is `LIVE`.
     #
     # @option params [Types::HLSFragmentSelector] :hls_fragment_selector
-    #   The time range of the requested fragment, and the source of the time
-    #   stamps.
+    #   The time range of the requested fragment, and the source of the
+    #   timestamps.
     #
     #   This parameter is required if `PlaybackMode` is `ON_DEMAND`. This
     #   parameter is optional if `PlaybackMode` is `LIVE`. If `PlaybackMode`
     #   is `LIVE`, the `FragmentSelectorType` can be set, but the
     #   `TimestampRange` should not be set. If `PlaybackMode` is `ON_DEMAND`,
     #   both `FragmentSelectorType` and `TimestampRange` must be set.
+    #
+    # @option params [String] :container_format
+    #   Specifies which format should be used for packaging the media.
+    #   Specifying the `FRAGMENTED_MP4` container format packages the media
+    #   into MP4 fragments (fMP4 or CMAF). This is the recommended packaging
+    #   because there is minimal packaging overhead. The other container
+    #   format option is `MPEG_TS`. HLS has supported MPEG TS chunks since it
+    #   was released and is sometimes the only supported packaging on older
+    #   HLS players. MPEG TS typically has a 5-25 percent packaging overhead.
+    #   This means MPEG TS typically requires 5-25 percent more bandwidth and
+    #   cost than fMP4.
+    #
+    #   The default is `FRAGMENTED_MP4`.
     #
     # @option params [String] :discontinuity_mode
     #   Specifies when flags marking discontinuities between fragments will be
@@ -425,17 +461,33 @@ module Aws::KinesisVideoArchivedMedia
     #   `PRODUCER_TIMESTAMP`.
     #
     #   Media players typically build a timeline of media content to play,
-    #   based on the time stamps of each fragment. This means that if there is
+    #   based on the timestamps of each fragment. This means that if there is
     #   any overlap between fragments (as is typical if HLSFragmentSelector is
     #   `SERVER_TIMESTAMP`), the media player timeline has small gaps between
     #   fragments in some places, and overwrites frames in other places. When
     #   there are discontinuity flags between fragments, the media player is
     #   expected to reset the timeline, resulting in the fragment being played
     #   immediately after the previous fragment. We recommend that you always
-    #   have discontinuity flags between fragments if the fragment time stamps
+    #   have discontinuity flags between fragments if the fragment timestamps
     #   are not accurate or if fragments might be missing. You should not
     #   place discontinuity flags between fragments for the player timeline to
-    #   accurately map to the producer time stamps.
+    #   accurately map to the producer timestamps.
+    #
+    # @option params [String] :display_fragment_timestamp
+    #   Specifies when the fragment start timestamps should be included in the
+    #   HLS media playlist. Typically, media players report the playhead
+    #   position as a time relative to the start of the first fragment in the
+    #   playback session. However, when the start timestamps are included in
+    #   the HLS media playlist, some media players might report the current
+    #   playhead as an absolute time based on the fragment timestamps. This
+    #   can be useful for creating a playback experience that shows viewers
+    #   the wall-clock time of the media.
+    #
+    #   The default is `NEVER`. When HLSFragmentSelector is
+    #   `SERVER_TIMESTAMP`, the timestamps will be the server start
+    #   timestamps. Similarly, when HLSFragmentSelector is
+    #   `PRODUCER_TIMESTAMP`, the timestamps will be the producer start
+    #   timestamps.
     #
     # @option params [Integer] :expires
     #   The time in seconds until the requested session expires. This value
@@ -486,7 +538,9 @@ module Aws::KinesisVideoArchivedMedia
     #         end_timestamp: Time.now,
     #       },
     #     },
+    #     container_format: "FRAGMENTED_MP4", # accepts FRAGMENTED_MP4, MPEG_TS
     #     discontinuity_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #     display_fragment_timestamp: "ALWAYS", # accepts ALWAYS, NEVER
     #     expires: 1,
     #     max_media_playlist_fragment_results: 1,
     #   })
@@ -507,6 +561,12 @@ module Aws::KinesisVideoArchivedMedia
     # Gets media for a list of fragments (specified by fragment number) from
     # the archived data in an Amazon Kinesis video stream.
     #
+    # <note markdown="1"> You must first call the `GetDataEndpoint` API to get an endpoint. Then
+    # send the `GetMediaForFragmentList` requests to this endpoint using the
+    # [--endpoint-url parameter][1].
+    #
+    #  </note>
+    #
     # The following limits apply when using the `GetMediaForFragmentList`
     # API:
     #
@@ -516,6 +576,10 @@ module Aws::KinesisVideoArchivedMedia
     # * Kinesis Video Streams sends media data at a rate of up to 25
     #   megabytes per second (or 200 megabits per second) during a
     #   `GetMediaForFragmentList` session.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/
     #
     # @option params [required, String] :stream_name
     #   The name of the stream from which to retrieve fragment media.
@@ -550,8 +614,24 @@ module Aws::KinesisVideoArchivedMedia
       req.send_request(options, &block)
     end
 
-    # Returns a list of Fragment objects from the specified stream and start
-    # location within the archived data.
+    # Returns a list of Fragment objects from the specified stream and
+    # timestamp range within the archived data.
+    #
+    # Listing fragments is eventually consistent. This means that even if
+    # the producer receives an acknowledgment that a fragment is persisted,
+    # the result might not be returned immediately from a request to
+    # `ListFragments`. However, results are typically available in less than
+    # one second.
+    #
+    # <note markdown="1"> You must first call the `GetDataEndpoint` API to get an endpoint. Then
+    # send the `ListFragments` requests to this endpoint using the
+    # [--endpoint-url parameter][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/
     #
     # @option params [required, String] :stream_name
     #   The name of the stream from which to retrieve a fragment list.
@@ -567,7 +647,7 @@ module Aws::KinesisVideoArchivedMedia
     #   ListFragmentsOutput$NextToken from a previously truncated response.
     #
     # @option params [Types::FragmentSelector] :fragment_selector
-    #   Describes the time stamp range and time stamp origin for the range of
+    #   Describes the timestamp range and timestamp origin for the range of
     #   fragments to return.
     #
     # @return [Types::ListFragmentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -622,7 +702,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

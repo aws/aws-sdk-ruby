@@ -33,6 +33,7 @@ module Aws::CodeBuild
     BuildPhases = Shapes::ListShape.new(name: 'BuildPhases')
     Builds = Shapes::ListShape.new(name: 'Builds')
     BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
+    CacheMode = Shapes::StringShape.new(name: 'CacheMode')
     CacheType = Shapes::StringShape.new(name: 'CacheType')
     CloudWatchLogsConfig = Shapes::StructureShape.new(name: 'CloudWatchLogsConfig')
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
@@ -93,6 +94,7 @@ module Aws::CodeBuild
     ProjectArtifactsList = Shapes::ListShape.new(name: 'ProjectArtifactsList')
     ProjectBadge = Shapes::StructureShape.new(name: 'ProjectBadge')
     ProjectCache = Shapes::StructureShape.new(name: 'ProjectCache')
+    ProjectCacheModes = Shapes::ListShape.new(name: 'ProjectCacheModes')
     ProjectDescription = Shapes::StringShape.new(name: 'ProjectDescription')
     ProjectEnvironment = Shapes::StructureShape.new(name: 'ProjectEnvironment')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
@@ -414,7 +416,10 @@ module Aws::CodeBuild
 
     ProjectCache.add_member(:type, Shapes::ShapeRef.new(shape: CacheType, required: true, location_name: "type"))
     ProjectCache.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    ProjectCache.add_member(:modes, Shapes::ShapeRef.new(shape: ProjectCacheModes, location_name: "modes"))
     ProjectCache.struct_class = Types::ProjectCache
+
+    ProjectCacheModes.member = Shapes::ShapeRef.new(shape: CacheMode)
 
     ProjectEnvironment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "type"))
     ProjectEnvironment.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "image"))
@@ -538,8 +543,8 @@ module Aws::CodeBuild
 
     UpdateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     UpdateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
-    UpdateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     UpdateWebhookInput.add_member(:rotate_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "rotateSecret"))
+    UpdateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     UpdateWebhookInput.struct_class = Types::UpdateWebhookInput
 
     UpdateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
