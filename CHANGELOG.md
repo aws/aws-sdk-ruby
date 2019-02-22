@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
+
+* Feature - Aws::Cloud9 - Updated the API, and documentation for AWS Cloud9.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.11.226 (2019-02-21)
 ------------------
 
