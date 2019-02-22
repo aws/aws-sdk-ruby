@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.227 (2019-02-22)
+------------------
+
 * Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
 
 * Feature - Aws::Cloud9 - Updated the API, and documentation for AWS Cloud9.
