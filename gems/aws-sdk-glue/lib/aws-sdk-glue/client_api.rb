@@ -29,9 +29,17 @@ module Aws::Glue
     BatchDeleteTableVersionList = Shapes::ListShape.new(name: 'BatchDeleteTableVersionList')
     BatchDeleteTableVersionRequest = Shapes::StructureShape.new(name: 'BatchDeleteTableVersionRequest')
     BatchDeleteTableVersionResponse = Shapes::StructureShape.new(name: 'BatchDeleteTableVersionResponse')
+    BatchGetCrawlersRequest = Shapes::StructureShape.new(name: 'BatchGetCrawlersRequest')
+    BatchGetCrawlersResponse = Shapes::StructureShape.new(name: 'BatchGetCrawlersResponse')
+    BatchGetDevEndpointsRequest = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsRequest')
+    BatchGetDevEndpointsResponse = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsResponse')
+    BatchGetJobsRequest = Shapes::StructureShape.new(name: 'BatchGetJobsRequest')
+    BatchGetJobsResponse = Shapes::StructureShape.new(name: 'BatchGetJobsResponse')
     BatchGetPartitionRequest = Shapes::StructureShape.new(name: 'BatchGetPartitionRequest')
     BatchGetPartitionResponse = Shapes::StructureShape.new(name: 'BatchGetPartitionResponse')
     BatchGetPartitionValueList = Shapes::ListShape.new(name: 'BatchGetPartitionValueList')
+    BatchGetTriggersRequest = Shapes::StructureShape.new(name: 'BatchGetTriggersRequest')
+    BatchGetTriggersResponse = Shapes::StructureShape.new(name: 'BatchGetTriggersResponse')
     BatchStopJobRunError = Shapes::StructureShape.new(name: 'BatchStopJobRunError')
     BatchStopJobRunErrorList = Shapes::ListShape.new(name: 'BatchStopJobRunErrorList')
     BatchStopJobRunJobRunIdList = Shapes::ListShape.new(name: 'BatchStopJobRunJobRunIdList')
@@ -163,6 +171,8 @@ module Aws::Glue
     DevEndpoint = Shapes::StructureShape.new(name: 'DevEndpoint')
     DevEndpointCustomLibraries = Shapes::StructureShape.new(name: 'DevEndpointCustomLibraries')
     DevEndpointList = Shapes::ListShape.new(name: 'DevEndpointList')
+    DevEndpointNameList = Shapes::ListShape.new(name: 'DevEndpointNameList')
+    DevEndpointNames = Shapes::ListShape.new(name: 'DevEndpointNames')
     DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     EncryptionAtRest = Shapes::StructureShape.new(name: 'EncryptionAtRest')
@@ -239,6 +249,8 @@ module Aws::Glue
     GetTableVersionsResponse = Shapes::StructureShape.new(name: 'GetTableVersionsResponse')
     GetTablesRequest = Shapes::StructureShape.new(name: 'GetTablesRequest')
     GetTablesResponse = Shapes::StructureShape.new(name: 'GetTablesResponse')
+    GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
+    GetTagsResponse = Shapes::StructureShape.new(name: 'GetTagsResponse')
     GetTriggerRequest = Shapes::StructureShape.new(name: 'GetTriggerRequest')
     GetTriggerResponse = Shapes::StructureShape.new(name: 'GetTriggerResponse')
     GetTriggersRequest = Shapes::StructureShape.new(name: 'GetTriggersRequest')
@@ -248,6 +260,7 @@ module Aws::Glue
     GetUserDefinedFunctionsRequest = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionsRequest')
     GetUserDefinedFunctionsResponse = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionsResponse')
     GlueEncryptionException = Shapes::StructureShape.new(name: 'GlueEncryptionException')
+    GlueResourceArn = Shapes::StringShape.new(name: 'GlueResourceArn')
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
     HashString = Shapes::StringShape.new(name: 'HashString')
@@ -269,6 +282,7 @@ module Aws::Glue
     JobCommand = Shapes::StructureShape.new(name: 'JobCommand')
     JobList = Shapes::ListShape.new(name: 'JobList')
     JobName = Shapes::StringShape.new(name: 'JobName')
+    JobNameList = Shapes::ListShape.new(name: 'JobNameList')
     JobRun = Shapes::StructureShape.new(name: 'JobRun')
     JobRunList = Shapes::ListShape.new(name: 'JobRunList')
     JobRunState = Shapes::StringShape.new(name: 'JobRunState')
@@ -281,6 +295,14 @@ module Aws::Glue
     Language = Shapes::StringShape.new(name: 'Language')
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
+    ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
+    ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
+    ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
+    ListDevEndpointsResponse = Shapes::StructureShape.new(name: 'ListDevEndpointsResponse')
+    ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
+    ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
+    ListTriggersRequest = Shapes::StructureShape.new(name: 'ListTriggersRequest')
+    ListTriggersResponse = Shapes::StructureShape.new(name: 'ListTriggersResponse')
     Location = Shapes::StructureShape.new(name: 'Location')
     LocationMap = Shapes::MapShape.new(name: 'LocationMap')
     LocationString = Shapes::StringShape.new(name: 'LocationString')
@@ -389,6 +411,12 @@ module Aws::Glue
     TableVersion = Shapes::StructureShape.new(name: 'TableVersion')
     TableVersionError = Shapes::StructureShape.new(name: 'TableVersionError')
     TableVersionErrors = Shapes::ListShape.new(name: 'TableVersionErrors')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeysList = Shapes::ListShape.new(name: 'TagKeysList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
@@ -396,10 +424,13 @@ module Aws::Glue
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
     Trigger = Shapes::StructureShape.new(name: 'Trigger')
     TriggerList = Shapes::ListShape.new(name: 'TriggerList')
+    TriggerNameList = Shapes::ListShape.new(name: 'TriggerNameList')
     TriggerState = Shapes::StringShape.new(name: 'TriggerState')
     TriggerType = Shapes::StringShape.new(name: 'TriggerType')
     TriggerUpdate = Shapes::StructureShape.new(name: 'TriggerUpdate')
     URI = Shapes::StringShape.new(name: 'URI')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBehavior = Shapes::StringShape.new(name: 'UpdateBehavior')
     UpdateClassifierRequest = Shapes::StructureShape.new(name: 'UpdateClassifierRequest')
     UpdateClassifierResponse = Shapes::StructureShape.new(name: 'UpdateClassifierResponse')
@@ -497,6 +528,27 @@ module Aws::Glue
     BatchDeleteTableVersionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TableVersionErrors, location_name: "Errors"))
     BatchDeleteTableVersionResponse.struct_class = Types::BatchDeleteTableVersionResponse
 
+    BatchGetCrawlersRequest.add_member(:crawler_names, Shapes::ShapeRef.new(shape: CrawlerNameList, required: true, location_name: "CrawlerNames"))
+    BatchGetCrawlersRequest.struct_class = Types::BatchGetCrawlersRequest
+
+    BatchGetCrawlersResponse.add_member(:crawlers, Shapes::ShapeRef.new(shape: CrawlerList, location_name: "Crawlers"))
+    BatchGetCrawlersResponse.add_member(:crawlers_not_found, Shapes::ShapeRef.new(shape: CrawlerNameList, location_name: "CrawlersNotFound"))
+    BatchGetCrawlersResponse.struct_class = Types::BatchGetCrawlersResponse
+
+    BatchGetDevEndpointsRequest.add_member(:dev_endpoint_names, Shapes::ShapeRef.new(shape: DevEndpointNames, required: true, location_name: "DevEndpointNames"))
+    BatchGetDevEndpointsRequest.struct_class = Types::BatchGetDevEndpointsRequest
+
+    BatchGetDevEndpointsResponse.add_member(:dev_endpoints, Shapes::ShapeRef.new(shape: DevEndpointList, location_name: "DevEndpoints"))
+    BatchGetDevEndpointsResponse.add_member(:dev_endpoints_not_found, Shapes::ShapeRef.new(shape: DevEndpointNames, location_name: "DevEndpointsNotFound"))
+    BatchGetDevEndpointsResponse.struct_class = Types::BatchGetDevEndpointsResponse
+
+    BatchGetJobsRequest.add_member(:job_names, Shapes::ShapeRef.new(shape: JobNameList, required: true, location_name: "JobNames"))
+    BatchGetJobsRequest.struct_class = Types::BatchGetJobsRequest
+
+    BatchGetJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobList, location_name: "Jobs"))
+    BatchGetJobsResponse.add_member(:jobs_not_found, Shapes::ShapeRef.new(shape: JobNameList, location_name: "JobsNotFound"))
+    BatchGetJobsResponse.struct_class = Types::BatchGetJobsResponse
+
     BatchGetPartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     BatchGetPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     BatchGetPartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -508,6 +560,13 @@ module Aws::Glue
     BatchGetPartitionResponse.struct_class = Types::BatchGetPartitionResponse
 
     BatchGetPartitionValueList.member = Shapes::ShapeRef.new(shape: PartitionValueList)
+
+    BatchGetTriggersRequest.add_member(:trigger_names, Shapes::ShapeRef.new(shape: TriggerNameList, required: true, location_name: "TriggerNames"))
+    BatchGetTriggersRequest.struct_class = Types::BatchGetTriggersRequest
+
+    BatchGetTriggersResponse.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "Triggers"))
+    BatchGetTriggersResponse.add_member(:triggers_not_found, Shapes::ShapeRef.new(shape: TriggerNameList, location_name: "TriggersNotFound"))
+    BatchGetTriggersResponse.struct_class = Types::BatchGetTriggersResponse
 
     BatchStopJobRunError.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     BatchStopJobRunError.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
@@ -687,6 +746,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
     CreateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     CreateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
+    CreateCrawlerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateCrawlerRequest.struct_class = Types::CreateCrawlerRequest
 
     CreateCrawlerResponse.struct_class = Types::CreateCrawlerResponse
@@ -707,6 +767,7 @@ module Aws::Glue
     CreateDevEndpointRequest.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
     CreateDevEndpointRequest.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
     CreateDevEndpointRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    CreateDevEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateDevEndpointRequest.struct_class = Types::CreateDevEndpointRequest
 
     CreateDevEndpointResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointName"))
@@ -746,6 +807,7 @@ module Aws::Glue
     CreateJobRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
     CreateJobRequest.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     CreateJobRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -794,6 +856,7 @@ module Aws::Glue
     CreateTriggerRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, required: true, location_name: "Actions"))
     CreateTriggerRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateTriggerRequest.add_member(:start_on_creation, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "StartOnCreation"))
+    CreateTriggerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateTriggerRequest.struct_class = Types::CreateTriggerRequest
 
     CreateTriggerResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -943,6 +1006,10 @@ module Aws::Glue
     DevEndpointCustomLibraries.struct_class = Types::DevEndpointCustomLibraries
 
     DevEndpointList.member = Shapes::ShapeRef.new(shape: DevEndpoint)
+
+    DevEndpointNameList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    DevEndpointNames.member = Shapes::ShapeRef.new(shape: GenericString)
 
     DynamoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     DynamoDBTarget.struct_class = Types::DynamoDBTarget
@@ -1215,6 +1282,12 @@ module Aws::Glue
     GetTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetTablesResponse.struct_class = Types::GetTablesResponse
 
+    GetTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, required: true, location_name: "ResourceArn"))
+    GetTagsRequest.struct_class = Types::GetTagsRequest
+
+    GetTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetTagsResponse.struct_class = Types::GetTagsResponse
+
     GetTriggerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetTriggerRequest.struct_class = Types::GetTriggerRequest
 
@@ -1305,6 +1378,8 @@ module Aws::Glue
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
 
+    JobNameList.member = Shapes::ShapeRef.new(shape: NameString)
+
     JobRun.add_member(:id, Shapes::ShapeRef.new(shape: IdString, location_name: "Id"))
     JobRun.add_member(:attempt, Shapes::ShapeRef.new(shape: AttemptCount, location_name: "Attempt"))
     JobRun.add_member(:previous_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "PreviousRunId"))
@@ -1357,6 +1432,43 @@ module Aws::Glue
     LastCrawlInfo.add_member(:message_prefix, Shapes::ShapeRef.new(shape: MessagePrefix, location_name: "MessagePrefix"))
     LastCrawlInfo.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     LastCrawlInfo.struct_class = Types::LastCrawlInfo
+
+    ListCrawlersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListCrawlersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCrawlersRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListCrawlersRequest.struct_class = Types::ListCrawlersRequest
+
+    ListCrawlersResponse.add_member(:crawler_names, Shapes::ShapeRef.new(shape: CrawlerNameList, location_name: "CrawlerNames"))
+    ListCrawlersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCrawlersResponse.struct_class = Types::ListCrawlersResponse
+
+    ListDevEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListDevEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListDevEndpointsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListDevEndpointsRequest.struct_class = Types::ListDevEndpointsRequest
+
+    ListDevEndpointsResponse.add_member(:dev_endpoint_names, Shapes::ShapeRef.new(shape: DevEndpointNameList, location_name: "DevEndpointNames"))
+    ListDevEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListDevEndpointsResponse.struct_class = Types::ListDevEndpointsResponse
+
+    ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListJobsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListJobsRequest.struct_class = Types::ListJobsRequest
+
+    ListJobsResponse.add_member(:job_names, Shapes::ShapeRef.new(shape: JobNameList, location_name: "JobNames"))
+    ListJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListJobsResponse.struct_class = Types::ListJobsResponse
+
+    ListTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListTriggersRequest.add_member(:dependent_job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DependentJobName"))
+    ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListTriggersRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListTriggersRequest.struct_class = Types::ListTriggersRequest
+
+    ListTriggersResponse.add_member(:trigger_names, Shapes::ShapeRef.new(shape: TriggerNameList, location_name: "TriggerNames"))
+    ListTriggersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListTriggersResponse.struct_class = Types::ListTriggersResponse
 
     Location.add_member(:jdbc, Shapes::ShapeRef.new(shape: CodeGenNodeArgs, location_name: "Jdbc"))
     Location.add_member(:s3, Shapes::ShapeRef.new(shape: CodeGenNodeArgs, location_name: "S3"))
@@ -1622,6 +1734,17 @@ module Aws::Glue
 
     TableVersionErrors.member = Shapes::ShapeRef.new(shape: TableVersionError)
 
+    TagKeysList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags_to_add, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "TagsToAdd"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     Trigger.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Trigger.add_member(:id, Shapes::ShapeRef.new(shape: IdString, location_name: "Id"))
     Trigger.add_member(:type, Shapes::ShapeRef.new(shape: TriggerType, location_name: "Type"))
@@ -1634,12 +1757,20 @@ module Aws::Glue
 
     TriggerList.member = Shapes::ShapeRef.new(shape: Trigger)
 
+    TriggerNameList.member = Shapes::ShapeRef.new(shape: NameString)
+
     TriggerUpdate.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     TriggerUpdate.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     TriggerUpdate.add_member(:schedule, Shapes::ShapeRef.new(shape: GenericString, location_name: "Schedule"))
     TriggerUpdate.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, location_name: "Actions"))
     TriggerUpdate.add_member(:predicate, Shapes::ShapeRef.new(shape: Predicate, location_name: "Predicate"))
     TriggerUpdate.struct_class = Types::TriggerUpdate
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GlueResourceArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tags_to_remove, Shapes::ShapeRef.new(shape: TagKeysList, required: true, location_name: "TagsToRemove"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: UpdateGrokClassifierRequest, location_name: "GrokClassifier"))
     UpdateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: UpdateXMLClassifierRequest, location_name: "XMLClassifier"))
@@ -1853,6 +1984,39 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:batch_get_crawlers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCrawlers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCrawlersRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCrawlersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:batch_get_dev_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetDevEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetDevEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetDevEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:batch_get_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:batch_get_partition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetPartition"
         o.http_method = "POST"
@@ -1864,6 +2028,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+      end)
+
+      api.add_operation(:batch_get_triggers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetTriggers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetTriggersRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetTriggersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:batch_stop_job_run, Seahorse::Model::Operation.new.tap do |o|
@@ -2531,6 +2706,12 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_table, Seahorse::Model::Operation.new.tap do |o|
@@ -2595,6 +2776,18 @@ module Aws::Glue
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
       api.add_operation(:get_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -2667,6 +2860,75 @@ module Aws::Glue
         o.output = Shapes::ShapeRef.new(shape: ImportCatalogToGlueResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:list_crawlers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCrawlers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCrawlersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCrawlersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_dev_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDevEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDevEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDevEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_triggers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTriggers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTriggersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTriggersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_data_catalog_encryption_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2792,6 +3054,30 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
       api.add_operation(:update_classifier, Seahorse::Model::Operation.new.tap do |o|

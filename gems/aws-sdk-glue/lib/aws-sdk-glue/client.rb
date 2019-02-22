@@ -315,7 +315,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, Array<String>] :connection_name_list
     #   A list of names of the connections to delete.
@@ -502,6 +502,190 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns a list of resource metadata for a given list of crawler names.
+    # After calling the `ListCrawlers` operation, you can call this
+    # operation to access the data to which you have been granted
+    # permissions to based on tags.
+    #
+    # @option params [required, Array<String>] :crawler_names
+    #   A list of crawler names, which may be the names returned from the
+    #   `ListCrawlers` operation.
+    #
+    # @return [Types::BatchGetCrawlersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCrawlersResponse#crawlers #crawlers} => Array&lt;Types::Crawler&gt;
+    #   * {Types::BatchGetCrawlersResponse#crawlers_not_found #crawlers_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_crawlers({
+    #     crawler_names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.crawlers #=> Array
+    #   resp.crawlers[0].name #=> String
+    #   resp.crawlers[0].role #=> String
+    #   resp.crawlers[0].targets.s3_targets #=> Array
+    #   resp.crawlers[0].targets.s3_targets[0].path #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.jdbc_targets #=> Array
+    #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
+    #   resp.crawlers[0].targets.jdbc_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawlers[0].database_name #=> String
+    #   resp.crawlers[0].description #=> String
+    #   resp.crawlers[0].classifiers #=> Array
+    #   resp.crawlers[0].classifiers[0] #=> String
+    #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
+    #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
+    #   resp.crawlers[0].state #=> String, one of "READY", "RUNNING", "STOPPING"
+    #   resp.crawlers[0].table_prefix #=> String
+    #   resp.crawlers[0].schedule.schedule_expression #=> String
+    #   resp.crawlers[0].schedule.state #=> String, one of "SCHEDULED", "NOT_SCHEDULED", "TRANSITIONING"
+    #   resp.crawlers[0].crawl_elapsed_time #=> Integer
+    #   resp.crawlers[0].creation_time #=> Time
+    #   resp.crawlers[0].last_updated #=> Time
+    #   resp.crawlers[0].last_crawl.status #=> String, one of "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.crawlers[0].last_crawl.error_message #=> String
+    #   resp.crawlers[0].last_crawl.log_group #=> String
+    #   resp.crawlers[0].last_crawl.log_stream #=> String
+    #   resp.crawlers[0].last_crawl.message_prefix #=> String
+    #   resp.crawlers[0].last_crawl.start_time #=> Time
+    #   resp.crawlers[0].version #=> Integer
+    #   resp.crawlers[0].configuration #=> String
+    #   resp.crawlers[0].crawler_security_configuration #=> String
+    #   resp.crawlers_not_found #=> Array
+    #   resp.crawlers_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlers AWS API Documentation
+    #
+    # @overload batch_get_crawlers(params = {})
+    # @param [Hash] params ({})
+    def batch_get_crawlers(params = {}, options = {})
+      req = build_request(:batch_get_crawlers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of resource metadata for a given list of DevEndpoint
+    # names. After calling the `ListDevEndpoints` operation, you can call
+    # this operation to access the data to which you have been granted
+    # permissions. This operation supports all IAM permissions, including
+    # permission conditions that uses tags.
+    #
+    # @option params [required, Array<String>] :dev_endpoint_names
+    #   The list of DevEndpoint names, which may be the names returned from
+    #   the `ListDevEndpoint` operation.
+    #
+    # @return [Types::BatchGetDevEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDevEndpointsResponse#dev_endpoints #dev_endpoints} => Array&lt;Types::DevEndpoint&gt;
+    #   * {Types::BatchGetDevEndpointsResponse#dev_endpoints_not_found #dev_endpoints_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_dev_endpoints({
+    #     dev_endpoint_names: ["GenericString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dev_endpoints #=> Array
+    #   resp.dev_endpoints[0].endpoint_name #=> String
+    #   resp.dev_endpoints[0].role_arn #=> String
+    #   resp.dev_endpoints[0].security_group_ids #=> Array
+    #   resp.dev_endpoints[0].security_group_ids[0] #=> String
+    #   resp.dev_endpoints[0].subnet_id #=> String
+    #   resp.dev_endpoints[0].yarn_endpoint_address #=> String
+    #   resp.dev_endpoints[0].private_address #=> String
+    #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
+    #   resp.dev_endpoints[0].public_address #=> String
+    #   resp.dev_endpoints[0].status #=> String
+    #   resp.dev_endpoints[0].number_of_nodes #=> Integer
+    #   resp.dev_endpoints[0].availability_zone #=> String
+    #   resp.dev_endpoints[0].vpc_id #=> String
+    #   resp.dev_endpoints[0].extra_python_libs_s3_path #=> String
+    #   resp.dev_endpoints[0].extra_jars_s3_path #=> String
+    #   resp.dev_endpoints[0].failure_reason #=> String
+    #   resp.dev_endpoints[0].last_update_status #=> String
+    #   resp.dev_endpoints[0].created_timestamp #=> Time
+    #   resp.dev_endpoints[0].last_modified_timestamp #=> Time
+    #   resp.dev_endpoints[0].public_key #=> String
+    #   resp.dev_endpoints[0].public_keys #=> Array
+    #   resp.dev_endpoints[0].public_keys[0] #=> String
+    #   resp.dev_endpoints[0].security_configuration #=> String
+    #   resp.dev_endpoints_not_found #=> Array
+    #   resp.dev_endpoints_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpoints AWS API Documentation
+    #
+    # @overload batch_get_dev_endpoints(params = {})
+    # @param [Hash] params ({})
+    def batch_get_dev_endpoints(params = {}, options = {})
+      req = build_request(:batch_get_dev_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of resource metadata for a given list of job names.
+    # After calling the `ListJobs` operation, you can call this operation to
+    # access the data to which you have been granted permissions. This
+    # operation supports all IAM permissions, including permission
+    # conditions that uses tags.
+    #
+    # @option params [required, Array<String>] :job_names
+    #   A list of job names, which may be the names returned from the
+    #   `ListJobs` operation.
+    #
+    # @return [Types::BatchGetJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetJobsResponse#jobs #jobs} => Array&lt;Types::Job&gt;
+    #   * {Types::BatchGetJobsResponse#jobs_not_found #jobs_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_jobs({
+    #     job_names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].description #=> String
+    #   resp.jobs[0].log_uri #=> String
+    #   resp.jobs[0].role #=> String
+    #   resp.jobs[0].created_on #=> Time
+    #   resp.jobs[0].last_modified_on #=> Time
+    #   resp.jobs[0].execution_property.max_concurrent_runs #=> Integer
+    #   resp.jobs[0].command.name #=> String
+    #   resp.jobs[0].command.script_location #=> String
+    #   resp.jobs[0].default_arguments #=> Hash
+    #   resp.jobs[0].default_arguments["GenericString"] #=> String
+    #   resp.jobs[0].connections.connections #=> Array
+    #   resp.jobs[0].connections.connections[0] #=> String
+    #   resp.jobs[0].max_retries #=> Integer
+    #   resp.jobs[0].allocated_capacity #=> Integer
+    #   resp.jobs[0].timeout #=> Integer
+    #   resp.jobs[0].max_capacity #=> Float
+    #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
+    #   resp.jobs[0].security_configuration #=> String
+    #   resp.jobs_not_found #=> Array
+    #   resp.jobs_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobs AWS API Documentation
+    #
+    # @overload batch_get_jobs(params = {})
+    # @param [Hash] params ({})
+    def batch_get_jobs(params = {}, options = {})
+      req = build_request(:batch_get_jobs, params)
+      req.send_request(options)
+    end
+
     # Retrieves partitions in a batch request.
     #
     # @option params [String] :catalog_id
@@ -584,6 +768,60 @@ module Aws::Glue
     # @param [Hash] params ({})
     def batch_get_partition(params = {}, options = {})
       req = build_request(:batch_get_partition, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of resource metadata for a given list of trigger names.
+    # After calling the `ListTriggers` operation, you can call this
+    # operation to access the data to which you have been granted
+    # permissions. This operation supports all IAM permissions, including
+    # permission conditions that uses tags.
+    #
+    # @option params [required, Array<String>] :trigger_names
+    #   A list of trigger names, which may be the names returned from the
+    #   `ListTriggers` operation.
+    #
+    # @return [Types::BatchGetTriggersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetTriggersResponse#triggers #triggers} => Array&lt;Types::Trigger&gt;
+    #   * {Types::BatchGetTriggersResponse#triggers_not_found #triggers_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_triggers({
+    #     trigger_names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.triggers #=> Array
+    #   resp.triggers[0].name #=> String
+    #   resp.triggers[0].id #=> String
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
+    #   resp.triggers[0].description #=> String
+    #   resp.triggers[0].schedule #=> String
+    #   resp.triggers[0].actions #=> Array
+    #   resp.triggers[0].actions[0].job_name #=> String
+    #   resp.triggers[0].actions[0].arguments #=> Hash
+    #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
+    #   resp.triggers[0].actions[0].timeout #=> Integer
+    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
+    #   resp.triggers[0].actions[0].security_configuration #=> String
+    #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
+    #   resp.triggers[0].predicate.conditions #=> Array
+    #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
+    #   resp.triggers[0].predicate.conditions[0].job_name #=> String
+    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.triggers_not_found #=> Array
+    #   resp.triggers_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggers AWS API Documentation
+    #
+    # @overload batch_get_triggers(params = {})
+    # @param [Hash] params ({})
+    def batch_get_triggers(params = {}, options = {})
+      req = build_request(:batch_get_triggers, params)
       req.send_request(options)
     end
 
@@ -676,7 +914,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the connection. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #
     # @option params [required, Types::ConnectionInput] :connection_input
     #   A `ConnectionInput` object defining the connection to create.
@@ -768,6 +1006,15 @@ module Aws::Glue
     #   The name of the SecurityConfiguration structure to be used by this
     #   Crawler.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to use with this crawler request. You may use tags to limit
+    #   access to the crawler. For more information about tags in AWS Glue,
+    #   see [AWS Tags in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -806,6 +1053,9 @@ module Aws::Glue
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler AWS API Documentation
@@ -911,6 +1161,15 @@ module Aws::Glue
     #   The name of the SecurityConfiguration structure to be used with this
     #   DevEndpoint.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to use with this DevEndpoint. You may use tags to limit
+    #   access to the DevEndpoint. For more information about tags in AWS
+    #   Glue, see [AWS Tags in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
     # @return [Types::CreateDevEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDevEndpointResponse#endpoint_name #endpoint_name} => String
@@ -942,6 +1201,9 @@ module Aws::Glue
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
     #     security_configuration: "NameString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1038,10 +1300,27 @@ module Aws::Glue
     #   status. The default is 2,880 minutes (48 hours).
     #
     # @option params [Float] :max_capacity
-    #   AWS Glue supports running jobs on a `JobCommand.Name`="pythonshell"
-    #   with allocated processing as low as 0.0625 DPU, which can be specified
-    #   using `MaxCapacity`. Glue ETL jobs running in any other way cannot
-    #   have fractional DPU allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either 0.0625
+    #     or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
+    #     DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Types::NotificationProperty] :notification_property
     #   Specifies configuration properties of a job notification.
@@ -1049,6 +1328,15 @@ module Aws::Glue
     # @option params [String] :security_configuration
     #   The name of the SecurityConfiguration structure to be used with this
     #   job.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to use with this job. You may use tags to limit access to the
+    #   job. For more information about tags in AWS Glue, see [AWS Tags in AWS
+    #   Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1082,6 +1370,9 @@ module Aws::Glue
     #       notify_delay_after: 1,
     #     },
     #     security_configuration: "NameString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1412,6 +1703,15 @@ module Aws::Glue
     #   Set to true to start SCHEDULED and CONDITIONAL triggers when created.
     #   True not supported for ON\_DEMAND triggers.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to use with this trigger. You may use tags to limit access to
+    #   the trigger. For more information about tags in AWS Glue, see [AWS
+    #   Tags in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
     # @return [Types::CreateTriggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTriggerResponse#name #name} => String
@@ -1447,6 +1747,9 @@ module Aws::Glue
     #     ],
     #     description: "DescriptionString",
     #     start_on_creation: false,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1531,7 +1834,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :connection_name
     #   The name of the connection to delete.
@@ -2026,19 +2329,18 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the connection definition to retrieve.
     #
     # @option params [Boolean] :hide_password
-    #   Allow you to retrieve the connection metadata without displaying the
+    #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve connections, since the console does not display passwords.
-    #   Set this parameter where the caller may not have permission to use the
-    #   KMS key to decrypt the password, but does have permission to access
-    #   the rest of the connection metadata (that is, the other connection
-    #   properties).
+    #   retrieve the connection, and does not display the password. Set this
+    #   parameter when the caller might not have permission to use the AWS KMS
+    #   key to decrypt the password, but does have permission to access the
+    #   rest of the connection properties.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2082,19 +2384,18 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [Types::GetConnectionsFilter] :filter
     #   A filter that controls which connections will be returned.
     #
     # @option params [Boolean] :hide_password
-    #   Allow you to retrieve the connection metadata without displaying the
+    #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve connections, since the console does not display passwords.
-    #   Set this parameter where the caller may not have permission to use the
-    #   KMS key to decrypt the password, but does have permission to access
-    #   the rest of the connection metadata (that is, the other connection
-    #   properties).
+    #   retrieve the connection, and does not display the password. Set this
+    #   parameter when the caller might not have permission to use the AWS KMS
+    #   key to decrypt the password, but does have permission to access the
+    #   rest of the connection properties.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -2329,7 +2630,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog for which to retrieve the security
-    #   configuration. If none is supplied, the AWS account ID is used by
+    #   configuration. If none is provided, the AWS account ID is used by
     #   default.
     #
     # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3708,6 +4009,35 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves a list of tags associated with a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon ARN of the resource for which to retrieve tags.
+    #
+    # @return [Types::GetTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTagsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tags({
+    #     resource_arn: "GlueResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTags AWS API Documentation
+    #
+    # @overload get_tags(params = {})
+    # @param [Hash] params ({})
+    def get_tags(params = {}, options = {})
+      req = build_request(:get_tags, params)
+      req.send_request(options)
+    end
+
     # Retrieves the definition of a trigger.
     #
     # @option params [required, String] :name
@@ -3934,13 +4264,211 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Sets the security configuration for a specified catalog. Once the
+    # Retrieves the names of all crawler resources in this AWS account, or
+    # the resources with the specified tag. This operation allows you to see
+    # which resources are available in your account, and their names.
+    #
+    # This operation takes the optional `Tags` field which you can use as a
+    # filter on the response so that tagged resources can be retrieved as a
+    # group. If you choose to use tags filtering, only resources with the
+    # tag will be retrieved.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Specifies to return only these tagged resources.
+    #
+    # @return [Types::ListCrawlersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCrawlersResponse#crawler_names #crawler_names} => Array&lt;String&gt;
+    #   * {Types::ListCrawlersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_crawlers({
+    #     max_results: 1,
+    #     next_token: "Token",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.crawler_names #=> Array
+    #   resp.crawler_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlers AWS API Documentation
+    #
+    # @overload list_crawlers(params = {})
+    # @param [Hash] params ({})
+    def list_crawlers(params = {}, options = {})
+      req = build_request(:list_crawlers, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the names of all DevEndpoint resources in this AWS account,
+    # or the resources with the specified tag. This operation allows you to
+    # see which resources are available in your account, and their names.
+    #
+    # This operation takes the optional `Tags` field which you can use as a
+    # filter on the response so that tagged resources can be retrieved as a
+    # group. If you choose to use tags filtering, only resources with the
+    # tag will be retrieved.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Specifies to return only these tagged resources.
+    #
+    # @return [Types::ListDevEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDevEndpointsResponse#dev_endpoint_names #dev_endpoint_names} => Array&lt;String&gt;
+    #   * {Types::ListDevEndpointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dev_endpoints({
+    #     next_token: "GenericString",
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dev_endpoint_names #=> Array
+    #   resp.dev_endpoint_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpoints AWS API Documentation
+    #
+    # @overload list_dev_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_dev_endpoints(params = {}, options = {})
+      req = build_request(:list_dev_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the names of all job resources in this AWS account, or the
+    # resources with the specified tag. This operation allows you to see
+    # which resources are available in your account, and their names.
+    #
+    # This operation takes the optional `Tags` field which you can use as a
+    # filter on the response so that tagged resources can be retrieved as a
+    # group. If you choose to use tags filtering, only resources with the
+    # tag will be retrieved.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Specifies to return only these tagged resources.
+    #
+    # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobsResponse#job_names #job_names} => Array&lt;String&gt;
+    #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_jobs({
+    #     next_token: "GenericString",
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_names #=> Array
+    #   resp.job_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobs AWS API Documentation
+    #
+    # @overload list_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_jobs(params = {}, options = {})
+      req = build_request(:list_jobs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the names of all trigger resources in this AWS account, or
+    # the resources with the specified tag. This operation allows you to see
+    # which resources are available in your account, and their names.
+    #
+    # This operation takes the optional `Tags` field which you can use as a
+    # filter on the response so that tagged resources can be retrieved as a
+    # group. If you choose to use tags filtering, only resources with the
+    # tag will be retrieved.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [String] :dependent_job_name
+    #   The name of the job for which to retrieve triggers. The trigger that
+    #   can start this job will be returned, and if there is no such trigger,
+    #   all triggers will be returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Specifies to return only these tagged resources.
+    #
+    # @return [Types::ListTriggersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTriggersResponse#trigger_names #trigger_names} => Array&lt;String&gt;
+    #   * {Types::ListTriggersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_triggers({
+    #     next_token: "GenericString",
+    #     dependent_job_name: "NameString",
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trigger_names #=> Array
+    #   resp.trigger_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggers AWS API Documentation
+    #
+    # @overload list_triggers(params = {})
+    # @param [Hash] params ({})
+    def list_triggers(params = {}, options = {})
+      req = build_request(:list_triggers, params)
+      req.send_request(options)
+    end
+
+    # Sets the security configuration for a specified catalog. After the
     # configuration has been set, the specified encryption is applied to
     # every catalog write thereafter.
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog for which to set the security
-    #   configuration. If none is supplied, the AWS account ID is used by
+    #   configuration. If none is provided, the AWS account ID is used by
     #   default.
     #
     # @option params [required, Types::DataCatalogEncryptionSettings] :data_catalog_encryption_settings
@@ -3979,10 +4507,10 @@ module Aws::Glue
     #   Contains the policy document to set, in JSON format.
     #
     # @option params [String] :policy_hash_condition
-    #   This is the hash value returned when the previous policy was set using
-    #   PutResourcePolicy. Its purpose is to prevent concurrent modifications
-    #   of a policy. Do not use this parameter if no previous policy has been
-    #   set.
+    #   The hash value returned when the previous policy was set using
+    #   `PutResourcePolicy`. Its purpose is to prevent concurrent
+    #   modifications of a policy. Do not use this parameter if no previous
+    #   policy has been set.
     #
     # @option params [String] :policy_exists_condition
     #   A value of `MUST_EXIST` is used to update a policy. A value of
@@ -4108,8 +4636,8 @@ module Aws::Glue
     #   The ID of a previous JobRun to retry.
     #
     # @option params [Hash<String,String>] :arguments
-    #   The job arguments specifically for this run. They override the
-    #   equivalent default arguments set for in the job definition itself.
+    #   The job arguments specifically for this run. For this job run, they
+    #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -4147,10 +4675,27 @@ module Aws::Glue
     #   timeout value set in the parent job.
     #
     # @option params [Float] :max_capacity
-    #   AWS Glue supports running jobs on a `JobCommand.Name`="pythonshell"
-    #   with allocated processing as low as 0.0625 DPU, which can be specified
-    #   using `MaxCapacity`. Glue ETL jobs running in any other way cannot
-    #   have fractional DPU allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either 0.0625
+    #     or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
+    #     DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @option params [Types::NotificationProperty] :notification_property
     #   Specifies configuration properties of a job run notification.
@@ -4299,6 +4844,73 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Adds tags to a resource. A tag is a label you can assign to an AWS
+    # resource. In AWS Glue, you can tag only certain resources. For
+    # information about what resources you can tag, see [AWS Tags in AWS
+    # Glue][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the AWS Glue resource to which to add the tags. For more
+    #   information about AWS Glue resource ARNs, see the [AWS Glue ARN string
+    #   pattern][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #
+    # @option params [required, Hash<String,String>] :tags_to_add
+    #   Tags to add to this resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "GlueResourceArn", # required
+    #     tags_to_add: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource from which to remove the tags.
+    #
+    # @option params [required, Array<String>] :tags_to_remove
+    #   Tags to remove from this resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "GlueResourceArn", # required
+    #     tags_to_remove: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing classifier (a `GrokClassifier`, `XMLClassifier`,
     # or `JsonClassifier`, depending on which field is present).
     #
@@ -4346,7 +4958,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   supplied, the AWS account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the connection definition to update.
@@ -4986,7 +5598,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

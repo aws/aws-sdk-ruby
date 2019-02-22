@@ -30,7 +30,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   Arguments to be passed to the job run.
+    #   The job arguments used when this trigger fires. For this job run,
+    #   they replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -185,7 +186,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] connection_name_list
@@ -369,6 +370,111 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetCrawlersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         crawler_names: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] crawler_names
+    #   A list of crawler names, which may be the names returned from the
+    #   `ListCrawlers` operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlersRequest AWS API Documentation
+    #
+    class BatchGetCrawlersRequest < Struct.new(
+      :crawler_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] crawlers
+    #   A list of crawler definitions.
+    #   @return [Array<Types::Crawler>]
+    #
+    # @!attribute [rw] crawlers_not_found
+    #   A list of crawlers not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlersResponse AWS API Documentation
+    #
+    class BatchGetCrawlersResponse < Struct.new(
+      :crawlers,
+      :crawlers_not_found)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetDevEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dev_endpoint_names: ["GenericString"], # required
+    #       }
+    #
+    # @!attribute [rw] dev_endpoint_names
+    #   The list of DevEndpoint names, which may be the names returned from
+    #   the `ListDevEndpoint` operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpointsRequest AWS API Documentation
+    #
+    class BatchGetDevEndpointsRequest < Struct.new(
+      :dev_endpoint_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dev_endpoints
+    #   A list of DevEndpoint definitions.
+    #   @return [Array<Types::DevEndpoint>]
+    #
+    # @!attribute [rw] dev_endpoints_not_found
+    #   A list of DevEndpoints not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpointsResponse AWS API Documentation
+    #
+    class BatchGetDevEndpointsResponse < Struct.new(
+      :dev_endpoints,
+      :dev_endpoints_not_found)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_names: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] job_names
+    #   A list of job names, which may be the names returned from the
+    #   `ListJobs` operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobsRequest AWS API Documentation
+    #
+    class BatchGetJobsRequest < Struct.new(
+      :job_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] jobs
+    #   A list of job definitions.
+    #   @return [Array<Types::Job>]
+    #
+    # @!attribute [rw] jobs_not_found
+    #   A list of names of jobs not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobsResponse AWS API Documentation
+    #
+    class BatchGetJobsResponse < Struct.new(
+      :jobs,
+      :jobs_not_found)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetPartitionRequest
     #   data as a hash:
     #
@@ -424,6 +530,41 @@ module Aws::Glue
     class BatchGetPartitionResponse < Struct.new(
       :partitions,
       :unprocessed_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetTriggersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trigger_names: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] trigger_names
+    #   A list of trigger names, which may be the names returned from the
+    #   `ListTriggers` operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggersRequest AWS API Documentation
+    #
+    class BatchGetTriggersRequest < Struct.new(
+      :trigger_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] triggers
+    #   A list of trigger definitions.
+    #   @return [Array<Types::Trigger>]
+    #
+    # @!attribute [rw] triggers_not_found
+    #   A list of names of triggers not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggersResponse AWS API Documentation
+    #
+    class BatchGetTriggersResponse < Struct.new(
+      :triggers,
+      :triggers_not_found)
       include Aws::Structure
     end
 
@@ -800,7 +941,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the connection.
+    #   The description of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -828,10 +969,10 @@ module Aws::Glue
     #
     #   * `ENCRYPTED_PASSWORD` - When you enable connection password
     #     protection by setting `ConnectionPasswordEncryption` in the Data
-    #     Catalog encryption settings, this field stores the key you
-    #     designate to encrypt the password.
+    #     Catalog encryption settings, this field stores the encrypted
+    #     password.
     #
-    #   * `JDBC_DRIVER_JAR_URI` - The S3 path of the a jar file that
+    #   * `JDBC_DRIVER_JAR_URI` - The Amazon S3 path of the JAR file that
     #     contains the JDBC driver to use.
     #
     #   * `JDBC_DRIVER_CLASS_NAME` - The class name of the JDBC driver to
@@ -848,25 +989,27 @@ module Aws::Glue
     #   * `JDBC_CONNECTION_URL` - The URL for the JDBC connection.
     #
     #   * `JDBC_ENFORCE_SSL` - A Boolean string (true, false) specifying
-    #     whether SSL with hostname matching will be enforced for the JDBC
-    #     connection on the client. The default is false.
+    #     whether Secure Sockets Layer (SSL) with hostname matching will be
+    #     enforced for the JDBC connection on the client. The default is
+    #     false.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
-    #   A map of physical connection requirements, such as VPC and
-    #   SecurityGroup, needed for making this connection successfully.
+    #   A map of physical connection requirements, such as virtual private
+    #   cloud (VPC) and `SecurityGroup`, that are needed to make this
+    #   connection successfully.
     #   @return [Types::PhysicalConnectionRequirements]
     #
     # @!attribute [rw] creation_time
-    #   The time this connection definition was created.
+    #   The time that this connection definition was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this connection definition was updated.
+    #   The last time that this connection definition was updated.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_by
-    #   The user, group or role that last updated this connection
+    #   The user, group, or role that last updated this connection
     #   definition.
     #   @return [String]
     #
@@ -885,7 +1028,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A structure used to specify a connection to create or update.
+    # A structure that is used to specify a connection to create or update.
     #
     # @note When making an API call, you may pass ConnectionInput
     #   data as a hash:
@@ -910,7 +1053,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the connection.
+    #   The description of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -927,8 +1070,9 @@ module Aws::Glue
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
-    #   A map of physical connection requirements, such as VPC and
-    #   SecurityGroup, needed for making this connection successfully.
+    #   A map of physical connection requirements, such as virtual private
+    #   cloud (VPC) and `SecurityGroup`, that are needed to successfully
+    #   make this connection.
     #   @return [Types::PhysicalConnectionRequirements]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionInput AWS API Documentation
@@ -949,14 +1093,14 @@ module Aws::Glue
     # enable catalog encryption or only password encryption.
     #
     # When a `CreationConnection` request arrives containing a password, the
-    # Data Catalog first encrypts the password using your KMS key, and then
-    # encrypts the whole connection object again if catalog encryption is
-    # also enabled.
+    # Data Catalog first encrypts the password using your AWS KMS key. It
+    # then encrypts the whole connection object again if catalog encryption
+    # is also enabled.
     #
-    # This encryption requires that you set KMS key permissions to enable or
-    # restrict access on the password key according to your security
-    # requirements. For example, you may want only admin users to have
-    # decrypt permission on the password key.
+    # This encryption requires that you set AWS KMS key permissions to
+    # enable or restrict access on the password key according to your
+    # security requirements. For example, you might want only admin users to
+    # have decrypt permission on the password key.
     #
     # @note When making an API call, you may pass ConnectionPasswordEncryption
     #   data as a hash:
@@ -974,14 +1118,15 @@ module Aws::Glue
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_kms_key_id
-    #   A KMS key used to protect access to the JDBC source.
+    #   An AWS KMS key that is used to encrypt the connection password.
     #
-    #   All users in your account should be granted the `kms:encrypt`
-    #   permission to encrypt passwords before storing them in the Data
-    #   Catalog (through the AWS Glue `CreateConnection` operation).
+    #   If connection password protection is enabled, the caller of
+    #   `CreateConnection` and `UpdateConnection` needs at least
+    #   `kms:Encrypt` permission on the specified AWS KMS key, to encrypt
+    #   passwords before storing them in the Data Catalog.
     #
-    #   The decrypt permission should be granted only to KMS key admins and
-    #   IAM roles designated for AWS Glue crawlers.
+    #   You can set the decrypt permission to enable or restrict access on
+    #   the password key according to your security requirements.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPasswordEncryption AWS API Documentation
@@ -1285,7 +1430,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the connection. If
-    #   none is supplied, the AWS account ID is used by default.
+    #   none is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] connection_input
@@ -1341,6 +1486,9 @@ module Aws::Glue
     #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1405,6 +1553,16 @@ module Aws::Glue
     #   Crawler.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to use with this crawler request. You may use tags to limit
+    #   access to the crawler. For more information about tags in AWS Glue,
+    #   see [AWS Tags in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
     #
     class CreateCrawlerRequest < Struct.new(
@@ -1418,7 +1576,8 @@ module Aws::Glue
       :table_prefix,
       :schema_change_policy,
       :configuration,
-      :crawler_security_configuration)
+      :crawler_security_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -1477,6 +1636,9 @@ module Aws::Glue
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
     #         security_configuration: "NameString",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -1546,6 +1708,16 @@ module Aws::Glue
     #   DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to use with this DevEndpoint. You may use tags to limit
+    #   access to the DevEndpoint. For more information about tags in AWS
+    #   Glue, see [AWS Tags in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointRequest AWS API Documentation
     #
     class CreateDevEndpointRequest < Struct.new(
@@ -1558,7 +1730,8 @@ module Aws::Glue
       :number_of_nodes,
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
-      :security_configuration)
+      :security_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -1715,6 +1888,9 @@ module Aws::Glue
     #           notify_delay_after: 1,
     #         },
     #         security_configuration: "NameString",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1792,11 +1968,27 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   AWS Glue supports running jobs on a
-    #   `JobCommand.Name`="pythonshell" with allocated processing as low
-    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
-    #   jobs running in any other way cannot have fractional DPU
-    #   allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either
+    #     0.0625 or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] notification_property
@@ -1807,6 +1999,16 @@ module Aws::Glue
     #   The name of the SecurityConfiguration structure to be used with this
     #   job.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to use with this job. You may use tags to limit access to
+    #   the job. For more information about tags in AWS Glue, see [AWS Tags
+    #   in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
@@ -1824,7 +2026,8 @@ module Aws::Glue
       :timeout,
       :max_capacity,
       :notification_property,
-      :security_configuration)
+      :security_configuration,
+      :tags)
       include Aws::Structure
     end
 
@@ -2208,6 +2411,9 @@ module Aws::Glue
     #         ],
     #         description: "DescriptionString",
     #         start_on_creation: false,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2249,6 +2455,16 @@ module Aws::Glue
     #   created. True not supported for ON\_DEMAND triggers.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   The tags to use with this trigger. You may use tags to limit access
+    #   to the trigger. For more information about tags in AWS Glue, see
+    #   [AWS Tags in AWS Glue][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest AWS API Documentation
     #
     class CreateTriggerRequest < Struct.new(
@@ -2258,7 +2474,8 @@ module Aws::Glue
       :predicate,
       :actions,
       :description,
-      :start_on_creation)
+      :start_on_creation,
+      :tags)
       include Aws::Structure
     end
 
@@ -2375,12 +2592,12 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] encryption_at_rest
-    #   Specifies encryption-at-rest configuration for the Data Catalog.
+    #   Specifies the encryption-at-rest configuration for the Data Catalog.
     #   @return [Types::EncryptionAtRest]
     #
     # @!attribute [rw] connection_password_encryption
-    #   When password protection is enabled, the Data Catalog uses a
-    #   customer-provided key to encrypt the password as part of
+    #   When connection password protection is enabled, the Data Catalog
+    #   uses a customer-provided key to encrypt the password as part of
     #   `CreateConnection` or `UpdateConnection` and store it in the
     #   `ENCRYPTED_PASSWORD` field in the connection properties. You can
     #   enable catalog encryption or only password encryption.
@@ -2504,7 +2721,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -3065,7 +3282,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies encryption-at-rest configuration for the Data Catalog.
+    # Specifies the encryption-at-rest configuration for the Data Catalog.
     #
     # @note When making an API call, you may pass EncryptionAtRest
     #   data as a hash:
@@ -3284,7 +3501,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3292,13 +3509,12 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] hide_password
-    #   Allow you to retrieve the connection metadata without displaying the
+    #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve connections, since the console does not display passwords.
-    #   Set this parameter where the caller may not have permission to use
-    #   the KMS key to decrypt the password, but does have permission to
-    #   access the rest of the connection metadata (that is, the other
-    #   connection properties).
+    #   retrieve the connection, and does not display the password. Set this
+    #   parameter when the caller might not have permission to use the AWS
+    #   KMS key to decrypt the password, but does have permission to access
+    #   the rest of the connection properties.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionRequest AWS API Documentation
@@ -3321,8 +3537,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Filters the connection definitions returned by the `GetConnections`
-    # API.
+    # Filters the connection definitions that are returned by the
+    # `GetConnections` API operation.
     #
     # @note When making an API call, you may pass GetConnectionsFilter
     #   data as a hash:
@@ -3366,7 +3582,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -3374,13 +3590,12 @@ module Aws::Glue
     #   @return [Types::GetConnectionsFilter]
     #
     # @!attribute [rw] hide_password
-    #   Allow you to retrieve the connection metadata without displaying the
+    #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
-    #   retrieve connections, since the console does not display passwords.
-    #   Set this parameter where the caller may not have permission to use
-    #   the KMS key to decrypt the password, but does have permission to
-    #   access the rest of the connection metadata (that is, the other
-    #   connection properties).
+    #   retrieve the connection, and does not display the password. Set this
+    #   parameter when the caller might not have permission to use the AWS
+    #   KMS key to decrypt the password, but does have permission to access
+    #   the rest of the connection properties.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -3545,7 +3760,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog for which to retrieve the security
-    #   configuration. If none is supplied, the AWS account ID is used by
+    #   configuration. If none is provided, the AWS account ID is used by
     #   default.
     #   @return [String]
     #
@@ -4620,6 +4835,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GlueResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon ARN of the resource for which to retrieve tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTagsRequest AWS API Documentation
+    #
+    class GetTagsRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The requested tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTagsResponse AWS API Documentation
+    #
+    class GetTagsResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTriggerRequest
     #   data as a hash:
     #
@@ -5002,11 +5246,27 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   AWS Glue supports running jobs on a
-    #   `JobCommand.Name`="pythonshell" with allocated processing as low
-    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
-    #   jobs running in any other way cannot have fractional DPU
-    #   allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either
+    #     0.0625 or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] notification_property
@@ -5166,8 +5426,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   The job arguments associated with this run. These override
-    #   equivalent default arguments set for the job.
+    #   The job arguments associated with this run. For this job run, they
+    #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -5220,11 +5480,27 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   AWS Glue supports running jobs on a
-    #   `JobCommand.Name`="pythonshell" with allocated processing as low
-    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
-    #   jobs running in any other way cannot have fractional DPU
-    #   allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either
+    #     0.0625 or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] notification_property
@@ -5375,11 +5651,27 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   AWS Glue supports running jobs on a
-    #   `JobCommand.Name`="pythonshell" with allocated processing as low
-    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
-    #   jobs running in any other way cannot have fractional DPU
-    #   allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either
+    #     0.0625 or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] notification_property
@@ -5484,6 +5776,214 @@ module Aws::Glue
       :log_stream,
       :message_prefix,
       :start_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCrawlersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "Token",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Specifies to return only these tagged resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlersRequest AWS API Documentation
+    #
+    class ListCrawlersRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] crawler_names
+    #   The names of all crawlers in the account, or the crawlers with the
+    #   specified tags.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   metric available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlersResponse AWS API Documentation
+    #
+    class ListCrawlersResponse < Struct.new(
+      :crawler_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDevEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "GenericString",
+    #         max_results: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Specifies to return only these tagged resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpointsRequest AWS API Documentation
+    #
+    class ListDevEndpointsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dev_endpoint_names
+    #   The names of all DevEndpoints in the account, or the DevEndpoints
+    #   with the specified tags.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   metric available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpointsResponse AWS API Documentation
+    #
+    class ListDevEndpointsResponse < Struct.new(
+      :dev_endpoint_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "GenericString",
+    #         max_results: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Specifies to return only these tagged resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobsRequest AWS API Documentation
+    #
+    class ListJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_names
+    #   The names of all jobs in the account, or the jobs with the specified
+    #   tags.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   metric available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobsResponse AWS API Documentation
+    #
+    class ListJobsResponse < Struct.new(
+      :job_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTriggersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "GenericString",
+    #         dependent_job_name: "NameString",
+    #         max_results: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dependent_job_name
+    #   The name of the job for which to retrieve triggers. The trigger that
+    #   can start this job will be returned, and if there is no such
+    #   trigger, all triggers will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Specifies to return only these tagged resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggersRequest AWS API Documentation
+    #
+    class ListTriggersRequest < Struct.new(
+      :next_token,
+      :dependent_job_name,
+      :max_results,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trigger_names
+    #   The names of all triggers in the account, or the triggers with the
+    #   specified tags.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   metric available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggersResponse AWS API Documentation
+    #
+    class ListTriggersResponse < Struct.new(
+      :trigger_names,
+      :next_token)
       include Aws::Structure
     end
 
@@ -5758,7 +6258,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] values
-    #   The values of the partition.
+    #   The values of the partition. Although this parameter is not required
+    #   by the SDK, you must specify this parameter for a valid input.
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_access_time
@@ -5830,9 +6331,10 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
-    #   The connection's availability zone. This field is redundant, since
-    #   the specified subnet implies the availability zone to be used. The
-    #   field must be populated now, but will be deprecated in the future.
+    #   The connection's Availability Zone. This field is redundant because
+    #   the specified subnet implies the Availability Zone to be used.
+    #   Currently the field must be populated, but it will be deprecated in
+    #   the future.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PhysicalConnectionRequirements AWS API Documentation
@@ -5915,7 +6417,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog for which to set the security
-    #   configuration. If none is supplied, the AWS account ID is used by
+    #   configuration. If none is provided, the AWS account ID is used by
     #   default.
     #   @return [String]
     #
@@ -5949,8 +6451,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] policy_hash_condition
-    #   This is the hash value returned when the previous policy was set
-    #   using PutResourcePolicy. Its purpose is to prevent concurrent
+    #   The hash value returned when the previous policy was set using
+    #   `PutResourcePolicy`. Its purpose is to prevent concurrent
     #   modifications of a policy. Do not use this parameter if no previous
     #   policy has been set.
     #   @return [String]
@@ -6342,8 +6844,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   The job arguments specifically for this run. They override the
-    #   equivalent default arguments set for in the job definition itself.
+    #   The job arguments specifically for this run. For this job run, they
+    #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -6384,11 +6886,27 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   AWS Glue supports running jobs on a
-    #   `JobCommand.Name`="pythonshell" with allocated processing as low
-    #   as 0.0625 DPU, which can be specified using `MaxCapacity`. Glue ETL
-    #   jobs running in any other way cannot have fractional DPU
-    #   allocations.
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
+    #
+    #   The value that can be allocated for `MaxCapacity` depends on whether
+    #   you are running a python shell job, or an Apache Spark ETL job:
+    #
+    #   * When you specify a python shell job
+    #     (`JobCommand.Name`="pythonshell"), you can allocate either
+    #     0.0625 or 1 DPU. The default is 0.0625 DPU.
+    #
+    #   * When you specify an Apache Spark ETL job
+    #     (`JobCommand.Name`="glueetl"), you can allocate from 2 to 100
+    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] notification_property
@@ -6951,6 +7469,42 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GlueResourceArn", # required
+    #         tags_to_add: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the AWS Glue resource to which to add the tags. For more
+    #   information about AWS Glue resource ARNs, see the [AWS Glue ARN
+    #   string pattern][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags_to_add
+    #   Tags to add to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags_to_add)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Information about a specific trigger.
     #
     # @!attribute [rw] name
@@ -7078,6 +7632,34 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GlueResourceArn", # required
+    #         tags_to_remove: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource from which to remove the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags_to_remove
+    #   Tags to remove from this resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags_to_remove)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateClassifierRequest
     #   data as a hash:
     #
@@ -7148,7 +7730,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] name

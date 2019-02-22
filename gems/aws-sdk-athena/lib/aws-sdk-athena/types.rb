@@ -225,6 +225,12 @@ module Aws::Athena
     #           bytes_scanned_cutoff_per_query: 1,
     #         },
     #         description: "WorkGroupDescriptionString",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -247,12 +253,18 @@ module Aws::Athena
     #   The workgroup description.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tags, separated by commas, that you want to attach to
+    #   the workgroup as you create it.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateWorkGroupInput AWS API Documentation
     #
     class CreateWorkGroupInput < Struct.new(
       :name,
       :configuration,
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -592,6 +604,55 @@ module Aws::Athena
     #
     class ListQueryExecutionsOutput < Struct.new(
       :query_execution_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Lists the tags for the workgroup resource with the specified ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results for this request, where the request lists the
+    #   tags for the workgroup resource with the specified ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request that lists
+    #   the tags for the workgroup resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags associated with this workgroup.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to be used by the next request if this request is truncated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
       :next_token)
       include Aws::Structure
     end
@@ -1096,6 +1157,83 @@ module Aws::Athena
     #
     class StopQueryExecutionOutput < Aws::EmptyStructure; end
 
+    # A tag that you can add to a resource. A tag is a label that you assign
+    # to an AWS Athena resource (a workgroup). Each tag consists of a key
+    # and an optional value, both of which you define. Tags enable you to
+    # categorize workgroups in Athena, for example, by purpose, owner, or
+    # environment. Use a consistent set of tag keys to make it easier to
+    # search and filter workgroups in your account. The maximum tag key
+    # length is 128 Unicode characters in UTF-8. The maximum tag value
+    # length is 256 Unicode characters in UTF-8. You can use letters and
+    # numbers representable in UTF-8, and the following characters: + - = .
+    # \_ : / @. Tag keys and values are case-sensitive. Tag keys must be
+    # unique per resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A tag key. The tag key length is from 1 to 128 Unicode characters in
+    #   UTF-8. You can use letters and numbers representable in UTF-8, and
+    #   the following characters: + - = . \_ : / @. Tag keys are
+    #   case-sensitive and must be unique per resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A tag value. The tag value length is from 0 to 256 Unicode
+    #   characters in UTF-8. You can use letters and numbers representable
+    #   in UTF-8, and the following characters: + - = . \_ : / @. Tag values
+    #   are case-sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Requests that one or more tags are added to the resource (such as a
+    #   workgroup) for the specified ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags, separated by commas, to be added to the resource,
+    #   such as a workgroup.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Information about a named query ID that could not be processed.
     #
     # @!attribute [rw] named_query_id
@@ -1145,6 +1283,36 @@ module Aws::Athena
       :error_message)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Removes one or more tags from the workgroup resource for the
+    #   specified ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Removes the tags associated with one or more tag keys from the
+    #   workgroup resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateWorkGroupInput
     #   data as a hash:

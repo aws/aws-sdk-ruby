@@ -96,6 +96,7 @@ module Aws::States
     SendTaskSuccessOutput = Shapes::StructureShape.new(name: 'SendTaskSuccessOutput')
     SensitiveCause = Shapes::StringShape.new(name: 'SensitiveCause')
     SensitiveData = Shapes::StringShape.new(name: 'SensitiveData')
+    SensitiveDataJobInput = Shapes::StringShape.new(name: 'SensitiveDataJobInput')
     SensitiveError = Shapes::StringShape.new(name: 'SensitiveError')
     StartExecutionInput = Shapes::StructureShape.new(name: 'StartExecutionInput')
     StartExecutionOutput = Shapes::StructureShape.new(name: 'StartExecutionOutput')
@@ -168,6 +169,7 @@ module Aws::States
     ActivityTimedOutEventDetails.struct_class = Types::ActivityTimedOutEventDetails
 
     CreateActivityInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateActivityInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateActivityInput.struct_class = Types::CreateActivityInput
 
     CreateActivityOutput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
@@ -177,6 +179,7 @@ module Aws::States
     CreateStateMachineInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     CreateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    CreateStateMachineInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateStateMachineInput.struct_class = Types::CreateStateMachineInput
 
     CreateStateMachineOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -269,7 +272,7 @@ module Aws::States
     GetActivityTaskInput.struct_class = Types::GetActivityTaskInput
 
     GetActivityTaskOutput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, location_name: "taskToken"))
-    GetActivityTaskOutput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
+    GetActivityTaskOutput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveDataJobInput, location_name: "input"))
     GetActivityTaskOutput.struct_class = Types::GetActivityTaskOutput
 
     GetExecutionHistoryInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -523,6 +526,7 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: CreateActivityOutput)
         o.errors << Shapes::ShapeRef.new(shape: ActivityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
       end)
 
       api.add_operation(:create_state_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -537,6 +541,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: StateMachineAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
       end)
 
       api.add_operation(:delete_activity, Seahorse::Model::Operation.new.tap do |o|

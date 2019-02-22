@@ -689,6 +689,9 @@ module Aws::Cloud9
     #   resp.environments[0].type #=> String, one of "ssh", "ec2"
     #   resp.environments[0].arn #=> String
     #   resp.environments[0].owner_arn #=> String
+    #   resp.environments[0].lifecycle.status #=> String, one of "CREATED", "DELETING", "DELETE_FAILED"
+    #   resp.environments[0].lifecycle.reason #=> String
+    #   resp.environments[0].lifecycle.failure_resource #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironments AWS API Documentation
     #
@@ -878,7 +881,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,6 +11,7 @@ module Aws::Athena
 
     include Seahorse::Model
 
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
     BatchGetNamedQueryOutput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryOutput')
     BatchGetQueryExecutionInput = Shapes::StructureShape.new(name: 'BatchGetQueryExecutionInput')
@@ -53,12 +54,15 @@ module Aws::Athena
     ListNamedQueriesOutput = Shapes::StructureShape.new(name: 'ListNamedQueriesOutput')
     ListQueryExecutionsInput = Shapes::StructureShape.new(name: 'ListQueryExecutionsInput')
     ListQueryExecutionsOutput = Shapes::StructureShape.new(name: 'ListQueryExecutionsOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListWorkGroupsInput = Shapes::StructureShape.new(name: 'ListWorkGroupsInput')
     ListWorkGroupsOutput = Shapes::StructureShape.new(name: 'ListWorkGroupsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxNamedQueriesCount = Shapes::IntegerShape.new(name: 'MaxNamedQueriesCount')
     MaxQueryExecutionsCount = Shapes::IntegerShape.new(name: 'MaxQueryExecutionsCount')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
+    MaxTagsCount = Shapes::IntegerShape.new(name: 'MaxTagsCount')
     MaxWorkGroupsCount = Shapes::IntegerShape.new(name: 'MaxWorkGroupsCount')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NamedQuery = Shapes::StructureShape.new(name: 'NamedQuery')
@@ -74,6 +78,7 @@ module Aws::Athena
     QueryExecutionStatistics = Shapes::StructureShape.new(name: 'QueryExecutionStatistics')
     QueryExecutionStatus = Shapes::StructureShape.new(name: 'QueryExecutionStatus')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultConfiguration = Shapes::StructureShape.new(name: 'ResultConfiguration')
     ResultConfigurationUpdates = Shapes::StructureShape.new(name: 'ResultConfigurationUpdates')
     ResultSet = Shapes::StructureShape.new(name: 'ResultSet')
@@ -86,6 +91,13 @@ module Aws::Athena
     StopQueryExecutionInput = Shapes::StructureShape.new(name: 'StopQueryExecutionInput')
     StopQueryExecutionOutput = Shapes::StructureShape.new(name: 'StopQueryExecutionOutput')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -93,6 +105,8 @@ module Aws::Athena
     UnprocessedNamedQueryIdList = Shapes::ListShape.new(name: 'UnprocessedNamedQueryIdList')
     UnprocessedQueryExecutionId = Shapes::StructureShape.new(name: 'UnprocessedQueryExecutionId')
     UnprocessedQueryExecutionIdList = Shapes::ListShape.new(name: 'UnprocessedQueryExecutionIdList')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
     UpdateWorkGroupOutput = Shapes::StructureShape.new(name: 'UpdateWorkGroupOutput')
     WorkGroup = Shapes::StructureShape.new(name: 'WorkGroup')
@@ -148,6 +162,7 @@ module Aws::Athena
     CreateWorkGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "Name"))
     CreateWorkGroupInput.add_member(:configuration, Shapes::ShapeRef.new(shape: WorkGroupConfiguration, location_name: "Configuration"))
     CreateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
+    CreateWorkGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWorkGroupInput.struct_class = Types::CreateWorkGroupInput
 
     CreateWorkGroupOutput.struct_class = Types::CreateWorkGroupOutput
@@ -215,6 +230,15 @@ module Aws::Athena
     ListQueryExecutionsOutput.add_member(:query_execution_ids, Shapes::ShapeRef.new(shape: QueryExecutionIdList, location_name: "QueryExecutionIds"))
     ListQueryExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListQueryExecutionsOutput.struct_class = Types::ListQueryExecutionsOutput
+
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTagsForResourceInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxTagsCount, location_name: "MaxResults"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
     ListWorkGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListWorkGroupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxWorkGroupsCount, location_name: "MaxResults"))
@@ -300,6 +324,20 @@ module Aws::Athena
 
     StopQueryExecutionOutput.struct_class = Types::StopQueryExecutionOutput
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     UnprocessedNamedQueryId.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, location_name: "NamedQueryId"))
     UnprocessedNamedQueryId.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     UnprocessedNamedQueryId.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
@@ -313,6 +351,12 @@ module Aws::Athena
     UnprocessedQueryExecutionId.struct_class = Types::UnprocessedQueryExecutionId
 
     UnprocessedQueryExecutionIdList.member = Shapes::ShapeRef.new(shape: UnprocessedQueryExecutionId)
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     UpdateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
@@ -508,6 +552,17 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_work_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkGroups"
         o.http_method = "POST"
@@ -543,6 +598,28 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: StopQueryExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_work_group, Seahorse::Model::Operation.new.tap do |o|

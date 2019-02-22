@@ -403,6 +403,10 @@ module Aws::Athena
     # @option params [String] :description
     #   The workgroup description.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags, separated by commas, that you want to attach to the
+    #   workgroup as you create it.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -422,6 +426,12 @@ module Aws::Athena
     #       bytes_scanned_cutoff_per_query: 1,
     #     },
     #     description: "WorkGroupDescriptionString",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateWorkGroup AWS API Documentation
@@ -629,7 +639,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Returns information about the workgroup with the speficied name.
+    # Returns information about the workgroup with the specified name.
     #
     # @option params [required, String] :work_group
     #   The name of the workgroup.
@@ -761,6 +771,49 @@ module Aws::Athena
     # @param [Hash] params ({})
     def list_query_executions(params = {}, options = {})
       req = build_request(:list_query_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags associated with this workgroup.
+    #
+    # @option params [required, String] :resource_arn
+    #   Lists the tags for the workgroup resource with the specified ARN.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results for this request, where the request lists the tags
+    #   for the workgroup resource with the specified ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request that lists
+    #   the tags for the workgroup resource.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -913,6 +966,85 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Adds one or more tags to the resource, such as a workgroup. A tag is a
+    # label that you assign to an AWS Athena resource (a workgroup). Each
+    # tag consists of a key and an optional value, both of which you define.
+    # Tags enable you to categorize resources (workgroups) in Athena, for
+    # example, by purpose, owner, or environment. Use a consistent set of
+    # tag keys to make it easier to search and filter workgroups in your
+    # account. For best practices, see [AWS Tagging Strategies][1]. The key
+    # length is from 1 (minimum) to 128 (maximum) Unicode characters in
+    # UTF-8. The tag value length is from 0 (minimum) to 256 (maximum)
+    # Unicode characters in UTF-8. You can use letters and numbers
+    # representable in UTF-8, and the following characters: + - = . \_ : /
+    # @. Tag keys and values are case-sensitive. Tag keys must be unique per
+    # resource. If you specify more than one, separate them by commas.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    #
+    # @option params [required, String] :resource_arn
+    #   Requests that one or more tags are added to the resource (such as a
+    #   workgroup) for the specified ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   One or more tags, separated by commas, to be added to the resource,
+    #   such as a workgroup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the workgroup resource. Takes as an
+    # input a list of TagKey Strings separated by commas, and removes their
+    # tags at the same time.
+    #
+    # @option params [required, String] :resource_arn
+    #   Removes one or more tags from the workgroup resource for the specified
+    #   ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Removes the tags associated with one or more tag keys from the
+    #   workgroup resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the workgroup with the specified name. The workgroup's name
     # cannot be changed.
     #
@@ -976,7 +1108,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
