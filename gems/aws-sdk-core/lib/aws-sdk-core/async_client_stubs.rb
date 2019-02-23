@@ -71,6 +71,10 @@ module Aws
       def closed?
         @state == :closed
       end
+
+      def close
+        @state = :closed
+      end
     end
   end
 end
