@@ -32,8 +32,7 @@ describe 'Client Interface:' do
         input_stream.signal_end_stream
 
         expect {
-          async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream)
-          async_resp.wait
+          client.foo(member_a: "hello", input_event_stream_handler: input_stream)
         }.to raise_error(ArgumentError, "unexpected value at params[:bar_wrong_chunk]")
       end
 
@@ -52,8 +51,7 @@ describe 'Client Interface:' do
           }}
         )
         expect {
-          async_resp = no_validate_client.foo(member_a: "hello", input_event_stream_handler: input_stream)
-          async_resp.wait
+          no_validate_client.foo(member_a: "hello", input_event_stream_handler: input_stream)
         }.to_not raise_error
       end
 
@@ -69,9 +67,8 @@ describe 'Client Interface:' do
           expect(e.result.details).to eq(['foo'])
         end
 
-        async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream,
+        client.foo(member_a: "hello", input_event_stream_handler: input_stream,
           output_event_stream_handler: output_stream)
-        async_resp.wait
 
         client.send_events.each_with_index do |event, i|
           expect(event.headers[":event-type"].value).to eq('BarEvent')
@@ -89,8 +86,9 @@ describe 'Client Interface:' do
             expect(e.event_type).to eq(:baz_result)
             expect(e.result.details).to eq(['foo'])
           end
-        end.wait
+        end
 
+        sleep(3)
         expect(client.send_events.size).to eq(1)
         expect(client.send_events.first.headers[":event-type"].value).to eq('BarEvent')
         expect(client.send_events.first.payload.read).to eq('chunk')
@@ -104,12 +102,12 @@ describe 'Client Interface:' do
           expect(e.result.details).to eq(['foo'])
         end
 
-        async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream,
+        client.foo(member_a: "hello", input_event_stream_handler: input_stream,
           output_event_stream_handler: output_stream)
         input_stream.signal_bar_event(bar_chunk: "chunk")
         input_stream.signal_end_stream
-        async_resp.wait
 
+        sleep(3)
         expect(client.send_events.size).to eq(1)
         expect(client.send_events.first.headers[":event-type"].value).to eq('BarEvent')
         expect(client.send_events.first.payload.read).to eq('chunk')
@@ -124,7 +122,7 @@ describe 'Client Interface:' do
         end
         input_stream.signal_bar_event(bar_chunk: "chunk0")
 
-        async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream,
+        client.foo(member_a: "hello", input_event_stream_handler: input_stream,
           output_event_stream_handler: output_stream) do |stream, _|
 
           stream.signal_bar_event(bar_chunk: "chunk1")
@@ -132,8 +130,8 @@ describe 'Client Interface:' do
         end
         input_stream.signal_bar_event(bar_chunk: "chunk2")
         input_stream.signal_end_stream
-        async_resp.wait
 
+        sleep(5)
         expect(client.send_events.size).to eq(3)
         client.send_events.each_with_index do |event, i|
           expect(event.headers[":event-type"].value).to eq('BarEvent')
