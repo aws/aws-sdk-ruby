@@ -61,12 +61,25 @@ module Seahorse
 
       describe 'async' do
 
-        it '#wait on stream close to finalize the response' do
+        it '#wait on stream mutex to finalize the response' do
           stream = double('stream')
-          allow(stream).to receive(:closed?).and_return(true)
-          a_resp = AsyncResponse.new(context: RequestContext.new, stream: stream)
-          expect(stream).to receive(:closed?)
+          queue = Queue.new
+          mutex = Mutex.new
+          condition = ConditionVariable.new
+
+          # mock stream close callback
+          signal_thread = Thread.new do
+            queue.pop
+            mutex.synchronize {
+              condition.signal
+            }
+          end
+
+          a_resp = AsyncResponse.new(context: RequestContext.new, stream: stream, sync_queue: queue, stream_mutex: mutex, close_condition: condition)
+          expect(queue).to receive(:<<)
+          expect(condition).to receive(:wait)
           a_resp.wait
+          Thread.kill(signal_thread)
         end
 
         it 'use #join! to close stream and finalize response immediately' do

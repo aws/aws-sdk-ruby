@@ -41,7 +41,7 @@ module Seahorse
           @stream_mutex.synchronize {
             @close_condition.wait(@stream_mutex)
           }
-          _kill_threads
+          _kill_input_thread
           @response
         end
       end
@@ -58,7 +58,7 @@ module Seahorse
 
       private
 
-      def _kill_threads
+      def _kill_input_thread
         if thread = context[:input_signal_thread]
           Thread.kill(thread)
         end
