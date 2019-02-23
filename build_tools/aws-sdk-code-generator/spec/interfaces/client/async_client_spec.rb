@@ -26,16 +26,6 @@ describe 'Client Interface:' do
         )
       }
 
-      it 'support validate signal event by default' do
-        input_stream = Async::EventStreams::FooStream.new
-        input_stream.signal_bar_event(bar_wrong_chunk: "chunk0")
-        input_stream.signal_end_stream
-
-        expect {
-          client.foo(member_a: "hello", input_event_stream_handler: input_stream)
-        }.to raise_error(ArgumentError, "unexpected value at params[:bar_wrong_chunk]")
-      end
-
       it 'allows disable event validation' do
         input_stream = Async::EventStreams::FooStream.new
         input_stream.signal_bar_event(bar_wrong_chunk: "chunk0")
@@ -51,7 +41,7 @@ describe 'Client Interface:' do
           }}
         )
         expect {
-          no_validate_client.foo(member_a: "hello", input_event_stream_handler: input_stream)
+          no_validate_client.foo(member_a: "hello", input_event_stream_handler: input_stream).join!
         }.to_not raise_error
       end
 
@@ -77,7 +67,7 @@ describe 'Client Interface:' do
       end
 
       it 'supports signal events using request block' do
-        client.foo(member_a: "hello") do |input_stream, output_stream|
+        async_resp = client.foo(member_a: "hello") do |input_stream, output_stream|
 
           input_stream.signal_bar_event(bar_chunk: "chunk")
           input_stream.signal_end_stream
@@ -89,6 +79,7 @@ describe 'Client Interface:' do
         end
 
         sleep(3)
+        async_resp.join!
         expect(client.send_events.size).to eq(1)
         expect(client.send_events.first.headers[":event-type"].value).to eq('BarEvent')
         expect(client.send_events.first.payload.read).to eq('chunk')
@@ -102,12 +93,13 @@ describe 'Client Interface:' do
           expect(e.result.details).to eq(['foo'])
         end
 
-        client.foo(member_a: "hello", input_event_stream_handler: input_stream,
+        async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream,
           output_event_stream_handler: output_stream)
         input_stream.signal_bar_event(bar_chunk: "chunk")
         input_stream.signal_end_stream
 
         sleep(3)
+        async_resp.join!
         expect(client.send_events.size).to eq(1)
         expect(client.send_events.first.headers[":event-type"].value).to eq('BarEvent')
         expect(client.send_events.first.payload.read).to eq('chunk')
@@ -122,7 +114,7 @@ describe 'Client Interface:' do
         end
         input_stream.signal_bar_event(bar_chunk: "chunk0")
 
-        client.foo(member_a: "hello", input_event_stream_handler: input_stream,
+        async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream,
           output_event_stream_handler: output_stream) do |stream, _|
 
           stream.signal_bar_event(bar_chunk: "chunk1")
@@ -132,6 +124,7 @@ describe 'Client Interface:' do
         input_stream.signal_end_stream
 
         sleep(5)
+        async_resp.join!
         expect(client.send_events.size).to eq(3)
         client.send_events.each_with_index do |event, i|
           expect(event.headers[":event-type"].value).to eq('BarEvent')
