@@ -29,8 +29,18 @@ module Seahorse
             conn = context.client.connection
             stream = conn.new_stream
 
+            stream_mutex = Mutex.new
+            close_condition = ConditionVariable.new
+            sync_queue = Queue.new
+
             conn.connect(context.http_request.endpoint)
-            _register_callbacks(context.http_response, stream)
+            _register_callbacks(
+              context.http_response,
+              stream,
+              stream_mutex,
+              close_condition,
+              sync_queue
+            )
 
             conn.debug_output("sending initial request ...")
             if input_emitter = context[:input_event_emitter]
@@ -57,12 +67,19 @@ module Seahorse
             # not retryable
             context.http_response.signal_error(error)
           end
-          AsyncResponse.new(context: context, stream: stream, connection: conn)
+
+          AsyncResponse.new(
+            context: context,
+            stream: stream,
+            stream_mutex: stream_mutex,
+            close_condition: close_condition,
+            sync_queue: sync_queue
+          )
         end
 
         private
 
-        def _register_callbacks(resp, stream)
+        def _register_callbacks(resp, stream, stream_mutex, close_condition, sync_queue)
           stream.on(:headers) do |headers|
             resp.signal_headers(headers)
           end
@@ -73,6 +90,13 @@ module Seahorse
 
           stream.on(:close) do
             resp.signal_done
+            # block until #wait is ready for signal
+            # else deadlock may happen because #signal happened
+            # eariler than #wait (see AsyncResponse#wait)
+            sync_queue.pop
+            stream_mutex.synchronize {
+              close_condition.signal
+            }
           end
         end
 
