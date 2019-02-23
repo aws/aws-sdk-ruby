@@ -57,7 +57,7 @@ module Seahorse
             # not retryable
             context.http_response.signal_error(error)
           end
-          AsyncResponse.new(context: context, stream: stream)
+          AsyncResponse.new(context: context, stream: stream, connection: conn)
         end
 
         private
@@ -99,9 +99,9 @@ module Seahorse
         # https://http2.github.io/http2-spec/#rfc.section.8.1.2.3
         def _h2_headers(req)
           headers = {}
-          headers[':path'] = req.endpoint.path.empty? ? '/' : req.endpoint.path
-          headers[':scheme'] = req.endpoint.scheme
           headers[':method'] = req.http_method.upcase
+          headers[':scheme'] = req.endpoint.scheme
+          headers[':path'] = req.endpoint.path.empty? ? '/' : req.endpoint.path
           if req.endpoint.query && !req.endpoint.query.empty?
             headers[':path'] += "?#{req.endpoint.query}"
           end
