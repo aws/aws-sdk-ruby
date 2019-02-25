@@ -45,6 +45,7 @@ module Aws::ElasticLoadBalancingV2
     AuthenticateOidcActionSessionCookieName = Shapes::StringShape.new(name: 'AuthenticateOidcActionSessionCookieName')
     AuthenticateOidcActionSessionTimeout = Shapes::IntegerShape.new(name: 'AuthenticateOidcActionSessionTimeout')
     AuthenticateOidcActionTokenEndpoint = Shapes::StringShape.new(name: 'AuthenticateOidcActionTokenEndpoint')
+    AuthenticateOidcActionUseExistingClientSecret = Shapes::BooleanShape.new(name: 'AuthenticateOidcActionUseExistingClientSecret')
     AuthenticateOidcActionUserInfoEndpoint = Shapes::StringShape.new(name: 'AuthenticateOidcActionUserInfoEndpoint')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneNotSupportedException = Shapes::StructureShape.new(name: 'AvailabilityZoneNotSupportedException')
@@ -310,12 +311,13 @@ module Aws::ElasticLoadBalancingV2
     AuthenticateOidcActionConfig.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: AuthenticateOidcActionTokenEndpoint, required: true, location_name: "TokenEndpoint"))
     AuthenticateOidcActionConfig.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: AuthenticateOidcActionUserInfoEndpoint, required: true, location_name: "UserInfoEndpoint"))
     AuthenticateOidcActionConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: AuthenticateOidcActionClientId, required: true, location_name: "ClientId"))
-    AuthenticateOidcActionConfig.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthenticateOidcActionClientSecret, required: true, location_name: "ClientSecret"))
+    AuthenticateOidcActionConfig.add_member(:client_secret, Shapes::ShapeRef.new(shape: AuthenticateOidcActionClientSecret, location_name: "ClientSecret"))
     AuthenticateOidcActionConfig.add_member(:session_cookie_name, Shapes::ShapeRef.new(shape: AuthenticateOidcActionSessionCookieName, location_name: "SessionCookieName"))
     AuthenticateOidcActionConfig.add_member(:scope, Shapes::ShapeRef.new(shape: AuthenticateOidcActionScope, location_name: "Scope"))
     AuthenticateOidcActionConfig.add_member(:session_timeout, Shapes::ShapeRef.new(shape: AuthenticateOidcActionSessionTimeout, location_name: "SessionTimeout"))
     AuthenticateOidcActionConfig.add_member(:authentication_request_extra_params, Shapes::ShapeRef.new(shape: AuthenticateOidcActionAuthenticationRequestExtraParams, location_name: "AuthenticationRequestExtraParams"))
     AuthenticateOidcActionConfig.add_member(:on_unauthenticated_request, Shapes::ShapeRef.new(shape: AuthenticateOidcActionConditionalBehaviorEnum, location_name: "OnUnauthenticatedRequest"))
+    AuthenticateOidcActionConfig.add_member(:use_existing_client_secret, Shapes::ShapeRef.new(shape: AuthenticateOidcActionUseExistingClientSecret, location_name: "UseExistingClientSecret"))
     AuthenticateOidcActionConfig.struct_class = Types::AuthenticateOidcActionConfig
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: ZoneName, location_name: "ZoneName"))

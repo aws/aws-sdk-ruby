@@ -332,8 +332,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -493,7 +493,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -501,6 +501,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -558,6 +559,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -613,10 +615,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
-    # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
-    # [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
+    # [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html
     #
     # @option params [required, String] :name
     #   The name of the load balancer.
@@ -844,7 +846,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -982,7 +984,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -990,6 +992,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -1045,6 +1048,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1098,8 +1102,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
     #
     # @option params [required, String] :name
     #   The name of the target group.
@@ -1483,8 +1487,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
     #
     # @option params [String] :marker
     #   The marker for the next set of results. (You received this marker from
@@ -1648,6 +1652,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1687,8 +1692,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1953,6 +1958,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1992,7 +1998,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<String>] :names
     #   The names of the policies.
@@ -2212,8 +2218,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -2521,7 +2527,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default SSL server certificate. You
@@ -2649,7 +2655,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -2657,6 +2663,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -2714,6 +2721,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3046,7 +3054,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -3054,6 +3062,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -3109,6 +3118,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3658,6 +3668,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3840,7 +3851,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

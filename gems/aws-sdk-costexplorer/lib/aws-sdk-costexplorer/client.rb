@@ -744,6 +744,10 @@ module Aws::CostExplorer
     #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Array<String>] :metrics
+    #   The measurement that you want your reservation coverage reported in.
+    #
+    #   Valid values are `Hour`, `Unit`, and `Cost`. You can use multiple
+    #   values in a request.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -1247,7 +1251,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

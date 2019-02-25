@@ -1189,6 +1189,10 @@ module Aws::CostExplorer
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
+    #   The measurement that you want your reservation coverage reported in.
+    #
+    #   Valid values are `Hour`, `Unit`, and `Cost`. You can use multiple
+    #   values in a request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_page_token
@@ -1895,6 +1899,7 @@ module Aws::CostExplorer
     # Details about your recommended reservation purchase.
     #
     # @!attribute [rw] account_id
+    #   The account that this RI recommendation is for.
     #   @return [String]
     #
     # @!attribute [rw] instance_details

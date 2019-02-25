@@ -166,6 +166,7 @@ module Aws::AutoScaling
     Metrics = Shapes::ListShape.new(name: 'Metrics')
     MinAdjustmentMagnitude = Shapes::IntegerShape.new(name: 'MinAdjustmentMagnitude')
     MinAdjustmentStep = Shapes::IntegerShape.new(name: 'MinAdjustmentStep')
+    MixedInstanceSpotPrice = Shapes::StringShape.new(name: 'MixedInstanceSpotPrice')
     MixedInstancesPolicy = Shapes::StructureShape.new(name: 'MixedInstancesPolicy')
     MonitoringEnabled = Shapes::BooleanShape.new(name: 'MonitoringEnabled')
     NoDevice = Shapes::BooleanShape.new(name: 'NoDevice')
@@ -657,7 +658,7 @@ module Aws::AutoScaling
     InstancesDistribution.add_member(:on_demand_percentage_above_base_capacity, Shapes::ShapeRef.new(shape: OnDemandPercentageAboveBaseCapacity, location_name: "OnDemandPercentageAboveBaseCapacity"))
     InstancesDistribution.add_member(:spot_allocation_strategy, Shapes::ShapeRef.new(shape: XmlString, location_name: "SpotAllocationStrategy"))
     InstancesDistribution.add_member(:spot_instance_pools, Shapes::ShapeRef.new(shape: SpotInstancePools, location_name: "SpotInstancePools"))
-    InstancesDistribution.add_member(:spot_max_price, Shapes::ShapeRef.new(shape: SpotPrice, location_name: "SpotMaxPrice"))
+    InstancesDistribution.add_member(:spot_max_price, Shapes::ShapeRef.new(shape: MixedInstanceSpotPrice, location_name: "SpotMaxPrice"))
     InstancesDistribution.struct_class = Types::InstancesDistribution
 
     LaunchConfiguration.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))

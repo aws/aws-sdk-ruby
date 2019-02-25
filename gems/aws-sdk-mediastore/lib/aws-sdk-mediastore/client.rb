@@ -242,6 +242,7 @@ module Aws::MediaStore
     #   resp.container.arn #=> String
     #   resp.container.name #=> String
     #   resp.container.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.container.access_logging_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainer AWS API Documentation
     #
@@ -326,7 +327,8 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
-    # Removes an object lifecycle policy from a container.
+    # Removes an object lifecycle policy from a container. It takes up to 20
+    # minutes for the change to take effect.
     #
     # @option params [required, String] :container_name
     #   The name of the container that holds the object lifecycle policy.
@@ -376,6 +378,7 @@ module Aws::MediaStore
     #   resp.container.arn #=> String
     #   resp.container.name #=> String
     #   resp.container.status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.container.access_logging_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainer AWS API Documentation
     #
@@ -534,6 +537,7 @@ module Aws::MediaStore
     #   resp.containers[0].arn #=> String
     #   resp.containers[0].name #=> String
     #   resp.containers[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING"
+    #   resp.containers[0].access_logging_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListContainers AWS API Documentation
@@ -600,6 +604,13 @@ module Aws::MediaStore
     # rules to a CORS policy. If more than one rule applies, the service
     # uses the first applicable rule listed.
     #
+    # To learn more about CORS, see [Cross-Origin Resource Sharing (CORS) in
+    # AWS Elemental MediaStore][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html
+    #
     # @option params [required, String] :container_name
     #   The name of the container that you want to assign the CORS policy to.
     #
@@ -634,7 +645,15 @@ module Aws::MediaStore
 
     # Writes an object lifecycle policy to a container. If the container
     # already has an object lifecycle policy, the service replaces the
-    # existing policy with the new policy.
+    # existing policy with the new policy. It takes up to 20 minutes for the
+    # change to take effect.
+    #
+    # For information about how to construct an object lifecycle policy, see
+    # [Components of an Object Lifecycle Policy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html
     #
     # @option params [required, String] :container_name
     #   The name of the container that you want to assign the object lifecycle
@@ -661,6 +680,55 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Starts access logging on the specified container. When you enable
+    # access logging on a container, MediaStore delivers access logs for
+    # objects stored in that container to Amazon CloudWatch Logs.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to start access logging on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_access_logging({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLogging AWS API Documentation
+    #
+    # @overload start_access_logging(params = {})
+    # @param [Hash] params ({})
+    def start_access_logging(params = {}, options = {})
+      req = build_request(:start_access_logging, params)
+      req.send_request(options)
+    end
+
+    # Stops access logging on the specified container. When you stop access
+    # logging on a container, MediaStore stops sending access logs to Amazon
+    # CloudWatch Logs. These access logs are not saved and are not
+    # retrievable.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to stop access logging on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_access_logging({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLogging AWS API Documentation
+    #
+    # @overload stop_access_logging(params = {})
+    # @param [Hash] params ({})
+    def stop_access_logging(params = {}, options = {})
+      req = build_request(:stop_access_logging, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -674,7 +742,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

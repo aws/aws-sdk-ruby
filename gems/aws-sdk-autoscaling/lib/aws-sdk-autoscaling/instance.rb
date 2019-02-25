@@ -81,6 +81,13 @@ module Aws::AutoScaling
 
     # Indicates whether the instance is protected from termination by Amazon
     # EC2 Auto Scaling when scaling in.
+    #
+    # For more information, see [Instance Protection][1] in the *Amazon EC2
+    # Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     # @return [Boolean]
     def protected_from_scale_in
       data[:protected_from_scale_in]

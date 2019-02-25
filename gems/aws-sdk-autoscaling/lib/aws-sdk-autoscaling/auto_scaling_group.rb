@@ -128,7 +128,7 @@ module Aws::AutoScaling
 
     # The name of the placement group into which to launch your instances,
     # if any. For more information, see [Placement Groups][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -169,6 +169,13 @@ module Aws::AutoScaling
 
     # Indicates whether newly launched instances are protected from
     # termination by Auto Scaling when scaling in.
+    #
+    # For more information, see [Instance Protection][1] in the *Amazon EC2
+    # Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     # @return [Boolean]
     def new_instances_protected_from_scale_in
       data[:new_instances_protected_from_scale_in]
@@ -663,7 +670,10 @@ module Aws::AutoScaling
     #   does not perform the action after this time.
     # @option options [String] :recurrence
     #   The recurring schedule for this action, in Unix cron syntax format.
-    #   For more information about this format, see [Crontab][1].
+    #   This format consists of five fields separated by white spaces:
+    #   \[Minute\] \[Hour\] \[Day\_of\_Month\] \[Month\_of\_Year\]
+    #   \[Day\_of\_Week\]. For more information about this format, see
+    #   [Crontab][1].
     #
     #
     #
@@ -799,7 +809,7 @@ module Aws::AutoScaling
     #         on_demand_percentage_above_base_capacity: 1,
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
-    #         spot_max_price: "SpotPrice",
+    #         spot_max_price: "MixedInstanceSpotPrice",
     #       },
     #     },
     #     min_size: 1,
@@ -864,7 +874,7 @@ module Aws::AutoScaling
     # @option options [String] :placement_group
     #   The name of the placement group into which to launch your instances,
     #   if any. For more information, see [Placement Groups][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -889,7 +899,8 @@ module Aws::AutoScaling
     #   order that they are listed.
     #
     #   For more information, see [Controlling Which Instances Auto Scaling
-    #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
+    #   Terminates During Scale In][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
@@ -897,6 +908,14 @@ module Aws::AutoScaling
     # @option options [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
+    #
+    #   For more information about preventing instances from terminating on
+    #   scale in, see [Instance Protection][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     # @option options [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
     #   Auto Scaling group uses to call other AWS services on your behalf.

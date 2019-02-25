@@ -22,7 +22,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -30,6 +30,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -281,7 +282,7 @@ module Aws::ElasticLoadBalancingV2
     #         token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #         user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #         client_id: "AuthenticateOidcActionClientId", # required
-    #         client_secret: "AuthenticateOidcActionClientSecret", # required
+    #         client_secret: "AuthenticateOidcActionClientSecret",
     #         session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #         scope: "AuthenticateOidcActionScope",
     #         session_timeout: 1,
@@ -289,6 +290,7 @@ module Aws::ElasticLoadBalancingV2
     #           "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #         },
     #         on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #         use_existing_client_secret: false,
     #       }
     #
     # @!attribute [rw] issuer
@@ -316,7 +318,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The OAuth 2.0 client secret.
+    #   The OAuth 2.0 client secret. This parameter is required if you are
+    #   creating a rule. If you are modifying a rule, you can omit this
+    #   parameter if you set `UseExistingClientSecret` to true.
     #   @return [String]
     #
     # @!attribute [rw] session_cookie_name
@@ -354,6 +358,12 @@ module Aws::ElasticLoadBalancingV2
     #     endpoint. This is the default value.
     #   @return [String]
     #
+    # @!attribute [rw] use_existing_client_secret
+    #   Indicates whether to use the existing client secret when modifying a
+    #   rule. If you are creating a rule, you can omit this parameter or set
+    #   it to false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateOidcActionConfig AWS API Documentation
     #
     class AuthenticateOidcActionConfig < Struct.new(
@@ -367,7 +377,8 @@ module Aws::ElasticLoadBalancingV2
       :scope,
       :session_timeout,
       :authentication_request_extra_params,
-      :on_unauthenticated_request)
+      :on_unauthenticated_request,
+      :use_existing_client_secret)
       include Aws::Structure
     end
 
@@ -463,7 +474,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret",
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -471,6 +482,7 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -721,7 +733,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret",
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -729,6 +741,7 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -1854,15 +1867,6 @@ module Aws::ElasticLoadBalancingV2
     #   The following attributes are supported by both Application Load
     #   Balancers and Network Load Balancers:
     #
-    #   * `deletion_protection.enabled` - Indicates whether deletion
-    #     protection is enabled. The value is `true` or `false`. The default
-    #     is `false`.
-    #
-    #   ^
-    #
-    #   The following attributes are supported by only Application Load
-    #   Balancers:
-    #
     #   * `access_logs.s3.enabled` - Indicates whether access logs are
     #     enabled. The value is `true` or `false`. The default is `false`.
     #
@@ -1874,6 +1878,13 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `access_logs.s3.prefix` - The prefix for the location in the S3
     #     bucket for the access logs.
+    #
+    #   * `deletion_protection.enabled` - Indicates whether deletion
+    #     protection is enabled. The value is `true` or `false`. The default
+    #     is `false`.
+    #
+    #   The following attributes are supported by only Application Load
+    #   Balancers:
     #
     #   * `idle_timeout.timeout_seconds` - The idle timeout value, in
     #     seconds. The valid range is 1-4000 seconds. The default is 60
@@ -1977,7 +1988,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret",
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -1985,6 +1996,7 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -2037,7 +2049,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -2157,7 +2169,7 @@ module Aws::ElasticLoadBalancingV2
     #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #               client_id: "AuthenticateOidcActionClientId", # required
-    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret",
     #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #               scope: "AuthenticateOidcActionScope",
     #               session_timeout: 1,
@@ -2165,6 +2177,7 @@ module Aws::ElasticLoadBalancingV2
     #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #               },
     #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #               use_existing_client_secret: false,
     #             },
     #             authenticate_cognito_config: {
     #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required

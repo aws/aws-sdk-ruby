@@ -269,7 +269,10 @@ module Aws::AutoScaling
     # DescribeLoadBalancerTargetGroups. To detach the target group from the
     # Auto Scaling group, use DetachLoadBalancerTargetGroups.
     #
-    # For more information, see [Attach a Load Balancer to Your Auto Scaling
+    # With Application Load Balancers and Network Load Balancers, instances
+    # are registered as targets with a target group. With Classic Load
+    # Balancers, instances are registered with the load balancer. For more
+    # information, see [Attaching a Load Balancer to Your Auto Scaling
     # Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
@@ -316,15 +319,15 @@ module Aws::AutoScaling
     # Attaches one or more Classic Load Balancers to the specified Auto
     # Scaling group.
     #
-    # To attach an Application Load Balancer instead, see
-    # AttachLoadBalancerTargetGroups.
+    # To attach an Application Load Balancer or a Network Load Balancer
+    # instead, see AttachLoadBalancerTargetGroups.
     #
     # To describe the load balancers for an Auto Scaling group, use
     # DescribeLoadBalancers. To detach the load balancer from the Auto
     # Scaling group, use DetachLoadBalancers.
     #
-    # For more information, see [Attach a Load Balancer to Your Auto Scaling
-    # Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Attaching a Load Balancer to Your Auto
+    # Scaling Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -540,7 +543,8 @@ module Aws::AutoScaling
     # If you exceed your maximum limit of Auto Scaling groups, the call
     # fails. For information about viewing this limit, see
     # DescribeAccountLimits. For information about updating this limit, see
-    # [Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # [Amazon EC2 Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
     #
     # For more information, see [Auto Scaling Groups][2] in the *Amazon EC2
     # Auto Scaling User Guide*.
@@ -616,14 +620,14 @@ module Aws::AutoScaling
     #
     # @option params [Array<String>] :load_balancer_names
     #   One or more Classic Load Balancers. To specify an Application Load
-    #   Balancer, use `TargetGroupARNs` instead.
+    #   Balancer or a Network Load Balancer, use `TargetGroupARNs` instead.
     #
     #   For more information, see [Using a Load Balancer With an Auto Scaling
     #   Group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the target groups.
@@ -658,7 +662,7 @@ module Aws::AutoScaling
     # @option params [String] :placement_group
     #   The name of the placement group into which to launch your instances,
     #   if any. For more information, see [Placement Groups][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -685,7 +689,8 @@ module Aws::AutoScaling
     #   listed.
     #
     #   For more information, see [Controlling Which Instances Auto Scaling
-    #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
+    #   Terminates During Scale In][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
@@ -694,6 +699,14 @@ module Aws::AutoScaling
     # @option params [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
+    #
+    #   For more information about preventing instances from terminating on
+    #   scale in, see [Instance Protection][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     #
     # @option params [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
     #   One or more lifecycle hooks.
@@ -794,7 +807,7 @@ module Aws::AutoScaling
     #         on_demand_percentage_above_base_capacity: 1,
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
-    #         spot_max_price: "SpotPrice",
+    #         spot_max_price: "MixedInstanceSpotPrice",
     #       },
     #     },
     #     instance_id: "XmlStringMaxLen19",
@@ -848,7 +861,8 @@ module Aws::AutoScaling
     # If you exceed your maximum limit of launch configurations, the call
     # fails. For information about viewing this limit, see
     # DescribeAccountLimits. For information about updating this limit, see
-    # [Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # [Amazon EC2 Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
     #
     # For more information, see [Launch Configurations][2] in the *Amazon
     # EC2 Auto Scaling User Guide*.
@@ -868,8 +882,8 @@ module Aws::AutoScaling
     #
     #   If you do not specify `InstanceId`, you must specify `ImageId`.
     #
-    #   For more information, see [Finding an AMI][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   For more information, see [Finding an AMI][1] in the *Amazon EC2 User
+    #   Guide for Linux Instances*.
     #
     #
     #
@@ -877,7 +891,7 @@ module Aws::AutoScaling
     #
     # @option params [String] :key_name
     #   The name of the key pair. For more information, see [Amazon EC2 Key
-    #   Pairs][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Pairs][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -888,8 +902,8 @@ module Aws::AutoScaling
     #
     #   If your instances are launched in EC2-Classic, you can either specify
     #   security group names or the security group IDs. For more information,
-    #   see [Amazon EC2 Security Groups][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   see [Amazon EC2 Security Groups][1] in the *Amazon EC2 User Guide for
+    #   Linux Instances*.
     #
     #   If your instances are launched into a VPC, specify security group IDs.
     #   For more information, see [Security Groups for Your VPC][2] in the
@@ -904,27 +918,31 @@ module Aws::AutoScaling
     #   The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
     #   to. This parameter is supported only if you are launching EC2-Classic
     #   instances. For more information, see [ClassicLink][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide for Linux Instances* and [Linking EC2-Classic Instances
+    #   to a VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #   [2]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     #
     # @option params [Array<String>] :classic_link_vpc_security_groups
     #   The IDs of one or more security groups for the specified
     #   ClassicLink-enabled VPC. This parameter is required if you specify a
     #   ClassicLink-enabled VPC, and is not supported otherwise. For more
-    #   information, see [ClassicLink][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   information, see [ClassicLink][1] in the *Amazon EC2 User Guide for
+    #   Linux Instances* and [Linking EC2-Classic Instances to a VPC][2] in
+    #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #   [2]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     #
     # @option params [String] :user_data
     #   The user data to make available to the launched EC2 instances. For
     #   more information, see [Instance Metadata and User Data][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -955,7 +973,7 @@ module Aws::AutoScaling
     #   If you do not specify `InstanceId`, you must specify `InstanceType`.
     #
     #   For information about available instance types, see [Available
-    #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
+    #   Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances.*
     #
     #
     #
@@ -970,7 +988,7 @@ module Aws::AutoScaling
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   One or more mappings that specify how block devices are exposed to the
     #   instance. For more information, see [Block Device Mapping][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -999,8 +1017,8 @@ module Aws::AutoScaling
     #   security credentials available. You can use IAM roles with Amazon EC2
     #   Auto Scaling to automatically enable applications running on your EC2
     #   instances to securely access other AWS resources. For more
-    #   information, see [Launch Auto Scaling Instances with an IAM Role][1]
-    #   in the *Amazon EC2 Auto Scaling User Guide*.
+    #   information, see [Use an IAM Role for Applications That Run on Amazon
+    #   EC2 Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1013,7 +1031,7 @@ module Aws::AutoScaling
     #   configuration stack to provide optimal I/O performance. This
     #   optimization is not available with all instance types. Additional
     #   usage charges apply. For more information, see [Amazon EBS-Optimized
-    #   Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -1487,7 +1505,8 @@ module Aws::AutoScaling
     # account.
     #
     # For information about requesting an increase in these limits, see
-    # [Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # [Amazon EC2 Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
     #
     #
     #
@@ -1578,9 +1597,11 @@ module Aws::AutoScaling
     # Describes one or more Auto Scaling groups.
     #
     # @option params [Array<String>] :auto_scaling_group_names
-    #   The names of the Auto Scaling groups. You can specify up to
-    #   `MaxRecords` names. If you omit this parameter, all Auto Scaling
-    #   groups are described.
+    #   The names of the Auto Scaling groups. Each name can be a maximum of
+    #   1600 characters. By default, you can only specify up to 50 names. You
+    #   can optionally increase this limit using the `MaxRecords` parameter.
+    #
+    #   If you omit this parameter, all Auto Scaling groups are described.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -2127,8 +2148,8 @@ module Aws::AutoScaling
     # Describes the load balancers for the specified Auto Scaling group.
     #
     # This operation describes only Classic Load Balancers. If you have
-    # Application Load Balancers, use DescribeLoadBalancerTargetGroups
-    # instead.
+    # Application Load Balancers or Network Load Balancers, use
+    # DescribeLoadBalancerTargetGroups instead.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -2969,8 +2990,8 @@ module Aws::AutoScaling
     # Scaling group.
     #
     # This operation detaches only Classic Load Balancers. If you have
-    # Application Load Balancers, use DetachLoadBalancerTargetGroups
-    # instead.
+    # Application Load Balancers or Network Load Balancers, use
+    # DetachLoadBalancerTargetGroups instead.
     #
     # When you detach a load balancer, it enters the `Removing` state while
     # deregistering the instances in the group. When all instances are
@@ -3393,18 +3414,15 @@ module Aws::AutoScaling
     # 5.  If you finish before the timeout period ends, complete the
     #     lifecycle action.
     #
-    # For more information, see [Auto Scaling Lifecycle Hooks][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Amazon EC2 Auto Scaling Lifecycle Hooks][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
     #
     # If you exceed your maximum limit of lifecycle hooks, which by default
-    # is 50 per Auto Scaling group, the call fails. For information about
-    # updating this limit, see [AWS Service Limits][2] in the *Amazon Web
-    # Services General Reference*.
+    # is 50 per Auto Scaling group, the call fails.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
-    # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @option params [required, String] :lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -3507,8 +3525,9 @@ module Aws::AutoScaling
     #
     # This configuration overwrites any existing configuration.
     #
-    # For more information, see [Getting SNS Notifications When Your Auto
-    # Scaling Group Scales][1] in the *Auto Scaling User Guide*.
+    # For more information, see [Getting Amazon SNS Notifications When Your
+    # Auto Scaling Group Scales][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
     #
     #
     #
@@ -3562,15 +3581,6 @@ module Aws::AutoScaling
     # existing policy, use the existing policy name and set the parameters
     # to change. Any existing parameter not changed in an update to an
     # existing policy is not changed in this update request.
-    #
-    # If you exceed your maximum limit of step adjustments, which by default
-    # is 20 per region, the call fails. For information about updating this
-    # limit, see [AWS Service Limits][1] in the *Amazon Web Services General
-    # Reference*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -3777,7 +3787,10 @@ module Aws::AutoScaling
     #
     # @option params [String] :recurrence
     #   The recurring schedule for this action, in Unix cron syntax format.
-    #   For more information about this format, see [Crontab][1].
+    #   This format consists of five fields separated by white spaces:
+    #   \[Minute\] \[Hour\] \[Day\_of\_Month\] \[Month\_of\_Year\]
+    #   \[Day\_of\_Week\]. For more information about this format, see
+    #   [Crontab][1].
     #
     #
     #
@@ -3980,7 +3993,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/WhatIsAutoScaling.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -4084,8 +4097,9 @@ module Aws::AutoScaling
 
     # Updates the instance protection settings of the specified instances.
     #
-    # For more information, see [Instance Protection][1] in the *Amazon EC2
-    # Auto Scaling User Guide*.
+    # For more information about preventing instances that are part of an
+    # Auto Scaling group from terminating on scale in, see [Instance
+    # Protection][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4357,7 +4371,7 @@ module Aws::AutoScaling
     # @option params [String] :placement_group
     #   The name of the placement group into which to launch your instances,
     #   if any. For more information, see [Placement Groups][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -4384,7 +4398,8 @@ module Aws::AutoScaling
     #   order that they are listed.
     #
     #   For more information, see [Controlling Which Instances Auto Scaling
-    #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
+    #   Terminates During Scale In][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
@@ -4393,6 +4408,14 @@ module Aws::AutoScaling
     # @option params [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
+    #
+    #   For more information about preventing instances from terminating on
+    #   scale in, see [Instance Protection][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     #
     # @option params [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
@@ -4458,7 +4481,7 @@ module Aws::AutoScaling
     #         on_demand_percentage_above_base_capacity: 1,
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
-    #         spot_max_price: "SpotPrice",
+    #         spot_max_price: "MixedInstanceSpotPrice",
     #       },
     #     },
     #     min_size: 1,
@@ -4497,7 +4520,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
