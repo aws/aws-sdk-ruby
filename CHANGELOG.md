@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
+
+* Feature - Aws::CostExplorer - Updated the documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::MediaStore - Updated the API, and documentation for AWS Elemental MediaStore.
+
 2.11.227 (2019-02-22)
 ------------------
 
