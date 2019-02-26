@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostandUsageReportService - Updated the API, documentation, and integration test for AWS Cost and Usage Report Service.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the documentation for AWS Application Discovery Service.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::OpsWorksCM - Updated the documentation for AWS OpsWorks for Chef Automate.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::ResourceGroups - Updated the documentation for AWS Resource Groups.
+
 2.11.228 (2019-02-25)
 ------------------
 
