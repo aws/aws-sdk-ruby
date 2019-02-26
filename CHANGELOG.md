@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.229 (2019-02-26)
+------------------
+
 * Feature - Aws::CostandUsageReportService - Updated the API, documentation, and integration test for AWS Cost and Usage Report Service.
 
 * Feature - Aws::ApplicationDiscoveryService - Updated the documentation for AWS Application Discovery Service.
