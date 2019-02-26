@@ -1092,6 +1092,10 @@ module Aws::Pinpoint
 
     # Application Response.
     #
+    # @!attribute [rw] arn
+    #   The arn for the application.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The unique application ID.
     #   @return [String]
@@ -1100,11 +1104,17 @@ module Aws::Pinpoint
     #   The display name of the application.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The Tags for the application.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationResponse AWS API Documentation
     #
     class ApplicationResponse < Struct.new(
+      :arn,
       :id,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1622,6 +1632,10 @@ module Aws::Pinpoint
     #   The ID of the application to which the campaign applies.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The arn for the campaign.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date the campaign was created in ISO 8601 format.
     #   @return [String]
@@ -1686,6 +1700,10 @@ module Aws::Pinpoint
     #   COMPLETED only when all treatments have a status of COMPLETED.
     #   @return [Types::CampaignState]
     #
+    # @!attribute [rw] tags
+    #   The Tags for the campaign.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] treatment_description
     #   A custom description for the treatment.
     #   @return [String]
@@ -1703,6 +1721,7 @@ module Aws::Pinpoint
     class CampaignResponse < Struct.new(
       :additional_treatments,
       :application_id,
+      :arn,
       :creation_date,
       :default_state,
       :description,
@@ -1718,6 +1737,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_version,
       :state,
+      :tags,
       :treatment_description,
       :treatment_name,
       :version)
@@ -1864,6 +1884,9 @@ module Aws::Pinpoint
     #       {
     #         create_application_request: { # required
     #           name: "__string",
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
     #         },
     #       }
     #
@@ -1896,6 +1919,9 @@ module Aws::Pinpoint
     #
     #       {
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1903,10 +1929,15 @@ module Aws::Pinpoint
     #   console.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The Tags for the app.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -2170,6 +2201,9 @@ module Aws::Pinpoint
     #           },
     #           segment_id: "__string",
     #           segment_version: 1,
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -2436,6 +2470,9 @@ module Aws::Pinpoint
     #               },
     #             ],
     #             include: "ALL", # accepts ALL, ANY, NONE
+    #           },
+    #           tags: {
+    #             "__string" => "__string",
     #           },
     #         },
     #       }
@@ -6367,6 +6404,33 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags_model
+    #   @return [Types::TagsModel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags_model)
+      include Aws::Structure
+    end
+
     # Message to send
     #
     # @note When making an API call, you may pass Message
@@ -8298,6 +8362,10 @@ module Aws::Pinpoint
     #   The ID of the application that the segment applies to.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The arn for the segment.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date and time when the segment was created.
     #   @return [String]
@@ -8338,6 +8406,10 @@ module Aws::Pinpoint
     #   to the jobs/import resource.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The Tags for the segment.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] version
     #   The segment version number.
     #   @return [Integer]
@@ -8346,6 +8418,7 @@ module Aws::Pinpoint
     #
     class SegmentResponse < Struct.new(
       :application_id,
+      :arn,
       :creation_date,
       :dimensions,
       :id,
@@ -8354,6 +8427,7 @@ module Aws::Pinpoint
       :name,
       :segment_groups,
       :segment_type,
+      :tags,
       :version)
       include Aws::Structure
     end
@@ -9183,6 +9257,51 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags_model: { # required
+    #           tags: { # required
+    #             "__string" => "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags_model
+    #   @return [Types::TagsModel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags_model)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagsModel
+    #   data as a hash:
+    #
+    #       {
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagsModel AWS API Documentation
+    #
+    class TagsModel < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Treatment resource
     #
     # @!attribute [rw] id
@@ -9223,6 +9342,28 @@ module Aws::Pinpoint
       :state,
       :treatment_description,
       :treatment_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -9806,6 +9947,9 @@ module Aws::Pinpoint
     #           },
     #           segment_id: "__string",
     #           segment_version: 1,
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -10224,6 +10368,9 @@ module Aws::Pinpoint
     #               },
     #             ],
     #             include: "ALL", # accepts ALL, ANY, NONE
+    #           },
+    #           tags: {
+    #             "__string" => "__string",
     #           },
     #         },
     #       }
@@ -10784,6 +10931,9 @@ module Aws::Pinpoint
     #         },
     #         segment_id: "__string",
     #         segment_version: 1,
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
     #       }
@@ -10834,6 +10984,10 @@ module Aws::Pinpoint
     #   The version of the segment to which the campaign sends messages.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   The Tags for the campaign.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] treatment_description
     #   A custom description for the treatment.
     #   @return [String]
@@ -10856,6 +11010,7 @@ module Aws::Pinpoint
       :schedule,
       :segment_id,
       :segment_version,
+      :tags,
       :treatment_description,
       :treatment_name)
       include Aws::Structure
@@ -11046,6 +11201,9 @@ module Aws::Pinpoint
     #           ],
     #           include: "ALL", # accepts ALL, ANY, NONE
     #         },
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] dimensions
@@ -11063,12 +11221,17 @@ module Aws::Pinpoint
     #   either a SegmentGroups object or a Dimensions object, but not both.
     #   @return [Types::SegmentGroupList]
     #
+    # @!attribute [rw] tags
+    #   The Tags for the segments.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteSegmentRequest AWS API Documentation
     #
     class WriteSegmentRequest < Struct.new(
       :dimensions,
       :name,
-      :segment_groups)
+      :segment_groups,
+      :tags)
       include Aws::Structure
     end
 

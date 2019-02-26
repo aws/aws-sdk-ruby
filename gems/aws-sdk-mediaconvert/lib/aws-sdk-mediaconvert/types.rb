@@ -1855,6 +1855,9 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           rate_mode: "VBR", # accepts VBR, CBR
+    #           scte_35_esam: {
+    #             scte_35_esam_pid: 1,
+    #           },
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -1908,7 +1911,17 @@ module Aws::MediaConvert
     #   @return [Types::F4vSettings]
     #
     # @!attribute [rw] m2ts_settings
-    #   Settings for M2TS Container.
+    #   MPEG-2 TS container settings. These apply to outputs in a File
+    #   output group when the output's container (ContainerType) is MPEG-2
+    #   Transport Stream (M2TS). In these assets, data is organized by the
+    #   program map table (PMT). Each transport stream program contains
+    #   subsets of data, including audio, video, and metadata. Each of these
+    #   subsets of data has a numerical label called a packet identifier
+    #   (PID). Each transport stream program corresponds to one MediaConvert
+    #   output. The PMT lists the types of data in a program along with
+    #   their PID. Downstream systems and players use the program map table
+    #   to look up the PID for each type of data it accesses and then uses
+    #   the PIDs to locate specific data within the asset.
     #   @return [Types::M2tsSettings]
     #
     # @!attribute [rw] m3u_8_settings
@@ -1954,6 +1967,15 @@ module Aws::MediaConvert
     #           ad_avail_offset: 1,
     #           avail_blanking: {
     #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #           },
+    #           esam: {
+    #             manifest_confirm_condition_notification: {
+    #               mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #             },
+    #             response_signal_preroll: 1,
+    #             signal_processing_notification: {
+    #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #             },
     #           },
     #           inputs: [
     #             {
@@ -2074,6 +2096,7 @@ module Aws::MediaConvert
     #                 },
     #                 pid: 1,
     #                 program_number: 1,
+    #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #               },
     #             },
     #           ],
@@ -2169,6 +2192,7 @@ module Aws::MediaConvert
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       resource_id: "__string",
@@ -2414,6 +2438,9 @@ module Aws::MediaConvert
     #                       private_metadata_pid: 1,
     #                       program_number: 1,
     #                       rate_mode: "VBR", # accepts VBR, CBR
+    #                       scte_35_esam: {
+    #                         scte_35_esam_pid: 1,
+    #                       },
     #                       scte_35_pid: 1,
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -2715,6 +2742,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
+    #         status_update_interval_in_secs: 1,
     #         user_metadata: {
     #           "__string" => "__string",
     #         },
@@ -2761,6 +2789,14 @@ module Aws::MediaConvert
     #   JobSettings contains all the transcode settings for a job.
     #   @return [Types::JobSettings]
     #
+    # @!attribute [rw] status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] user_metadata
     #   User-defined metadata that you want to associate with an
     #   MediaConvert job. You specify metadata in key/value pairs.
@@ -2776,6 +2812,7 @@ module Aws::MediaConvert
       :queue,
       :role,
       :settings,
+      :status_update_interval_in_secs,
       :user_metadata)
       include Aws::Structure
     end
@@ -2815,6 +2852,15 @@ module Aws::MediaConvert
     #           ad_avail_offset: 1,
     #           avail_blanking: {
     #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #           },
+    #           esam: {
+    #             manifest_confirm_condition_notification: {
+    #               mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #             },
+    #             response_signal_preroll: 1,
+    #             signal_processing_notification: {
+    #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #             },
     #           },
     #           inputs: [
     #             {
@@ -2927,6 +2973,7 @@ module Aws::MediaConvert
     #                 },
     #                 pid: 1,
     #                 program_number: 1,
+    #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #               },
     #             },
     #           ],
@@ -3022,6 +3069,7 @@ module Aws::MediaConvert
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       resource_id: "__string",
@@ -3267,6 +3315,9 @@ module Aws::MediaConvert
     #                       private_metadata_pid: 1,
     #                       program_number: 1,
     #                       rate_mode: "VBR", # accepts VBR, CBR
+    #                       scte_35_esam: {
+    #                         scte_35_esam_pid: 1,
+    #                       },
     #                       scte_35_pid: 1,
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -3568,6 +3619,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
+    #         status_update_interval_in_secs: 1,
     #         tags: {
     #           "__string" => "__string",
     #         },
@@ -3601,6 +3653,14 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
+    # @!attribute [rw] status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   The tags that you want to add to the resource. You can tag resources
     #   with a key-value pair or with only a key.
@@ -3615,6 +3675,7 @@ module Aws::MediaConvert
       :name,
       :queue,
       :settings,
+      :status_update_interval_in_secs,
       :tags)
       include Aws::Structure
     end
@@ -3841,6 +3902,9 @@ module Aws::MediaConvert
     #               private_metadata_pid: 1,
     #               program_number: 1,
     #               rate_mode: "VBR", # accepts VBR, CBR
+    #               scte_35_esam: {
+    #                 scte_35_esam_pid: 1,
+    #               },
     #               scte_35_pid: 1,
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -5072,11 +5136,12 @@ module Aws::MediaConvert
     #   your output container is MXF. With this combination of input
     #   captions format and output container, you can optionally use this
     #   setting to replace the input channel number with the track number
-    #   that you specify. If you don't specify an output track number, the
+    #   that you specify. Specify a different number for each output
+    #   captions track. If you don't specify an output track number, the
     #   system uses the input channel number for the output channel number.
-    #   This setting applies to each output individually. Channels must be
-    #   unique and may only be combined in the following combinations: (1+3,
-    #   2+4, 1+4, 2+3).
+    #   This setting applies to each output individually. You can optionally
+    #   combine two captions channels in your output. The two output channel
+    #   numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EmbeddedDestinationSettings AWS API Documentation
@@ -5134,6 +5199,106 @@ module Aws::MediaConvert
     #
     class Endpoint < Struct.new(
       :url)
+      include Aws::Structure
+    end
+
+    # ESAM ManifestConfirmConditionNotification defined by
+    # OC-SP-ESAM-API-I03-131025.
+    #
+    # @note When making an API call, you may pass EsamManifestConfirmConditionNotification
+    #   data as a hash:
+    #
+    #       {
+    #         mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #       }
+    #
+    # @!attribute [rw] mcc_xml
+    #   Provide your ESAM ManifestConfirmConditionNotification XML document
+    #   inside your JSON job settings. Form the XML document as per
+    #   OC-SP-ESAM-API-I03-131025. The transcoder will use the Manifest
+    #   Conditioning instructions in the message that you supply.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EsamManifestConfirmConditionNotification AWS API Documentation
+    #
+    class EsamManifestConfirmConditionNotification < Struct.new(
+      :mcc_xml)
+      include Aws::Structure
+    end
+
+    # Settings for Event Signaling And Messaging (ESAM). If you don't do ad
+    # insertion, you can ignore these settings.
+    #
+    # @note When making an API call, you may pass EsamSettings
+    #   data as a hash:
+    #
+    #       {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] manifest_confirm_condition_notification
+    #   Specifies an ESAM ManifestConfirmConditionNotification XML as per
+    #   OC-SP-ESAM-API-I03-131025. The transcoder uses the manifest
+    #   conditioning instructions that you provide in the setting MCC XML
+    #   (mccXml).
+    #   @return [Types::EsamManifestConfirmConditionNotification]
+    #
+    # @!attribute [rw] response_signal_preroll
+    #   Specifies the stream distance, in milliseconds, between the SCTE 35
+    #   messages that the transcoder places and the splice points that they
+    #   refer to. If the time between the start of the asset and the SCTE-35
+    #   message is less than this value, then the transcoder places the
+    #   SCTE-35 marker at the beginning of the stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] signal_processing_notification
+    #   Specifies an ESAM SignalProcessingNotification XML as per
+    #   OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing
+    #   instructions that you provide in the setting SCC XML (sccXml).
+    #   @return [Types::EsamSignalProcessingNotification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EsamSettings AWS API Documentation
+    #
+    class EsamSettings < Struct.new(
+      :manifest_confirm_condition_notification,
+      :response_signal_preroll,
+      :signal_processing_notification)
+      include Aws::Structure
+    end
+
+    # ESAM SignalProcessingNotification data defined by
+    # OC-SP-ESAM-API-I03-131025.
+    #
+    # @note When making an API call, you may pass EsamSignalProcessingNotification
+    #   data as a hash:
+    #
+    #       {
+    #         scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #       }
+    #
+    # @!attribute [rw] scc_xml
+    #   Provide your ESAM SignalProcessingNotification XML document inside
+    #   your JSON job settings. Form the XML document as per
+    #   OC-SP-ESAM-API-I03-131025. The transcoder will use the signal
+    #   processing instructions in the message that you supply. Provide your
+    #   ESAM SignalProcessingNotification XML document inside your JSON job
+    #   settings. If you want the service to place SCTE-35 markers at the
+    #   insertion points you specify in the XML document, you must also
+    #   enable SCTE-35 ESAM (scte35Esam). Note that you can either specify
+    #   an ESAM XML document or enable SCTE-35 passthrough. You can't do
+    #   both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EsamSignalProcessingNotification AWS API Documentation
+    #
+    class EsamSignalProcessingNotification < Struct.new(
+      :scc_xml)
       include Aws::Structure
     end
 
@@ -6140,12 +6305,19 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] write_mp_4_packaging_type
-    #   If HVC1, output that is H.265 will be marked as HVC1 and adhere to
-    #   the ISO-IECJTC1-SC29\_N13798\_Text\_ISOIEC\_FDIS\_14496-15\_3rd\_E
-    #   spec which states that parameter set NAL units will be stored in the
-    #   sample headers but not in the samples directly. If HEV1, then H.265
-    #   will be marked as HEV1 and parameter set NAL units will be written
-    #   into the samples.
+    #   Use this setting only for outputs encoded with H.265 that are in
+    #   CMAF or DASH output groups. If you include writeMp4PackagingType in
+    #   your JSON job specification for other outputs, your video might not
+    #   work properly with downstream systems and video players. If the
+    #   location of parameter set NAL units don't matter in your workflow,
+    #   ignore this setting. The service defaults to marking your output as
+    #   HEV1. Choose HVC1 to mark your output as HVC1. This makes your
+    #   output compliant with this specification: ISO IECJTC1 SC29 N13798
+    #   Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the
+    #   service stores parameter set NAL units in the sample headers but not
+    #   in the samples directly. Keep the default HEV1 to mark your output
+    #   as HEV1. For these outputs, the service writes parameter set NAL
+    #   units directly into the samples.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265Settings AWS API Documentation
@@ -6366,6 +6538,7 @@ module Aws::MediaConvert
     #         constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #         encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #         initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #         speke_key_provider: {
     #           certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #           resource_id: "__string",
@@ -6400,6 +6573,12 @@ module Aws::MediaConvert
     #   Initialization Vector is not in the manifest.
     #   @return [String]
     #
+    # @!attribute [rw] offline_encrypted
+    #   Enable this setting to insert the EXT-X-SESSION-KEY element into the
+    #   master playlist. This allows for offline Apple HLS FairPlay content
+    #   protection.
+    #   @return [String]
+    #
     # @!attribute [rw] speke_key_provider
     #   Settings for use with a SPEKE key provider
     #   @return [Types::SpekeKeyProvider]
@@ -6418,6 +6597,7 @@ module Aws::MediaConvert
       :constant_initialization_vector,
       :encryption_method,
       :initialization_vector_in_manifest,
+      :offline_encrypted,
       :speke_key_provider,
       :static_key_provider,
       :type)
@@ -6450,6 +6630,7 @@ module Aws::MediaConvert
     #           constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #           encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #           initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #           speke_key_provider: {
     #             certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #             resource_id: "__string",
@@ -6896,6 +7077,7 @@ module Aws::MediaConvert
     #           },
     #           pid: 1,
     #           program_number: 1,
+    #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #         },
     #       }
     #
@@ -7239,6 +7421,7 @@ module Aws::MediaConvert
     #           },
     #           pid: 1,
     #           program_number: 1,
+    #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #         },
     #       }
     #
@@ -7531,6 +7714,14 @@ module Aws::MediaConvert
     #   or ERROR.
     #   @return [String]
     #
+    # @!attribute [rw] status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] timing
     #   Information about when jobs are submitted, started, and finished is
     #   specified in Unix epoch format in seconds.
@@ -7557,6 +7748,7 @@ module Aws::MediaConvert
       :role,
       :settings,
       :status,
+      :status_update_interval_in_secs,
       :timing,
       :user_metadata)
       include Aws::Structure
@@ -7571,6 +7763,15 @@ module Aws::MediaConvert
     #         ad_avail_offset: 1,
     #         avail_blanking: {
     #           avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         },
+    #         esam: {
+    #           manifest_confirm_condition_notification: {
+    #             mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #           },
+    #           response_signal_preroll: 1,
+    #           signal_processing_notification: {
+    #             scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #           },
     #         },
     #         inputs: [
     #           {
@@ -7691,6 +7892,7 @@ module Aws::MediaConvert
     #               },
     #               pid: 1,
     #               program_number: 1,
+    #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #             },
     #           },
     #         ],
@@ -7786,6 +7988,7 @@ module Aws::MediaConvert
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     resource_id: "__string",
@@ -8031,6 +8234,9 @@ module Aws::MediaConvert
     #                     private_metadata_pid: 1,
     #                     program_number: 1,
     #                     rate_mode: "VBR", # accepts VBR, CBR
+    #                     scte_35_esam: {
+    #                       scte_35_esam_pid: 1,
+    #                     },
     #                     scte_35_pid: 1,
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -8343,6 +8549,10 @@ module Aws::MediaConvert
     #   with an image, and audio muted during SCTE-35 triggered ad avails.
     #   @return [Types::AvailBlanking]
     #
+    # @!attribute [rw] esam
+    #   Settings for Event Signaling And Messaging (ESAM).
+    #   @return [Types::EsamSettings]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs (inputs) to define source file used in the transcode job.
     #   There can be multiple inputs add in a job. These inputs will be
@@ -8390,6 +8600,7 @@ module Aws::MediaConvert
     class JobSettings < Struct.new(
       :ad_avail_offset,
       :avail_blanking,
+      :esam,
       :inputs,
       :motion_image_inserter,
       :nielsen_configuration,
@@ -8443,6 +8654,14 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
+    # @!attribute [rw] status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] type
     #   A job template can be of two types: system or custom. System or
     #   built-in job templates can't be modified or deleted by the user.
@@ -8460,6 +8679,7 @@ module Aws::MediaConvert
       :name,
       :queue,
       :settings,
+      :status_update_interval_in_secs,
       :type)
       include Aws::Structure
     end
@@ -8474,6 +8694,15 @@ module Aws::MediaConvert
     #         ad_avail_offset: 1,
     #         avail_blanking: {
     #           avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #         },
+    #         esam: {
+    #           manifest_confirm_condition_notification: {
+    #             mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #           },
+    #           response_signal_preroll: 1,
+    #           signal_processing_notification: {
+    #             scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #           },
     #         },
     #         inputs: [
     #           {
@@ -8586,6 +8815,7 @@ module Aws::MediaConvert
     #               },
     #               pid: 1,
     #               program_number: 1,
+    #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #             },
     #           },
     #         ],
@@ -8681,6 +8911,7 @@ module Aws::MediaConvert
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     resource_id: "__string",
@@ -8926,6 +9157,9 @@ module Aws::MediaConvert
     #                     private_metadata_pid: 1,
     #                     program_number: 1,
     #                     rate_mode: "VBR", # accepts VBR, CBR
+    #                     scte_35_esam: {
+    #                       scte_35_esam_pid: 1,
+    #                     },
     #                     scte_35_pid: 1,
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -9238,6 +9472,10 @@ module Aws::MediaConvert
     #   with an image, and audio muted during SCTE-35 triggered ad avails.
     #   @return [Types::AvailBlanking]
     #
+    # @!attribute [rw] esam
+    #   Settings for Event Signaling And Messaging (ESAM).
+    #   @return [Types::EsamSettings]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs (inputs) to define the source file used in the transcode
     #   job. There can only be one input in a job template. Using the API,
@@ -9285,6 +9523,7 @@ module Aws::MediaConvert
     class JobTemplateSettings < Struct.new(
       :ad_avail_offset,
       :avail_blanking,
+      :esam,
       :inputs,
       :motion_image_inserter,
       :nielsen_configuration,
@@ -9619,7 +9858,41 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for M2TS Container.
+    # Settings for SCTE-35 signals from ESAM. Include this in your job
+    # settings to put SCTE-35 markers in your HLS and transport stream
+    # outputs at the insertion points that you specify in an ESAM XML
+    # document. Provide the document in the setting SCC XML (sccXml).
+    #
+    # @note When making an API call, you may pass M2tsScte35Esam
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_esam_pid: 1,
+    #       }
+    #
+    # @!attribute [rw] scte_35_esam_pid
+    #   Packet Identifier (PID) of the SCTE-35 stream in the transport
+    #   stream generated by ESAM.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M2tsScte35Esam AWS API Documentation
+    #
+    class M2tsScte35Esam < Struct.new(
+      :scte_35_esam_pid)
+      include Aws::Structure
+    end
+
+    # MPEG-2 TS container settings. These apply to outputs in a File output
+    # group when the output's container (ContainerType) is MPEG-2 Transport
+    # Stream (M2TS). In these assets, data is organized by the program map
+    # table (PMT). Each transport stream program contains subsets of data,
+    # including audio, video, and metadata. Each of these subsets of data
+    # has a numerical label called a packet identifier (PID). Each transport
+    # stream program corresponds to one MediaConvert output. The PMT lists
+    # the types of data in a program along with their PID. Downstream
+    # systems and players use the program map table to look up the PID for
+    # each type of data it accesses and then uses the PIDs to locate
+    # specific data within the asset.
     #
     # @note When making an API call, you may pass M2tsSettings
     #   data as a hash:
@@ -9663,6 +9936,9 @@ module Aws::MediaConvert
     #         private_metadata_pid: 1,
     #         program_number: 1,
     #         rate_mode: "VBR", # accepts VBR, CBR
+    #         scte_35_esam: {
+    #           scte_35_esam_pid: 1,
+    #         },
     #         scte_35_pid: 1,
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -9683,15 +9959,16 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] audio_pids
-    #   Packet Identifier (PID) of the elementary audio stream(s) in the
-    #   transport stream. Multiple values are accepted, and can be entered
-    #   in ranges and/or by comma separation.
+    #   Specify the packet identifiers (PIDs) for any elementary audio
+    #   streams you include in this output. Specify multiple PIDs as a JSON
+    #   array. Default is the range 482-492.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] bitrate
-    #   The output bitrate of the transport stream in bits per second.
-    #   Setting to 0 lets the muxer automatically determine the appropriate
-    #   bitrate. Other common values are 3750000, 7500000, and 15000000.
+    #   Specify the output bitrate of the transport stream in bits per
+    #   second. Setting to 0 lets the muxer automatically determine the
+    #   appropriate bitrate. Other common values are 3750000, 7500000, and
+    #   15000000.
     #   @return [Integer]
     #
     # @!attribute [rw] buffer_model
@@ -9712,9 +9989,9 @@ module Aws::MediaConvert
     #   @return [Types::DvbSdtSettings]
     #
     # @!attribute [rw] dvb_sub_pids
-    #   Packet Identifier (PID) for input source DVB Subtitle data to this
-    #   output. Multiple values are accepted, and can be entered in ranges
-    #   and/or by comma separation.
+    #   Specify the packet identifiers (PIDs) for DVB subtitle data included
+    #   in this output. Specify multiple PIDs as a JSON array. Default is
+    #   the range 460-479.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] dvb_tdt_settings
@@ -9723,8 +10000,8 @@ module Aws::MediaConvert
     #   @return [Types::DvbTdtSettings]
     #
     # @!attribute [rw] dvb_teletext_pid
-    #   Packet Identifier (PID) for input source DVB Teletext data to this
-    #   output.
+    #   Specify the packet identifier (PID) for DVB teletext data you
+    #   include in this output. Default is 499.
     #   @return [Integer]
     #
     # @!attribute [rw] ebp_audio_interval
@@ -9749,17 +10026,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] force_ts_video_ebp_order
     #   Keep the default value (DEFAULT) unless you know that your audio EBP
-    #   markers are incorrectly appearing before your video EBP markers. Set
-    #   this value to Force (FORCE) to correct this problem.
+    #   markers are incorrectly appearing before your video EBP markers. To
+    #   correct this problem, set this value to Force (FORCE).
     #   @return [String]
     #
     # @!attribute [rw] fragment_time
-    #   The length in seconds of each fragment. Only used with EBP markers.
+    #   The length, in seconds, of each fragment. Only used with EBP
+    #   markers.
     #   @return [Float]
     #
     # @!attribute [rw] max_pcr_interval
-    #   Maximum time in milliseconds between Program Clock References (PCRs)
-    #   inserted into the transport stream.
+    #   Specify the maximum time, in milliseconds, between Program Clock
+    #   References (PCRs) inserted into the transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] min_ebp_interval
@@ -9797,28 +10075,31 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] pcr_pid
-    #   Packet Identifier (PID) of the Program Clock Reference (PCR) in the
-    #   transport stream. When no value is given, the encoder will assign
-    #   the same value as the Video PID.
+    #   Specify the packet identifier (PID) for the program clock reference
+    #   (PCR) in this output. If you do not specify a value, the service
+    #   will use the value for Video PID (VideoPid).
     #   @return [Integer]
     #
     # @!attribute [rw] pmt_interval
-    #   The number of milliseconds between instances of this table in the
-    #   output transport stream.
+    #   Specify the number of milliseconds between instances of the program
+    #   map table (PMT) in the output transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] pmt_pid
-    #   Packet Identifier (PID) for the Program Map Table (PMT) in the
-    #   transport stream.
+    #   Specify the packet identifier (PID) for the program map table (PMT)
+    #   itself. Default is 480.
     #   @return [Integer]
     #
     # @!attribute [rw] private_metadata_pid
-    #   Packet Identifier (PID) of the private metadata stream in the
-    #   transport stream.
+    #   Specify the packet identifier (PID) of the private metadata stream.
+    #   Default is 503.
     #   @return [Integer]
     #
     # @!attribute [rw] program_number
-    #   The value of the program number field in the Program Map Table.
+    #   Use Program number (programNumber) to specify the program number
+    #   used in the program map table (PMT) for this output. Default is 1.
+    #   Program numbers and program map tables are parts of MPEG-2 transport
+    #   stream containers, used for organizing data.
     #   @return [Integer]
     #
     # @!attribute [rw] rate_mode
@@ -9828,9 +10109,16 @@ module Aws::MediaConvert
     #   bitrate.
     #   @return [String]
     #
+    # @!attribute [rw] scte_35_esam
+    #   Include this in your job settings to put SCTE-35 markers in your HLS
+    #   and transport stream outputs at the insertion points that you
+    #   specify in an ESAM XML document. Provide the document in the setting
+    #   SCC XML (sccXml).
+    #   @return [Types::M2tsScte35Esam]
+    #
     # @!attribute [rw] scte_35_pid
-    #   Packet Identifier (PID) of the SCTE-35 stream in the transport
-    #   stream.
+    #   Specify the packet identifier (PID) of the SCTE-35 stream in the
+    #   transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] scte_35_source
@@ -9867,22 +10155,25 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] segmentation_time
-    #   The length in seconds of each segment. Required unless markers is
-    #   set to \_none\_.
+    #   Specify the length, in seconds, of each segment. Required unless
+    #   markers is set to \_none\_.
     #   @return [Float]
     #
     # @!attribute [rw] timed_metadata_pid
-    #   Packet Identifier (PID) of the timed metadata stream in the
-    #   transport stream.
+    #   Specify the packet identifier (PID) for timed metadata in this
+    #   output. Default is 502.
     #   @return [Integer]
     #
     # @!attribute [rw] transport_stream_id
-    #   The value of the transport stream ID field in the Program Map Table.
+    #   Specify the ID for the transport stream itself in the program map
+    #   table for this output. Transport stream IDs and program map tables
+    #   are parts of MPEG-2 transport stream containers, used for organizing
+    #   data.
     #   @return [Integer]
     #
     # @!attribute [rw] video_pid
-    #   Packet Identifier (PID) of the elementary video stream in the
-    #   transport stream.
+    #   Specify the packet identifier (PID) of the elementary video stream
+    #   in the transport stream.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M2tsSettings AWS API Documentation
@@ -9915,6 +10206,7 @@ module Aws::MediaConvert
       :private_metadata_pid,
       :program_number,
       :rate_mode,
+      :scte_35_esam,
       :scte_35_pid,
       :scte_35_source,
       :segmentation_markers,
@@ -11038,6 +11330,9 @@ module Aws::MediaConvert
     #             private_metadata_pid: 1,
     #             program_number: 1,
     #             rate_mode: "VBR", # accepts VBR, CBR
+    #             scte_35_esam: {
+    #               scte_35_esam_pid: 1,
+    #             },
     #             scte_35_pid: 1,
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -11508,6 +11803,7 @@ module Aws::MediaConvert
     #               constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #               encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #               initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #               speke_key_provider: {
     #                 certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                 resource_id: "__string",
@@ -11753,6 +12049,9 @@ module Aws::MediaConvert
     #                 private_metadata_pid: 1,
     #                 program_number: 1,
     #                 rate_mode: "VBR", # accepts VBR, CBR
+    #                 scte_35_esam: {
+    #                   scte_35_esam_pid: 1,
+    #                 },
     #                 scte_35_pid: 1,
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -12159,6 +12458,7 @@ module Aws::MediaConvert
     #             constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #             encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #             initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #             speke_key_provider: {
     #               certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #               resource_id: "__string",
@@ -12530,6 +12830,9 @@ module Aws::MediaConvert
     #             private_metadata_pid: 1,
     #             program_number: 1,
     #             rate_mode: "VBR", # accepts VBR, CBR
+    #             scte_35_esam: {
+    #               scte_35_esam_pid: 1,
+    #             },
     #             scte_35_pid: 1,
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -13708,6 +14011,15 @@ module Aws::MediaConvert
     #           avail_blanking: {
     #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #           },
+    #           esam: {
+    #             manifest_confirm_condition_notification: {
+    #               mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #             },
+    #             response_signal_preroll: 1,
+    #             signal_processing_notification: {
+    #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #             },
+    #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
@@ -13819,6 +14131,7 @@ module Aws::MediaConvert
     #                 },
     #                 pid: 1,
     #                 program_number: 1,
+    #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #               },
     #             },
     #           ],
@@ -13914,6 +14227,7 @@ module Aws::MediaConvert
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       resource_id: "__string",
@@ -14159,6 +14473,9 @@ module Aws::MediaConvert
     #                       private_metadata_pid: 1,
     #                       program_number: 1,
     #                       rate_mode: "VBR", # accepts VBR, CBR
+    #                       scte_35_esam: {
+    #                         scte_35_esam_pid: 1,
+    #                       },
     #                       scte_35_pid: 1,
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -14460,6 +14777,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
+    #         status_update_interval_in_secs: 1,
     #       }
     #
     # @!attribute [rw] acceleration_settings
@@ -14488,6 +14806,14 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
+    # @!attribute [rw] status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplateRequest AWS API Documentation
     #
     class UpdateJobTemplateRequest < Struct.new(
@@ -14496,7 +14822,8 @@ module Aws::MediaConvert
       :description,
       :name,
       :queue,
-      :settings)
+      :settings,
+      :status_update_interval_in_secs)
       include Aws::Structure
     end
 
@@ -14724,6 +15051,9 @@ module Aws::MediaConvert
     #               private_metadata_pid: 1,
     #               program_number: 1,
     #               rate_mode: "VBR", # accepts VBR, CBR
+    #               scte_35_esam: {
+    #                 scte_35_esam_pid: 1,
+    #               },
     #               scte_35_pid: 1,
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -15550,9 +15880,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] anti_alias
-    #   Enable Anti-alias (AntiAlias) to enhance sharp edges in video output
-    #   when your input resolution is much larger than your output
-    #   resolution. Default is enabled.
+    #   You no longer need to specify the anti-alias filter. It's now
+    #   automatically applied to all outputs. This property is deprecated.
     #   @return [String]
     #
     # @!attribute [rw] codec_settings
@@ -15628,12 +15957,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sharpness
-    #   Use Sharpness (Sharpness)setting to specify the strength of
+    #   Use Sharpness (Sharpness) setting to specify the strength of
     #   anti-aliasing. This setting changes the width of the anti-alias
     #   filter kernel used for scaling. Sharpness only applies if your
-    #   output resolution is different from your input resolution, and if
-    #   you set Anti-alias (AntiAlias) to ENABLED. 0 is the softest setting,
-    #   100 the sharpest, and 50 recommended for most content.
+    #   output resolution is different from your input resolution. 0 is the
+    #   softest setting, 100 the sharpest, and 50 recommended for most
+    #   content.
     #   @return [Integer]
     #
     # @!attribute [rw] timecode_insertion
@@ -15836,6 +16165,7 @@ module Aws::MediaConvert
     #         },
     #         pid: 1,
     #         program_number: 1,
+    #         rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #       }
     #
     # @!attribute [rw] color_space
@@ -15889,6 +16219,20 @@ module Aws::MediaConvert
     #   stream. Note that Quad 4K is not currently supported.
     #   @return [Integer]
     #
+    # @!attribute [rw] rotate
+    #   Use Rotate (InputRotate) to specify how the service rotates your
+    #   video. You can choose automatic rotation or specify a rotation. You
+    #   can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If
+    #   your input video container is .mov or .mp4 and your input has
+    #   rotation metadata, you can choose Automatic to have the service
+    #   rotate your video according to the rotation specified in the
+    #   metadata. The rotation must be within one degree of 90, 180, or 270
+    #   degrees. If the rotation metadata specifies any other rotation, the
+    #   service will default to no rotation. By default, the service does no
+    #   rotation, even if your input video has rotation metadata. The
+    #   service doesn't pass through rotation metadata.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
     #
     class VideoSelector < Struct.new(
@@ -15896,7 +16240,8 @@ module Aws::MediaConvert
       :color_space_usage,
       :hdr_10_metadata,
       :pid,
-      :program_number)
+      :program_number,
+      :rotate)
       include Aws::Structure
     end
 

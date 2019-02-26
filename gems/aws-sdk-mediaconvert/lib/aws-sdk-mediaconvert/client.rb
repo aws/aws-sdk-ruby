@@ -229,8 +229,8 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Permanently remove a job from a queue. Once you have canceled a job,
-    # you can't start it again. You can't delete a running job.
+    # Permanently cancel a job. Once you have canceled a job, you can't
+    # start it again.
     #
     # @option params [required, String] :id
     #   The Job ID of the job to be cancelled.
@@ -290,6 +290,13 @@ module Aws::MediaConvert
     # @option params [required, Types::JobSettings] :settings
     #   JobSettings contains all the transcode settings for a job.
     #
+    # @option params [Integer] :status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #
     # @option params [Hash<String,String>] :user_metadata
     #   User-defined metadata that you want to associate with an MediaConvert
     #   job. You specify metadata in key/value pairs.
@@ -313,6 +320,15 @@ module Aws::MediaConvert
     #       ad_avail_offset: 1,
     #       avail_blanking: {
     #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #       },
+    #       esam: {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
     #       },
     #       inputs: [
     #         {
@@ -433,6 +449,7 @@ module Aws::MediaConvert
     #             },
     #             pid: 1,
     #             program_number: 1,
+    #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #           },
     #         },
     #       ],
@@ -528,6 +545,7 @@ module Aws::MediaConvert
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
@@ -773,6 +791,9 @@ module Aws::MediaConvert
     #                   private_metadata_pid: 1,
     #                   program_number: 1,
     #                   rate_mode: "VBR", # accepts VBR, CBR
+    #                   scte_35_esam: {
+    #                     scte_35_esam_pid: 1,
+    #                   },
     #                   scte_35_pid: 1,
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -1074,6 +1095,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     status_update_interval_in_secs: 1,
     #     user_metadata: {
     #       "__string" => "__string",
     #     },
@@ -1098,6 +1120,9 @@ module Aws::MediaConvert
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
     #   resp.job.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job.settings.inputs #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -1178,6 +1203,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.motion_image_inserter.input #=> String
@@ -1243,6 +1269,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1426,6 +1453,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -1662,6 +1690,7 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
+    #   resp.job.status_update_interval_in_secs #=> Integer
     #   resp.job.timing.finish_time #=> Time
     #   resp.job.timing.start_time #=> Time
     #   resp.job.timing.submit_time #=> Time
@@ -1702,6 +1731,13 @@ module Aws::MediaConvert
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
     #
+    # @option params [Integer] :status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags that you want to add to the resource. You can tag resources
     #   with a key-value pair or with only a key.
@@ -1724,6 +1760,15 @@ module Aws::MediaConvert
     #       ad_avail_offset: 1,
     #       avail_blanking: {
     #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #       },
+    #       esam: {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
     #       },
     #       inputs: [
     #         {
@@ -1836,6 +1881,7 @@ module Aws::MediaConvert
     #             },
     #             pid: 1,
     #             program_number: 1,
+    #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #           },
     #         },
     #       ],
@@ -1931,6 +1977,7 @@ module Aws::MediaConvert
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
@@ -2176,6 +2223,9 @@ module Aws::MediaConvert
     #                   private_metadata_pid: 1,
     #                   program_number: 1,
     #                   rate_mode: "VBR", # accepts VBR, CBR
+    #                   scte_35_esam: {
+    #                     scte_35_esam_pid: 1,
+    #                   },
     #                   scte_35_pid: 1,
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -2477,6 +2527,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     status_update_interval_in_secs: 1,
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -2494,6 +2545,9 @@ module Aws::MediaConvert
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -2567,6 +2621,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -2632,6 +2687,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -2815,6 +2871,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -3050,6 +3107,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_template.status_update_interval_in_secs #=> Integer
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplate AWS API Documentation
@@ -3289,6 +3347,9 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           rate_mode: "VBR", # accepts VBR, CBR
+    #           scte_35_esam: {
+    #             scte_35_esam_pid: 1,
+    #           },
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -3720,6 +3781,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -4196,6 +4258,9 @@ module Aws::MediaConvert
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
     #   resp.job.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job.settings.inputs #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -4276,6 +4341,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.motion_image_inserter.input #=> String
@@ -4341,6 +4407,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4524,6 +4591,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -4760,6 +4828,7 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
+    #   resp.job.status_update_interval_in_secs #=> Integer
     #   resp.job.timing.finish_time #=> Time
     #   resp.job.timing.start_time #=> Time
     #   resp.job.timing.submit_time #=> Time
@@ -4802,6 +4871,9 @@ module Aws::MediaConvert
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -4875,6 +4947,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -4940,6 +5013,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -5123,6 +5197,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -5358,6 +5433,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_template.status_update_interval_in_secs #=> Integer
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobTemplate AWS API Documentation
@@ -5539,6 +5615,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -5868,6 +5945,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].queue #=> String
     #   resp.job_templates[0].settings.ad_avail_offset #=> Integer
     #   resp.job_templates[0].settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_templates[0].settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_templates[0].settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_templates[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_templates[0].settings.inputs #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -5941,6 +6021,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.motion_image_inserter.input #=> String
@@ -6006,6 +6087,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6189,6 +6271,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -6424,6 +6507,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_templates[0].status_update_interval_in_secs #=> Integer
     #   resp.job_templates[0].type #=> String, one of "SYSTEM", "CUSTOM"
     #   resp.next_token #=> String
     #
@@ -6497,6 +6581,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].role #=> String
     #   resp.jobs[0].settings.ad_avail_offset #=> Integer
     #   resp.jobs[0].settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.jobs[0].settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.jobs[0].settings.esam.response_signal_preroll #=> Integer
+    #   resp.jobs[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.jobs[0].settings.inputs #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -6577,6 +6664,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.jobs[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.motion_image_inserter.input #=> String
@@ -6642,6 +6730,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6825,6 +6914,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -7061,6 +7151,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
+    #   resp.jobs[0].status_update_interval_in_secs #=> Integer
     #   resp.jobs[0].timing.finish_time #=> Time
     #   resp.jobs[0].timing.start_time #=> Time
     #   resp.jobs[0].timing.submit_time #=> Time
@@ -7276,6 +7367,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -7687,6 +7779,13 @@ module Aws::MediaConvert
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
     #
+    # @option params [Integer] :status_update_interval_in_secs
+    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
+    #   CloudWatch Events. Set the interval, in seconds, between status
+    #   updates. MediaConvert sends an update at this interval from the time
+    #   the service begins processing your job to the time it completes the
+    #   transcode or encounters an error.
+    #
     # @return [Types::UpdateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateJobTemplateResponse#job_template #job_template} => Types::JobTemplate
@@ -7705,6 +7804,15 @@ module Aws::MediaConvert
     #       ad_avail_offset: 1,
     #       avail_blanking: {
     #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
+    #       },
+    #       esam: {
+    #         manifest_confirm_condition_notification: {
+    #           mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS",
+    #         },
+    #         response_signal_preroll: 1,
+    #         signal_processing_notification: {
+    #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
+    #         },
     #       },
     #       inputs: [
     #         {
@@ -7817,6 +7925,7 @@ module Aws::MediaConvert
     #             },
     #             pid: 1,
     #             program_number: 1,
+    #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #           },
     #         },
     #       ],
@@ -7912,6 +8021,7 @@ module Aws::MediaConvert
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 offline_encrypted: "ENABLED", # accepts ENABLED, DISABLED
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   resource_id: "__string",
@@ -8157,6 +8267,9 @@ module Aws::MediaConvert
     #                   private_metadata_pid: 1,
     #                   program_number: 1,
     #                   rate_mode: "VBR", # accepts VBR, CBR
+    #                   scte_35_esam: {
+    #                     scte_35_esam_pid: 1,
+    #                   },
     #                   scte_35_pid: 1,
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -8458,6 +8571,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     status_update_interval_in_secs: 1,
     #   })
     #
     # @example Response structure
@@ -8472,6 +8586,9 @@ module Aws::MediaConvert
     #   resp.job_template.queue #=> String
     #   resp.job_template.settings.ad_avail_offset #=> Integer
     #   resp.job_template.settings.avail_blanking.avail_blanking_image #=> String
+    #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
+    #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
+    #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -8545,6 +8662,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -8610,6 +8728,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.offline_encrypted #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -8793,6 +8912,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.program_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -9028,6 +9148,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
+    #   resp.job_template.status_update_interval_in_secs #=> Integer
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplate AWS API Documentation
@@ -9261,6 +9382,9 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           rate_mode: "VBR", # accepts VBR, CBR
+    #           scte_35_esam: {
+    #             scte_35_esam_pid: 1,
+    #           },
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
@@ -9689,6 +9813,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
@@ -10000,7 +10125,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

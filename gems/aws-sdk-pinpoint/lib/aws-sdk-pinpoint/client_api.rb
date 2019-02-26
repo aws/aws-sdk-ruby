@@ -218,6 +218,8 @@ module Aws::Pinpoint
     ListOfTreatmentResource = Shapes::ListShape.new(name: 'ListOfTreatmentResource')
     ListOfWriteTreatmentResource = Shapes::ListShape.new(name: 'ListOfWriteTreatmentResource')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MapOfAddressConfiguration = Shapes::MapShape.new(name: 'MapOfAddressConfiguration')
     MapOfAttributeDimension = Shapes::MapShape.new(name: 'MapOfAttributeDimension')
     MapOfChannelResponse = Shapes::MapShape.new(name: 'MapOfChannelResponse')
@@ -286,9 +288,12 @@ module Aws::Pinpoint
     SimpleEmail = Shapes::StructureShape.new(name: 'SimpleEmail')
     SimpleEmailPart = Shapes::StructureShape.new(name: 'SimpleEmailPart')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TreatmentResource = Shapes::StructureShape.new(name: 'TreatmentResource')
     Type = Shapes::StringShape.new(name: 'Type')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAdmChannelRequest = Shapes::StructureShape.new(name: 'UpdateAdmChannelRequest')
     UpdateAdmChannelResponse = Shapes::StructureShape.new(name: 'UpdateAdmChannelResponse')
     UpdateApnsChannelRequest = Shapes::StructureShape.new(name: 'UpdateApnsChannelRequest')
@@ -514,8 +519,10 @@ module Aws::Pinpoint
     AddressConfiguration.add_member(:title_override, Shapes::ShapeRef.new(shape: __string, location_name: "TitleOverride"))
     AddressConfiguration.struct_class = Types::AddressConfiguration
 
+    ApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     ApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     ApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    ApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     ApplicationResponse.struct_class = Types::ApplicationResponse
 
     ApplicationSettingsResource.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
@@ -595,6 +602,7 @@ module Aws::Pinpoint
 
     CampaignResponse.add_member(:additional_treatments, Shapes::ShapeRef.new(shape: ListOfTreatmentResource, location_name: "AdditionalTreatments"))
     CampaignResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    CampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     CampaignResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     CampaignResponse.add_member(:default_state, Shapes::ShapeRef.new(shape: CampaignState, location_name: "DefaultState"))
     CampaignResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
@@ -610,6 +618,7 @@ module Aws::Pinpoint
     CampaignResponse.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
     CampaignResponse.add_member(:segment_version, Shapes::ShapeRef.new(shape: __integer, location_name: "SegmentVersion"))
     CampaignResponse.add_member(:state, Shapes::ShapeRef.new(shape: CampaignState, location_name: "State"))
+    CampaignResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     CampaignResponse.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     CampaignResponse.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     CampaignResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
@@ -652,6 +661,7 @@ module Aws::Pinpoint
     CreateAppResponse[:payload_member] = CreateAppResponse.member(:application_response)
 
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateCampaignRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
@@ -1453,6 +1463,14 @@ module Aws::Pinpoint
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags_model, Shapes::ShapeRef.new(shape: TagsModel, required: true, location_name: "TagsModel"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+    ListTagsForResourceResponse[:payload] = :tags_model
+    ListTagsForResourceResponse[:payload_member] = ListTagsForResourceResponse.member(:tags_model)
+
     MapOfAddressConfiguration.key = Shapes::ShapeRef.new(shape: __string)
     MapOfAddressConfiguration.value = Shapes::ShapeRef.new(shape: AddressConfiguration)
 
@@ -1724,6 +1742,7 @@ module Aws::Pinpoint
     SegmentReference.struct_class = Types::SegmentReference
 
     SegmentResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    SegmentResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     SegmentResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     SegmentResponse.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))
     SegmentResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
@@ -1732,6 +1751,7 @@ module Aws::Pinpoint
     SegmentResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     SegmentResponse.add_member(:segment_groups, Shapes::ShapeRef.new(shape: SegmentGroupList, location_name: "SegmentGroups"))
     SegmentResponse.add_member(:segment_type, Shapes::ShapeRef.new(shape: SegmentType, location_name: "SegmentType"))
+    SegmentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     SegmentResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     SegmentResponse.struct_class = Types::SegmentResponse
 
@@ -1791,6 +1811,15 @@ module Aws::Pinpoint
     SimpleEmailPart.add_member(:data, Shapes::ShapeRef.new(shape: __string, location_name: "Data"))
     SimpleEmailPart.struct_class = Types::SimpleEmailPart
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    TagResourceRequest.add_member(:tags_model, Shapes::ShapeRef.new(shape: TagsModel, required: true, location_name: "TagsModel"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+    TagResourceRequest[:payload] = :tags_model
+    TagResourceRequest[:payload_member] = TagResourceRequest.member(:tags_model)
+
+    TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "tags"))
+    TagsModel.struct_class = Types::TagsModel
+
     TreatmentResource.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     TreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
     TreatmentResource.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
@@ -1799,6 +1828,10 @@ module Aws::Pinpoint
     TreatmentResource.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     TreatmentResource.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     TreatmentResource.struct_class = Types::TreatmentResource
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ListOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateAdmChannelRequest.add_member(:adm_channel_request, Shapes::ShapeRef.new(shape: ADMChannelRequest, required: true, location_name: "ADMChannelRequest"))
     UpdateAdmChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
@@ -2010,6 +2043,7 @@ module Aws::Pinpoint
     WriteCampaignRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
     WriteCampaignRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
     WriteCampaignRequest.add_member(:segment_version, Shapes::ShapeRef.new(shape: __integer, location_name: "SegmentVersion"))
+    WriteCampaignRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     WriteCampaignRequest.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     WriteCampaignRequest.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     WriteCampaignRequest.struct_class = Types::WriteCampaignRequest
@@ -2021,6 +2055,7 @@ module Aws::Pinpoint
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))
     WriteSegmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     WriteSegmentRequest.add_member(:segment_groups, Shapes::ShapeRef.new(shape: SegmentGroupList, location_name: "SegmentGroups"))
+    WriteSegmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     WriteSegmentRequest.struct_class = Types::WriteSegmentRequest
 
     WriteTreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
@@ -2790,6 +2825,14 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
       api.add_operation(:phone_number_validate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PhoneNumberValidate"
         o.http_method = "POST"
@@ -2872,6 +2915,22 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:update_adm_channel, Seahorse::Model::Operation.new.tap do |o|

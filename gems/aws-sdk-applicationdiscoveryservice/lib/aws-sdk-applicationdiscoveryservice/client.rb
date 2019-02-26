@@ -571,13 +571,12 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # `DescribeExportConfigurations` is deprecated.
-    #
-    # Use instead [ `DescribeExportTasks` ][1].
-    #
+    # `DescribeExportConfigurations` is deprecated. Use
+    # [DescribeImportTasks][1], instead.
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
+    #
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
     #
     # @option params [Array<String>] :export_ids
     #   A list of continuous export ids to search for.
@@ -1369,7 +1368,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -219,13 +219,19 @@ module Aws::Pinpoint
     #   resp = client.create_app({
     #     create_application_request: { # required
     #       name: "__string",
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.application_response.arn #=> String
     #   resp.application_response.id #=> String
     #   resp.application_response.name #=> String
+    #   resp.application_response.tags #=> Hash
+    #   resp.application_response.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp AWS API Documentation
     #
@@ -506,6 +512,9 @@ module Aws::Pinpoint
     #       },
     #       segment_id: "__string",
     #       segment_version: 1,
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -605,6 +614,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -708,6 +718,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -997,12 +1009,16 @@ module Aws::Pinpoint
     #         ],
     #         include: "ALL", # accepts ALL, ANY, NONE
     #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1097,6 +1113,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegment AWS API Documentation
@@ -1312,8 +1330,11 @@ module Aws::Pinpoint
     #
     # @example Response structure
     #
+    #   resp.application_response.arn #=> String
     #   resp.application_response.id #=> String
     #   resp.application_response.name #=> String
+    #   resp.application_response.tags #=> Hash
+    #   resp.application_response.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp AWS API Documentation
     #
@@ -1472,6 +1493,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -1575,6 +1597,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -1780,6 +1804,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1874,6 +1899,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegment AWS API Documentation
@@ -2228,8 +2255,11 @@ module Aws::Pinpoint
     #
     # @example Response structure
     #
+    #   resp.application_response.arn #=> String
     #   resp.application_response.id #=> String
     #   resp.application_response.name #=> String
+    #   resp.application_response.tags #=> Hash
+    #   resp.application_response.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp AWS API Documentation
     #
@@ -2297,8 +2327,11 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.applications_response.item #=> Array
+    #   resp.applications_response.item[0].arn #=> String
     #   resp.applications_response.item[0].id #=> String
     #   resp.applications_response.item[0].name #=> String
+    #   resp.applications_response.item[0].tags #=> Hash
+    #   resp.applications_response.item[0].tags["__string"] #=> String
     #   resp.applications_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps AWS API Documentation
@@ -2458,6 +2491,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -2561,6 +2595,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2738,6 +2774,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -2841,6 +2878,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2972,6 +3011,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
+    #   resp.campaigns_response.item[0].arn #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
@@ -3075,6 +3115,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
     #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].tags #=> Hash
+    #   resp.campaigns_response.item[0].tags["__string"] #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -3204,6 +3246,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
+    #   resp.campaigns_response.item[0].arn #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
@@ -3307,6 +3350,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
     #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].tags #=> Hash
+    #   resp.campaigns_response.item[0].tags["__string"] #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -3751,6 +3796,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -3845,6 +3891,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegment AWS API Documentation
@@ -3991,6 +4039,7 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4085,6 +4134,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersion AWS API Documentation
@@ -4123,6 +4174,7 @@ module Aws::Pinpoint
     #
     #   resp.segments_response.item #=> Array
     #   resp.segments_response.item[0].application_id #=> String
+    #   resp.segments_response.item[0].arn #=> String
     #   resp.segments_response.item[0].creation_date #=> String
     #   resp.segments_response.item[0].dimensions.attributes #=> Hash
     #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4217,6 +4269,8 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segments_response.item[0].tags #=> Hash
+    #   resp.segments_response.item[0].tags["__string"] #=> String
     #   resp.segments_response.item[0].version #=> Integer
     #   resp.segments_response.next_token #=> String
     #
@@ -4253,6 +4307,7 @@ module Aws::Pinpoint
     #
     #   resp.segments_response.item #=> Array
     #   resp.segments_response.item[0].application_id #=> String
+    #   resp.segments_response.item[0].arn #=> String
     #   resp.segments_response.item[0].creation_date #=> String
     #   resp.segments_response.item[0].dimensions.attributes #=> Hash
     #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4347,6 +4402,8 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segments_response.item[0].tags #=> Hash
+    #   resp.segments_response.item[0].tags["__string"] #=> String
     #   resp.segments_response.item[0].version #=> Integer
     #   resp.segments_response.next_token #=> String
     #
@@ -4496,6 +4553,34 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_voice_channel(params = {}, options = {})
       req = build_request(:get_voice_channel, params)
+      req.send_request(options)
+    end
+
+    # Get list of all tags for a given resource arn
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags_model #tags_model} => Types::TagsModel
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags_model.tags #=> Hash
+    #   resp.tags_model.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -5168,6 +5253,58 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Adds tags to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Types::TagsModel] :tags_model
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags_model: { # required
+    #       tags: { # required
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Update an ADM channel.
     #
     # @option params [required, Types::ADMChannelRequest] :adm_channel_request
@@ -5792,6 +5929,9 @@ module Aws::Pinpoint
     #       },
     #       segment_id: "__string",
     #       segment_version: 1,
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -5891,6 +6031,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
+    #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
@@ -5994,6 +6135,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
     #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.tags #=> Hash
+    #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -6415,12 +6558,16 @@ module Aws::Pinpoint
     #         ],
     #         include: "ALL", # accepts ALL, ANY, NONE
     #       },
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.segment_response.application_id #=> String
+    #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
     #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -6515,6 +6662,8 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
+    #   resp.segment_response.tags #=> Hash
+    #   resp.segment_response.tags["__string"] #=> String
     #   resp.segment_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegment AWS API Documentation
@@ -6629,7 +6778,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

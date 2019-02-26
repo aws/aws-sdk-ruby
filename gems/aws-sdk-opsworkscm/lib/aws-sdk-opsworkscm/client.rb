@@ -426,10 +426,10 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is set,
-    #     one is generated and returned in the response.
+    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #     corresponding private key is required to access the Chef API. When
+    #     no CHEF\_PIVOTAL\_KEY is set, a private key is generated and
+    #     returned in the response.
     #
     #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the administrative
     #     user in the Chef Automate GUI. The password length is a minimum of
@@ -445,7 +445,14 @@ module Aws::OpsWorksCM
     #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
     #     console, a password must use ASCII characters.
     #
-    #   ^
+    #   * `PUPPET_R10K_REMOTE`\: The r10k remote is the URL of your control
+    #     repository (for example,
+    #     ssh://git@your.git-repo.com:user/control-repo.git). Specifying an
+    #     r10k remote opens TCP port 8170.
+    #
+    #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify an SSH URL and
+    #     a PEM-encoded private SSH key.
     #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
@@ -542,7 +549,7 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [String] :backup_id
     #   If you specify this field, AWS OpsWorks CM creates the server by using
@@ -1301,7 +1308,7 @@ module Aws::OpsWorksCM
     # Updates engine-specific attributes on a specified server. The server
     # enters the `MODIFYING` state when this operation is in progress. Only
     # one update can occur at a time. You can use this command to reset a
-    # Chef server's private key (`CHEF_PIVOTAL_KEY`) or a Puppet server's
+    # Chef server's public key (`CHEF_PIVOTAL_KEY`) or a Puppet server's
     # admin password (`PUPPET_ADMIN_PASSWORD`).
     #
     # This operation is asynchronous.
@@ -1385,7 +1392,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
