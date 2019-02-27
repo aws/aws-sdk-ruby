@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WAFRegional - Updated the documentation for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the documentation for AWS WAF.
+
 2.11.229 (2019-02-26)
 ------------------
 
