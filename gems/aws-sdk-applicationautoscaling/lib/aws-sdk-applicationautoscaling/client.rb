@@ -235,7 +235,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -365,7 +365,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action.
@@ -487,7 +487,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -624,7 +624,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [Array<String>] :resource_ids
     #   The identifier of the resource associated with the scalable target.
@@ -802,7 +802,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling activity.
@@ -990,7 +990,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
@@ -1210,7 +1210,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scheduled action.
@@ -1396,7 +1396,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
@@ -1484,9 +1484,9 @@ module Aws::ApplicationAutoScaling
     #   scaling policy.
     #
     #   For information on which services do not support `StepScaling` or
-    #   `TargetTrackingScaling`, see [Step Scaling Policies for Application
-    #   Auto Scaling][1] and [Target Tracking Scaling Policies for Application
-    #   Auto Scaling][2] in the *Application Auto Scaling User Guide*.
+    #   `TargetTrackingScaling`, see the information about **Limits** in [Step
+    #   Scaling Policies][1] and [Target Tracking Scaling Policies][2] in the
+    #   *Application Auto Scaling User Guide*.
     #
     #
     #
@@ -1662,7 +1662,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [String] :schedule
     #   The schedule for this action. The following formats are supported:
@@ -1832,7 +1832,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -2007,7 +2007,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

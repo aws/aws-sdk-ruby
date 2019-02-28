@@ -2092,7 +2092,7 @@ module Aws::SSM
     #       {
     #         entries: [ # required
     #           {
-    #             name: "DocumentName", # required
+    #             name: "DocumentARN", # required
     #             instance_id: "InstanceId",
     #             parameters: {
     #               "ParameterName" => ["ParameterValue"],
@@ -2139,7 +2139,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         instance_id: "InstanceId",
     #         parameters: {
     #           "ParameterName" => ["ParameterValue"],
@@ -2167,7 +2167,26 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the configuration document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or
+    #   a document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:aws:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2279,7 +2298,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         document_version: "DocumentVersion",
     #         instance_id: "InstanceId",
     #         parameters: {
@@ -2307,7 +2326,26 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Systems Manager document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or
+    #   a document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:partition:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -2732,7 +2770,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #   @return [Types::PatchFilterGroup]
     #
     # @!attribute [rw] approval_rules
@@ -2917,7 +2955,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName",
+    #         name: "DocumentARN",
     #         instance_id: "InstanceId",
     #         association_id: "AssociationId",
     #       }
@@ -3573,7 +3611,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName",
+    #         name: "DocumentARN",
     #         instance_id: "InstanceId",
     #         association_id: "AssociationId",
     #         association_version: "AssociationVersion",
@@ -10606,6 +10644,10 @@ module Aws::SSM
     #
     # * `CentOS7.4`
     #
+    # * `CentOS7.5`
+    #
+    # * `CentOS7.6`
+    #
     # * `*`
     #
     #   *Use a wildcard character (*) to target all supported operating
@@ -12982,7 +13024,7 @@ module Aws::SSM
     #             output_s3_key_prefix: "S3KeyPrefix",
     #           },
     #         },
-    #         name: "DocumentName",
+    #         name: "DocumentARN",
     #         targets: [
     #           {
     #             key: "TargetKey",
@@ -13022,7 +13064,26 @@ module Aws::SSM
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @!attribute [rw] name
-    #   The name of the association document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or
+    #   a document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:aws:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -13115,7 +13176,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         instance_id: "InstanceId", # required
     #         association_status: { # required
     #           date: Time.now, # required
@@ -13923,7 +13984,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #   @return [Types::PatchFilterGroup]
     #
     # @!attribute [rw] approval_rules

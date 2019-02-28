@@ -171,6 +171,8 @@ module Aws::AlexaForBusiness
     GetContactResponse = Shapes::StructureShape.new(name: 'GetContactResponse')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
     GetDeviceResponse = Shapes::StructureShape.new(name: 'GetDeviceResponse')
+    GetInvitationConfigurationRequest = Shapes::StructureShape.new(name: 'GetInvitationConfigurationRequest')
+    GetInvitationConfigurationResponse = Shapes::StructureShape.new(name: 'GetInvitationConfigurationResponse')
     GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
     GetProfileResponse = Shapes::StructureShape.new(name: 'GetProfileResponse')
     GetRoomRequest = Shapes::StructureShape.new(name: 'GetRoomRequest')
@@ -213,6 +215,7 @@ module Aws::AlexaForBusiness
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OneClickIdDelay = Shapes::StringShape.new(name: 'OneClickIdDelay')
     OneClickPinDelay = Shapes::StringShape.new(name: 'OneClickPinDelay')
+    OrganizationName = Shapes::StringShape.new(name: 'OrganizationName')
     OutboundPhoneNumber = Shapes::StringShape.new(name: 'OutboundPhoneNumber')
     PSTNDialIn = Shapes::StructureShape.new(name: 'PSTNDialIn')
     PrivacyPolicy = Shapes::StringShape.new(name: 'PrivacyPolicy')
@@ -225,6 +228,8 @@ module Aws::AlexaForBusiness
     ProviderCalendarId = Shapes::StringShape.new(name: 'ProviderCalendarId')
     PutConferencePreferenceRequest = Shapes::StructureShape.new(name: 'PutConferencePreferenceRequest')
     PutConferencePreferenceResponse = Shapes::StructureShape.new(name: 'PutConferencePreferenceResponse')
+    PutInvitationConfigurationRequest = Shapes::StructureShape.new(name: 'PutInvitationConfigurationRequest')
+    PutInvitationConfigurationResponse = Shapes::StructureShape.new(name: 'PutInvitationConfigurationResponse')
     PutRoomSkillParameterRequest = Shapes::StructureShape.new(name: 'PutRoomSkillParameterRequest')
     PutRoomSkillParameterResponse = Shapes::StructureShape.new(name: 'PutRoomSkillParameterResponse')
     PutSkillAuthorizationRequest = Shapes::StructureShape.new(name: 'PutSkillAuthorizationRequest')
@@ -271,6 +276,7 @@ module Aws::AlexaForBusiness
     SendInvitationRequest = Shapes::StructureShape.new(name: 'SendInvitationRequest')
     SendInvitationResponse = Shapes::StructureShape.new(name: 'SendInvitationResponse')
     ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
+    ShortSkillIdList = Shapes::ListShape.new(name: 'ShortSkillIdList')
     SkillDetails = Shapes::StructureShape.new(name: 'SkillDetails')
     SkillGroup = Shapes::StructureShape.new(name: 'SkillGroup')
     SkillGroupData = Shapes::StructureShape.new(name: 'SkillGroupData')
@@ -384,7 +390,6 @@ module Aws::AlexaForBusiness
 
     AssociateSkillWithSkillGroupResponse.struct_class = Types::AssociateSkillWithSkillGroupResponse
 
-    AssociateSkillWithUsersRequest.add_member(:organization_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "OrganizationArn"))
     AssociateSkillWithUsersRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
     AssociateSkillWithUsersRequest.struct_class = Types::AssociateSkillWithUsersRequest
 
@@ -668,7 +673,6 @@ module Aws::AlexaForBusiness
 
     DisassociateSkillFromSkillGroupResponse.struct_class = Types::DisassociateSkillFromSkillGroupResponse
 
-    DisassociateSkillFromUsersRequest.add_member(:organization_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "OrganizationArn"))
     DisassociateSkillFromUsersRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
     DisassociateSkillFromUsersRequest.struct_class = Types::DisassociateSkillFromUsersRequest
 
@@ -725,6 +729,13 @@ module Aws::AlexaForBusiness
 
     GetDeviceResponse.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "Device"))
     GetDeviceResponse.struct_class = Types::GetDeviceResponse
+
+    GetInvitationConfigurationRequest.struct_class = Types::GetInvitationConfigurationRequest
+
+    GetInvitationConfigurationResponse.add_member(:organization_name, Shapes::ShapeRef.new(shape: OrganizationName, location_name: "OrganizationName"))
+    GetInvitationConfigurationResponse.add_member(:contact_email, Shapes::ShapeRef.new(shape: Email, location_name: "ContactEmail"))
+    GetInvitationConfigurationResponse.add_member(:private_skill_ids, Shapes::ShapeRef.new(shape: ShortSkillIdList, location_name: "PrivateSkillIds"))
+    GetInvitationConfigurationResponse.struct_class = Types::GetInvitationConfigurationResponse
 
     GetProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     GetProfileRequest.struct_class = Types::GetProfileRequest
@@ -869,6 +880,13 @@ module Aws::AlexaForBusiness
     PutConferencePreferenceRequest.struct_class = Types::PutConferencePreferenceRequest
 
     PutConferencePreferenceResponse.struct_class = Types::PutConferencePreferenceResponse
+
+    PutInvitationConfigurationRequest.add_member(:organization_name, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "OrganizationName"))
+    PutInvitationConfigurationRequest.add_member(:contact_email, Shapes::ShapeRef.new(shape: Email, location_name: "ContactEmail"))
+    PutInvitationConfigurationRequest.add_member(:private_skill_ids, Shapes::ShapeRef.new(shape: ShortSkillIdList, location_name: "PrivateSkillIds"))
+    PutInvitationConfigurationRequest.struct_class = Types::PutInvitationConfigurationRequest
+
+    PutInvitationConfigurationResponse.struct_class = Types::PutInvitationConfigurationResponse
 
     PutRoomSkillParameterRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     PutRoomSkillParameterRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
@@ -1023,6 +1041,8 @@ module Aws::AlexaForBusiness
     SendInvitationRequest.struct_class = Types::SendInvitationRequest
 
     SendInvitationResponse.struct_class = Types::SendInvitationResponse
+
+    ShortSkillIdList.member = Shapes::ShapeRef.new(shape: SkillId)
 
     SkillDetails.add_member(:product_description, Shapes::ShapeRef.new(shape: ProductDescription, location_name: "ProductDescription"))
     SkillDetails.add_member(:invocation_phrase, Shapes::ShapeRef.new(shape: InvocationPhrase, location_name: "InvocationPhrase"))
@@ -1273,6 +1293,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: AssociateSkillWithUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillWithUsersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:create_address_book, Seahorse::Model::Operation.new.tap do |o|
@@ -1500,6 +1521,7 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: DisassociateSkillFromUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillFromUsersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:disassociate_skill_group_from_room, Seahorse::Model::Operation.new.tap do |o|
@@ -1562,6 +1584,15 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_invitation_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInvitationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetInvitationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInvitationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
@@ -1723,6 +1754,16 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: PutConferencePreferenceRequest)
         o.output = Shapes::ShapeRef.new(shape: PutConferencePreferenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:put_invitation_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutInvitationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutInvitationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutInvitationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:put_room_skill_parameter, Seahorse::Model::Operation.new.tap do |o|

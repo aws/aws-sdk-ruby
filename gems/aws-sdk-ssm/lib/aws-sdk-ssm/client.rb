@@ -472,7 +472,26 @@ module Aws::SSM
     # exception.
     #
     # @option params [required, String] :name
-    #   The name of the Systems Manager document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or a
+    #   document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:partition:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #
     # @option params [String] :document_version
     #   The document version you want to associate with the target(s). Can be
@@ -542,7 +561,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_association({
-    #     name: "DocumentName", # required
+    #     name: "DocumentARN", # required
     #     document_version: "DocumentVersion",
     #     instance_id: "InstanceId",
     #     parameters: {
@@ -638,7 +657,7 @@ module Aws::SSM
     #   resp = client.create_association_batch({
     #     entries: [ # required
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         instance_id: "InstanceId",
     #         parameters: {
     #           "ParameterName" => ["ParameterValue"],
@@ -1004,7 +1023,7 @@ module Aws::SSM
     #   The name of the patch baseline.
     #
     # @option params [Types::PatchFilterGroup] :global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #
     # @option params [Types::PatchRuleGroup] :approval_rules
     #   A set of rules used to include patches in the baseline.
@@ -1166,14 +1185,13 @@ module Aws::SSM
     # By default, data is not encrypted in Amazon S3. We strongly recommend
     # that you enable encryption in Amazon S3 to ensure secure data storage.
     # We also recommend that you secure access to the Amazon S3 bucket by
-    # creating a restrictive bucket policy. To view an example of a
-    # restrictive Amazon S3 bucket policy for Resource Data Sync, see
-    # [Create a Resource Data Sync for Inventory][1] in the *AWS Systems
+    # creating a restrictive bucket policy. For more information, see
+    # [Configuring Resource Data Sync for Inventory][1] in the *AWS Systems
     # Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html
     #
     # @option params [required, String] :sync_name
     #   A name for the configuration.
@@ -1254,7 +1272,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_association({
-    #     name: "DocumentName",
+    #     name: "DocumentARN",
     #     instance_id: "InstanceId",
     #     association_id: "AssociationId",
     #   })
@@ -1727,7 +1745,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_association({
-    #     name: "DocumentName",
+    #     name: "DocumentARN",
     #     instance_id: "InstanceId",
     #     association_id: "AssociationId",
     #     association_version: "AssociationVersion",
@@ -6862,7 +6880,26 @@ module Aws::SSM
     #   request.
     #
     # @option params [String] :name
-    #   The name of the association document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or a
+    #   document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:aws:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #
     # @option params [Array<Types::Target>] :targets
     #   The targets of the association.
@@ -6933,7 +6970,7 @@ module Aws::SSM
     #         output_s3_key_prefix: "S3KeyPrefix",
     #       },
     #     },
-    #     name: "DocumentName",
+    #     name: "DocumentARN",
     #     targets: [
     #       {
     #         key: "TargetKey",
@@ -7012,7 +7049,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_association_status({
-    #     name: "DocumentName", # required
+    #     name: "DocumentARN", # required
     #     instance_id: "InstanceId", # required
     #     association_status: { # required
     #       date: Time.now, # required
@@ -7694,7 +7731,7 @@ module Aws::SSM
     #   The name of the patch baseline.
     #
     # @option params [Types::PatchFilterGroup] :global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #
     # @option params [Types::PatchRuleGroup] :approval_rules
     #   A set of rules used to include patches in the baseline.
@@ -7876,7 +7913,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
