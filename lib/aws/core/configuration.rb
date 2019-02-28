@@ -413,7 +413,7 @@ module AWS
             else
               endpoint = config.send("#{ruby_name}_endpoint")
               if endpoint =~ /us-gov/
-                if matches = endpoint.match(/(us-gov-west-\d+)/)
+                if matches = endpoint.match(/(us-gov-(east|west)-\d+)/)
                   matches[1]
                 else
                   'us-gov-west-1' # e.g. iam.us-gov.amazonaws.com
