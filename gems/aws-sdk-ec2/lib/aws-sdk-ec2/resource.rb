@@ -858,18 +858,17 @@ module Aws::EC2
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
-    #   IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed
-    #   only on [Nitro-based
-    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    #   Other instance families guarantee performance up to 32,000 IOPS. For
-    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed
+    #   only on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     # @option options [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use when creating the encrypted volume. This
@@ -925,7 +924,7 @@ module Aws::EC2
     #   Defaults: If no volume type is specified, the default is `standard` in
     #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
     #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
-    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
+    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other Regions, EBS
     #   defaults to `gp2`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2557,15 +2556,15 @@ module Aws::EC2
     #
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by one or more owners.
     # @option options [Array<String>] :restorable_by_user_ids
     #   One or more AWS accounts IDs that can create volumes from the
     #   snapshot.
     # @option options [Array<String>] :snapshot_ids
     #   One or more snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -1066,11 +1066,11 @@ module Aws::EC2
     # endpoint. A target network is a subnet in a VPC.
     #
     # @!attribute [rw] network_id
-    #   **The ID of the subnet.**
+    #   The ID of the subnet.
     #   @return [String]
     #
     # @!attribute [rw] network_type
-    #   **The target network type.**
+    #   The target network type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedTargetNetwork AWS API Documentation
@@ -1370,7 +1370,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # **Information about an authorization rule.**
+    # Information about an authorization rule.
     #
     # @!attribute [rw] client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint with which the authorization rule
@@ -2694,10 +2694,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # **Information about the client certificate used for authentication.**
+    # Information about the client certificate used for authentication.
     #
     # @!attribute [rw] client_root_certificate_chain
-    #   <b>The ARN of the client certificate. </b>
+    #   The ARN of the client certificate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CertificateAuthentication AWS API Documentation
@@ -2707,8 +2707,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # **Information about the client certificate to be used for
-    # authentication.**
+    # Information about the client certificate to be used for
+    # authentication.
     #
     # @note When making an API call, you may pass CertificateAuthenticationRequest
     #   data as a hash:
@@ -2718,9 +2718,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] client_root_certificate_chain_arn
-    #   **The ARN of the client certificate. The certificate must be signed
-    #   by a certificate authority (CA) and it must be provisioned in AWS
-    #   Certificate Manager (ACM).**
+    #   The ARN of the client certificate. The certificate must be signed by
+    #   a certificate authority (CA) and it must be provisioned in AWS
+    #   Certificate Manager (ACM).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CertificateAuthenticationRequest AWS API Documentation
@@ -2921,9 +2921,12 @@ module Aws::EC2
 
     # Describes the authentication methods used by a Client VPN endpoint.
     # Client VPN supports Active Directory and mutual authentication. For
-    # more information, see
-    # [Authentication](vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
-    # in the *AWS Client VPN Admin Guide*.
+    # more information, see [Authentication][1] in the *AWS Client VPN
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication
     #
     # @!attribute [rw] type
     #   The authentication type used.
@@ -2948,9 +2951,12 @@ module Aws::EC2
 
     # Describes the authentication method to be used by a Client VPN
     # endpoint. Client VPN supports Active Directory and mutual
-    # authentication. For more information, see
-    # [Authentication](vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
-    # in the *AWS Client VPN Admin Guide*.
+    # authentication. For more information, see [Authentication][1] in the
+    # *AWS Client VPN Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication
     #
     # @note When making an API call, you may pass ClientVpnAuthenticationRequest
     #   data as a hash:
@@ -3018,7 +3024,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   **The current date and time.**
+    #   The current date and time.
     #   @return [String]
     #
     # @!attribute [rw] connection_id
@@ -3056,8 +3062,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] common_name
-    #   **The common name associated with the client. This is either the
-    #   name of the client certificate, or the Active Directory user name.**
+    #   The common name associated with the client. This is either the name
+    #   of the client certificate, or the Active Directory user name.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3151,7 +3157,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] transport_protocol
-    #   **The transport protocol used by the Client VPN endpoint.**
+    #   The transport protocol used by the Client VPN endpoint.
     #   @return [String]
     #
     # @!attribute [rw] associated_target_networks
@@ -3231,7 +3237,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # **Information about a Client VPN endpoint route.**
+    # Information about a Client VPN endpoint route.
     #
     # @!attribute [rw] client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint with which the route is
@@ -3247,7 +3253,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   **The route type.**
+    #   The route type.
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -3713,15 +3719,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] destination_region
-    #   The destination region to use in the `PresignedUrl` parameter of a
+    #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying
-    #   the destination region in a `PresignedUrl` parameter, where it is
+    #   the destination Region in a `PresignedUrl` parameter, where it is
     #   required.
     #
     #   The snapshot copy is sent to the regional endpoint that you sent the
     #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With
     #   the AWS CLI, this is specified using the `--region` parameter or the
-    #   default region in your AWS configuration file.
+    #   default Region in your AWS configuration file.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -3792,7 +3798,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The ID of the region that contains the snapshot to be copied.
+    #   The ID of the Region that contains the snapshot to be copied.
     #   @return [String]
     #
     # @!attribute [rw] source_snapshot_id
@@ -4108,8 +4114,11 @@ module Aws::EC2
     #
     # @!attribute [rw] server_certificate_arn
     #   The ARN of the server certificate. For more information, see the
-    #   [AWS Certificate Manager User
-    #   Guide](acm/latest/userguide/acm-overview.html) .
+    #   [AWS Certificate Manager User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/
     #   @return [String]
     #
     # @!attribute [rw] authentication_options
@@ -4732,8 +4741,8 @@ module Aws::EC2
     # @!attribute [rw] valid_until
     #   The end date and time of the request, in UTC format (for example,
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
-    #   requests are placed or able to fulfill the request. The default end
-    #   date is 7 days from the current date.
+    #   requests are placed or able to fulfill the request. If no value is
+    #   specified, the request remains until you cancel it.
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
@@ -6767,8 +6776,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the user or group to be added or removed from the
-    # permissions for a volume.
+    # Describes the user or group to be added or removed from the list of
+    # create volume permissions for a volume.
     #
     # @note When making an API call, you may pass CreateVolumePermission
     #   data as a hash:
@@ -6779,13 +6788,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] group
-    #   The specific group that is to be added or removed from a volume's
-    #   list of create volume permissions.
+    #   The group to be added or removed. The possible value is `all`.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The specific AWS account ID that is to be added or removed from a
-    #   volume's list of create volume permissions.
+    #   The AWS account ID to be added or removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermission AWS API Documentation
@@ -6796,7 +6803,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes modifications to the permissions for a volume.
+    # Describes modifications to the list of create volume permissions for a
+    # volume.
     #
     # @note When making an API call, you may pass CreateVolumePermissionModifications
     #   data as a hash:
@@ -6817,13 +6825,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] add
-    #   Adds a specific AWS account ID or group to a volume's list of
-    #   create volume permissions.
+    #   Adds the specified AWS account ID or group to the list.
     #   @return [Array<Types::CreateVolumePermission>]
     #
     # @!attribute [rw] remove
-    #   Removes a specific AWS account ID or group from a volume's list of
-    #   create volume permissions.
+    #   Removes the specified AWS account ID or group from the list.
     #   @return [Array<Types::CreateVolumePermission>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermissionModifications AWS API Documentation
@@ -6885,18 +6891,18 @@ module Aws::EC2
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
-    #   IOPS for volumes in most regions. Maximum IOPS of 64,000 is
-    #   guaranteed only on [Nitro-based
-    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    #   Other instance families guarantee performance up to 32,000 IOPS. For
-    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is
+    #   guaranteed only on [Nitro-based instances][1]. Other instance
+    #   families guarantee performance up to 32,000 IOPS. For more
+    #   information, see [Amazon EBS Volume Types][2] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -6961,7 +6967,7 @@ module Aws::EC2
     #   in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1,
     #   sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1,
     #   ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all
-    #   other regions, EBS defaults to `gp2`.
+    #   other Regions, EBS defaults to `gp2`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7107,10 +7113,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] policy_document
-    #   (Gateway endpoint) A policy to attach to the endpoint that controls
-    #   access to the service. The policy must be in valid JSON format. If
-    #   this parameter is not specified, we attach a default policy that
-    #   allows full access to the service.
+    #   A policy to attach to the endpoint that controls access to the
+    #   service. The policy must be in valid JSON format. If this parameter
+    #   is not specified, we attach a default policy that allows full access
+    #   to the service.
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
@@ -11878,11 +11884,17 @@ module Aws::EC2
     #
     #   * `event.description` - A description of the event.
     #
+    #   * `event.instance-event-id` - The ID of the event whose date and
+    #     time you are modifying.
+    #
     #   * `event.not-after` - The latest end time for the scheduled event
     #     (for example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `event.not-before` - The earliest start time for the scheduled
     #     event (for example, `2014-09-15T17:15:20.000Z`).
+    #
+    #   * `event.not-before-deadline` - The deadline for starting the event
+    #     (for example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `instance-state-code` - The code for the instance state, as a
     #     16-bit unsigned integer. The high byte is used for internal
@@ -14615,11 +14627,12 @@ module Aws::EC2
     # Contains the output of DescribeSnapshotAttribute.
     #
     # @!attribute [rw] create_volume_permissions
-    #   A list of permissions for creating volumes from the snapshot.
+    #   The users and groups that have the permissions for creating volumes
+    #   from the snapshot.
     #   @return [Array<Types::CreateVolumePermission>]
     #
     # @!attribute [rw] product_codes
-    #   A list of product codes.
+    #   The product codes.
     #   @return [Array<Types::ProductCode>]
     #
     # @!attribute [rw] snapshot_id
@@ -14716,8 +14729,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by one or more owners.
     #   @return [Array<String>]
     #
     # @!attribute [rw] restorable_by_user_ids
@@ -14728,7 +14740,8 @@ module Aws::EC2
     # @!attribute [rw] snapshot_ids
     #   One or more snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -18262,21 +18275,17 @@ module Aws::EC2
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) that the volume
-    #   supports. For `io1`, this represents the number of IOPS that are
-    #   provisioned for the volume. For `gp2`, this represents the baseline
-    #   performance of the volume and the rate at which the volume
-    #   accumulates I/O credits for bursting. For more information about
-    #   General Purpose SSD baseline performance, I/O credits, and bursting,
+    #   supports. For `io1` volumes, this represents the number of IOPS that
+    #   are provisioned for the volume. For `gp2` volumes, this represents
+    #   the baseline performance of the volume and the rate at which the
+    #   volume accumulates I/O credits for bursting. For more information,
     #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes in most Regions. Maximum `io1`IOPS of
-    #   64,000 is guaranteed only on [Nitro-based
-    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    #   Other instance families guarantee performance up to 32,000 IOPS. For
-    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
+    #   `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
+    #   Other instance families guarantee performance up to 32,000 IOPS.
     #
     #   Condition: This parameter is required for requests to create `io1`
     #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
@@ -18285,6 +18294,7 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -18776,10 +18786,6 @@ module Aws::EC2
     #   * `iamFleetRoleInvalid` - The Spot Fleet did not have the required
     #     permissions either to launch or terminate an instance.
     #
-    #   * `launchSpecTemporarilyBlacklisted` - The configuration is not
-    #     valid and several attempts to launch instances have failed. For
-    #     more information, see the description of the event.
-    #
     #   * `spotFleetRequestConfigurationInvalid` - The configuration is not
     #     valid. For more information, see the description of the event.
     #
@@ -18826,6 +18832,10 @@ module Aws::EC2
     #   * `terminated` - An instance was terminated by the user.
     #
     #   The following are the `Information` events:
+    #
+    #   * `launchSpecTemporarilyBlacklisted` - The configuration is not
+    #     valid and several attempts to launch instances have failed. For
+    #     more information, see the description of the event.
     #
     #   * `launchSpecUnusable` - The price in a launch specification is not
     #     valid because it is below the Spot price or the Spot price is
@@ -21140,9 +21150,12 @@ module Aws::EC2
     #
     # @!attribute [rw] certificate_revocation_list
     #   The client certificate revocation list file. For more information,
-    #   see [Generate a Client Certificate Revocation
-    #   List](vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
-    #   in the *AWS Client VPN Admin Guide*.
+    #   see [Generate a Client Certificate Revocation List][1] in the *AWS
+    #   Client VPN Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -22989,8 +23002,17 @@ module Aws::EC2
     # Describes the current state of an instance.
     #
     # @!attribute [rw] code
-    #   The low byte represents the state. The high byte is used for
-    #   internal purposes and should be ignored.
+    #   The state of the instance as a 16-bit unsigned integer.
+    #
+    #   The high byte is all of the bits between 2^8 and (2^16)-1, which
+    #   equals decimal values between 256 and 65,535. These numerical values
+    #   are used for internal purposes and should be ignored.
+    #
+    #   The low byte is all of the bits between 2^0 and (2^8)-1, which
+    #   equals decimal values between 0 and 255.
+    #
+    #   The valid values for instance-state-code will all be in the range of
+    #   the low byte and they are:
     #
     #   * `0`\: `pending`
     #
@@ -23003,6 +23025,9 @@ module Aws::EC2
     #   * `64`\: `stopping`
     #
     #   * `80`\: `stopped`
+    #
+    #   You can ignore the high byte value by zeroing out all of the bits
+    #   above 2^8 or 256 in decimal.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -23109,6 +23134,10 @@ module Aws::EC2
 
     # Describes a scheduled event for an instance.
     #
+    # @!attribute [rw] instance_event_id
+    #   The ID of the event.
+    #   @return [String]
+    #
     # @!attribute [rw] code
     #   The event code.
     #   @return [String]
@@ -23129,13 +23158,19 @@ module Aws::EC2
     #   The earliest scheduled start time for the event.
     #   @return [Time]
     #
+    # @!attribute [rw] not_before_deadline
+    #   The deadline for starting the event.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusEvent AWS API Documentation
     #
     class InstanceStatusEvent < Struct.new(
+      :instance_event_id,
       :code,
       :description,
       :not_after,
-      :not_before)
+      :not_before,
+      :not_before_deadline)
       include Aws::Structure
     end
 
@@ -25794,6 +25829,56 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyInstanceEventStartTimeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_id: "String", # required
+    #         instance_event_id: "String", # required
+    #         not_before: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation.`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance with the scheduled event.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_event_id
+    #   The ID of the event whose date and time you are modifying.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_before
+    #   The new date and time when the event will take place.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceEventStartTimeRequest AWS API Documentation
+    #
+    class ModifyInstanceEventStartTimeRequest < Struct.new(
+      :dry_run,
+      :instance_id,
+      :instance_event_id,
+      :not_before)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event
+    #   Describes a scheduled event for an instance.
+    #   @return [Types::InstanceStatusEvent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceEventStartTimeResult AWS API Documentation
+    #
+    class ModifyInstanceEventStartTimeResult < Struct.new(
+      :event)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyInstancePlacementRequest
     #   data as a hash:
     #
@@ -26560,8 +26645,10 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   (Gateway endpoint) A policy document to attach to the endpoint. The
-    #   policy must be in valid JSON format.
+    #   A policy to attach to the endpoint that controls access to the
+    #   service. The policy must be in valid JSON format. If this parameter
+    #   is not specified, we attach a default policy that allows full access
+    #   to the service.
     #   @return [String]
     #
     # @!attribute [rw] add_route_table_ids
@@ -34347,8 +34434,9 @@ module Aws::EC2
     # @!attribute [rw] valid_until
     #   The end date and time of the request, in UTC format (for example,
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new Spot
-    #   Instance requests are placed or able to fulfill the request. The
-    #   default end date is 7 days from the current date.
+    #   Instance requests are placed or able to fulfill the request. If no
+    #   value is specified, the Spot Fleet request remains until you cancel
+    #   it.
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
@@ -36867,17 +36955,13 @@ module Aws::EC2
     #   number of IOPS that are provisioned for the volume. For General
     #   Purpose SSD volumes, this represents the baseline performance of the
     #   volume and the rate at which the volume accumulates I/O credits for
-    #   bursting. For more information about General Purpose SSD baseline
-    #   performance, I/O credits, and bursting, see [Amazon EBS Volume
-    #   Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   bursting. For more information, see [Amazon EBS Volume Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    #   64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
-    #   64,000 is guaranteed only on [Nitro-based
-    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    #   Other instance families guarantee performance up to 32,000 IOPS. For
-    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
+    #   `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
+    #   Other instance families guarantee performance up to 32,000 IOPS.
     #
     #   Condition: This parameter is required for requests to create `io1`
     #   volumes; it is not used in requests to create `gp2`, `st1`, `sc1`,
@@ -36886,6 +36970,7 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
     # @!attribute [rw] tags

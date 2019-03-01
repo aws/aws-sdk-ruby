@@ -2915,8 +2915,8 @@ module Aws::EC2
     end
 
     # Copies a point-in-time snapshot of an EBS volume and stores it in
-    # Amazon S3. You can copy the snapshot within the same region or from
-    # one region to another. You can use the snapshot to create EBS volumes
+    # Amazon S3. You can copy the snapshot within the same Region or from
+    # one Region to another. You can use the snapshot to create EBS volumes
     # or Amazon Machine Images (AMIs). The snapshot is copied to the
     # regional endpoint that you send the HTTP request to.
     #
@@ -2945,15 +2945,15 @@ module Aws::EC2
     #   A description for the EBS snapshot.
     #
     # @option params [String] :destination_region
-    #   The destination region to use in the `PresignedUrl` parameter of a
+    #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying
-    #   the destination region in a `PresignedUrl` parameter, where it is
+    #   the destination Region in a `PresignedUrl` parameter, where it is
     #   required.
     #
     #   The snapshot copy is sent to the regional endpoint that you sent the
     #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
     #   AWS CLI, this is specified using the `--region` parameter or the
-    #   default region in your AWS configuration file.
+    #   default Region in your AWS configuration file.
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
@@ -3018,7 +3018,7 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #
     # @option params [required, String] :source_region
-    #   The ID of the region that contains the snapshot to be copied.
+    #   The ID of the Region that contains the snapshot to be copied.
     #
     # @option params [required, String] :source_snapshot_id
     #   The ID of the EBS snapshot to copy.
@@ -3313,8 +3313,11 @@ module Aws::EC2
     #
     # @option params [required, String] :server_certificate_arn
     #   The ARN of the server certificate. For more information, see the [AWS
-    #   Certificate Manager User
-    #   Guide](acm/latest/userguide/acm-overview.html) .
+    #   Certificate Manager User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/
     #
     # @option params [required, Array<Types::ClientVpnAuthenticationRequest>] :authentication_options
     #   Information about the authentication method to be used to authenticate
@@ -3994,8 +3997,8 @@ module Aws::EC2
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date and time of the request, in UTC format (for example,
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
-    #   requests are placed or able to fulfill the request. The default end
-    #   date is 7 days from the current date.
+    #   requests are placed or able to fulfill the request. If no value is
+    #   specified, the request remains until you cancel it.
     #
     # @option params [Boolean] :replace_unhealthy_instances
     #   Indicates whether EC2 Fleet should replace unhealthy instances.
@@ -5853,10 +5856,8 @@ module Aws::EC2
     # Reserved Instances, you can use the DescribeReservedInstances
     # operation.
     #
-    # <note markdown="1"> Only Standard Reserved Instances with a capacity reservation can be
-    # sold in the Reserved Instance Marketplace. Convertible Reserved
-    # Instances and Standard Reserved Instances with a regional benefit
-    # cannot be sold.
+    # <note markdown="1"> Only Standard Reserved Instances can be sold in the Reserved Instance
+    # Marketplace. Convertible Reserved Instances cannot be sold.
     #
     #  </note>
     #
@@ -7037,18 +7038,17 @@ module Aws::EC2
     # @option params [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
-    #   IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed
-    #   only on [Nitro-based
-    #   instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    #   Other instance families guarantee performance up to 32,000 IOPS. For
-    #   more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed
+    #   only on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
@@ -7108,7 +7108,7 @@ module Aws::EC2
     #   Defaults: If no volume type is specified, the default is `standard` in
     #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
     #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
-    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
+    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other Regions, EBS
     #   defaults to `gp2`.
     #
     # @option params [Boolean] :dry_run
@@ -7406,10 +7406,10 @@ module Aws::EC2
     #   provider.
     #
     # @option params [String] :policy_document
-    #   (Gateway endpoint) A policy to attach to the endpoint that controls
-    #   access to the service. The policy must be in valid JSON format. If
-    #   this parameter is not specified, we attach a default policy that
-    #   allows full access to the service.
+    #   A policy to attach to the endpoint that controls access to the
+    #   service. The policy must be in valid JSON format. If this parameter is
+    #   not specified, we attach a default policy that allows full access to
+    #   the service.
     #
     # @option params [Array<String>] :route_table_ids
     #   (Gateway endpoint) One or more route table IDs.
@@ -13215,10 +13215,16 @@ module Aws::EC2
     #
     #   * `event.description` - A description of the event.
     #
+    #   * `event.instance-event-id` - The ID of the event whose date and time
+    #     you are modifying.
+    #
     #   * `event.not-after` - The latest end time for the scheduled event (for
     #     example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `event.not-before` - The earliest start time for the scheduled event
+    #     (for example, `2014-09-15T17:15:20.000Z`).
+    #
+    #   * `event.not-before-deadline` - The deadline for starting the event
     #     (for example, `2014-09-15T17:15:20.000Z`).
     #
     #   * `instance-state-code` - The code for the instance state, as a 16-bit
@@ -13344,10 +13350,12 @@ module Aws::EC2
     #   resp.instance_statuses #=> Array
     #   resp.instance_statuses[0].availability_zone #=> String
     #   resp.instance_statuses[0].events #=> Array
+    #   resp.instance_statuses[0].events[0].instance_event_id #=> String
     #   resp.instance_statuses[0].events[0].code #=> String, one of "instance-reboot", "system-reboot", "system-maintenance", "instance-retirement", "instance-stop"
     #   resp.instance_statuses[0].events[0].description #=> String
     #   resp.instance_statuses[0].events[0].not_after #=> Time
     #   resp.instance_statuses[0].events[0].not_before #=> Time
+    #   resp.instance_statuses[0].events[0].not_before_deadline #=> Time
     #   resp.instance_statuses[0].instance_id #=> String
     #   resp.instance_statuses[0].instance_state.code #=> Integer
     #   resp.instance_statuses[0].instance_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
@@ -17088,9 +17096,9 @@ module Aws::EC2
     end
 
     # Describes one or more of the EBS snapshots available to you. Available
-    # snapshots include public snapshots available for any AWS account to
-    # launch, private snapshots that you own, and private snapshots owned by
-    # another AWS account but for which you've been given explicit create
+    # snapshots include public snapshots available for use by any AWS
+    # account, private snapshots that you own, and private snapshots owned
+    # by another AWS account for which you've been given explicit create
     # volume permissions.
     #
     # The create volume permissions fall into the following categories:
@@ -17197,8 +17205,7 @@ module Aws::EC2
     #   value. This value is `null` when there are no more results to return.
     #
     # @option params [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by one or more owners.
     #
     # @option params [Array<String>] :restorable_by_user_ids
     #   One or more AWS accounts IDs that can create volumes from the
@@ -17207,7 +17214,8 @@ module Aws::EC2
     # @option params [Array<String>] :snapshot_ids
     #   One or more snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22549,9 +22557,12 @@ module Aws::EC2
     #
     # @option params [required, String] :certificate_revocation_list
     #   The client certificate revocation list file. For more information, see
-    #   [Generate a Client Certificate Revocation
-    #   List](vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
-    #   in the *AWS Client VPN Admin Guide*.
+    #   [Generate a Client Certificate Revocation List][1] in the *AWS Client
+    #   VPN Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -24113,6 +24124,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the start time for a scheduled Amazon EC2 instance event.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation.`
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance with the scheduled event.
+    #
+    # @option params [required, String] :instance_event_id
+    #   The ID of the event whose date and time you are modifying.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :not_before
+    #   The new date and time when the event will take place.
+    #
+    # @return [Types::ModifyInstanceEventStartTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceEventStartTimeResult#event #event} => Types::InstanceStatusEvent
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_event_start_time({
+    #     dry_run: false,
+    #     instance_id: "String", # required
+    #     instance_event_id: "String", # required
+    #     not_before: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event.instance_event_id #=> String
+    #   resp.event.code #=> String, one of "instance-reboot", "system-reboot", "system-maintenance", "instance-retirement", "instance-stop"
+    #   resp.event.description #=> String
+    #   resp.event.not_after #=> Time
+    #   resp.event.not_before #=> Time
+    #   resp.event.not_before_deadline #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceEventStartTime AWS API Documentation
+    #
+    # @overload modify_instance_event_start_time(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_event_start_time(params = {}, options = {})
+      req = build_request(:modify_instance_event_start_time, params)
+      req.send_request(options)
+    end
+
     # Modifies the placement attributes for a specified instance. You can do
     # the following:
     #
@@ -25068,8 +25127,10 @@ module Aws::EC2
     #   default policy. The default policy allows full access to the service.
     #
     # @option params [String] :policy_document
-    #   (Gateway endpoint) A policy document to attach to the endpoint. The
-    #   policy must be in valid JSON format.
+    #   A policy to attach to the endpoint that controls access to the
+    #   service. The policy must be in valid JSON format. If this parameter is
+    #   not specified, we attach a default policy that allows full access to
+    #   the service.
     #
     # @option params [Array<String>] :add_route_table_ids
     #   (Gateway endpoint) One or more route tables IDs to associate with the
@@ -29884,7 +29945,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

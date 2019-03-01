@@ -445,6 +445,7 @@ module Aws::EC2
     DescribeImportSnapshotTasksRequest = Shapes::StructureShape.new(name: 'DescribeImportSnapshotTasksRequest')
     DescribeImportSnapshotTasksResult = Shapes::StructureShape.new(name: 'DescribeImportSnapshotTasksResult')
     DescribeInstanceAttributeRequest = Shapes::StructureShape.new(name: 'DescribeInstanceAttributeRequest')
+    DescribeInstanceCreditSpecificationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeInstanceCreditSpecificationsMaxResults')
     DescribeInstanceCreditSpecificationsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsRequest')
     DescribeInstanceCreditSpecificationsResult = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
@@ -791,6 +792,7 @@ module Aws::EC2
     InstanceCreditSpecificationList = Shapes::ListShape.new(name: 'InstanceCreditSpecificationList')
     InstanceCreditSpecificationListRequest = Shapes::ListShape.new(name: 'InstanceCreditSpecificationListRequest')
     InstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'InstanceCreditSpecificationRequest')
+    InstanceEventId = Shapes::StringShape.new(name: 'InstanceEventId')
     InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
@@ -942,6 +944,8 @@ module Aws::EC2
     ModifyInstanceCapacityReservationAttributesResult = Shapes::StructureShape.new(name: 'ModifyInstanceCapacityReservationAttributesResult')
     ModifyInstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationRequest')
     ModifyInstanceCreditSpecificationResult = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationResult')
+    ModifyInstanceEventStartTimeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceEventStartTimeRequest')
+    ModifyInstanceEventStartTimeResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventStartTimeResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
     ModifyInstancePlacementResult = Shapes::StructureShape.new(name: 'ModifyInstancePlacementResult')
     ModifyLaunchTemplateRequest = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateRequest')
@@ -3257,7 +3261,7 @@ module Aws::EC2
     DescribeInstanceCreditSpecificationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeInstanceCreditSpecificationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeInstanceCreditSpecificationsRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
-    DescribeInstanceCreditSpecificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeInstanceCreditSpecificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeInstanceCreditSpecificationsMaxResults, location_name: "MaxResults"))
     DescribeInstanceCreditSpecificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeInstanceCreditSpecificationsRequest.struct_class = Types::DescribeInstanceCreditSpecificationsRequest
 
@@ -4940,10 +4944,12 @@ module Aws::EC2
 
     InstanceStatusDetailsList.member = Shapes::ShapeRef.new(shape: InstanceStatusDetails, location_name: "item")
 
+    InstanceStatusEvent.add_member(:instance_event_id, Shapes::ShapeRef.new(shape: InstanceEventId, location_name: "instanceEventId"))
     InstanceStatusEvent.add_member(:code, Shapes::ShapeRef.new(shape: EventCode, location_name: "code"))
     InstanceStatusEvent.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     InstanceStatusEvent.add_member(:not_after, Shapes::ShapeRef.new(shape: DateTime, location_name: "notAfter"))
     InstanceStatusEvent.add_member(:not_before, Shapes::ShapeRef.new(shape: DateTime, location_name: "notBefore"))
+    InstanceStatusEvent.add_member(:not_before_deadline, Shapes::ShapeRef.new(shape: DateTime, location_name: "notBeforeDeadline"))
     InstanceStatusEvent.struct_class = Types::InstanceStatusEvent
 
     InstanceStatusEventList.member = Shapes::ShapeRef.new(shape: InstanceStatusEvent, location_name: "item")
@@ -5404,6 +5410,15 @@ module Aws::EC2
     ModifyInstanceCreditSpecificationResult.add_member(:successful_instance_credit_specifications, Shapes::ShapeRef.new(shape: SuccessfulInstanceCreditSpecificationSet, location_name: "successfulInstanceCreditSpecificationSet"))
     ModifyInstanceCreditSpecificationResult.add_member(:unsuccessful_instance_credit_specifications, Shapes::ShapeRef.new(shape: UnsuccessfulInstanceCreditSpecificationSet, location_name: "unsuccessfulInstanceCreditSpecificationSet"))
     ModifyInstanceCreditSpecificationResult.struct_class = Types::ModifyInstanceCreditSpecificationResult
+
+    ModifyInstanceEventStartTimeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceEventStartTimeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    ModifyInstanceEventStartTimeRequest.add_member(:instance_event_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceEventId"))
+    ModifyInstanceEventStartTimeRequest.add_member(:not_before, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "NotBefore"))
+    ModifyInstanceEventStartTimeRequest.struct_class = Types::ModifyInstanceEventStartTimeRequest
+
+    ModifyInstanceEventStartTimeResult.add_member(:event, Shapes::ShapeRef.new(shape: InstanceStatusEvent, location_name: "event"))
+    ModifyInstanceEventStartTimeResult.struct_class = Types::ModifyInstanceEventStartTimeResult
 
     ModifyInstancePlacementRequest.add_member(:affinity, Shapes::ShapeRef.new(shape: Affinity, location_name: "affinity"))
     ModifyInstancePlacementRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
@@ -9753,6 +9768,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceCreditSpecificationRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceCreditSpecificationResult)
+      end)
+
+      api.add_operation(:modify_instance_event_start_time, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceEventStartTime"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceEventStartTimeRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceEventStartTimeResult)
       end)
 
       api.add_operation(:modify_instance_placement, Seahorse::Model::Operation.new.tap do |o|
