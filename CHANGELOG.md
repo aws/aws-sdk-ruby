@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.232 (2019-03-01)
+------------------
+
 * Feature - Aws::AutoScalingPlans - Updated the documentation for AWS Auto Scaling Plans.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
