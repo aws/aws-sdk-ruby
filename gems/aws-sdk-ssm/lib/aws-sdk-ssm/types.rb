@@ -7221,6 +7221,39 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The request body of the GetServiceSetting API action.
+    #
+    # @note When making an API call, you may pass GetServiceSettingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         setting_id: "ServiceSettingId", # required
+    #       }
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingRequest AWS API Documentation
+    #
+    class GetServiceSettingRequest < Struct.new(
+      :setting_id)
+      include Aws::Structure
+    end
+
+    # The query result body of the GetServiceSetting API action.
+    #
+    # @!attribute [rw] service_setting
+    #   The query result of the current service setting.
+    #   @return [Types::ServiceSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingResult AWS API Documentation
+    #
+    class GetServiceSettingResult < Struct.new(
+      :service_setting)
+      include Aws::Structure
+    end
+
     # Status information about the aggregated associations.
     #
     # @!attribute [rw] detailed_status
@@ -11688,6 +11721,40 @@ module Aws::SSM
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
+    # The request body of the ResetServiceSetting API action.
+    #
+    # @note When making an API call, you may pass ResetServiceSettingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         setting_id: "ServiceSettingId", # required
+    #       }
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting to reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingRequest AWS API Documentation
+    #
+    class ResetServiceSettingRequest < Struct.new(
+      :setting_id)
+      include Aws::Structure
+    end
+
+    # The result body of the ResetServiceSetting API action.
+    #
+    # @!attribute [rw] service_setting
+    #   The current, effective service setting after calling the
+    #   ResetServiceSetting API action.
+    #   @return [Types::ServiceSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingResult AWS API Documentation
+    #
+    class ResetServiceSettingResult < Struct.new(
+      :service_setting)
+      include Aws::Structure
+    end
+
     # Information about targets that resolved during the Automation
     # execution.
     #
@@ -12241,6 +12308,71 @@ module Aws::SSM
     #
     class SendCommandResult < Struct.new(
       :command)
+      include Aws::Structure
+    end
+
+    # The service setting data structure.
+    #
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # UpdateServiceSetting API action to change the default setting. Or, use
+    # the ResetServiceSetting to change the value back to the original value
+    # defined by the AWS service team.
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] setting_value
+    #   The value of the service setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The last time the service setting was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_user
+    #   The ARN of the last modified user. This field is populated only if
+    #   the setting value was overwritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the service setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the service setting. The value can be Default,
+    #   Customized or PendingUpdate.
+    #
+    #   * Default: The current setting uses a default value provisioned by
+    #     the AWS service team.
+    #
+    #   * Customized: The current setting use a custom value specified by
+    #     the customer.
+    #
+    #   * PendingUpdate: The current setting uses a default or custom value,
+    #     but a setting change request is pending approval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ServiceSetting AWS API Documentation
+    #
+    class ServiceSetting < Struct.new(
+      :setting_id,
+      :setting_value,
+      :last_modified_date,
+      :last_modified_user,
+      :arn,
+      :status)
       include Aws::Structure
     end
 
@@ -14160,6 +14292,38 @@ module Aws::SSM
       :sources)
       include Aws::Structure
     end
+
+    # The request body of the UpdateServiceSetting API action.
+    #
+    # @note When making an API call, you may pass UpdateServiceSettingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         setting_id: "ServiceSettingId", # required
+    #         setting_value: "ServiceSettingValue", # required
+    #       }
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] setting_value
+    #   The new value to specify for the service setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation
+    #
+    class UpdateServiceSettingRequest < Struct.new(
+      :setting_id,
+      :setting_value)
+      include Aws::Structure
+    end
+
+    # The result body of the UpdateServiceSetting API action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingResult AWS API Documentation
+    #
+    class UpdateServiceSettingResult < Aws::EmptyStructure; end
 
   end
 end

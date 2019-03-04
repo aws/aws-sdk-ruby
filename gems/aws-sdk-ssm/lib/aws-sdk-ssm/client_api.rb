@@ -379,6 +379,8 @@ module Aws::SSM
     GetPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupResult')
     GetPatchBaselineRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineRequest')
     GetPatchBaselineResult = Shapes::StructureShape.new(name: 'GetPatchBaselineResult')
+    GetServiceSettingRequest = Shapes::StructureShape.new(name: 'GetServiceSettingRequest')
+    GetServiceSettingResult = Shapes::StructureShape.new(name: 'GetServiceSettingResult')
     HierarchyLevelLimitExceededException = Shapes::StructureShape.new(name: 'HierarchyLevelLimitExceededException')
     HierarchyTypeMismatchException = Shapes::StructureShape.new(name: 'HierarchyTypeMismatchException')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
@@ -755,6 +757,8 @@ module Aws::SSM
     RemainingCount = Shapes::IntegerShape.new(name: 'RemainingCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+    ResetServiceSettingRequest = Shapes::StructureShape.new(name: 'ResetServiceSettingRequest')
+    ResetServiceSettingResult = Shapes::StructureShape.new(name: 'ResetServiceSettingResult')
     ResolvedTargets = Shapes::StructureShape.new(name: 'ResolvedTargets')
     ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
     ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
@@ -797,6 +801,10 @@ module Aws::SSM
     SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
     SendCommandResult = Shapes::StructureShape.new(name: 'SendCommandResult')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
+    ServiceSetting = Shapes::StructureShape.new(name: 'ServiceSetting')
+    ServiceSettingId = Shapes::StringShape.new(name: 'ServiceSettingId')
+    ServiceSettingNotFound = Shapes::StructureShape.new(name: 'ServiceSettingNotFound')
+    ServiceSettingValue = Shapes::StringShape.new(name: 'ServiceSettingValue')
     Session = Shapes::StructureShape.new(name: 'Session')
     SessionDetails = Shapes::StringShape.new(name: 'SessionDetails')
     SessionFilter = Shapes::StructureShape.new(name: 'SessionFilter')
@@ -901,6 +909,8 @@ module Aws::SSM
     UpdateManagedInstanceRoleResult = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleResult')
     UpdatePatchBaselineRequest = Shapes::StructureShape.new(name: 'UpdatePatchBaselineRequest')
     UpdatePatchBaselineResult = Shapes::StructureShape.new(name: 'UpdatePatchBaselineResult')
+    UpdateServiceSettingRequest = Shapes::StructureShape.new(name: 'UpdateServiceSettingRequest')
+    UpdateServiceSettingResult = Shapes::StructureShape.new(name: 'UpdateServiceSettingResult')
     Url = Shapes::StringShape.new(name: 'Url')
     ValidNextStep = Shapes::StringShape.new(name: 'ValidNextStep')
     ValidNextStepList = Shapes::ListShape.new(name: 'ValidNextStepList')
@@ -2102,6 +2112,12 @@ module Aws::SSM
     GetPatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     GetPatchBaselineResult.struct_class = Types::GetPatchBaselineResult
 
+    GetServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
+    GetServiceSettingRequest.struct_class = Types::GetServiceSettingRequest
+
+    GetServiceSettingResult.add_member(:service_setting, Shapes::ShapeRef.new(shape: ServiceSetting, location_name: "ServiceSetting"))
+    GetServiceSettingResult.struct_class = Types::GetServiceSettingResult
+
     InstanceAggregatedAssociationOverview.add_member(:detailed_status, Shapes::ShapeRef.new(shape: StatusName, location_name: "DetailedStatus"))
     InstanceAggregatedAssociationOverview.add_member(:instance_association_status_aggregated_count, Shapes::ShapeRef.new(shape: InstanceAssociationStatusAggregatedCount, location_name: "InstanceAssociationStatusAggregatedCount"))
     InstanceAggregatedAssociationOverview.struct_class = Types::InstanceAggregatedAssociationOverview
@@ -2845,6 +2861,12 @@ module Aws::SSM
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
 
+    ResetServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
+    ResetServiceSettingRequest.struct_class = Types::ResetServiceSettingRequest
+
+    ResetServiceSettingResult.add_member(:service_setting, Shapes::ShapeRef.new(shape: ServiceSetting, location_name: "ServiceSetting"))
+    ResetServiceSettingResult.struct_class = Types::ResetServiceSettingResult
+
     ResolvedTargets.add_member(:parameter_values, Shapes::ShapeRef.new(shape: TargetParameterList, location_name: "ParameterValues"))
     ResolvedTargets.add_member(:truncated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Truncated"))
     ResolvedTargets.struct_class = Types::ResolvedTargets
@@ -2935,6 +2957,14 @@ module Aws::SSM
 
     SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))
     SendCommandResult.struct_class = Types::SendCommandResult
+
+    ServiceSetting.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, location_name: "SettingId"))
+    ServiceSetting.add_member(:setting_value, Shapes::ShapeRef.new(shape: ServiceSettingValue, location_name: "SettingValue"))
+    ServiceSetting.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
+    ServiceSetting.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: String, location_name: "LastModifiedUser"))
+    ServiceSetting.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ServiceSetting.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ServiceSetting.struct_class = Types::ServiceSetting
 
     Session.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     Session.add_member(:target, Shapes::ShapeRef.new(shape: SessionTarget, location_name: "Target"))
@@ -3238,6 +3268,12 @@ module Aws::SSM
     UpdatePatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     UpdatePatchBaselineResult.struct_class = Types::UpdatePatchBaselineResult
+
+    UpdateServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
+    UpdateServiceSettingRequest.add_member(:setting_value, Shapes::ShapeRef.new(shape: ServiceSettingValue, required: true, location_name: "SettingValue"))
+    UpdateServiceSettingRequest.struct_class = Types::UpdateServiceSettingRequest
+
+    UpdateServiceSettingResult.struct_class = Types::UpdateServiceSettingResult
 
     ValidNextStepList.member = Shapes::ShapeRef.new(shape: ValidNextStep)
 
@@ -4088,6 +4124,16 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:get_service_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceSettingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceSettingNotFound)
+      end)
+
       api.add_operation(:label_parameter_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "LabelParameterVersion"
         o.http_method = "POST"
@@ -4391,6 +4437,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
+      api.add_operation(:reset_service_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetServiceSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetServiceSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetServiceSettingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceSettingNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+      end)
+
       api.add_operation(:resume_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ResumeSession"
         o.http_method = "POST"
@@ -4601,6 +4658,17 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: UpdatePatchBaselineResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_service_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServiceSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServiceSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateServiceSettingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceSettingNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
     end
 

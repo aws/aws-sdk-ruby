@@ -211,18 +211,25 @@ module Aws::MediaPackage
     #
     # @option params [required, String] :id
     #
+    # @option params [Hash<String,String>] :tags
+    #   A collection of tags associated with a resource
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#arn #arn} => String
     #   * {Types::CreateChannelResponse#description #description} => String
     #   * {Types::CreateChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::CreateChannelResponse#id #id} => String
+    #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_channel({
     #     description: "__string",
     #     id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -235,6 +242,8 @@ module Aws::MediaPackage
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannel AWS API Documentation
     #
@@ -269,6 +278,9 @@ module Aws::MediaPackage
     #
     # @option params [Integer] :startover_window_seconds
     #
+    # @option params [Hash<String,String>] :tags
+    #   A collection of tags associated with a resource
+    #
     # @option params [Integer] :time_delay_seconds
     #
     # @option params [Array<String>] :whitelist
@@ -285,6 +297,7 @@ module Aws::MediaPackage
     #   * {Types::CreateOriginEndpointResponse#manifest_name #manifest_name} => String
     #   * {Types::CreateOriginEndpointResponse#mss_package #mss_package} => Types::MssPackage
     #   * {Types::CreateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
+    #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateOriginEndpointResponse#time_delay_seconds #time_delay_seconds} => Integer
     #   * {Types::CreateOriginEndpointResponse#url #url} => String
     #   * {Types::CreateOriginEndpointResponse#whitelist #whitelist} => Array&lt;String&gt;
@@ -398,6 +411,9 @@ module Aws::MediaPackage
     #       },
     #     },
     #     startover_window_seconds: 1,
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     time_delay_seconds: 1,
     #     whitelist: ["__string"],
     #   })
@@ -482,6 +498,8 @@ module Aws::MediaPackage
     #   resp.mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.startover_window_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.time_delay_seconds #=> Integer
     #   resp.url #=> String
     #   resp.whitelist #=> Array
@@ -548,6 +566,7 @@ module Aws::MediaPackage
     #   * {Types::DescribeChannelResponse#description #description} => String
     #   * {Types::DescribeChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::DescribeChannelResponse#id #id} => String
+    #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -565,6 +584,8 @@ module Aws::MediaPackage
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeChannel AWS API Documentation
     #
@@ -591,6 +612,7 @@ module Aws::MediaPackage
     #   * {Types::DescribeOriginEndpointResponse#manifest_name #manifest_name} => String
     #   * {Types::DescribeOriginEndpointResponse#mss_package #mss_package} => Types::MssPackage
     #   * {Types::DescribeOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
+    #   * {Types::DescribeOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeOriginEndpointResponse#time_delay_seconds #time_delay_seconds} => Integer
     #   * {Types::DescribeOriginEndpointResponse#url #url} => String
     #   * {Types::DescribeOriginEndpointResponse#whitelist #whitelist} => Array&lt;String&gt;
@@ -681,6 +703,8 @@ module Aws::MediaPackage
     #   resp.mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.startover_window_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.time_delay_seconds #=> Integer
     #   resp.url #=> String
     #   resp.whitelist #=> Array
@@ -724,6 +748,8 @@ module Aws::MediaPackage
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.channels[0].hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.channels[0].id #=> String
+    #   resp.channels[0].tags #=> Hash
+    #   resp.channels[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannels AWS API Documentation
@@ -838,6 +864,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.origin_endpoints[0].mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.origin_endpoints[0].startover_window_seconds #=> Integer
+    #   resp.origin_endpoints[0].tags #=> Hash
+    #   resp.origin_endpoints[0].tags["__string"] #=> String
     #   resp.origin_endpoints[0].time_delay_seconds #=> Integer
     #   resp.origin_endpoints[0].url #=> String
     #   resp.origin_endpoints[0].whitelist #=> Array
@@ -849,6 +877,32 @@ module Aws::MediaPackage
     # @param [Hash] params ({})
     def list_origin_endpoints(params = {}, options = {})
       req = build_request(:list_origin_endpoints, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -864,6 +918,7 @@ module Aws::MediaPackage
     #   * {Types::RotateChannelCredentialsResponse#description #description} => String
     #   * {Types::RotateChannelCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::RotateChannelCredentialsResponse#id #id} => String
+    #   * {Types::RotateChannelCredentialsResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -881,6 +936,8 @@ module Aws::MediaPackage
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentials AWS API Documentation
     #
@@ -904,6 +961,7 @@ module Aws::MediaPackage
     #   * {Types::RotateIngestEndpointCredentialsResponse#description #description} => String
     #   * {Types::RotateIngestEndpointCredentialsResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::RotateIngestEndpointCredentialsResponse#id #id} => String
+    #   * {Types::RotateIngestEndpointCredentialsResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -922,6 +980,8 @@ module Aws::MediaPackage
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentials AWS API Documentation
     #
@@ -929,6 +989,52 @@ module Aws::MediaPackage
     # @param [Hash] params ({})
     def rotate_ingest_endpoint_credentials(params = {}, options = {})
       req = build_request(:rotate_ingest_endpoint_credentials, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -944,6 +1050,7 @@ module Aws::MediaPackage
     #   * {Types::UpdateChannelResponse#description #description} => String
     #   * {Types::UpdateChannelResponse#hls_ingest #hls_ingest} => Types::HlsIngest
     #   * {Types::UpdateChannelResponse#id #id} => String
+    #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -962,6 +1069,8 @@ module Aws::MediaPackage
     #   resp.hls_ingest.ingest_endpoints[0].url #=> String
     #   resp.hls_ingest.ingest_endpoints[0].username #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateChannel AWS API Documentation
     #
@@ -1010,6 +1119,7 @@ module Aws::MediaPackage
     #   * {Types::UpdateOriginEndpointResponse#manifest_name #manifest_name} => String
     #   * {Types::UpdateOriginEndpointResponse#mss_package #mss_package} => Types::MssPackage
     #   * {Types::UpdateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
+    #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::UpdateOriginEndpointResponse#time_delay_seconds #time_delay_seconds} => Integer
     #   * {Types::UpdateOriginEndpointResponse#url #url} => String
     #   * {Types::UpdateOriginEndpointResponse#whitelist #whitelist} => Array&lt;String&gt;
@@ -1206,6 +1316,8 @@ module Aws::MediaPackage
     #   resp.mss_package.stream_selection.min_video_bits_per_second #=> Integer
     #   resp.mss_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.startover_window_seconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.time_delay_seconds #=> Integer
     #   resp.url #=> String
     #   resp.whitelist #=> Array
@@ -1233,7 +1345,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

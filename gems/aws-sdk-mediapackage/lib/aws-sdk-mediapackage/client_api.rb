@@ -46,6 +46,8 @@ module Aws::MediaPackage
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListOriginEndpointsRequest = Shapes::StructureShape.new(name: 'ListOriginEndpointsRequest')
     ListOriginEndpointsResponse = Shapes::StructureShape.new(name: 'ListOriginEndpointsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManifestLayout = Shapes::StringShape.new(name: 'ManifestLayout')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MssEncryption = Shapes::StructureShape.new(name: 'MssEncryption')
@@ -66,8 +68,12 @@ module Aws::MediaPackage
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     StreamOrder = Shapes::StringShape.new(name: 'StreamOrder')
     StreamSelection = Shapes::StructureShape.new(name: 'StreamSelection')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    Tags = Shapes::MapShape.new(name: 'Tags')
+    TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateOriginEndpointRequest = Shapes::StructureShape.new(name: 'UpdateOriginEndpointRequest')
@@ -84,16 +90,19 @@ module Aws::MediaPackage
     __listOf__PeriodTriggersElement = Shapes::ListShape.new(name: '__listOf__PeriodTriggersElement')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Channel.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Channel.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     Channel.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.struct_class = Types::Channel
 
     ChannelCreateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     ChannelCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    ChannelCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelCreateParameters.struct_class = Types::ChannelCreateParameters
 
     ChannelList.add_member(:channels, Shapes::ShapeRef.new(shape: __listOfChannel, location_name: "channels"))
@@ -123,12 +132,14 @@ module Aws::MediaPackage
 
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateChannelRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CreateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateChannelResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     CreateChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
     CreateOriginEndpointRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelId"))
@@ -140,6 +151,7 @@ module Aws::MediaPackage
     CreateOriginEndpointRequest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     CreateOriginEndpointRequest.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     CreateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
+    CreateOriginEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateOriginEndpointRequest.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     CreateOriginEndpointRequest.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     CreateOriginEndpointRequest.struct_class = Types::CreateOriginEndpointRequest
@@ -154,6 +166,7 @@ module Aws::MediaPackage
     CreateOriginEndpointResponse.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     CreateOriginEndpointResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     CreateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
+    CreateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     CreateOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     CreateOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
@@ -193,6 +206,7 @@ module Aws::MediaPackage
     DescribeChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     DescribeChannelResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     DescribeChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeOriginEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
@@ -208,6 +222,7 @@ module Aws::MediaPackage
     DescribeOriginEndpointResponse.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     DescribeOriginEndpointResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     DescribeOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
+    DescribeOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     DescribeOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     DescribeOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
@@ -276,6 +291,12 @@ module Aws::MediaPackage
     ListOriginEndpointsResponse.add_member(:origin_endpoints, Shapes::ShapeRef.new(shape: __listOfOriginEndpoint, location_name: "originEndpoints"))
     ListOriginEndpointsResponse.struct_class = Types::ListOriginEndpointsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MssEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     MssEncryption.struct_class = Types::MssEncryption
 
@@ -295,6 +316,7 @@ module Aws::MediaPackage
     OriginEndpoint.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     OriginEndpoint.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     OriginEndpoint.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
+    OriginEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     OriginEndpoint.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     OriginEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     OriginEndpoint.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
@@ -309,6 +331,7 @@ module Aws::MediaPackage
     OriginEndpointCreateParameters.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     OriginEndpointCreateParameters.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     OriginEndpointCreateParameters.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
+    OriginEndpointCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     OriginEndpointCreateParameters.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     OriginEndpointCreateParameters.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     OriginEndpointCreateParameters.struct_class = Types::OriginEndpointCreateParameters
@@ -335,6 +358,7 @@ module Aws::MediaPackage
     RotateChannelCredentialsResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     RotateChannelCredentialsResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     RotateChannelCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    RotateChannelCredentialsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RotateChannelCredentialsResponse.struct_class = Types::RotateChannelCredentialsResponse
 
     RotateIngestEndpointCredentialsRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
@@ -345,6 +369,7 @@ module Aws::MediaPackage
     RotateIngestEndpointCredentialsResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     RotateIngestEndpointCredentialsResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     RotateIngestEndpointCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    RotateIngestEndpointCredentialsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RotateIngestEndpointCredentialsResponse.struct_class = Types::RotateIngestEndpointCredentialsResponse
 
     SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __string, location_name: "certificateArn"))
@@ -359,6 +384,20 @@ module Aws::MediaPackage
     StreamSelection.add_member(:stream_order, Shapes::ShapeRef.new(shape: StreamOrder, location_name: "streamOrder"))
     StreamSelection.struct_class = Types::StreamSelection
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    Tags.key = Shapes::ShapeRef.new(shape: __string)
+    Tags.value = Shapes::ShapeRef.new(shape: __string)
+
+    TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagsModel.struct_class = Types::TagsModel
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
     UpdateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateChannelRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
@@ -367,6 +406,7 @@ module Aws::MediaPackage
     UpdateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateChannelResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     UpdateChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
     UpdateOriginEndpointRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
@@ -391,6 +431,7 @@ module Aws::MediaPackage
     UpdateOriginEndpointResponse.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     UpdateOriginEndpointResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     UpdateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
+    UpdateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     UpdateOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     UpdateOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
@@ -409,6 +450,9 @@ module Aws::MediaPackage
     __listOf__PeriodTriggersElement.member = Shapes::ShapeRef.new(shape: __PeriodTriggersElement)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private
@@ -553,6 +597,14 @@ module Aws::MediaPackage
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
       api.add_operation(:rotate_channel_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RotateChannelCredentials"
         o.http_method = "PUT"
@@ -580,6 +632,22 @@ module Aws::MediaPackage
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|

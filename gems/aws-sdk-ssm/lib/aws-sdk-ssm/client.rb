@@ -4740,6 +4740,55 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # UpdateServiceSetting API action to change the default setting. Or use
+    # the ResetServiceSetting to change the value back to the original value
+    # defined by the AWS service team.
+    #
+    # Query the current service setting for the account.
+    #
+    # @option params [required, String] :setting_id
+    #   The ID of the service setting to get.
+    #
+    # @return [Types::GetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceSettingResult#service_setting #service_setting} => Types::ServiceSetting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_setting({
+    #     setting_id: "ServiceSettingId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_setting.setting_id #=> String
+    #   resp.service_setting.setting_value #=> String
+    #   resp.service_setting.last_modified_date #=> Time
+    #   resp.service_setting.last_modified_user #=> String
+    #   resp.service_setting.arn #=> String
+    #   resp.service_setting.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSetting AWS API Documentation
+    #
+    # @overload get_service_setting(params = {})
+    # @param [Hash] params ({})
+    def get_service_setting(params = {}, options = {})
+      req = build_request(:get_service_setting, params)
+      req.send_request(options)
+    end
+
     # A parameter label is a user-defined alias to help you manage different
     # versions of a parameter. When you modify a parameter, Systems Manager
     # automatically saves a new version and increments the version number by
@@ -6323,6 +6372,55 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # GetServiceSetting API action to view the current value. Use the
+    # UpdateServiceSetting API action to change the default setting.
+    #
+    # Reset the service setting for the account to the default value as
+    # provisioned by the AWS service team.
+    #
+    # @option params [required, String] :setting_id
+    #   The ID of the service setting to reset.
+    #
+    # @return [Types::ResetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetServiceSettingResult#service_setting #service_setting} => Types::ServiceSetting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_service_setting({
+    #     setting_id: "ServiceSettingId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_setting.setting_id #=> String
+    #   resp.service_setting.setting_value #=> String
+    #   resp.service_setting.last_modified_date #=> Time
+    #   resp.service_setting.last_modified_user #=> String
+    #   resp.service_setting.arn #=> String
+    #   resp.service_setting.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSetting AWS API Documentation
+    #
+    # @overload reset_service_setting(params = {})
+    # @param [Hash] params ({})
+    def reset_service_setting(params = {}, options = {})
+      req = build_request(:reset_service_setting, params)
+      req.send_request(options)
+    end
+
     # Reconnects a session to an instance after it has been disconnected.
     # Connections can be resumed for disconnected sessions, but not
     # terminated sessions.
@@ -7900,6 +7998,48 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # GetServiceSetting API action to view the current value. Or, use the
+    # ResetServiceSetting to change the value back to the original value
+    # defined by the AWS service team.
+    #
+    # Update the service setting for the account.
+    #
+    # @option params [required, String] :setting_id
+    #   The ID of the service setting to update.
+    #
+    # @option params [required, String] :setting_value
+    #   The new value to specify for the service setting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_setting({
+    #     setting_id: "ServiceSettingId", # required
+    #     setting_value: "ServiceSettingValue", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSetting AWS API Documentation
+    #
+    # @overload update_service_setting(params = {})
+    # @param [Hash] params ({})
+    def update_service_setting(params = {}, options = {})
+      req = build_request(:update_service_setting, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7913,7 +8053,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

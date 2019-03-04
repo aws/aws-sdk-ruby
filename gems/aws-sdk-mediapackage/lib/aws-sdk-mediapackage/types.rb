@@ -26,13 +26,18 @@ module Aws::MediaPackage
     #   The ID of the Channel.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/Channel AWS API Documentation
     #
     class Channel < Struct.new(
       :arn,
       :description,
       :hls_ingest,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -47,11 +52,16 @@ module Aws::MediaPackage
     #   it cannot be changed after a Channel is created.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ChannelCreateParameters AWS API Documentation
     #
     class ChannelCreateParameters < Struct.new(
       :description,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -231,6 +241,9 @@ module Aws::MediaPackage
     #       {
     #         description: "__string",
     #         id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] description
@@ -239,11 +252,16 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
       :description,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -260,13 +278,18 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelResponse AWS API Documentation
     #
     class CreateChannelResponse < Struct.new(
       :arn,
       :description,
       :hls_ingest,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -380,6 +403,9 @@ module Aws::MediaPackage
     #           },
     #         },
     #         startover_window_seconds: 1,
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         time_delay_seconds: 1,
     #         whitelist: ["__string"],
     #       }
@@ -416,6 +442,10 @@ module Aws::MediaPackage
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] time_delay_seconds
     #   @return [Integer]
     #
@@ -434,6 +464,7 @@ module Aws::MediaPackage
       :manifest_name,
       :mss_package,
       :startover_window_seconds,
+      :tags,
       :time_delay_seconds,
       :whitelist)
       include Aws::Structure
@@ -474,6 +505,10 @@ module Aws::MediaPackage
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] time_delay_seconds
     #   @return [Integer]
     #
@@ -496,6 +531,7 @@ module Aws::MediaPackage
       :manifest_name,
       :mss_package,
       :startover_window_seconds,
+      :tags,
       :time_delay_seconds,
       :url,
       :whitelist)
@@ -721,13 +757,18 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
       :arn,
       :description,
       :hls_ingest,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -783,6 +824,10 @@ module Aws::MediaPackage
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] time_delay_seconds
     #   @return [Integer]
     #
@@ -805,6 +850,7 @@ module Aws::MediaPackage
       :manifest_name,
       :mss_package,
       :startover_window_seconds,
+      :tags,
       :time_delay_seconds,
       :url,
       :whitelist)
@@ -1227,6 +1273,33 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A Microsoft Smooth Streaming (MSS) encryption configuration.
     #
     # @note When making an API call, you may pass MssEncryption
@@ -1350,6 +1423,10 @@ module Aws::MediaPackage
     #   the OriginEndpoint.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] time_delay_seconds
     #   Amount of delay (seconds) to enforce on the playback of live
     #   content. If not specified, there will be no time delay in effect for
@@ -1378,6 +1455,7 @@ module Aws::MediaPackage
       :manifest_name,
       :mss_package,
       :startover_window_seconds,
+      :tags,
       :time_delay_seconds,
       :url,
       :whitelist)
@@ -1428,6 +1506,10 @@ module Aws::MediaPackage
     #   the OriginEndpoint.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] time_delay_seconds
     #   Amount of delay (seconds) to enforce on the playback of live
     #   content. If not specified, there will be no time delay in effect for
@@ -1451,6 +1533,7 @@ module Aws::MediaPackage
       :manifest_name,
       :mss_package,
       :startover_window_seconds,
+      :tags,
       :time_delay_seconds,
       :whitelist)
       include Aws::Structure
@@ -1564,13 +1647,18 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsResponse AWS API Documentation
     #
     class RotateChannelCredentialsResponse < Struct.new(
       :arn,
       :description,
       :hls_ingest,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1609,13 +1697,18 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsResponse AWS API Documentation
     #
     class RotateIngestEndpointCredentialsResponse < Struct.new(
       :arn,
       :description,
       :hls_ingest,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1699,6 +1792,62 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/TagsModel AWS API Documentation
+    #
+    class TagsModel < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateChannelRequest
     #   data as a hash:
     #
@@ -1734,13 +1883,18 @@ module Aws::MediaPackage
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
       :arn,
       :description,
       :hls_ingest,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1943,6 +2097,10 @@ module Aws::MediaPackage
     # @!attribute [rw] startover_window_seconds
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] time_delay_seconds
     #   @return [Integer]
     #
@@ -1965,6 +2123,7 @@ module Aws::MediaPackage
       :manifest_name,
       :mss_package,
       :startover_window_seconds,
+      :tags,
       :time_delay_seconds,
       :url,
       :whitelist)
