@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.233 (2019-03-04)
+------------------
+
 * Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
