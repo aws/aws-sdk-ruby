@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.234 (2019-03-05)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the documentation for AWS CodeDeploy.
 
 * Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
