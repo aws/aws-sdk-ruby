@@ -308,6 +308,7 @@ module Aws::StorageGateway
     ActivateGatewayInput.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     ActivateGatewayInput.add_member(:tape_drive_type, Shapes::ShapeRef.new(shape: TapeDriveType, location_name: "TapeDriveType"))
     ActivateGatewayInput.add_member(:medium_changer_type, Shapes::ShapeRef.new(shape: MediumChangerType, location_name: "MediumChangerType"))
+    ActivateGatewayInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ActivateGatewayInput.struct_class = Types::ActivateGatewayInput
 
     ActivateGatewayOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
@@ -420,6 +421,7 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     CreateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    CreateNFSFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -439,6 +441,7 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
+    CreateSMBFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSMBFileShareInput.struct_class = Types::CreateSMBFileShareInput
 
     CreateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -595,6 +598,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     DescribeGatewayInformationOutput.add_member(:next_update_availability_date, Shapes::ShapeRef.new(shape: NextUpdateAvailabilityDate, location_name: "NextUpdateAvailabilityDate"))
     DescribeGatewayInformationOutput.add_member(:last_software_update, Shapes::ShapeRef.new(shape: LastSoftwareUpdate, location_name: "LastSoftwareUpdate"))
+    DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -869,6 +873,7 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     NFSFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     NFSFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    NFSFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -938,6 +943,7 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
+    SMBFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
 
     SMBFileShareInfoList.member = Shapes::ShapeRef.new(shape: SMBFileShareInfo)

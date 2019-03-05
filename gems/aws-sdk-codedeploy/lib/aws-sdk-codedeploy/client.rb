@@ -888,15 +888,32 @@ module Aws::CodeDeploy
     #   A comment about the deployment.
     #
     # @option params [Boolean] :ignore_application_stop_failures
-    #   If set to true, then if the deployment causes the ApplicationStop
-    #   deployment lifecycle event to an instance to fail, the deployment to
-    #   that instance is considered to have failed at that point and continues
-    #   on to the BeforeInstall deployment lifecycle event.
+    #   If true, then if an ApplicationStop, BeforeBlockTraffic, or
+    #   AfterBlockTraffic deployment lifecycle event to an instance fails,
+    #   then the deployment continues to the next deployment lifecycle event.
+    #   For example, if ApplicationStop fails, the deployment continues with
+    #   DownloadBundle. If BeforeBlockTraffic fails, the deployment continues
+    #   with BlockTraffic. If AfterBlockTraffic fails, the deployment
+    #   continues with ApplicationStop.
     #
-    #   If set to false or not specified, then if the deployment causes the
-    #   ApplicationStop deployment lifecycle event to fail to an instance, the
-    #   deployment to that instance stops, and the deployment to that instance
-    #   is considered to have failed.
+    #   If false or not specified, then if a lifecycle event fails during a
+    #   deployment to an instance, that deployment fails. If deployment to
+    #   that instance is part of an overall deployment and the number of
+    #   healthy hosts is not less than the minimum number of healthy hosts,
+    #   then a deployment to the next instance is attempted.
+    #
+    #   During a deployment, the AWS CodeDeploy agent runs the scripts
+    #   specified for ApplicationStop, BeforeBlockTraffic, and
+    #   AfterBlockTraffic in the AppSpec file from the previous successful
+    #   deployment. (All other scripts are run from the AppSpec file in the
+    #   current deployment.) If one of these scripts contains an error and
+    #   does not run successfully, the deployment can fail.
+    #
+    #   If the cause of the failure is a script from the last successful
+    #   deployment that will never run successfully, create a new deployment
+    #   and use `ignoreApplicationStopFailures` to specify that the
+    #   ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures
+    #   should be ignored.
     #
     # @option params [Types::TargetInstances] :target_instances
     #   Information about the instances that belong to the replacement
@@ -1101,7 +1118,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
     #
     # @option params [Array<Types::EC2TagFilter>] :ec2_tag_filters
     #   The Amazon EC2 tags on which to filter. The deployment group includes
@@ -1127,7 +1144,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   Information to add about Amazon CloudWatch alarms when the deployment
@@ -1544,6 +1561,13 @@ module Aws::CodeDeploy
     end
 
     # Gets information about a deployment.
+    #
+    # <note markdown="1"> The `content` property of the `appSpecContent` object in the returned
+    # revision is always null. Use `GetApplicationRevision` and the `sha256`
+    # property of the returned `appSpecContent` object to get the content of
+    # the deployment’s AppSpec file.
+    #
+    #  </note>
     #
     # @option params [required, String] :deployment_id
     #   The unique ID of a deployment associated with the IAM user or AWS
@@ -2740,7 +2764,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   Information to add or change about Amazon CloudWatch alarms when the
@@ -2927,7 +2951,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

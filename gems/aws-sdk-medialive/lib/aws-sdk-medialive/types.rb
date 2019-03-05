@@ -939,6 +939,13 @@ module Aws::MediaLive
     #               input_switch_settings: {
     #                 input_attachment_name_reference: "__string", # required
     #               },
+    #               pause_state_settings: {
+    #                 pipelines: [
+    #                   {
+    #                     pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #                   },
+    #                 ],
+    #               },
     #               scte_35_return_to_network_settings: {
     #                 splice_event_id: 1, # required
     #               },
@@ -1082,6 +1089,13 @@ module Aws::MediaLive
     #                 },
     #                 input_switch_settings: {
     #                   input_attachment_name_reference: "__string", # required
+    #                 },
+    #                 pause_state_settings: {
+    #                   pipelines: [
+    #                     {
+    #                       pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #                     },
+    #                   ],
     #                 },
     #                 scte_35_return_to_network_settings: {
     #                   splice_event_id: 1, # required
@@ -1975,6 +1989,10 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -1988,7 +2006,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -2880,6 +2899,14 @@ module Aws::MediaLive
     # @!attribute [rw] type
     #   @return [String]
     #
+    # @!attribute [rw] vpc
+    #   Settings for a private VPC Input. When this property is specified,
+    #   the input destination addresses will be created in a VPC rather than
+    #   with public Internet addresses. This property requires setting the
+    #   roleArn property on Input creation. Not compatible with the
+    #   inputSecurityGroups property.
+    #   @return [Types::InputVpcRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
     class CreateInput < Struct.new(
@@ -2891,7 +2918,8 @@ module Aws::MediaLive
       :role_arn,
       :sources,
       :tags,
-      :type)
+      :type,
+      :vpc)
       include Aws::Structure
     end
 
@@ -5727,14 +5755,21 @@ module Aws::MediaLive
     #   @return [Types::HlsCdnSettings]
     #
     # @!attribute [rw] i_frame_only_playlists
-    #   If enabled, writes out I-Frame only playlists in addition to media
-    #   playlists.
+    #   DISABLED: Do not create an I-frame-only manifest, but do create the
+    #   master and media manifests (according to the Output Selection
+    #   field). STANDARD: Create an I-frame-only manifest for each output
+    #   that contains video, as well as the other manifests (according to
+    #   the Output Selection field). The I-frame manifest contains a
+    #   #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or
+    #   more #EXT-X-BYTERANGE entries identifying the I-frame position. For
+    #   example, #EXT-X-BYTERANGE:160364@1461888"
     #   @return [String]
     #
     # @!attribute [rw] index_n_segments
-    #   If mode is "live", the number of segments to retain in the
-    #   manifest (.m3u8) file. This number must be less than or equal to
-    #   keepSegments. If mode is "vod", this parameter has no effect.
+    #   Applies only if Mode field is LIVE. Specifies the maximum number of
+    #   segments in the media manifest file. After this maximum, older
+    #   segments are removed from the media manifest. This number must be
+    #   less than or equal to the Keep Segments field.
     #   @return [Integer]
     #
     # @!attribute [rw] input_loss_action
@@ -5757,9 +5792,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] keep_segments
-    #   If mode is "live", the number of TS segments to retain in the
-    #   destination directory. If mode is "vod", this parameter has no
-    #   effect.
+    #   Applies only if Mode field is LIVE. Specifies the number of media
+    #   segments (.ts files) to retain in the destination directory.
     #   @return [Integer]
     #
     # @!attribute [rw] key_format
@@ -5804,8 +5838,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] output_selection
-    #   Generates the .m3u8 playlist file for this HLS output group. The
-    #   segmentsOnly option will output segments without the .m3u8 file.
+    #   MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if
+    #   applicable, and media manifests) for this output group.
+    #   SEGMENTSONLY: Does not generate any manifests for this output group.
     #   @return [String]
     #
     # @!attribute [rw] program_date_time
@@ -5861,10 +5896,14 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] ts_file_mode
-    #   When set to "singleFile", emits the program as a single media
-    #   resource (.ts) file, and uses #EXT-X-BYTERANGE tags to index segment
-    #   for playback. Playback of VOD mode content during event is not
-    #   guaranteed due to HTTP server caching.
+    #   SEGMENTEDFILES: Emit the program as segments - multiple .ts media
+    #   files. SINGLEFILE: Applies only if Mode field is VOD. Emit the
+    #   program as a single .ts media file. The media manifest includes
+    #   #EXT-X-BYTERANGE tags to index segments for playback. A typical use
+    #   for this value is when sending the output to AWS Elemental
+    #   MediaConvert, which can accept only a single media file. Playback
+    #   while the channel is running is not guaranteed due to HTTP server
+    #   caching.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsGroupSettings AWS API Documentation
@@ -9277,6 +9316,49 @@ module Aws::MediaLive
     #
     class PassThroughSettings < Aws::EmptyStructure; end
 
+    # Settings for the action to set pause state of a channel.
+    #
+    # @note When making an API call, you may pass PauseStateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         pipelines: [
+    #           {
+    #             pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] pipelines
+    #   @return [Array<Types::PipelinePauseStateSettings>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PauseStateScheduleActionSettings AWS API Documentation
+    #
+    class PauseStateScheduleActionSettings < Struct.new(
+      :pipelines)
+      include Aws::Structure
+    end
+
+    # Settings for pausing a pipeline.
+    #
+    # @note When making an API call, you may pass PipelinePauseStateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #       }
+    #
+    # @!attribute [rw] pipeline_id
+    #   Pipeline ID to pause ("PIPELINE\_0" or "PIPELINE\_1").
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelinePauseStateSettings AWS API Documentation
+    #
+    class PipelinePauseStateSettings < Struct.new(
+      :pipeline_id)
+      include Aws::Structure
+    end
+
     # PurchaseOffering request
     #
     # @!attribute [rw] count
@@ -9703,6 +9785,13 @@ module Aws::MediaLive
     #           input_switch_settings: {
     #             input_attachment_name_reference: "__string", # required
     #           },
+    #           pause_state_settings: {
+    #             pipelines: [
+    #               {
+    #                 pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #               },
+    #             ],
+    #           },
     #           scte_35_return_to_network_settings: {
     #             splice_event_id: 1, # required
     #           },
@@ -9806,6 +9895,13 @@ module Aws::MediaLive
     #         input_switch_settings: {
     #           input_attachment_name_reference: "__string", # required
     #         },
+    #         pause_state_settings: {
+    #           pipelines: [
+    #             {
+    #               pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #             },
+    #           ],
+    #         },
     #         scte_35_return_to_network_settings: {
     #           splice_event_id: 1, # required
     #         },
@@ -9862,31 +9958,35 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] hls_timed_metadata_settings
-    #   Settings to emit HLS metadata
+    #   Action to insert HLS metadata
     #   @return [Types::HlsTimedMetadataScheduleActionSettings]
     #
     # @!attribute [rw] input_switch_settings
-    #   Settings to switch an input
+    #   Action to switch the input
     #   @return [Types::InputSwitchScheduleActionSettings]
     #
+    # @!attribute [rw] pause_state_settings
+    #   Action to pause or unpause one or both channel pipelines
+    #   @return [Types::PauseStateScheduleActionSettings]
+    #
     # @!attribute [rw] scte_35_return_to_network_settings
-    #   Settings for SCTE-35 return\_to\_network message
+    #   Action to insert SCTE-35 return\_to\_network message
     #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_splice_insert_settings
-    #   Settings for SCTE-35 splice\_insert message
+    #   Action to insert SCTE-35 splice\_insert message
     #   @return [Types::Scte35SpliceInsertScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_time_signal_settings
-    #   Settings for SCTE-35 time\_signal message
+    #   Action to insert SCTE-35 time\_signal message
     #   @return [Types::Scte35TimeSignalScheduleActionSettings]
     #
     # @!attribute [rw] static_image_activate_settings
-    #   Settings to activate a static image overlay
+    #   Action to activate a static image overlay
     #   @return [Types::StaticImageActivateScheduleActionSettings]
     #
     # @!attribute [rw] static_image_deactivate_settings
-    #   Settings to deactivate a static image overlay
+    #   Action to deactivate a static image overlay
     #   @return [Types::StaticImageDeactivateScheduleActionSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
@@ -9894,6 +9994,7 @@ module Aws::MediaLive
     class ScheduleActionSettings < Struct.new(
       :hls_timed_metadata_settings,
       :input_switch_settings,
+      :pause_state_settings,
       :scte_35_return_to_network_settings,
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,

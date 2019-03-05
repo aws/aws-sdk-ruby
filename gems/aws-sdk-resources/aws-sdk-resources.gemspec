@@ -174,6 +174,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-states', '~> 1')
   spec.add_dependency('aws-sdk-storagegateway', '~> 1')
   spec.add_dependency('aws-sdk-support', '~> 1')
+  spec.add_dependency('aws-sdk-textract', '~> 1')
   spec.add_dependency('aws-sdk-transcribeservice', '~> 1')
   spec.add_dependency('aws-sdk-transfer', '~> 1')
   spec.add_dependency('aws-sdk-translate', '~> 1')

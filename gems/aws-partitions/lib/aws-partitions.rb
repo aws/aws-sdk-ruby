@@ -381,6 +381,7 @@ module Aws
             'States' => 'states',
             'StorageGateway' => 'storagegateway',
             'Support' => 'support',
+            'Textract' => 'textract',
             'TranscribeService' => 'transcribe',
             'Transfer' => 'transfer',
             'Translate' => 'translate',

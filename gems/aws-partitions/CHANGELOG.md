@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2019-03-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Textract`.
+
 1.141.0 (2019-02-26)
 ------------------
 

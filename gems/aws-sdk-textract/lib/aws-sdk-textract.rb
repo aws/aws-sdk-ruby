@@ -8,16 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codedeploy/types'
-require_relative 'aws-sdk-codedeploy/client_api'
-require_relative 'aws-sdk-codedeploy/client'
-require_relative 'aws-sdk-codedeploy/errors'
-require_relative 'aws-sdk-codedeploy/waiters'
-require_relative 'aws-sdk-codedeploy/resource'
-require_relative 'aws-sdk-codedeploy/customizations'
+require_relative 'aws-sdk-textract/types'
+require_relative 'aws-sdk-textract/client_api'
+require_relative 'aws-sdk-textract/client'
+require_relative 'aws-sdk-textract/errors'
+require_relative 'aws-sdk-textract/resource'
+require_relative 'aws-sdk-textract/customizations'
 
-# This module provides support for AWS CodeDeploy. This module is available in the
-# `aws-sdk-codedeploy` gem.
+# This module provides support for Amazon Textract. This module is available in the
+# `aws-sdk-textract` gem.
 #
 # # Client
 #
@@ -29,20 +28,20 @@ require_relative 'aws-sdk-codedeploy/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS CodeDeploy all
+# Errors returned from Amazon Textract all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::CodeDeploy::Errors::ServiceError
+#     rescue Aws::Textract::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::CodeDeploy
+module Aws::Textract
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.0.0'
 
 end

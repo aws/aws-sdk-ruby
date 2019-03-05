@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.40.0 (2019-03-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-textract` gem.
+
 3.39.0 (2019-01-23)
 ------------------
 

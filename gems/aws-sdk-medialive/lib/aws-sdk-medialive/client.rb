@@ -235,6 +235,13 @@ module Aws::MediaLive
     #             input_switch_settings: {
     #               input_attachment_name_reference: "__string", # required
     #             },
+    #             pause_state_settings: {
+    #               pipelines: [
+    #                 {
+    #                   pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #                 },
+    #               ],
+    #             },
     #             scte_35_return_to_network_settings: {
     #               splice_event_id: 1, # required
     #             },
@@ -312,6 +319,8 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].action_name #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -351,6 +360,8 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].action_name #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -3210,6 +3221,8 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].action_name #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -3329,6 +3342,8 @@ module Aws::MediaLive
     #   resp.channels[0].pipelines_running_count #=> Integer
     #   resp.channels[0].role_arn #=> String
     #   resp.channels[0].state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.channels[0].tags #=> Hash
+    #   resp.channels[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -6072,7 +6087,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

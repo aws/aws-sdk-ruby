@@ -317,6 +317,9 @@ module Aws::MediaLive
     OutputLocationRef = Shapes::StructureShape.new(name: 'OutputLocationRef')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
+    PauseStateScheduleActionSettings = Shapes::StructureShape.new(name: 'PauseStateScheduleActionSettings')
+    PipelineId = Shapes::StringShape.new(name: 'PipelineId')
+    PipelinePauseStateSettings = Shapes::StructureShape.new(name: 'PipelinePauseStateSettings')
     PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
@@ -496,6 +499,7 @@ module Aws::MediaLive
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
     __listOfOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfOutputDestinationSettings')
     __listOfOutputGroup = Shapes::ListShape.new(name: '__listOfOutputGroup')
+    __listOfPipelinePauseStateSettings = Shapes::ListShape.new(name: '__listOfPipelinePauseStateSettings')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
@@ -736,6 +740,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     ChannelSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     ChannelSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     CreateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -777,6 +782,7 @@ module Aws::MediaLive
     CreateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     CreateInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInput.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
+    CreateInput.add_member(:vpc, Shapes::ShapeRef.new(shape: InputVpcRequest, location_name: "vpc"))
     CreateInput.struct_class = Types::CreateInput
 
     CreateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
@@ -1551,6 +1557,12 @@ module Aws::MediaLive
 
     PassThroughSettings.struct_class = Types::PassThroughSettings
 
+    PauseStateScheduleActionSettings.add_member(:pipelines, Shapes::ShapeRef.new(shape: __listOfPipelinePauseStateSettings, location_name: "pipelines"))
+    PauseStateScheduleActionSettings.struct_class = Types::PauseStateScheduleActionSettings
+
+    PipelinePauseStateSettings.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: PipelineId, required: true, location_name: "pipelineId"))
+    PipelinePauseStateSettings.struct_class = Types::PipelinePauseStateSettings
+
     PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
     PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
@@ -1632,6 +1644,7 @@ module Aws::MediaLive
 
     ScheduleActionSettings.add_member(:hls_timed_metadata_settings, Shapes::ShapeRef.new(shape: HlsTimedMetadataScheduleActionSettings, location_name: "hlsTimedMetadataSettings"))
     ScheduleActionSettings.add_member(:input_switch_settings, Shapes::ShapeRef.new(shape: InputSwitchScheduleActionSettings, location_name: "inputSwitchSettings"))
+    ScheduleActionSettings.add_member(:pause_state_settings, Shapes::ShapeRef.new(shape: PauseStateScheduleActionSettings, location_name: "pauseStateSettings"))
     ScheduleActionSettings.add_member(:scte_35_return_to_network_settings, Shapes::ShapeRef.new(shape: Scte35ReturnToNetworkScheduleActionSettings, location_name: "scte35ReturnToNetworkSettings"))
     ScheduleActionSettings.add_member(:scte_35_splice_insert_settings, Shapes::ShapeRef.new(shape: Scte35SpliceInsertScheduleActionSettings, location_name: "scte35SpliceInsertSettings"))
     ScheduleActionSettings.add_member(:scte_35_time_signal_settings, Shapes::ShapeRef.new(shape: Scte35TimeSignalScheduleActionSettings, location_name: "scte35TimeSignalSettings"))
@@ -1941,6 +1954,8 @@ module Aws::MediaLive
     __listOfOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: OutputDestinationSettings)
 
     __listOfOutputGroup.member = Shapes::ShapeRef.new(shape: OutputGroup)
+
+    __listOfPipelinePauseStateSettings.member = Shapes::ShapeRef.new(shape: PipelinePauseStateSettings)
 
     __listOfReservation.member = Shapes::ShapeRef.new(shape: Reservation)
 

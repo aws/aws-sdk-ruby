@@ -165,6 +165,7 @@ module Aws
   autoload :States, 'aws-sdk-states'
   autoload :StorageGateway, 'aws-sdk-storagegateway'
   autoload :Support, 'aws-sdk-support'
+  autoload :Textract, 'aws-sdk-textract'
   autoload :TranscribeService, 'aws-sdk-transcribeservice'
   autoload :Transfer, 'aws-sdk-transfer'
   autoload :Translate, 'aws-sdk-translate'

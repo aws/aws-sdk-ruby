@@ -458,6 +458,7 @@ to be backwards compatible.
 | Amazon Simple Systems Manager (SSM)                   | Aws::SSM                             | aws-sdk-ssm                             | 2014-11-06  |
 | Amazon Simple Workflow Service                        | Aws::SWF                             | aws-sdk-swf                             | 2012-01-25  |
 | Amazon SimpleDB                                       | Aws::SimpleDB                        | aws-sdk-simpledb                        | 2009-04-15  |
+| Amazon Textract                                       | Aws::Textract                        | aws-sdk-textract                        | 2018-06-27  |
 | Amazon Transcribe Service                             | Aws::TranscribeService               | aws-sdk-transcribeservice               | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
