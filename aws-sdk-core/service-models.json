@@ -646,6 +646,10 @@
     "models": "support/2013-04-15",
     "endpoint": "support"
   },
+  "Textract": {
+    "models": "textract/2018-06-27",
+    "endpoint": "textract"
+  },
   "TranscribeService": {
     "models": "transcribe/2017-10-26",
     "endpoint": "transcribe"

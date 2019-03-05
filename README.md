@@ -413,6 +413,7 @@ to be backwards compatible.
 | Amazon Simple Systems Manager (SSM)                   | SSM                             | 2014-11-06  |
 | Amazon Simple Workflow Service                        | SWF                             | 2012-01-25  |
 | Amazon SimpleDB                                       | SimpleDB                        | 2009-04-15  |
+| Amazon Textract                                       | Textract                        | 2018-06-27  |
 | Amazon Transcribe Service                             | TranscribeService               | 2017-10-26  |
 | Amazon Translate                                      | Translate                       | 2017-07-01  |
 | Amazon WorkDocs                                       | WorkDocs                        | 2016-05-01  |

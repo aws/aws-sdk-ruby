@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the documentation for AWS CodeDeploy.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::Textract - Added support for a new service, Amazon Textract.
+
 2.11.233 (2019-03-04)
 ------------------
 

@@ -185,6 +185,7 @@ module Aws
     States
     StorageGateway
     Support
+    Textract
     TranscribeService
     Transfer
     Translate
