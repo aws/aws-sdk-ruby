@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.235 (2019-03-06)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
