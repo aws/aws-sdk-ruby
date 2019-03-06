@@ -700,8 +700,6 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -753,30 +751,25 @@ module Aws::EC2
     #   One or more VPC peering connection IDs.
     #
     #   Default: Describes all your VPC peering connections.
-    # @option options [String] :next_token
-    #   The token to request the next page of results. (You received this
-    #   token from a prior call.)
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
     # @return [VpcPeeringConnection::Collection]
     def accepted_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "accepter-vpc-info.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end
@@ -1150,20 +1143,22 @@ module Aws::EC2
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "attachment.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_internet_gateways(options)
-        resp.data.internet_gateways.each do |i|
-          batch << InternetGateway.new(
-            id: i.internet_gateway_id,
-            data: i,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.internet_gateways.each do |i|
+            batch << InternetGateway.new(
+              id: i.internet_gateway_id,
+              data: i,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       InternetGateway::Collection.new(batches)
     end
@@ -1246,20 +1241,22 @@ module Aws::EC2
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_acls(options)
-        resp.data.network_acls.each do |n|
-          batch << NetworkAcl.new(
-            id: n.network_acl_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_acls.each do |n|
+            batch << NetworkAcl.new(
+              id: n.network_acl_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkAcl::Collection.new(batches)
     end
@@ -1432,8 +1429,6 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -1485,30 +1480,25 @@ module Aws::EC2
     #   One or more VPC peering connection IDs.
     #
     #   Default: Describes all your VPC peering connections.
-    # @option options [String] :next_token
-    #   The token to request the next page of results. (You received this
-    #   token from a prior call.)
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
     # @return [VpcPeeringConnection::Collection]
     def requested_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "requester-vpc-info.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end

@@ -2732,6 +2732,12 @@ module Aws::EC2
 
     # Provides authorization for Amazon to bring a specific IP address range
     # to a specific AWS account using bring your own IP addresses (BYOIP).
+    # For more information, see [Prepare to Bring Your Address Range to Your
+    # AWS Account][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip
     #
     # @note When making an API call, you may pass CidrAuthorizationContext
     #   data as a hash:
@@ -9653,19 +9659,16 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results of the initial request can be seen by
-    #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000. If `MaxResults` is given a value
-    #   larger than 1000, only 1000 results are returned. You cannot specify
-    #   this parameter and the instance IDs parameter in the same request.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     #   Constraint: If the value is greater than 1000, we return only 1000
     #   items.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesRequest AWS API Documentation
@@ -10261,15 +10264,13 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
-    #   results are returned.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysRequest AWS API Documentation
@@ -10287,7 +10288,8 @@ module Aws::EC2
     #   @return [Array<Types::EgressOnlyInternetGateway>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysResult AWS API Documentation
@@ -10808,16 +10810,13 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
-    #   results are returned. You cannot specify this parameter and the flow
-    #   log IDs parameter in the same request.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsRequest AWS API Documentation
@@ -12339,6 +12338,8 @@ module Aws::EC2
     #         ],
     #         dry_run: false,
     #         internet_gateway_ids: ["String"],
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -12379,12 +12380,24 @@ module Aws::EC2
     #   Default: Describes all your internet gateways.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysRequest AWS API Documentation
     #
     class DescribeInternetGatewaysRequest < Struct.new(
       :filters,
       :dry_run,
-      :internet_gateway_ids)
+      :internet_gateway_ids,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -12392,10 +12405,16 @@ module Aws::EC2
     #   Information about one or more internet gateways.
     #   @return [Array<Types::InternetGateway>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysResult AWS API Documentation
     #
     class DescribeInternetGatewaysResult < Struct.new(
-      :internet_gateways)
+      :internet_gateways,
+      :next_token)
       include Aws::Structure
     end
 
@@ -12774,12 +12793,9 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
-    #
-    #   Constraint: If the value specified is greater than 1000, we return
-    #   only 1000 items.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] nat_gateway_ids
@@ -12787,7 +12803,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysRequest AWS API Documentation
@@ -12829,6 +12845,8 @@ module Aws::EC2
     #         ],
     #         dry_run: false,
     #         network_acl_ids: ["String"],
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -12899,12 +12917,24 @@ module Aws::EC2
     #   Default: Describes all your network ACLs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsRequest AWS API Documentation
     #
     class DescribeNetworkAclsRequest < Struct.new(
       :filters,
       :dry_run,
-      :network_acl_ids)
+      :network_acl_ids,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -12912,10 +12942,16 @@ module Aws::EC2
     #   Information about one or more network ACLs.
     #   @return [Array<Types::NetworkAcl>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsResult AWS API Documentation
     #
     class DescribeNetworkAclsResult < Struct.new(
-      :network_acls)
+      :network_acls,
+      :next_token)
       include Aws::Structure
     end
 
@@ -13343,17 +13379,13 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
-    #
-    #   Constraint: If the value specified is greater than 1000, we return
-    #   only 1000 items.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] prefix_list_ids
@@ -13372,8 +13404,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token to use when requesting the next set of items. If there are
-    #   no additional items to return, the string is empty.
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] prefix_lists
@@ -14140,13 +14172,13 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. To
+    #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
-    #   **NextToken** value. This value can be between 5 and 100.
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesRequest AWS API Documentation
@@ -16418,14 +16450,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] vpc_ids
@@ -16442,7 +16473,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] next_token
-    #   The token to use when requesting the next set of items.
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] vpcs
@@ -17079,14 +17111,13 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to request the next page of results. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for this request. The
-    #   request returns a token that you can specify in a subsequent call to
-    #   get the next set of results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsRequest AWS API Documentation
@@ -17129,6 +17160,8 @@ module Aws::EC2
     #         ],
     #         vpc_ids: ["String"],
     #         dry_run: false,
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -17191,12 +17224,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsRequest AWS API Documentation
     #
     class DescribeVpcsRequest < Struct.new(
       :filters,
       :vpc_ids,
-      :dry_run)
+      :dry_run,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -17204,10 +17249,16 @@ module Aws::EC2
     #   Information about one or more VPCs.
     #   @return [Array<Types::Vpc>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsResult AWS API Documentation
     #
     class DescribeVpcsResult < Struct.new(
-      :vpcs)
+      :vpcs,
+      :next_token)
       include Aws::Structure
     end
 

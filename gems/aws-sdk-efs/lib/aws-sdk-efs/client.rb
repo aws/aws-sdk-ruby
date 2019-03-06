@@ -982,6 +982,25 @@ module Aws::EFS
     #
     #   * {Types::LifecycleConfigurationDescription#lifecycle_policies #lifecycle_policies} => Array&lt;Types::LifecyclePolicy&gt;
     #
+    #
+    # @example Example: To describe the lifecycle configuration for a file system
+    #
+    #   # This operation describes a file system's LifecycleConfiguration. EFS lifecycle management uses the
+    #   # LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. 
+    #
+    #   resp = client.describe_lifecycle_configuration({
+    #     file_system_id: "fs-01234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policies: [
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_lifecycle_configuration({
@@ -1322,6 +1341,31 @@ module Aws::EFS
     #
     #   * {Types::LifecycleConfigurationDescription#lifecycle_policies #lifecycle_policies} => Array&lt;Types::LifecyclePolicy&gt;
     #
+    #
+    # @example Example: Creates a new lifecycleconfiguration object for a file system
+    #
+    #   # This operation enables lifecycle management on a file system by creating a new LifecycleConfiguration object. A
+    #   # LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the
+    #   # lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system.
+    #
+    #   resp = client.put_lifecycle_configuration({
+    #     file_system_id: "fs-01234567", 
+    #     lifecycle_policies: [
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policies: [
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_lifecycle_configuration({
@@ -1433,7 +1477,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10543,18 +10543,15 @@ module Aws::EC2
     #   ClassicLink.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results of the initial request can be seen by
-    #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000. If `MaxResults` is given a value
-    #   larger than 1000, only 1000 results are returned. You cannot specify
-    #   this parameter and the instance IDs parameter in the same request.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     #   Constraint: If the value is greater than 1000, we return only 1000
     #   items.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeClassicLinkInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11259,14 +11256,12 @@ module Aws::EC2
     #   One or more egress-only internet gateway IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
-    #   results are returned.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeEgressOnlyInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11737,15 +11732,12 @@ module Aws::EC2
     #   One or more flow log IDs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `NextToken` value. This value can be between 5 and
-    #   1000. If `MaxResults` is given a value larger than 1000, only 1000
-    #   results are returned. You cannot specify this parameter and the flow
-    #   log IDs parameter in the same request.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13928,9 +13920,18 @@ module Aws::EC2
     #
     #   Default: Describes all your internet gateways.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeInternetGatewaysResult#internet_gateways #internet_gateways} => Array&lt;Types::InternetGateway&gt;
+    #   * {Types::DescribeInternetGatewaysResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe the Internet gateway for a VPC
@@ -13976,6 +13977,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     internet_gateway_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -13989,6 +13992,7 @@ module Aws::EC2
     #   resp.internet_gateways[0].tags #=> Array
     #   resp.internet_gateways[0].tags[0].key #=> String
     #   resp.internet_gateways[0].tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGateways AWS API Documentation
     #
@@ -14535,18 +14539,15 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
-    #
-    #   Constraint: If the value specified is greater than 1000, we return
-    #   only 1000 items.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [Array<String>] :nat_gateway_ids
     #   One or more NAT gateway IDs.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @return [Types::DescribeNatGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14713,9 +14714,18 @@ module Aws::EC2
     #
     #   Default: Describes all your network ACLs.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeNetworkAclsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkAclsResult#network_acls #network_acls} => Array&lt;Types::NetworkAcl&gt;
+    #   * {Types::DescribeNetworkAclsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a network ACL
@@ -14775,6 +14785,8 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     network_acl_ids: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -14802,6 +14814,7 @@ module Aws::EC2
     #   resp.network_acls[0].tags[0].value #=> String
     #   resp.network_acls[0].vpc_id #=> String
     #   resp.network_acls[0].owner_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAcls AWS API Documentation
     #
@@ -15379,16 +15392,12 @@ module Aws::EC2
     #   * `prefix-list-name`\: The name of a prefix list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
-    #
-    #   Constraint: If the value specified is greater than 1000, we return
-    #   only 1000 items.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #
     # @option params [Array<String>] :prefix_list_ids
     #   One or more prefix list IDs.
@@ -16309,12 +16318,12 @@ module Aws::EC2
     #   Default: Describes all your route tables.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another call with the returned
-    #   **NextToken** value. This value can be between 5 and 100.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @return [Types::DescribeRouteTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19751,13 +19760,12 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @option params [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #
     # @option params [Array<String>] :vpc_ids
     #   One or more VPC IDs.
@@ -20308,13 +20316,12 @@ module Aws::EC2
     #   Default: Describes all your VPC peering connections.
     #
     # @option params [String] :next_token
-    #   The token to request the next page of results. (You received this
-    #   token from a prior call.)
+    #   The token for the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for this request. The request
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #
     # @return [Types::DescribeVpcPeeringConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20438,9 +20445,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeVpcsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcsResult#vpcs #vpcs} => Array&lt;Types::Vpc&gt;
+    #   * {Types::DescribeVpcsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a VPC
@@ -20484,6 +20500,8 @@ module Aws::EC2
     #     ],
     #     vpc_ids: ["String"],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -20509,6 +20527,7 @@ module Aws::EC2
     #   resp.vpcs[0].tags #=> Array
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcs AWS API Documentation
     #
@@ -29945,7 +29964,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

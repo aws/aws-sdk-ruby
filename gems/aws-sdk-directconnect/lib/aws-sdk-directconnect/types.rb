@@ -35,7 +35,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] interconnect_id
     #   The ID of the interconnect on which the connection will be
-    #   provisioned. For example, dxcon-456abc78.
+    #   provisioned.
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -189,12 +189,11 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #   @return [String]
     #
     # @!attribute [rw] lag_id
-    #   The ID of the LAG with which to associate the connection. For
-    #   example, dxlag-abc123.
+    #   The ID of the LAG with which to associate the connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLagRequest AWS API Documentation
@@ -1785,11 +1784,11 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #   @return [String]
     #
     # @!attribute [rw] lag_id
-    #   The ID of the LAG. For example, dxlag-abc123.
+    #   The ID of the LAG.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLagRequest AWS API Documentation
@@ -2051,12 +2050,17 @@ module Aws::DirectConnect
     #   The AWS Region for the location.
     #   @return [String]
     #
+    # @!attribute [rw] available_port_speeds
+    #   The available port speeds for the location.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location AWS API Documentation
     #
     class Location < Struct.new(
       :location_code,
       :location_name,
-      :region)
+      :region,
+      :available_port_speeds)
       include Aws::Structure
     end
 

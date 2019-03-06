@@ -239,7 +239,7 @@ module Aws::DirectConnect
     #
     # @option params [required, String] :interconnect_id
     #   The ID of the interconnect on which the connection will be
-    #   provisioned. For example, dxcon-456abc78.
+    #   provisioned.
     #
     # @option params [required, Integer] :vlan
     #   The dedicated VLAN provisioned to the connection.
@@ -625,11 +625,10 @@ module Aws::DirectConnect
     # associated with the original LAG.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #
     # @option params [required, String] :lag_id
-    #   The ID of the LAG with which to associate the connection. For example,
-    #   dxlag-abc123.
+    #   The ID of the LAG with which to associate the connection.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2533,6 +2532,8 @@ module Aws::DirectConnect
     #   resp.locations[0].location_code #=> String
     #   resp.locations[0].location_name #=> String
     #   resp.locations[0].region #=> String
+    #   resp.locations[0].available_port_speeds #=> Array
+    #   resp.locations[0].available_port_speeds[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -2687,10 +2688,10 @@ module Aws::DirectConnect
     # LAG with no physical connections.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #
     # @option params [required, String] :lag_id
-    #   The ID of the LAG. For example, dxlag-abc123.
+    #   The ID of the LAG.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3012,7 +3013,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
