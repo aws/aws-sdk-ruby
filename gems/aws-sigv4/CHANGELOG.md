@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.0.3 (2019-04-07)
+------------------
+
+* Issue - Fix deprecation warning when signing an AWS request.
+
 1.0.3 (2018-06-28)
 ------------------
 
