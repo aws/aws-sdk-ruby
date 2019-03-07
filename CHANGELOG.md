@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.236 (2019-03-07)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
