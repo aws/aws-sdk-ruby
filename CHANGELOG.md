@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::AppMesh - Added support for the new 2019-01-25 API version of AWS App Mesh.
+
 2.11.235 (2019-03-06)
 ------------------
 

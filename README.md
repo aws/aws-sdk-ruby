@@ -257,7 +257,7 @@ to be backwards compatible.
 | Service Name                                          | Service Class                   | API Version |
 | ----------------------------------------------------- | ------------------------------- | ----------- |
 | AWS Amplify                                           | Amplify                         | 2017-07-25  |
-| AWS App Mesh                                          | AppMesh                         | 2018-10-01  |
+| AWS App Mesh                                          | AppMesh                         | 2019-01-25  |
 | AWS AppSync                                           | AppSync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | ApplicationDiscoveryService     | 2015-11-01  |
 | AWS Auto Scaling Plans                                | AutoScalingPlans                | 2018-01-06  |

@@ -28,7 +28,7 @@
     "endpoint": "apigateway"
   },
   "AppMesh": {
-    "models": "appmesh/2018-10-01",
+    "models": "appmesh/2019-01-25",
     "endpoint": "appmesh"
   },
   "AppStream": {
