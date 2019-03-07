@@ -572,7 +572,7 @@ module Aws
       end
 
       def credentials_set?(credentials)
-        credentials.access_key_id && credentials.secret_access_key
+        credentials.credentials.access_key_id && credentials.credentials.secret_access_key
       end
 
       class << self
