@@ -442,6 +442,11 @@ module Aws::MediaLive
     #     destinations: [
     #       {
     #         id: "__string",
+    #         media_package_settings: [
+    #           {
+    #             channel_id: "__stringMin1",
+    #           },
+    #         ],
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -767,6 +772,11 @@ module Aws::MediaLive
     #               timestamp_delta_milliseconds: 1,
     #               ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
     #             },
+    #             media_package_group_settings: {
+    #               destination: { # required
+    #                 destination_ref_id: "__string",
+    #               },
+    #             },
     #             ms_smooth_group_settings: {
     #               acquisition_point_id: "__string",
     #               audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
@@ -913,6 +923,8 @@ module Aws::MediaLive
     #                   },
     #                   name_modifier: "__stringMin1",
     #                   segment_modifier: "__string",
+    #                 },
+    #                 media_package_output_settings: {
     #                 },
     #                 ms_smooth_output_settings: {
     #                   name_modifier: "__string",
@@ -1159,6 +1171,8 @@ module Aws::MediaLive
     #   resp.channel.arn #=> String
     #   resp.channel.destinations #=> Array
     #   resp.channel.destinations[0].id #=> String
+    #   resp.channel.destinations[0].media_package_settings #=> Array
+    #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -1366,6 +1380,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -1846,6 +1861,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -2053,6 +2070,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -2491,6 +2509,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -2698,6 +2718,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -3292,6 +3313,8 @@ module Aws::MediaLive
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].destinations #=> Array
     #   resp.channels[0].destinations[0].id #=> String
+    #   resp.channels[0].destinations[0].media_package_settings #=> Array
+    #   resp.channels[0].destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.channels[0].destinations[0].settings #=> Array
     #   resp.channels[0].destinations[0].settings[0].password_param #=> String
     #   resp.channels[0].destinations[0].settings[0].stream_name #=> String
@@ -3723,6 +3746,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -3930,6 +3955,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -4237,6 +4263,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -4444,6 +4472,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -4750,6 +4779,11 @@ module Aws::MediaLive
     #     destinations: [
     #       {
     #         id: "__string",
+    #         media_package_settings: [
+    #           {
+    #             channel_id: "__stringMin1",
+    #           },
+    #         ],
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -5075,6 +5109,11 @@ module Aws::MediaLive
     #               timestamp_delta_milliseconds: 1,
     #               ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
     #             },
+    #             media_package_group_settings: {
+    #               destination: { # required
+    #                 destination_ref_id: "__string",
+    #               },
+    #             },
     #             ms_smooth_group_settings: {
     #               acquisition_point_id: "__string",
     #               audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
@@ -5221,6 +5260,8 @@ module Aws::MediaLive
     #                   },
     #                   name_modifier: "__stringMin1",
     #                   segment_modifier: "__string",
+    #                 },
+    #                 media_package_output_settings: {
     #                 },
     #                 ms_smooth_output_settings: {
     #                   name_modifier: "__string",
@@ -5462,6 +5503,8 @@ module Aws::MediaLive
     #   resp.channel.arn #=> String
     #   resp.channel.destinations #=> Array
     #   resp.channel.destinations[0].id #=> String
+    #   resp.channel.destinations[0].media_package_settings #=> Array
+    #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -5669,6 +5712,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -6087,7 +6131,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

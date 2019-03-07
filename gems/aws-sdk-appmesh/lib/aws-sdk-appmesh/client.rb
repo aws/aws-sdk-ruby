@@ -208,9 +208,9 @@ module Aws::AppMesh
     # Creates a new service mesh. A service mesh is a logical boundary for
     # network traffic between the services that reside within it.
     #
-    # After you create your service mesh, you can create virtual nodes,
-    # virtual routers, and routes to distribute traffic between the
-    # applications in your mesh.
+    # After you create your service mesh, you can create virtual services,
+    # virtual nodes, virtual routers, and routes to distribute traffic
+    # between the applications in your mesh.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -244,7 +244,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateMesh AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMesh AWS API Documentation
     #
     # @overload create_mesh(params = {})
     # @param [Hash] params ({})
@@ -296,16 +296,16 @@ module Aws::AppMesh
     #     route_name: "ResourceName", # required
     #     spec: { # required
     #       http_route: {
-    #         action: {
-    #           weighted_targets: [
+    #         action: { # required
+    #           weighted_targets: [ # required
     #             {
-    #               virtual_node: "ResourceName",
-    #               weight: 1,
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
     #             },
     #           ],
     #         },
-    #         match: {
-    #           prefix: "String",
+    #         match: { # required
+    #           prefix: "String", # required
     #         },
     #       },
     #     },
@@ -328,7 +328,7 @@ module Aws::AppMesh
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateRoute AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRoute AWS API Documentation
     #
     # @overload create_route(params = {})
     # @param [Hash] params ({})
@@ -341,8 +341,8 @@ module Aws::AppMesh
     #
     # A virtual node acts as logical pointer to a particular task group,
     # such as an Amazon ECS service or a Kubernetes deployment. When you
-    # create a virtual node, you must specify the DNS service discovery name
-    # for your task group.
+    # create a virtual node, you must specify the DNS service discovery
+    # hostname for your task group.
     #
     # Any inbound traffic that your virtual node expects should be specified
     # as a `listener`. Any outbound traffic that your virtual node expects
@@ -391,7 +391,13 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       backends: ["ServiceName"],
+    #       backends: [
+    #         {
+    #           virtual_service: {
+    #             virtual_service_name: "ServiceName", # required
+    #           },
+    #         },
+    #       ],
     #       listeners: [
     #         {
     #           health_check: {
@@ -403,15 +409,15 @@ module Aws::AppMesh
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
-    #           port_mapping: {
-    #             port: 1,
-    #             protocol: "http", # accepts http, tcp
+    #           port_mapping: { # required
+    #             port: 1, # required
+    #             protocol: "http", # required, accepts http, tcp
     #           },
     #         },
     #       ],
     #       service_discovery: {
     #         dns: {
-    #           service_name: "ServiceName",
+    #           hostname: "Hostname", # required
     #         },
     #       },
     #     },
@@ -427,7 +433,7 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
     #   resp.virtual_node.spec.backends #=> Array
-    #   resp.virtual_node.spec.backends[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
@@ -438,11 +444,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
-    #   resp.virtual_node.spec.service_discovery.dns.service_name #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualNode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNode AWS API Documentation
     #
     # @overload create_virtual_node(params = {})
     # @param [Hash] params ({})
@@ -452,6 +458,9 @@ module Aws::AppMesh
     end
 
     # Creates a new virtual router within a service mesh.
+    #
+    # Any inbound traffic that your virtual router expects should be
+    # specified as a `listener`.
     #
     # Virtual routers handle traffic for one or more service names within
     # your mesh. After you create your virtual router, create and associate
@@ -467,7 +476,7 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to create the virtual router.
+    #   The name of the service mesh to create the virtual router in.
     #
     # @option params [required, Types::VirtualRouterSpec] :spec
     #   The virtual router specification to apply.
@@ -485,7 +494,14 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       service_names: ["ServiceName"],
+    #       listeners: [ # required
+    #         {
+    #           port_mapping: { # required
+    #             port: 1, # required
+    #             protocol: "http", # required, accepts http, tcp
+    #           },
+    #         },
+    #       ],
     #     },
     #     virtual_router_name: "ResourceName", # required
     #   })
@@ -498,12 +514,13 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.last_updated_at #=> Time
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
-    #   resp.virtual_router.spec.service_names #=> Array
-    #   resp.virtual_router.spec.service_names[0] #=> String
+    #   resp.virtual_router.spec.listeners #=> Array
+    #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualRouter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouter AWS API Documentation
     #
     # @overload create_virtual_router(params = {})
     # @param [Hash] params ({})
@@ -512,10 +529,81 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
+    # Creates a virtual service within a service mesh.
+    #
+    # A virtual service is an abstraction of a real service that is either
+    # provided by a virtual node directly, or indirectly by means of a
+    # virtual router. Dependent services call your virtual service by its
+    # `virtualServiceName`, and those requests are routed to the virtual
+    # node or virtual router that is specified as the provider for the
+    # virtual service.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh in which to create the virtual service.
+    #
+    # @option params [required, Types::VirtualServiceSpec] :spec
+    #   The virtual service specification to apply.
+    #
+    # @option params [required, String] :virtual_service_name
+    #   The name to use for the virtual service.
+    #
+    # @return [Types::CreateVirtualServiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVirtualServiceOutput#virtual_service #virtual_service} => Types::VirtualServiceData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_virtual_service({
+    #     client_token: "String",
+    #     mesh_name: "ResourceName", # required
+    #     spec: { # required
+    #       provider: {
+    #         virtual_node: {
+    #           virtual_node_name: "ResourceName", # required
+    #         },
+    #         virtual_router: {
+    #           virtual_router_name: "ResourceName", # required
+    #         },
+    #       },
+    #     },
+    #     virtual_service_name: "ServiceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_service.mesh_name #=> String
+    #   resp.virtual_service.metadata.arn #=> String
+    #   resp.virtual_service.metadata.created_at #=> Time
+    #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.uid #=> String
+    #   resp.virtual_service.metadata.version #=> Integer
+    #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
+    #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.virtual_service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualService AWS API Documentation
+    #
+    # @overload create_virtual_service(params = {})
+    # @param [Hash] params ({})
+    def create_virtual_service(params = {}, options = {})
+      req = build_request(:create_virtual_service, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing service mesh.
     #
-    # You must delete all resources (routes, virtual routers, virtual nodes)
-    # in the service mesh before you can delete the mesh itself.
+    # You must delete all resources (virtual services, routes, virtual
+    # routers, virtual nodes) in the service mesh before you can delete the
+    # mesh itself.
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to delete.
@@ -540,7 +628,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteMesh AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMesh AWS API Documentation
     #
     # @overload delete_mesh(params = {})
     # @param [Hash] params ({})
@@ -552,13 +640,13 @@ module Aws::AppMesh
     # Deletes an existing route.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to delete the route.
+    #   The name of the service mesh to delete the route in.
     #
     # @option params [required, String] :route_name
     #   The name of the route to delete.
     #
     # @option params [required, String] :virtual_router_name
-    #   The name of the virtual router in which to delete the route.
+    #   The name of the virtual router to delete the route in.
     #
     # @return [Types::DeleteRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -588,7 +676,7 @@ module Aws::AppMesh
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteRoute AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRoute AWS API Documentation
     #
     # @overload delete_route(params = {})
     # @param [Hash] params ({})
@@ -599,8 +687,11 @@ module Aws::AppMesh
 
     # Deletes an existing virtual node.
     #
+    # You must delete any virtual services that list a virtual node as a
+    # service provider before you can delete the virtual node itself.
+    #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to delete the virtual node.
+    #   The name of the service mesh to delete the virtual node in.
     #
     # @option params [required, String] :virtual_node_name
     #   The name of the virtual node to delete.
@@ -625,7 +716,7 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
     #   resp.virtual_node.spec.backends #=> Array
-    #   resp.virtual_node.spec.backends[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
@@ -636,11 +727,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
-    #   resp.virtual_node.spec.service_discovery.dns.service_name #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualNode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNode AWS API Documentation
     #
     # @overload delete_virtual_node(params = {})
     # @param [Hash] params ({})
@@ -655,7 +746,7 @@ module Aws::AppMesh
     # you can delete the router itself.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to delete the virtual router.
+    #   The name of the service mesh to delete the virtual router in.
     #
     # @option params [required, String] :virtual_router_name
     #   The name of the virtual router to delete.
@@ -679,17 +770,59 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.last_updated_at #=> Time
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
-    #   resp.virtual_router.spec.service_names #=> Array
-    #   resp.virtual_router.spec.service_names[0] #=> String
+    #   resp.virtual_router.spec.listeners #=> Array
+    #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualRouter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouter AWS API Documentation
     #
     # @overload delete_virtual_router(params = {})
     # @param [Hash] params ({})
     def delete_virtual_router(params = {}, options = {})
       req = build_request(:delete_virtual_router, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing virtual service.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to delete the virtual service in.
+    #
+    # @option params [required, String] :virtual_service_name
+    #   The name of the virtual service to delete.
+    #
+    # @return [Types::DeleteVirtualServiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVirtualServiceOutput#virtual_service #virtual_service} => Types::VirtualServiceData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_virtual_service({
+    #     mesh_name: "ResourceName", # required
+    #     virtual_service_name: "ServiceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_service.mesh_name #=> String
+    #   resp.virtual_service.metadata.arn #=> String
+    #   resp.virtual_service.metadata.created_at #=> Time
+    #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.uid #=> String
+    #   resp.virtual_service.metadata.version #=> Integer
+    #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
+    #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.virtual_service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualService AWS API Documentation
+    #
+    # @overload delete_virtual_service(params = {})
+    # @param [Hash] params ({})
+    def delete_virtual_service(params = {}, options = {})
+      req = build_request(:delete_virtual_service, params)
       req.send_request(options)
     end
 
@@ -718,7 +851,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeMesh AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMesh AWS API Documentation
     #
     # @overload describe_mesh(params = {})
     # @param [Hash] params ({})
@@ -730,13 +863,13 @@ module Aws::AppMesh
     # Describes an existing route.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which the route resides.
+    #   The name of the service mesh that the route resides in.
     #
     # @option params [required, String] :route_name
     #   The name of the route to describe.
     #
     # @option params [required, String] :virtual_router_name
-    #   The name of the virtual router with which the route is associated.
+    #   The name of the virtual router that the route is associated with.
     #
     # @return [Types::DescribeRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -766,7 +899,7 @@ module Aws::AppMesh
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeRoute AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRoute AWS API Documentation
     #
     # @overload describe_route(params = {})
     # @param [Hash] params ({})
@@ -778,7 +911,7 @@ module Aws::AppMesh
     # Describes an existing virtual node.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which the virtual node resides.
+    #   The name of the service mesh that the virtual node resides in.
     #
     # @option params [required, String] :virtual_node_name
     #   The name of the virtual node to describe.
@@ -803,7 +936,7 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
     #   resp.virtual_node.spec.backends #=> Array
-    #   resp.virtual_node.spec.backends[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
@@ -814,11 +947,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
-    #   resp.virtual_node.spec.service_discovery.dns.service_name #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualNode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNode AWS API Documentation
     #
     # @overload describe_virtual_node(params = {})
     # @param [Hash] params ({})
@@ -830,7 +963,7 @@ module Aws::AppMesh
     # Describes an existing virtual router.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which the virtual router resides.
+    #   The name of the service mesh that the virtual router resides in.
     #
     # @option params [required, String] :virtual_router_name
     #   The name of the virtual router to describe.
@@ -854,12 +987,13 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.last_updated_at #=> Time
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
-    #   resp.virtual_router.spec.service_names #=> Array
-    #   resp.virtual_router.spec.service_names[0] #=> String
+    #   resp.virtual_router.spec.listeners #=> Array
+    #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualRouter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouter AWS API Documentation
     #
     # @overload describe_virtual_router(params = {})
     # @param [Hash] params ({})
@@ -868,17 +1002,58 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
+    # Describes an existing virtual service.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh that the virtual service resides in.
+    #
+    # @option params [required, String] :virtual_service_name
+    #   The name of the virtual service to describe.
+    #
+    # @return [Types::DescribeVirtualServiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVirtualServiceOutput#virtual_service #virtual_service} => Types::VirtualServiceData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_virtual_service({
+    #     mesh_name: "ResourceName", # required
+    #     virtual_service_name: "ServiceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_service.mesh_name #=> String
+    #   resp.virtual_service.metadata.arn #=> String
+    #   resp.virtual_service.metadata.created_at #=> Time
+    #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.uid #=> String
+    #   resp.virtual_service.metadata.version #=> Integer
+    #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
+    #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.virtual_service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualService AWS API Documentation
+    #
+    # @overload describe_virtual_service(params = {})
+    # @param [Hash] params ({})
+    def describe_virtual_service(params = {}, options = {})
+      req = build_request(:describe_virtual_service, params)
+      req.send_request(options)
+    end
+
     # Returns a list of existing service meshes.
     #
     # @option params [Integer] :limit
-    #   The maximum number of mesh results returned by `ListMeshes` in
-    #   paginated output. When this parameter is used, `ListMeshes` only
-    #   returns `limit` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListMeshes` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListMeshes` returns up to 100 results and
-    #   a `nextToken` value if applicable.
+    #   The maximum number of results returned by `ListMeshes` in paginated
+    #   output. When you use this parameter, `ListMeshes` returns only `limit`
+    #   results in a single page along with a `nextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListMeshes` request with the returned `nextToken` value. This
+    #   value can be between 1 and 100. If you don't use this parameter,
+    #   `ListMeshes` returns up to 100 results and a `nextToken` value if
+    #   applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListMeshes`
@@ -911,7 +1086,7 @@ module Aws::AppMesh
     #   resp.meshes[0].mesh_name #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListMeshes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshes AWS API Documentation
     #
     # @overload list_meshes(params = {})
     # @param [Hash] params ({})
@@ -923,14 +1098,14 @@ module Aws::AppMesh
     # Returns a list of existing routes in a service mesh.
     #
     # @option params [Integer] :limit
-    #   The maximum number of mesh results returned by `ListRoutes` in
-    #   paginated output. When this parameter is used, `ListRoutes` only
-    #   returns `limit` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListRoutes` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListRoutes` returns up to 100 results and
-    #   a `nextToken` value if applicable.
+    #   The maximum number of results returned by `ListRoutes` in paginated
+    #   output. When you use this parameter, `ListRoutes` returns only `limit`
+    #   results in a single page along with a `nextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListRoutes` request with the returned `nextToken` value. This
+    #   value can be between 1 and 100. If you don't use this parameter,
+    #   `ListRoutes` returns up to 100 results and a `nextToken` value if
+    #   applicable.
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh in which to list routes.
@@ -942,7 +1117,7 @@ module Aws::AppMesh
     #   results that returned the `nextToken` value.
     #
     # @option params [required, String] :virtual_router_name
-    #   The name of the virtual router in which to list routes.
+    #   The name of the virtual router to list routes in.
     #
     # @return [Types::ListRoutesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -967,7 +1142,7 @@ module Aws::AppMesh
     #   resp.routes[0].route_name #=> String
     #   resp.routes[0].virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListRoutes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutes AWS API Documentation
     #
     # @overload list_routes(params = {})
     # @param [Hash] params ({})
@@ -979,17 +1154,17 @@ module Aws::AppMesh
     # Returns a list of existing virtual nodes.
     #
     # @option params [Integer] :limit
-    #   The maximum number of mesh results returned by `ListVirtualNodes` in
-    #   paginated output. When this parameter is used, `ListVirtualNodes` only
-    #   returns `limit` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListVirtualNodes` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListVirtualNodes` returns up to 100
+    #   The maximum number of results returned by `ListVirtualNodes` in
+    #   paginated output. When you use this parameter, `ListVirtualNodes`
+    #   returns only `limit` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListVirtualNodes` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListVirtualNodes` returns up to 100
     #   results and a `nextToken` value if applicable.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to list virtual nodes.
+    #   The name of the service mesh to list virtual nodes in.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1018,7 +1193,7 @@ module Aws::AppMesh
     #   resp.virtual_nodes[0].mesh_name #=> String
     #   resp.virtual_nodes[0].virtual_node_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualNodes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodes AWS API Documentation
     #
     # @overload list_virtual_nodes(params = {})
     # @param [Hash] params ({})
@@ -1030,17 +1205,17 @@ module Aws::AppMesh
     # Returns a list of existing virtual routers in a service mesh.
     #
     # @option params [Integer] :limit
-    #   The maximum number of mesh results returned by `ListVirtualRouters` in
-    #   paginated output. When this parameter is used, `ListVirtualRouters`
-    #   only returns `limit` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListVirtualRouters` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListVirtualRouters` returns up to 100
+    #   The maximum number of results returned by `ListVirtualRouters` in
+    #   paginated output. When you use this parameter, `ListVirtualRouters`
+    #   returns only `limit` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListVirtualRouters` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListVirtualRouters` returns up to 100
     #   results and a `nextToken` value if applicable.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to list virtual routers.
+    #   The name of the service mesh to list virtual routers in.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1069,12 +1244,63 @@ module Aws::AppMesh
     #   resp.virtual_routers[0].mesh_name #=> String
     #   resp.virtual_routers[0].virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualRouters AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRouters AWS API Documentation
     #
     # @overload list_virtual_routers(params = {})
     # @param [Hash] params ({})
     def list_virtual_routers(params = {}, options = {})
       req = build_request(:list_virtual_routers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of existing virtual services in a service mesh.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results returned by `ListVirtualServices` in
+    #   paginated output. When you use this parameter, `ListVirtualServices`
+    #   returns only `limit` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListVirtualServices` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListVirtualServices` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to list virtual services in.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListVirtualServices` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    # @return [Types::ListVirtualServicesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVirtualServicesOutput#next_token #next_token} => String
+    #   * {Types::ListVirtualServicesOutput#virtual_services #virtual_services} => Array&lt;Types::VirtualServiceRef&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_virtual_services({
+    #     limit: 1,
+    #     mesh_name: "ResourceName", # required
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.virtual_services #=> Array
+    #   resp.virtual_services[0].arn #=> String
+    #   resp.virtual_services[0].mesh_name #=> String
+    #   resp.virtual_services[0].virtual_service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServices AWS API Documentation
+    #
+    # @overload list_virtual_services(params = {})
+    # @param [Hash] params ({})
+    def list_virtual_services(params = {}, options = {})
+      req = build_request(:list_virtual_services, params)
       req.send_request(options)
     end
 
@@ -1090,7 +1316,7 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which the route resides.
+    #   The name of the service mesh that the route resides in.
     #
     # @option params [required, String] :route_name
     #   The name of the route to update.
@@ -1100,7 +1326,7 @@ module Aws::AppMesh
     #   data.
     #
     # @option params [required, String] :virtual_router_name
-    #   The name of the virtual router with which the route is associated.
+    #   The name of the virtual router that the route is associated with.
     #
     # @return [Types::UpdateRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1114,16 +1340,16 @@ module Aws::AppMesh
     #     route_name: "ResourceName", # required
     #     spec: { # required
     #       http_route: {
-    #         action: {
-    #           weighted_targets: [
+    #         action: { # required
+    #           weighted_targets: [ # required
     #             {
-    #               virtual_node: "ResourceName",
-    #               weight: 1,
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
     #             },
     #           ],
     #         },
-    #         match: {
-    #           prefix: "String",
+    #         match: { # required
+    #           prefix: "String", # required
     #         },
     #       },
     #     },
@@ -1146,7 +1372,7 @@ module Aws::AppMesh
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateRoute AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRoute AWS API Documentation
     #
     # @overload update_route(params = {})
     # @param [Hash] params ({})
@@ -1166,7 +1392,7 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which the virtual node resides.
+    #   The name of the service mesh that the virtual node resides in.
     #
     # @option params [required, Types::VirtualNodeSpec] :spec
     #   The new virtual node specification to apply. This overwrites the
@@ -1185,7 +1411,13 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       backends: ["ServiceName"],
+    #       backends: [
+    #         {
+    #           virtual_service: {
+    #             virtual_service_name: "ServiceName", # required
+    #           },
+    #         },
+    #       ],
     #       listeners: [
     #         {
     #           health_check: {
@@ -1197,15 +1429,15 @@ module Aws::AppMesh
     #             timeout_millis: 1, # required
     #             unhealthy_threshold: 1, # required
     #           },
-    #           port_mapping: {
-    #             port: 1,
-    #             protocol: "http", # accepts http, tcp
+    #           port_mapping: { # required
+    #             port: 1, # required
+    #             protocol: "http", # required, accepts http, tcp
     #           },
     #         },
     #       ],
     #       service_discovery: {
     #         dns: {
-    #           service_name: "ServiceName",
+    #           hostname: "Hostname", # required
     #         },
     #       },
     #     },
@@ -1221,7 +1453,7 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
     #   resp.virtual_node.spec.backends #=> Array
-    #   resp.virtual_node.spec.backends[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].health_check.interval_millis #=> Integer
@@ -1232,11 +1464,11 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
-    #   resp.virtual_node.spec.service_discovery.dns.service_name #=> String
+    #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualNode AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNode AWS API Documentation
     #
     # @overload update_virtual_node(params = {})
     # @param [Hash] params ({})
@@ -1256,7 +1488,7 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which the virtual router resides.
+    #   The name of the service mesh that the virtual router resides in.
     #
     # @option params [required, Types::VirtualRouterSpec] :spec
     #   The new virtual router specification to apply. This overwrites the
@@ -1275,7 +1507,14 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
-    #       service_names: ["ServiceName"],
+    #       listeners: [ # required
+    #         {
+    #           port_mapping: { # required
+    #             port: 1, # required
+    #             protocol: "http", # required, accepts http, tcp
+    #           },
+    #         },
+    #       ],
     #     },
     #     virtual_router_name: "ResourceName", # required
     #   })
@@ -1288,17 +1527,82 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.last_updated_at #=> Time
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
-    #   resp.virtual_router.spec.service_names #=> Array
-    #   resp.virtual_router.spec.service_names[0] #=> String
+    #   resp.virtual_router.spec.listeners #=> Array
+    #   resp.virtual_router.spec.listeners[0].port_mapping.port #=> Integer
+    #   resp.virtual_router.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
     #   resp.virtual_router.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_router.virtual_router_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualRouter AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouter AWS API Documentation
     #
     # @overload update_virtual_router(params = {})
     # @param [Hash] params ({})
     def update_virtual_router(params = {}, options = {})
       req = build_request(:update_virtual_router, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing virtual service in a specified service mesh.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh that the virtual service resides in.
+    #
+    # @option params [required, Types::VirtualServiceSpec] :spec
+    #   The new virtual service specification to apply. This overwrites the
+    #   existing data.
+    #
+    # @option params [required, String] :virtual_service_name
+    #   The name of the virtual service to update.
+    #
+    # @return [Types::UpdateVirtualServiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVirtualServiceOutput#virtual_service #virtual_service} => Types::VirtualServiceData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_virtual_service({
+    #     client_token: "String",
+    #     mesh_name: "ResourceName", # required
+    #     spec: { # required
+    #       provider: {
+    #         virtual_node: {
+    #           virtual_node_name: "ResourceName", # required
+    #         },
+    #         virtual_router: {
+    #           virtual_router_name: "ResourceName", # required
+    #         },
+    #       },
+    #     },
+    #     virtual_service_name: "ServiceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_service.mesh_name #=> String
+    #   resp.virtual_service.metadata.arn #=> String
+    #   resp.virtual_service.metadata.created_at #=> Time
+    #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.uid #=> String
+    #   resp.virtual_service.metadata.version #=> Integer
+    #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
+    #   resp.virtual_service.spec.provider.virtual_router.virtual_router_name #=> String
+    #   resp.virtual_service.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #   resp.virtual_service.virtual_service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualService AWS API Documentation
+    #
+    # @overload update_virtual_service(params = {})
+    # @param [Hash] params ({})
+    def update_virtual_service(params = {}, options = {})
+      req = build_request(:update_virtual_service, params)
       req.send_request(options)
     end
 
@@ -1315,7 +1619,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

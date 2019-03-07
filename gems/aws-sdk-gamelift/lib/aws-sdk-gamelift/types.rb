@@ -438,6 +438,7 @@ module Aws::GameLift
     #         peer_vpc_aws_account_id: "NonZeroAndMaxString",
     #         peer_vpc_id: "NonZeroAndMaxString",
     #         fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+    #         instance_role_arn: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] name
@@ -582,6 +583,21 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-credentials.html
     #   @return [String]
     #
+    # @!attribute [rw] instance_role_arn
+    #   Unique identifier for an AWS IAM role that manages access to your
+    #   AWS services. Any application that runs on an instance in this fleet
+    #   can assume the role, including install scripts, server processs,
+    #   daemons (background processes). Create a role or look up a role's
+    #   ARN using the [IAM dashboard][1] in the AWS Management Console.
+    #   Learn more about using on-box credentials for your game servers at [
+    #   Access external resources from a game server][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -599,7 +615,8 @@ module Aws::GameLift
       :metric_groups,
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
-      :fleet_type)
+      :fleet_type,
+      :instance_role_arn)
       include Aws::Structure
     end
 
@@ -3057,6 +3074,21 @@ module Aws::GameLift
     #   StopFleetActions. This includes auto-scaling.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] instance_role_arn
+    #   Unique identifier for an AWS IAM role that manages access to your
+    #   AWS services. Any application that runs on an instance in this fleet
+    #   can assume the role, including install scripts, server processs,
+    #   daemons (background processes). Create a role or look up a role's
+    #   ARN using the [IAM dashboard][1] in the AWS Management Console.
+    #   Learn more about using on-box credentials for your game servers at [
+    #   Access external resources from a game server][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
     class FleetAttributes < Struct.new(
@@ -3077,7 +3109,8 @@ module Aws::GameLift
       :operating_system,
       :resource_creation_limit_policy,
       :metric_groups,
-      :stopped_actions)
+      :stopped_actions,
+      :instance_role_arn)
       include Aws::Structure
     end
 

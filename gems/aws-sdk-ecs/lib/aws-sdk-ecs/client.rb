@@ -566,11 +566,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 7,200 seconds.
-    #   During that time, the ECS service scheduler ignores health check
-    #   status. This grace period can prevent the ECS service scheduler from
-    #   marking tasks as unhealthy and stopping them before they have time to
-    #   come up.
+    #   you can specify a health check grace period of up to 2,147,483,647
+    #   seconds. During that time, the ECS service scheduler ignores health
+    #   check status. This grace period can prevent the ECS service scheduler
+    #   from marking tasks as unhealthy and stopping them before they have
+    #   time to come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -1501,6 +1501,11 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1571,6 +1576,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -2189,6 +2199,11 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -2259,6 +2274,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -4015,6 +4035,9 @@ module Aws::ECS
     #   [2]: https://docs.docker.com/engine/security/security/
     #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
@@ -4152,6 +4175,14 @@ module Aws::ECS
     #             value_from: "String", # required
     #           },
     #         ],
+    #         depends_on: [
+    #           {
+    #             container_name: "String", # required
+    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
     #         hostname: "String",
     #         user: "String",
     #         working_directory: "String",
@@ -4242,6 +4273,16 @@ module Aws::ECS
     #     ],
     #     pid_mode: "host", # accepts host, task
     #     ipc_mode: "host", # accepts host, task, none
+    #     proxy_configuration: {
+    #       type: "APPMESH", # accepts APPMESH
+    #       container_name: "String", # required
+    #       properties: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -4294,6 +4335,11 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -4364,6 +4410,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -5909,7 +5960,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

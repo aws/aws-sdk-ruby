@@ -299,7 +299,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     # @option options [Array<String>] :source_ids
     #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
@@ -331,7 +331,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [EventSubscription]
     def create(options = {})
       options = options.merge(subscription_name: @name)
@@ -387,7 +387,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     # @option options [Boolean] :enabled
     #   A Boolean value; set to **true** to activate the subscription.
     # @return [EventSubscription]

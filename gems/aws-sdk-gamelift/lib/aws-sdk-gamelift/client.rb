@@ -366,23 +366,21 @@ module Aws::GameLift
     # Amazon Simple Storage Service (Amazon S3) location.
     #
     # Game server binaries must be combined into a `.zip` file for use with
-    # Amazon GameLift. See [Uploading Your Game][1] for more information.
+    # Amazon GameLift.
     #
     # To create new builds quickly and easily, use the AWS CLI command <b>
     # <a
     # href="https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html">upload-build</a>
     # </b>. This helper command uploads your build and creates a new build
     # record in one step, and automatically handles the necessary
-    # permissions. See [ Upload Build Files to Amazon GameLift][2] for more
-    # help.
+    # permissions.
     #
     # The `CreateBuild` operation should be used only when you need to
     # manually upload your build files, as in the following scenarios:
     #
     # * Store a build file in an Amazon S3 bucket under your own AWS
     #   account. To use this option, you must first give Amazon GameLift
-    #   access to that Amazon S3 bucket. See [ Create a Build with Files in
-    #   Amazon S3][3] for detailed help. To create a new build record using
+    #   access to that Amazon S3 bucket. To create a new build record using
     #   files in your Amazon S3 bucket, call `CreateBuild` and specify a
     #   build name, operating system, and the storage location of your game
     #   build.
@@ -393,13 +391,21 @@ module Aws::GameLift
     #   record and returns an Amazon S3 storage location (bucket and key
     #   only) and temporary access credentials. Use the credentials to
     #   manually upload your build file to the storage location (see the
-    #   Amazon S3 topic [Uploading Objects][4]). You can upload files to a
+    #   Amazon S3 topic [Uploading Objects][1]). You can upload files to a
     #   location only once.
     #
     # If successful, this operation creates a new build record with a unique
     # build ID and places it in `INITIALIZED` status. You can use
     # DescribeBuild to check the status of your build. A build must be in
     # `READY` status before it can be used to create fleets.
+    #
+    # **Learn more**
+    #
+    # [Uploading Your Game][2]
+    #
+    # [ Create a Build with Files in Amazon S3][3]
+    #
+    # **Related operations**
     #
     # * CreateBuild
     #
@@ -413,10 +419,9 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html
     #
     # @option params [String] :name
     #   Descriptive label that is associated with a build. Build names do not
@@ -525,8 +530,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # See Amazon GameLift Developer Guide topics in [ Working with
-    # Fleets][2].
+    # [ Working with Fleets][2].
     #
     # **Related operations**
     #
@@ -698,6 +702,20 @@ module Aws::GameLift
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-credentials.html
     #
+    # @option params [String] :instance_role_arn
+    #   Unique identifier for an AWS IAM role that manages access to your AWS
+    #   services. Any application that runs on an instance in this fleet can
+    #   assume the role, including install scripts, server processs, daemons
+    #   (background processes). Create a role or look up a role's ARN using
+    #   the [IAM dashboard][1] in the AWS Management Console. Learn more about
+    #   using on-box credentials for your game servers at [ Access external
+    #   resources from a game server][2].
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -740,6 +758,7 @@ module Aws::GameLift
     #     peer_vpc_aws_account_id: "NonZeroAndMaxString",
     #     peer_vpc_id: "NonZeroAndMaxString",
     #     fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+    #     instance_role_arn: "NonEmptyString",
     #   })
     #
     # @example Response structure
@@ -766,6 +785,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.metric_groups[0] #=> String
     #   resp.fleet_attributes.stopped_actions #=> Array
     #   resp.fleet_attributes.stopped_actions[0] #=> String, one of "AUTO_SCALING"
+    #   resp.fleet_attributes.instance_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
     #
@@ -1691,6 +1711,12 @@ module Aws::GameLift
     # the status of any active fleets using the build, but you can no longer
     # create new fleets with the deleted build.
     #
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
+    #
     # * CreateBuild
     #
     # * ListBuilds
@@ -1700,6 +1726,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to delete.
@@ -1727,6 +1757,12 @@ module Aws::GameLift
     #
     # This action removes the fleet's resources and the fleet record. Once
     # a fleet is deleted, you can no longer use that fleet.
+    #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -1765,6 +1801,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to be deleted.
@@ -2125,6 +2165,12 @@ module Aws::GameLift
     # build ID. If successful, an object containing the build properties is
     # returned.
     #
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
+    #
     # * CreateBuild
     #
     # * ListBuilds
@@ -2134,6 +2180,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to retrieve properties for.
@@ -2178,6 +2228,12 @@ module Aws::GameLift
     # GameLift can be found in the AWS Management Console for Amazon
     # GameLift (see the drop-down list in the upper right corner).
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -2215,6 +2271,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [String] :ec2_instance_type
     #   Name of an EC2 instance type that is supported in Amazon GameLift. A
@@ -2269,6 +2329,12 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -2306,6 +2372,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve attributes for. To
@@ -2362,6 +2432,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].metric_groups[0] #=> String
     #   resp.fleet_attributes[0].stopped_actions #=> Array
     #   resp.fleet_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
+    #   resp.fleet_attributes[0].instance_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -2388,6 +2459,12 @@ module Aws::GameLift
     # error message includes the maximum allowed.
     #
     #  </note>
+    #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
     #
     # * CreateFleet
     #
@@ -2426,6 +2503,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve capacity information for.
@@ -2487,6 +2568,12 @@ module Aws::GameLift
     # successful, a collection of event log entries matching the request are
     # returned.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -2524,6 +2611,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to get event logs for.
@@ -2592,6 +2683,12 @@ module Aws::GameLift
     # requested fleet ID. If the requested fleet has been deleted, the
     # result set is empty.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -2629,6 +2726,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to retrieve port settings for.
@@ -2674,6 +2775,12 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -2711,6 +2818,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve utilization data for. To
@@ -3522,6 +3633,12 @@ module Aws::GameLift
     # The run-time configuration tells Amazon GameLift how to launch server
     # processes on instances in the fleet.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -3559,6 +3676,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to get the run-time configuration for.
@@ -4010,6 +4131,12 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
+    #
     # * CreateBuild
     #
     # * ListBuilds
@@ -4019,6 +4146,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [String] :status
     #   Build status to filter results by. To retrieve all builds, leave this
@@ -4088,6 +4219,12 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -4125,6 +4262,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [String] :build_id
     #   Unique identifier for a build to return fleets for. Use this parameter
@@ -4412,6 +4553,26 @@ module Aws::GameLift
     # initial `CreateBuild` request. If successful, a new set of credentials
     # are returned, along with the S3 storage location associated with the
     # build ID.
+    #
+    # **Learn more**
+    #
+    # [Uploading Your Game][1]
+    #
+    # **Related operations**
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to get credentials for.
@@ -4706,25 +4867,53 @@ module Aws::GameLift
     # this operation will have no effect. You can view a fleet's stopped
     # actions using DescribeFleetAttributes.
     #
-    # * DescribeFleetCapacity
+    # **Learn more**
     #
-    # * UpdateFleetCapacity
+    # [ Working with Fleets][1].
     #
-    # * DescribeEC2InstanceLimits
+    # **Related operations**
     #
-    # * Manage scaling policies:
+    # * CreateFleet
     #
-    #   * PutScalingPolicy (auto-scaling)
+    # * ListFleets
     #
-    #   * DescribeScalingPolicies (auto-scaling)
+    # * DeleteFleet
     #
-    #   * DeleteScalingPolicy (auto-scaling)
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
     #
     # * Manage fleet actions:
     #
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet
@@ -5244,6 +5433,54 @@ module Aws::GameLift
     # desired instances setting (FleetCapacity. Changes to the fleet's
     # capacity must be done manually using UpdateFleetCapacity.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * DeleteFleet
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet actions:
+    #
+    #   * StartFleetActions
+    #
+    #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet
     #
@@ -5450,6 +5687,12 @@ module Aws::GameLift
     # provide the new values. If successful, a build object containing the
     # updated metadata is returned.
     #
+    # **Learn more**
+    #
+    # [ Working with Builds][1]
+    #
+    # **Related operations**
+    #
     # * CreateBuild
     #
     # * ListBuilds
@@ -5459,6 +5702,10 @@ module Aws::GameLift
     # * UpdateBuild
     #
     # * DeleteBuild
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to update.
@@ -5507,6 +5754,12 @@ module Aws::GameLift
     # you want to change. If successful, the fleet ID for the updated fleet
     # is returned.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -5544,6 +5797,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update attribute metadata for.
@@ -5628,6 +5885,12 @@ module Aws::GameLift
     # desired instance count is higher than the instance type's limit, the
     # "Limit Exceeded" exception occurs.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -5665,6 +5928,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update capacity for.
@@ -5714,6 +5981,12 @@ module Aws::GameLift
     # match existing fleet permissions. If successful, the fleet ID for the
     # updated fleet is returned.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -5751,6 +6024,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update port settings for.
@@ -6151,6 +6428,12 @@ module Aws::GameLift
     # down and new processes are launched in Amazon GameLift's normal
     # process recycling activity.
     #
+    # **Learn more**
+    #
+    # [ Working with Fleets][1].
+    #
+    # **Related operations**
+    #
     # * CreateFleet
     #
     # * ListFleets
@@ -6188,6 +6471,10 @@ module Aws::GameLift
     #   * StartFleetActions
     #
     #   * StopFleetActions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update run-time configuration for.
@@ -6313,7 +6600,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

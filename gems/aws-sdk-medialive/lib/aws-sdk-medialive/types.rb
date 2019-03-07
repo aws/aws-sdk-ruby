@@ -2075,6 +2075,11 @@ module Aws::MediaLive
     #         destinations: [
     #           {
     #             id: "__string",
+    #             media_package_settings: [
+    #               {
+    #                 channel_id: "__stringMin1",
+    #               },
+    #             ],
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -2400,6 +2405,11 @@ module Aws::MediaLive
     #                   timestamp_delta_milliseconds: 1,
     #                   ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
     #                 },
+    #                 media_package_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
+    #                 },
     #                 ms_smooth_group_settings: {
     #                   acquisition_point_id: "__string",
     #                   audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
@@ -2546,6 +2556,8 @@ module Aws::MediaLive
     #                       },
     #                       name_modifier: "__stringMin1",
     #                       segment_modifier: "__string",
+    #                     },
+    #                     media_package_output_settings: {
     #                     },
     #                     ms_smooth_output_settings: {
     #                       name_modifier: "__string",
@@ -4566,6 +4578,11 @@ module Aws::MediaLive
     #                 timestamp_delta_milliseconds: 1,
     #                 ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
     #               },
+    #               media_package_group_settings: {
+    #                 destination: { # required
+    #                   destination_ref_id: "__string",
+    #                 },
+    #               },
     #               ms_smooth_group_settings: {
     #                 acquisition_point_id: "__string",
     #                 audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
@@ -4712,6 +4729,8 @@ module Aws::MediaLive
     #                     },
     #                     name_modifier: "__stringMin1",
     #                     segment_modifier: "__string",
+    #                   },
+    #                   media_package_output_settings: {
     #                   },
     #                   ms_smooth_output_settings: {
     #                     name_modifier: "__string",
@@ -5856,8 +5875,18 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] redundant_manifest
-    #   When set to "enabled", includes the media playlists from both
-    #   pipelines in the master manifest (.m3u8) file.
+    #   ENABLED: The master manifest (.m3u8 file) for each pipeline includes
+    #   information about both pipelines: first its own media files, then
+    #   the media files of the other pipeline. This feature allows playout
+    #   device that support stale manifest detection to switch from one
+    #   manifest to the other, when the current manifest seems to be stale.
+    #   There are still two destinations and two master manifests, but both
+    #   master manifests reference the media files from both pipelines.
+    #   DISABLED: The master manifest (.m3u8 file) for each pipeline
+    #   includes information about its own pipeline only. For an HLS output
+    #   group with MediaPackage as the destination, the DISABLED behavior is
+    #   always followed. MediaPackage regenerates the manifests it serves to
+    #   players so a redundant manifest from MediaLive is irrelevant.
     #   @return [String]
     #
     # @!attribute [rw] segment_length
@@ -7922,6 +7951,60 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Media Package Group Settings
+    #
+    # @note When making an API call, you may pass MediaPackageGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         destination: { # required
+    #           destination_ref_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   MediaPackage channel destination.
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageGroupSettings AWS API Documentation
+    #
+    class MediaPackageGroupSettings < Struct.new(
+      :destination)
+      include Aws::Structure
+    end
+
+    # Media Package Output Destination Settings
+    #
+    # @note When making an API call, you may pass MediaPackageOutputDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__stringMin1",
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   ID of the channel in MediaPackage that is the destination for this
+    #   output group. You do not need to specify the individual inputs in
+    #   MediaPackage; MediaLive will handle the connection of the two
+    #   MediaLive pipelines to the two MediaPackage inputs. The MediaPackage
+    #   channel and MediaLive channel must be in the same region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputDestinationSettings AWS API Documentation
+    #
+    class MediaPackageOutputDestinationSettings < Struct.new(
+      :channel_id)
+      include Aws::Structure
+    end
+
+    # Media Package Output Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputSettings AWS API Documentation
+    #
+    class MediaPackageOutputSettings < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass Mp2Settings
     #   data as a hash:
     #
@@ -8346,6 +8429,8 @@ module Aws::MediaLive
     #             name_modifier: "__stringMin1",
     #             segment_modifier: "__string",
     #           },
+    #           media_package_output_settings: {
+    #           },
     #           ms_smooth_output_settings: {
     #             name_modifier: "__string",
     #           },
@@ -8471,6 +8556,11 @@ module Aws::MediaLive
     #
     #       {
     #         id: "__string",
+    #         media_package_settings: [
+    #           {
+    #             channel_id: "__stringMin1",
+    #           },
+    #         ],
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -8485,14 +8575,21 @@ module Aws::MediaLive
     #   User-specified id. This is used in an output group or an output.
     #   @return [String]
     #
+    # @!attribute [rw] media_package_settings
+    #   Destination settings for a MediaPackage output; one destination for
+    #   both encoders.
+    #   @return [Array<Types::MediaPackageOutputDestinationSettings>]
+    #
     # @!attribute [rw] settings
-    #   Destination settings for output; one for each redundant encoder.
+    #   Destination settings for a standard output; one destination for each
+    #   redundant encoder.
     #   @return [Array<Types::OutputDestinationSettings>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination AWS API Documentation
     #
     class OutputDestination < Struct.new(
       :id,
+      :media_package_settings,
       :settings)
       include Aws::Structure
     end
@@ -8638,6 +8735,11 @@ module Aws::MediaLive
     #             timed_metadata_id_3_period: 1,
     #             timestamp_delta_milliseconds: 1,
     #             ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #           },
+    #           media_package_group_settings: {
+    #             destination: { # required
+    #               destination_ref_id: "__string",
+    #             },
     #           },
     #           ms_smooth_group_settings: {
     #             acquisition_point_id: "__string",
@@ -8785,6 +8887,8 @@ module Aws::MediaLive
     #                 },
     #                 name_modifier: "__stringMin1",
     #                 segment_modifier: "__string",
+    #               },
+    #               media_package_output_settings: {
     #               },
     #               ms_smooth_output_settings: {
     #                 name_modifier: "__string",
@@ -8998,6 +9102,11 @@ module Aws::MediaLive
     #           timestamp_delta_milliseconds: 1,
     #           ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
     #         },
+    #         media_package_group_settings: {
+    #           destination: { # required
+    #             destination_ref_id: "__string",
+    #           },
+    #         },
     #         ms_smooth_group_settings: {
     #           acquisition_point_id: "__string",
     #           audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
@@ -9046,6 +9155,10 @@ module Aws::MediaLive
     # @!attribute [rw] hls_group_settings
     #   @return [Types::HlsGroupSettings]
     #
+    # @!attribute [rw] media_package_group_settings
+    #   Media Package Group Settings
+    #   @return [Types::MediaPackageGroupSettings]
+    #
     # @!attribute [rw] ms_smooth_group_settings
     #   @return [Types::MsSmoothGroupSettings]
     #
@@ -9061,6 +9174,7 @@ module Aws::MediaLive
       :archive_group_settings,
       :frame_capture_group_settings,
       :hls_group_settings,
+      :media_package_group_settings,
       :ms_smooth_group_settings,
       :rtmp_group_settings,
       :udp_group_settings)
@@ -9194,6 +9308,8 @@ module Aws::MediaLive
     #           name_modifier: "__stringMin1",
     #           segment_modifier: "__string",
     #         },
+    #         media_package_output_settings: {
+    #         },
     #         ms_smooth_output_settings: {
     #           name_modifier: "__string",
     #         },
@@ -9289,6 +9405,10 @@ module Aws::MediaLive
     # @!attribute [rw] hls_output_settings
     #   @return [Types::HlsOutputSettings]
     #
+    # @!attribute [rw] media_package_output_settings
+    #   Media Package Output Settings
+    #   @return [Types::MediaPackageOutputSettings]
+    #
     # @!attribute [rw] ms_smooth_output_settings
     #   @return [Types::MsSmoothOutputSettings]
     #
@@ -9304,6 +9424,7 @@ module Aws::MediaLive
       :archive_output_settings,
       :frame_capture_output_settings,
       :hls_output_settings,
+      :media_package_output_settings,
       :ms_smooth_output_settings,
       :rtmp_output_settings,
       :udp_output_settings)
@@ -11228,6 +11349,11 @@ module Aws::MediaLive
     #         destinations: [
     #           {
     #             id: "__string",
+    #             media_package_settings: [
+    #               {
+    #                 channel_id: "__stringMin1",
+    #               },
+    #             ],
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -11553,6 +11679,11 @@ module Aws::MediaLive
     #                   timestamp_delta_milliseconds: 1,
     #                   ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
     #                 },
+    #                 media_package_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
+    #                 },
     #                 ms_smooth_group_settings: {
     #                   acquisition_point_id: "__string",
     #                   audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
@@ -11699,6 +11830,8 @@ module Aws::MediaLive
     #                       },
     #                       name_modifier: "__stringMin1",
     #                       segment_modifier: "__string",
+    #                     },
+    #                     media_package_output_settings: {
     #                     },
     #                     ms_smooth_output_settings: {
     #                       name_modifier: "__string",

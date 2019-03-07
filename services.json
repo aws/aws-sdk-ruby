@@ -24,7 +24,7 @@
     "models": "apigatewayv2/2018-11-29"
   },
   "AppMesh": {
-    "models": "appmesh/2018-10-01"
+    "models": "appmesh/2019-01-25"
   },
   "AppStream": {
     "models": "appstream/2016-12-01"

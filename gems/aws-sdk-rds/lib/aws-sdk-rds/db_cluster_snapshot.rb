@@ -407,8 +407,8 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :copy_tags
     #   True to copy all tags from the source DB cluster snapshot to the
     #   target DB cluster snapshot, and otherwise false. The default is false.
@@ -418,7 +418,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -482,6 +482,7 @@ module Aws::RDS
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     copy_tags_to_snapshot: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -573,7 +574,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, or `parallelquery`.
@@ -599,6 +600,9 @@ module Aws::RDS
     #   Indicates if the DB cluster should have deletion protection enabled.
     #   The database can't be deleted when this value is set to true. The
     #   default is false.
+    # @option options [Boolean] :copy_tags_to_snapshot
+    #   True to copy all tags from the restored DB cluster to snapshots of the
+    #   restored DB cluster, and otherwise false. The default is false.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

@@ -299,6 +299,9 @@ module Aws::MediaLive
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaConnectFlow = Shapes::StructureShape.new(name: 'MediaConnectFlow')
     MediaConnectFlowRequest = Shapes::StructureShape.new(name: 'MediaConnectFlowRequest')
+    MediaPackageGroupSettings = Shapes::StructureShape.new(name: 'MediaPackageGroupSettings')
+    MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
+    MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
     Mp2CodingMode = Shapes::StringShape.new(name: 'Mp2CodingMode')
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
@@ -494,6 +497,7 @@ module Aws::MediaLive
     __listOfInputWhitelistRuleCidr = Shapes::ListShape.new(name: '__listOfInputWhitelistRuleCidr')
     __listOfMediaConnectFlow = Shapes::ListShape.new(name: '__listOfMediaConnectFlow')
     __listOfMediaConnectFlowRequest = Shapes::ListShape.new(name: '__listOfMediaConnectFlowRequest')
+    __listOfMediaPackageOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfMediaPackageOutputDestinationSettings')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
@@ -1468,6 +1472,14 @@ module Aws::MediaLive
     MediaConnectFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     MediaConnectFlowRequest.struct_class = Types::MediaConnectFlowRequest
 
+    MediaPackageGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    MediaPackageGroupSettings.struct_class = Types::MediaPackageGroupSettings
+
+    MediaPackageOutputDestinationSettings.add_member(:channel_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelId"))
+    MediaPackageOutputDestinationSettings.struct_class = Types::MediaPackageOutputDestinationSettings
+
+    MediaPackageOutputSettings.struct_class = Types::MediaPackageOutputSettings
+
     Mp2Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
     Mp2Settings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Mp2CodingMode, location_name: "codingMode"))
     Mp2Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __double, location_name: "sampleRate"))
@@ -1522,6 +1534,7 @@ module Aws::MediaLive
     Output.struct_class = Types::Output
 
     OutputDestination.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    OutputDestination.add_member(:media_package_settings, Shapes::ShapeRef.new(shape: __listOfMediaPackageOutputDestinationSettings, location_name: "mediaPackageSettings"))
     OutputDestination.add_member(:settings, Shapes::ShapeRef.new(shape: __listOfOutputDestinationSettings, location_name: "settings"))
     OutputDestination.struct_class = Types::OutputDestination
 
@@ -1539,6 +1552,7 @@ module Aws::MediaLive
     OutputGroupSettings.add_member(:archive_group_settings, Shapes::ShapeRef.new(shape: ArchiveGroupSettings, location_name: "archiveGroupSettings"))
     OutputGroupSettings.add_member(:frame_capture_group_settings, Shapes::ShapeRef.new(shape: FrameCaptureGroupSettings, location_name: "frameCaptureGroupSettings"))
     OutputGroupSettings.add_member(:hls_group_settings, Shapes::ShapeRef.new(shape: HlsGroupSettings, location_name: "hlsGroupSettings"))
+    OutputGroupSettings.add_member(:media_package_group_settings, Shapes::ShapeRef.new(shape: MediaPackageGroupSettings, location_name: "mediaPackageGroupSettings"))
     OutputGroupSettings.add_member(:ms_smooth_group_settings, Shapes::ShapeRef.new(shape: MsSmoothGroupSettings, location_name: "msSmoothGroupSettings"))
     OutputGroupSettings.add_member(:rtmp_group_settings, Shapes::ShapeRef.new(shape: RtmpGroupSettings, location_name: "rtmpGroupSettings"))
     OutputGroupSettings.add_member(:udp_group_settings, Shapes::ShapeRef.new(shape: UdpGroupSettings, location_name: "udpGroupSettings"))
@@ -1550,6 +1564,7 @@ module Aws::MediaLive
     OutputSettings.add_member(:archive_output_settings, Shapes::ShapeRef.new(shape: ArchiveOutputSettings, location_name: "archiveOutputSettings"))
     OutputSettings.add_member(:frame_capture_output_settings, Shapes::ShapeRef.new(shape: FrameCaptureOutputSettings, location_name: "frameCaptureOutputSettings"))
     OutputSettings.add_member(:hls_output_settings, Shapes::ShapeRef.new(shape: HlsOutputSettings, location_name: "hlsOutputSettings"))
+    OutputSettings.add_member(:media_package_output_settings, Shapes::ShapeRef.new(shape: MediaPackageOutputSettings, location_name: "mediaPackageOutputSettings"))
     OutputSettings.add_member(:ms_smooth_output_settings, Shapes::ShapeRef.new(shape: MsSmoothOutputSettings, location_name: "msSmoothOutputSettings"))
     OutputSettings.add_member(:rtmp_output_settings, Shapes::ShapeRef.new(shape: RtmpOutputSettings, location_name: "rtmpOutputSettings"))
     OutputSettings.add_member(:udp_output_settings, Shapes::ShapeRef.new(shape: UdpOutputSettings, location_name: "udpOutputSettings"))
@@ -1944,6 +1959,8 @@ module Aws::MediaLive
     __listOfMediaConnectFlow.member = Shapes::ShapeRef.new(shape: MediaConnectFlow)
 
     __listOfMediaConnectFlowRequest.member = Shapes::ShapeRef.new(shape: MediaConnectFlowRequest)
+
+    __listOfMediaPackageOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: MediaPackageOutputDestinationSettings)
 
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 

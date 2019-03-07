@@ -40,8 +40,11 @@ module Aws::ECS
     CompatibilityList = Shapes::ListShape.new(name: 'CompatibilityList')
     Connectivity = Shapes::StringShape.new(name: 'Connectivity')
     Container = Shapes::StructureShape.new(name: 'Container')
+    ContainerCondition = Shapes::StringShape.new(name: 'ContainerCondition')
     ContainerDefinition = Shapes::StructureShape.new(name: 'ContainerDefinition')
     ContainerDefinitions = Shapes::ListShape.new(name: 'ContainerDefinitions')
+    ContainerDependencies = Shapes::ListShape.new(name: 'ContainerDependencies')
+    ContainerDependency = Shapes::StructureShape.new(name: 'ContainerDependency')
     ContainerInstance = Shapes::StructureShape.new(name: 'ContainerInstance')
     ContainerInstanceField = Shapes::StringShape.new(name: 'ContainerInstanceField')
     ContainerInstanceFieldList = Shapes::ListShape.new(name: 'ContainerInstanceFieldList')
@@ -158,6 +161,9 @@ module Aws::ECS
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
     PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
+    ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
+    ProxyConfigurationProperties = Shapes::ListShape.new(name: 'ProxyConfigurationProperties')
+    ProxyConfigurationType = Shapes::StringShape.new(name: 'ProxyConfigurationType')
     PutAccountSettingDefaultRequest = Shapes::StructureShape.new(name: 'PutAccountSettingDefaultRequest')
     PutAccountSettingDefaultResponse = Shapes::StructureShape.new(name: 'PutAccountSettingDefaultResponse')
     PutAccountSettingRequest = Shapes::StructureShape.new(name: 'PutAccountSettingRequest')
@@ -339,6 +345,9 @@ module Aws::ECS
     ContainerDefinition.add_member(:volumes_from, Shapes::ShapeRef.new(shape: VolumeFromList, location_name: "volumesFrom"))
     ContainerDefinition.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerDefinition.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
+    ContainerDefinition.add_member(:depends_on, Shapes::ShapeRef.new(shape: ContainerDependencies, location_name: "dependsOn"))
+    ContainerDefinition.add_member(:start_timeout, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "startTimeout"))
+    ContainerDefinition.add_member(:stop_timeout, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "stopTimeout"))
     ContainerDefinition.add_member(:hostname, Shapes::ShapeRef.new(shape: String, location_name: "hostname"))
     ContainerDefinition.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
     ContainerDefinition.add_member(:working_directory, Shapes::ShapeRef.new(shape: String, location_name: "workingDirectory"))
@@ -360,6 +369,12 @@ module Aws::ECS
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitions.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
+
+    ContainerDependencies.member = Shapes::ShapeRef.new(shape: ContainerDependency)
+
+    ContainerDependency.add_member(:container_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerName"))
+    ContainerDependency.add_member(:condition, Shapes::ShapeRef.new(shape: ContainerCondition, required: true, location_name: "condition"))
+    ContainerDependency.struct_class = Types::ContainerDependency
 
     ContainerInstance.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     ContainerInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceId"))
@@ -772,6 +787,13 @@ module Aws::ECS
 
     PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)
 
+    ProxyConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ProxyConfigurationType, location_name: "type"))
+    ProxyConfiguration.add_member(:container_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerName"))
+    ProxyConfiguration.add_member(:properties, Shapes::ShapeRef.new(shape: ProxyConfigurationProperties, location_name: "properties"))
+    ProxyConfiguration.struct_class = Types::ProxyConfiguration
+
+    ProxyConfigurationProperties.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
     PutAccountSettingDefaultRequest.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, required: true, location_name: "name"))
     PutAccountSettingDefaultRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
     PutAccountSettingDefaultRequest.struct_class = Types::PutAccountSettingDefaultRequest
@@ -821,6 +843,7 @@ module Aws::ECS
     RegisterTaskDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RegisterTaskDefinitionRequest.add_member(:pid_mode, Shapes::ShapeRef.new(shape: PidMode, location_name: "pidMode"))
     RegisterTaskDefinitionRequest.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: IpcMode, location_name: "ipcMode"))
+    RegisterTaskDefinitionRequest.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "proxyConfiguration"))
     RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
 
     RegisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
@@ -1059,6 +1082,7 @@ module Aws::ECS
     TaskDefinition.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
     TaskDefinition.add_member(:pid_mode, Shapes::ShapeRef.new(shape: PidMode, location_name: "pidMode"))
     TaskDefinition.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: IpcMode, location_name: "ipcMode"))
+    TaskDefinition.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "proxyConfiguration"))
     TaskDefinition.struct_class = Types::TaskDefinition
 
     TaskDefinitionFieldList.member = Shapes::ShapeRef.new(shape: TaskDefinitionField)

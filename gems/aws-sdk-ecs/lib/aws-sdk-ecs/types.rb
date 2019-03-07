@@ -401,6 +401,14 @@ module Aws::ECS
     #             value_from: "String", # required
     #           },
     #         ],
+    #         depends_on: [
+    #           {
+    #             container_name: "String", # required
+    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
     #         hostname: "String",
     #         user: "String",
     #         working_directory: "String",
@@ -843,6 +851,32 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html
     #   @return [Array<Types::Secret>]
     #
+    # @!attribute [rw] depends_on
+    #   The dependencies defined for container startup. A container can
+    #   contain multiple dependencies.
+    #   @return [Array<Types::ContainerDependency>]
+    #
+    # @!attribute [rw] start_timeout
+    #   Time duration to wait before giving up on starting the container.
+    #
+    #   <note markdown="1"> The `startTimeout` value for the container will take precedence over
+    #   the `ECS_CONTAINER_START_TIMEOUT` container agent configuration
+    #   parameter, if used.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stop_timeout
+    #   Time duration to wait before the container is forcefully killed if
+    #   it does not exit normally on its own.
+    #
+    #   <note markdown="1"> The `stopTimeout` value for the container will take precedence over
+    #   the `ECS_CONTAINER_STOP_TIMEOUT` container agent configuration
+    #   parameter, if used.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] hostname
     #   The hostname to use for your container. This parameter maps to
     #   `Hostname` in the [Create a container][1] section of the [Docker
@@ -861,9 +895,24 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   The user name to use inside the container. This parameter maps to
+    #   The username to use inside the container. This parameter maps to
     #   `User` in the [Create a container][1] section of the [Docker Remote
     #   API][2] and the `--user` option to [docker run][3].
+    #
+    #   This following formats can be used. If specifying a UID or GID, it
+    #   must be specified as a positive integer.
+    #
+    #   * `user`
+    #
+    #   * `user:group`
+    #
+    #   * `uid`
+    #
+    #   * `uid:gid`
+    #
+    #   * `user:gid`
+    #
+    #   * `uid:group`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -1196,6 +1245,9 @@ module Aws::ECS
       :volumes_from,
       :linux_parameters,
       :secrets,
+      :depends_on,
+      :start_timeout,
+      :stop_timeout,
       :hostname,
       :user,
       :working_directory,
@@ -1214,6 +1266,52 @@ module Aws::ECS
       :health_check,
       :system_controls,
       :resource_requirements)
+      include Aws::Structure
+    end
+
+    # The dependencies defined for container startup. A container can
+    # contain multiple dependencies.
+    #
+    # @note When making an API call, you may pass ContainerDependency
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "String", # required
+    #         condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of a container.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   The dependency condition of the container. The following are the
+    #   available conditions and their behavior:
+    #
+    #   * `START` - This condition emulates the behavior of links and
+    #     volumes today. It validates that a dependent container is started
+    #     before permitting other containers to start.
+    #
+    #   * `COMPLETE` - This condition validates that a dependent container
+    #     runs to completion (exits) before permitting other containers to
+    #     start. This can be useful for non-essential containers that run a
+    #     script and then subsequently exit.
+    #
+    #   * `SUCCESS` - This condition is the same as `COMPLETE`, but it will
+    #     also require that the container exits with a `zero` status.
+    #
+    #   * `HEALTHY` - This condition validates that the dependent container
+    #     passes its Docker health check before permitting other containers
+    #     to start. This requires that the dependent container has health
+    #     checks configured. This condition will only be confirmed at task
+    #     startup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDependency AWS API Documentation
+    #
+    class ContainerDependency < Struct.new(
+      :container_name,
+      :condition)
       include Aws::Structure
     end
 
@@ -1785,10 +1883,10 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 7,200 seconds. During that time, the ECS service scheduler
-    #   ignores health check status. This grace period can prevent the ECS
-    #   service scheduler from marking tasks as unhealthy and stopping them
-    #   before they have time to come up.
+    #   of up to 2,147,483,647 seconds. During that time, the ECS service
+    #   scheduler ignores health check status. This grace period can prevent
+    #   the ECS service scheduler from marking tasks as unhealthy and
+    #   stopping them before they have time to come up.
     #   @return [Integer]
     #
     # @!attribute [rw] scheduling_strategy
@@ -4435,6 +4533,72 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The configuration details for the App Mesh proxy.
+    #
+    # @note When making an API call, you may pass ProxyConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         type: "APPMESH", # accepts APPMESH
+    #         container_name: "String", # required
+    #         properties: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The proxy type. The only supported value is `APPMESH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that will serve as the App Mesh proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The set of network configuration parameters to provide the Container
+    #   Network Interface (CNI) plugin, specified as key-value pairs.
+    #
+    #   * `IgnoredUID` - (Required) The user ID (UID) of the proxy container
+    #     as defined by the `user` parameter in a container definition. This
+    #     is used to ensure the proxy ignores its own traffic. If
+    #     `IgnoredGID` is specified, this field can be empty.
+    #
+    #   * `IgnoredGID` - (Required) The group ID (GID) of the proxy
+    #     container as defined by the `user` parameter in a container
+    #     definition. This is used to ensure the proxy ignores its own
+    #     traffic. If `IgnoredGID` is specified, this field can be empty.
+    #
+    #   * `AppPorts` - (Required) The list of ports that the application
+    #     uses. Network traffic to these ports will be forwarded to the
+    #     `ProxyIngressPort` and `ProxyEgressPort`.
+    #
+    #   * `ProxyIngressPort` - (Required) Specifies the port that incoming
+    #     traffic to the `AppPorts` is directed to.
+    #
+    #   * `ProxyEgressPort` - (Required) Specifies the port that outgoing
+    #     traffic from the `AppPorts` is directed to.
+    #
+    #   * `EgressIgnoredPorts` - (Required) The egress traffic going to
+    #     these specified ports will be ignored and not redirected to the
+    #     `ProxyEgressPort`. It can be empty list.
+    #
+    #   * `EgressIgnoredIPs` - (Required) The egress traffic going to these
+    #     specified IP addresses will be ignored and not redirected to the
+    #     `ProxyEgressPort`. It can be empty list.
+    #   @return [Array<Types::KeyValuePair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ProxyConfiguration AWS API Documentation
+    #
+    class ProxyConfiguration < Struct.new(
+      :type,
+      :container_name,
+      :properties)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutAccountSettingDefaultRequest
     #   data as a hash:
     #
@@ -4772,6 +4936,14 @@ module Aws::ECS
     #                 value_from: "String", # required
     #               },
     #             ],
+    #             depends_on: [
+    #               {
+    #                 container_name: "String", # required
+    #                 condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #               },
+    #             ],
+    #             start_timeout: 1,
+    #             stop_timeout: 1,
     #             hostname: "String",
     #             user: "String",
     #             working_directory: "String",
@@ -4862,6 +5034,16 @@ module Aws::ECS
     #         ],
     #         pid_mode: "host", # accepts host, task
     #         ipc_mode: "host", # accepts host, task, none
+    #         proxy_configuration: {
+    #           type: "APPMESH", # accepts APPMESH
+    #           container_name: "String", # required
+    #           properties: [
+    #             {
+    #               name: "String",
+    #               value: "String",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] family
@@ -5109,6 +5291,10 @@ module Aws::ECS
     #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
     #
     class RegisterTaskDefinitionRequest < Struct.new(
@@ -5124,7 +5310,8 @@ module Aws::ECS
       :memory,
       :tags,
       :pid_mode,
-      :ipc_mode)
+      :ipc_mode,
+      :proxy_configuration)
       include Aws::Structure
     end
 
@@ -6943,6 +7130,9 @@ module Aws::ECS
     #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
+    # @!attribute [rw] proxy_configuration
+    #   @return [Types::ProxyConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
     #
     class TaskDefinition < Struct.new(
@@ -6962,7 +7152,8 @@ module Aws::ECS
       :cpu,
       :memory,
       :pid_mode,
-      :ipc_mode)
+      :ipc_mode,
+      :proxy_configuration)
       include Aws::Structure
     end
 
