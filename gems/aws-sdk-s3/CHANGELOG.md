@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Change `Aws::S3::Object#copy_to` to use the target's client so the request is sent to the correct region endpoint.
+
 1.30.1 (2019-01-11)
 ------------------
 
