@@ -50,12 +50,15 @@ module Aws
         end
 
         it 'accepts an S3::Object source' do
-          expect(client).to receive(:copy_object).with({
+          target = S3::Object.new(
+            'target-bucket', 'target-key',
+            stub_responses: true
+          )
+          expect(target.client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
             copy_source: 'bucket/unescaped/key%20path',
           })
-          target = S3::Object.new('target-bucket', 'target-key', stub_responses:true)
           object.copy_to(target)
         end
 

@@ -12,16 +12,21 @@ module Aws
       end
 
       def copy_from(source, options = {})
-        copy_object(source, @object, merge_options(source, options))
+        copy_object(
+          @object.client, source, @object, merge_options(source, options)
+        )
       end
 
       def copy_to(target, options = {})
-        copy_object(@object, target, merge_options(target, options))
+        # Attempt to use the target's client instance so the HTTP request
+        # will be sent to the region where the target object will be stored.
+        client = target.respond_to?(:client) ? target.client : @object.client
+        copy_object(client, @object, target, merge_options(target, options))
       end
 
       private
 
-      def copy_object(source, target, options)
+      def copy_object(client, source, target, options)
         target_bucket, target_key = copy_target(target)
         options[:bucket] = target_bucket
         options[:key] = target_key
@@ -30,7 +35,7 @@ module Aws
           apply_source_client(source, options)
           ObjectMultipartCopier.new(@options).copy(options)
         else
-          @object.client.copy_object(options)
+          client.copy_object(options)
         end
       end
 
