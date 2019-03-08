@@ -403,6 +403,7 @@ module Aws::SageMaker
     ResponseMIMEType = Shapes::StringShape.new(name: 'ResponseMIMEType')
     ResponseMIMETypes = Shapes::ListShape.new(name: 'ResponseMIMETypes')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RootAccess = Shapes::StringShape.new(name: 'RootAccess')
     S3DataDistribution = Shapes::StringShape.new(name: 'S3DataDistribution')
     S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
     S3DataType = Shapes::StringShape.new(name: 'S3DataType')
@@ -759,6 +760,7 @@ module Aws::SageMaker
     CreateNotebookInstanceInput.add_member(:accelerator_types, Shapes::ShapeRef.new(shape: NotebookInstanceAcceleratorTypes, location_name: "AcceleratorTypes"))
     CreateNotebookInstanceInput.add_member(:default_code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryNameOrUrl, location_name: "DefaultCodeRepository"))
     CreateNotebookInstanceInput.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: AdditionalCodeRepositoryNamesOrUrls, location_name: "AdditionalCodeRepositories"))
+    CreateNotebookInstanceInput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
     CreateNotebookInstanceInput.struct_class = Types::CreateNotebookInstanceInput
 
     CreateNotebookInstanceLifecycleConfigInput.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NotebookInstanceLifecycleConfigName, required: true, location_name: "NotebookInstanceLifecycleConfigName"))
@@ -1036,6 +1038,7 @@ module Aws::SageMaker
     DescribeNotebookInstanceOutput.add_member(:accelerator_types, Shapes::ShapeRef.new(shape: NotebookInstanceAcceleratorTypes, location_name: "AcceleratorTypes"))
     DescribeNotebookInstanceOutput.add_member(:default_code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryNameOrUrl, location_name: "DefaultCodeRepository"))
     DescribeNotebookInstanceOutput.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: AdditionalCodeRepositoryNamesOrUrls, location_name: "AdditionalCodeRepositories"))
+    DescribeNotebookInstanceOutput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
     DescribeNotebookInstanceOutput.struct_class = Types::DescribeNotebookInstanceOutput
 
     DescribeSubscribedWorkteamRequest.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
@@ -1917,6 +1920,7 @@ module Aws::SageMaker
     TrainingJob.add_member(:secondary_status_transitions, Shapes::ShapeRef.new(shape: SecondaryStatusTransitions, location_name: "SecondaryStatusTransitions"))
     TrainingJob.add_member(:final_metric_data_list, Shapes::ShapeRef.new(shape: FinalMetricDataList, location_name: "FinalMetricDataList"))
     TrainingJob.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
+    TrainingJob.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     TrainingJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     TrainingJob.struct_class = Types::TrainingJob
 
@@ -2048,6 +2052,7 @@ module Aws::SageMaker
     UpdateNotebookInstanceInput.add_member(:disassociate_accelerator_types, Shapes::ShapeRef.new(shape: DisassociateNotebookInstanceAcceleratorTypes, location_name: "DisassociateAcceleratorTypes"))
     UpdateNotebookInstanceInput.add_member(:disassociate_default_code_repository, Shapes::ShapeRef.new(shape: DisassociateDefaultCodeRepository, location_name: "DisassociateDefaultCodeRepository"))
     UpdateNotebookInstanceInput.add_member(:disassociate_additional_code_repositories, Shapes::ShapeRef.new(shape: DisassociateAdditionalCodeRepositories, location_name: "DisassociateAdditionalCodeRepositories"))
+    UpdateNotebookInstanceInput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
     UpdateNotebookInstanceInput.struct_class = Types::UpdateNotebookInstanceInput
 
     UpdateNotebookInstanceLifecycleConfigInput.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NotebookInstanceLifecycleConfigName, required: true, location_name: "NotebookInstanceLifecycleConfigName"))

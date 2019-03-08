@@ -30,16 +30,19 @@ module Aws::S3
       @bucket_name
     end
 
+    
     # @return [Array<Types::TopicConfiguration>]
     def topic_configurations
       data[:topic_configurations]
     end
 
+    
     # @return [Array<Types::QueueConfiguration>]
     def queue_configurations
       data[:queue_configurations]
     end
 
+    
     # @return [Array<Types::LambdaFunctionConfiguration>]
     def lambda_function_configurations
       data[:lambda_function_configurations]

@@ -638,7 +638,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #       target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -695,9 +695,9 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
-    # [3]: http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html
     # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
@@ -710,7 +710,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. For more information, see [Using Cost
@@ -719,7 +719,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @return [Types::CreateEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -776,7 +776,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
@@ -784,7 +784,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #
     # @option params [required, Array<Types::ProductionVariant>] :production_variants
     #   An array of `ProductionVariant` objects, one for each model that you
@@ -797,7 +797,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
@@ -1287,7 +1287,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. For more information, see [Using Cost
@@ -1296,7 +1296,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   A VpcConfig object that specifies the VPC that you want your model to
@@ -1308,8 +1308,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the model container. No inbound or outbound network calls can
@@ -1546,7 +1546,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the new notebook instance.
@@ -1578,7 +1578,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [String] :kms_key_id
     #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
@@ -1602,7 +1602,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [String] :direct_internet_access
     #   Sets whether Amazon SageMaker provides internet access to the notebook
@@ -1617,7 +1617,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #
     # @option params [Integer] :volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
@@ -1661,6 +1661,17 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #
+    # @option params [String] :root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance. The default value is `Enabled`.
+    #
+    #   <note markdown="1"> Lifecycle configurations need root access to be able to set up a
+    #   notebook instance. Because of this, lifecycle configurations
+    #   associated with a notebook instance always run with root access even
+    #   if you disable root access for users.
+    #
+    #    </note>
+    #
     # @return [Types::CreateNotebookInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNotebookInstanceOutput#notebook_instance_arn #notebook_instance_arn} => String
@@ -1686,6 +1697,7 @@ module Aws::SageMaker
     #     accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
     #     default_code_repository: "CodeRepositoryNameOrUrl",
     #     additional_code_repositories: ["CodeRepositoryNameOrUrl"],
+    #     root_access: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -1723,7 +1735,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
@@ -1788,7 +1800,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-ip-filter.html
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance.
@@ -1826,9 +1838,9 @@ module Aws::SageMaker
     #
     # If you choose to host your model using Amazon SageMaker hosting
     # services, you can use the resulting model artifacts as part of the
-    # model. You can also use the artifacts in a deep learning service other
-    # than Amazon SageMaker, provided that you know how to use them for
-    # inferences.
+    # model. You can also use the artifacts in a machine learning service
+    # other than Amazon SageMaker, provided that you know how to use them
+    # for inferences.
     #
     # In the request body, you provide the following:
     #
@@ -1863,8 +1875,8 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
     #
     # @option params [required, String] :training_job_name
     #   The name of the training job. The name must be unique within an AWS
@@ -1882,7 +1894,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #
     # @option params [required, Types::AlgorithmSpecification] :algorithm_specification
     #   The registry path of the Docker image that contains the training
@@ -1893,8 +1905,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
@@ -1914,7 +1926,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [Array<Types::Channel>] :input_data_config
     #   An array of `Channel` objects. Each channel is a named input source.
@@ -1956,7 +1968,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Sets a duration for training. Use this parameter to cap model training
@@ -1978,7 +1990,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the training container. No inbound or outbound network calls
@@ -1995,9 +2007,17 @@ module Aws::SageMaker
     #
     # @option params [Boolean] :enable_inter_container_traffic_encryption
     #   To encrypt all communications between ML compute instances in
-    #   distributed training, choose `True`,. Encryption provides greater
-    #   security for distributed training, but training can take longer
-    #   because of additional communications between ML compute instances.
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer. How
+    #   long it takes depends on the amount of communication between compute
+    #   instances, especially if you use a deep learning algorithm in
+    #   distributed training. For more information, see [Protect
+    #   Communications Between ML Compute Instances in a Distributed Training
+    #   Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html
     #
     # @return [Types::CreateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2113,7 +2133,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
     #
     # @option params [required, String] :transform_job_name
     #   The name of the transform job. The name must be unique within an AWS
@@ -2125,39 +2145,41 @@ module Aws::SageMaker
     #   within an AWS Region in an AWS account.
     #
     # @option params [Integer] :max_concurrent_transforms
-    #   The maximum number of parallel requests that can be sent to an
-    #   algorithm container on an instance. This is good for algorithms that
-    #   implement multiple workers on larger instances . The default value is
-    #   `1`. To allow Amazon SageMaker to determine the appropriate number for
-    #   `MaxConcurrentTransforms`, do not set the value in the API.
+    #   The maximum number of parallel requests that can be sent to each
+    #   instance in a transform job. The default value is `1`. To allow Amazon
+    #   SageMaker to determine the appropriate number for
+    #   `MaxConcurrentTransforms`, set the value to `0`.
     #
     # @option params [Integer] :max_payload_in_mb
-    #   The maximum payload size allowed, in MB. A payload is the data portion
-    #   of a record (without metadata). The value in `MaxPayloadInMB` must be
-    #   greater or equal to the size of a single record. You can approximate
-    #   the size of a record by dividing the size of your dataset by the
-    #   number of records. Then multiply this value by the number of records
-    #   you want in a mini-batch. We recommend to enter a slightly larger
-    #   value than this to ensure the records fit within the maximum payload
-    #   size. The default value is `6` MB.
+    #   The maximum allowed size of the payload, in MB. A *payload* is the
+    #   data portion of a record (without metadata). The value in
+    #   `MaxPayloadInMB` must be greater than, or equal to, the size of a
+    #   single record. To estimate the size of a record in MB, divide the size
+    #   of your dataset by the number of records. To ensure that the records
+    #   fit within the maximum payload size, we recommend using a slightly
+    #   larger value. The default value is `6` MB.
     #
     #   For cases where the payload might be arbitrarily large and is
     #   transmitted using HTTP chunked encoding, set the value to `0`. This
-    #   feature only works in supported algorithms. Currently, Amazon
-    #   SageMaker built-in algorithms do not support this feature.
+    #   feature works only in supported algorithms. Currently, Amazon
+    #   SageMaker built-in algorithms do not support HTTP chunked encoding.
     #
     # @option params [String] :batch_strategy
-    #   Determines the number of records to include in a mini-batch. If you
-    #   want to include only one record in a mini-batch, specify
-    #   `SingleRecord`.. If you want mini-batches to contain a maximum of the
-    #   number of records specified in the `MaxPayloadInMB` parameter, specify
-    #   `MultiRecord`.
+    #   Specifies the number of records to include in a mini-batch for an HTTP
+    #   inference request. A *record* ** is a single unit of input data that
+    #   inference can be made on. For example, a single line in a CSV file is
+    #   a record.
     #
-    #   If you set `SplitType` to `Line` and `BatchStrategy` to `MultiRecord`,
-    #   a batch transform automatically splits your input data into the
-    #   specified payload size. There's no need to split the dataset into
-    #   smaller files or to use larger payload sizes unless the records in
-    #   your dataset are very large.
+    #   To enable the batch strategy, you must set `SplitType` to `Line`,
+    #   `RecordIO`, or `TFRecord`.
+    #
+    #   To use only one record when making an HTTP invocation request to a
+    #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
+    #   `Line`.
+    #
+    #   To fit as many records in a mini-batch as can fit within the
+    #   `MaxPayloadInMB` limit, set `BatchStrategy` to `MultiRecord` and
+    #   `SplitType` to `Line`.
     #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container. We support
@@ -2180,7 +2202,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @return [Types::CreateTransformJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2411,7 +2433,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html
     #
     # @option params [required, String] :model_name
     #   The name of the model to delete.
@@ -2802,7 +2824,7 @@ module Aws::SageMaker
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens"
+    #   resp.output_config.target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens", "rk3399", "rk3288"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -3307,6 +3329,7 @@ module Aws::SageMaker
     #   * {Types::DescribeNotebookInstanceOutput#accelerator_types #accelerator_types} => Array&lt;String&gt;
     #   * {Types::DescribeNotebookInstanceOutput#default_code_repository #default_code_repository} => String
     #   * {Types::DescribeNotebookInstanceOutput#additional_code_repositories #additional_code_repositories} => Array&lt;String&gt;
+    #   * {Types::DescribeNotebookInstanceOutput#root_access #root_access} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3338,6 +3361,7 @@ module Aws::SageMaker
     #   resp.default_code_repository #=> String
     #   resp.additional_code_repositories #=> Array
     #   resp.additional_code_repositories[0] #=> String
+    #   resp.root_access #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance AWS API Documentation
     #
@@ -3355,7 +3379,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration to describe.
@@ -3898,7 +3922,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens", "rk3399", "rk3288"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -3918,7 +3942,7 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListEndpointConfig` request was
@@ -3980,7 +4004,7 @@ module Aws::SageMaker
     #   Sorts the list of results. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of a `ListEndpoints` request was truncated, the response
@@ -4377,13 +4401,13 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html
     #
     # @option params [String] :sort_by
     #   Sorts the list of results. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the response to a previous `ListModels` request was truncated, the
@@ -5196,6 +5220,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.final_metric_data_list[0].value #=> Float
     #   resp.results[0].training_job.final_metric_data_list[0].timestamp #=> Time
     #   resp.results[0].training_job.enable_network_isolation #=> Boolean
+    #   resp.results[0].training_job.enable_inter_container_traffic_encryption #=> Boolean
     #   resp.results[0].training_job.tags #=> Array
     #   resp.results[0].training_job.tags[0].key #=> String
     #   resp.results[0].training_job.tags[0].value #=> String
@@ -5355,11 +5380,6 @@ module Aws::SageMaker
     # seconds. Algorithms might use this 120-second window to save the model
     # artifacts, so the results of the training is not lost.
     #
-    # Training algorithms provided by Amazon SageMaker save the intermediate
-    # results of a model training job. This intermediate data is a valid
-    # model artifact. You can use the model artifacts that are saved when
-    # Amazon SageMaker stops a training job to create a model.
-    #
     # When it receives a `StopTrainingJob` request, Amazon SageMaker changes
     # the status of the job to `Stopping`. After Amazon SageMaker stops the
     # job, it sets the status to `Stopped`.
@@ -5469,7 +5489,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint whose configuration you want to update.
@@ -5510,7 +5530,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of an existing Amazon SageMaker endpoint.
@@ -5571,7 +5591,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [String] :lifecycle_config_name
     #   The name of a lifecycle configuration to associate with the notebook
@@ -5580,7 +5600,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [Boolean] :disassociate_lifecycle_config
     #   Set to `true` to remove the notebook instance lifecycle configuration
@@ -5608,9 +5628,9 @@ module Aws::SageMaker
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories in
-    #   [AWS CodeCommit][1] or in any other Git repository.. These
-    #   repositories are cloned at the same level as the default repository of
-    #   your notebook instance. For more information, see [Associating Git
+    #   [AWS CodeCommit][1] or in any other Git repository. These repositories
+    #   are cloned at the same level as the default repository of your
+    #   notebook instance. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
@@ -5640,6 +5660,16 @@ module Aws::SageMaker
     #   A list of names or URLs of the default Git repositories to remove from
     #   this notebook instance.
     #
+    # @option params [String] :root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance. The default value is `Enabled`.
+    #
+    #   <note markdown="1"> If you set this to `Disabled`, users don't have root access on the
+    #   notebook instance, but lifecycle configuration scripts still run with
+    #   root permissions.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5657,6 +5687,7 @@ module Aws::SageMaker
     #     disassociate_accelerator_types: false,
     #     disassociate_default_code_repository: false,
     #     disassociate_additional_code_repositories: false,
+    #     root_access: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance AWS API Documentation
@@ -5779,7 +5810,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

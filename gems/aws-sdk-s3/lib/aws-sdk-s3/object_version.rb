@@ -46,6 +46,7 @@ module Aws::S3
       @id
     end
 
+    
     # @return [String]
     def etag
       data[:etag]
@@ -88,6 +89,7 @@ module Aws::S3
       data[:last_modified]
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]

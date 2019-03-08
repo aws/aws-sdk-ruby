@@ -61,6 +61,7 @@ module Aws::CodeBuild
     FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
     FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
+    GitSubmodulesConfig = Shapes::StructureShape.new(name: 'GitSubmodulesConfig')
     ImagePullCredentialsType = Shapes::StringShape.new(name: 'ImagePullCredentialsType')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
     ImportSourceCredentialsInput = Shapes::StructureShape.new(name: 'ImportSourceCredentialsInput')
@@ -301,6 +302,9 @@ module Aws::CodeBuild
 
     FilterGroups.member = Shapes::ShapeRef.new(shape: FilterGroup)
 
+    GitSubmodulesConfig.add_member(:fetch_submodules, Shapes::ShapeRef.new(shape: WrapperBoolean, required: true, location_name: "fetchSubmodules"))
+    GitSubmodulesConfig.struct_class = Types::GitSubmodulesConfig
+
     ImageVersions.member = Shapes::ShapeRef.new(shape: String)
 
     ImportSourceCredentialsInput.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "username"))
@@ -438,6 +442,7 @@ module Aws::CodeBuild
     ProjectSource.add_member(:type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "type"))
     ProjectSource.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     ProjectSource.add_member(:git_clone_depth, Shapes::ShapeRef.new(shape: GitCloneDepth, location_name: "gitCloneDepth"))
+    ProjectSource.add_member(:git_submodules_config, Shapes::ShapeRef.new(shape: GitSubmodulesConfig, location_name: "gitSubmodulesConfig"))
     ProjectSource.add_member(:buildspec, Shapes::ShapeRef.new(shape: String, location_name: "buildspec"))
     ProjectSource.add_member(:auth, Shapes::ShapeRef.new(shape: SourceAuth, location_name: "auth"))
     ProjectSource.add_member(:report_build_status, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "reportBuildStatus"))
@@ -459,6 +464,7 @@ module Aws::CodeBuild
 
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    S3LogsConfig.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     S3LogsConfig.struct_class = Types::S3LogsConfig
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -485,6 +491,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:source_location_override, Shapes::ShapeRef.new(shape: String, location_name: "sourceLocationOverride"))
     StartBuildInput.add_member(:source_auth_override, Shapes::ShapeRef.new(shape: SourceAuth, location_name: "sourceAuthOverride"))
     StartBuildInput.add_member(:git_clone_depth_override, Shapes::ShapeRef.new(shape: GitCloneDepth, location_name: "gitCloneDepthOverride"))
+    StartBuildInput.add_member(:git_submodules_config_override, Shapes::ShapeRef.new(shape: GitSubmodulesConfig, location_name: "gitSubmodulesConfigOverride"))
     StartBuildInput.add_member(:buildspec_override, Shapes::ShapeRef.new(shape: String, location_name: "buildspecOverride"))
     StartBuildInput.add_member(:insecure_ssl_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "insecureSslOverride"))
     StartBuildInput.add_member(:report_build_status_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "reportBuildStatusOverride"))

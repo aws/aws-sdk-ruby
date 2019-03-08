@@ -59,9 +59,9 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    # [3]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @note When making an API call, you may pass AlgorithmSpecification
     #   data as a hash:
@@ -82,11 +82,15 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1].
+    #   Parameters][1]. Amazon SageMaker supports both
+    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
+    #   path formats. For more information, see [Using Your Own Algorithms
+    #   with Amazon SageMaker][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] algorithm_name
@@ -121,7 +125,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
     # @!attribute [rw] metric_definitions
@@ -854,8 +858,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] container_hostname
-    #   The DNS host name for the container after Amazon SageMaker deploys
-    #   it.
+    #   This parameter is ignored.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -869,7 +872,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] model_data_url
@@ -1259,7 +1262,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #           target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -1369,7 +1372,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #   @return [String]
     #
     # @!attribute [rw] production_variants
@@ -1384,7 +1387,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
@@ -1439,7 +1442,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1449,7 +1452,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointInput AWS API Documentation
@@ -1921,7 +1924,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1931,7 +1934,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_config
@@ -1944,8 +1947,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] enable_network_isolation
@@ -2134,6 +2137,7 @@ module Aws::SageMaker
     #         accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
     #         default_code_repository: "CodeRepositoryNameOrUrl",
     #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
+    #         root_access: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -2170,7 +2174,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -2197,7 +2201,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
@@ -2213,7 +2217,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -2262,6 +2266,18 @@ module Aws::SageMaker
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance. The default value is `Enabled`.
+    #
+    #   <note markdown="1"> Lifecycle configurations need root access to be able to set up a
+    #   notebook instance. Because of this, lifecycle configurations
+    #   associated with a notebook instance always run with root access even
+    #   if you disable root access for users.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
     class CreateNotebookInstanceInput < Struct.new(
@@ -2277,7 +2293,8 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :accelerator_types,
       :default_code_repository,
-      :additional_code_repositories)
+      :additional_code_repositories,
+      :root_access)
       include Aws::Structure
     end
 
@@ -2463,7 +2480,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] algorithm_specification
@@ -2476,8 +2493,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
@@ -2498,7 +2515,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -2544,7 +2561,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -2568,7 +2585,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_network_isolation
@@ -2588,9 +2605,17 @@ module Aws::SageMaker
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
     #   To encrypt all communications between ML compute instances in
-    #   distributed training, choose `True`,. Encryption provides greater
-    #   security for distributed training, but training can take longer
-    #   because of additional communications between ML compute instances.
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training. For more information, see [Protect
+    #   Communications Between ML Compute Instances in a Distributed
+    #   Training Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
@@ -2676,43 +2701,43 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_concurrent_transforms
-    #   The maximum number of parallel requests that can be sent to an
-    #   algorithm container on an instance. This is good for algorithms that
-    #   implement multiple workers on larger instances . The default value
-    #   is `1`. To allow Amazon SageMaker to determine the appropriate
-    #   number for `MaxConcurrentTransforms`, do not set the value in the
-    #   API.
+    #   The maximum number of parallel requests that can be sent to each
+    #   instance in a transform job. The default value is `1`. To allow
+    #   Amazon SageMaker to determine the appropriate number for
+    #   `MaxConcurrentTransforms`, set the value to `0`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_payload_in_mb
-    #   The maximum payload size allowed, in MB. A payload is the data
-    #   portion of a record (without metadata). The value in
-    #   `MaxPayloadInMB` must be greater or equal to the size of a single
-    #   record. You can approximate the size of a record by dividing the
-    #   size of your dataset by the number of records. Then multiply this
-    #   value by the number of records you want in a mini-batch. We
-    #   recommend to enter a slightly larger value than this to ensure the
-    #   records fit within the maximum payload size. The default value is
-    #   `6` MB.
+    #   The maximum allowed size of the payload, in MB. A *payload* is the
+    #   data portion of a record (without metadata). The value in
+    #   `MaxPayloadInMB` must be greater than, or equal to, the size of a
+    #   single record. To estimate the size of a record in MB, divide the
+    #   size of your dataset by the number of records. To ensure that the
+    #   records fit within the maximum payload size, we recommend using a
+    #   slightly larger value. The default value is `6` MB.
     #
     #   For cases where the payload might be arbitrarily large and is
     #   transmitted using HTTP chunked encoding, set the value to `0`. This
-    #   feature only works in supported algorithms. Currently, Amazon
-    #   SageMaker built-in algorithms do not support this feature.
+    #   feature works only in supported algorithms. Currently, Amazon
+    #   SageMaker built-in algorithms do not support HTTP chunked encoding.
     #   @return [Integer]
     #
     # @!attribute [rw] batch_strategy
-    #   Determines the number of records to include in a mini-batch. If you
-    #   want to include only one record in a mini-batch, specify
-    #   `SingleRecord`.. If you want mini-batches to contain a maximum of
-    #   the number of records specified in the `MaxPayloadInMB` parameter,
-    #   specify `MultiRecord`.
+    #   Specifies the number of records to include in a mini-batch for an
+    #   HTTP inference request. A *record* ** is a single unit of input data
+    #   that inference can be made on. For example, a single line in a CSV
+    #   file is a record.
     #
-    #   If you set `SplitType` to `Line` and `BatchStrategy` to
-    #   `MultiRecord`, a batch transform automatically splits your input
-    #   data into the specified payload size. There's no need to split the
-    #   dataset into smaller files or to use larger payload sizes unless the
-    #   records in your dataset are very large.
+    #   To enable the batch strategy, you must set `SplitType` to `Line`,
+    #   `RecordIO`, or `TFRecord`.
+    #
+    #   To use only one record when making an HTTP invocation request to a
+    #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
+    #   `Line`.
+    #
+    #   To fit as many records in a mini-batch as can fit within the
+    #   `MaxPayloadInMB` limit, set `BatchStrategy` to `MultiRecord` and
+    #   `SplitType` to `Line`.
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -2741,7 +2766,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJobRequest AWS API Documentation
@@ -3810,7 +3835,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] creation_time
@@ -4064,21 +4089,21 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
     #   Describes whether Amazon SageMaker provides internet access to the
-    #   notebook instance. If this value is set to *Disabled, he notebook
+    #   notebook instance. If this value is set to *Disabled*, the notebook
     #   instance does not have internet access, and cannot connect to Amazon
-    #   SageMaker training and endpoint services*.
+    #   SageMaker training and endpoint services.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -4127,6 +4152,18 @@ module Aws::SageMaker
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance.
+    #
+    #   <note markdown="1"> Lifecycle configurations need root access to be able to set up a
+    #   notebook instance. Because of this, lifecycle configurations
+    #   associated with a notebook instance always run with root access even
+    #   if you disable root access for users.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
     class DescribeNotebookInstanceOutput < Struct.new(
@@ -4148,7 +4185,8 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :accelerator_types,
       :default_code_repository,
-      :additional_code_repositories)
+      :additional_code_repositories,
+      :root_access)
       include Aws::Structure
     end
 
@@ -4339,7 +4377,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -4401,9 +4439,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
     #   To encrypt all communications between ML compute instances in
-    #   distributed training, specify `True`. Encryption provides greater
-    #   security for distributed training, but training take longer because
-    #   of the additional communications between ML compute instances.
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
@@ -4468,7 +4508,15 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   If the transform job failed, the reason that it failed.
+    #   If the transform job failed, `FailureReason` describes why it
+    #   failed. A transform job creates a log file, which includes error
+    #   messages, and stores it as an Amazon S3 object. For more
+    #   information, see [Log Amazon SageMaker Events with Amazon
+    #   CloudWatch][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html
     #   @return [String]
     #
     # @!attribute [rw] model_name
@@ -4485,13 +4533,18 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] batch_strategy
-    #   If you want to include only one record in a batch, specify
-    #   `SingleRecord`.. If you want batches to contain a maximum of the
-    #   number of records specified in the `MaxPayloadInMB` parameter,
-    #   specify `MultiRecord`.S
+    #   Specifies the number of records to include in a mini-batch for an
+    #   HTTP inference request. A *record* ** is a single unit of input data
+    #   that inference can be made on. For example, a single line in a CSV
+    #   file is a record.
+    #
+    #   To enable the batch strategy, you must set `SplitType` to `Line`,
+    #   `RecordIO`, or `TFRecord`.
     #   @return [String]
     #
     # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container. We support
+    #   up to 16 key and values entries in the map.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transform_input
@@ -4667,9 +4720,9 @@ module Aws::SageMaker
     #
     #   * `SystemUpdating`\: Endpoint is undergoing maintenance and cannot
     #     be updated or deleted or re-scaled until it has completed. This
-    #     mainenance operation does not change any customer-specified values
-    #     such as VPC config, KMS encryption, model, instance type, or
-    #     instance count.
+    #     maintenance operation does not change any customer-specified
+    #     values such as VPC config, KMS encryption, model, instance type,
+    #     or instance count.
     #
     #   * `RollingBack`\: Endpoint fails to scale up or down or change its
     #     variant weight and is in the process of rolling back to its
@@ -5144,11 +5197,15 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about Docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1].
+    #   Parameters][1]. Amazon SageMaker supports both
+    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
+    #   path formats. For more information, see [Using Your Own Algorithms
+    #   with Amazon SageMaker][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -5170,7 +5227,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
     # @!attribute [rw] algorithm_name
@@ -5357,7 +5414,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] output_data_config
@@ -5407,9 +5464,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
     #   To encrypt all communications between ML compute instances in
-    #   distributed training, specify `True`. Encryption provides greater
-    #   security for distributed training, but training take longer because
-    #   of the additional communications between ML compute instances.
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
@@ -5748,7 +5807,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/automatic-model-tuning-incremental
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html
     #   @return [Array<Types::ParentHyperParameterTuningJob>]
     #
     # @!attribute [rw] warm_start_type
@@ -6727,7 +6786,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6808,7 +6867,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7266,7 +7325,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8063,7 +8122,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition AWS API Documentation
@@ -8119,7 +8178,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] image_digest
@@ -8473,7 +8532,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @note When making an API call, you may pass NotebookInstanceLifecycleHook
     #   data as a hash:
@@ -8536,7 +8595,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] default_code_repository
@@ -8626,7 +8685,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #         target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -10211,7 +10270,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -10262,6 +10321,15 @@ module Aws::SageMaker
     #   communicate beyond the VPC they run in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_inter_container_traffic_encryption
+    #   To encrypt all communications between ML compute instances in
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. For more information, see [Using Cost
     #   Allocation Tags][1] in the *AWS Billing and Cost Management User
@@ -10269,7 +10337,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJob AWS API Documentation
@@ -10298,6 +10366,7 @@ module Aws::SageMaker
       :secondary_status_transitions,
       :final_metric_data_list,
       :enable_network_isolation,
+      :enable_inter_container_traffic_encryption,
       :tags)
       include Aws::Structure
     end
@@ -10360,7 +10429,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameters
@@ -10657,23 +10726,41 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] split_type
-    #   The method to use to split the transform job's data into smaller
-    #   batches. If you don't want to split the data, specify `None`. If
-    #   you want to split records on a newline character boundary, specify
-    #   `Line`. To split records according to the RecordIO format, specify
-    #   `RecordIO`. The default value is `None`.
+    #   The method to use to split the transform job's data files into
+    #   smaller batches. Splitting is necessary when the total size of each
+    #   object is too large to fit in a single request. You can also use
+    #   data splitting to improve performance by processing multiple
+    #   concurrent mini-batches. The default value for `SplitType` is
+    #   `None`, which indicates that input data files are not split, and
+    #   request payloads contain the entire contents of an input object. Set
+    #   the value of this parameter to `Line` to split records on a newline
+    #   character boundary. `SplitType` also supports a number of
+    #   record-oriented binary data formats.
     #
-    #   Amazon SageMaker sends the maximum number of records per batch in
-    #   each request up to the MaxPayloadInMB limit. For more information,
-    #   see [RecordIO data format][1].
+    #   When splitting is enabled, the size of a mini-batch depends on the
+    #   values of the `BatchStrategy` and `MaxPayloadInMB` parameters. When
+    #   the value of `BatchStrategy` is `MultiRecord`, Amazon SageMaker
+    #   sends the maximum number of records in each request, up to the
+    #   `MaxPayloadInMB` limit. If the value of `BatchStrategy` is
+    #   `SingleRecord`, Amazon SageMaker sends individual records in each
+    #   request.
     #
-    #   <note markdown="1"> For information about the `RecordIO` format, see [Data Format][1].
+    #   <note markdown="1"> Some data formats represent a record as a binary payload wrapped
+    #   with extra padding bytes. When splitting is applied to a binary data
+    #   format, padding is removed if the value of `BatchStrategy` is set to
+    #   `SingleRecord`. Padding is not removed if the value of
+    #   `BatchStrategy` is set to `MultiRecord`.
+    #
+    #    For more information about the RecordIO, see [Data Format][1] in the
+    #   MXNet documentation. For more information about the TFRecord, see
+    #   [Consuming TFRecord data][2] in the TensorFlow documentation.
     #
     #    </note>
     #
     #
     #
     #   [1]: http://mxnet.io/architecture/note_data_loading.html#data-format
+    #   [2]: https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformInput AWS API Documentation
@@ -10822,7 +10909,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Describes the results of a transform job output.
+    # Describes the results of a transform job.
     #
     # @note When making an API call, you may pass TransformOutput
     #   data as a hash:
@@ -10839,14 +10926,20 @@ module Aws::SageMaker
     #   results of the transform job. For example,
     #   `s3://bucket-name/key-name-prefix`.
     #
-    #   For every S3 object used as input for the transform job, the
-    #   transformed data is stored in a corresponding subfolder in the
-    #   location under the output prefix. For example, for the input data
-    #   `s3://bucket-name/input-name-prefix/dataset01/data.csv` the
-    #   transformed data is stored at
-    #   `s3://bucket-name/key-name-prefix/dataset01/`. This is based on the
-    #   original name, as a series of .part files (.part0001, part0002,
-    #   etc.).
+    #   For every S3 object used as input for the transform job, batch
+    #   transform stores the transformed data with an .`out` suffix in a
+    #   corresponding subfolder in the location in the output prefix. For
+    #   example, for the input data stored at
+    #   `s3://bucket-name/input-name-prefix/dataset01/data.csv`, batch
+    #   transform stores the transformed data at
+    #   `s3://bucket-name/output-name-prefix/input-name-prefix/data.csv.out`.
+    #   Batch transform doesn't upload partially processed objects. For an
+    #   input S3 object that contains multiple records, it creates an .`out`
+    #   file only if the transform job succeeds on the entire file. When the
+    #   input contains multiple S3 objects, the batch transform job
+    #   processes the listed S3 objects and uploads only the output for
+    #   successfully processed objects. If any object fails in the transform
+    #   job batch transform marks the job as failed to prompt investigation.
     #   @return [String]
     #
     # @!attribute [rw] accept
@@ -11242,6 +11335,7 @@ module Aws::SageMaker
     #         disassociate_accelerator_types: false,
     #         disassociate_default_code_repository: false,
     #         disassociate_additional_code_repositories: false,
+    #         root_access: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -11264,7 +11358,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_config_name
@@ -11274,7 +11368,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] disassociate_lifecycle_config
@@ -11306,7 +11400,7 @@ module Aws::SageMaker
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories
-    #   in [AWS CodeCommit][1] or in any other Git repository.. These
+    #   in [AWS CodeCommit][1] or in any other Git repository. These
     #   repositories are cloned at the same level as the default repository
     #   of your notebook instance. For more information, see [Associating
     #   Git Repositories with Amazon SageMaker Notebook Instances][2].
@@ -11343,6 +11437,17 @@ module Aws::SageMaker
     #   from this notebook instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance. The default value is `Enabled`.
+    #
+    #   <note markdown="1"> If you set this to `Disabled`, users don't have root access on the
+    #   notebook instance, but lifecycle configuration scripts still run
+    #   with root permissions.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation
     #
     class UpdateNotebookInstanceInput < Struct.new(
@@ -11357,7 +11462,8 @@ module Aws::SageMaker
       :accelerator_types,
       :disassociate_accelerator_types,
       :disassociate_default_code_repository,
-      :disassociate_additional_code_repositories)
+      :disassociate_additional_code_repositories,
+      :root_access)
       include Aws::Structure
     end
 
@@ -11467,8 +11573,8 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:

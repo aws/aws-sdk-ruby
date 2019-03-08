@@ -274,9 +274,14 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   This is expressed either as the Amazon Resource Name (ARN) of the
-    #   CMK or, if specified, the CMK's alias (using the format
-    #   `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
@@ -533,6 +538,9 @@ module Aws::CodeBuild
     #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
+    #           git_submodules_config: {
+    #             fetch_submodules: false, # required
+    #           },
     #           buildspec: "String",
     #           auth: {
     #             type: "OAUTH", # required, accepts OAUTH
@@ -547,6 +555,9 @@ module Aws::CodeBuild
     #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #             location: "String",
     #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
     #             buildspec: "String",
     #             auth: {
     #               type: "OAUTH", # required, accepts OAUTH
@@ -630,6 +641,7 @@ module Aws::CodeBuild
     #           s3_logs: {
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
+    #             encryption_disabled: false,
     #           },
     #         },
     #       }
@@ -687,6 +699,11 @@ module Aws::CodeBuild
     # @!attribute [rw] encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
@@ -989,6 +1006,28 @@ module Aws::CodeBuild
       :name,
       :value,
       :type)
+      include Aws::Structure
+    end
+
+    # Information about the Git submodules configuration for an AWS
+    # CodeBuild build project.
+    #
+    # @note When making an API call, you may pass GitSubmodulesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         fetch_submodules: false, # required
+    #       }
+    #
+    # @!attribute [rw] fetch_submodules
+    #   Set to true to fetch Git submodules for your AWS CodeBuild build
+    #   project.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GitSubmodulesConfig AWS API Documentation
+    #
+    class GitSubmodulesConfig < Struct.new(
+      :fetch_submodules)
       include Aws::Structure
     end
 
@@ -1308,6 +1347,7 @@ module Aws::CodeBuild
     #         s3_logs: {
     #           status: "ENABLED", # required, accepts ENABLED, DISABLED
     #           location: "String",
+    #           encryption_disabled: false,
     #         },
     #       }
     #
@@ -1465,9 +1505,14 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   This is expressed either as the Amazon Resource Name (ARN) of the
-    #   CMK or, if specified, the CMK's alias (using the format
-    #   `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1762,21 +1807,21 @@ module Aws::CodeBuild
     #     secondary sources. After the cache is created, subsequent builds
     #     pull only the change between commits. This mode is a good choice
     #     for projects with a clean working directory and a source that is a
-    #     large Git repository. If your project does not use a Git
-    #     repository (GitHub, GitHub Enterprise, or Bitbucket) and you
-    #     choose this option, then it is ignored.
+    #     large Git repository. If you choose this option and your project
+    #     does not use a Git repository (GitHub, GitHub Enterprise, or
+    #     Bitbucket), the option is ignored.
     #
     #   * `LOCAL_DOCKER_LAYER_CACHE` mode caches existing Docker layers.
     #     This mode is a good choice for projects that build or pull large
-    #     Docker images. It can prevent the performance hit that would be
-    #     caused by pulling large Docker images down from the network.
+    #     Docker images. It can prevent the performance issues caused by
+    #     pulling large Docker images down from the network.
     #
-    #     <note markdown="1"> * You can only use a Docker layer cache in the Linux enviornment.
+    #     <note markdown="1"> * You can use a Docker layer cache in the Linux enviornment only.
     #
     #     * The `privileged` flag must be set so that your project has the
-    #       necessary Docker privileges.
+    #       required Docker permissions.
     #
-    #     * You should consider the security implications before using a
+    #     * You should consider the security implications before you use a
     #       Docker layer cache.
     #
     #      </note>
@@ -1784,8 +1829,8 @@ module Aws::CodeBuild
     #
     #   * `LOCAL_CUSTOM_CACHE` mode caches directories you specify in the
     #     buildspec file. This mode is a good choice if your build scenario
-    #     does not match one that works well with one of the other three
-    #     local cache modes. If you use a custom cache:
+    #     is not suited to one of the other three local cache modes. If you
+    #     use a custom cache:
     #
     #     * Only directories can be specified for caching. You cannot
     #       specify individual files.
@@ -1943,6 +1988,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -2025,8 +2073,13 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] git_clone_depth
-    #   Information about the git clone depth for the build project.
+    #   Information about the Git clone depth for the build project.
     #   @return [Integer]
+    #
+    # @!attribute [rw] git_submodules_config
+    #   Information about the Git submodules configuration for the build
+    #   project.
+    #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec
     #   The build spec declaration to use for the builds in this build
@@ -2067,6 +2120,7 @@ module Aws::CodeBuild
       :type,
       :location,
       :git_clone_depth,
+      :git_submodules_config,
       :buildspec,
       :auth,
       :report_build_status,
@@ -2174,6 +2228,7 @@ module Aws::CodeBuild
     #       {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       }
     #
     # @!attribute [rw] status
@@ -2191,11 +2246,17 @@ module Aws::CodeBuild
     #   `arn:aws:s3:::my-bucket/build-log`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_disabled
+    #   Set to true if you do not want your S3 build log output encrypted.
+    #   By default S3 build logs are encrypted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation
     #
     class S3LogsConfig < Struct.new(
       :status,
-      :location)
+      :location,
+      :encryption_disabled)
       include Aws::Structure
     end
 
@@ -2270,6 +2331,9 @@ module Aws::CodeBuild
     #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #             location: "String",
     #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
     #             buildspec: "String",
     #             auth: {
     #               type: "OAUTH", # required, accepts OAUTH
@@ -2325,6 +2389,9 @@ module Aws::CodeBuild
     #           resource: "String",
     #         },
     #         git_clone_depth_override: 1,
+    #         git_submodules_config_override: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
     #         report_build_status_override: false,
@@ -2351,6 +2418,7 @@ module Aws::CodeBuild
     #           s3_logs: {
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
+    #             encryption_disabled: false,
     #           },
     #         },
     #         registry_credential_override: {
@@ -2434,6 +2502,11 @@ module Aws::CodeBuild
     #   overrides, for this build only, any previous depth of history
     #   defined in the build project.
     #   @return [Integer]
+    #
+    # @!attribute [rw] git_submodules_config_override
+    #   Information about the Git submodules configuration for this build of
+    #   an AWS CodeBuild build project.
+    #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec_override
     #   A build spec declaration that overrides, for this build only, the
@@ -2547,6 +2620,7 @@ module Aws::CodeBuild
       :source_location_override,
       :source_auth_override,
       :git_clone_depth_override,
+      :git_submodules_config_override,
       :buildspec_override,
       :insecure_ssl_override,
       :report_build_status_override,
@@ -2645,6 +2719,9 @@ module Aws::CodeBuild
     #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
+    #           git_submodules_config: {
+    #             fetch_submodules: false, # required
+    #           },
     #           buildspec: "String",
     #           auth: {
     #             type: "OAUTH", # required, accepts OAUTH
@@ -2659,6 +2736,9 @@ module Aws::CodeBuild
     #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #             location: "String",
     #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
     #             buildspec: "String",
     #             auth: {
     #               type: "OAUTH", # required, accepts OAUTH
@@ -2742,6 +2822,7 @@ module Aws::CodeBuild
     #           s3_logs: {
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
+    #             encryption_disabled: false,
     #           },
     #         },
     #       }
@@ -2804,10 +2885,15 @@ module Aws::CodeBuild
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
-    #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN)of the CMK or,
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
     #   `).
     #   @return [String]

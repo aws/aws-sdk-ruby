@@ -541,6 +541,7 @@ module Aws::CodeBuild
     #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].source.location #=> String
     #   resp.builds[0].source.git_clone_depth #=> Integer
+    #   resp.builds[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].source.buildspec #=> String
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
@@ -551,6 +552,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].secondary_sources[0].location #=> String
     #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.builds[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].secondary_sources[0].buildspec #=> String
     #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].secondary_sources[0].auth.resource #=> String
@@ -599,6 +601,7 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.cloud_watch_logs.stream_name #=> String
     #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.builds[0].logs.s3_logs.location #=> String
+    #   resp.builds[0].logs.s3_logs.encryption_disabled #=> Boolean
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].queued_timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
@@ -648,6 +651,7 @@ module Aws::CodeBuild
     #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].source.location #=> String
     #   resp.projects[0].source.git_clone_depth #=> Integer
+    #   resp.projects[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].source.buildspec #=> String
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
@@ -658,6 +662,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].secondary_sources[0].location #=> String
     #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.projects[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].secondary_sources[0].buildspec #=> String
     #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].secondary_sources[0].auth.resource #=> String
@@ -730,6 +735,7 @@ module Aws::CodeBuild
     #   resp.projects[0].logs_config.cloud_watch_logs.stream_name #=> String
     #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.projects[0].logs_config.s3_logs.location #=> String
+    #   resp.projects[0].logs_config.s3_logs.encryption_disabled #=> Boolean
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -787,6 +793,11 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
     #   be used for encrypting the build output artifacts.
     #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
@@ -821,6 +832,9 @@ module Aws::CodeBuild
     #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
+    #       git_submodules_config: {
+    #         fetch_submodules: false, # required
+    #       },
     #       buildspec: "String",
     #       auth: {
     #         type: "OAUTH", # required, accepts OAUTH
@@ -835,6 +849,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -918,6 +935,7 @@ module Aws::CodeBuild
     #       s3_logs: {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       },
     #     },
     #   })
@@ -930,6 +948,7 @@ module Aws::CodeBuild
     #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
+    #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
@@ -940,6 +959,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.secondary_sources[0].location #=> String
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
     #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.project.secondary_sources[0].auth.resource #=> String
@@ -1012,6 +1032,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
+    #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -1525,6 +1546,10 @@ module Aws::CodeBuild
     #   overrides, for this build only, any previous depth of history defined
     #   in the build project.
     #
+    # @option params [Types::GitSubmodulesConfig] :git_submodules_config_override
+    #   Information about the Git submodules configuration for this build of
+    #   an AWS CodeBuild build project.
+    #
     # @option params [String] :buildspec_override
     #   A build spec declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
@@ -1620,6 +1645,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -1675,6 +1703,9 @@ module Aws::CodeBuild
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
+    #     git_submodules_config_override: {
+    #       fetch_submodules: false, # required
+    #     },
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
     #     report_build_status_override: false,
@@ -1701,6 +1732,7 @@ module Aws::CodeBuild
     #       s3_logs: {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       },
     #     },
     #     registry_credential_override: {
@@ -1733,6 +1765,7 @@ module Aws::CodeBuild
     #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
+    #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
@@ -1743,6 +1776,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
     #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.build.secondary_sources[0].auth.resource #=> String
@@ -1791,6 +1825,7 @@ module Aws::CodeBuild
     #   resp.build.logs.cloud_watch_logs.stream_name #=> String
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
+    #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -1851,6 +1886,7 @@ module Aws::CodeBuild
     #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
+    #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
@@ -1861,6 +1897,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
     #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.build.secondary_sources[0].auth.resource #=> String
@@ -1909,6 +1946,7 @@ module Aws::CodeBuild
     #   resp.build.logs.cloud_watch_logs.stream_name #=> String
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
+    #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -1980,11 +2018,16 @@ module Aws::CodeBuild
     #   out.
     #
     # @option params [String] :encryption_key
-    #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
+    #   be used for encrypting the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN)of the CMK or, if
-    #   available, the CMK's alias (using the format `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
     # @option params [Array<Types::Tag>] :tags
     #   The replacement set of tags for this build project.
@@ -2016,6 +2059,9 @@ module Aws::CodeBuild
     #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
+    #       git_submodules_config: {
+    #         fetch_submodules: false, # required
+    #       },
     #       buildspec: "String",
     #       auth: {
     #         type: "OAUTH", # required, accepts OAUTH
@@ -2030,6 +2076,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -2113,6 +2162,7 @@ module Aws::CodeBuild
     #       s3_logs: {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       },
     #     },
     #   })
@@ -2125,6 +2175,7 @@ module Aws::CodeBuild
     #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
+    #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
@@ -2135,6 +2186,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.secondary_sources[0].location #=> String
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
     #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.project.secondary_sources[0].auth.resource #=> String
@@ -2207,6 +2259,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
+    #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -2303,7 +2356,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

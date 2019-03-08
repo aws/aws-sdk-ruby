@@ -353,7 +353,8 @@ module Aws::S3
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [Time,DateTime,Date,Integer,String] :expires

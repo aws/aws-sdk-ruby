@@ -46,6 +46,7 @@ module Aws::S3
       data[:delete_marker]
     end
 
+    
     # @return [String]
     def accept_ranges
       data[:accept_ranges]
@@ -190,6 +191,7 @@ module Aws::S3
       data[:ssekms_key_id]
     end
 
+    
     # @return [String]
     def storage_class
       data[:storage_class]
@@ -202,6 +204,7 @@ module Aws::S3
       data[:request_charged]
     end
 
+    
     # @return [String]
     def replication_status
       data[:replication_status]
@@ -860,7 +863,8 @@ module Aws::S3
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically.
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   is auto-populated when using the command from the CLI
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the object data.
     # @option options [Time,DateTime,Date,Integer,String] :expires
