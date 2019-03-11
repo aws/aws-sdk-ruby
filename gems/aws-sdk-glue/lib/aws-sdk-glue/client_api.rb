@@ -310,6 +310,7 @@ module Aws::Glue
     LogStream = Shapes::StringShape.new(name: 'LogStream')
     Logical = Shapes::StringShape.new(name: 'Logical')
     LogicalOperator = Shapes::StringShape.new(name: 'LogicalOperator')
+    MapValue = Shapes::MapShape.new(name: 'MapValue')
     MappingEntry = Shapes::StructureShape.new(name: 'MappingEntry')
     MappingList = Shapes::ListShape.new(name: 'MappingList')
     MatchCriteria = Shapes::ListShape.new(name: 'MatchCriteria')
@@ -768,6 +769,7 @@ module Aws::Glue
     CreateDevEndpointRequest.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
     CreateDevEndpointRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     CreateDevEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateDevEndpointRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: MapValue, location_name: "Arguments"))
     CreateDevEndpointRequest.struct_class = Types::CreateDevEndpointRequest
 
     CreateDevEndpointResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointName"))
@@ -785,6 +787,7 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "FailureReason"))
     CreateDevEndpointResponse.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     CreateDevEndpointResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimestamp"))
+    CreateDevEndpointResponse.add_member(:arguments, Shapes::ShapeRef.new(shape: MapValue, location_name: "Arguments"))
     CreateDevEndpointResponse.struct_class = Types::CreateDevEndpointResponse
 
     CreateGrokClassifierRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))
@@ -999,6 +1002,7 @@ module Aws::Glue
     DevEndpoint.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
     DevEndpoint.add_member(:public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "PublicKeys"))
     DevEndpoint.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    DevEndpoint.add_member(:arguments, Shapes::ShapeRef.new(shape: MapValue, location_name: "Arguments"))
     DevEndpoint.struct_class = Types::DevEndpoint
 
     DevEndpointCustomLibraries.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
@@ -1478,6 +1482,9 @@ module Aws::Glue
     LocationMap.key = Shapes::ShapeRef.new(shape: ColumnValuesString)
     LocationMap.value = Shapes::ShapeRef.new(shape: ColumnValuesString)
 
+    MapValue.key = Shapes::ShapeRef.new(shape: GenericString)
+    MapValue.value = Shapes::ShapeRef.new(shape: GenericString)
+
     MappingEntry.add_member(:source_table, Shapes::ShapeRef.new(shape: TableName, location_name: "SourceTable"))
     MappingEntry.add_member(:source_path, Shapes::ShapeRef.new(shape: SchemaPathString, location_name: "SourcePath"))
     MappingEntry.add_member(:source_type, Shapes::ShapeRef.new(shape: FieldType, location_name: "SourceType"))
@@ -1820,6 +1827,8 @@ module Aws::Glue
     UpdateDevEndpointRequest.add_member(:delete_public_keys, Shapes::ShapeRef.new(shape: PublicKeysList, location_name: "DeletePublicKeys"))
     UpdateDevEndpointRequest.add_member(:custom_libraries, Shapes::ShapeRef.new(shape: DevEndpointCustomLibraries, location_name: "CustomLibraries"))
     UpdateDevEndpointRequest.add_member(:update_etl_libraries, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "UpdateEtlLibraries"))
+    UpdateDevEndpointRequest.add_member(:delete_arguments, Shapes::ShapeRef.new(shape: StringList, location_name: "DeleteArguments"))
+    UpdateDevEndpointRequest.add_member(:add_arguments, Shapes::ShapeRef.new(shape: MapValue, location_name: "AddArguments"))
     UpdateDevEndpointRequest.struct_class = Types::UpdateDevEndpointRequest
 
     UpdateDevEndpointResponse.struct_class = Types::UpdateDevEndpointResponse

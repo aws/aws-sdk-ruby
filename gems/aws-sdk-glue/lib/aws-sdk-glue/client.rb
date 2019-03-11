@@ -619,6 +619,8 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_keys #=> Array
     #   resp.dev_endpoints[0].public_keys[0] #=> String
     #   resp.dev_endpoints[0].security_configuration #=> String
+    #   resp.dev_endpoints[0].arguments #=> Hash
+    #   resp.dev_endpoints[0].arguments["GenericString"] #=> String
     #   resp.dev_endpoints_not_found #=> Array
     #   resp.dev_endpoints_not_found[0] #=> String
     #
@@ -1170,6 +1172,9 @@ module Aws::Glue
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
+    # @option params [Hash<String,String>] :arguments
+    #   A map of arguments used to configure the DevEndpoint.
+    #
     # @return [Types::CreateDevEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDevEndpointResponse#endpoint_name #endpoint_name} => String
@@ -1187,6 +1192,7 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#failure_reason #failure_reason} => String
     #   * {Types::CreateDevEndpointResponse#security_configuration #security_configuration} => String
     #   * {Types::CreateDevEndpointResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateDevEndpointResponse#arguments #arguments} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1203,6 +1209,9 @@ module Aws::Glue
     #     security_configuration: "NameString",
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     arguments: {
+    #       "GenericString" => "GenericString",
     #     },
     #   })
     #
@@ -1224,6 +1233,8 @@ module Aws::Glue
     #   resp.failure_reason #=> String
     #   resp.security_configuration #=> String
     #   resp.created_timestamp #=> Time
+    #   resp.arguments #=> Hash
+    #   resp.arguments["GenericString"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpoint AWS API Documentation
     #
@@ -2830,6 +2841,8 @@ module Aws::Glue
     #   resp.dev_endpoint.public_keys #=> Array
     #   resp.dev_endpoint.public_keys[0] #=> String
     #   resp.dev_endpoint.security_configuration #=> String
+    #   resp.dev_endpoint.arguments #=> Hash
+    #   resp.dev_endpoint.arguments["GenericString"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint AWS API Documentation
     #
@@ -2893,6 +2906,8 @@ module Aws::Glue
     #   resp.dev_endpoints[0].public_keys #=> Array
     #   resp.dev_endpoints[0].public_keys[0] #=> String
     #   resp.dev_endpoints[0].security_configuration #=> String
+    #   resp.dev_endpoints[0].arguments #=> Hash
+    #   resp.dev_endpoints[0].arguments["GenericString"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints AWS API Documentation
@@ -5195,6 +5210,14 @@ module Aws::Glue
     #   True if the list of custom libraries to be loaded in the development
     #   endpoint needs to be updated, or False otherwise.
     #
+    # @option params [Array<String>] :delete_arguments
+    #   The list of argument keys to be deleted from the map of arguments used
+    #   to configure the DevEndpoint.
+    #
+    # @option params [Hash<String,String>] :add_arguments
+    #   The map of arguments to add the map of arguments used to configure the
+    #   DevEndpoint.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5209,6 +5232,10 @@ module Aws::Glue
     #       extra_jars_s3_path: "GenericString",
     #     },
     #     update_etl_libraries: false,
+    #     delete_arguments: ["GenericString"],
+    #     add_arguments: {
+    #       "GenericString" => "GenericString",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpoint AWS API Documentation
@@ -5598,7 +5625,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

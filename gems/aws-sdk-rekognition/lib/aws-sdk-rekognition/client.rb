@@ -1478,15 +1478,15 @@ module Aws::Rekognition
     # Video analysis started by StartContentModeration.
     #
     # Content moderation analysis of a video is an asynchronous operation.
-    # You start analysis by calling StartContentModeration. which returns a
+    # You start analysis by calling StartContentModeration which returns a
     # job identifier (`JobId`). When analysis finishes, Amazon Rekognition
     # Video publishes a completion status to the Amazon Simple Notification
     # Service topic registered in the initial call to
     # `StartContentModeration`. To get the results of the content moderation
     # analysis, first check that the status value published to the Amazon
-    # SNS topic is `SUCCEEDED`. If so, call `GetCelebrityDetection` and pass
+    # SNS topic is `SUCCEEDED`. If so, call `GetContentModeration` and pass
     # the job identifier (`JobId`) from the initial call to
-    # `StartCelebrityDetection`.
+    # `StartContentModeration`.
     #
     # For more information, see Working with Stored Videos in the Amazon
     # Rekognition Devlopers Guide.
@@ -3709,7 +3709,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

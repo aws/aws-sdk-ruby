@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.0.2 (2019-03-11)
+------------------
+
 * Issue - public #encode_headers method
 
 1.0.1 (2018-06-15)

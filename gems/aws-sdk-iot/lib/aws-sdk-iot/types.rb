@@ -8436,8 +8436,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] set_as_active
-    #   A boolean value that specifies if the CA certificate is set to
-    #   active.
+    #   A boolean value that specifies if the certificate is set to active.
     #   @return [Boolean]
     #
     # @!attribute [rw] status

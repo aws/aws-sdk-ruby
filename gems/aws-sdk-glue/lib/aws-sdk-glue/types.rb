@@ -1639,6 +1639,9 @@ module Aws::Glue
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         arguments: {
+    #           "GenericString" => "GenericString",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -1718,6 +1721,10 @@ module Aws::Glue
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] arguments
+    #   A map of arguments used to configure the DevEndpoint.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointRequest AWS API Documentation
     #
     class CreateDevEndpointRequest < Struct.new(
@@ -1731,7 +1738,8 @@ module Aws::Glue
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
       :security_configuration,
-      :tags)
+      :tags,
+      :arguments)
       include Aws::Structure
     end
 
@@ -1799,6 +1807,10 @@ module Aws::Glue
     #   The point in time at which this DevEndpoint was created.
     #   @return [Time]
     #
+    # @!attribute [rw] arguments
+    #   The map of arguments used to configure this DevEndpoint.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpointResponse AWS API Documentation
     #
     class CreateDevEndpointResponse < Struct.new(
@@ -1816,7 +1828,8 @@ module Aws::Glue
       :extra_jars_s3_path,
       :failure_reason,
       :security_configuration,
-      :created_timestamp)
+      :created_timestamp,
+      :arguments)
       include Aws::Structure
     end
 
@@ -3195,6 +3208,13 @@ module Aws::Glue
     #   DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] arguments
+    #   A map of arguments used to configure the DevEndpoint.
+    #
+    #   Note that currently, we only support "--enable-glue-datacatalog":
+    #   "" as a valid argument.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint AWS API Documentation
     #
     class DevEndpoint < Struct.new(
@@ -3218,7 +3238,8 @@ module Aws::Glue
       :last_modified_timestamp,
       :public_key,
       :public_keys,
-      :security_configuration)
+      :security_configuration,
+      :arguments)
       include Aws::Structure
     end
 
@@ -7969,6 +7990,10 @@ module Aws::Glue
     #           extra_jars_s3_path: "GenericString",
     #         },
     #         update_etl_libraries: false,
+    #         delete_arguments: ["GenericString"],
+    #         add_arguments: {
+    #           "GenericString" => "GenericString",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -7996,6 +8021,16 @@ module Aws::Glue
     #   endpoint needs to be updated, or False otherwise.
     #   @return [Boolean]
     #
+    # @!attribute [rw] delete_arguments
+    #   The list of argument keys to be deleted from the map of arguments
+    #   used to configure the DevEndpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] add_arguments
+    #   The map of arguments to add the map of arguments used to configure
+    #   the DevEndpoint.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointRequest AWS API Documentation
     #
     class UpdateDevEndpointRequest < Struct.new(
@@ -8004,7 +8039,9 @@ module Aws::Glue
       :add_public_keys,
       :delete_public_keys,
       :custom_libraries,
-      :update_etl_libraries)
+      :update_etl_libraries,
+      :delete_arguments,
+      :add_arguments)
       include Aws::Structure
     end
 

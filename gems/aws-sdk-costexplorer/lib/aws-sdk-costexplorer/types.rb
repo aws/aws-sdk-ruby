@@ -556,7 +556,7 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         time_period: {
+    #         time_period: { # required
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
     #         },

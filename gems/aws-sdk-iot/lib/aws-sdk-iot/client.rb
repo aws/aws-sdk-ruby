@@ -1505,7 +1505,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a thing record in the registry.
+    # Creates a thing record in the registry. If this call is made multiple
+    # times using the same thing name and configuration, the call will
+    # succeed. If this call is made with the same thing name but different
+    # configuration a `ResourceAlreadyExistsException` is thrown.
     #
     # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
     # information about authorizing control plane actions.
@@ -5740,7 +5743,7 @@ module Aws::IoT
     #   registered.
     #
     # @option params [Boolean] :set_as_active
-    #   A boolean value that specifies if the CA certificate is set to active.
+    #   A boolean value that specifies if the certificate is set to active.
     #
     # @option params [String] :status
     #   The status of the register certificate request.
@@ -7511,7 +7514,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
