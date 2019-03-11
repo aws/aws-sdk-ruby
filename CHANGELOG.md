@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostExplorer - Updated the API for AWS Cost Explorer Service.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::IoT - Updated the documentation for AWS IoT.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
+
 2.11.237 (2019-03-08)
 ------------------
 
