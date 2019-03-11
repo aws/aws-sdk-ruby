@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.238 (2019-03-11)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API for AWS Cost Explorer Service.
 
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
