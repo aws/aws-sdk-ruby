@@ -109,6 +109,10 @@ all generated client side metrics. Defaults to an empty string.
           context.metadata[:client_metrics] = request_metrics
           start_time = Aws::Util.monotonic_milliseconds
           final_error_retryable = false
+          final_aws_exception = nil
+          final_aws_exception_message = nil
+          final_sdk_exception = nil
+          final_sdk_exception_message = nil
           begin
             @handler.call(context)
           rescue StandardError => e
@@ -137,14 +141,29 @@ all generated client side metrics. Defaults to an empty string.
               attempt.sdk_exception = e.class.to_s
               attempt.sdk_exception_msg = e.message
             end # Else we don't have an SDK exception and are done.
+            final_attempt = request_metrics.api_call_attempts.last
+            final_aws_exception = final_attempt.aws_exception
+            final_aws_exception_message = final_attempt.aws_exception_msg
+            final_sdk_exception = final_attempt.sdk_exception
+            final_sdk_exception_message = final_attempt.sdk_exception_msg
             raise e
           ensure
             end_time = Aws::Util.monotonic_milliseconds
-            request_metrics.api_call.complete(
+            complete_opts = {
               latency: end_time - start_time,
               attempt_count: context.retries + 1,
-              final_error_retryable: final_error_retryable
-            )
+              user_agent: context.http_request.headers["user-agent"],
+              final_error_retryable: final_error_retryable,
+              final_http_status_code: context.http_response.status_code,
+              final_aws_exception: final_aws_exception,
+              final_aws_exception_message: final_aws_exception_message,
+              final_sdk_exception: final_sdk_exception,
+              final_sdk_exception_message: final_sdk_exception_message
+            }
+            if context.metadata[:redirect_region]
+              complete_opts[:region] = context.metadata[:redirect_region]
+            end
+            request_metrics.api_call.complete(complete_opts)
             # Report the metrics by passing the complete RequestMetrics object
             if publisher
               publisher.publish(request_metrics)

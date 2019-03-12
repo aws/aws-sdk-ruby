@@ -241,6 +241,45 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Deletes one or more import tasks, each identified by their import ID.
+    # Each import task has a number of records that can identify servers or
+    # applications.
+    #
+    # AWS Application Discovery Service has built-in matching logic that
+    # will identify when discovered servers match existing entries that
+    # you've previously discovered, the information for the
+    # already-existing discovered server is updated. When you delete an
+    # import task that contains records that were used to match, the
+    # information in those matched records that comes from the deleted
+    # records will also be deleted.
+    #
+    # @option params [required, Array<String>] :import_task_ids
+    #   The IDs for the import tasks that you want to delete.
+    #
+    # @return [Types::BatchDeleteImportDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteImportDataResponse#errors #errors} => Array&lt;Types::BatchDeleteImportDataError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_import_data({
+    #     import_task_ids: ["ImportTaskIdentifier"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].import_task_id #=> String
+    #   resp.errors[0].error_code #=> String, one of "NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].error_description #=> String
+    #
+    # @overload batch_delete_import_data(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_import_data(params = {}, options = {})
+      req = build_request(:batch_delete_import_data, params)
+      req.send_request(options)
+    end
+
     # Creates an application with the given name and description.
     #
     # @option params [required, String] :name
@@ -434,7 +473,7 @@ module Aws::ApplicationDiscoveryService
     # Retrieves attributes for a list of configuration item IDs.
     #
     # <note markdown="1"> All of the supplied IDs must be for the same asset type from one of
-    # the follwoing:
+    # the following:
     #
     #  * server
     #
@@ -532,13 +571,12 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # `DescribeExportConfigurations` is deprecated.
-    #
-    # Use instead [ `DescribeExportTasks` ][1].
-    #
+    # `DescribeExportConfigurations` is deprecated. Use
+    # [DescribeImportTasks][1], instead.
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
+    #
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
     #
     # @option params [Array<String>] :export_ids
     #   A list of continuous export ids to search for.
@@ -647,6 +685,65 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def describe_export_tasks(params = {}, options = {})
       req = build_request(:describe_export_tasks, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of import tasks for your account, including status
+    # information, times, IDs, the Amazon S3 Object URL for the import file,
+    # and more.
+    #
+    # @option params [Array<Types::ImportTaskFilter>] :filters
+    #   An array of name-value pairs that you provide to filter the results
+    #   for the `DescribeImportTask` request to a specific subset of results.
+    #   Currently, wildcard values aren't supported for filters.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want this request to return, up
+    #   to 100.
+    #
+    # @option params [String] :next_token
+    #   The token to request a specific page of results.
+    #
+    # @return [Types::DescribeImportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImportTasksResponse#next_token #next_token} => String
+    #   * {Types::DescribeImportTasksResponse#tasks #tasks} => Array&lt;Types::ImportTask&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_import_tasks({
+    #     filters: [
+    #       {
+    #         name: "IMPORT_TASK_ID", # accepts IMPORT_TASK_ID, STATUS, NAME
+    #         values: ["ImportTaskFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tasks #=> Array
+    #   resp.tasks[0].import_task_id #=> String
+    #   resp.tasks[0].client_request_token #=> String
+    #   resp.tasks[0].name #=> String
+    #   resp.tasks[0].import_url #=> String
+    #   resp.tasks[0].status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED"
+    #   resp.tasks[0].import_request_time #=> Time
+    #   resp.tasks[0].import_completion_time #=> Time
+    #   resp.tasks[0].import_deleted_time #=> Time
+    #   resp.tasks[0].server_import_success #=> Integer
+    #   resp.tasks[0].server_import_failure #=> Integer
+    #   resp.tasks[0].application_import_success #=> Integer
+    #   resp.tasks[0].application_import_failure #=> Integer
+    #   resp.tasks[0].errors_and_failed_entries_zip #=> String
+    #
+    # @overload describe_import_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_import_tasks(params = {}, options = {})
+      req = build_request(:describe_import_tasks, params)
       req.send_request(options)
     end
 
@@ -1071,6 +1168,106 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Starts an import task, which allows you to import details of your
+    # on-premises environment directly into AWS without having to use the
+    # Application Discovery Service (ADS) tools such as the Discovery
+    # Connector or Discovery Agent. This gives you the option to perform
+    # migration assessment and planning directly from your imported data,
+    # including the ability to group your devices as applications and track
+    # their migration status.
+    #
+    # To start an import request, do this:
+    #
+    # 1.  Download the specially formatted comma separated value (CSV)
+    #     import template, which you can find here:
+    #     [https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import\_template.csv][1].
+    #
+    # 2.  Fill out the template with your server and application data.
+    #
+    # 3.  Upload your import file to an Amazon S3 bucket, and make a note of
+    #     it's Object URL. Your import file must be in the CSV format.
+    #
+    # 4.  Use the console or the `StartImportTask` command with the AWS CLI
+    #     or one of the AWS SDKs to import the records from your file.
+    #
+    # For more information, including step-by-step procedures, see
+    # [Migration Hub Import][2] in the *AWS Application Discovery Service
+    # User Guide*.
+    #
+    # <note markdown="1"> There are limits to the number of import tasks you can create (and
+    # delete) in an AWS account. For more information, see [AWS Application
+    # Discovery Service Limits][3] in the *AWS Application Discovery Service
+    # User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
+    # [2]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html
+    # [3]: https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html
+    #
+    # @option params [String] :client_request_token
+    #   Optional. A unique token that you can provide to prevent the same
+    #   import request from occurring more than once. If you don't provide a
+    #   token, a token is automatically generated.
+    #
+    #   Sending more than one `StartImportTask` request with the same client
+    #   request token will return information about the original import task
+    #   with that client request token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   A descriptive name for this request. You can use this name to filter
+    #   future requests related to this import task, such as identifying
+    #   applications and servers that were included in this import task. We
+    #   recommend that you use a meaningful name for each import task.
+    #
+    # @option params [required, String] :import_url
+    #   The URL for your import file that you've uploaded to Amazon S3.
+    #
+    #   <note markdown="1"> If you're using the AWS CLI, this URL is structured as follows:
+    #   `s3://BucketName/ImportFileName.CSV`
+    #
+    #    </note>
+    #
+    # @return [Types::StartImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportTaskResponse#task #task} => Types::ImportTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import_task({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "ImportTaskName", # required
+    #     import_url: "ImportURL", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task.import_task_id #=> String
+    #   resp.task.client_request_token #=> String
+    #   resp.task.name #=> String
+    #   resp.task.import_url #=> String
+    #   resp.task.status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED"
+    #   resp.task.import_request_time #=> Time
+    #   resp.task.import_completion_time #=> Time
+    #   resp.task.import_deleted_time #=> Time
+    #   resp.task.server_import_success #=> Integer
+    #   resp.task.server_import_failure #=> Integer
+    #   resp.task.application_import_success #=> Integer
+    #   resp.task.application_import_failure #=> Integer
+    #   resp.task.errors_and_failed_entries_zip #=> String
+    #
+    # @overload start_import_task(params = {})
+    # @param [Hash] params ({})
+    def start_import_task(params = {}, options = {})
+      req = build_request(:start_import_task, params)
+      req.send_request(options)
+    end
+
     # Stop the continuous flow of agent's discovered data into Amazon
     # Athena.
     #
@@ -1171,7 +1368,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

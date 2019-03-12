@@ -2380,6 +2380,15 @@
       "input":{"shape":"ModifyInstanceCreditSpecificationRequest"},
       "output":{"shape":"ModifyInstanceCreditSpecificationResult"}
     },
+    "ModifyInstanceEventStartTime":{
+      "name":"ModifyInstanceEventStartTime",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyInstanceEventStartTimeRequest"},
+      "output":{"shape":"ModifyInstanceEventStartTimeResult"}
+    },
     "ModifyInstancePlacement":{
       "name":"ModifyInstancePlacement",
       "http":{
@@ -4550,7 +4559,10 @@
         "Windows with SQL Server",
         "Windows with SQL Server Enterprise",
         "Windows with SQL Server Standard",
-        "Windows with SQL Server Web"
+        "Windows with SQL Server Web",
+        "Linux with SQL Server Standard",
+        "Linux with SQL Server Web",
+        "Linux with SQL Server Enterprise"
       ]
     },
     "CapacityReservationPreference":{
@@ -4947,6 +4959,10 @@
           "shape":"String",
           "locationName":"clientCidrBlock"
         },
+        "DnsServers":{
+          "shape":"ValueStringList",
+          "locationName":"dnsServer"
+        },
         "SplitTunnel":{
           "shape":"Boolean",
           "locationName":"splitTunnel"
@@ -4961,6 +4977,8 @@
         },
         "AssociatedTargetNetworks":{
           "shape":"AssociatedTargetNetworkSet",
+          "deprecated":true,
+          "deprecatedMessage":"This property is deprecated. To view the target networks associated with a Client VPN endpoint, call DescribeClientVpnTargetNetworks and inspect the clientVpnTargetNetworks response element.",
           "locationName":"associatedTargetNetwork"
         },
         "ServerCertificateArn":{
@@ -4974,6 +4992,10 @@
         "ConnectionLogOptions":{
           "shape":"ConnectionLogResponseOptions",
           "locationName":"connectionLogOptions"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         }
       }
     },
@@ -5393,6 +5415,10 @@
         "ClientToken":{
           "shape":"String",
           "idempotencyToken":true
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
         }
       }
     },
@@ -8520,6 +8546,11 @@
         }
       }
     },
+    "DescribeInstanceCreditSpecificationsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
+    },
     "DescribeInstanceCreditSpecificationsRequest":{
       "type":"structure",
       "members":{
@@ -8532,7 +8563,7 @@
           "shape":"InstanceIdStringList",
           "locationName":"InstanceId"
         },
-        "MaxResults":{"shape":"Integer"},
+        "MaxResults":{"shape":"DescribeInstanceCreditSpecificationsMaxResults"},
         "NextToken":{"shape":"String"}
       }
     },
@@ -8623,6 +8654,11 @@
         }
       }
     },
+    "DescribeInternetGatewaysMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
+    },
     "DescribeInternetGatewaysRequest":{
       "type":"structure",
       "members":{
@@ -8637,7 +8673,9 @@
         "InternetGatewayIds":{
           "shape":"ValueStringList",
           "locationName":"internetGatewayId"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"DescribeInternetGatewaysMaxResults"}
       }
     },
     "DescribeInternetGatewaysResult":{
@@ -8646,6 +8684,10 @@
         "InternetGateways":{
           "shape":"InternetGatewayList",
           "locationName":"internetGatewaySet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -8804,6 +8846,11 @@
         }
       }
     },
+    "DescribeNetworkAclsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
+    },
     "DescribeNetworkAclsRequest":{
       "type":"structure",
       "members":{
@@ -8818,7 +8865,9 @@
         "NetworkAclIds":{
           "shape":"ValueStringList",
           "locationName":"NetworkAclId"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"DescribeNetworkAclsMaxResults"}
       }
     },
     "DescribeNetworkAclsResult":{
@@ -8827,6 +8876,10 @@
         "NetworkAcls":{
           "shape":"NetworkAclList",
           "locationName":"networkAclSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -9587,7 +9640,9 @@
         "SpotInstanceRequestIds":{
           "shape":"SpotInstanceRequestIdList",
           "locationName":"SpotInstanceRequestId"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"Integer"}
       }
     },
     "DescribeSpotInstanceRequestsResult":{
@@ -9596,6 +9651,10 @@
         "SpotInstanceRequests":{
           "shape":"SpotInstanceRequestList",
           "locationName":"spotInstanceRequestSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -10225,6 +10284,11 @@
         }
       }
     },
+    "DescribeVpcPeeringConnectionsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
+    },
     "DescribeVpcPeeringConnectionsRequest":{
       "type":"structure",
       "members":{
@@ -10239,7 +10303,9 @@
         "VpcPeeringConnectionIds":{
           "shape":"ValueStringList",
           "locationName":"VpcPeeringConnectionId"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"DescribeVpcPeeringConnectionsMaxResults"}
       }
     },
     "DescribeVpcPeeringConnectionsResult":{
@@ -10248,8 +10314,17 @@
         "VpcPeeringConnections":{
           "shape":"VpcPeeringConnectionList",
           "locationName":"vpcPeeringConnectionSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
+    },
+    "DescribeVpcsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
     },
     "DescribeVpcsRequest":{
       "type":"structure",
@@ -10265,7 +10340,9 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"DescribeVpcsMaxResults"}
       }
     },
     "DescribeVpcsResult":{
@@ -10274,6 +10351,10 @@
         "Vpcs":{
           "shape":"VpcList",
           "locationName":"vpcSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -13657,6 +13738,7 @@
         "CpuCredits":{"shape":"String"}
       }
     },
+    "InstanceEventId":{"type":"string"},
     "InstanceExportDetails":{
       "type":"structure",
       "members":{
@@ -14099,6 +14181,10 @@
     "InstanceStatusEvent":{
       "type":"structure",
       "members":{
+        "InstanceEventId":{
+          "shape":"InstanceEventId",
+          "locationName":"instanceEventId"
+        },
         "Code":{
           "shape":"EventCode",
           "locationName":"code"
@@ -14114,6 +14200,10 @@
         "NotBefore":{
           "shape":"DateTime",
           "locationName":"notBefore"
+        },
+        "NotBeforeDeadline":{
+          "shape":"DateTime",
+          "locationName":"notBeforeDeadline"
         }
       }
     },
@@ -14195,9 +14285,7 @@
         "r5.xlarge",
         "r5.2xlarge",
         "r5.4xlarge",
-        "r5.8xlarge",
         "r5.12xlarge",
-        "r5.16xlarge",
         "r5.24xlarge",
         "r5.metal",
         "r5a.large",
@@ -14210,9 +14298,7 @@
         "r5d.xlarge",
         "r5d.2xlarge",
         "r5d.4xlarge",
-        "r5d.8xlarge",
         "r5d.12xlarge",
-        "r5d.16xlarge",
         "r5d.24xlarge",
         "r5d.metal",
         "x1.16xlarge",
@@ -14295,6 +14381,7 @@
         "m5.4xlarge",
         "m5.12xlarge",
         "m5.24xlarge",
+        "m5.metal",
         "m5a.large",
         "m5a.xlarge",
         "m5a.2xlarge",
@@ -14307,6 +14394,7 @@
         "m5d.4xlarge",
         "m5d.12xlarge",
         "m5d.24xlarge",
+        "m5d.metal",
         "h1.2xlarge",
         "h1.4xlarge",
         "h1.8xlarge",
@@ -14317,6 +14405,7 @@
         "z1d.3xlarge",
         "z1d.6xlarge",
         "z1d.12xlarge",
+        "z1d.metal",
         "u-6tb1.metal",
         "u-9tb1.metal",
         "u-12tb1.metal",
@@ -15709,6 +15798,29 @@
         }
       }
     },
+    "ModifyInstanceEventStartTimeRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "InstanceEventId",
+        "NotBefore"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "InstanceId":{"shape":"String"},
+        "InstanceEventId":{"shape":"String"},
+        "NotBefore":{"shape":"DateTime"}
+      }
+    },
+    "ModifyInstanceEventStartTimeResult":{
+      "type":"structure",
+      "members":{
+        "Event":{
+          "shape":"InstanceStatusEvent",
+          "locationName":"event"
+        }
+      }
+    },
     "ModifyInstancePlacementRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -16782,6 +16894,10 @@
           "shape":"Boolean",
           "locationName":"singleInstanceType"
         },
+        "SingleAvailabilityZone":{
+          "shape":"Boolean",
+          "locationName":"singleAvailabilityZone"
+        },
         "MinTargetCapacity":{
           "shape":"Integer",
           "locationName":"minTargetCapacity"
@@ -16793,6 +16909,7 @@
       "members":{
         "AllocationStrategy":{"shape":"FleetOnDemandAllocationStrategy"},
         "SingleInstanceType":{"shape":"Boolean"},
+        "SingleAvailabilityZone":{"shape":"Boolean"},
         "MinTargetCapacity":{"shape":"Integer"}
       }
     },
@@ -18761,6 +18878,7 @@
     "ResourceType":{
       "type":"string",
       "enum":[
+        "client-vpn-endpoint",
         "customer-gateway",
         "dedicated-host",
         "dhcp-options",
@@ -20569,6 +20687,10 @@
           "shape":"Boolean",
           "locationName":"singleInstanceType"
         },
+        "SingleAvailabilityZone":{
+          "shape":"Boolean",
+          "locationName":"singleAvailabilityZone"
+        },
         "MinTargetCapacity":{
           "shape":"Integer",
           "locationName":"minTargetCapacity"
@@ -20582,6 +20704,7 @@
         "InstanceInterruptionBehavior":{"shape":"SpotInstanceInterruptionBehavior"},
         "InstancePoolsToUseCount":{"shape":"Integer"},
         "SingleInstanceType":{"shape":"Boolean"},
+        "SingleAvailabilityZone":{"shape":"Boolean"},
         "MinTargetCapacity":{"shape":"Integer"}
       }
     },

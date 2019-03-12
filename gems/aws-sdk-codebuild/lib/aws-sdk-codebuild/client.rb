@@ -541,6 +541,7 @@ module Aws::CodeBuild
     #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].source.location #=> String
     #   resp.builds[0].source.git_clone_depth #=> Integer
+    #   resp.builds[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].source.buildspec #=> String
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
@@ -551,6 +552,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].secondary_sources[0].location #=> String
     #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.builds[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].secondary_sources[0].buildspec #=> String
     #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].secondary_sources[0].auth.resource #=> String
@@ -573,8 +575,10 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.builds[0].cache.location #=> String
+    #   resp.builds[0].cache.modes #=> Array
+    #   resp.builds[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -584,6 +588,9 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].environment.certificate #=> String
+    #   resp.builds[0].environment.registry_credential.credential #=> String
+    #   resp.builds[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.builds[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.builds[0].service_role #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
@@ -594,6 +601,7 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.cloud_watch_logs.stream_name #=> String
     #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.builds[0].logs.s3_logs.location #=> String
+    #   resp.builds[0].logs.s3_logs.encryption_disabled #=> Boolean
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].queued_timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
@@ -643,6 +651,7 @@ module Aws::CodeBuild
     #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].source.location #=> String
     #   resp.projects[0].source.git_clone_depth #=> Integer
+    #   resp.projects[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].source.buildspec #=> String
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
@@ -653,6 +662,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].secondary_sources[0].location #=> String
     #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.projects[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].secondary_sources[0].buildspec #=> String
     #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].secondary_sources[0].auth.resource #=> String
@@ -678,8 +688,10 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.projects[0].cache.location #=> String
+    #   resp.projects[0].cache.modes #=> Array
+    #   resp.projects[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -689,6 +701,9 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.projects[0].environment.privileged_mode #=> Boolean
     #   resp.projects[0].environment.certificate #=> String
+    #   resp.projects[0].environment.registry_credential.credential #=> String
+    #   resp.projects[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.projects[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
     #   resp.projects[0].queued_timeout_in_minutes #=> Integer
@@ -702,6 +717,11 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.payload_url #=> String
     #   resp.projects[0].webhook.secret #=> String
     #   resp.projects[0].webhook.branch_filter #=> String
+    #   resp.projects[0].webhook.filter_groups #=> Array
+    #   resp.projects[0].webhook.filter_groups[0] #=> Array
+    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
+    #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
@@ -715,6 +735,7 @@ module Aws::CodeBuild
     #   resp.projects[0].logs_config.cloud_watch_logs.stream_name #=> String
     #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.projects[0].logs_config.s3_logs.location #=> String
+    #   resp.projects[0].logs_config.s3_logs.encryption_disabled #=> Boolean
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -772,6 +793,11 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
     #   be used for encrypting the build output artifacts.
     #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
@@ -806,6 +832,9 @@ module Aws::CodeBuild
     #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
+    #       git_submodules_config: {
+    #         fetch_submodules: false, # required
+    #       },
     #       buildspec: "String",
     #       auth: {
     #         type: "OAUTH", # required, accepts OAUTH
@@ -820,6 +849,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -855,8 +887,9 @@ module Aws::CodeBuild
     #       },
     #     ],
     #     cache: {
-    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: { # required
     #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -871,6 +904,11 @@ module Aws::CodeBuild
     #       ],
     #       privileged_mode: false,
     #       certificate: "String",
+    #       registry_credential: {
+    #         credential: "NonEmptyString", # required
+    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #       },
+    #       image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #     },
     #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
@@ -897,6 +935,7 @@ module Aws::CodeBuild
     #       s3_logs: {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       },
     #     },
     #   })
@@ -909,6 +948,7 @@ module Aws::CodeBuild
     #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
+    #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
@@ -919,6 +959,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.secondary_sources[0].location #=> String
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
     #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.project.secondary_sources[0].auth.resource #=> String
@@ -944,8 +985,10 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
+    #   resp.project.cache.modes #=> Array
+    #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -955,6 +998,9 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.environment.certificate #=> String
+    #   resp.project.environment.registry_credential.credential #=> String
+    #   resp.project.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.project.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -968,6 +1014,11 @@ module Aws::CodeBuild
     #   resp.project.webhook.payload_url #=> String
     #   resp.project.webhook.secret #=> String
     #   resp.project.webhook.branch_filter #=> String
+    #   resp.project.webhook.filter_groups #=> Array
+    #   resp.project.webhook.filter_groups[0] #=> Array
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.project.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -981,6 +1032,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
+    #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -1007,7 +1059,7 @@ module Aws::CodeBuild
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
     #
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild project.
@@ -1018,6 +1070,20 @@ module Aws::CodeBuild
     #   regular expression, then it is built. If `branchFilter` is empty, then
     #   all branches are built.
     #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
+    #
+    # @option params [Array<Array>] :filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine which
+    #   webhooks are triggered. At least one `WebhookFilter` in the array must
+    #   specify `EVENT` as its `type`.
+    #
+    #   For a build to be triggered, at least one filter group in the
+    #   `filterGroups` array must pass. For a filter group to pass, each of
+    #   its filters must pass.
+    #
     # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebhookOutput#webhook #webhook} => Types::Webhook
@@ -1027,6 +1093,15 @@ module Aws::CodeBuild
     #   resp = client.create_webhook({
     #     project_name: "ProjectName", # required
     #     branch_filter: "String",
+    #     filter_groups: [
+    #       [
+    #         {
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #           pattern: "String", # required
+    #           exclude_matched_pattern: false,
+    #         },
+    #       ],
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1035,6 +1110,11 @@ module Aws::CodeBuild
     #   resp.webhook.payload_url #=> String
     #   resp.webhook.secret #=> String
     #   resp.webhook.branch_filter #=> String
+    #   resp.webhook.filter_groups #=> Array
+    #   resp.webhook.filter_groups[0] #=> Array
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
@@ -1466,6 +1546,10 @@ module Aws::CodeBuild
     #   overrides, for this build only, any previous depth of history defined
     #   in the build project.
     #
+    # @option params [Types::GitSubmodulesConfig] :git_submodules_config_override
+    #   Information about the Git submodules configuration for this build of
+    #   an AWS CodeBuild build project.
+    #
     # @option params [String] :buildspec_override
     #   A build spec declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
@@ -1530,6 +1614,24 @@ module Aws::CodeBuild
     #   Log settings for this build that override the log settings defined in
     #   the build project.
     #
+    # @option params [Types::RegistryCredential] :registry_credential_override
+    #   The credentials for access to a private registry.
+    #
+    # @option params [String] :image_pull_credentials_type_override
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
+    #
+    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #     This requires that you modify your ECR repository policy to trust
+    #     AWS CodeBuild's service principal.
+    #
+    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
+    #     project's service role.
+    #
+    #   When using a cross-account or private registry image, you must use
+    #   SERVICE\_ROLE credentials. When using an AWS CodeBuild curated image,
+    #   you must use CODEBUILD credentials.
+    #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildOutput#build #build} => Types::Build
@@ -1543,6 +1645,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -1598,6 +1703,9 @@ module Aws::CodeBuild
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
+    #     git_submodules_config_override: {
+    #       fetch_submodules: false, # required
+    #     },
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
     #     report_build_status_override: false,
@@ -1606,8 +1714,9 @@ module Aws::CodeBuild
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #     certificate_override: "String",
     #     cache_override: {
-    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     service_role_override: "NonEmptyString",
     #     privileged_mode_override: false,
@@ -1623,8 +1732,14 @@ module Aws::CodeBuild
     #       s3_logs: {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       },
     #     },
+    #     registry_credential_override: {
+    #       credential: "NonEmptyString", # required
+    #       credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #     },
+    #     image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #   })
     #
     # @example Response structure
@@ -1650,6 +1765,7 @@ module Aws::CodeBuild
     #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
+    #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
@@ -1660,6 +1776,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
     #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.build.secondary_sources[0].auth.resource #=> String
@@ -1682,8 +1799,10 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
+    #   resp.build.cache.modes #=> Array
+    #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1693,6 +1812,9 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.environment.registry_credential.credential #=> String
+    #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -1703,6 +1825,7 @@ module Aws::CodeBuild
     #   resp.build.logs.cloud_watch_logs.stream_name #=> String
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
+    #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -1763,6 +1886,7 @@ module Aws::CodeBuild
     #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
+    #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
@@ -1773,6 +1897,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
     #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.build.secondary_sources[0].auth.resource #=> String
@@ -1795,8 +1920,10 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
+    #   resp.build.cache.modes #=> Array
+    #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1806,6 +1933,9 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.environment.registry_credential.credential #=> String
+    #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -1816,6 +1946,7 @@ module Aws::CodeBuild
     #   resp.build.logs.cloud_watch_logs.stream_name #=> String
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
+    #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -1887,11 +2018,16 @@ module Aws::CodeBuild
     #   out.
     #
     # @option params [String] :encryption_key
-    #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
+    #   be used for encrypting the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN)of the CMK or, if
-    #   available, the CMK's alias (using the format `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name `).
     #
     # @option params [Array<Types::Tag>] :tags
     #   The replacement set of tags for this build project.
@@ -1923,6 +2059,9 @@ module Aws::CodeBuild
     #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
+    #       git_submodules_config: {
+    #         fetch_submodules: false, # required
+    #       },
     #       buildspec: "String",
     #       auth: {
     #         type: "OAUTH", # required, accepts OAUTH
@@ -1937,6 +2076,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -1972,8 +2114,9 @@ module Aws::CodeBuild
     #       },
     #     ],
     #     cache: {
-    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #       location: "String",
+    #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: {
     #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -1988,6 +2131,11 @@ module Aws::CodeBuild
     #       ],
     #       privileged_mode: false,
     #       certificate: "String",
+    #       registry_credential: {
+    #         credential: "NonEmptyString", # required
+    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #       },
+    #       image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -2014,6 +2162,7 @@ module Aws::CodeBuild
     #       s3_logs: {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       },
     #     },
     #   })
@@ -2026,6 +2175,7 @@ module Aws::CodeBuild
     #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
+    #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
@@ -2036,6 +2186,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.secondary_sources[0].location #=> String
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
+    #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
     #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
     #   resp.project.secondary_sources[0].auth.resource #=> String
@@ -2061,8 +2212,10 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
-    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
+    #   resp.project.cache.modes #=> Array
+    #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -2072,6 +2225,9 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.environment.certificate #=> String
+    #   resp.project.environment.registry_credential.credential #=> String
+    #   resp.project.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
+    #   resp.project.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -2085,6 +2241,11 @@ module Aws::CodeBuild
     #   resp.project.webhook.payload_url #=> String
     #   resp.project.webhook.secret #=> String
     #   resp.project.webhook.branch_filter #=> String
+    #   resp.project.webhook.filter_groups #=> Array
+    #   resp.project.webhook.filter_groups[0] #=> Array
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.project.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -2098,6 +2259,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.cloud_watch_logs.stream_name #=> String
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
+    #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -2123,10 +2285,20 @@ module Aws::CodeBuild
     #   regular expression, then it is built. If `branchFilter` is empty, then
     #   all branches are built.
     #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
+    #
     # @option params [Boolean] :rotate_secret
     #   A boolean value that specifies whether the associated GitHub
     #   repository's secret token should be updated. If you use Bitbucket for
     #   your repository, `rotateSecret` is ignored.
+    #
+    # @option params [Array<Array>] :filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine if a
+    #   webhook event can trigger a build. A filter group must pcontain at
+    #   least one `EVENT` `WebhookFilter`.
     #
     # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2138,6 +2310,15 @@ module Aws::CodeBuild
     #     project_name: "ProjectName", # required
     #     branch_filter: "String",
     #     rotate_secret: false,
+    #     filter_groups: [
+    #       [
+    #         {
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #           pattern: "String", # required
+    #           exclude_matched_pattern: false,
+    #         },
+    #       ],
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2146,6 +2327,11 @@ module Aws::CodeBuild
     #   resp.webhook.payload_url #=> String
     #   resp.webhook.secret #=> String
     #   resp.webhook.branch_filter #=> String
+    #   resp.webhook.filter_groups #=> Array
+    #   resp.webhook.filter_groups[0] #=> Array
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.webhook.filter_groups[0][0].pattern #=> String
+    #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
@@ -2170,7 +2356,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

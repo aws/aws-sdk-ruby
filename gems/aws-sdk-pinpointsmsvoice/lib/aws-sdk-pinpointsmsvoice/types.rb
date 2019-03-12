@@ -357,6 +357,49 @@ module Aws::PinpointSMSVoice
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListConfigurationSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsRequest AWS API Documentation
+    #
+    class ListConfigurationSetsRequest < Struct.new(
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # An object that contains information about the configuration sets for
+    # your account in the current region.
+    #
+    # @!attribute [rw] configuration_sets
+    #   An object that contains a list of configuration sets for your
+    #   account in the current region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to ListConfigurationSets to
+    #   indicate the position in the list of configuration sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsResponse AWS API Documentation
+    #
+    class ListConfigurationSetsResponse < Struct.new(
+      :configuration_sets,
+      :next_token)
+      include Aws::Structure
+    end
+
     # An object that defines a message that contains unformatted text.
     #
     # @note When making an API call, you may pass PlainTextMessageType

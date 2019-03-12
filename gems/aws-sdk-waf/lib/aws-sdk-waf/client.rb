@@ -241,7 +241,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the ByteMatchSet. You can't change
@@ -308,7 +308,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the GeoMatchSet. You can't change
@@ -373,7 +373,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the IPSet. You can't change `Name`
@@ -506,7 +506,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RateBasedRule. You can't change
@@ -603,7 +603,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RegexMatchSet. You can't change
@@ -668,7 +668,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RegexPatternSet. You can't
@@ -746,7 +746,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the Rule. You can't change the name
@@ -840,7 +840,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the RuleGroup. You can't change
@@ -913,7 +913,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the SizeConstraintSet. You can't
@@ -1010,7 +1010,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description for the SqlInjectionMatchSet that
@@ -1114,7 +1114,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description of the WebACL. You can't change `Name`
@@ -1236,7 +1236,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :name
     #   A friendly name or description for the XssMatchSet that you're
@@ -2150,7 +2150,7 @@ module Aws::WAF
     # * `PENDING`\: AWS WAF is propagating the create, update, or delete
     #   request to all AWS WAF servers.
     #
-    # * `IN_SYNC`\: Propagation is complete.
+    # * `INSYNC`\: Propagation is complete.
     #
     # @option params [required, String] :change_token
     #   The change token for which you want to get the status. This change
@@ -3791,6 +3791,10 @@ module Aws::WAF
     #
     # 1.  Create an Amazon Kinesis Data Firehose .
     #
+    #     Create the data firehose with a PUT source and in the region that
+    #     you are operating. However, if you are capturing logs for Amazon
+    #     CloudFront, always create the firehose in US East (N. Virginia).
+    #
     # 2.  Associate that firehose to your web ACL using a
     #     `PutLoggingConfiguration` request.
     #
@@ -3802,7 +3806,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
     #
     # @option params [required, Types::LoggingConfiguration] :logging_configuration
     #   The Amazon Kinesis Data Firehose that contains the inspected traffic
@@ -3949,7 +3953,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :byte_match_set_id
     #   The `ByteMatchSetId` of the ByteMatchSet that you want to update.
@@ -4071,7 +4075,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :geo_match_set_id
     #   The `GeoMatchSetId` of the GeoMatchSet that you want to update.
@@ -4141,8 +4145,8 @@ module Aws::WAF
     #   `192.0.2.44/32` (for the individual IP address `192.0.2.44`).
     #
     # AWS WAF supports IPv4 address ranges: /8 and any range between /16
-    # through /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48,
-    # /56, /64, and /128. For more information about CIDR notation, see the
+    # through /32. AWS WAF supports IPv6 address ranges: /24, /32, /48, /56,
+    # /64, and /128. For more information about CIDR notation, see the
     # Wikipedia entry [Classless Inter-Domain Routing][1].
     #
     # IPv6 addresses can be represented using any of the following formats:
@@ -4185,7 +4189,7 @@ module Aws::WAF
     #
     #
     # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-    # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :ip_set_id
     #   The `IPSetId` of the IPSet that you want to update. `IPSetId` is
@@ -4401,7 +4405,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :regex_match_set_id
     #   The `RegexMatchSetId` of the RegexMatchSet that you want to update.
@@ -4490,7 +4494,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :regex_pattern_set_id
     #   The `RegexPatternSetId` of the RegexPatternSet that you want to
@@ -4574,7 +4578,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :rule_id
     #   The `RuleId` of the `Rule` that you want to update. `RuleId` is
@@ -4681,7 +4685,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :rule_group_id
     #   The `RuleGroupId` of the RuleGroup that you want to update.
@@ -4799,7 +4803,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :size_constraint_set_id
     #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -4930,7 +4934,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :sql_injection_match_set_id
     #   The `SqlInjectionMatchSetId` of the `SqlInjectionMatchSet` that you
@@ -5081,7 +5085,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :web_acl_id
     #   The `WebACLId` of the WebACL that you want to update. `WebACLId` is
@@ -5231,7 +5235,7 @@ module Aws::WAF
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/
     #
     # @option params [required, String] :xss_match_set_id
     #   The `XssMatchSetId` of the `XssMatchSet` that you want to update.
@@ -5328,7 +5332,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

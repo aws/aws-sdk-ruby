@@ -57,7 +57,7 @@ module Aws::DLM
     TargetTagsFilterList = Shapes::ListShape.new(name: 'TargetTagsFilterList')
     Time = Shapes::StringShape.new(name: 'Time')
     TimesList = Shapes::ListShape.new(name: 'TimesList')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UpdateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyRequest')
     UpdateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyResponse')
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+3.40.0 (2019-03-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-textract` gem.
+
+3.39.0 (2019-01-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-worklink` gem.
+
+3.38.0 (2019-01-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-backup` gem.
+
+3.37.0 (2019-01-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-docdb` gem.
+
 3.36.0 (2018-12-18)
 ------------------
 

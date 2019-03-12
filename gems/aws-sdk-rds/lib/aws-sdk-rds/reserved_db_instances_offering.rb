@@ -244,7 +244,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [ReservedDBInstance]
     def purchase(options = {})
       options = options.merge(reserved_db_instances_offering_id: @id)

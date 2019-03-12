@@ -165,6 +165,7 @@ module Aws::ElasticsearchService
     VPCOptions = Shapes::StructureShape.new(name: 'VPCOptions')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
+    ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
 
     AccessPoliciesStatus.add_member(:options, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "Options"))
     AccessPoliciesStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
@@ -297,6 +298,7 @@ module Aws::ElasticsearchService
     ElasticsearchClusterConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "InstanceCount"))
     ElasticsearchClusterConfig.add_member(:dedicated_master_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedMasterEnabled"))
     ElasticsearchClusterConfig.add_member(:zone_awareness_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ZoneAwarenessEnabled"))
+    ElasticsearchClusterConfig.add_member(:zone_awareness_config, Shapes::ShapeRef.new(shape: ZoneAwarenessConfig, location_name: "ZoneAwarenessConfig"))
     ElasticsearchClusterConfig.add_member(:dedicated_master_type, Shapes::ShapeRef.new(shape: ESPartitionInstanceType, location_name: "DedicatedMasterType"))
     ElasticsearchClusterConfig.add_member(:dedicated_master_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "DedicatedMasterCount"))
     ElasticsearchClusterConfig.struct_class = Types::ElasticsearchClusterConfig
@@ -600,6 +602,9 @@ module Aws::ElasticsearchService
     VPCOptions.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
     VPCOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
     VPCOptions.struct_class = Types::VPCOptions
+
+    ZoneAwarenessConfig.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AvailabilityZoneCount"))
+    ZoneAwarenessConfig.struct_class = Types::ZoneAwarenessConfig
 
 
     # @api private

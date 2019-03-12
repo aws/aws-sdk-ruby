@@ -12,8 +12,10 @@ module Aws::KinesisVideoArchivedMedia
     include Seahorse::Model
 
     ClientLimitExceededException = Shapes::StructureShape.new(name: 'ClientLimitExceededException')
+    ContainerFormat = Shapes::StringShape.new(name: 'ContainerFormat')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     DiscontinuityMode = Shapes::StringShape.new(name: 'DiscontinuityMode')
+    DisplayFragmentTimestamp = Shapes::StringShape.new(name: 'DisplayFragmentTimestamp')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Expires = Shapes::IntegerShape.new(name: 'Expires')
     Fragment = Shapes::StructureShape.new(name: 'Fragment')
@@ -68,7 +70,9 @@ module Aws::KinesisVideoArchivedMedia
     GetHLSStreamingSessionURLInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     GetHLSStreamingSessionURLInput.add_member(:playback_mode, Shapes::ShapeRef.new(shape: PlaybackMode, location_name: "PlaybackMode"))
     GetHLSStreamingSessionURLInput.add_member(:hls_fragment_selector, Shapes::ShapeRef.new(shape: HLSFragmentSelector, location_name: "HLSFragmentSelector"))
+    GetHLSStreamingSessionURLInput.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "ContainerFormat"))
     GetHLSStreamingSessionURLInput.add_member(:discontinuity_mode, Shapes::ShapeRef.new(shape: DiscontinuityMode, location_name: "DiscontinuityMode"))
+    GetHLSStreamingSessionURLInput.add_member(:display_fragment_timestamp, Shapes::ShapeRef.new(shape: DisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
     GetHLSStreamingSessionURLInput.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
     GetHLSStreamingSessionURLInput.add_member(:max_media_playlist_fragment_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxMediaPlaylistFragmentResults"))
     GetHLSStreamingSessionURLInput.struct_class = Types::GetHLSStreamingSessionURLInput

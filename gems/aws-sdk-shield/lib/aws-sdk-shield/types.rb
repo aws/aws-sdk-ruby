@@ -291,8 +291,12 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For AWS CloudFront distribution:
+    #   * For an AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #
+    #   * For an AWS Global Accelerator accelerator:
+    #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
+    #     `
     #
     #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id
     #     `
@@ -437,18 +441,29 @@ module Aws::Shield
     #   data as a hash:
     #
     #       {
-    #         protection_id: "ProtectionId", # required
+    #         protection_id: "ProtectionId",
+    #         resource_arn: "ResourceArn",
     #       }
     #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object that is
-    #   described.
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN (Amazon Resource Name) of the AWS resource for the
+    #   Protection object that is described. When submitting the
+    #   `DescribeProtection` request you must provide either the
+    #   `ResourceArn` or the `ProtectionID`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionRequest AWS API Documentation
     #
     class DescribeProtectionRequest < Struct.new(
-      :protection_id)
+      :protection_id,
+      :resource_arn)
       include Aws::Structure
     end
 

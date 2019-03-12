@@ -402,10 +402,11 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
-    #   * `partition-number` - The partition in which the instance is located.
-    #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
+    #
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
     #
     #   * `platform` - The platform. Use `windows` if you have Windows
     #     instances; otherwise, leave blank.

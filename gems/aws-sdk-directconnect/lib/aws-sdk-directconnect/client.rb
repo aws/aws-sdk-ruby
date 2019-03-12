@@ -239,7 +239,7 @@ module Aws::DirectConnect
     #
     # @option params [required, String] :interconnect_id
     #   The ID of the interconnect on which the connection will be
-    #   provisioned. For example, dxcon-456abc78.
+    #   provisioned.
     #
     # @option params [required, Integer] :vlan
     #   The dedicated VLAN provisioned to the connection.
@@ -277,7 +277,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -358,7 +358,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -456,7 +456,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -472,7 +472,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
@@ -574,7 +574,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -590,7 +590,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
@@ -625,11 +625,10 @@ module Aws::DirectConnect
     # associated with the original LAG.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #
     # @option params [required, String] :lag_id
-    #   The ID of the LAG with which to associate the connection. For example,
-    #   dxlag-abc123.
+    #   The ID of the LAG with which to associate the connection.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -661,7 +660,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -729,7 +728,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -821,7 +820,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -837,7 +836,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
@@ -873,7 +872,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection AWS API Documentation
     #
@@ -915,7 +914,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterface AWS API Documentation
     #
@@ -947,7 +946,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface AWS API Documentation
     #
@@ -1013,7 +1012,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.amazon_address #=> String
     #   resp.virtual_interface.customer_address #=> String
     #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.virtual_interface.customer_router_config #=> String
     #   resp.virtual_interface.mtu #=> Integer
     #   resp.virtual_interface.jumbo_frame_capable #=> Boolean
@@ -1029,7 +1028,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
     #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
@@ -1103,7 +1102,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -1278,7 +1277,7 @@ module Aws::DirectConnect
     #
     #   resp.interconnect_id #=> String
     #   resp.interconnect_name #=> String
-    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -1377,7 +1376,7 @@ module Aws::DirectConnect
     #   resp.lag_id #=> String
     #   resp.owner_account #=> String
     #   resp.lag_name #=> String
-    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.location #=> String
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
@@ -1387,7 +1386,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -1486,7 +1485,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -1502,7 +1501,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
@@ -1591,7 +1590,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -1607,7 +1606,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
@@ -1667,7 +1666,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.amazon_address #=> String
     #   resp.virtual_interface.customer_address #=> String
     #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.virtual_interface.customer_router_config #=> String
     #   resp.virtual_interface.mtu #=> Integer
     #   resp.virtual_interface.jumbo_frame_capable #=> Boolean
@@ -1683,7 +1682,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
     #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.virtual_interface.bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interface.region #=> String
     #   resp.virtual_interface.aws_device_v2 #=> String
@@ -1736,7 +1735,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -1853,7 +1852,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect AWS API Documentation
     #
@@ -1901,7 +1900,7 @@ module Aws::DirectConnect
     #   resp.lag_id #=> String
     #   resp.owner_account #=> String
     #   resp.lag_name #=> String
-    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.location #=> String
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
@@ -1911,7 +1910,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -1953,7 +1952,7 @@ module Aws::DirectConnect
     #
     # @example Response structure
     #
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface AWS API Documentation
     #
@@ -1976,7 +1975,7 @@ module Aws::DirectConnect
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
@@ -2038,7 +2037,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2088,7 +2087,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2292,7 +2291,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2326,7 +2325,7 @@ module Aws::DirectConnect
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :interconnect_id
     #   The ID of the interconnect.
@@ -2388,7 +2387,7 @@ module Aws::DirectConnect
     #   resp.interconnects #=> Array
     #   resp.interconnects[0].interconnect_id #=> String
     #   resp.interconnects[0].interconnect_name #=> String
-    #   resp.interconnects[0].interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.interconnects[0].interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.interconnects[0].region #=> String
     #   resp.interconnects[0].location #=> String
     #   resp.interconnects[0].bandwidth #=> String
@@ -2431,7 +2430,7 @@ module Aws::DirectConnect
     #   resp.lags[0].lag_id #=> String
     #   resp.lags[0].owner_account #=> String
     #   resp.lags[0].lag_name #=> String
-    #   resp.lags[0].lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lags[0].lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.lags[0].location #=> String
     #   resp.lags[0].region #=> String
     #   resp.lags[0].minimum_links #=> Integer
@@ -2441,7 +2440,7 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].owner_account #=> String
     #   resp.lags[0].connections[0].connection_id #=> String
     #   resp.lags[0].connections[0].connection_name #=> String
-    #   resp.lags[0].connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.lags[0].connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.lags[0].connections[0].region #=> String
     #   resp.lags[0].connections[0].location #=> String
     #   resp.lags[0].connections[0].bandwidth #=> String
@@ -2477,7 +2476,7 @@ module Aws::DirectConnect
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :connection_id
     #   The ID of a connection, LAG, or interconnect.
@@ -2533,6 +2532,8 @@ module Aws::DirectConnect
     #   resp.locations[0].location_code #=> String
     #   resp.locations[0].location_name #=> String
     #   resp.locations[0].region #=> String
+    #   resp.locations[0].available_port_speeds #=> Array
+    #   resp.locations[0].available_port_speeds[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -2642,7 +2643,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].amazon_address #=> String
     #   resp.virtual_interfaces[0].customer_address #=> String
     #   resp.virtual_interfaces[0].address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.virtual_interfaces[0].customer_router_config #=> String
     #   resp.virtual_interfaces[0].mtu #=> Integer
     #   resp.virtual_interfaces[0].jumbo_frame_capable #=> Boolean
@@ -2658,7 +2659,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].bgp_peers[0].amazon_address #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].customer_address #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.virtual_interfaces[0].bgp_peers[0].aws_device_v2 #=> String
     #   resp.virtual_interfaces[0].region #=> String
     #   resp.virtual_interfaces[0].aws_device_v2 #=> String
@@ -2687,10 +2688,10 @@ module Aws::DirectConnect
     # LAG with no physical connections.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the connection. For example, dxcon-abc123.
+    #   The ID of the connection.
     #
     # @option params [required, String] :lag_id
-    #   The ID of the LAG. For example, dxlag-abc123.
+    #   The ID of the LAG.
     #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2722,7 +2723,7 @@ module Aws::DirectConnect
     #   resp.owner_account #=> String
     #   resp.connection_id #=> String
     #   resp.connection_name #=> String
-    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.region #=> String
     #   resp.location #=> String
     #   resp.bandwidth #=> String
@@ -2867,7 +2868,7 @@ module Aws::DirectConnect
     #   resp.lag_id #=> String
     #   resp.owner_account #=> String
     #   resp.lag_name #=> String
-    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted", "unknown"
     #   resp.location #=> String
     #   resp.region #=> String
     #   resp.minimum_links #=> Integer
@@ -2877,7 +2878,7 @@ module Aws::DirectConnect
     #   resp.connections[0].owner_account #=> String
     #   resp.connections[0].connection_id #=> String
     #   resp.connections[0].connection_name #=> String
-    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.connections[0].region #=> String
     #   resp.connections[0].location #=> String
     #   resp.connections[0].bandwidth #=> String
@@ -2969,7 +2970,7 @@ module Aws::DirectConnect
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
     #   resp.address_family #=> String, one of "ipv4", "ipv6"
-    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
     #   resp.customer_router_config #=> String
     #   resp.mtu #=> Integer
     #   resp.jumbo_frame_capable #=> Boolean
@@ -2985,7 +2986,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].amazon_address #=> String
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
-    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down", "unknown"
     #   resp.bgp_peers[0].aws_device_v2 #=> String
     #   resp.region #=> String
     #   resp.aws_device_v2 #=> String
@@ -3012,7 +3013,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

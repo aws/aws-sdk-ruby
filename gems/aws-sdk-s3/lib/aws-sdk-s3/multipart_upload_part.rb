@@ -235,7 +235,7 @@ module Aws::S3
     #   must use the form bytes=first-last, where the first and last are the
     #   zero-based byte offsets to copy. For example, bytes=0-9 indicates that
     #   you want to copy the first ten bytes of the source. You can copy a
-    #   range only if the source object is greater than 5 GB.
+    #   range only if the source object is greater than 5 MB.
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (e.g.,
     #   AES256).

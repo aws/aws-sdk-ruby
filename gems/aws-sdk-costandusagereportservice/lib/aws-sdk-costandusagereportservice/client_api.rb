@@ -27,11 +27,13 @@ module Aws::CostandUsageReportService
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     PutReportDefinitionRequest = Shapes::StructureShape.new(name: 'PutReportDefinitionRequest')
     PutReportDefinitionResponse = Shapes::StructureShape.new(name: 'PutReportDefinitionResponse')
+    RefreshClosedReports = Shapes::BooleanShape.new(name: 'RefreshClosedReports')
     ReportDefinition = Shapes::StructureShape.new(name: 'ReportDefinition')
     ReportDefinitionList = Shapes::ListShape.new(name: 'ReportDefinitionList')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportLimitReachedException = Shapes::StructureShape.new(name: 'ReportLimitReachedException')
     ReportName = Shapes::StringShape.new(name: 'ReportName')
+    ReportVersioning = Shapes::StringShape.new(name: 'ReportVersioning')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     SchemaElement = Shapes::StringShape.new(name: 'SchemaElement')
@@ -69,6 +71,8 @@ module Aws::CostandUsageReportService
     ReportDefinition.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Prefix, required: true, location_name: "S3Prefix"))
     ReportDefinition.add_member(:s3_region, Shapes::ShapeRef.new(shape: AWSRegion, required: true, location_name: "S3Region"))
     ReportDefinition.add_member(:additional_artifacts, Shapes::ShapeRef.new(shape: AdditionalArtifactList, location_name: "AdditionalArtifacts"))
+    ReportDefinition.add_member(:refresh_closed_reports, Shapes::ShapeRef.new(shape: RefreshClosedReports, location_name: "RefreshClosedReports"))
+    ReportDefinition.add_member(:report_versioning, Shapes::ShapeRef.new(shape: ReportVersioning, location_name: "ReportVersioning"))
     ReportDefinition.struct_class = Types::ReportDefinition
 
     ReportDefinitionList.member = Shapes::ShapeRef.new(shape: ReportDefinition)
@@ -87,6 +91,7 @@ module Aws::CostandUsageReportService
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Cost and Usage Report Service",
+        "serviceId" => "Cost and Usage Report Service",
         "signatureVersion" => "v4",
         "signingName" => "cur",
         "targetPrefix" => "AWSOrigamiServiceGatewayService",

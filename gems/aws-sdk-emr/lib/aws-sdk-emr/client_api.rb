@@ -1023,7 +1023,6 @@ module Aws::EMR
         "serviceId" => "EMR",
         "signatureVersion" => "v4",
         "targetPrefix" => "ElasticMapReduce",
-        "timestampFormat" => "unixTimestamp",
         "uid" => "elasticmapreduce-2009-03-31",
       }
 

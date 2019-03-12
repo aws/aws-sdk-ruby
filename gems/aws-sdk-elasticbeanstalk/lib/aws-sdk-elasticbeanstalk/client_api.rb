@@ -482,6 +482,7 @@ module Aws::ElasticBeanstalk
     CreateApplicationMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateApplicationMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateApplicationMessage.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, location_name: "ResourceLifecycleConfig"))
+    CreateApplicationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateApplicationMessage.struct_class = Types::CreateApplicationMessage
 
     CreateApplicationVersionMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -492,6 +493,7 @@ module Aws::ElasticBeanstalk
     CreateApplicationVersionMessage.add_member(:build_configuration, Shapes::ShapeRef.new(shape: BuildConfiguration, location_name: "BuildConfiguration"))
     CreateApplicationVersionMessage.add_member(:auto_create_application, Shapes::ShapeRef.new(shape: AutoCreateApplication, location_name: "AutoCreateApplication"))
     CreateApplicationVersionMessage.add_member(:process, Shapes::ShapeRef.new(shape: ApplicationVersionProccess, location_name: "Process"))
+    CreateApplicationVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateApplicationVersionMessage.struct_class = Types::CreateApplicationVersionMessage
 
     CreateConfigurationTemplateMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -502,6 +504,7 @@ module Aws::ElasticBeanstalk
     CreateConfigurationTemplateMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     CreateConfigurationTemplateMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateConfigurationTemplateMessage.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
+    CreateConfigurationTemplateMessage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConfigurationTemplateMessage.struct_class = Types::CreateConfigurationTemplateMessage
 
     CreateEnvironmentMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -524,6 +527,7 @@ module Aws::ElasticBeanstalk
     CreatePlatformVersionRequest.add_member(:platform_definition_bundle, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "PlatformDefinitionBundle"))
     CreatePlatformVersionRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     CreatePlatformVersionRequest.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
+    CreatePlatformVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreatePlatformVersionRequest.struct_class = Types::CreatePlatformVersionRequest
 
     CreatePlatformVersionResult.add_member(:platform_summary, Shapes::ShapeRef.new(shape: PlatformSummary, location_name: "PlatformSummary"))

@@ -343,10 +343,10 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is
-    #     set, one is generated and returned in the response.
+    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #     corresponding private key is required to access the Chef API. When
+    #     no CHEF\_PIVOTAL\_KEY is set, a private key is generated and
+    #     returned in the response.
     #
     #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the
     #     administrative user in the Chef Automate GUI. The password length
@@ -362,7 +362,14 @@ module Aws::OpsWorksCM
     #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
     #     console, a password must use ASCII characters.
     #
-    #   ^
+    #   * `PUPPET_R10K_REMOTE`\: The r10k remote is the URL of your control
+    #     repository (for example,
+    #     ssh://git@your.git-repo.com:user/control-repo.git). Specifying an
+    #     r10k remote opens TCP port 8170.
+    #
+    #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify an SSH URL
+    #     and a PEM-encoded private SSH key.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @!attribute [rw] backup_retention_count
@@ -470,7 +477,7 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] backup_id
@@ -895,29 +902,37 @@ module Aws::OpsWorksCM
     #       }
     #
     # @!attribute [rw] export_attribute_name
-    #   The name of the export attribute. Currently supported export
-    #   attribute is "Userdata" which exports a userdata script filled out
-    #   with parameters provided in the `InputAttributes` list.
+    #   The name of the export attribute. Currently, the supported export
+    #   attribute is `Userdata`. This exports a user data script that
+    #   includes parameters and values provided in the `InputAttributes`
+    #   list.
     #   @return [String]
     #
     # @!attribute [rw] server_name
-    #   The name of the Server to which the attribute is being exported from
+    #   The name of the server from which you are exporting the attribute.
     #   @return [String]
     #
     # @!attribute [rw] input_attributes
     #   The list of engine attributes. The list type is `EngineAttribute`.
-    #   `EngineAttribute` is a pair of attribute name and value. For
-    #   `ExportAttributeName` "Userdata", currently supported input
-    #   attribute names are: - "RunList": For Chef, an ordered list of
-    #   roles and/or recipes that are run in the exact order. For Puppet,
-    #   this parameter is ignored. - "OrganizationName": For Chef, an
-    #   organization name. AWS OpsWorks for Chef Server always creates the
-    #   organization "default". For Puppet, this parameter is ignored. -
-    #   "NodeEnvironment": For Chef, a node environment (eg. development,
-    #   staging, onebox). For Puppet, this parameter is ignored. -
-    #   "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
-    #   separated by dots, eg. "13.8.5"). If empty, it uses the latest
-    #   one. For Puppet, this parameter is ignored.
+    #   An `EngineAttribute` list item is a pair that includes an attribute
+    #   name and its value. For the `Userdata` ExportAttributeName, the
+    #   following are supported engine attribute names.
+    #
+    #   * **RunList** In Chef, a list of roles or recipes that are run in
+    #     the specified order. In Puppet, this parameter is ignored.
+    #
+    #   * **OrganizationName** In Chef, an organization name. AWS OpsWorks
+    #     for Chef Automate always creates the organization `default`. In
+    #     Puppet, this parameter is ignored.
+    #
+    #   * **NodeEnvironment** In Chef, a node environment (for example,
+    #     development, staging, or one-box). In Puppet, this parameter is
+    #     ignored.
+    #
+    #   * **NodeClientVersion** In Chef, the version of the Chef engine
+    #     (three numbers separated by dots, such as 13.8.5). If this
+    #     attribute is empty, OpsWorks for Chef Automate uses the most
+    #     current version. In Puppet, this parameter is ignored.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeRequest AWS API Documentation
@@ -934,7 +949,7 @@ module Aws::OpsWorksCM
     #   @return [Types::EngineAttribute]
     #
     # @!attribute [rw] server_name
-    #   The requested ServerName.
+    #   The server name used in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeResponse AWS API Documentation

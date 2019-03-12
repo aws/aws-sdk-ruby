@@ -26,7 +26,29 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # Configures a customized metric for a target tracking policy.
+    # Represents a CloudWatch metric of your choosing for a target tracking
+    # scaling policy to use with Application Auto Scaling.
+    #
+    # To create your customized metric specification:
+    #
+    # * Add values for each required parameter from CloudWatch. You can use
+    #   an existing metric, or a new metric that you create. To use your own
+    #   metric, you must first publish the metric to CloudWatch. For more
+    #   information, see [Publish Custom Metrics][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    # * Choose a metric that changes proportionally with capacity. The value
+    #   of the metric should increase or decrease in inverse proportion to
+    #   the number of capacity units. That is, the value of the metric
+    #   should decrease when capacity increases.
+    #
+    # For more information about CloudWatch, see [Amazon CloudWatch
+    # Concepts][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
     # @note When making an API call, you may pass CustomizedMetricSpecification
     #   data as a hash:
@@ -54,6 +76,9 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] dimensions
     #   The dimensions of the metric.
+    #
+    #   Conditional: If you published your metric with dimensions, you must
+    #   specify the same dimensions in your scaling policy.
     #   @return [Array<Types::MetricDimension>]
     #
     # @!attribute [rw] statistic
@@ -97,7 +122,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -136,7 +161,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -169,7 +199,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -199,7 +229,7 @@ module Aws::ApplicationAutoScaling
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -210,7 +240,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_name
@@ -253,7 +283,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -286,7 +321,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -326,7 +361,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -365,7 +400,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -399,7 +439,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -440,7 +480,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
@@ -481,7 +521,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [Array<String>]
     #
     # @!attribute [rw] scalable_dimension
@@ -516,7 +561,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -587,7 +632,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -628,7 +673,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -662,7 +712,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -738,7 +788,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -779,7 +829,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -813,7 +868,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -890,7 +945,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -931,7 +986,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -965,7 +1025,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1018,7 +1078,7 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # Describes the dimension of a metric.
+    # Describes the dimension names and values associated with a metric.
     #
     # @note When making an API call, you may pass MetricDimension
     #   data as a hash:
@@ -1044,7 +1104,8 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # Configures a predefined metric for a target tracking policy.
+    # Represents a predefined metric for a target tracking scaling policy to
+    # use with Application Auto Scaling.
     #
     # @note When making an API call, you may pass PredefinedMetricSpecification
     #   data as a hash:
@@ -1142,7 +1203,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1181,7 +1242,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1214,7 +1280,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1225,12 +1291,17 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] policy_type
     #   The policy type. This parameter is required if you are creating a
-    #   policy.
+    #   scaling policy.
     #
-    #   For DynamoDB, only `TargetTrackingScaling` is supported. For Amazon
-    #   ECS, Spot Fleet, and Amazon RDS, both `StepScaling` and
-    #   `TargetTrackingScaling` are supported. For any other service, only
-    #   `StepScaling` is supported.
+    #   For information on which services do not support `StepScaling` or
+    #   `TargetTrackingScaling`, see the information about **Limits** in
+    #   [Step Scaling Policies][1] and [Target Tracking Scaling Policies][2]
+    #   in the *Application Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
     #   @return [String]
     #
     # @!attribute [rw] step_scaling_policy_configuration
@@ -1241,7 +1312,8 @@ module Aws::ApplicationAutoScaling
     #   @return [Types::StepScalingPolicyConfiguration]
     #
     # @!attribute [rw] target_tracking_scaling_policy_configuration
-    #   A target tracking policy.
+    #   A target tracking scaling policy. Includes support for predefined or
+    #   customized metrics.
     #
     #   This parameter is required if you are creating a policy and the
     #   policy type is `TargetTrackingScaling`.
@@ -1265,7 +1337,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] alarms
-    #   The CloudWatch alarms created for the target tracking policy.
+    #   The CloudWatch alarms created for the target tracking scaling
+    #   policy.
     #   @return [Array<Types::Alarm>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicyResponse AWS API Documentation
@@ -1284,7 +1357,7 @@ module Aws::ApplicationAutoScaling
     #         schedule: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1301,17 +1374,17 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] schedule
     #   The schedule for this action. The following formats are supported:
     #
-    #   * At expressions - `at(yyyy-mm-ddThh:mm:ss)`
+    #   * At expressions - "`at(yyyy-mm-ddThh:mm:ss)`"
     #
-    #   * Rate expressions - `rate(value unit)`
+    #   * Rate expressions - "`rate(value unit)`"
     #
-    #   * Cron expressions - `cron(fields)`
+    #   * Cron expressions - "`cron(fields)`"
     #
     #   At expressions are useful for one-time schedules. Specify the time,
     #   in UTC.
@@ -1324,7 +1397,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_name
@@ -1367,12 +1440,16 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
-    #   The scalable dimension. This parameter is required if you are
-    #   creating a scheduled action. This string consists of the service
+    #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
@@ -1401,7 +1478,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1465,7 +1542,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1504,7 +1581,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1538,7 +1620,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1548,13 +1630,13 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
-    #   The minimum value to scale to in response to a scale in event. This
-    #   parameter is required if you are registering a scalable target.
+    #   The minimum value to scale to in response to a scale-in event. This
+    #   parameter is required to register a scalable target.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The maximum value to scale to in response to a scale out event. This
-    #   parameter is required if you are registering a scalable target.
+    #   The maximum value to scale to in response to a scale-out event. This
+    #   parameter is required to register a scalable target.
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
@@ -1570,7 +1652,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/autoscaling/application/userguide/application-autoscaling-service-linked-roles.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetRequest AWS API Documentation
@@ -1599,7 +1681,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1638,7 +1720,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1672,7 +1759,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1682,11 +1769,11 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
-    #   The minimum value to scale to in response to a scale in event.
+    #   The minimum value to scale to in response to a scale-in event.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The maximum value to scale to in response to a scale out event.
+    #   The maximum value to scale to in response to a scale-out event.
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
@@ -1751,7 +1838,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1790,7 +1877,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1823,7 +1915,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1878,7 +1970,7 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # Represents a scaling policy.
+    # Represents a scaling policy to use with Application Auto Scaling.
     #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the scaling policy.
@@ -1896,7 +1988,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1935,7 +2027,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1968,7 +2065,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -1986,7 +2083,7 @@ module Aws::ApplicationAutoScaling
     #   @return [Types::StepScalingPolicyConfiguration]
     #
     # @!attribute [rw] target_tracking_scaling_policy_configuration
-    #   A target tracking policy.
+    #   A target tracking scaling policy.
     #   @return [Types::TargetTrackingScalingPolicyConfiguration]
     #
     # @!attribute [rw] alarms
@@ -2031,17 +2128,17 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] schedule
     #   The schedule for this action. The following formats are supported:
     #
-    #   * At expressions - `at(yyyy-mm-ddThh:mm:ss)`
+    #   * At expressions - "`at(yyyy-mm-ddThh:mm:ss)`"
     #
-    #   * Rate expressions - `rate(value unit)`
+    #   * Rate expressions - "`rate(value unit)`"
     #
-    #   * Cron expressions - `cron(fields)`
+    #   * Cron expressions - "`cron(fields)`"
     #
     #   At expressions are useful for one-time schedules. Specify the time,
     #   in UTC.
@@ -2054,7 +2151,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2093,7 +2190,12 @@ module Aws::ApplicationAutoScaling
     #   * Custom resources are not supported with a resource type. This
     #     parameter must specify the `OutputValue` from the CloudFormation
     #     template stack used to access the resources. The unique identifier
-    #     is defined by the service provider.
+    #     is defined by the service provider. More information is available
+    #     in our [GitHub repository][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -2126,7 +2228,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
-    #     edition.
+    #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
@@ -2247,7 +2349,8 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # Represents a step scaling policy configuration.
+    # Represents a step scaling policy configuration to use with Application
+    # Auto Scaling.
     #
     # @note When making an API call, you may pass StepScalingPolicyConfiguration
     #   data as a hash:
@@ -2281,6 +2384,13 @@ module Aws::ApplicationAutoScaling
     #   a scaling activity. If the adjustment type is
     #   `PercentChangeInCapacity`, the scaling policy changes the scalable
     #   dimension of the scalable target by this amount.
+    #
+    #   For example, suppose that you create a step scaling policy to scale
+    #   out an Amazon ECS service by 25 percent and you specify a
+    #   `MinAdjustmentMagnitude` of 2. If the service has 4 tasks and the
+    #   scaling policy is performed, 25 percent of 4 is 1. However, because
+    #   you specified a `MinAdjustmentMagnitude` of 2, Application Auto
+    #   Scaling scales out the service by 2 tasks.
     #   @return [Integer]
     #
     # @!attribute [rw] cooldown
@@ -2288,30 +2398,31 @@ module Aws::ApplicationAutoScaling
     #   where previous trigger-related scaling activities can influence
     #   future scaling events.
     #
-    #   For scale out policies, while the cooldown period is in effect, the
-    #   capacity that has been added by the previous scale out event that
+    #   For scale-out policies, while the cooldown period is in effect, the
+    #   capacity that has been added by the previous scale-out event that
     #   initiated the cooldown is calculated as part of the desired capacity
     #   for the next scale out. The intention is to continuously (but not
     #   excessively) scale out. For example, an alarm triggers a step
     #   scaling policy to scale out an Amazon ECS service by 2 tasks, the
     #   scaling activity completes successfully, and a cooldown period of 5
-    #   minutes starts. During the Cooldown period, if the alarm triggers
+    #   minutes starts. During the cooldown period, if the alarm triggers
     #   the same policy again but at a more aggressive step adjustment to
     #   scale out the service by 3 tasks, the 2 tasks that were added in the
-    #   previous scale out event are considered part of that capacity and
+    #   previous scale-out event are considered part of that capacity and
     #   only 1 additional task is added to the desired count.
     #
-    #   For scale in policies, the cooldown period is used to block
-    #   subsequent scale in requests until it has expired. The intention is
+    #   For scale-in policies, the cooldown period is used to block
+    #   subsequent scale-in requests until it has expired. The intention is
     #   to scale in conservatively to protect your application's
-    #   availability. However, if another alarm triggers a scale out policy
+    #   availability. However, if another alarm triggers a scale-out policy
     #   during the cooldown period after a scale-in, Application Auto
     #   Scaling scales out your scalable target immediately.
     #   @return [Integer]
     #
     # @!attribute [rw] metric_aggregation_type
     #   The aggregation type for the CloudWatch metrics. Valid values are
-    #   `Minimum`, `Maximum`, and `Average`.
+    #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is
+    #   null, the value is treated as `Average`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepScalingPolicyConfiguration AWS API Documentation
@@ -2325,7 +2436,8 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
-    # Represents a target tracking scaling policy configuration.
+    # Represents a target tracking scaling policy configuration to use with
+    # Application Auto Scaling.
     #
     # @note When making an API call, you may pass TargetTrackingScalingPolicyConfiguration
     #   data as a hash:
@@ -2359,42 +2471,44 @@ module Aws::ApplicationAutoScaling
     #   @return [Float]
     #
     # @!attribute [rw] predefined_metric_specification
-    #   A predefined metric.
+    #   A predefined metric. You can specify either a predefined metric or a
+    #   customized metric.
     #   @return [Types::PredefinedMetricSpecification]
     #
     # @!attribute [rw] customized_metric_specification
-    #   A customized metric.
+    #   A customized metric. You can specify either a predefined metric or a
+    #   customized metric.
     #   @return [Types::CustomizedMetricSpecification]
     #
     # @!attribute [rw] scale_out_cooldown
-    #   The amount of time, in seconds, after a scale out activity completes
-    #   before another scale out activity can start.
+    #   The amount of time, in seconds, after a scale-out activity completes
+    #   before another scale-out activity can start.
     #
     #   While the cooldown period is in effect, the capacity that has been
-    #   added by the previous scale out event that initiated the cooldown is
+    #   added by the previous scale-out event that initiated the cooldown is
     #   calculated as part of the desired capacity for the next scale out.
     #   The intention is to continuously (but not excessively) scale out.
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_cooldown
-    #   The amount of time, in seconds, after a scale in activity completes
+    #   The amount of time, in seconds, after a scale-in activity completes
     #   before another scale in activity can start.
     #
-    #   The cooldown period is used to block subsequent scale in requests
+    #   The cooldown period is used to block subsequent scale-in requests
     #   until it has expired. The intention is to scale in conservatively to
     #   protect your application's availability. However, if another alarm
-    #   triggers a scale out policy during the cooldown period after a
+    #   triggers a scale-out policy during the cooldown period after a
     #   scale-in, Application Auto Scaling scales out your scalable target
     #   immediately.
     #   @return [Integer]
     #
     # @!attribute [rw] disable_scale_in
-    #   Indicates whether scale in by the target tracking policy is
+    #   Indicates whether scale in by the target tracking scaling policy is
     #   disabled. If the value is `true`, scale in is disabled and the
-    #   target tracking policy won't remove capacity from the scalable
-    #   resource. Otherwise, scale in is enabled and the target tracking
-    #   policy can remove capacity from the scalable resource. The default
-    #   value is `false`.
+    #   target tracking scaling policy won't remove capacity from the
+    #   scalable resource. Otherwise, scale in is enabled and the target
+    #   tracking scaling policy can remove capacity from the scalable
+    #   resource. The default value is `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingScalingPolicyConfiguration AWS API Documentation

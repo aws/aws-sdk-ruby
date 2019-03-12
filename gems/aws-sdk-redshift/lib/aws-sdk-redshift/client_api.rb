@@ -18,6 +18,7 @@ module Aws::Redshift
     AccountAttributeList = Shapes::StructureShape.new(name: 'AccountAttributeList')
     AccountWithRestoreAccess = Shapes::StructureShape.new(name: 'AccountWithRestoreAccess')
     AccountsWithRestoreAccessList = Shapes::ListShape.new(name: 'AccountsWithRestoreAccessList')
+    AssociatedClusterList = Shapes::ListShape.new(name: 'AssociatedClusterList')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
@@ -45,6 +46,7 @@ module Aws::Redshift
     CancelResizeMessage = Shapes::StructureShape.new(name: 'CancelResizeMessage')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'ClusterAlreadyExistsFault')
+    ClusterAssociatedToSchedule = Shapes::StructureShape.new(name: 'ClusterAssociatedToSchedule')
     ClusterCredentials = Shapes::StructureShape.new(name: 'ClusterCredentials')
     ClusterDbRevision = Shapes::StructureShape.new(name: 'ClusterDbRevision')
     ClusterDbRevisionsList = Shapes::ListShape.new(name: 'ClusterDbRevisionsList')
@@ -410,6 +412,8 @@ module Aws::Redshift
 
     AccountsWithRestoreAccessList.member = Shapes::ShapeRef.new(shape: AccountWithRestoreAccess, location_name: "AccountWithRestoreAccess")
 
+    AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
+
     AttributeList.member = Shapes::ShapeRef.new(shape: AccountAttribute, location_name: "AccountAttribute")
 
     AttributeNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "AttributeName")
@@ -508,6 +512,10 @@ module Aws::Redshift
     Cluster.add_member(:snapshot_schedule_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "SnapshotScheduleState"))
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
     Cluster.struct_class = Types::Cluster
+
+    ClusterAssociatedToSchedule.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    ClusterAssociatedToSchedule.add_member(:schedule_association_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "ScheduleAssociationState"))
+    ClusterAssociatedToSchedule.struct_class = Types::ClusterAssociatedToSchedule
 
     ClusterCredentials.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ClusterCredentials.add_member(:db_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "DbPassword"))
@@ -1553,6 +1561,8 @@ module Aws::Redshift
     SnapshotSchedule.add_member(:schedule_description, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleDescription"))
     SnapshotSchedule.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     SnapshotSchedule.add_member(:next_invocations, Shapes::ShapeRef.new(shape: ScheduledSnapshotTimeList, location_name: "NextInvocations"))
+    SnapshotSchedule.add_member(:associated_cluster_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AssociatedClusterCount"))
+    SnapshotSchedule.add_member(:associated_clusters, Shapes::ShapeRef.new(shape: AssociatedClusterList, location_name: "AssociatedClusters"))
     SnapshotSchedule.struct_class = Types::SnapshotSchedule
 
     SnapshotScheduleList.member = Shapes::ShapeRef.new(shape: SnapshotSchedule, location_name: "SnapshotSchedule")

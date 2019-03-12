@@ -637,7 +637,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
     # [2]: https://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [required, Array<Types::MetricDataQuery>] :metric_data_queries
@@ -653,7 +653,7 @@ module Aws::CloudWatch
     #   align with the value of the metric's `Period` and sync up with the
     #   beginning and end of an hour. For example, if the `Period` of a metric
     #   is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can get a
-    #   faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   faster response from CloudWatch than setting 12:07 or 12:29 as the
     #   `StartTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
@@ -663,7 +663,7 @@ module Aws::CloudWatch
     #   align with the value of the metric's `Period` and sync up with the
     #   beginning and end of an hour. For example, if the `Period` of a metric
     #   is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get a faster
-    #   response from CloudWatch then setting 12:07 or 12:29 as the `EndTime`.
+    #   response from CloudWatch than setting 12:07 or 12:29 as the `EndTime`.
     #
     # @option params [String] :next_token
     #   Include this value, if it was returned by the previous call, to get
@@ -803,7 +803,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html
     #
     # @option params [required, String] :namespace
     #   The namespace of the metric, with or without spaces.
@@ -824,8 +824,8 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
-    #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp that determines the first data point to return. Start
@@ -991,8 +991,7 @@ module Aws::CloudWatch
     #   response with the content-type set to `text/xml`. The image data is in
     #   a `MetricWidgetImage` field. For example:
     #
-    #   ` <GetMetricWidgetImageResponse
-    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #   ` <GetMetricWidgetImageResponse xmlns=<URLstring>>`
     #
     #   ` <GetMetricWidgetImageResult>`
     #
@@ -1264,7 +1263,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within your AWS
@@ -1305,6 +1304,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1324,6 +1324,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1416,7 +1417,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     #
     # @option params [required, Float] :threshold
     #   The value against which the specified statistic is compared.
@@ -1436,7 +1437,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     #
     # @option params [String] :evaluate_low_sample_count_percentile
     #   Used only for alarms based on percentiles. If you specify `ignore`,
@@ -1451,13 +1452,18 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     #
     # @option params [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
     #   alarm based on the result of a metric math expression. Each item in
     #   the `Metrics` array either retrieves a metric or performs a math
     #   expression.
+    #
+    #   One item in the `Metrics` array is the expression that the alarm
+    #   watches. You designate this expression by setting `ReturnValue` to
+    #   true for this object in the array. For more information, see
+    #   MetricDataQuery.
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
@@ -1553,9 +1559,9 @@ module Aws::CloudWatch
     # example, NaN, +Infinity, -Infinity) are not supported.
     #
     # You can use up to 10 dimensions per metric to further clarify what
-    # data the metric collects. For more information about specifying
-    # dimensions, see [Publishing Metrics][1] in the *Amazon CloudWatch User
-    # Guide*.
+    # data the metric collects. Each dimension consists of a Name and Value
+    # pair. For more information about specifying dimensions, see
+    # [Publishing Metrics][1] in the *Amazon CloudWatch User Guide*.
     #
     # Data points with time stamps from 24 hours ago or longer can take at
     # least 48 hours to become available for GetMetricData or
@@ -1574,7 +1580,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     #
     # @option params [required, String] :namespace
     #   The namespace for the metric data.
@@ -1685,7 +1691,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

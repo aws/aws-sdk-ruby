@@ -228,7 +228,7 @@ module Aws::CostExplorer
     #
     # [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
     #
-    # @option params [Types::DateInterval] :time_period
+    # @option params [required, Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
     #   is inclusive, but the end date is exclusive. For example, if `start`
     #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
@@ -304,7 +304,7 @@ module Aws::CostExplorer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_cost_and_usage({
-    #     time_period: {
+    #     time_period: { # required
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
@@ -690,8 +690,6 @@ module Aws::CostExplorer
     #
     #   * REGION
     #
-    #   * TAG
-    #
     #   * TENANCY
     #
     # @option params [String] :granularity
@@ -746,6 +744,10 @@ module Aws::CostExplorer
     #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Array<String>] :metrics
+    #   The measurement that you want your reservation coverage reported in.
+    #
+    #   Valid values are `Hour`, `Unit`, and `Cost`. You can use multiple
+    #   values in a request.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -1249,7 +1251,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

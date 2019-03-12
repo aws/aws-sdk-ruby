@@ -193,23 +193,16 @@ module Aws::AlexaForBusiness
     #   data as a hash:
     #
     #       {
-    #         organization_arn: "Arn",
     #         skill_id: "SkillId", # required
     #       }
     #
-    # @!attribute [rw] organization_arn
-    #   The ARN of the organization.
-    #   @return [String]
-    #
     # @!attribute [rw] skill_id
-    #   The private skill ID you want to make available to enrolled
-    #   users.&gt;
+    #   The private skill ID you want to make available to enrolled users.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsersRequest AWS API Documentation
     #
     class AssociateSkillWithUsersRequest < Struct.new(
-      :organization_arn,
       :skill_id)
       include Aws::Structure
     end
@@ -579,7 +572,9 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
-    #   The S3 bucket name of the output reports.
+    #   The S3 bucket name of the output reports. If this isn't specified,
+    #   the report can be retrieved from a download link by calling
+    #   ListBusinessReportSchedule.
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -596,7 +591,8 @@ module Aws::AlexaForBusiness
     #   @return [Types::BusinessReportContentRange]
     #
     # @!attribute [rw] recurrence
-    #   The recurrence of the reports.
+    #   The recurrence of the reports. If this isn't specified, the report
+    #   will only be delivered one time when the API is called.
     #   @return [Types::BusinessReportRecurrence]
     #
     # @!attribute [rw] client_request_token
@@ -1574,13 +1570,8 @@ module Aws::AlexaForBusiness
     #   data as a hash:
     #
     #       {
-    #         organization_arn: "Arn",
     #         skill_id: "SkillId", # required
     #       }
-    #
-    # @!attribute [rw] organization_arn
-    #   The ARN of the organization.
-    #   @return [String]
     #
     # @!attribute [rw] skill_id
     #   The private skill ID you want to make unavailable for enrolled
@@ -1590,7 +1581,6 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsersRequest AWS API Documentation
     #
     class DisassociateSkillFromUsersRequest < Struct.new(
-      :organization_arn,
       :skill_id)
       include Aws::Structure
     end
@@ -1808,6 +1798,36 @@ module Aws::AlexaForBusiness
     #
     class GetDeviceResponse < Struct.new(
       :device)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfigurationRequest AWS API Documentation
+    #
+    class GetInvitationConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_name
+    #   The name of the organization sending the enrollment invite to a
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_email
+    #   The email ID of the organization or individual contact that the
+    #   enrolled user can use.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_skill_ids
+    #   The list of private skill IDs that you want to recommend to the user
+    #   to enable in the invitation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfigurationResponse AWS API Documentation
+    #
+    class GetInvitationConfigurationResponse < Struct.new(
+      :organization_name,
+      :contact_email,
+      :private_skill_ids)
       include Aws::Structure
     end
 
@@ -2125,6 +2145,7 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group for which to list enabled skills.
+    #   Required.
     #   @return [String]
     #
     # @!attribute [rw] enablement_type
@@ -2140,14 +2161,14 @@ module Aws::AlexaForBusiness
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up
-    #   to the value specified by `MaxResults`.
+    #   to the value specified by `MaxResults`. Required.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved.
+    #   retrieved. Required.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsRequest AWS API Documentation
@@ -2575,6 +2596,43 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreferenceResponse AWS API Documentation
     #
     class PutConferencePreferenceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutInvitationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_name: "OrganizationName", # required
+    #         contact_email: "Email",
+    #         private_skill_ids: ["SkillId"],
+    #       }
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the organization sending the enrollment invite to a
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_email
+    #   The email ID of the organization or individual contact that the
+    #   enrolled user can use.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_skill_ids
+    #   The list of private skill IDs that you want to recommend to the user
+    #   to enable in the invitation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfigurationRequest AWS API Documentation
+    #
+    class PutInvitationConfigurationRequest < Struct.new(
+      :organization_name,
+      :contact_email,
+      :private_skill_ids)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfigurationResponse AWS API Documentation
+    #
+    class PutInvitationConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutRoomSkillParameterRequest
     #   data as a hash:

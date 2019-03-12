@@ -86,17 +86,13 @@ module Aws::EC2
     # of IOPS that are provisioned for the volume. For General Purpose SSD
     # volumes, this represents the baseline performance of the volume and
     # the rate at which the volume accumulates I/O credits for bursting. For
-    # more information about General Purpose SSD baseline performance, I/O
-    # credits, and bursting, see [Amazon EBS Volume Types][1] in the *Amazon
+    # more information, see [Amazon EBS Volume Types][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     # Constraints: Range is 100-16,000 IOPS for `gp2` volumes and 100 to
-    # 64,000IOPS for `io1` volumes in most regions. Maximum `io1`IOPS of
-    # 64,000 is guaranteed only on [Nitro-based
-    # instances](AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-    # Other instance families guarantee performance up to 32,000 IOPS. For
-    # more information, see [Amazon EBS Volume Types][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # 64,000IOPS for `io1` volumes, in most Regions. The maximum IOPS for
+    # `io1` of 64,000 is guaranteed only on [Nitro-based instances][2].
+    # Other instance families guarantee performance up to 32,000 IOPS.
     #
     # Condition: This parameter is required for requests to create `io1`
     # volumes; it is not used in requests to create `gp2`, `st1`, `sc1`, or
@@ -104,7 +100,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     # @return [Integer]
     def iops
       data[:iops]
@@ -286,7 +283,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-instances-request, subnet, transit-gateway, transit-gateway-attachment, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -599,15 +596,15 @@ module Aws::EC2
     #
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by one or more owners.
     # @option options [Array<String>] :restorable_by_user_ids
     #   One or more AWS accounts IDs that can create volumes from the
     #   snapshot.
     # @option options [Array<String>] :snapshot_ids
     #   One or more snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

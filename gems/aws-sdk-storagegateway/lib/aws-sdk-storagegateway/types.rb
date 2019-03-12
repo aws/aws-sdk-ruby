@@ -35,6 +35,12 @@ module Aws::StorageGateway
     #         gateway_type: "GatewayType",
     #         tape_drive_type: "TapeDriveType",
     #         medium_changer_type: "MediumChangerType",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] activation_key
@@ -72,15 +78,12 @@ module Aws::StorageGateway
     #   available regions and endpoints for AWS Storage Gateway, see
     #   [Regions and Endpoints][1] in the *Amazon Web Services Glossary*.
     #
-    #   Valid Values: "us-east-1", "us-east-2", "us-west-1",
-    #   "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1",
-    #   "eu-west-2", "eu-west-3", "ap-northeast-1",
-    #   "ap-northeast-2", "ap-southeast-1", "ap-southeast-2",
-    #   "ap-south-1", "sa-east-1"
+    #   Valid Values: See [AWS Storage Gateway Regions and Endpoints][1] in
+    #   the AWS General Reference.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region
     #   @return [String]
     #
     # @!attribute [rw] gateway_type
@@ -105,6 +108,18 @@ module Aws::StorageGateway
     #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to ten (10) tags assigned to the gateway may be
+    #   specified. Every tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGatewayInput AWS API Documentation
     #
     class ActivateGatewayInput < Struct.new(
@@ -114,7 +129,8 @@ module Aws::StorageGateway
       :gateway_region,
       :gateway_type,
       :tape_drive_type,
-      :medium_changer_type)
+      :medium_changer_type,
+      :tags)
       include Aws::Structure
     end
 
@@ -156,6 +172,9 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
+    #   An array of strings that identify disks that are to be configured as
+    #   working storage. Each string have a minimum length of 1 and maximum
+    #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCacheInput AWS API Documentation
@@ -204,7 +223,8 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters:
-    #   + - = . \_ : / @.
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
     #
     #    </note>
     #   @return [Array<Types::Tag>]
@@ -245,6 +265,9 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
+    #   An array of strings that identify disks that are to be configured as
+    #   working storage. Each string have a minimum length of 1 and maximum
+    #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBufferInput AWS API Documentation
@@ -315,6 +338,87 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # AttachVolumeInput
+    #
+    # @note When making an API call, you may pass AttachVolumeInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         target_name: "TargetName",
+    #         volume_arn: "VolumeARN", # required
+    #         network_interface_id: "NetworkInterfaceId", # required
+    #         disk_id: "DiskId",
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway that you want to
+    #   attach the volume to.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_name
+    #   The name of the iSCSI target used by an initiator to connect to a
+    #   volume and used as a suffix for the target ARN. For example,
+    #   specifying `TargetName` as *myvolume* results in the target ARN of
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume`.
+    #   The target name must be unique across all volumes on a gateway.
+    #
+    #   If you don't specify a value, Storage Gateway uses the value that
+    #   was previously used for this volume as the new target name.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume to attach to the
+    #   specified gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface of the gateway on which to expose the iSCSI
+    #   target. Only IPv4 addresses are accepted. Use
+    #   DescribeGatewayInformation to get a list of the network interfaces
+    #   available on a gateway.
+    #
+    #   Valid Values: A valid IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_id
+    #   The unique device ID or other distinguishing data that identifies
+    #   the local disk used to create the volume. This value is only
+    #   required when you are attaching a stored volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AttachVolumeInput AWS API Documentation
+    #
+    class AttachVolumeInput < Struct.new(
+      :gateway_arn,
+      :target_name,
+      :volume_arn,
+      :network_interface_id,
+      :disk_id)
+      include Aws::Structure
+    end
+
+    # AttachVolumeOutput
+    #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume that was attached to
+    #   the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of the volume target, which includes
+    #   the iSCSI name for the initiator that was used to connect to the
+    #   target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AttachVolumeOutput AWS API Documentation
+    #
+    class AttachVolumeOutput < Struct.new(
+      :volume_arn,
+      :target_arn)
+      include Aws::Structure
+    end
+
     # Describes an iSCSI cached volume.
     #
     # @!attribute [rw] volume_arn
@@ -333,6 +437,16 @@ module Aws::StorageGateway
     # @!attribute [rw] volume_status
     #   One of the VolumeStatus values that indicates the state of the
     #   storage volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_attachment_status
+    #   A value that indicates whether a storage volume is attached to or
+    #   detached from a gateway. For more information, see [Moving Your
+    #   Volumes to a Different Gateway][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
@@ -377,6 +491,17 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] target_name
+    #   The name of the iSCSI target used by an initiator to connect to a
+    #   volume and used as a suffix for the target ARN. For example,
+    #   specifying `TargetName` as *myvolume* results in the target ARN of
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume`.
+    #   The target name must be unique across all volumes on a gateway.
+    #
+    #   If you don't specify a value, Storage Gateway uses the value that
+    #   was previously used for this volume as the new target name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CachediSCSIVolume AWS API Documentation
     #
     class CachediSCSIVolume < Struct.new(
@@ -384,13 +509,15 @@ module Aws::StorageGateway
       :volume_id,
       :volume_type,
       :volume_status,
+      :volume_attachment_status,
       :volume_size_in_bytes,
       :volume_progress,
       :source_snapshot_id,
       :volume_iscsi_attributes,
       :created_date,
       :volume_used_in_bytes,
-      :kms_key)
+      :kms_key,
+      :target_name)
       include Aws::Structure
     end
 
@@ -547,15 +674,18 @@ module Aws::StorageGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
     #   @return [String]
     #
     # @!attribute [rw] target_name
-    #   The name of the iSCSI target used by initiators to connect to the
-    #   target and as a suffix for the target ARN. For example, specifying
-    #   `TargetName` as *myvolume* results in the target ARN of
-    #   arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
-    #   The target name must be unique across all volumes of a gateway.
+    #   The name of the iSCSI target used by an initiator to connect to a
+    #   volume and used as a suffix for the target ARN. For example,
+    #   specifying `TargetName` as *myvolume* results in the target ARN of
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume`.
+    #   The target name must be unique across all volumes on a gateway.
+    #
+    #   If you don't specify a value, Storage Gateway uses the value that
+    #   was previously used for this volume as the new target name.
     #   @return [String]
     #
     # @!attribute [rw] source_volume_arn
@@ -612,8 +742,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   he Amazon Resource Name (ARN) of the volume target that includes the
-    #   iSCSI name that initiators can use to connect to the target.
+    #   The Amazon Resource Name (ARN) of the volume target, which includes
+    #   the iSCSI name that initiators can use to connect to the target.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeOutput AWS API Documentation
@@ -649,6 +779,12 @@ module Aws::StorageGateway
     #         read_only: false,
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -730,6 +866,18 @@ module Aws::StorageGateway
     #   default value is `private`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of up to ten (10) tags can be assigned to the NFS file share.
+    #   Every tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -746,7 +894,8 @@ module Aws::StorageGateway
       :squash,
       :read_only,
       :guess_mime_type_enabled,
-      :requester_pays)
+      :requester_pays,
+      :tags)
       include Aws::Structure
     end
 
@@ -783,6 +932,12 @@ module Aws::StorageGateway
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #         authentication: "Authentication",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -866,6 +1021,18 @@ module Aws::StorageGateway
     #   `ActiveDirectory`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to ten (10) tags can be assigned to the NFS file share.
+    #   Every tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput AWS API Documentation
     #
     class CreateSMBFileShareInput < Struct.new(
@@ -882,7 +1049,8 @@ module Aws::StorageGateway
       :requester_pays,
       :valid_user_list,
       :invalid_user_list,
-      :authentication)
+      :authentication,
+      :tags)
       include Aws::Structure
     end
 
@@ -908,9 +1076,16 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
+    #   DescribeStorediSCSIVolumes operation to return to retrieve the
+    #   TargetARN for specified VolumeARN.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_description
+    #   Textual description of the snapshot that appears in the Amazon EC2
+    #   console, Elastic Block Store snapshots panel in the **Description**
+    #   field, and in the AWS Storage Gateway snapshot **Details** pane,
+    #   **Description** field
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointInput AWS API Documentation
@@ -922,12 +1097,17 @@ module Aws::StorageGateway
     end
 
     # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
+    #   DescribeStorediSCSIVolumes operation to return to retrieve the
+    #   TargetARN for specified VolumeARN.
     #   @return [String]
     #
     # @!attribute [rw] volume_recovery_point_time
+    #   The time the volume was created from the recovery point.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointOutput AWS API Documentation
@@ -1033,7 +1213,7 @@ module Aws::StorageGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -1046,7 +1226,7 @@ module Aws::StorageGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
     #   @return [String]
     #
     # @!attribute [rw] preserve_existing_data
@@ -1058,11 +1238,14 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] target_name
-    #   The name of the iSCSI target used by initiators to connect to the
-    #   target and as a suffix for the target ARN. For example, specifying
-    #   `TargetName` as *myvolume* results in the target ARN of
-    #   arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
-    #   The target name must be unique across all volumes of a gateway.
+    #   The name of the iSCSI target used by an initiator to connect to a
+    #   volume and used as a suffix for the target ARN. For example,
+    #   specifying `TargetName` as *myvolume* results in the target ARN of
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume`.
+    #   The target name must be unique across all volumes on a gateway.
+    #
+    #   If you don't specify a value, Storage Gateway uses the value that
+    #   was previously used for this volume as the new target name.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
@@ -1110,8 +1293,8 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] target_arn
-    #   he Amazon Resource Name (ARN) of the volume target that includes the
-    #   iSCSI name that initiators can use to connect to the target.
+    #   The Amazon Resource Name (ARN) of the volume target, which includes
+    #   the iSCSI name that initiators can use to connect to the target.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeOutput AWS API Documentation
@@ -1472,6 +1655,7 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] volume_arn
+    #   The volume which snapshot schedule to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotScheduleInput AWS API Documentation
@@ -1482,6 +1666,7 @@ module Aws::StorageGateway
     end
 
     # @!attribute [rw] volume_arn
+    #   The volume which snapshot schedule was deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotScheduleOutput AWS API Documentation
@@ -1676,18 +1861,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
+    #   An array of strings that identify disks that are to be configured as
+    #   working storage. Each string have a minimum length of 1 and maximum
+    #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cache_allocated_in_bytes
+    #   The amount of cache in bytes allocated to the a gateway.
     #   @return [Integer]
     #
     # @!attribute [rw] cache_used_percentage
+    #   Percent use of the gateway's cache storage. This metric applies
+    #   only to the gateway-cached volume setup. The sample is taken at the
+    #   end of the reporting period.
     #   @return [Float]
     #
     # @!attribute [rw] cache_dirty_percentage
+    #   The file share's contribution to the overall percentage of the
+    #   gateway's cache that has not been persisted to AWS. The sample is
+    #   taken at the end of the reporting period.
     #   @return [Float]
     #
     # @!attribute [rw] cache_hit_percentage
+    #   Percent of application read operations from the file shares that are
+    #   served from cache. The sample is taken at the end of the reporting
+    #   period.
     #   @return [Float]
     #
     # @!attribute [rw] cache_miss_percentage
@@ -1714,6 +1912,10 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] volume_arns
+    #   An array of strings where each string represents the Amazon Resource
+    #   Name (ARN) of a cached volume. All of the specified cached volumes
+    #   must from the same gateway. Use ListVolumes to get volume ARNs for a
+    #   gateway.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumesInput AWS API Documentation
@@ -1858,6 +2060,13 @@ module Aws::StorageGateway
     #   return a value in the response.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to ten (10) tags assigned to the gateway are returned,
+    #   sorted alphabetically by key name. Every tag is a key-value pair.
+    #   For a gateway with more than 10 tags assigned, you can view all tags
+    #   using the `ListTagsForResource` API.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -1869,7 +2078,8 @@ module Aws::StorageGateway
       :gateway_network_interfaces,
       :gateway_type,
       :next_update_availability_date,
-      :last_software_update)
+      :last_software_update,
+      :tags)
       include Aws::Structure
     end
 
@@ -1928,6 +2138,9 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] timezone
+    #   A value that indicates the time zone that is set for the gateway.
+    #   The start time and day of week specified should be in the time zone
+    #   of the gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeOutput AWS API Documentation
@@ -2074,18 +2287,26 @@ module Aws::StorageGateway
     end
 
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume that was specified in
+    #   the request.
     #   @return [String]
     #
     # @!attribute [rw] start_at
+    #   The hour of the day at which the snapshot schedule begins
+    #   represented as *hh*, where *hh* is the hour (0 to 23). The hour of
+    #   the day is in the time zone of the gateway.
     #   @return [Integer]
     #
     # @!attribute [rw] recurrence_in_hours
+    #   The number of hours between snapshots.
     #   @return [Integer]
     #
     # @!attribute [rw] description
+    #   The snapshot description.
     #   @return [String]
     #
     # @!attribute [rw] timezone
+    #   A value that indicates the time zone of the gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleOutput AWS API Documentation
@@ -2124,6 +2345,59 @@ module Aws::StorageGateway
     end
 
     # @!attribute [rw] stored_iscsi_volumes
+    #   Describes a single unit of output from DescribeStorediSCSIVolumes.
+    #   The following fields are returned:
+    #
+    #   * **ChapEnabled**\: Indicates whether mutual CHAP is enabled for the
+    #     iSCSI target.
+    #
+    #   * **LunNumber**\: The logical disk number.
+    #
+    #   * **NetworkInterfaceId**\: The network interface ID of the stored
+    #     volume that initiator use to map the stored volume as an iSCSI
+    #     target.
+    #
+    #   * **NetworkInterfacePort**\: The port used to communicate with iSCSI
+    #     targets.
+    #
+    #   * **PreservedExistingData**\: Indicates if when the stored volume
+    #     was created, existing data on the underlying local disk was
+    #     preserved.
+    #
+    #   * **SourceSnapshotId**\: If the stored volume was created from a
+    #     snapshot, this field contains the snapshot ID used, e.g.
+    #     snap-1122aabb. Otherwise, this field is not included.
+    #
+    #   * **StorediSCSIVolumes**\: An array of StorediSCSIVolume objects
+    #     where each object contains metadata about one stored volume.
+    #
+    #   * **TargetARN**\: The Amazon Resource Name (ARN) of the volume
+    #     target.
+    #
+    #   * **VolumeARN**\: The Amazon Resource Name (ARN) of the stored
+    #     volume.
+    #
+    #   * **VolumeDiskId**\: The disk ID of the local disk that was
+    #     specified in the CreateStorediSCSIVolume operation.
+    #
+    #   * **VolumeId**\: The unique identifier of the storage volume, e.g.
+    #     vol-1122AABB.
+    #
+    #   * **VolumeiSCSIAttributes**\: An VolumeiSCSIAttributes object that
+    #     represents a collection of iSCSI attributes for one stored volume.
+    #
+    #   * **VolumeProgress**\: Represents the percentage complete if the
+    #     volume is restoring or bootstrapping that represents the percent
+    #     of data transferred. This field does not appear in the response if
+    #     the stored volume is not restoring or bootstrapping.
+    #
+    #   * **VolumeSizeInBytes**\: The size of the volume in bytes.
+    #
+    #   * **VolumeStatus**\: One of the `VolumeStatus` values that indicates
+    #     the state of the volume.
+    #
+    #   * **VolumeType**\: One of the enumeration values describing the type
+    #     of the volume. Currently, on STORED volumes are supported.
     #   @return [Array<Types::StorediSCSIVolume>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumesOutput AWS API Documentation
@@ -2357,12 +2631,20 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
+    #   An array of the gateway's local disk IDs that are configured as
+    #   working storage. Each local disk ID is specified as a string
+    #   (minimum length of 1 and maximum length of 300). If no local disks
+    #   are configured as working storage, then the DiskIds array is empty.
     #   @return [Array<String>]
     #
     # @!attribute [rw] upload_buffer_used_in_bytes
+    #   The total number of bytes being used in the gateway's upload
+    #   buffer.
     #   @return [Integer]
     #
     # @!attribute [rw] upload_buffer_allocated_in_bytes
+    #   The total number of bytes allocated in the gateway's as upload
+    #   buffer.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBufferOutput AWS API Documentation
@@ -2507,6 +2789,49 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # AttachVolumeInput
+    #
+    # @note When making an API call, you may pass DetachVolumeInput
+    #   data as a hash:
+    #
+    #       {
+    #         volume_arn: "VolumeARN", # required
+    #         force_detach: false,
+    #       }
+    #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume to detach from the
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_detach
+    #   Set to `true` to forcibly remove the iSCSI connection of the target
+    #   volume and detach the volume. The default is `false`. If this value
+    #   is set to `false`, you must manually disconnect the iSCSI connection
+    #   from the target volume.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolumeInput AWS API Documentation
+    #
+    class DetachVolumeInput < Struct.new(
+      :volume_arn,
+      :force_detach)
+      include Aws::Structure
+    end
+
+    # AttachVolumeOutput
+    #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume that was detached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolumeOutput AWS API Documentation
+    #
+    class DetachVolumeOutput < Struct.new(
+      :volume_arn)
+      include Aws::Structure
+    end
+
     # Lists iSCSI information about a VTL device.
     #
     # @!attribute [rw] target_arn
@@ -2570,26 +2895,46 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Represents a gateway's local disk.
+    #
     # @!attribute [rw] disk_id
+    #   The unique device ID or other distinguishing data that identifies a
+    #   local disk.
     #   @return [String]
     #
     # @!attribute [rw] disk_path
+    #   The path of a local disk in the gateway virtual machine (VM).
     #   @return [String]
     #
     # @!attribute [rw] disk_node
+    #   The device node of a local disk as assigned by the virtualization
+    #   environment.
     #   @return [String]
     #
     # @!attribute [rw] disk_status
+    #   A value that represents the status of a local disk.
     #   @return [String]
     #
     # @!attribute [rw] disk_size_in_bytes
+    #   The local disk size in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] disk_allocation_type
+    #   One of the `DiskAllocationType` enumeration values that identifies
+    #   how a local disk is used. Valid values: `UPLOAD_BUFFER`,
+    #   `CACHE_STORAGE`
     #   @return [String]
     #
     # @!attribute [rw] disk_allocation_resource
+    #   The iSCSI qualified name (IQN) that is defined for a disk. This
+    #   field is not included in the response if the local disk is not
+    #   defined as an iSCSI target. The format of this field is
+    #   *targetIqn::LUNNumber::region-volumeId*.
     #   @return [String]
+    #
+    # @!attribute [rw] disk_attribute_list
+    #   A list of values that represents attributes of a local disk.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Disk AWS API Documentation
     #
@@ -2600,7 +2945,8 @@ module Aws::StorageGateway
       :disk_status,
       :disk_size_in_bytes,
       :disk_allocation_type,
-      :disk_allocation_resource)
+      :disk_allocation_resource,
+      :disk_attribute_list)
       include Aws::Structure
     end
 
@@ -2685,18 +3031,34 @@ module Aws::StorageGateway
     #       {
     #         gateway_arn: "GatewayARN", # required
     #         domain_name: "DomainName", # required
+    #         organizational_unit: "OrganizationalUnit",
+    #         domain_controllers: ["Host"],
     #         user_name: "DomainUserName", # required
     #         password: "DomainUserPassword", # required
     #       }
     #
     # @!attribute [rw] gateway_arn
-    #   The unique Amazon Resource Name (ARN) of the file gateway you want
-    #   to add to the Active Directory domain.
+    #   The Amazon Resource Name (ARN) of the gateway. Use the
+    #   `ListGateways` operation to return a list of gateways for your
+    #   account and region.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
     #   The name of the domain that you want the gateway to join.
     #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit
+    #   The organizational unit (OU) is a container with an Active Directory
+    #   that can hold users, groups, computers, and other OUs and this
+    #   parameter specifies the OU that the gateway will join within the AD
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_controllers
+    #   List of IPv4 addresses, NetBIOS names, or host names of your domain
+    #   server. If you need to specify the port number include it after the
+    #   colon (“:”). For example, `mydc.mydomain.com:389`.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] user_name
     #   Sets the user name of user who has permission to add the gateway to
@@ -2713,6 +3075,8 @@ module Aws::StorageGateway
     class JoinDomainInput < Struct.new(
       :gateway_arn,
       :domain_name,
+      :organizational_unit,
+      :domain_controllers,
       :user_name,
       :password)
       include Aws::Structure
@@ -2828,9 +3192,13 @@ module Aws::StorageGateway
     end
 
     # @!attribute [rw] gateways
+    #   An array of GatewayInfo objects.
     #   @return [Array<Types::GatewayInfo>]
     #
     # @!attribute [rw] marker
+    #   Use the marker in your next request to fetch the next set of
+    #   gateways in the list. If there are no more gateways to list, this
+    #   field does not appear in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGatewaysOutput AWS API Documentation
@@ -2868,6 +3236,11 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] disks
+    #   A JSON object containing the following fields:
+    #
+    #   * ListLocalDisksOutput$Disks
+    #
+    #   ^
     #   @return [Array<Types::Disk>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksOutput AWS API Documentation
@@ -3067,6 +3440,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_recovery_point_infos
+    #   An array of VolumeRecoveryPointInfo objects.
     #   @return [Array<Types::VolumeRecoveryPointInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPointsOutput AWS API Documentation
@@ -3117,15 +3491,27 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # A JSON object containing the following fields:
+    #
+    # * ListVolumesOutput$Marker
+    #
+    # * ListVolumesOutput$VolumeInfos
+    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
     # @!attribute [rw] marker
+    #   Use the marker in your next request to continue pagination of iSCSI
+    #   volumes. If there are no more volumes to list, this field does not
+    #   appear in the response body.
     #   @return [String]
     #
     # @!attribute [rw] volume_infos
+    #   An array of VolumeInfo objects, where each object describes an iSCSI
+    #   volume. If no volumes are defined for the gateway, then
+    #   `VolumeInfos` is an empty array "\[\]".
     #   @return [Array<Types::VolumeInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesOutput AWS API Documentation
@@ -3287,6 +3673,13 @@ module Aws::StorageGateway
     #   default value is `private`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of up to ten (10) tags assigned to the NFS file share are
+    #   returned, sorted alphabetically by key name. Every tag is a
+    #   key-value pair. For a gateway with more than 10 tags assigned, you
+    #   can view all tags using the `ListTagsForResource` API.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -3306,7 +3699,8 @@ module Aws::StorageGateway
       :squash,
       :read_only,
       :guess_mime_type_enabled,
-      :requester_pays)
+      :requester_pays,
+      :tags)
       include Aws::Structure
     end
 
@@ -3373,6 +3767,8 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # RefreshCacheInput
+    #
     # @note When making an API call, you may pass RefreshCacheInput
     #   data as a hash:
     #
@@ -3383,7 +3779,8 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] file_share_arn
-    #   The Amazon Resource Name (ARN) of the file share.
+    #   The Amazon Resource Name (ARN) of the file share you want to
+    #   refresh.
     #   @return [String]
     #
     # @!attribute [rw] folder_list
@@ -3691,6 +4088,13 @@ module Aws::StorageGateway
     #   `ActiveDirectory`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to ten (10) tags assigned to the SMB file share are
+    #   returned, sorted alphabetically by key name. Every tag is a
+    #   key-value pair. For a gateway with more than 10 tags assigned, you
+    #   can view all tags using the `ListTagsForResource` API.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
     #
     class SMBFileShareInfo < Struct.new(
@@ -3710,7 +4114,8 @@ module Aws::StorageGateway
       :requester_pays,
       :valid_user_list,
       :invalid_user_list,
-      :authentication)
+      :authentication,
+      :tags)
       include Aws::Structure
     end
 
@@ -3903,6 +4308,17 @@ module Aws::StorageGateway
     #   storage volume.
     #   @return [String]
     #
+    # @!attribute [rw] volume_attachment_status
+    #   A value that indicates whether a storage volume is attached to,
+    #   detached from, or is in the process of detaching from a gateway. For
+    #   more information, see [Moving Your Volumes to a Different
+    #   Gateway][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume
+    #   @return [String]
+    #
     # @!attribute [rw] volume_size_in_bytes
     #   The size of the volume in bytes.
     #   @return [Integer]
@@ -3957,6 +4373,17 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] target_name
+    #   The name of the iSCSI target used by an initiator to connect to a
+    #   volume and used as a suffix for the target ARN. For example,
+    #   specifying `TargetName` as *myvolume* results in the target ARN of
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume`.
+    #   The target name must be unique across all volumes on a gateway.
+    #
+    #   If you don't specify a value, Storage Gateway uses the value that
+    #   was previously used for this volume as the new target name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorediSCSIVolume AWS API Documentation
     #
     class StorediSCSIVolume < Struct.new(
@@ -3964,6 +4391,7 @@ module Aws::StorageGateway
       :volume_id,
       :volume_type,
       :volume_status,
+      :volume_attachment_status,
       :volume_size_in_bytes,
       :volume_progress,
       :volume_disk_id,
@@ -3972,10 +4400,15 @@ module Aws::StorageGateway
       :volume_iscsi_attributes,
       :created_date,
       :volume_used_in_bytes,
-      :kms_key)
+      :kms_key,
+      :target_name)
       include Aws::Structure
     end
 
+    # A key-value pair that helps you manage, filter, and search for your
+    # resource. Allowed characters: letters, white space, and numbers,
+    # representable in UTF-8, and the following characters: + - = . \_ : /
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -3985,9 +4418,11 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] key
+    #   Tag key (String). The key can't start with aws:.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   Value of the tag key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tag AWS API Documentation
@@ -4180,6 +4615,7 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] tape_status
+    #   The status of the virtual tapes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeRecoveryPointInfo AWS API Documentation
@@ -4345,6 +4781,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] gateway_timezone
+    #   A value that indicates the time zone of the gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationInput AWS API Documentation
@@ -4364,6 +4801,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
+    #   The name you configured for your gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationOutput AWS API Documentation
@@ -4753,6 +5191,8 @@ module Aws::StorageGateway
     # A JSON object containing the of the updated storage volume.
     #
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
+    #   operation to return a list of gateway volumes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotScheduleOutput AWS API Documentation
@@ -4811,12 +5251,16 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] vtl_device_type
+    #   Specifies the type of device that the VTL device emulates.
     #   @return [String]
     #
     # @!attribute [rw] vtl_device_vendor
+    #   Specifies the vendor of the device that the VTL device object
+    #   emulates.
     #   @return [String]
     #
     # @!attribute [rw] vtl_device_product_identifier
+    #   Specifies the model number of device that the VTL device emulates.
     #   @return [String]
     #
     # @!attribute [rw] device_iscsi_attributes
@@ -4870,6 +5314,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_type
+    #   One of the VolumeType enumeration values describing the type of the
+    #   volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
@@ -4879,6 +5325,11 @@ module Aws::StorageGateway
     #   hyphens (-).
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_attachment_status
+    #   One of the VolumeStatus values that indicates the state of the
+    #   storage volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeInfo AWS API Documentation
     #
     class VolumeInfo < Struct.new(
@@ -4887,20 +5338,32 @@ module Aws::StorageGateway
       :gateway_arn,
       :gateway_id,
       :volume_type,
-      :volume_size_in_bytes)
+      :volume_size_in_bytes,
+      :volume_attachment_status)
       include Aws::Structure
     end
 
+    # Describes a storage volume recovery point object.
+    #
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume target.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
+    #   The size of the volume in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_usage_in_bytes
+    #   The size of the data stored on the volume in bytes.
+    #
+    #   <note markdown="1"> This value is not available for volumes created prior to May 13,
+    #   2015, until you store data on the volume.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] volume_recovery_point_time
+    #   The time the recovery point was taken.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeRecoveryPointInfo AWS API Documentation

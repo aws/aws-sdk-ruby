@@ -36,7 +36,7 @@ module AwsSdkCodeGenerator
         event_ctx.unshift("#{context} #=> Enumerator")
         event_ctx.unshift("All events are available at #{context}:")
         return event_ctx
-      else
+      elsif shape['members']
         shape['members'].each_pair do |member_name, member_ref|
           lines += entry(member_ref, "#{context}.#{underscore(member_name)}", visited)
         end

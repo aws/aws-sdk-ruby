@@ -30,21 +30,25 @@ module Aws::S3
       @bucket_name
     end
 
+    
     # @return [Types::RedirectAllRequestsTo]
     def redirect_all_requests_to
       data[:redirect_all_requests_to]
     end
 
+    
     # @return [Types::IndexDocument]
     def index_document
       data[:index_document]
     end
 
+    
     # @return [Types::ErrorDocument]
     def error_document
       data[:error_document]
     end
 
+    
     # @return [Array<Types::RoutingRule>]
     def routing_rules
       data[:routing_rules]

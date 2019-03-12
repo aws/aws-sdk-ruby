@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-03-08)
+------------------
+
+* Feature - API update.
+
+1.30.1 (2019-01-11)
+------------------
+
+* Issue - Plugin updates to support client-side monitoring.
+
 1.30.0 (2018-12-04)
 ------------------
 

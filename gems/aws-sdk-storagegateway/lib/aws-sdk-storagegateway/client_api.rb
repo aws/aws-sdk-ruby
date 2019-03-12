@@ -22,6 +22,8 @@ module Aws::StorageGateway
     AddUploadBufferOutput = Shapes::StructureShape.new(name: 'AddUploadBufferOutput')
     AddWorkingStorageInput = Shapes::StructureShape.new(name: 'AddWorkingStorageInput')
     AddWorkingStorageOutput = Shapes::StructureShape.new(name: 'AddWorkingStorageOutput')
+    AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
+    AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
     Authentication = Shapes::StringShape.new(name: 'Authentication')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
@@ -106,12 +108,16 @@ module Aws::StorageGateway
     DescribeWorkingStorageInput = Shapes::StructureShape.new(name: 'DescribeWorkingStorageInput')
     DescribeWorkingStorageOutput = Shapes::StructureShape.new(name: 'DescribeWorkingStorageOutput')
     Description = Shapes::StringShape.new(name: 'Description')
+    DetachVolumeInput = Shapes::StructureShape.new(name: 'DetachVolumeInput')
+    DetachVolumeOutput = Shapes::StructureShape.new(name: 'DetachVolumeOutput')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
     DeviceiSCSIAttributes = Shapes::StructureShape.new(name: 'DeviceiSCSIAttributes')
     DisableGatewayInput = Shapes::StructureShape.new(name: 'DisableGatewayInput')
     DisableGatewayOutput = Shapes::StructureShape.new(name: 'DisableGatewayOutput')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     DiskAllocationType = Shapes::StringShape.new(name: 'DiskAllocationType')
+    DiskAttribute = Shapes::StringShape.new(name: 'DiskAttribute')
+    DiskAttributeList = Shapes::ListShape.new(name: 'DiskAttributeList')
     DiskId = Shapes::StringShape.new(name: 'DiskId')
     DiskIds = Shapes::ListShape.new(name: 'DiskIds')
     Disks = Shapes::ListShape.new(name: 'Disks')
@@ -142,6 +148,8 @@ module Aws::StorageGateway
     GatewayTimezone = Shapes::StringShape.new(name: 'GatewayTimezone')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     Gateways = Shapes::ListShape.new(name: 'Gateways')
+    Host = Shapes::StringShape.new(name: 'Host')
+    Hosts = Shapes::ListShape.new(name: 'Hosts')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     IPV4AddressCIDR = Shapes::StringShape.new(name: 'IPV4AddressCIDR')
     Initiator = Shapes::StringShape.new(name: 'Initiator')
@@ -185,6 +193,7 @@ module Aws::StorageGateway
     NotifyWhenUploadedOutput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedOutput')
     NumTapesToCreate = Shapes::IntegerShape.new(name: 'NumTapesToCreate')
     ObjectACL = Shapes::StringShape.new(name: 'ObjectACL')
+    OrganizationalUnit = Shapes::StringShape.new(name: 'OrganizationalUnit')
     Path = Shapes::StringShape.new(name: 'Path')
     PermissionId = Shapes::IntegerShape.new(name: 'PermissionId')
     PermissionMode = Shapes::StringShape.new(name: 'PermissionMode')
@@ -275,6 +284,7 @@ module Aws::StorageGateway
     VTLDevices = Shapes::ListShape.new(name: 'VTLDevices')
     VolumeARN = Shapes::StringShape.new(name: 'VolumeARN')
     VolumeARNs = Shapes::ListShape.new(name: 'VolumeARNs')
+    VolumeAttachmentStatus = Shapes::StringShape.new(name: 'VolumeAttachmentStatus')
     VolumeId = Shapes::StringShape.new(name: 'VolumeId')
     VolumeInfo = Shapes::StructureShape.new(name: 'VolumeInfo')
     VolumeInfos = Shapes::ListShape.new(name: 'VolumeInfos')
@@ -298,6 +308,7 @@ module Aws::StorageGateway
     ActivateGatewayInput.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     ActivateGatewayInput.add_member(:tape_drive_type, Shapes::ShapeRef.new(shape: TapeDriveType, location_name: "TapeDriveType"))
     ActivateGatewayInput.add_member(:medium_changer_type, Shapes::ShapeRef.new(shape: MediumChangerType, location_name: "MediumChangerType"))
+    ActivateGatewayInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ActivateGatewayInput.struct_class = Types::ActivateGatewayInput
 
     ActivateGatewayOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
@@ -331,10 +342,22 @@ module Aws::StorageGateway
     AddWorkingStorageOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     AddWorkingStorageOutput.struct_class = Types::AddWorkingStorageOutput
 
+    AttachVolumeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    AttachVolumeInput.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
+    AttachVolumeInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
+    AttachVolumeInput.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachVolumeInput.add_member(:disk_id, Shapes::ShapeRef.new(shape: DiskId, location_name: "DiskId"))
+    AttachVolumeInput.struct_class = Types::AttachVolumeInput
+
+    AttachVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
+    AttachVolumeOutput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
+    AttachVolumeOutput.struct_class = Types::AttachVolumeOutput
+
     CachediSCSIVolume.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
     CachediSCSIVolume.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     CachediSCSIVolume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     CachediSCSIVolume.add_member(:volume_status, Shapes::ShapeRef.new(shape: VolumeStatus, location_name: "VolumeStatus"))
+    CachediSCSIVolume.add_member(:volume_attachment_status, Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
     CachediSCSIVolume.add_member(:volume_size_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "VolumeSizeInBytes"))
     CachediSCSIVolume.add_member(:volume_progress, Shapes::ShapeRef.new(shape: DoubleObject, location_name: "VolumeProgress"))
     CachediSCSIVolume.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SourceSnapshotId"))
@@ -342,6 +365,7 @@ module Aws::StorageGateway
     CachediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
     CachediSCSIVolume.add_member(:volume_used_in_bytes, Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
     CachediSCSIVolume.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    CachediSCSIVolume.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
     CachediSCSIVolume.struct_class = Types::CachediSCSIVolume
 
     CachediSCSIVolumes.member = Shapes::ShapeRef.new(shape: CachediSCSIVolume)
@@ -397,6 +421,7 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     CreateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    CreateNFSFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -416,6 +441,7 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
+    CreateSMBFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSMBFileShareInput.struct_class = Types::CreateSMBFileShareInput
 
     CreateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -572,6 +598,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     DescribeGatewayInformationOutput.add_member(:next_update_availability_date, Shapes::ShapeRef.new(shape: NextUpdateAvailabilityDate, location_name: "NextUpdateAvailabilityDate"))
     DescribeGatewayInformationOutput.add_member(:last_software_update, Shapes::ShapeRef.new(shape: LastSoftwareUpdate, location_name: "LastSoftwareUpdate"))
+    DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -678,6 +705,13 @@ module Aws::StorageGateway
     DescribeWorkingStorageOutput.add_member(:working_storage_allocated_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "WorkingStorageAllocatedInBytes"))
     DescribeWorkingStorageOutput.struct_class = Types::DescribeWorkingStorageOutput
 
+    DetachVolumeInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
+    DetachVolumeInput.add_member(:force_detach, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDetach"))
+    DetachVolumeInput.struct_class = Types::DetachVolumeInput
+
+    DetachVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
+    DetachVolumeOutput.struct_class = Types::DetachVolumeOutput
+
     DeviceiSCSIAttributes.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
     DeviceiSCSIAttributes.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     DeviceiSCSIAttributes.add_member(:network_interface_port, Shapes::ShapeRef.new(shape: integer, location_name: "NetworkInterfacePort"))
@@ -697,7 +731,10 @@ module Aws::StorageGateway
     Disk.add_member(:disk_size_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "DiskSizeInBytes"))
     Disk.add_member(:disk_allocation_type, Shapes::ShapeRef.new(shape: DiskAllocationType, location_name: "DiskAllocationType"))
     Disk.add_member(:disk_allocation_resource, Shapes::ShapeRef.new(shape: string, location_name: "DiskAllocationResource"))
+    Disk.add_member(:disk_attribute_list, Shapes::ShapeRef.new(shape: DiskAttributeList, location_name: "DiskAttributeList"))
     Disk.struct_class = Types::Disk
+
+    DiskAttributeList.member = Shapes::ShapeRef.new(shape: DiskAttribute)
 
     DiskIds.member = Shapes::ShapeRef.new(shape: DiskId)
 
@@ -731,10 +768,14 @@ module Aws::StorageGateway
 
     Gateways.member = Shapes::ShapeRef.new(shape: GatewayInfo)
 
+    Hosts.member = Shapes::ShapeRef.new(shape: Host)
+
     Initiators.member = Shapes::ShapeRef.new(shape: Initiator)
 
     JoinDomainInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     JoinDomainInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    JoinDomainInput.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: OrganizationalUnit, location_name: "OrganizationalUnit"))
+    JoinDomainInput.add_member(:domain_controllers, Shapes::ShapeRef.new(shape: Hosts, location_name: "DomainControllers"))
     JoinDomainInput.add_member(:user_name, Shapes::ShapeRef.new(shape: DomainUserName, required: true, location_name: "UserName"))
     JoinDomainInput.add_member(:password, Shapes::ShapeRef.new(shape: DomainUserPassword, required: true, location_name: "Password"))
     JoinDomainInput.struct_class = Types::JoinDomainInput
@@ -832,6 +873,7 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     NFSFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     NFSFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
+    NFSFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -901,6 +943,7 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
+    SMBFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
 
     SMBFileShareInfoList.member = Shapes::ShapeRef.new(shape: SMBFileShareInfo)
@@ -939,6 +982,7 @@ module Aws::StorageGateway
     StorediSCSIVolume.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     StorediSCSIVolume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     StorediSCSIVolume.add_member(:volume_status, Shapes::ShapeRef.new(shape: VolumeStatus, location_name: "VolumeStatus"))
+    StorediSCSIVolume.add_member(:volume_attachment_status, Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
     StorediSCSIVolume.add_member(:volume_size_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "VolumeSizeInBytes"))
     StorediSCSIVolume.add_member(:volume_progress, Shapes::ShapeRef.new(shape: DoubleObject, location_name: "VolumeProgress"))
     StorediSCSIVolume.add_member(:volume_disk_id, Shapes::ShapeRef.new(shape: DiskId, location_name: "VolumeDiskId"))
@@ -948,6 +992,7 @@ module Aws::StorageGateway
     StorediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
     StorediSCSIVolume.add_member(:volume_used_in_bytes, Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
     StorediSCSIVolume.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    StorediSCSIVolume.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
     StorediSCSIVolume.struct_class = Types::StorediSCSIVolume
 
     StorediSCSIVolumes.member = Shapes::ShapeRef.new(shape: StorediSCSIVolume)
@@ -1113,6 +1158,7 @@ module Aws::StorageGateway
     VolumeInfo.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, location_name: "GatewayId"))
     VolumeInfo.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     VolumeInfo.add_member(:volume_size_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "VolumeSizeInBytes"))
+    VolumeInfo.add_member(:volume_attachment_status, Shapes::ShapeRef.new(shape: VolumeAttachmentStatus, location_name: "VolumeAttachmentStatus"))
     VolumeInfo.struct_class = Types::VolumeInfo
 
     VolumeInfos.member = Shapes::ShapeRef.new(shape: VolumeInfo)
@@ -1199,6 +1245,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddWorkingStorageInput)
         o.output = Shapes::ShapeRef.new(shape: AddWorkingStorageOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:attach_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachVolumeInput)
+        o.output = Shapes::ShapeRef.new(shape: AttachVolumeOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1575,6 +1631,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeWorkingStorageInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeWorkingStorageOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:detach_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachVolumeInput)
+        o.output = Shapes::ShapeRef.new(shape: DetachVolumeOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

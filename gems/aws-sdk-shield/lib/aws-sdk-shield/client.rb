@@ -321,7 +321,8 @@ module Aws::Shield
 
     # Enables AWS Shield Advanced for a specific AWS resource. The resource
     # can be an Amazon CloudFront distribution, Elastic Load Balancing load
-    # balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.
+    # balancer, AWS Global Accelerator accelerator, Elastic IP Address, or
+    # an Amazon Route 53 hosted zone.
     #
     # You can add protection to only a single resource with each
     # CreateProtection request. If you want to add protection to multiple
@@ -351,8 +352,11 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For AWS CloudFront distribution:
+    #   * For an AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #
+    #   * For an AWS Global Accelerator accelerator:
+    #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id `
     #
     #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
     #
@@ -562,9 +566,16 @@ module Aws::Shield
 
     # Lists the details of a Protection object.
     #
-    # @option params [required, String] :protection_id
+    # @option params [String] :protection_id
     #   The unique identifier (ID) for the Protection object that is
-    #   described.
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not both.
+    #
+    # @option params [String] :resource_arn
+    #   The ARN (Amazon Resource Name) of the AWS resource for the Protection
+    #   object that is described. When submitting the `DescribeProtection`
+    #   request you must provide either the `ResourceArn` or the
+    #   `ProtectionID`, but not both.
     #
     # @return [Types::DescribeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -573,7 +584,8 @@ module Aws::Shield
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_protection({
-    #     protection_id: "ProtectionId", # required
+    #     protection_id: "ProtectionId",
+    #     resource_arn: "ResourceArn",
     #   })
     #
     # @example Response structure
@@ -893,7 +905,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

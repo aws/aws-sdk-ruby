@@ -436,7 +436,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Attaches the specified principal to the specified thing.
+    # Attaches the specified principal to the specified thing. A principal
+    # can be X.509 certificates, IAM users, groups, and roles, Amazon
+    # Cognito identities or federated identities.
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
@@ -825,7 +827,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
     #
     # @option params [String] :query_version
     #   The dynamic thing group query version.
@@ -1323,6 +1325,9 @@ module Aws::IoT
     #   see the list of all checks including those that are enabled or
     #   `UpdateAccountAuditConfiguration` to select which checks are enabled.)
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the scheduled audit.
+    #
     # @option params [required, String] :scheduled_audit_name
     #   The name you want to give to the scheduled audit. (Max. 128 chars)
     #
@@ -1337,6 +1342,12 @@ module Aws::IoT
     #     day_of_month: "DayOfMonth",
     #     day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #     target_check_names: ["AuditCheckName"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     scheduled_audit_name: "ScheduledAuditName", # required
     #   })
     #
@@ -1359,7 +1370,7 @@ module Aws::IoT
     # @option params [String] :security_profile_description
     #   A description of the security profile.
     #
-    # @option params [required, Array<Types::Behavior>] :behaviors
+    # @option params [Array<Types::Behavior>] :behaviors
     #   Specifies the behaviors that, when violated by a device (thing), cause
     #   an alert.
     #
@@ -1367,6 +1378,11 @@ module Aws::IoT
     #   Specifies the destinations to which alerts are sent. (Alerts are
     #   always sent to the console.) Alerts are generated when a device
     #   (thing) violates a behavior.
+    #
+    # @option params [Array<String>] :additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data is
+    #   retained for any metric used in the profile's `behaviors` but it is
+    #   also retained for any metric specified here.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the security profile.
@@ -1381,7 +1397,7 @@ module Aws::IoT
     #   resp = client.create_security_profile({
     #     security_profile_name: "SecurityProfileName", # required
     #     security_profile_description: "SecurityProfileDescription",
-    #     behaviors: [ # required
+    #     behaviors: [
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
@@ -1393,6 +1409,11 @@ module Aws::IoT
     #             ports: [1],
     #           },
     #           duration_seconds: 1,
+    #           consecutive_datapoints_to_alarm: 1,
+    #           consecutive_datapoints_to_clear: 1,
+    #           statistical_threshold: {
+    #             statistic: "EvaluationStatistic",
+    #           },
     #         },
     #       },
     #     ],
@@ -1402,6 +1423,7 @@ module Aws::IoT
     #         role_arn: "RoleArn", # required
     #       },
     #     },
+    #     additional_metrics_to_retain: ["BehaviorMetric"],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1483,7 +1505,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a thing record in the registry.
+    # Creates a thing record in the registry. If this call is made multiple
+    # times using the same thing name and configuration, the call will
+    # succeed. If this call is made with the same thing name but different
+    # configuration a `ResourceAlreadyExistsException` is thrown.
     #
     # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
     # information about authorizing control plane actions.
@@ -1492,7 +1517,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
@@ -1551,7 +1576,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
     #
     # @option params [required, String] :thing_group_name
     #   The thing group name to create.
@@ -1664,6 +1689,20 @@ module Aws::IoT
     # @option params [required, Types::TopicRulePayload] :topic_rule_payload
     #   The rule payload.
     #
+    # @option params [String] :tags
+    #   Metadata which can be used to manage the topic rule.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: --tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1688,8 +1727,8 @@ module Aws::IoT
     #             payload_field: "PayloadField",
     #           },
     #           dynamo_d_bv_2: {
-    #             role_arn: "AwsArn",
-    #             put_item: {
+    #             role_arn: "AwsArn", # required
+    #             put_item: { # required
     #               table_name: "TableName", # required
     #             },
     #           },
@@ -1784,8 +1823,8 @@ module Aws::IoT
     #           payload_field: "PayloadField",
     #         },
     #         dynamo_d_bv_2: {
-    #           role_arn: "AwsArn",
-    #           put_item: {
+    #           role_arn: "AwsArn", # required
+    #           put_item: { # required
     #             table_name: "TableName", # required
     #           },
     #         },
@@ -1864,6 +1903,7 @@ module Aws::IoT
     #         },
     #       },
     #     },
+    #     tags: "String",
     #   })
     #
     # @overload create_topic_rule(params = {})
@@ -2991,6 +3031,7 @@ module Aws::IoT
     #   * {Types::DescribeSecurityProfileResponse#security_profile_description #security_profile_description} => String
     #   * {Types::DescribeSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
     #   * {Types::DescribeSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
+    #   * {Types::DescribeSecurityProfileResponse#additional_metrics_to_retain #additional_metrics_to_retain} => Array&lt;String&gt;
     #   * {Types::DescribeSecurityProfileResponse#version #version} => Integer
     #   * {Types::DescribeSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::DescribeSecurityProfileResponse#last_modified_date #last_modified_date} => Time
@@ -3016,9 +3057,14 @@ module Aws::IoT
     #   resp.behaviors[0].criteria.value.ports #=> Array
     #   resp.behaviors[0].criteria.value.ports[0] #=> Integer
     #   resp.behaviors[0].criteria.duration_seconds #=> Integer
+    #   resp.behaviors[0].criteria.consecutive_datapoints_to_alarm #=> Integer
+    #   resp.behaviors[0].criteria.consecutive_datapoints_to_clear #=> Integer
+    #   resp.behaviors[0].criteria.statistical_threshold.statistic #=> String
     #   resp.alert_targets #=> Hash
     #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
+    #   resp.additional_metrics_to_retain #=> Array
+    #   resp.additional_metrics_to_retain[0] #=> String
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
@@ -3324,7 +3370,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Detaches the specified principal from the specified thing.
+    # Detaches the specified principal from the specified thing. A principal
+    # can be X.509 certificates, IAM users, groups, and roles, Amazon
+    # Cognito identities or federated identities.
     #
     # <note markdown="1"> This call is asynchronous. It might take several seconds for the
     # detachment to propagate.
@@ -3880,6 +3928,9 @@ module Aws::IoT
     #   resp.active_violations[0].behavior.criteria.value.ports #=> Array
     #   resp.active_violations[0].behavior.criteria.value.ports[0] #=> Integer
     #   resp.active_violations[0].behavior.criteria.duration_seconds #=> Integer
+    #   resp.active_violations[0].behavior.criteria.consecutive_datapoints_to_alarm #=> Integer
+    #   resp.active_violations[0].behavior.criteria.consecutive_datapoints_to_clear #=> Integer
+    #   resp.active_violations[0].behavior.criteria.statistical_threshold.statistic #=> String
     #   resp.active_violations[0].last_violation_value.count #=> Integer
     #   resp.active_violations[0].last_violation_value.cidrs #=> Array
     #   resp.active_violations[0].last_violation_value.cidrs[0] #=> String
@@ -4704,7 +4755,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax
     #
     # @option params [required, String] :principal
     #   The principal.
@@ -4747,7 +4798,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Lists the things associated with the specified principal.
+    # Lists the things associated with the specified principal. A principal
+    # can be X.509 certificates, IAM users, groups, and roles, Amazon
+    # Cognito identities or federated identities.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
@@ -5175,7 +5228,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Lists the principals associated with the specified thing.
+    # Lists the principals associated with the specified thing. A principal
+    # can be X.509 certificates, IAM users, groups, and roles, Amazon
+    # Cognito identities or federated identities.
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
@@ -5601,6 +5656,9 @@ module Aws::IoT
     #   resp.violation_events[0].behavior.criteria.value.ports #=> Array
     #   resp.violation_events[0].behavior.criteria.value.ports[0] #=> Integer
     #   resp.violation_events[0].behavior.criteria.duration_seconds #=> Integer
+    #   resp.violation_events[0].behavior.criteria.consecutive_datapoints_to_alarm #=> Integer
+    #   resp.violation_events[0].behavior.criteria.consecutive_datapoints_to_clear #=> Integer
+    #   resp.violation_events[0].behavior.criteria.statistical_threshold.statistic #=> String
     #   resp.violation_events[0].metric_value.count #=> Integer
     #   resp.violation_events[0].metric_value.cidrs #=> Array
     #   resp.violation_events[0].metric_value.cidrs[0] #=> String
@@ -5685,7 +5743,7 @@ module Aws::IoT
     #   registered.
     #
     # @option params [Boolean] :set_as_active
-    #   A boolean value that specifies if the CA certificate is set to active.
+    #   A boolean value that specifies if the certificate is set to active.
     #
     # @option params [String] :status
     #   The status of the register certificate request.
@@ -5724,7 +5782,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @option params [Hash<String,String>] :parameters
     #   The parameters for provisioning a thing. See [Programmatic
@@ -5732,7 +5790,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5894,8 +5952,8 @@ module Aws::IoT
     #             payload_field: "PayloadField",
     #           },
     #           dynamo_d_bv_2: {
-    #             role_arn: "AwsArn",
-    #             put_item: {
+    #             role_arn: "AwsArn", # required
+    #             put_item: { # required
     #               table_name: "TableName", # required
     #             },
     #           },
@@ -5990,8 +6048,8 @@ module Aws::IoT
     #           payload_field: "PayloadField",
     #         },
     #         dynamo_d_bv_2: {
-    #           role_arn: "AwsArn",
-    #           put_item: {
+    #           role_arn: "AwsArn", # required
+    #           put_item: { # required
     #             table_name: "TableName", # required
     #           },
     #         },
@@ -7101,6 +7159,26 @@ module Aws::IoT
     # @option params [Hash<String,Types::AlertTarget>] :alert_targets
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #
+    # @option params [Array<String>] :additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data is
+    #   retained for any metric used in the profile's `behaviors` but it is
+    #   also retained for any metric specified here.
+    #
+    # @option params [Boolean] :delete_behaviors
+    #   If true, delete all `behaviors` defined for this security profile. If
+    #   any `behaviors` are defined in the current invocation an exception
+    #   occurs.
+    #
+    # @option params [Boolean] :delete_alert_targets
+    #   If true, delete all `alertTargets` defined for this security profile.
+    #   If any `alertTargets` are defined in the current invocation an
+    #   exception occurs.
+    #
+    # @option params [Boolean] :delete_additional_metrics_to_retain
+    #   If true, delete all `additionalMetricsToRetain` defined for this
+    #   security profile. If any `additionalMetricsToRetain` are defined in
+    #   the current invocation an exception occurs.
+    #
     # @option params [Integer] :expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
@@ -7114,6 +7192,7 @@ module Aws::IoT
     #   * {Types::UpdateSecurityProfileResponse#security_profile_description #security_profile_description} => String
     #   * {Types::UpdateSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
     #   * {Types::UpdateSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
+    #   * {Types::UpdateSecurityProfileResponse#additional_metrics_to_retain #additional_metrics_to_retain} => Array&lt;String&gt;
     #   * {Types::UpdateSecurityProfileResponse#version #version} => Integer
     #   * {Types::UpdateSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::UpdateSecurityProfileResponse#last_modified_date #last_modified_date} => Time
@@ -7135,6 +7214,11 @@ module Aws::IoT
     #             ports: [1],
     #           },
     #           duration_seconds: 1,
+    #           consecutive_datapoints_to_alarm: 1,
+    #           consecutive_datapoints_to_clear: 1,
+    #           statistical_threshold: {
+    #             statistic: "EvaluationStatistic",
+    #           },
     #         },
     #       },
     #     ],
@@ -7144,6 +7228,10 @@ module Aws::IoT
     #         role_arn: "RoleArn", # required
     #       },
     #     },
+    #     additional_metrics_to_retain: ["BehaviorMetric"],
+    #     delete_behaviors: false,
+    #     delete_alert_targets: false,
+    #     delete_additional_metrics_to_retain: false,
     #     expected_version: 1,
     #   })
     #
@@ -7162,9 +7250,14 @@ module Aws::IoT
     #   resp.behaviors[0].criteria.value.ports #=> Array
     #   resp.behaviors[0].criteria.value.ports[0] #=> Integer
     #   resp.behaviors[0].criteria.duration_seconds #=> Integer
+    #   resp.behaviors[0].criteria.consecutive_datapoints_to_alarm #=> Integer
+    #   resp.behaviors[0].criteria.consecutive_datapoints_to_clear #=> Integer
+    #   resp.behaviors[0].criteria.statistical_threshold.statistic #=> String
     #   resp.alert_targets #=> Hash
     #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
+    #   resp.additional_metrics_to_retain #=> Array
+    #   resp.additional_metrics_to_retain[0] #=> String
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
@@ -7385,6 +7478,11 @@ module Aws::IoT
     #             ports: [1],
     #           },
     #           duration_seconds: 1,
+    #           consecutive_datapoints_to_alarm: 1,
+    #           consecutive_datapoints_to_clear: 1,
+    #           statistical_threshold: {
+    #             statistic: "EvaluationStatistic",
+    #           },
     #         },
     #       },
     #     ],
@@ -7416,7 +7514,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

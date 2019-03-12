@@ -70,6 +70,7 @@ module Aws::FSx
     Flag = Shapes::BooleanShape.new(name: 'Flag')
     IncompatibleParameterError = Shapes::StructureShape.new(name: 'IncompatibleParameterError')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    InvalidExportPath = Shapes::StructureShape.new(name: 'InvalidExportPath')
     InvalidImportPath = Shapes::StructureShape.new(name: 'InvalidImportPath')
     InvalidNetworkSettings = Shapes::StructureShape.new(name: 'InvalidNetworkSettings')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
@@ -153,6 +154,7 @@ module Aws::FSx
 
     CreateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     CreateFileSystemLustreConfiguration.add_member(:import_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
+    CreateFileSystemLustreConfiguration.add_member(:export_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ExportPath"))
     CreateFileSystemLustreConfiguration.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
@@ -370,6 +372,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ActiveDirectoryError)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidImportPath)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExportPath)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
@@ -399,6 +402,7 @@ module Aws::FSx
         o.input = Shapes::ShapeRef.new(shape: DeleteBackupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBackupResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: BackupInProgress)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
         o.errors << Shapes::ShapeRef.new(shape: BackupRestoring)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)

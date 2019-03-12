@@ -75,6 +75,7 @@ module Aws::FMS
     #
     #       {
     #         policy_id: "PolicyId", # required
+    #         delete_all_policy_resources: false,
     #       }
     #
     # @!attribute [rw] policy_id
@@ -82,10 +83,17 @@ module Aws::FMS
     #   by `PutPolicy` and by `ListPolicies`.
     #   @return [String]
     #
+    # @!attribute [rw] delete_all_policy_resources
+    #   If `True`, the request will also delete all web ACLs in this policy.
+    #   Associated resources will no longer be protected by web ACLs in this
+    #   policy.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeletePolicyRequest AWS API Documentation
     #
     class DeletePolicyRequest < Struct.new(
-      :policy_id)
+      :policy_id,
+      :delete_all_policy_resources)
       include Aws::Structure
     end
 
@@ -331,7 +339,7 @@ module Aws::FMS
     #   Firewall Manager to return for this request. If you have more IDs
     #   than the number that you specify for `MaxResults`, the response
     #   includes a `NextToken` value that you can use to get another batch
-    #   of member account IDs. The maximum value for `MaxResults` is 100.
+    #   of member account IDs.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsRequest AWS API Documentation
@@ -498,9 +506,9 @@ module Aws::FMS
     #
     # @!attribute [rw] include_map
     #   Specifies the AWS account IDs to include in the policy. If
-    #   `IncludeMap` is null, all accounts in the AWS Organization are
-    #   included in the policy. If `IncludeMap` is not null, only values
-    #   listed in `IncludeMap` will be included in the policy.
+    #   `IncludeMap` is null, all accounts in the organization in AWS
+    #   Organizations are included in the policy. If `IncludeMap` is not
+    #   null, only values listed in `IncludeMap` are included in the policy.
     #
     #   The key to the map is `ACCOUNT`. For example, a valid `IncludeMap`
     #   would be `\{“ACCOUNT” : [“accountID1”, “accountID2”]\}`.
@@ -508,7 +516,7 @@ module Aws::FMS
     #
     # @!attribute [rw] exclude_map
     #   Specifies the AWS account IDs to exclude from the policy. The
-    #   `IncludeMap` values are evaluated first, with all of the appropriate
+    #   `IncludeMap` values are evaluated first, with all the appropriate
     #   account IDs added to the policy. Then the accounts listed in
     #   `ExcludeMap` are removed, resulting in the final list of accounts to
     #   add to the policy.
@@ -568,7 +576,7 @@ module Aws::FMS
     #   Details about problems with dependent services, such as AWS WAF or
     #   AWS Config, that are causing a resource to be non-compliant. The
     #   details include the name of the dependent service and the error
-    #   message recieved indicating the problem with the service.
+    #   message received that indicates the problem with the service.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceDetail AWS API Documentation
@@ -616,7 +624,7 @@ module Aws::FMS
     #   Details about problems with dependent services, such as AWS WAF or
     #   AWS Config, that are causing a resource to be non-compliant. The
     #   details include the name of the dependent service and the error
-    #   message recieved indicating the problem with the service.
+    #   message received that indicates the problem with the service.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceStatus AWS API Documentation

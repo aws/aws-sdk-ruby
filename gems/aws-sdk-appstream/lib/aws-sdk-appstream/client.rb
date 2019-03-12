@@ -500,25 +500,40 @@ module Aws::AppStream
     #
     # @option params [Integer] :max_user_duration_in_seconds
     #   The maximum time that a streaming session can run, in seconds. Specify
-    #   a value between 600 and 57600.
+    #   a value between 600 and 360000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
     #   ended, in seconds. If a user who was disconnected reconnects within
     #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 57600.
+    #   Specify a value between 60 and 360000.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to join
+    #   the fleet to a Microsoft Active Directory domain.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the fleet. A tag is a key-value pair, and
+    #   the value is optional. For example, Environment=Test. If you do not
+    #   specify a value, Environment=.
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information, see [Tagging Your Resources][1] in the *Amazon
+    #   AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -547,6 +562,9 @@ module Aws::AppStream
     #     domain_join_info: {
     #       directory_name: "DirectoryName",
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -598,7 +616,7 @@ module Aws::AppStream
     #   A unique name for the image builder.
     #
     # @option params [String] :image_name
-    #   The name of the image used to create the builder.
+    #   The name of the image used to create the image builder.
     #
     # @option params [String] :image_arn
     #   The ARN of the public, private, or shared image to use.
@@ -607,10 +625,10 @@ module Aws::AppStream
     #   The instance type to use when launching the image builder.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The image builder name for display.
+    #   The image builder name to display.
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC configuration for the image builder. You can specify only one
@@ -620,12 +638,27 @@ module Aws::AppStream
     #   Enables or disables default internet access for the image builder.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to join
+    #   the image builder to a Microsoft Active Directory domain.
     #
     # @option params [String] :appstream_agent_version
     #   The version of the AppStream 2.0 agent to use for this image builder.
     #   To use the latest version of the AppStream 2.0 agent, specify
     #   \[LATEST\].
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the image builder. A tag is a key-value
+    #   pair, and the value is optional. For example, Environment=Test. If you
+    #   do not specify a value, Environment=.
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -650,6 +683,9 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     appstream_agent_version: "AppstreamAgentVersion",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -730,10 +766,10 @@ module Aws::AppStream
     #   The name of the stack.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #
     # @option params [Array<Types::StorageConnector>] :storage_connectors
     #   The storage connectors to enable.
@@ -756,6 +792,20 @@ module Aws::AppStream
     #   settings are enabled, changes that users make to applications and
     #   Windows settings are automatically saved after each session and
     #   applied to the next session.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the stack. A tag is a key-value pair, and
+    #   the value is optional. For example, Environment=Test. If you do not
+    #   specify a value, Environment=.
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -785,6 +835,9 @@ module Aws::AppStream
     #     application_settings: {
     #       enabled: false, # required
     #       settings_group: "SettingsGroup",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -832,7 +885,7 @@ module Aws::AppStream
     #   The name of the fleet.
     #
     # @option params [required, String] :user_id
-    #   The ID of the user.
+    #   The identifier of the user.
     #
     # @option params [String] :application_id
     #   The name of the application to launch after the session starts. This
@@ -848,7 +901,7 @@ module Aws::AppStream
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
     #
     # @return [Types::CreateStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1085,7 +1138,7 @@ module Aws::AppStream
     #   The name of the private image.
     #
     # @option params [required, String] :shared_account_id
-    #   The 12-digit ID of the AWS account for which to delete image
+    #   The 12-digit identifier of the AWS account for which to delete image
     #   permissions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1347,8 +1400,8 @@ module Aws::AppStream
     #   The maximum size of each page of results.
     #
     # @option params [Array<String>] :shared_aws_account_ids
-    #   The 12-digit ID of one or more AWS accounts with which the image is
-    #   shared.
+    #   The 12-digit identifier of one or more AWS accounts with which the
+    #   image is shared.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -1461,11 +1514,11 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Retrieves a list that describes the streaming sessions for a specified
-    # stack and fleet. If a user ID is provided for the stack and fleet,
-    # only streaming sessions for that user are described. If an
-    # authentication type is not provided, the default is to authenticate
-    # users using a streaming URL.
+    # Retrieves a list that describes the active streaming sessions for a
+    # specified stack and fleet. If a value for `UserId` is provided for the
+    # stack and fleet, only streaming sessions for that user are described.
+    # If an authentication type is not provided, the default is to
+    # authenticate users using a streaming URL.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack. This value is case-sensitive.
@@ -1474,7 +1527,7 @@ module Aws::AppStream
     #   The name of the fleet. This value is case-sensitive.
     #
     # @option params [String] :user_id
-    #   The user ID.
+    #   The user identifier.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -1486,8 +1539,9 @@ module Aws::AppStream
     #
     # @option params [String] :authentication_type
     #   The authentication method. Specify `API` for a user authenticated
-    #   using a streaming URL or `SAML` for a SAML federated user. The default
-    #   is to authenticate users using a streaming URL.
+    #   using a streaming URL, `SAML` for a SAML 2.0-federated user, or
+    #   `USERPOOL` for a user in the AppStream 2.0 user pool. The default is
+    #   to authenticate users using a streaming URL.
     #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1513,6 +1567,9 @@ module Aws::AppStream
     #   resp.sessions[0].stack_name #=> String
     #   resp.sessions[0].fleet_name #=> String
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
+    #   resp.sessions[0].connection_state #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.sessions[0].start_time #=> Time
+    #   resp.sessions[0].max_expiration_time #=> Time
     #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
     #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
     #   resp.sessions[0].network_access_configuration.eni_id #=> String
@@ -1644,8 +1701,7 @@ module Aws::AppStream
     end
 
     # Retrieves a list that describes one or more specified users in the
-    # user pool, if user names are provided. Otherwise, all users in the
-    # user pool are described.
+    # user pool.
     #
     # @option params [required, String] :authentication_type
     #   The authentication type for the users in the user pool to describe.
@@ -1778,7 +1834,7 @@ module Aws::AppStream
     # Immediately stops the specified streaming session.
     #
     # @option params [required, String] :session_id
-    #   The ID of the streaming session.
+    #   The identifier of the streaming session.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1879,7 +1935,7 @@ module Aws::AppStream
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2073,17 +2129,17 @@ module Aws::AppStream
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to associate. A tag is a key-value pair (the value is
-    #   optional). For example, `Environment=Test`, or, if you do not specify
-    #   a value, `Environment=`.
+    #   The tags to associate. A tag is a key-value pair, and the value is
+    #   optional. For example, Environment=Test. If you do not specify a
+    #   value, Environment=.
     #
-    #   If you do not specify a value, we set the value to an empty string.
+    #   If you do not specify a value, the value is set to an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2115,7 +2171,7 @@ module Aws::AppStream
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2257,28 +2313,31 @@ module Aws::AppStream
     #
     # @option params [Integer] :max_user_duration_in_seconds
     #   The maximum time that a streaming session can run, in seconds. Specify
-    #   a value between 600 and 57600.
+    #   a value between 600 and 360000. By default, the value is 900 seconds
+    #   (15 minutes).
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
     #   ended, in seconds. If a user who was disconnected reconnects within
     #   this time interval, the user is connected to their previous session.
-    #   Specify a value between 60 and 57600.
+    #   Specify a value between 60 and 360000. By default, the value is 900
+    #   seconds (15 minutes).
     #
     # @option params [Boolean] :delete_vpc_config
     #   Deletes the VPC association for the specified fleet.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [String] :display_name
-    #   The fleet name for display.
+    #   The fleet name to display.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed to join a Microsoft Active Directory domain.
+    #   The name of the directory and organizational unit (OU) to use to join
+    #   the fleet to a Microsoft Active Directory domain.
     #
     # @option params [Array<String>] :attributes_to_delete
     #   The fleet attributes to delete.
@@ -2358,8 +2417,8 @@ module Aws::AppStream
     #   The name of the private image.
     #
     # @option params [required, String] :shared_account_id
-    #   The 12-digit ID of the AWS account for which you want add or update
-    #   image permissions.
+    #   The 12-digit identifier of the AWS account for which you want add or
+    #   update image permissions.
     #
     # @option params [required, Types::ImagePermissions] :image_permissions
     #   The permissions for the image.
@@ -2389,10 +2448,10 @@ module Aws::AppStream
     # Updates the specified fields for the specified stack.
     #
     # @option params [String] :display_name
-    #   The stack name for display.
+    #   The stack name to display.
     #
     # @option params [String] :description
-    #   The description for display.
+    #   The description to display.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -2408,7 +2467,7 @@ module Aws::AppStream
     #   ends.
     #
     # @option params [String] :feedback_url
-    #   The URL that users are redirected to after they click the Send
+    #   The URL that users are redirected to after they choose the Send
     #   Feedback link. If no URL is specified, no Send Feedback link is
     #   displayed.
     #
@@ -2504,7 +2563,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

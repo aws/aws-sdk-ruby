@@ -493,7 +493,7 @@ module Aws::Greengrass
     #   deployment.
     #
     # @option params [String] :deployment_type
-    #   The type of deployment. When used in ''CreateDeployment'', only
+    #   The type of deployment. When used for ''CreateDeployment'', only
     #   ''NewDeployment'' and ''Redeployment'' are valid.
     #
     # @option params [required, String] :group_id
@@ -665,6 +665,10 @@ module Aws::Greengrass
     #       default_config: {
     #         execution: {
     #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #           run_as: {
+    #             gid: 1,
+    #             uid: 1,
+    #           },
     #         },
     #       },
     #       functions: [
@@ -729,8 +733,8 @@ module Aws::Greengrass
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::FunctionDefaultConfig] :default_config
-    #   Default configuration that will apply to all Lambda functions in the
-    #   group.
+    #   The default configuration that applies to all Lambda functions in the
+    #   group. Individual Lambda functions can override these settings.
     #
     # @option params [required, String] :function_definition_id
     #
@@ -750,6 +754,10 @@ module Aws::Greengrass
     #     default_config: {
     #       execution: {
     #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #         run_as: {
+    #           gid: 1,
+    #           uid: 1,
+    #         },
     #       },
     #     },
     #     function_definition_id: "__string", # required
@@ -2065,6 +2073,8 @@ module Aws::Greengrass
     #   resp.arn #=> String
     #   resp.creation_timestamp #=> String
     #   resp.definition.default_config.execution.isolation_mode #=> String, one of "GreengrassContainer", "NoContainer"
+    #   resp.definition.default_config.execution.run_as.gid #=> Integer
+    #   resp.definition.default_config.execution.run_as.uid #=> Integer
     #   resp.definition.functions #=> Array
     #   resp.definition.functions[0].function_arn #=> String
     #   resp.definition.functions[0].function_configuration.encoding_type #=> String, one of "binary", "json"
@@ -3706,7 +3716,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

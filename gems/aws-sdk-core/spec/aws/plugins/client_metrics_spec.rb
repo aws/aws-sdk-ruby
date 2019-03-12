@@ -157,12 +157,15 @@ module Aws
           api_call = stub_publisher.metrics[0].api_call
           expect(api_call.service).to eq("S3")
           expect(api_call.api).to eq("ListBuckets")
-          expect(api_call.timestamp).to be_a_kind_of(Fixnum)
-          expect(api_call.version).to be_a_kind_of(Fixnum)
+          expect(api_call.timestamp).to be_a_kind_of(Integer)
+          expect(api_call.version).to be_a_kind_of(Integer)
           expect(api_call.attempt_count).to eq(1)
-          expect(api_call.latency).to be_a_kind_of(Fixnum)
+          expect(api_call.latency).to be_a_kind_of(Integer)
           expect(api_call.client_id).to eq("")
           expect(api_call.region).to eq("us-stubbed-1")
+          expect(api_call.user_agent).to match(/^aws-sdk-ruby3/)
+          expect(api_call.user_agent).to match(/aws-sdk-sampleapi.\/1.0.0/)
+          expect(api_call.final_http_status_code).to eq(200)
         end
       end
 
@@ -177,15 +180,15 @@ module Aws
           attempt = api_call_attempts[0]
           expect(attempt.service).to eq("S3")
           expect(attempt.api).to eq("ListBuckets")
-          expect(attempt.timestamp).to be_a_kind_of(Fixnum)
-          expect(attempt.version).to be_a_kind_of(Fixnum)
+          expect(attempt.timestamp).to be_a_kind_of(Integer)
+          expect(attempt.version).to be_a_kind_of(Integer)
           expect(attempt.fqdn).to eq("s3.us-stubbed-1.amazonaws.com")
           expect(attempt.region).to eq("us-stubbed-1")
           expect(attempt.user_agent).to match(/^aws-sdk-ruby3/)
           expect(attempt.user_agent).to match(/aws-sdk-sampleapi.\/1.0.0/)
           expect(attempt.access_key).to eq("stubbed-akid")
           expect(attempt.http_status_code).to eq(200)
-          expect(attempt.request_latency).to be_a_kind_of(Fixnum)
+          expect(attempt.request_latency).to be_a_kind_of(Integer)
           expect(attempt.client_id).to eq("")
         end
 
@@ -211,6 +214,12 @@ module Aws
           request_metrics = stub_publisher.metrics[0]
           api_call_attempts = request_metrics.api_call_attempts
           expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
+          expect(request_metrics.api_call.final_aws_exception).to eq(
+            "NoSuchKey"
+          )
+          expect(request_metrics.api_call.final_aws_exception_message).to eq(
+            "The resource you requested does not exist"
+          )
           expect(api_call_attempts.size).to eq(1)
           attempt = api_call_attempts[0]
           expect(attempt.aws_exception).to eq("NoSuchKey")
@@ -289,6 +298,12 @@ module Aws
             expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
             expect(api_call_attempts.size).to eq(1)
             attempt = api_call_attempts[0]
+            expect(request_metrics.api_call.final_sdk_exception).to eq(
+              "ArgumentError"
+            )
+            expect(request_metrics.api_call.final_sdk_exception_message).to eq(
+              "Injected exception."
+            )
             expect(attempt.sdk_exception).to eq("ArgumentError")
             expect(attempt.sdk_exception_msg).to eq("Injected exception.")
           end
@@ -333,6 +348,12 @@ module Aws
             expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
             expect(api_call_attempts.size).to eq(1)
             attempt = api_call_attempts[0]
+            expect(request_metrics.api_call.final_sdk_exception).to eq(
+              "ArgumentError"
+            )
+            expect(request_metrics.api_call.final_sdk_exception_message).to eq(
+              "Bad response."
+            )
             expect(attempt.sdk_exception).to eq("ArgumentError")
             expect(attempt.sdk_exception_msg).to eq("Bad response.")
           end
@@ -362,6 +383,18 @@ module Aws
             expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
             expect(api_call_attempts.size).to eq(1)
             attempt = api_call_attempts[0]
+            expect(request_metrics.api_call.final_aws_exception).to eq(
+              "NoSuchKey"
+            )
+            expect(request_metrics.api_call.final_aws_exception_message).to eq(
+              "The resource you requested does not exist"
+            )
+            expect(request_metrics.api_call.final_sdk_exception).to eq(
+              "ArgumentError"
+            )
+            expect(request_metrics.api_call.final_sdk_exception_message).to eq(
+              "Bad response."
+            )
             expect(attempt.aws_exception).to eq("NoSuchKey")
             expect(attempt.aws_exception_msg).to eq(
               "The resource you requested does not exist"

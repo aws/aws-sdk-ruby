@@ -11,12 +11,14 @@ module Aws::RDSDataService
 
     include Seahorse::Model
 
+    Arn = Shapes::StringShape.new(name: 'Arn')
     ArrayValues = Shapes::ListShape.new(name: 'ArrayValues')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ColumnMetadata = Shapes::StructureShape.new(name: 'ColumnMetadata')
     ColumnMetadataList = Shapes::ListShape.new(name: 'ColumnMetadataList')
+    DbName = Shapes::StringShape.new(name: 'DbName')
     Double = Shapes::FloatShape.new(name: 'Double')
     ExecuteSqlRequest = Shapes::StructureShape.new(name: 'ExecuteSqlRequest')
     ExecuteSqlResponse = Shapes::StructureShape.new(name: 'ExecuteSqlResponse')
@@ -31,6 +33,7 @@ module Aws::RDSDataService
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
     Row = Shapes::ListShape.new(name: 'Row')
     ServiceUnavailableError = Shapes::StructureShape.new(name: 'ServiceUnavailableError')
+    SqlStatement = Shapes::StringShape.new(name: 'SqlStatement')
     SqlStatementResult = Shapes::StructureShape.new(name: 'SqlStatementResult')
     SqlStatementResults = Shapes::ListShape.new(name: 'SqlStatementResults')
     String = Shapes::StringShape.new(name: 'String')
@@ -57,11 +60,11 @@ module Aws::RDSDataService
 
     ColumnMetadataList.member = Shapes::ShapeRef.new(shape: ColumnMetadata)
 
-    ExecuteSqlRequest.add_member(:aws_secret_store_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsSecretStoreArn"))
-    ExecuteSqlRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "database"))
-    ExecuteSqlRequest.add_member(:db_cluster_or_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "dbClusterOrInstanceArn"))
-    ExecuteSqlRequest.add_member(:schema, Shapes::ShapeRef.new(shape: String, location_name: "schema"))
-    ExecuteSqlRequest.add_member(:sql_statements, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sqlStatements"))
+    ExecuteSqlRequest.add_member(:aws_secret_store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "awsSecretStoreArn"))
+    ExecuteSqlRequest.add_member(:database, Shapes::ShapeRef.new(shape: DbName, location_name: "database"))
+    ExecuteSqlRequest.add_member(:db_cluster_or_instance_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "dbClusterOrInstanceArn"))
+    ExecuteSqlRequest.add_member(:schema, Shapes::ShapeRef.new(shape: DbName, location_name: "schema"))
+    ExecuteSqlRequest.add_member(:sql_statements, Shapes::ShapeRef.new(shape: SqlStatement, required: true, location_name: "sqlStatements"))
     ExecuteSqlRequest.struct_class = Types::ExecuteSqlRequest
 
     ExecuteSqlResponse.add_member(:sql_statement_results, Shapes::ShapeRef.new(shape: SqlStatementResults, required: true, location_name: "sqlStatementResults"))

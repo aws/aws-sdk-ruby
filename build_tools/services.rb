@@ -59,7 +59,7 @@ module BuildTools
         paginators: model_path('paginators-1.json', config['models']),
         waiters: model_path('waiters-2.json', config['models']),
         resources: model_path('resources-1.json', config['models']),
-        examples: model_path('examples-1.json', config['models']),
+        examples: load_examples(svc_name, config['models']),
         smoke_tests: model_path('smoke.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
@@ -77,6 +77,17 @@ module BuildTools
       docs = JSON.load(File.read(model_path('docs-2.json', models_dir)))
       BuildTools::Customizations.apply_doc_customizations(svc_name, docs)
       docs
+    end
+
+    def load_examples(svc_name, models_dir)
+      path = model_path('examples-1.json', models_dir)
+      if path
+        examples = JSON.load(File.read(path))
+        BuildTools::Customizations.apply_example_customizations(svc_name, examples)
+        examples
+      else
+        nil
+      end
     end
 
     def add_plugins(api, plugins)

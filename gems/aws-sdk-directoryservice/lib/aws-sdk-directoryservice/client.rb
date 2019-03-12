@@ -452,6 +452,9 @@ module Aws::DirectoryService
     #   A DirectoryConnectSettings object that contains additional information
     #   for the operation.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to AD Connector.
+    #
     # @return [Types::ConnectDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConnectDirectoryResult#directory_id #directory_id} => String
@@ -470,6 +473,12 @@ module Aws::DirectoryService
     #       customer_dns_ips: ["IpAddr"], # required
     #       customer_user_name: "UserName", # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -657,6 +666,9 @@ module Aws::DirectoryService
     #   A DirectoryVpcSettings object that contains additional information for
     #   the operation.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the Simple AD directory.
+    #
     # @return [Types::CreateDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDirectoryResult#directory_id #directory_id} => String
@@ -673,6 +685,12 @@ module Aws::DirectoryService
     #       vpc_id: "VpcId", # required
     #       subnet_ids: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -756,6 +774,9 @@ module Aws::DirectoryService
     #   AWS Managed Microsoft AD is available in two editions: Standard and
     #   Enterprise. Enterprise is the default.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the AWS Managed Microsoft AD directory.
+    #
     # @return [Types::CreateMicrosoftADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMicrosoftADResult#directory_id #directory_id} => String
@@ -772,6 +793,12 @@ module Aws::DirectoryService
     #       subnet_ids: ["SubnetId"], # required
     #     },
     #     edition: "Enterprise", # accepts Enterprise, Standard
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2408,7 +2435,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

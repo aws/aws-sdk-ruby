@@ -89,6 +89,28 @@ module Aws::IoTAnalytics
     # @!attribute [rw] messages
     #   The list of messages to be sent. Each message has format: '\\\{
     #   "messageId": "string", "payload": "string"\\}'.
+    #
+    #   Note that the field names of message payloads (data) that you send
+    #   to AWS IoT Analytics:
+    #
+    #   * Must contain only alphanumeric characters and undescores (\_); no
+    #     other special characters are allowed.
+    #
+    #   * Must begin with an alphabetic character or single underscore (\_).
+    #
+    #   * Cannot contain hyphens (-).
+    #
+    #   * In regular expression terms:
+    #     "^\[A-Za-z\_\](\[A-Za-z0-9\]*\|\[A-Za-z0-9\]\[A-Za-z0-9\_\]*)$".
+    #
+    #   * Cannot be greater than 255 characters.
+    #
+    #   * Are case-insensitive. (Fields named "foo" and "FOO" in the
+    #     same payload are considered duplicates.)
+    #
+    #   For example, \\\{"temp\_01": 29\\} or \\\{"\_temp\_01": 29\\}
+    #   are valid, but \\\{"temp-01": 29\\}, \\\{"01\_temp": 29\\} or
+    #   \\\{"\_\_temp\_01": 29\\} are invalid in message payloads.
     #   @return [Array<Types::Message>]
     #
     class BatchPutMessageRequest < Struct.new(
@@ -470,6 +492,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::DatasetTrigger>]
     #
     # @!attribute [rw] content_delivery_rules
+    #   When data set contents are created they are delivered to
+    #   destinations specified here.
     #   @return [Array<Types::DatasetContentDeliveryRule>]
     #
     # @!attribute [rw] retention_period
@@ -702,6 +726,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::DatasetTrigger>]
     #
     # @!attribute [rw] content_delivery_rules
+    #   When data set contents are created they are delivered to
+    #   destinations specified here.
     #   @return [Array<Types::DatasetContentDeliveryRule>]
     #
     # @!attribute [rw] status
@@ -734,8 +760,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # A "DatasetAction" object specifying the query that creates the data
-    # set content.
+    # A "DatasetAction" object that specifies how data set contents are
+    # automatically created.
     #
     # @note When making an API call, you may pass DatasetAction
     #   data as a hash:
@@ -782,8 +808,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] query_action
-    #   An "SqlQueryDatasetAction" object that contains the SQL query to
-    #   modify the message.
+    #   An "SqlQueryDatasetAction" object that uses an SQL query to
+    #   automatically create data set contents.
     #   @return [Types::SqlQueryDatasetAction]
     #
     # @!attribute [rw] container_action
@@ -816,6 +842,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # The destination to which data set contents are delivered.
+    #
     # @note When making an API call, you may pass DatasetContentDeliveryDestination
     #   data as a hash:
     #
@@ -827,6 +855,8 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] iot_events_destination_configuration
+    #   Configuration information for delivery of data set contents to AWS
+    #   IoT Events.
     #   @return [Types::IotEventsDestinationConfiguration]
     #
     class DatasetContentDeliveryDestination < Struct.new(
@@ -834,6 +864,9 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # When data set contents are created they are delivered to destination
+    # specified here.
+    #
     # @note When making an API call, you may pass DatasetContentDeliveryRule
     #   data as a hash:
     #
@@ -848,9 +881,11 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] entry_name
+    #   The name of the data set content delivery rules entry.
     #   @return [String]
     #
     # @!attribute [rw] destination
+    #   The destination to which data set contents are delivered.
     #   @return [Types::DatasetContentDeliveryDestination]
     #
     class DatasetContentDeliveryRule < Struct.new(
@@ -904,8 +939,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # The data set whose latest contents will be used as input to the
-    # notebook or application.
+    # The data set whose latest contents are used as input to the notebook
+    # or application.
     #
     # @note When making an API call, you may pass DatasetContentVersionValue
     #   data as a hash:
@@ -915,8 +950,8 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] dataset_name
-    #   The name of the data set whose latest contents will be used as input
-    #   to the notebook or application.
+    #   The name of the data set whose latest contents are used as input to
+    #   the notebook or application.
     #   @return [String]
     #
     class DatasetContentVersionValue < Struct.new(
@@ -999,8 +1034,8 @@ module Aws::IoTAnalytics
     #   @return [Types::Schedule]
     #
     # @!attribute [rw] dataset
-    #   The data set whose content creation will trigger the creation of
-    #   this data set's contents.
+    #   The data set whose content creation triggers the creation of this
+    #   data set's contents.
     #   @return [Types::TriggeringDataset]
     #
     class DatasetTrigger < Struct.new(
@@ -1208,15 +1243,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # When you create data set contents using message data from a specified
-    # time frame, some message data may still be "in flight" when
-    # processing begins, and so will not arrive in time to be processed. Use
-    # this field to make allowances for the "in flight" time of your
-    # message data, so that data not processed from the previous time frame
-    # will be included with the next time frame. Without this, missed
-    # message data would be excluded from processing during the next time
-    # frame as well, because its timestamp places it within the previous
-    # time frame.
+    # Used to limit data to that which has arrived since the last execution
+    # of the action.
     #
     # @note When making an API call, you may pass DeltaTime
     #   data as a hash:
@@ -1228,7 +1256,15 @@ module Aws::IoTAnalytics
     #
     # @!attribute [rw] offset_seconds
     #   The number of seconds of estimated "in flight" lag time of message
-    #   data.
+    #   data. When you create data set contents using message data from a
+    #   specified time frame, some message data may still be "in flight"
+    #   when processing begins, and so will not arrive in time to be
+    #   processed. Use this field to make allowances for the "in flight"
+    #   time of your message data, so that data not processed from a
+    #   previous time frame will be included with the next time frame.
+    #   Without this, missed message data would be excluded from processing
+    #   during the next time frame as well, because its timestamp places it
+    #   within the previous time frame.
     #   @return [Integer]
     #
     # @!attribute [rw] time_expression
@@ -1563,6 +1599,9 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Configuration information for delivery of data set contents to AWS IoT
+    # Events.
+    #
     # @note When making an API call, you may pass IotEventsDestinationConfiguration
     #   data as a hash:
     #
@@ -1572,9 +1611,13 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] input_name
+    #   The name of the AWS IoT Events input to which data set contents are
+    #   delivered.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
+    #   The ARN of the role which grants AWS IoT Analytics permission to
+    #   deliver data set contents to an AWS IoT Events input.
     #   @return [String]
     #
     class IotEventsDestinationConfiguration < Struct.new(
@@ -1669,6 +1712,8 @@ module Aws::IoTAnalytics
     #         dataset_name: "DatasetName", # required
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         scheduled_on_or_after: Time.now,
+    #         scheduled_before: Time.now,
     #       }
     #
     # @!attribute [rw] dataset_name
@@ -1684,10 +1729,24 @@ module Aws::IoTAnalytics
     #   The maximum number of results to return in this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] scheduled_on_or_after
+    #   A filter to limit results to those data set contents whose creation
+    #   is scheduled on or after the given time. See the field
+    #   `triggers.schedule` in the CreateDataset request. (timestamp)
+    #   @return [Time]
+    #
+    # @!attribute [rw] scheduled_before
+    #   A filter to limit results to those data set contents whose creation
+    #   is scheduled before the given time. See the field
+    #   `triggers.schedule` in the CreateDataset request. (timestamp)
+    #   @return [Time]
+    #
     class ListDatasetContentsRequest < Struct.new(
       :dataset_name,
       :next_token,
-      :max_results)
+      :max_results,
+      :scheduled_on_or_after,
+      :scheduled_before)
       include Aws::Structure
     end
 
@@ -1897,7 +1956,7 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] attribute
-    #   The name of the attribute that will contain the result of the math
+    #   The name of the attribute that contains the result of the math
     #   operation.
     #   @return [String]
     #
@@ -1945,8 +2004,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
-    # The URI of the location where data set contents are stored, usually
-    # the URI of a file in an S3 bucket.
+    # The value of the variable as a structure that specifies an output file
+    # URI.
     #
     # @note When making an API call, you may pass OutputFileUriValue
     #   data as a hash:
@@ -2184,15 +2243,7 @@ module Aws::IoTAnalytics
     #
     # @!attribute [rw] delta_time
     #   Used to limit data to that which has arrived since the last
-    #   execution of the action. When you create data set contents using
-    #   message data from a specified time frame, some message data may
-    #   still be "in flight" when processing begins, and so will not
-    #   arrive in time to be processed. Use this field to make allowances
-    #   for the "in flight" time of you message data, so that data not
-    #   processed from a previous time frame will be included with the next
-    #   time frame. Without this, missed message data would be excluded from
-    #   processing during the next time frame as well, because its timestamp
-    #   places it within the previous time frame.
+    #   execution of the action.
     #   @return [Types::DeltaTime]
     #
     class QueryFilter < Struct.new(
@@ -2613,7 +2664,7 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource whose tags will be modified.
+    #   The ARN of the resource whose tags you want to modify.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2628,8 +2679,8 @@ module Aws::IoTAnalytics
 
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # Information about the data set whose content generation will trigger
-    # the new data set content generation.
+    # Information about the data set whose content generation triggers the
+    # new data set content generation.
     #
     # @note When making an API call, you may pass TriggeringDataset
     #   data as a hash:
@@ -2639,8 +2690,8 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the data set whose content generation will trigger the
-    #   new data set content generation.
+    #   The name of the data set whose content generation triggers the new
+    #   data set content generation.
     #   @return [String]
     #
     class TriggeringDataset < Struct.new(
@@ -2657,11 +2708,11 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource whose tags will be removed.
+    #   The ARN of the resource whose tags you want to remove.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The keys of those tags which will be removed.
+    #   The keys of those tags which you want to remove.
     #   @return [Array<String>]
     #
     class UntagResourceRequest < Struct.new(
@@ -2780,6 +2831,8 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::DatasetTrigger>]
     #
     # @!attribute [rw] content_delivery_rules
+    #   When data set contents are created they are delivered to
+    #   destinations specified here.
     #   @return [Array<Types::DatasetContentDeliveryRule>]
     #
     # @!attribute [rw] retention_period

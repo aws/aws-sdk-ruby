@@ -2149,14 +2149,13 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time to start the query. Specified as epoch time, the number of
-    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #   The beginning of the time range to query. Specified as epoch time,
+    #   the number of seconds since January 1, 1970, 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
-    #   The time to end this query, if it is still running. Specified as
-    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
-    #   UTC.
+    #   The end of the time range to query. Specified as epoch time, the
+    #   number of seconds since January 1, 1970, 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] query_string

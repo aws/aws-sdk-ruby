@@ -574,8 +574,8 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Adds specified tags to a resource with the specified ARN. Existing
-    # tags on a resource are not changed if they are not specified in the
+    # Adds tags to a resource group with the specified ARN. Existing tags on
+    # a resource group are not changed if they are not specified in the
     # request parameters.
     #
     # @option params [required, String] :arn
@@ -740,7 +740,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

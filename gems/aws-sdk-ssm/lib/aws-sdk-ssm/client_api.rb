@@ -103,6 +103,7 @@ module Aws::SSM
     AutomationParameterValue = Shapes::StringShape.new(name: 'AutomationParameterValue')
     AutomationParameterValueList = Shapes::ListShape.new(name: 'AutomationParameterValueList')
     AutomationStepNotFoundException = Shapes::StructureShape.new(name: 'AutomationStepNotFoundException')
+    AutomationTargetParameterName = Shapes::StringShape.new(name: 'AutomationTargetParameterName')
     AutomationType = Shapes::StringShape.new(name: 'AutomationType')
     BaselineDescription = Shapes::StringShape.new(name: 'BaselineDescription')
     BaselineId = Shapes::StringShape.new(name: 'BaselineId')
@@ -378,6 +379,8 @@ module Aws::SSM
     GetPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupResult')
     GetPatchBaselineRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineRequest')
     GetPatchBaselineResult = Shapes::StructureShape.new(name: 'GetPatchBaselineResult')
+    GetServiceSettingRequest = Shapes::StructureShape.new(name: 'GetServiceSettingRequest')
+    GetServiceSettingResult = Shapes::StructureShape.new(name: 'GetServiceSettingResult')
     HierarchyLevelLimitExceededException = Shapes::StructureShape.new(name: 'HierarchyLevelLimitExceededException')
     HierarchyTypeMismatchException = Shapes::StructureShape.new(name: 'HierarchyTypeMismatchException')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
@@ -754,6 +757,8 @@ module Aws::SSM
     RemainingCount = Shapes::IntegerShape.new(name: 'RemainingCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+    ResetServiceSettingRequest = Shapes::StructureShape.new(name: 'ResetServiceSettingRequest')
+    ResetServiceSettingResult = Shapes::StructureShape.new(name: 'ResetServiceSettingResult')
     ResolvedTargets = Shapes::StructureShape.new(name: 'ResolvedTargets')
     ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
     ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
@@ -796,6 +801,10 @@ module Aws::SSM
     SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
     SendCommandResult = Shapes::StructureShape.new(name: 'SendCommandResult')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
+    ServiceSetting = Shapes::StructureShape.new(name: 'ServiceSetting')
+    ServiceSettingId = Shapes::StringShape.new(name: 'ServiceSettingId')
+    ServiceSettingNotFound = Shapes::StructureShape.new(name: 'ServiceSettingNotFound')
+    ServiceSettingValue = Shapes::StringShape.new(name: 'ServiceSettingValue')
     Session = Shapes::StructureShape.new(name: 'Session')
     SessionDetails = Shapes::StringShape.new(name: 'SessionDetails')
     SessionFilter = Shapes::StructureShape.new(name: 'SessionFilter')
@@ -900,6 +909,8 @@ module Aws::SSM
     UpdateManagedInstanceRoleResult = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleResult')
     UpdatePatchBaselineRequest = Shapes::StructureShape.new(name: 'UpdatePatchBaselineRequest')
     UpdatePatchBaselineResult = Shapes::StructureShape.new(name: 'UpdatePatchBaselineResult')
+    UpdateServiceSettingRequest = Shapes::StructureShape.new(name: 'UpdateServiceSettingRequest')
+    UpdateServiceSettingResult = Shapes::StructureShape.new(name: 'UpdateServiceSettingResult')
     Url = Shapes::StringShape.new(name: 'Url')
     ValidNextStep = Shapes::StringShape.new(name: 'ValidNextStep')
     ValidNextStepList = Shapes::ListShape.new(name: 'ValidNextStepList')
@@ -918,6 +929,7 @@ module Aws::SSM
     Activation.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
     Activation.add_member(:expired, Shapes::ShapeRef.new(shape: Boolean, location_name: "Expired"))
     Activation.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
+    Activation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Activation.struct_class = Types::Activation
 
     ActivationList.member = Shapes::ShapeRef.new(shape: Activation)
@@ -929,7 +941,7 @@ module Aws::SSM
 
     AddTagsToResourceResult.struct_class = Types::AddTagsToResourceResult
 
-    Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     Association.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     Association.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     Association.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
@@ -941,7 +953,7 @@ module Aws::SSM
     Association.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     Association.struct_class = Types::Association
 
-    AssociationDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    AssociationDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     AssociationDescription.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     AssociationDescription.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     AssociationDescription.add_member(:date, Shapes::ShapeRef.new(shape: DateTime, location_name: "Date"))
@@ -949,6 +961,7 @@ module Aws::SSM
     AssociationDescription.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "Status"))
     AssociationDescription.add_member(:overview, Shapes::ShapeRef.new(shape: AssociationOverview, location_name: "Overview"))
     AssociationDescription.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    AssociationDescription.add_member(:automation_target_parameter_name, Shapes::ShapeRef.new(shape: AutomationTargetParameterName, location_name: "AutomationTargetParameterName"))
     AssociationDescription.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     AssociationDescription.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     AssociationDescription.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
@@ -1029,7 +1042,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     AssociationVersionInfo.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     AssociationVersionInfo.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
-    AssociationVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    AssociationVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     AssociationVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     AssociationVersionInfo.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     AssociationVersionInfo.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
@@ -1275,6 +1288,7 @@ module Aws::SSM
     CreateActivationRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "IamRole"))
     CreateActivationRequest.add_member(:registration_limit, Shapes::ShapeRef.new(shape: RegistrationLimit, location_name: "RegistrationLimit", metadata: {"box"=>true}))
     CreateActivationRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
+    CreateActivationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateActivationRequest.struct_class = Types::CreateActivationRequest
 
     CreateActivationResult.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
@@ -1286,9 +1300,10 @@ module Aws::SSM
 
     CreateAssociationBatchRequestEntries.member = Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntry)
 
-    CreateAssociationBatchRequestEntry.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    CreateAssociationBatchRequestEntry.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     CreateAssociationBatchRequestEntry.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     CreateAssociationBatchRequestEntry.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    CreateAssociationBatchRequestEntry.add_member(:automation_target_parameter_name, Shapes::ShapeRef.new(shape: AutomationTargetParameterName, location_name: "AutomationTargetParameterName"))
     CreateAssociationBatchRequestEntry.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     CreateAssociationBatchRequestEntry.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     CreateAssociationBatchRequestEntry.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
@@ -1303,7 +1318,7 @@ module Aws::SSM
     CreateAssociationBatchResult.add_member(:failed, Shapes::ShapeRef.new(shape: FailedCreateAssociationList, location_name: "Failed"))
     CreateAssociationBatchResult.struct_class = Types::CreateAssociationBatchResult
 
-    CreateAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    CreateAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     CreateAssociationRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     CreateAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     CreateAssociationRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
@@ -1311,6 +1326,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     CreateAssociationRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
     CreateAssociationRequest.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
+    CreateAssociationRequest.add_member(:automation_target_parameter_name, Shapes::ShapeRef.new(shape: AutomationTargetParameterName, location_name: "AutomationTargetParameterName"))
     CreateAssociationRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     CreateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     CreateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
@@ -1326,6 +1342,7 @@ module Aws::SSM
     CreateDocumentRequest.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     CreateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
+    CreateDocumentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDocumentRequest.struct_class = Types::CreateDocumentRequest
 
     CreateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -1341,6 +1358,7 @@ module Aws::SSM
     CreateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, required: true, location_name: "Cutoff"))
     CreateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, required: true, location_name: "AllowUnassociatedTargets"))
     CreateMaintenanceWindowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMaintenanceWindowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMaintenanceWindowRequest.struct_class = Types::CreateMaintenanceWindowRequest
 
     CreateMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
@@ -1358,6 +1376,7 @@ module Aws::SSM
     CreatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     CreatePatchBaselineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     CreatePatchBaselineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePatchBaselineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePatchBaselineRequest.struct_class = Types::CreatePatchBaselineRequest
 
     CreatePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
@@ -1374,7 +1393,7 @@ module Aws::SSM
 
     DeleteActivationResult.struct_class = Types::DeleteActivationResult
 
-    DeleteAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    DeleteAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     DeleteAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     DeleteAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     DeleteAssociationRequest.struct_class = Types::DeleteAssociationRequest
@@ -1492,7 +1511,7 @@ module Aws::SSM
     DescribeAssociationExecutionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAssociationExecutionsResult.struct_class = Types::DescribeAssociationExecutionsResult
 
-    DescribeAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    DescribeAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     DescribeAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     DescribeAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     DescribeAssociationRequest.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
@@ -2093,6 +2112,12 @@ module Aws::SSM
     GetPatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     GetPatchBaselineResult.struct_class = Types::GetPatchBaselineResult
 
+    GetServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
+    GetServiceSettingRequest.struct_class = Types::GetServiceSettingRequest
+
+    GetServiceSettingResult.add_member(:service_setting, Shapes::ShapeRef.new(shape: ServiceSetting, location_name: "ServiceSetting"))
+    GetServiceSettingResult.struct_class = Types::GetServiceSettingResult
+
     InstanceAggregatedAssociationOverview.add_member(:detailed_status, Shapes::ShapeRef.new(shape: StatusName, location_name: "DetailedStatus"))
     InstanceAggregatedAssociationOverview.add_member(:instance_association_status_aggregated_count, Shapes::ShapeRef.new(shape: InstanceAssociationStatusAggregatedCount, location_name: "InstanceAssociationStatusAggregatedCount"))
     InstanceAggregatedAssociationOverview.struct_class = Types::InstanceAggregatedAssociationOverview
@@ -2115,7 +2140,7 @@ module Aws::SSM
     InstanceAssociationStatusAggregatedCount.value = Shapes::ShapeRef.new(shape: InstanceCount)
 
     InstanceAssociationStatusInfo.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
-    InstanceAssociationStatusInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    InstanceAssociationStatusInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     InstanceAssociationStatusInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     InstanceAssociationStatusInfo.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     InstanceAssociationStatusInfo.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
@@ -2776,6 +2801,7 @@ module Aws::SSM
     PutParameterRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: ParameterKeyId, location_name: "KeyId"))
     PutParameterRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite", metadata: {"box"=>true}))
     PutParameterRequest.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
+    PutParameterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
@@ -2834,6 +2860,12 @@ module Aws::SSM
     RemoveTagsFromResourceRequest.struct_class = Types::RemoveTagsFromResourceRequest
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
+
+    ResetServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
+    ResetServiceSettingRequest.struct_class = Types::ResetServiceSettingRequest
+
+    ResetServiceSettingResult.add_member(:service_setting, Shapes::ShapeRef.new(shape: ServiceSetting, location_name: "ServiceSetting"))
+    ResetServiceSettingResult.struct_class = Types::ResetServiceSettingResult
 
     ResolvedTargets.add_member(:parameter_values, Shapes::ShapeRef.new(shape: TargetParameterList, location_name: "ParameterValues"))
     ResolvedTargets.add_member(:truncated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Truncated"))
@@ -2925,6 +2957,14 @@ module Aws::SSM
 
     SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))
     SendCommandResult.struct_class = Types::SendCommandResult
+
+    ServiceSetting.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, location_name: "SettingId"))
+    ServiceSetting.add_member(:setting_value, Shapes::ShapeRef.new(shape: ServiceSettingValue, location_name: "SettingValue"))
+    ServiceSetting.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
+    ServiceSetting.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: String, location_name: "LastModifiedUser"))
+    ServiceSetting.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    ServiceSetting.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ServiceSetting.struct_class = Types::ServiceSetting
 
     Session.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     Session.add_member(:target, Shapes::ShapeRef.new(shape: SessionTarget, location_name: "Target"))
@@ -3078,10 +3118,11 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     UpdateAssociationRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     UpdateAssociationRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
-    UpdateAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    UpdateAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     UpdateAssociationRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     UpdateAssociationRequest.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     UpdateAssociationRequest.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
+    UpdateAssociationRequest.add_member(:automation_target_parameter_name, Shapes::ShapeRef.new(shape: AutomationTargetParameterName, location_name: "AutomationTargetParameterName"))
     UpdateAssociationRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     UpdateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     UpdateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
@@ -3090,7 +3131,7 @@ module Aws::SSM
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
     UpdateAssociationResult.struct_class = Types::UpdateAssociationResult
 
-    UpdateAssociationStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    UpdateAssociationStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     UpdateAssociationStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     UpdateAssociationStatusRequest.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "AssociationStatus"))
     UpdateAssociationStatusRequest.struct_class = Types::UpdateAssociationStatusRequest
@@ -3227,6 +3268,12 @@ module Aws::SSM
     UpdatePatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     UpdatePatchBaselineResult.struct_class = Types::UpdatePatchBaselineResult
+
+    UpdateServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
+    UpdateServiceSettingRequest.add_member(:setting_value, Shapes::ShapeRef.new(shape: ServiceSettingValue, required: true, location_name: "SettingValue"))
+    UpdateServiceSettingRequest.struct_class = Types::UpdateServiceSettingRequest
+
+    UpdateServiceSettingResult.struct_class = Types::UpdateServiceSettingResult
 
     ValidNextStepList.member = Shapes::ShapeRef.new(shape: ValidNextStep)
 
@@ -4077,6 +4124,16 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:get_service_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceSettingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceSettingNotFound)
+      end)
+
       api.add_operation(:label_parameter_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "LabelParameterVersion"
         o.http_method = "POST"
@@ -4380,6 +4437,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
+      api.add_operation(:reset_service_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetServiceSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetServiceSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetServiceSettingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceSettingNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+      end)
+
       api.add_operation(:resume_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ResumeSession"
         o.http_method = "POST"
@@ -4590,6 +4658,17 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: UpdatePatchBaselineResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_service_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServiceSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServiceSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateServiceSettingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceSettingNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
     end
 

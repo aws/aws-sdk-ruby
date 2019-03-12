@@ -680,6 +680,7 @@ module Aws::Greengrass
     FunctionDefaultConfig.struct_class = Types::FunctionDefaultConfig
 
     FunctionDefaultExecutionConfig.add_member(:isolation_mode, Shapes::ShapeRef.new(shape: FunctionIsolationMode, location_name: "IsolationMode"))
+    FunctionDefaultExecutionConfig.add_member(:run_as, Shapes::ShapeRef.new(shape: FunctionRunAsConfig, location_name: "RunAs"))
     FunctionDefaultExecutionConfig.struct_class = Types::FunctionDefaultExecutionConfig
 
     FunctionDefinitionVersion.add_member(:default_config, Shapes::ShapeRef.new(shape: FunctionDefaultConfig, location_name: "DefaultConfig"))

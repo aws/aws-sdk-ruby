@@ -152,6 +152,7 @@ module Aws::ACMPCA
     CreateCertificateAuthorityRequest.add_member(:revocation_configuration, Shapes::ShapeRef.new(shape: RevocationConfiguration, location_name: "RevocationConfiguration"))
     CreateCertificateAuthorityRequest.add_member(:certificate_authority_type, Shapes::ShapeRef.new(shape: CertificateAuthorityType, required: true, location_name: "CertificateAuthorityType"))
     CreateCertificateAuthorityRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
+    CreateCertificateAuthorityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCertificateAuthorityRequest.struct_class = Types::CreateCertificateAuthorityRequest
 
     CreateCertificateAuthorityResponse.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
@@ -297,6 +298,7 @@ module Aws::ACMPCA
         o.output = Shapes::ShapeRef.new(shape: CreateCertificateAuthorityResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -459,6 +461,7 @@ module Aws::ACMPCA
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RequestAlreadyProcessedException)
         o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)

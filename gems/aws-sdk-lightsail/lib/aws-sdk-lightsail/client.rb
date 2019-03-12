@@ -623,7 +623,7 @@ module Aws::Lightsail
     #       {
     #         source_name: "ResourceName", # required
     #         instance_type: "NonEmptyString", # required
-    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE
+    #         port_info_source: "DEFAULT", # required, accepts DEFAULT, INSTANCE, NONE, CLOSED
     #         user_data: "string",
     #         availability_zone: "string", # required
     #       },
@@ -835,6 +835,16 @@ module Aws::Lightsail
     # You may remount and use your disk while the snapshot status is
     # pending.
     #
+    # You can also use this operation to create a snapshot of an instance's
+    # system volume. You might want to do this, for example, to recover data
+    # from the system volume of a botched instance or to create a backup of
+    # the system volume like you would for a block storage disk. To create a
+    # snapshot of a system volume, just define the `instance name` parameter
+    # when issuing the snapshot command, and a snapshot of the defined
+    # instance's system volume will be created. After the snapshot is
+    # available, you can create a block storage disk from the snapshot and
+    # attach it to a running instance to access the data on the disk.
+    #
     # The `create disk snapshot` operation supports tag-based access control
     # via request tags. For more information, see the [Lightsail Dev
     # Guide][1].
@@ -843,12 +853,29 @@ module Aws::Lightsail
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
-    # @option params [required, String] :disk_name
-    #   The unique name of the source disk (e.g., `my-source-disk`).
+    # @option params [String] :disk_name
+    #   The unique name of the source disk (e.g., `Disk-Virginia-1`).
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `instance name`
+    #   parameter. The `disk name` and `instance name` parameters are mutually
+    #   exclusive.
+    #
+    #    </note>
     #
     # @option params [required, String] :disk_snapshot_name
     #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
     #   based on the source disk.
+    #
+    # @option params [String] :instance_name
+    #   The unique name of the source instance (e.g.,
+    #   `Amazon_Linux-512MB-Virginia-1`). When this is defined, a snapshot of
+    #   the instance's system volume is created.
+    #
+    #   <note markdown="1"> This parameter cannot be defined together with the `disk name`
+    #   parameter. The `instance name` and `disk name` parameters are mutually
+    #   exclusive.
+    #
+    #    </note>
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag keys and optional values to add to the resource during create.
@@ -863,8 +890,9 @@ module Aws::Lightsail
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_disk_snapshot({
-    #     disk_name: "ResourceName", # required
+    #     disk_name: "ResourceName",
     #     disk_snapshot_name: "ResourceName", # required
+    #     instance_name: "ResourceName",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -2797,7 +2825,7 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Exports a Amazon Lightsail instance or block storage disk snapshot to
+    # Exports an Amazon Lightsail instance or block storage disk snapshot to
     # Amazon Elastic Compute Cloud (Amazon EC2). This operation results in
     # an export snapshot record that can be used with the `create cloud
     # formation stack` operation to create new Amazon EC2 instances.
@@ -3124,6 +3152,8 @@ module Aws::Lightsail
     #   resp.disk_snapshot.progress #=> String
     #   resp.disk_snapshot.from_disk_name #=> String
     #   resp.disk_snapshot.from_disk_arn #=> String
+    #   resp.disk_snapshot.from_instance_name #=> String
+    #   resp.disk_snapshot.from_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshot AWS API Documentation
     #
@@ -3174,6 +3204,8 @@ module Aws::Lightsail
     #   resp.disk_snapshots[0].progress #=> String
     #   resp.disk_snapshots[0].from_disk_name #=> String
     #   resp.disk_snapshots[0].from_disk_arn #=> String
+    #   resp.disk_snapshots[0].from_instance_name #=> String
+    #   resp.disk_snapshots[0].from_instance_arn #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshots AWS API Documentation
@@ -5430,10 +5462,7 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Restarts a specific instance. When your Amazon Lightsail instance is
-    # finished rebooting, Lightsail assigns a new public IP address. To use
-    # the same IP address after restarting, create a static IP address and
-    # attach it to the instance.
+    # Restarts a specific instance.
     #
     # The `reboot instance` operation supports tag-based access control via
     # resource tags applied to the resource identified by instanceName. For
@@ -5574,15 +5603,23 @@ module Aws::Lightsail
     end
 
     # Starts a specific Amazon Lightsail instance from a stopped state. To
-    # restart an instance, use the reboot instance operation.
+    # restart an instance, use the `reboot instance` operation.
+    #
+    # <note markdown="1"> When you start a stopped instance, Lightsail assigns a new public IP
+    # address to the instance. To use the same IP address after stopping and
+    # starting an instance, create a static IP address and attach it to the
+    # instance. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #  </note>
     #
     # The `start instance` operation supports tag-based access control via
     # resource tags applied to the resource identified by instanceName. For
-    # more information, see the [Lightsail Dev Guide][1].
+    # more information, see the [Lightsail Dev Guide][2].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_name
     #   The name of the instance (a virtual private server) to start.
@@ -5676,13 +5713,21 @@ module Aws::Lightsail
 
     # Stops a specific Amazon Lightsail instance that is currently running.
     #
+    # <note markdown="1"> When you start a stopped instance, Lightsail assigns a new public IP
+    # address to the instance. To use the same IP address after stopping and
+    # starting an instance, create a static IP address and attach it to the
+    # instance. For more information, see the [Lightsail Dev Guide][1].
+    #
+    #  </note>
+    #
     # The `stop instance` operation supports tag-based access control via
     # resource tags applied to the resource identified by instanceName. For
-    # more information, see the [Lightsail Dev Guide][1].
+    # more information, see the [Lightsail Dev Guide][2].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :instance_name
     #   The name of the instance (a virtual private server) to stop.
@@ -6287,7 +6332,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

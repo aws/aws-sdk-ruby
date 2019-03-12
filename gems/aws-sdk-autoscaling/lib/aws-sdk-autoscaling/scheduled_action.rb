@@ -49,8 +49,7 @@ module Aws::AutoScaling
       data[:time]
     end
 
-    # The date and time that the action is scheduled to begin. This date and
-    # time can be up to one month in the future.
+    # The date and time that the action is scheduled to begin.
     #
     # When `StartTime` and `EndTime` are specified with `Recurrence`, they
     # form the boundaries of when the recurring action starts and stops.
@@ -59,8 +58,7 @@ module Aws::AutoScaling
       data[:start_time]
     end
 
-    # The date and time that the action is scheduled to end. This date and
-    # time can be up to one month in the future.
+    # The date and time that the action is scheduled to end.
     # @return [Time]
     def end_time
       data[:end_time]
