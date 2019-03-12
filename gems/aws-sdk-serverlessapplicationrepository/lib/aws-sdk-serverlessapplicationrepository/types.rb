@@ -180,7 +180,7 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   An AWS account ID, or * to make the application public.
+    #   An array of AWS account IDs, or * to make the application public.
     #   @return [Array<String>]
     #
     # @!attribute [rw] statement_id
@@ -408,9 +408,16 @@ module Aws::ServerlessApplicationRepository
     #   [1]: https://semver.org/
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   A link to the S3 object that contains the ZIP archive of the source
+    #   code for this version of your application.
+    #
+    #   Maximum size 50 MB
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
@@ -450,6 +457,7 @@ module Aws::ServerlessApplicationRepository
       :readme_body,
       :readme_url,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :spdx_license_id,
       :template_body,
@@ -471,6 +479,7 @@ module Aws::ServerlessApplicationRepository
     #         readme_body: "__string",
     #         readme_url: "__string",
     #         semantic_version: "__string",
+    #         source_code_archive_url: "__string",
     #         source_code_url: "__string",
     #         spdx_license_id: "__string",
     #         template_body: "__string",
@@ -507,6 +516,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   @return [String]
     #
@@ -532,6 +544,7 @@ module Aws::ServerlessApplicationRepository
       :readme_body,
       :readme_url,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :spdx_license_id,
       :template_body,
@@ -592,9 +605,16 @@ module Aws::ServerlessApplicationRepository
 
     # Create a version request.
     #
+    # @!attribute [rw] source_code_archive_url
+    #   A link to the S3 object that contains the ZIP archive of the source
+    #   code for this version of your application.
+    #
+    #   Maximum size 50 MB
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @!attribute [rw] template_body
@@ -608,6 +628,7 @@ module Aws::ServerlessApplicationRepository
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionInput AWS API Documentation
     #
     class CreateApplicationVersionInput < Struct.new(
+      :source_code_archive_url,
       :source_code_url,
       :template_body,
       :template_url)
@@ -620,6 +641,7 @@ module Aws::ServerlessApplicationRepository
     #       {
     #         application_id: "__string", # required
     #         semantic_version: "__string", # required
+    #         source_code_archive_url: "__string",
     #         source_code_url: "__string",
     #         template_body: "__string",
     #         template_url: "__string",
@@ -629,6 +651,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @!attribute [rw] source_code_archive_url
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -645,6 +670,7 @@ module Aws::ServerlessApplicationRepository
     class CreateApplicationVersionRequest < Struct.new(
       :application_id,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :template_body,
       :template_url)
@@ -669,6 +695,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   @return [String]
     #
@@ -684,6 +713,7 @@ module Aws::ServerlessApplicationRepository
       :required_capabilities,
       :resources_supported,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :template_url)
       include Aws::Structure
@@ -700,7 +730,7 @@ module Aws::ServerlessApplicationRepository
     #   specifying this parameter.
     #
     #   The only valid values are CAPABILITY\_IAM, CAPABILITY\_NAMED\_IAM,
-    #   and CAPABILITY\_RESOURCE\_POLICY.
+    #   CAPABILITY\_RESOURCE\_POLICY, and CAPABILITY\_AUTO\_EXPAND.
     #
     #   The following resources require you to specify CAPABILITY\_IAM or
     #   CAPABILITY\_NAMED\_IAM: [AWS::IAM::Group][1],
@@ -717,13 +747,13 @@ module Aws::ServerlessApplicationRepository
     #   [AWS::S3::BucketPolicy][7], [AWS::SQS::QueuePolicy][8], and
     #   [AWS::SNS:TopicPolicy][9].
     #
+    #   Applications that contain one or more nested applications require
+    #   you to specify CAPABILITY\_AUTO\_EXPAND.
+    #
     #   If your application template contains any of the above resources, we
     #   recommend that you review all permissions associated with the
     #   application before deploying. If you don't specify this parameter
     #   for an application that requires capabilities, the call will fail.
-    #
-    #   Valid values: CAPABILITY\_IAM \| CAPABILITY\_NAMED\_IAM \|
-    #   CAPABILITY\_RESOURCE\_POLICY
     #
     #
     #
@@ -740,38 +770,30 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] change_set_name
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [String]
     #
     # @!attribute [rw] notification_arns
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parameter_overrides
@@ -780,20 +802,16 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] resource_types
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [Array<String>]
     #
     # @!attribute [rw] rollback_configuration
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] semantic_version
@@ -808,20 +826,16 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] stack_name
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   This property corresponds to the parameter of the same name for the
-    #   *AWS CloudFormation [CreateChangeSet][1]* API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_id
@@ -911,12 +925,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<String>]
     #
     # @!attribute [rw] rollback_configuration
-    #   This property corresponds to the *AWS CloudFormation
-    #   [RollbackConfiguration][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
+    #   This property corresponds to the <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
     #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] semantic_version
@@ -1516,12 +1527,9 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # This property corresponds to the *AWS CloudFormation
-    # [RollbackConfiguration][1]* Data Type.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
+    # This property corresponds to the <i>AWS CloudFormation <a
+    # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    # </i> Data Type.
     #
     # @note When making an API call, you may pass RollbackConfiguration
     #   data as a hash:
@@ -1538,20 +1546,16 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] monitoring_time_in_minutes
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [RollbackConfiguration][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
     #   @return [Integer]
     #
     # @!attribute [rw] rollback_triggers
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [RollbackConfiguration][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
     #   @return [Array<Types::RollbackTrigger>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackConfiguration AWS API Documentation
@@ -1562,12 +1566,9 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # This property corresponds to the *AWS CloudFormation
-    # [RollbackTrigger][1]* Data Type.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger
+    # This property corresponds to the <i>AWS CloudFormation <a
+    # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    # </i> Data Type.
     #
     # @note When making an API call, you may pass RollbackTrigger
     #   data as a hash:
@@ -1579,20 +1580,16 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] arn
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [RollbackTrigger][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    #   </i> Data Type.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [RollbackTrigger][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    #   </i> Data Type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackTrigger AWS API Documentation
@@ -1603,12 +1600,9 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
-    # This property corresponds to the *AWS CloudFormation [Tag][1]* Data
-    # Type.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag
+    # This property corresponds to the <i>AWS CloudFormation <a
+    # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+    # </i> Data Type.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1620,11 +1614,9 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] key
     #   This property corresponds to the content of the same name for the
-    #   *AWS CloudFormation [Tag][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+    #   </i> Data Type.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1874,7 +1866,7 @@ module Aws::ServerlessApplicationRepository
     #   specifying this parameter.
     #
     #   The only valid values are CAPABILITY\_IAM, CAPABILITY\_NAMED\_IAM,
-    #   and CAPABILITY\_RESOURCE\_POLICY.
+    #   CAPABILITY\_RESOURCE\_POLICY, and CAPABILITY\_AUTO\_EXPAND.
     #
     #   The following resources require you to specify CAPABILITY\_IAM or
     #   CAPABILITY\_NAMED\_IAM: [AWS::IAM::Group][1],
@@ -1891,13 +1883,13 @@ module Aws::ServerlessApplicationRepository
     #   [AWS::S3::BucketPolicy][7], [AWS::SQS::QueuePolicy][8], and
     #   [AWS::SNS::TopicPolicy][9].
     #
+    #   Applications that contain one or more nested applications require
+    #   you to specify CAPABILITY\_AUTO\_EXPAND.
+    #
     #   If your application template contains any of the above resources, we
     #   recommend that you review all permissions associated with the
     #   application before deploying. If you don't specify this parameter
     #   for an application that requires capabilities, the call will fail.
-    #
-    #   Valid values: CAPABILITY\_IAM \| CAPABILITY\_NAMED\_IAM \|
-    #   CAPABILITY\_RESOURCE\_POLICY
     #
     #
     #
@@ -1927,9 +1919,16 @@ module Aws::ServerlessApplicationRepository
     #   [1]: https://semver.org/
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   A link to the S3 object that contains the ZIP archive of the source
+    #   code for this version of your application.
+    #
+    #   Maximum size 50 MB
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -1945,6 +1944,7 @@ module Aws::ServerlessApplicationRepository
       :required_capabilities,
       :resources_supported,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :template_url)
       include Aws::Structure
@@ -1972,7 +1972,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/VersionSummary AWS API Documentation

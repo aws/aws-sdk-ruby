@@ -228,6 +228,8 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :semantic_version
     #
+    # @option params [String] :source_code_archive_url
+    #
     # @option params [String] :source_code_url
     #
     # @option params [String] :spdx_license_id
@@ -263,6 +265,7 @@ module Aws::ServerlessApplicationRepository
     #     readme_body: "__string",
     #     readme_url: "__string",
     #     semantic_version: "__string",
+    #     source_code_archive_url: "__string",
     #     source_code_url: "__string",
     #     spdx_license_id: "__string",
     #     template_body: "__string",
@@ -304,6 +307,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
+    #   resp.version.source_code_archive_url #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
     #
@@ -322,6 +326,8 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [required, String] :semantic_version
     #
+    # @option params [String] :source_code_archive_url
+    #
     # @option params [String] :source_code_url
     #
     # @option params [String] :template_body
@@ -336,6 +342,7 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::CreateApplicationVersionResponse#required_capabilities #required_capabilities} => Array&lt;String&gt;
     #   * {Types::CreateApplicationVersionResponse#resources_supported #resources_supported} => Boolean
     #   * {Types::CreateApplicationVersionResponse#semantic_version #semantic_version} => String
+    #   * {Types::CreateApplicationVersionResponse#source_code_archive_url #source_code_archive_url} => String
     #   * {Types::CreateApplicationVersionResponse#source_code_url #source_code_url} => String
     #   * {Types::CreateApplicationVersionResponse#template_url #template_url} => String
     #
@@ -344,6 +351,7 @@ module Aws::ServerlessApplicationRepository
     #   resp = client.create_application_version({
     #     application_id: "__string", # required
     #     semantic_version: "__string", # required
+    #     source_code_archive_url: "__string",
     #     source_code_url: "__string",
     #     template_body: "__string",
     #     template_url: "__string",
@@ -373,6 +381,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.resources_supported #=> Boolean
     #   resp.semantic_version #=> String
+    #   resp.source_code_archive_url #=> String
     #   resp.source_code_url #=> String
     #   resp.template_url #=> String
     #
@@ -404,12 +413,9 @@ module Aws::ServerlessApplicationRepository
     # @option params [Array<String>] :resource_types
     #
     # @option params [Types::RollbackConfiguration] :rollback_configuration
-    #   This property corresponds to the *AWS CloudFormation
-    #   [RollbackConfiguration][1]* Data Type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
+    #   This property corresponds to the <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
     #
     # @option params [String] :semantic_version
     #
@@ -603,6 +609,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
+    #   resp.version.source_code_archive_url #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
     #
@@ -933,6 +940,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.version.required_capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND", "CAPABILITY_RESOURCE_POLICY"
     #   resp.version.resources_supported #=> Boolean
     #   resp.version.semantic_version #=> String
+    #   resp.version.source_code_archive_url #=> String
     #   resp.version.source_code_url #=> String
     #   resp.version.template_url #=> String
     #
@@ -958,7 +966,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
