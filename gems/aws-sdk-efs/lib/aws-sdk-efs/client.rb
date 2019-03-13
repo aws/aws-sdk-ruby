@@ -254,32 +254,32 @@ module Aws::EFS
     # state to `available`, at which point you can create one or more mount
     # targets for the file system in your VPC. For more information, see
     # CreateMountTarget. You mount your Amazon EFS file system on an EC2
-    # instances in your VPC via the mount target. For more information, see
-    # [Amazon EFS: How it Works][2].
+    # instances in your VPC by using the mount target. For more information,
+    # see [Amazon EFS: How it Works][2].
     #
     # This operation requires permissions for the
     # `elasticfilesystem:CreateFileSystem` action.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html
-    # [2]: http://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html
+    # [2]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
     #
     # @option params [required, String] :creation_token
-    #   String of up to 64 ASCII characters. Amazon EFS uses this to ensure
+    #   A string of up to 64 ASCII characters. Amazon EFS uses this to ensure
     #   idempotent creation.
     #
     # @option params [String] :performance_mode
-    #   The `PerformanceMode` of the file system. We recommend
-    #   `generalPurpose` performance mode for most file systems. File systems
-    #   using the `maxIO` performance mode can scale to higher levels of
-    #   aggregate throughput and operations per second with a tradeoff of
-    #   slightly higher latencies for most file operations. This can't be
-    #   changed after the file system has been created.
+    #   The performance mode of the file system. We recommend `generalPurpose`
+    #   performance mode for most file systems. File systems using the `maxIO`
+    #   performance mode can scale to higher levels of aggregate throughput
+    #   and operations per second with a tradeoff of slightly higher latencies
+    #   for most file operations. The performance mode can't be changed after
+    #   the file system has been created.
     #
     # @option params [Boolean] :encrypted
     #   A Boolean value that, if true, creates an encrypted file system. When
-    #   creating an encrypted file system, you have the option of specifying a
+    #   creating an encrypted file system, you have the option of specifying
     #   CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management
     #   Service (AWS KMS) customer master key (CMK). If you don't specify a
     #   CMK, then the default CMK for Amazon EFS, `/aws/elasticfilesystem`, is
@@ -288,23 +288,23 @@ module Aws::EFS
     # @option params [String] :kms_key_id
     #   The ID of the AWS KMS CMK to be used to protect the encrypted file
     #   system. This parameter is only required if you want to use a
-    #   non-default CMK. If this parameter is not specified, the default CMK
+    #   nondefault CMK. If this parameter is not specified, the default CMK
     #   for Amazon EFS is used. This ID can be in one of the following
     #   formats:
     #
-    #   * Key ID - A unique identifier of the key, for example,
+    #   * Key ID - A unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * ARN - An Amazon Resource Name (ARN) for the key, for example,
+    #   * ARN - An Amazon Resource Name (ARN) for the key, for example
     #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * Key alias - A previously created display name for a key. For
-    #     example, `alias/projectKey1`.
+    #   * Key alias - A previously created display name for a key, for example
+    #     `alias/projectKey1`.
     #
-    #   * Key alias ARN - An ARN for a key alias, for example,
+    #   * Key alias ARN - An ARN for a key alias, for example
     #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #
-    #   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted
+    #   If `KmsKeyId` is specified, the CreateFileSystemRequest$Encrypted
     #   parameter must be set to true.
     #
     # @option params [String] :throughput_mode
@@ -324,7 +324,13 @@ module Aws::EFS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A value that specifies to create one or more tags associated with the
+    #   file system. Each tag is a user-defined key-value pair. Name your file
+    #   system on creation by including a `"Key":"Name","Value":"\{value\}"`
+    #   key-value pair.
     #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -341,6 +347,7 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
     #   * {Types::FileSystemDescription#throughput_mode #throughput_mode} => String
     #   * {Types::FileSystemDescription#provisioned_throughput_in_mibps #provisioned_throughput_in_mibps} => Float
+    #   * {Types::FileSystemDescription#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To create a new file system
@@ -350,6 +357,12 @@ module Aws::EFS
     #   resp = client.create_file_system({
     #     creation_token: "tokenstring", 
     #     performance_mode: "generalPurpose", 
+    #     tags: [
+    #       {
+    #         key: "Name", 
+    #         value: "MyFileSystem", 
+    #       }, 
+    #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -364,6 +377,12 @@ module Aws::EFS
     #     size_in_bytes: {
     #       value: 0, 
     #     }, 
+    #     tags: [
+    #       {
+    #         key: "Name", 
+    #         value: "MyFileSystem", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -375,6 +394,12 @@ module Aws::EFS
     #     kms_key_id: "KmsKeyId",
     #     throughput_mode: "bursting", # accepts bursting, provisioned
     #     provisioned_throughput_in_mibps: 1.0,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -388,11 +413,16 @@ module Aws::EFS
     #   resp.number_of_mount_targets #=> Integer
     #   resp.size_in_bytes.value #=> Integer
     #   resp.size_in_bytes.timestamp #=> Time
+    #   resp.size_in_bytes.value_in_ia #=> Integer
+    #   resp.size_in_bytes.value_in_standard #=> Integer
     #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
     #   resp.encrypted #=> Boolean
     #   resp.kms_key_id #=> String
     #   resp.throughput_mode #=> String, one of "bursting", "provisioned"
     #   resp.provisioned_throughput_in_mibps #=> Float
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem AWS API Documentation
     #
@@ -404,7 +434,7 @@ module Aws::EFS
     end
 
     # Creates a mount target for a file system. You can then mount the file
-    # system on EC2 instances via the mount target.
+    # system on EC2 instances by using the mount target.
     #
     # You can create one mount target in each Availability Zone in your VPC.
     # All EC2 instances in a VPC within a given Availability Zone share a
@@ -432,9 +462,9 @@ module Aws::EFS
     # includes, a `MountTargetId` and an `IpAddress`. You use this IP
     # address when mounting the file system in an EC2 instance. You can also
     # use the mount target's DNS name when mounting the file system. The
-    # EC2 instance on which you mount the file system via the mount target
-    # can resolve the mount target's DNS name to its IP address. For more
-    # information, see [How it Works: Implementation Overview][2].
+    # EC2 instance on which you mount the file system by using the mount
+    # target can resolve the mount target's DNS name to its IP address. For
+    # more information, see [How it Works: Implementation Overview][2].
     #
     # Note that you can create mount targets for a file system in only one
     # VPC, and there can be only one mount target per Availability Zone.
@@ -487,15 +517,14 @@ module Aws::EFS
     #
     #  </note>
     #
-    # We recommend you create a mount target in each of the Availability
-    # Zones. There are cost considerations for using a file system in an
-    # Availability Zone through a mount target created in another
-    # Availability Zone. For more information, see [Amazon EFS][3]. In
-    # addition, by always using a mount target local to the instance's
+    # We recommend that you create a mount target in each of the
+    # Availability Zones. There are cost considerations for using a file
+    # system in an Availability Zone through a mount target created in
+    # another Availability Zone. For more information, see [Amazon EFS][3].
+    # In addition, by always using a mount target local to the instance's
     # Availability Zone, you eliminate a partial failure scenario. If the
     # Availability Zone in which your mount target is created goes down,
-    # then you won't be able to access your file system through that mount
-    # target.
+    # then you can't access your file system through that mount target.
     #
     # This operation requires permissions for the following action on the
     # file system:
@@ -515,15 +544,15 @@ module Aws::EFS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
-    # [2]: http://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
+    # [2]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation
     # [3]: http://aws.amazon.com/efs/
     #
     # @option params [required, String] :file_system_id
-    #   ID of the file system for which to create the mount target.
+    #   The ID of the file system for which to create the mount target.
     #
     # @option params [required, String] :subnet_id
-    #   ID of the subnet to add the mount target in.
+    #   The ID of the subnet to add the mount target in.
     #
     # @option params [String] :ip_address
     #   Valid IPv4 address within the address range of the specified subnet.
@@ -602,11 +631,12 @@ module Aws::EFS
     # `elasticfilesystem:CreateTags` action.
     #
     # @option params [required, String] :file_system_id
-    #   ID of the file system whose tags you want to modify (String). This
+    #   The ID of the file system whose tags you want to modify (String). This
     #   operation modifies the tags only, not the file system.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   Array of `Tag` objects to add. Each `Tag` object is a key-value pair.
+    #   An array of `Tag` objects to add. Each `Tag` object is a key-value
+    #   pair.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -667,7 +697,7 @@ module Aws::EFS
     # `elasticfilesystem:DeleteFileSystem` action.
     #
     # @option params [required, String] :file_system_id
-    #   ID of the file system you want to delete.
+    #   The ID of the file system you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -697,15 +727,15 @@ module Aws::EFS
 
     # Deletes the specified mount target.
     #
-    # This operation forcibly breaks any mounts of the file system via the
-    # mount target that is being deleted, which might disrupt instances or
-    # applications using those mounts. To avoid applications getting cut off
-    # abruptly, you might consider unmounting any mounts of the mount
+    # This operation forcibly breaks any mounts of the file system by using
+    # the mount target that is being deleted, which might disrupt instances
+    # or applications using those mounts. To avoid applications getting cut
+    # off abruptly, you might consider unmounting any mounts of the mount
     # target, if feasible. The operation also deletes the associated network
-    # interface. Uncommitted writes may be lost, but breaking a mount target
-    # using this operation does not corrupt the file system itself. The file
-    # system you created remains. You can mount an EC2 instance in your VPC
-    # via another mount target.
+    # interface. Uncommitted writes might be lost, but breaking a mount
+    # target using this operation does not corrupt the file system itself.
+    # The file system you created remains. You can mount an EC2 instance in
+    # your VPC by using another mount target.
     #
     # This operation requires permissions for the following action on the
     # file system:
@@ -729,7 +759,7 @@ module Aws::EFS
     # ^
     #
     # @option params [required, String] :mount_target_id
-    #   ID of the mount target to delete (String).
+    #   The ID of the mount target to delete (String).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -758,7 +788,7 @@ module Aws::EFS
     end
 
     # Deletes the specified tags from a file system. If the `DeleteTags`
-    # request includes a tag key that does not exist, Amazon EFS ignores it
+    # request includes a tag key that doesn't exist, Amazon EFS ignores it
     # and doesn't cause an error. For more information about tags and
     # related restrictions, see [Tag Restrictions][1] in the *AWS Billing
     # and Cost Management User Guide*.
@@ -768,13 +798,13 @@ module Aws::EFS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #
     # @option params [required, String] :file_system_id
-    #   ID of the file system whose tags you want to delete (String).
+    #   The ID of the file system whose tags you want to delete (String).
     #
     # @option params [required, Array<String>] :tag_keys
-    #   List of tag keys to delete.
+    #   A list of tag keys to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -814,19 +844,17 @@ module Aws::EFS
     #
     # When retrieving all file system descriptions, you can optionally
     # specify the `MaxItems` parameter to limit the number of descriptions
-    # in a response. If more file system descriptions remain, Amazon EFS
-    # returns a `NextMarker`, an opaque token, in the response. In this
-    # case, you should send a subsequent request with the `Marker` request
-    # parameter set to the value of `NextMarker`.
+    # in a response. Currently, this number is automatically set to 10. If
+    # more file system descriptions remain, Amazon EFS returns a
+    # `NextMarker`, an opaque token, in the response. In this case, you
+    # should send a subsequent request with the `Marker` request parameter
+    # set to the value of `NextMarker`.
     #
     # To retrieve a list of your file system descriptions, this operation is
     # used in an iterative process, where `DescribeFileSystems` is called
     # first without the `Marker` and then the operation continues to call it
     # with the `Marker` parameter set to the value of the `NextMarker` from
     # the previous response until the response has no `NextMarker`.
-    #
-    # The implementation may return fewer than `MaxItems` file system
-    # descriptions while still including a `NextMarker` value.
     #
     # The order of file systems returned in the response of one
     # `DescribeFileSystems` call and the order of file systems returned
@@ -837,10 +865,8 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) Specifies the maximum number of file systems to return in
-    #   the response (integer). This parameter value must be greater than 0.
-    #   The number of items that Amazon EFS returns is the minimum of the
-    #   `MaxItems` parameter specified in the request and the service's
-    #   internal maximum number of items per page.
+    #   the response (integer). Currently, this number is automatically set to
+    #   10.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -885,6 +911,12 @@ module Aws::EFS
     #         size_in_bytes: {
     #           value: 6144, 
     #         }, 
+    #         tags: [
+    #           {
+    #             key: "Name", 
+    #             value: "MyFileSystem", 
+    #           }, 
+    #         ], 
     #       }, 
     #     ], 
     #   }
@@ -911,11 +943,16 @@ module Aws::EFS
     #   resp.file_systems[0].number_of_mount_targets #=> Integer
     #   resp.file_systems[0].size_in_bytes.value #=> Integer
     #   resp.file_systems[0].size_in_bytes.timestamp #=> Time
+    #   resp.file_systems[0].size_in_bytes.value_in_ia #=> Integer
+    #   resp.file_systems[0].size_in_bytes.value_in_standard #=> Integer
     #   resp.file_systems[0].performance_mode #=> String, one of "generalPurpose", "maxIO"
     #   resp.file_systems[0].encrypted #=> Boolean
     #   resp.file_systems[0].kms_key_id #=> String
     #   resp.file_systems[0].throughput_mode #=> String, one of "bursting", "provisioned"
     #   resp.file_systems[0].provisioned_throughput_in_mibps #=> Float
+    #   resp.file_systems[0].tags #=> Array
+    #   resp.file_systems[0].tags[0].key #=> String
+    #   resp.file_systems[0].tags[0].value #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems AWS API Documentation
@@ -924,6 +961,63 @@ module Aws::EFS
     # @param [Hash] params ({})
     def describe_file_systems(params = {}, options = {})
       req = build_request(:describe_file_systems, params)
+      req.send_request(options)
+    end
+
+    # Returns the current `LifecycleConfiguration` object for the specified
+    # Amazon EFS file system. EFS lifecycle management uses the
+    # `LifecycleConfiguration` object to identify which files to move to the
+    # EFS Infrequent Access (IA) storage class. For a file system without a
+    # `LifecycleConfiguration` object, the call returns an empty array in
+    # the response.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:DescribeLifecycleConfiguration` operation.
+    #
+    # @option params [required, String] :file_system_id
+    #   The ID of the file system whose `LifecycleConfiguration` object you
+    #   want to retrieve (String).
+    #
+    # @return [Types::LifecycleConfigurationDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LifecycleConfigurationDescription#lifecycle_policies #lifecycle_policies} => Array&lt;Types::LifecyclePolicy&gt;
+    #
+    #
+    # @example Example: To describe the lifecycle configuration for a file system
+    #
+    #   # This operation describes a file system's LifecycleConfiguration. EFS lifecycle management uses the
+    #   # LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. 
+    #
+    #   resp = client.describe_lifecycle_configuration({
+    #     file_system_id: "fs-01234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policies: [
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_lifecycle_configuration({
+    #     file_system_id: "FileSystemId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policies #=> Array
+    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_30_DAYS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfiguration AWS API Documentation
+    #
+    # @overload describe_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:describe_lifecycle_configuration, params)
       req.send_request(options)
     end
 
@@ -941,7 +1035,7 @@ module Aws::EFS
     #   target's network interface.
     #
     # @option params [required, String] :mount_target_id
-    #   ID of the mount target whose security groups you want to retrieve.
+    #   The ID of the mount target whose security groups you want to retrieve.
     #
     # @return [Types::DescribeMountTargetSecurityGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -995,7 +1089,7 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) Maximum number of mount targets to return in the response.
-    #   It must be an integer with a value greater than zero.
+    #   Currently, this number is automatically set to 10.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1075,23 +1169,23 @@ module Aws::EFS
 
     # Returns the tags associated with a file system. The order of tags
     # returned in the response of one `DescribeTags` call and the order of
-    # tags returned across the responses of a multi-call iteration (when
+    # tags returned across the responses of a multiple-call iteration (when
     # using pagination) is unspecified.
     #
     # This operation requires permissions for the
     # `elasticfilesystem:DescribeTags` action.
     #
     # @option params [Integer] :max_items
-    #   (Optional) Maximum number of file system tags to return in the
-    #   response. It must be an integer with a value greater than zero.
+    #   (Optional) The maximum number of file system tags to return in the
+    #   response. Currently, this number is automatically set to 10.
     #
     # @option params [String] :marker
-    #   (Optional) Opaque pagination token returned from a previous
+    #   (Optional) An opaque pagination token returned from a previous
     #   `DescribeTags` operation (String). If present, it specifies to
     #   continue the list from where the previous call left off.
     #
     # @option params [required, String] :file_system_id
-    #   ID of the file system whose tag set you want to retrieve.
+    #   The ID of the file system whose tag set you want to retrieve.
     #
     # @return [Types::DescribeTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1162,10 +1256,10 @@ module Aws::EFS
     #   network interface.
     #
     # @option params [required, String] :mount_target_id
-    #   ID of the mount target whose security groups you want to modify.
+    #   The ID of the mount target whose security groups you want to modify.
     #
     # @option params [Array<String>] :security_groups
-    #   Array of up to five VPC security group IDs.
+    #   An array of up to five VPC security group IDs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1194,6 +1288,106 @@ module Aws::EFS
     # @param [Hash] params ({})
     def modify_mount_target_security_groups(params = {}, options = {})
       req = build_request(:modify_mount_target_security_groups, params)
+      req.send_request(options)
+    end
+
+    # Enables lifecycle management by creating a new
+    # `LifecycleConfiguration` object. A `LifecycleConfiguration` object
+    # defines when files in an Amazon EFS file system are automatically
+    # transitioned to the lower-cost EFS Infrequent Access (IA) storage
+    # class. A `LifecycleConfiguration` applies to all files in a file
+    # system.
+    #
+    # Each Amazon EFS file system supports one lifecycle configuration,
+    # which applies to all files in the file system. If a
+    # `LifecycleConfiguration` object already exists for the specified file
+    # system, a `PutLifecycleConfiguration` call modifies the existing
+    # configuration. A `PutLifecycleConfiguration` call with an empty
+    # `LifecyclePolicies` array in the request body deletes any existing
+    # `LifecycleConfiguration` and disables lifecycle management.
+    #
+    # <note markdown="1"> You can enable lifecycle management only for EFS file systems created
+    # after the release of EFS infrequent access.
+    #
+    #  </note>
+    #
+    # In the request, specify the following:
+    #
+    # * The ID for the file system for which you are creating a lifecycle
+    #   management configuration.
+    #
+    # * A `LifecyclePolicies` array of `LifecyclePolicy` objects that define
+    #   when files are moved to the IA storage class. The array can contain
+    #   only one `"TransitionToIA": "AFTER_30_DAYS"` `LifecyclePolicy` item.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:PutLifecycleConfiguration` operation.
+    #
+    # To apply a `LifecycleConfiguration` object to an encrypted file
+    # system, you need the same AWS Key Management Service (AWS KMS)
+    # permissions as when you created the encrypted file system.
+    #
+    # @option params [required, String] :file_system_id
+    #   The ID of the file system for which you are creating the
+    #   `LifecycleConfiguration` object (String).
+    #
+    # @option params [required, Array<Types::LifecyclePolicy>] :lifecycle_policies
+    #   An array of `LifecyclePolicy` objects that define the file system's
+    #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
+    #   tells lifecycle management when to transition files from the Standard
+    #   storage class to the Infrequent Access storage class.
+    #
+    # @return [Types::LifecycleConfigurationDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LifecycleConfigurationDescription#lifecycle_policies #lifecycle_policies} => Array&lt;Types::LifecyclePolicy&gt;
+    #
+    #
+    # @example Example: Creates a new lifecycleconfiguration object for a file system
+    #
+    #   # This operation enables lifecycle management on a file system by creating a new LifecycleConfiguration object. A
+    #   # LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the
+    #   # lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system.
+    #
+    #   resp = client.put_lifecycle_configuration({
+    #     file_system_id: "fs-01234567", 
+    #     lifecycle_policies: [
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policies: [
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_lifecycle_configuration({
+    #     file_system_id: "FileSystemId", # required
+    #     lifecycle_policies: [ # required
+    #       {
+    #         transition_to_ia: "AFTER_30_DAYS", # accepts AFTER_30_DAYS
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policies #=> Array
+    #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_30_DAYS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfiguration AWS API Documentation
+    #
+    # @overload put_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:put_lifecycle_configuration, params)
       req.send_request(options)
     end
 
@@ -1229,6 +1423,7 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
     #   * {Types::FileSystemDescription#throughput_mode #throughput_mode} => String
     #   * {Types::FileSystemDescription#provisioned_throughput_in_mibps #provisioned_throughput_in_mibps} => Float
+    #   * {Types::FileSystemDescription#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1249,11 +1444,16 @@ module Aws::EFS
     #   resp.number_of_mount_targets #=> Integer
     #   resp.size_in_bytes.value #=> Integer
     #   resp.size_in_bytes.timestamp #=> Time
+    #   resp.size_in_bytes.value_in_ia #=> Integer
+    #   resp.size_in_bytes.value_in_standard #=> Integer
     #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
     #   resp.encrypted #=> Boolean
     #   resp.kms_key_id #=> String
     #   resp.throughput_mode #=> String, one of "bursting", "provisioned"
     #   resp.provisioned_throughput_in_mibps #=> Float
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystem AWS API Documentation
     #
@@ -1277,7 +1477,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

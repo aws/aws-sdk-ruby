@@ -30,6 +30,18 @@ module Aws
         end
       end
 
+      class EventPayloadLengthExceedError < RuntimeError
+        def initialize(*args)
+          super("Payload length of a message should be under 16mb.")
+        end
+      end
+
+      class EventHeadersLengthExceedError < RuntimeError
+        def initialize(*args)
+          super("Encoded headers length of a message should be under 128kb.")
+        end
+      end
+
     end
   end
 end

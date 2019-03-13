@@ -237,6 +237,7 @@ module Aws::FSx
     #       {
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         import_path: "ArchivePath",
+    #         export_path: "ArchivePath",
     #         imported_file_chunk_size: 1,
     #       }
     #
@@ -246,11 +247,35 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] import_path
-    #   (Optional) The path to the Amazon S3 bucket (and optional prefix)
-    #   that you're using as the data repository for your FSx for Lustre
-    #   file system, for example `s3://import-bucket/optional-prefix`. If
-    #   you specify a prefix after the Amazon S3 bucket name, only object
-    #   keys with that prefix are loaded into the file system.
+    #   (Optional) The path to the Amazon S3 bucket (including the optional
+    #   prefix) that you're using as the data repository for your Amazon
+    #   FSx for Lustre file system. The root of your FSx for Lustre file
+    #   system will be mapped to the root of the Amazon S3 bucket you
+    #   select. An example is `s3://import-bucket/optional-prefix`. If you
+    #   specify a prefix after the Amazon S3 bucket name, only object keys
+    #   with that prefix are loaded into the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_path
+    #   (Optional) The path in Amazon S3 where the root of your Amazon FSx
+    #   file system is exported. The path must use the same Amazon S3 bucket
+    #   as specified in ImportPath. You can provide an optional prefix to
+    #   which new and changed data is to be exported from your Amazon FSx
+    #   for Lustre file system. If an `ExportPath` value is not provided,
+    #   Amazon FSx sets a default export path,
+    #   `s3://import-bucket/FSxLustre[creation-timestamp]`. The timestamp is
+    #   in UTC format, for example
+    #   `s3://import-bucket/FSxLustre20181105T222312Z`.
+    #
+    #   The Amazon S3 export bucket must be the same as the import bucket
+    #   specified by `ImportPath`. If you only specify a bucket name, such
+    #   as `s3://import-bucket`, you get a 1:1 mapping of file system
+    #   objects to S3 bucket objects. This mapping means that the input data
+    #   in S3 is overwritten on export. If you provide a custom prefix in
+    #   the export path, such as
+    #   `s3://import-bucket/[custom-optional-prefix]`, Amazon FSx exports
+    #   the contents of your file system to that export prefix in the Amazon
+    #   S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] imported_file_chunk_size
@@ -270,6 +295,7 @@ module Aws::FSx
     class CreateFileSystemLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :import_path,
+      :export_path,
       :imported_file_chunk_size)
       include Aws::Structure
     end
@@ -303,6 +329,7 @@ module Aws::FSx
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           import_path: "ArchivePath",
+    #           export_path: "ArchivePath",
     #           imported_file_chunk_size: 1,
     #         },
     #       }
@@ -358,7 +385,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #   @return [String]
     #
     # @!attribute [rw] windows_configuration
@@ -473,14 +500,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] export_path
-    #   The Amazon S3 commit path to use for storing new and changed Lustre
-    #   file system files as part of the archive operation from the file
-    #   system to Amazon S3. The value is
-    #   `s3://import-bucket/FSxLustre[creationtimestamp]`. The timestamp is
-    #   presented in UTC format, for example
-    #   `s3://import-bucket/FSxLustre20181105T222312Z`. Files are archived
-    #   to a different prefix in the Amazon S3 bucket, preventing input data
-    #   from being overwritten.
+    #   The export path to the Amazon S3 bucket (and prefix) that you are
+    #   using to store new and changed Lustre file system files in S3.
     #   @return [String]
     #
     # @!attribute [rw] imported_file_chunk_size
@@ -868,7 +889,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_name
@@ -892,7 +913,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] windows_configuration

@@ -654,6 +654,20 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_association_state
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterAssociatedToSchedule AWS API Documentation
+    #
+    class ClusterAssociatedToSchedule < Struct.new(
+      :cluster_identifier,
+      :schedule_association_state)
+      include Aws::Structure
+    end
+
     # Temporary credentials with authorization to log on to an Amazon
     # Redshift database.
     #
@@ -3199,21 +3213,8 @@ module Aws::Redshift
     #   A value that indicates whether to return snapshots only for an
     #   existing cluster. Table-level restore can be performed only using a
     #   snapshot of an existing cluster, that is, a cluster that has not
-    #   been deleted.
-    #
-    #   * If `ClusterExists` is set to `true`, `ClusterIdentifier` is
-    #     required.
-    #
-    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
-    #     not specified, all snapshots associated with deleted clusters
-    #     (orphaned snapshots) are returned.
-    #
-    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
-    #     specified for a deleted cluster, snapshots associated with that
-    #     cluster are returned.
-    #
-    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
-    #     specified for an existing cluster, no snapshots are returned.
+    #   been deleted. If `ClusterExists` is set to `true`,
+    #   `ClusterIdentifier` is required.
     #   @return [Boolean]
     #
     # @!attribute [rw] sorting_entities
@@ -7784,6 +7785,12 @@ module Aws::Redshift
     # @!attribute [rw] next_invocations
     #   @return [Array<Time>]
     #
+    # @!attribute [rw] associated_cluster_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] associated_clusters
+    #   @return [Array<Types::ClusterAssociatedToSchedule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSchedule AWS API Documentation
     #
     class SnapshotSchedule < Struct.new(
@@ -7791,7 +7798,9 @@ module Aws::Redshift
       :schedule_identifier,
       :schedule_description,
       :tags,
-      :next_invocations)
+      :next_invocations,
+      :associated_cluster_count,
+      :associated_clusters)
       include Aws::Structure
     end
 

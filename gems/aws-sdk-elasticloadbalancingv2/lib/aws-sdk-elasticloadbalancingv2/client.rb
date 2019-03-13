@@ -205,7 +205,7 @@ module Aws::ElasticLoadBalancingV2
 
     # @!group API Operations
 
-    # Adds the specified certificate to the specified secure listener.
+    # Adds the specified certificate to the specified HTTPS listener.
     #
     # If the certificate was already added, the call is successful but the
     # certificate is not added again.
@@ -332,8 +332,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -341,19 +341,20 @@ module Aws::ElasticLoadBalancingV2
     # @option params [required, String] :protocol
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP and
+    #   TLS.
     #
     # @option params [required, Integer] :port
     #   The port on which the load balancer is listening.
     #
     # @option params [String] :ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which ciphers and
-    #   protocols are supported. The default is the current predefined
-    #   security policy.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   ciphers and protocols are supported. The default is the current
+    #   predefined security policy.
     #
     # @option params [Array<Types::Certificate>] :certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   \[HTTPS and TLS listeners\] The default SSL server certificate. You
+    #   must provide exactly one certificate. Set `CertificateArn` to the
     #   certificate ARN but do not set `IsDefault`.
     #
     #   To create a certificate list, use AddListenerCertificates.
@@ -364,13 +365,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP or TLS for
+    #   a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -472,7 +474,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_listener({
     #     load_balancer_arn: "LoadBalancerArn", # required
-    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP, TLS
     #     port: 1, # required
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
@@ -491,7 +493,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -499,6 +501,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -536,7 +539,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
@@ -556,6 +559,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -611,10 +615,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
-    # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
-    # [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
+    # [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html
     #
     # @option params [required, String] :name
     #   The name of the load balancer.
@@ -842,7 +846,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -889,13 +893,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP or TLS for
+    #   a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -979,7 +984,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -987,6 +992,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -1042,6 +1048,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1095,8 +1102,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
     #
     # @option params [required, String] :name
     #   The name of the target group.
@@ -1108,8 +1115,9 @@ module Aws::ElasticLoadBalancingV2
     # @option params [String] :protocol
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
-    #   HTTPS. For Network Load Balancers, the supported protocol is TCP. If
-    #   the target is a Lambda function, this parameter does not apply.
+    #   HTTPS. For Network Load Balancers, the supported protocols are TCP and
+    #   TLS. If the target is a Lambda function, this parameter does not
+    #   apply.
     #
     # @option params [Integer] :port
     #   The port on which the targets receive traffic. This port is used
@@ -1122,9 +1130,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP. For Application Load Balancers, the default is
-    #   HTTP. For Network Load Balancers, the default is TCP.
+    #   targets. For Application Load Balancers, the default is HTTP. For
+    #   Network Load Balancers, the default is TCP. The TCP protocol is
+    #   supported for health checks only if the protocol of the target group
+    #   is TCP or TLS. The TLS protocol is not supported for health checks.
     #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
@@ -1232,10 +1241,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_target_group({
     #     name: "TargetGroupName", # required
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #     port: 1,
     #     vpc_id: "VpcId",
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #     health_check_port: "HealthCheckPort",
     #     health_check_enabled: false,
     #     health_check_path: "Path",
@@ -1254,10 +1263,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -1478,8 +1487,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
     #
     # @option params [String] :marker
     #   The marker for the next set of results. (You received this marker from
@@ -1516,7 +1525,7 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Describes the certificates for the specified secure listener.
+    # Describes the certificates for the specified HTTPS listener.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Names (ARN) of the listener.
@@ -1623,7 +1632,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
@@ -1643,6 +1652,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1682,8 +1692,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1948,6 +1958,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -1987,7 +1998,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<String>] :names
     #   The names of the policies.
@@ -2207,8 +2218,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
-    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -2352,10 +2363,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -2493,10 +2504,10 @@ module Aws::ElasticLoadBalancingV2
     # Modifies the specified properties of the specified listener.
     #
     # Any properties that you do not specify retain their current values.
-    # However, changing the protocol from HTTPS to HTTP removes the security
-    # policy and SSL certificate properties. If you change the protocol from
-    # HTTP to HTTPS, you must add the security policy and server
-    # certificate.
+    # However, changing the protocol from HTTPS to HTTP, or from TLS to TCP,
+    # removes the security policy and server certificate properties. If you
+    # change the protocol from HTTP to HTTPS, or from TCP to TLS, you must
+    # add the security policy and server certificate properties.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -2506,21 +2517,21 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :protocol
     #   The protocol for connections from clients to the load balancer.
-    #   Application Load Balancers support HTTP and HTTPS and Network Load
-    #   Balancers support TCP.
+    #   Application Load Balancers support the HTTP and HTTPS protocols.
+    #   Network Load Balancers support the TCP and TLS protocols.
     #
     # @option params [String] :ssl_policy
-    #   \[HTTPS listeners\] The security policy that defines which protocols
-    #   and ciphers are supported. For more information, see [Security
-    #   Policies][1] in the *Application Load Balancers Guide*.
+    #   \[HTTPS and TLS listeners\] The security policy that defines which
+    #   protocols and ciphers are supported. For more information, see
+    #   [Security Policies][1] in the *Application Load Balancers Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
-    #   \[HTTPS listeners\] The default SSL server certificate. You must
-    #   provide exactly one certificate. Set `CertificateArn` to the
+    #   \[HTTPS and TLS listeners\] The default SSL server certificate. You
+    #   must provide exactly one certificate. Set `CertificateArn` to the
     #   certificate ARN but do not set `IsDefault`.
     #
     #   To create a certificate list, use AddListenerCertificates.
@@ -2531,13 +2542,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP or TLS for
+    #   a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -2625,7 +2637,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.modify_listener({
     #     listener_arn: "ListenerArn", # required
     #     port: 1,
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
     #       {
@@ -2643,7 +2655,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -2651,6 +2663,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -2688,7 +2701,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
@@ -2708,6 +2721,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.listeners[0].default_actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.listeners[0].default_actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -2958,13 +2972,14 @@ module Aws::ElasticLoadBalancingV2
     #
     #   If the action type is `forward`, you specify a target group. The
     #   protocol of the target group must be HTTP or HTTPS for an Application
-    #   Load Balancer or TCP for a Network Load Balancer.
+    #   Load Balancer. The protocol of the target group must be TCP or TLS for
+    #   a Network Load Balancer.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-oidc`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-oidc`, you
     #   authenticate users through an identity provider that is OpenID Connect
     #   (OIDC) compliant.
     #
-    #   \[HTTPS listener\] If the action type is `authenticate-cognito`, you
+    #   \[HTTPS listeners\] If the action type is `authenticate-cognito`, you
     #   authenticate users through the user pools supported by Amazon Cognito.
     #
     #   \[Application Load Balancer\] If the action type is `redirect`, you
@@ -3039,7 +3054,7 @@ module Aws::ElasticLoadBalancingV2
     #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
     #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
     #           client_id: "AuthenticateOidcActionClientId", # required
-    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret",
     #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
     #           scope: "AuthenticateOidcActionScope",
     #           session_timeout: 1,
@@ -3047,6 +3062,7 @@ module Aws::ElasticLoadBalancingV2
     #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
     #           },
     #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #           use_existing_client_secret: false,
     #         },
     #         authenticate_cognito_config: {
     #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
@@ -3102,6 +3118,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3142,8 +3159,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported only if the protocol of the
-    #   target group is TCP.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP or TLS. The TLS protocol is not
+    #   supported for health checks.
     #
     #   If the protocol of the target group is TCP, you can't modify this
     #   setting.
@@ -3236,7 +3254,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.modify_target_group({
     #     target_group_arn: "TargetGroupArn", # required
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS
     #     health_check_port: "HealthCheckPort",
     #     health_check_path: "Path",
     #     health_check_enabled: false,
@@ -3254,10 +3272,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -3443,7 +3461,7 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Removes the specified certificate from the specified secure listener.
+    # Removes the specified certificate from the specified HTTPS listener.
     #
     # You can't remove the default certificate for a listener. To replace
     # the default certificate, call ModifyListener.
@@ -3650,6 +3668,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params #=> Hash
     #   resp.rules[0].actions[0].authenticate_oidc_config.authentication_request_extra_params["AuthenticateOidcActionAuthenticationRequestParamName"] #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.on_unauthenticated_request #=> String, one of "deny", "allow", "authenticate"
+    #   resp.rules[0].actions[0].authenticate_oidc_config.use_existing_client_secret #=> Boolean
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_arn #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_client_id #=> String
     #   resp.rules[0].actions[0].authenticate_cognito_config.user_pool_domain #=> String
@@ -3832,7 +3851,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -399,7 +399,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -493,7 +493,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
     #   The platform version on which your tasks in the service are running. A
@@ -505,7 +505,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [String] :role
     #   The name or full Amazon Resource Name (ARN) of the IAM role that
@@ -533,7 +533,7 @@ module Aws::ECS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
@@ -566,11 +566,11 @@ module Aws::ECS
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 7,200 seconds.
-    #   During that time, the ECS service scheduler ignores health check
-    #   status. This grace period can prevent the ECS service scheduler from
-    #   marking tasks as unhealthy and stopping them before they have time to
-    #   come up.
+    #   you can specify a health check grace period of up to 2,147,483,647
+    #   seconds. During that time, the ECS service scheduler ignores health
+    #   check status. This grace period can prevent the ECS service scheduler
+    #   from marking tasks as unhealthy and stopping them before they have
+    #   time to come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -620,14 +620,14 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the tasks. If no value is specified, the tags are not
-    #   propagated. Tags can only be propagated to the tasks within the
-    #   service during service creation. To add tags to a task after service
-    #   creation, use the TagResource API action.
+    #   the service to the tasks in the service. If no value is specified, the
+    #   tags are not propagated. Tags can only be propagated to the tasks
+    #   within the service during service creation. To add tags to a task
+    #   after service creation, use the TagResource API action.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -944,6 +944,43 @@ module Aws::ECS
     # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAccountSettingResponse#setting #setting} => Types::Setting
+    #
+    #
+    # @example Example: To delete your account setting
+    #
+    #   # This example deletes the account setting for your user for the specified resource type.
+    #
+    #   resp = client.delete_account_setting({
+    #     name: "serviceLongArnFormat", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "serviceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To delete the account settings for a specific IAM user or IAM role
+    #
+    #   # This example deletes the account setting for a specific IAM user or IAM role for the specified resource type. Only the
+    #   # root user can view or modify the account settings for another user.
+    #
+    #   resp = client.delete_account_setting({
+    #     name: "containerInstanceLongArnFormat", 
+    #     principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "containerInstanceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1464,6 +1501,11 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1499,6 +1541,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1531,6 +1576,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -2149,6 +2199,11 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -2184,6 +2239,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -2216,6 +2274,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -2324,6 +2387,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -2347,6 +2413,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -2483,6 +2554,66 @@ module Aws::ECS
     #
     #   * {Types::ListAccountSettingsResponse#settings #settings} => Array&lt;Types::Setting&gt;
     #   * {Types::ListAccountSettingsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To view your effective account settings
+    #
+    #   # This example displays the effective account settings for your account.
+    #
+    #   resp = client.list_account_settings({
+    #     effective_settings: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     settings: [
+    #       {
+    #         name: "containerInstanceLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "serviceLongArnFormat", 
+    #         value: "enabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "taskLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To view the effective account settings for a specific IAM user or IAM role
+    #
+    #   # This example displays the effective account settings for the specified user or role.
+    #
+    #   resp = client.list_account_settings({
+    #     effective_settings: true, 
+    #     principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     settings: [
+    #       {
+    #         name: "containerInstanceLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "serviceLongArnFormat", 
+    #         value: "enabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #       {
+    #         name: "taskLongArnFormat", 
+    #         value: "disabled", 
+    #         principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2667,7 +2798,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -2682,7 +2813,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -3268,11 +3399,21 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies the ARN and resource ID format of a resource for a specified
-    # IAM user, IAM role, or the root user for an account. You can specify
-    # whether the new ARN and resource ID format are enabled for new
-    # resources that are created. Enabling this setting is required to use
-    # new Amazon ECS features such as resource tagging.
+    # Modifies the ARN and resource ID format of a resource type for a
+    # specified IAM user, IAM role, or the root user for an account. If the
+    # account setting for the root user is changed, it sets the default
+    # setting for all of the IAM users and roles for which no individual
+    # account setting has been set. The opt-in and opt-out account setting
+    # can be set for each Amazon ECS resource separately. The ARN and
+    # resource ID format of a resource will be defined by the opt-in status
+    # of the IAM user or role that created the resource. Enabling this
+    # setting is required to use new Amazon ECS features such as resource
+    # tagging. For more information, see [Amazon Resource Names (ARNs) and
+    # IDs][1] in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-resource-ids.html
     #
     # @option params [required, String] :name
     #   The resource name for which to enable the new format. If
@@ -3291,12 +3432,54 @@ module Aws::ECS
     #   root user. If you specify the root user, it modifies the ARN and
     #   resource ID format for all IAM users, IAM roles, and the root user of
     #   the account unless an IAM user or role explicitly overrides these
-    #   settings for themselves. If this field is omitted, the setting are
+    #   settings for themselves. If this field is omitted, the settings are
     #   changed only for the authenticated user.
     #
     # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAccountSettingResponse#setting #setting} => Types::Setting
+    #
+    #
+    # @example Example: To modify your account settings
+    #
+    #   # This example modifies your account settings to opt in to the new ARN and resource ID format for Amazon ECS services. If
+    #   # you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role
+    #   # explicitly overrides these settings for themselves.
+    #
+    #   resp = client.put_account_setting({
+    #     name: "serviceLongArnFormat", 
+    #     value: "enabled", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "serviceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To modify the account settings for a specific IAM user or IAM role
+    #
+    #   # This example modifies the account setting for a specific IAM user or IAM role to opt in to the new ARN and resource ID
+    #   # format for Amazon ECS container instances. If you’re using this command as the root user, then changes apply to the
+    #   # entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.
+    #
+    #   resp = client.put_account_setting({
+    #     name: "containerInstanceLongArnFormat", 
+    #     value: "enabled", 
+    #     principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "containerInstanceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:user/principalName", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3321,6 +3504,70 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies the ARN and resource ID format of a resource type for all IAM
+    # users on an account for which no individual account setting has been
+    # set. Enabling this setting is required to use new Amazon ECS features
+    # such as resource tagging.
+    #
+    # @option params [required, String] :name
+    #   The resource type to enable the new format for. If
+    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
+    #   services is affected. If `taskLongArnFormat` is specified, the ARN and
+    #   resource ID for your Amazon ECS tasks are affected. If
+    #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
+    #   for your Amazon ECS container instances are affected.
+    #
+    # @option params [required, String] :value
+    #   The account setting value for the specified principal ARN. Accepted
+    #   values are `enabled` and `disabled`.
+    #
+    # @return [Types::PutAccountSettingDefaultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountSettingDefaultResponse#setting #setting} => Types::Setting
+    #
+    #
+    # @example Example: To modify the default account settings for all IAM users or roles on an account
+    #
+    #   # This example modifies the default account setting for the specified resource for all IAM users or roles on an account.
+    #   # These changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for
+    #   # themselves.
+    #
+    #   resp = client.put_account_setting_default({
+    #     name: "serviceLongArnFormat", 
+    #     value: "enabled", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     setting: {
+    #       name: "serviceLongArnFormat", 
+    #       value: "enabled", 
+    #       principal_arn: "arn:aws:iam::<aws_account_id>:root", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_setting_default({
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat
+    #     value: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat"
+    #   resp.setting.value #=> String
+    #   resp.setting.principal_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefault AWS API Documentation
+    #
+    # @overload put_account_setting_default(params = {})
+    # @param [Hash] params ({})
+    def put_account_setting_default(params = {}, options = {})
+      req = build_request(:put_account_setting_default, params)
+      req.send_request(options)
+    end
+
     # Create or update an attribute on an Amazon ECS resource. If the
     # attribute does not exist, it is created. If the attribute exists, its
     # value is replaced with the specified value. To delete an attribute,
@@ -3329,7 +3576,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -3415,6 +3662,10 @@ module Aws::ECS
     #   The container instance attributes that this container instance
     #   supports.
     #
+    # @option params [Array<Types::PlatformDevice>] :platform_devices
+    #   The devices that are available on the container instance. The only
+    #   supported device type is a GPU.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
@@ -3454,6 +3705,12 @@ module Aws::ECS
     #         value: "String",
     #         target_type: "container-instance", # accepts container-instance
     #         target_id: "String",
+    #       },
+    #     ],
+    #     platform_devices: [
+    #       {
+    #         id: "String", # required
+    #         type: "GPU", # required, accepts GPU
     #       },
     #     ],
     #     tags: [
@@ -3545,8 +3802,8 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     # [3]: https://docs.docker.com/engine/reference/run/#/network-settings
     # [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
@@ -3565,7 +3822,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     #
     # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution role that the
@@ -3778,6 +4035,9 @@ module Aws::ECS
     #   [2]: https://docs.docker.com/engine/security/security/
     #   [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
@@ -3915,6 +4175,14 @@ module Aws::ECS
     #             value_from: "String", # required
     #           },
     #         ],
+    #         depends_on: [
+    #           {
+    #             container_name: "String", # required
+    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
     #         hostname: "String",
     #         user: "String",
     #         working_directory: "String",
@@ -3961,6 +4229,12 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
+    #           },
+    #         ],
     #       },
     #     ],
     #     volumes: [
@@ -3999,6 +4273,16 @@ module Aws::ECS
     #     ],
     #     pid_mode: "host", # accepts host, task
     #     ipc_mode: "host", # accepts host, task, none
+    #     proxy_configuration: {
+    #       type: "APPMESH", # accepts APPMESH
+    #       container_name: "String", # required
+    #       properties: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -4051,6 +4335,11 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].secrets #=> Array
     #   resp.task_definition.container_definitions[0].secrets[0].name #=> String
     #   resp.task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].stop_timeout #=> Integer
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -4086,6 +4375,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].system_controls #=> Array
     #   resp.task_definition.container_definitions[0].system_controls[0].namespace #=> String
     #   resp.task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -4118,6 +4410,11 @@ module Aws::ECS
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.pid_mode #=> String, one of "host", "task"
     #   resp.task_definition.ipc_mode #=> String, one of "host", "task", "none"
+    #   resp.task_definition.proxy_configuration.type #=> String, one of "APPMESH"
+    #   resp.task_definition.proxy_configuration.container_name #=> String
+    #   resp.task_definition.proxy_configuration.properties #=> Array
+    #   resp.task_definition.proxy_configuration.properties[0].name #=> String
+    #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -4165,7 +4462,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -4229,7 +4526,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
     #   The platform version the task should run. A platform version is only
@@ -4240,7 +4537,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
@@ -4267,12 +4564,18 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
-    #   propagated.
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags are not propagated. Tags
+    #   can only be propagated to the task during task creation. To add tags
+    #   to a task after task creation, use the TagResource API action.
+    #
+    #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
+    #   running a task.
+    #
+    #    </note>
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4336,6 +4639,12 @@ module Aws::ECS
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -4392,6 +4701,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -4415,6 +4727,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4464,7 +4781,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -4532,7 +4849,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Using_Tags.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
@@ -4563,6 +4880,12 @@ module Aws::ECS
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -4605,6 +4928,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
@@ -4628,6 +4954,11 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.tasks[0].containers[0].cpu #=> String
+    #   resp.tasks[0].containers[0].memory #=> String
+    #   resp.tasks[0].containers[0].memory_reservation #=> String
+    #   resp.tasks[0].containers[0].gpu_ids #=> Array
+    #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -4687,7 +5018,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -4732,6 +5063,9 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].cpu #=> Integer
     #   resp.task.overrides.container_overrides[0].memory #=> Integer
     #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
+    #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU"
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.last_status #=> String
@@ -4755,6 +5089,11 @@ module Aws::ECS
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.task.containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
+    #   resp.task.containers[0].cpu #=> String
+    #   resp.task.containers[0].memory #=> String
+    #   resp.task.containers[0].memory_reservation #=> String
+    #   resp.task.containers[0].gpu_ids #=> Array
+    #   resp.task.containers[0].gpu_ids[0] #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -5059,7 +5398,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -5428,7 +5767,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Boolean] :force_new_deployment
     #   Whether to force a new deployment of the service. Deployments are not
@@ -5621,7 +5960,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

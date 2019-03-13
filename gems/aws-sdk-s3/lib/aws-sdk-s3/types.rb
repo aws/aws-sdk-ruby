@@ -1248,7 +1248,8 @@ module Aws::S3
     #
     # @!attribute [rw] location_constraint
     #   Specifies the region where the bucket will be created. If you don't
-    #   specify a region, the bucket will be created in US Standard.
+    #   specify a region, the bucket is created in US East (N. Virginia)
+    #   Region (us-east-1).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration AWS API Documentation
@@ -2364,7 +2365,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4376,7 +4377,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LambdaFunctionConfiguration AWS API Documentation
@@ -4526,7 +4527,7 @@ module Aws::S3
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
-    #   This is deprecated; use Filter instead.
+    #   This is No longer used; use Filter instead.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -5769,7 +5770,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionExpiration AWS API Documentation
@@ -5804,7 +5805,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
@@ -5947,7 +5948,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #
     # @note When making an API call, you may pass NotificationConfigurationFilter
     #   data as a hash:
@@ -6668,7 +6669,8 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
-    #   configuration.
+    #   configuration. This parameter is auto-populated when using the
+    #   command from the CLI
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -7580,6 +7582,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] token
+    #   A token to allow Object Lock to be enabled for an existing bucket.
     #   @return [String]
     #
     # @!attribute [rw] content_md5
@@ -7726,7 +7729,8 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data.
+    #   The base64-encoded 128-bit MD5 digest of the part data. This
+    #   parameter is auto-populated when using the command from the CLI
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -8087,7 +8091,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfiguration AWS API Documentation
@@ -9105,7 +9109,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
     #
     # @note When making an API call, you may pass SelectObjectContentRequest
     #   data as a hash:
@@ -9167,7 +9171,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
@@ -9176,7 +9180,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -9185,7 +9189,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -9637,7 +9641,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfiguration AWS API Documentation
@@ -9824,7 +9828,7 @@ module Aws::S3
     #   must use the form bytes=first-last, where the first and last are the
     #   zero-based byte offsets to copy. For example, bytes=0-9 indicates
     #   that you want to copy the first ten bytes of the source. You can
-    #   copy a range only if the source object is greater than 5 GB.
+    #   copy a range only if the source object is greater than 5 MB.
     #   @return [String]
     #
     # @!attribute [rw] key

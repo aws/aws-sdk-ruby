@@ -274,9 +274,14 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   This is expressed either as the Amazon Resource Name (ARN) of the
-    #   CMK or, if specified, the CMK's alias (using the format
-    #   `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
@@ -502,7 +507,7 @@ module Aws::CodeBuild
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
     #   @return [String]
     #
     # @!attribute [rw] stream_name
@@ -511,7 +516,7 @@ module Aws::CodeBuild
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CloudWatchLogsConfig AWS API Documentation
@@ -533,6 +538,9 @@ module Aws::CodeBuild
     #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
+    #           git_submodules_config: {
+    #             fetch_submodules: false, # required
+    #           },
     #           buildspec: "String",
     #           auth: {
     #             type: "OAUTH", # required, accepts OAUTH
@@ -547,6 +555,9 @@ module Aws::CodeBuild
     #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #             location: "String",
     #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
     #             buildspec: "String",
     #             auth: {
     #               type: "OAUTH", # required, accepts OAUTH
@@ -582,8 +593,9 @@ module Aws::CodeBuild
     #           },
     #         ],
     #         cache: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: { # required
     #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -598,6 +610,11 @@ module Aws::CodeBuild
     #           ],
     #           privileged_mode: false,
     #           certificate: "String",
+    #           registry_credential: {
+    #             credential: "NonEmptyString", # required
+    #             credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #           },
+    #           image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #         },
     #         service_role: "NonEmptyString", # required
     #         timeout_in_minutes: 1,
@@ -624,6 +641,7 @@ module Aws::CodeBuild
     #           s3_logs: {
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
+    #             encryption_disabled: false,
     #           },
     #         },
     #       }
@@ -681,6 +699,11 @@ module Aws::CodeBuild
     # @!attribute [rw] encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
     #
     #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
@@ -749,6 +772,15 @@ module Aws::CodeBuild
     #       {
     #         project_name: "ProjectName", # required
     #         branch_filter: "String",
+    #         filter_groups: [
+    #           [
+    #             {
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               pattern: "String", # required
+    #               exclude_matched_pattern: false,
+    #             },
+    #           ],
+    #         ],
     #       }
     #
     # @!attribute [rw] project_name
@@ -760,13 +792,29 @@ module Aws::CodeBuild
     #   built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If `branchFilter` is
     #   empty, then all branches are built.
+    #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine
+    #   which webhooks are triggered. At least one `WebhookFilter` in the
+    #   array must specify `EVENT` as its `type`.
+    #
+    #   For a build to be triggered, at least one filter group in the
+    #   `filterGroups` array must pass. For a filter group to pass, each of
+    #   its filters must pass.
+    #   @return [Array<Array<Types::WebhookFilter>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
       :project_name,
-      :branch_filter)
+      :branch_filter,
+      :filter_groups)
       include Aws::Structure
     end
 
@@ -958,6 +1006,28 @@ module Aws::CodeBuild
       :name,
       :value,
       :type)
+      include Aws::Structure
+    end
+
+    # Information about the Git submodules configuration for an AWS
+    # CodeBuild build project.
+    #
+    # @note When making an API call, you may pass GitSubmodulesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         fetch_submodules: false, # required
+    #       }
+    #
+    # @!attribute [rw] fetch_submodules
+    #   Set to true to fetch Git submodules for your AWS CodeBuild build
+    #   project.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GitSubmodulesConfig AWS API Documentation
+    #
+    class GitSubmodulesConfig < Struct.new(
+      :fetch_submodules)
       include Aws::Structure
     end
 
@@ -1277,6 +1347,7 @@ module Aws::CodeBuild
     #         s3_logs: {
     #           status: "ENABLED", # required, accepts ENABLED, DISABLED
     #           location: "String",
+    #           encryption_disabled: false,
     #         },
     #       }
     #
@@ -1434,9 +1505,14 @@ module Aws::CodeBuild
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   to be used for encrypting the build output artifacts.
     #
-    #   This is expressed either as the Amazon Resource Name (ARN) of the
-    #   CMK or, if specified, the CMK's alias (using the format
-    #   `alias/alias-name `).
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1699,8 +1775,9 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #         type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #         location: "String",
+    #         modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #       }
     #
     # @!attribute [rw] type
@@ -1709,21 +1786,69 @@ module Aws::CodeBuild
     #   * `NO_CACHE`\: The build project does not use any cache.
     #
     #   * `S3`\: The build project reads and writes from and to S3.
+    #
+    #   * `LOCAL`\: The build project stores a cache locally on a build host
+    #     that is only available to that build host.
     #   @return [String]
     #
     # @!attribute [rw] location
     #   Information about the cache location:
     #
-    #   * `NO_CACHE`\: This value is ignored.
+    #   * `NO_CACHE` or `LOCAL`\: This value is ignored.
     #
     #   * `S3`\: This is the S3 bucket name/prefix.
     #   @return [String]
+    #
+    # @!attribute [rw] modes
+    #   If you use a `LOCAL` cache, the local cache mode. You can use one or
+    #   more local cache modes at the same time.
+    #
+    #   * `LOCAL_SOURCE_CACHE` mode caches Git metadata for primary and
+    #     secondary sources. After the cache is created, subsequent builds
+    #     pull only the change between commits. This mode is a good choice
+    #     for projects with a clean working directory and a source that is a
+    #     large Git repository. If you choose this option and your project
+    #     does not use a Git repository (GitHub, GitHub Enterprise, or
+    #     Bitbucket), the option is ignored.
+    #
+    #   * `LOCAL_DOCKER_LAYER_CACHE` mode caches existing Docker layers.
+    #     This mode is a good choice for projects that build or pull large
+    #     Docker images. It can prevent the performance issues caused by
+    #     pulling large Docker images down from the network.
+    #
+    #     <note markdown="1"> * You can use a Docker layer cache in the Linux enviornment only.
+    #
+    #     * The `privileged` flag must be set so that your project has the
+    #       required Docker permissions.
+    #
+    #     * You should consider the security implications before you use a
+    #       Docker layer cache.
+    #
+    #      </note>
+    #   ^
+    #
+    #   * `LOCAL_CUSTOM_CACHE` mode caches directories you specify in the
+    #     buildspec file. This mode is a good choice if your build scenario
+    #     is not suited to one of the other three local cache modes. If you
+    #     use a custom cache:
+    #
+    #     * Only directories can be specified for caching. You cannot
+    #       specify individual files.
+    #
+    #     * Symlinks are used to reference cached directories.
+    #
+    #     * Cached directories are linked to your build before it downloads
+    #       its project sources. Cached items are overriden if a source item
+    #       has the same name. Directories are specified using cache paths
+    #       in the buildspec file.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectCache AWS API Documentation
     #
     class ProjectCache < Struct.new(
       :type,
-      :location)
+      :location,
+      :modes)
       include Aws::Structure
     end
 
@@ -1745,6 +1870,11 @@ module Aws::CodeBuild
     #         ],
     #         privileged_mode: false,
     #         certificate: "String",
+    #         registry_credential: {
+    #           credential: "NonEmptyString", # required
+    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #         },
+    #         image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #       }
     #
     # @!attribute [rw] type
@@ -1752,7 +1882,18 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The ID of the Docker image to use for this build project.
+    #   The image tag or image digest that identifies the Docker image to
+    #   use for this build project. Use the following formats:
+    #
+    #   * For an image tag: `registry/repository:tag`. For example, to
+    #     specify an image with the tag "latest," use
+    #     `registry/repository:latest`.
+    #
+    #   * For an image digest: `registry/repository@digest`. For example, to
+    #     specify an image with the digest
+    #     "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,"
+    #     use
+    #     `registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf`.
     #   @return [String]
     #
     # @!attribute [rw] compute_type
@@ -1804,6 +1945,26 @@ module Aws::CodeBuild
     #   The certificate to use with this build project.
     #   @return [String]
     #
+    # @!attribute [rw] registry_credential
+    #   The credentials for access to a private registry.
+    #   @return [Types::RegistryCredential]
+    #
+    # @!attribute [rw] image_pull_credentials_type
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
+    #
+    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #     This requires that you modify your ECR repository policy to trust
+    #     AWS CodeBuild's service principal.
+    #
+    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
+    #     project's service role.
+    #
+    #   When you use a cross-account or private registry image, you must use
+    #   SERVICE\_ROLE credentials. When you use an AWS CodeBuild curated
+    #   image, you must use CODEBUILD credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
@@ -1812,7 +1973,9 @@ module Aws::CodeBuild
       :compute_type,
       :environment_variables,
       :privileged_mode,
-      :certificate)
+      :certificate,
+      :registry_credential,
+      :image_pull_credentials_type)
       include Aws::Structure
     end
 
@@ -1825,6 +1988,9 @@ module Aws::CodeBuild
     #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
+    #         git_submodules_config: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
@@ -1907,8 +2073,13 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] git_clone_depth
-    #   Information about the git clone depth for the build project.
+    #   Information about the Git clone depth for the build project.
     #   @return [Integer]
+    #
+    # @!attribute [rw] git_submodules_config
+    #   Information about the Git submodules configuration for the build
+    #   project.
+    #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec
     #   The build spec declaration to use for the builds in this build
@@ -1949,6 +2120,7 @@ module Aws::CodeBuild
       :type,
       :location,
       :git_clone_depth,
+      :git_submodules_config,
       :buildspec,
       :auth,
       :report_build_status,
@@ -2002,6 +2174,52 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about credentials that provide access to a private Docker
+    # registry. When this is set:
+    #
+    # * `imagePullCredentialsType` must be set to `SERVICE_ROLE`.
+    #
+    # * images cannot be curated or an Amazon ECR image.
+    #
+    # For more information, see [Private Registry with AWS Secrets Manager
+    # Sample for AWS CodeBuild][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html
+    #
+    # @note When making an API call, you may pass RegistryCredential
+    #   data as a hash:
+    #
+    #       {
+    #         credential: "NonEmptyString", # required
+    #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #       }
+    #
+    # @!attribute [rw] credential
+    #   The Amazon Resource Name (ARN) or name of credentials created using
+    #   AWS Secrets Manager.
+    #
+    #   <note markdown="1"> The `credential` can use the name of the credentials only if they
+    #   exist in your current region.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider
+    #   The service that created the credentials to access a private Docker
+    #   registry. The valid value, SECRETS\_MANAGER, is for AWS Secrets
+    #   Manager.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RegistryCredential AWS API Documentation
+    #
+    class RegistryCredential < Struct.new(
+      :credential,
+      :credential_provider)
+      include Aws::Structure
+    end
+
     # Information about S3 logs for a build project.
     #
     # @note When making an API call, you may pass S3LogsConfig
@@ -2010,6 +2228,7 @@ module Aws::CodeBuild
     #       {
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
+    #         encryption_disabled: false,
     #       }
     #
     # @!attribute [rw] status
@@ -2027,11 +2246,17 @@ module Aws::CodeBuild
     #   `arn:aws:s3:::my-bucket/build-log`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_disabled
+    #   Set to true if you do not want your S3 build log output encrypted.
+    #   By default S3 build logs are encrypted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation
     #
     class S3LogsConfig < Struct.new(
       :status,
-      :location)
+      :location,
+      :encryption_disabled)
       include Aws::Structure
     end
 
@@ -2106,6 +2331,9 @@ module Aws::CodeBuild
     #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #             location: "String",
     #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
     #             buildspec: "String",
     #             auth: {
     #               type: "OAUTH", # required, accepts OAUTH
@@ -2161,6 +2389,9 @@ module Aws::CodeBuild
     #           resource: "String",
     #         },
     #         git_clone_depth_override: 1,
+    #         git_submodules_config_override: {
+    #           fetch_submodules: false, # required
+    #         },
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
     #         report_build_status_override: false,
@@ -2169,8 +2400,9 @@ module Aws::CodeBuild
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         certificate_override: "String",
     #         cache_override: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         service_role_override: "NonEmptyString",
     #         privileged_mode_override: false,
@@ -2186,8 +2418,14 @@ module Aws::CodeBuild
     #           s3_logs: {
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
+    #             encryption_disabled: false,
     #           },
     #         },
+    #         registry_credential_override: {
+    #           credential: "NonEmptyString", # required
+    #           credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #         },
+    #         image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #       }
     #
     # @!attribute [rw] project_name
@@ -2264,6 +2502,11 @@ module Aws::CodeBuild
     #   overrides, for this build only, any previous depth of history
     #   defined in the build project.
     #   @return [Integer]
+    #
+    # @!attribute [rw] git_submodules_config_override
+    #   Information about the Git submodules configuration for this build of
+    #   an AWS CodeBuild build project.
+    #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec_override
     #   A build spec declaration that overrides, for this build only, the
@@ -2343,6 +2586,26 @@ module Aws::CodeBuild
     #   in the build project.
     #   @return [Types::LogsConfig]
     #
+    # @!attribute [rw] registry_credential_override
+    #   The credentials for access to a private registry.
+    #   @return [Types::RegistryCredential]
+    #
+    # @!attribute [rw] image_pull_credentials_type_override
+    #   The type of credentials AWS CodeBuild uses to pull images in your
+    #   build. There are two valid values:
+    #
+    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #     This requires that you modify your ECR repository policy to trust
+    #     AWS CodeBuild's service principal.
+    #
+    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
+    #     project's service role.
+    #
+    #   When using a cross-account or private registry image, you must use
+    #   SERVICE\_ROLE credentials. When using an AWS CodeBuild curated
+    #   image, you must use CODEBUILD credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -2357,6 +2620,7 @@ module Aws::CodeBuild
       :source_location_override,
       :source_auth_override,
       :git_clone_depth_override,
+      :git_submodules_config_override,
       :buildspec_override,
       :insecure_ssl_override,
       :report_build_status_override,
@@ -2370,7 +2634,9 @@ module Aws::CodeBuild
       :timeout_in_minutes_override,
       :queued_timeout_in_minutes_override,
       :idempotency_token,
-      :logs_config_override)
+      :logs_config_override,
+      :registry_credential_override,
+      :image_pull_credentials_type_override)
       include Aws::Structure
     end
 
@@ -2453,6 +2719,9 @@ module Aws::CodeBuild
     #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #           location: "String",
     #           git_clone_depth: 1,
+    #           git_submodules_config: {
+    #             fetch_submodules: false, # required
+    #           },
     #           buildspec: "String",
     #           auth: {
     #             type: "OAUTH", # required, accepts OAUTH
@@ -2467,6 +2736,9 @@ module Aws::CodeBuild
     #             type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #             location: "String",
     #             git_clone_depth: 1,
+    #             git_submodules_config: {
+    #               fetch_submodules: false, # required
+    #             },
     #             buildspec: "String",
     #             auth: {
     #               type: "OAUTH", # required, accepts OAUTH
@@ -2502,8 +2774,9 @@ module Aws::CodeBuild
     #           },
     #         ],
     #         cache: {
-    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3, LOCAL
     #           location: "String",
+    #           modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #         },
     #         environment: {
     #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
@@ -2518,6 +2791,11 @@ module Aws::CodeBuild
     #           ],
     #           privileged_mode: false,
     #           certificate: "String",
+    #           registry_credential: {
+    #             credential: "NonEmptyString", # required
+    #             credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
+    #           },
+    #           image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,
@@ -2544,6 +2822,7 @@ module Aws::CodeBuild
     #           s3_logs: {
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
+    #             encryption_disabled: false,
     #           },
     #         },
     #       }
@@ -2606,10 +2885,15 @@ module Aws::CodeBuild
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
-    #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build output artifacts.
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   to be used for encrypting the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN)of the CMK or,
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
     #   if available, the CMK's alias (using the format `alias/alias-name
     #   `).
     #   @return [String]
@@ -2676,6 +2960,15 @@ module Aws::CodeBuild
     #         project_name: "ProjectName", # required
     #         branch_filter: "String",
     #         rotate_secret: false,
+    #         filter_groups: [
+    #           [
+    #             {
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               pattern: "String", # required
+    #               exclude_matched_pattern: false,
+    #             },
+    #           ],
+    #         ],
     #       }
     #
     # @!attribute [rw] project_name
@@ -2687,6 +2980,11 @@ module Aws::CodeBuild
     #   built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If `branchFilter` is
     #   empty, then all branches are built.
+    #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] rotate_secret
@@ -2695,12 +2993,19 @@ module Aws::CodeBuild
     #   for your repository, `rotateSecret` is ignored.
     #   @return [Boolean]
     #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine if a
+    #   webhook event can trigger a build. A filter group must pcontain at
+    #   least one `EVENT` `WebhookFilter`.
+    #   @return [Array<Array<Types::WebhookFilter>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
     #
     class UpdateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
-      :rotate_secret)
+      :rotate_secret,
+      :filter_groups)
       include Aws::Structure
     end
 
@@ -2772,7 +3077,22 @@ module Aws::CodeBuild
     #   built when a webhook is triggered. If the name of a branch matches
     #   the regular expression, then it is built. If `branchFilter` is
     #   empty, then all branches are built.
+    #
+    #   <note markdown="1"> It is recommended that you use `filterGroups` instead of
+    #   `branchFilter`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] filter_groups
+    #   An array of arrays of `WebhookFilter` objects used to determine
+    #   which webhooks are triggered. At least one `WebhookFilter` in the
+    #   array must specify `EVENT` as its `type`.
+    #
+    #   For a build to be triggered, at least one filter group in the
+    #   `filterGroups` array must pass. For a filter group to pass, each of
+    #   its filters must pass.
+    #   @return [Array<Array<Types::WebhookFilter>>]
     #
     # @!attribute [rw] last_modified_secret
     #   A timestamp that indicates the last time a repository's secret
@@ -2786,7 +3106,103 @@ module Aws::CodeBuild
       :payload_url,
       :secret,
       :branch_filter,
+      :filter_groups,
       :last_modified_secret)
+      include Aws::Structure
+    end
+
+    # A filter used to determine which webhooks trigger a build.
+    #
+    # @note When making an API call, you may pass WebhookFilter
+    #   data as a hash:
+    #
+    #       {
+    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #         pattern: "String", # required
+    #         exclude_matched_pattern: false,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of webhook filter. There are five webhook filter types:
+    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, and
+    #   `FILE_PATH`.
+    #
+    #   EVENT
+    #
+    #   : A webhook event triggers a build when the provided `pattern`
+    #     matches one of four event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #     `PULL_REQUEST_UPDATED`, and `PULL_REQUEST_REOPENED`. The `EVENT`
+    #     patterns are specified as a comma-separated string. For example,
+    #     `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all
+    #     push, pull request created, and pull request updated events.
+    #
+    #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
+    #     Enterprise only.
+    #
+    #      </note>
+    #
+    #   ACTOR\_ACCOUNT\_ID
+    #
+    #   : A webhook event triggers a build when a GitHub, GitHub Enterprise,
+    #     or Bitbucket account ID matches the regular expression `pattern`.
+    #
+    #   HEAD\_REF
+    #
+    #   : A webhook event triggers a build when the head reference matches
+    #     the regular expression `pattern`. For example,
+    #     `refs/heads/branch-name` and `refs/tags/tag-name`.
+    #
+    #     Works with GitHub and GitHub Enterprise push, GitHub and GitHub
+    #     Enterprise pull request, Bitbucket push, and Bitbucket pull
+    #     request events.
+    #
+    #   BASE\_REF
+    #
+    #   : A webhook event triggers a build when the base reference matches
+    #     the regular expression `pattern`. For example,
+    #     `refs/heads/branch-name`.
+    #
+    #     <note markdown="1"> Works with pull request events only.
+    #
+    #      </note>
+    #
+    #   FILE\_PATH
+    #
+    #   : A webhook triggers a build when the path of a changed file matches
+    #     the regular expression `pattern`.
+    #
+    #     <note markdown="1"> Works with GitHub and GitHub Enterprise push events only.
+    #
+    #      </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   For a `WebHookFilter` that uses `EVENT` type, a comma-separated
+    #   string that specifies one or more events. For example, the webhook
+    #   filter `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` allows all
+    #   push, pull request created, and pull request updated events to
+    #   trigger a build.
+    #
+    #   For a `WebHookFilter` that uses any of the other filter types, a
+    #   regular expression pattern. For example, a `WebHookFilter` that uses
+    #   `HEAD_REF` for its `type` and the pattern `^refs/heads/` triggers a
+    #   build when the head reference is a branch with a reference name
+    #   `refs/heads/branch-name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_matched_pattern
+    #   Used to indicate that the `pattern` determines which webhook events
+    #   do not trigger a build. If true, then a webhook event that does not
+    #   match the `pattern` triggers a build. If false, then a webhook event
+    #   that matches the `pattern` triggers a build.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/WebhookFilter AWS API Documentation
+    #
+    class WebhookFilter < Struct.new(
+      :type,
+      :pattern,
+      :exclude_matched_pattern)
       include Aws::Structure
     end
 

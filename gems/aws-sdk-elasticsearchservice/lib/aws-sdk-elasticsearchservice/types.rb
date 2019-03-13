@@ -240,6 +240,9 @@ module Aws::ElasticsearchService
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
     #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
     #         },
@@ -752,6 +755,9 @@ module Aws::ElasticsearchService
     #         instance_count: 1,
     #         dedicated_master_enabled: false,
     #         zone_awareness_enabled: false,
+    #         zone_awareness_config: {
+    #           availability_zone_count: 1,
+    #         },
     #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         dedicated_master_count: 1,
     #       }
@@ -782,6 +788,11 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness
     #   @return [Boolean]
     #
+    # @!attribute [rw] zone_awareness_config
+    #   Specifies the zone awareness configuration for a domain when zone
+    #   awareness is enabled.
+    #   @return [Types::ZoneAwarenessConfig]
+    #
     # @!attribute [rw] dedicated_master_type
     #   The instance type for a dedicated master node.
     #   @return [String]
@@ -796,6 +807,7 @@ module Aws::ElasticsearchService
       :instance_count,
       :dedicated_master_enabled,
       :zone_awareness_enabled,
+      :zone_awareness_config,
       :dedicated_master_type,
       :dedicated_master_count)
       include Aws::Structure
@@ -2020,6 +2032,9 @@ module Aws::ElasticsearchService
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
     #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
     #         },
@@ -2349,6 +2364,27 @@ module Aws::ElasticsearchService
     class VPCOptions < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      include Aws::Structure
+    end
+
+    # Specifies the zone awareness configuration for the domain cluster,
+    # such as the number of availability zones.
+    #
+    # @note When making an API call, you may pass ZoneAwarenessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone_count: 1,
+    #       }
+    #
+    # @!attribute [rw] availability_zone_count
+    #   An integer value to indicate the number of availability zones for a
+    #   domain when zone awareness is enabled. This should be equal to
+    #   number of subnets if VPC endpoints is enabled
+    #   @return [Integer]
+    #
+    class ZoneAwarenessConfig < Struct.new(
+      :availability_zone_count)
       include Aws::Structure
     end
 

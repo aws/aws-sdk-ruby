@@ -350,18 +350,14 @@ module Aws::AlexaForBusiness
     # Makes a private skill available for enrolled users to enable on their
     # devices.
     #
-    # @option params [String] :organization_arn
-    #   The ARN of the organization.
-    #
     # @option params [required, String] :skill_id
-    #   The private skill ID you want to make available to enrolled users.&gt;
+    #   The private skill ID you want to make available to enrolled users.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_skill_with_users({
-    #     organization_arn: "Arn",
     #     skill_id: "SkillId", # required
     #   })
     #
@@ -421,7 +417,9 @@ module Aws::AlexaForBusiness
     #   The name identifier of the schedule.
     #
     # @option params [String] :s3_bucket_name
-    #   The S3 bucket name of the output reports.
+    #   The S3 bucket name of the output reports. If this isn't specified,
+    #   the report can be retrieved from a download link by calling
+    #   ListBusinessReportSchedule.
     #
     # @option params [String] :s3_key_prefix
     #   The S3 key where the report is delivered.
@@ -434,7 +432,8 @@ module Aws::AlexaForBusiness
     #   The content range of the reports.
     #
     # @option params [Types::BusinessReportRecurrence] :recurrence
-    #   The recurrence of the reports.
+    #   The recurrence of the reports. If this isn't specified, the report
+    #   will only be delivered one time when the API is called.
     #
     # @option params [String] :client_request_token
     #   The client request token.
@@ -1149,9 +1148,6 @@ module Aws::AlexaForBusiness
     # Makes a private skill unavailable for enrolled users and prevents them
     # from enabling it on their devices.
     #
-    # @option params [String] :organization_arn
-    #   The ARN of the organization.
-    #
     # @option params [required, String] :skill_id
     #   The private skill ID you want to make unavailable for enrolled users.
     #
@@ -1160,7 +1156,6 @@ module Aws::AlexaForBusiness
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_skill_from_users({
-    #     organization_arn: "Arn",
     #     skill_id: "SkillId", # required
     #   })
     #
@@ -1376,6 +1371,31 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def get_device(params = {}, options = {})
       req = build_request(:get_device, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configured values for the user enrollment invitation
+    # email template.
+    #
+    # @return [Types::GetInvitationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInvitationConfigurationResponse#organization_name #organization_name} => String
+    #   * {Types::GetInvitationConfigurationResponse#contact_email #contact_email} => String
+    #   * {Types::GetInvitationConfigurationResponse#private_skill_ids #private_skill_ids} => Array&lt;String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.organization_name #=> String
+    #   resp.contact_email #=> String
+    #   resp.private_skill_ids #=> Array
+    #   resp.private_skill_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfiguration AWS API Documentation
+    #
+    # @overload get_invitation_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_invitation_configuration(params = {}, options = {})
+      req = build_request(:get_invitation_configuration, params)
       req.send_request(options)
     end
 
@@ -1672,7 +1692,7 @@ module Aws::AlexaForBusiness
     # Lists all enabled skills in a specific skill group.
     #
     # @option params [String] :skill_group_arn
-    #   The ARN of the skill group for which to list enabled skills.
+    #   The ARN of the skill group for which to list enabled skills. Required.
     #
     # @option params [String] :enablement_type
     #   Whether the skill is enabled under the user's account, or if it
@@ -1685,13 +1705,13 @@ module Aws::AlexaForBusiness
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up to
-    #   the value specified by `MaxResults`.
+    #   the value specified by `MaxResults`. Required.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved.
+    #   retrieved. Required.
     #
     # @return [Types::ListSkillsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1936,6 +1956,39 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def put_conference_preference(params = {}, options = {})
       req = build_request(:put_conference_preference, params)
+      req.send_request(options)
+    end
+
+    # Configures the email template for the user enrollment invitation with
+    # the specified attributes.
+    #
+    # @option params [required, String] :organization_name
+    #   The name of the organization sending the enrollment invite to a user.
+    #
+    # @option params [String] :contact_email
+    #   The email ID of the organization or individual contact that the
+    #   enrolled user can use.
+    #
+    # @option params [Array<String>] :private_skill_ids
+    #   The list of private skill IDs that you want to recommend to the user
+    #   to enable in the invitation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_invitation_configuration({
+    #     organization_name: "OrganizationName", # required
+    #     contact_email: "Email",
+    #     private_skill_ids: ["SkillId"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfiguration AWS API Documentation
+    #
+    # @overload put_invitation_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_invitation_configuration(params = {}, options = {})
+      req = build_request(:put_invitation_configuration, params)
       req.send_request(options)
     end
 
@@ -3111,7 +3164,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

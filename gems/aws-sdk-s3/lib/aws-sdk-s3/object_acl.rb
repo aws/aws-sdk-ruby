@@ -38,6 +38,7 @@ module Aws::S3
       @object_key
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]

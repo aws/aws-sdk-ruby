@@ -564,7 +564,7 @@ module Aws::CloudWatch
     #   that align with the value of the metric's `Period` and sync up with
     #   the beginning and end of an hour. For example, if the `Period` of a
     #   metric is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can
-    #   get a faster response from CloudWatch then setting 12:07 or 12:29 as
+    #   get a faster response from CloudWatch than setting 12:07 or 12:29 as
     #   the `StartTime`.
     #   @return [Time]
     #
@@ -575,7 +575,7 @@ module Aws::CloudWatch
     #   that align with the value of the metric's `Period` and sync up with
     #   the beginning and end of an hour. For example, if the `Period` of a
     #   metric is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get
-    #   a faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   a faster response from CloudWatch than setting 12:07 or 12:29 as the
     #   `EndTime`.
     #   @return [Time]
     #
@@ -667,8 +667,8 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
-    #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     #   @return [Array<Types::Dimension>]
     #
     # @!attribute [rw] start_time
@@ -817,8 +817,7 @@ module Aws::CloudWatch
     #   response with the content-type set to `text/xml`. The image data is
     #   in a `MetricWidgetImage` field. For example:
     #
-    #   ` <GetMetricWidgetImageResponse
-    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #   ` <GetMetricWidgetImageResponse xmlns=<URLstring>>`
     #
     #   ` <GetMetricWidgetImageResult>`
     #
@@ -1197,9 +1196,13 @@ module Aws::CloudWatch
     # structures can include as many as 10 structures that contain a
     # `MetricStat` parameter to retrieve a metric, and as many as 10
     # structures that contain the `Expression` parameter to perform a math
-    # expression. Any expression used in a `PutMetricAlarm` operation must
-    # return a single time series. For more information, see [Metric Math
-    # Syntax and Functions][1] in the *Amazon CloudWatch User Guide*.
+    # expression. Of those `Expression` structures, one must have `True` as
+    # the value for `ReturnData`. The result of this expression is the value
+    # the alarm watches.
+    #
+    # Any expression used in a `PutMetricAlarm` operation must return a
+    # single time series. For more information, see [Metric Math Syntax and
+    # Functions][1] in the *Amazon CloudWatch User Guide*.
     #
     # Some of the parameters of this structure also have different uses
     # whether you are using this structure in a `GetMetricData` operation or
@@ -1208,7 +1211,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
     #
     # @note When making an API call, you may pass MetricDataQuery
     #   data as a hash:
@@ -1267,7 +1270,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
     #   @return [String]
     #
     # @!attribute [rw] label
@@ -1452,7 +1455,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDatum AWS API Documentation
@@ -1668,6 +1671,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1688,6 +1692,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1790,7 +1795,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     #   @return [Integer]
     #
     # @!attribute [rw] threshold
@@ -1813,7 +1818,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     #   @return [String]
     #
     # @!attribute [rw] evaluate_low_sample_count_percentile
@@ -1829,7 +1834,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     #   @return [String]
     #
     # @!attribute [rw] metrics
@@ -1837,6 +1842,11 @@ module Aws::CloudWatch
     #   an alarm based on the result of a metric math expression. Each item
     #   in the `Metrics` array either retrieves a metric or performs a math
     #   expression.
+    #
+    #   One item in the `Metrics` array is the expression that the alarm
+    #   watches. You designate this expression by setting `ReturnValue` to
+    #   true for this object in the array. For more information, see
+    #   MetricDataQuery.
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or

@@ -95,6 +95,8 @@ module Aws::ConfigService
     DeleteEvaluationResultsRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsRequest')
     DeleteEvaluationResultsResponse = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsResponse')
     DeletePendingAggregationRequestRequest = Shapes::StructureShape.new(name: 'DeletePendingAggregationRequestRequest')
+    DeleteRemediationConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRemediationConfigurationRequest')
+    DeleteRemediationConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteRemediationConfigurationResponse')
     DeleteRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRetentionConfigurationRequest')
     DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
     DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
@@ -131,6 +133,10 @@ module Aws::ConfigService
     DescribePendingAggregationRequestsLimit = Shapes::IntegerShape.new(name: 'DescribePendingAggregationRequestsLimit')
     DescribePendingAggregationRequestsRequest = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsRequest')
     DescribePendingAggregationRequestsResponse = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsResponse')
+    DescribeRemediationConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeRemediationConfigurationsRequest')
+    DescribeRemediationConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeRemediationConfigurationsResponse')
+    DescribeRemediationExecutionStatusRequest = Shapes::StructureShape.new(name: 'DescribeRemediationExecutionStatusRequest')
+    DescribeRemediationExecutionStatusResponse = Shapes::StructureShape.new(name: 'DescribeRemediationExecutionStatusResponse')
     DescribeRetentionConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsRequest')
     DescribeRetentionConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsResponse')
     DiscoveredResourceIdentifierList = Shapes::ListShape.new(name: 'DiscoveredResourceIdentifierList')
@@ -143,6 +149,8 @@ module Aws::ConfigService
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
     Evaluations = Shapes::ListShape.new(name: 'Evaluations')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
+    FailedRemediationBatch = Shapes::StructureShape.new(name: 'FailedRemediationBatch')
+    FailedRemediationBatches = Shapes::ListShape.new(name: 'FailedRemediationBatches')
     GetAggregateComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleRequest')
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
@@ -206,6 +214,7 @@ module Aws::ConfigService
     NoSuchConfigurationAggregatorException = Shapes::StructureShape.new(name: 'NoSuchConfigurationAggregatorException')
     NoSuchConfigurationRecorderException = Shapes::StructureShape.new(name: 'NoSuchConfigurationRecorderException')
     NoSuchDeliveryChannelException = Shapes::StructureShape.new(name: 'NoSuchDeliveryChannelException')
+    NoSuchRemediationConfigurationException = Shapes::StructureShape.new(name: 'NoSuchRemediationConfigurationException')
     NoSuchRetentionConfigurationException = Shapes::StructureShape.new(name: 'NoSuchRetentionConfigurationException')
     OrderingTimestamp = Shapes::TimestampShape.new(name: 'OrderingTimestamp')
     OrganizationAccessDeniedException = Shapes::StructureShape.new(name: 'OrganizationAccessDeniedException')
@@ -224,6 +233,8 @@ module Aws::ConfigService
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
     PutEvaluationsResponse = Shapes::StructureShape.new(name: 'PutEvaluationsResponse')
+    PutRemediationConfigurationsRequest = Shapes::StructureShape.new(name: 'PutRemediationConfigurationsRequest')
+    PutRemediationConfigurationsResponse = Shapes::StructureShape.new(name: 'PutRemediationConfigurationsResponse')
     PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
     PutRetentionConfigurationResponse = Shapes::StructureShape.new(name: 'PutRetentionConfigurationResponse')
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
@@ -235,6 +246,17 @@ module Aws::ConfigService
     Relationship = Shapes::StructureShape.new(name: 'Relationship')
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     RelationshipName = Shapes::StringShape.new(name: 'RelationshipName')
+    RemediationConfiguration = Shapes::StructureShape.new(name: 'RemediationConfiguration')
+    RemediationConfigurations = Shapes::ListShape.new(name: 'RemediationConfigurations')
+    RemediationExecutionState = Shapes::StringShape.new(name: 'RemediationExecutionState')
+    RemediationExecutionStatus = Shapes::StructureShape.new(name: 'RemediationExecutionStatus')
+    RemediationExecutionStatuses = Shapes::ListShape.new(name: 'RemediationExecutionStatuses')
+    RemediationExecutionStep = Shapes::StructureShape.new(name: 'RemediationExecutionStep')
+    RemediationExecutionStepState = Shapes::StringShape.new(name: 'RemediationExecutionStepState')
+    RemediationExecutionSteps = Shapes::ListShape.new(name: 'RemediationExecutionSteps')
+    RemediationParameterValue = Shapes::StructureShape.new(name: 'RemediationParameterValue')
+    RemediationParameters = Shapes::MapShape.new(name: 'RemediationParameters')
+    RemediationTargetType = Shapes::StringShape.new(name: 'RemediationTargetType')
     ResourceCount = Shapes::StructureShape.new(name: 'ResourceCount')
     ResourceCountFilters = Shapes::StructureShape.new(name: 'ResourceCountFilters')
     ResourceCountGroupKey = Shapes::StringShape.new(name: 'ResourceCountGroupKey')
@@ -255,6 +277,8 @@ module Aws::ConfigService
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    ResourceValue = Shapes::StructureShape.new(name: 'ResourceValue')
+    ResourceValueType = Shapes::StringShape.new(name: 'ResourceValueType')
     RetentionConfiguration = Shapes::StructureShape.new(name: 'RetentionConfiguration')
     RetentionConfigurationList = Shapes::ListShape.new(name: 'RetentionConfigurationList')
     RetentionConfigurationName = Shapes::StringShape.new(name: 'RetentionConfigurationName')
@@ -268,6 +292,10 @@ module Aws::ConfigService
     StartConfigRulesEvaluationRequest = Shapes::StructureShape.new(name: 'StartConfigRulesEvaluationRequest')
     StartConfigRulesEvaluationResponse = Shapes::StructureShape.new(name: 'StartConfigRulesEvaluationResponse')
     StartConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StartConfigurationRecorderRequest')
+    StartRemediationExecutionRequest = Shapes::StructureShape.new(name: 'StartRemediationExecutionRequest')
+    StartRemediationExecutionResponse = Shapes::StructureShape.new(name: 'StartRemediationExecutionResponse')
+    StaticParameterValues = Shapes::ListShape.new(name: 'StaticParameterValues')
+    StaticValue = Shapes::StructureShape.new(name: 'StaticValue')
     StopConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StopConfigurationRecorderRequest')
     String = Shapes::StringShape.new(name: 'String')
     StringWithCharLimit1024 = Shapes::StringShape.new(name: 'StringWithCharLimit1024')
@@ -554,6 +582,12 @@ module Aws::ConfigService
     DeletePendingAggregationRequestRequest.add_member(:requester_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "RequesterAwsRegion"))
     DeletePendingAggregationRequestRequest.struct_class = Types::DeletePendingAggregationRequestRequest
 
+    DeleteRemediationConfigurationRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+    DeleteRemediationConfigurationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    DeleteRemediationConfigurationRequest.struct_class = Types::DeleteRemediationConfigurationRequest
+
+    DeleteRemediationConfigurationResponse.struct_class = Types::DeleteRemediationConfigurationResponse
+
     DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "RetentionConfigurationName"))
     DeleteRetentionConfigurationRequest.struct_class = Types::DeleteRetentionConfigurationRequest
 
@@ -688,6 +722,22 @@ module Aws::ConfigService
     DescribePendingAggregationRequestsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribePendingAggregationRequestsResponse.struct_class = Types::DescribePendingAggregationRequestsResponse
 
+    DescribeRemediationConfigurationsRequest.add_member(:config_rule_names, Shapes::ShapeRef.new(shape: ConfigRuleNames, required: true, location_name: "ConfigRuleNames"))
+    DescribeRemediationConfigurationsRequest.struct_class = Types::DescribeRemediationConfigurationsRequest
+
+    DescribeRemediationConfigurationsResponse.add_member(:remediation_configurations, Shapes::ShapeRef.new(shape: RemediationConfigurations, location_name: "RemediationConfigurations"))
+    DescribeRemediationConfigurationsResponse.struct_class = Types::DescribeRemediationConfigurationsResponse
+
+    DescribeRemediationExecutionStatusRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+    DescribeRemediationExecutionStatusRequest.add_member(:resource_keys, Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "ResourceKeys"))
+    DescribeRemediationExecutionStatusRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeRemediationExecutionStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "NextToken"))
+    DescribeRemediationExecutionStatusRequest.struct_class = Types::DescribeRemediationExecutionStatusRequest
+
+    DescribeRemediationExecutionStatusResponse.add_member(:remediation_execution_statuses, Shapes::ShapeRef.new(shape: RemediationExecutionStatuses, location_name: "RemediationExecutionStatuses"))
+    DescribeRemediationExecutionStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "NextToken"))
+    DescribeRemediationExecutionStatusResponse.struct_class = Types::DescribeRemediationExecutionStatusResponse
+
     DescribeRetentionConfigurationsRequest.add_member(:retention_configuration_names, Shapes::ShapeRef.new(shape: RetentionConfigurationNameList, location_name: "RetentionConfigurationNames"))
     DescribeRetentionConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeRetentionConfigurationsRequest.struct_class = Types::DescribeRetentionConfigurationsRequest
@@ -725,6 +775,12 @@ module Aws::ConfigService
     EvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
 
     Evaluations.member = Shapes::ShapeRef.new(shape: Evaluation)
+
+    FailedRemediationBatch.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    FailedRemediationBatch.add_member(:failed_items, Shapes::ShapeRef.new(shape: RemediationConfigurations, location_name: "FailedItems"))
+    FailedRemediationBatch.struct_class = Types::FailedRemediationBatch
+
+    FailedRemediationBatches.member = Shapes::ShapeRef.new(shape: FailedRemediationBatch)
 
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
@@ -895,6 +951,12 @@ module Aws::ConfigService
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.struct_class = Types::PutEvaluationsResponse
 
+    PutRemediationConfigurationsRequest.add_member(:remediation_configurations, Shapes::ShapeRef.new(shape: RemediationConfigurations, required: true, location_name: "RemediationConfigurations"))
+    PutRemediationConfigurationsRequest.struct_class = Types::PutRemediationConfigurationsRequest
+
+    PutRemediationConfigurationsResponse.add_member(:failed_batches, Shapes::ShapeRef.new(shape: FailedRemediationBatches, location_name: "FailedBatches"))
+    PutRemediationConfigurationsResponse.struct_class = Types::PutRemediationConfigurationsResponse
+
     PutRetentionConfigurationRequest.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, required: true, location_name: "RetentionPeriodInDays"))
     PutRetentionConfigurationRequest.struct_class = Types::PutRetentionConfigurationRequest
 
@@ -917,6 +979,41 @@ module Aws::ConfigService
     Relationship.struct_class = Types::Relationship
 
     RelationshipList.member = Shapes::ShapeRef.new(shape: Relationship)
+
+    RemediationConfiguration.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+    RemediationConfiguration.add_member(:target_type, Shapes::ShapeRef.new(shape: RemediationTargetType, required: true, location_name: "TargetType"))
+    RemediationConfiguration.add_member(:target_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "TargetId"))
+    RemediationConfiguration.add_member(:target_version, Shapes::ShapeRef.new(shape: String, location_name: "TargetVersion"))
+    RemediationConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: RemediationParameters, location_name: "Parameters"))
+    RemediationConfiguration.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    RemediationConfiguration.struct_class = Types::RemediationConfiguration
+
+    RemediationConfigurations.member = Shapes::ShapeRef.new(shape: RemediationConfiguration)
+
+    RemediationExecutionStatus.add_member(:resource_key, Shapes::ShapeRef.new(shape: ResourceKey, location_name: "ResourceKey"))
+    RemediationExecutionStatus.add_member(:state, Shapes::ShapeRef.new(shape: RemediationExecutionState, location_name: "State"))
+    RemediationExecutionStatus.add_member(:step_details, Shapes::ShapeRef.new(shape: RemediationExecutionSteps, location_name: "StepDetails"))
+    RemediationExecutionStatus.add_member(:invocation_time, Shapes::ShapeRef.new(shape: Date, location_name: "InvocationTime"))
+    RemediationExecutionStatus.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    RemediationExecutionStatus.struct_class = Types::RemediationExecutionStatus
+
+    RemediationExecutionStatuses.member = Shapes::ShapeRef.new(shape: RemediationExecutionStatus)
+
+    RemediationExecutionStep.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    RemediationExecutionStep.add_member(:state, Shapes::ShapeRef.new(shape: RemediationExecutionStepState, location_name: "State"))
+    RemediationExecutionStep.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    RemediationExecutionStep.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
+    RemediationExecutionStep.add_member(:stop_time, Shapes::ShapeRef.new(shape: Date, location_name: "StopTime"))
+    RemediationExecutionStep.struct_class = Types::RemediationExecutionStep
+
+    RemediationExecutionSteps.member = Shapes::ShapeRef.new(shape: RemediationExecutionStep)
+
+    RemediationParameterValue.add_member(:resource_value, Shapes::ShapeRef.new(shape: ResourceValue, location_name: "ResourceValue"))
+    RemediationParameterValue.add_member(:static_value, Shapes::ShapeRef.new(shape: StaticValue, location_name: "StaticValue"))
+    RemediationParameterValue.struct_class = Types::RemediationParameterValue
+
+    RemediationParameters.key = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
+    RemediationParameters.value = Shapes::ShapeRef.new(shape: RemediationParameterValue)
 
     ResourceCount.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     ResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
@@ -957,6 +1054,9 @@ module Aws::ConfigService
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
 
+    ResourceValue.add_member(:value, Shapes::ShapeRef.new(shape: ResourceValueType, location_name: "Value"))
+    ResourceValue.struct_class = Types::ResourceValue
+
     RetentionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "Name"))
     RetentionConfiguration.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, required: true, location_name: "RetentionPeriodInDays"))
     RetentionConfiguration.struct_class = Types::RetentionConfiguration
@@ -990,6 +1090,19 @@ module Aws::ConfigService
 
     StartConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     StartConfigurationRecorderRequest.struct_class = Types::StartConfigurationRecorderRequest
+
+    StartRemediationExecutionRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+    StartRemediationExecutionRequest.add_member(:resource_keys, Shapes::ShapeRef.new(shape: ResourceKeys, required: true, location_name: "ResourceKeys"))
+    StartRemediationExecutionRequest.struct_class = Types::StartRemediationExecutionRequest
+
+    StartRemediationExecutionResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    StartRemediationExecutionResponse.add_member(:failed_items, Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "FailedItems"))
+    StartRemediationExecutionResponse.struct_class = Types::StartRemediationExecutionResponse
+
+    StaticParameterValues.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
+
+    StaticValue.add_member(:values, Shapes::ShapeRef.new(shape: StaticParameterValues, location_name: "Values"))
+    StaticValue.struct_class = Types::StaticValue
 
     StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     StopConfigurationRecorderRequest.struct_class = Types::StopConfigurationRecorderRequest
@@ -1105,6 +1218,15 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: DeletePendingAggregationRequestRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:delete_remediation_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRemediationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
       end)
 
       api.add_operation(:delete_retention_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1262,6 +1384,29 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+      end)
+
+      api.add_operation(:describe_remediation_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRemediationConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRemediationConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRemediationConfigurationsResponse)
+      end)
+
+      api.add_operation(:describe_remediation_execution_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRemediationExecutionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRemediationExecutionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRemediationExecutionStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_retention_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -1489,6 +1634,16 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
       end)
 
+      api.add_operation(:put_remediation_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRemediationConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRemediationConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRemediationConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:put_retention_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRetentionConfiguration"
         o.http_method = "POST"
@@ -1519,6 +1674,16 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableDeliveryChannelException)
+      end)
+
+      api.add_operation(:start_remediation_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRemediationExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartRemediationExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRemediationExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
       end)
 
       api.add_operation(:stop_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|

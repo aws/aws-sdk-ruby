@@ -58,25 +58,30 @@ module Aws::AutoScaling
     # The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
     # to. This parameter can only be used if you are launching EC2-Classic
     # instances. For more information, see [ClassicLink][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide for Linux Instances* and [Linking EC2-Classic Instances
+    # to a VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @return [String]
     def classic_link_vpc_id
       data[:classic_link_vpc_id]
     end
 
     # The IDs of one or more security groups for the VPC specified in
-    # `ClassicLinkVPCId`. This parameter is required if you specify a
-    # ClassicLink-enabled VPC, and cannot be used otherwise. For more
-    # information, see [ClassicLink][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # `ClassicLinkVPCId`. For more information, see [ClassicLink][1] in the
+    # *Amazon EC2 User Guide for Linux Instances* and [Linking EC2-Classic
+    # Instances to a VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    # Conditional: This parameter is required if you specify a
+    # ClassicLink-enabled VPC, and cannot be used otherwise.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @return [Array<String>]
     def classic_link_vpc_security_groups
       data[:classic_link_vpc_security_groups]

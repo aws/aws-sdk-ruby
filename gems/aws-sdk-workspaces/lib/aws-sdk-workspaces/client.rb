@@ -1138,7 +1138,7 @@ module Aws::WorkSpaces
     # @option params [required, String] :resource_id
     #   The resource identifiers, in the form of directory IDs.
     #
-    # @option params [Types::ClientProperties] :client_properties
+    # @option params [required, Types::ClientProperties] :client_properties
     #   Information about the Amazon WorkSpaces client.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1147,7 +1147,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.modify_client_properties({
     #     resource_id: "NonEmptyString", # required
-    #     client_properties: {
+    #     client_properties: { # required
     #       reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
@@ -1506,7 +1506,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

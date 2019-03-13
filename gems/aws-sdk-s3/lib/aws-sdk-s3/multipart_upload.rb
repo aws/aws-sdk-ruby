@@ -70,6 +70,7 @@ module Aws::S3
       data[:storage_class]
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]

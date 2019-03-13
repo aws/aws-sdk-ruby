@@ -30,6 +30,7 @@ module Aws::S3
       @bucket_name
     end
 
+    
     # @return [Types::Owner]
     def owner
       data[:owner]

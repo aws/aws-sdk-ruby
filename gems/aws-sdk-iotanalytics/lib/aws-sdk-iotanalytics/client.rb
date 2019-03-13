@@ -214,6 +214,28 @@ module Aws::IoTAnalytics
     #   The list of messages to be sent. Each message has format: '\\\{
     #   "messageId": "string", "payload": "string"\\}'.
     #
+    #   Note that the field names of message payloads (data) that you send to
+    #   AWS IoT Analytics:
+    #
+    #   * Must contain only alphanumeric characters and undescores (\_); no
+    #     other special characters are allowed.
+    #
+    #   * Must begin with an alphabetic character or single underscore (\_).
+    #
+    #   * Cannot contain hyphens (-).
+    #
+    #   * In regular expression terms:
+    #     "^\[A-Za-z\_\](\[A-Za-z0-9\]*\|\[A-Za-z0-9\]\[A-Za-z0-9\_\]*)$".
+    #
+    #   * Cannot be greater than 255 characters.
+    #
+    #   * Are case-insensitive. (Fields named "foo" and "FOO" in the same
+    #     payload are considered duplicates.)
+    #
+    #   For example, \\\{"temp\_01": 29\\} or \\\{"\_temp\_01": 29\\} are
+    #   valid, but \\\{"temp-01": 29\\}, \\\{"01\_temp": 29\\} or
+    #   \\\{"\_\_temp\_01": 29\\} are invalid in message payloads.
+    #
     # @return [Types::BatchPutMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchPutMessageResponse#batch_put_message_error_entries #batch_put_message_error_entries} => Array&lt;Types::BatchPutMessageErrorEntry&gt;
@@ -338,6 +360,8 @@ module Aws::IoTAnalytics
     #   **DataSetTrigger** objects.
     #
     # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
+    #   When data set contents are created they are delivered to destinations
+    #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   \[Optional\] How long, in days, message data is kept for the data set.
@@ -442,7 +466,9 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates the content of a data set by applying a SQL action.
+    # Creates the content of a data set by applying a "queryAction" (a SQL
+    # query) or a "containerAction" (executing a containerized
+    # application).
     #
     # @option params [required, String] :dataset_name
     #   The name of the data set.
@@ -1051,6 +1077,16 @@ module Aws::IoTAnalytics
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :scheduled_on_or_after
+    #   A filter to limit results to those data set contents whose creation is
+    #   scheduled on or after the given time. See the field
+    #   `triggers.schedule` in the CreateDataset request. (timestamp)
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :scheduled_before
+    #   A filter to limit results to those data set contents whose creation is
+    #   scheduled before the given time. See the field `triggers.schedule` in
+    #   the CreateDataset request. (timestamp)
+    #
     # @return [Types::ListDatasetContentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDatasetContentsResponse#dataset_content_summaries #dataset_content_summaries} => Array&lt;Types::DatasetContentSummary&gt;
@@ -1062,6 +1098,8 @@ module Aws::IoTAnalytics
     #     dataset_name: "DatasetName", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     scheduled_on_or_after: Time.now,
+    #     scheduled_before: Time.now,
     #   })
     #
     # @example Response structure
@@ -1438,7 +1476,7 @@ module Aws::IoTAnalytics
     # which can be used to manage a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource whose tags will be modified.
+    #   The ARN of the resource whose tags you want to modify.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The new or modified tags for the resource.
@@ -1467,10 +1505,10 @@ module Aws::IoTAnalytics
     # Removes the given tags (metadata) from the resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource whose tags will be removed.
+    #   The ARN of the resource whose tags you want to remove.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys of those tags which will be removed.
+    #   The keys of those tags which you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1528,6 +1566,8 @@ module Aws::IoTAnalytics
     #   contain up to five **DataSetTrigger** objects.
     #
     # @option params [Array<Types::DatasetContentDeliveryRule>] :content_delivery_rules
+    #   When data set contents are created they are delivered to destinations
+    #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data set.
@@ -1739,7 +1779,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

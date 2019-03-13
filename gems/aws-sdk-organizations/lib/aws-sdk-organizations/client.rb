@@ -248,8 +248,8 @@ module Aws::Organizations
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
-    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to accept.
@@ -369,9 +369,10 @@ module Aws::Organizations
     #   * If you attach the policy directly to an account, then it affects
     #     only that account.
     #
-    #   SCPs essentially are permission "filters". When you attach one SCP
-    #   to a higher level root or OU, and you also attach a different SCP to
-    #   a child OU or to an account, the child policy can further restrict
+    #   SCPs are JSON policies that specify the maximum permissions for an
+    #   organization or organizational unit (OU). When you attach one SCP to
+    #   a higher level root or OU, and you also attach a different SCP to a
+    #   child OU or to an account, the child policy can further restrict
     #   only the permissions that pass through the parent filter and are
     #   available to the child. An SCP that is attached to a child cannot
     #   grant a permission that is not already granted by the parent. For
@@ -400,7 +401,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
@@ -605,7 +606,7 @@ module Aws::Organizations
     # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
     #   For information on using AWS CloudTrail with Organizations, see
     #   [Monitoring the Activity in Your Organization][1] in the *AWS
-    #   Organizations User Guide*.
+    #   Organizations User Guide.*
     #
     #
     #
@@ -628,7 +629,7 @@ module Aws::Organizations
     #
     # For more information about creating accounts, see [Creating an AWS
     # Account in Your Organization][3] in the *AWS Organizations User
-    # Guide*.
+    # Guide.*
     #
     # * When you create an account in an organization using the AWS
     #   Organizations console, API, or CLI commands, the information
@@ -646,7 +647,7 @@ module Aws::Organizations
     #   because your organization is still initializing, wait one hour and
     #   then try again. If the error persists, contact [AWS Support][5].
     #
-    # * Using CreateAccount to create multiple temporary accounts is not
+    # * Using CreateAccount to create multiple temporary accounts isn't
     #   recommended. You can only close an account from the Billing and Cost
     #   Management Console, and you must be signed in as the root user. For
     #   information on the requirements and process for closing an account,
@@ -668,11 +669,11 @@ module Aws::Organizations
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
     # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
-    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
     # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     # [5]: https://console.aws.amazon.com/support/home#/
     # [6]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
-    # [7]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
+    # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
@@ -709,8 +710,8 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
     #   [3]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :iam_user_access_to_billing
@@ -727,7 +728,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @return [Types::CreateAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -800,7 +801,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_getting-started_concepts.html#account
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_getting-started_concepts.html#account
     #
     # @option params [String] :feature_set
     #   Specifies the feature set supported by the new organization. Each
@@ -819,8 +820,8 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all
     #
     # @return [Types::CreateOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -919,7 +920,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) of the parent root or OU in which you want
@@ -999,7 +1000,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html
     #
     # @option params [required, String] :content
     #   The policy content to add to the new policy. For example, if you
@@ -1011,8 +1012,8 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
     #
     # @option params [required, String] :description
     #   An optional description to assign to the policy.
@@ -1776,8 +1777,8 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_whitelist
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_whitelist
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy you want to detach. You can
@@ -2068,7 +2069,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @return [Types::EnableAllFeaturesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2962,8 +2963,8 @@ module Aws::Organizations
     # @option params [Types::HandshakeFilter] :filter
     #   Filters the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the output
-    #   to only a specified type, such as `INVITE`, `ENABLE-FULL-CONTROL`, or
-    #   `APPROVE-FULL-CONTROL`. Alternatively, for the `ENABLE-FULL-CONTROL`
+    #   to only a specified type, such as `INVITE`, `ENABLE_ALL_FEATURES`, or
+    #   `APPROVE_ALL_FEATURES`. Alternatively, for the `ENABLE_ALL_FEATURES`
     #   handshake that generates a separate child handshake for each member
     #   account, you can specify `ParentHandshakeId` to see only the
     #   handshakes that were generated by that parent request.
@@ -4179,7 +4180,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
     #
     # @return [Types::UpdatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4278,7 +4279,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

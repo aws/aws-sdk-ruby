@@ -399,6 +399,32 @@ module Aws::SSM
     #   The date by which this activation request should expire. The default
     #   value is 24 hours.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an activation to
+    #   identify which servers or virtual machines (VMs) in your on-premises
+    #   environment you intend to activate. In this case, you could specify
+    #   the following key name/value pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   When you install SSM Agent on your on-premises servers and VMs, you
+    #   specify an activation ID and code. When you specify the activation ID
+    #   and code, tags assigned to the activation are automatically applied to
+    #   the on-premises servers or VMs.
+    #
+    #   You can't add tags to or delete tags from an existing activation. You
+    #   can tag your on-premises servers and VMs after they connect to Systems
+    #   Manager for the first time and are assigned a managed instance ID.
+    #   This means they are listed in the AWS Systems Manager console with an
+    #   ID that is prefixed with "mi-". For information about how to add
+    #   tags to your managed instances, see AddTagsToResource. For information
+    #   about how to remove tags from your managed instances, see
+    #   RemoveTagsFromResource.
+    #
     # @return [Types::CreateActivationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateActivationResult#activation_id #activation_id} => String
@@ -412,6 +438,12 @@ module Aws::SSM
     #     iam_role: "IamRole", # required
     #     registration_limit: 1,
     #     expiration_date: Time.now,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -440,7 +472,26 @@ module Aws::SSM
     # exception.
     #
     # @option params [required, String] :name
-    #   The name of the Systems Manager document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or a
+    #   document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:partition:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #
     # @option params [String] :document_version
     #   The document version you want to associate with the target(s). Can be
@@ -465,6 +516,11 @@ module Aws::SSM
     #
     # @option params [String] :association_name
     #   Specify a descriptive name for the association.
+    #
+    # @option params [String] :automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
     #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops sending
@@ -505,7 +561,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_association({
-    #     name: "DocumentName", # required
+    #     name: "DocumentARN", # required
     #     document_version: "DocumentVersion",
     #     instance_id: "InstanceId",
     #     parameters: {
@@ -526,6 +582,7 @@ module Aws::SSM
     #       },
     #     },
     #     association_name: "AssociationName",
+    #     automation_target_parameter_name: "AutomationTargetParameterName",
     #     max_errors: "MaxErrors",
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -547,6 +604,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -599,11 +657,12 @@ module Aws::SSM
     #   resp = client.create_association_batch({
     #     entries: [ # required
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         instance_id: "InstanceId",
     #         parameters: {
     #           "ParameterName" => ["ParameterValue"],
     #         },
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         document_version: "DocumentVersion",
     #         targets: [
     #           {
@@ -644,6 +703,7 @@ module Aws::SSM
     #   resp.successful[0].overview.association_status_aggregated_count #=> Hash
     #   resp.successful[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.successful[0].document_version #=> String
+    #   resp.successful[0].automation_target_parameter_name #=> String
     #   resp.successful[0].parameters #=> Hash
     #   resp.successful[0].parameters["ParameterName"] #=> Array
     #   resp.successful[0].parameters["ParameterName"][0] #=> String
@@ -668,6 +728,7 @@ module Aws::SSM
     #   resp.failed[0].entry.parameters #=> Hash
     #   resp.failed[0].entry.parameters["ParameterName"] #=> Array
     #   resp.failed[0].entry.parameters["ParameterName"][0] #=> String
+    #   resp.failed[0].entry.automation_target_parameter_name #=> String
     #   resp.failed[0].entry.document_version #=> String
     #   resp.failed[0].entry.targets #=> Array
     #   resp.failed[0].entry.targets[0].key #=> String
@@ -744,6 +805,22 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an SSM document to
+    #   identify the types of targets or the environment where it will run. In
+    #   this case, you could specify the following key name/value pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing SSM document, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #
     # @return [Types::CreateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentResult#document_description #document_description} => Types::DocumentDescription
@@ -763,6 +840,12 @@ module Aws::SSM
     #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -864,6 +947,25 @@ module Aws::SSM
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag a Maintenance Window
+    #   to identify the type of tasks it will run, the types of targets, and
+    #   the environment it will run in. In this case, you could specify the
+    #   following key name/value pairs:
+    #
+    #   * `Key=TaskType,Value=AgentUpdate`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #
     # @return [Types::CreateMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMaintenanceWindowResult#window_id #window_id} => String
@@ -881,6 +983,12 @@ module Aws::SSM
     #     cutoff: 1, # required
     #     allow_unassociated_targets: false, # required
     #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -915,7 +1023,7 @@ module Aws::SSM
     #   The name of the patch baseline.
     #
     # @option params [Types::PatchFilterGroup] :global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #
     # @option params [Types::PatchRuleGroup] :approval_rules
     #   A set of rules used to include patches in the baseline.
@@ -982,6 +1090,23 @@ module Aws::SSM
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag a patch baseline to
+    #   identify the severity level of patches it specifies and the operating
+    #   system family it applies to. In this case, you could specify the
+    #   following key name/value pairs:
+    #
+    #   * `Key=PatchSeverity,Value=Critical`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #
     # @return [Types::CreatePatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePatchBaselineResult#baseline_id #baseline_id} => String
@@ -1030,6 +1155,12 @@ module Aws::SSM
     #       },
     #     ],
     #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1054,14 +1185,13 @@ module Aws::SSM
     # By default, data is not encrypted in Amazon S3. We strongly recommend
     # that you enable encryption in Amazon S3 to ensure secure data storage.
     # We also recommend that you secure access to the Amazon S3 bucket by
-    # creating a restrictive bucket policy. To view an example of a
-    # restrictive Amazon S3 bucket policy for Resource Data Sync, see
-    # [Create a Resource Data Sync for Inventory][1] in the *AWS Systems
+    # creating a restrictive bucket policy. For more information, see
+    # [Configuring Resource Data Sync for Inventory][1] in the *AWS Systems
     # Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html
     #
     # @option params [required, String] :sync_name
     #   A name for the configuration.
@@ -1142,7 +1272,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_association({
-    #     name: "DocumentName",
+    #     name: "DocumentARN",
     #     instance_id: "InstanceId",
     #     association_id: "AssociationId",
     #   })
@@ -1571,6 +1701,9 @@ module Aws::SSM
     #   resp.activation_list[0].expiration_date #=> Time
     #   resp.activation_list[0].expired #=> Boolean
     #   resp.activation_list[0].created_date #=> Time
+    #   resp.activation_list[0].tags #=> Array
+    #   resp.activation_list[0].tags[0].key #=> String
+    #   resp.activation_list[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations AWS API Documentation
@@ -1602,7 +1735,7 @@ module Aws::SSM
     #   Specify the association version to retrieve. To view the latest
     #   version, either specify `$LATEST` for this parameter, or omit this
     #   parameter. To view a list of all associations for an instance, use
-    #   ListInstanceAssociations. To get a list of versions for a specific
+    #   ListAssociations. To get a list of versions for a specific
     #   association, use ListAssociationVersions.
     #
     # @return [Types::DescribeAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1612,7 +1745,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_association({
-    #     name: "DocumentName",
+    #     name: "DocumentARN",
     #     instance_id: "InstanceId",
     #     association_id: "AssociationId",
     #     association_version: "AssociationVersion",
@@ -1634,6 +1767,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -4606,6 +4740,55 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # UpdateServiceSetting API action to change the default setting. Or use
+    # the ResetServiceSetting to change the value back to the original value
+    # defined by the AWS service team.
+    #
+    # Query the current service setting for the account.
+    #
+    # @option params [required, String] :setting_id
+    #   The ID of the service setting to get.
+    #
+    # @return [Types::GetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceSettingResult#service_setting #service_setting} => Types::ServiceSetting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_setting({
+    #     setting_id: "ServiceSettingId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_setting.setting_id #=> String
+    #   resp.service_setting.setting_value #=> String
+    #   resp.service_setting.last_modified_date #=> Time
+    #   resp.service_setting.last_modified_user #=> String
+    #   resp.service_setting.arn #=> String
+    #   resp.service_setting.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSetting AWS API Documentation
+    #
+    # @overload get_service_setting(params = {})
+    # @param [Hash] params ({})
+    def get_service_setting(params = {}, options = {})
+      req = build_request(:get_service_setting, params)
+      req.send_request(options)
+    end
+
     # A parameter label is a user-defined alias to help you manage different
     # versions of a parameter. When you modify a parameter, Systems Manager
     # automatically saves a new version and increments the version number by
@@ -5768,6 +5951,26 @@ module Aws::SSM
     #   example, for String types with values restricted to numbers, you can
     #   specify the following: AllowedPattern=^\\d+$
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag a Systems Manager
+    #   parameter to identify the type of resource to which it applies, the
+    #   environment, or the type of configuration data referenced by the
+    #   parameter. In this case, you could specify the following key
+    #   name/value pairs:
+    #
+    #   * `Key=Resource,Value=S3bucket`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=ParameterType,Value=LicenseKey`
+    #
+    #   <note markdown="1"> To add tags to an existing Systems Manager parameter, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutParameterResult#version #version} => Integer
@@ -5782,6 +5985,12 @@ module Aws::SSM
     #     key_id: "ParameterKeyId",
     #     overwrite: false,
     #     allowed_pattern: "AllowedPattern",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6160,6 +6369,55 @@ module Aws::SSM
     # @param [Hash] params ({})
     def remove_tags_from_resource(params = {}, options = {})
       req = build_request(:remove_tags_from_resource, params)
+      req.send_request(options)
+    end
+
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # GetServiceSetting API action to view the current value. Use the
+    # UpdateServiceSetting API action to change the default setting.
+    #
+    # Reset the service setting for the account to the default value as
+    # provisioned by the AWS service team.
+    #
+    # @option params [required, String] :setting_id
+    #   The ID of the service setting to reset.
+    #
+    # @return [Types::ResetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetServiceSettingResult#service_setting #service_setting} => Types::ServiceSetting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_service_setting({
+    #     setting_id: "ServiceSettingId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_setting.setting_id #=> String
+    #   resp.service_setting.setting_value #=> String
+    #   resp.service_setting.last_modified_date #=> Time
+    #   resp.service_setting.last_modified_user #=> String
+    #   resp.service_setting.arn #=> String
+    #   resp.service_setting.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSetting AWS API Documentation
+    #
+    # @overload reset_service_setting(params = {})
+    # @param [Hash] params ({})
+    def reset_service_setting(params = {}, options = {})
+      req = build_request(:reset_service_setting, params)
       req.send_request(options)
     end
 
@@ -6720,7 +6978,26 @@ module Aws::SSM
     #   request.
     #
     # @option params [String] :name
-    #   The name of the association document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or a
+    #   document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:aws:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #
     # @option params [Array<Types::Target>] :targets
     #   The targets of the association.
@@ -6733,6 +7010,11 @@ module Aws::SSM
     #   specify the latest association version in the service. If you want to
     #   ensure that this request succeeds, either specify `$LATEST`, or omit
     #   this parameter.
+    #
+    # @option params [String] :automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
     #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops sending
@@ -6786,7 +7068,7 @@ module Aws::SSM
     #         output_s3_key_prefix: "S3KeyPrefix",
     #       },
     #     },
-    #     name: "DocumentName",
+    #     name: "DocumentARN",
     #     targets: [
     #       {
     #         key: "TargetKey",
@@ -6795,6 +7077,7 @@ module Aws::SSM
     #     ],
     #     association_name: "AssociationName",
     #     association_version: "AssociationVersion",
+    #     automation_target_parameter_name: "AutomationTargetParameterName",
     #     max_errors: "MaxErrors",
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -6816,6 +7099,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -6863,7 +7147,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_association_status({
-    #     name: "DocumentName", # required
+    #     name: "DocumentARN", # required
     #     instance_id: "InstanceId", # required
     #     association_status: { # required
     #       date: Time.now, # required
@@ -6889,6 +7173,7 @@ module Aws::SSM
     #   resp.association_description.overview.association_status_aggregated_count #=> Hash
     #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.association_description.document_version #=> String
+    #   resp.association_description.automation_target_parameter_name #=> String
     #   resp.association_description.parameters #=> Hash
     #   resp.association_description.parameters["ParameterName"] #=> Array
     #   resp.association_description.parameters["ParameterName"][0] #=> String
@@ -7544,7 +7829,7 @@ module Aws::SSM
     #   The name of the patch baseline.
     #
     # @option params [Types::PatchFilterGroup] :global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #
     # @option params [Types::PatchRuleGroup] :approval_rules
     #   A set of rules used to include patches in the baseline.
@@ -7713,6 +7998,48 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # GetServiceSetting API action to view the current value. Or, use the
+    # ResetServiceSetting to change the value back to the original value
+    # defined by the AWS service team.
+    #
+    # Update the service setting for the account.
+    #
+    # @option params [required, String] :setting_id
+    #   The ID of the service setting to update.
+    #
+    # @option params [required, String] :setting_value
+    #   The new value to specify for the service setting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_setting({
+    #     setting_id: "ServiceSettingId", # required
+    #     setting_value: "ServiceSettingValue", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSetting AWS API Documentation
+    #
+    # @overload update_service_setting(params = {})
+    # @param [Hash] params ({})
+    def update_service_setting(params = {}, options = {})
+      req = build_request(:update_service_setting, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7726,7 +8053,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

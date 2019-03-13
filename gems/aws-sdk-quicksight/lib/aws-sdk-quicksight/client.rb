@@ -253,6 +253,7 @@ module Aws::QuickSight
     #   resp.group.arn #=> String
     #   resp.group.group_name #=> String
     #   resp.group.description #=> String
+    #   resp.group.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -487,6 +488,45 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes a user after locating the user by its principal ID.
+    #
+    # @option params [required, String] :principal_id
+    #   The principal ID of the user.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the AWS account that the user is in. Currently, you use the
+    #   ID for the AWS account that contains your Amazon QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace. Currently, you should set this to `default`.
+    #
+    # @return [Types::DeleteUserByPrincipalIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteUserByPrincipalIdResponse#request_id #request_id} => String
+    #   * {Types::DeleteUserByPrincipalIdResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_by_principal_id({
+    #     principal_id: "String", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalId AWS API Documentation
+    #
+    # @overload delete_user_by_principal_id(params = {})
+    # @param [Hash] params ({})
+    def delete_user_by_principal_id(params = {}, options = {})
+      req = build_request(:delete_user_by_principal_id, params)
+      req.send_request(options)
+    end
+
     # Returns an Amazon QuickSight group's description and Amazon Resource
     # Name (ARN).
     #
@@ -531,6 +571,7 @@ module Aws::QuickSight
     #   resp.group.arn #=> String
     #   resp.group.group_name #=> String
     #   resp.group.description #=> String
+    #   resp.group.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -590,6 +631,7 @@ module Aws::QuickSight
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
+    #   resp.user.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -805,6 +847,7 @@ module Aws::QuickSight
     #   resp.group_list[0].arn #=> String
     #   resp.group_list[0].group_name #=> String
     #   resp.group_list[0].description #=> String
+    #   resp.group_list[0].principal_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -873,6 +916,7 @@ module Aws::QuickSight
     #   resp.group_list[0].arn #=> String
     #   resp.group_list[0].group_name #=> String
     #   resp.group_list[0].description #=> String
+    #   resp.group_list[0].principal_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -939,6 +983,7 @@ module Aws::QuickSight
     #   resp.user_list[0].role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user_list[0].active #=> Boolean
+    #   resp.user_list[0].principal_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -1036,7 +1081,7 @@ module Aws::QuickSight
     #     email: "String", # required
     #     user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #     iam_arn: "String",
-    #     session_name: "String",
+    #     session_name: "RoleSessionName",
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #     user_name: "UserName",
@@ -1050,6 +1095,7 @@ module Aws::QuickSight
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
+    #   resp.user.principal_id #=> String
     #   resp.user_invitation_url #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -1111,6 +1157,7 @@ module Aws::QuickSight
     #   resp.group.arn #=> String
     #   resp.group.group_name #=> String
     #   resp.group.description #=> String
+    #   resp.group.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -1189,6 +1236,7 @@ module Aws::QuickSight
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
     #   resp.user.active #=> Boolean
+    #   resp.user.principal_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -1214,7 +1262,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

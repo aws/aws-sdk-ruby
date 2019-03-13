@@ -458,7 +458,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration for this Microsoft Windows file system.
@@ -559,6 +559,7 @@ module Aws::FSx
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       import_path: "ArchivePath",
+    #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
     #     },
     #   })
@@ -1567,7 +1568,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

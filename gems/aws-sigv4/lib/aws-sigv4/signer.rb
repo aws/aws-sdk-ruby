@@ -246,6 +246,39 @@ module Aws
 
       # Signs a event and returns signature headers and prior signature
       # used for next event signing.
+      #
+      # Headers of a sigv4 signed event message only contains 2 headers
+      #   * ':chunk-signature'
+      #     * computed signature of the event, binary string, 'bytes' type
+      #   * ':date'
+      #     * millisecond since epoch, 'timestamp' type
+      #
+      # Payload of the sigv4 signed event message contains eventstream encoded message
+      # which is serialized based on input and protocol
+      #
+      # To sign events
+      #
+      #     headers_0, signature_0 = signer.sign_event(
+      #       prior_signature, # hex-encoded string
+      #       payload_0, # binary string (eventstream encoded event 0)
+      #       encoder, # Aws::EventStreamEncoder
+      #     )
+      #
+      #     headers_1, signature_1 = signer.sign_event(
+      #       signature_0,
+      #       payload_1, # binary string (eventstream encoded event 1)
+      #       encoder
+      #     )
+      #
+      # The initial prior_signature should be using the signature computed at initial request
+      #
+      # Note:
+      #
+      #   Since ':chunk-signature' header value has bytes type, the signature value provided
+      #   needs to be a binary string instead of a hex-encoded string (like original signature
+      #   V4 algorithm). Thus, when returning signature value used for next event siging, the
+      #   signature value (a binary string) used at ':chunk-signature' needs to converted to
+      #   hex-encoded string using #unpack
       def sign_event(prior_signature, payload, encoder)
         creds = get_credentials
         time = Time.now
@@ -259,6 +292,8 @@ module Aws
         sig = event_signature(creds.secret_access_key, date, sts)
 
         headers[':chunk-signature'] = Aws::EventStream::HeaderValue.new(value: sig, type: 'bytes')
+
+        # Returning signed headers and signature value in hex-encoded string
         [headers, sig.unpack('H*').first]
       end
 
@@ -394,9 +429,19 @@ module Aws
         ].join("\n")
       end
 
+      # Compared to original #string_to_sign at signature v4 algorithm
+      # there is no canonical_request concept for an eventstream event,
+      # instead, an event contains headers and payload two parts, and
+      # they will be used for computing digest in #event_string_to_sign
+      #
+      # Note:
+      #   While headers need to be encoded under eventstream format,
+      #   payload used is already eventstream encoded (event without signature),
+      #   thus no extra encoding is needed.
       def event_string_to_sign(datetime, headers, payload, prior_signature, encoder)
         encoded_headers = encoder.encode_headers(
-          Aws::EventStream::Message.new(headers: headers, payload: payload)).read
+          Aws::EventStream::Message.new(headers: headers, payload: payload)
+        ).read
         [
           "AWS4-HMAC-SHA256-PAYLOAD",
           datetime,
@@ -428,6 +473,15 @@ module Aws
         hexhmac(k_credentials, string_to_sign)
       end
 
+      # Comparing to original signature v4 algorithm,
+      # returned signature is a binary string instread of
+      # hex-encoded string. (Since ':chunk-signature' requires
+      # 'bytes' type)
+      #
+      # Note:
+      #   converting signature from binary string to hex-encoded
+      #   string is handled at #sign_event instead. (Will be used
+      #   as next prior signature for event signing)
       def event_signature(secret_access_key, date, string_to_sign)
         k_date = hmac("AWS4" + secret_access_key, date)
         k_region = hmac(k_date, @region)

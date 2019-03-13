@@ -331,6 +331,7 @@ module Aws::DirectoryService
     ConnectDirectoryRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ConnectDirectoryRequest.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, required: true, location_name: "Size"))
     ConnectDirectoryRequest.add_member(:connect_settings, Shapes::ShapeRef.new(shape: DirectoryConnectSettings, required: true, location_name: "ConnectSettings"))
+    ConnectDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ConnectDirectoryRequest.struct_class = Types::ConnectDirectoryRequest
 
     ConnectDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -367,6 +368,7 @@ module Aws::DirectoryService
     CreateDirectoryRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDirectoryRequest.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, required: true, location_name: "Size"))
     CreateDirectoryRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings"))
+    CreateDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDirectoryRequest.struct_class = Types::CreateDirectoryRequest
 
     CreateDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -384,6 +386,7 @@ module Aws::DirectoryService
     CreateMicrosoftADRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateMicrosoftADRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, required: true, location_name: "VpcSettings"))
     CreateMicrosoftADRequest.add_member(:edition, Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
+    CreateMicrosoftADRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateMicrosoftADRequest.struct_class = Types::CreateMicrosoftADRequest
 
     CreateMicrosoftADResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))

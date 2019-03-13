@@ -145,6 +145,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationInput.add_member(:readme_body, Shapes::ShapeRef.new(shape: __string, location_name: "readmeBody"))
     CreateApplicationInput.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationInput.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
+    CreateApplicationInput.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationInput.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationInput.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
     CreateApplicationInput.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
@@ -161,6 +162,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationRequest.add_member(:readme_body, Shapes::ShapeRef.new(shape: __string, location_name: "readmeBody"))
     CreateApplicationRequest.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
+    CreateApplicationRequest.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationRequest.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationRequest.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
     CreateApplicationRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
@@ -180,6 +182,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
+    CreateApplicationVersionInput.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationVersionInput.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationVersionInput.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
     CreateApplicationVersionInput.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
@@ -187,6 +190,7 @@ module Aws::ServerlessApplicationRepository
 
     CreateApplicationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
     CreateApplicationVersionRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "semanticVersion"))
+    CreateApplicationVersionRequest.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationVersionRequest.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationVersionRequest.add_member(:template_body, Shapes::ShapeRef.new(shape: __string, location_name: "templateBody"))
     CreateApplicationVersionRequest.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
@@ -198,6 +202,7 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationVersionResponse.add_member(:required_capabilities, Shapes::ShapeRef.new(shape: __listOfCapability, location_name: "requiredCapabilities"))
     CreateApplicationVersionResponse.add_member(:resources_supported, Shapes::ShapeRef.new(shape: __boolean, location_name: "resourcesSupported"))
     CreateApplicationVersionResponse.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, location_name: "semanticVersion"))
+    CreateApplicationVersionResponse.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     CreateApplicationVersionResponse.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     CreateApplicationVersionResponse.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, location_name: "templateUrl"))
     CreateApplicationVersionResponse.struct_class = Types::CreateApplicationVersionResponse
@@ -399,6 +404,7 @@ module Aws::ServerlessApplicationRepository
     Version.add_member(:required_capabilities, Shapes::ShapeRef.new(shape: __listOfCapability, required: true, location_name: "requiredCapabilities"))
     Version.add_member(:resources_supported, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "resourcesSupported"))
     Version.add_member(:semantic_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "semanticVersion"))
+    Version.add_member(:source_code_archive_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeArchiveUrl"))
     Version.add_member(:source_code_url, Shapes::ShapeRef.new(shape: __string, location_name: "sourceCodeUrl"))
     Version.add_member(:template_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "templateUrl"))
     Version.struct_class = Types::Version

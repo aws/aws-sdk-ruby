@@ -352,6 +352,12 @@ module Aws::ACMPCA
     #         },
     #         certificate_authority_type: "SUBORDINATE", # required, accepts SUBORDINATE
     #         idempotency_token: "IdempotencyToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] certificate_authority_configuration
@@ -384,13 +390,19 @@ module Aws::ACMPCA
     #   you are requesting multiple certificates.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Key-value pairs that will be attached to the new private CA. You can
+    #   associate up to 50 tags with a private CA.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreateCertificateAuthorityRequest AWS API Documentation
     #
     class CreateCertificateAuthorityRequest < Struct.new(
       :certificate_authority_configuration,
       :revocation_configuration,
       :certificate_authority_type,
-      :idempotency_token)
+      :idempotency_token,
+      :tags)
       include Aws::Structure
     end
 

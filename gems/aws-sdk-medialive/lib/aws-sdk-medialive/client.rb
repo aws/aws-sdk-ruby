@@ -235,6 +235,13 @@ module Aws::MediaLive
     #             input_switch_settings: {
     #               input_attachment_name_reference: "__string", # required
     #             },
+    #             pause_state_settings: {
+    #               pipelines: [
+    #                 {
+    #                   pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #                 },
+    #               ],
+    #             },
     #             scte_35_return_to_network_settings: {
     #               splice_event_id: 1, # required
     #             },
@@ -312,6 +319,8 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].action_name #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
+    #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -351,6 +360,8 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].action_name #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -419,6 +430,8 @@ module Aws::MediaLive
     #
     # @option params [String] :role_arn
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -429,6 +442,11 @@ module Aws::MediaLive
     #     destinations: [
     #       {
     #         id: "__string",
+    #         media_package_settings: [
+    #           {
+    #             channel_id: "__stringMin1",
+    #           },
+    #         ],
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -663,6 +681,11 @@ module Aws::MediaLive
     #               },
     #               rollover_interval: 1,
     #             },
+    #             frame_capture_group_settings: {
+    #               destination: { # required
+    #                 destination_ref_id: "__string",
+    #               },
+    #             },
     #             hls_group_settings: {
     #               ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #               base_url_content: "__string",
@@ -714,6 +737,7 @@ module Aws::MediaLive
     #                   restart_delay: 1,
     #                 },
     #               },
+    #               i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #               index_n_segments: 1,
     #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #               iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -747,6 +771,11 @@ module Aws::MediaLive
     #               timed_metadata_id_3_period: 1,
     #               timestamp_delta_milliseconds: 1,
     #               ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #             },
+    #             media_package_group_settings: {
+    #               destination: { # required
+    #                 destination_ref_id: "__string",
+    #               },
     #             },
     #             ms_smooth_group_settings: {
     #               acquisition_point_id: "__string",
@@ -856,6 +885,9 @@ module Aws::MediaLive
     #                   extension: "__string",
     #                   name_modifier: "__string",
     #                 },
+    #                 frame_capture_output_settings: {
+    #                   name_modifier: "__string",
+    #                 },
     #                 hls_output_settings: {
     #                   hls_settings: { # required
     #                     audio_only_hls_settings: {
@@ -891,6 +923,8 @@ module Aws::MediaLive
     #                   },
     #                   name_modifier: "__stringMin1",
     #                   segment_modifier: "__string",
+    #                 },
+    #                 media_package_output_settings: {
     #                 },
     #                 ms_smooth_output_settings: {
     #                   name_modifier: "__string",
@@ -988,6 +1022,9 @@ module Aws::MediaLive
     #       video_descriptions: [ # required
     #         {
     #           codec_settings: {
+    #             frame_capture_settings: {
+    #               capture_interval: 1, # required
+    #             },
     #             h264_settings: {
     #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -1124,6 +1161,9 @@ module Aws::MediaLive
     #     request_id: "__string",
     #     reserved: "__string",
     #     role_arn: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1131,6 +1171,8 @@ module Aws::MediaLive
     #   resp.channel.arn #=> String
     #   resp.channel.destinations #=> Array
     #   resp.channel.destinations[0].id #=> String
+    #   resp.channel.destinations[0].media_package_settings #=> Array
+    #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -1273,6 +1315,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -1309,6 +1352,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -1336,6 +1380,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -1423,6 +1468,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.video_pid #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
@@ -1512,6 +1558,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.channel.encoder_settings.video_descriptions #=> Array
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -1598,6 +1645,8 @@ module Aws::MediaLive
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.channel.tags #=> Hash
+    #   resp.channel.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -1626,7 +1675,16 @@ module Aws::MediaLive
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @option params [String] :type
+    #
+    # @option params [Types::InputVpcRequest] :vpc
+    #   Settings for a private VPC Input. When this property is specified, the
+    #   input destination addresses will be created in a VPC rather than with
+    #   public Internet addresses. This property requires setting the roleArn
+    #   property on Input creation. Not compatible with the
+    #   inputSecurityGroups property.
     #
     # @return [Types::CreateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1656,7 +1714,14 @@ module Aws::MediaLive
     #         username: "__string",
     #       },
     #     ],
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
+    #     vpc: {
+    #       security_group_ids: ["__string"],
+    #       subnet_ids: ["__string"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1668,6 +1733,8 @@ module Aws::MediaLive
     #   resp.input.destinations[0].ip #=> String
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
+    #   resp.input.destinations[0].vpc.availability_zone #=> String
+    #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -1680,6 +1747,8 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.input.tags #=> Hash
+    #   resp.input.tags["__string"] #=> String
     #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
@@ -1693,6 +1762,8 @@ module Aws::MediaLive
 
     # Creates a Input Security Group
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @option params [Array<Types::InputWhitelistRuleCidr>] :whitelist_rules
     #
     # @return [Types::CreateInputSecurityGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1702,6 +1773,9 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_input_security_group({
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     whitelist_rules: [
     #       {
     #         cidr: "__string",
@@ -1716,6 +1790,8 @@ module Aws::MediaLive
     #   resp.security_group.inputs #=> Array
     #   resp.security_group.inputs[0] #=> String
     #   resp.security_group.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.security_group.tags #=> Hash
+    #   resp.security_group.tags["__string"] #=> String
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
     #
@@ -1725,6 +1801,32 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def create_input_security_group(params = {}, options = {})
       req = build_request(:create_input_security_group, params)
+      req.send_request(options)
+    end
+
+    # Create tags for a resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tags({
+    #     resource_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateTags AWS API Documentation
+    #
+    # @overload create_tags(params = {})
+    # @param [Hash] params ({})
+    def create_tags(params = {}, options = {})
+      req = build_request(:create_tags, params)
       req.send_request(options)
     end
 
@@ -1746,6 +1848,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
     #   * {Types::DeleteChannelResponse#state #state} => String
+    #   * {Types::DeleteChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1758,6 +1861,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -1900,6 +2005,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -1936,6 +2042,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -1963,6 +2070,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -2050,6 +2158,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
@@ -2139,6 +2248,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -2225,6 +2335,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -2342,6 +2454,30 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Removes tags for a resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tags({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteTags AWS API Documentation
+    #
+    # @overload delete_tags(params = {})
+    # @param [Hash] params ({})
+    def delete_tags(params = {}, options = {})
+      req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
     # Gets details about a channel
     #
     # @option params [required, String] :channel_id
@@ -2360,6 +2496,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
     #   * {Types::DescribeChannelResponse#state #state} => String
+    #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2372,6 +2509,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -2514,6 +2653,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -2550,6 +2690,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -2577,6 +2718,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -2664,6 +2806,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
@@ -2753,6 +2896,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -2839,6 +2983,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannel AWS API Documentation
     #
@@ -2865,6 +3011,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#security_groups #security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#sources #sources} => Array&lt;Types::InputSource&gt;
     #   * {Types::DescribeInputResponse#state #state} => String
+    #   * {Types::DescribeInputResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputResponse#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -2882,6 +3029,8 @@ module Aws::MediaLive
     #   resp.destinations[0].ip #=> String
     #   resp.destinations[0].port #=> String
     #   resp.destinations[0].url #=> String
+    #   resp.destinations[0].vpc.availability_zone #=> String
+    #   resp.destinations[0].vpc.network_interface_id #=> String
     #   resp.id #=> String
     #   resp.media_connect_flows #=> Array
     #   resp.media_connect_flows[0].flow_arn #=> String
@@ -2894,6 +3043,8 @@ module Aws::MediaLive
     #   resp.sources[0].url #=> String
     #   resp.sources[0].username #=> String
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput AWS API Documentation
@@ -2915,6 +3066,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputSecurityGroupResponse#id #id} => String
     #   * {Types::DescribeInputSecurityGroupResponse#inputs #inputs} => Array&lt;String&gt;
     #   * {Types::DescribeInputSecurityGroupResponse#state #state} => String
+    #   * {Types::DescribeInputSecurityGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputSecurityGroupResponse#whitelist_rules #whitelist_rules} => Array&lt;Types::InputWhitelistRule&gt;
     #
     # @example Request syntax with placeholder values
@@ -2930,6 +3082,8 @@ module Aws::MediaLive
     #   resp.inputs #=> Array
     #   resp.inputs[0] #=> String
     #   resp.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.whitelist_rules #=> Array
     #   resp.whitelist_rules[0].cidr #=> String
     #
@@ -3088,6 +3242,8 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].action_name #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
+    #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.duration #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_splice_insert_settings.splice_event_id #=> Integer
@@ -3157,6 +3313,8 @@ module Aws::MediaLive
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].destinations #=> Array
     #   resp.channels[0].destinations[0].id #=> String
+    #   resp.channels[0].destinations[0].media_package_settings #=> Array
+    #   resp.channels[0].destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.channels[0].destinations[0].settings #=> Array
     #   resp.channels[0].destinations[0].settings[0].password_param #=> String
     #   resp.channels[0].destinations[0].settings[0].stream_name #=> String
@@ -3207,6 +3365,8 @@ module Aws::MediaLive
     #   resp.channels[0].pipelines_running_count #=> Integer
     #   resp.channels[0].role_arn #=> String
     #   resp.channels[0].state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.channels[0].tags #=> Hash
+    #   resp.channels[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -3244,6 +3404,8 @@ module Aws::MediaLive
     #   resp.input_security_groups[0].inputs #=> Array
     #   resp.input_security_groups[0].inputs[0] #=> String
     #   resp.input_security_groups[0].state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.input_security_groups[0].tags #=> Hash
+    #   resp.input_security_groups[0].tags["__string"] #=> String
     #   resp.input_security_groups[0].whitelist_rules #=> Array
     #   resp.input_security_groups[0].whitelist_rules[0].cidr #=> String
     #   resp.next_token #=> String
@@ -3285,6 +3447,8 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].ip #=> String
     #   resp.inputs[0].destinations[0].port #=> String
     #   resp.inputs[0].destinations[0].url #=> String
+    #   resp.inputs[0].destinations[0].vpc.availability_zone #=> String
+    #   resp.inputs[0].destinations[0].vpc.network_interface_id #=> String
     #   resp.inputs[0].id #=> String
     #   resp.inputs[0].media_connect_flows #=> Array
     #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
@@ -3297,6 +3461,8 @@ module Aws::MediaLive
     #   resp.inputs[0].sources[0].url #=> String
     #   resp.inputs[0].sources[0].username #=> String
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.inputs[0].tags #=> Hash
+    #   resp.inputs[0].tags["__string"] #=> String
     #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #   resp.next_token #=> String
     #
@@ -3458,6 +3624,34 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Produces list of tags that have been created for a resource
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Purchase an offering and create a reservation.
     #
     # @option params [required, Integer] :count
@@ -3539,6 +3733,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
     #   * {Types::StartChannelResponse#state #state} => String
+    #   * {Types::StartChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3551,6 +3746,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -3693,6 +3890,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -3729,6 +3927,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -3756,6 +3955,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -3843,6 +4043,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
@@ -3932,6 +4133,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -4018,6 +4220,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -4046,6 +4250,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
     #   * {Types::StopChannelResponse#state #state} => String
+    #   * {Types::StopChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4058,6 +4263,8 @@ module Aws::MediaLive
     #   resp.arn #=> String
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
+    #   resp.destinations[0].media_package_settings #=> Array
+    #   resp.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -4200,6 +4407,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -4236,6 +4444,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -4263,6 +4472,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -4350,6 +4560,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.video_pid #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
@@ -4439,6 +4650,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -4525,6 +4737,8 @@ module Aws::MediaLive
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -4565,6 +4779,11 @@ module Aws::MediaLive
     #     destinations: [
     #       {
     #         id: "__string",
+    #         media_package_settings: [
+    #           {
+    #             channel_id: "__stringMin1",
+    #           },
+    #         ],
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -4799,6 +5018,11 @@ module Aws::MediaLive
     #               },
     #               rollover_interval: 1,
     #             },
+    #             frame_capture_group_settings: {
+    #               destination: { # required
+    #                 destination_ref_id: "__string",
+    #               },
+    #             },
     #             hls_group_settings: {
     #               ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #               base_url_content: "__string",
@@ -4850,6 +5074,7 @@ module Aws::MediaLive
     #                   restart_delay: 1,
     #                 },
     #               },
+    #               i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #               index_n_segments: 1,
     #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #               iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -4883,6 +5108,11 @@ module Aws::MediaLive
     #               timed_metadata_id_3_period: 1,
     #               timestamp_delta_milliseconds: 1,
     #               ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #             },
+    #             media_package_group_settings: {
+    #               destination: { # required
+    #                 destination_ref_id: "__string",
+    #               },
     #             },
     #             ms_smooth_group_settings: {
     #               acquisition_point_id: "__string",
@@ -4992,6 +5222,9 @@ module Aws::MediaLive
     #                   extension: "__string",
     #                   name_modifier: "__string",
     #                 },
+    #                 frame_capture_output_settings: {
+    #                   name_modifier: "__string",
+    #                 },
     #                 hls_output_settings: {
     #                   hls_settings: { # required
     #                     audio_only_hls_settings: {
@@ -5027,6 +5260,8 @@ module Aws::MediaLive
     #                   },
     #                   name_modifier: "__stringMin1",
     #                   segment_modifier: "__string",
+    #                 },
+    #                 media_package_output_settings: {
     #                 },
     #                 ms_smooth_output_settings: {
     #                   name_modifier: "__string",
@@ -5124,6 +5359,9 @@ module Aws::MediaLive
     #       video_descriptions: [ # required
     #         {
     #           codec_settings: {
+    #             frame_capture_settings: {
+    #               capture_interval: 1, # required
+    #             },
     #             h264_settings: {
     #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #               afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -5265,6 +5503,8 @@ module Aws::MediaLive
     #   resp.channel.arn #=> String
     #   resp.channel.destinations #=> Array
     #   resp.channel.destinations[0].id #=> String
+    #   resp.channel.destinations[0].media_package_settings #=> Array
+    #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -5407,6 +5647,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -5443,6 +5684,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.iv_in_manifest #=> String, one of "EXCLUDE", "INCLUDE"
@@ -5470,6 +5712,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ts_file_mode #=> String, one of "SEGMENTED_FILES", "SINGLE_FILE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -5557,6 +5800,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.video_pid #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
@@ -5646,6 +5890,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.channel.encoder_settings.video_descriptions #=> Array
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -5732,6 +5977,8 @@ module Aws::MediaLive
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.channel.tags #=> Hash
+    #   resp.channel.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -5797,6 +6044,8 @@ module Aws::MediaLive
     #   resp.input.destinations[0].ip #=> String
     #   resp.input.destinations[0].port #=> String
     #   resp.input.destinations[0].url #=> String
+    #   resp.input.destinations[0].vpc.availability_zone #=> String
+    #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -5809,6 +6058,8 @@ module Aws::MediaLive
     #   resp.input.sources[0].url #=> String
     #   resp.input.sources[0].username #=> String
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.input.tags #=> Hash
+    #   resp.input.tags["__string"] #=> String
     #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
@@ -5824,6 +6075,8 @@ module Aws::MediaLive
     #
     # @option params [required, String] :input_security_group_id
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @option params [Array<Types::InputWhitelistRuleCidr>] :whitelist_rules
     #
     # @return [Types::UpdateInputSecurityGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5834,6 +6087,9 @@ module Aws::MediaLive
     #
     #   resp = client.update_input_security_group({
     #     input_security_group_id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #     whitelist_rules: [
     #       {
     #         cidr: "__string",
@@ -5848,6 +6104,8 @@ module Aws::MediaLive
     #   resp.security_group.inputs #=> Array
     #   resp.security_group.inputs[0] #=> String
     #   resp.security_group.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.security_group.tags #=> Hash
+    #   resp.security_group.tags["__string"] #=> String
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
     #
@@ -5873,7 +6131,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

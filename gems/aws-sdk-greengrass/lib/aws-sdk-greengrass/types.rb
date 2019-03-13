@@ -144,8 +144,8 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
-    #   The current status of the group deployment: ''Pending'',
-    #   ''InProgress'', ''Success'', or ''Failure''.
+    #   The current status of the group deployment: ''InProgress'',
+    #   ''Building'', ''Success'', or ''Failure''.
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
@@ -631,7 +631,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   The type of deployment. When used in ''CreateDeployment'', only
+    #   The type of deployment. When used for ''CreateDeployment'', only
     #   ''NewDeployment'' and ''Redeployment'' are valid.
     #   @return [String]
     #
@@ -805,6 +805,10 @@ module Aws::Greengrass
     #           default_config: {
     #             execution: {
     #               isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #               run_as: {
+    #                 gid: 1,
+    #                 uid: 1,
+    #               },
     #             },
     #           },
     #           functions: [
@@ -905,6 +909,10 @@ module Aws::Greengrass
     #         default_config: {
     #           execution: {
     #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #             run_as: {
+    #               gid: 1,
+    #               uid: 1,
+    #             },
     #           },
     #         },
     #         function_definition_id: "__string", # required
@@ -947,8 +955,8 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] default_config
-    #   Default configuration that will apply to all Lambda functions in the
-    #   group.
+    #   The default configuration that applies to all Lambda functions in
+    #   the group. Individual Lambda functions can override these settings.
     #   @return [Types::FunctionDefaultConfig]
     #
     # @!attribute [rw] function_definition_id
@@ -2265,8 +2273,8 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Default configuration that will apply to all Lambda functions in the
-    # group.
+    # The default configuration that applies to all Lambda functions in the
+    # group. Individual Lambda functions can override these settings.
     #
     # @note When making an API call, you may pass FunctionDefaultConfig
     #   data as a hash:
@@ -2274,13 +2282,15 @@ module Aws::Greengrass
     #       {
     #         execution: {
     #           isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #           run_as: {
+    #             gid: 1,
+    #             uid: 1,
+    #           },
     #         },
     #       }
     #
     # @!attribute [rw] execution
-    #   Configuration that defines the default containerization used for
-    #   when running Lambda functions in the group. Individual Lambda
-    #   functions can be override this setting.
+    #   Configuration information that specifies how a Lambda function runs.
     #   @return [Types::FunctionDefaultExecutionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefaultConfig AWS API Documentation
@@ -2290,15 +2300,17 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Configuration that defines the default containerization used for when
-    # running Lambda functions in the group. Individual Lambda functions can
-    # be override this setting.
+    # Configuration information that specifies how a Lambda function runs.
     #
     # @note When making an API call, you may pass FunctionDefaultExecutionConfig
     #   data as a hash:
     #
     #       {
     #         isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #         run_as: {
+    #           gid: 1,
+    #           uid: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] isolation_mode
@@ -2309,10 +2321,22 @@ module Aws::Greengrass
     #   with the default containerization for the group.
     #   @return [String]
     #
+    # @!attribute [rw] run_as
+    #   Specifies the user and group whose permissions are used when running
+    #   the Lambda function. You can specify one or both values to override
+    #   the default values. We recommend that you avoid running as root
+    #   unless absolutely necessary to minimize the risk of unintended
+    #   changes or malicious attacks. To run as root, you must set
+    #   ''IsolationMode'' to ''NoContainer'' and update config.json
+    #   in ''greengrass-root/config'' to set
+    #   ''allowFunctionsToRunAsRoot'' to ''yes''.
+    #   @return [Types::FunctionRunAsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefaultExecutionConfig AWS API Documentation
     #
     class FunctionDefaultExecutionConfig < Struct.new(
-      :isolation_mode)
+      :isolation_mode,
+      :run_as)
       include Aws::Structure
     end
 
@@ -2325,6 +2349,10 @@ module Aws::Greengrass
     #         default_config: {
     #           execution: {
     #             isolation_mode: "GreengrassContainer", # accepts GreengrassContainer, NoContainer
+    #             run_as: {
+    #               gid: 1,
+    #               uid: 1,
+    #             },
     #           },
     #         },
     #         functions: [
@@ -2363,8 +2391,9 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] default_config
-    #   Default configuration that will apply to all Lambda functions in
-    #   this function definition version
+    #   The default configuration that applies to all Lambda functions in
+    #   this function definition version. Individual Lambda functions can
+    #   override these settings.
     #   @return [Types::FunctionDefaultConfig]
     #
     # @!attribute [rw] functions
@@ -2379,7 +2408,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Configuration information that specifies how the Lambda function runs.
+    # Configuration information that specifies how a Lambda function runs.
     #
     # @note When making an API call, you may pass FunctionExecutionConfig
     #   data as a hash:
@@ -2401,14 +2430,14 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] run_as
-    #   Specifies the user and/or group whose permissions are used when
-    #   running the Lambda function. You can specify one or both values to
-    #   override the default values (ggc\_user/ggc\_group). We recommend
-    #   that you avoid running as root unless absolutely necessary to
-    #   minimize the risk of unintended changes or malicious attacks. To run
-    #   as root, you must set IsolationMode to NoContainer and you must
-    #   update config.json in greengrass-root/config to set
-    #   allowFunctionsToRunAsRoot to yes.
+    #   Specifies the user and group whose permissions are used when running
+    #   the Lambda function. You can specify one or both values to override
+    #   the default values. We recommend that you avoid running as root
+    #   unless absolutely necessary to minimize the risk of unintended
+    #   changes or malicious attacks. To run as root, you must set
+    #   ''IsolationMode'' to ''NoContainer'' and update config.json
+    #   in ''greengrass-root/config'' to set
+    #   ''allowFunctionsToRunAsRoot'' to ''yes''.
     #   @return [Types::FunctionRunAsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionExecutionConfig AWS API Documentation
@@ -2419,13 +2448,14 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Specifies the user and/or group whose permissions are used when
-    # running the Lambda function. You can specify one or both values to
-    # override the default values (ggc\_user/ggc\_group). We recommend that
-    # you avoid running as root unless absolutely necessary to minimize the
-    # risk of unintended changes or malicious attacks. To run as root, you
-    # must set IsolationMode to NoContainer and you must update config.json
-    # in greengrass-root/config to set allowFunctionsToRunAsRoot to yes.
+    # Specifies the user and group whose permissions are used when running
+    # the Lambda function. You can specify one or both values to override
+    # the default values. We recommend that you avoid running as root unless
+    # absolutely necessary to minimize the risk of unintended changes or
+    # malicious attacks. To run as root, you must set ''IsolationMode''
+    # to ''NoContainer'' and update config.json in
+    # ''greengrass-root/config'' to set
+    # ''allowFunctionsToRunAsRoot'' to ''yes''.
     #
     # @note When making an API call, you may pass FunctionRunAsConfig
     #   data as a hash:
@@ -2436,11 +2466,11 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] gid
-    #   The Group ID whose permissions are used to run a Lambda function.
+    #   The group ID whose permissions are used to run a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] uid
-    #   The User ID whose permissions are used to run a Lambda function.
+    #   The user ID whose permissions are used to run a Lambda function.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionRunAsConfig AWS API Documentation
@@ -2842,7 +2872,7 @@ module Aws::Greengrass
     # Information about the status of a deployment for a group.
     #
     # @!attribute [rw] deployment_status
-    #   The status of the deployment: ''Pending'', ''InProgress'',
+    #   The status of the deployment: ''InProgress'', ''Building'',
     #   ''Success'', or ''Failure''.
     #   @return [String]
     #
@@ -5246,7 +5276,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] subject
-    #   The subject of the message.
+    #   The MQTT topic used to route the message.
     #   @return [String]
     #
     # @!attribute [rw] target

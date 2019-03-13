@@ -59,9 +59,9 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    # [3]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @note When making an API call, you may pass AlgorithmSpecification
     #   data as a hash:
@@ -82,11 +82,15 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1].
+    #   Parameters][1]. Amazon SageMaker supports both
+    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
+    #   path formats. For more information, see [Using Your Own Algorithms
+    #   with Amazon SageMaker][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] algorithm_name
@@ -121,7 +125,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
     # @!attribute [rw] metric_definitions
@@ -719,26 +723,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies summary information about a git repository.
+    # Specifies summary information about a Git repository.
     #
     # @!attribute [rw] code_repository_name
-    #   The name of the git repository.
+    #   The name of the Git repository.
     #   @return [String]
     #
     # @!attribute [rw] code_repository_arn
-    #   The Amazon Resource Name (ARN) of the git repository.
+    #   The Amazon Resource Name (ARN) of the Git repository.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date and time that the git repository was created.
+    #   The date and time that the Git repository was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time that the git repository was last modified.
+    #   The date and time that the Git repository was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] git_config
-    #   Configuration details for the git repository, including the URL
+    #   Configuration details for the Git repository, including the URL
     #   where it is located and the ARN of the AWS Secrets Manager secret
     #   that contains the credentials used to access the repository.
     #   @return [Types::GitConfig]
@@ -854,8 +858,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] container_hostname
-    #   The DNS host name for the container after Amazon SageMaker deploys
-    #   it.
+    #   This parameter is ignored.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -869,7 +872,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] model_data_url
@@ -1178,7 +1181,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] certify_for_marketplace
     #   Whether to certify the algorithm so that it can be listed in AWS
-    #   Marektplace.
+    #   Marketplace.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithmInput AWS API Documentation
@@ -1217,7 +1220,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] code_repository_name
-    #   The name of the git repository. The name must have 1 to 63
+    #   The name of the Git repository. The name must have 1 to 63
     #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #   @return [String]
     #
@@ -1259,7 +1262,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #           target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -1369,7 +1372,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #   @return [String]
     #
     # @!attribute [rw] production_variants
@@ -1384,7 +1387,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
@@ -1439,7 +1442,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1449,7 +1452,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointInput AWS API Documentation
@@ -1565,6 +1568,7 @@ module Aws::SageMaker
     #             max_runtime_in_seconds: 1,
     #           },
     #           enable_network_isolation: false,
+    #           enable_inter_container_traffic_encryption: false,
     #         },
     #         warm_start_config: {
     #           parent_hyper_parameter_tuning_jobs: [ # required
@@ -1606,20 +1610,20 @@ module Aws::SageMaker
     #   @return [Types::HyperParameterTrainingJobDefinition]
     #
     # @!attribute [rw] warm_start_config
-    #   Specifies configuration for starting the hyperparameter tuning job
-    #   using one or more previous tuning jobs as a starting point. The
+    #   Specifies the configuration for starting the hyperparameter tuning
+    #   job using one or more previous tuning jobs as a starting point. The
     #   results of previous tuning jobs are used to inform which
     #   combinations of hyperparameters to search over in the new tuning
     #   job.
     #
     #   All training jobs launched by the new hyperparameter tuning job are
     #   evaluated by using the objective metric. If you specify
-    #   `IDENTICAL_DATA_AND_ALGORITHM` as the `WarmStartType` for the warm
-    #   start configuration, the training job that performs the best in the
-    #   new tuning job is compared to the best training jobs from the parent
-    #   tuning jobs. From these, the training job that performs the best as
-    #   measured by the objective metric is returned as the overall best
-    #   training job.
+    #   `IDENTICAL_DATA_AND_ALGORITHM` as the `WarmStartType` value for the
+    #   warm start configuration, the training job that performs the best in
+    #   the new tuning job is compared to the best training jobs from the
+    #   parent tuning jobs. From these, the training job that performs the
+    #   best as measured by the objective metric is returned as the overall
+    #   best training job.
     #
     #   <note markdown="1"> All training jobs launched by parent hyperparameter tuning jobs and
     #   the new hyperparameter tuning jobs count against the limit of
@@ -1920,7 +1924,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1930,7 +1934,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_config
@@ -1943,8 +1947,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] enable_network_isolation
@@ -2133,6 +2137,7 @@ module Aws::SageMaker
     #         accelerator_types: ["ml.eia1.medium"], # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge
     #         default_code_repository: "CodeRepositoryNameOrUrl",
     #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
+    #         root_access: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -2169,7 +2174,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -2196,7 +2201,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
@@ -2212,7 +2217,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -2223,8 +2228,8 @@ module Aws::SageMaker
     # @!attribute [rw] accelerator_types
     #   A list of Elastic Inference (EI) instance types to associate with
     #   this notebook instance. Currently, only one instance type can be
-    #   associated with a notebook intance. For more information, see [Using
-    #   Elastic Inference in Amazon SageMaker][1].
+    #   associated with a notebook instance. For more information, see
+    #   [Using Elastic Inference in Amazon SageMaker][1].
     #
     #
     #
@@ -2232,10 +2237,10 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_code_repository
-    #   A git repository to associate with the notebook instance as its
-    #   default code repository. This can be either the name of a git
-    #   repository stored as a resource in your account, or the URL of a git
-    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   A Git repository to associate with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository.
     #   When you open a notebook instance, it opens in the directory that
     #   contains this repository. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
@@ -2247,19 +2252,31 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] additional_code_repositories
-    #   An array of up to 3 git repositories to associate with the notebook
-    #   instance. These can be either the names of git repositories stored
-    #   as resources in your account, or the URL of git repositories in [AWS
-    #   CodeCommit][1] or in any other git repository. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   An array of up to three Git repositories to associate with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories
+    #   in [AWS CodeCommit][1] or in any other Git repository. These
+    #   repositories are cloned at the same level as the default repository
+    #   of your notebook instance. For more information, see [Associating
+    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance. The default value is `Enabled`.
+    #
+    #   <note markdown="1"> Lifecycle configurations need root access to be able to set up a
+    #   notebook instance. Because of this, lifecycle configurations
+    #   associated with a notebook instance always run with root access even
+    #   if you disable root access for users.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
@@ -2276,7 +2293,8 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :accelerator_types,
       :default_code_repository,
-      :additional_code_repositories)
+      :additional_code_repositories,
+      :root_access)
       include Aws::Structure
     end
 
@@ -2442,6 +2460,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #         enable_network_isolation: false,
+    #         enable_inter_container_traffic_encryption: false,
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -2461,7 +2480,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] algorithm_specification
@@ -2474,8 +2493,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
@@ -2496,7 +2515,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -2542,7 +2561,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -2566,22 +2585,37 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_network_isolation
     #   Isolates the training container. No inbound or outbound network
     #   calls can be made, except for calls between peers within a training
-    #   cluster for distributed training. If network isolation is used for
-    #   training jobs that are configured to use a VPC, Amazon SageMaker
+    #   cluster for distributed training. If you enable network isolation
+    #   for training jobs that are configured to use a VPC, Amazon SageMaker
     #   downloads and uploads customer data and model artifacts through the
-    #   specifed VPC, but the training container does not have network
+    #   specified VPC, but the training container does not have network
     #   access.
     #
     #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
     #   network isolation.
     #
     #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_inter_container_traffic_encryption
+    #   To encrypt all communications between ML compute instances in
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training. For more information, see [Protect
+    #   Communications Between ML Compute Instances in a Distributed
+    #   Training Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
@@ -2597,7 +2631,8 @@ module Aws::SageMaker
       :vpc_config,
       :stopping_condition,
       :tags,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :enable_inter_container_traffic_encryption)
       include Aws::Structure
     end
 
@@ -2667,40 +2702,42 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_concurrent_transforms
     #   The maximum number of parallel requests that can be sent to each
-    #   instance in a transform job. This is good for algorithms that
-    #   implement multiple workers on larger instances . The default value
-    #   is `1`. To allow Amazon SageMaker to determine the appropriate
-    #   number for `MaxConcurrentTransforms`, set the value to `0`.
+    #   instance in a transform job. The default value is `1`. To allow
+    #   Amazon SageMaker to determine the appropriate number for
+    #   `MaxConcurrentTransforms`, set the value to `0`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_payload_in_mb
-    #   The maximum payload size allowed, in MB. A payload is the data
-    #   portion of a record (without metadata). The value in
-    #   `MaxPayloadInMB` must be greater or equal to the size of a single
-    #   record. You can approximate the size of a record by dividing the
-    #   size of your dataset by the number of records. Then multiply this
-    #   value by the number of records you want in a mini-batch. We
-    #   recommend to enter a slightly larger value than this to ensure the
-    #   records fit within the maximum payload size. The default value is
-    #   `6` MB.
+    #   The maximum allowed size of the payload, in MB. A *payload* is the
+    #   data portion of a record (without metadata). The value in
+    #   `MaxPayloadInMB` must be greater than, or equal to, the size of a
+    #   single record. To estimate the size of a record in MB, divide the
+    #   size of your dataset by the number of records. To ensure that the
+    #   records fit within the maximum payload size, we recommend using a
+    #   slightly larger value. The default value is `6` MB.
     #
     #   For cases where the payload might be arbitrarily large and is
     #   transmitted using HTTP chunked encoding, set the value to `0`. This
-    #   feature only works in supported algorithms. Currently, Amazon
-    #   SageMaker built-in algorithms do not support this feature.
+    #   feature works only in supported algorithms. Currently, Amazon
+    #   SageMaker built-in algorithms do not support HTTP chunked encoding.
     #   @return [Integer]
     #
     # @!attribute [rw] batch_strategy
-    #   Determines the number of records included in a single mini-batch.
-    #   `SingleRecord` means only one record is used per mini-batch.
-    #   `MultiRecord` means a mini-batch is set to contain as many records
-    #   that can fit within the `MaxPayloadInMB` limit.
+    #   Specifies the number of records to include in a mini-batch for an
+    #   HTTP inference request. A *record* ** is a single unit of input data
+    #   that inference can be made on. For example, a single line in a CSV
+    #   file is a record.
     #
-    #   Batch transform will automatically split your input data into
-    #   whatever payload size is specified if you set `SplitType` to `Line`
-    #   and `BatchStrategy` to `MultiRecord`. There's no need to split the
-    #   dataset into smaller files or to use larger payload sizes unless the
-    #   records in your dataset are very large.
+    #   To enable the batch strategy, you must set `SplitType` to `Line`,
+    #   `RecordIO`, or `TFRecord`.
+    #
+    #   To use only one record when making an HTTP invocation request to a
+    #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
+    #   `Line`.
+    #
+    #   To fit as many records in a mini-batch as can fit within the
+    #   `MaxPayloadInMB` limit, set `BatchStrategy` to `MultiRecord` and
+    #   `SplitType` to `Line`.
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -2723,13 +2760,13 @@ module Aws::SageMaker
     #   @return [Types::TransformResources]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. Adding tags is optional. For more
-    #   information, see [Using Cost Allocation Tags][1] in the *AWS Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJobRequest AWS API Documentation
@@ -2880,7 +2917,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] code_repository_name
-    #   The name of the git repository to delete.
+    #   The name of the Git repository to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCodeRepositoryInput AWS API Documentation
@@ -3156,7 +3193,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] certify_for_marketplace
-    #   Whether the algorithm is certified to be listed in AWS Marektplace.
+    #   Whether the algorithm is certified to be listed in AWS Marketplace.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithmOutput AWS API Documentation
@@ -3184,7 +3221,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] code_repository_name
-    #   The name of the git repository to describe.
+    #   The name of the Git repository to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepositoryInput AWS API Documentation
@@ -3195,11 +3232,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] code_repository_name
-    #   The name of the git repository.
+    #   The name of the Git repository.
     #   @return [String]
     #
     # @!attribute [rw] code_repository_arn
-    #   The Amazon Resource Name (ARN) of the git repository.
+    #   The Amazon Resource Name (ARN) of the Git repository.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -3798,7 +3835,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] creation_time
@@ -3991,7 +4028,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] notebook_instance_name
-    #   Name of the Amazon SageMaker notebook instance.
+    #   The name of the Amazon SageMaker notebook instance.
     #   @return [String]
     #
     # @!attribute [rw] notebook_instance_status
@@ -3999,7 +4036,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   If status is failed, the reason it failed.
+    #   If status is `Failed`, the reason it failed.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -4020,18 +4057,18 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
-    #   Amazon Resource Name (ARN) of the IAM role associated with the
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
     #   instance.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it
-    #   on the ML storage volume attached to the instance.
+    #   The AWS KMS key ID Amazon SageMaker uses to encrypt data when
+    #   storing it on the ML storage volume attached to the instance.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
-    #   Network interface IDs that Amazon SageMaker created at the time of
-    #   creating the instance.
+    #   The network interface IDs that Amazon SageMaker created at the time
+    #   of creating the instance.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -4052,21 +4089,21 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
     #   Describes whether Amazon SageMaker provides internet access to the
-    #   notebook instance. If this value is set to *Disabled, he notebook
+    #   notebook instance. If this value is set to *Disabled*, the notebook
     #   instance does not have internet access, and cannot connect to Amazon
-    #   SageMaker training and endpoint services*.
+    #   SageMaker training and endpoint services.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -4086,10 +4123,10 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_code_repository
-    #   The git repository associated with the notebook instance as its
-    #   default code repository. This can be either the name of a git
-    #   repository stored as a resource in your account, or the URL of a git
-    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   The Git repository associated with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository.
     #   When you open a notebook instance, it opens in the directory that
     #   contains this repository. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
@@ -4101,19 +4138,31 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] additional_code_repositories
-    #   An array of up to 3 git repositories associated with the notebook
-    #   instance. These can be either the names of git repositories stored
-    #   as resources in your account, or the URL of git repositories in [AWS
-    #   CodeCommit][1] or in any other git repository. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   An array of up to three Git repositories associated with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories
+    #   in [AWS CodeCommit][1] or in any other Git repository. These
+    #   repositories are cloned at the same level as the default repository
+    #   of your notebook instance. For more information, see [Associating
+    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
     #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance.
+    #
+    #   <note markdown="1"> Lifecycle configurations need root access to be able to set up a
+    #   notebook instance. Because of this, lifecycle configurations
+    #   associated with a notebook instance always run with root access even
+    #   if you disable root access for users.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
@@ -4136,7 +4185,8 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :accelerator_types,
       :default_code_repository,
-      :additional_code_repositories)
+      :additional_code_repositories,
+      :root_access)
       include Aws::Structure
     end
 
@@ -4327,7 +4377,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -4373,17 +4423,27 @@ module Aws::SageMaker
     #   @return [Array<Types::MetricData>]
     #
     # @!attribute [rw] enable_network_isolation
-    #   If `True`, inbound or outbound network calls can be made, except for
+    #   If you want to allow inbound or outbound network calls, except for
     #   calls between peers within a training cluster for distributed
-    #   training. If network isolation is used for training jobs that are
-    #   configured to use a VPC, Amazon SageMaker downloads and uploads
-    #   customer data and model artifacts through the specifed VPC, but the
-    #   training container does not have network access.
+    #   training, choose `True`. If you enable network isolation for
+    #   training jobs that are configured to use a VPC, Amazon SageMaker
+    #   downloads and uploads customer data and model artifacts through the
+    #   specified VPC, but the training container does not have network
+    #   access.
     #
     #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
     #   network isolation.
     #
     #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_inter_container_traffic_encryption
+    #   To encrypt all communications between ML compute instances in
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
@@ -4411,7 +4471,8 @@ module Aws::SageMaker
       :last_modified_time,
       :secondary_status_transitions,
       :final_metric_data_list,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :enable_inter_container_traffic_encryption)
       include Aws::Structure
     end
 
@@ -4447,7 +4508,15 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   If the transform job failed, the reason that it failed.
+    #   If the transform job failed, `FailureReason` describes why it
+    #   failed. A transform job creates a log file, which includes error
+    #   messages, and stores it as an Amazon S3 object. For more
+    #   information, see [Log Amazon SageMaker Events with Amazon
+    #   CloudWatch][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html
     #   @return [String]
     #
     # @!attribute [rw] model_name
@@ -4460,16 +4529,22 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_payload_in_mb
-    #   The maximum payload size , in MB used in the transform job.
+    #   The maximum payload size, in MB, used in the transform job.
     #   @return [Integer]
     #
     # @!attribute [rw] batch_strategy
-    #   SingleRecord means only one record was used per a batch.
-    #   `MultiRecord` means batches contained as many records that could
-    #   possibly fit within the `MaxPayloadInMB` limit.
+    #   Specifies the number of records to include in a mini-batch for an
+    #   HTTP inference request. A *record* ** is a single unit of input data
+    #   that inference can be made on. For example, a single line in a CSV
+    #   file is a record.
+    #
+    #   To enable the batch strategy, you must set `SplitType` to `Line`,
+    #   `RecordIO`, or `TFRecord`.
     #   @return [String]
     #
     # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container. We support
+    #   up to 16 key and values entries in the map.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transform_input
@@ -4498,9 +4573,9 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] transform_end_time
-    #   Indicates when the transform job is `Completed`, `Stopped`, or
-    #   `Failed`. You are billed for the time interval between this time and
-    #   the value of `TransformStartTime`.
+    #   Indicates when the transform job has been completed, or has stopped
+    #   or failed. You are billed for the time interval between this time
+    #   and the value of `TransformStartTime`.
     #   @return [Time]
     #
     # @!attribute [rw] labeling_job_arn
@@ -4645,9 +4720,9 @@ module Aws::SageMaker
     #
     #   * `SystemUpdating`\: Endpoint is undergoing maintenance and cannot
     #     be updated or deleted or re-scaled until it has completed. This
-    #     mainenance operation does not change any customer-specified values
-    #     such as VPC config, KMS encryption, model, instance type, or
-    #     instance count.
+    #     maintenance operation does not change any customer-specified
+    #     values such as VPC config, KMS encryption, model, instance type,
+    #     or instance count.
     #
     #   * `RollingBack`\: Endpoint fails to scale up or down or change its
     #     variant weight and is in the process of rolling back to its
@@ -4878,7 +4953,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies configuration details for a git repository in your AWS
+    # Specifies configuration details for a Git repository in your AWS
     # account.
     #
     # @note When making an API call, you may pass GitConfig
@@ -4891,11 +4966,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] repository_url
-    #   The URL where the git repository is located.
+    #   The URL where the Git repository is located.
     #   @return [String]
     #
     # @!attribute [rw] branch
-    #   The default beach for the git repository.
+    #   The default branch for the Git repository.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -4916,7 +4991,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies configuration details for a git repository when the
+    # Specifies configuration details for a Git repository when the
     # repository is updated.
     #
     # @note When making an API call, you may pass GitConfigForUpdate
@@ -5122,11 +5197,15 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about Docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1].
+    #   Parameters][1]. Amazon SageMaker supports both
+    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
+    #   path formats. For more information, see [Using Your Own Algorithms
+    #   with Amazon SageMaker][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -5148,7 +5227,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
     # @!attribute [rw] algorithm_name
@@ -5302,6 +5381,7 @@ module Aws::SageMaker
     #           max_runtime_in_seconds: 1,
     #         },
     #         enable_network_isolation: false,
+    #         enable_inter_container_traffic_encryption: false,
     #       }
     #
     # @!attribute [rw] static_hyper_parameters
@@ -5334,7 +5414,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] output_data_config
@@ -5382,6 +5462,15 @@ module Aws::SageMaker
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_inter_container_traffic_encryption
+    #   To encrypt all communications between ML compute instances in
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
     #
     class HyperParameterTrainingJobDefinition < Struct.new(
@@ -5393,7 +5482,8 @@ module Aws::SageMaker
       :output_data_config,
       :resource_config,
       :stopping_condition,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :enable_inter_container_traffic_encryption)
       include Aws::Structure
     end
 
@@ -5420,7 +5510,12 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] training_end_time
-    #   The date and time that the training job ended.
+    #   Specifies the time when the training job ends on training instances.
+    #   You are billed for the time interval between the value of
+    #   `TrainingStartTime` and this time. For successful jobs and stopped
+    #   jobs, this is the time after model artifacts are uploaded. For
+    #   failed jobs, this is the time when Amazon SageMaker detects a job
+    #   failure.
     #   @return [Time]
     #
     # @!attribute [rw] training_job_status
@@ -5712,7 +5807,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/automatic-model-tuning-incremental
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html
     #   @return [Array<Types::ParentHyperParameterTuningJob>]
     #
     # @!attribute [rw] warm_start_type
@@ -6485,38 +6580,38 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] creation_time_after
-    #   A filter that returns only git repositories that were created after
+    #   A filter that returns only Git repositories that were created after
     #   the specified time.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time_before
-    #   A filter that returns only git repositories that were created before
+    #   A filter that returns only Git repositories that were created before
     #   the specified time.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time_after
-    #   A filter that returns only git repositories that were last modified
+    #   A filter that returns only Git repositories that were last modified
     #   after the specified time.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time_before
-    #   A filter that returns only git repositories that were last modified
+    #   A filter that returns only Git repositories that were last modified
     #   before the specified time.
     #   @return [Time]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of git repositories to return in the response.
+    #   The maximum number of Git repositories to return in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] name_contains
-    #   A string in the git repositories name. This filter returns only
+    #   A string in the Git repositories name. This filter returns only
     #   repositories whose name contains the specified string.
     #   @return [String]
     #
     # @!attribute [rw] next_token
     #   If the result of a `ListCodeRepositoriesOutput` request was
     #   truncated, the response includes a `NextToken`. To get the next set
-    #   of git repositories, use the token in the next request.
+    #   of Git repositories, use the token in the next request.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -6543,7 +6638,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] code_repository_summary_list
-    #   Gets a list of summaries of the git repositories. Each summary
+    #   Gets a list of summaries of the Git repositories. Each summary
     #   specifies the following values for the repository:
     #
     #   * Name
@@ -6557,14 +6652,12 @@ module Aws::SageMaker
     #   * Configuration information, including the URL location of the
     #     repository and the ARN of the AWS Secrets Manager secret that
     #     contains the credentials used to access the repository.
-    #
-    #   *
     #   @return [Array<Types::CodeRepositorySummary>]
     #
     # @!attribute [rw] next_token
     #   If the result of a `ListCodeRepositoriesOutput` request was
     #   truncated, the response includes a `NextToken`. To get the next set
-    #   of git repositories, use the token in the next request.
+    #   of Git repositories, use the token in the next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositoriesOutput AWS API Documentation
@@ -6693,7 +6786,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6774,7 +6867,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7232,7 +7325,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Ascending`.
+    #   The sort order for results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7467,7 +7560,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_code_repository_contains
-    #   A string in the name or URL of a git repository associated with this
+    #   A string in the name or URL of a Git repository associated with this
     #   notebook instance. This filter returns only notebook instances
     #   associated with a git repository with a name that contains the
     #   specified string.
@@ -7475,7 +7568,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] additional_code_repository_equals
     #   A filter that returns only notebook instances with associated with
-    #   the specified git respository.
+    #   the specified git repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput AWS API Documentation
@@ -8029,7 +8122,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition AWS API Documentation
@@ -8085,7 +8178,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #   @return [String]
     #
     # @!attribute [rw] image_digest
@@ -8336,13 +8429,12 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines a list of `NestedFilter` objects. To satisfy the conditions
+    # Defines a list of `NestedFilters` objects. To satisfy the conditions
     # specified in the `NestedFilters` call, a resource must satisfy the
     # conditions of all of the filters.
     #
-    # For example, a `NestedFilters` could be defined using the training
-    # job's `InputDataConfig` property, this would be defined as a list of
-    # `Channel` objects.
+    # For example, you could define a `NestedFilters` using the training
+    # job's `InputDataConfig` property to filter on `Channel` objects.
     #
     # A `NestedFilters` object contains multiple filters. For example, to
     # find all training jobs whose name contains `train` and that have
@@ -8440,7 +8532,7 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @note When making an API call, you may pass NotebookInstanceLifecycleHook
     #   data as a hash:
@@ -8503,14 +8595,14 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] default_code_repository
-    #   The git repository associated with the notebook instance as its
-    #   default code repository. This can be either the name of a git
-    #   repository stored as a resource in your account, or the URL of a git
-    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   The Git repository associated with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository.
     #   When you open a notebook instance, it opens in the directory that
     #   contains this repository. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
@@ -8522,13 +8614,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] additional_code_repositories
-    #   An array of up to 3 git repositories associated with the notebook
-    #   instance. These can be either the names of git repositories stored
-    #   as resources in your account, or the URL of git repositories in [AWS
-    #   CodeCommit][1] or in any other git repository. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   An array of up to three Git repositories associated with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories
+    #   in [AWS CodeCommit][1] or in any other Git repository. These
+    #   repositories are cloned at the same level as the default repository
+    #   of your notebook instance. For more information, see [Associating
+    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
     #
@@ -8593,7 +8685,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens
+    #         target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -9073,7 +9165,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] ui_template
-    #   A `Template`object containing the worker UI template to render.
+    #   A `Template` object containing the worker UI template to render.
     #   @return [Types::UiTemplate]
     #
     # @!attribute [rw] task
@@ -9944,7 +10036,7 @@ module Aws::SageMaker
     #   The maximum length of time, in seconds, that the training job can
     #   run. If model training does not complete during this time, Amazon
     #   SageMaker ends the job. If value is not specified, default value is
-    #   1 day. Maximum value is 5 days.
+    #   1 day. Maximum value is 28 days.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
@@ -10178,7 +10270,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -10229,6 +10321,15 @@ module Aws::SageMaker
     #   communicate beyond the VPC they run in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_inter_container_traffic_encryption
+    #   To encrypt all communications between ML compute instances in
+    #   distributed training, choose `True`. Encryption provides greater
+    #   security for distributed training, but training might take longer.
+    #   How long it takes depends on the amount of communication between
+    #   compute instances, especially if you use a deep learning algorithm
+    #   in distributed training.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. For more information, see [Using Cost
     #   Allocation Tags][1] in the *AWS Billing and Cost Management User
@@ -10236,7 +10337,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJob AWS API Documentation
@@ -10265,6 +10366,7 @@ module Aws::SageMaker
       :secondary_status_transitions,
       :final_metric_data_list,
       :enable_network_isolation,
+      :enable_inter_container_traffic_encryption,
       :tags)
       include Aws::Structure
     end
@@ -10327,7 +10429,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameters
@@ -10509,8 +10611,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] training_image
-    #   The Amazon Amazon ECR registry path of the Docker image that
-    #   contains the training algorithm.
+    #   The Amazon ECR registry path of the Docker image that contains the
+    #   training algorithm.
     #   @return [String]
     #
     # @!attribute [rw] training_image_digest
@@ -10607,8 +10709,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] data_source
-    #   Describes the location of the channel data, meaning the S3 location
-    #   of the input data that the model can consume.
+    #   Describes the location of the channel data, which is, the S3
+    #   location of the input data that the model can consume.
     #   @return [Types::TransformDataSource]
     #
     # @!attribute [rw] content_type
@@ -10618,10 +10720,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] compression_type
-    #   Compressing data helps save on storage space. If your transform data
-    #   is compressed, specify the compression type. Amazon SageMaker
-    #   automatically decompresses the data for the transform job
-    #   accordingly. The default value is `None`.
+    #   If your transform data is compressed, specify the compression type.
+    #   Amazon SageMaker automatically decompresses the data for the
+    #   transform job accordingly. The default value is `None`.
     #   @return [String]
     #
     # @!attribute [rw] split_type
@@ -10650,12 +10751,11 @@ module Aws::SageMaker
     #   `SingleRecord`. Padding is not removed if the value of
     #   `BatchStrategy` is set to `MultiRecord`.
     #
-    #    </note>
+    #    For more information about the RecordIO, see [Data Format][1] in the
+    #   MXNet documentation. For more information about the TFRecord, see
+    #   [Consuming TFRecord data][2] in the TensorFlow documentation.
     #
-    #   For more information about the RecordIO data format, see [Data
-    #   Format][1] in the MXNet documentation. For more information about
-    #   the TFRecord fofmat, see [Consuming TFRecord data][2] in the
-    #   TensorFlow documentation.
+    #    </note>
     #
     #
     #
@@ -10761,8 +10861,9 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides a summary of a transform job. Multiple TransformJobSummary
-    # objects are returned as a list after calling ListTransformJobs.
+    # Provides a summary of a transform job. Multiple `TransformJobSummary`
+    # objects are returned as a list after in response to a
+    # ListTransformJobs call.
     #
     # @!attribute [rw] transform_job_name
     #   The name of the transform job.
@@ -10808,7 +10909,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Describes the results of a transform job output.
+    # Describes the results of a transform job.
     #
     # @note When making an API call, you may pass TransformOutput
     #   data as a hash:
@@ -10825,13 +10926,20 @@ module Aws::SageMaker
     #   results of the transform job. For example,
     #   `s3://bucket-name/key-name-prefix`.
     #
-    #   For every S3 object used as input for the transform job, the
-    #   transformed data is stored in a corresponding subfolder in the
-    #   location under the output prefix. For example, the input data
-    #   `s3://bucket-name/input-name-prefix/dataset01/data.csv` will have
-    #   the transformed data stored at
-    #   `s3://bucket-name/key-name-prefix/dataset01/`, based on the original
-    #   name, as a series of .part files (.part0001, part0002, etc).
+    #   For every S3 object used as input for the transform job, batch
+    #   transform stores the transformed data with an .`out` suffix in a
+    #   corresponding subfolder in the location in the output prefix. For
+    #   example, for the input data stored at
+    #   `s3://bucket-name/input-name-prefix/dataset01/data.csv`, batch
+    #   transform stores the transformed data at
+    #   `s3://bucket-name/output-name-prefix/input-name-prefix/data.csv.out`.
+    #   Batch transform doesn't upload partially processed objects. For an
+    #   input S3 object that contains multiple records, it creates an .`out`
+    #   file only if the transform job succeeds on the entire file. When the
+    #   input contains multiple S3 objects, the batch transform job
+    #   processes the listed S3 objects and uploads only the output for
+    #   successfully processed objects. If any object fails in the transform
+    #   job batch transform marks the job as failed to prompt investigation.
     #   @return [String]
     #
     # @!attribute [rw] accept
@@ -10842,10 +10950,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] assemble_with
     #   Defines how to assemble the results of the transform job as a single
-    #   S3 object. You should select a format that is most convenient to
-    #   you. To concatenate the results in binary format, specify `None`. To
-    #   add a newline character at the end of every transformed record,
-    #   specify `Line`.
+    #   S3 object. Choose a format that is most convenient to you. To
+    #   concatenate the results in binary format, specify `None`. To add a
+    #   newline character at the end of every transformed record, specify
+    #   `Line`.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -11102,7 +11210,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] code_repository_name
-    #   The name of the git repository to update.
+    #   The name of the Git repository to update.
     #   @return [String]
     #
     # @!attribute [rw] git_config
@@ -11124,7 +11232,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] code_repository_arn
-    #   The ARN of the git repository.
+    #   The ARN of the Git repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryOutput AWS API Documentation
@@ -11227,6 +11335,7 @@ module Aws::SageMaker
     #         disassociate_accelerator_types: false,
     #         disassociate_default_code_repository: false,
     #         disassociate_additional_code_repositories: false,
+    #         root_access: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -11249,7 +11358,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_config_name
@@ -11259,7 +11368,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #   @return [String]
     #
     # @!attribute [rw] disassociate_lifecycle_config
@@ -11273,10 +11382,10 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] default_code_repository
-    #   The git repository to associate with the notebook instance as its
-    #   default code repository. This can be either the name of a git
-    #   repository stored as a resource in your account, or the URL of a git
-    #   repository in [AWS CodeCommit][1] or in any other git repository.
+    #   The Git repository to associate with the notebook instance as its
+    #   default code repository. This can be either the name of a Git
+    #   repository stored as a resource in your account, or the URL of a Git
+    #   repository in [AWS CodeCommit][1] or in any other Git repository.
     #   When you open a notebook instance, it opens in the directory that
     #   contains this repository. For more information, see [Associating Git
     #   Repositories with Amazon SageMaker Notebook Instances][2].
@@ -11288,13 +11397,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] additional_code_repositories
-    #   An array of up to 3 git repositories to associate with the notebook
-    #   instance. These can be either the names of git repositories stored
-    #   as resources in your account, or the URL of git repositories in [AWS
-    #   CodeCommit][1] or in any other git repository.. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   An array of up to three Git repositories to associate with the
+    #   notebook instance. These can be either the names of Git repositories
+    #   stored as resources in your account, or the URL of Git repositories
+    #   in [AWS CodeCommit][1] or in any other Git repository. These
+    #   repositories are cloned at the same level as the default repository
+    #   of your notebook instance. For more information, see [Associating
+    #   Git Repositories with Amazon SageMaker Notebook Instances][2].
     #
     #
     #
@@ -11319,14 +11428,25 @@ module Aws::SageMaker
     #   @return [Boolean]
     #
     # @!attribute [rw] disassociate_default_code_repository
-    #   The name or URL of the default git repository to remove from this
+    #   The name or URL of the default Git repository to remove from this
     #   notebook instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] disassociate_additional_code_repositories
-    #   A list of names or URLs of the default git repositories to remove
+    #   A list of names or URLs of the default Git repositories to remove
     #   from this notebook instance.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] root_access
+    #   Whether root access is enabled or disabled for users of the notebook
+    #   instance. The default value is `Enabled`.
+    #
+    #   <note markdown="1"> If you set this to `Disabled`, users don't have root access on the
+    #   notebook instance, but lifecycle configuration scripts still run
+    #   with root permissions.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation
     #
@@ -11342,7 +11462,8 @@ module Aws::SageMaker
       :accelerator_types,
       :disassociate_accelerator_types,
       :disassociate_default_code_repository,
-      :disassociate_additional_code_repositories)
+      :disassociate_additional_code_repositories,
+      :root_access)
       include Aws::Structure
     end
 
@@ -11452,8 +11573,8 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:

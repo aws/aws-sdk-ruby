@@ -215,15 +215,24 @@ module Aws::CostandUsageReportService
 
     # @!group API Operations
 
-    # Delete a specified report definition
+    # Deletes the specified report.
     #
     # @option params [String] :report_name
-    #   Preferred name for a report, it has to be unique. Must starts with a
-    #   number/letter, case sensitive. Limited to 256 characters.
+    #   The name of the report that you want to create. The name must be
+    #   unique, is case sensitive, and can't include spaces.
     #
     # @return [Types::DeleteReportDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteReportDefinitionResponse#response_message #response_message} => String
+    #
+    #
+    # @example Example: To delete the AWS Cost and Usage report named ExampleReport.
+    #
+    #   # The following example deletes the AWS Cost and Usage report named ExampleReport.
+    #
+    #   resp = client.delete_report_definition({
+    #     report_name: "ExampleReport", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -244,10 +253,10 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Describe a list of report definitions owned by the account
+    # Lists the AWS Cost and Usage reports available to this account.
     #
     # @option params [Integer] :max_results
-    #   The max number of results returned by the operation.
+    #   The maximum number of results that AWS returns for the operation.
     #
     # @option params [String] :next_token
     #   A generic string.
@@ -256,6 +265,51 @@ module Aws::CostandUsageReportService
     #
     #   * {Types::DescribeReportDefinitionsResponse#report_definitions #report_definitions} => Array&lt;Types::ReportDefinition&gt;
     #   * {Types::DescribeReportDefinitionsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list the AWS Cost and Usage reports for the account.
+    #
+    #   # The following example lists the AWS Cost and Usage reports for the account.
+    #
+    #   resp = client.describe_report_definitions({
+    #     max_results: 5, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     report_definitions: [
+    #       {
+    #         additional_artifacts: [
+    #           "QUICKSIGHT", 
+    #         ], 
+    #         additional_schema_elements: [
+    #           "RESOURCES", 
+    #         ], 
+    #         compression: "GZIP", 
+    #         format: "textORcsv", 
+    #         report_name: "ExampleReport", 
+    #         s3_bucket: "example-s3-bucket", 
+    #         s3_prefix: "exampleprefix", 
+    #         s3_region: "us-east-1", 
+    #         time_unit: "HOURLY", 
+    #       }, 
+    #       {
+    #         additional_artifacts: [
+    #           "QUICKSIGHT", 
+    #         ], 
+    #         additional_schema_elements: [
+    #           "RESOURCES", 
+    #         ], 
+    #         compression: "GZIP", 
+    #         format: "textORcsv", 
+    #         report_name: "ExampleReport2", 
+    #         s3_bucket: "example-s3-bucket", 
+    #         s3_prefix: "exampleprefix", 
+    #         s3_region: "us-east-1", 
+    #         time_unit: "HOURLY", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -269,15 +323,17 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions #=> Array
     #   resp.report_definitions[0].report_name #=> String
     #   resp.report_definitions[0].time_unit #=> String, one of "HOURLY", "DAILY"
-    #   resp.report_definitions[0].format #=> String, one of "textORcsv"
-    #   resp.report_definitions[0].compression #=> String, one of "ZIP", "GZIP"
+    #   resp.report_definitions[0].format #=> String, one of "textORcsv", "Parquet"
+    #   resp.report_definitions[0].compression #=> String, one of "ZIP", "GZIP", "Parquet"
     #   resp.report_definitions[0].additional_schema_elements #=> Array
     #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES"
     #   resp.report_definitions[0].s3_bucket #=> String
     #   resp.report_definitions[0].s3_prefix #=> String
-    #   resp.report_definitions[0].s3_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1"
+    #   resp.report_definitions[0].s3_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "eu-north-1", "ap-northeast-3"
     #   resp.report_definitions[0].additional_artifacts #=> Array
-    #   resp.report_definitions[0].additional_artifacts[0] #=> String, one of "REDSHIFT", "QUICKSIGHT"
+    #   resp.report_definitions[0].additional_artifacts[0] #=> String, one of "REDSHIFT", "QUICKSIGHT", "ATHENA"
+    #   resp.report_definitions[0].refresh_closed_reports #=> Boolean
+    #   resp.report_definitions[0].report_versioning #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions AWS API Documentation
@@ -289,14 +345,37 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Create a new report definition
+    # Creates a new report using the description that you provide.
     #
     # @option params [required, Types::ReportDefinition] :report_definition
-    #   The definition of AWS Cost and Usage Report. Customer can specify the
-    #   report name, time unit, report format, compression format, S3 bucket
-    #   and additional artifacts and schema elements in the definition.
+    #   Represents the output of the PutReportDefinition operation. The
+    #   content consists of the detailed metadata and data file information.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create a report named ExampleReport.
+    #
+    #   # The following example creates a AWS Cost and Usage report named ExampleReport.
+    #
+    #   resp = client.put_report_definition({
+    #     report_definition: {
+    #       additional_artifacts: [
+    #         "REDSHIFT", 
+    #         "QUICKSIGHT", 
+    #       ], 
+    #       additional_schema_elements: [
+    #         "RESOURCES", 
+    #       ], 
+    #       compression: "ZIP", 
+    #       format: "textORcsv", 
+    #       report_name: "ExampleReport", 
+    #       s3_bucket: "example-s3-bucket", 
+    #       s3_prefix: "exampleprefix", 
+    #       s3_region: "us-east-1", 
+    #       time_unit: "DAILY", 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -304,13 +383,15 @@ module Aws::CostandUsageReportService
     #     report_definition: { # required
     #       report_name: "ReportName", # required
     #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY
-    #       format: "textORcsv", # required, accepts textORcsv
-    #       compression: "ZIP", # required, accepts ZIP, GZIP
+    #       format: "textORcsv", # required, accepts textORcsv, Parquet
+    #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
     #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
-    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1
-    #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT
+    #       s3_region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-north-1, ap-northeast-3
+    #       additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
+    #       refresh_closed_reports: false,
+    #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #     },
     #   })
     #
@@ -336,7 +417,7 @@ module Aws::CostandUsageReportService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costandusagereportservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

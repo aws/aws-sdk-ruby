@@ -514,6 +514,8 @@ module Aws::IoTAnalytics
     ListDatasetContentsRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "datasetName"))
     ListDatasetContentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDatasetContentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDatasetContentsRequest.add_member(:scheduled_on_or_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "scheduledOnOrAfter"))
+    ListDatasetContentsRequest.add_member(:scheduled_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "scheduledBefore"))
     ListDatasetContentsRequest.struct_class = Types::ListDatasetContentsRequest
 
     ListDatasetContentsResponse.add_member(:dataset_content_summaries, Shapes::ShapeRef.new(shape: DatasetContentSummaries, location_name: "datasetContentSummaries"))

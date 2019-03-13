@@ -233,6 +233,54 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteUserByPrincipalIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         principal_id: "String", # required
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace", # required
+    #       }
+    #
+    # @!attribute [rw] principal_id
+    #   The principal ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the AWS account that the user is in. Currently, you use
+    #   the ID for the AWS account that contains your Amazon QuickSight
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace. Currently, you should set this to `default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalIdRequest AWS API Documentation
+    #
+    class DeleteUserByPrincipalIdRequest < Struct.new(
+      :principal_id,
+      :aws_account_id,
+      :namespace)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The http status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalIdResponse AWS API Documentation
+    #
+    class DeleteUserByPrincipalIdResponse < Struct.new(
+      :request_id,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteUserRequest
     #   data as a hash:
     #
@@ -479,12 +527,17 @@ module Aws::QuickSight
     #   The group description.
     #   @return [String]
     #
+    # @!attribute [rw] principal_id
+    #   The principal ID of the group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Group AWS API Documentation
     #
     class Group < Struct.new(
       :arn,
       :group_name,
-      :description)
+      :description,
+      :principal_id)
       include Aws::Structure
     end
 
@@ -783,7 +836,7 @@ module Aws::QuickSight
     #         email: "String", # required
     #         user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #         iam_arn: "String",
-    #         session_name: "String",
+    #         session_name: "RoleSessionName",
     #         aws_account_id: "AwsAccountId", # required
     #         namespace: "Namespace", # required
     #         user_name: "UserName",
@@ -1053,6 +1106,10 @@ module Aws::QuickSight
     #   they sign in and provide a password
     #   @return [Boolean]
     #
+    # @!attribute [rw] principal_id
+    #   The principal ID of the user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/User AWS API Documentation
     #
     class User < Struct.new(
@@ -1061,7 +1118,8 @@ module Aws::QuickSight
       :email,
       :role,
       :identity_type,
-      :active)
+      :active,
+      :principal_id)
       include Aws::Structure
     end
 

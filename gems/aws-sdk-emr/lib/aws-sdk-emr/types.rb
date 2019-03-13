@@ -304,31 +304,21 @@ module Aws::EMR
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
-    # An application is any Amazon or third-party software that you can add
-    # to the cluster. This structure contains a list of strings that
-    # indicates the software to use with the cluster and accepts a user
-    # argument list. Amazon EMR accepts and forwards the argument list to
-    # the corresponding installation script as bootstrap action argument.
-    # For more information, see [Using the MapR Distribution for Hadoop][1].
-    # Currently supported values are:
+    # With Amazon EMR release version 4.0 and later, the only accepted
+    # parameter is the application name. To pass arguments to applications,
+    # you use configuration classifications specified using configuration
+    # JSON objects. For more information, see [Configuring Applications][1].
     #
-    # * "mapr-m3" - launch the cluster using MapR M3 Edition.
-    #
-    # * "mapr-m5" - launch the cluster using MapR M5 Edition.
-    #
-    # * "mapr" with the user arguments specifying "--edition,m3" or
-    #   "--edition,m5" - launch the cluster using MapR M3 or M5 Edition,
-    #   respectively.
-    #
-    # <note markdown="1"> In Amazon EMR releases 4.x and later, the only accepted parameter is
-    # the application name. To pass arguments to applications, you supply a
-    # configuration for each application.
-    #
-    #  </note>
+    # With earlier Amazon EMR releases, the application is any Amazon or
+    # third-party software that you can add to the cluster. This structure
+    # contains a list of strings that indicates the software to use with the
+    # cluster and accepts a user argument list. Amazon EMR accepts and
+    # forwards the argument list to the corresponding installation script as
+    # bootstrap action argument.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-mapr.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
     # @note When making an API call, you may pass Application
     #   data as a hash:
@@ -1487,7 +1477,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] emr_managed_slave_security_group
-    #   The identifier of the Amazon EC2 security group for the slave nodes.
+    #   The identifier of the Amazon EC2 security group for the core and
+    #   task nodes.
     #   @return [String]
     #
     # @!attribute [rw] service_access_security_group
@@ -1501,8 +1492,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_slave_security_groups
-    #   A list of additional Amazon EC2 security group IDs for the slave
-    #   nodes.
+    #   A list of additional Amazon EC2 security group IDs for the core and
+    #   task nodes.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Ec2InstanceAttributes AWS API Documentation
@@ -3122,7 +3113,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] slave_instance_type
-    #   The EC2 instance type of the slave nodes.
+    #   The EC2 instance type of the core and task nodes.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -3204,7 +3195,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] emr_managed_slave_security_group
-    #   The identifier of the Amazon EC2 security group for the slave nodes.
+    #   The identifier of the Amazon EC2 security group for the core and
+    #   task nodes.
     #   @return [String]
     #
     # @!attribute [rw] service_access_security_group
@@ -3218,8 +3210,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_slave_security_groups
-    #   A list of additional Amazon EC2 security group IDs for the slave
-    #   nodes.
+    #   A list of additional Amazon EC2 security group IDs for the core and
+    #   task nodes.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesConfig AWS API Documentation
@@ -3263,14 +3255,14 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] slave_instance_type
-    #   The Amazon EC2 slave node instance type.
+    #   The Amazon EC2 core and task node instance type.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
     #   The number of Amazon EC2 instances in the cluster. If the value is
-    #   1, the same instance serves as both the master and slave node. If
-    #   the value is greater than 1, one instance is the master node and all
-    #   others are slave nodes.
+    #   1, the same instance serves as both the master and core and task
+    #   node. If the value is greater than 1, one instance is the master
+    #   node and all others are core and task nodes.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_groups
@@ -4413,9 +4405,14 @@ module Aws::EMR
     #   @return [Array<Types::SupportedProductConfig>]
     #
     # @!attribute [rw] applications
-    #   For Amazon EMR releases 4.0 and later. A list of applications for
-    #   the cluster. Valid values are: "Hadoop", "Hive", "Mahout",
-    #   "Pig", and "Spark." They are case insensitive.
+    #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive
+    #   list of applications for Amazon EMR to install and configure when
+    #   launching the cluster. For a list of applications available for each
+    #   Amazon EMR release version, see the [Amazon EMR Release Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] configurations
@@ -4960,12 +4957,12 @@ module Aws::EMR
     #
     # @!attribute [rw] timeout_action
     #   The action to take when `TargetSpotCapacity` has not been fulfilled
-    #   when the `TimeoutDurationMinutes` has expired. Spot instances are
-    #   not uprovisioned within the Spot provisioining timeout. Valid values
-    #   are `TERMINATE_CLUSTER` and `SWITCH_TO_ON_DEMAND`.
-    #   SWITCH\_TO\_ON\_DEMAND specifies that if no Spot instances are
-    #   available, On-Demand Instances should be provisioned to fulfill any
-    #   remaining Spot capacity.
+    #   when the `TimeoutDurationMinutes` has expired; that is, when all
+    #   Spot instances could not be provisioned within the Spot provisioning
+    #   timeout. Valid values are `TERMINATE_CLUSTER` and
+    #   `SWITCH_TO_ON_DEMAND`. SWITCH\_TO\_ON\_DEMAND specifies that if no
+    #   Spot instances are available, On-Demand Instances should be
+    #   provisioned to fulfill any remaining Spot capacity.
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
@@ -5004,9 +5001,10 @@ module Aws::EMR
     #   @return [Types::HadoopStepConfig]
     #
     # @!attribute [rw] action_on_failure
-    #   This specifies what action to take when the cluster step fails.
-    #   Possible values are TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and
-    #   CONTINUE.
+    #   The action to take when the cluster step fails. Possible values are
+    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
+    #   TERMINATE\_JOB\_FLOW is provided for backward compatibility. We
+    #   recommend using TERMINATE\_CLUSTER instead.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5050,7 +5048,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] action_on_failure
-    #   The action to take if the step fails.
+    #   The action to take when the cluster step fails. Possible values are
+    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
+    #   TERMINATE\_JOB\_FLOW is provided for backward compatibility. We
+    #   recommend using TERMINATE\_CLUSTER instead.
     #   @return [String]
     #
     # @!attribute [rw] hadoop_jar_step
@@ -5180,9 +5181,10 @@ module Aws::EMR
     #   @return [Types::HadoopStepConfig]
     #
     # @!attribute [rw] action_on_failure
-    #   This specifies what action to take when the cluster step fails.
-    #   Possible values are TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and
-    #   CONTINUE.
+    #   The action to take when the cluster step fails. Possible values are
+    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
+    #   TERMINATE\_JOB\_FLOW is available for backward compatibility. We
+    #   recommend using TERMINATE\_CLUSTER instead.
     #   @return [String]
     #
     # @!attribute [rw] status

@@ -8,24 +8,6 @@
 module Aws::RDSDataService
   module Types
 
-    # SQL statement execution result
-    #
-    # @!attribute [rw] number_of_records_updated
-    #   Number of rows updated.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] result_frame
-    #   ResultFrame returned by executing the sql statement
-    #   @return [Types::ResultFrame]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlStatementResult AWS API Documentation
-    #
-    class SqlStatementResult < Struct.new(
-      :number_of_records_updated,
-      :result_frame)
-      include Aws::Structure
-    end
-
     # Column value
     #
     # @!attribute [rw] array_values
@@ -84,24 +66,6 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
-    # List of columns and their types.
-    #
-    # @!attribute [rw] column_count
-    #   Number of columns
-    #   @return [Integer]
-    #
-    # @!attribute [rw] column_metadata
-    #   List of columns and their types
-    #   @return [Array<Types::ColumnMetadata>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultSetMetadata AWS API Documentation
-    #
-    class ResultSetMetadata < Struct.new(
-      :column_count,
-      :column_metadata)
-      include Aws::Structure
-    end
-
     # Result Frame
     #
     # @!attribute [rw] records
@@ -120,17 +84,66 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # Execute SQL response
+    #
+    # @!attribute [rw] sql_statement_results
+    #   Results returned by executing the sql statement(s)
+    #   @return [Array<Types::SqlStatementResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteSqlResponse AWS API Documentation
+    #
+    class ExecuteSqlResponse < Struct.new(
+      :sql_statement_results)
+      include Aws::Structure
+    end
+
+    # SQL statement execution result
+    #
+    # @!attribute [rw] number_of_records_updated
+    #   Number of rows updated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] result_frame
+    #   ResultFrame returned by executing the sql statement
+    #   @return [Types::ResultFrame]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlStatementResult AWS API Documentation
+    #
+    class SqlStatementResult < Struct.new(
+      :number_of_records_updated,
+      :result_frame)
+      include Aws::Structure
+    end
+
+    # List of columns and their types.
+    #
+    # @!attribute [rw] column_count
+    #   Number of columns
+    #   @return [Integer]
+    #
+    # @!attribute [rw] column_metadata
+    #   List of columns and their types
+    #   @return [Array<Types::ColumnMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultSetMetadata AWS API Documentation
+    #
+    class ResultSetMetadata < Struct.new(
+      :column_count,
+      :column_metadata)
+      include Aws::Structure
+    end
+
     # Execute SQL Request
     #
     # @note When making an API call, you may pass ExecuteSqlRequest
     #   data as a hash:
     #
     #       {
-    #         aws_secret_store_arn: "String", # required
-    #         database: "String",
-    #         db_cluster_or_instance_arn: "String", # required
-    #         schema: "String",
-    #         sql_statements: "String", # required
+    #         aws_secret_store_arn: "Arn", # required
+    #         database: "DbName",
+    #         db_cluster_or_instance_arn: "Arn", # required
+    #         schema: "DbName",
+    #         sql_statements: "SqlStatement", # required
     #       }
     #
     # @!attribute [rw] aws_secret_store_arn
@@ -277,19 +290,6 @@ module Aws::RDSDataService
     #
     class Record < Struct.new(
       :values)
-      include Aws::Structure
-    end
-
-    # Execute SQL response
-    #
-    # @!attribute [rw] sql_statement_results
-    #   Results returned by executing the sql statement(s)
-    #   @return [Array<Types::SqlStatementResult>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteSqlResponse AWS API Documentation
-    #
-    class ExecuteSqlResponse < Struct.new(
-      :sql_statement_results)
       include Aws::Structure
     end
 

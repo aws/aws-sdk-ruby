@@ -24,7 +24,7 @@
     "models": "apigatewayv2/2018-11-29"
   },
   "AppMesh": {
-    "models": "appmesh/2018-10-01"
+    "models": "appmesh/2019-01-25"
   },
   "AppStream": {
     "models": "appstream/2016-12-01"
@@ -47,6 +47,9 @@
   },
   "AutoScalingPlans": {
     "models": "autoscaling-plans/2018-01-06"
+  },
+  "Backup": {
+    "models": "backup/2018-11-15"
   },
   "Batch": {
     "models": "batch/2016-08-10"
@@ -168,6 +171,9 @@
   },
   "DirectoryService": {
     "models": "ds/2015-04-16"
+  },
+  "DocDB": {
+    "models": "docdb/2014-10-31"
   },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",
@@ -566,6 +572,9 @@
   "Support": {
     "models": "support/2013-04-15"
   },
+  "Textract": {
+    "models": "textract/2018-06-27"
+  },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
   },
@@ -583,6 +592,9 @@
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"
+  },
+  "WorkLink": {
+    "models": "worklink/2018-09-25"
   },
   "WorkMail": {
     "models": "workmail/2017-10-01"

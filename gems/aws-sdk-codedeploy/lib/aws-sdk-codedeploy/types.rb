@@ -88,11 +88,11 @@ module Aws::CodeDeploy
     #   the current state of alarms cannot be retrieved from Amazon
     #   CloudWatch. The default value is false.
     #
-    #   * true: The deployment will proceed even if alarm status information
+    #   * true: The deployment proceeds even if alarm status information
     #     can't be retrieved from Amazon CloudWatch.
     #
-    #   * false: The deployment will stop if alarm status information can't
-    #     be retrieved from Amazon CloudWatch.
+    #   * false: The deployment stops if alarm status information can't be
+    #     retrieved from Amazon CloudWatch.
     #   @return [Boolean]
     #
     # @!attribute [rw] alarms
@@ -125,12 +125,12 @@ module Aws::CodeDeploy
     # @!attribute [rw] content
     #   The YAML-formatted or JSON-formatted revision string.
     #
-    #   For an AWS Lambda deployment the content includes a Lambda function
+    #   For an AWS Lambda deployment, the content includes a Lambda function
     #   name, the alias for its original version, and the alias for its
     #   replacement version. The deployment shifts traffic from the original
     #   version of the Lambda function to the replacement version.
     #
-    #   For an Amazon ECS deployment the content includes the task name,
+    #   For an Amazon ECS deployment, the content includes the task name,
     #   information about the load balancer that serves traffic to the
     #   container, and more.
     #
@@ -167,7 +167,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] linked_to_git_hub
     #   True if the user has authenticated with GitHub for the specified
-    #   application; otherwise, false.
+    #   application. Otherwise, false.
     #   @return [Boolean]
     #
     # @!attribute [rw] git_hub_account_name
@@ -192,8 +192,8 @@ module Aws::CodeDeploy
     end
 
     # Information about a configuration for automatically rolling back to a
-    # previous version of an application revision when a deployment doesn't
-    # complete successfully.
+    # previous version of an application revision when a deployment is not
+    # completed successfully.
     #
     # @note When making an API call, you may pass AutoRollbackConfiguration
     #   data as a hash:
@@ -296,7 +296,8 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   Information about errors that may have occurred during the API call.
+    #   Information about errors that might have occurred during the API
+    #   call.
     #   @return [String]
     #
     # @!attribute [rw] revisions
@@ -362,7 +363,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_names
-    #   The deployment groups' names.
+    #   The names of the deployment groups.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsInput AWS API Documentation
@@ -380,7 +381,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::DeploymentGroupInfo>]
     #
     # @!attribute [rw] error_message
-    #   Information about errors that may have occurred during the API call.
+    #   Information about errors that might have occurred during the API
+    #   call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsOutput AWS API Documentation
@@ -406,7 +408,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
-    #   The unique IDs of instances of the deployment.
+    #   The unique IDs of instances used in the deployment.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstancesInput AWS API Documentation
@@ -424,7 +426,8 @@ module Aws::CodeDeploy
     #   @return [Array<Types::InstanceSummary>]
     #
     # @!attribute [rw] error_message
-    #   Information about errors that may have occurred during the API call.
+    #   Information about errors that might have occurred during the API
+    #   call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstancesOutput AWS API Documentation
@@ -452,12 +455,12 @@ module Aws::CodeDeploy
     #   the deployment determines the type of the targets and their formats.
     #
     #   * For deployments that use the EC2/On-premises compute platform, the
-    #     target IDs are EC2 or on-premises instances IDs and their target
+    #     target IDs are EC2 or on-premises instances IDs, and their target
     #     type is `instanceTarget`.
     #
     #   * For deployments that use the AWS Lambda compute platform, the
-    #     target IDs are the names of Lambda functions and their target type
-    #     is `instanceTarget`.
+    #     target IDs are the names of Lambda functions, and their target
+    #     type is `instanceTarget`.
     #
     #   * For deployments that use the Amazon ECS compute platform, the
     #     target IDs are pairs of Amazon ECS clusters and services specified
@@ -479,13 +482,13 @@ module Aws::CodeDeploy
     #   events. The type of the target objects depends on the deployment'
     #   compute platform.
     #
-    #   * **EC2/On-premises** - Each target object is an EC2 or on-premises
+    #   * **EC2/On-premises**\: Each target object is an EC2 or on-premises
     #     instance.
     #
-    #   * **AWS Lambda** - The target object is a specific version of an AWS
+    #   * **AWS Lambda**\: The target object is a specific version of an AWS
     #     Lambda function.
     #
-    #   * **Amazon ECS** - The target object is an Amazon ECS service.
+    #   * **Amazon ECS**\: The target object is an Amazon ECS service.
     #   @return [Array<Types::DeploymentTarget>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargetsOutput AWS API Documentation
@@ -764,7 +767,7 @@ module Aws::CodeDeploy
     #   @return [Types::MinimumHealthyHosts]
     #
     # @!attribute [rw] traffic_routing_config
-    #   The configuration that specifies how the deployment traffic will be
+    #   The configuration that specifies how the deployment traffic is
     #   routed.
     #   @return [Types::TrafficRoutingConfig]
     #
@@ -916,8 +919,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -932,7 +935,7 @@ module Aws::CodeDeploy
     #
     #   CodeDeployDefault.OneAtATime is the default deployment
     #   configuration. It is used if a configuration isn't specified for
-    #   the deployment or the deployment group.
+    #   the deployment or deployment group.
     #
     #   For more information about the predefined deployment configurations
     #   in AWS CodeDeploy, see [Working with Deployment Groups in AWS
@@ -940,23 +943,23 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
     #   @return [String]
     #
     # @!attribute [rw] ec2_tag_filters
-    #   The Amazon EC2 tags on which to filter. The deployment group will
-    #   include EC2 instances with any of the specified tags. Cannot be used
-    #   in the same call as ec2TagSet.
+    #   The Amazon EC2 tags on which to filter. The deployment group
+    #   includes EC2 instances with any of the specified tags. Cannot be
+    #   used in the same call as ec2TagSet.
     #   @return [Array<Types::EC2TagFilter>]
     #
     # @!attribute [rw] on_premises_instance_tag_filters
     #   The on-premises instance tags on which to filter. The deployment
-    #   group will include on-premises instances with any of the specified
-    #   tags. Cannot be used in the same call as OnPremisesTagSet.
+    #   group includes on-premises instances with any of the specified tags.
+    #   Cannot be used in the same call as OnPremisesTagSet.
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] auto_scaling_groups
-    #   A list of associated Auto Scaling groups.
+    #   A list of associated Amazon EC2 Auto Scaling groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role_arn
@@ -971,7 +974,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
     #   @return [Array<Types::TriggerConfig>]
     #
     # @!attribute [rw] alarm_configuration
@@ -1001,21 +1004,22 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] ec2_tag_set
     #   Information about groups of tags applied to EC2 instances. The
-    #   deployment group will include only EC2 instances identified by all
-    #   the tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   deployment group includes only EC2 instances identified by all the
+    #   tag groups. Cannot be used in the same call as ec2TagFilters.
     #   @return [Types::EC2TagSet]
     #
     # @!attribute [rw] ecs_services
-    #   The target ECS services in the deployment group. This only applies
-    #   to deployment groups that use the Amazon ECS compute platform. A
-    #   target ECS service is specified as an Amazon ECS cluster and service
-    #   name pair using the format `<clustername>:<servicename>`.
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform.
+    #   A target Amazon ECS service is specified as an Amazon ECS cluster
+    #   and service name pair using the format
+    #   `<clustername>:<servicename>`.
     #   @return [Array<Types::ECSService>]
     #
     # @!attribute [rw] on_premises_tag_set
     #   Information about groups of tags applied to on-premises instances.
-    #   The deployment group will include only on-premises instances
-    #   identified by all the tag groups. Cannot be used in the same call as
+    #   The deployment group includes only on-premises instances identified
+    #   by all of the tag groups. Cannot be used in the same call as
     #   onPremisesInstanceTagFilters.
     #   @return [Types::OnPremisesTagSet]
     #
@@ -1117,8 +1121,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -1130,13 +1134,13 @@ module Aws::CodeDeploy
     #   @return [Types::RevisionLocation]
     #
     # @!attribute [rw] deployment_config_name
-    #   The name of a deployment configuration associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user
+    #   or AWS account.
     #
-    #   If not specified, the value configured in the deployment group will
-    #   be used as the default. If the deployment group does not have a
-    #   deployment configuration associated with it, then
-    #   CodeDeployDefault.OneAtATime will be used by default.
+    #   If not specified, the value configured in the deployment group is
+    #   used as the default. If the deployment group does not have a
+    #   deployment configuration associated with it,
+    #   CodeDeployDefault.OneAtATime is used by default.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1144,20 +1148,36 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] ignore_application_stop_failures
-    #   If set to true, then if the deployment causes the ApplicationStop
-    #   deployment lifecycle event to an instance to fail, the deployment to
-    #   that instance will not be considered to have failed at that point
-    #   and will continue on to the BeforeInstall deployment lifecycle
-    #   event.
+    #   If true, then if an ApplicationStop, BeforeBlockTraffic, or
+    #   AfterBlockTraffic deployment lifecycle event to an instance fails,
+    #   then the deployment continues to the next deployment lifecycle
+    #   event. For example, if ApplicationStop fails, the deployment
+    #   continues with DownloadBundle. If BeforeBlockTraffic fails, the
+    #   deployment continues with BlockTraffic. If AfterBlockTraffic fails,
+    #   the deployment continues with ApplicationStop.
     #
-    #   If set to false or not specified, then if the deployment causes the
-    #   ApplicationStop deployment lifecycle event to fail to an instance,
-    #   the deployment to that instance will stop, and the deployment to
-    #   that instance will be considered to have failed.
+    #   If false or not specified, then if a lifecycle event fails during a
+    #   deployment to an instance, that deployment fails. If deployment to
+    #   that instance is part of an overall deployment and the number of
+    #   healthy hosts is not less than the minimum number of healthy hosts,
+    #   then a deployment to the next instance is attempted.
+    #
+    #   During a deployment, the AWS CodeDeploy agent runs the scripts
+    #   specified for ApplicationStop, BeforeBlockTraffic, and
+    #   AfterBlockTraffic in the AppSpec file from the previous successful
+    #   deployment. (All other scripts are run from the AppSpec file in the
+    #   current deployment.) If one of these scripts contains an error and
+    #   does not run successfully, the deployment can fail.
+    #
+    #   If the cause of the failure is a script from the last successful
+    #   deployment that will never run successfully, create a new deployment
+    #   and use `ignoreApplicationStopFailures` to specify that the
+    #   ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures
+    #   should be ignored.
     #   @return [Boolean]
     #
     # @!attribute [rw] target_instances
-    #   Information about the instances that will belong to the replacement
+    #   Information about the instances that belong to the replacement
     #   environment in a blue/green deployment.
     #   @return [Types::TargetInstances]
     #
@@ -1228,8 +1248,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplicationInput AWS API Documentation
@@ -1249,8 +1269,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] deployment_config_name
-    #   The name of a deployment configuration associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user
+    #   or AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigInput AWS API Documentation
@@ -1271,13 +1291,12 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroupInput AWS API Documentation
@@ -1365,7 +1384,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] traffic_routing_config
-    #   The configuration specifying how the deployment traffic will be
+    #   The configuration that specifies how the deployment traffic is
     #   routed. Only deployments with a Lambda compute platform can specify
     #   this.
     #   @return [Types::TrafficRoutingConfig]
@@ -1463,8 +1482,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] ec2_tag_set
     #   Information about groups of tags applied to an EC2 instance. The
-    #   deployment group includes only EC2 instances identified by all the
-    #   tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   deployment group includes only EC2 instances identified by all of
+    #   the tag groups. Cannot be used in the same call as ec2TagFilters.
     #   @return [Types::EC2TagSet]
     #
     # @!attribute [rw] on_premises_tag_set
@@ -1480,10 +1499,11 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] ecs_services
-    #   The target ECS services in the deployment group. This only applies
-    #   to deployment groups that use the Amazon ECS compute platform. A
-    #   target ECS service is specified as an Amazon ECS cluster and service
-    #   name pair using the format `<clustername>:<servicename>`.
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform.
+    #   A target Amazon ECS service is specified as an Amazon ECS cluster
+    #   and service name pair using the format
+    #   `<clustername>:<servicename>`.
     #   @return [Array<Types::ECSService>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
@@ -1550,21 +1570,21 @@ module Aws::CodeDeploy
     #   @return [Types::ErrorInformation]
     #
     # @!attribute [rw] create_time
-    #   A timestamp indicating when the deployment was created.
+    #   A timestamp that indicates when the deployment was created.
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   A timestamp indicating when the deployment was deployed to the
+    #   A timestamp that indicates when the deployment was deployed to the
     #   deployment group.
     #
-    #   In some cases, the reported value of the start time may be later
+    #   In some cases, the reported value of the start time might be later
     #   than the complete time. This is due to differences in the clock
-    #   settings of back-end servers that participate in the deployment
+    #   settings of backend servers that participate in the deployment
     #   process.
     #   @return [Time]
     #
     # @!attribute [rw] complete_time
-    #   A timestamp indicating when the deployment was complete.
+    #   A timestamp that indicates when the deployment was complete.
     #   @return [Time]
     #
     # @!attribute [rw] deployment_overview
@@ -1581,22 +1601,38 @@ module Aws::CodeDeploy
     #
     #   * user: A user created the deployment.
     #
-    #   * autoscaling: Auto Scaling created the deployment.
+    #   * autoscaling: Amazon EC2 Auto Scaling created the deployment.
     #
     #   * codeDeployRollback: A rollback process created the deployment.
     #   @return [String]
     #
     # @!attribute [rw] ignore_application_stop_failures
-    #   If true, then if the deployment causes the ApplicationStop
-    #   deployment lifecycle event to an instance to fail, the deployment to
-    #   that instance will not be considered to have failed at that point
-    #   and will continue on to the BeforeInstall deployment lifecycle
-    #   event.
+    #   If true, then if an ApplicationStop, BeforeBlockTraffic, or
+    #   AfterBlockTraffic deployment lifecycle event to an instance fails,
+    #   then the deployment continues to the next deployment lifecycle
+    #   event. For example, if ApplicationStop fails, the deployment
+    #   continues with DownloadBundle. If BeforeBlockTraffic fails, the
+    #   deployment continues with BlockTraffic. If AfterBlockTraffic fails,
+    #   the deployment continues with ApplicationStop.
     #
-    #   If false or not specified, then if the deployment causes the
-    #   ApplicationStop deployment lifecycle event to an instance to fail,
-    #   the deployment to that instance will stop, and the deployment to
-    #   that instance will be considered to have failed.
+    #   If false or not specified, then if a lifecycle event fails during a
+    #   deployment to an instance, that deployment fails. If deployment to
+    #   that instance is part of an overall deployment and the number of
+    #   healthy hosts is not less than the minimum number of healthy hosts,
+    #   then a deployment to the next instance is attempted.
+    #
+    #   During a deployment, the AWS CodeDeploy agent runs the scripts
+    #   specified for ApplicationStop, BeforeBlockTraffic, and
+    #   AfterBlockTraffic in the AppSpec file from the previous successful
+    #   deployment. (All other scripts are run from the AppSpec file in the
+    #   current deployment.) If one of these scripts contains an error and
+    #   does not run successfully, the deployment can fail.
+    #
+    #   If the cause of the failure is a script from the last successful
+    #   deployment that will never run successfully, create a new deployment
+    #   and use `ignoreApplicationStopFailures` to specify that the
+    #   ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures
+    #   should be ignored.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_rollback_configuration
@@ -1627,7 +1663,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] instance_termination_wait_time_started
     #   Indicates whether the wait period set for the termination of
     #   instances in the original environment has started. Status is
-    #   'false' if the KEEP\_ALIVE option is specified; otherwise,
+    #   'false' if the KEEP\_ALIVE option is specified. Otherwise,
     #   'true' as soon as the termination wait period starts.
     #   @return [Boolean]
     #
@@ -1772,8 +1808,9 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] wait_time_in_minutes
     #   The number of minutes to wait before the status of a blue/green
-    #   deployment changed to Stopped if rerouting is not started manually.
-    #   Applies only to the STOP\_DEPLOYMENT option for actionOnTimeout
+    #   deployment is changed to Stopped if rerouting is not started
+    #   manually. Applies only to the STOP\_DEPLOYMENT option for
+    #   actionOnTimeout
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentReadyOption AWS API Documentation
@@ -1817,7 +1854,7 @@ module Aws::CodeDeploy
     # Information about the deployment target.
     #
     # @!attribute [rw] deployment_target_type
-    #   The deployment type which is specific to the deployment's compute
+    #   The deployment type that is specific to the deployment's compute
     #   platform.
     #   @return [String]
     #
@@ -1970,9 +2007,9 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] ec2_tag_set_list
-    #   A list containing other lists of EC2 instance tag groups. In order
-    #   for an instance to be included in the deployment group, it must be
-    #   identified by all the tag groups in the list.
+    #   A list that contains other lists of EC2 instance tag groups. For an
+    #   instance to be included in the deployment group, it must be
+    #   identified by all of the tag groups in the list.
     #   @return [Array<Array<Types::EC2TagFilter>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagSet AWS API Documentation
@@ -1994,11 +2031,12 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] service_name
-    #   The name of the target ECS service.
+    #   The name of the target Amazon ECS service.
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
-    #   The name of the cluster that the ECS service is associated with.
+    #   The name of the cluster that the Amazon ECS service is associated
+    #   with.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSService AWS API Documentation
@@ -2054,12 +2092,12 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # A set of Amazon ECS tasks. A task set runs a specified number of
-    # instances of a task definition simultaneously inside an Amazon ECS
-    # service. Information about a set of Amazon ECS tasks in an AWS
-    # CodeDeploy deployment. An Amazon ECS task set includes details such as
-    # the desired number of tasks, how many tasks are running, and whether
-    # the task set serves production traffic or not.
+    # Information about a set of Amazon ECS tasks in an AWS CodeDeploy
+    # deployment. An Amazon ECS task set includes details such as the
+    # desired number of tasks, how many tasks are running, and whether the
+    # task set serves production traffic. An AWS CodeDeploy application that
+    # uses the Amazon ECS compute platform deploys a containerized
+    # application in an Amazon ECS service as a task set.
     #
     # @!attribute [rw] identifer
     #   A unique ID of an `ECSTaskSet`.
@@ -2067,10 +2105,10 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] desired_count
     #   The number of tasks in a task set. During a deployment that uses the
-    #   Amazon ECS compute type, CodeDeploy asks Amazon ECS to create a new
-    #   task set and uses this value to determine how many tasks to create.
-    #   After the updated task set is created, CodeDeploy shifts traffic to
-    #   the new task set.
+    #   Amazon ECS compute type, CodeDeploy instructs Amazon ECS to create a
+    #   new task set and uses this value to determine how many tasks to
+    #   create. After the updated task set is created, CodeDeploy shifts
+    #   traffic to the new task set.
     #   @return [Integer]
     #
     # @!attribute [rw] pending_count
@@ -2090,12 +2128,12 @@ module Aws::CodeDeploy
     # @!attribute [rw] status
     #   The status of the task set. There are three valid task set statuses:
     #
-    #   * `PRIMARY` - indicates the task set is serving production traffic.
+    #   * `PRIMARY`\: Indicates the task set is serving production traffic.
     #
-    #   * `ACTIVE` - indicates the task set is not serving production
+    #   * `ACTIVE`\: Indicates the task set is not serving production
     #     traffic.
     #
-    #   * `DRAINING` - indicates the tasks in the task set are being stopped
+    #   * `DRAINING`\: Indicates the tasks in the task set are being stopped
     #     and their corresponding targets are being deregistered from their
     #     target group.
     #   @return [String]
@@ -2140,12 +2178,12 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] name
-    #   For blue/green deployments, the name of the load balancer that will
-    #   be used to route traffic from original instances to replacement
+    #   For blue/green deployments, the name of the load balancer that is
+    #   used to route traffic from original instances to replacement
     #   instances in a blue/green deployment. For in-place deployments, the
     #   name of the load balancer that instances are deregistered from so
     #   they are not serving traffic during a deployment, and then
-    #   re-registered with after the deployment completes.
+    #   re-registered with after the deployment is complete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ELBInfo AWS API Documentation
@@ -2158,18 +2196,18 @@ module Aws::CodeDeploy
     # Information about a deployment error.
     #
     # @!attribute [rw] code
-    #   For information about additional error codes, see [Error Codes for
-    #   AWS CodeDeploy][1] in the [AWS CodeDeploy User Guide][2].
+    #   For more information, see [Error Codes for AWS CodeDeploy][1] in the
+    #   [AWS CodeDeploy User Guide][2].
     #
     #   The error code:
     #
     #   * APPLICATION\_MISSING: The application was missing. This error code
-    #     will most likely be raised if the application is deleted after the
-    #     deployment is created but before it is started.
+    #     is most likely raised if the application is deleted after the
+    #     deployment is created, but before it is started.
     #
     #   * DEPLOYMENT\_GROUP\_MISSING: The deployment group was missing. This
-    #     error code will most likely be raised if the deployment group is
-    #     deleted after the deployment is created but before it is started.
+    #     error code is most likely raised if the deployment group is
+    #     deleted after the deployment is created, but before it is started.
     #
     #   * HEALTH\_CONSTRAINTS: The deployment failed on too many instances
     #     to be successfully deployed within the instance health constraints
@@ -2186,26 +2224,27 @@ module Aws::CodeDeploy
     #   * INTERNAL\_ERROR: There was an internal error.
     #
     #   * NO\_EC2\_SUBSCRIPTION: The calling account is not subscribed to
-    #     the Amazon EC2 service.
+    #     Amazon EC2.
     #
-    #   * NO\_INSTANCES: No instance were specified, or no instance can be
+    #   * NO\_INSTANCES: No instances were specified, or no instances can be
     #     found.
     #
-    #   * OVER\_MAX\_INSTANCES: The maximum number of instance was exceeded.
+    #   * OVER\_MAX\_INSTANCES: The maximum number of instances was
+    #     exceeded.
     #
     #   * THROTTLED: The operation was throttled because the calling account
     #     exceeded the throttling limits of one or more AWS services.
     #
     #   * TIMEOUT: The deployment has timed out.
     #
-    #   * REVISION\_MISSING: The revision ID was missing. This error code
-    #     will most likely be raised if the revision is deleted after the
-    #     deployment is created but before it is started.
+    #   * REVISION\_MISSING: The revision ID was missing. This error code is
+    #     most likely raised if the revision is deleted after the deployment
+    #     is created, but before it is started.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html
-    #   [2]: http://docs.aws.amazon.com/codedeploy/latest/userguide
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -2263,8 +2302,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationInput AWS API Documentation
@@ -2369,8 +2408,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] deployment_config_name
-    #   The name of a deployment configuration associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user
+    #   or AWS account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfigInput AWS API Documentation
@@ -2404,13 +2443,12 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroupInput AWS API Documentation
@@ -2444,8 +2482,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] deployment_id
-    #   The unique ID of a deployment associated with the applicable IAM
-    #   user or AWS account.
+    #   The unique ID of a deployment associated with the IAM user or AWS
+    #   account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInput AWS API Documentation
@@ -2533,7 +2571,7 @@ module Aws::CodeDeploy
 
     # @!attribute [rw] deployment_target
     #   A deployment target that contains information about a deployment
-    #   such as its status, lifecyle events, and when it was updated last.
+    #   such as its status, lifecyle events, and when it was last updated.
     #   It also contains metadata about the deployment target. The
     #   deployment target metadata depends on the deployment target's type
     #   (`instanceTarget`, `lambdaTarget`, or `ecsTarget`).
@@ -2710,7 +2748,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
-    #   A timestamp indicating when the instance information was last
+    #   A timestamp that indicaties when the instance information was last
     #   updated.
     #   @return [Time]
     #
@@ -2840,12 +2878,12 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   A timestamp indicating when the most recent deployment to the
-    #   deployment group completed.
+    #   A timestamp that indicates when the most recent deployment to the
+    #   deployment group was complete.
     #   @return [Time]
     #
     # @!attribute [rw] create_time
-    #   A timestamp indicating when the most recent deployment to the
+    #   A timestamp that indicates when the most recent deployment to the
     #   deployment group started.
     #   @return [Time]
     #
@@ -2871,11 +2909,13 @@ module Aws::CodeDeploy
     #   @return [Types::Diagnostics]
     #
     # @!attribute [rw] start_time
-    #   A timestamp indicating when the deployment lifecycle event started.
+    #   A timestamp that indicates when the deployment lifecycle event
+    #   started.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   A timestamp indicating when the deployment lifecycle event ended.
+    #   A timestamp that indicates when the deployment lifecycle event
+    #   ended.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -2921,8 +2961,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -2937,7 +2977,7 @@ module Aws::CodeDeploy
     #   * lastUsedTime: Sort by the time the revisions were last used in a
     #     deployment.
     #
-    #   If not specified or set to null, the results will be returned in an
+    #   If not specified or set to null, the results are returned in an
     #   arbitrary order.
     #   @return [String]
     #
@@ -2948,9 +2988,9 @@ module Aws::CodeDeploy
     #
     #   * descending: descending order.
     #
-    #   If not specified, the results will be sorted in ascending order.
+    #   If not specified, the results are sorted in ascending order.
     #
-    #   If set to null, the results will be sorted in an arbitrary order.
+    #   If set to null, the results are sorted in an arbitrary order.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
@@ -3003,10 +3043,9 @@ module Aws::CodeDeploy
     #   @return [Array<Types::RevisionLocation>]
     #
     # @!attribute [rw] next_token
-    #   If a large amount of information is returned, an identifier will
-    #   also be returned. It can be used in a subsequent list application
-    #   revisions call to return the next set of application revisions in
-    #   the list.
+    #   If a large amount of information is returned, an identifier is also
+    #   returned. It can be used in a subsequent list application revisions
+    #   call to return the next set of application revisions in the list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisionsOutput AWS API Documentation
@@ -3047,8 +3086,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] next_token
     #   If a large amount of information is returned, an identifier is also
     #   returned. It can be used in a subsequent list applications call to
-    #   return the next set of applications, will also be returned. in the
-    #   list.
+    #   return the next set of applications in the list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationsOutput AWS API Documentation
@@ -3114,8 +3152,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3139,7 +3177,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] deployment_groups
-    #   A list of corresponding deployment group names.
+    #   A list of deployment group names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -3182,18 +3220,18 @@ module Aws::CodeDeploy
     # @!attribute [rw] instance_status_filter
     #   A subset of instances to list by status:
     #
-    #   * Pending: Include those instance with pending deployments.
+    #   * Pending: Include those instances with pending deployments.
     #
-    #   * InProgress: Include those instance where deployments are still in
+    #   * InProgress: Include those instances where deployments are still in
     #     progress.
     #
     #   * Succeeded: Include those instances with successful deployments.
     #
-    #   * Failed: Include those instance with failed deployments.
+    #   * Failed: Include those instances with failed deployments.
     #
-    #   * Skipped: Include those instance with skipped deployments.
+    #   * Skipped: Include those instances with skipped deployments.
     #
-    #   * Unknown: Include those instance with deployments in an unknown
+    #   * Unknown: Include those instances with deployments in an unknown
     #     state.
     #   @return [Array<String>]
     #
@@ -3273,8 +3311,8 @@ module Aws::CodeDeploy
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   If a large amount of information is returned, a token identifier
-    #   will also be returned. It can be used in a subsequent
+    #   If a large amount of information is returned, a token identifier is
+    #   also returned. It can be used in a subsequent
     #   `ListDeploymentTargets` call to return the next set of deployment
     #   targets in the list.
     #   @return [String]
@@ -3304,13 +3342,12 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #   @return [String]
     #
     # @!attribute [rw] include_only_statuses
@@ -3440,8 +3477,8 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] tag_filters
-    #   The on-premises instance tags that will be used to restrict the
-    #   corresponding on-premises instance names returned.
+    #   The on-premises instance tags that are used to restrict the
+    #   on-premises instance names returned.
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] next_token
@@ -3459,7 +3496,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of list on-premises instances operation.
+    # Represents the output of the list on-premises instances operation.
     #
     # @!attribute [rw] instance_names
     #   The list of matching on-premises instance names.
@@ -3514,8 +3551,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] elb_info_list
-    #   An array containing information about the load balancer to use for
-    #   load balancing in a deployment. In Elastic Load Balancing, load
+    #   An array that contains information about the load balancer to use
+    #   for load balancing in a deployment. In Elastic Load Balancing, load
     #   balancers are used with Classic Load Balancers.
     #
     #   <note markdown="1"> Adding more than one load balancer to the array is not supported.
@@ -3524,7 +3561,7 @@ module Aws::CodeDeploy
     #   @return [Array<Types::ELBInfo>]
     #
     # @!attribute [rw] target_group_info_list
-    #   An array containing information about the target group to use for
+    #   An array that contains information about the target group to use for
     #   load balancing in a deployment. In Elastic Load Balancing, target
     #   groups are used with Application Load Balancers.
     #
@@ -3572,23 +3609,23 @@ module Aws::CodeDeploy
     #
     #   In an example of nine instance, if a HOST\_COUNT of six is
     #   specified, deploy to up to three instances at a time. The deployment
-    #   will be successful if six or more instances are deployed to
-    #   successfully; otherwise, the deployment fails. If a FLEET\_PERCENT
-    #   of 40 is specified, deploy to up to five instance at a time. The
-    #   deployment will be successful if four or more instance are deployed
-    #   to successfully; otherwise, the deployment fails.
+    #   is successful if six or more instances are deployed to successfully.
+    #   Otherwise, the deployment fails. If a FLEET\_PERCENT of 40 is
+    #   specified, deploy to up to five instance at a time. The deployment
+    #   is successful if four or more instance are deployed to successfully.
+    #   Otherwise, the deployment fails.
     #
     #   <note markdown="1"> In a call to the get deployment configuration operation,
-    #   CodeDeployDefault.OneAtATime will return a minimum healthy instance
-    #   type of MOST\_CONCURRENCY and a value of 1. This means a deployment
-    #   to only one instance at a time. (You cannot set the type to
+    #   CodeDeployDefault.OneAtATime returns a minimum healthy instance type
+    #   of MOST\_CONCURRENCY and a value of 1. This means a deployment to
+    #   only one instance at a time. (You cannot set the type to
     #   MOST\_CONCURRENCY, only to HOST\_COUNT or FLEET\_PERCENT.) In
-    #   addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try
+    #   addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts
     #   to ensure that all instances but one are kept in a healthy state
     #   during the deployment. Although this allows one instance at a time
     #   to be taken offline for a new deployment, it also means that if the
-    #   deployment to the last instance fails, the overall deployment still
-    #   succeeds.
+    #   deployment to the last instance fails, the overall deployment is
+    #   still successful.
     #
     #    </note>
     #
@@ -3597,7 +3634,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHosts AWS API Documentation
@@ -3626,9 +3663,9 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] on_premises_tag_set_list
-    #   A list containing other lists of on-premises instance tag groups. In
-    #   order for an instance to be included in the deployment group, it
-    #   must be identified by all the tag groups in the list.
+    #   A list that contains other lists of on-premises instance tag groups.
+    #   For an instance to be included in the deployment group, it must be
+    #   identified by all of the tag groups in the list.
     #   @return [Array<Array<Types::TagFilter>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/OnPremisesTagSet AWS API Documentation
@@ -3747,8 +3784,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM
+    #   user or AWS account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3886,10 +3923,10 @@ module Aws::CodeDeploy
     #   * S3: An application revision stored in Amazon S3.
     #
     #   * GitHub: An application revision stored in GitHub (EC2/On-premises
-    #     deployments only)
+    #     deployments only).
     #
     #   * String: A YAML-formatted or JSON-formatted string (AWS Lambda
-    #     deployments only)
+    #     deployments only).
     #   @return [String]
     #
     # @!attribute [rw] s3_location
@@ -3935,9 +3972,9 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] rollback_message
-    #   Information describing the status of a deployment rollback; for
+    #   Information that describes the status of a deployment rollback (for
     #   example, whether the deployment can't be rolled back, is in
-    #   progress, failed, or succeeded.
+    #   progress, failed, or succeeded).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RollbackInfo AWS API Documentation
@@ -3988,7 +4025,7 @@ module Aws::CodeDeploy
     #   A specific version of the Amazon S3 object that represents the
     #   bundled artifacts for the application revision.
     #
-    #   If the version is not specified, the system will use the most recent
+    #   If the version is not specified, the system uses the most recent
     #   version by default.
     #   @return [String]
     #
@@ -3997,7 +4034,7 @@ module Aws::CodeDeploy
     #   artifacts for the application revision.
     #
     #   If the ETag is not specified as an input parameter, ETag validation
-    #   of the object will be skipped.
+    #   of the object is skipped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/S3Location AWS API Documentation
@@ -4158,11 +4195,11 @@ module Aws::CodeDeploy
     # @!attribute [rw] name
     #   For blue/green deployments, the name of the target group that
     #   instances in the original environment are deregistered from, and
-    #   instances in the replacement environment registered with. For
+    #   instances in the replacement environment are registered with. For
     #   in-place deployments, the name of the target group that instances
     #   are deregistered from, so they are not serving traffic during a
-    #   deployment, and then re-registered with after the deployment
-    #   completes.
+    #   deployment, and then re-registered with after the deployment is
+    #   complete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupInfo AWS API Documentation
@@ -4172,8 +4209,8 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about two target groups and how traffic routes during an
-    # Amazon ECS deployment. An optional test traffic route can be
+    # Information about two target groups and how traffic is routed during
+    # an Amazon ECS deployment. An optional test traffic route can be
     # specified.
     #
     # @note When making an API call, you may pass TargetGroupPairInfo
@@ -4195,8 +4232,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] target_groups
     #   One pair of target groups. One is associated with the original task
-    #   set. The second target is associated with the task set that serves
-    #   traffic after the deployment completes.
+    #   set. The second is associated with the task set that serves traffic
+    #   after the deployment is complete.
     #   @return [Array<Types::TargetGroupInfo>]
     #
     # @!attribute [rw] prod_traffic_route
@@ -4206,8 +4243,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] test_traffic_route
     #   An optional path used by a load balancer to route test traffic after
-    #   an Amazon ECS deployment. Validation can happen while test traffic
-    #   is served during a deployment.
+    #   an Amazon ECS deployment. Validation can occur while test traffic is
+    #   served during a deployment.
     #   @return [Types::TrafficRoute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupPairInfo AWS API Documentation
@@ -4620,7 +4657,7 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] application_name
-    #   The application name corresponding to the deployment group to
+    #   The application name that corresponds to the deployment group to
     #   update.
     #   @return [String]
     #
@@ -4667,7 +4704,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
     #   @return [Array<Types::TriggerConfig>]
     #
     # @!attribute [rw] alarm_configuration
@@ -4697,21 +4734,22 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] ec2_tag_set
     #   Information about groups of tags applied to on-premises instances.
-    #   The deployment group will include only EC2 instances identified by
-    #   all the tag groups.
+    #   The deployment group includes only EC2 instances identified by all
+    #   the tag groups.
     #   @return [Types::EC2TagSet]
     #
     # @!attribute [rw] ecs_services
-    #   The target ECS services in the deployment group. This only applies
-    #   to deployment groups that use the Amazon ECS compute platform. A
-    #   target ECS service is specified as an Amazon ECS cluster and service
-    #   name pair using the format `<clustername>:<servicename>`.
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform.
+    #   A target Amazon ECS service is specified as an Amazon ECS cluster
+    #   and service name pair using the format
+    #   `<clustername>:<servicename>`.
     #   @return [Array<Types::ECSService>]
     #
     # @!attribute [rw] on_premises_tag_set
     #   Information about an on-premises instance tag set. The deployment
-    #   group will include only on-premises instances identified by all the
-    #   tag groups.
+    #   group includes only on-premises instances identified by all the tag
+    #   groups.
     #   @return [Types::OnPremisesTagSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupInput AWS API Documentation

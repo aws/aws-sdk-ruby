@@ -16,6 +16,7 @@ module Aws::MediaStore
     AllowedOrigins = Shapes::ListShape.new(name: 'AllowedOrigins')
     Container = Shapes::StructureShape.new(name: 'Container')
     ContainerARN = Shapes::StringShape.new(name: 'ContainerARN')
+    ContainerAccessLoggingEnabled = Shapes::BooleanShape.new(name: 'ContainerAccessLoggingEnabled')
     ContainerInUseException = Shapes::StructureShape.new(name: 'ContainerInUseException')
     ContainerList = Shapes::ListShape.new(name: 'ContainerList')
     ContainerListLimit = Shapes::IntegerShape.new(name: 'ContainerListLimit')
@@ -64,6 +65,10 @@ module Aws::MediaStore
     PutCorsPolicyOutput = Shapes::StructureShape.new(name: 'PutCorsPolicyOutput')
     PutLifecyclePolicyInput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyInput')
     PutLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyOutput')
+    StartAccessLoggingInput = Shapes::StructureShape.new(name: 'StartAccessLoggingInput')
+    StartAccessLoggingOutput = Shapes::StructureShape.new(name: 'StartAccessLoggingOutput')
+    StopAccessLoggingInput = Shapes::StructureShape.new(name: 'StopAccessLoggingInput')
+    StopAccessLoggingOutput = Shapes::StructureShape.new(name: 'StopAccessLoggingOutput')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
 
     AllowedHeaders.member = Shapes::ShapeRef.new(shape: Header)
@@ -77,6 +82,7 @@ module Aws::MediaStore
     Container.add_member(:arn, Shapes::ShapeRef.new(shape: ContainerARN, location_name: "ARN"))
     Container.add_member(:name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "Name"))
     Container.add_member(:status, Shapes::ShapeRef.new(shape: ContainerStatus, location_name: "Status"))
+    Container.add_member(:access_logging_enabled, Shapes::ShapeRef.new(shape: ContainerAccessLoggingEnabled, location_name: "AccessLoggingEnabled"))
     Container.struct_class = Types::Container
 
     ContainerList.member = Shapes::ShapeRef.new(shape: Container)
@@ -167,6 +173,16 @@ module Aws::MediaStore
     PutLifecyclePolicyInput.struct_class = Types::PutLifecyclePolicyInput
 
     PutLifecyclePolicyOutput.struct_class = Types::PutLifecyclePolicyOutput
+
+    StartAccessLoggingInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    StartAccessLoggingInput.struct_class = Types::StartAccessLoggingInput
+
+    StartAccessLoggingOutput.struct_class = Types::StartAccessLoggingOutput
+
+    StopAccessLoggingInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    StopAccessLoggingInput.struct_class = Types::StopAccessLoggingInput
+
+    StopAccessLoggingOutput.struct_class = Types::StopAccessLoggingOutput
 
 
     # @api private
@@ -329,6 +345,28 @@ module Aws::MediaStore
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutLifecyclePolicyInput)
         o.output = Shapes::ShapeRef.new(shape: PutLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:start_access_logging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAccessLogging"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAccessLoggingInput)
+        o.output = Shapes::ShapeRef.new(shape: StartAccessLoggingOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:stop_access_logging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopAccessLogging"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopAccessLoggingInput)
+        o.output = Shapes::ShapeRef.new(shape: StopAccessLoggingOutput)
         o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)

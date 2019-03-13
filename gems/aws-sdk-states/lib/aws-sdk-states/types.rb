@@ -161,6 +161,12 @@ module Aws::States
     #
     #       {
     #         name: "Name", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -183,13 +189,18 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to a resource.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput AWS API Documentation
     #
     class CreateActivityInput < Struct.new(
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -216,6 +227,12 @@ module Aws::States
     #         name: "Name", # required
     #         definition: "Definition", # required
     #         role_arn: "Arn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -240,7 +257,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -248,12 +265,17 @@ module Aws::States
     #   machine.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to be added when creating a state machine.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
     #
     class CreateStateMachineInput < Struct.new(
       :name,
       :definition,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -484,7 +506,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -557,7 +579,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -880,38 +902,35 @@ module Aws::States
     #   @return [Types::ActivityTimedOutEventDetails]
     #
     # @!attribute [rw] task_failed_event_details
-    #   Contains details about a task failure event.
+    #   Contains details about the failure of a task.
     #   @return [Types::TaskFailedEventDetails]
     #
     # @!attribute [rw] task_scheduled_event_details
-    #   Contains details about a task scheduled during an execution.
+    #   Contains details about a task that was scheduled.
     #   @return [Types::TaskScheduledEventDetails]
     #
     # @!attribute [rw] task_start_failed_event_details
-    #   Contains details about a task that failed to start during an
-    #   execution.
+    #   Contains details about a task that failed to start.
     #   @return [Types::TaskStartFailedEventDetails]
     #
     # @!attribute [rw] task_started_event_details
-    #   Contains details about the start of a task during an execution.
+    #   Contains details about a task that was started.
     #   @return [Types::TaskStartedEventDetails]
     #
     # @!attribute [rw] task_submit_failed_event_details
-    #   Contains details about a task that failed to submit during an
-    #   execution.
+    #   Contains details about a task that where the submit failed.
     #   @return [Types::TaskSubmitFailedEventDetails]
     #
     # @!attribute [rw] task_submitted_event_details
-    #   Contains details about a task submitted to a resource .
+    #   Contains details about a submitted task.
     #   @return [Types::TaskSubmittedEventDetails]
     #
     # @!attribute [rw] task_succeeded_event_details
-    #   Contains details about the successful completion of a task state.
+    #   Contains details about a task that succeeded.
     #   @return [Types::TaskSucceededEventDetails]
     #
     # @!attribute [rw] task_timed_out_event_details
-    #   Contains details about a resource timeout that occurred during an
-    #   execution.
+    #   Contains details about a task that timed out.
     #   @return [Types::TaskTimedOutEventDetails]
     #
     # @!attribute [rw] execution_failed_event_details
@@ -1440,9 +1459,9 @@ module Aws::States
     #
     # @!attribute [rw] name
     #   The name of the execution. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   account, region, and state machine for 90 days. For more
+    #   information, see [ Limits Related to State Machine Executions][1] in
+    #   the *AWS Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -1458,7 +1477,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #   @return [String]
     #
     # @!attribute [rw] input
@@ -1947,7 +1966,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn

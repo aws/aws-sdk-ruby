@@ -30,7 +30,7 @@ module Aws::Chime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
+    #   [1]: https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
@@ -66,7 +66,7 @@ module Aws::Chime
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/chime/latest/ag/policies.html
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/policies.html
     #
     # @note When making an API call, you may pass AccountSettings
     #   data as a hash:
@@ -88,7 +88,7 @@ module Aws::Chime
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html
+    #   [1]: https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AccountSettings AWS API Documentation

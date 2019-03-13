@@ -97,7 +97,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a celebrity recognized by the operation.
+    # Provides information about a celebrity recognized by the
+    # RecognizeCelebrities operation.
     #
     # @!attribute [rw] urls
     #   An array of URLs pointing to additional information about the
@@ -236,12 +237,22 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
     #   The target image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
@@ -462,7 +473,8 @@ module Aws::Rekognition
     # @!attribute [rw] name
     #   An identifier you assign to the stream processor. You can use `Name`
     #   to manage the stream processor. For example, you can get the current
-    #   status of the stream processor by calling . `Name` is idempotent.
+    #   status of the stream processor by calling DescribeStreamProcessor.
+    #   `Name` is idempotent.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -585,7 +597,7 @@ module Aws::Rekognition
 
     # @!attribute [rw] face_count
     #   The number of faces that are indexed into the collection. To index
-    #   faces into a collection, use .
+    #   faces into a collection, use IndexFaces.
     #   @return [Integer]
     #
     # @!attribute [rw] face_model_version
@@ -708,6 +720,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
@@ -775,8 +792,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] image
     #   The input image as base64-encoded bytes or an S3 object. If you use
-    #   the AWS CLI to call Amazon Rekognition operations, passing
-    #   base64-encoded image bytes is not supported.
+    #   the AWS CLI to call Amazon Rekognition operations, passing image
+    #   bytes is not supported. Images stored in an S3 Bucket do not need to
+    #   be base64-encoded.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_labels
@@ -791,7 +814,7 @@ module Aws::Rekognition
     #   than this specified value.
     #
     #   If `MinConfidence` is not specified, the operation returns labels
-    #   with a confidence values greater than or equal to 50 percent.
+    #   with a confidence values greater than or equal to 55 percent.
     #   @return [Float]
     #
     class DetectLabelsRequest < Struct.new(
@@ -853,6 +876,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] min_confidence
@@ -875,8 +903,14 @@ module Aws::Rekognition
     #   from the start of the video, they were detected.
     #   @return [Array<Types::ModerationLabel>]
     #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
+    #   @return [String]
+    #
     class DetectModerationLabelsResponse < Struct.new(
-      :moderation_labels)
+      :moderation_labels,
+      :moderation_model_version)
       include Aws::Structure
     end
 
@@ -898,6 +932,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an Amazon S3 object. If
     #   you use the AWS CLI to call Amazon Rekognition operations, you
     #   can't pass image bytes.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class DetectTextRequest < Struct.new(
@@ -1007,12 +1046,12 @@ module Aws::Rekognition
     # all facial attributes. The default attributes are `BoundingBox`,
     # `Confidence`, `Landmarks`, `Pose`, and `Quality`.
     #
-    # is the only Amazon Rekognition Video stored video operation that can
-    # return a `FaceDetail` object with all attributes. To specify which
-    # attributes to return, use the `FaceAttributes` input parameter for .
-    # The following Amazon Rekognition Video operations return only the
-    # default attributes. The corresponding Start operations don't have a
-    # `FaceAttributes` input parameter.
+    # GetFaceDetection is the only Amazon Rekognition Video stored video
+    # operation that can return a `FaceDetail` object with all attributes.
+    # To specify which attributes to return, use the `FaceAttributes` input
+    # parameter for StartFaceDetection. The following Amazon Rekognition
+    # Video operations return only the default attributes. The corresponding
+    # Start operations don't have a `FaceAttributes` input parameter.
     #
     # * GetCelebrityRecognition
     #
@@ -1020,10 +1059,10 @@ module Aws::Rekognition
     #
     # * GetFaceSearch
     #
-    # The Amazon Rekognition Image and operations can return all facial
-    # attributes. To specify which attributes to return, use the
-    # `Attributes` input parameter for `DetectFaces`. For `IndexFaces`, use
-    # the `DetectAttributes` input parameter.
+    # The Amazon Rekognition Image DetectFaces and IndexFaces operations can
+    # return all facial attributes. To specify which attributes to return,
+    # use the `Attributes` input parameter for `DetectFaces`. For
+    # `IndexFaces`, use the `DetectAttributes` input parameter.
     #
     # @!attribute [rw] bounding_box
     #   Bounding box of the face. Default attribute.
@@ -1174,7 +1213,8 @@ module Aws::Rekognition
     end
 
     # Input face recognition parameters for an Amazon Rekognition stream
-    # processor. `FaceRecognitionSettings` is a request parameter for .
+    # processor. `FaceRecognitionSettings` is a request parameter for
+    # CreateStreamProcessor.
     #
     # @note When making an API call, you may pass FaceSearchSettings
     #   data as a hash:
@@ -1217,7 +1257,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about where the text detected by is located on an image.
+    # Information about where the text detected by DetectText is located on
+    # an image.
     #
     # @!attribute [rw] bounding_box
     #   An axis-aligned coarse representation of the detected text's
@@ -1244,7 +1285,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] id
     #   The ID for the celebrity. You get the celebrity ID from a call to
-    #   the operation, which recognizes celebrities in an image.
+    #   the RecognizeCelebrities operation, which recognizes celebrities in
+    #   an image.
     #   @return [String]
     #
     class GetCelebrityInfoRequest < Struct.new(
@@ -1414,12 +1456,18 @@ module Aws::Rekognition
     #   next set of moderation labels.
     #   @return [String]
     #
+    # @!attribute [rw] moderation_model_version
+    #   Version number of the moderation detection model that was used to
+    #   detect unsafe content.
+    #   @return [String]
+    #
     class GetContentModerationResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :moderation_labels,
-      :next_token)
+      :next_token,
+      :moderation_model_version)
       include Aws::Structure
     end
 
@@ -1559,13 +1607,14 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] persons
-    #   An array of persons, , in the video whose face(s) match the face(s)
-    #   in an Amazon Rekognition collection. It also includes time
-    #   information for when persons are matched in the video. You specify
-    #   the input collection in an initial call to `StartFaceSearch`. Each
-    #   `Persons` element includes a time the person was matched, face match
-    #   details (`FaceMatches`) for matching faces in the collection, and
-    #   person information (`Person`) for the matched person.
+    #   An array of persons, PersonMatch, in the video whose face(s) match
+    #   the face(s) in an Amazon Rekognition collection. It also includes
+    #   time information for when persons are matched in the video. You
+    #   specify the input collection in an initial call to
+    #   `StartFaceSearch`. Each `Persons` element includes a time the person
+    #   was matched, face match details (`FaceMatches`) for matching faces
+    #   in the collection, and person information (`Person`) for the matched
+    #   person.
     #   @return [Array<Types::PersonMatch>]
     #
     class GetFaceSearchResponse < Struct.new(
@@ -1650,12 +1699,18 @@ module Aws::Rekognition
     #   video, that the label was detected.
     #   @return [Array<Types::LabelDetection>]
     #
+    # @!attribute [rw] label_model_version
+    #   Version number of the label detection model that was used to detect
+    #   labels.
+    #   @return [String]
+    #
     class GetLabelDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :labels)
+      :labels,
+      :label_model_version)
       include Aws::Structure
     end
 
@@ -1842,6 +1897,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes isn't supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
@@ -1940,7 +2000,8 @@ module Aws::Rekognition
     #     object locations before the image is rotated.
     #
     #   Bounding box information is returned in the `FaceRecords` array. You
-    #   can get the version of the face detection model by calling .
+    #   can get the version of the face detection model by calling
+    #   DescribeCollection.
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
@@ -1964,15 +2025,16 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # An instance of a label detected by .
+    # An instance of a label returned by Amazon Rekognition Image
+    # (DetectLabels) or by Amazon Rekognition Video (GetLabelDetection).
     #
     # @!attribute [rw] bounding_box
     #   The position of the label instance on the image.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] confidence
-    #   The confidence that Amazon Rekognition Image has in the accuracy of
-    #   the bounding box.
+    #   The confidence that Amazon Rekognition has in the accuracy of the
+    #   bounding box.
     #   @return [Float]
     #
     class Instance < Struct.new(
@@ -2024,13 +2086,7 @@ module Aws::Rekognition
     end
 
     # Structure containing details about the detected label, including the
-    # name, and level of confidence.
-    #
-    # The Amazon Rekognition Image operation operation returns a
-    # hierarchical taxonomy (`Parents`) for detected labels and also
-    # bounding box information (`Instances`) for detected labels. Amazon
-    # Rekognition Video doesn't return this information and returns `null`
-    # for the `Parents` and `Instances` attributes.
+    # name, detected instances, parent labels, and level of confidence.
     #
     # @!attribute [rw] name
     #   The name (label) of the object or scene.
@@ -2045,23 +2101,11 @@ module Aws::Rekognition
     #   boxes for each instance of the detected object. Bounding boxes are
     #   returned for common object labels such as people, cars, furniture,
     #   apparel or pets.
-    #
-    #   <note markdown="1"> Amazon Rekognition Video does not support bounding box information
-    #   for detected labels. The value of `Instances` is returned as `null`
-    #   by `GetLabelDetection`.
-    #
-    #    </note>
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] parents
     #   The parent labels for a label. The response includes all ancestor
     #   labels.
-    #
-    #   <note markdown="1"> Amazon Rekognition Video does not support a hierarchical taxonomy of
-    #   detected labels. The value of `Parents` is returned as `null` by
-    #   `GetLabelDetection`.
-    #
-    #    </note>
     #   @return [Array<Types::Parent>]
     #
     class Label < Struct.new(
@@ -2390,8 +2434,8 @@ module Aws::Rekognition
     # people's paths return an array of `PersonDetection` objects with
     # elements for each time a person's path is tracked in a video.
     #
-    # For more information, see API\_GetPersonTracking in the Amazon
-    # Rekognition Developer Guide.
+    # For more information, see GetPersonTracking in the Amazon Rekognition
+    # Developer Guide.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the
@@ -2410,9 +2454,10 @@ module Aws::Rekognition
 
     # Information about a person whose face matches a face(s) in an Amazon
     # Rekognition collection. Includes information about the faces in the
-    # Amazon Rekognition collection (), information about the person
-    # (PersonDetail), and the time stamp for when the person was detected in
-    # a video. An array of `PersonMatch` objects is returned by .
+    # Amazon Rekognition collection (FaceMatch), information about the
+    # person (PersonDetail), and the time stamp for when the person was
+    # detected in a video. An array of `PersonMatch` objects is returned by
+    # GetFaceSearch.
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the beginning of the video, that the
@@ -2440,9 +2485,10 @@ module Aws::Rekognition
     # input image is 700x200 and the operation returns X=0.5 and Y=0.25,
     # then the point is at the (350,50) pixel coordinate on the image.
     #
-    # An array of `Point` objects, `Polygon`, is returned by . `Polygon`
-    # represents a fine-grained polygon around detected text. For more
-    # information, see Geometry in the Amazon Rekognition Developer Guide.
+    # An array of `Point` objects, `Polygon`, is returned by DetectText.
+    # `Polygon` represents a fine-grained polygon around detected text. For
+    # more information, see Geometry in the Amazon Rekognition Developer
+    # Guide.
     #
     # @!attribute [rw] x
     #   The value of the X coordinate for a point on a `Polygon`.
@@ -2498,6 +2544,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     class RecognizeCelebritiesRequest < Struct.new(
@@ -2603,6 +2654,11 @@ module Aws::Rekognition
     #   The input image as base64-encoded bytes or an S3 object. If you use
     #   the AWS CLI to call Amazon Rekognition operations, passing
     #   base64-encoded image bytes is not supported.
+    #
+    #   If you are using an AWS SDK to call Amazon Rekognition, you might
+    #   not need to base64-encode image bytes passed using the `Bytes`
+    #   field. For more information, see Images in the Amazon Rekognition
+    #   developer guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces
@@ -3162,7 +3218,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] name
-    #   The name of a stream processor created by .
+    #   The name of a stream processor created by CreateStreamProcessor.
     #   @return [String]
     #
     class StopStreamProcessorRequest < Struct.new(
@@ -3173,10 +3229,11 @@ module Aws::Rekognition
     class StopStreamProcessorResponse < Aws::EmptyStructure; end
 
     # An object that recognizes faces in a streaming video. An Amazon
-    # Rekognition stream processor is created by a call to . The request
-    # parameters for `CreateStreamProcessor` describe the Kinesis video
-    # stream source for the streaming video, face recognition parameters,
-    # and where to stream the analysis resullts.
+    # Rekognition stream processor is created by a call to
+    # CreateStreamProcessor. The request parameters for
+    # `CreateStreamProcessor` describe the Kinesis video stream source for
+    # the streaming video, face recognition parameters, and where to stream
+    # the analysis resullts.
     #
     # @!attribute [rw] name
     #   Name of the Amazon Rekognition stream processor.
@@ -3277,7 +3334,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about a word or line of text detected by .
+    # Information about a word or line of text detected by DetectText.
     #
     # The `DetectedText` field contains the text that Amazon Rekognition
     # detected in the image.
@@ -3331,8 +3388,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A face that detected, but didn't index. Use the `Reasons` response
-    # attribute to determine why a face wasn't indexed.
+    # A face that IndexFaces detected, but didn't index. Use the `Reasons`
+    # response attribute to determine why a face wasn't indexed.
     #
     # @!attribute [rw] reasons
     #   An array of reasons that specify why a face wasn't indexed.
@@ -3366,8 +3423,9 @@ module Aws::Rekognition
     end
 
     # Video file stored in an Amazon S3 bucket. Amazon Rekognition video
-    # start operations such as use `Video` to specify a video for analysis.
-    # The supported file formats are .mp4, .mov and .avi.
+    # start operations such as StartLabelDetection use `Video` to specify a
+    # video for analysis. The supported file formats are .mp4, .mov and
+    # .avi.
     #
     # @note When making an API call, you may pass Video
     #   data as a hash:

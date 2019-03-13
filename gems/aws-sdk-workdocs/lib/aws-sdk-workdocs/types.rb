@@ -504,7 +504,7 @@ module Aws::WorkDocs
     #
     # @!attribute [rw] endpoint
     #   The endpoint to receive the notifications. If the protocol is HTTPS,
-    #   the endpoint is a URL that begins with "https://".
+    #   the endpoint is a URL that begins with `https`.
     #   @return [String]
     #
     # @!attribute [rw] protocol

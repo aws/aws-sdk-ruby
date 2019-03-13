@@ -274,12 +274,18 @@ module Aws::FMS
     #   The ID of the policy that you want to delete. `PolicyId` is returned
     #   by `PutPolicy` and by `ListPolicies`.
     #
+    # @option params [Boolean] :delete_all_policy_resources
+    #   If `True`, the request will also delete all web ACLs in this policy.
+    #   Associated resources will no longer be protected by web ACLs in this
+    #   policy.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_policy({
     #     policy_id: "PolicyId", # required
+    #     delete_all_policy_resources: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeletePolicy AWS API Documentation
@@ -292,9 +298,9 @@ module Aws::FMS
     end
 
     # Disassociates the account that has been set as the AWS Firewall
-    # Manager administrator account. You will need to submit an
-    # `AssociateAdminAccount` request to set a new account as the AWS
-    # Firewall administrator.
+    # Manager administrator account. To set a different account as the
+    # administrator account, you must submit an `AssociateAdminAccount`
+    # request .
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -528,7 +534,7 @@ module Aws::FMS
     #   Manager to return for this request. If you have more IDs than the
     #   number that you specify for `MaxResults`, the response includes a
     #   `NextToken` value that you can use to get another batch of member
-    #   account IDs. The maximum value for `MaxResults` is 100.
+    #   account IDs.
     #
     # @return [Types::ListMemberAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -718,7 +724,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

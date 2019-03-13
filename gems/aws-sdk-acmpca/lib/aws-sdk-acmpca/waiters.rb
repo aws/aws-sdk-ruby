@@ -26,12 +26,20 @@ module Aws::ACMPCA
           delay: 3,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_certificate_authority_audit_report,
-            acceptors: [{
-              "state" => "success",
-              "matcher" => "path",
-              "argument" => "audit_report_status",
-              "expected" => "SUCCESS"
-            }]
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "audit_report_status",
+                "expected" => "SUCCESS"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "audit_report_status",
+                "expected" => "FAILED"
+              }
+            ]
           )
         }.merge(options))
       end

@@ -659,7 +659,7 @@ module Aws::ConfigService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @note When making an API call, you may pass ConfigRule
     #   data as a hash:
@@ -1018,7 +1018,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html
     #   @return [String]
     #
     # @!attribute [rw] last_error_code
@@ -1156,7 +1156,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] relationships
@@ -1439,6 +1439,35 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRemediationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "StringWithCharLimit64", # required
+    #         resource_type: "String",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want to delete
+    #   remediation configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationRequest AWS API Documentation
+    #
+    class DeleteRemediationConfigurationRequest < Struct.new(
+      :config_rule_name,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfigurationResponse AWS API Documentation
+    #
+    class DeleteRemediationConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteRetentionConfigurationRequest
     #   data as a hash:
     #
@@ -1527,7 +1556,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1545,7 +1574,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html
     #   @return [String]
     #
     # @!attribute [rw] config_snapshot_delivery_properties
@@ -1719,8 +1748,7 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1782,7 +1810,8 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
+    #   `INSUFFICIENT_DATA`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -2221,6 +2250,97 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRemediationConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_names: ["StringWithCharLimit64"], # required
+    #       }
+    #
+    # @!attribute [rw] config_rule_names
+    #   A list of AWS Config rule names of remediation configurations for
+    #   which you want details.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationConfigurationsRequest AWS API Documentation
+    #
+    class DescribeRemediationConfigurationsRequest < Struct.new(
+      :config_rule_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remediation_configurations
+    #   Returns a remediation configuration object.
+    #   @return [Array<Types::RemediationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationConfigurationsResponse AWS API Documentation
+    #
+    class DescribeRemediationConfigurationsResponse < Struct.new(
+      :remediation_configurations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRemediationExecutionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "StringWithCharLimit64", # required
+    #         resource_keys: [
+    #           {
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_id: "ResourceId", # required
+    #           },
+    #         ],
+    #         limit: 1,
+    #         next_token: "StringWithCharLimit256",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   A list of config rule names.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   A list of resource keys object.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of RemediationExecutionStatuses returned on each
+    #   page. The default is maximum. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExecutionStatusRequest AWS API Documentation
+    #
+    class DescribeRemediationExecutionStatusRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remediation_execution_statuses
+    #   Returns a list of remediation execution statuses object.
+    #   @return [Array<Types::RemediationExecutionStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExecutionStatusResponse AWS API Documentation
+    #
+    class DescribeRemediationExecutionStatusResponse < Struct.new(
+      :remediation_execution_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRetentionConfigurationsRequest
     #   data as a hash:
     #
@@ -2425,6 +2545,24 @@ module Aws::ConfigService
       :config_rule_name,
       :resource_type,
       :resource_id)
+      include Aws::Structure
+    end
+
+    # List of each of the failed remediation with specific reasons.
+    #
+    # @!attribute [rw] failure_message
+    #   Returns a failure message. For example, the resource is compliant.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   Returns remediation configurations of the failed items.
+    #   @return [Array<Types::RemediationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedRemediationBatch AWS API Documentation
+    #
+    class FailedRemediationBatch < Struct.new(
+      :failure_message,
+      :failed_items)
       include Aws::Structure
     end
 
@@ -3508,6 +3646,53 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRemediationConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         remediation_configurations: [ # required
+    #           {
+    #             config_rule_name: "StringWithCharLimit64", # required
+    #             target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
+    #             target_id: "StringWithCharLimit256", # required
+    #             target_version: "String",
+    #             parameters: {
+    #               "StringWithCharLimit256" => {
+    #                 resource_value: {
+    #                   value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #                 },
+    #                 static_value: {
+    #                   values: ["StringWithCharLimit256"],
+    #                 },
+    #               },
+    #             },
+    #             resource_type: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] remediation_configurations
+    #   A list of remediation configuration objects.
+    #   @return [Array<Types::RemediationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurationsRequest AWS API Documentation
+    #
+    class PutRemediationConfigurationsRequest < Struct.new(
+      :remediation_configurations)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_batches
+    #   Returns a list of failed remediation batch objects.
+    #   @return [Array<Types::FailedRemediationBatch>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurationsResponse AWS API Documentation
+    #
+    class PutRemediationConfigurationsResponse < Struct.new(
+      :failed_batches)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutRetentionConfigurationRequest
     #   data as a hash:
     #
@@ -3579,8 +3764,8 @@ module Aws::ConfigService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
-    # [2]: http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
+    # [2]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
     #
     # @note When making an API call, you may pass RecordingGroup
     #   data as a hash:
@@ -3638,7 +3823,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RecordingGroup AWS API Documentation
@@ -3675,6 +3860,167 @@ module Aws::ConfigService
       :resource_id,
       :resource_name,
       :relationship_name)
+      include Aws::Structure
+    end
+
+    # An object that represents the details about the remediation
+    # configuration that includes the remediation action, parameters, and
+    # data to execute the action.
+    #
+    # @note When making an API call, you may pass RemediationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "StringWithCharLimit64", # required
+    #         target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
+    #         target_id: "StringWithCharLimit256", # required
+    #         target_version: "String",
+    #         parameters: {
+    #           "StringWithCharLimit256" => {
+    #             resource_value: {
+    #               value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #             },
+    #             static_value: {
+    #               values: ["StringWithCharLimit256"],
+    #             },
+    #           },
+    #         },
+    #         resource_type: "String",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the target. Target executes remediation. For example,
+    #   SSM document.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   Public ID is document.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   Version of the target. For example, version of the SSM document.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object of the RemediationParameterValue.
+    #   @return [Hash<String,Types::RemediationParameterValue>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationConfiguration AWS API Documentation
+    #
+    class RemediationConfiguration < Struct.new(
+      :config_rule_name,
+      :target_type,
+      :target_id,
+      :target_version,
+      :parameters,
+      :resource_type)
+      include Aws::Structure
+    end
+
+    # Provides details of the current status of the invoked remediation
+    # action for that resource.
+    #
+    # @!attribute [rw] resource_key
+    #   The details that identify a resource within AWS Config, including
+    #   the resource type and resource ID.
+    #   @return [Types::ResourceKey]
+    #
+    # @!attribute [rw] state
+    #   ENUM of the values.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_details
+    #   Details of every step.
+    #   @return [Array<Types::RemediationExecutionStep>]
+    #
+    # @!attribute [rw] invocation_time
+    #   Start time when the remediation was executed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the remediation execution was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExecutionStatus AWS API Documentation
+    #
+    class RemediationExecutionStatus < Struct.new(
+      :resource_key,
+      :state,
+      :step_details,
+      :invocation_time,
+      :last_updated_time)
+      include Aws::Structure
+    end
+
+    # Name of the step from the SSM document.
+    #
+    # @!attribute [rw] name
+    #   The details of the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The valid status of the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message if the step was interupted during execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the step started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_time
+    #   The time when the step stopped.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExecutionStep AWS API Documentation
+    #
+    class RemediationExecutionStep < Struct.new(
+      :name,
+      :state,
+      :error_message,
+      :start_time,
+      :stop_time)
+      include Aws::Structure
+    end
+
+    # The value is either a dynamic (resource) value or a static value. You
+    # must select either a dynamic value or a static value.
+    #
+    # @note When making an API call, you may pass RemediationParameterValue
+    #   data as a hash:
+    #
+    #       {
+    #         resource_value: {
+    #           value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #         },
+    #         static_value: {
+    #           values: ["StringWithCharLimit256"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_value
+    #   The value is dynamic and changes at run-time.
+    #   @return [Types::ResourceValue]
+    #
+    # @!attribute [rw] static_value
+    #   The value is static and does not change at run-time.
+    #   @return [Types::StaticValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationParameterValue AWS API Documentation
+    #
+    class RemediationParameterValue < Struct.new(
+      :resource_value,
+      :static_value)
       include Aws::Structure
     end
 
@@ -3825,6 +4171,26 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The dynamic value of the resource.
+    #
+    # @note When making an API call, you may pass ResourceValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value is a resource ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceValue AWS API Documentation
+    #
+    class ResourceValue < Struct.new(
+      :value)
+      include Aws::Structure
+    end
+
     # An object with the name of the retention configuration and the
     # retention period in days. The object stores the configuration for data
     # retention in AWS Config.
@@ -3935,7 +4301,7 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
     #   @return [String]
     #
     # @!attribute [rw] source_details
@@ -4070,6 +4436,73 @@ module Aws::ConfigService
     #
     class StartConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartRemediationExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "StringWithCharLimit64", # required
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #             resource_id: "ResourceId", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The list of names of AWS Config rules that you want to run
+    #   remediation execution for.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_keys
+    #   A list of resource key object.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartRemediationExecutionRequest AWS API Documentation
+    #
+    class StartRemediationExecutionRequest < Struct.new(
+      :config_rule_name,
+      :resource_keys)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failure_message
+    #   Returns a failure message. For example, the resource is compliant.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   For resources that have failed to start execuition the API returns a
+    #   resource key object.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartRemediationExecutionResponse AWS API Documentation
+    #
+    class StartRemediationExecutionResponse < Struct.new(
+      :failure_message,
+      :failed_items)
+      include Aws::Structure
+    end
+
+    # The static value of the resource.
+    #
+    # @note When making an API call, you may pass StaticValue
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringWithCharLimit256"],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   A list of values. For example, the ARN of the assumed role.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StaticValue AWS API Documentation
+    #
+    class StaticValue < Struct.new(
+      :values)
       include Aws::Structure
     end
 

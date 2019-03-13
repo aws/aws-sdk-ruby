@@ -44,6 +44,15 @@ module Aws::MediaStore
     #   the endpoint is available, the status changes to `ACTIVE`.
     #   @return [String]
     #
+    # @!attribute [rw] access_logging_enabled
+    #   The state of access logging on the container. This value is `false`
+    #   by default, indicating that AWS Elemental MediaStore does not send
+    #   access logs to Amazon CloudWatch Logs. When you enable access
+    #   logging on the container, MediaStore changes this value to `true`,
+    #   indicating that the service delivers access logs for objects stored
+    #   in that container to CloudWatch Logs.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -51,7 +60,8 @@ module Aws::MediaStore
       :creation_time,
       :arn,
       :name,
-      :status)
+      :status,
+      :access_logging_enabled)
       include Aws::Structure
     end
 
@@ -525,6 +535,50 @@ module Aws::MediaStore
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicyOutput AWS API Documentation
     #
     class PutLifecyclePolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartAccessLoggingInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that you want to start access logging on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLoggingInput AWS API Documentation
+    #
+    class StartAccessLoggingInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLoggingOutput AWS API Documentation
+    #
+    class StartAccessLoggingOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopAccessLoggingInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that you want to stop access logging on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLoggingInput AWS API Documentation
+    #
+    class StopAccessLoggingInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLoggingOutput AWS API Documentation
+    #
+    class StopAccessLoggingOutput < Aws::EmptyStructure; end
 
   end
 end

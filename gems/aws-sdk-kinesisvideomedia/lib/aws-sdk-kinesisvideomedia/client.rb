@@ -206,12 +206,13 @@ module Aws::KinesisVideoMedia
     # @!group API Operations
 
     # Use this API to retrieve media content from a Kinesis video stream. In
-    # the request, you identify stream name or stream Amazon Resource Name
-    # (ARN), and the starting chunk. Kinesis Video Streams then returns a
-    # stream of chunks in order by fragment number.
+    # the request, you identify the stream name or stream Amazon Resource
+    # Name (ARN), and the starting chunk. Kinesis Video Streams then returns
+    # a stream of chunks in order by fragment number.
     #
-    # <note markdown="1"> You must first call the `GetDataEndpoint` API to get an endpoint to
-    # which you can then send the `GetMedia` requests.
+    # <note markdown="1"> You must first call the `GetDataEndpoint` API to get an endpoint. Then
+    # send the `GetMedia` requests to this endpoint using the
+    # [--endpoint-url parameter][1].
     #
     #  </note>
     #
@@ -228,6 +229,10 @@ module Aws::KinesisVideoMedia
     # * Kinesis Video Streams sends media data at a rate of up to 25
     #   megabytes per second (or 200 megabits per second) during a
     #   `GetMedia` session.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/
     #
     # @option params [String] :stream_name
     #   The Kinesis video stream name from where you want to get the media
@@ -286,7 +291,7 @@ module Aws::KinesisVideoMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideomedia'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

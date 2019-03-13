@@ -248,8 +248,6 @@ module Aws::MediaLive
     #
     # @!attribute [rw] destination
     #   A directory and base filename where archive files should be written.
-    #   If the base filename portion of the URI is left blank, the base
-    #   filename of the first input will be automatically inserted.
     #   @return [Types::OutputLocationRef]
     #
     # @!attribute [rw] rollover_interval
@@ -941,6 +939,13 @@ module Aws::MediaLive
     #               input_switch_settings: {
     #                 input_attachment_name_reference: "__string", # required
     #               },
+    #               pause_state_settings: {
+    #                 pipelines: [
+    #                   {
+    #                     pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #                   },
+    #                 ],
+    #               },
     #               scte_35_return_to_network_settings: {
     #                 splice_event_id: 1, # required
     #               },
@@ -1084,6 +1089,13 @@ module Aws::MediaLive
     #                 },
     #                 input_switch_settings: {
     #                   input_attachment_name_reference: "__string", # required
+    #                 },
+    #                 pause_state_settings: {
+    #                   pipelines: [
+    #                     {
+    #                       pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #                     },
+    #                   ],
     #                 },
     #                 scte_35_return_to_network_settings: {
     #                   splice_event_id: 1, # required
@@ -1883,6 +1895,10 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1897,7 +1913,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -1972,6 +1989,10 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -1985,7 +2006,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -2026,6 +2048,10 @@ module Aws::MediaLive
     #   running the Channel.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2037,7 +2063,8 @@ module Aws::MediaLive
       :name,
       :request_id,
       :reserved,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -2048,6 +2075,11 @@ module Aws::MediaLive
     #         destinations: [
     #           {
     #             id: "__string",
+    #             media_package_settings: [
+    #               {
+    #                 channel_id: "__stringMin1",
+    #               },
+    #             ],
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -2282,6 +2314,11 @@ module Aws::MediaLive
     #                   },
     #                   rollover_interval: 1,
     #                 },
+    #                 frame_capture_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
+    #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                   base_url_content: "__string",
@@ -2333,6 +2370,7 @@ module Aws::MediaLive
     #                       restart_delay: 1,
     #                     },
     #                   },
+    #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -2366,6 +2404,11 @@ module Aws::MediaLive
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
     #                   ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #                 },
+    #                 media_package_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
     #                 },
     #                 ms_smooth_group_settings: {
     #                   acquisition_point_id: "__string",
@@ -2475,6 +2518,9 @@ module Aws::MediaLive
     #                       extension: "__string",
     #                       name_modifier: "__string",
     #                     },
+    #                     frame_capture_output_settings: {
+    #                       name_modifier: "__string",
+    #                     },
     #                     hls_output_settings: {
     #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
@@ -2510,6 +2556,8 @@ module Aws::MediaLive
     #                       },
     #                       name_modifier: "__stringMin1",
     #                       segment_modifier: "__string",
+    #                     },
+    #                     media_package_output_settings: {
     #                     },
     #                     ms_smooth_output_settings: {
     #                       name_modifier: "__string",
@@ -2607,6 +2655,9 @@ module Aws::MediaLive
     #           video_descriptions: [ # required
     #             {
     #               codec_settings: {
+    #                 frame_capture_settings: {
+    #                   capture_interval: 1, # required
+    #                 },
     #                 h264_settings: {
     #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -2743,6 +2794,9 @@ module Aws::MediaLive
     #         request_id: "__string",
     #         reserved: "__string",
     #         role_arn: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] destinations
@@ -2775,6 +2829,9 @@ module Aws::MediaLive
     # @!attribute [rw] role_arn
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2786,7 +2843,8 @@ module Aws::MediaLive
       :name,
       :request_id,
       :reserved,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -2846,8 +2904,20 @@ module Aws::MediaLive
     #   PULL type Inputs. Leave Destinations empty.
     #   @return [Array<Types::InputSourceRequest>]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
+    #
+    # @!attribute [rw] vpc
+    #   Settings for a private VPC Input. When this property is specified,
+    #   the input destination addresses will be created in a VPC rather than
+    #   with public Internet addresses. This property requires setting the
+    #   roleArn property on Input creation. Not compatible with the
+    #   inputSecurityGroups property.
+    #   @return [Types::InputVpcRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -2859,7 +2929,9 @@ module Aws::MediaLive
       :request_id,
       :role_arn,
       :sources,
-      :type)
+      :tags,
+      :type,
+      :vpc)
       include Aws::Structure
     end
 
@@ -2888,7 +2960,14 @@ module Aws::MediaLive
     #             username: "__string",
     #           },
     #         ],
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT
+    #         vpc: {
+    #           security_group_ids: ["__string"],
+    #           subnet_ids: ["__string"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] destinations
@@ -2914,8 +2993,19 @@ module Aws::MediaLive
     # @!attribute [rw] sources
     #   @return [Array<Types::InputSourceRequest>]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
+    #
+    # @!attribute [rw] vpc
+    #   Settings for a private VPC Input. When this property is specified,
+    #   the input destination addresses will be created in a VPC rather than
+    #   with public Internet addresses. This property requires setting the
+    #   roleArn property on Input creation. Not compatible with the
+    #   inputSecurityGroups property.
+    #   @return [Types::InputVpcRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest AWS API Documentation
     #
@@ -2927,7 +3017,9 @@ module Aws::MediaLive
       :request_id,
       :role_arn,
       :sources,
-      :type)
+      :tags,
+      :type,
+      :vpc)
       include Aws::Structure
     end
 
@@ -2955,6 +3047,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         whitelist_rules: [
     #           {
     #             cidr: "__string",
@@ -2962,12 +3057,16 @@ module Aws::MediaLive
     #         ],
     #       }
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRuleCidr>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputSecurityGroupRequest AWS API Documentation
     #
     class CreateInputSecurityGroupRequest < Struct.new(
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -2991,6 +3090,30 @@ module Aws::MediaLive
     #
     class CreateInputSecurityGroupResultModel < Struct.new(
       :security_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateTagsRequest AWS API Documentation
+    #
+    class CreateTagsRequest < Struct.new(
+      :resource_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -3048,6 +3171,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -3062,7 +3188,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -3203,6 +3330,28 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteTagsRequest AWS API Documentation
+    #
+    class DeleteTagsRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeChannelRequest
     #   data as a hash:
     #
@@ -3257,6 +3406,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3271,7 +3423,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -3322,6 +3475,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] type
     #   @return [String]
     #
@@ -3338,6 +3494,7 @@ module Aws::MediaLive
       :security_groups,
       :sources,
       :state,
+      :tags,
       :type)
       include Aws::Structure
     end
@@ -3371,6 +3528,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRule>]
     #
@@ -3381,6 +3541,7 @@ module Aws::MediaLive
       :id,
       :inputs,
       :state,
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -4326,6 +4487,11 @@ module Aws::MediaLive
     #                 },
     #                 rollover_interval: 1,
     #               },
+    #               frame_capture_group_settings: {
+    #                 destination: { # required
+    #                   destination_ref_id: "__string",
+    #                 },
+    #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                 base_url_content: "__string",
@@ -4377,6 +4543,7 @@ module Aws::MediaLive
     #                     restart_delay: 1,
     #                   },
     #                 },
+    #                 i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                 index_n_segments: 1,
     #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                 iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -4410,6 +4577,11 @@ module Aws::MediaLive
     #                 timed_metadata_id_3_period: 1,
     #                 timestamp_delta_milliseconds: 1,
     #                 ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #               },
+    #               media_package_group_settings: {
+    #                 destination: { # required
+    #                   destination_ref_id: "__string",
+    #                 },
     #               },
     #               ms_smooth_group_settings: {
     #                 acquisition_point_id: "__string",
@@ -4519,6 +4691,9 @@ module Aws::MediaLive
     #                     extension: "__string",
     #                     name_modifier: "__string",
     #                   },
+    #                   frame_capture_output_settings: {
+    #                     name_modifier: "__string",
+    #                   },
     #                   hls_output_settings: {
     #                     hls_settings: { # required
     #                       audio_only_hls_settings: {
@@ -4554,6 +4729,8 @@ module Aws::MediaLive
     #                     },
     #                     name_modifier: "__stringMin1",
     #                     segment_modifier: "__string",
+    #                   },
+    #                   media_package_output_settings: {
     #                   },
     #                   ms_smooth_output_settings: {
     #                     name_modifier: "__string",
@@ -4651,6 +4828,9 @@ module Aws::MediaLive
     #         video_descriptions: [ # required
     #           {
     #             codec_settings: {
+    #               frame_capture_settings: {
+    #                 capture_interval: 1, # required
+    #               },
     #               h264_settings: {
     #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -4836,6 +5016,78 @@ module Aws::MediaLive
     class FollowModeScheduleActionStartSettings < Struct.new(
       :follow_point,
       :reference_action_name)
+      include Aws::Structure
+    end
+
+    # Frame Capture Group Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         destination: { # required
+    #           destination_ref_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   The destination for the frame capture files. Either the URI for an
+    #   Amazon S3 bucket and object, plus a file name prefix (for example,
+    #   s3ssl://sportsDelivery/highlights/20180820/curling\_) or the URI for
+    #   a MediaStore container, plus a file name prefix (for example,
+    #   mediastoressl://sportsDelivery/20180820/curling\_). The final file
+    #   names consist of the prefix from the destination field (for example,
+    #   "curling\_") + name modifier + the counter (5 digits, starting
+    #   from 00001) + extension (which is always .jpg). For example,
+    #   curlingLow.00001.jpg
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureGroupSettings AWS API Documentation
+    #
+    class FrameCaptureGroupSettings < Struct.new(
+      :destination)
+      include Aws::Structure
+    end
+
+    # Frame Capture Output Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureOutputSettings
+    #   data as a hash:
+    #
+    #       {
+    #         name_modifier: "__string",
+    #       }
+    #
+    # @!attribute [rw] name_modifier
+    #   Required if the output group contains more than one output. This
+    #   modifier forms part of the output file name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureOutputSettings AWS API Documentation
+    #
+    class FrameCaptureOutputSettings < Struct.new(
+      :name_modifier)
+      include Aws::Structure
+    end
+
+    # Frame Capture Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureSettings
+    #   data as a hash:
+    #
+    #       {
+    #         capture_interval: 1, # required
+    #       }
+    #
+    # @!attribute [rw] capture_interval
+    #   The frequency, in seconds, for capturing frames for inclusion in the
+    #   output. For example, "10" means capture a frame every 10 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureSettings AWS API Documentation
+    #
+    class FrameCaptureSettings < Struct.new(
+      :capture_interval)
       include Aws::Structure
     end
 
@@ -5414,6 +5666,7 @@ module Aws::MediaLive
     #             restart_delay: 1,
     #           },
     #         },
+    #         i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #         index_n_segments: 1,
     #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #         iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -5520,10 +5773,22 @@ module Aws::MediaLive
     #   Parameters that control interactions with the CDN.
     #   @return [Types::HlsCdnSettings]
     #
+    # @!attribute [rw] i_frame_only_playlists
+    #   DISABLED: Do not create an I-frame-only manifest, but do create the
+    #   master and media manifests (according to the Output Selection
+    #   field). STANDARD: Create an I-frame-only manifest for each output
+    #   that contains video, as well as the other manifests (according to
+    #   the Output Selection field). The I-frame manifest contains a
+    #   #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or
+    #   more #EXT-X-BYTERANGE entries identifying the I-frame position. For
+    #   example, #EXT-X-BYTERANGE:160364@1461888"
+    #   @return [String]
+    #
     # @!attribute [rw] index_n_segments
-    #   If mode is "live", the number of segments to retain in the
-    #   manifest (.m3u8) file. This number must be less than or equal to
-    #   keepSegments. If mode is "vod", this parameter has no effect.
+    #   Applies only if Mode field is LIVE. Specifies the maximum number of
+    #   segments in the media manifest file. After this maximum, older
+    #   segments are removed from the media manifest. This number must be
+    #   less than or equal to the Keep Segments field.
     #   @return [Integer]
     #
     # @!attribute [rw] input_loss_action
@@ -5546,9 +5811,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] keep_segments
-    #   If mode is "live", the number of TS segments to retain in the
-    #   destination directory. If mode is "vod", this parameter has no
-    #   effect.
+    #   Applies only if Mode field is LIVE. Specifies the number of media
+    #   segments (.ts files) to retain in the destination directory.
     #   @return [Integer]
     #
     # @!attribute [rw] key_format
@@ -5593,8 +5857,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] output_selection
-    #   Generates the .m3u8 playlist file for this HLS output group. The
-    #   segmentsOnly option will output segments without the .m3u8 file.
+    #   MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if
+    #   applicable, and media manifests) for this output group.
+    #   SEGMENTSONLY: Does not generate any manifests for this output group.
     #   @return [String]
     #
     # @!attribute [rw] program_date_time
@@ -5610,8 +5875,18 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] redundant_manifest
-    #   When set to "enabled", includes the media playlists from both
-    #   pipelines in the master manifest (.m3u8) file.
+    #   ENABLED: The master manifest (.m3u8 file) for each pipeline includes
+    #   information about both pipelines: first its own media files, then
+    #   the media files of the other pipeline. This feature allows playout
+    #   device that support stale manifest detection to switch from one
+    #   manifest to the other, when the current manifest seems to be stale.
+    #   There are still two destinations and two master manifests, but both
+    #   master manifests reference the media files from both pipelines.
+    #   DISABLED: The master manifest (.m3u8 file) for each pipeline
+    #   includes information about its own pipeline only. For an HLS output
+    #   group with MediaPackage as the destination, the DISABLED behavior is
+    #   always followed. MediaPackage regenerates the manifests it serves to
+    #   players so a redundant manifest from MediaLive is irrelevant.
     #   @return [String]
     #
     # @!attribute [rw] segment_length
@@ -5650,10 +5925,14 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] ts_file_mode
-    #   When set to "singleFile", emits the program as a single media
-    #   resource (.ts) file, and uses #EXT-X-BYTERANGE tags to index segment
-    #   for playback. Playback of VOD mode content during event is not
-    #   guaranteed due to HTTP server caching.
+    #   SEGMENTEDFILES: Emit the program as segments - multiple .ts media
+    #   files. SINGLEFILE: Applies only if Mode field is VOD. Emit the
+    #   program as a single .ts media file. The media manifest includes
+    #   #EXT-X-BYTERANGE tags to index segments for playback. A typical use
+    #   for this value is when sending the output to AWS Elemental
+    #   MediaConvert, which can accept only a single media file. Playback
+    #   while the channel is running is not guaranteed due to HTTP server
+    #   caching.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsGroupSettings AWS API Documentation
@@ -5671,6 +5950,7 @@ module Aws::MediaLive
       :directory_structure,
       :encryption_type,
       :hls_cdn_settings,
+      :i_frame_only_playlists,
       :index_n_segments,
       :input_loss_action,
       :iv_in_manifest,
@@ -5998,7 +6278,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   A list of IDs for all the security groups attached to the input.
+    #   A list of IDs for all the Input Security Groups attached to the
+    #   input.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sources
@@ -6007,6 +6288,10 @@ module Aws::MediaLive
     #
     # @!attribute [rw] state
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -6024,6 +6309,7 @@ module Aws::MediaLive
       :security_groups,
       :sources,
       :state,
+      :tags,
       :type)
       include Aws::Structure
     end
@@ -6170,12 +6456,17 @@ module Aws::MediaLive
     #   to.
     #   @return [String]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a VPC type input destination.
+    #   @return [Types::InputDestinationVpc]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestination AWS API Documentation
     #
     class InputDestination < Struct.new(
       :ip,
       :port,
-      :url)
+      :url,
+      :vpc)
       include Aws::Structure
     end
 
@@ -6196,6 +6487,24 @@ module Aws::MediaLive
     #
     class InputDestinationRequest < Struct.new(
       :stream_name)
+      include Aws::Structure
+    end
+
+    # The properties for a VPC type input destination.
+    #
+    # @!attribute [rw] availability_zone
+    #   The availability zone of the Input destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID of the Input destination in the VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationVpc AWS API Documentation
+    #
+    class InputDestinationVpc < Struct.new(
+      :availability_zone,
+      :network_interface_id)
       include Aws::Structure
     end
 
@@ -6310,6 +6619,10 @@ module Aws::MediaLive
     #   The current state of the Input Security Group.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
@@ -6321,11 +6634,16 @@ module Aws::MediaLive
       :id,
       :inputs,
       :state,
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
 
     # Request of IPv4 CIDR addresses to whitelist in a security group.
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] whitelist_rules
     #   List of IPv4 CIDR addresses to whitelist
@@ -6334,6 +6652,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSecurityGroupWhitelistRequest AWS API Documentation
     #
     class InputSecurityGroupWhitelistRequest < Struct.new(
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -6581,6 +6900,39 @@ module Aws::MediaLive
     #
     class InputSwitchScheduleActionSettings < Struct.new(
       :input_attachment_name_reference)
+      include Aws::Structure
+    end
+
+    # Settings for a private VPC Input. When this property is specified, the
+    # input destination addresses will be created in a VPC rather than with
+    # public Internet addresses. This property requires setting the roleArn
+    # property on Input creation. Not compatible with the
+    # inputSecurityGroups property.
+    #
+    # @note When making an API call, you may pass InputVpcRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["__string"],
+    #         subnet_ids: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of up to 5 EC2 VPC security group IDs to attach to the Input
+    #   VPC network interfaces. Requires subnetIds. If none are specified
+    #   then the VPC default security group will be used.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of 2 VPC subnet IDs from the same VPC. Subnet IDs must be
+    #   mapped to two unique availability zones (AZ).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputVpcRequest AWS API Documentation
+    #
+    class InputVpcRequest < Struct.new(
+      :security_group_ids,
+      :subnet_ids)
       include Aws::Structure
     end
 
@@ -7004,6 +7356,33 @@ module Aws::MediaLive
     class ListReservationsResultModel < Struct.new(
       :next_token,
       :reservations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -7572,6 +7951,60 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Media Package Group Settings
+    #
+    # @note When making an API call, you may pass MediaPackageGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         destination: { # required
+    #           destination_ref_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   MediaPackage channel destination.
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageGroupSettings AWS API Documentation
+    #
+    class MediaPackageGroupSettings < Struct.new(
+      :destination)
+      include Aws::Structure
+    end
+
+    # Media Package Output Destination Settings
+    #
+    # @note When making an API call, you may pass MediaPackageOutputDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__stringMin1",
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   ID of the channel in MediaPackage that is the destination for this
+    #   output group. You do not need to specify the individual inputs in
+    #   MediaPackage; MediaLive will handle the connection of the two
+    #   MediaLive pipelines to the two MediaPackage inputs. The MediaPackage
+    #   channel and MediaLive channel must be in the same region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputDestinationSettings AWS API Documentation
+    #
+    class MediaPackageOutputDestinationSettings < Struct.new(
+      :channel_id)
+      include Aws::Structure
+    end
+
+    # Media Package Output Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputSettings AWS API Documentation
+    #
+    class MediaPackageOutputSettings < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass Mp2Settings
     #   data as a hash:
     #
@@ -7957,6 +8390,9 @@ module Aws::MediaLive
     #             extension: "__string",
     #             name_modifier: "__string",
     #           },
+    #           frame_capture_output_settings: {
+    #             name_modifier: "__string",
+    #           },
     #           hls_output_settings: {
     #             hls_settings: { # required
     #               audio_only_hls_settings: {
@@ -7992,6 +8428,8 @@ module Aws::MediaLive
     #             },
     #             name_modifier: "__stringMin1",
     #             segment_modifier: "__string",
+    #           },
+    #           media_package_output_settings: {
     #           },
     #           ms_smooth_output_settings: {
     #             name_modifier: "__string",
@@ -8118,6 +8556,11 @@ module Aws::MediaLive
     #
     #       {
     #         id: "__string",
+    #         media_package_settings: [
+    #           {
+    #             channel_id: "__stringMin1",
+    #           },
+    #         ],
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -8132,14 +8575,21 @@ module Aws::MediaLive
     #   User-specified id. This is used in an output group or an output.
     #   @return [String]
     #
+    # @!attribute [rw] media_package_settings
+    #   Destination settings for a MediaPackage output; one destination for
+    #   both encoders.
+    #   @return [Array<Types::MediaPackageOutputDestinationSettings>]
+    #
     # @!attribute [rw] settings
-    #   Destination settings for output; one for each redundant encoder.
+    #   Destination settings for a standard output; one destination for each
+    #   redundant encoder.
     #   @return [Array<Types::OutputDestinationSettings>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination AWS API Documentation
     #
     class OutputDestination < Struct.new(
       :id,
+      :media_package_settings,
       :settings)
       include Aws::Structure
     end
@@ -8195,6 +8645,11 @@ module Aws::MediaLive
     #             },
     #             rollover_interval: 1,
     #           },
+    #           frame_capture_group_settings: {
+    #             destination: { # required
+    #               destination_ref_id: "__string",
+    #             },
+    #           },
     #           hls_group_settings: {
     #             ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #             base_url_content: "__string",
@@ -8246,6 +8701,7 @@ module Aws::MediaLive
     #                 restart_delay: 1,
     #               },
     #             },
+    #             i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #             index_n_segments: 1,
     #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #             iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -8279,6 +8735,11 @@ module Aws::MediaLive
     #             timed_metadata_id_3_period: 1,
     #             timestamp_delta_milliseconds: 1,
     #             ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #           },
+    #           media_package_group_settings: {
+    #             destination: { # required
+    #               destination_ref_id: "__string",
+    #             },
     #           },
     #           ms_smooth_group_settings: {
     #             acquisition_point_id: "__string",
@@ -8388,6 +8849,9 @@ module Aws::MediaLive
     #                 extension: "__string",
     #                 name_modifier: "__string",
     #               },
+    #               frame_capture_output_settings: {
+    #                 name_modifier: "__string",
+    #               },
     #               hls_output_settings: {
     #                 hls_settings: { # required
     #                   audio_only_hls_settings: {
@@ -8423,6 +8887,8 @@ module Aws::MediaLive
     #                 },
     #                 name_modifier: "__stringMin1",
     #                 segment_modifier: "__string",
+    #               },
+    #               media_package_output_settings: {
     #               },
     #               ms_smooth_output_settings: {
     #                 name_modifier: "__string",
@@ -8545,6 +9011,11 @@ module Aws::MediaLive
     #           },
     #           rollover_interval: 1,
     #         },
+    #         frame_capture_group_settings: {
+    #           destination: { # required
+    #             destination_ref_id: "__string",
+    #           },
+    #         },
     #         hls_group_settings: {
     #           ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #           base_url_content: "__string",
@@ -8596,6 +9067,7 @@ module Aws::MediaLive
     #               restart_delay: 1,
     #             },
     #           },
+    #           i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #           index_n_segments: 1,
     #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #           iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -8629,6 +9101,11 @@ module Aws::MediaLive
     #           timed_metadata_id_3_period: 1,
     #           timestamp_delta_milliseconds: 1,
     #           ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #         },
+    #         media_package_group_settings: {
+    #           destination: { # required
+    #             destination_ref_id: "__string",
+    #           },
     #         },
     #         ms_smooth_group_settings: {
     #           acquisition_point_id: "__string",
@@ -8671,8 +9148,16 @@ module Aws::MediaLive
     # @!attribute [rw] archive_group_settings
     #   @return [Types::ArchiveGroupSettings]
     #
+    # @!attribute [rw] frame_capture_group_settings
+    #   Frame Capture Group Settings
+    #   @return [Types::FrameCaptureGroupSettings]
+    #
     # @!attribute [rw] hls_group_settings
     #   @return [Types::HlsGroupSettings]
+    #
+    # @!attribute [rw] media_package_group_settings
+    #   Media Package Group Settings
+    #   @return [Types::MediaPackageGroupSettings]
     #
     # @!attribute [rw] ms_smooth_group_settings
     #   @return [Types::MsSmoothGroupSettings]
@@ -8687,7 +9172,9 @@ module Aws::MediaLive
     #
     class OutputGroupSettings < Struct.new(
       :archive_group_settings,
+      :frame_capture_group_settings,
       :hls_group_settings,
+      :media_package_group_settings,
       :ms_smooth_group_settings,
       :rtmp_group_settings,
       :udp_group_settings)
@@ -8782,6 +9269,9 @@ module Aws::MediaLive
     #           extension: "__string",
     #           name_modifier: "__string",
     #         },
+    #         frame_capture_output_settings: {
+    #           name_modifier: "__string",
+    #         },
     #         hls_output_settings: {
     #           hls_settings: { # required
     #             audio_only_hls_settings: {
@@ -8817,6 +9307,8 @@ module Aws::MediaLive
     #           },
     #           name_modifier: "__stringMin1",
     #           segment_modifier: "__string",
+    #         },
+    #         media_package_output_settings: {
     #         },
     #         ms_smooth_output_settings: {
     #           name_modifier: "__string",
@@ -8906,8 +9398,16 @@ module Aws::MediaLive
     # @!attribute [rw] archive_output_settings
     #   @return [Types::ArchiveOutputSettings]
     #
+    # @!attribute [rw] frame_capture_output_settings
+    #   Frame Capture Output Settings
+    #   @return [Types::FrameCaptureOutputSettings]
+    #
     # @!attribute [rw] hls_output_settings
     #   @return [Types::HlsOutputSettings]
+    #
+    # @!attribute [rw] media_package_output_settings
+    #   Media Package Output Settings
+    #   @return [Types::MediaPackageOutputSettings]
     #
     # @!attribute [rw] ms_smooth_output_settings
     #   @return [Types::MsSmoothOutputSettings]
@@ -8922,7 +9422,9 @@ module Aws::MediaLive
     #
     class OutputSettings < Struct.new(
       :archive_output_settings,
+      :frame_capture_output_settings,
       :hls_output_settings,
+      :media_package_output_settings,
       :ms_smooth_output_settings,
       :rtmp_output_settings,
       :udp_output_settings)
@@ -8934,6 +9436,49 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PassThroughSettings AWS API Documentation
     #
     class PassThroughSettings < Aws::EmptyStructure; end
+
+    # Settings for the action to set pause state of a channel.
+    #
+    # @note When making an API call, you may pass PauseStateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         pipelines: [
+    #           {
+    #             pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] pipelines
+    #   @return [Array<Types::PipelinePauseStateSettings>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PauseStateScheduleActionSettings AWS API Documentation
+    #
+    class PauseStateScheduleActionSettings < Struct.new(
+      :pipelines)
+      include Aws::Structure
+    end
+
+    # Settings for pausing a pipeline.
+    #
+    # @note When making an API call, you may pass PipelinePauseStateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #       }
+    #
+    # @!attribute [rw] pipeline_id
+    #   Pipeline ID to pause ("PIPELINE\_0" or "PIPELINE\_1").
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelinePauseStateSettings AWS API Documentation
+    #
+    class PipelinePauseStateSettings < Struct.new(
+      :pipeline_id)
+      include Aws::Structure
+    end
 
     # PurchaseOffering request
     #
@@ -9361,6 +9906,13 @@ module Aws::MediaLive
     #           input_switch_settings: {
     #             input_attachment_name_reference: "__string", # required
     #           },
+    #           pause_state_settings: {
+    #             pipelines: [
+    #               {
+    #                 pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #               },
+    #             ],
+    #           },
     #           scte_35_return_to_network_settings: {
     #             splice_event_id: 1, # required
     #           },
@@ -9464,6 +10016,13 @@ module Aws::MediaLive
     #         input_switch_settings: {
     #           input_attachment_name_reference: "__string", # required
     #         },
+    #         pause_state_settings: {
+    #           pipelines: [
+    #             {
+    #               pipeline_id: "PIPELINE_0", # required, accepts PIPELINE_0, PIPELINE_1
+    #             },
+    #           ],
+    #         },
     #         scte_35_return_to_network_settings: {
     #           splice_event_id: 1, # required
     #         },
@@ -9520,31 +10079,35 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] hls_timed_metadata_settings
-    #   Settings to emit HLS metadata
+    #   Action to insert HLS metadata
     #   @return [Types::HlsTimedMetadataScheduleActionSettings]
     #
     # @!attribute [rw] input_switch_settings
-    #   Settings to switch an input
+    #   Action to switch the input
     #   @return [Types::InputSwitchScheduleActionSettings]
     #
+    # @!attribute [rw] pause_state_settings
+    #   Action to pause or unpause one or both channel pipelines
+    #   @return [Types::PauseStateScheduleActionSettings]
+    #
     # @!attribute [rw] scte_35_return_to_network_settings
-    #   Settings for SCTE-35 return\_to\_network message
+    #   Action to insert SCTE-35 return\_to\_network message
     #   @return [Types::Scte35ReturnToNetworkScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_splice_insert_settings
-    #   Settings for SCTE-35 splice\_insert message
+    #   Action to insert SCTE-35 splice\_insert message
     #   @return [Types::Scte35SpliceInsertScheduleActionSettings]
     #
     # @!attribute [rw] scte_35_time_signal_settings
-    #   Settings for SCTE-35 time\_signal message
+    #   Action to insert SCTE-35 time\_signal message
     #   @return [Types::Scte35TimeSignalScheduleActionSettings]
     #
     # @!attribute [rw] static_image_activate_settings
-    #   Settings to activate a static image overlay
+    #   Action to activate a static image overlay
     #   @return [Types::StaticImageActivateScheduleActionSettings]
     #
     # @!attribute [rw] static_image_deactivate_settings
-    #   Settings to deactivate a static image overlay
+    #   Action to deactivate a static image overlay
     #   @return [Types::StaticImageDeactivateScheduleActionSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
@@ -9552,6 +10115,7 @@ module Aws::MediaLive
     class ScheduleActionSettings < Struct.new(
       :hls_timed_metadata_settings,
       :input_switch_settings,
+      :pause_state_settings,
       :scte_35_return_to_network_settings,
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,
@@ -10168,6 +10732,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -10182,7 +10749,8 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -10398,6 +10966,9 @@ module Aws::MediaLive
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -10412,7 +10983,18 @@ module Aws::MediaLive
       :name,
       :pipelines_running_count,
       :role_arn,
-      :state)
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TagsModel AWS API Documentation
+    #
+    class TagsModel < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -10767,6 +11349,11 @@ module Aws::MediaLive
     #         destinations: [
     #           {
     #             id: "__string",
+    #             media_package_settings: [
+    #               {
+    #                 channel_id: "__stringMin1",
+    #               },
+    #             ],
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -11001,6 +11588,11 @@ module Aws::MediaLive
     #                   },
     #                   rollover_interval: 1,
     #                 },
+    #                 frame_capture_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
+    #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                   base_url_content: "__string",
@@ -11052,6 +11644,7 @@ module Aws::MediaLive
     #                       restart_delay: 1,
     #                     },
     #                   },
+    #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
     #                   iv_in_manifest: "EXCLUDE", # accepts EXCLUDE, INCLUDE
@@ -11085,6 +11678,11 @@ module Aws::MediaLive
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
     #                   ts_file_mode: "SEGMENTED_FILES", # accepts SEGMENTED_FILES, SINGLE_FILE
+    #                 },
+    #                 media_package_group_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
     #                 },
     #                 ms_smooth_group_settings: {
     #                   acquisition_point_id: "__string",
@@ -11194,6 +11792,9 @@ module Aws::MediaLive
     #                       extension: "__string",
     #                       name_modifier: "__string",
     #                     },
+    #                     frame_capture_output_settings: {
+    #                       name_modifier: "__string",
+    #                     },
     #                     hls_output_settings: {
     #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
@@ -11229,6 +11830,8 @@ module Aws::MediaLive
     #                       },
     #                       name_modifier: "__stringMin1",
     #                       segment_modifier: "__string",
+    #                     },
+    #                     media_package_output_settings: {
     #                     },
     #                     ms_smooth_output_settings: {
     #                       name_modifier: "__string",
@@ -11326,6 +11929,9 @@ module Aws::MediaLive
     #           video_descriptions: [ # required
     #             {
     #               codec_settings: {
+    #                 frame_capture_settings: {
+    #                   capture_interval: 1, # required
+    #                 },
     #                 h264_settings: {
     #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -11652,6 +12258,9 @@ module Aws::MediaLive
     #
     #       {
     #         input_security_group_id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #         whitelist_rules: [
     #           {
     #             cidr: "__string",
@@ -11662,6 +12271,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_security_group_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRuleCidr>]
     #
@@ -11669,6 +12281,7 @@ module Aws::MediaLive
     #
     class UpdateInputSecurityGroupRequest < Struct.new(
       :input_security_group_id,
+      :tags,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -11713,6 +12326,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         frame_capture_settings: {
+    #           capture_interval: 1, # required
+    #         },
     #         h264_settings: {
     #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -11754,12 +12370,17 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] frame_capture_settings
+    #   Frame Capture Settings
+    #   @return [Types::FrameCaptureSettings]
+    #
     # @!attribute [rw] h264_settings
     #   @return [Types::H264Settings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
+      :frame_capture_settings,
       :h264_settings)
       include Aws::Structure
     end
@@ -11771,6 +12392,9 @@ module Aws::MediaLive
     #
     #       {
     #         codec_settings: {
+    #           frame_capture_settings: {
+    #             capture_interval: 1, # required
+    #           },
     #           h264_settings: {
     #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
@@ -11824,8 +12448,11 @@ module Aws::MediaLive
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] height
-    #   Output video height (in pixels). Leave blank to use source video
-    #   height. If left blank, width must also be unspecified.
+    #   Output video height, in pixels. Must be an even number. For most
+    #   codecs, you can leave this field and width blank in order to use the
+    #   height and width (resolution) from the source. Note, however, that
+    #   leaving blank is not recommended. For the Frame Capture codec,
+    #   height and width are required.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -11836,28 +12463,35 @@ module Aws::MediaLive
     #
     # @!attribute [rw] respond_to_afd
     #   Indicates how to respond to the AFD values in the input stream.
-    #   Setting to "respond" causes input video to be clipped, depending
-    #   on AFD value, input display aspect ratio and output display aspect
-    #   ratio.
+    #   RESPOND causes input video to be clipped, depending on the AFD
+    #   value, input display aspect ratio, and output display aspect ratio,
+    #   and (except for FRAMECAPTURE codec) includes the values in the
+    #   output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores
+    #   the AFD values and includes the values in the output, so input video
+    #   is not clipped. NONE ignores the AFD values and does not include the
+    #   values through to the output, so input video is not clipped.
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior
-    #   When set to "stretchToOutput", automatically configures the output
-    #   position to stretch the video to the specified output resolution.
-    #   This option will override any position value.
+    #   STRETCHTOOUTPUT configures the output position to stretch the video
+    #   to the specified output resolution (height and width). This option
+    #   will override any position value. DEFAULT may insert black boxes
+    #   (pillar boxes or letter boxes) around the video to provide the
+    #   specified output resolution.
     #   @return [String]
     #
     # @!attribute [rw] sharpness
-    #   Changes the width of the anti-alias filter kernel used for scaling.
-    #   Only applies if scaling is being performed and antiAlias is set to
-    #   true. 0 is the softest setting, 100 the sharpest, and 50 recommended
-    #   for most content.
+    #   Changes the strength of the anti-alias filter used for scaling. 0 is
+    #   the softest setting, 100 is the sharpest. A setting of 50 is
+    #   recommended for most content.
     #   @return [Integer]
     #
     # @!attribute [rw] width
-    #   Output video width (in pixels). Leave out to use source video width.
-    #   If left out, height must also be left out. Display aspect ratio is
-    #   always preserved by letterboxing or pillarboxing when necessary.
+    #   Output video width, in pixels. Must be an even number. For most
+    #   codecs, you can leave this field and height blank in order to use
+    #   the height and width (resolution) from the source. Note, however,
+    #   that leaving blank is not recommended. For the Frame Capture codec,
+    #   height and width are required.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoDescription AWS API Documentation

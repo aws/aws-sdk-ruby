@@ -1113,7 +1113,7 @@ module Aws::WorkSpaces
     #
     #       {
     #         resource_id: "NonEmptyString", # required
-    #         client_properties: {
+    #         client_properties: { # required
     #           reconnect_enabled: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       }

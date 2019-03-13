@@ -148,6 +148,7 @@ module Aws
           def resign_with_new_region(context, actual_region)
             context.http_response.body.truncate(0)
             context.http_request.endpoint.host = S3Signer.new_hostname(context, actual_region)
+            context.metadata[:redirect_region] = actual_region
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
               signer: S3Signer.build_v4_signer(

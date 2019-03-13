@@ -53,6 +53,10 @@ module Aws::SSM
     #   The date the activation was created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the activation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Activation AWS API Documentation
     #
     class Activation < Struct.new(
@@ -64,7 +68,8 @@ module Aws::SSM
       :registrations_count,
       :expiration_date,
       :expired,
-      :created_date)
+      :created_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -231,6 +236,12 @@ module Aws::SSM
     #   The document version.
     #   @return [String]
     #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
+    #   @return [String]
+    #
     # @!attribute [rw] parameters
     #   A description of the parameters for a document.
     #   @return [Hash<String,Array<String>>]
@@ -311,6 +322,7 @@ module Aws::SSM
       :status,
       :overview,
       :document_version,
+      :automation_target_parameter_name,
       :parameters,
       :association_id,
       :targets,
@@ -716,9 +728,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # An attribute of an attachment, such as the attachment name or size.
+    # An attribute of an attachment, such as the attachment name.
     #
     # @!attribute [rw] name
+    #   The name of the attachment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentInformation AWS API Documentation
@@ -1026,8 +1039,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] automation_type
-    #   Use this filter with DescribeAutomationExecution. Specify either
-    #   Local of CrossAccount. CrossAccount is an Automation that executes
+    #   Use this filter with DescribeAutomationExecutions. Specify either
+    #   Local or CrossAccount. CrossAccount is an Automation that executes
     #   in multiple AWS Regions and accounts. For more information, see
     #   [Concurrently Executing Automations in Multiple AWS Regions and
     #   Accounts][1] in the *AWS Systems Manager User Guide*.
@@ -1977,6 +1990,12 @@ module Aws::SSM
     #         iam_role: "IamRole", # required
     #         registration_limit: 1,
     #         expiration_date: Time.now,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] description
@@ -2009,6 +2028,33 @@ module Aws::SSM
     #   value is 24 hours.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an activation to
+    #   identify which servers or virtual machines (VMs) in your on-premises
+    #   environment you intend to activate. In this case, you could specify
+    #   the following key name/value pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   When you install SSM Agent on your on-premises servers and VMs, you
+    #   specify an activation ID and code. When you specify the activation
+    #   ID and code, tags assigned to the activation are automatically
+    #   applied to the on-premises servers or VMs.
+    #
+    #   You can't add tags to or delete tags from an existing activation.
+    #   You can tag your on-premises servers and VMs after they connect to
+    #   Systems Manager for the first time and are assigned a managed
+    #   instance ID. This means they are listed in the AWS Systems Manager
+    #   console with an ID that is prefixed with "mi-". For information
+    #   about how to add tags to your managed instances, see
+    #   AddTagsToResource. For information about how to remove tags from
+    #   your managed instances, see RemoveTagsFromResource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationRequest AWS API Documentation
     #
     class CreateActivationRequest < Struct.new(
@@ -2016,7 +2062,8 @@ module Aws::SSM
       :default_instance_name,
       :iam_role,
       :registration_limit,
-      :expiration_date)
+      :expiration_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -2045,11 +2092,12 @@ module Aws::SSM
     #       {
     #         entries: [ # required
     #           {
-    #             name: "DocumentName", # required
+    #             name: "DocumentARN", # required
     #             instance_id: "InstanceId",
     #             parameters: {
     #               "ParameterName" => ["ParameterValue"],
     #             },
+    #             automation_target_parameter_name: "AutomationTargetParameterName",
     #             document_version: "DocumentVersion",
     #             targets: [
     #               {
@@ -2091,11 +2139,12 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         instance_id: "InstanceId",
     #         parameters: {
     #           "ParameterName" => ["ParameterValue"],
     #         },
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         document_version: "DocumentVersion",
     #         targets: [
     #           {
@@ -2118,7 +2167,26 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the configuration document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or
+    #   a document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:aws:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2128,6 +2196,12 @@ module Aws::SSM
     # @!attribute [rw] parameters
     #   A description of the parameters for a document.
     #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
+    #   @return [String]
     #
     # @!attribute [rw] document_version
     #   The document version.
@@ -2192,6 +2266,7 @@ module Aws::SSM
       :name,
       :instance_id,
       :parameters,
+      :automation_target_parameter_name,
       :document_version,
       :targets,
       :schedule_expression,
@@ -2223,7 +2298,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         document_version: "DocumentVersion",
     #         instance_id: "InstanceId",
     #         parameters: {
@@ -2244,13 +2319,33 @@ module Aws::SSM
     #           },
     #         },
     #         association_name: "AssociationName",
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Systems Manager document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or
+    #   a document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:partition:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -2282,6 +2377,12 @@ module Aws::SSM
     #
     # @!attribute [rw] association_name
     #   Specify a descriptive name for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -2330,6 +2431,7 @@ module Aws::SSM
       :schedule_expression,
       :output_location,
       :association_name,
+      :automation_target_parameter_name,
       :max_errors,
       :max_concurrency,
       :compliance_severity)
@@ -2363,6 +2465,12 @@ module Aws::SSM
     #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] content
@@ -2418,6 +2526,24 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an SSM document
+    #   to identify the types of targets or the environment where it will
+    #   run. In this case, you could specify the following key name/value
+    #   pairs:
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing SSM document, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentRequest AWS API Documentation
     #
     class CreateDocumentRequest < Struct.new(
@@ -2427,7 +2553,8 @@ module Aws::SSM
       :version_name,
       :document_type,
       :document_format,
-      :target_type)
+      :target_type,
+      :tags)
       include Aws::Structure
     end
 
@@ -2456,6 +2583,12 @@ module Aws::SSM
     #         cutoff: 1, # required
     #         allow_unassociated_targets: false, # required
     #         client_token: "ClientToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2526,6 +2659,26 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a Maintenance
+    #   Window to identify the type of tasks it will run, the types of
+    #   targets, and the environment it will run in. In this case, you could
+    #   specify the following key name/value pairs:
+    #
+    #   * `Key=TaskType,Value=AgentUpdate`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   <note markdown="1"> To add tags to an existing Maintenance Window, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowRequest AWS API Documentation
     #
     class CreateMaintenanceWindowRequest < Struct.new(
@@ -2538,7 +2691,8 @@ module Aws::SSM
       :duration,
       :cutoff,
       :allow_unassociated_targets,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -2598,6 +2752,12 @@ module Aws::SSM
     #           },
     #         ],
     #         client_token: "ClientToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] operating_system
@@ -2610,7 +2770,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #   @return [Types::PatchFilterGroup]
     #
     # @!attribute [rw] approval_rules
@@ -2687,6 +2847,24 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a patch baseline
+    #   to identify the severity level of patches it specifies and the
+    #   operating system family it applies to. In this case, you could
+    #   specify the following key name/value pairs:
+    #
+    #   * `Key=PatchSeverity,Value=Critical`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaselineRequest AWS API Documentation
     #
     class CreatePatchBaselineRequest < Struct.new(
@@ -2701,7 +2879,8 @@ module Aws::SSM
       :rejected_patches_action,
       :description,
       :sources,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -2776,7 +2955,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName",
+    #         name: "DocumentARN",
     #         instance_id: "InstanceId",
     #         association_id: "AssociationId",
     #       }
@@ -3432,7 +3611,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName",
+    #         name: "DocumentARN",
     #         instance_id: "InstanceId",
     #         association_id: "AssociationId",
     #         association_version: "AssociationVersion",
@@ -3454,7 +3633,7 @@ module Aws::SSM
     #   Specify the association version to retrieve. To view the latest
     #   version, either specify `$LATEST` for this parameter, or omit this
     #   parameter. To view a list of all associations for an instance, use
-    #   ListInstanceAssociations. To get a list of versions for a specific
+    #   ListAssociations. To get a list of versions for a specific
     #   association, use ListAssociationVersions.
     #   @return [String]
     #
@@ -7042,6 +7221,39 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The request body of the GetServiceSetting API action.
+    #
+    # @note When making an API call, you may pass GetServiceSettingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         setting_id: "ServiceSettingId", # required
+    #       }
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingRequest AWS API Documentation
+    #
+    class GetServiceSettingRequest < Struct.new(
+      :setting_id)
+      include Aws::Structure
+    end
+
+    # The query result body of the GetServiceSetting API action.
+    #
+    # @!attribute [rw] service_setting
+    #   The query result of the current service setting.
+    #   @return [Types::ServiceSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingResult AWS API Documentation
+    #
+    class GetServiceSettingResult < Struct.new(
+      :service_setting)
+      include Aws::Structure
+    end
+
     # Status information about the aggregated associations.
     #
     # @!attribute [rw] detailed_status
@@ -10114,6 +10326,8 @@ module Aws::SSM
     #
     # * `WindowsServer2016`
     #
+    # * `WindowsServer2019`
+    #
     # * `*`
     #
     #   *Use a wildcard character (*) to target all supported operating
@@ -10335,6 +10549,10 @@ module Aws::SSM
     #
     # * `RedhatEnterpriseLinux7.4`
     #
+    # * `RedhatEnterpriseLinux7.5`
+    #
+    # * `RedhatEnterpriseLinux7.6`
+    #
     # * `*`
     #
     #   *Use a wildcard character (*) to target all supported operating
@@ -10458,6 +10676,10 @@ module Aws::SSM
     # * `CentOS7.3`
     #
     # * `CentOS7.4`
+    #
+    # * `CentOS7.5`
+    #
+    # * `CentOS7.6`
     #
     # * `*`
     #
@@ -10704,9 +10926,9 @@ module Aws::SSM
     # @!attribute [rw] configuration
     #   The value of the yum repo configuration. For example:
     #
-    #   `cachedir=/var/cache/yum/$basesearch`
+    #   `[main]`
     #
-    #   `$releasever`
+    #   `cachedir=/var/cache/yum/$basesearch$releasever`
     #
     #   `keepcache=0`
     #
@@ -10926,6 +11148,12 @@ module Aws::SSM
     #         key_id: "ParameterKeyId",
     #         overwrite: false,
     #         allowed_pattern: "AllowedPattern",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -11021,6 +11249,27 @@ module Aws::SSM
     #   specify the following: AllowedPattern=^\\d+$
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a Systems Manager
+    #   parameter to identify the type of resource to which it applies, the
+    #   environment, or the type of configuration data referenced by the
+    #   parameter. In this case, you could specify the following key
+    #   name/value pairs:
+    #
+    #   * `Key=Resource,Value=S3bucket`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   * `Key=ParameterType,Value=LicenseKey`
+    #
+    #   <note markdown="1"> To add tags to an existing Systems Manager parameter, use the
+    #   AddTagsToResource action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
     #
     class PutParameterRequest < Struct.new(
@@ -11030,7 +11279,8 @@ module Aws::SSM
       :type,
       :key_id,
       :overwrite,
-      :allowed_pattern)
+      :allowed_pattern,
+      :tags)
       include Aws::Structure
     end
 
@@ -11470,6 +11720,40 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResourceResult AWS API Documentation
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
+
+    # The request body of the ResetServiceSetting API action.
+    #
+    # @note When making an API call, you may pass ResetServiceSettingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         setting_id: "ServiceSettingId", # required
+    #       }
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting to reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingRequest AWS API Documentation
+    #
+    class ResetServiceSettingRequest < Struct.new(
+      :setting_id)
+      include Aws::Structure
+    end
+
+    # The result body of the ResetServiceSetting API action.
+    #
+    # @!attribute [rw] service_setting
+    #   The current, effective service setting after calling the
+    #   ResetServiceSetting API action.
+    #   @return [Types::ServiceSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingResult AWS API Documentation
+    #
+    class ResetServiceSettingResult < Struct.new(
+      :service_setting)
+      include Aws::Structure
+    end
 
     # Information about targets that resolved during the Automation
     # execution.
@@ -12024,6 +12308,71 @@ module Aws::SSM
     #
     class SendCommandResult < Struct.new(
       :command)
+      include Aws::Structure
+    end
+
+    # The service setting data structure.
+    #
+    # `ServiceSetting` is an account-level setting for an AWS service. This
+    # setting defines how a user interacts with or uses a service or a
+    # feature of a service. For example, if an AWS service charges money to
+    # the account based on feature or service usage, then the AWS service
+    # team might create a default setting of "false". This means the user
+    # can't use this feature unless they change the setting to "true" and
+    # intentionally opt in for a paid feature.
+    #
+    # Services map a `SettingId` object to a setting value. AWS services
+    # teams define the default value for a `SettingId`. You can't create a
+    # new `SettingId`, but you can overwrite the default value if you have
+    # the `ssm:UpdateServiceSetting` permission for the setting. Use the
+    # UpdateServiceSetting API action to change the default setting. Or, use
+    # the ResetServiceSetting to change the value back to the original value
+    # defined by the AWS service team.
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] setting_value
+    #   The value of the service setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The last time the service setting was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_user
+    #   The ARN of the last modified user. This field is populated only if
+    #   the setting value was overwritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the service setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the service setting. The value can be Default,
+    #   Customized or PendingUpdate.
+    #
+    #   * Default: The current setting uses a default value provisioned by
+    #     the AWS service team.
+    #
+    #   * Customized: The current setting use a custom value specified by
+    #     the customer.
+    #
+    #   * PendingUpdate: The current setting uses a default or custom value,
+    #     but a setting change request is pending approval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ServiceSetting AWS API Documentation
+    #
+    class ServiceSetting < Struct.new(
+      :setting_id,
+      :setting_value,
+      :last_modified_date,
+      :last_modified_user,
+      :arn,
+      :status)
       include Aws::Structure
     end
 
@@ -12807,7 +13156,7 @@ module Aws::SSM
     #             output_s3_key_prefix: "S3KeyPrefix",
     #           },
     #         },
-    #         name: "DocumentName",
+    #         name: "DocumentARN",
     #         targets: [
     #           {
     #             key: "TargetKey",
@@ -12816,6 +13165,7 @@ module Aws::SSM
     #         ],
     #         association_name: "AssociationName",
     #         association_version: "AssociationVersion",
+    #         automation_target_parameter_name: "AutomationTargetParameterName",
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
@@ -12846,7 +13196,26 @@ module Aws::SSM
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @!attribute [rw] name
-    #   The name of the association document.
+    #   The name of the SSM document that contains the configuration
+    #   information for the instance. You can specify Command, Policy, or
+    #   Automation documents.
+    #
+    #   You can specify AWS-predefined documents, documents you created, or
+    #   a document that is shared with you from another account.
+    #
+    #   For SSM documents that are shared with you from other AWS accounts,
+    #   you must specify the complete SSM document ARN, in the following
+    #   format:
+    #
+    #   `arn:aws:ssm:region:account-id:document/document-name `
+    #
+    #   For example:
+    #
+    #   `arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document`
+    #
+    #   For AWS-predefined documents and SSM documents you created in your
+    #   account, you only need to specify the document name. For example,
+    #   `AWS-ApplyPatchBaseline` or `My-Document`.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -12862,6 +13231,12 @@ module Aws::SSM
     #   must specify the latest association version in the service. If you
     #   want to ensure that this request succeeds, either specify `$LATEST`,
     #   or omit this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_target_parameter_name
+    #   Specify the target for the association. This target is required for
+    #   associations that use an Automation document and target resources by
+    #   using rate controls.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -12911,6 +13286,7 @@ module Aws::SSM
       :targets,
       :association_name,
       :association_version,
+      :automation_target_parameter_name,
       :max_errors,
       :max_concurrency,
       :compliance_severity)
@@ -12932,7 +13308,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         instance_id: "InstanceId", # required
     #         association_status: { # required
     #           date: Time.now, # required
@@ -13740,7 +14116,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] global_filters
-    #   A set of global filters used to exclude patches from the baseline.
+    #   A set of global filters used to include patches in the baseline.
     #   @return [Types::PatchFilterGroup]
     #
     # @!attribute [rw] approval_rules
@@ -13916,6 +14292,38 @@ module Aws::SSM
       :sources)
       include Aws::Structure
     end
+
+    # The request body of the UpdateServiceSetting API action.
+    #
+    # @note When making an API call, you may pass UpdateServiceSettingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         setting_id: "ServiceSettingId", # required
+    #         setting_value: "ServiceSettingValue", # required
+    #       }
+    #
+    # @!attribute [rw] setting_id
+    #   The ID of the service setting to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] setting_value
+    #   The new value to specify for the service setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation
+    #
+    class UpdateServiceSettingRequest < Struct.new(
+      :setting_id,
+      :setting_value)
+      include Aws::Structure
+    end
+
+    # The result body of the UpdateServiceSetting API action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingResult AWS API Documentation
+    #
+    class UpdateServiceSettingResult < Aws::EmptyStructure; end
 
   end
 end

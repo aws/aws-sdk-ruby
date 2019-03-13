@@ -223,6 +223,11 @@ module Aws::States
     # activity and returns an identifier for use in a state machine and when
     # polling from the activity.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the activity to create. This name must be unique for your
     #   AWS account and region for 90 days. For more information, see [ Limits
@@ -243,7 +248,10 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of tags to add to a resource.
     #
     # @return [Types::CreateActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -254,6 +262,12 @@ module Aws::States
     #
     #   resp = client.create_activity({
     #     name: "Name", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -276,6 +290,11 @@ module Aws::States
     # (`Fail` states), and so on. State machines are specified using a
     # JSON-based, structured language.
     #
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not reflect very recent updates and changes.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the state machine.
     #
@@ -297,11 +316,14 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to use for this state
     #   machine.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be added when creating a state machine.
     #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -314,6 +336,12 @@ module Aws::States
     #     name: "Name", # required
     #     definition: "Definition", # required
     #     role_arn: "Arn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -570,7 +598,7 @@ module Aws::States
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
     #
     # @option params [required, String] :activity_arn
     #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from
@@ -1080,9 +1108,9 @@ module Aws::States
     #
     # @option params [String] :name
     #   The name of the execution. This name must be unique for your AWS
-    #   account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   account, region, and state machine for 90 days. For more information,
+    #   see [ Limits Related to State Machine Executions][1] in the *AWS Step
+    #   Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -1098,7 +1126,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #
     # @option params [String] :input
     #   The string that contains the JSON input data for the execution, for
@@ -1258,7 +1286,7 @@ module Aws::States
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
@@ -1301,7 +1329,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

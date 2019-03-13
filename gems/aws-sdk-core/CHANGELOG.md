@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+3.46.2 (2019-02-19)
+------------------
+
+* Issue - Update NetHttp Patches per Ruby version (Github Issue: #1979)
+
+3.46.1 (2019-02-12)
+------------------
+
+* Issue - Fix the issue that APIG SDK doesn't have regional endpoint related plugins.
+
+3.46.0 (2019-01-16)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.45.0 (2019-01-11)
+------------------
+
+* Feature - Improve Query protocol handling of empty responses, to ensure response is an instance of `Aws::EmptyStructure` rather than the class `Aws::EmptyStructure` itself.
+* Issue - Plugin updates to support client-side monitoring.
+
+3.44.2 (2019-01-04)
+------------------
+
+* Issue - Update to code paths and plugins for future SDK instrumentation and telemetry.
+
 3.44.1 (2018-12-17)
 ------------------
 

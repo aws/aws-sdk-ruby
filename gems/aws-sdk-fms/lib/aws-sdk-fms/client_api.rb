@@ -98,6 +98,7 @@ module Aws::FMS
     DeleteNotificationChannelRequest.struct_class = Types::DeleteNotificationChannelRequest
 
     DeletePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
+    DeletePolicyRequest.add_member(:delete_all_policy_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteAllPolicyResources"))
     DeletePolicyRequest.struct_class = Types::DeletePolicyRequest
 
     DisassociateAdminAccountRequest.struct_class = Types::DisassociateAdminAccountRequest

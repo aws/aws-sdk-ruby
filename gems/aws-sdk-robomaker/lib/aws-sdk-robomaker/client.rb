@@ -229,7 +229,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag"
+    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.jobs[0].failure_reason #=> String
     #   resp.jobs[0].client_request_token #=> String
     #   resp.jobs[0].output_location.s3_bucket #=> String
     #   resp.jobs[0].output_location.s3_prefix #=> String
@@ -250,6 +251,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].launch_config.launch_file #=> String
     #   resp.jobs[0].simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.jobs[0].simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.jobs[0].tags #=> Hash
+    #   resp.jobs[0].tags["TagKey"] #=> String
     #   resp.jobs[0].vpc_config.subnets #=> Array
     #   resp.jobs[0].vpc_config.subnets[0] #=> String
     #   resp.jobs[0].vpc_config.security_groups #=> Array
@@ -290,7 +293,17 @@ module Aws::RoboMaker
       req.send_request(options)
     end
 
-    # Creates a deployment job.
+    # Deploys a specific version of a robot application to robots in a
+    # fleet.
+    #
+    # The robot application must have a numbered `applicationVersion` for
+    # consistency reasons. To create a new version, use
+    # `CreateRobotApplicationVersion` or see [Creating a Robot Application
+    # Version][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html
     #
     # @option params [Types::DeploymentConfig] :deployment_config
     #   The requested deployment configuration.
@@ -308,6 +321,10 @@ module Aws::RoboMaker
     # @option params [required, Array<Types::DeploymentApplicationConfig>] :deployment_application_configs
     #   The deployment application configuration.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   deployment job.
+    #
     # @return [Types::CreateDeploymentJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentJobResponse#arn #arn} => String
@@ -318,6 +335,7 @@ module Aws::RoboMaker
     #   * {Types::CreateDeploymentJobResponse#failure_code #failure_code} => String
     #   * {Types::CreateDeploymentJobResponse#created_at #created_at} => Time
     #   * {Types::CreateDeploymentJobResponse#deployment_config #deployment_config} => Types::DeploymentConfig
+    #   * {Types::CreateDeploymentJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -331,7 +349,7 @@ module Aws::RoboMaker
     #     deployment_application_configs: [ # required
     #       {
     #         application: "Arn", # required
-    #         application_version: "Version", # required
+    #         application_version: "DeploymentVersion", # required
     #         launch_config: { # required
     #           package_name: "GenericString", # required
     #           pre_launch_file: "GenericString",
@@ -343,6 +361,9 @@ module Aws::RoboMaker
     #         },
     #       },
     #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -364,6 +385,8 @@ module Aws::RoboMaker
     #   resp.created_at #=> Time
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateDeploymentJob AWS API Documentation
     #
@@ -380,16 +403,24 @@ module Aws::RoboMaker
     # @option params [required, String] :name
     #   The name of the fleet.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   fleet.
+    #
     # @return [Types::CreateFleetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResponse#arn #arn} => String
     #   * {Types::CreateFleetResponse#name #name} => String
     #   * {Types::CreateFleetResponse#created_at #created_at} => Time
+    #   * {Types::CreateFleetResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_fleet({
     #     name: "Name", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -397,6 +428,8 @@ module Aws::RoboMaker
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.created_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateFleet AWS API Documentation
     #
@@ -418,6 +451,10 @@ module Aws::RoboMaker
     # @option params [required, String] :greengrass_group_id
     #   The Greengrass group id.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   robot.
+    #
     # @return [Types::CreateRobotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRobotResponse#arn #arn} => String
@@ -425,6 +462,7 @@ module Aws::RoboMaker
     #   * {Types::CreateRobotResponse#created_at #created_at} => Time
     #   * {Types::CreateRobotResponse#greengrass_group_id #greengrass_group_id} => String
     #   * {Types::CreateRobotResponse#architecture #architecture} => String
+    #   * {Types::CreateRobotResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -432,6 +470,9 @@ module Aws::RoboMaker
     #     name: "Name", # required
     #     architecture: "X86_64", # required, accepts X86_64, ARM64, ARMHF
     #     greengrass_group_id: "Id", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -441,6 +482,8 @@ module Aws::RoboMaker
     #   resp.created_at #=> Time
     #   resp.greengrass_group_id #=> String
     #   resp.architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobot AWS API Documentation
     #
@@ -462,6 +505,10 @@ module Aws::RoboMaker
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
     #   The robot software suite used by the robot application.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   robot application.
+    #
     # @return [Types::CreateRobotApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRobotApplicationResponse#arn #arn} => String
@@ -471,6 +518,7 @@ module Aws::RoboMaker
     #   * {Types::CreateRobotApplicationResponse#robot_software_suite #robot_software_suite} => Types::RobotSoftwareSuite
     #   * {Types::CreateRobotApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateRobotApplicationResponse#revision_id #revision_id} => String
+    #   * {Types::CreateRobotApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -486,6 +534,9 @@ module Aws::RoboMaker
     #     robot_software_suite: { # required
     #       name: "ROS", # accepts ROS
     #       version: "Kinetic", # accepts Kinetic
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -503,6 +554,8 @@ module Aws::RoboMaker
     #   resp.robot_software_suite.version #=> String, one of "Kinetic"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplication AWS API Documentation
     #
@@ -581,6 +634,10 @@ module Aws::RoboMaker
     # @option params [required, Types::RenderingEngine] :rendering_engine
     #   The rendering engine for the simulation application.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation application.
+    #
     # @return [Types::CreateSimulationApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSimulationApplicationResponse#arn #arn} => String
@@ -592,6 +649,7 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationApplicationResponse#rendering_engine #rendering_engine} => Types::RenderingEngine
     #   * {Types::CreateSimulationApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateSimulationApplicationResponse#revision_id #revision_id} => String
+    #   * {Types::CreateSimulationApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -616,6 +674,9 @@ module Aws::RoboMaker
     #       name: "OGRE", # accepts OGRE
     #       version: "RenderingEngineVersionType",
     #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -636,6 +697,8 @@ module Aws::RoboMaker
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplication AWS API Documentation
     #
@@ -721,14 +784,9 @@ module Aws::RoboMaker
     #   simulation job will status will transition to `Completed`.
     #
     # @option params [required, String] :iam_role
-    #   The IAM role that allows the simulation instance to call the AWS APIs
-    #   that are specified in its associated policies on your behalf. This is
-    #   how credentials are passed in to your simulation job. See how to
-    #   [specify AWS security credentials for your application][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials
+    #   The IAM role name that allows the simulation instance to call the AWS
+    #   APIs that are specified in its associated policies on your behalf.
+    #   This is how credentials are passed in to your simulation job.
     #
     # @option params [String] :failure_behavior
     #   The failure behavior the simulation job.
@@ -746,6 +804,10 @@ module Aws::RoboMaker
     #
     # @option params [Array<Types::SimulationApplicationConfig>] :simulation_applications
     #   The simulation application to use in the simulation job.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation job.
     #
     # @option params [Types::VPCConfig] :vpc_config
     #   If your simulation job accesses resources in a VPC, you provide this
@@ -767,6 +829,7 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationJobResponse#iam_role #iam_role} => String
     #   * {Types::CreateSimulationJobResponse#robot_applications #robot_applications} => Array&lt;Types::RobotApplicationConfig&gt;
     #   * {Types::CreateSimulationJobResponse#simulation_applications #simulation_applications} => Array&lt;Types::SimulationApplicationConfig&gt;
+    #   * {Types::CreateSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
     #
     # @example Request syntax with placeholder values
@@ -806,6 +869,9 @@ module Aws::RoboMaker
     #         },
     #       },
     #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     vpc_config: {
     #       subnets: ["GenericString"], # required
     #       security_groups: ["GenericString"],
@@ -819,7 +885,7 @@ module Aws::RoboMaker
     #   resp.status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
     #   resp.output_location.s3_prefix #=> String
@@ -840,6 +906,8 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.launch_file #=> String
     #   resp.simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #   resp.vpc_config.subnets #=> Array
     #   resp.vpc_config.subnets[0] #=> String
     #   resp.vpc_config.security_groups #=> Array
@@ -1003,6 +1071,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeDeploymentJobResponse#failure_code #failure_code} => String
     #   * {Types::DescribeDeploymentJobResponse#created_at #created_at} => Time
     #   * {Types::DescribeDeploymentJobResponse#robot_deployment_summary #robot_deployment_summary} => Array&lt;Types::RobotDeployment&gt;
+    #   * {Types::DescribeDeploymentJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1038,6 +1107,8 @@ module Aws::RoboMaker
     #   resp.robot_deployment_summary[0].progress_detail.target_resource #=> String
     #   resp.robot_deployment_summary[0].failure_reason #=> String
     #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "FailureThresholdBreached", "RobotDeploymentNoResponse", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeDeploymentJob AWS API Documentation
     #
@@ -1062,6 +1133,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeFleetResponse#last_deployment_status #last_deployment_status} => String
     #   * {Types::DescribeFleetResponse#last_deployment_job #last_deployment_job} => String
     #   * {Types::DescribeFleetResponse#last_deployment_time #last_deployment_time} => Time
+    #   * {Types::DescribeFleetResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1087,6 +1159,8 @@ module Aws::RoboMaker
     #   resp.last_deployment_status #=> String, one of "Pending", "Preparing", "InProgress", "Failed", "Succeeded"
     #   resp.last_deployment_job #=> String
     #   resp.last_deployment_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeFleet AWS API Documentation
     #
@@ -1113,6 +1187,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeRobotResponse#architecture #architecture} => String
     #   * {Types::DescribeRobotResponse#last_deployment_job #last_deployment_job} => String
     #   * {Types::DescribeRobotResponse#last_deployment_time #last_deployment_time} => Time
+    #   * {Types::DescribeRobotResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1131,6 +1206,8 @@ module Aws::RoboMaker
     #   resp.architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
     #   resp.last_deployment_job #=> String
     #   resp.last_deployment_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobot AWS API Documentation
     #
@@ -1158,6 +1235,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeRobotApplicationResponse#robot_software_suite #robot_software_suite} => Types::RobotSoftwareSuite
     #   * {Types::DescribeRobotApplicationResponse#revision_id #revision_id} => String
     #   * {Types::DescribeRobotApplicationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::DescribeRobotApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1180,6 +1258,8 @@ module Aws::RoboMaker
     #   resp.robot_software_suite.version #=> String, one of "Kinetic"
     #   resp.revision_id #=> String
     #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobotApplication AWS API Documentation
     #
@@ -1209,6 +1289,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationApplicationResponse#rendering_engine #rendering_engine} => Types::RenderingEngine
     #   * {Types::DescribeSimulationApplicationResponse#revision_id #revision_id} => String
     #   * {Types::DescribeSimulationApplicationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::DescribeSimulationApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1235,6 +1316,8 @@ module Aws::RoboMaker
     #   resp.rendering_engine.version #=> String
     #   resp.revision_id #=> String
     #   resp.last_updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationApplication AWS API Documentation
     #
@@ -1258,6 +1341,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::DescribeSimulationJobResponse#failure_behavior #failure_behavior} => String
     #   * {Types::DescribeSimulationJobResponse#failure_code #failure_code} => String
+    #   * {Types::DescribeSimulationJobResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeSimulationJobResponse#client_request_token #client_request_token} => String
     #   * {Types::DescribeSimulationJobResponse#output_location #output_location} => Types::OutputLocation
     #   * {Types::DescribeSimulationJobResponse#max_job_duration_in_seconds #max_job_duration_in_seconds} => Integer
@@ -1265,6 +1349,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#iam_role #iam_role} => String
     #   * {Types::DescribeSimulationJobResponse#robot_applications #robot_applications} => Array&lt;Types::RobotApplicationConfig&gt;
     #   * {Types::DescribeSimulationJobResponse#simulation_applications #simulation_applications} => Array&lt;Types::SimulationApplicationConfig&gt;
+    #   * {Types::DescribeSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
     #
     # @example Request syntax with placeholder values
@@ -1280,7 +1365,8 @@ module Aws::RoboMaker
     #   resp.status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failure_reason #=> String
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
     #   resp.output_location.s3_prefix #=> String
@@ -1301,6 +1387,8 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.launch_file #=> String
     #   resp.simulation_applications[0].launch_config.environment_variables #=> Hash
     #   resp.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #   resp.vpc_config.subnets #=> Array
     #   resp.vpc_config.subnets[0] #=> String
     #   resp.vpc_config.security_groups #=> Array
@@ -1741,6 +1829,35 @@ module Aws::RoboMaker
       req.send_request(options)
     end
 
+    # Lists all tags on a AWS RoboMaker resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Registers a robot with a fleet.
     #
     # @option params [required, String] :fleet
@@ -1854,6 +1971,82 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def sync_deployment_job(params = {}, options = {})
       req = build_request(:sync_deployment_job, params)
+      req.send_request(options)
+    end
+
+    # Adds or edits tags for a AWS RoboMaker resource.
+    #
+    # Each tag consists of a tag key and a tag value. Tag keys and tag
+    # values are both required, but tag values can be empty strings.
+    #
+    # For information about the rules that apply to tag keys and tag values,
+    # see [User-Defined Tag Restrictions][1] in the *AWS Billing and Cost
+    # Management User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
+    #   tagging.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified AWS RoboMaker resource.
+    #
+    # To remove a tag, specify the tag key. To change the tag value of an
+    # existing tag key, use [ `TagResource` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/robomaker/latest/dg//API_Reference.htmlAPI_TagResource.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
+    #   removing tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A map that contains tag keys and tag values that will be unattached
+    #   from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2022,7 +2215,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

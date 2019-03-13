@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2019-03-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.143.0 (2019-03-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.142.0 (2019-03-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Textract`.
+
+1.141.0 (2019-02-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.140.0 (2019-02-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.139.0 (2019-02-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.138.0 (2019-02-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.137.0 (2019-02-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.136.0 (2019-01-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.135.0 (2019-01-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ECR`.
+
+1.134.0 (2019-01-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkLink`.
+
+1.133.0 (2019-01-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.132.0 (2019-01-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Backup`.
+
+1.131.0 (2019-01-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.130.0 (2019-01-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::DocDB`.
+
+1.129.0 (2019-01-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.128.0 (2019-01-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.127.0 (2018-12-21)
 ------------------
 

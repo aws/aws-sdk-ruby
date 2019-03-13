@@ -46,12 +46,7 @@ module Aws::AutoScaling
       data[:availability_zone]
     end
 
-    # The lifecycle state for the instance. For more information, see [Auto
-    # Scaling Lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
+    # The lifecycle state for the instance.
     # @return [String]
     def lifecycle_state
       data[:lifecycle_state]

@@ -27,7 +27,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
@@ -150,7 +150,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1014,7 +1014,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2149,14 +2149,16 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time to start the query. Specified as epoch time, the number of
-    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #   The beginning of the time range to query. The range is inclusive, so
+    #   the specified start time is included in the query. Specified as
+    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
+    #   UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
-    #   The time to end this query, if it is still running. Specified as
-    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
-    #   UTC.
+    #   The end of the time range to query. The range is inclusive, so the
+    #   specified end time is included in the query. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] query_string
@@ -2165,7 +2167,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #   @return [String]
     #
     # @!attribute [rw] limit

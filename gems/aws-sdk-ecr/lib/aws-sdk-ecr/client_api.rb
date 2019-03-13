@@ -509,13 +509,14 @@ module Aws::ECR
 
       api.metadata = {
         "apiVersion" => "2015-09-21",
-        "endpointPrefix" => "ecr",
+        "endpointPrefix" => "api.ecr",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceAbbreviation" => "Amazon ECR",
         "serviceFullName" => "Amazon EC2 Container Registry",
         "serviceId" => "ECR",
         "signatureVersion" => "v4",
+        "signingName" => "ecr",
         "targetPrefix" => "AmazonEC2ContainerRegistry_V20150921",
         "uid" => "ecr-2015-09-21",
       }

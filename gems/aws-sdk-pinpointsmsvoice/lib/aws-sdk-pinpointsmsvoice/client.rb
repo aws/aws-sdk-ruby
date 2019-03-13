@@ -354,6 +354,40 @@ module Aws::PinpointSMSVoice
       req.send_request(options)
     end
 
+    # List all of the configuration sets associated with your Amazon
+    # Pinpoint account in the current region.
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @return [Types::ListConfigurationSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationSetsResponse#configuration_sets #configuration_sets} => Array&lt;String&gt;
+    #   * {Types::ListConfigurationSetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configuration_sets({
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_sets #=> Array
+    #   resp.configuration_sets[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSets AWS API Documentation
+    #
+    # @overload list_configuration_sets(params = {})
+    # @param [Hash] params ({})
+    def list_configuration_sets(params = {}, options = {})
+      req = build_request(:list_configuration_sets, params)
+      req.send_request(options)
+    end
+
     # Create a new voice message and send it to a recipient's phone number.
     #
     # @option params [String] :caller_id
@@ -476,7 +510,7 @@ module Aws::PinpointSMSVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointsmsvoice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

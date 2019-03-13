@@ -11,6 +11,7 @@ module Aws::MediaTailor
 
     include Seahorse::Model
 
+    BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
     DashConfigurationForPut = Shapes::StructureShape.new(name: 'DashConfigurationForPut')
@@ -20,15 +21,22 @@ module Aws::MediaTailor
     HlsConfiguration = Shapes::StructureShape.new(name: 'HlsConfiguration')
     ListPlaybackConfigurationsRequest = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsRequest')
     ListPlaybackConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     PlaybackConfiguration = Shapes::StructureShape.new(name: 'PlaybackConfiguration')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
     PutPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationResponse')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin1Max100 = Shapes::IntegerShape.new(name: '__integerMin1Max100')
     __listOfPlaybackConfigurations = Shapes::ListShape.new(name: '__listOfPlaybackConfigurations')
+    __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -55,9 +63,11 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    GetPlaybackConfigurationResponse.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     GetPlaybackConfigurationResponse.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
     GetPlaybackConfigurationResponse.add_member(:session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "SessionInitializationEndpointPrefix"))
     GetPlaybackConfigurationResponse.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
+    GetPlaybackConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     GetPlaybackConfigurationResponse.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     GetPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     GetPlaybackConfigurationResponse.struct_class = Types::GetPlaybackConfigurationResponse
@@ -73,10 +83,23 @@ module Aws::MediaTailor
     ListPlaybackConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ListPlaybackConfigurationsResponse.struct_class = Types::ListPlaybackConfigurationsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     PlaybackConfiguration.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PlaybackConfiguration.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
+    PlaybackConfiguration.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
+    PlaybackConfiguration.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     PlaybackConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    PlaybackConfiguration.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
+    PlaybackConfiguration.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
+    PlaybackConfiguration.add_member(:session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "SessionInitializationEndpointPrefix"))
     PlaybackConfiguration.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
+    PlaybackConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    PlaybackConfiguration.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PlaybackConfiguration.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
 
@@ -85,6 +108,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfigurationForPut, location_name: "DashConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     PutPlaybackConfigurationRequest.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
+    PutPlaybackConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PutPlaybackConfigurationRequest.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PutPlaybackConfigurationRequest.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationRequest.struct_class = Types::PutPlaybackConfigurationRequest
@@ -94,14 +118,32 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    PutPlaybackConfigurationResponse.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     PutPlaybackConfigurationResponse.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
     PutPlaybackConfigurationResponse.add_member(:session_initialization_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "SessionInitializationEndpointPrefix"))
     PutPlaybackConfigurationResponse.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
+    PutPlaybackConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PutPlaybackConfigurationResponse.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PutPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationResponse.struct_class = Types::PutPlaybackConfigurationResponse
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagsModel.struct_class = Types::TagsModel
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
     __listOfPlaybackConfigurations.member = Shapes::ShapeRef.new(shape: PlaybackConfiguration)
+
+    __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private
@@ -146,12 +188,39 @@ module Aws::MediaTailor
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsResponse)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:put_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutPlaybackConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/playbackConfiguration"
         o.input = Shapes::ShapeRef.new(shape: PutPlaybackConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutPlaybackConfigurationResponse)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
     end
 

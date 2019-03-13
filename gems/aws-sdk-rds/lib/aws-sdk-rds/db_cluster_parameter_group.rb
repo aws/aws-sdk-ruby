@@ -218,7 +218,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [DBClusterParameterGroup]
     def create(options = {})
       options = options.merge(db_cluster_parameter_group_name: @name)

@@ -370,8 +370,8 @@ module Aws::EC2
     #   IP protocol and port range, use a set of IP permissions instead. For
     #   EC2-VPC, the source security group must be in the same VPC.
     # @option options [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account ID for the source security group, if
-    #   the source security group is in a different account. You can't
+    #   \[nondefault VPC\] The AWS account ID for the source security group,
+    #   if the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full

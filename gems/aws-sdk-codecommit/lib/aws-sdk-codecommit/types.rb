@@ -351,6 +351,138 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCommitInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         branch_name: "BranchName", # required
+    #         parent_commit_id: "CommitId",
+    #         author_name: "Name",
+    #         email: "Email",
+    #         commit_message: "Message",
+    #         keep_empty_folders: false,
+    #         put_files: [
+    #           {
+    #             file_path: "Path", # required
+    #             file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #             file_content: "data",
+    #             source_file: {
+    #               file_path: "Path", # required
+    #               is_move: false,
+    #             },
+    #           },
+    #         ],
+    #         delete_files: [
+    #           {
+    #             file_path: "Path", # required
+    #           },
+    #         ],
+    #         set_file_modes: [
+    #           {
+    #             file_path: "Path", # required
+    #             file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you will create the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the branch where you will create the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_commit_id
+    #   The ID of the commit that is the parent of the commit you will
+    #   create. If this is an empty repository, this is not required.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_name
+    #   The name of the author who created the commit. This information will
+    #   be used as both the author and committer for the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person who created the commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   The commit message you want to include as part of creating the
+    #   commit. Commit messages are limited to 256 KB. If no message is
+    #   specified, a default message will be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] keep_empty_folders
+    #   If the commit contains deletions, whether to keep a folder or folder
+    #   structure if the changes leave the folders empty. If this is
+    #   specified as true, a .gitkeep file will be created for empty
+    #   folders.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] put_files
+    #   The files to add or update in this commit.
+    #   @return [Array<Types::PutFileEntry>]
+    #
+    # @!attribute [rw] delete_files
+    #   The files to delete in this commit. These files will still exist in
+    #   prior commits.
+    #   @return [Array<Types::DeleteFileEntry>]
+    #
+    # @!attribute [rw] set_file_modes
+    #   The file modes to update for files in this commit.
+    #   @return [Array<Types::SetFileModeEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitInput AWS API Documentation
+    #
+    class CreateCommitInput < Struct.new(
+      :repository_name,
+      :branch_name,
+      :parent_commit_id,
+      :author_name,
+      :email,
+      :commit_message,
+      :keep_empty_folders,
+      :put_files,
+      :delete_files,
+      :set_file_modes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full commit ID of the commit that contains your committed file
+    #   changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   The full SHA-1 pointer of the tree information for the commit that
+    #   contains the commited file changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] files_added
+    #   The files added as part of the committed file changes.
+    #   @return [Array<Types::FileMetadata>]
+    #
+    # @!attribute [rw] files_updated
+    #   The files updated as part of the commited file changes.
+    #   @return [Array<Types::FileMetadata>]
+    #
+    # @!attribute [rw] files_deleted
+    #   The files deleted as part of the committed file changes.
+    #   @return [Array<Types::FileMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitOutput AWS API Documentation
+    #
+    class CreateCommitOutput < Struct.new(
+      :commit_id,
+      :tree_id,
+      :files_added,
+      :files_updated,
+      :files_deleted)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreatePullRequestInput
     #   data as a hash:
     #
@@ -549,6 +681,27 @@ module Aws::CodeCommit
     #
     class DeleteCommentContentOutput < Struct.new(
       :comment)
+      include Aws::Structure
+    end
+
+    # A file that will be deleted as part of a commit.
+    #
+    # @note When making an API call, you may pass DeleteFileEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path of the file that will be deleted, including the name
+    #   of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileEntry AWS API Documentation
+    #
+    class DeleteFileEntry < Struct.new(
+      :file_path)
       include Aws::Structure
     end
 
@@ -810,6 +963,31 @@ module Aws::CodeCommit
       :blob_id,
       :absolute_path,
       :relative_path,
+      :file_mode)
+      include Aws::Structure
+    end
+
+    # A file that will be added, updated, or deleted as part of a commit.
+    #
+    # @!attribute [rw] absolute_path
+    #   The full path to the file that will be added or updated, including
+    #   the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID that contains the file information.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The extrapolated file mode permissions for the file. Valid values
+    #   include EXECUTABLE and NORMAL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileMetadata AWS API Documentation
+    #
+    class FileMetadata < Struct.new(
+      :absolute_path,
+      :blob_id,
       :file_mode)
       include Aws::Structure
     end
@@ -2356,6 +2534,52 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Information about a file that will be added or updated as part of a
+    # commit.
+    #
+    # @note When making an API call, you may pass PutFileEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         file_content: "data",
+    #         source_file: {
+    #           file_path: "Path", # required
+    #           is_move: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path to the file in the repository, including the name of
+    #   the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The extrapolated file mode permissions for the file. Valid values
+    #   include EXECUTABLE and NORMAL.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_content
+    #   The content of the file, if a source file is not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_file
+    #   The name and full path of the file that contains the changes you
+    #   want to make as part of the commit, if you are not providing the
+    #   file content directly.
+    #   @return [Types::SourceFileSpecifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileEntry AWS API Documentation
+    #
+    class PutFileEntry < Struct.new(
+      :file_path,
+      :file_mode,
+      :file_content,
+      :source_file)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutFileInput
     #   data as a hash:
     #
@@ -2662,6 +2886,59 @@ module Aws::CodeCommit
     class RepositoryTriggerExecutionFailure < Struct.new(
       :trigger,
       :failure_message)
+      include Aws::Structure
+    end
+
+    # Information about the file mode changes.
+    #
+    # @note When making an API call, you may pass SetFileModeEntry
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # required, accepts EXECUTABLE, NORMAL, SYMLINK
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path to the file, including the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The file mode for the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SetFileModeEntry AWS API Documentation
+    #
+    class SetFileModeEntry < Struct.new(
+      :file_path,
+      :file_mode)
+      include Aws::Structure
+    end
+
+    # Information about a source file that is part of changes made in a
+    # commit.
+    #
+    # @note When making an API call, you may pass SourceFileSpecifier
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path", # required
+    #         is_move: false,
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The full path to the file, including the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_move
+    #   Whether to remove the source file from the parent commit.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SourceFileSpecifier AWS API Documentation
+    #
+    class SourceFileSpecifier < Struct.new(
+      :file_path,
+      :is_move)
       include Aws::Structure
     end
 

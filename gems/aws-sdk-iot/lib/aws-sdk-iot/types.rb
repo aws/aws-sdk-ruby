@@ -118,8 +118,8 @@ module Aws::IoT
     #           payload_field: "PayloadField",
     #         },
     #         dynamo_d_bv_2: {
-    #           role_arn: "AwsArn",
-    #           put_item: {
+    #           role_arn: "AwsArn", # required
+    #           put_item: { # required
     #             table_name: "TableName", # required
     #           },
     #         },
@@ -958,6 +958,11 @@ module Aws::IoT
     #             ports: [1],
     #           },
     #           duration_seconds: 1,
+    #           consecutive_datapoints_to_alarm: 1,
+    #           consecutive_datapoints_to_clear: 1,
+    #           statistical_threshold: {
+    #             statistic: "EvaluationStatistic",
+    #           },
     #         },
     #       }
     #
@@ -994,11 +999,16 @@ module Aws::IoT
     #           ports: [1],
     #         },
     #         duration_seconds: 1,
+    #         consecutive_datapoints_to_alarm: 1,
+    #         consecutive_datapoints_to_clear: 1,
+    #         statistical_threshold: {
+    #           statistic: "EvaluationStatistic",
+    #         },
     #       }
     #
     # @!attribute [rw] comparison_operator
     #   The operator that relates the thing measured (`metric`) to the
-    #   criteria (`value`).
+    #   criteria (containing a `value` or `statisticalThreshold`).
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1006,15 +1016,41 @@ module Aws::IoT
     #   @return [Types::MetricValue]
     #
     # @!attribute [rw] duration_seconds
-    #   Use this to specify the period of time over which the behavior is
+    #   Use this to specify the time duration over which the behavior is
     #   evaluated, for those criteria which have a time dimension (for
-    #   example, `NUM_MESSAGES_SENT`).
+    #   example, `NUM_MESSAGES_SENT`). For a `statisticalThreshhold` metric
+    #   comparison, measurements from all devices are accumulated over this
+    #   time duration before being used to calculate percentiles, and later,
+    #   measurements from an individual device are also accumulated over
+    #   this time duration before being given a percentile rank.
     #   @return [Integer]
+    #
+    # @!attribute [rw] consecutive_datapoints_to_alarm
+    #   If a device is in violation of the behavior for the specified number
+    #   of consecutive datapoints, an alarm occurs. If not specified, the
+    #   default is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consecutive_datapoints_to_clear
+    #   If an alarm has occurred and the offending device is no longer in
+    #   violation of the behavior for the specified number of consecutive
+    #   datapoints, the alarm is cleared. If not specified, the default is
+    #   1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistical_threshold
+    #   A statistical ranking (percentile) which indicates a threshold value
+    #   by which a behavior is determined to be in compliance or in
+    #   violation of the behavior.
+    #   @return [Types::StatisticalThreshold]
     #
     class BehaviorCriteria < Struct.new(
       :comparison_operator,
       :value,
-      :duration_seconds)
+      :duration_seconds,
+      :consecutive_datapoints_to_alarm,
+      :consecutive_datapoints_to_clear,
+      :statistical_threshold)
       include Aws::Structure
     end
 
@@ -1493,7 +1529,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit
     #   @return [String]
     #
     # @!attribute [rw] metric_timestamp
@@ -1501,7 +1537,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp
     #   @return [String]
     #
     class CloudwatchMetricAction < Struct.new(
@@ -1836,7 +1872,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
     #   @return [String]
     #
     # @!attribute [rw] query_version
@@ -2396,6 +2432,12 @@ module Aws::IoT
     #         day_of_month: "DayOfMonth",
     #         day_of_week: "SUN", # accepts SUN, MON, TUE, WED, THU, FRI, SAT
     #         target_check_names: ["AuditCheckName"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         scheduled_audit_name: "ScheduledAuditName", # required
     #       }
     #
@@ -2429,6 +2471,10 @@ module Aws::IoT
     #   enabled.)
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the scheduled audit.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] scheduled_audit_name
     #   The name you want to give to the scheduled audit. (Max. 128 chars)
     #   @return [String]
@@ -2438,6 +2484,7 @@ module Aws::IoT
       :day_of_month,
       :day_of_week,
       :target_check_names,
+      :tags,
       :scheduled_audit_name)
       include Aws::Structure
     end
@@ -2457,7 +2504,7 @@ module Aws::IoT
     #       {
     #         security_profile_name: "SecurityProfileName", # required
     #         security_profile_description: "SecurityProfileDescription",
-    #         behaviors: [ # required
+    #         behaviors: [
     #           {
     #             name: "BehaviorName", # required
     #             metric: "BehaviorMetric",
@@ -2469,6 +2516,11 @@ module Aws::IoT
     #                 ports: [1],
     #               },
     #               duration_seconds: 1,
+    #               consecutive_datapoints_to_alarm: 1,
+    #               consecutive_datapoints_to_clear: 1,
+    #               statistical_threshold: {
+    #                 statistic: "EvaluationStatistic",
+    #               },
     #             },
     #           },
     #         ],
@@ -2478,6 +2530,7 @@ module Aws::IoT
     #             role_arn: "RoleArn", # required
     #           },
     #         },
+    #         additional_metrics_to_retain: ["BehaviorMetric"],
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -2505,6 +2558,12 @@ module Aws::IoT
     #   (thing) violates a behavior.
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors` but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
     #   Metadata which can be used to manage the security profile.
     #   @return [Array<Types::Tag>]
@@ -2514,6 +2573,7 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
       :tags)
       include Aws::Structure
     end
@@ -2817,8 +2877,8 @@ module Aws::IoT
     #                 payload_field: "PayloadField",
     #               },
     #               dynamo_d_bv_2: {
-    #                 role_arn: "AwsArn",
-    #                 put_item: {
+    #                 role_arn: "AwsArn", # required
+    #                 put_item: { # required
     #                   table_name: "TableName", # required
     #                 },
     #               },
@@ -2913,8 +2973,8 @@ module Aws::IoT
     #               payload_field: "PayloadField",
     #             },
     #             dynamo_d_bv_2: {
-    #               role_arn: "AwsArn",
-    #               put_item: {
+    #               role_arn: "AwsArn", # required
+    #               put_item: { # required
     #                 table_name: "TableName", # required
     #               },
     #             },
@@ -2993,6 +3053,7 @@ module Aws::IoT
     #             },
     #           },
     #         },
+    #         tags: "String",
     #       }
     #
     # @!attribute [rw] rule_name
@@ -3003,9 +3064,25 @@ module Aws::IoT
     #   The rule payload.
     #   @return [Types::TopicRulePayload]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the topic rule.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: --tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [String]
+    #
     class CreateTopicRuleRequest < Struct.new(
       :rule_name,
-      :topic_rule_payload)
+      :topic_rule_payload,
+      :tags)
       include Aws::Structure
     end
 
@@ -4152,6 +4229,12 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors` but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] version
     #   The version of the security profile. A new version is generated
     #   whenever the security profile is updated.
@@ -4171,6 +4254,7 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
       :version,
       :creation_date,
       :last_modified_date)
@@ -4721,8 +4805,8 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         role_arn: "AwsArn",
-    #         put_item: {
+    #         role_arn: "AwsArn", # required
+    #         put_item: { # required
     #           table_name: "TableName", # required
     #         },
     #       }
@@ -5448,17 +5532,15 @@ module Aws::IoT
     #   @return [Types::AbortConfig]
     #
     # @!attribute [rw] created_at
-    #   The time, in milliseconds since the epoch, when the job was created.
+    #   The time, in seconds since the epoch, when the job was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job was last
-    #   updated.
+    #   The time, in seconds since the epoch, when the job was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] completed_at
-    #   The time, in milliseconds since the epoch, when the job was
-    #   completed.
+    #   The time, in seconds since the epoch, when the job was completed.
     #   @return [Time]
     #
     # @!attribute [rw] job_process_details
@@ -5521,18 +5603,18 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] queued_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was queued.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   queued.
     #   @return [Time]
     #
     # @!attribute [rw] started_at
-    #   The time, in milliseconds since the epoch, when the job execution
+    #   The time, in seconds since the epoch, when the job execution
     #   started.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was last updated.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   last updated.
     #   @return [Time]
     #
     # @!attribute [rw] execution_number
@@ -5589,18 +5671,18 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] queued_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was queued.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   queued.
     #   @return [Time]
     #
     # @!attribute [rw] started_at
-    #   The time, in milliseconds since the epoch, when the job execution
+    #   The time, in seconds since the epoch, when the job execution
     #   started.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job execution
-    #   was last updated.
+    #   The time, in seconds since the epoch, when the job execution was
+    #   last updated.
     #   @return [Time]
     #
     # @!attribute [rw] execution_number
@@ -5768,16 +5850,15 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time, in milliseconds since the epoch, when the job was created.
+    #   The time, in seconds since the epoch, when the job was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The time, in milliseconds since the epoch, when the job was last
-    #   updated.
+    #   The time, in seconds since the epoch, when the job was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] completed_at
-    #   The time, in milliseconds since the epoch, when the job completed.
+    #   The time, in seconds since the epoch, when the job completed.
     #   @return [Time]
     #
     class JobSummary < Struct.new(
@@ -8355,8 +8436,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] set_as_active
-    #   A boolean value that specifies if the CA certificate is set to
-    #   active.
+    #   A boolean value that specifies if the certificate is set to active.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -8403,7 +8483,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -8412,7 +8492,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [Hash<String,String>]
     #
     class RegisterThingRequest < Struct.new(
@@ -8602,8 +8682,8 @@ module Aws::IoT
     #                 payload_field: "PayloadField",
     #               },
     #               dynamo_d_bv_2: {
-    #                 role_arn: "AwsArn",
-    #                 put_item: {
+    #                 role_arn: "AwsArn", # required
+    #                 put_item: { # required
     #                   table_name: "TableName", # required
     #                 },
     #               },
@@ -8698,8 +8778,8 @@ module Aws::IoT
     #               payload_field: "PayloadField",
     #             },
     #             dynamo_d_bv_2: {
-    #               role_arn: "AwsArn",
-    #               put_item: {
+    #               role_arn: "AwsArn", # required
+    #               put_item: { # required
     #                 table_name: "TableName", # required
     #               },
     #             },
@@ -8941,7 +9021,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #   @return [String]
     #
     class S3Action < Struct.new(
@@ -9360,12 +9440,12 @@ module Aws::IoT
     #   is "RAW". SNS uses this setting to determine if the payload should
     #   be parsed and relevant platform-specific bits of the payload should
     #   be extracted. To read more about SNS message formats, see
-    #   [http://docs.aws.amazon.com/sns/latest/dg/json-formats.html][1]
+    #   [https://docs.aws.amazon.com/sns/latest/dg/json-formats.html][1]
     #   refer to their official documentation.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/json-formats.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/json-formats.html
     #   @return [String]
     #
     class SnsAction < Struct.new(
@@ -9516,6 +9596,34 @@ module Aws::IoT
     #
     class StartThingRegistrationTaskResponse < Struct.new(
       :task_id)
+      include Aws::Structure
+    end
+
+    # A statistical ranking (percentile) which indicates a threshold value
+    # by which a behavior is determined to be in compliance or in violation
+    # of the behavior.
+    #
+    # @note When making an API call, you may pass StatisticalThreshold
+    #   data as a hash:
+    #
+    #       {
+    #         statistic: "EvaluationStatistic",
+    #       }
+    #
+    # @!attribute [rw] statistic
+    #   The percentile which resolves to a threshold value by which
+    #   compliance with a behavior is determined. Metrics are collected over
+    #   the specified period (`durationSeconds`) from all reporting devices
+    #   in your account and statistical ranks are calculated. Then, the
+    #   measurements from a device are collected over the same period. If
+    #   the accumulated measurements from the device fall above or below
+    #   (`comparisonOperator`) the value associated with the percentile
+    #   specified, then the device is considered to be in compliance with
+    #   the behavior, otherwise a violation occurs.
+    #   @return [String]
+    #
+    class StatisticalThreshold < Struct.new(
+      :statistic)
       include Aws::Structure
     end
 
@@ -10359,8 +10467,8 @@ module Aws::IoT
     #               payload_field: "PayloadField",
     #             },
     #             dynamo_d_bv_2: {
-    #               role_arn: "AwsArn",
-    #               put_item: {
+    #               role_arn: "AwsArn", # required
+    #               put_item: { # required
     #                 table_name: "TableName", # required
     #               },
     #             },
@@ -10455,8 +10563,8 @@ module Aws::IoT
     #             payload_field: "PayloadField",
     #           },
     #           dynamo_d_bv_2: {
-    #             role_arn: "AwsArn",
-    #             put_item: {
+    #             role_arn: "AwsArn", # required
+    #             put_item: { # required
     #               table_name: "TableName", # required
     #             },
     #           },
@@ -10542,7 +10650,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -11226,6 +11334,11 @@ module Aws::IoT
     #                 ports: [1],
     #               },
     #               duration_seconds: 1,
+    #               consecutive_datapoints_to_alarm: 1,
+    #               consecutive_datapoints_to_clear: 1,
+    #               statistical_threshold: {
+    #                 statistic: "EvaluationStatistic",
+    #               },
     #             },
     #           },
     #         ],
@@ -11235,6 +11348,10 @@ module Aws::IoT
     #             role_arn: "RoleArn", # required
     #           },
     #         },
+    #         additional_metrics_to_retain: ["BehaviorMetric"],
+    #         delete_behaviors: false,
+    #         delete_alert_targets: false,
+    #         delete_additional_metrics_to_retain: false,
     #         expected_version: 1,
     #       }
     #
@@ -11255,6 +11372,30 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors` but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] delete_behaviors
+    #   If true, delete all `behaviors` defined for this security profile.
+    #   If any `behaviors` are defined in the current invocation an
+    #   exception occurs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_alert_targets
+    #   If true, delete all `alertTargets` defined for this security
+    #   profile. If any `alertTargets` are defined in the current invocation
+    #   an exception occurs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_additional_metrics_to_retain
+    #   If true, delete all `additionalMetricsToRetain` defined for this
+    #   security profile. If any `additionalMetricsToRetain` are defined in
+    #   the current invocation an exception occurs.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] expected_version
     #   The expected version of the security profile. A new version is
     #   generated whenever the security profile is updated. If you specify a
@@ -11267,6 +11408,10 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
+      :delete_behaviors,
+      :delete_alert_targets,
+      :delete_additional_metrics_to_retain,
       :expected_version)
       include Aws::Structure
     end
@@ -11292,6 +11437,12 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #   @return [Hash<String,Types::AlertTarget>]
     #
+    # @!attribute [rw] additional_metrics_to_retain
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the security profile's
+    #   `behaviors` but it is also retained for any metric specified here.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] version
     #   The updated version of the security profile.
     #   @return [Integer]
@@ -11310,6 +11461,7 @@ module Aws::IoT
       :security_profile_description,
       :behaviors,
       :alert_targets,
+      :additional_metrics_to_retain,
       :version,
       :creation_date,
       :last_modified_date)
@@ -11546,6 +11698,11 @@ module Aws::IoT
     #                 ports: [1],
     #               },
     #               duration_seconds: 1,
+    #               consecutive_datapoints_to_alarm: 1,
+    #               consecutive_datapoints_to_clear: 1,
+    #               statistical_threshold: {
+    #                 statistic: "EvaluationStatistic",
+    #               },
     #             },
     #           },
     #         ],

@@ -301,6 +301,12 @@ module Aws::DirectoryService
     #           customer_dns_ips: ["IpAddr"], # required
     #           customer_user_name: "UserName", # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -329,6 +335,10 @@ module Aws::DirectoryService
     #   information for the operation.
     #   @return [Types::DirectoryConnectSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to AD Connector.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryRequest AWS API Documentation
     #
     class ConnectDirectoryRequest < Struct.new(
@@ -337,7 +347,8 @@ module Aws::DirectoryService
       :password,
       :description,
       :size,
-      :connect_settings)
+      :connect_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -528,6 +539,12 @@ module Aws::DirectoryService
     #           vpc_id: "VpcId", # required
     #           subnet_ids: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -558,6 +575,10 @@ module Aws::DirectoryService
     #   for the operation.
     #   @return [Types::DirectoryVpcSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the Simple AD directory.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryRequest AWS API Documentation
     #
     class CreateDirectoryRequest < Struct.new(
@@ -566,7 +587,8 @@ module Aws::DirectoryService
       :password,
       :description,
       :size,
-      :vpc_settings)
+      :vpc_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -628,6 +650,12 @@ module Aws::DirectoryService
     #           subnet_ids: ["SubnetId"], # required
     #         },
     #         edition: "Enterprise", # accepts Enterprise, Standard
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -663,6 +691,10 @@ module Aws::DirectoryService
     #   Enterprise. Enterprise is the default.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the AWS Managed Microsoft AD directory.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest AWS API Documentation
     #
     class CreateMicrosoftADRequest < Struct.new(
@@ -671,7 +703,8 @@ module Aws::DirectoryService
       :password,
       :description,
       :vpc_settings,
-      :edition)
+      :edition,
+      :tags)
       include Aws::Structure
     end
 

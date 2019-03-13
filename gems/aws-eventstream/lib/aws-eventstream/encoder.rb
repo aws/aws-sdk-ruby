@@ -39,6 +39,12 @@ module Aws
       # and 4 bytes total message crc checksum
       OVERHEAD_LENGTH = 16
 
+      # Maximum header length allowed (after encode) 128kb
+      MAX_HEADERS_LENGTH = 131072
+
+      # Maximum payload length allowed (after encode) 16mb
+      MAX_PAYLOAD_LENGTH = 16777216
+
       # Encodes Aws::EventStream::Message to output IO when
       #   provided, else return the encoded binary string
       #
@@ -62,11 +68,20 @@ module Aws
         end
       end
 
+      # Encodes an Aws::EventStream::Message
+      #   into Aws::EventStream::BytesBuffer
+      #
+      # @param [Aws::EventStream::Message] msg
+      #
+      # @return [Aws::EventStream::BytesBuffer]
       def encode_message(message)
         # create context buffer with encode headers
         ctx_buffer = encode_headers(message)
         headers_len = ctx_buffer.bytesize
         # encode payload
+        if message.payload.length > MAX_PAYLOAD_LENGTH
+          raise Aws::EventStream::Errors::EventPayloadLengthExceedError.new
+        end
         ctx_buffer << message.payload.read
         total_len = ctx_buffer.bytesize + OVERHEAD_LENGTH
 
@@ -83,6 +98,12 @@ module Aws
         buffer
       end
 
+      # Encodes headers part of an Aws::EventStream::Message
+      #   into Aws::EventStream::BytesBuffer
+      #
+      # @param [Aws::EventStream::Message] msg
+      #
+      # @return [Aws::EventStream::BytesBuffer]
       def encode_headers(msg)
         buffer = BytesBuffer.new('')
         msg.headers.each do |k, v|
@@ -98,6 +119,9 @@ module Aws
           buffer << pack_uint16(v.value.bytesize) unless val_len
           pattern ? buffer << [v.value].pack(pattern) :
             buffer << v.value
+        end
+        if buffer.bytesize > MAX_HEADERS_LENGTH
+          raise Aws::EventStream::Errors::EventHeadersLengthExceedError.new
         end
         buffer
       end

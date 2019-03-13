@@ -243,7 +243,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -393,7 +393,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to use for the tags.
@@ -1158,7 +1158,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [String] :next_token
     #   The token for the next set of events to return. (You received this
@@ -1511,7 +1511,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html
     #
     # @option params [required, String] :destination_name
     #   A name for an existing destination.
@@ -1838,25 +1838,27 @@ module Aws::CloudWatchLogs
     end
 
     # Schedules a query of a log group using CloudWatch Logs Insights. You
-    # specify the log group to query, the query string to use, and the time
-    # to query.
+    # specify the log group and time range to query, and the query string to
+    # use.
     #
     # For more information, see [CloudWatch Logs Insights Query Syntax][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #
     # @option params [required, String] :log_group_name
     #   The log group on which to perform the query.
     #
     # @option params [required, Integer] :start_time
-    #   The time to start the query. Specified as epoch time, the number of
-    #   seconds since January 1, 1970, 00:00:00 UTC.
+    #   The beginning of the time range to query. The range is inclusive, so
+    #   the specified start time is included in the query. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
     #
     # @option params [required, Integer] :end_time
-    #   The time to end this query, if it is still running. Specified as epoch
-    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #   The end of the time range to query. The range is inclusive, so the
+    #   specified end time is included in the query. Specified as epoch time,
+    #   the number of seconds since January 1, 1970, 00:00:00 UTC.
     #
     # @option params [required, String] :query_string
     #   The query string to use. For more information, see [CloudWatch Logs
@@ -1864,7 +1866,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #
     # @option params [Integer] :limit
     #   The maximum number of log events to return in the query. If the query
@@ -1939,7 +1941,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -2050,7 +2052,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

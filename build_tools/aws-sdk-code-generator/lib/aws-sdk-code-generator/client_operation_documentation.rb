@@ -106,7 +106,7 @@ module AwsSdkCodeGenerator
 
     def return_tag(operation, api)
       output = Api.shape(operation['output'], api)
-      if output && output['members'].size > 0
+      if output && output['members'] && output['members'].size > 0
         shape_name = operation.fetch('output').fetch('shape')
         type = "Types::#{shape_name}"
         _, shape = Api.resolve(shape_name, api)
@@ -214,7 +214,7 @@ module AwsSdkCodeGenerator
 
     def response_structure_example(operation, api)
       output = Api.shape(operation['output'], api) if operation['output']
-      if output && output['members'].size > 0
+      if output && output['members'] && output['members'].size > 0
         Docstring.block_comment(ClientResponseStructureExample.new(
           shape_ref: operation['output'],
           api: api

@@ -231,11 +231,11 @@ module Aws::RDSDataService
     # @example Request syntax with placeholder values
     #
     #   resp = client.execute_sql({
-    #     aws_secret_store_arn: "String", # required
-    #     database: "String",
-    #     db_cluster_or_instance_arn: "String", # required
-    #     schema: "String",
-    #     sql_statements: "String", # required
+    #     aws_secret_store_arn: "Arn", # required
+    #     database: "DbName",
+    #     db_cluster_or_instance_arn: "Arn", # required
+    #     schema: "DbName",
+    #     sql_statements: "SqlStatement", # required
     #   })
     #
     # @example Response structure
@@ -295,7 +295,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

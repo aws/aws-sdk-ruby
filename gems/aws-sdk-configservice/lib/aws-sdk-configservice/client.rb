@@ -544,6 +544,33 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Deletes the remediation configuration.
+    #
+    # @option params [required, String] :config_rule_name
+    #   The name of the AWS Config rule for which you want to delete
+    #   remediation configuration for.
+    #
+    # @option params [String] :resource_type
+    #   The type of a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_remediation_configuration({
+    #     config_rule_name: "StringWithCharLimit64", # required
+    #     resource_type: "String",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfiguration AWS API Documentation
+    #
+    # @overload delete_remediation_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_remediation_configuration(params = {}, options = {})
+      req = build_request(:delete_remediation_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes the retention configuration.
     #
     # @option params [required, String] :retention_configuration_name
@@ -740,8 +767,7 @@ module Aws::ConfigService
     # @option params [Array<String>] :compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #
     # @option params [String] :next_token
     #   The `nextToken` string returned on a previous page that you use to get
@@ -819,7 +845,8 @@ module Aws::ConfigService
     # @option params [Array<String>] :compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
+    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
+    #   `INSUFFICIENT_DATA`.
     #
     # @option params [Integer] :limit
     #   The maximum number of evaluation results returned on each page. The
@@ -986,9 +1013,10 @@ module Aws::ConfigService
     end
 
     # Returns status information for sources within an aggregator. The
-    # status includes information about the last time AWS Config aggregated
-    # data from source accounts or AWS Config failed to aggregate data from
-    # source accounts with the related error code or message.
+    # status includes information about the last time AWS Config verified
+    # authorization between the source account and an aggregator account. In
+    # case of a failure, the status contains the related error code or
+    # message.
     #
     # @option params [required, String] :configuration_aggregator_name
     #   The name of the configuration aggregator.
@@ -1315,6 +1343,109 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def describe_pending_aggregation_requests(params = {}, options = {})
       req = build_request(:describe_pending_aggregation_requests, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of one or more remediation configuration.
+    #
+    # @option params [required, Array<String>] :config_rule_names
+    #   A list of AWS Config rule names of remediation configurations for
+    #   which you want details.
+    #
+    # @return [Types::DescribeRemediationConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRemediationConfigurationsResponse#remediation_configurations #remediation_configurations} => Array&lt;Types::RemediationConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_remediation_configurations({
+    #     config_rule_names: ["StringWithCharLimit64"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.remediation_configurations #=> Array
+    #   resp.remediation_configurations[0].config_rule_name #=> String
+    #   resp.remediation_configurations[0].target_type #=> String, one of "SSM_DOCUMENT"
+    #   resp.remediation_configurations[0].target_id #=> String
+    #   resp.remediation_configurations[0].target_version #=> String
+    #   resp.remediation_configurations[0].parameters #=> Hash
+    #   resp.remediation_configurations[0].parameters["StringWithCharLimit256"].resource_value.value #=> String, one of "RESOURCE_ID"
+    #   resp.remediation_configurations[0].parameters["StringWithCharLimit256"].static_value.values #=> Array
+    #   resp.remediation_configurations[0].parameters["StringWithCharLimit256"].static_value.values[0] #=> String
+    #   resp.remediation_configurations[0].resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationConfigurations AWS API Documentation
+    #
+    # @overload describe_remediation_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_remediation_configurations(params = {}, options = {})
+      req = build_request(:describe_remediation_configurations, params)
+      req.send_request(options)
+    end
+
+    # Provides a detailed view of a Remediation Execution for a set of
+    # resources including state, timestamps for when steps for the
+    # remediation execution happen, and any error messages for steps that
+    # have failed. When you specify the limit and the next token, you
+    # receive a paginated response.
+    #
+    # @option params [required, String] :config_rule_name
+    #   A list of config rule names.
+    #
+    # @option params [Array<Types::ResourceKey>] :resource_keys
+    #   A list of resource keys object.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of RemediationExecutionStatuses returned on each
+    #   page. The default is maximum. If you specify 0, AWS Config uses the
+    #   default.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeRemediationExecutionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRemediationExecutionStatusResponse#remediation_execution_statuses #remediation_execution_statuses} => Array&lt;Types::RemediationExecutionStatus&gt;
+    #   * {Types::DescribeRemediationExecutionStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_remediation_execution_status({
+    #     config_rule_name: "StringWithCharLimit64", # required
+    #     resource_keys: [
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_id: "ResourceId", # required
+    #       },
+    #     ],
+    #     limit: 1,
+    #     next_token: "StringWithCharLimit256",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.remediation_execution_statuses #=> Array
+    #   resp.remediation_execution_statuses[0].resource_key.resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig", "AWS::SSM::AssociationCompliance", "AWS::SSM::PatchCompliance", "AWS::Shield::Protection", "AWS::ShieldRegional::Protection", "AWS::Config::ResourceCompliance", "AWS::CodePipeline::Pipeline"
+    #   resp.remediation_execution_statuses[0].resource_key.resource_id #=> String
+    #   resp.remediation_execution_statuses[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.remediation_execution_statuses[0].step_details #=> Array
+    #   resp.remediation_execution_statuses[0].step_details[0].name #=> String
+    #   resp.remediation_execution_statuses[0].step_details[0].state #=> String, one of "SUCCEEDED", "PENDING", "FAILED"
+    #   resp.remediation_execution_statuses[0].step_details[0].error_message #=> String
+    #   resp.remediation_execution_statuses[0].step_details[0].start_time #=> Time
+    #   resp.remediation_execution_statuses[0].step_details[0].stop_time #=> Time
+    #   resp.remediation_execution_statuses[0].invocation_time #=> Time
+    #   resp.remediation_execution_statuses[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationExecutionStatus AWS API Documentation
+    #
+    # @overload describe_remediation_execution_status(params = {})
+    # @param [Hash] params ({})
+    def describe_remediation_execution_status(params = {}, options = {})
+      req = build_request(:describe_remediation_execution_status, params)
       req.send_request(options)
     end
 
@@ -2253,7 +2384,7 @@ module Aws::ConfigService
     # the rule by `ConfigRuleName`, `ConfigRuleId`, or `ConfigRuleArn` in
     # the `ConfigRule` data type that you use in this request.
     #
-    # The maximum number of rules that AWS Config supports is 50.
+    # The maximum number of rules that AWS Config supports is 150.
     #
     # For information about requesting a rule limit increase, see [AWS
     # Config Limits][2] in the *AWS General Reference Guide*.
@@ -2264,9 +2395,9 @@ module Aws::ConfigService
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
     # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config
-    # [3]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    # [3]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @option params [required, Types::ConfigRule] :config_rule
     #   The rule that you want to add to your account.
@@ -2539,6 +2670,68 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Adds or updates the remediation configuration with a specific AWS
+    # Config rule with the selected target or action. The API creates the
+    # `RemediationConfiguration` object for the AWS Config rule. AWS Config
+    # rule must already exist for you to add a remeduation configuration.
+    # The target (SSM document) must exist and have permissions to use the
+    # target.
+    #
+    # @option params [required, Array<Types::RemediationConfiguration>] :remediation_configurations
+    #   A list of remediation configuration objects.
+    #
+    # @return [Types::PutRemediationConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRemediationConfigurationsResponse#failed_batches #failed_batches} => Array&lt;Types::FailedRemediationBatch&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_remediation_configurations({
+    #     remediation_configurations: [ # required
+    #       {
+    #         config_rule_name: "StringWithCharLimit64", # required
+    #         target_type: "SSM_DOCUMENT", # required, accepts SSM_DOCUMENT
+    #         target_id: "StringWithCharLimit256", # required
+    #         target_version: "String",
+    #         parameters: {
+    #           "StringWithCharLimit256" => {
+    #             resource_value: {
+    #               value: "RESOURCE_ID", # accepts RESOURCE_ID
+    #             },
+    #             static_value: {
+    #               values: ["StringWithCharLimit256"],
+    #             },
+    #           },
+    #         },
+    #         resource_type: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_batches #=> Array
+    #   resp.failed_batches[0].failure_message #=> String
+    #   resp.failed_batches[0].failed_items #=> Array
+    #   resp.failed_batches[0].failed_items[0].config_rule_name #=> String
+    #   resp.failed_batches[0].failed_items[0].target_type #=> String, one of "SSM_DOCUMENT"
+    #   resp.failed_batches[0].failed_items[0].target_id #=> String
+    #   resp.failed_batches[0].failed_items[0].target_version #=> String
+    #   resp.failed_batches[0].failed_items[0].parameters #=> Hash
+    #   resp.failed_batches[0].failed_items[0].parameters["StringWithCharLimit256"].resource_value.value #=> String, one of "RESOURCE_ID"
+    #   resp.failed_batches[0].failed_items[0].parameters["StringWithCharLimit256"].static_value.values #=> Array
+    #   resp.failed_batches[0].failed_items[0].parameters["StringWithCharLimit256"].static_value.values[0] #=> String
+    #   resp.failed_batches[0].failed_items[0].resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurations AWS API Documentation
+    #
+    # @overload put_remediation_configurations(params = {})
+    # @param [Hash] params ({})
+    def put_remediation_configurations(params = {}, options = {})
+      req = build_request(:put_remediation_configurations, params)
+      req.send_request(options)
+    end
+
     # Creates and updates the retention configuration with details about
     # retention period (number of days) that AWS Config stores your
     # historical information. The API creates the `RetentionConfiguration`
@@ -2668,6 +2861,55 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Runs an on-demand remediation for the specified AWS Config rules
+    # against the last known remediation configuration. It runs an execution
+    # against the current state of your resources. Remediation execution is
+    # asynchronous.
+    #
+    # You can specify up to 100 resource keys per request. An existing
+    # StartRemediationExecution call for the specified resource keys must
+    # complete before you can call the API again.
+    #
+    # @option params [required, String] :config_rule_name
+    #   The list of names of AWS Config rules that you want to run remediation
+    #   execution for.
+    #
+    # @option params [required, Array<Types::ResourceKey>] :resource_keys
+    #   A list of resource key object.
+    #
+    # @return [Types::StartRemediationExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRemediationExecutionResponse#failure_message #failure_message} => String
+    #   * {Types::StartRemediationExecutionResponse#failed_items #failed_items} => Array&lt;Types::ResourceKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_remediation_execution({
+    #     config_rule_name: "StringWithCharLimit64", # required
+    #     resource_keys: [ # required
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig, AWS::SSM::AssociationCompliance, AWS::SSM::PatchCompliance, AWS::Shield::Protection, AWS::ShieldRegional::Protection, AWS::Config::ResourceCompliance, AWS::CodePipeline::Pipeline
+    #         resource_id: "ResourceId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failure_message #=> String
+    #   resp.failed_items #=> Array
+    #   resp.failed_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig", "AWS::SSM::AssociationCompliance", "AWS::SSM::PatchCompliance", "AWS::Shield::Protection", "AWS::ShieldRegional::Protection", "AWS::Config::ResourceCompliance", "AWS::CodePipeline::Pipeline"
+    #   resp.failed_items[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartRemediationExecution AWS API Documentation
+    #
+    # @overload start_remediation_execution(params = {})
+    # @param [Hash] params ({})
+    def start_remediation_execution(params = {}, options = {})
+      req = build_request(:start_remediation_execution, params)
+      req.send_request(options)
+    end
+
     # Stops recording configurations of the AWS resources you have selected
     # to record in your AWS account.
     #
@@ -2705,7 +2947,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

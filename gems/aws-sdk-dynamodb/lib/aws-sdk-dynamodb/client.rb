@@ -425,28 +425,16 @@ module Aws::DynamoDB
     #       "Music" => {
     #         keys: [
     #           {
-    #             "Artist" => {
-    #               s: "No One You Know", 
-    #             }, 
-    #             "SongTitle" => {
-    #               s: "Call Me Today", 
-    #             }, 
+    #             "Artist" => "No One You Know", 
+    #             "SongTitle" => "Call Me Today", 
     #           }, 
     #           {
-    #             "Artist" => {
-    #               s: "Acme Band", 
-    #             }, 
-    #             "SongTitle" => {
-    #               s: "Happy Day", 
-    #             }, 
+    #             "Artist" => "Acme Band", 
+    #             "SongTitle" => "Happy Day", 
     #           }, 
     #           {
-    #             "Artist" => {
-    #               s: "No One You Know", 
-    #             }, 
-    #             "SongTitle" => {
-    #               s: "Scared of My Shadow", 
-    #             }, 
+    #             "Artist" => "No One You Know", 
+    #             "SongTitle" => "Scared of My Shadow", 
     #           }, 
     #         ], 
     #         projection_expression: "AlbumTitle", 
@@ -459,19 +447,13 @@ module Aws::DynamoDB
     #     responses: {
     #       "Music" => [
     #         {
-    #           "AlbumTitle" => {
-    #             s: "Somewhat Famous", 
-    #           }, 
+    #           "AlbumTitle" => "Somewhat Famous", 
     #         }, 
     #         {
-    #           "AlbumTitle" => {
-    #             s: "Blue Sky Blues", 
-    #           }, 
+    #           "AlbumTitle" => "Blue Sky Blues", 
     #         }, 
     #         {
-    #           "AlbumTitle" => {
-    #             s: "Louder Than Ever", 
-    #           }, 
+    #           "AlbumTitle" => "Louder Than Ever", 
     #         }, 
     #       ], 
     #     }, 
@@ -698,45 +680,27 @@ module Aws::DynamoDB
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => {
-    #                 s: "Somewhat Famous", 
-    #               }, 
-    #               "Artist" => {
-    #                 s: "No One You Know", 
-    #               }, 
-    #               "SongTitle" => {
-    #                 s: "Call Me Today", 
-    #               }, 
+    #               "AlbumTitle" => "Somewhat Famous", 
+    #               "Artist" => "No One You Know", 
+    #               "SongTitle" => "Call Me Today", 
     #             }, 
     #           }, 
     #         }, 
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => {
-    #                 s: "Songs About Life", 
-    #               }, 
-    #               "Artist" => {
-    #                 s: "Acme Band", 
-    #               }, 
-    #               "SongTitle" => {
-    #                 s: "Happy Day", 
-    #               }, 
+    #               "AlbumTitle" => "Songs About Life", 
+    #               "Artist" => "Acme Band", 
+    #               "SongTitle" => "Happy Day", 
     #             }, 
     #           }, 
     #         }, 
     #         {
     #           put_request: {
     #             item: {
-    #               "AlbumTitle" => {
-    #                 s: "Blue Sky Blues", 
-    #               }, 
-    #               "Artist" => {
-    #                 s: "No One You Know", 
-    #               }, 
-    #               "SongTitle" => {
-    #                 s: "Scared of My Shadow", 
-    #               }, 
+    #               "AlbumTitle" => "Blue Sky Blues", 
+    #               "Artist" => "No One You Know", 
+    #               "SongTitle" => "Scared of My Shadow", 
     #             }, 
     #           }, 
     #         }, 
@@ -867,7 +831,7 @@ module Aws::DynamoDB
     #   resp.backup_details.backup_name #=> String
     #   resp.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_details.backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_details.backup_creation_date_time #=> Time
     #   resp.backup_details.backup_expiry_date_time #=> Time
     #
@@ -1025,10 +989,10 @@ module Aws::DynamoDB
     #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
     #
     # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_indexes
-    #   One or more local secondary indexes (the maximum is five) to be
-    #   created on the table. Each index is scoped to a given partition key
-    #   value. There is a 10 GB size limit per partition key value; otherwise,
-    #   the size of a local secondary index is unconstrained.
+    #   One or more local secondary indexes (the maximum is 5) to be created
+    #   on the table. Each index is scoped to a given partition key value.
+    #   There is a 10 GB size limit per partition key value; otherwise, the
+    #   size of a local secondary index is unconstrained.
     #
     #   Each local secondary index in the array includes the following:
     #
@@ -1061,14 +1025,14 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
-    #       the secondary indexes, must not exceed 20. If you project the same
-    #       attribute into two different indexes, this counts as two distinct
-    #       attributes when determining the total.
+    #       the secondary indexes, must not exceed 100. If you project the
+    #       same attribute into two different indexes, this counts as two
+    #       distinct attributes when determining the total.
     #
     # @option params [Array<Types::GlobalSecondaryIndex>] :global_secondary_indexes
-    #   One or more global secondary indexes (the maximum is five) to be
-    #   created on the table. Each global secondary index in the array
-    #   includes the following:
+    #   One or more global secondary indexes (the maximum is 20) to be created
+    #   on the table. Each global secondary index in the array includes the
+    #   following:
     #
     #   * `IndexName` - The name of the global secondary index. Must be unique
     #     only for this table.
@@ -1098,9 +1062,9 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
-    #       the secondary indexes, must not exceed 20. If you project the same
-    #       attribute into two different indexes, this counts as two distinct
-    #       attributes when determining the total.
+    #       the secondary indexes, must not exceed 100. If you project the
+    #       same attribute into two different indexes, this counts as two
+    #       distinct attributes when determining the total.
     #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
@@ -1391,7 +1355,7 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
     #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
@@ -1639,12 +1603,8 @@ module Aws::DynamoDB
     #
     #   resp = client.delete_item({
     #     key: {
-    #       "Artist" => {
-    #         s: "No One You Know", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Scared of My Shadow", 
-    #       }, 
+    #       "Artist" => "No One You Know", 
+    #       "SongTitle" => "Scared of My Shadow", 
     #     }, 
     #     table_name: "Music", 
     #   })
@@ -1874,7 +1834,7 @@ module Aws::DynamoDB
     #   resp.backup_description.backup_details.backup_name #=> String
     #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
     #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_description.backup_details.backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
     #   resp.backup_description.backup_details.backup_expiry_date_time #=> Time
     #   resp.backup_description.source_table_details.table_name #=> String
@@ -1970,6 +1930,8 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Returns the regional endpoint information.
+    #
     # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
@@ -2520,12 +2482,8 @@ module Aws::DynamoDB
     #
     #   resp = client.get_item({
     #     key: {
-    #       "Artist" => {
-    #         s: "Acme Band", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Happy Day", 
-    #       }, 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #     table_name: "Music", 
     #   })
@@ -2533,15 +2491,9 @@ module Aws::DynamoDB
     #   resp.to_h outputs the following:
     #   {
     #     item: {
-    #       "AlbumTitle" => {
-    #         s: "Songs About Life", 
-    #       }, 
-    #       "Artist" => {
-    #         s: "Acme Band", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Happy Day", 
-    #       }, 
+    #       "AlbumTitle" => "Songs About Life", 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #   }
     #
@@ -2647,7 +2599,7 @@ module Aws::DynamoDB
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
     #     exclusive_start_backup_arn: "BackupArn",
-    #     backup_type: "USER", # accepts USER, SYSTEM, ALL
+    #     backup_type: "USER", # accepts USER, SYSTEM, AWS_BACKUP, ALL
     #   })
     #
     # @example Response structure
@@ -2661,7 +2613,7 @@ module Aws::DynamoDB
     #   resp.backup_summaries[0].backup_creation_date_time #=> Time
     #   resp.backup_summaries[0].backup_expiry_date_time #=> Time
     #   resp.backup_summaries[0].backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
-    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM"
+    #   resp.backup_summaries[0].backup_type #=> String, one of "USER", "SYSTEM", "AWS_BACKUP"
     #   resp.backup_summaries[0].backup_size_bytes #=> Integer
     #   resp.last_evaluated_backup_arn #=> String
     #
@@ -3080,15 +3032,9 @@ module Aws::DynamoDB
     #
     #   resp = client.put_item({
     #     item: {
-    #       "AlbumTitle" => {
-    #         s: "Somewhat Famous", 
-    #       }, 
-    #       "Artist" => {
-    #         s: "No One You Know", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Call Me Today", 
-    #       }, 
+    #       "AlbumTitle" => "Somewhat Famous", 
+    #       "Artist" => "No One You Know", 
+    #       "SongTitle" => "Call Me Today", 
     #     }, 
     #     return_consumed_capacity: "TOTAL", 
     #     table_name: "Music", 
@@ -3603,9 +3549,7 @@ module Aws::DynamoDB
     #
     #   resp = client.query({
     #     expression_attribute_values: {
-    #       ":v1" => {
-    #         s: "No One You Know", 
-    #       }, 
+    #       ":v1" => "No One You Know", 
     #     }, 
     #     key_condition_expression: "Artist = :v1", 
     #     projection_expression: "SongTitle", 
@@ -3619,9 +3563,7 @@ module Aws::DynamoDB
     #     count: 2, 
     #     items: [
     #       {
-    #         "SongTitle" => {
-    #           s: "Call Me Today", 
-    #         }, 
+    #         "SongTitle" => "Call Me Today", 
     #       }, 
     #     ], 
     #     scanned_count: 2, 
@@ -4297,9 +4239,7 @@ module Aws::DynamoDB
     #       "ST" => "SongTitle", 
     #     }, 
     #     expression_attribute_values: {
-    #       ":a" => {
-    #         s: "No One You Know", 
-    #       }, 
+    #       ":a" => "No One You Know", 
     #     }, 
     #     filter_expression: "Artist = :a", 
     #     projection_expression: "#ST, #AT", 
@@ -4313,20 +4253,12 @@ module Aws::DynamoDB
     #     count: 2, 
     #     items: [
     #       {
-    #         "AlbumTitle" => {
-    #           s: "Somewhat Famous", 
-    #         }, 
-    #         "SongTitle" => {
-    #           s: "Call Me Today", 
-    #         }, 
+    #         "AlbumTitle" => "Somewhat Famous", 
+    #         "SongTitle" => "Call Me Today", 
     #       }, 
     #       {
-    #         "AlbumTitle" => {
-    #           s: "Blue Sky Blues", 
-    #         }, 
-    #         "SongTitle" => {
-    #           s: "Scared of My Shadow", 
-    #         }, 
+    #         "AlbumTitle" => "Blue Sky Blues", 
+    #         "SongTitle" => "Scared of My Shadow", 
     #       }, 
     #     ], 
     #     scanned_count: 3, 
@@ -5385,20 +5317,12 @@ module Aws::DynamoDB
     #       "#Y" => "Year", 
     #     }, 
     #     expression_attribute_values: {
-    #       ":t" => {
-    #         s: "Louder Than Ever", 
-    #       }, 
-    #       ":y" => {
-    #         n: "2015", 
-    #       }, 
+    #       ":t" => "Louder Than Ever", 
+    #       ":y" => "2015", 
     #     }, 
     #     key: {
-    #       "Artist" => {
-    #         s: "Acme Band", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Happy Day", 
-    #       }, 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
     #     }, 
     #     return_values: "ALL_NEW", 
     #     table_name: "Music", 
@@ -5408,18 +5332,10 @@ module Aws::DynamoDB
     #   resp.to_h outputs the following:
     #   {
     #     attributes: {
-    #       "AlbumTitle" => {
-    #         s: "Louder Than Ever", 
-    #       }, 
-    #       "Artist" => {
-    #         s: "Acme Band", 
-    #       }, 
-    #       "SongTitle" => {
-    #         s: "Happy Day", 
-    #       }, 
-    #       "Year" => {
-    #         n: "2015", 
-    #       }, 
+    #       "AlbumTitle" => "Louder Than Ever", 
+    #       "Artist" => "Acme Band", 
+    #       "SongTitle" => "Happy Day", 
+    #       "Year" => "2015", 
     #     }, 
     #   }
     #
@@ -5837,7 +5753,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

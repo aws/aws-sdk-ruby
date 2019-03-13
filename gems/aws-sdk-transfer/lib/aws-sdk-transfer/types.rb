@@ -597,9 +597,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   Specifies the number of tags to return as a response to the
+    #   `ListTagsForResource` request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   When you request additional results from the `ListTagsForResource`
+    #   call, a `NextToken` parameter is returned in the input. You can then
+    #   pass in a subsequent command the `NextToken` parameter to continue
+    #   listing additional tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListTagsForResourceRequest AWS API Documentation
@@ -616,6 +622,10 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   When you can get additional results from the `ListTagsForResource`
+    #   call, a `NextToken` parameter is returned in the output. You can
+    #   then pass in a subsequent command the `NextToken` parameter to
+    #   continue listing additional tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -648,10 +658,10 @@ module Aws::Transfer
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   When you can get additional results from the `ListUsers`ListUsers
-    #   call, a `NextToken` parameter is returned in the output. You can
-    #   then pass in a subsequent command the `NextToken` parameter to
-    #   continue listing additional users.
+    #   When you can get additional results from the `ListUsers` call, a
+    #   `NextToken` parameter is returned in the output. You can then pass
+    #   in a subsequent command the `NextToken` parameter to continue
+    #   listing additional users.
     #   @return [String]
     #
     # @!attribute [rw] server_id
