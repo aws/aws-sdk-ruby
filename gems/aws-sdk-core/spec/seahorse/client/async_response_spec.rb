@@ -85,7 +85,7 @@ module Seahorse
         it 'use #join! to close stream and finalize response immediately' do
           stream = double('stream')
           allow(stream).to receive(:close)
-          a_resp = AsyncResponse.new(context: RequestContext.new, stream: stream)
+          a_resp = AsyncResponse.new(context: RequestContext.new, stream: stream, sync_queue: Queue.new)
           expect(stream).to receive(:close)
           a_resp.join!
         end

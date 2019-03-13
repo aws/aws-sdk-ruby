@@ -50,6 +50,9 @@ module Seahorse
         if error && context.config.raise_response_errors
           raise error
         elsif @stream
+          # close callback is waiting
+          # for the "sync_signal"
+          @sync_queue << "sync_signal"
           @stream.close
           _kill_input_thread
           @response

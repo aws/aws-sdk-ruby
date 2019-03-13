@@ -49,7 +49,7 @@ requests are made, and retries are disabled.
           apply_stub(stub, resp, async_mode)
 
           async_mode ? Seahorse::Client::AsyncResponse.new(
-            context: context, stream: context[:input_event_stream_handler].event_emitter.stream) : resp
+            context: context, stream: context[:input_event_stream_handler].event_emitter.stream, sync_queue: Queue.new) : resp
         end
 
         def apply_stub(stub, response, async_mode = false)
