@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::CloudWatchLogs - Updated the documentation for Amazon CloudWatch Logs.
+
 2.11.239 (2019-03-12)
 ------------------
 
