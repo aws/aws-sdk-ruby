@@ -40,12 +40,17 @@ module Seahorse
           end
         end
 
-        # @return [String]
+        # @return [String|Array]
         def body_contents
-          body.rewind
-          contents = body.read
-          body.rewind
-          contents
+          if body.is_a?(Array)
+            # an array of parsed events
+            body
+          else
+            body.rewind
+            contents = body.read
+            body.rewind
+            contents
+          end
         end
 
         # @param [Integer] status_code

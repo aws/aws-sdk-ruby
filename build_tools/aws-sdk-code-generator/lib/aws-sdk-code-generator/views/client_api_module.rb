@@ -205,6 +205,8 @@ module AwsSdkCodeGenerator
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
+            o.async = @service.protocol_settings['h2'] == 'eventstream' &&
+              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
           end
         end
       end
@@ -260,6 +262,20 @@ module AwsSdkCodeGenerator
       end
 
       def shape_enum
+        unless @service.protocol_settings.empty?
+          if @service.protocol_settings['h2'] == 'eventstream'
+            # some event shapes shared with error shapes
+            # might missing event trait
+            @service.api['shapes'].each do |_, shape|
+              if shape['eventstream']
+                # add event trait to all members if not exists
+                shape['members'].each do |name, ref|
+                  @service.api['shapes'][ref['shape']]['event'] = true
+                end
+              end
+            end
+          end
+        end
         Enumerator.new do |y|
           @service.api.fetch('shapes', {}).keys.sort.each do |shape_name|
             y.yield(shape_name, @service.api['shapes'].fetch(shape_name))
@@ -268,9 +284,13 @@ module AwsSdkCodeGenerator
       end
 
       def non_error_struct?(shape)
-        shape['type'] == 'structure' &&
-        !shape['error'] &&
-        !shape['exception']
+        if !!shape['event']
+          shape['type'] == 'structure'
+        else
+          shape['type'] == 'structure' &&
+          !shape['error'] &&
+          !shape['exception']
+        end
       end
 
       def structure_shape_enum
@@ -508,6 +528,9 @@ module AwsSdkCodeGenerator
 
         # @return [Pager, nil]
         attr_accessor :pager
+
+        # @return [Boolean]
+        attr_accessor :async
 
       end
 

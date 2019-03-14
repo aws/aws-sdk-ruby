@@ -30,7 +30,7 @@ module Aws
       end
 
       def apply_data(data, stub)
-        ParamValidator.new(@rules, validate_required:false).validate!(data)
+        ParamValidator.new(@rules, validate_required: false, input: false).validate!(data)
         DataApplicator.new(@rules).apply_data(data, stub)
       end
     end

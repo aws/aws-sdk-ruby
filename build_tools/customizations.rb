@@ -20,9 +20,6 @@ module BuildTools
       end
 
       def apply_api_customizations(svc_name, api)
-        if api['metadata']['protocolSettings'] && api['metadata']['protocolSettings']['h2']
-          api = exclude_eventstream(api)
-        end
         @api_customizations[svc_name].call(api) if @api_customizations[svc_name]
       end
 
@@ -35,32 +32,6 @@ module BuildTools
       end
 
       private
-
-      def exclude_eventstream(api)
-        api['operations'].each do |name, ref|
-          inbound = ref['input'] && is_eventstream?(api, ref['input']['shape'])
-          outbound = ref['output'] && is_eventstream?(api, ref['output']['shape'])
-          if !!inbound || !!outbound
-            api['shapes'].delete(ref['input']['shape'])
-            api['shapes'].delete(ref['output']['shape'])
-            api['operations'].delete(name)
-          end
-        end
-        api
-      end
-
-      def is_eventstream?(api, shape_name)
-        shape = api['shapes'][shape_name]
-        if shape['type'] == 'structure' && shape['members']
-          eventstream = false
-          shape['members'].each do |_, m_ref|
-            eventstream ||= api['shapes'][m_ref['shape']]['eventstream']
-          end
-          eventstream
-        else
-          shape['eventstream']
-        end
-      end
 
       def dynamodb_example_deep_transform(subsegment, keys)
         if subsegment.is_a?(Hash)

@@ -23,11 +23,31 @@ module Aws
 
         context.http_response.on_headers(200) do
           protocol = context.config.api.metadata['protocol']
+          output_handler = context[:output_event_stream_handler] || context[:event_stream_handler]
           context.http_response.body = EventStreamDecoder.new(
             protocol,
             rules,
+            context.operation.output,
+            context.operation.errors,
             context.http_response.body,
-            context[:event_stream_handler])
+            output_handler)
+          if input_emitter = context[:input_event_emitter]
+            # events need to be send in order
+            # every event signature requries prior signature
+            thread = Thread.new do
+              # polling for buffered emit events until stream not active
+              while input_emitter.stream.state == :open
+                while callback = input_emitter.buffer.shift
+                  callback.call if input_emitter.stream.state == :open
+                end
+              end
+            end
+            thread.abort_on_exception = true
+            # attach thread to current stream context
+            # make sure when stream closes (#wait or #join! is called)
+            # input signal thread is also killed
+            context[:input_signal_thread] = thread
+          end
         end
 
         context.http_response.on_success(200) do

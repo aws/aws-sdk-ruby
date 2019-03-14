@@ -59,6 +59,12 @@ group :test do
     end
   end
 
+  if RUBY_VERSION >= '2.1'
+    # http 2 requires ruby version >= 2.1
+    # over alpn with tls
+    # requires ruby version >= 2.3 and openssl >=1.0.2
+    gem 'http-2'
+  end
 end
 
 group :build do

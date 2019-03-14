@@ -8,7 +8,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.39.0"
+    MINIMUM_CORE_VERSION = "3.47.0"
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
     # @option options [String] :manifest_path (MANIFEST_PATH)
@@ -127,7 +127,7 @@ module BuildTools
       dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{csm_version_string}"
 
       case api['metadata']['signatureVersion']
-      when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
+      when 'v4' then dependencies['aws-sigv4'] = '~> 1.1'
       when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
       end
       dependencies
@@ -139,7 +139,6 @@ module BuildTools
     end
 
     def eventstream?(api)
-      return false if api['metadata']['protocolSettings'] && api['metadata']['protocolSettings']['h2']
       api['shapes'].each do |_, ref|
         return true if ref['eventstream'] || ref['event']
       end

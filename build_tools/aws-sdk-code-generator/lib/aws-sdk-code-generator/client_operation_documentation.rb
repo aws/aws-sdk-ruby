@@ -13,6 +13,7 @@ module AwsSdkCodeGenerator
       @client_examples = options.fetch(:client_examples, [])
       @examples = options.fetch(:examples)
       @module_name = options.fetch(:module_name)
+      @async_client = options[:async_client] || false
     end
 
     # @return [String]
@@ -44,7 +45,8 @@ module AwsSdkCodeGenerator
         eventstream_examples(module_name, method_name, operation, api),
         shared_examples(examples, operation, api),
         given_examples(client_examples),
-        request_syntax_example(method_name, operation, api),
+        @async_client ? async_request_syntax_example(method_name, operation, api)
+        : request_syntax_example(method_name, operation, api),
         response_structure_example(operation, api),
         see_also_tag(operation, api),
       ], block_comment: false)
@@ -79,6 +81,9 @@ module AwsSdkCodeGenerator
         return if shape['members'].nil?
         shape['members'].map do |member_name, member_ref|
           next if member_ref['documented'] === false
+          # input eventstream is not provided by params
+          member_shape = Api.shape(member_ref['shape'], api)
+          next if member_shape['eventstream'] === true
           docstring = Api.docstring(member_ref, api)
           if member_ref['idempotencyToken']
             docstring = docstring.to_s + "<p><b>A suitable default value is auto-generated.** You should normally not need to pass this option.</b></p>"
@@ -125,7 +130,7 @@ module AwsSdkCodeGenerator
     end
 
     def shared_examples(examples, operation, api)
-      return if examples.nil? || examples['examples'][@name].nil?
+      return if examples.nil? || examples['examples'].nil? || examples['examples'][@name].nil?
       begin # skip broken/nil examples
         example_block = []
         examples['examples'][@name].each do |example|
@@ -193,6 +198,17 @@ module AwsSdkCodeGenerator
         method_name: method_name,
         receiver: 'client',
         resp_var: 'resp',
+      ).format
+    end
+
+    def async_request_syntax_example(method_name, operation, api)
+      SyntaxExample.new(
+        api: api,
+        shape: Api.shape(operation['input'], api),
+        method_name: method_name,
+        receiver: 'async_client',
+        resp_var: 'async_resp',
+        async: true
       ).format
     end
 

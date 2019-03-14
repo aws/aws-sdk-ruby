@@ -10,6 +10,7 @@ module AwsSdkCodeGenerator
     def initialize(options = {})
       @api = options.fetch(:api)
       @shape = options.fetch(:shape)
+      @async = options[:async] || false
     end
 
     def format(indent = '')
@@ -59,7 +60,12 @@ module AwsSdkCodeGenerator
       unless struct_shape['members'].nil?
         struct_shape['members'].each_pair do |member_name, member_ref|
           next if member_ref['documented'] === false
-          lines << struct_member(struct_shape, member_name, member_ref, i, visited)
+          # input eventstream shouldn't be provided from params
+          if @api['shapes'][member_ref['shape']]['eventstream'] === true
+            lines << "#{i}  input_event_stream_hander: EventStreams::#{member_ref['shape']}.new,"
+          else
+            lines << struct_member(struct_shape, member_name, member_ref, i, visited)
+          end
         end
       end
       lines << "#{i}}"

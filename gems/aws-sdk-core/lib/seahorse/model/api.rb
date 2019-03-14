@@ -38,6 +38,10 @@ module Seahorse
         @operations.keys
       end
 
+      def async_operation_names
+        @operations.select {|_, op| op.async }.keys
+      end
+
       def add_operation(name, operation)
         @operations[name.to_sym] = operation
       end

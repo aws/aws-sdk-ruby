@@ -41,6 +41,7 @@ module AwsSdkCodeGenerator
 
       # computed attributes
       @protocol = api.fetch('metadata').fetch('protocol')
+      @protocol_settings = api.fetch('metadata')['protocolSettings'] || {}
       @api_version = api.fetch('metadata')['apiVersion']
       @signature_version = api.fetch('metadata')['signatureVersion']
       @full_name = api.fetch('metadata')['serviceFullName']
@@ -98,6 +99,9 @@ module AwsSdkCodeGenerator
 
     # @return [String] The service protocol, e.g. "json", "query", etc.
     attr_reader :protocol
+
+    # @return [Hash] The service protocol settings
+    attr_reader :protocol_settings
 
     # @return [String] The service API version, e.g. "YYYY-MM-DD".
     attr_reader :api_version
