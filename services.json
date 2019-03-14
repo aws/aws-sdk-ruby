@@ -578,6 +578,9 @@
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
   },
+  "TranscribeStreamingService": {
+    "models": "transcribe-streaming/2017-10-26"
+  },
   "Transfer": {
     "models": "transfer/2018-11-05"
   },
