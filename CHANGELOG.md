@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.241 (2019-03-14)
+------------------
+
 * Feature - Aws::ACMPCA - Updated the API, and documentation for AWS Certificate Manager Private Certificate Authority.
 
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
