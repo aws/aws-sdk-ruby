@@ -1080,6 +1080,9 @@ module Aws::IoT
     # @option params [Hash<String,String>] :additional_parameters
     #   A list of additional OTA update parameters which are name-value pairs.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage updates.
+    #
     # @return [Types::CreateOTAUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOTAUpdateResponse#ota_update_id #ota_update_id} => String
@@ -1150,6 +1153,12 @@ module Aws::IoT
     #     additional_parameters: {
     #       "AttributeKey" => "Value",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1466,6 +1475,9 @@ module Aws::IoT
     #   An IAM role that allows the IoT service principal assumes to access
     #   your S3 files.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage streams.
+    #
     # @return [Types::CreateStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStreamResponse#stream_id #stream_id} => String
@@ -1489,6 +1501,12 @@ module Aws::IoT
     #       },
     #     ],
     #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1505,10 +1523,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a thing record in the registry. If this call is made multiple
-    # times using the same thing name and configuration, the call will
-    # succeed. If this call is made with the same thing name but different
-    # configuration a `ResourceAlreadyExistsException` is thrown.
+    # Creates a thing record in the registry.
     #
     # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
     # information about authorizing control plane actions.
@@ -5743,7 +5758,7 @@ module Aws::IoT
     #   registered.
     #
     # @option params [Boolean] :set_as_active
-    #   A boolean value that specifies if the certificate is set to active.
+    #   A boolean value that specifies if the CA certificate is set to active.
     #
     # @option params [String] :status
     #   The status of the register certificate request.
@@ -7514,7 +7529,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

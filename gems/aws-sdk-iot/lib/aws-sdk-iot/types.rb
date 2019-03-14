@@ -2187,6 +2187,12 @@ module Aws::IoT
     #         additional_parameters: {
     #           "AttributeKey" => "Value",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] ota_update_id
@@ -2228,6 +2234,10 @@ module Aws::IoT
     #   pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage updates.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateOTAUpdateRequest < Struct.new(
       :ota_update_id,
       :description,
@@ -2236,7 +2246,8 @@ module Aws::IoT
       :aws_job_executions_rollout_config,
       :files,
       :role_arn,
-      :additional_parameters)
+      :additional_parameters,
+      :tags)
       include Aws::Structure
     end
 
@@ -2609,6 +2620,12 @@ module Aws::IoT
     #           },
     #         ],
     #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] stream_id
@@ -2628,11 +2645,16 @@ module Aws::IoT
     #   your S3 files.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage streams.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateStreamRequest < Struct.new(
       :stream_id,
       :description,
       :files,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -8436,7 +8458,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] set_as_active
-    #   A boolean value that specifies if the certificate is set to active.
+    #   A boolean value that specifies if the CA certificate is set to
+    #   active.
     #   @return [Boolean]
     #
     # @!attribute [rw] status

@@ -564,7 +564,7 @@ module Aws::CloudWatch
     #   that align with the value of the metric's `Period` and sync up with
     #   the beginning and end of an hour. For example, if the `Period` of a
     #   metric is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can
-    #   get a faster response from CloudWatch than setting 12:07 or 12:29 as
+    #   get a faster response from CloudWatch then setting 12:07 or 12:29 as
     #   the `StartTime`.
     #   @return [Time]
     #
@@ -575,7 +575,7 @@ module Aws::CloudWatch
     #   that align with the value of the metric's `Period` and sync up with
     #   the beginning and end of an hour. For example, if the `Period` of a
     #   metric is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get
-    #   a faster response from CloudWatch than setting 12:07 or 12:29 as the
+    #   a faster response from CloudWatch then setting 12:07 or 12:29 as the
     #   `EndTime`.
     #   @return [Time]
     #
@@ -618,11 +618,20 @@ module Aws::CloudWatch
     #   A token that marks the next batch of returned results.
     #   @return [String]
     #
+    # @!attribute [rw] messages
+    #   Contains a message about the operation or the results, if the
+    #   operation results in such a message. Examples of messages that may
+    #   be returned include `Maximum number of allowed metrics exceeded` and
+    #   `You are not authorized to search one or more metrics`. If there is
+    #   a message, as much of the operation as possible is still executed.
+    #   @return [Array<Types::MessageData>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataOutput AWS API Documentation
     #
     class GetMetricDataOutput < Struct.new(
       :metric_data_results,
-      :next_token)
+      :next_token,
+      :messages)
       include Aws::Structure
     end
 
@@ -817,7 +826,8 @@ module Aws::CloudWatch
     #   response with the content-type set to `text/xml`. The image data is
     #   in a `MetricWidgetImage` field. For example:
     #
-    #   ` <GetMetricWidgetImageResponse xmlns=<URLstring>>`
+    #   ` <GetMetricWidgetImageResponse
+    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
     #
     #   ` <GetMetricWidgetImageResult>`
     #
@@ -1196,13 +1206,9 @@ module Aws::CloudWatch
     # structures can include as many as 10 structures that contain a
     # `MetricStat` parameter to retrieve a metric, and as many as 10
     # structures that contain the `Expression` parameter to perform a math
-    # expression. Of those `Expression` structures, one must have `True` as
-    # the value for `ReturnData`. The result of this expression is the value
-    # the alarm watches.
-    #
-    # Any expression used in a `PutMetricAlarm` operation must return a
-    # single time series. For more information, see [Metric Math Syntax and
-    # Functions][1] in the *Amazon CloudWatch User Guide*.
+    # expression. Any expression used in a `PutMetricAlarm` operation must
+    # return a single time series. For more information, see [Metric Math
+    # Syntax and Functions][1] in the *Amazon CloudWatch User Guide*.
     #
     # Some of the parameters of this structure also have different uses
     # whether you are using this structure in a `GetMetricData` operation or
@@ -1671,7 +1677,6 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
-    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1692,7 +1697,6 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
-    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1842,11 +1846,6 @@ module Aws::CloudWatch
     #   an alarm based on the result of a metric math expression. Each item
     #   in the `Metrics` array either retrieves a metric or performs a math
     #   expression.
-    #
-    #   One item in the `Metrics` array is the expression that the alarm
-    #   watches. You designate this expression by setting `ReturnValue` to
-    #   true for this object in the array. For more information, see
-    #   MetricDataQuery.
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or

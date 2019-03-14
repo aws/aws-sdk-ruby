@@ -1113,7 +1113,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   accoun
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1449,7 +1449,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] config_rule_name
     #   The name of the AWS Config rule for which you want to delete
-    #   remediation configuration for.
+    #   remediation configuration.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -2296,11 +2296,13 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] config_rule_name
-    #   A list of config rule names.
+    #   A list of AWS Config rule names.
     #   @return [String]
     #
     # @!attribute [rw] resource_keys
-    #   A list of resource keys object.
+    #   A list of resource keys to be processed with the current request.
+    #   Each element in the list consists of the resource type and resource
+    #   ID.
     #   @return [Array<Types::ResourceKey>]
     #
     # @!attribute [rw] limit
@@ -2325,7 +2327,7 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] remediation_execution_statuses
-    #   Returns a list of remediation execution statuses object.
+    #   Returns a list of remediation execution statuses objects.
     #   @return [Array<Types::RemediationExecutionStatus>]
     #
     # @!attribute [rw] next_token
@@ -2548,10 +2550,11 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # List of each of the failed remediation with specific reasons.
+    # List of each of the failed remediations with specific reasons.
     #
     # @!attribute [rw] failure_message
-    #   Returns a failure message. For example, the resource is compliant.
+    #   Returns a failure message. For example, the resource is already
+    #   compliant.
     #   @return [String]
     #
     # @!attribute [rw] failed_items
@@ -3342,6 +3345,59 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   `ConfigRule`, `ConfigurationAggregator` and
+    #   `AggregatorAuthorization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of tags returned on each page. The limit maximum
+    #   is 50. You cannot specify a number greater than 50. If you specify
+    #   0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # This object contains regions to setup the aggregator and an IAM role
     # to retrieve organization details.
     #
@@ -3898,7 +3954,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   Public ID is document.
+    #   Target ID is the name of the public document.
     #   @return [String]
     #
     # @!attribute [rw] target_version
@@ -3971,7 +4027,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   An error message if the step was interupted during execution.
+    #   An error message if the step was interrupted during execution.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -4458,7 +4514,9 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] resource_keys
-    #   A list of resource key object.
+    #   A list of resource keys to be processed with the current request.
+    #   Each element in the list consists of the resource type and resource
+    #   ID.
     #   @return [Array<Types::ResourceKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartRemediationExecutionRequest AWS API Documentation
@@ -4470,11 +4528,12 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] failure_message
-    #   Returns a failure message. For example, the resource is compliant.
+    #   Returns a failure message. For example, the resource is already
+    #   compliant.
     #   @return [String]
     #
     # @!attribute [rw] failed_items
-    #   For resources that have failed to start execuition the API returns a
+    #   For resources that have failed to start execution, the API returns a
     #   resource key object.
     #   @return [Array<Types::ResourceKey>]
     #
@@ -4524,6 +4583,97 @@ module Aws::ConfigService
     #
     class StopConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
+      include Aws::Structure
+    end
+
+    # The tags for the resource. The metadata that you apply to a resource
+    # to help you categorize and organize them. Each tag consists of a key
+    # and an optional value, both of which you define. Tag keys can have a
+    # maximum character length of 128 characters, and tag values can have a
+    # maximum length of 256 characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A value
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   `ConfigRule`, `ConfigurationAggregator` and
+    #   `AggregatorAuthorization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tag object.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resources are
+    #   `ConfigRule`, `ConfigurationAggregator` and
+    #   `AggregatorAuthorization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

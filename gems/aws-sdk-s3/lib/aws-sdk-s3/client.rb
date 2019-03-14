@@ -195,6 +195,9 @@ module Aws::S3
     #     When set to `true`, the bucket name is always left in the
     #     request URI and never moved to the host as a sub-domain.
     #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
+    #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
     #
@@ -204,6 +207,9 @@ module Aws::S3
     #   @option options [Logger] :logger
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
@@ -6487,13 +6493,12 @@ module Aws::S3
     #   is also supported.
     #
     #   `:event_stream_handler` option takes in either Proc object or
-    #   EventStreams::SelectObjectContentEventStream object.
+    #   Aws::S3::EventStreams::SelectObjectContentEventStream object.
     #
     #   Usage pattern a): callbacks with a block attached to #select_object_content
     #     Example for registering callbacks for all event types and error event
     #
     #     client.select_object_content( # params input# ) do |stream|
-    #
     #       stream.on_error_event do |event|
     #         # catch unmodeled error event in the stream
     #         raise event
@@ -6513,7 +6518,7 @@ module Aws::S3
     #
     #   Usage pattern b): pass in `:event_stream_handler` for #select_object_content
     #
-    #     1) create a EventStreams::SelectObjectContentEventStream object
+    #     1) create a Aws::S3::EventStreams::SelectObjectContentEventStream object
     #     Example for registering callbacks with specific events
     #
     #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
@@ -6993,7 +6998,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -32,7 +32,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -57,7 +57,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -152,7 +152,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -166,8 +166,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   @return [String]
     #
     # @!attribute [rw] renewal_summary
@@ -177,7 +177,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Types::RenewalSummary]
     #
     # @!attribute [rw] key_usages
@@ -202,7 +202,9 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] renewal_eligibility
-    #   Specifies whether the certificate is eligible for renewal.
+    #   Specifies whether the certificate is eligible for renewal. At this
+    #   time, only exported private certificates can be renewed with the
+    #   RenewCertificate command.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -257,7 +259,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
     #
     # @note When making an API call, you may pass CertificateOptions
     #   data as a hash:
@@ -291,7 +293,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -325,7 +327,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateRequest AWS API Documentation
@@ -353,7 +355,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateRequest AWS API Documentation
@@ -409,7 +411,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
     #   @return [Types::ResourceRecord]
     #
     # @!attribute [rw] validation_method
@@ -513,8 +515,9 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] private_key
-    #   The PEM-encoded private key associated with the public key in the
-    #   certificate.
+    #   The encrypted private key associated with the public key in the
+    #   certificate. The key is output in PKCS #8 format and is base64
+    #   PEM-encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateResponse AWS API Documentation
@@ -617,7 +620,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateRequest AWS API Documentation
@@ -661,7 +664,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -691,7 +694,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateResponse AWS API Documentation
@@ -799,7 +802,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateRequest AWS API Documentation
@@ -844,7 +847,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -859,20 +862,48 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RenewCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   String that contains the ARN of the ACM certificate to be renewed.
+    #   This must be of the form:
+    #
+    #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
+    #   and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificateRequest AWS API Documentation
+    #
+    class RenewCertificateRequest < Struct.new(
+      :certificate_arn)
+      include Aws::Structure
+    end
+
     # Contains information about the status of ACM's [managed renewal][1]
     # for the certificate. This structure exists only when the certificate
     # type is `AMAZON_ISSUED`.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #
     # @!attribute [rw] renewal_status
     #   The status of ACM's [managed renewal][1] of the certificate.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
@@ -884,14 +915,24 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Array<Types::DomainValidation>]
+    #
+    # @!attribute [rw] renewal_status_reason
+    #   The reason that a renewal request was unsuccessful.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the renewal summary was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary AWS API Documentation
     #
     class RenewalSummary < Struct.new(
       :renewal_status,
-      :domain_validation_options)
+      :domain_validation_options,
+      :renewal_status_reason,
+      :updated_at)
       include Aws::Structure
     end
 
@@ -935,8 +976,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -967,7 +1008,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] idempotency_token
@@ -996,7 +1037,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #   @return [Types::CertificateOptions]
     #
     # @!attribute [rw] certificate_authority_arn
@@ -1012,7 +1053,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation

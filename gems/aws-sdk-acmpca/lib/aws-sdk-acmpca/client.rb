@@ -315,25 +315,24 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
-    # Creates an audit report that lists every time that the your CA private
-    # key is used. The report is saved in the Amazon S3 bucket that you
-    # specify on input. The IssueCertificate and RevokeCertificate
-    # operations use the private key. You can generate a new report every 30
-    # minutes.
+    # Creates an audit report that lists every time that your CA private key
+    # is used. The report is saved in the Amazon S3 bucket that you specify
+    # on input. The IssueCertificate and RevokeCertificate operations use
+    # the private key. You can generate a new report every 30 minutes.
     #
     # @option params [required, String] :certificate_authority_arn
-    #   Amazon Resource Name (ARN) of the CA to be audited. This is of the
+    #   The Amazon Resource Name (ARN) of the CA to be audited. This is of the
     #   form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #
     # @option params [required, String] :s3_bucket_name
-    #   Name of the S3 bucket that will contain the audit report.
+    #   The name of the S3 bucket that will contain the audit report.
     #
     # @option params [required, String] :audit_report_response_format
-    #   Format in which to create the report. This can be either **JSON** or
-    #   **CSV**.
+    #   The format in which to create the report. This can be either **JSON**
+    #   or **CSV**.
     #
     # @return [Types::CreateCertificateAuthorityAuditReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -362,6 +361,58 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
+    # Assigns permissions from a private CA to a designated AWS service.
+    # Services are specified by their service principals and can be given
+    # permission to create and retrieve certificates on a private CA.
+    # Services can also be given permission to list the active permissions
+    # that the private CA has granted. For ACM to automatically renew your
+    # private CA's certificates, you must assign all possible permissions
+    # from the CA to the ACM service principal.
+    #
+    # At this time, you can only assign permissions to ACM
+    # (`acm.amazonaws.com`). Permissions can be revoked with the
+    # DeletePermission operation and listed with the ListPermissions
+    # operation.
+    #
+    # @option params [required, String] :certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the CA that grants the permissions.
+    #   You can find the ARN by calling the ListCertificateAuthorities
+    #   operation. This must have the following form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `.
+    #
+    # @option params [required, String] :principal
+    #   The AWS service or identity that receives the permission. At this
+    #   time, the only valid principal is `acm.amazonaws.com`.
+    #
+    # @option params [String] :source_account
+    #   The ID of the calling account.
+    #
+    # @option params [required, Array<String>] :actions
+    #   The actions that the specified AWS service principal can use. These
+    #   include `IssueCertificate`, `GetCertificate`, and `ListPermissions`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_permission({
+    #     certificate_authority_arn: "Arn", # required
+    #     principal: "Principal", # required
+    #     source_account: "AccountId",
+    #     actions: ["IssueCertificate"], # required, accepts IssueCertificate, GetCertificate, ListPermissions
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreatePermission AWS API Documentation
+    #
+    # @overload create_permission(params = {})
+    # @param [Hash] params ({})
+    def create_permission(params = {}, options = {})
+      req = build_request(:create_permission, params)
+      req.send_request(options)
+    end
+
     # Deletes a private certificate authority (CA). You must provide the ARN
     # (Amazon Resource Name) of the private CA that you want to delete. You
     # can find the ARN by calling the ListCertificateAuthorities operation.
@@ -375,15 +426,15 @@ module Aws::ACMPCA
     # haven't yet imported the signed certificate (the **Status** is
     # `PENDING_CERTIFICATE`) into ACM PCA.
     #
-    # If the CA is in one of the aforementioned states and you call
+    # If the CA is in one of the previously mentioned states and you call
     # DeleteCertificateAuthority, the CA's status changes to `DELETED`.
-    # However, the CA won't be permentantly deleted until the restoration
+    # However, the CA won't be permanently deleted until the restoration
     # period has passed. By default, if you do not set the
     # `PermanentDeletionTimeInDays` parameter, the CA remains restorable for
     # 30 days. You can set the parameter from 7 to 30 days. The
     # DescribeCertificateAuthority operation returns the time remaining in
     # the restoration window of a Private CA in the `DELETED` state. To
-    # restore an eligable CA, call the RestoreCertificateAuthority
+    # restore an eligible CA, call the RestoreCertificateAuthority
     # operation.
     #
     # @option params [required, String] :certificate_authority_arn
@@ -412,6 +463,45 @@ module Aws::ACMPCA
     # @param [Hash] params ({})
     def delete_certificate_authority(params = {}, options = {})
       req = build_request(:delete_certificate_authority, params)
+      req.send_request(options)
+    end
+
+    # Revokes permissions that a private CA assigned to a designated AWS
+    # service. Permissions can be created with the CreatePermission
+    # operation and listed with the ListPermissions operation.
+    #
+    # @option params [required, String] :certificate_authority_arn
+    #   The Amazon Resource Number (ARN) of the private CA that issued the
+    #   permissions. You can find the CA's ARN by calling the
+    #   ListCertificateAuthorities operation. This must have the following
+    #   form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `.
+    #
+    # @option params [required, String] :principal
+    #   The AWS service or identity that will have its CA permissions revoked.
+    #   At this time, the only valid service principal is `acm.amazonaws.com`
+    #
+    # @option params [String] :source_account
+    #   The AWS account that calls this operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_permission({
+    #     certificate_authority_arn: "Arn", # required
+    #     principal: "Principal", # required
+    #     source_account: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeletePermission AWS API Documentation
+    #
+    # @overload delete_permission(params = {})
+    # @param [Hash] params ({})
+    def delete_permission(params = {}, options = {})
+      req = build_request(:delete_permission, params)
       req.send_request(options)
     end
 
@@ -885,6 +975,64 @@ module Aws::ACMPCA
       req.send_request(options)
     end
 
+    # Lists all the permissions, if any, that have been assigned by a
+    # private CA. Permissions can be granted with the CreatePermission
+    # operation and revoked with the DeletePermission operation.
+    #
+    # @option params [required, String] :certificate_authority_arn
+    #   The Amazon Resource Number (ARN) of the private CA to inspect. You can
+    #   find the ARN by calling the ListCertificateAuthorities operation. This
+    #   must be of the form:
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #   You can get a private CA's ARN by running the
+    #   ListCertificateAuthorities operation.
+    #
+    # @option params [String] :next_token
+    #   When paginating results, use this parameter in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of **NextToken** from the response you just received.
+    #
+    # @option params [Integer] :max_results
+    #   When paginating results, use this parameter to specify the maximum
+    #   number of items to return in the response. If additional items exist
+    #   beyond the number you specify, the **NextToken** element is sent in
+    #   the response. Use this **NextToken** value in a subsequent request to
+    #   retrieve additional items.
+    #
+    # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
+    #   * {Types::ListPermissionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_permissions({
+    #     certificate_authority_arn: "Arn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].certificate_authority_arn #=> String
+    #   resp.permissions[0].created_at #=> Time
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].source_account #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String, one of "IssueCertificate", "GetCertificate", "ListPermissions"
+    #   resp.permissions[0].policy #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListPermissions AWS API Documentation
+    #
+    # @overload list_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_permissions(params = {}, options = {})
+      req = build_request(:list_permissions, params)
+      req.send_request(options)
+    end
+
     # Lists the tags, if any, that are associated with your private CA. Tags
     # are labels that you can use to identify and organize your CAs. Each
     # tag consists of a key and an optional value. Call the
@@ -1181,7 +1329,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

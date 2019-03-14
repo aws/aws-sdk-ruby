@@ -548,7 +548,7 @@ module Aws::ConfigService
     #
     # @option params [required, String] :config_rule_name
     #   The name of the AWS Config rule for which you want to delete
-    #   remediation configuration for.
+    #   remediation configuration.
     #
     # @option params [String] :resource_type
     #   The type of a resource.
@@ -1346,7 +1346,7 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Returns the details of one or more remediation configuration.
+    # Returns the details of one or more remediation configurations.
     #
     # @option params [required, Array<String>] :config_rule_names
     #   A list of AWS Config rule names of remediation configurations for
@@ -1386,15 +1386,16 @@ module Aws::ConfigService
 
     # Provides a detailed view of a Remediation Execution for a set of
     # resources including state, timestamps for when steps for the
-    # remediation execution happen, and any error messages for steps that
+    # remediation execution occur, and any error messages for steps that
     # have failed. When you specify the limit and the next token, you
     # receive a paginated response.
     #
     # @option params [required, String] :config_rule_name
-    #   A list of config rule names.
+    #   A list of AWS Config rule names.
     #
     # @option params [Array<Types::ResourceKey>] :resource_keys
-    #   A list of resource keys object.
+    #   A list of resource keys to be processed with the current request. Each
+    #   element in the list consists of the resource type and resource ID.
     #
     # @option params [Integer] :limit
     #   The maximum number of RemediationExecutionStatuses returned on each
@@ -2319,6 +2320,51 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # List the tags for AWS Config resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the supported resources are `ConfigRule`,
+    #   `ConfigurationAggregator` and `AggregatorAuthorization`.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of tags returned on each page. The limit maximum is
+    #   50. You cannot specify a number greater than 50. If you specify 0, AWS
+    #   Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Authorizes the aggregator account and region to collect data from the
     # source account and region.
     #
@@ -2672,10 +2718,10 @@ module Aws::ConfigService
 
     # Adds or updates the remediation configuration with a specific AWS
     # Config rule with the selected target or action. The API creates the
-    # `RemediationConfiguration` object for the AWS Config rule. AWS Config
-    # rule must already exist for you to add a remeduation configuration.
-    # The target (SSM document) must exist and have permissions to use the
-    # target.
+    # `RemediationConfiguration` object for the AWS Config rule. The AWS
+    # Config rule must already exist for you to add a remediation
+    # configuration. The target (SSM document) must exist and have
+    # permissions to use the target.
     #
     # @option params [required, Array<Types::RemediationConfiguration>] :remediation_configurations
     #   A list of remediation configuration objects.
@@ -2875,7 +2921,8 @@ module Aws::ConfigService
     #   execution for.
     #
     # @option params [required, Array<Types::ResourceKey>] :resource_keys
-    #   A list of resource key object.
+    #   A list of resource keys to be processed with the current request. Each
+    #   element in the list consists of the resource type and resource ID.
     #
     # @return [Types::StartRemediationExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2934,6 +2981,70 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Associates the specified tags to a resource with the specified
+    # resourceArn. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the supported resources are `ConfigRule`,
+    #   `ConfigurationAggregator` and `AggregatorAuthorization`.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   An array of tag object.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the supported resources are `ConfigRule`,
+    #   `ConfigurationAggregator` and `AggregatorAuthorization`.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2947,7 +3058,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

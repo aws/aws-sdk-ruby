@@ -271,6 +271,7 @@ module Aws::CloudWatch
 
     GetMetricDataOutput.add_member(:metric_data_results, Shapes::ShapeRef.new(shape: MetricDataResults, location_name: "MetricDataResults"))
     GetMetricDataOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetMetricDataOutput.add_member(:messages, Shapes::ShapeRef.new(shape: MetricDataResultMessages, location_name: "Messages"))
     GetMetricDataOutput.struct_class = Types::GetMetricDataOutput
 
     GetMetricStatisticsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
@@ -557,6 +558,12 @@ module Aws::CloudWatch
         o.input = Shapes::ShapeRef.new(shape: GetMetricDataInput)
         o.output = Shapes::ShapeRef.new(shape: GetMetricDataOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_datapoints",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_metric_statistics, Seahorse::Model::Operation.new.tap do |o|
@@ -587,6 +594,11 @@ module Aws::CloudWatch
         o.output = Shapes::ShapeRef.new(shape: ListDashboardsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_metrics, Seahorse::Model::Operation.new.tap do |o|

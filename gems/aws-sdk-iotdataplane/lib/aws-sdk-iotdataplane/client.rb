@@ -356,7 +356,7 @@ module Aws::IoTDataPlane
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdataplane'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

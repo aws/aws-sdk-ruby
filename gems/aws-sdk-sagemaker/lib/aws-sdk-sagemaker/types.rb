@@ -923,6 +923,7 @@ module Aws::SageMaker
     #         name: "ParameterKey", # required
     #         min_value: "ParameterValue", # required
     #         max_value: "ParameterValue", # required
+    #         scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #       }
     #
     # @!attribute [rw] name
@@ -940,12 +941,50 @@ module Aws::SageMaker
     #   tuning.
     #   @return [String]
     #
+    # @!attribute [rw] scaling_type
+    #   The scale that hyperparameter tuning uses to search the
+    #   hyperparameter range. For information about choosing a
+    #   hyperparameter scale, see [Hyperparameter Range Scaling][1]. One of
+    #   the following values:
+    #
+    #   Auto
+    #
+    #   : Amazon SageMaker hyperparameter tuning chooses the best scale for
+    #     the hyperparameter.
+    #
+    #   Linear
+    #
+    #   : Hyperparameter tuning searches the values in the hyperparameter
+    #     range by using a linear scale.
+    #
+    #   Logarithmic
+    #
+    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #     range by using a logarithmic scale.
+    #
+    #     Logarithmic scaling works only for ranges that have only values
+    #     greater than 0.
+    #
+    #   ReverseLogarithmic
+    #
+    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #     range by using a reverse logarithmic scale.
+    #
+    #     Reverse logarithmic scaling works only for ranges that are
+    #     entirely within the range 0&lt;=x&lt;1.0.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContinuousParameterRange AWS API Documentation
     #
     class ContinuousParameterRange < Struct.new(
       :name,
       :min_value,
-      :max_value)
+      :max_value,
+      :scaling_type)
       include Aws::Structure
     end
 
@@ -1481,7 +1520,7 @@ module Aws::SageMaker
     #       {
     #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #         hyper_parameter_tuning_job_config: { # required
-    #           strategy: "Bayesian", # required, accepts Bayesian
+    #           strategy: "Bayesian", # required, accepts Bayesian, Random
     #           hyper_parameter_tuning_job_objective: { # required
     #             type: "Maximize", # required, accepts Maximize, Minimize
     #             metric_name: "MetricName", # required
@@ -1496,6 +1535,7 @@ module Aws::SageMaker
     #                 name: "ParameterKey", # required
     #                 min_value: "ParameterValue", # required
     #                 max_value: "ParameterValue", # required
+    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #               },
     #             ],
     #             continuous_parameter_ranges: [
@@ -1503,6 +1543,7 @@ module Aws::SageMaker
     #                 name: "ParameterKey", # required
     #                 min_value: "ParameterValue", # required
     #                 max_value: "ParameterValue", # required
+    #                 scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #               },
     #             ],
     #             categorical_parameter_ranges: [
@@ -5584,7 +5625,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         strategy: "Bayesian", # required, accepts Bayesian
+    #         strategy: "Bayesian", # required, accepts Bayesian, Random
     #         hyper_parameter_tuning_job_objective: { # required
     #           type: "Maximize", # required, accepts Maximize, Minimize
     #           metric_name: "MetricName", # required
@@ -5599,6 +5640,7 @@ module Aws::SageMaker
     #               name: "ParameterKey", # required
     #               min_value: "ParameterValue", # required
     #               max_value: "ParameterValue", # required
+    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #             },
     #           ],
     #           continuous_parameter_ranges: [
@@ -5606,6 +5648,7 @@ module Aws::SageMaker
     #               name: "ParameterKey", # required
     #               min_value: "ParameterValue", # required
     #               max_value: "ParameterValue", # required
+    #               scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #             },
     #           ],
     #           categorical_parameter_ranges: [
@@ -5619,8 +5662,15 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] strategy
-    #   Specifies the search strategy for hyperparameters. Currently, the
-    #   only valid value is `Bayesian`.
+    #   Specifies how hyperparameter tuning chooses the combinations of
+    #   hyperparameter values to use for the training job it launches. To
+    #   use the Bayesian search stategy, set this to `Bayesian`. To randomly
+    #   search, set it to `Random`. For information about search strategies,
+    #   see [How Hyperparameter Tuning Works][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_objective
@@ -6021,6 +6071,7 @@ module Aws::SageMaker
     #         name: "ParameterKey", # required
     #         min_value: "ParameterValue", # required
     #         max_value: "ParameterValue", # required
+    #         scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #       }
     #
     # @!attribute [rw] name
@@ -6035,12 +6086,42 @@ module Aws::SageMaker
     #   The maximum value of the hyperparameter to search.
     #   @return [String]
     #
+    # @!attribute [rw] scaling_type
+    #   The scale that hyperparameter tuning uses to search the
+    #   hyperparameter range. For information about choosing a
+    #   hyperparameter scale, see [Hyperparameter Range Scaling][1]. One of
+    #   the following values:
+    #
+    #   Auto
+    #
+    #   : Amazon SageMaker hyperparameter tuning chooses the best scale for
+    #     the hyperparameter.
+    #
+    #   Linear
+    #
+    #   : Hyperparameter tuning searches the values in the hyperparameter
+    #     range by using a linear scale.
+    #
+    #   Logarithmic
+    #
+    #   : Hyperparemeter tuning searches the values in the hyperparameter
+    #     range by using a logarithmic scale.
+    #
+    #     Logarithmic scaling works only for ranges that have only values
+    #     greater than 0.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRange AWS API Documentation
     #
     class IntegerParameterRange < Struct.new(
       :name,
       :min_value,
-      :max_value)
+      :max_value,
+      :scaling_type)
       include Aws::Structure
     end
 
@@ -8834,6 +8915,7 @@ module Aws::SageMaker
     #             name: "ParameterKey", # required
     #             min_value: "ParameterValue", # required
     #             max_value: "ParameterValue", # required
+    #             scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #           },
     #         ],
     #         continuous_parameter_ranges: [
@@ -8841,6 +8923,7 @@ module Aws::SageMaker
     #             name: "ParameterKey", # required
     #             min_value: "ParameterValue", # required
     #             max_value: "ParameterValue", # required
+    #             scaling_type: "Auto", # accepts Auto, Linear, Logarithmic, ReverseLogarithmic
     #           },
     #         ],
     #         categorical_parameter_ranges: [

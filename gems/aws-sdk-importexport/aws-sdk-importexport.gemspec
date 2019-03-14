@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-importexport/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.39.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.47.0')
   spec.add_dependency('aws-sigv2', '~> 1.0')
 
 end

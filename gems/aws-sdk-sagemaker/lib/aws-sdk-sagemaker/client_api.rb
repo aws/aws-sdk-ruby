@@ -195,6 +195,7 @@ module Aws::SageMaker
     GitConfigUrl = Shapes::StringShape.new(name: 'GitConfigUrl')
     HumanTaskConfig = Shapes::StructureShape.new(name: 'HumanTaskConfig')
     HyperParameterAlgorithmSpecification = Shapes::StructureShape.new(name: 'HyperParameterAlgorithmSpecification')
+    HyperParameterScalingType = Shapes::StringShape.new(name: 'HyperParameterScalingType')
     HyperParameterSpecification = Shapes::StructureShape.new(name: 'HyperParameterSpecification')
     HyperParameterSpecifications = Shapes::ListShape.new(name: 'HyperParameterSpecifications')
     HyperParameterTrainingJobDefinition = Shapes::StructureShape.new(name: 'HyperParameterTrainingJobDefinition')
@@ -646,6 +647,7 @@ module Aws::SageMaker
     ContinuousParameterRange.add_member(:name, Shapes::ShapeRef.new(shape: ParameterKey, required: true, location_name: "Name"))
     ContinuousParameterRange.add_member(:min_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MinValue"))
     ContinuousParameterRange.add_member(:max_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MaxValue"))
+    ContinuousParameterRange.add_member(:scaling_type, Shapes::ShapeRef.new(shape: HyperParameterScalingType, location_name: "ScalingType"))
     ContinuousParameterRange.struct_class = Types::ContinuousParameterRange
 
     ContinuousParameterRangeSpecification.add_member(:min_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MinValue"))
@@ -1269,6 +1271,7 @@ module Aws::SageMaker
     IntegerParameterRange.add_member(:name, Shapes::ShapeRef.new(shape: ParameterKey, required: true, location_name: "Name"))
     IntegerParameterRange.add_member(:min_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MinValue"))
     IntegerParameterRange.add_member(:max_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MaxValue"))
+    IntegerParameterRange.add_member(:scaling_type, Shapes::ShapeRef.new(shape: HyperParameterScalingType, location_name: "ScalingType"))
     IntegerParameterRange.struct_class = Types::IntegerParameterRange
 
     IntegerParameterRangeSpecification.add_member(:min_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MinValue"))

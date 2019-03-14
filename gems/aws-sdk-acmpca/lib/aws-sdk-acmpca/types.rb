@@ -213,10 +213,10 @@ module Aws::ACMPCA
     # Contains configuration information for your private certificate
     # authority (CA). This includes information about the class of public
     # key algorithm and the key pair that your private CA creates when it
-    # issues a certificate, the signature algorithm it uses used when
-    # issuing certificates, and its X.500 distinguished name. You must
-    # specify this information when you call the CreateCertificateAuthority
-    # operation.
+    # issues a certificate. It also includes the signature algorithm that it
+    # uses when issuing certificates, and its X.500 distinguished name. You
+    # must specify this information when you call the
+    # CreateCertificateAuthority operation.
     #
     # @note When making an API call, you may pass CertificateAuthorityConfiguration
     #   data as a hash:
@@ -276,20 +276,20 @@ module Aws::ACMPCA
     #       }
     #
     # @!attribute [rw] certificate_authority_arn
-    #   Amazon Resource Name (ARN) of the CA to be audited. This is of the
-    #   form:
+    #   The Amazon Resource Name (ARN) of the CA to be audited. This is of
+    #   the form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
     #   `.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_name
-    #   Name of the S3 bucket that will contain the audit report.
+    #   The name of the S3 bucket that will contain the audit report.
     #   @return [String]
     #
     # @!attribute [rw] audit_report_response_format
-    #   Format in which to create the report. This can be either **JSON** or
-    #   **CSV**.
+    #   The format in which to create the report. This can be either
+    #   **JSON** or **CSV**.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreateCertificateAuthorityAuditReportRequest AWS API Documentation
@@ -418,6 +418,50 @@ module Aws::ACMPCA
     #
     class CreateCertificateAuthorityResponse < Struct.new(
       :certificate_authority_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_authority_arn: "Arn", # required
+    #         principal: "Principal", # required
+    #         source_account: "AccountId",
+    #         actions: ["IssueCertificate"], # required, accepts IssueCertificate, GetCertificate, ListPermissions
+    #       }
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the CA that grants the
+    #   permissions. You can find the ARN by calling the
+    #   ListCertificateAuthorities operation. This must have the following
+    #   form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The AWS service or identity that receives the permission. At this
+    #   time, the only valid principal is `acm.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account
+    #   The ID of the calling account.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The actions that the specified AWS service principal can use. These
+    #   include `IssueCertificate`, `GetCertificate`, and `ListPermissions`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreatePermissionRequest AWS API Documentation
+    #
+    class CreatePermissionRequest < Struct.new(
+      :certificate_authority_arn,
+      :principal,
+      :source_account,
+      :actions)
       include Aws::Structure
     end
 
@@ -561,6 +605,44 @@ module Aws::ACMPCA
     class DeleteCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       :permanent_deletion_time_in_days)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeletePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_authority_arn: "Arn", # required
+    #         principal: "Principal", # required
+    #         source_account: "AccountId",
+    #       }
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Number (ARN) of the private CA that issued the
+    #   permissions. You can find the CA's ARN by calling the
+    #   ListCertificateAuthorities operation. This must have the following
+    #   form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The AWS service or identity that will have its CA permissions
+    #   revoked. At this time, the only valid service principal is
+    #   `acm.amazonaws.com`
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account
+    #   The AWS account that calls this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeletePermissionRequest AWS API Documentation
+    #
+    class DeletePermissionRequest < Struct.new(
+      :certificate_authority_arn,
+      :principal,
+      :source_account)
       include Aws::Structure
     end
 
@@ -952,6 +1034,66 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_authority_arn: "Arn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Number (ARN) of the private CA to inspect. You
+    #   can find the ARN by calling the ListCertificateAuthorities
+    #   operation. This must be of the form:
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #   You can get a private CA's ARN by running the
+    #   ListCertificateAuthorities operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When paginating results, use this parameter in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of **NextToken** from the response you just received.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   When paginating results, use this parameter to specify the maximum
+    #   number of items to return in the response. If additional items exist
+    #   beyond the number you specify, the **NextToken** element is sent in
+    #   the response. Use this **NextToken** value in a subsequent request
+    #   to retrieve additional items.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListPermissionsRequest AWS API Documentation
+    #
+    class ListPermissionsRequest < Struct.new(
+      :certificate_authority_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permissions
+    #   Summary information about each permission assigned by the specified
+    #   private CA, including the action enabled, the policy provided, and
+    #   the time of creation.
+    #   @return [Array<Types::Permission>]
+    #
+    # @!attribute [rw] next_token
+    #   When the list is truncated, this value is present and should be used
+    #   for the **NextToken** parameter in a subsequent pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListPermissionsResponse AWS API Documentation
+    #
+    class ListPermissionsResponse < Struct.new(
+      :permissions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
     #
@@ -1006,6 +1148,53 @@ module Aws::ACMPCA
     class ListTagsResponse < Struct.new(
       :tags,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Permissions designate which private CA operations can be performed by
+    # an AWS service or entity. In order for ACM to automatically renew
+    # private certificates, you must give the ACM service principal all
+    # available permissions (`IssueCertificate`, `GetCertificate`, and
+    # `ListPermissions`). Permissions can be assigned with the
+    # CreatePermission operation, removed with the DeletePermission
+    # operation, and listed with the ListPermissions operation.
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Number (ARN) of the private CA from which the
+    #   permission was issued.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the permission was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] principal
+    #   The AWS service or entity that holds the permission. At this time,
+    #   the only valid principal is `acm.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account
+    #   The ID of the account that assigned the permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The private CA operations that can be performed by the designated
+    #   AWS service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] policy
+    #   The name of the policy that is associated with the permission.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Permission AWS API Documentation
+    #
+    class Permission < Struct.new(
+      :certificate_authority_arn,
+      :created_at,
+      :principal,
+      :source_account,
+      :actions,
+      :policy)
       include Aws::Structure
     end
 

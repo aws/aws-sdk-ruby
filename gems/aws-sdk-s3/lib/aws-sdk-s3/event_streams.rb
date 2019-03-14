@@ -37,12 +37,18 @@ module Aws::S3
         @event_emitter.on(:error, Proc.new)
       end
 
+      def on_initial_response_event(&block)
+        @event_emitter.on(:initial_response, Proc.new)
+      end
+
       def on_event(&block)
         on_records_event(&block)
         on_stats_event(&block)
         on_progress_event(&block)
         on_cont_event(&block)
         on_end_event(&block)
+        on_error_event(&block)
+        on_initial_response_event(&block)
       end
 
       # @api private

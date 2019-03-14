@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.47.0 (2019-03-14)
+------------------
+
 * Feature - Support HTTP/2 based AWS event stream operations
 
 3.46.2 (2019-02-19)

@@ -49,6 +49,7 @@ module Aws::ACM
     ImportCertificateRequest = Shapes::StructureShape.new(name: 'ImportCertificateRequest')
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
     InUseList = Shapes::ListShape.new(name: 'InUseList')
+    InvalidArgsException = Shapes::StructureShape.new(name: 'InvalidArgsException')
     InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidDomainValidationOptionsException = Shapes::StructureShape.new(name: 'InvalidDomainValidationOptionsException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
@@ -71,6 +72,7 @@ module Aws::ACM
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
+    RenewCertificateRequest = Shapes::StructureShape.new(name: 'RenewCertificateRequest')
     RenewalEligibility = Shapes::StringShape.new(name: 'RenewalEligibility')
     RenewalStatus = Shapes::StringShape.new(name: 'RenewalStatus')
     RenewalSummary = Shapes::StructureShape.new(name: 'RenewalSummary')
@@ -232,8 +234,13 @@ module Aws::ACM
     RemoveTagsFromCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     RemoveTagsFromCertificateRequest.struct_class = Types::RemoveTagsFromCertificateRequest
 
+    RenewCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
+    RenewCertificateRequest.struct_class = Types::RenewCertificateRequest
+
     RenewalSummary.add_member(:renewal_status, Shapes::ShapeRef.new(shape: RenewalStatus, required: true, location_name: "RenewalStatus"))
     RenewalSummary.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationList, required: true, location_name: "DomainValidationOptions"))
+    RenewalSummary.add_member(:renewal_status_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "RenewalStatusReason"))
+    RenewalSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: TStamp, required: true, location_name: "UpdatedAt"))
     RenewalSummary.struct_class = Types::RenewalSummary
 
     RequestCertificateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
@@ -360,6 +367,7 @@ module Aws::ACM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCertificatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -387,6 +395,16 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+      end)
+
+      api.add_operation(:renew_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RenewCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RenewCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
       api.add_operation(:request_certificate, Seahorse::Model::Operation.new.tap do |o|

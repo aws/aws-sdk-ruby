@@ -427,6 +427,7 @@ module Aws::EC2
     DescribeFpgaImagesResult = Shapes::StructureShape.new(name: 'DescribeFpgaImagesResult')
     DescribeHostReservationOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeHostReservationOfferingsRequest')
     DescribeHostReservationOfferingsResult = Shapes::StructureShape.new(name: 'DescribeHostReservationOfferingsResult')
+    DescribeHostReservationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeHostReservationsMaxResults')
     DescribeHostReservationsRequest = Shapes::StructureShape.new(name: 'DescribeHostReservationsRequest')
     DescribeHostReservationsResult = Shapes::StructureShape.new(name: 'DescribeHostReservationsResult')
     DescribeHostsRequest = Shapes::StructureShape.new(name: 'DescribeHostsRequest')
@@ -3166,7 +3167,7 @@ module Aws::EC2
 
     DescribeHostReservationOfferingsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeHostReservationOfferingsRequest.add_member(:max_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxDuration"))
-    DescribeHostReservationOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeHostReservationOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeHostReservationsMaxResults, location_name: "MaxResults"))
     DescribeHostReservationOfferingsRequest.add_member(:min_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "MinDuration"))
     DescribeHostReservationOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeHostReservationOfferingsRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "OfferingId"))
@@ -4514,6 +4515,7 @@ module Aws::EC2
     HostReservation.add_member(:start, Shapes::ShapeRef.new(shape: DateTime, location_name: "start"))
     HostReservation.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
     HostReservation.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
+    HostReservation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     HostReservation.struct_class = Types::HostReservation
 
     HostReservationIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
