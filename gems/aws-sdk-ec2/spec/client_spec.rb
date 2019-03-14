@@ -98,6 +98,30 @@ module Aws
           end
 
         end
+
+        describe ':security_group_exists' do
+
+          it 'returns fails when an error is returned' do
+            client = Client.new(stub_responses: true)
+            client.stub_responses(:describe_security_groups, 'InvalidGroupNotFound')
+            expect {
+              client.wait_until(:security_group_exists, group_ids:['sg-1234578']) do |w|
+                w.max_attempts = 1
+              end
+            }.to raise_error(Aws::Waiters::Errors::TooManyAttemptsError)
+          end
+
+          it 'returns the security_group object when the group exists' do
+            client = Client.new(stub_responses: true)
+            client.stub_responses(:describe_security_groups, security_groups: [{group_id: 'sg-1234578'}])
+            actual = client.wait_until(:security_group_exists, group_ids:['sg-1234578']) do |w|
+              w.max_attempts = 1
+            end
+            expect(actual.security_groups[0].group_id).to eq('sg-1234578')
+          end
+
+        end
+
       end
     end
   end

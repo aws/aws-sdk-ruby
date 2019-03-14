@@ -25707,6 +25707,7 @@ module Aws::EC2
     # | nat_gateway_available           | {#describe_nat_gateways}            | 15       | 40            |
     # | network_interface_available     | {#describe_network_interfaces}      | 20       | 10            |
     # | password_data_available         | {#get_password_data}                | 15       | 40            |
+    # | security_group_exists           | {#describe_security_groups}         | 15       | 40            |
     # | snapshot_completed              | {#describe_snapshots}               | 15       | 40            |
     # | spot_instance_request_fulfilled | {#describe_spot_instance_requests}  | 15       | 40            |
     # | subnet_available                | {#describe_subnets}                 | 15       | 40            |
@@ -25788,6 +25789,7 @@ module Aws::EC2
         nat_gateway_available: Waiters::NatGatewayAvailable,
         network_interface_available: Waiters::NetworkInterfaceAvailable,
         password_data_available: Waiters::PasswordDataAvailable,
+        security_group_exists: Waiters::SecurityGroupExists,
         snapshot_completed: Waiters::SnapshotCompleted,
         spot_instance_request_fulfilled: Waiters::SpotInstanceRequestFulfilled,
         subnet_available: Waiters::SubnetAvailable,
