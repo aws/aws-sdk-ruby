@@ -1,4 +1,4 @@
-if RUBY_VERSION <= '2.1'
+if RUBY_VERSION >= '2.1'
   begin
     require 'http/2'
   rescue LoadError
