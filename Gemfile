@@ -59,7 +59,7 @@ group :test do
     end
   end
 
-  if RUBY_VERSION >= '2.1'
+  if RUBY_VERSION >= '2.1' || ENV['NO_H2']
     # http 2 requires ruby version >= 2.1
     # over alpn with tls
     # requires ruby version >= 2.3 and openssl >=1.0.2
