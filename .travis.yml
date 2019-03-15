@@ -31,7 +31,7 @@ matrix:
   include:
     - rvm: 2.5
       env: OLD_OJ=1
-    - rvm: 2.5
+    - rvm: 2.3
       env: OLD_OX=1
     - rvm: 2.5
       env: NO_H2=1
