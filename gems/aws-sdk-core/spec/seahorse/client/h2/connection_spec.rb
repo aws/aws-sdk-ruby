@@ -14,11 +14,6 @@ module Seahorse
             end
 
           end
-
-        else
-          it 'it should raise an error when you attempt to create a connection' do
-            Connection.new
-          end
         end
 
       end
