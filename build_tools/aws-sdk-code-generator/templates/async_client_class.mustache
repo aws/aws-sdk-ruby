@@ -24,7 +24,7 @@ module {{module_name}}
     {{>documentation}}
     {{/client_constructor}}
     def initialize(*args)
-      unless Kernel.const_defined?("HTTP2::Client")
+      unless Kernel.const_defined?("HTTP2")
         raise "Must include http/2 gem to use AsyncClient instances."
       end
       super
