@@ -29,7 +29,7 @@ matrix:
     - rvm: jruby-9.1.16.0
       env: KITCHEN_SINK=1
   include:
-    - rvm: 2.5
+    - rvm: 2.3
       env: OLD_OJ=1
     - rvm: 2.3
       env: OLD_OX=1

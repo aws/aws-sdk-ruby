@@ -172,9 +172,8 @@ module Aws::Kinesis
     #     sending the request.
     #
     def initialize(*args)
-      unless RUBY_VERSION >= '2.1'
-        raise "API operations over HTTP2 protocol is not supported"\
-          " for Ruby Version < 2.1"
+      unless Kernel.const_defined?("HTTP2::Client")
+        raise "Must include http/2 gem to use AsyncClient instances."
       end
       super
     end

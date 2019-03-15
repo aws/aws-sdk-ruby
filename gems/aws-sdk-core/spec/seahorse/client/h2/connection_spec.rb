@@ -4,7 +4,7 @@ module Seahorse
   module Client
     module H2
       describe Connection do
-        if RUBY_VERSION >= '2.1'
+        if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
           let(:conn) { Connection.new }
 
           describe '#new_stream' do
@@ -15,6 +15,10 @@ module Seahorse
 
           end
 
+        else
+          it 'it should raise an error when you attempt to create a connection' do
+            Connection.new
+          end
         end
 
       end
