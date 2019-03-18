@@ -5,6 +5,13 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+if RUBY_VERSION >= '2.1'
+  begin
+    require 'http/2'
+  rescue LoadError
+    STDERR.puts "Unable to load the http/2 gem."
+  end
+end
 require 'seahorse/client/plugins/content_length.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
@@ -172,7 +179,7 @@ module Aws::Kinesis
     #     sending the request.
     #
     def initialize(*args)
-      unless Kernel.const_defined?("HTTP2::Client")
+      unless Kernel.const_defined?("HTTP2")
         raise "Must include http/2 gem to use AsyncClient instances."
       end
       super
