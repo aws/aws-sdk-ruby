@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.48.0 (2019-03-18)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Feature - Fix http-2 Dependency for Old Ruby Versions (Github Issue #1994)
 
 3.47.0 (2019-03-14)
