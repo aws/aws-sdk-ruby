@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.242 (2019-03-18)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
