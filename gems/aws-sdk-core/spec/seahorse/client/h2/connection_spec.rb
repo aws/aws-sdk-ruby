@@ -4,7 +4,7 @@ module Seahorse
   module Client
     module H2
       describe Connection do
-        if RUBY_VERSION >= '2.1'
+        if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
           let(:conn) { Connection.new }
 
           describe '#new_stream' do
@@ -14,7 +14,6 @@ module Seahorse
             end
 
           end
-
         end
 
       end

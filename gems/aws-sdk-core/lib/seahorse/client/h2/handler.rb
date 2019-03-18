@@ -1,5 +1,9 @@
 if RUBY_VERSION >= '2.1'
-  require 'http/2'
+  begin
+    require 'http/2'
+  rescue LoadError
+    STDERR.puts "Unable to load the http/2 gem."
+  end
 end
 require 'securerandom'
 

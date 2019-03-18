@@ -3,7 +3,7 @@ require_relative '../../spec_helper'
 module Seahorse
   module Client
     describe AsyncBase do
-      if RUBY_VERSION >= '2.1'
+      if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
 
         describe 'api operations' do
 
