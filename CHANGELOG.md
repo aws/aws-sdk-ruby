@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
 2.11.241 (2019-03-14)
 ------------------
 
