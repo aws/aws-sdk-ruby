@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix http-2 Dependency for Old Ruby Versions (Github Issue #1994)
+* Feature - Fix http-2 Dependency for Old Ruby Versions (Github Issue #1994)
 
 3.47.0 (2019-03-14)
 ------------------
