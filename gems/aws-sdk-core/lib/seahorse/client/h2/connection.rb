@@ -1,9 +1,7 @@
 if RUBY_VERSION >= '2.1'
   begin
     require 'http/2'
-  rescue LoadError
-    STDERR.puts "Unable to load the http/2 gem."
-  end
+  rescue LoadError; end
 end
 require 'openssl'
 require 'socket'
