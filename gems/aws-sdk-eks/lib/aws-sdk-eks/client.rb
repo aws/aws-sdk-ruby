@@ -231,8 +231,8 @@ module Aws::EKS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
-    # [2]: http://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
     #
     # @option params [required, String] :name
     #   The unique name to give to your cluster.
@@ -249,21 +249,21 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
     #
     # @option params [required, Types::VpcConfigRequest] :resources_vpc_config
-    #   The VPC subnets and security groups used by the cluster control plane.
-    #   Amazon EKS VPC resources have specific requirements to work properly
-    #   with Kubernetes. For more information, see [Cluster VPC
-    #   Considerations][1] and [Cluster Security Group Considerations][2] in
-    #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You may specify up to five security groups, but we recommend that you
-    #   use a dedicated security group for your cluster control plane.
+    #   The VPC configuration used by the cluster control plane. Amazon EKS
+    #   VPC resources have specific requirements to work properly with
+    #   Kubernetes. For more information, see [Cluster VPC Considerations][1]
+    #   and [Cluster Security Group Considerations][2] in the *Amazon EKS User
+    #   Guide*. You must specify at least two subnets. You may specify up to
+    #   five security groups, but we recommend that you use a dedicated
+    #   security group for your cluster control plane.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-    #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -308,8 +308,10 @@ module Aws::EKS
     #     version: "String",
     #     role_arn: "String", # required
     #     resources_vpc_config: { # required
-    #       subnet_ids: ["String"], # required
+    #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #       endpoint_public_access: false,
+    #       endpoint_private_access: false,
     #     },
     #     client_request_token: "String",
     #   })
@@ -327,6 +329,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -354,7 +358,7 @@ module Aws::EKS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html
     #
     # @option params [required, String] :name
     #   The name of the cluster to delete.
@@ -395,6 +399,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -423,7 +429,7 @@ module Aws::EKS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
     #
     # @option params [required, String] :name
     #   The name of the cluster to describe.
@@ -486,6 +492,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
     #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -528,9 +536,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -666,6 +674,81 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Updates an Amazon EKS cluster configuration. Your cluster continues to
+    # function during the update. The response output includes an update ID
+    # that you can use to track the status of your cluster update with the
+    # DescribeUpdate API operation.
+    #
+    # Currently, the only cluster configuration changes supported are to
+    # enable or disable Amazon EKS public and private API server endpoints.
+    # For more information, see [Amazon EKS Cluster Endpoint Access
+    # Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # Cluster updates are asynchronous, and they should finish within a few
+    # minutes. During an update, the cluster status moves to `UPDATING`
+    # (this status transition is eventually consistent). When the update is
+    # complete (either `Failed` or `Successful`), the cluster status moves
+    # to `Active`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon EKS cluster to update.
+    #
+    # @option params [Types::VpcConfigRequest] :resources_vpc_config
+    #   An object representing an Amazon EKS cluster VPC configuration
+    #   request.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateClusterConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterConfigResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_config({
+    #     name: "String", # required
+    #     resources_vpc_config: {
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #       endpoint_public_access: false,
+    #       endpoint_private_access: false,
+    #     },
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfig AWS API Documentation
+    #
+    # @overload update_cluster_config(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_config(params = {}, options = {})
+      req = build_request(:update_cluster_config, params)
+      req.send_request(options)
+    end
+
     # Updates an Amazon EKS cluster to the specified Kubernetes version.
     # Your cluster continues to function during the update. The response
     # output includes an update ID that you can use to track the status of
@@ -706,9 +789,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -739,7 +822,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

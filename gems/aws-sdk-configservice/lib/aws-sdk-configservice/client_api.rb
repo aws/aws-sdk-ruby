@@ -150,8 +150,12 @@ module Aws::ConfigService
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
     Evaluations = Shapes::ListShape.new(name: 'Evaluations')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
+    Expression = Shapes::StringShape.new(name: 'Expression')
     FailedRemediationBatch = Shapes::StructureShape.new(name: 'FailedRemediationBatch')
     FailedRemediationBatches = Shapes::ListShape.new(name: 'FailedRemediationBatches')
+    FieldInfo = Shapes::StructureShape.new(name: 'FieldInfo')
+    FieldInfoList = Shapes::ListShape.new(name: 'FieldInfoList')
+    FieldName = Shapes::StringShape.new(name: 'FieldName')
     GetAggregateComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleRequest')
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
@@ -180,6 +184,7 @@ module Aws::ConfigService
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidConfigurationRecorderNameException = Shapes::StructureShape.new(name: 'InvalidConfigurationRecorderNameException')
     InvalidDeliveryChannelNameException = Shapes::StructureShape.new(name: 'InvalidDeliveryChannelNameException')
+    InvalidExpressionException = Shapes::StructureShape.new(name: 'InvalidExpressionException')
     InvalidLimitException = Shapes::StructureShape.new(name: 'InvalidLimitException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -240,6 +245,7 @@ module Aws::ConfigService
     PutRemediationConfigurationsResponse = Shapes::StructureShape.new(name: 'PutRemediationConfigurationsResponse')
     PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
     PutRetentionConfigurationResponse = Shapes::StructureShape.new(name: 'PutRetentionConfigurationResponse')
+    QueryInfo = Shapes::StructureShape.new(name: 'QueryInfo')
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
     RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
     RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
@@ -283,6 +289,7 @@ module Aws::ConfigService
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     ResourceValue = Shapes::StructureShape.new(name: 'ResourceValue')
     ResourceValueType = Shapes::StringShape.new(name: 'ResourceValueType')
+    Results = Shapes::ListShape.new(name: 'Results')
     RetentionConfiguration = Shapes::StructureShape.new(name: 'RetentionConfiguration')
     RetentionConfigurationList = Shapes::ListShape.new(name: 'RetentionConfigurationList')
     RetentionConfigurationName = Shapes::StringShape.new(name: 'RetentionConfigurationName')
@@ -290,6 +297,8 @@ module Aws::ConfigService
     RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RuleLimit = Shapes::IntegerShape.new(name: 'RuleLimit')
     Scope = Shapes::StructureShape.new(name: 'Scope')
+    SelectResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectResourceConfigRequest')
+    SelectResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectResourceConfigResponse')
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceDetail = Shapes::StructureShape.new(name: 'SourceDetail')
     SourceDetails = Shapes::ListShape.new(name: 'SourceDetails')
@@ -794,6 +803,11 @@ module Aws::ConfigService
 
     FailedRemediationBatches.member = Shapes::ShapeRef.new(shape: FailedRemediationBatch)
 
+    FieldInfo.add_member(:name, Shapes::ShapeRef.new(shape: FieldName, location_name: "Name"))
+    FieldInfo.struct_class = Types::FieldInfo
+
+    FieldInfoList.member = Shapes::ShapeRef.new(shape: FieldInfo)
+
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
@@ -984,6 +998,9 @@ module Aws::ConfigService
     PutRetentionConfigurationResponse.add_member(:retention_configuration, Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "RetentionConfiguration"))
     PutRetentionConfigurationResponse.struct_class = Types::PutRetentionConfigurationResponse
 
+    QueryInfo.add_member(:select_fields, Shapes::ShapeRef.new(shape: FieldInfoList, location_name: "SelectFields"))
+    QueryInfo.struct_class = Types::QueryInfo
+
     RecordingGroup.add_member(:all_supported, Shapes::ShapeRef.new(shape: AllSupported, location_name: "allSupported"))
     RecordingGroup.add_member(:include_global_resource_types, Shapes::ShapeRef.new(shape: IncludeGlobalResourceTypes, location_name: "includeGlobalResourceTypes"))
     RecordingGroup.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
@@ -1078,6 +1095,8 @@ module Aws::ConfigService
     ResourceValue.add_member(:value, Shapes::ShapeRef.new(shape: ResourceValueType, location_name: "Value"))
     ResourceValue.struct_class = Types::ResourceValue
 
+    Results.member = Shapes::ShapeRef.new(shape: String)
+
     RetentionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "Name"))
     RetentionConfiguration.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, required: true, location_name: "RetentionPeriodInDays"))
     RetentionConfiguration.struct_class = Types::RetentionConfiguration
@@ -1091,6 +1110,16 @@ module Aws::ConfigService
     Scope.add_member(:tag_value, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValue"))
     Scope.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId"))
     Scope.struct_class = Types::Scope
+
+    SelectResourceConfigRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    SelectResourceConfigRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    SelectResourceConfigRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectResourceConfigRequest.struct_class = Types::SelectResourceConfigRequest
+
+    SelectResourceConfigResponse.add_member(:results, Shapes::ShapeRef.new(shape: Results, location_name: "Results"))
+    SelectResourceConfigResponse.add_member(:query_info, Shapes::ShapeRef.new(shape: QueryInfo, location_name: "QueryInfo"))
+    SelectResourceConfigResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectResourceConfigResponse.struct_class = Types::SelectResourceConfigResponse
 
     Source.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, required: true, location_name: "Owner"))
     Source.add_member(:source_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "SourceIdentifier"))
@@ -1701,6 +1730,17 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: PutRetentionConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfRetentionConfigurationsExceededException)
+      end)
+
+      api.add_operation(:select_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SelectResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SelectResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: SelectResourceConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExpressionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:start_config_rules_evaluation, Seahorse::Model::Operation.new.tap do |o|
