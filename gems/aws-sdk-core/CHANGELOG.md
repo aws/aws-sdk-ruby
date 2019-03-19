@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Clean up unnecessary error output when 'http-2' gem is not present.
+
 3.48.0 (2019-03-18)
 ------------------
 
