@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.243 (2019-03-19)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
 
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Container Service for Kubernetes.
