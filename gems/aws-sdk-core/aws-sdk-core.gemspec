@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'AWS SDK for Ruby - Core'
   spec.description   = 'Provides API clients for AWS. This gem is part of the official AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
+  spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.require_paths = ['lib']
   spec.files         = ['ca-bundle.crt', 'VERSION']
