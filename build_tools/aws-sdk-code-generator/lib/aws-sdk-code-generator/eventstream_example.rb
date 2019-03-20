@@ -29,23 +29,17 @@ module AwsSdkCodeGenerator
       <<-EXAMPLE.strip
 # @example Bi-directional EventStream Operation Example
 #
-#   You can signal input events before request starts or/and after initial request is
-#   established, events will be sent from a buffered queue in the signal order
+#   You can signal input events after initial request is
+#   established, events will be sent to stream
 #   immediately (once stream connection is established successfully).
 #
-#   To signal events, you can call #signal methods from an #{@input_eventstream} object or
-#   using a block when making request. Make sure signal events before calling #wait or #join!
-#   at async response.
+#   To signal events, you can call #signal methods from an #{@input_eventstream} object.
+#   Make sure signal events before calling #wait or #join! at async response.
 #
 #     input_stream = #{@input_eventstream}.new
-#     # 1) you may signal events before request
-#{event_entry(:input, 'input_stream')}
 #
 #     async_resp = #{@receiver}.#{@method_name}( # params input,
-#       input_event_stream_handler: input_stream) do |in_stream, out_stream|
-#
-#       # 2) or signal events at request block
-#{event_entry(:input, 'in_stream', 2)}
+#       input_event_stream_handler: input_stream) do |out_stream|
 #
 #       # register callbacks for events arrival
 #{event_entry(:output, 'out_stream', 2)}
@@ -53,7 +47,7 @@ module AwsSdkCodeGenerator
 #     end
 #     # => returns Aws::Seahorse::Client::AsyncResponse
 #
-#     # 3) or signal events after request connection is established
+#     # signal events
 #{event_entry(:input, 'input_stream')}
 #
 #     # make sure signaling :end_stream in the end

@@ -32,21 +32,9 @@ module Aws
             context.http_response.body,
             output_handler)
           if input_emitter = context[:input_event_emitter]
-            # events need to be send in order
-            # every event signature requries prior signature
-            thread = Thread.new do
-              # polling for buffered emit events until stream not active
-              while input_emitter.stream.state == :open
-                while callback = input_emitter.buffer.shift
-                  callback.call if input_emitter.stream.state == :open
-                end
-              end
-            end
-            thread.abort_on_exception = true
-            # attach thread to current stream context
-            # make sure when stream closes (#wait or #join! is called)
-            # input signal thread is also killed
-            context[:input_signal_thread] = thread
+            # #emit will be blocked until 200 success
+            # see Aws::EventEmitter#emit
+            input_emitter.signal_queue << "ready"
           end
         end
 
