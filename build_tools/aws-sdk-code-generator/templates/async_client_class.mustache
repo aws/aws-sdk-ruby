@@ -62,7 +62,7 @@ module {{module_name}}
       )
       {{/eventstream_output}}
 
-      yield({{#eventstream_input}}input_event_stream_handler{{/eventstream_input}}{{#bidirectional}}, {{/bidirectional}}{{#eventstream_output}}output_event_stream_handler{{/eventstream_output}}) if block_given?
+      yield({{#eventstream_output}}output_event_stream_handler{{/eventstream_output}}) if block_given?
 
       req = build_request(:{{name}}, params)
 

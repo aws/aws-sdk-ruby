@@ -28,9 +28,6 @@ describe 'Client Interface:' do
 
       it 'allows disable event validation' do
         input_stream = Async::EventStreams::FooStream.new
-        input_stream.signal_bar_event(bar_wrong_chunk: "chunk0")
-        input_stream.signal_end_stream
-
         no_validate_client = Async::AsyncClient.new(
           region: 'us-west-2',
           credentials: Aws::Credentials.new('akid', 'secret'),
@@ -40,17 +37,17 @@ describe 'Client Interface:' do
             baz_stream: output_stream
           }}
         )
+
         expect {
-          no_validate_client.foo(member_a: "hello", input_event_stream_handler: input_stream).join!
+          async_resp = no_validate_client.foo(member_a: "hello", input_event_stream_handler: input_stream)
+          input_stream.signal_bar_event(bar_wrong_chunk: "chunk0")
+          input_stream.signal_end_stream
+          async_resp.join!
         }.to_not raise_error
       end
 
       it 'supports signal events using eventstream object' do
         input_stream = Async::EventStreams::FooStream.new
-        input_stream.signal_bar_event(bar_chunk: "chunk0")
-        input_stream.signal_bar_event(bar_chunk: "chunk1")
-        input_stream.signal_end_stream
-
         output_stream = Async::EventStreams::BazStream.new
         output_stream.on_baz_result_event do |e|
           expect(e.event_type).to eq(:baz_result)
@@ -59,30 +56,14 @@ describe 'Client Interface:' do
 
         client.foo(member_a: "hello", input_event_stream_handler: input_stream,
           output_event_stream_handler: output_stream)
+        input_stream.signal_bar_event(bar_chunk: "chunk0")
+        input_stream.signal_bar_event(bar_chunk: "chunk1")
+        input_stream.signal_end_stream
 
         client.send_events.each_with_index do |event, i|
           expect(event.headers[":event-type"].value).to eq('BarEvent')
           expect(event.payload.read).to eq("chunk#{i}")
         end
-      end
-
-      it 'supports signal events using request block' do
-        async_resp = client.foo(member_a: "hello") do |input_stream, output_stream|
-
-          input_stream.signal_bar_event(bar_chunk: "chunk")
-          input_stream.signal_end_stream
-
-          output_stream.on_baz_result_event do |e|
-            expect(e.event_type).to eq(:baz_result)
-            expect(e.result.details).to eq(['foo'])
-          end
-        end
-
-        sleep(3)
-        async_resp.join!
-        expect(client.send_events.size).to eq(1)
-        expect(client.send_events.first.headers[":event-type"].value).to eq('BarEvent')
-        expect(client.send_events.first.payload.read).to eq('chunk')
       end
 
       it 'supports signal events after connection established' do
@@ -105,31 +86,19 @@ describe 'Client Interface:' do
         expect(client.send_events.first.payload.read).to eq('chunk')
       end
 
-      it 'supports signal events using block and by handler' do
+      it 'raise error when signal events before making async request' do
         input_stream = Async::EventStreams::FooStream.new
-        output_stream = Async::EventStreams::BazStream.new
-        output_stream.on_baz_result_event do |e|
-          expect(e.event_type).to eq(:baz_result)
-          expect(e.result.details).to eq(['foo'])
-        end
-        input_stream.signal_bar_event(bar_chunk: "chunk0")
 
-        async_resp = client.foo(member_a: "hello", input_event_stream_handler: input_stream,
-          output_event_stream_handler: output_stream) do |stream, _|
+        expect {
+          input_stream.signal_bar_event(bar_chunk: "chunk0")
+        }.to raise_error(Aws::Errors::SignalEventError)
 
-          stream.signal_bar_event(bar_chunk: "chunk1")
+        client.foo(member_a: "hello", input_event_stream_handler: input_stream)
 
-        end
-        input_stream.signal_bar_event(bar_chunk: "chunk2")
-        input_stream.signal_end_stream
-
-        sleep(5)
-        async_resp.join!
-        expect(client.send_events.size).to eq(3)
-        client.send_events.each_with_index do |event, i|
-          expect(event.headers[":event-type"].value).to eq('BarEvent')
-          expect(event.payload.read).to eq("chunk#{i}")
-        end
+        expect {
+          input_stream.signal_bar_event(bar_chunk: "chunk1")
+          input_stream.signal_end_stream
+        }.to_not raise_error
       end
     else
 

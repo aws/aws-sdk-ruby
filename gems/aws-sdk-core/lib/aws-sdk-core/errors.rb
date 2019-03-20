@@ -58,6 +58,10 @@ module Aws
 
     end
 
+    # Raised when attempting to #signal an event before
+    # making an async request
+    class SignalEventError < RuntimeError; end
+
     # Raised when EventStream Parser failed to parse
     # a raw event message
     class EventStreamParserError < RuntimeError; end
