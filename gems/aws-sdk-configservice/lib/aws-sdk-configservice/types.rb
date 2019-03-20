@@ -2569,6 +2569,19 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Details about the fields such as name of the field.
+    #
+    # @!attribute [rw] name
+    #   Name of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FieldInfo AWS API Documentation
+    #
+    class FieldInfo < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAggregateComplianceDetailsByConfigRuleRequest
     #   data as a hash:
     #
@@ -3782,6 +3795,19 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Details about the query.
+    #
+    # @!attribute [rw] select_fields
+    #   Returns a `FieldInfo` object.
+    #   @return [Array<Types::FieldInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/QueryInfo AWS API Documentation
+    #
+    class QueryInfo < Struct.new(
+      :select_fields)
+      include Aws::Structure
+    end
+
     # Specifies the types of AWS resource for which AWS Config records
     # configuration changes.
     #
@@ -4319,6 +4345,59 @@ module Aws::ConfigService
       :tag_key,
       :tag_value,
       :compliance_resource_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SelectResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "Expression", # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   The SQL query `SELECT` command.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of query results returned on each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfigRequest AWS API Documentation
+    #
+    class SelectResourceConfigRequest < Struct.new(
+      :expression,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   Returns the results for the SQL query.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_info
+    #   Returns the `QueryInfo` object.
+    #   @return [Types::QueryInfo]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned in a previous request that you use
+    #   to request the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfigResponse AWS API Documentation
+    #
+    class SelectResourceConfigResponse < Struct.new(
+      :results,
+      :query_info,
+      :next_token)
       include Aws::Structure
     end
 

@@ -42,6 +42,6 @@ require_relative 'aws-sdk-simpledb/customizations'
 # @service
 module Aws::SimpleDB
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

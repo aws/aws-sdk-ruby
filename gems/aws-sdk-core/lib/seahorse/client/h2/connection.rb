@@ -1,5 +1,7 @@
 if RUBY_VERSION >= '2.1'
-  require 'http/2'
+  begin
+    require 'http/2'
+  rescue LoadError; end
 end
 require 'openssl'
 require 'socket'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-03-18)
+------------------
+
+* Feature - Update AsyncClient implementation. Note that the `http-2` gem now must be included separately in your Gemfile or gemspec in order to use the asyncronous client.
+
 1.10.0 (2019-03-14)
 ------------------
 

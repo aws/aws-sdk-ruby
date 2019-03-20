@@ -67,6 +67,61 @@ module Aws::DatabaseMigrationService
     #
     class AddTagsToResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ApplyPendingMaintenanceActionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_instance_arn: "String", # required
+    #         apply_action: "String", # required
+    #         opt_in_type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the AWS DMS resource that the
+    #   pending maintenance action applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_action
+    #   The pending maintenance action to apply to this resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_type
+    #   A value that specifies the type of opt-in request, or undoes an
+    #   opt-in request. An opt-in request of type `immediate` cannot be
+    #   undone.
+    #
+    #   Valid values:
+    #
+    #   * `immediate` - Apply the maintenance action immediately.
+    #
+    #   * `next-maintenance` - Apply the maintenance action during the next
+    #     maintenance window for the resource.
+    #
+    #   * `undo-opt-in` - Cancel any existing `next-maintenance` opt-in
+    #     requests.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ApplyPendingMaintenanceActionMessage AWS API Documentation
+    #
+    class ApplyPendingMaintenanceActionMessage < Struct.new(
+      :replication_instance_arn,
+      :apply_action,
+      :opt_in_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_pending_maintenance_actions
+    #   The AWS DMS resource that the pending maintenance action will be
+    #   applied to.
+    #   @return [Types::ResourcePendingMaintenanceActions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ApplyPendingMaintenanceActionResponse AWS API Documentation
+    #
+    class ApplyPendingMaintenanceActionResponse < Struct.new(
+      :resource_pending_maintenance_actions)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the availability zone.
     #   @return [String]
@@ -214,6 +269,16 @@ module Aws::DatabaseMigrationService
     #           bucket_folder: "String",
     #           bucket_name: "String",
     #           compression_type: "none", # accepts none, gzip
+    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           server_side_encryption_kms_key_id: "String",
+    #           data_format: "csv", # accepts csv, parquet
+    #           encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
+    #           dict_page_size_limit: 1,
+    #           row_group_length: 1,
+    #           data_page_size: 1,
+    #           parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
+    #           enable_statistics: false,
+    #           cdc_inserts_only: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -243,6 +308,33 @@ module Aws::DatabaseMigrationService
     #           endpoint_uri: "String", # required
     #           full_load_error_percentage: 1,
     #           error_retry_duration: 1,
+    #         },
+    #         redshift_settings: {
+    #           accept_any_date: false,
+    #           after_connect_script: "String",
+    #           bucket_folder: "String",
+    #           bucket_name: "String",
+    #           connection_timeout: 1,
+    #           database_name: "String",
+    #           date_format: "String",
+    #           empty_as_null: false,
+    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           file_transfer_upload_streams: 1,
+    #           load_timeout: 1,
+    #           max_file_size: 1,
+    #           password: "SecretString",
+    #           port: 1,
+    #           remove_quotes: false,
+    #           replace_invalid_chars: "String",
+    #           replace_chars: "String",
+    #           server_name: "String",
+    #           service_access_role_arn: "String",
+    #           server_side_encryption_kms_key_id: "String",
+    #           time_format: "String",
+    #           trim_blanks: false,
+    #           truncate_columns: false,
+    #           username: "String",
+    #           write_buffer_size: 1,
     #         },
     #       }
     #
@@ -326,7 +418,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
     #   @return [Types::DynamoDbSettings]
     #
     # @!attribute [rw] s3_settings
@@ -337,7 +429,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #   @return [Types::S3Settings]
     #
     # @!attribute [rw] dms_transfer_settings
@@ -372,7 +464,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #   @return [Types::MongoDbSettings]
     #
     # @!attribute [rw] kinesis_settings
@@ -383,7 +475,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
     #   @return [Types::KinesisSettings]
     #
     # @!attribute [rw] elasticsearch_settings
@@ -394,8 +486,11 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
     #   @return [Types::ElasticsearchSettings]
+    #
+    # @!attribute [rw] redshift_settings
+    #   @return [Types::RedshiftSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
@@ -420,7 +515,8 @@ module Aws::DatabaseMigrationService
       :dms_transfer_settings,
       :mongo_db_settings,
       :kinesis_settings,
-      :elasticsearch_settings)
+      :elasticsearch_settings,
+      :redshift_settings)
       include Aws::Structure
     end
 
@@ -483,7 +579,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_ids
@@ -814,7 +910,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
@@ -1589,6 +1685,73 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePendingMaintenanceActionsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_instance_arn: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The ARN of the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribePendingMaintenanceActionsMessage AWS API Documentation
+    #
+    class DescribePendingMaintenanceActionsMessage < Struct.new(
+      :replication_instance_arn,
+      :filters,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pending_maintenance_actions
+    #   The pending maintenance action.
+    #   @return [Array<Types::ResourcePendingMaintenanceActions>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribePendingMaintenanceActionsResponse AWS API Documentation
+    #
+    class DescribePendingMaintenanceActionsResponse < Struct.new(
+      :pending_maintenance_actions,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRefreshSchemasStatusMessage
     #   data as a hash:
     #
@@ -1888,6 +2051,7 @@ module Aws::DatabaseMigrationService
     #         ],
     #         max_records: 1,
     #         marker: "String",
+    #         without_settings: false,
     #       }
     #
     # @!attribute [rw] filters
@@ -1914,12 +2078,19 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @!attribute [rw] without_settings
+    #   Set this flag to avoid returning setting information. Use this to
+    #   reduce overhead when settings are too large. Choose TRUE to use this
+    #   flag, otherwise choose FALSE (default).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasksMessage AWS API Documentation
     #
     class DescribeReplicationTasksMessage < Struct.new(
       :filters,
       :max_records,
-      :marker)
+      :marker,
+      :without_settings)
       include Aws::Structure
     end
 
@@ -2297,6 +2468,10 @@ module Aws::DatabaseMigrationService
     #   information, see the `ElasticsearchSettings` structure.
     #   @return [Types::ElasticsearchSettings]
     #
+    # @!attribute [rw] redshift_settings
+    #   Settings for the Amazon Redshift endpoint
+    #   @return [Types::RedshiftSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -2322,7 +2497,8 @@ module Aws::DatabaseMigrationService
       :dms_transfer_settings,
       :mongo_db_settings,
       :kinesis_settings,
-      :elasticsearch_settings)
+      :elasticsearch_settings,
+      :redshift_settings)
       include Aws::Structure
     end
 
@@ -2618,6 +2794,16 @@ module Aws::DatabaseMigrationService
     #           bucket_folder: "String",
     #           bucket_name: "String",
     #           compression_type: "none", # accepts none, gzip
+    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           server_side_encryption_kms_key_id: "String",
+    #           data_format: "csv", # accepts csv, parquet
+    #           encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
+    #           dict_page_size_limit: 1,
+    #           row_group_length: 1,
+    #           data_page_size: 1,
+    #           parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
+    #           enable_statistics: false,
+    #           cdc_inserts_only: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -2647,6 +2833,33 @@ module Aws::DatabaseMigrationService
     #           endpoint_uri: "String", # required
     #           full_load_error_percentage: 1,
     #           error_retry_duration: 1,
+    #         },
+    #         redshift_settings: {
+    #           accept_any_date: false,
+    #           after_connect_script: "String",
+    #           bucket_folder: "String",
+    #           bucket_name: "String",
+    #           connection_timeout: 1,
+    #           database_name: "String",
+    #           date_format: "String",
+    #           empty_as_null: false,
+    #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           file_transfer_upload_streams: 1,
+    #           load_timeout: 1,
+    #           max_file_size: 1,
+    #           password: "SecretString",
+    #           port: 1,
+    #           remove_quotes: false,
+    #           replace_invalid_chars: "String",
+    #           replace_chars: "String",
+    #           server_name: "String",
+    #           service_access_role_arn: "String",
+    #           server_side_encryption_kms_key_id: "String",
+    #           time_format: "String",
+    #           trim_blanks: false,
+    #           truncate_columns: false,
+    #           username: "String",
+    #           write_buffer_size: 1,
     #         },
     #       }
     #
@@ -2728,7 +2941,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
     #   @return [Types::DynamoDbSettings]
     #
     # @!attribute [rw] s3_settings
@@ -2739,7 +2952,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring
     #   @return [Types::S3Settings]
     #
     # @!attribute [rw] dms_transfer_settings
@@ -2775,7 +2988,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #   @return [Types::MongoDbSettings]
     #
     # @!attribute [rw] kinesis_settings
@@ -2786,7 +2999,7 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
     #   @return [Types::KinesisSettings]
     #
     # @!attribute [rw] elasticsearch_settings
@@ -2797,8 +3010,11 @@ module Aws::DatabaseMigrationService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
     #   @return [Types::ElasticsearchSettings]
+    #
+    # @!attribute [rw] redshift_settings
+    #   @return [Types::RedshiftSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
     #
@@ -2822,7 +3038,8 @@ module Aws::DatabaseMigrationService
       :dms_transfer_settings,
       :mongo_db_settings,
       :kinesis_settings,
-      :elasticsearch_settings)
+      :elasticsearch_settings,
+      :redshift_settings)
       include Aws::Structure
     end
 
@@ -3330,6 +3547,10 @@ module Aws::DatabaseMigrationService
     #   replication instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] availability_zones
+    #   List of availability zones for this replication instance.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OrderableReplicationInstance AWS API Documentation
     #
     class OrderableReplicationInstance < Struct.new(
@@ -3339,7 +3560,57 @@ module Aws::DatabaseMigrationService
       :min_allocated_storage,
       :max_allocated_storage,
       :default_allocated_storage,
-      :included_allocated_storage)
+      :included_allocated_storage,
+      :availability_zones)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action
+    #   The type of pending maintenance action that is available for the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_applied_after_date
+    #   The date of the maintenance window when the action will be applied.
+    #   The maintenance action will be applied to the resource during its
+    #   first maintenance window after this date. If this date is specified,
+    #   any `next-maintenance` opt-in requests are ignored.
+    #   @return [Time]
+    #
+    # @!attribute [rw] forced_apply_date
+    #   The date when the maintenance action will be automatically applied.
+    #   The maintenance action will be applied to the resource on this date
+    #   regardless of the maintenance window for the resource. If this date
+    #   is specified, any `immediate` opt-in requests are ignored.
+    #   @return [Time]
+    #
+    # @!attribute [rw] opt_in_status
+    #   Indicates the type of opt-in request that has been received for the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_apply_date
+    #   The effective date when the pending maintenance action will be
+    #   applied to the resource. This date takes into account opt-in
+    #   requests received from the `ApplyPendingMaintenanceAction` API, the
+    #   `AutoAppliedAfterDate`, and the `ForcedApplyDate`. This value is
+    #   blank if an opt-in request has not been received and nothing has
+    #   been specified as `AutoAppliedAfterDate` or `ForcedApplyDate`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description providing more detail about the maintenance action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PendingMaintenanceAction AWS API Documentation
+    #
+    class PendingMaintenanceAction < Struct.new(
+      :action,
+      :auto_applied_after_date,
+      :forced_apply_date,
+      :opt_in_status,
+      :current_apply_date,
+      :description)
       include Aws::Structure
     end
 
@@ -3377,6 +3648,216 @@ module Aws::DatabaseMigrationService
     #
     class RebootReplicationInstanceResponse < Struct.new(
       :replication_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RedshiftSettings
+    #   data as a hash:
+    #
+    #       {
+    #         accept_any_date: false,
+    #         after_connect_script: "String",
+    #         bucket_folder: "String",
+    #         bucket_name: "String",
+    #         connection_timeout: 1,
+    #         database_name: "String",
+    #         date_format: "String",
+    #         empty_as_null: false,
+    #         encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #         file_transfer_upload_streams: 1,
+    #         load_timeout: 1,
+    #         max_file_size: 1,
+    #         password: "SecretString",
+    #         port: 1,
+    #         remove_quotes: false,
+    #         replace_invalid_chars: "String",
+    #         replace_chars: "String",
+    #         server_name: "String",
+    #         service_access_role_arn: "String",
+    #         server_side_encryption_kms_key_id: "String",
+    #         time_format: "String",
+    #         trim_blanks: false,
+    #         truncate_columns: false,
+    #         username: "String",
+    #         write_buffer_size: 1,
+    #       }
+    #
+    # @!attribute [rw] accept_any_date
+    #   Allows any date format, including invalid formats such as 00/00/00
+    #   00:00:00, to be loaded without generating an error. You can choose
+    #   TRUE or FALSE (default).
+    #
+    #   This parameter applies only to TIMESTAMP and DATE columns. Always
+    #   use ACCEPTANYDATE with the DATEFORMAT parameter. If the date format
+    #   for the data does not match the DATEFORMAT specification, Amazon
+    #   Redshift inserts a NULL value into that field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] after_connect_script
+    #   Code to run after connecting. This should be the code, not a
+    #   filename.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_folder
+    #   The location where the CSV files are stored before being uploaded to
+    #   the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket you want to use
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_timeout
+    #   Sets the amount of time to wait (in milliseconds) before timing out,
+    #   beginning from when you initially establish a connection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the Amazon Redshift data warehouse (service) you are
+    #   working with.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_format
+    #   The date format you are using. Valid values are `auto`
+    #   (case-sensitive), your date format string enclosed in quotes, or
+    #   NULL. If this is left unset (NULL), it defaults to a format of
+    #   'YYYY-MM-DD'. Using `auto` recognizes most strings, even some that
+    #   are not supported when you use a date format string.
+    #
+    #   If your date and time values use formats different from each other,
+    #   set this to `auto`.
+    #   @return [String]
+    #
+    # @!attribute [rw] empty_as_null
+    #   Specifies whether AWS DMS should migrate empty CHAR and VARCHAR
+    #   fields as NULL. A value of TRUE sets empty CHAR and VARCHAR fields
+    #   to null. The default is FALSE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_mode
+    #   The type of server side encryption you want to use for your data.
+    #   This is part of the endpoint settings or the extra connections
+    #   attributes for Amazon S3. You can choose either SSE\_S3 (default) or
+    #   SSE\_KMS. To use SSE\_S3, create an IAM role with a policy that
+    #   allows `"arn:aws:s3:::*"` to use the following actions:
+    #   `"s3:PutObject", "s3:ListBucket"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_transfer_upload_streams
+    #   Specifies the number of threads used to upload a single file. This
+    #   accepts a value between 1 and 64. It defaults to 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] load_timeout
+    #   Sets the amount of time to wait (in milliseconds) before timing out,
+    #   beginning from when you begin loading.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_file_size
+    #   Specifies the maximum size (in KB) of any CSV file used to transfer
+    #   data to Amazon Redshift. This accepts a value between 1 and 1048576.
+    #   It defaults to 32768 KB (32 MB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] password
+    #   The password for the user named in the username property.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number for Amazon Redshift. The default value is 5439.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remove_quotes
+    #   Removes surrounding quotation marks from strings in the incoming
+    #   data. All characters within the quotation marks, including
+    #   delimiters, are retained. Choose TRUE to remove quotation marks. The
+    #   default is FALSE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] replace_invalid_chars
+    #   A list of chars you want to replace. Use with `ReplaceChars`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace_chars
+    #   Replaces invalid characters specified in `ReplaceInvalidChars`,
+    #   substituting the specified value instead. The default is "?".
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the Amazon Redshift cluster you are using.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The ARN of the role that has access to the Redshift service.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_kms_key_id
+    #   If you are using SSE\_KMS for the `EncryptionMode`, provide the KMS
+    #   Key ID. The key you use needs an attached policy that enables IAM
+    #   user permissions and allows use of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_format
+    #   The time format you want to use. Valid values are `auto`
+    #   (case-sensitive), 'timeformat\_string', 'epochsecs', or
+    #   'epochmillisecs'. It defaults to 10. Using `auto` recognizes most
+    #   strings, even some that are not supported when you use a time format
+    #   string.
+    #
+    #   If your date and time values use formats different from each other,
+    #   set this to `auto`.
+    #   @return [String]
+    #
+    # @!attribute [rw] trim_blanks
+    #   Removes the trailing white space characters from a VARCHAR string.
+    #   This parameter applies only to columns with a VARCHAR data type.
+    #   Choose TRUE to remove unneeded white space. The default is FALSE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] truncate_columns
+    #   Truncates data in columns to the appropriate number of characters,
+    #   so that it fits in the column. Applies only to columns with a
+    #   VARCHAR or CHAR data type, and rows with a size of 4 MB or less.
+    #   Choose TRUE to truncate data. The default is FALSE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] username
+    #   An Amazon Redshift user name for a registered user.
+    #   @return [String]
+    #
+    # @!attribute [rw] write_buffer_size
+    #   The size of the write buffer to use in rows. Valid values range from
+    #   1 to 2048. Defaults to 1024. Use this setting to tune performance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings AWS API Documentation
+    #
+    class RedshiftSettings < Struct.new(
+      :accept_any_date,
+      :after_connect_script,
+      :bucket_folder,
+      :bucket_name,
+      :connection_timeout,
+      :database_name,
+      :date_format,
+      :empty_as_null,
+      :encryption_mode,
+      :file_transfer_upload_streams,
+      :load_timeout,
+      :max_file_size,
+      :password,
+      :port,
+      :remove_quotes,
+      :replace_invalid_chars,
+      :replace_chars,
+      :server_name,
+      :service_access_role_arn,
+      :server_side_encryption_kms_key_id,
+      :time_format,
+      :trim_blanks,
+      :truncate_columns,
+      :username,
+      :write_buffer_size)
       include Aws::Structure
     end
 
@@ -3972,6 +4453,31 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_identifier
+    #   The Amazon Resource Name (ARN) of the DMS resource that the pending
+    #   maintenance action applies to. For information about creating an
+    #   ARN, see [ Constructing an Amazon Resource Name (ARN)][1] in the DMS
+    #   documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_maintenance_action_details
+    #   Detailed information about the pending maintenance action.
+    #   @return [Array<Types::PendingMaintenanceAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ResourcePendingMaintenanceActions AWS API Documentation
+    #
+    class ResourcePendingMaintenanceActions < Struct.new(
+      :resource_identifier,
+      :pending_maintenance_action_details)
+      include Aws::Structure
+    end
+
+    # Settings for exporting data to Amazon S3.
+    #
     # @note When making an API call, you may pass S3Settings
     #   data as a hash:
     #
@@ -3983,6 +4489,16 @@ module Aws::DatabaseMigrationService
     #         bucket_folder: "String",
     #         bucket_name: "String",
     #         compression_type: "none", # accepts none, gzip
+    #         encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #         server_side_encryption_kms_key_id: "String",
+    #         data_format: "csv", # accepts csv, parquet
+    #         encoding_type: "plain", # accepts plain, plain-dictionary, rle-dictionary
+    #         dict_page_size_limit: 1,
+    #         row_group_length: 1,
+    #         data_page_size: 1,
+    #         parquet_version: "parquet-1-0", # accepts parquet-1-0, parquet-2-0
+    #         enable_statistics: false,
+    #         cdc_inserts_only: false,
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -3995,7 +4511,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] csv_row_delimiter
     #   The delimiter used to separate rows in the source files. The default
-    #   is a carriage return (\\n).
+    #   is a carriage return (`\n`).
     #   @return [String]
     #
     # @!attribute [rw] csv_delimiter
@@ -4006,9 +4522,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] bucket_folder
     #   An optional parameter to set a folder name in the S3 bucket. If
     #   provided, tables are created in the path
-    #   &lt;bucketFolder&gt;/&lt;schema\_name&gt;/&lt;table\_name&gt;/. If
-    #   this parameter is not specified, then the path used is
-    #   &lt;schema\_name&gt;/&lt;table\_name&gt;/.
+    #   `<bucketFolder>/<schema_name>/<table_name>/`. If this parameter is
+    #   not specified, then the path used is `<schema_name>/<table_name>/`.
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
@@ -4018,8 +4533,121 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] compression_type
     #   An optional parameter to use GZIP to compress the target files. Set
     #   to GZIP to compress the target files. Set to NONE (the default) or
-    #   do not use to leave the files uncompressed.
+    #   do not use to leave the files uncompressed. Applies to both CSV and
+    #   PARQUET data formats.
     #   @return [String]
+    #
+    # @!attribute [rw] encryption_mode
+    #   The type of server side encryption you want to use for your data.
+    #   This is part of the endpoint settings or the extra connections
+    #   attributes for Amazon S3. You can choose either `SSE_S3` (default)
+    #   or `SSE_KMS`. To use `SSE_S3`, you need an IAM role with permission
+    #   to allow `"arn:aws:s3:::dms-*"` to use the following actions:
+    #
+    #   * s3:CreateBucket
+    #
+    #   * s3:ListBucket
+    #
+    #   * s3:DeleteBucket
+    #
+    #   * s3:GetBucketLocation
+    #
+    #   * s3:GetObject
+    #
+    #   * s3:PutObject
+    #
+    #   * s3:DeleteObject
+    #
+    #   * s3:GetObjectVersion
+    #
+    #   * s3:GetBucketPolicy
+    #
+    #   * s3:PutBucketPolicy
+    #
+    #   * s3:DeleteBucketPolicy
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_kms_key_id
+    #   If you are using SSE\_KMS for the `EncryptionMode`, provide the KMS
+    #   Key ID. The key you use needs an attached policy that enables IAM
+    #   user permissions and allows use of the key.
+    #
+    #   Here is a CLI example: `aws dms create-endpoint
+    #   --endpoint-identifier <value> --endpoint-type target --engine-name
+    #   s3 --s3-settings
+    #   ServiceAccessRoleArn=<value>,BucketFolder=<value>,BucketName=<value>,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=<value>
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The format of the data which you want to use for output. You can
+    #   choose one of the following:
+    #
+    #   * `CSV`\: This is a row-based format with comma-separated values.
+    #
+    #   * `PARQUET`\: Apache Parquet is a columnar storage format that
+    #     features efficient compression and provides faster query response.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoding_type
+    #   The type of encoding you are using: `RLE_DICTIONARY` (default),
+    #   `PLAIN`, or `PLAIN_DICTIONARY`.
+    #
+    #   * `RLE_DICTIONARY` uses a combination of bit-packing and run-length
+    #     encoding to store repeated values more efficiently.
+    #
+    #   * `PLAIN` does not use encoding at all. Values are stored as they
+    #     are.
+    #
+    #   * `PLAIN_DICTIONARY` builds a dictionary of the values encountered
+    #     in a given column. The dictionary is stored in a dictionary page
+    #     for each column chunk.
+    #   @return [String]
+    #
+    # @!attribute [rw] dict_page_size_limit
+    #   The maximum size of an encoded dictionary page of a column. If the
+    #   dictionary page exceeds this, this column is stored using an
+    #   encoding type of `PLAIN`. Defaults to 1024 * 1024 bytes (1MiB), the
+    #   maximum size of a dictionary page before it reverts to `PLAIN`
+    #   encoding. For `PARQUET` format only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] row_group_length
+    #   The number of rows in a row group. A smaller row group size provides
+    #   faster reads. But as the number of row groups grows, the slower
+    #   writes become. Defaults to 10,000 (ten thousand) rows. For `PARQUET`
+    #   format only.
+    #
+    #   If you choose a value larger than the maximum, `RowGroupLength` is
+    #   set to the max row group length in bytes (64 * 1024 * 1024).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_page_size
+    #   The size of one data page in bytes. Defaults to 1024 * 1024 bytes
+    #   (1MiB). For `PARQUET` format only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parquet_version
+    #   The version of Apache Parquet format you want to use: `PARQUET_1_0`
+    #   (default) or `PARQUET_2_0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_statistics
+    #   Enables statistics for Parquet pages and rowGroups. Choose `TRUE` to
+    #   enable statistics, choose `FALSE` to disable. Statistics include
+    #   `NULL`, `DISTINCT`, `MAX`, and `MIN` values. Defaults to `TRUE`. For
+    #   `PARQUET` format only.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cdc_inserts_only
+    #   Option to write only `INSERT` operations to the comma-separated
+    #   value (CSV) output files. By default, the first field in a CSV
+    #   record contains the letter `I` (insert), `U` (update) or `D`
+    #   (delete) to indicate whether the row was inserted, updated, or
+    #   deleted at the source database. If `cdcInsertsOnly` is set to true,
+    #   then only `INSERT`s are recorded in the CSV file, without the `I`
+    #   annotation on each line. Valid values are `TRUE` and `FALSE`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
@@ -4030,7 +4658,17 @@ module Aws::DatabaseMigrationService
       :csv_delimiter,
       :bucket_folder,
       :bucket_name,
-      :compression_type)
+      :compression_type,
+      :encryption_mode,
+      :server_side_encryption_kms_key_id,
+      :data_format,
+      :encoding_type,
+      :dict_page_size_limit,
+      :row_group_length,
+      :data_page_size,
+      :parquet_version,
+      :enable_statistics,
+      :cdc_inserts_only)
       include Aws::Structure
     end
 

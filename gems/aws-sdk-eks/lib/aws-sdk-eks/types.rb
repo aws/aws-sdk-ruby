@@ -54,16 +54,16 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
-    #   The VPC subnets and security groups used by the cluster control
-    #   plane. Amazon EKS VPC resources have specific requirements to work
-    #   properly with Kubernetes. For more information, see [Cluster VPC
+    #   The VPC configuration used by the cluster control plane. Amazon EKS
+    #   VPC resources have specific requirements to work properly with
+    #   Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-    #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigResponse]
     #
     # @!attribute [rw] status
@@ -86,7 +86,7 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
@@ -114,8 +114,10 @@ module Aws::EKS
     #         version: "String",
     #         role_arn: "String", # required
     #         resources_vpc_config: { # required
-    #           subnet_ids: ["String"], # required
+    #           subnet_ids: ["String"],
     #           security_group_ids: ["String"],
+    #           endpoint_public_access: false,
+    #           endpoint_private_access: false,
     #         },
     #         client_request_token: "String",
     #       }
@@ -138,13 +140,13 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
-    #   The VPC subnets and security groups used by the cluster control
-    #   plane. Amazon EKS VPC resources have specific requirements to work
-    #   properly with Kubernetes. For more information, see [Cluster VPC
+    #   The VPC configuration used by the cluster control plane. Amazon EKS
+    #   VPC resources have specific requirements to work properly with
+    #   Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*. You must specify at least two subnets.
     #   You may specify up to five security groups, but we recommend that
@@ -152,8 +154,8 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
-    #   [2]: http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigRequest]
     #
     # @!attribute [rw] client_request_token
@@ -483,6 +485,57 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateClusterConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         resources_vpc_config: {
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #           endpoint_public_access: false,
+    #           endpoint_private_access: false,
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon EKS cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources_vpc_config
+    #   An object representing an Amazon EKS cluster VPC configuration
+    #   request.
+    #   @return [Types::VpcConfigRequest]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
+    #
+    class UpdateClusterConfigRequest < Struct.new(
+      :name,
+      :resources_vpc_config,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigResponse AWS API Documentation
+    #
+    class UpdateClusterConfigResponse < Struct.new(
+      :update)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateClusterVersionRequest
     #   data as a hash:
     #
@@ -553,8 +606,10 @@ module Aws::EKS
     #   data as a hash:
     #
     #       {
-    #         subnet_ids: ["String"], # required
+    #         subnet_ids: ["String"],
     #         security_group_ids: ["String"],
+    #         endpoint_public_access: false,
+    #         endpoint_private_access: false,
     #       }
     #
     # @!attribute [rw] subnet_ids
@@ -572,11 +627,41 @@ module Aws::EKS
     #   group for your VPC is used.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] endpoint_public_access
+    #   Set this value to `false` to disable public access for your
+    #   cluster's Kubernetes API server endpoint. If you disable public
+    #   access, your cluster's Kubernetes API server can only receive
+    #   requests from within the cluster VPC. The default value for this
+    #   parameter is `true`, which enables public access for your Kubernetes
+    #   API server. For more information, see [Amazon EKS Cluster Endpoint
+    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint_private_access
+    #   Set this value to `true` to enable private access for your
+    #   cluster's Kubernetes API server endpoint. If you enable private
+    #   access, Kubernetes API requests from within your cluster's VPC will
+    #   use the private VPC endpoint. The default value for this parameter
+    #   is `false`, which disables private access for your Kubernetes API
+    #   server. For more information, see [Amazon EKS Cluster Endpoint
+    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest AWS API Documentation
     #
     class VpcConfigRequest < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :endpoint_public_access,
+      :endpoint_private_access)
       include Aws::Structure
     end
 
@@ -597,12 +682,29 @@ module Aws::EKS
     #   The VPC associated with your cluster.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_public_access
+    #   This parameter indicates whether the Amazon EKS public API server
+    #   endpoint is enabled. If the Amazon EKS public API server endpoint is
+    #   disabled, your cluster's Kubernetes API server can only receive
+    #   requests that originate from within the cluster VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint_private_access
+    #   This parameter indicates whether the Amazon EKS private API server
+    #   endpoint is enabled. If the Amazon EKS private API server endpoint
+    #   is enabled, Kubernetes API requests that originate from within your
+    #   cluster's VPC will use the private VPC endpoint instead of
+    #   traversing the internet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse AWS API Documentation
     #
     class VpcConfigResponse < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      :vpc_id)
+      :vpc_id,
+      :endpoint_public_access,
+      :endpoint_private_access)
       include Aws::Structure
     end
 

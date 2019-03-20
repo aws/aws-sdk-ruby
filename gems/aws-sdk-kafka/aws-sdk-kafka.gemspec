@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-kafka/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.47.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.48.0')
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end

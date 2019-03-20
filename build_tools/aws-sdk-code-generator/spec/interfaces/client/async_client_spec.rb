@@ -7,7 +7,7 @@ describe 'Client Interface:' do
       SpecHelper.generate_service(['Async'], multiple_files: false)  
     end
 
-    if RUBY_VERSION >= '2.1'
+    if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
 
       let(:output_stream) {
         [
@@ -134,8 +134,7 @@ describe 'Client Interface:' do
     else
 
       it 'raises error when initializing AsyncClient' do
-        expected_msg = "API operations over HTTP2 protocol"\
-          " is not supported for Ruby Version < 2.1"
+        expected_msg = "Must include http/2 gem to use AsyncClient instances."
         expect {
           Async::AsyncClient.new
         }.to raise_error(RuntimeError, expected_msg)

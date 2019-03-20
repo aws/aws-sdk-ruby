@@ -1,6 +1,13 @@
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
+if RUBY_VERSION >= '2.1'
+  begin
+    require 'http/2'
+  rescue LoadError
+    STDERR.puts "Unable to load the http/2 gem."
+  end
+end
 {{#plugin_requires}}
 require '{{.}}'
 {{/plugin_requires}}
@@ -24,9 +31,8 @@ module {{module_name}}
     {{>documentation}}
     {{/client_constructor}}
     def initialize(*args)
-      unless RUBY_VERSION >= '2.1'
-        raise "API operations over HTTP2 protocol is not supported"\
-          " for Ruby Version < 2.1"
+      unless Kernel.const_defined?("HTTP2")
+        raise "Must include http/2 gem to use AsyncClient instances."
       end
       super
     end

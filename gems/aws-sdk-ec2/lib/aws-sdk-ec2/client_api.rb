@@ -4318,6 +4318,7 @@ module Aws::EC2
     FpgaImage.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "productCodes"))
     FpgaImage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     FpgaImage.add_member(:public, Shapes::ShapeRef.new(shape: Boolean, location_name: "public"))
+    FpgaImage.add_member(:data_retention_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "dataRetentionSupport"))
     FpgaImage.struct_class = Types::FpgaImage
 
     FpgaImageAttribute.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))

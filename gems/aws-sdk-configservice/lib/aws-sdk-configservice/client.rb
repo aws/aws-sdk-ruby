@@ -2821,6 +2821,58 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Accepts a structured query language (SQL) `SELECT` command, performs
+    # the corresponding search, and returns resource configurations matching
+    # the properties.
+    #
+    # For more information about query components, see the [ **Query
+    # Components** ][1] section in the AWS Config Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/developerguide/query-components.html
+    #
+    # @option params [required, String] :expression
+    #   The SQL query `SELECT` command.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of query results returned on each page.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned in a previous request that you use to
+    #   request the next page of results in a paginated response.
+    #
+    # @return [Types::SelectResourceConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SelectResourceConfigResponse#results #results} => Array&lt;String&gt;
+    #   * {Types::SelectResourceConfigResponse#query_info #query_info} => Types::QueryInfo
+    #   * {Types::SelectResourceConfigResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.select_resource_config({
+    #     expression: "Expression", # required
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0] #=> String
+    #   resp.query_info.select_fields #=> Array
+    #   resp.query_info.select_fields[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfig AWS API Documentation
+    #
+    # @overload select_resource_config(params = {})
+    # @param [Hash] params ({})
+    def select_resource_config(params = {}, options = {})
+      req = build_request(:select_resource_config, params)
+      req.send_request(options)
+    end
+
     # Runs an on-demand evaluation for the specified AWS Config rules
     # against the last known configuration state of the resources. Use
     # `StartConfigRulesEvaluation` when you want to test that a rule you
@@ -3058,7 +3110,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

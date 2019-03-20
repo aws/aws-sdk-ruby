@@ -19787,6 +19787,10 @@ module Aws::EC2
     #   Indicates whether the AFI is public.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_retention_support
+    #   Indicates whether data retention support is enabled for the AFI.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImage AWS API Documentation
     #
     class FpgaImage < Struct.new(
@@ -19803,7 +19807,8 @@ module Aws::EC2
       :owner_alias,
       :product_codes,
       :tags,
-      :public)
+      :public,
+      :data_retention_support)
       include Aws::Structure
     end
 

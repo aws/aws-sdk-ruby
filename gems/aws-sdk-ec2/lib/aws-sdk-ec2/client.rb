@@ -11935,6 +11935,7 @@ module Aws::EC2
     #   resp.fpga_images[0].tags[0].key #=> String
     #   resp.fpga_images[0].tags[0].value #=> String
     #   resp.fpga_images[0].public #=> Boolean
+    #   resp.fpga_images[0].data_retention_support #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImages AWS API Documentation
@@ -29978,7 +29979,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5,6 +5,13 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+if RUBY_VERSION >= '2.1'
+  begin
+    require 'http/2'
+  rescue LoadError
+    STDERR.puts "Unable to load the http/2 gem."
+  end
+end
 require 'seahorse/client/plugins/content_length.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
@@ -172,9 +179,8 @@ module Aws::Kinesis
     #     sending the request.
     #
     def initialize(*args)
-      unless RUBY_VERSION >= '2.1'
-        raise "API operations over HTTP2 protocol is not supported"\
-          " for Ruby Version < 2.1"
+      unless Kernel.const_defined?("HTTP2")
+        raise "Must include http/2 gem to use AsyncClient instances."
       end
       super
     end
@@ -469,7 +475,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
