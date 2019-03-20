@@ -328,7 +328,7 @@ module Aws::CodePipeline
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
     #
     # @option params [required, Types::ArtifactDetails] :input_artifact_details
     #   The details of the input artifact for the action, such as its commit
@@ -903,6 +903,12 @@ module Aws::CodePipeline
     # Returns information about the state of a pipeline, including the
     # stages and actions.
     #
+    # <note markdown="1"> Values returned in the revisionId and revisionUrl fields indicate the
+    # source revision information, such as the commit ID, for the current
+    # state.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the pipeline about which you want to get information.
     #
@@ -1027,6 +1033,83 @@ module Aws::CodePipeline
     # @param [Hash] params ({})
     def get_third_party_job_details(params = {}, options = {})
       req = build_request(:get_third_party_job_details, params)
+      req.send_request(options)
+    end
+
+    # Lists the action executions that have occurred in a pipeline.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline for which you want to list action execution
+    #   history.
+    #
+    # @option params [Types::ActionExecutionFilter] :filter
+    #   Input information used to filter action execution history.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value. The action execution history is limited to the most recent 12
+    #   months, based on action execution start times. Default value is 100.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous ListActionExecutions
+    #   call, which can be used to return the next set of action executions in
+    #   the list.
+    #
+    # @return [Types::ListActionExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActionExecutionsOutput#action_execution_details #action_execution_details} => Array&lt;Types::ActionExecutionDetail&gt;
+    #   * {Types::ListActionExecutionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_action_executions({
+    #     pipeline_name: "PipelineName", # required
+    #     filter: {
+    #       pipeline_execution_id: "PipelineExecutionId",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_execution_details #=> Array
+    #   resp.action_execution_details[0].pipeline_execution_id #=> String
+    #   resp.action_execution_details[0].action_execution_id #=> String
+    #   resp.action_execution_details[0].pipeline_version #=> Integer
+    #   resp.action_execution_details[0].stage_name #=> String
+    #   resp.action_execution_details[0].action_name #=> String
+    #   resp.action_execution_details[0].start_time #=> Time
+    #   resp.action_execution_details[0].last_update_time #=> Time
+    #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Succeeded", "Failed"
+    #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_execution_details[0].input.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
+    #   resp.action_execution_details[0].input.action_type_id.provider #=> String
+    #   resp.action_execution_details[0].input.action_type_id.version #=> String
+    #   resp.action_execution_details[0].input.configuration #=> Hash
+    #   resp.action_execution_details[0].input.configuration["ActionConfigurationKey"] #=> String
+    #   resp.action_execution_details[0].input.role_arn #=> String
+    #   resp.action_execution_details[0].input.region #=> String
+    #   resp.action_execution_details[0].input.input_artifacts #=> Array
+    #   resp.action_execution_details[0].input.input_artifacts[0].name #=> String
+    #   resp.action_execution_details[0].input.input_artifacts[0].s3location.bucket #=> String
+    #   resp.action_execution_details[0].input.input_artifacts[0].s3location.key #=> String
+    #   resp.action_execution_details[0].output.output_artifacts #=> Array
+    #   resp.action_execution_details[0].output.output_artifacts[0].name #=> String
+    #   resp.action_execution_details[0].output.output_artifacts[0].s3location.bucket #=> String
+    #   resp.action_execution_details[0].output.output_artifacts[0].s3location.key #=> String
+    #   resp.action_execution_details[0].output.execution_result.external_execution_id #=> String
+    #   resp.action_execution_details[0].output.execution_result.external_execution_summary #=> String
+    #   resp.action_execution_details[0].output.execution_result.external_execution_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutions AWS API Documentation
+    #
+    # @overload list_action_executions(params = {})
+    # @param [Hash] params ({})
+    def list_action_executions(params = {}, options = {})
+      req = build_request(:list_action_executions, params)
       req.send_request(options)
     end
 
@@ -1950,7 +2033,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

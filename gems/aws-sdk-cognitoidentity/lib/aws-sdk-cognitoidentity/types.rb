@@ -8,8 +8,7 @@
 module Aws::CognitoIdentity
   module Types
 
-    # A provider representing an Amazon Cognito Identity User Pool and its
-    # client ID.
+    # A provider representing an Amazon Cognito user pool and its client ID.
     #
     # @note When making an API call, you may pass CognitoIdentityProvider
     #   data as a hash:
@@ -21,17 +20,26 @@ module Aws::CognitoIdentity
     #       }
     #
     # @!attribute [rw] provider_name
-    #   The provider name for an Amazon Cognito Identity User Pool. For
-    #   example, `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
+    #   The provider name for an Amazon Cognito user pool. For example,
+    #   `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
     #   @return [String]
     #
     # @!attribute [rw] client_id
-    #   The client ID for the Amazon Cognito Identity User Pool.
+    #   The client ID for the Amazon Cognito user pool.
     #   @return [String]
     #
     # @!attribute [rw] server_side_token_check
     #   TRUE if server-side token validation is enabled for the identity
     #   provider’s token.
+    #
+    #   Once you set `ServerSideTokenCheck` to TRUE for an identity pool,
+    #   that identity pool will check with the integrated user pools to make
+    #   sure that the user has not been globally signed out or deleted
+    #   before the identity pool provides an OIDC token or AWS credentials
+    #   for the user.
+    #
+    #   If the user is signed out or deleted, the identity pool will return
+    #   a 400 Not Authorized error.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CognitoIdentityProvider AWS API Documentation
@@ -64,6 +72,9 @@ module Aws::CognitoIdentity
     #           },
     #         ],
     #         saml_provider_arns: ["ARNString"],
+    #         identity_pool_tags: {
+    #           "TagKeysType" => "TagValueType",
+    #         },
     #       }
     #
     # @!attribute [rw] identity_pool_name
@@ -94,13 +105,19 @@ module Aws::CognitoIdentity
     #   @return [Array<String>]
     #
     # @!attribute [rw] cognito_identity_providers
-    #   An array of Amazon Cognito Identity user pools and their client IDs.
+    #   An array of Amazon Cognito user pools and their client IDs.
     #   @return [Array<Types::CognitoIdentityProvider>]
     #
     # @!attribute [rw] saml_provider_arns
     #   An array of Amazon Resource Names (ARNs) of the SAML provider for
     #   your identity pool.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] identity_pool_tags
+    #   Tags to assign to the identity pool. A tag is a label that you can
+    #   apply to identity pools to categorize and manage them in different
+    #   ways, such as by purpose, owner, environment, or other criteria.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CreateIdentityPoolInput AWS API Documentation
     #
@@ -111,7 +128,8 @@ module Aws::CognitoIdentity
       :developer_provider_name,
       :open_id_connect_provider_arns,
       :cognito_identity_providers,
-      :saml_provider_arns)
+      :saml_provider_arns,
+      :identity_pool_tags)
       include Aws::Structure
     end
 
@@ -256,7 +274,20 @@ module Aws::CognitoIdentity
     #
     # @!attribute [rw] logins
     #   A set of optional name-value pairs that map provider names to
-    #   provider tokens.
+    #   provider tokens. The name-value pair will follow the syntax
+    #   "provider\_name": "provider\_user\_identifier".
+    #
+    #   Logins should not be specified when trying to get credentials for an
+    #   unauthenticated identity.
+    #
+    #   The Logins parameter is required when using identities associated
+    #   with external identity providers such as FaceBook. For examples of
+    #   `Logins` maps, see the code examples in the [External Identity
+    #   Providers][1] section of the Amazon Cognito Developer Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] custom_role_arn
@@ -323,8 +354,10 @@ module Aws::CognitoIdentity
     #
     #   * Facebook: `graph.facebook.com`
     #
-    #   * Amazon Cognito Identity Provider:
-    #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`
+    #   * Amazon Cognito user pool:
+    #     `cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>`, for
+    #     example,
+    #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
     #
     #   * Google: `accounts.google.com`
     #
@@ -392,7 +425,7 @@ module Aws::CognitoIdentity
     #   How users for a specific identity provider are to mapped to roles.
     #   This is a String-to-RoleMapping object map. The string identifies
     #   the identity provider, for example, "graph.facebook.com" or
-    #   "cognito-idp-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
+    #   "cognito-idp.us-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
     #   @return [Hash<String,Types::RoleMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRolesResponse AWS API Documentation
@@ -500,7 +533,7 @@ module Aws::CognitoIdentity
     #   A set of optional name-value pairs that map provider names to
     #   provider tokens. When using graph.facebook.com and www.amazon.com,
     #   supply the access\_token returned from the provider's authflow. For
-    #   accounts.google.com, an Amazon Cognito Identity Provider, or any
+    #   accounts.google.com, an Amazon Cognito user pool provider, or any
     #   other OpenId Connect provider, always include the `id_token`.
     #   @return [Hash<String,String>]
     #
@@ -520,7 +553,7 @@ module Aws::CognitoIdentity
     #   @return [String]
     #
     # @!attribute [rw] token
-    #   An OpenID token, valid for 15 minutes.
+    #   An OpenID token, valid for 10 minutes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenResponse AWS API Documentation
@@ -538,8 +571,7 @@ module Aws::CognitoIdentity
     #   @return [String]
     #
     # @!attribute [rw] logins
-    #   A set of optional name-value pairs that map provider names to
-    #   provider tokens.
+    #   The provider names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_date
@@ -582,6 +614,9 @@ module Aws::CognitoIdentity
     #           },
     #         ],
     #         saml_provider_arns: ["ARNString"],
+    #         identity_pool_tags: {
+    #           "TagKeysType" => "TagValueType",
+    #         },
     #       }
     #
     # @!attribute [rw] identity_pool_id
@@ -609,14 +644,20 @@ module Aws::CognitoIdentity
     #   @return [Array<String>]
     #
     # @!attribute [rw] cognito_identity_providers
-    #   A list representing an Amazon Cognito Identity User Pool and its
-    #   client ID.
+    #   A list representing an Amazon Cognito user pool and its client ID.
     #   @return [Array<Types::CognitoIdentityProvider>]
     #
     # @!attribute [rw] saml_provider_arns
     #   An array of Amazon Resource Names (ARNs) of the SAML provider for
     #   your identity pool.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] identity_pool_tags
+    #   The tags that are assigned to the identity pool. A tag is a label
+    #   that you can apply to identity pools to categorize and manage them
+    #   in different ways, such as by purpose, owner, environment, or other
+    #   criteria.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPool AWS API Documentation
     #
@@ -628,7 +669,8 @@ module Aws::CognitoIdentity
       :developer_provider_name,
       :open_id_connect_provider_arns,
       :cognito_identity_providers,
-      :saml_provider_arns)
+      :saml_provider_arns,
+      :identity_pool_tags)
       include Aws::Structure
     end
 
@@ -754,6 +796,36 @@ module Aws::CognitoIdentity
     class ListIdentityPoolsResponse < Struct.new(
       :identity_pools,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARNString", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the identity pool that the tags
+    #   are assigned to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags that are assigned to the identity pool.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1081,6 +1153,37 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARNString", # required
+    #         tags: {
+    #           "TagKeysType" => "TagValueType",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the identity pool to assign the
+    #   tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the identity pool.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Input to the `UnlinkDeveloperIdentity` action.
     #
     # @note When making an API call, you may pass UnlinkDeveloperIdentityInput
@@ -1173,6 +1276,35 @@ module Aws::CognitoIdentity
       :error_code)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ARNString", # required
+    #         tag_keys: ["TagKeysType"],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the identity pool that the tags
+    #   are assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to remove from the user pool.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

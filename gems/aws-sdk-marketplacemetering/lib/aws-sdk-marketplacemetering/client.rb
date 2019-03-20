@@ -249,7 +249,7 @@ module Aws::MarketplaceMetering
     #         timestamp: Time.now, # required
     #         customer_identifier: "CustomerIdentifier", # required
     #         dimension: "UsageDimension", # required
-    #         quantity: 1, # required
+    #         quantity: 1,
     #       },
     #     ],
     #     product_code: "ProductCode", # required
@@ -298,13 +298,14 @@ module Aws::MarketplaceMetering
     #   It will be one of the fcp dimension name provided during the
     #   publishing of the product.
     #
-    # @option params [required, Integer] :usage_quantity
-    #   Consumption value for the hour.
+    # @option params [Integer] :usage_quantity
+    #   Consumption value for the hour. Defaults to `0` if not specified.
     #
-    # @option params [required, Boolean] :dry_run
+    # @option params [Boolean] :dry_run
     #   Checks whether you have the permissions required for the action, but
     #   does not make the request. If you have the permissions, the request
     #   returns DryRunOperation; otherwise, it returns UnauthorizedException.
+    #   Defaults to `false` if not specified.
     #
     # @return [Types::MeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -316,8 +317,8 @@ module Aws::MarketplaceMetering
     #     product_code: "ProductCode", # required
     #     timestamp: Time.now, # required
     #     usage_dimension: "UsageDimension", # required
-    #     usage_quantity: 1, # required
-    #     dry_run: false, # required
+    #     usage_quantity: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -458,7 +459,7 @@ module Aws::MarketplaceMetering
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

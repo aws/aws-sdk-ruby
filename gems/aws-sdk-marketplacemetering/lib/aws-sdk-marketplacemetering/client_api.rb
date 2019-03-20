@@ -62,8 +62,8 @@ module Aws::MarketplaceMetering
     MeterUsageRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
     MeterUsageRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     MeterUsageRequest.add_member(:usage_dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "UsageDimension"))
-    MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, required: true, location_name: "UsageQuantity"))
-    MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DryRun"))
+    MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "UsageQuantity"))
+    MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     MeterUsageRequest.struct_class = Types::MeterUsageRequest
 
     MeterUsageResult.add_member(:metering_record_id, Shapes::ShapeRef.new(shape: String, location_name: "MeteringRecordId"))
@@ -88,7 +88,7 @@ module Aws::MarketplaceMetering
     UsageRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     UsageRecord.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, required: true, location_name: "CustomerIdentifier"))
     UsageRecord.add_member(:dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "Dimension"))
-    UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, required: true, location_name: "Quantity"))
+    UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "Quantity"))
     UsageRecord.struct_class = Types::UsageRecord
 
     UsageRecordList.member = Shapes::ShapeRef.new(shape: UsageRecord)

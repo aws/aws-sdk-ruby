@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.48.2 (2019-03-20)
+------------------
+
 * Issue - Support signal events after request only [HTTP2]
 
 3.48.1 (2019-03-19)
