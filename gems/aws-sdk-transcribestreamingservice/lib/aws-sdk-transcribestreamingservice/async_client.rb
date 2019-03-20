@@ -310,7 +310,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_stream_transcription({
-    #     language_code: "en-US", # required, accepts en-US
+    #     language_code: "en-US", # required, accepts en-US, es-US
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm
     #     vocabulary_name: "VocabularyName",
@@ -325,7 +325,7 @@ module Aws::TranscribeStreamingService
     # @example Response structure
     #
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US"
+    #   resp.language_code #=> String, one of "en-US", "es-US"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm"
     #   resp.vocabulary_name #=> String

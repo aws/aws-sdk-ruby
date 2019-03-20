@@ -107,7 +107,10 @@
     },
     "LanguageCode":{
       "type":"string",
-      "enum":["en-US"]
+      "enum":[
+        "en-US",
+        "es-US"
+      ]
     },
     "LimitExceededException":{
       "type":"structure",
