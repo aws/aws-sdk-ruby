@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.244 (2019-03-20)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
