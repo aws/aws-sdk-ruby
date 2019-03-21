@@ -86,6 +86,8 @@ module Aws::Lightsail
     DeleteInstanceSnapshotResult = Shapes::StructureShape.new(name: 'DeleteInstanceSnapshotResult')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
     DeleteKeyPairResult = Shapes::StructureShape.new(name: 'DeleteKeyPairResult')
+    DeleteKnownHostKeysRequest = Shapes::StructureShape.new(name: 'DeleteKnownHostKeysRequest')
+    DeleteKnownHostKeysResult = Shapes::StructureShape.new(name: 'DeleteKnownHostKeysResult')
     DeleteLoadBalancerRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerRequest')
     DeleteLoadBalancerResult = Shapes::StructureShape.new(name: 'DeleteLoadBalancerResult')
     DeleteLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerTlsCertificateRequest')
@@ -215,6 +217,8 @@ module Aws::Lightsail
     GetStaticIpResult = Shapes::StructureShape.new(name: 'GetStaticIpResult')
     GetStaticIpsRequest = Shapes::StructureShape.new(name: 'GetStaticIpsRequest')
     GetStaticIpsResult = Shapes::StructureShape.new(name: 'GetStaticIpsResult')
+    HostKeyAttributes = Shapes::StructureShape.new(name: 'HostKeyAttributes')
+    HostKeysList = Shapes::ListShape.new(name: 'HostKeysList')
     ImportKeyPairRequest = Shapes::StructureShape.new(name: 'ImportKeyPairRequest')
     ImportKeyPairResult = Shapes::StructureShape.new(name: 'ImportKeyPairResult')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -679,6 +683,12 @@ module Aws::Lightsail
 
     DeleteKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     DeleteKeyPairResult.struct_class = Types::DeleteKeyPairResult
+
+    DeleteKnownHostKeysRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    DeleteKnownHostKeysRequest.struct_class = Types::DeleteKnownHostKeysRequest
+
+    DeleteKnownHostKeysResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteKnownHostKeysResult.struct_class = Types::DeleteKnownHostKeysResult
 
     DeleteLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
     DeleteLoadBalancerRequest.struct_class = Types::DeleteLoadBalancerRequest
@@ -1165,6 +1175,17 @@ module Aws::Lightsail
     GetStaticIpsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetStaticIpsResult.struct_class = Types::GetStaticIpsResult
 
+    HostKeyAttributes.add_member(:algorithm, Shapes::ShapeRef.new(shape: string, location_name: "algorithm"))
+    HostKeyAttributes.add_member(:public_key, Shapes::ShapeRef.new(shape: string, location_name: "publicKey"))
+    HostKeyAttributes.add_member(:witnessed_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "witnessedAt"))
+    HostKeyAttributes.add_member(:fingerprint_sha1, Shapes::ShapeRef.new(shape: string, location_name: "fingerprintSHA1"))
+    HostKeyAttributes.add_member(:fingerprint_sha256, Shapes::ShapeRef.new(shape: string, location_name: "fingerprintSHA256"))
+    HostKeyAttributes.add_member(:not_valid_before, Shapes::ShapeRef.new(shape: IsoDate, location_name: "notValidBefore"))
+    HostKeyAttributes.add_member(:not_valid_after, Shapes::ShapeRef.new(shape: IsoDate, location_name: "notValidAfter"))
+    HostKeyAttributes.struct_class = Types::HostKeyAttributes
+
+    HostKeysList.member = Shapes::ShapeRef.new(shape: HostKeyAttributes)
+
     ImportKeyPairRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "keyPairName"))
     ImportKeyPairRequest.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, required: true, location_name: "publicKeyBase64"))
     ImportKeyPairRequest.struct_class = Types::ImportKeyPairRequest
@@ -1202,6 +1223,7 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: InstanceAccessProtocol, location_name: "protocol"))
     InstanceAccessDetails.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     InstanceAccessDetails.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
+    InstanceAccessDetails.add_member(:host_keys, Shapes::ShapeRef.new(shape: HostKeysList, location_name: "hostKeys"))
     InstanceAccessDetails.struct_class = Types::InstanceAccessDetails
 
     InstanceEntry.add_member(:source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "sourceName"))
@@ -2138,6 +2160,21 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteKeyPairRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteKeyPairResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_known_host_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKnownHostKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKnownHostKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKnownHostKeysResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

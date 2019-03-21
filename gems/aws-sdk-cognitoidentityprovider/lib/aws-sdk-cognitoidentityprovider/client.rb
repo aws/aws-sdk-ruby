@@ -2152,12 +2152,9 @@ module Aws::CognitoIdentityProvider
     #   The SMS configuration.
     #
     # @option params [Hash<String,String>] :user_pool_tags
-    #   The cost allocation tags for the user pool. For more information, see
-    #   [Adding Cost Allocation Tags to Your User Pool][1]
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   The tag keys and values to assign to the user pool. A tag is a label
+    #   that you can use to categorize and manage user pools in different
+    #   ways, such as by purpose, owner, environment, or other criteria.
     #
     # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
     #   The configuration for `AdminCreateUser` requests.
@@ -2228,7 +2225,7 @@ module Aws::CognitoIdentityProvider
     #       external_id: "StringType",
     #     },
     #     user_pool_tags: {
-    #       "StringType" => "StringType",
+    #       "TagKeysType" => "TagValueType",
     #     },
     #     admin_create_user_config: {
     #       allow_admin_create_user_only: false,
@@ -2318,7 +2315,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
-    #   resp.user_pool.user_pool_tags["StringType"] #=> String
+    #   resp.user_pool.user_pool_tags["TagKeysType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
@@ -2374,7 +2371,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #
     # @option params [Array<String>] :explicit_auth_flows
     #   The explicit authentication flows.
@@ -2541,7 +2538,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
     #
     # @return [Types::CreateUserPoolDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3033,7 +3030,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
-    #   resp.user_pool.user_pool_tags["StringType"] #=> String
+    #   resp.user_pool.user_pool_tags["TagKeysType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.domain #=> String
@@ -3891,6 +3888,42 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def list_resource_servers(params = {}, options = {})
       req = build_request(:list_resource_servers, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags that are assigned to an Amazon Cognito user pool.
+    #
+    # A tag is a label that you can apply to user pools to categorize and
+    # manage them in different ways, such as by purpose, owner, environment,
+    # or other criteria.
+    #
+    # You can use this action up to 10 times per second, per account.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the user pool that the tags are
+    #   assigned to.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ArnType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKeysType"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -4846,6 +4879,80 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Assigns a set of tags to an Amazon Cognito user pool. A tag is a label
+    # that you can use to categorize and manage user pools in different
+    # ways, such as by purpose, owner, environment, or other criteria.
+    #
+    # Each tag consists of a key and value, both of which you define. A key
+    # is a general category for more specific values. For example, if you
+    # have two versions of a user pool, one for testing and another for
+    # production, you might assign an `Environment` tag key to both user
+    # pools. The value of this key might be `Test` for one user pool and
+    # `Production` for the other.
+    #
+    # Tags are useful for cost tracking and access control. You can activate
+    # your tags so that they appear on the Billing and Cost Management
+    # console, where you can track the costs associated with your user
+    # pools. In an IAM policy, you can constrain permissions for user pools
+    # based on specific tags or tag values.
+    #
+    # You can use this action up to 5 times per second, per account. A user
+    # pool can have as many as 50 tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the user pool to assign the tags to.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the user pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ArnType", # required
+    #     tags: {
+    #       "TagKeysType" => "TagValueType",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from an Amazon Cognito user pool. You can
+    # use this action up to 5 times per second, per account
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the user pool that the tags are
+    #   assigned to.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   The keys of the tags to remove from the user pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ArnType", # required
+    #     tag_keys: ["TagKeysType"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Provides the feedback for an authentication event whether it was from
     # a valid user or not. This feedback is used for improving the risk
     # evaluation decision for the user pool as part of Amazon Cognito
@@ -5179,12 +5286,9 @@ module Aws::CognitoIdentityProvider
     #   SMS configuration.
     #
     # @option params [Hash<String,String>] :user_pool_tags
-    #   The cost allocation tags for the user pool. For more information, see
-    #   [Adding Cost Allocation Tags to Your User Pool][1]
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   The tag keys and values to assign to the user pool. A tag is a label
+    #   that you can use to categorize and manage user pools in different
+    #   ways, such as by purpose, owner, environment, or other criteria.
     #
     # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
     #   The configuration for `AdminCreateUser` requests.
@@ -5247,7 +5351,7 @@ module Aws::CognitoIdentityProvider
     #       external_id: "StringType",
     #     },
     #     user_pool_tags: {
-    #       "StringType" => "StringType",
+    #       "TagKeysType" => "TagValueType",
     #     },
     #     admin_create_user_config: {
     #       allow_admin_create_user_only: false,
@@ -5474,7 +5578,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
     #
     # @option params [required, String] :domain
     #   The domain name for the custom domain that hosts the sign-up and
@@ -5608,7 +5712,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

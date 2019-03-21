@@ -268,6 +268,8 @@ module Aws::CognitoIdentityProvider
     ListResourceServersLimitType = Shapes::IntegerShape.new(name: 'ListResourceServersLimitType')
     ListResourceServersRequest = Shapes::StructureShape.new(name: 'ListResourceServersRequest')
     ListResourceServersResponse = Shapes::StructureShape.new(name: 'ListResourceServersResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUserImportJobsRequest = Shapes::StructureShape.new(name: 'ListUserImportJobsRequest')
     ListUserImportJobsResponse = Shapes::StructureShape.new(name: 'ListUserImportJobsResponse')
     ListUserPoolClientsRequest = Shapes::StructureShape.new(name: 'ListUserPoolClientsRequest')
@@ -370,6 +372,10 @@ module Aws::CognitoIdentityProvider
     StringAttributeConstraintsType = Shapes::StructureShape.new(name: 'StringAttributeConstraintsType')
     StringType = Shapes::StringShape.new(name: 'StringType')
     SupportedIdentityProvidersListType = Shapes::ListShape.new(name: 'SupportedIdentityProvidersListType')
+    TagKeysType = Shapes::StringShape.new(name: 'TagKeysType')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValueType = Shapes::StringShape.new(name: 'TagValueType')
     TokenModelType = Shapes::StringShape.new(name: 'TokenModelType')
     TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -377,6 +383,8 @@ module Aws::CognitoIdentityProvider
     UnexpectedLambdaException = Shapes::StructureShape.new(name: 'UnexpectedLambdaException')
     UnsupportedIdentityProviderException = Shapes::StructureShape.new(name: 'UnsupportedIdentityProviderException')
     UnsupportedUserStateException = Shapes::StructureShape.new(name: 'UnsupportedUserStateException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAuthEventFeedbackRequest = Shapes::StructureShape.new(name: 'UpdateAuthEventFeedbackRequest')
     UpdateAuthEventFeedbackResponse = Shapes::StructureShape.new(name: 'UpdateAuthEventFeedbackResponse')
     UpdateDeviceStatusRequest = Shapes::StructureShape.new(name: 'UpdateDeviceStatusRequest')
@@ -419,6 +427,7 @@ module Aws::CognitoIdentityProvider
     UserPoolNameType = Shapes::StringShape.new(name: 'UserPoolNameType')
     UserPoolPolicyType = Shapes::StructureShape.new(name: 'UserPoolPolicyType')
     UserPoolTaggingException = Shapes::StructureShape.new(name: 'UserPoolTaggingException')
+    UserPoolTagsListType = Shapes::ListShape.new(name: 'UserPoolTagsListType')
     UserPoolTagsType = Shapes::MapShape.new(name: 'UserPoolTagsType')
     UserPoolType = Shapes::StructureShape.new(name: 'UserPoolType')
     UserStatusType = Shapes::StringShape.new(name: 'UserStatusType')
@@ -1204,6 +1213,12 @@ module Aws::CognitoIdentityProvider
     ListResourceServersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
     ListResourceServersResponse.struct_class = Types::ListResourceServersResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListUserImportJobsRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     ListUserImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PoolQueryLimitType, required: true, location_name: "MaxResults"))
     ListUserImportJobsRequest.add_member(:pagination_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "PaginationToken"))
@@ -1474,6 +1489,12 @@ module Aws::CognitoIdentityProvider
 
     SupportedIdentityProvidersListType.member = Shapes::ShapeRef.new(shape: ProviderNameType)
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     UICustomizationType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
     UICustomizationType.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
     UICustomizationType.add_member(:image_url, Shapes::ShapeRef.new(shape: ImageUrlType, location_name: "ImageUrl"))
@@ -1482,6 +1503,12 @@ module Aws::CognitoIdentityProvider
     UICustomizationType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
     UICustomizationType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     UICustomizationType.struct_class = Types::UICustomizationType
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: UserPoolTagsListType, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAuthEventFeedbackRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     UpdateAuthEventFeedbackRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
@@ -1648,8 +1675,10 @@ module Aws::CognitoIdentityProvider
     UserPoolPolicyType.add_member(:password_policy, Shapes::ShapeRef.new(shape: PasswordPolicyType, location_name: "PasswordPolicy"))
     UserPoolPolicyType.struct_class = Types::UserPoolPolicyType
 
-    UserPoolTagsType.key = Shapes::ShapeRef.new(shape: StringType)
-    UserPoolTagsType.value = Shapes::ShapeRef.new(shape: StringType)
+    UserPoolTagsListType.member = Shapes::ShapeRef.new(shape: TagKeysType)
+
+    UserPoolTagsType.key = Shapes::ShapeRef.new(shape: TagKeysType)
+    UserPoolTagsType.value = Shapes::ShapeRef.new(shape: TagValueType)
 
     UserPoolType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
     UserPoolType.add_member(:name, Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "Name"))
@@ -2834,6 +2863,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:list_user_import_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListUserImportJobs"
         o.http_method = "POST"
@@ -3073,6 +3115,32 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:update_auth_event_feedback, Seahorse::Model::Operation.new.tap do |o|

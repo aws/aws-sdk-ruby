@@ -4039,17 +4039,17 @@ module Aws::IoT
     #   Contains a value that specifies the type of indexing performed.
     #   Valid values are:
     #
-    #   * REGISTRY – Your thing index will contain only registry data.
+    #   * REGISTRY – Your thing index contains only registry data.
     #
-    #   * REGISTRY\_AND\_SHADOW - Your thing index will contain registry
-    #     data and shadow data.
+    #   * REGISTRY\_AND\_SHADOW - Your thing index contains registry data
+    #     and shadow data.
     #
-    #   * REGISTRY\_AND\_CONNECTIVITY\_STATUS - Your thing index will
-    #     contain registry data and thing connectivity status data.
+    #   * REGISTRY\_AND\_CONNECTIVITY\_STATUS - Your thing index contains
+    #     registry data and thing connectivity status data.
     #
     #   * REGISTRY\_AND\_SHADOW\_AND\_CONNECTIVITY\_STATUS - Your thing
-    #     index will contain registry data, shadow data, and thing
-    #     connectivity status data.
+    #     index contains registry data, shadow data, and thing connectivity
+    #     status data.
     #   @return [String]
     #
     class DescribeIndexResponse < Struct.new(
@@ -5339,6 +5339,51 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetStatisticsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName",
+    #         query_string: "QueryString", # required
+    #         aggregation_field: "AggregationField",
+    #         query_version: "QueryVersion",
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search. The default value is `AWS_Things`.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query used to search. You can specify "*" for the query
+    #   string to get the count of all indexed things in your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The aggregation field name. Currently not supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The version of the query used to search.
+    #   @return [String]
+    #
+    class GetStatisticsRequest < Struct.new(
+      :index_name,
+      :query_string,
+      :aggregation_field,
+      :query_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statistics
+    #   The statistics returned by the Fleet Indexing service based on the
+    #   query and aggregation field.
+    #   @return [Types::Statistics]
+    #
+    class GetStatisticsResponse < Struct.new(
+      :statistics)
+      include Aws::Structure
+    end
+
     # The input for the GetTopicRule operation.
     #
     # @note When making an API call, you may pass GetTopicRuleRequest
@@ -6462,8 +6507,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results, or null if there are
+    #   no additional results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6481,8 +6526,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results, or null if there are
+    #   no additional results.
     #   @return [String]
     #
     class ListIndicesResponse < Struct.new(
@@ -8458,8 +8503,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] set_as_active
-    #   A boolean value that specifies if the CA certificate is set to
-    #   active.
+    #   A boolean value that specifies if the certificate is set to active.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -9193,8 +9237,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results, or null if there are
+    #   no additional results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9215,8 +9259,8 @@ module Aws::IoT
     end
 
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results, or null if there are
+    #   no additional results.
     #   @return [String]
     #
     # @!attribute [rw] things
@@ -9647,6 +9691,18 @@ module Aws::IoT
     #
     class StatisticalThreshold < Struct.new(
       :statistic)
+      include Aws::Structure
+    end
+
+    # A map of key-value pairs for all supported statistics. Currently, only
+    # count is supported.
+    #
+    # @!attribute [rw] count
+    #   The count of things that match the query.
+    #   @return [Integer]
+    #
+    class Statistics < Struct.new(
+      :count)
       include Aws::Structure
     end
 
@@ -10081,14 +10137,14 @@ module Aws::IoT
     # The connectivity status of the thing.
     #
     # @!attribute [rw] connected
-    #   True if the thing is connected to the AWS IoT service, false if it
+    #   True if the thing is connected to the AWS IoT service; false if it
     #   is not connected.
     #   @return [Boolean]
     #
     # @!attribute [rw] timestamp
     #   The epoch time (in milliseconds) when the thing last connected or
-    #   disconnected. Note that if the thing has been disconnected for more
-    #   than a few weeks, the time value can be missing.
+    #   disconnected. If the thing has been disconnected for more than a few
+    #   weeks, the time value might be missing.
     #   @return [Integer]
     #
     class ThingConnectivity < Struct.new(
@@ -10124,8 +10180,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] connectivity
-    #   Indicates whether or not the thing is connected to the AWS IoT
-    #   service.
+    #   Indicates whether the thing is connected to the AWS IoT service.
     #   @return [Types::ThingConnectivity]
     #
     class ThingDocument < Struct.new(
@@ -10256,9 +10311,9 @@ module Aws::IoT
     # @!attribute [rw] thing_indexing_mode
     #   Thing indexing mode. Valid values are:
     #
-    #   * REGISTRY – Your thing index will contain only registry data.
+    #   * REGISTRY – Your thing index contains registry data only.
     #
-    #   * REGISTRY\_AND\_SHADOW - Your thing index will contain registry and
+    #   * REGISTRY\_AND\_SHADOW - Your thing index contains registry and
     #     shadow data.
     #
     #   * OFF - Thing indexing is disabled.
@@ -10267,9 +10322,9 @@ module Aws::IoT
     # @!attribute [rw] thing_connectivity_indexing_mode
     #   Thing connectivity indexing mode. Valid values are:
     #
-    #   * STATUS – Your thing index will contain connectivity status. In
-    #     order to enable thing connectivity indexing, thingIndexMode must
-    #     not be set to OFF.
+    #   * STATUS – Your thing index contains connectivity status. To enable
+    #     thing connectivity indexing, thingIndexMode must not be set to
+    #     OFF.
     #
     #   * OFF - Thing connectivity status indexing is disabled.
     #   @return [String]
