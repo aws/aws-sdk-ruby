@@ -1980,6 +1980,36 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteKnownHostKeysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the instance for which you want to reset the host key or
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeysRequest AWS API Documentation
+    #
+    class DeleteKnownHostKeysRequest < Struct.new(
+      :instance_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   A list of objects describing the API operation.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeysResult AWS API Documentation
+    #
+    class DeleteKnownHostKeysResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteLoadBalancerRequest
     #   data as a hash:
     #
@@ -2633,7 +2663,25 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of domain entry (e.g., `SOA` or `NS`).
+    #   The type of domain entry, such as address (A), canonical name
+    #   (CNAME), mail exchanger (MX), name server (NS), start of authority
+    #   (SOA), service locator (SRV), or text (TXT).
+    #
+    #   The following domain entry types can be used:
+    #
+    #   * `A`
+    #
+    #   * `CNAME`
+    #
+    #   * `MX`
+    #
+    #   * `NS`
+    #
+    #   * `SOA`
+    #
+    #   * `SRV`
+    #
+    #   * `TXT`
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -4734,6 +4782,76 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the public SSH host keys or the RDP certificate.
+    #
+    # @!attribute [rw] algorithm
+    #   The SSH host key algorithm or the RDP certificate format.
+    #
+    #   For SSH host keys, the algorithm may be `ssh-rsa`,
+    #   `ecdsa-sha2-nistp256`, `ssh-ed25519`, etc. For RDP certificates, the
+    #   algorithm is always `x509-cert`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The public SSH host key or the RDP certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] witnessed_at
+    #   The time that the SSH host key or RDP certificate was recorded by
+    #   Lightsail.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fingerprint_sha1
+    #   The SHA-1 fingerprint of the returned SSH host key or RDP
+    #   certificate.
+    #
+    #   * Example of an SHA-1 SSH fingerprint:
+    #
+    #     `SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0`
+    #
+    #   * Example of an SHA-1 RDP fingerprint:
+    #
+    #     `af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45`
+    #   @return [String]
+    #
+    # @!attribute [rw] fingerprint_sha256
+    #   The SHA-256 fingerprint of the returned SSH host key or RDP
+    #   certificate.
+    #
+    #   * Example of an SHA-256 SSH fingerprint:
+    #
+    #     `SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o`
+    #
+    #   * Example of an SHA-256 RDP fingerprint:
+    #
+    #     `03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68`
+    #   @return [String]
+    #
+    # @!attribute [rw] not_valid_before
+    #   The returned RDP certificate is valid after this point in time.
+    #
+    #   This value is listed only for RDP certificates.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_valid_after
+    #   The returned RDP certificate is not valid after this point in time.
+    #
+    #   This value is listed only for RDP certificates.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/HostKeyAttributes AWS API Documentation
+    #
+    class HostKeyAttributes < Struct.new(
+      :algorithm,
+      :public_key,
+      :witnessed_at,
+      :fingerprint_sha1,
+      :fingerprint_sha256,
+      :not_valid_before,
+      :not_valid_after)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportKeyPairRequest
     #   data as a hash:
     #
@@ -4949,6 +5067,10 @@ module Aws::Lightsail
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] host_keys
+    #   Describes the public SSH host keys or the RDP certificate.
+    #   @return [Array<Types::HostKeyAttributes>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceAccessDetails AWS API Documentation
     #
     class InstanceAccessDetails < Struct.new(
@@ -4960,7 +5082,8 @@ module Aws::Lightsail
       :private_key,
       :protocol,
       :instance_name,
-      :username)
+      :username,
+      :host_keys)
       include Aws::Structure
     end
 

@@ -475,6 +475,37 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Displays the tags associated with a CloudWatch Events resource. In
+    # CloudWatch Events, rules can be tagged.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch Events rule for which you want to view tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists the targets assigned to the specified rule.
     #
     # @option params [required, String] :rule
@@ -613,7 +644,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
     #
     # @option params [required, String] :action
     #   The action that you are enabling the other account to perform.
@@ -652,7 +683,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -698,6 +729,17 @@ module Aws::CloudWatchEvents
     # ScheduleExpression, in which case the rule triggers on matching events
     # as well as on a schedule.
     #
+    # When you initially create a rule, you can optionally assign one or
+    # more tags to the rule. Tags can help you organize and categorize your
+    # resources. You can also use them to scope user permissions, by
+    # granting a user permission to access or change only rules with certain
+    # tag values. To use the `PutRule` operation and assign tags, you must
+    # have both the `events:PutRule` and `events:TagResource` permissions.
+    #
+    # If you are updating an existing rule, any tags you specify in the
+    # `PutRule` operation are ignored. To update the tags of an existing
+    # rule, use TagResource and UntagResource.
+    #
     # Most services in AWS treat : or / as the same character in Amazon
     # Resource Names (ARNs). However, CloudWatch Events uses an exact match
     # in event patterns and rules. Be sure to use the correct ARN characters
@@ -722,7 +764,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html
     #
     # @option params [required, String] :name
     #   The name of the rule that you are creating or updating.
@@ -737,7 +779,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #
     # @option params [String] :state
     #   Indicates whether the rule is enabled or disabled.
@@ -748,6 +790,9 @@ module Aws::CloudWatchEvents
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role associated with the
     #   rule.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of key-value pairs to associate with the rule.
     #
     # @return [Types::PutRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -762,6 +807,12 @@ module Aws::CloudWatchEvents
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     description: "RuleDescription",
     #     role_arn: "RoleArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -890,9 +941,9 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html
     # [2]: https://aws.amazon.com/cloudwatch/pricing/
-    # [3]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -1063,6 +1114,52 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Assigns one or more tags (key-value pairs) to the specified CloudWatch
+    # Events resource. Tags can help you organize and categorize your
+    # resources. You can also use them to scope user permissions by granting
+    # a user permission to access or change only resources with certain tag
+    # values. In CloudWatch Events, rules can be tagged.
+    #
+    # Tags don't have any semantic meaning to AWS and are interpreted
+    # strictly as strings of characters.
+    #
+    # You can use the `TagResource` action with a rule that already has
+    # tags. If you specify a new tag key for the rule, this tag is appended
+    # to the list of tags associated with the rule. If you specify a tag key
+    # that is already associated with the rule, the new tag value that you
+    # specify replaces the previous value for that tag.
+    #
+    # You can associate as many as 50 tags with a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch Events rule that you're adding tags to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The list of key-value pairs to associate with the rule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Tests whether the specified event pattern matches the provided event.
     #
     # Most services in AWS treat : or / as the same character in Amazon
@@ -1077,7 +1174,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #
     # @option params [required, String] :event
     #   The event, in JSON format, to test against the event pattern.
@@ -1106,6 +1203,34 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Removes one or more tags from the specified CloudWatch Events
+    # resource. In CloudWatch Events, rules can be tagged.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch Events rule from which you are removing
+    #   tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1119,7 +1244,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

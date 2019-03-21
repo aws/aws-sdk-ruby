@@ -100,7 +100,9 @@ module Aws::AutoScaling
     end
 
     # The service to use for the health checks. The valid values are `EC2`
-    # and `ELB`.
+    # and `ELB`. If you configure an Auto Scaling group to use ELB health
+    # checks, it considers the instance unhealthy if it fails either the EC2
+    # status checks or the load balancer health checks.
     # @return [String]
     def health_check_type
       data[:health_check_type]
@@ -823,12 +825,13 @@ module Aws::AutoScaling
     #   specify this parameter, you can't specify a launch configuration or a
     #   launch template.
     #
-    #   For more information, see [Using Multiple Instance Types and Purchase
-    #   Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling Groups with Multiple Instance
+    #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     # @option options [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -851,7 +854,9 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the group.
     # @option options [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`.
+    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
+    #   checks, it considers the instance unhealthy if it fails either the EC2
+    #   status checks or the load balancer health checks.
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come

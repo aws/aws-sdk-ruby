@@ -365,6 +365,169 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Returns information about an execution of an action, including the
+    # action execution ID, and the name, version, and timing of the action.
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The pipeline execution ID for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_execution_id
+    #   The action execution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version
+    #   The version of the pipeline where the action was run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage that contains the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   The name of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the action execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last update time of the action execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution. Status categories are
+    #   InProgress, Succeeded, and Failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   Input details for the action execution, such as role ARN, Region,
+    #   and input artifacts.
+    #   @return [Types::ActionExecutionInput]
+    #
+    # @!attribute [rw] output
+    #   Output details for the action execution, such as the action
+    #   execution result.
+    #   @return [Types::ActionExecutionOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionDetail AWS API Documentation
+    #
+    class ActionExecutionDetail < Struct.new(
+      :pipeline_execution_id,
+      :action_execution_id,
+      :pipeline_version,
+      :stage_name,
+      :action_name,
+      :start_time,
+      :last_update_time,
+      :status,
+      :input,
+      :output)
+      include Aws::Structure
+    end
+
+    # Filter values for the action execution.
+    #
+    # @note When making an API call, you may pass ActionExecutionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_execution_id: "PipelineExecutionId",
+    #       }
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The pipeline execution ID used to filter action execution history.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionFilter AWS API Documentation
+    #
+    class ActionExecutionFilter < Struct.new(
+      :pipeline_execution_id)
+      include Aws::Structure
+    end
+
+    # Input information used for an action execution.
+    #
+    # @!attribute [rw] action_type_id
+    #   Represents information about an action type.
+    #   @return [Types::ActionTypeId]
+    #
+    # @!attribute [rw] configuration
+    #   Configuration data for an action execution.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM service role that performs the declared action.
+    #   This is assumed through the roleArn for the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region for the action, such as us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_artifacts
+    #   Details of input artifacts of the action that correspond to the
+    #   action execution.
+    #   @return [Array<Types::ArtifactDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionInput AWS API Documentation
+    #
+    class ActionExecutionInput < Struct.new(
+      :action_type_id,
+      :configuration,
+      :role_arn,
+      :region,
+      :input_artifacts)
+      include Aws::Structure
+    end
+
+    # Output details listed for an action execution, such as the action
+    # execution result.
+    #
+    # @!attribute [rw] output_artifacts
+    #   Details of output artifacts of the action that correspond to the
+    #   action execution.
+    #   @return [Array<Types::ArtifactDetail>]
+    #
+    # @!attribute [rw] execution_result
+    #   Execution result information listed in the output details for an
+    #   action execution.
+    #   @return [Types::ActionExecutionResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionOutput AWS API Documentation
+    #
+    class ActionExecutionOutput < Struct.new(
+      :output_artifacts,
+      :execution_result)
+      include Aws::Structure
+    end
+
+    # Execution result information, such as the external execution ID.
+    #
+    # @!attribute [rw] external_execution_id
+    #   The action provider's external ID for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_summary
+    #   The action provider's summary for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_url
+    #   The deepest external link to the external resource (for example, a
+    #   repository URL or deployment endpoint) that is used when running the
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionResult AWS API Documentation
+    #
+    class ActionExecutionResult < Struct.new(
+      :external_execution_id,
+      :external_execution_summary,
+      :external_execution_url)
+      include Aws::Structure
+    end
+
     # Represents information about the version (or revision) of an action.
     #
     # @note When making an API call, you may pass ActionRevision
@@ -496,7 +659,13 @@ module Aws::CodePipeline
     #   The provider of the service being called by the action. Valid
     #   providers are determined by the action category. For example, an
     #   action in the Deploy category type might have a provider of AWS
-    #   CodeDeploy, which would be specified as CodeDeploy.
+    #   CodeDeploy, which would be specified as CodeDeploy. To reference a
+    #   list of action providers by action type, see [Valid Action Types and
+    #   Providers in CodePipeline][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -611,6 +780,25 @@ module Aws::CodePipeline
       :name,
       :revision,
       :location)
+      include Aws::Structure
+    end
+
+    # Artifact details for the action execution, such as the artifact
+    # location.
+    #
+    # @!attribute [rw] name
+    #   The artifact object name for the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3location
+    #   The Amazon S3 artifact location for the action execution.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactDetail AWS API Documentation
+    #
+    class ArtifactDetail < Struct.new(
+      :name,
+      :s3location)
       include Aws::Structure
     end
 
@@ -846,7 +1034,7 @@ module Aws::CodePipeline
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
     #   @return [Array<Types::ActionConfigurationProperty>]
     #
     # @!attribute [rw] input_artifact_details
@@ -1680,6 +1868,71 @@ module Aws::CodePipeline
       :id,
       :data,
       :account_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListActionExecutionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_name: "PipelineName", # required
+    #         filter: {
+    #           pipeline_execution_id: "PipelineExecutionId",
+    #         },
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline for which you want to list action execution
+    #   history.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Input information used to filter action execution history.
+    #   @return [Types::ActionExecutionFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. The action execution history is limited to the most
+    #   recent 12 months, based on action execution start times. Default
+    #   value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was returned from the previous ListActionExecutions
+    #   call, which can be used to return the next set of action executions
+    #   in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutionsInput AWS API Documentation
+    #
+    class ListActionExecutionsInput < Struct.new(
+      :pipeline_name,
+      :filter,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_execution_details
+    #   The details for a list of recent executions, such as action
+    #   execution ID.
+    #   @return [Array<Types::ActionExecutionDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   If the amount of returned information is significantly large, an
+    #   identifier is also returned and can be used in a subsequent
+    #   ListActionExecutions call to return the next set of action
+    #   executions in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutionsOutput AWS API Documentation
+    #
+    class ListActionExecutionsOutput < Struct.new(
+      :action_execution_details,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2797,6 +3050,24 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The Amazon S3 artifact location for an action's artifacts.
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 artifact bucket for an action's artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The artifact name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :key)
+      include Aws::Structure
+    end
+
     # Information about the version (or revision) of a source artifact that
     # initiated a pipeline execution.
     #
@@ -3375,7 +3646,7 @@ module Aws::CodePipeline
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookFilterRule AWS API Documentation

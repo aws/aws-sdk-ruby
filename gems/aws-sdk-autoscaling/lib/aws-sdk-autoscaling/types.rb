@@ -269,7 +269,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`.
+    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
+    #   checks, it considers the instance unhealthy if it fails either the
+    #   EC2 status checks or the load balancer health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -783,12 +785,13 @@ module Aws::AutoScaling
     #   parameter, a launch template, a launch configuration, or an EC2
     #   instance must be specified.
     #
-    #   For more information, see [Using Multiple Instance Types and
-    #   Purchase Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling Groups with Multiple
+    #   Instance Types and Purchase Options][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     #   @return [Types::MixedInstancesPolicy]
     #
     # @!attribute [rw] instance_id
@@ -864,7 +867,10 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. The default value is `EC2`.
+    #   and `ELB`. The default value is `EC2`. If you configure an Auto
+    #   Scaling group to use ELB health checks, it considers the instance
+    #   unhealthy if it fails either the EC2 status checks or the load
+    #   balancer health checks.
     #
     #   For more information, see [Health Checks for Auto Scaling
     #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -2034,9 +2040,7 @@ module Aws::AutoScaling
     #   The termination policies supported by Amazon EC2 Auto Scaling:
     #   `OldestInstance`, `OldestLaunchConfiguration`, `NewestInstance`,
     #   `ClosestToNextInstanceHour`, `Default`, `OldestLaunchTemplate`, and
-    #   `AllocationStrategy`. Currently, the `OldestLaunchTemplate` and
-    #   `AllocationStrategy` policies are only supported for Auto Scaling
-    #   groups with MixedInstancesPolicy.
+    #   `AllocationStrategy`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypesAnswer AWS API Documentation
@@ -3394,8 +3398,8 @@ module Aws::AutoScaling
     # mixed instances, your Auto Scaling group can provision a combination
     # of On-Demand Instances and Spot Instances across multiple instance
     # types. Used in combination with CreateAutoScalingGroup. For more
-    # information, see [Using Multiple Instance Types and Purchase
-    # Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # information, see [Auto Scaling Groups with Multiple Instance Types and
+    # Purchase Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     # When you create your Auto Scaling group, you can specify a launch
     # configuration or template as a parameter for the top-level object, or
@@ -3404,7 +3408,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     #
     # @note When making an API call, you may pass MixedInstancesPolicy
     #   data as a hash:
@@ -4800,12 +4804,13 @@ module Aws::AutoScaling
     #   specify this parameter, you can't specify a launch configuration or
     #   a launch template.
     #
-    #   For more information, see [Using Multiple Instance Types and
-    #   Purchase Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling Groups with Multiple
+    #   Instance Types and Purchase Options][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     #   @return [Types::MixedInstancesPolicy]
     #
     # @!attribute [rw] min_size
@@ -4842,7 +4847,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`.
+    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
+    #   checks, it considers the instance unhealthy if it fails either the
+    #   EC2 status checks or the load balancer health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period

@@ -20,7 +20,7 @@ module Aws::MarketplaceMetering
     #             timestamp: Time.now, # required
     #             customer_identifier: "CustomerIdentifier", # required
     #             dimension: "UsageDimension", # required
-    #             quantity: 1, # required
+    #             quantity: 1,
     #           },
     #         ],
     #         product_code: "ProductCode", # required
@@ -76,8 +76,8 @@ module Aws::MarketplaceMetering
     #         product_code: "ProductCode", # required
     #         timestamp: Time.now, # required
     #         usage_dimension: "UsageDimension", # required
-    #         usage_quantity: 1, # required
-    #         dry_run: false, # required
+    #         usage_quantity: 1,
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] product_code
@@ -97,14 +97,14 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] usage_quantity
-    #   Consumption value for the hour.
+    #   Consumption value for the hour. Defaults to `0` if not specified.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the permissions required for the action, but
     #   does not make the request. If you have the permissions, the request
     #   returns DryRunOperation; otherwise, it returns
-    #   UnauthorizedException.
+    #   UnauthorizedException. Defaults to `false` if not specified.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest AWS API Documentation
@@ -237,7 +237,7 @@ module Aws::MarketplaceMetering
     #         timestamp: Time.now, # required
     #         customer_identifier: "CustomerIdentifier", # required
     #         dimension: "UsageDimension", # required
-    #         quantity: 1, # required
+    #         quantity: 1,
     #       }
     #
     # @!attribute [rw] timestamp
@@ -260,7 +260,7 @@ module Aws::MarketplaceMetering
     #
     # @!attribute [rw] quantity
     #   The quantity of usage consumed by the customer for the given
-    #   dimension and time.
+    #   dimension and time. Defaults to `0` if not specified.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord AWS API Documentation

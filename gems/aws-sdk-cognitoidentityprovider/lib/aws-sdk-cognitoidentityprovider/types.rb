@@ -2632,7 +2632,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] explicit_auth_flows
@@ -2785,7 +2785,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
     #   @return [Types::CustomDomainConfigType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainRequest AWS API Documentation
@@ -2866,7 +2866,7 @@ module Aws::CognitoIdentityProvider
     #           external_id: "StringType",
     #         },
     #         user_pool_tags: {
-    #           "StringType" => "StringType",
+    #           "TagKeysType" => "TagValueType",
     #         },
     #         admin_create_user_config: {
     #           allow_admin_create_user_only: false,
@@ -2983,12 +2983,9 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SmsConfigurationType]
     #
     # @!attribute [rw] user_pool_tags
-    #   The cost allocation tags for the user pool. For more information,
-    #   see [Adding Cost Allocation Tags to Your User Pool][1]
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   The tag keys and values to assign to the user pool. A tag is a label
+    #   that you can use to categorize and manage user pools in different
+    #   ways, such as by purpose, owner, environment, or other criteria.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] admin_create_user_config
@@ -4812,6 +4809,36 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ArnType", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the user pool that the tags are
+    #   assigned to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags that are assigned to the user pool.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Represents the request to list the user import jobs.
     #
     # @note When making an API call, you may pass ListUserImportJobsRequest
@@ -5842,7 +5869,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Boolean]
     #
     # @!attribute [rw] required
@@ -6485,6 +6512,37 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ArnType", # required
+    #         tags: {
+    #           "TagKeysType" => "TagValueType",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the user pool to assign the tags
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the user pool.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # A container for the UI customization information for a user pool's
     # built-in app UI.
     #
@@ -6528,6 +6586,35 @@ module Aws::CognitoIdentityProvider
       :creation_date)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ArnType", # required
+    #         tag_keys: ["TagKeysType"],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the user pool that the tags are
+    #   assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to remove from the user pool.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateAuthEventFeedbackRequest
     #   data as a hash:
@@ -7112,7 +7199,7 @@ module Aws::CognitoIdentityProvider
     #           external_id: "StringType",
     #         },
     #         user_pool_tags: {
-    #           "StringType" => "StringType",
+    #           "TagKeysType" => "TagValueType",
     #         },
     #         admin_create_user_config: {
     #           allow_admin_create_user_only: false,
@@ -7192,12 +7279,9 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SmsConfigurationType]
     #
     # @!attribute [rw] user_pool_tags
-    #   The cost allocation tags for the user pool. For more information,
-    #   see [Adding Cost Allocation Tags to Your User Pool][1]
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   The tag keys and values to assign to the user pool. A tag is a label
+    #   that you can use to categorize and manage user pools in different
+    #   ways, such as by purpose, owner, environment, or other criteria.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] admin_create_user_config
@@ -7711,12 +7795,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SmsConfigurationType]
     #
     # @!attribute [rw] user_pool_tags
-    #   The cost allocation tags for the user pool. For more information,
-    #   see [Adding Cost Allocation Tags to Your User Pool][1]
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   The tags that are assigned to the user pool. A tag is a label that
+    #   you can apply to user pools to categorize and manage them in
+    #   different ways, such as by purpose, owner, environment, or other
+    #   criteria.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] sms_configuration_failure
@@ -7735,6 +7817,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] custom_domain
+    #   A custom domain name that you provide to Amazon Cognito. This
+    #   parameter applies only if you use a custom domain to host the
+    #   sign-up and sign-in pages for your application. For example:
+    #   `auth.example.com`.
+    #
+    #   For more information about adding a custom domain to your user pool,
+    #   see [Using Your Own Domain for the Hosted UI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
     #   @return [String]
     #
     # @!attribute [rw] admin_create_user_config

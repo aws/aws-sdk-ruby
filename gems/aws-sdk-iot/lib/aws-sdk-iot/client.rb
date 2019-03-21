@@ -1523,7 +1523,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a thing record in the registry.
+    # Creates a thing record in the registry. If this call is made multiple
+    # times using the same thing name and configuration, the call will
+    # succeed. If this call is made with the same thing name but different
+    # configuration a `ResourceAlreadyExistsException` is thrown.
     #
     # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
     # information about authorizing control plane actions.
@@ -3729,6 +3732,45 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets statistics about things that match the specified query.
+    #
+    # @option params [String] :index_name
+    #   The name of the index to search. The default value is `AWS_Things`.
+    #
+    # @option params [required, String] :query_string
+    #   The query used to search. You can specify "*" for the query string
+    #   to get the count of all indexed things in your AWS account.
+    #
+    # @option params [String] :aggregation_field
+    #   The aggregation field name. Currently not supported.
+    #
+    # @option params [String] :query_version
+    #   The version of the query used to search.
+    #
+    # @return [Types::GetStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStatisticsResponse#statistics #statistics} => Types::Statistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_statistics({
+    #     index_name: "IndexName",
+    #     query_string: "QueryString", # required
+    #     aggregation_field: "AggregationField",
+    #     query_version: "QueryVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statistics.count #=> Integer
+    #
+    # @overload get_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_statistics(params = {}, options = {})
+      req = build_request(:get_statistics, params)
+      req.send_request(options)
+    end
+
     # Gets information about the rule.
     #
     # @option params [required, String] :rule_name
@@ -4377,8 +4419,8 @@ module Aws::IoT
     # Lists the search indices.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results, or null if there are no
+    #   additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -5758,7 +5800,7 @@ module Aws::IoT
     #   registered.
     #
     # @option params [Boolean] :set_as_active
-    #   A boolean value that specifies if the CA certificate is set to active.
+    #   A boolean value that specifies if the certificate is set to active.
     #
     # @option params [String] :status
     #   The status of the register certificate request.
@@ -6161,8 +6203,8 @@ module Aws::IoT
     #   The search query string.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token used to get the next set of results, or null if there are no
+    #   additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7529,7 +7571,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

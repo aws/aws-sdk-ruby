@@ -278,7 +278,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -378,7 +378,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -403,7 +403,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -537,7 +537,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key
+    #   [1]: https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/KinesisParameters AWS API Documentation
@@ -640,6 +640,37 @@ module Aws::CloudWatchEvents
     class ListRulesResponse < Struct.new(
       :rules,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Events rule for which you want to view
+    #   tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tag keys and values associated with the rule you
+    #   specified
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -896,7 +927,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #   @return [Types::Condition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
@@ -919,6 +950,12 @@ module Aws::CloudWatchEvents
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #         description: "RuleDescription",
     #         role_arn: "RoleArn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -936,7 +973,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -952,6 +989,10 @@ module Aws::CloudWatchEvents
     #   rule.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the rule.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleRequest AWS API Documentation
     #
     class PutRuleRequest < Struct.new(
@@ -960,7 +1001,8 @@ module Aws::CloudWatchEvents
       :event_pattern,
       :state,
       :description,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -1202,7 +1244,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1321,6 +1363,67 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # A key-value pair associated with an AWS resource. In CloudWatch
+    # Events, rules support tagging.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A string you can use to assign a value. The combination of tag keys
+    #   and values can help you organize and categorize your resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the specified tag key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Events rule that you're adding tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the rule.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Targets are the resources to be invoked when a rule is triggered. For
     # a complete list of services and resources that can be set as a target,
     # see PutTargets.
@@ -1334,7 +1437,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -1452,7 +1555,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
     #   @return [Types::EcsParameters]
     #
     # @!attribute [rw] batch_parameters
@@ -1462,7 +1565,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/jobs.html
     #   @return [Types::BatchParameters]
     #
     # @!attribute [rw] sqs_parameters
@@ -1504,7 +1607,7 @@ module Aws::CloudWatchEvents
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] event
@@ -1529,6 +1632,35 @@ module Aws::CloudWatchEvents
       :result)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch Events rule from which you are removing
+    #   tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

@@ -28,6 +28,7 @@ module Aws::IoT
     AddThingToThingGroupResponse = Shapes::StructureShape.new(name: 'AddThingToThingGroupResponse')
     AdditionalMetricsToRetainList = Shapes::ListShape.new(name: 'AdditionalMetricsToRetainList')
     AdditionalParameterMap = Shapes::MapShape.new(name: 'AdditionalParameterMap')
+    AggregationField = Shapes::StringShape.new(name: 'AggregationField')
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
     AlertTarget = Shapes::StructureShape.new(name: 'AlertTarget')
     AlertTargetArn = Shapes::StringShape.new(name: 'AlertTargetArn')
@@ -352,6 +353,8 @@ module Aws::IoT
     GetPolicyVersionResponse = Shapes::StructureShape.new(name: 'GetPolicyVersionResponse')
     GetRegistrationCodeRequest = Shapes::StructureShape.new(name: 'GetRegistrationCodeRequest')
     GetRegistrationCodeResponse = Shapes::StructureShape.new(name: 'GetRegistrationCodeResponse')
+    GetStatisticsRequest = Shapes::StructureShape.new(name: 'GetStatisticsRequest')
+    GetStatisticsResponse = Shapes::StructureShape.new(name: 'GetStatisticsResponse')
     GetTopicRuleRequest = Shapes::StructureShape.new(name: 'GetTopicRuleRequest')
     GetTopicRuleResponse = Shapes::StructureShape.new(name: 'GetTopicRuleResponse')
     GetV2LoggingOptionsRequest = Shapes::StructureShape.new(name: 'GetV2LoggingOptionsRequest')
@@ -374,6 +377,7 @@ module Aws::IoT
     InputName = Shapes::StringShape.new(name: 'InputName')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    InvalidAggregationException = Shapes::StructureShape.new(name: 'InvalidAggregationException')
     InvalidQueryException = Shapes::StructureShape.new(name: 'InvalidQueryException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidResponseException = Shapes::StructureShape.new(name: 'InvalidResponseException')
@@ -683,6 +687,7 @@ module Aws::IoT
     StateReason = Shapes::StringShape.new(name: 'StateReason')
     StateValue = Shapes::StringShape.new(name: 'StateValue')
     StatisticalThreshold = Shapes::StructureShape.new(name: 'StatisticalThreshold')
+    Statistics = Shapes::StructureShape.new(name: 'Statistics')
     Status = Shapes::StringShape.new(name: 'Status')
     StepFunctionsAction = Shapes::StructureShape.new(name: 'StepFunctionsAction')
     StopThingRegistrationTaskRequest = Shapes::StructureShape.new(name: 'StopThingRegistrationTaskRequest')
@@ -1804,6 +1809,15 @@ module Aws::IoT
     GetRegistrationCodeResponse.add_member(:registration_code, Shapes::ShapeRef.new(shape: RegistrationCode, location_name: "registrationCode"))
     GetRegistrationCodeResponse.struct_class = Types::GetRegistrationCodeResponse
 
+    GetStatisticsRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    GetStatisticsRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    GetStatisticsRequest.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, location_name: "aggregationField"))
+    GetStatisticsRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    GetStatisticsRequest.struct_class = Types::GetStatisticsRequest
+
+    GetStatisticsResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: Statistics, location_name: "statistics"))
+    GetStatisticsResponse.struct_class = Types::GetStatisticsResponse
+
     GetTopicRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location: "uri", location_name: "ruleName"))
     GetTopicRuleRequest.struct_class = Types::GetTopicRuleRequest
 
@@ -2643,6 +2657,9 @@ module Aws::IoT
 
     StatisticalThreshold.add_member(:statistic, Shapes::ShapeRef.new(shape: EvaluationStatistic, location_name: "statistic"))
     StatisticalThreshold.struct_class = Types::StatisticalThreshold
+
+    Statistics.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))
+    Statistics.struct_class = Types::Statistics
 
     StepFunctionsAction.add_member(:execution_name_prefix, Shapes::ShapeRef.new(shape: ExecutionNamePrefix, location_name: "executionNamePrefix"))
     StepFunctionsAction.add_member(:state_machine_name, Shapes::ShapeRef.new(shape: StateMachineName, required: true, location_name: "stateMachineName"))
@@ -4204,6 +4221,23 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStatistics"
+        o.http_method = "POST"
+        o.http_request_uri = "/indices/statistics"
+        o.input = Shapes::ShapeRef.new(shape: GetStatisticsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStatisticsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregationException)
+        o.errors << Shapes::ShapeRef.new(shape: IndexNotReadyException)
       end)
 
       api.add_operation(:get_topic_rule, Seahorse::Model::Operation.new.tap do |o|

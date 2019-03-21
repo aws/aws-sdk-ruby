@@ -120,12 +120,13 @@ module Aws::AutoScaling
     #   a launch template, a launch configuration, or an EC2 instance must be
     #   specified.
     #
-    #   For more information, see [Using Multiple Instance Types and Purchase
-    #   Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling Groups with Multiple Instance
+    #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     # @option options [String] :instance_id
     #   The ID of the instance used to create a launch configuration for the
     #   group. This parameter, a launch configuration, a launch template, or a
@@ -182,7 +183,10 @@ module Aws::AutoScaling
     #   The Amazon Resource Names (ARN) of the target groups.
     # @option options [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. The default value is `EC2`.
+    #   and `ELB`. The default value is `EC2`. If you configure an Auto
+    #   Scaling group to use ELB health checks, it considers the instance
+    #   unhealthy if it fails either the EC2 status checks or the load
+    #   balancer health checks.
     #
     #   For more information, see [Health Checks for Auto Scaling
     #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.

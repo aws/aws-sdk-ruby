@@ -31,6 +31,13 @@ module Aws::CodePipeline
     ActionContext = Shapes::StructureShape.new(name: 'ActionContext')
     ActionDeclaration = Shapes::StructureShape.new(name: 'ActionDeclaration')
     ActionExecution = Shapes::StructureShape.new(name: 'ActionExecution')
+    ActionExecutionDetail = Shapes::StructureShape.new(name: 'ActionExecutionDetail')
+    ActionExecutionDetailList = Shapes::ListShape.new(name: 'ActionExecutionDetailList')
+    ActionExecutionFilter = Shapes::StructureShape.new(name: 'ActionExecutionFilter')
+    ActionExecutionId = Shapes::StringShape.new(name: 'ActionExecutionId')
+    ActionExecutionInput = Shapes::StructureShape.new(name: 'ActionExecutionInput')
+    ActionExecutionOutput = Shapes::StructureShape.new(name: 'ActionExecutionOutput')
+    ActionExecutionResult = Shapes::StructureShape.new(name: 'ActionExecutionResult')
     ActionExecutionStatus = Shapes::StringShape.new(name: 'ActionExecutionStatus')
     ActionExecutionToken = Shapes::StringShape.new(name: 'ActionExecutionToken')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
@@ -52,6 +59,8 @@ module Aws::CodePipeline
     ApprovalSummary = Shapes::StringShape.new(name: 'ApprovalSummary')
     ApprovalToken = Shapes::StringShape.new(name: 'ApprovalToken')
     Artifact = Shapes::StructureShape.new(name: 'Artifact')
+    ArtifactDetail = Shapes::StructureShape.new(name: 'ArtifactDetail')
+    ArtifactDetailList = Shapes::ListShape.new(name: 'ArtifactDetailList')
     ArtifactDetails = Shapes::StructureShape.new(name: 'ArtifactDetails')
     ArtifactList = Shapes::ListShape.new(name: 'ArtifactList')
     ArtifactLocation = Shapes::StructureShape.new(name: 'ArtifactLocation')
@@ -95,6 +104,8 @@ module Aws::CodePipeline
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
     ExecutionSummary = Shapes::StringShape.new(name: 'ExecutionSummary')
+    ExternalExecutionId = Shapes::StringShape.new(name: 'ExternalExecutionId')
+    ExternalExecutionSummary = Shapes::StringShape.new(name: 'ExternalExecutionSummary')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     FailureType = Shapes::StringShape.new(name: 'FailureType')
     GetJobDetailsInput = Shapes::StructureShape.new(name: 'GetJobDetailsInput')
@@ -133,6 +144,8 @@ module Aws::CodePipeline
     LastChangedBy = Shapes::StringShape.new(name: 'LastChangedBy')
     LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListActionExecutionsInput = Shapes::StructureShape.new(name: 'ListActionExecutionsInput')
+    ListActionExecutionsOutput = Shapes::StructureShape.new(name: 'ListActionExecutionsOutput')
     ListActionTypesInput = Shapes::StructureShape.new(name: 'ListActionTypesInput')
     ListActionTypesOutput = Shapes::StructureShape.new(name: 'ListActionTypesOutput')
     ListPipelineExecutionsInput = Shapes::StructureShape.new(name: 'ListPipelineExecutionsInput')
@@ -196,7 +209,10 @@ module Aws::CodePipeline
     RevisionSummary = Shapes::StringShape.new(name: 'RevisionSummary')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3ArtifactLocation = Shapes::StructureShape.new(name: 'S3ArtifactLocation')
+    S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     SessionToken = Shapes::StringShape.new(name: 'SessionToken')
@@ -308,6 +324,39 @@ module Aws::CodePipeline
     ActionExecution.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     ActionExecution.struct_class = Types::ActionExecution
 
+    ActionExecutionDetail.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+    ActionExecutionDetail.add_member(:action_execution_id, Shapes::ShapeRef.new(shape: ActionExecutionId, location_name: "actionExecutionId"))
+    ActionExecutionDetail.add_member(:pipeline_version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "pipelineVersion"))
+    ActionExecutionDetail.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, location_name: "stageName"))
+    ActionExecutionDetail.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, location_name: "actionName"))
+    ActionExecutionDetail.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    ActionExecutionDetail.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    ActionExecutionDetail.add_member(:status, Shapes::ShapeRef.new(shape: ActionExecutionStatus, location_name: "status"))
+    ActionExecutionDetail.add_member(:input, Shapes::ShapeRef.new(shape: ActionExecutionInput, location_name: "input"))
+    ActionExecutionDetail.add_member(:output, Shapes::ShapeRef.new(shape: ActionExecutionOutput, location_name: "output"))
+    ActionExecutionDetail.struct_class = Types::ActionExecutionDetail
+
+    ActionExecutionDetailList.member = Shapes::ShapeRef.new(shape: ActionExecutionDetail)
+
+    ActionExecutionFilter.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+    ActionExecutionFilter.struct_class = Types::ActionExecutionFilter
+
+    ActionExecutionInput.add_member(:action_type_id, Shapes::ShapeRef.new(shape: ActionTypeId, location_name: "actionTypeId"))
+    ActionExecutionInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ActionConfigurationMap, location_name: "configuration"))
+    ActionExecutionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    ActionExecutionInput.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "region"))
+    ActionExecutionInput.add_member(:input_artifacts, Shapes::ShapeRef.new(shape: ArtifactDetailList, location_name: "inputArtifacts"))
+    ActionExecutionInput.struct_class = Types::ActionExecutionInput
+
+    ActionExecutionOutput.add_member(:output_artifacts, Shapes::ShapeRef.new(shape: ArtifactDetailList, location_name: "outputArtifacts"))
+    ActionExecutionOutput.add_member(:execution_result, Shapes::ShapeRef.new(shape: ActionExecutionResult, location_name: "executionResult"))
+    ActionExecutionOutput.struct_class = Types::ActionExecutionOutput
+
+    ActionExecutionResult.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExternalExecutionId, location_name: "externalExecutionId"))
+    ActionExecutionResult.add_member(:external_execution_summary, Shapes::ShapeRef.new(shape: ExternalExecutionSummary, location_name: "externalExecutionSummary"))
+    ActionExecutionResult.add_member(:external_execution_url, Shapes::ShapeRef.new(shape: Url, location_name: "externalExecutionUrl"))
+    ActionExecutionResult.struct_class = Types::ActionExecutionResult
+
     ActionRevision.add_member(:revision_id, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revisionId"))
     ActionRevision.add_member(:revision_change_id, Shapes::ShapeRef.new(shape: RevisionChangeIdentifier, required: true, location_name: "revisionChangeId"))
     ActionRevision.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "created"))
@@ -351,6 +400,12 @@ module Aws::CodePipeline
     Artifact.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "revision"))
     Artifact.add_member(:location, Shapes::ShapeRef.new(shape: ArtifactLocation, location_name: "location"))
     Artifact.struct_class = Types::Artifact
+
+    ArtifactDetail.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, location_name: "name"))
+    ArtifactDetail.add_member(:s3location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3location"))
+    ArtifactDetail.struct_class = Types::ArtifactDetail
+
+    ArtifactDetailList.member = Shapes::ShapeRef.new(shape: ArtifactDetail)
 
     ArtifactDetails.add_member(:minimum_count, Shapes::ShapeRef.new(shape: MinimumArtifactCount, required: true, location_name: "minimumCount"))
     ArtifactDetails.add_member(:maximum_count, Shapes::ShapeRef.new(shape: MaximumArtifactCount, required: true, location_name: "maximumCount"))
@@ -520,6 +575,16 @@ module Aws::CodePipeline
     JobDetails.struct_class = Types::JobDetails
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
+
+    ListActionExecutionsInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
+    ListActionExecutionsInput.add_member(:filter, Shapes::ShapeRef.new(shape: ActionExecutionFilter, location_name: "filter"))
+    ListActionExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListActionExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListActionExecutionsInput.struct_class = Types::ListActionExecutionsInput
+
+    ListActionExecutionsOutput.add_member(:action_execution_details, Shapes::ShapeRef.new(shape: ActionExecutionDetailList, location_name: "actionExecutionDetails"))
+    ListActionExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListActionExecutionsOutput.struct_class = Types::ListActionExecutionsOutput
 
     ListActionTypesInput.add_member(:action_owner_filter, Shapes::ShapeRef.new(shape: ActionOwner, location_name: "actionOwnerFilter"))
     ListActionTypesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -693,6 +758,10 @@ module Aws::CodePipeline
     S3ArtifactLocation.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucketName"))
     S3ArtifactLocation.add_member(:object_key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "objectKey"))
     S3ArtifactLocation.struct_class = Types::S3ArtifactLocation
+
+    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "bucket"))
+    S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, location_name: "key"))
+    S3Location.struct_class = Types::S3Location
 
     SourceRevision.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
     SourceRevision.add_member(:revision_id, Shapes::ShapeRef.new(shape: Revision, location_name: "revisionId"))
@@ -964,6 +1033,18 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobException)
+      end)
+
+      api.add_operation(:list_action_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListActionExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListActionExecutionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListActionExecutionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: PipelineExecutionNotFoundException)
       end)
 
       api.add_operation(:list_action_types, Seahorse::Model::Operation.new.tap do |o|

@@ -583,12 +583,13 @@ module Aws::AutoScaling
     #   a launch template, a launch configuration, or an EC2 instance must be
     #   specified.
     #
-    #   For more information, see [Using Multiple Instance Types and Purchase
-    #   Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling Groups with Multiple Instance
+    #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     #
     # @option params [String] :instance_id
     #   The ID of the instance used to create a launch configuration for the
@@ -654,7 +655,10 @@ module Aws::AutoScaling
     #
     # @option params [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. The default value is `EC2`.
+    #   and `ELB`. The default value is `EC2`. If you configure an Auto
+    #   Scaling group to use ELB health checks, it considers the instance
+    #   unhealthy if it fails either the EC2 status checks or the load
+    #   balancer health checks.
     #
     #   For more information, see [Health Checks for Auto Scaling
     #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -4363,12 +4367,13 @@ module Aws::AutoScaling
     #   specify this parameter, you can't specify a launch configuration or a
     #   launch template.
     #
-    #   For more information, see [Using Multiple Instance Types and Purchase
-    #   Options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling Groups with Multiple Instance
+    #   Types and Purchase Options][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
     #
     # @option params [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
@@ -4397,7 +4402,9 @@ module Aws::AutoScaling
     #
     # @option params [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`.
+    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
+    #   checks, it considers the instance unhealthy if it fails either the EC2
+    #   status checks or the load balancer health checks.
     #
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
@@ -4566,7 +4573,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
