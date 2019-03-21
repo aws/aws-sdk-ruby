@@ -460,6 +460,7 @@ to be backwards compatible.
 | Amazon SimpleDB                                       | Aws::SimpleDB                        | aws-sdk-simpledb                        | 2009-04-15  |
 | Amazon Textract                                       | Aws::Textract                        | aws-sdk-textract                        | 2018-06-27  |
 | Amazon Transcribe Service                             | Aws::TranscribeService               | aws-sdk-transcribeservice               | 2017-10-26  |
+| Amazon Transcribe Streaming Service                   | Aws::TranscribeStreamingService      | aws-sdk-transcribestreamingservice      | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                        | aws-sdk-worklink                        | 2018-09-25  |

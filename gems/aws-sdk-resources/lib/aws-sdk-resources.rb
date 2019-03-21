@@ -167,6 +167,7 @@ module Aws
   autoload :Support, 'aws-sdk-support'
   autoload :Textract, 'aws-sdk-textract'
   autoload :TranscribeService, 'aws-sdk-transcribeservice'
+  autoload :TranscribeStreamingService, 'aws-sdk-transcribestreamingservice'
   autoload :Transfer, 'aws-sdk-transfer'
   autoload :Translate, 'aws-sdk-translate'
   autoload :WAF, 'aws-sdk-waf'
