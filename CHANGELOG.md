@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.245 (2019-03-21)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
