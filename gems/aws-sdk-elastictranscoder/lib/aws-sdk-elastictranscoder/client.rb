@@ -2856,7 +2856,7 @@ module Aws::ElasticTranscoder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elastictranscoder'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

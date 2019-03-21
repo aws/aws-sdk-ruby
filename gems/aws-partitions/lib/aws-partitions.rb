@@ -383,6 +383,7 @@ module Aws
             'Support' => 'support',
             'Textract' => 'textract',
             'TranscribeService' => 'transcribe',
+            'TranscribeStreamingService' => 'transcribestreaming',
             'Transfer' => 'transfer',
             'Translate' => 'translate',
             'WAF' => 'waf',

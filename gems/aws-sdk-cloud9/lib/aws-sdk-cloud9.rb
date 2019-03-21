@@ -42,6 +42,6 @@ require_relative 'aws-sdk-cloud9/customizations'
 # @service
 module Aws::Cloud9
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

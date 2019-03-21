@@ -42,6 +42,6 @@ require_relative 'aws-sdk-mediastore/customizations'
 # @service
 module Aws::MediaStore
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

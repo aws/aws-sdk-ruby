@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2019-03-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TranscribeStreamingService`.
+
 1.144.0 (2019-03-11)
 ------------------
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.41.0 (2019-03-21)
+------------------
+
 * Feature - Added a dependency on the new `aws-sdk-transcribestreamingservice` gem.
 
 3.40.0 (2019-03-05)
