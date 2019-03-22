@@ -5753,7 +5753,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5770,7 +5770,7 @@ module Aws::DynamoDB
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

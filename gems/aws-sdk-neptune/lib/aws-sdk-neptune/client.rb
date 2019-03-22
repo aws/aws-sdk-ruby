@@ -6267,7 +6267,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6284,7 +6284,7 @@ module Aws::Neptune
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

@@ -4573,7 +4573,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4590,7 +4590,7 @@ module Aws::AutoScaling
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

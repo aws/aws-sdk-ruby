@@ -2481,7 +2481,7 @@ module Aws::ElasticLoadBalancing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancing'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2498,7 +2498,7 @@ module Aws::ElasticLoadBalancing
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

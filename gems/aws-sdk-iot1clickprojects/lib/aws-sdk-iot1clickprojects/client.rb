@@ -288,6 +288,15 @@ module Aws::IoT1ClickProjects
     #   However, you can update `callbackOverrides` for the device templates
     #   using the `UpdateProject` API.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Optional tags (metadata key/value pairs) to be associated with the
+    #   project. For example, `\{ \{"key1": "value1", "key2": "value2"\} \}`.
+    #   For more information, see [AWS Tagging Strategies][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -307,6 +316,9 @@ module Aws::IoT1ClickProjects
     #           },
     #         },
     #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -424,6 +436,7 @@ module Aws::IoT1ClickProjects
     #
     # @example Response structure
     #
+    #   resp.project.arn #=> String
     #   resp.project.project_name #=> String
     #   resp.project.description #=> String
     #   resp.project.created_date #=> Time
@@ -434,6 +447,8 @@ module Aws::IoT1ClickProjects
     #   resp.project.placement_template.device_templates["DeviceTemplateName"].device_type #=> String
     #   resp.project.placement_template.device_templates["DeviceTemplateName"].callback_overrides #=> Hash
     #   resp.project.placement_template.device_templates["DeviceTemplateName"].callback_overrides["DeviceCallbackKey"] #=> String
+    #   resp.project.tags #=> Hash
+    #   resp.project.tags["TagKey"] #=> String
     #
     # @overload describe_project(params = {})
     # @param [Hash] params ({})
@@ -567,15 +582,108 @@ module Aws::IoT1ClickProjects
     # @example Response structure
     #
     #   resp.projects #=> Array
+    #   resp.projects[0].arn #=> String
     #   resp.projects[0].project_name #=> String
     #   resp.projects[0].created_date #=> Time
     #   resp.projects[0].updated_date #=> Time
+    #   resp.projects[0].tags #=> Hash
+    #   resp.projects[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @overload list_projects(params = {})
     # @param [Hash] params ({})
     def list_projects(params = {}, options = {})
       req = build_request(:list_projects, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags (metadata key/value pairs) which you have assigned to
+    # the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags you want to list.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ProjectArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates or modifies tags for a resource. Tags are key/value pairs
+    # (metadata) that can be used to manage a resource. For more
+    # information, see [AWS Tagging Strategies][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resouce for which tag(s) should be added or modified.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The new or modifying tag(s) for the resource. See [AWS IoT 1-Click
+    #   Service Limits][1] for the maximum number of tags allowed per
+    #   resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ProjectArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags (metadata key/value pairs) from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tag you want to remove.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of those tags which you want to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ProjectArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -671,7 +779,7 @@ module Aws::IoT1ClickProjects
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot1clickprojects'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
