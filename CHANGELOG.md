@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.246 (2019-03-22)
+------------------
+
 * Feature - Aws::IoT1ClickProjects - Updated the API, and documentation for AWS IoT 1-Click Projects Service.
 
 * Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
