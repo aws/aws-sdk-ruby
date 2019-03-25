@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - ":event-type" header uses member name instead of shape name
+* Issue - event header ":event-type" uses member name instead of shape name
 
 3.48.2 (2019-03-20)
 ------------------
