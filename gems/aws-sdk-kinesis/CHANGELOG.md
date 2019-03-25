@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove debug message spam when `http-2` gem is not present.
+
 1.13.0 (2019-03-22)
 ------------------
 
