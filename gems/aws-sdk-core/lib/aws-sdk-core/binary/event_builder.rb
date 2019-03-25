@@ -26,7 +26,7 @@ module Aws
         es_headers[":message-type"] = Aws::EventStream::HeaderValue.new(
           type: "string", value: "event")
         es_headers[":event-type"] = Aws::EventStream::HeaderValue.new(
-          type: "string", value: event_ref.shape.name)
+          type: "string", value: event_ref.location_name)
 
         explicit_payload = false
         implicit_payload_members = {}

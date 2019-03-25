@@ -61,7 +61,7 @@ describe 'Client Interface:' do
         input_stream.signal_end_stream
 
         client.send_events.each_with_index do |event, i|
-          expect(event.headers[":event-type"].value).to eq('BarEvent')
+          expect(event.headers[":event-type"].value).to eq('Bar')
           expect(event.payload.read).to eq("chunk#{i}")
         end
       end
@@ -82,7 +82,7 @@ describe 'Client Interface:' do
         sleep(3)
         async_resp.join!
         expect(client.send_events.size).to eq(1)
-        expect(client.send_events.first.headers[":event-type"].value).to eq('BarEvent')
+        expect(client.send_events.first.headers[":event-type"].value).to eq('Bar')
         expect(client.send_events.first.payload.read).to eq('chunk')
       end
 
