@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.247 (2019-03-25)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 * Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
