@@ -80,10 +80,10 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "DeploymentVersion", # required
     #             launch_config: { # required
-    #               package_name: "GenericString", # required
-    #               pre_launch_file: "GenericString",
-    #               launch_file: "GenericString", # required
-    #               post_launch_file: "GenericString",
+    #               package_name: "Command", # required
+    #               pre_launch_file: "Path",
+    #               launch_file: "Command", # required
+    #               post_launch_file: "Path",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -757,8 +757,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "GenericString", # required
-    #               launch_file: "GenericString", # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -770,8 +770,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "GenericString", # required
-    #               launch_file: "GenericString", # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -952,8 +952,7 @@ module Aws::RoboMaker
     #   @return [Types::OutputLocation]
     #
     # @!attribute [rw] max_job_duration_in_seconds
-    #   The maximum simulation job duration in seconds. The value must be 8
-    #   days (691,200 seconds) or less.
+    #   The maximum simulation job duration in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] simulation_time_millis
@@ -1111,10 +1110,10 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "DeploymentVersion", # required
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           pre_launch_file: "GenericString",
-    #           launch_file: "GenericString", # required
-    #           post_launch_file: "GenericString",
+    #           package_name: "Command", # required
+    #           pre_launch_file: "Path",
+    #           launch_file: "Command", # required
+    #           post_launch_file: "Path",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -1224,10 +1223,10 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         package_name: "GenericString", # required
-    #         pre_launch_file: "GenericString",
-    #         launch_file: "GenericString", # required
-    #         post_launch_file: "GenericString",
+    #         package_name: "Command", # required
+    #         pre_launch_file: "Path",
+    #         launch_file: "Command", # required
+    #         post_launch_file: "Path",
     #         environment_variables: {
     #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #         },
@@ -1920,8 +1919,8 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         package_name: "GenericString", # required
-    #         launch_file: "GenericString", # required
+    #         package_name: "Command", # required
+    #         launch_file: "Command", # required
     #         environment_variables: {
     #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #         },
@@ -1964,6 +1963,12 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `fleetName` are supported. When
+    #   filtering, you must use the complete value of the filtered item. You
+    #   can use up to three filters, but they must be for the same named
+    #   item. For example, if you are looking for items with the status
+    #   `InProgress` or the status `Pending`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -2061,6 +2066,10 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListFleetsRequest AWS API Documentation
@@ -2131,14 +2140,18 @@ module Aws::RoboMaker
     #   used, `ListRobotApplications` only returns `maxResults` results in a
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
-    #   `ListFleets` request with the returned `nextToken` value. This value
-    #   can be between 1 and 100. If this parameter is not used, then
-    #   `ListRobotApplications` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   `ListRobotApplications` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter is not used,
+    #   then `ListRobotApplications` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotApplicationsRequest AWS API Documentation
@@ -2204,7 +2217,7 @@ module Aws::RoboMaker
     #   `ListRobots` in paginated output. When this parameter is used,
     #   `ListRobots` only returns `maxResults` results in a single page
     #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListFleets`
+    #   the initial request can be seen by sending another `ListRobots`
     #   request with the returned `nextToken` value. This value can be
     #   between 1 and 100. If this parameter is not used, then `ListRobots`
     #   returns up to 100 results and a `nextToken` value if applicable.
@@ -2212,6 +2225,12 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `fleetName` are supported. When
+    #   filtering, you must use the complete value of the filtered item. You
+    #   can use up to three filters, but they must be for the same named
+    #   item. For example, if you are looking for items with the status
+    #   `Registered` or the status `Available`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobotsRequest AWS API Documentation
@@ -2281,15 +2300,18 @@ module Aws::RoboMaker
     #   parameter is used, `ListSimulationApplications` only returns
     #   `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can
-    #   be seen by sending another `ListFleets` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListSimulationApplications` returns up
-    #   to 100 results and a `nextToken` value if applicable.
+    #   be seen by sending another `ListSimulationApplications` request with
+    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   If this parameter is not used, then `ListSimulationApplications`
+    #   returns up to 100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
-    #   Optional list of filters to limit results. The only valid filter
-    #   name is `name`.
+    #   Optional list of filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationApplicationsRequest AWS API Documentation
@@ -2357,14 +2379,21 @@ module Aws::RoboMaker
     #   used, `ListSimulationJobs` only returns `maxResults` results in a
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
-    #   `ListFleets` request with the returned `nextToken` value. This value
-    #   can be between 1 and 100. If this parameter is not used, then
-    #   `ListSimulationJobs` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   `ListSimulationJobs` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter is not used,
+    #   then `ListSimulationJobs` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `simulationApplicationName` and
+    #   `robotApplicationName` are supported. When filtering, you must use
+    #   the complete value of the filtered item. You can use up to three
+    #   filters, but they must be for the same named item. For example, if
+    #   you are looking for items with the status `Preparing` or the status
+    #   `Running`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobsRequest AWS API Documentation
@@ -2456,7 +2485,43 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] current_progress
     #   The current progress status.
+    #
+    #   Validating
+    #
+    #   : Validating the deployment.
+    #
+    #   Downloading/Extracting
+    #
+    #   : Downloading and extracting the bundle on the robot.
+    #
+    #   Executing pre-launch script(s)
+    #
+    #   : Executing pre-launch script(s) if provided.
+    #
+    #   Launching
+    #
+    #   : Launching the robot application.
+    #
+    #   Executing post-launch script(s)
+    #
+    #   : Executing post-launch script(s) if provided.
+    #
+    #   Finished
+    #
+    #   : Deployment is complete.
     #   @return [String]
+    #
+    # @!attribute [rw] percent_done
+    #   Precentage of the step that is done. This currently only applies to
+    #   the `Downloading/Extracting` step of the deployment. It is empty for
+    #   other steps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_time_remaining_seconds
+    #   Estimated amount of time in seconds remaining in the step. This
+    #   currently only applies to the `Downloading/Extracting` step of the
+    #   deployment. It is empty for other steps.
+    #   @return [Integer]
     #
     # @!attribute [rw] target_resource
     #   The Amazon Resource Name (ARN) of the deployment job.
@@ -2466,6 +2531,8 @@ module Aws::RoboMaker
     #
     class ProgressDetail < Struct.new(
       :current_progress,
+      :percent_done,
+      :estimated_time_remaining_seconds,
       :target_resource)
       include Aws::Structure
     end
@@ -2622,8 +2689,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           launch_file: "GenericString", # required
+    #           package_name: "Command", # required
+    #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -2760,8 +2827,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           launch_file: "GenericString", # required
+    #           package_name: "Command", # required
+    #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },

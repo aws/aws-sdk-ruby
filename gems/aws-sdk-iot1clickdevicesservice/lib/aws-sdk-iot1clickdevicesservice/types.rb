@@ -107,6 +107,9 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
     # @!attribute [rw] attributes
     #   An array of zero or more elements of DeviceAttribute objects
     #   providing user specified device attributes.
@@ -129,14 +132,19 @@ module Aws::IoT1ClickDevicesService
     #   The type of the device, such as "button".
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DeviceDescription AWS API Documentation
     #
     class DeviceDescription < Struct.new(
+      :arn,
       :attributes,
       :device_id,
       :enabled,
       :remaining_life,
-      :type)
+      :type,
+      :tags)
       include Aws::Structure
     end
 
@@ -209,15 +217,22 @@ module Aws::IoT1ClickDevicesService
     #
     #       {
     #         device_id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] device_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/FinalizeDeviceClaimRequest AWS API Documentation
     #
     class FinalizeDeviceClaimRequest < Struct.new(
-      :device_id)
+      :device_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -424,6 +439,57 @@ module Aws::IoT1ClickDevicesService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UnclaimDeviceRequest
     #   data as a hash:
     #
@@ -448,6 +514,28 @@ module Aws::IoT1ClickDevicesService
     #
     class UnclaimDeviceResponse < Struct.new(
       :state)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

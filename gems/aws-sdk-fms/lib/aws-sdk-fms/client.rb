@@ -275,9 +275,21 @@ module Aws::FMS
     #   by `PutPolicy` and by `ListPolicies`.
     #
     # @option params [Boolean] :delete_all_policy_resources
-    #   If `True`, the request will also delete all web ACLs in this policy.
-    #   Associated resources will no longer be protected by web ACLs in this
-    #   policy.
+    #   If `True`, the request will also perform a clean-up process that will:
+    #
+    #   * Delete rule groups created by AWS Firewall Manager
+    #
+    #   * Remove web ACLs from in-scope resources
+    #
+    #   * Delete web ACLs that contain no rules or rule groups
+    #
+    #   After the cleanup, in-scope resources will no longer be protected by
+    #   web ACLs in this policy. Protection of out-of-scope resources will
+    #   remain unchanged. Scope is determined by tags and accounts associated
+    #   with the policy. When creating the policy, if you specified that only
+    #   resources in specific accounts or with specific tags be protected by
+    #   the policy, those resources are in-scope. All others are out of scope.
+    #   If you did not specify tags or accounts, all resources are in-scope.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -366,7 +378,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
@@ -426,9 +438,11 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
+    #   resp.policy.resource_type_list #=> Array
+    #   resp.policy.resource_type_list[0] #=> String
     #   resp.policy.resource_tags #=> Array
     #   resp.policy.resource_tags[0].key #=> String
     #   resp.policy.resource_tags[0].value #=> String
@@ -448,6 +462,77 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_policy(params = {}, options = {})
       req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
+    # If you created a Shield Advanced policy, returns policy-level attack
+    # summary information in the event of a potential DDoS attack.
+    #
+    # @option params [required, String] :policy_id
+    #   The ID of the policy for which you want to get the attack information.
+    #
+    # @option params [String] :member_account_id
+    #   The AWS account that is in scope of the policy that you want to get
+    #   the details for.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time period to query for the attacks. This is a
+    #   `timestamp` type. The sample request above indicates a number type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period to query for the attacks. This is a
+    #   `timestamp` type. The sample request above indicates a number type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #
+    # @option params [String] :next_token
+    #   If you specify a value for `MaxResults` and you have more objects than
+    #   the number that you specify for `MaxResults`, AWS Firewall Manager
+    #   returns a `NextToken` value in the response that allows you to list
+    #   another group of objects. For the second and subsequent
+    #   `GetProtectionStatus` requests, specify the value of `NextToken` from
+    #   the previous response to get information about another batch of
+    #   objects.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the number of objects that you want AWS Firewall Manager to
+    #   return for this request. If you have more objects than the number that
+    #   you specify for `MaxResults`, the response includes a `NextToken`
+    #   value that you can use to get another batch of objects.
+    #
+    # @return [Types::GetProtectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProtectionStatusResponse#admin_account_id #admin_account_id} => String
+    #   * {Types::GetProtectionStatusResponse#service_type #service_type} => String
+    #   * {Types::GetProtectionStatusResponse#data #data} => String
+    #   * {Types::GetProtectionStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_protection_status({
+    #     policy_id: "PolicyId", # required
+    #     member_account_id: "AWSAccountId",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_account_id #=> String
+    #   resp.service_type #=> String, one of "WAF", "SHIELD_ADVANCED"
+    #   resp.data #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatus AWS API Documentation
+    #
+    # @overload get_protection_status(params = {})
+    # @param [Hash] params ({})
+    def get_protection_status(params = {}, options = {})
+      req = build_request(:get_protection_status, params)
       req.send_request(options)
     end
 
@@ -600,7 +685,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "SHIELD_ADVANCED"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -644,6 +729,23 @@ module Aws::FMS
 
     # Creates an AWS Firewall Manager policy.
     #
+    # Firewall Manager provides two types of policies: A Shield Advanced
+    # policy, which applies Shield Advanced protection to specified accounts
+    # and resources, or a WAF policy, which contains a rule group and
+    # defines which resources are to be protected by that rule group. A
+    # policy is specific to either WAF or Shield Advanced. If you want to
+    # enforce both WAF rules and Shield Advanced protection across accounts,
+    # you can create multiple policies. You can create one or more policies
+    # for WAF rules, and one or more policies for Shield Advanced.
+    #
+    # You must be subscribed to Shield Advanced to create a Shield Advanced
+    # policy. For more information on subscribing to Shield Advanced, see
+    # [CreateSubscription][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html
+    #
     # @option params [required, Types::Policy] :policy
     #   The details of the AWS Firewall Manager policy to be created.
     #
@@ -660,10 +762,11 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF
+    #         type: "WAF", # required, accepts WAF, SHIELD_ADVANCED
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
+    #       resource_type_list: ["ResourceType"],
     #       resource_tags: [
     #         {
     #           key: "TagKey", # required
@@ -686,9 +789,11 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
+    #   resp.policy.resource_type_list #=> Array
+    #   resp.policy.resource_type_list[0] #=> String
     #   resp.policy.resource_tags #=> Array
     #   resp.policy.resource_tags[0].key #=> String
     #   resp.policy.resource_tags[0].value #=> String
@@ -724,7 +829,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

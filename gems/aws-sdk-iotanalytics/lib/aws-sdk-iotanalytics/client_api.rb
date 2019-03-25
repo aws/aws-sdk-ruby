@@ -133,6 +133,7 @@ module Aws::IoTAnalytics
     MathExpression = Shapes::StringShape.new(name: 'MathExpression')
     MaxMessages = Shapes::IntegerShape.new(name: 'MaxMessages')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxVersions = Shapes::IntegerShape.new(name: 'MaxVersions')
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MessagePayload = Shapes::BlobShape.new(name: 'MessagePayload')
@@ -193,6 +194,7 @@ module Aws::IoTAnalytics
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TriggeringDataset = Shapes::StructureShape.new(name: 'TriggeringDataset')
     UnlimitedRetentionPeriod = Shapes::BooleanShape.new(name: 'UnlimitedRetentionPeriod')
+    UnlimitedVersioning = Shapes::BooleanShape.new(name: 'UnlimitedVersioning')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
@@ -202,6 +204,7 @@ module Aws::IoTAnalytics
     Variable = Shapes::StructureShape.new(name: 'Variable')
     VariableName = Shapes::StringShape.new(name: 'VariableName')
     Variables = Shapes::ListShape.new(name: 'Variables')
+    VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     resourceArn = Shapes::StringShape.new(name: 'resourceArn')
@@ -288,6 +291,7 @@ module Aws::IoTAnalytics
     CreateDatasetRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: DatasetTriggers, location_name: "triggers"))
     CreateDatasetRequest.add_member(:content_delivery_rules, Shapes::ShapeRef.new(shape: DatasetContentDeliveryRules, location_name: "contentDeliveryRules"))
     CreateDatasetRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
+    CreateDatasetRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "versioningConfiguration"))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
@@ -324,6 +328,7 @@ module Aws::IoTAnalytics
     Dataset.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Dataset.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     Dataset.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
+    Dataset.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "versioningConfiguration"))
     Dataset.struct_class = Types::Dataset
 
     DatasetAction.add_member(:action_name, Shapes::ShapeRef.new(shape: DatasetActionName, location_name: "actionName"))
@@ -701,6 +706,7 @@ module Aws::IoTAnalytics
     UpdateDatasetRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: DatasetTriggers, location_name: "triggers"))
     UpdateDatasetRequest.add_member(:content_delivery_rules, Shapes::ShapeRef.new(shape: DatasetContentDeliveryRules, location_name: "contentDeliveryRules"))
     UpdateDatasetRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
+    UpdateDatasetRequest.add_member(:versioning_configuration, Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "versioningConfiguration"))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 
     UpdateDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location: "uri", location_name: "datastoreName"))
@@ -719,6 +725,10 @@ module Aws::IoTAnalytics
     Variable.struct_class = Types::Variable
 
     Variables.member = Shapes::ShapeRef.new(shape: Variable)
+
+    VersioningConfiguration.add_member(:unlimited, Shapes::ShapeRef.new(shape: UnlimitedVersioning, location_name: "unlimited"))
+    VersioningConfiguration.add_member(:max_versions, Shapes::ShapeRef.new(shape: MaxVersions, location_name: "maxVersions"))
+    VersioningConfiguration.struct_class = Types::VersioningConfiguration
 
 
     # @api private

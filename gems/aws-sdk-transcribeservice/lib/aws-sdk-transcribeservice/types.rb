@@ -14,7 +14,8 @@ module Aws::TranscribeService
     #       {
     #         vocabulary_name: "VocabularyName", # required
     #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR
-    #         phrases: ["Phrase"], # required
+    #         phrases: ["Phrase"],
+    #         vocabulary_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -30,12 +31,38 @@ module Aws::TranscribeService
     #   An array of strings that contains the vocabulary entries.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vocabulary_file_uri
+    #   The S3 location of the text file that contains the definition of the
+    #   custom vocabulary. The URI must be in the same region as the API
+    #   endpoint that you are calling. The general form is
+    #
+    #   `
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
     #
     class CreateVocabularyRequest < Struct.new(
       :vocabulary_name,
       :language_code,
-      :phrases)
+      :phrases,
+      :vocabulary_file_uri)
       include Aws::Structure
     end
 
@@ -720,7 +747,8 @@ module Aws::TranscribeService
     #       {
     #         vocabulary_name: "VocabularyName", # required
     #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR
-    #         phrases: ["Phrase"], # required
+    #         phrases: ["Phrase"],
+    #         vocabulary_file_uri: "Uri",
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -735,12 +763,38 @@ module Aws::TranscribeService
     #   An array of strings containing the vocabulary entries.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vocabulary_file_uri
+    #   The S3 location of the text file that contains the definition of the
+    #   custom vocabulary. The URI must be in the same region as the API
+    #   endpoint that you are calling. The general form is
+    #
+    #   `
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest AWS API Documentation
     #
     class UpdateVocabularyRequest < Struct.new(
       :vocabulary_name,
       :language_code,
-      :phrases)
+      :phrases,
+      :vocabulary_file_uri)
       include Aws::Structure
     end
 

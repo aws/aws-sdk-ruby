@@ -20,6 +20,7 @@ module Aws::RoboMaker
     CancelSimulationJobRequest = Shapes::StructureShape.new(name: 'CancelSimulationJobRequest')
     CancelSimulationJobResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    Command = Shapes::StringShape.new(name: 'Command')
     ConcurrentDeploymentException = Shapes::StructureShape.new(name: 'ConcurrentDeploymentException')
     CreateDeploymentJobRequest = Shapes::StructureShape.new(name: 'CreateDeploymentJobRequest')
     CreateDeploymentJobResponse = Shapes::StructureShape.new(name: 'CreateDeploymentJobResponse')
@@ -78,6 +79,7 @@ module Aws::RoboMaker
     Filters = Shapes::ListShape.new(name: 'Filters')
     Fleet = Shapes::StructureShape.new(name: 'Fleet')
     Fleets = Shapes::ListShape.new(name: 'Fleets')
+    GenericInteger = Shapes::IntegerShape.new(name: 'GenericInteger')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     Id = Shapes::StringShape.new(name: 'Id')
@@ -106,6 +108,8 @@ module Aws::RoboMaker
     Name = Shapes::StringShape.new(name: 'Name')
     OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    Path = Shapes::StringShape.new(name: 'Path')
+    PercentDone = Shapes::FloatShape.new(name: 'PercentDone')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     ProgressDetail = Shapes::StructureShape.new(name: 'ProgressDetail')
     RegisterRobotRequest = Shapes::StructureShape.new(name: 'RegisterRobotRequest')
@@ -125,6 +129,7 @@ module Aws::RoboMaker
     RobotApplicationSummaries = Shapes::ListShape.new(name: 'RobotApplicationSummaries')
     RobotApplicationSummary = Shapes::StructureShape.new(name: 'RobotApplicationSummary')
     RobotDeployment = Shapes::StructureShape.new(name: 'RobotDeployment')
+    RobotDeploymentStep = Shapes::StringShape.new(name: 'RobotDeploymentStep')
     RobotDeploymentSummary = Shapes::ListShape.new(name: 'RobotDeploymentSummary')
     RobotSoftwareSuite = Shapes::StructureShape.new(name: 'RobotSoftwareSuite')
     RobotSoftwareSuiteType = Shapes::StringShape.new(name: 'RobotSoftwareSuiteType')
@@ -368,10 +373,10 @@ module Aws::RoboMaker
 
     DeploymentJobs.member = Shapes::ShapeRef.new(shape: DeploymentJob)
 
-    DeploymentLaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "packageName"))
-    DeploymentLaunchConfig.add_member(:pre_launch_file, Shapes::ShapeRef.new(shape: GenericString, location_name: "preLaunchFile"))
-    DeploymentLaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "launchFile"))
-    DeploymentLaunchConfig.add_member(:post_launch_file, Shapes::ShapeRef.new(shape: GenericString, location_name: "postLaunchFile"))
+    DeploymentLaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "packageName"))
+    DeploymentLaunchConfig.add_member(:pre_launch_file, Shapes::ShapeRef.new(shape: Path, location_name: "preLaunchFile"))
+    DeploymentLaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
+    DeploymentLaunchConfig.add_member(:post_launch_file, Shapes::ShapeRef.new(shape: Path, location_name: "postLaunchFile"))
     DeploymentLaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
     DeploymentLaunchConfig.struct_class = Types::DeploymentLaunchConfig
 
@@ -498,8 +503,8 @@ module Aws::RoboMaker
 
     Fleets.member = Shapes::ShapeRef.new(shape: Fleet)
 
-    LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "packageName"))
-    LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "launchFile"))
+    LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "packageName"))
+    LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
     LaunchConfig.struct_class = Types::LaunchConfig
 
@@ -569,7 +574,9 @@ module Aws::RoboMaker
     OutputLocation.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Key, location_name: "s3Prefix"))
     OutputLocation.struct_class = Types::OutputLocation
 
-    ProgressDetail.add_member(:current_progress, Shapes::ShapeRef.new(shape: GenericString, location_name: "currentProgress"))
+    ProgressDetail.add_member(:current_progress, Shapes::ShapeRef.new(shape: RobotDeploymentStep, location_name: "currentProgress"))
+    ProgressDetail.add_member(:percent_done, Shapes::ShapeRef.new(shape: PercentDone, location_name: "percentDone"))
+    ProgressDetail.add_member(:estimated_time_remaining_seconds, Shapes::ShapeRef.new(shape: GenericInteger, location_name: "estimatedTimeRemainingSeconds"))
     ProgressDetail.add_member(:target_resource, Shapes::ShapeRef.new(shape: GenericString, location_name: "targetResource"))
     ProgressDetail.struct_class = Types::ProgressDetail
 
@@ -1070,6 +1077,12 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_fleets, Seahorse::Model::Operation.new.tap do |o|
@@ -1082,6 +1095,12 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_robot_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -1093,6 +1112,12 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_robots, Seahorse::Model::Operation.new.tap do |o|
@@ -1105,6 +1130,12 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_simulation_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -1116,6 +1147,12 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_simulation_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -1127,6 +1164,12 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

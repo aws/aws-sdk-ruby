@@ -182,7 +182,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Acceleration settings for job execution.
+    # Accelerated transcoding is currently in private preview. Contact AWS
+    # for more information.
     #
     # @note When making an API call, you may pass AccelerationSettings
     #   data as a hash:
@@ -1589,6 +1590,14 @@ module Aws::MediaConvert
     #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #         destination: "__stringPatternS3",
+    #         destination_settings: {
+    #           s3_settings: {
+    #             encryption: {
+    #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #             },
+    #           },
+    #         },
     #         encryption: {
     #           constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #           encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -1636,6 +1645,11 @@ module Aws::MediaConvert
     #   use the filename of the input file. If your job has multiple inputs,
     #   the service uses the filename of the first input file.
     #   @return [String]
+    #
+    # @!attribute [rw] destination_settings
+    #   Settings associated with the destination. Will vary based on the
+    #   type of destination
+    #   @return [Types::DestinationSettings]
     #
     # @!attribute [rw] encryption
     #   DRM settings.
@@ -1722,6 +1736,7 @@ module Aws::MediaConvert
       :client_cache,
       :codec_specification,
       :destination,
+      :destination_settings,
       :encryption,
       :fragment_length,
       :manifest_compression,
@@ -2128,6 +2143,14 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -2154,6 +2177,14 @@ module Aws::MediaConvert
     #                 dash_iso_group_settings: {
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -2171,6 +2202,14 @@ module Aws::MediaConvert
     #                 },
     #                 file_group_settings: {
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -2187,6 +2226,14 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -2225,6 +2272,14 @@ module Aws::MediaConvert
     #                 ms_smooth_group_settings: {
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -2742,7 +2797,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
-    #         status_update_interval_in_secs: 1,
+    #         status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #         user_metadata: {
     #           "__string" => "__string",
     #         },
@@ -2789,13 +2844,13 @@ module Aws::MediaConvert
     #   JobSettings contains all the transcode settings for a job.
     #   @return [Types::JobSettings]
     #
-    # @!attribute [rw] status_update_interval_in_secs
+    # @!attribute [rw] status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
     #   the service begins processing your job to the time it completes the
     #   transcode or encounters an error.
-    #   @return [Integer]
+    #   @return [String]
     #
     # @!attribute [rw] user_metadata
     #   User-defined metadata that you want to associate with an
@@ -2812,7 +2867,7 @@ module Aws::MediaConvert
       :queue,
       :role,
       :settings,
-      :status_update_interval_in_secs,
+      :status_update_interval,
       :user_metadata)
       include Aws::Structure
     end
@@ -3005,6 +3060,14 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -3031,6 +3094,14 @@ module Aws::MediaConvert
     #                 dash_iso_group_settings: {
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -3048,6 +3119,14 @@ module Aws::MediaConvert
     #                 },
     #                 file_group_settings: {
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -3064,6 +3143,14 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -3102,6 +3189,14 @@ module Aws::MediaConvert
     #                 ms_smooth_group_settings: {
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -3619,7 +3714,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
-    #         status_update_interval_in_secs: 1,
+    #         status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #         tags: {
     #           "__string" => "__string",
     #         },
@@ -3653,13 +3748,13 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
-    # @!attribute [rw] status_update_interval_in_secs
+    # @!attribute [rw] status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
     #   the service begins processing your job to the time it completes the
     #   transcode or encounters an error.
-    #   @return [Integer]
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags that you want to add to the resource. You can tag resources
@@ -3675,7 +3770,7 @@ module Aws::MediaConvert
       :name,
       :queue,
       :settings,
-      :status_update_interval_in_secs,
+      :status_update_interval,
       :tags)
       include Aws::Structure
     end
@@ -4342,6 +4437,14 @@ module Aws::MediaConvert
     #       {
     #         base_url: "__string",
     #         destination: "__stringPatternS3",
+    #         destination_settings: {
+    #           s3_settings: {
+    #             encryption: {
+    #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #             },
+    #           },
+    #         },
     #         encryption: {
     #           speke_key_provider: {
     #             certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -4371,6 +4474,11 @@ module Aws::MediaConvert
     #   use the filename of the input file. If your job has multiple inputs,
     #   the service uses the filename of the first input file.
     #   @return [String]
+    #
+    # @!attribute [rw] destination_settings
+    #   Settings associated with the destination. Will vary based on the
+    #   type of destination
+    #   @return [Types::DestinationSettings]
     #
     # @!attribute [rw] encryption
     #   DRM settings.
@@ -4426,6 +4534,7 @@ module Aws::MediaConvert
     class DashIsoGroupSettings < Struct.new(
       :base_url,
       :destination,
+      :destination_settings,
       :encryption,
       :fragment_length,
       :hbbtv_compliance,
@@ -4624,6 +4733,32 @@ module Aws::MediaConvert
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Settings associated with the destination. Will vary based on the type
+    # of destination
+    #
+    # @note When making an API call, you may pass DestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         s3_settings: {
+    #           encryption: {
+    #             encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #             kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_settings
+    #   Settings associated with S3 destination
+    #   @return [Types::S3DestinationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DestinationSettings AWS API Documentation
+    #
+    class DestinationSettings < Struct.new(
+      :s3_settings)
       include Aws::Structure
     end
 
@@ -5342,6 +5477,14 @@ module Aws::MediaConvert
     #
     #       {
     #         destination: "__stringPatternS3",
+    #         destination_settings: {
+    #           s3_settings: {
+    #             encryption: {
+    #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] destination
@@ -5352,10 +5495,16 @@ module Aws::MediaConvert
     #   the service uses the filename of the first input file.
     #   @return [String]
     #
+    # @!attribute [rw] destination_settings
+    #   Settings associated with the destination. Will vary based on the
+    #   type of destination
+    #   @return [Types::DestinationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileGroupSettings AWS API Documentation
     #
     class FileGroupSettings < Struct.new(
-      :destination)
+      :destination,
+      :destination_settings)
       include Aws::Structure
     end
 
@@ -6625,6 +6774,14 @@ module Aws::MediaConvert
     #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #         destination: "__stringPatternS3",
+    #         destination_settings: {
+    #           s3_settings: {
+    #             encryption: {
+    #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #             },
+    #           },
+    #         },
     #         directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #         encryption: {
     #           constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -6706,6 +6863,11 @@ module Aws::MediaConvert
     #   use the filename of the input file. If your job has multiple inputs,
     #   the service uses the filename of the first input file.
     #   @return [String]
+    #
+    # @!attribute [rw] destination_settings
+    #   Settings associated with the destination. Will vary based on the
+    #   type of destination
+    #   @return [Types::DestinationSettings]
     #
     # @!attribute [rw] directory_structure
     #   Indicates whether segments should be placed in subdirectories.
@@ -6809,6 +6971,7 @@ module Aws::MediaConvert
       :client_cache,
       :codec_specification,
       :destination,
+      :destination_settings,
       :directory_structure,
       :encryption,
       :manifest_compression,
@@ -7106,7 +7269,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] decryption_settings
-    #   Settings for decrypting any input files that are encrypted.
+    #   Settings for decrypting any input files that you encrypt before you
+    #   upload them to Amazon S3. MediaConvert can decrypt files only when
+    #   you use AWS Key Management Service (KMS) to encrypt the data key
+    #   that you use to encrypt your content.
     #   @return [Types::InputDecryptionSettings]
     #
     # @!attribute [rw] denoise_filter
@@ -7268,7 +7434,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Specify the decryption settings used to decrypt encrypted input
+    # Settings for decrypting any input files that you encrypt before you
+    # upload them to Amazon S3. MediaConvert can decrypt files only when you
+    # use AWS Key Management Service (KMS) to encrypt the data key that you
+    # use to encrypt your content.
     #
     # @note When making an API call, you may pass InputDecryptionSettings
     #   data as a hash:
@@ -7281,19 +7450,30 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] decryption_mode
-    #   This specifies how the encrypted file needs to be decrypted.
+    #   Specify the encryption mode that you used to encrypt your input
+    #   files.
     #   @return [String]
     #
     # @!attribute [rw] encrypted_decryption_key
-    #   Decryption key either 128 or 192 or 256 bits encrypted with KMS
+    #   Warning! Don't provide your encryption key in plaintext. Your job
+    #   settings could be intercepted, making your encrypted content
+    #   vulnerable. Specify the encrypted version of the data key that you
+    #   used to encrypt your content. The data key must be encrypted by AWS
+    #   Key Management Service (KMS). The key can be 128, 192, or 256 bits.
     #   @return [String]
     #
     # @!attribute [rw] initialization_vector
-    #   Initialization Vector 96 bits (CTR/GCM mode only) or 128 bits.
+    #   Specify the initialization vector that you used when you encrypted
+    #   your content before uploading it to Amazon S3. You can use a 16-byte
+    #   initialization vector with any encryption mode. Or, you can use a
+    #   12-byte initialization vector with GCM or CTR. MediaConvert accepts
+    #   only initialization vectors that are base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_region
-    #   The AWS region in which decryption key was encrypted with KMS
+    #   Specify the AWS Region for AWS Key Management Service (KMS) that you
+    #   used to encrypt your data key, if that Region is different from the
+    #   one you are using for AWS Elemental MediaConvert.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputDecryptionSettings AWS API Documentation
@@ -7650,7 +7830,8 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @!attribute [rw] acceleration_settings
-    #   Acceleration settings for job execution.
+    #   Accelerated transcoding is currently in private preview. Contact AWS
+    #   for more information.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] arn
@@ -7670,6 +7851,10 @@ module Aws::MediaConvert
     #   The time, in Unix epoch format in seconds, when the job got created.
     #   @return [Time]
     #
+    # @!attribute [rw] current_phase
+    #   A job's phase can be PROBING, TRANSCODING OR UPLOADING
+    #   @return [String]
+    #
     # @!attribute [rw] error_code
     #   Error code for the job
     #   @return [Integer]
@@ -7682,6 +7867,19 @@ module Aws::MediaConvert
     #   A portion of the job's ARN, unique within your AWS Elemental
     #   MediaConvert resources
     #   @return [String]
+    #
+    # @!attribute [rw] job_percent_complete
+    #   An estimate of how far your job has progressed. This estimate is
+    #   shown as a percentage of the total time from when your job leaves
+    #   its queue to when your output files appear in your output Amazon S3
+    #   bucket. AWS Elemental MediaConvert provides jobPercentComplete in
+    #   CloudWatch STATUS\_UPDATE events and in the response to GetJob and
+    #   ListJobs requests. The jobPercentComplete estimate is reliable for
+    #   the following input containers: Quicktime, Transport Stream, MP4,
+    #   and MXF. For some jobs, including audio-only jobs and jobs that use
+    #   input clipping, the service can't provide information about job
+    #   progress. In those cases, jobPercentComplete returns a null value.
+    #   @return [Integer]
     #
     # @!attribute [rw] job_template
     #   The job template that the job is created from, if it is created from
@@ -7699,6 +7897,11 @@ module Aws::MediaConvert
     #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [String]
     #
+    # @!attribute [rw] retry_count
+    #   The number of times that the service automatically attempted to
+    #   process your job after encountering an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] role
     #   The IAM role you use for creating this job. For details about
     #   permissions, see the User Guide topic at the User Guide at
@@ -7714,13 +7917,13 @@ module Aws::MediaConvert
     #   or ERROR.
     #   @return [String]
     #
-    # @!attribute [rw] status_update_interval_in_secs
+    # @!attribute [rw] status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
     #   the service begins processing your job to the time it completes the
     #   transcode or encounters an error.
-    #   @return [Integer]
+    #   @return [String]
     #
     # @!attribute [rw] timing
     #   Information about when jobs are submitted, started, and finished is
@@ -7739,16 +7942,19 @@ module Aws::MediaConvert
       :arn,
       :billing_tags_source,
       :created_at,
+      :current_phase,
       :error_code,
       :error_message,
       :id,
+      :job_percent_complete,
       :job_template,
       :output_group_details,
       :queue,
+      :retry_count,
       :role,
       :settings,
       :status,
-      :status_update_interval_in_secs,
+      :status_update_interval,
       :timing,
       :user_metadata)
       include Aws::Structure
@@ -7924,6 +8130,14 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 encryption: {
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -7950,6 +8164,14 @@ module Aws::MediaConvert
     #               dash_iso_group_settings: {
     #                 base_url: "__string",
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 encryption: {
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -7967,6 +8189,14 @@ module Aws::MediaConvert
     #               },
     #               file_group_settings: {
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -7983,6 +8213,14 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                 encryption: {
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -8021,6 +8259,14 @@ module Aws::MediaConvert
     #               ms_smooth_group_settings: {
     #                 audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 encryption: {
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -8614,7 +8860,8 @@ module Aws::MediaConvert
     # use to quickly create a job.
     #
     # @!attribute [rw] acceleration_settings
-    #   Acceleration settings for job execution.
+    #   Accelerated transcoding is currently in private preview. Contact AWS
+    #   for more information.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] arn
@@ -8654,13 +8901,13 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
-    # @!attribute [rw] status_update_interval_in_secs
+    # @!attribute [rw] status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
     #   the service begins processing your job to the time it completes the
     #   transcode or encounters an error.
-    #   @return [Integer]
+    #   @return [String]
     #
     # @!attribute [rw] type
     #   A job template can be of two types: system or custom. System or
@@ -8679,7 +8926,7 @@ module Aws::MediaConvert
       :name,
       :queue,
       :settings,
-      :status_update_interval_in_secs,
+      :status_update_interval,
       :type)
       include Aws::Structure
     end
@@ -8847,6 +9094,14 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 encryption: {
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -8873,6 +9128,14 @@ module Aws::MediaConvert
     #               dash_iso_group_settings: {
     #                 base_url: "__string",
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 encryption: {
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -8890,6 +9153,14 @@ module Aws::MediaConvert
     #               },
     #               file_group_settings: {
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -8906,6 +9177,14 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                 encryption: {
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -8944,6 +9223,14 @@ module Aws::MediaConvert
     #               ms_smooth_group_settings: {
     #                 audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                 destination: "__stringPatternS3",
+    #                 destination_settings: {
+    #                   s3_settings: {
+    #                     encryption: {
+    #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                     },
+    #                   },
+    #                 },
     #                 encryption: {
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -10938,6 +11225,14 @@ module Aws::MediaConvert
     #       {
     #         audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #         destination: "__stringPatternS3",
+    #         destination_settings: {
+    #           s3_settings: {
+    #             encryption: {
+    #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #             },
+    #           },
+    #         },
     #         encryption: {
     #           speke_key_provider: {
     #             certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -10964,6 +11259,11 @@ module Aws::MediaConvert
     #   the service uses the filename of the first input file.
     #   @return [String]
     #
+    # @!attribute [rw] destination_settings
+    #   Settings associated with the destination. Will vary based on the
+    #   type of destination
+    #   @return [Types::DestinationSettings]
+    #
     # @!attribute [rw] encryption
     #   If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to
     #   specify the value SpekeKeyProvider.
@@ -10986,6 +11286,7 @@ module Aws::MediaConvert
     class MsSmoothGroupSettings < Struct.new(
       :audio_deduplication,
       :destination,
+      :destination_settings,
       :encryption,
       :fragment_length,
       :manifest_encoding)
@@ -11739,6 +12040,14 @@ module Aws::MediaConvert
     #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #             destination: "__stringPatternS3",
+    #             destination_settings: {
+    #               s3_settings: {
+    #                 encryption: {
+    #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                 },
+    #               },
+    #             },
     #             encryption: {
     #               constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #               encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -11765,6 +12074,14 @@ module Aws::MediaConvert
     #           dash_iso_group_settings: {
     #             base_url: "__string",
     #             destination: "__stringPatternS3",
+    #             destination_settings: {
+    #               s3_settings: {
+    #                 encryption: {
+    #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                 },
+    #               },
+    #             },
     #             encryption: {
     #               speke_key_provider: {
     #                 certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -11782,6 +12099,14 @@ module Aws::MediaConvert
     #           },
     #           file_group_settings: {
     #             destination: "__stringPatternS3",
+    #             destination_settings: {
+    #               s3_settings: {
+    #                 encryption: {
+    #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                 },
+    #               },
+    #             },
     #           },
     #           hls_group_settings: {
     #             ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -11798,6 +12123,14 @@ module Aws::MediaConvert
     #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #             destination: "__stringPatternS3",
+    #             destination_settings: {
+    #               s3_settings: {
+    #                 encryption: {
+    #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                 },
+    #               },
+    #             },
     #             directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #             encryption: {
     #               constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -11836,6 +12169,14 @@ module Aws::MediaConvert
     #           ms_smooth_group_settings: {
     #             audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #             destination: "__stringPatternS3",
+    #             destination_settings: {
+    #               s3_settings: {
+    #                 encryption: {
+    #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                 },
+    #               },
+    #             },
     #             encryption: {
     #               speke_key_provider: {
     #                 certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -12394,6 +12735,14 @@ module Aws::MediaConvert
     #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #           destination: "__stringPatternS3",
+    #           destination_settings: {
+    #             s3_settings: {
+    #               encryption: {
+    #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #               },
+    #             },
+    #           },
     #           encryption: {
     #             constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #             encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -12420,6 +12769,14 @@ module Aws::MediaConvert
     #         dash_iso_group_settings: {
     #           base_url: "__string",
     #           destination: "__stringPatternS3",
+    #           destination_settings: {
+    #             s3_settings: {
+    #               encryption: {
+    #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #               },
+    #             },
+    #           },
     #           encryption: {
     #             speke_key_provider: {
     #               certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -12437,6 +12794,14 @@ module Aws::MediaConvert
     #         },
     #         file_group_settings: {
     #           destination: "__stringPatternS3",
+    #           destination_settings: {
+    #             s3_settings: {
+    #               encryption: {
+    #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #               },
+    #             },
+    #           },
     #         },
     #         hls_group_settings: {
     #           ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -12453,6 +12818,14 @@ module Aws::MediaConvert
     #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #           destination: "__stringPatternS3",
+    #           destination_settings: {
+    #             s3_settings: {
+    #               encryption: {
+    #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #               },
+    #             },
+    #           },
     #           directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #           encryption: {
     #             constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -12491,6 +12864,14 @@ module Aws::MediaConvert
     #         ms_smooth_group_settings: {
     #           audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #           destination: "__stringPatternS3",
+    #           destination_settings: {
+    #             s3_settings: {
+    #               encryption: {
+    #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #               },
+    #             },
+    #           },
     #           encryption: {
     #             speke_key_provider: {
     #               certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -13542,6 +13923,76 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings associated with S3 destination
+    #
+    # @note When making an API call, you may pass S3DestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         encryption: {
+    #           encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #           kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] encryption
+    #   Settings for how your job outputs are encrypted as they are uploaded
+    #   to Amazon S3.
+    #   @return [Types::S3EncryptionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3DestinationSettings AWS API Documentation
+    #
+    class S3DestinationSettings < Struct.new(
+      :encryption)
+      include Aws::Structure
+    end
+
+    # Settings for how your job outputs are encrypted as they are uploaded
+    # to Amazon S3.
+    #
+    # @note When making an API call, you may pass S3EncryptionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #       }
+    #
+    # @!attribute [rw] encryption_type
+    #   Specify how you want your data keys managed. AWS uses data keys to
+    #   encrypt your content. AWS also encrypts the data keys themselves,
+    #   using a customer master key (CMK), and then stores the encrypted
+    #   data keys alongside your encrypted content. Use this setting to
+    #   specify which AWS service manages the CMK. For simplest set up,
+    #   choose Amazon S3 (SERVER\_SIDE\_ENCRYPTION\_S3). If you want your
+    #   master key to be managed by AWS Key Management Service (KMS), choose
+    #   AWS KMS (SERVER\_SIDE\_ENCRYPTION\_KMS). By default, when you choose
+    #   AWS KMS, KMS uses the AWS managed customer master key (CMK)
+    #   associated with Amazon S3 to encrypt your data keys. You can
+    #   optionally choose to specify a different, customer managed CMK. Do
+    #   so by specifying the Amazon Resource Name (ARN) of the key for the
+    #   setting KMS ARN (kmsKeyArn).
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Optionally, specify the customer master key (CMK) that you want to
+    #   use to encrypt the data key that AWS uses to encrypt your output
+    #   content. Enter the Amazon Resource Name (ARN) of the CMK. To use
+    #   this setting, you must also set Server-side encryption
+    #   (S3ServerSideEncryptionType) to AWS KMS
+    #   (SERVER\_SIDE\_ENCRYPTION\_KMS). If you set Server-side encryption
+    #   to AWS KMS but don't specify a CMK here, AWS uses the AWS managed
+    #   CMK associated with Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3EncryptionSettings AWS API Documentation
+    #
+    class S3EncryptionSettings < Struct.new(
+      :encryption_type,
+      :kms_key_arn)
+      include Aws::Structure
+    end
+
     # Settings for SCC caption output.
     #
     # @note When making an API call, you may pass SccDestinationSettings
@@ -14163,6 +14614,14 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -14189,6 +14648,14 @@ module Aws::MediaConvert
     #                 dash_iso_group_settings: {
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -14206,6 +14673,14 @@ module Aws::MediaConvert
     #                 },
     #                 file_group_settings: {
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -14222,6 +14697,14 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                   encryption: {
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -14260,6 +14743,14 @@ module Aws::MediaConvert
     #                 ms_smooth_group_settings: {
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                       },
+    #                     },
+    #                   },
     #                   encryption: {
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -14777,7 +15268,7 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
-    #         status_update_interval_in_secs: 1,
+    #         status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #       }
     #
     # @!attribute [rw] acceleration_settings
@@ -14806,13 +15297,13 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
-    # @!attribute [rw] status_update_interval_in_secs
+    # @!attribute [rw] status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
     #   the service begins processing your job to the time it completes the
     #   transcode or encounters an error.
-    #   @return [Integer]
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplateRequest AWS API Documentation
     #
@@ -14823,7 +15314,7 @@ module Aws::MediaConvert
       :name,
       :queue,
       :settings,
-      :status_update_interval_in_secs)
+      :status_update_interval)
       include Aws::Structure
     end
 
@@ -15880,8 +16371,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] anti_alias
-    #   You no longer need to specify the anti-alias filter. It's now
-    #   automatically applied to all outputs. This property is deprecated.
+    #   The anti-alias filter is automatically applied to all outputs. The
+    #   service no longer accepts the value DISABLED for AntiAlias. If you
+    #   specify that in your job, the service will ignore the setting.
     #   @return [String]
     #
     # @!attribute [rw] codec_settings

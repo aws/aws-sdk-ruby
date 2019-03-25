@@ -468,6 +468,10 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         versioning_configuration: {
+    #           unlimited: false,
+    #           max_versions: 1,
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -497,11 +501,22 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::DatasetContentDeliveryRule>]
     #
     # @!attribute [rw] retention_period
-    #   \[Optional\] How long, in days, message data is kept for the data
-    #   set. If not given or set to null, the latest version of the dataset
-    #   content plus the latest succeeded version (if they are different)
-    #   are retained for at most 90 days.
+    #   \[Optional\] How long, in days, versions of data set contents are
+    #   kept for the data set. If not specified or set to null, versions of
+    #   data set contents are retained for at most 90 days. The number of
+    #   versions of data set contents retained is determined by the
+    #   `versioningConfiguration` parameter. (For more information, see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
     #   @return [Types::RetentionPeriod]
+    #
+    # @!attribute [rw] versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time
+    #   period specified by the "retentionPeriod" parameter. (For more
+    #   information, see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #   @return [Types::VersioningConfiguration]
     #
     # @!attribute [rw] tags
     #   Metadata which can be used to manage the data set.
@@ -513,6 +528,7 @@ module Aws::IoTAnalytics
       :triggers,
       :content_delivery_rules,
       :retention_period,
+      :versioning_configuration,
       :tags)
       include Aws::Structure
     end
@@ -526,7 +542,7 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the data set.
+    #   How long, in days, data set contents are kept for the data set.
     #   @return [Types::RetentionPeriod]
     #
     class CreateDatasetResponse < Struct.new(
@@ -670,14 +686,19 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] pipeline_activities
-    #   A list of pipeline activities.
+    #   A list of "PipelineActivity" objects. Activities perform
+    #   transformations on your messages, such as removing, renaming or
+    #   adding message attributes; filtering messages based on attribute
+    #   values; invoking your Lambda functions on messages for advanced
+    #   processing; or performing mathematical transformations to normalize
+    #   device data.
     #
-    #   The list can be 1-25 **PipelineActivity** objects. Activities
-    #   perform transformations on your messages, such as removing,
-    #   renaming, or adding message attributes; filtering messages based on
-    #   attribute values; invoking your Lambda functions on messages for
-    #   advanced processing; or performing mathematical transformations to
-    #   normalize device data.
+    #   The list can be 2-25 **PipelineActivity** objects and must contain
+    #   both a `channel` and a `datastore` activity. Each entry in the list
+    #   must contain only one activity, for example:
+    #
+    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
+    #   ... \} \}, ... ]`
     #   @return [Array<Types::PipelineActivity>]
     #
     # @!attribute [rw] tags
@@ -747,6 +768,15 @@ module Aws::IoTAnalytics
     #   set.
     #   @return [Types::RetentionPeriod]
     #
+    # @!attribute [rw] versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time
+    #   period specified by the "retentionPeriod" parameter. (For more
+    #   information, see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #   @return [Types::VersioningConfiguration]
+    #
     class Dataset < Struct.new(
       :name,
       :arn,
@@ -756,7 +786,8 @@ module Aws::IoTAnalytics
       :status,
       :creation_time,
       :last_update_time,
-      :retention_period)
+      :retention_period,
+      :versioning_configuration)
       include Aws::Structure
     end
 
@@ -2515,7 +2546,7 @@ module Aws::IoTAnalytics
     # @!attribute [rw] expression
     #   The expression that defines when to trigger an update. For more
     #   information, see [ Schedule Expressions for Rules][1] in the Amazon
-    #   CloudWatch documentation.
+    #   CloudWatch Events User Guide.
     #
     #
     #
@@ -2815,6 +2846,10 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         versioning_configuration: {
+    #           unlimited: false,
+    #           max_versions: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] dataset_name
@@ -2836,15 +2871,25 @@ module Aws::IoTAnalytics
     #   @return [Array<Types::DatasetContentDeliveryRule>]
     #
     # @!attribute [rw] retention_period
-    #   How long, in days, message data is kept for the data set.
+    #   How long, in days, data set contents are kept for the data set.
     #   @return [Types::RetentionPeriod]
+    #
+    # @!attribute [rw] versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time
+    #   period specified by the "retentionPeriod" parameter. (For more
+    #   information, see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #   @return [Types::VersioningConfiguration]
     #
     class UpdateDatasetRequest < Struct.new(
       :dataset_name,
       :actions,
       :triggers,
       :content_delivery_rules,
-      :retention_period)
+      :retention_period,
+      :versioning_configuration)
       include Aws::Structure
     end
 
@@ -2946,14 +2991,19 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] pipeline_activities
-    #   A list of "PipelineActivity" objects.
-    #
-    #   The list can be 1-25 **PipelineActivity** objects. Activities
-    #   perform transformations on your messages, such as removing, renaming
-    #   or adding message attributes; filtering messages based on attribute
+    #   A list of "PipelineActivity" objects. Activities perform
+    #   transformations on your messages, such as removing, renaming or
+    #   adding message attributes; filtering messages based on attribute
     #   values; invoking your Lambda functions on messages for advanced
     #   processing; or performing mathematical transformations to normalize
     #   device data.
+    #
+    #   The list can be 2-25 **PipelineActivity** objects and must contain
+    #   both a `channel` and a `datastore` activity. Each entry in the list
+    #   must contain only one activity, for example:
+    #
+    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
+    #   ... \} \}, ... ]`
     #   @return [Array<Types::PipelineActivity>]
     #
     class UpdatePipelineRequest < Struct.new(
@@ -3010,6 +3060,29 @@ module Aws::IoTAnalytics
       :double_value,
       :dataset_content_version_value,
       :output_file_uri_value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass VersioningConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         unlimited: false,
+    #         max_versions: 1,
+    #       }
+    #
+    # @!attribute [rw] unlimited
+    #   If true, unlimited versions of data set contents will be kept.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_versions
+    #   How many versions of data set contents will be kept. The
+    #   "unlimited" parameter must be false.
+    #   @return [Integer]
+    #
+    class VersioningConfiguration < Struct.new(
+      :unlimited,
+      :max_versions)
       include Aws::Structure
     end
 

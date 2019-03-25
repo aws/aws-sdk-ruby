@@ -301,6 +301,11 @@ module Aws::RoboMaker
     # `CreateRobotApplicationVersion` or see [Creating a Robot Application
     # Version][1].
     #
+    # <note markdown="1"> After 90 days, deployment jobs expire and will be deleted. They will
+    # no longer be accessible.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html
@@ -351,10 +356,10 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "DeploymentVersion", # required
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           pre_launch_file: "GenericString",
-    #           launch_file: "GenericString", # required
-    #           post_launch_file: "GenericString",
+    #           package_name: "Command", # required
+    #           pre_launch_file: "Path",
+    #           launch_file: "Command", # required
+    #           post_launch_file: "Path",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -381,7 +386,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "FailureThresholdBreached", "RobotDeploymentNoResponse", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
     #   resp.created_at #=> Time
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
@@ -768,6 +773,11 @@ module Aws::RoboMaker
 
     # Creates a simulation job.
     #
+    # <note markdown="1"> After 90 days, simulation jobs expire and will be deleted. They will
+    # no longer be accessible.
+    #
+    #  </note>
+    #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -848,8 +858,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           launch_file: "GenericString", # required
+    #           package_name: "Command", # required
+    #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -861,8 +871,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "GenericString", # required
-    #           launch_file: "GenericString", # required
+    #           package_name: "Command", # required
+    #           launch_file: "Command", # required
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -1096,17 +1106,19 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "FailureThresholdBreached", "RobotDeploymentNoResponse", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
     #   resp.created_at #=> Time
     #   resp.robot_deployment_summary #=> Array
     #   resp.robot_deployment_summary[0].arn #=> String
     #   resp.robot_deployment_summary[0].deployment_start_time #=> Time
     #   resp.robot_deployment_summary[0].deployment_finish_time #=> Time
     #   resp.robot_deployment_summary[0].status #=> String, one of "Available", "Registered", "PendingNewDeployment", "Deploying", "Failed", "InSync", "NoResponse"
-    #   resp.robot_deployment_summary[0].progress_detail.current_progress #=> String
+    #   resp.robot_deployment_summary[0].progress_detail.current_progress #=> String, one of "Validating", "DownloadingExtracting", "ExecutingPreLaunch", "Launching", "ExecutingPostLaunch", "Finished"
+    #   resp.robot_deployment_summary[0].progress_detail.percent_done #=> Float
+    #   resp.robot_deployment_summary[0].progress_detail.estimated_time_remaining_seconds #=> Integer
     #   resp.robot_deployment_summary[0].progress_detail.target_resource #=> String
     #   resp.robot_deployment_summary[0].failure_reason #=> String
-    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "FailureThresholdBreached", "RobotDeploymentNoResponse", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1408,8 +1420,18 @@ module Aws::RoboMaker
     # Returns a list of deployment jobs for a fleet. You can optionally
     # provide filters to retrieve specific deployment jobs.
     #
+    # <note markdown="1">
+    #
+    #  </note>
+    #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `fleetName` are supported. When
+    #   filtering, you must use the complete value of the filtered item. You
+    #   can use up to three filters, but they must be for the same named item.
+    #   For example, if you are looking for items with the status `InProgress`
+    #   or the status `Pending`.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1471,7 +1493,7 @@ module Aws::RoboMaker
     #   resp.deployment_jobs[0].deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_jobs[0].deployment_config.failure_threshold_percentage #=> Integer
     #   resp.deployment_jobs[0].failure_reason #=> String
-    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "FailureThresholdBreached", "RobotDeploymentNoResponse", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
     #   resp.deployment_jobs[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1511,6 +1533,9 @@ module Aws::RoboMaker
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use the
+    #   complete value of the filtered item. You can use up to three filters.
     #
     # @return [Types::ListFleetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1575,13 +1600,16 @@ module Aws::RoboMaker
     #   used, `ListRobotApplications` only returns `maxResults` results in a
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
-    #   `ListFleets` request with the returned `nextToken` value. This value
-    #   can be between 1 and 100. If this parameter is not used, then
-    #   `ListRobotApplications` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   `ListRobotApplications` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter is not used,
+    #   then `ListRobotApplications` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use the
+    #   complete value of the filtered item. You can use up to three filters.
     #
     # @return [Types::ListRobotApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1640,13 +1668,19 @@ module Aws::RoboMaker
     #   in paginated output. When this parameter is used, `ListRobots` only
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListFleets` request with the returned
+    #   seen by sending another `ListRobots` request with the returned
     #   `nextToken` value. This value can be between 1 and 100. If this
     #   parameter is not used, then `ListRobots` returns up to 100 results and
     #   a `nextToken` value if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `fleetName` are supported. When
+    #   filtering, you must use the complete value of the filtered item. You
+    #   can use up to three filters, but they must be for the same named item.
+    #   For example, if you are looking for items with the status `Registered`
+    #   or the status `Available`.
     #
     # @return [Types::ListRobotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1714,14 +1748,16 @@ module Aws::RoboMaker
     #   is used, `ListSimulationApplications` only returns `maxResults`
     #   results in a single page along with a `nextToken` response element.
     #   The remaining results of the initial request can be seen by sending
-    #   another `ListFleets` request with the returned `nextToken` value. This
-    #   value can be between 1 and 100. If this parameter is not used, then
-    #   `ListSimulationApplications` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   another `ListSimulationApplications` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter is not used, then `ListSimulationApplications` returns up to
+    #   100 results and a `nextToken` value if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Optional list of filters to limit results. The only valid filter name
-    #   is `name`.
+    #   Optional list of filters to limit results.
+    #
+    #   The filter name `name` is supported. When filtering, you must use the
+    #   complete value of the filtered item. You can use up to three filters.
     #
     # @return [Types::ListSimulationApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1781,13 +1817,20 @@ module Aws::RoboMaker
     #   `ListSimulationJobs` in paginated output. When this parameter is used,
     #   `ListSimulationJobs` only returns `maxResults` results in a single
     #   page along with a `nextToken` response element. The remaining results
-    #   of the initial request can be seen by sending another `ListFleets`
-    #   request with the returned `nextToken` value. This value can be between
-    #   1 and 100. If this parameter is not used, then `ListSimulationJobs`
-    #   returns up to 100 results and a `nextToken` value if applicable.
+    #   of the initial request can be seen by sending another
+    #   `ListSimulationJobs` request with the returned `nextToken` value. This
+    #   value can be between 1 and 100. If this parameter is not used, then
+    #   `ListSimulationJobs` returns up to 100 results and a `nextToken` value
+    #   if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
+    #
+    #   The filter names `status` and `simulationApplicationName` and
+    #   `robotApplicationName` are supported. When filtering, you must use the
+    #   complete value of the filtered item. You can use up to three filters,
+    #   but they must be for the same named item. For example, if you are
+    #   looking for items with the status `Preparing` or the status `Running`.
     #
     # @return [Types::ListSimulationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1962,7 +2005,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "FailureThresholdBreached", "RobotDeploymentNoResponse", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "InternalServerError"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SyncDeploymentJob AWS API Documentation
@@ -2022,7 +2065,7 @@ module Aws::RoboMaker
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/robomaker/latest/dg//API_Reference.htmlAPI_TagResource.html
+    # [1]: https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are
@@ -2215,7 +2258,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

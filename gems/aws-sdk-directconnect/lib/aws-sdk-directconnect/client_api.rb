@@ -12,6 +12,8 @@ module Aws::DirectConnect
     include Seahorse::Model
 
     ASN = Shapes::IntegerShape.new(name: 'ASN')
+    AcceptDirectConnectGatewayAssociationProposalRequest = Shapes::StructureShape.new(name: 'AcceptDirectConnectGatewayAssociationProposalRequest')
+    AcceptDirectConnectGatewayAssociationProposalResult = Shapes::StructureShape.new(name: 'AcceptDirectConnectGatewayAssociationProposalResult')
     AddressFamily = Shapes::StringShape.new(name: 'AddressFamily')
     AllocateConnectionOnInterconnectRequest = Shapes::StructureShape.new(name: 'AllocateConnectionOnInterconnectRequest')
     AllocateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AllocateHostedConnectionRequest')
@@ -21,6 +23,8 @@ module Aws::DirectConnect
     AssociateConnectionWithLagRequest = Shapes::StructureShape.new(name: 'AssociateConnectionWithLagRequest')
     AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
     AssociateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AssociateVirtualInterfaceRequest')
+    AssociatedGateway = Shapes::StructureShape.new(name: 'AssociatedGateway')
+    AssociatedGatewayId = Shapes::StringShape.new(name: 'AssociatedGatewayId')
     AvailablePortSpeeds = Shapes::ListShape.new(name: 'AvailablePortSpeeds')
     AwsDevice = Shapes::StringShape.new(name: 'AwsDevice')
     AwsDeviceV2 = Shapes::StringShape.new(name: 'AwsDeviceV2')
@@ -49,6 +53,8 @@ module Aws::DirectConnect
     CreateBGPPeerRequest = Shapes::StructureShape.new(name: 'CreateBGPPeerRequest')
     CreateBGPPeerResponse = Shapes::StructureShape.new(name: 'CreateBGPPeerResponse')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
+    CreateDirectConnectGatewayAssociationProposalRequest = Shapes::StructureShape.new(name: 'CreateDirectConnectGatewayAssociationProposalRequest')
+    CreateDirectConnectGatewayAssociationProposalResult = Shapes::StructureShape.new(name: 'CreateDirectConnectGatewayAssociationProposalResult')
     CreateDirectConnectGatewayAssociationRequest = Shapes::StructureShape.new(name: 'CreateDirectConnectGatewayAssociationRequest')
     CreateDirectConnectGatewayAssociationResult = Shapes::StructureShape.new(name: 'CreateDirectConnectGatewayAssociationResult')
     CreateDirectConnectGatewayRequest = Shapes::StructureShape.new(name: 'CreateDirectConnectGatewayRequest')
@@ -61,6 +67,8 @@ module Aws::DirectConnect
     DeleteBGPPeerRequest = Shapes::StructureShape.new(name: 'DeleteBGPPeerRequest')
     DeleteBGPPeerResponse = Shapes::StructureShape.new(name: 'DeleteBGPPeerResponse')
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
+    DeleteDirectConnectGatewayAssociationProposalRequest = Shapes::StructureShape.new(name: 'DeleteDirectConnectGatewayAssociationProposalRequest')
+    DeleteDirectConnectGatewayAssociationProposalResult = Shapes::StructureShape.new(name: 'DeleteDirectConnectGatewayAssociationProposalResult')
     DeleteDirectConnectGatewayAssociationRequest = Shapes::StructureShape.new(name: 'DeleteDirectConnectGatewayAssociationRequest')
     DeleteDirectConnectGatewayAssociationResult = Shapes::StructureShape.new(name: 'DeleteDirectConnectGatewayAssociationResult')
     DeleteDirectConnectGatewayRequest = Shapes::StructureShape.new(name: 'DeleteDirectConnectGatewayRequest')
@@ -74,6 +82,8 @@ module Aws::DirectConnect
     DescribeConnectionLoaResponse = Shapes::StructureShape.new(name: 'DescribeConnectionLoaResponse')
     DescribeConnectionsOnInterconnectRequest = Shapes::StructureShape.new(name: 'DescribeConnectionsOnInterconnectRequest')
     DescribeConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeConnectionsRequest')
+    DescribeDirectConnectGatewayAssociationProposalsRequest = Shapes::StructureShape.new(name: 'DescribeDirectConnectGatewayAssociationProposalsRequest')
+    DescribeDirectConnectGatewayAssociationProposalsResult = Shapes::StructureShape.new(name: 'DescribeDirectConnectGatewayAssociationProposalsResult')
     DescribeDirectConnectGatewayAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeDirectConnectGatewayAssociationsRequest')
     DescribeDirectConnectGatewayAssociationsResult = Shapes::StructureShape.new(name: 'DescribeDirectConnectGatewayAssociationsResult')
     DescribeDirectConnectGatewayAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeDirectConnectGatewayAttachmentsRequest')
@@ -92,7 +102,12 @@ module Aws::DirectConnect
     DirectConnectClientException = Shapes::StructureShape.new(name: 'DirectConnectClientException')
     DirectConnectGateway = Shapes::StructureShape.new(name: 'DirectConnectGateway')
     DirectConnectGatewayAssociation = Shapes::StructureShape.new(name: 'DirectConnectGatewayAssociation')
+    DirectConnectGatewayAssociationId = Shapes::StringShape.new(name: 'DirectConnectGatewayAssociationId')
     DirectConnectGatewayAssociationList = Shapes::ListShape.new(name: 'DirectConnectGatewayAssociationList')
+    DirectConnectGatewayAssociationProposal = Shapes::StructureShape.new(name: 'DirectConnectGatewayAssociationProposal')
+    DirectConnectGatewayAssociationProposalId = Shapes::StringShape.new(name: 'DirectConnectGatewayAssociationProposalId')
+    DirectConnectGatewayAssociationProposalList = Shapes::ListShape.new(name: 'DirectConnectGatewayAssociationProposalList')
+    DirectConnectGatewayAssociationProposalState = Shapes::StringShape.new(name: 'DirectConnectGatewayAssociationProposalState')
     DirectConnectGatewayAssociationState = Shapes::StringShape.new(name: 'DirectConnectGatewayAssociationState')
     DirectConnectGatewayAttachment = Shapes::StructureShape.new(name: 'DirectConnectGatewayAttachment')
     DirectConnectGatewayAttachmentList = Shapes::ListShape.new(name: 'DirectConnectGatewayAttachmentList')
@@ -105,6 +120,9 @@ module Aws::DirectConnect
     DisassociateConnectionFromLagRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionFromLagRequest')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    GatewayIdToAssociate = Shapes::StringShape.new(name: 'GatewayIdToAssociate')
+    GatewayIdentifier = Shapes::StringShape.new(name: 'GatewayIdentifier')
+    GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     HasLogicalRedundancy = Shapes::StringShape.new(name: 'HasLogicalRedundancy')
     Interconnect = Shapes::StructureShape.new(name: 'Interconnect')
     InterconnectId = Shapes::StringShape.new(name: 'InterconnectId')
@@ -160,6 +178,8 @@ module Aws::DirectConnect
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateDirectConnectGatewayAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayAssociationRequest')
+    UpdateDirectConnectGatewayAssociationResult = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayAssociationResult')
     UpdateLagRequest = Shapes::StructureShape.new(name: 'UpdateLagRequest')
     UpdateVirtualInterfaceAttributesRequest = Shapes::StructureShape.new(name: 'UpdateVirtualInterfaceAttributesRequest')
     VLAN = Shapes::IntegerShape.new(name: 'VLAN')
@@ -177,6 +197,15 @@ module Aws::DirectConnect
     VirtualInterfaceState = Shapes::StringShape.new(name: 'VirtualInterfaceState')
     VirtualInterfaceType = Shapes::StringShape.new(name: 'VirtualInterfaceType')
     VirtualInterfaces = Shapes::StructureShape.new(name: 'VirtualInterfaces')
+
+    AcceptDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
+    AcceptDirectConnectGatewayAssociationProposalRequest.add_member(:proposal_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposalId, required: true, location_name: "proposalId"))
+    AcceptDirectConnectGatewayAssociationProposalRequest.add_member(:associated_gateway_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, required: true, location_name: "associatedGatewayOwnerAccount"))
+    AcceptDirectConnectGatewayAssociationProposalRequest.add_member(:override_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "overrideAllowedPrefixesToDirectConnectGateway"))
+    AcceptDirectConnectGatewayAssociationProposalRequest.struct_class = Types::AcceptDirectConnectGatewayAssociationProposalRequest
+
+    AcceptDirectConnectGatewayAssociationProposalResult.add_member(:direct_connect_gateway_association, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociation, location_name: "directConnectGatewayAssociation"))
+    AcceptDirectConnectGatewayAssociationProposalResult.struct_class = Types::AcceptDirectConnectGatewayAssociationProposalResult
 
     AllocateConnectionOnInterconnectRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
     AllocateConnectionOnInterconnectRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "connectionName"))
@@ -214,6 +243,12 @@ module Aws::DirectConnect
     AssociateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AssociateVirtualInterfaceRequest.struct_class = Types::AssociateVirtualInterfaceRequest
 
+    AssociatedGateway.add_member(:id, Shapes::ShapeRef.new(shape: GatewayIdentifier, location_name: "id"))
+    AssociatedGateway.add_member(:type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "type"))
+    AssociatedGateway.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
+    AssociatedGateway.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    AssociatedGateway.struct_class = Types::AssociatedGateway
+
     AvailablePortSpeeds.member = Shapes::ShapeRef.new(shape: PortSpeed)
 
     BGPPeer.add_member(:bgp_peer_id, Shapes::ShapeRef.new(shape: BGPPeerId, location_name: "bgpPeerId"))
@@ -236,7 +271,7 @@ module Aws::DirectConnect
     ConfirmConnectionResponse.struct_class = Types::ConfirmConnectionResponse
 
     ConfirmPrivateVirtualInterfaceRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
-    ConfirmPrivateVirtualInterfaceRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
+    ConfirmPrivateVirtualInterfaceRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     ConfirmPrivateVirtualInterfaceRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     ConfirmPrivateVirtualInterfaceRequest.struct_class = Types::ConfirmPrivateVirtualInterfaceRequest
 
@@ -284,8 +319,20 @@ module Aws::DirectConnect
     CreateConnectionRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
+    CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
+    CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, required: true, location_name: "directConnectGatewayOwnerAccount"))
+    CreateDirectConnectGatewayAssociationProposalRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayIdToAssociate, required: true, location_name: "gatewayId"))
+    CreateDirectConnectGatewayAssociationProposalRequest.add_member(:add_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "addAllowedPrefixesToDirectConnectGateway"))
+    CreateDirectConnectGatewayAssociationProposalRequest.add_member(:remove_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "removeAllowedPrefixesToDirectConnectGateway"))
+    CreateDirectConnectGatewayAssociationProposalRequest.struct_class = Types::CreateDirectConnectGatewayAssociationProposalRequest
+
+    CreateDirectConnectGatewayAssociationProposalResult.add_member(:direct_connect_gateway_association_proposal, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposal, location_name: "directConnectGatewayAssociationProposal"))
+    CreateDirectConnectGatewayAssociationProposalResult.struct_class = Types::CreateDirectConnectGatewayAssociationProposalResult
+
     CreateDirectConnectGatewayAssociationRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
-    CreateDirectConnectGatewayAssociationRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, required: true, location_name: "virtualGatewayId"))
+    CreateDirectConnectGatewayAssociationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayIdToAssociate, location_name: "gatewayId"))
+    CreateDirectConnectGatewayAssociationRequest.add_member(:add_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "addAllowedPrefixesToDirectConnectGateway"))
+    CreateDirectConnectGatewayAssociationRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     CreateDirectConnectGatewayAssociationRequest.struct_class = Types::CreateDirectConnectGatewayAssociationRequest
 
     CreateDirectConnectGatewayAssociationResult.add_member(:direct_connect_gateway_association, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociation, location_name: "directConnectGatewayAssociation"))
@@ -331,8 +378,15 @@ module Aws::DirectConnect
     DeleteConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     DeleteConnectionRequest.struct_class = Types::DeleteConnectionRequest
 
-    DeleteDirectConnectGatewayAssociationRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
-    DeleteDirectConnectGatewayAssociationRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, required: true, location_name: "virtualGatewayId"))
+    DeleteDirectConnectGatewayAssociationProposalRequest.add_member(:proposal_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposalId, required: true, location_name: "proposalId"))
+    DeleteDirectConnectGatewayAssociationProposalRequest.struct_class = Types::DeleteDirectConnectGatewayAssociationProposalRequest
+
+    DeleteDirectConnectGatewayAssociationProposalResult.add_member(:direct_connect_gateway_association_proposal, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposal, location_name: "directConnectGatewayAssociationProposal"))
+    DeleteDirectConnectGatewayAssociationProposalResult.struct_class = Types::DeleteDirectConnectGatewayAssociationProposalResult
+
+    DeleteDirectConnectGatewayAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationId, location_name: "associationId"))
+    DeleteDirectConnectGatewayAssociationRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
+    DeleteDirectConnectGatewayAssociationRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     DeleteDirectConnectGatewayAssociationRequest.struct_class = Types::DeleteDirectConnectGatewayAssociationRequest
 
     DeleteDirectConnectGatewayAssociationResult.add_member(:direct_connect_gateway_association, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociation, location_name: "directConnectGatewayAssociation"))
@@ -373,10 +427,23 @@ module Aws::DirectConnect
     DescribeConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
     DescribeConnectionsRequest.struct_class = Types::DescribeConnectionsRequest
 
+    DescribeDirectConnectGatewayAssociationProposalsRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
+    DescribeDirectConnectGatewayAssociationProposalsRequest.add_member(:proposal_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposalId, location_name: "proposalId"))
+    DescribeDirectConnectGatewayAssociationProposalsRequest.add_member(:associated_gateway_id, Shapes::ShapeRef.new(shape: AssociatedGatewayId, location_name: "associatedGatewayId"))
+    DescribeDirectConnectGatewayAssociationProposalsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    DescribeDirectConnectGatewayAssociationProposalsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DescribeDirectConnectGatewayAssociationProposalsRequest.struct_class = Types::DescribeDirectConnectGatewayAssociationProposalsRequest
+
+    DescribeDirectConnectGatewayAssociationProposalsResult.add_member(:direct_connect_gateway_association_proposals, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposalList, location_name: "directConnectGatewayAssociationProposals"))
+    DescribeDirectConnectGatewayAssociationProposalsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DescribeDirectConnectGatewayAssociationProposalsResult.struct_class = Types::DescribeDirectConnectGatewayAssociationProposalsResult
+
+    DescribeDirectConnectGatewayAssociationsRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationId, location_name: "associationId"))
+    DescribeDirectConnectGatewayAssociationsRequest.add_member(:associated_gateway_id, Shapes::ShapeRef.new(shape: AssociatedGatewayId, location_name: "associatedGatewayId"))
     DescribeDirectConnectGatewayAssociationsRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
-    DescribeDirectConnectGatewayAssociationsRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
     DescribeDirectConnectGatewayAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
     DescribeDirectConnectGatewayAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DescribeDirectConnectGatewayAssociationsRequest.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     DescribeDirectConnectGatewayAssociationsRequest.struct_class = Types::DescribeDirectConnectGatewayAssociationsRequest
 
     DescribeDirectConnectGatewayAssociationsResult.add_member(:direct_connect_gateway_associations, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationList, location_name: "directConnectGatewayAssociations"))
@@ -443,14 +510,29 @@ module Aws::DirectConnect
     DirectConnectGateway.struct_class = Types::DirectConnectGateway
 
     DirectConnectGatewayAssociation.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
-    DirectConnectGatewayAssociation.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
-    DirectConnectGatewayAssociation.add_member(:virtual_gateway_region, Shapes::ShapeRef.new(shape: VirtualGatewayRegion, location_name: "virtualGatewayRegion"))
-    DirectConnectGatewayAssociation.add_member(:virtual_gateway_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "virtualGatewayOwnerAccount"))
+    DirectConnectGatewayAssociation.add_member(:direct_connect_gateway_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "directConnectGatewayOwnerAccount"))
     DirectConnectGatewayAssociation.add_member(:association_state, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationState, location_name: "associationState"))
     DirectConnectGatewayAssociation.add_member(:state_change_error, Shapes::ShapeRef.new(shape: StateChangeError, location_name: "stateChangeError"))
+    DirectConnectGatewayAssociation.add_member(:associated_gateway, Shapes::ShapeRef.new(shape: AssociatedGateway, location_name: "associatedGateway"))
+    DirectConnectGatewayAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationId, location_name: "associationId"))
+    DirectConnectGatewayAssociation.add_member(:allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "allowedPrefixesToDirectConnectGateway"))
+    DirectConnectGatewayAssociation.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
+    DirectConnectGatewayAssociation.add_member(:virtual_gateway_region, Shapes::ShapeRef.new(shape: VirtualGatewayRegion, deprecated: true, location_name: "virtualGatewayRegion"))
+    DirectConnectGatewayAssociation.add_member(:virtual_gateway_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "virtualGatewayOwnerAccount"))
     DirectConnectGatewayAssociation.struct_class = Types::DirectConnectGatewayAssociation
 
     DirectConnectGatewayAssociationList.member = Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociation)
+
+    DirectConnectGatewayAssociationProposal.add_member(:proposal_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposalId, location_name: "proposalId"))
+    DirectConnectGatewayAssociationProposal.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
+    DirectConnectGatewayAssociationProposal.add_member(:direct_connect_gateway_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "directConnectGatewayOwnerAccount"))
+    DirectConnectGatewayAssociationProposal.add_member(:proposal_state, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposalState, location_name: "proposalState"))
+    DirectConnectGatewayAssociationProposal.add_member(:associated_gateway, Shapes::ShapeRef.new(shape: AssociatedGateway, location_name: "associatedGateway"))
+    DirectConnectGatewayAssociationProposal.add_member(:existing_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "existingAllowedPrefixesToDirectConnectGateway"))
+    DirectConnectGatewayAssociationProposal.add_member(:requested_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "requestedAllowedPrefixesToDirectConnectGateway"))
+    DirectConnectGatewayAssociationProposal.struct_class = Types::DirectConnectGatewayAssociationProposal
+
+    DirectConnectGatewayAssociationProposalList.member = Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationProposal)
 
     DirectConnectGatewayAttachment.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     DirectConnectGatewayAttachment.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
@@ -539,7 +621,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
     NewPrivateVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
     NewPrivateVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
-    NewPrivateVirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
+    NewPrivateVirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     NewPrivateVirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     NewPrivateVirtualInterface.struct_class = Types::NewPrivateVirtualInterface
 
@@ -606,6 +688,14 @@ module Aws::DirectConnect
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateDirectConnectGatewayAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationId, location_name: "associationId"))
+    UpdateDirectConnectGatewayAssociationRequest.add_member(:add_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "addAllowedPrefixesToDirectConnectGateway"))
+    UpdateDirectConnectGatewayAssociationRequest.add_member(:remove_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "removeAllowedPrefixesToDirectConnectGateway"))
+    UpdateDirectConnectGatewayAssociationRequest.struct_class = Types::UpdateDirectConnectGatewayAssociationRequest
+
+    UpdateDirectConnectGatewayAssociationResult.add_member(:direct_connect_gateway_association, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociation, location_name: "directConnectGatewayAssociation"))
+    UpdateDirectConnectGatewayAssociationResult.struct_class = Types::UpdateDirectConnectGatewayAssociationResult
+
     UpdateLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     UpdateLagRequest.add_member(:lag_name, Shapes::ShapeRef.new(shape: LagName, location_name: "lagName"))
     UpdateLagRequest.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
@@ -615,7 +705,7 @@ module Aws::DirectConnect
     UpdateVirtualInterfaceAttributesRequest.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     UpdateVirtualInterfaceAttributesRequest.struct_class = Types::UpdateVirtualInterfaceAttributesRequest
 
-    VirtualGateway.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
+    VirtualGateway.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     VirtualGateway.add_member(:virtual_gateway_state, Shapes::ShapeRef.new(shape: VirtualGatewayState, location_name: "virtualGatewayState"))
     VirtualGateway.struct_class = Types::VirtualGateway
 
@@ -641,7 +731,7 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:customer_router_config, Shapes::ShapeRef.new(shape: RouterConfig, location_name: "customerRouterConfig"))
     VirtualInterface.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
     VirtualInterface.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
-    VirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
+    VirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, deprecated: true, location_name: "virtualGatewayId"))
     VirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     VirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
     VirtualInterface.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerList, location_name: "bgpPeers"))
@@ -671,6 +761,16 @@ module Aws::DirectConnect
         "targetPrefix" => "OvertureService",
         "uid" => "directconnect-2012-10-25",
       }
+
+      api.add_operation(:accept_direct_connect_gateway_association_proposal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptDirectConnectGatewayAssociationProposal"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptDirectConnectGatewayAssociationProposalRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptDirectConnectGatewayAssociationProposalResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
 
       api.add_operation(:allocate_connection_on_interconnect, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AllocateConnectionOnInterconnect"
@@ -813,6 +913,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:create_direct_connect_gateway_association_proposal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDirectConnectGatewayAssociationProposal"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDirectConnectGatewayAssociationProposalRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDirectConnectGatewayAssociationProposalResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:create_interconnect, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateInterconnect"
         o.http_method = "POST"
@@ -893,6 +1003,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:delete_direct_connect_gateway_association_proposal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDirectConnectGatewayAssociationProposal"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDirectConnectGatewayAssociationProposalRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDirectConnectGatewayAssociationProposalResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:delete_interconnect, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteInterconnect"
         o.http_method = "POST"
@@ -951,6 +1071,16 @@ module Aws::DirectConnect
         o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeConnectionsOnInterconnectRequest)
         o.output = Shapes::ShapeRef.new(shape: Connections)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:describe_direct_connect_gateway_association_proposals, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDirectConnectGatewayAssociationProposals"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDirectConnectGatewayAssociationProposalsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDirectConnectGatewayAssociationProposalsResult)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1104,6 +1234,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:update_direct_connect_gateway_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDirectConnectGatewayAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDirectConnectGatewayAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDirectConnectGatewayAssociationResult)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

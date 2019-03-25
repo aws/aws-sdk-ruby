@@ -8,6 +8,59 @@
 module Aws::DirectConnect
   module Types
 
+    # @note When making an API call, you may pass AcceptDirectConnectGatewayAssociationProposalRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #         proposal_id: "DirectConnectGatewayAssociationProposalId", # required
+    #         associated_gateway_owner_account: "OwnerAccount", # required
+    #         override_allowed_prefixes_to_direct_connect_gateway: [
+    #           {
+    #             cidr: "CIDR",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] proposal_id
+    #   The ID of the request proposal.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_gateway_owner_account
+    #   The ID of the AWS account that owns the virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_allowed_prefixes_to_direct_connect_gateway
+    #   Overrides the Amazon VPC prefixes advertised to the Direct Connect
+    #   gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposalRequest AWS API Documentation
+    #
+    class AcceptDirectConnectGatewayAssociationProposalRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :proposal_id,
+      :associated_gateway_owner_account,
+      :override_allowed_prefixes_to_direct_connect_gateway)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] direct_connect_gateway_association
+    #   Information about an association between a Direct Connect gateway
+    #   and a virtual private gateway.
+    #   @return [Types::DirectConnectGatewayAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposalResult AWS API Documentation
+    #
+    class AcceptDirectConnectGatewayAssociationProposalResult < Struct.new(
+      :direct_connect_gateway_association)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AllocateConnectionOnInterconnectRequest
     #   data as a hash:
     #
@@ -20,8 +73,11 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] bandwidth
-    #   The bandwidth of the connection, in Mbps. The possible values are
-    #   50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
+    #   The bandwidth of the connection. The possible values are 50Mbps,
+    #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
+    #   and 10Gbps. Note that only those AWS Direct Connect Partners who
+    #   have met specific requirements are allowed to create a 1Gbps, 2Gbps,
+    #   5Gbps or 10Gbps hosted connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -73,8 +129,11 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] bandwidth
-    #   The bandwidth of the hosted connection, in Mbps. The possible values
-    #   are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
+    #   The bandwidth of the connection. The possible values are 50Mbps,
+    #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
+    #   and 10Gbps. Note that only those AWS Direct Connect Partners who
+    #   have met specific requirements are allowed to create a 1Gbps, 2Gbps,
+    #   5Gbps or 10Gbps hosted connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -249,6 +308,35 @@ module Aws::DirectConnect
     class AssociateVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       :connection_id)
+      include Aws::Structure
+    end
+
+    # Information about the associated gateway.
+    #
+    # @!attribute [rw] id
+    #   The ID of the associated gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of associated gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the AWS account that owns the associated virtual private
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region where the associated gateway is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociatedGateway AWS API Documentation
+    #
+    class AssociatedGateway < Struct.new(
+      :id,
+      :type,
+      :owner_account,
+      :region)
       include Aws::Structure
     end
 
@@ -717,17 +805,93 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateDirectConnectGatewayAssociationRequest
+    # @note When making an API call, you may pass CreateDirectConnectGatewayAssociationProposalRequest
     #   data as a hash:
     #
     #       {
     #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #         virtual_gateway_id: "VirtualGatewayId", # required
+    #         direct_connect_gateway_owner_account: "OwnerAccount", # required
+    #         gateway_id: "GatewayIdToAssociate", # required
+    #         add_allowed_prefixes_to_direct_connect_gateway: [
+    #           {
+    #             cidr: "CIDR",
+    #           },
+    #         ],
+    #         remove_allowed_prefixes_to_direct_connect_gateway: [
+    #           {
+    #             cidr: "CIDR",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_owner_account
+    #   The ID of the AWS account that owns the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @!attribute [rw] remove_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to no longer advertise to the Direct Connect
+    #   gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationProposalRequest AWS API Documentation
+    #
+    class CreateDirectConnectGatewayAssociationProposalRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :direct_connect_gateway_owner_account,
+      :gateway_id,
+      :add_allowed_prefixes_to_direct_connect_gateway,
+      :remove_allowed_prefixes_to_direct_connect_gateway)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] direct_connect_gateway_association_proposal
+    #   Information about the Direct Connect gateway proposal.
+    #   @return [Types::DirectConnectGatewayAssociationProposal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationProposalResult AWS API Documentation
+    #
+    class CreateDirectConnectGatewayAssociationProposalResult < Struct.new(
+      :direct_connect_gateway_association_proposal)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDirectConnectGatewayAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #         gateway_id: "GatewayIdToAssociate",
+    #         add_allowed_prefixes_to_direct_connect_gateway: [
+    #           {
+    #             cidr: "CIDR",
+    #           },
+    #         ],
+    #         virtual_gateway_id: "VirtualGatewayId",
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway
+    #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @!attribute [rw] virtual_gateway_id
     #   The ID of the virtual private gateway.
@@ -737,6 +901,8 @@ module Aws::DirectConnect
     #
     class CreateDirectConnectGatewayAssociationRequest < Struct.new(
       :direct_connect_gateway_id,
+      :gateway_id,
+      :add_allowed_prefixes_to_direct_connect_gateway,
       :virtual_gateway_id)
       include Aws::Structure
     end
@@ -848,7 +1014,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] connections_bandwidth
     #   The bandwidth of the individual physical connections bundled by the
-    #   LAG. The possible values are 1Gbps and 10Gbps.
+    #   LAG. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps,
+    #   400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
     #   @return [String]
     #
     # @!attribute [rw] lag_name
@@ -1008,13 +1175,47 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDirectConnectGatewayAssociationProposalRequest
+    #   data as a hash:
+    #
+    #       {
+    #         proposal_id: "DirectConnectGatewayAssociationProposalId", # required
+    #       }
+    #
+    # @!attribute [rw] proposal_id
+    #   The ID of the proposal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationProposalRequest AWS API Documentation
+    #
+    class DeleteDirectConnectGatewayAssociationProposalRequest < Struct.new(
+      :proposal_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] direct_connect_gateway_association_proposal
+    #   The ID of the virtual private gateway.
+    #   @return [Types::DirectConnectGatewayAssociationProposal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationProposalResult AWS API Documentation
+    #
+    class DeleteDirectConnectGatewayAssociationProposalResult < Struct.new(
+      :direct_connect_gateway_association_proposal)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDirectConnectGatewayAssociationRequest
     #   data as a hash:
     #
     #       {
-    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
-    #         virtual_gateway_id: "VirtualGatewayId", # required
+    #         association_id: "DirectConnectGatewayAssociationId",
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         virtual_gateway_id: "VirtualGatewayId",
     #       }
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the Direct Connect gateway association.
+    #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
@@ -1027,13 +1228,14 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationRequest AWS API Documentation
     #
     class DeleteDirectConnectGatewayAssociationRequest < Struct.new(
+      :association_id,
       :direct_connect_gateway_id,
       :virtual_gateway_id)
       include Aws::Structure
     end
 
     # @!attribute [rw] direct_connect_gateway_association
-    #   The association to be deleted.
+    #   Information about the deleted association.
     #   @return [Types::DirectConnectGatewayAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationResult AWS API Documentation
@@ -1281,12 +1483,13 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DescribeDirectConnectGatewayAssociationsRequest
+    # @note When making an API call, you may pass DescribeDirectConnectGatewayAssociationProposalsRequest
     #   data as a hash:
     #
     #       {
     #         direct_connect_gateway_id: "DirectConnectGatewayId",
-    #         virtual_gateway_id: "VirtualGatewayId",
+    #         proposal_id: "DirectConnectGatewayAssociationProposalId",
+    #         associated_gateway_id: "AssociatedGatewayId",
     #         max_results: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -1295,30 +1498,110 @@ module Aws::DirectConnect
     #   The ID of the Direct Connect gateway.
     #   @return [String]
     #
-    # @!attribute [rw] virtual_gateway_id
-    #   The ID of the virtual private gateway.
+    # @!attribute [rw] proposal_id
+    #   The ID of the proposal.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_gateway_id
+    #   The ID of the associated virtual private gateway.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of associations to return per page.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationProposalsRequest AWS API Documentation
+    #
+    class DescribeDirectConnectGatewayAssociationProposalsRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :proposal_id,
+      :associated_gateway_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] direct_connect_gateway_association_proposals
+    #   Describes the Direct Connect gateway association proposals.
+    #   @return [Array<Types::DirectConnectGatewayAssociationProposal>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationProposalsResult AWS API Documentation
+    #
+    class DescribeDirectConnectGatewayAssociationProposalsResult < Struct.new(
+      :direct_connect_gateway_association_proposals,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDirectConnectGatewayAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "DirectConnectGatewayAssociationId",
+    #         associated_gateway_id: "AssociatedGatewayId",
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         virtual_gateway_id: "VirtualGatewayId",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the Direct Connect gateway association.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_gateway_id
+    #   The ID of the associated gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The token provided in the previous call to retrieve the next page.
     #   @return [String]
     #
+    # @!attribute [rw] virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsRequest AWS API Documentation
     #
     class DescribeDirectConnectGatewayAssociationsRequest < Struct.new(
+      :association_id,
+      :associated_gateway_id,
       :direct_connect_gateway_id,
-      :virtual_gateway_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :virtual_gateway_id)
       include Aws::Structure
     end
 
     # @!attribute [rw] direct_connect_gateway_associations
-    #   The associations.
+    #   Information about the associations.
     #   @return [Array<Types::DirectConnectGatewayAssociation>]
     #
     # @!attribute [rw] next_token
@@ -1352,7 +1635,12 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of attachments to return per page.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1399,7 +1687,12 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Direct Connect gateways to return per page.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1677,17 +1970,8 @@ module Aws::DirectConnect
     #   The ID of the Direct Connect gateway.
     #   @return [String]
     #
-    # @!attribute [rw] virtual_gateway_id
-    #   The ID of the virtual private gateway. Applies only to private
-    #   virtual interfaces.
-    #   @return [String]
-    #
-    # @!attribute [rw] virtual_gateway_region
-    #   The AWS Region where the virtual private gateway is located.
-    #   @return [String]
-    #
-    # @!attribute [rw] virtual_gateway_owner_account
-    #   The ID of the AWS account that owns the virtual private gateway.
+    # @!attribute [rw] direct_connect_gateway_owner_account
+    #   The ID of the AWS account that owns the associated gateway.
     #   @return [String]
     #
     # @!attribute [rw] association_state
@@ -1711,15 +1995,99 @@ module Aws::DirectConnect
     #   The error message if the state of an object failed to advance.
     #   @return [String]
     #
+    # @!attribute [rw] associated_gateway
+    #   Information about the associated virtual private gateway.
+    #   @return [Types::AssociatedGateway]
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the Direct Connect gateway association.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @!attribute [rw] virtual_gateway_id
+    #   The ID of the virtual private gateway. Applies only to private
+    #   virtual interfaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_region
+    #   The AWS Region where the virtual private gateway is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_owner_account
+    #   The ID of the AWS account that owns the virtual private gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation AWS API Documentation
     #
     class DirectConnectGatewayAssociation < Struct.new(
       :direct_connect_gateway_id,
+      :direct_connect_gateway_owner_account,
+      :association_state,
+      :state_change_error,
+      :associated_gateway,
+      :association_id,
+      :allowed_prefixes_to_direct_connect_gateway,
       :virtual_gateway_id,
       :virtual_gateway_region,
-      :virtual_gateway_owner_account,
-      :association_state,
-      :state_change_error)
+      :virtual_gateway_owner_account)
+      include Aws::Structure
+    end
+
+    # Information about the proposal request to attach a virtual private
+    # gateway to a DDirect Connect gateway.
+    #
+    # @!attribute [rw] proposal_id
+    #   The ID of the association proposal.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_owner_account
+    #   The ID of the AWS account that owns the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] proposal_state
+    #   The state of the proposal. The following are possible values:
+    #
+    #   * `accepted`\: The proposal has been accepted. The Direct Connect
+    #     gateway association is available to use in this state.
+    #
+    #   * `deleted`\: The proposal has been deleted by the owner that made
+    #     the proposal. The Direct Connect gateway association cannot be
+    #     used in this state.
+    #
+    #   * `requested`\: The proposal has been requested. The Direct Connect
+    #     gateway association cannot be used in this state.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_gateway
+    #   Information about the associated virtual private gateway.
+    #   @return [Types::AssociatedGateway]
+    #
+    # @!attribute [rw] existing_allowed_prefixes_to_direct_connect_gateway
+    #   The existing Amazon VPC prefixes advertised to the Direct Connect
+    #   gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @!attribute [rw] requested_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociationProposal AWS API Documentation
+    #
+    class DirectConnectGatewayAssociationProposal < Struct.new(
+      :proposal_id,
+      :direct_connect_gateway_id,
+      :direct_connect_gateway_owner_account,
+      :proposal_state,
+      :associated_gateway,
+      :existing_allowed_prefixes_to_direct_connect_gateway,
+      :requested_allowed_prefixes_to_direct_connect_gateway)
       include Aws::Structure
     end
 
@@ -1959,11 +2327,11 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] aws_device
-    #   The Direct Connect endpoint that hosts the LAG.
+    #   The AWS Direct Connect endpoint that hosts the LAG.
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2
-    #   The Direct Connect endpoint that hosts the LAG.
+    #   The AWS Direct Connect endpoint that hosts the LAG.
     #   @return [String]
     #
     # @!attribute [rw] connections
@@ -2525,6 +2893,57 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateDirectConnectGatewayAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "DirectConnectGatewayAssociationId",
+    #         add_allowed_prefixes_to_direct_connect_gateway: [
+    #           {
+    #             cidr: "CIDR",
+    #           },
+    #         ],
+    #         remove_allowed_prefixes_to_direct_connect_gateway: [
+    #           {
+    #             cidr: "CIDR",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the Direct Connect gateway association.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @!attribute [rw] remove_allowed_prefixes_to_direct_connect_gateway
+    #   The Amazon VPC prefixes to no longer advertise to the Direct Connect
+    #   gateway.
+    #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayAssociationRequest AWS API Documentation
+    #
+    class UpdateDirectConnectGatewayAssociationRequest < Struct.new(
+      :association_id,
+      :add_allowed_prefixes_to_direct_connect_gateway,
+      :remove_allowed_prefixes_to_direct_connect_gateway)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] direct_connect_gateway_association
+    #   Information about an association between a Direct Connect gateway
+    #   and a virtual private gateway.
+    #   @return [Types::DirectConnectGatewayAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayAssociationResult AWS API Documentation
+    #
+    class UpdateDirectConnectGatewayAssociationResult < Struct.new(
+      :direct_connect_gateway_association)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateLagRequest
     #   data as a hash:

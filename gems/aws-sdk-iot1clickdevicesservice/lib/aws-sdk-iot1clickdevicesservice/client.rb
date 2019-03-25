@@ -252,12 +252,15 @@ module Aws::IoT1ClickDevicesService
     #
     # @example Response structure
     #
+    #   resp.device_description.arn #=> String
     #   resp.device_description.attributes #=> Hash
     #   resp.device_description.attributes["__string"] #=> String
     #   resp.device_description.device_id #=> String
     #   resp.device_description.enabled #=> Boolean
     #   resp.device_description.remaining_life #=> Float
     #   resp.device_description.type #=> String
+    #   resp.device_description.tags #=> Hash
+    #   resp.device_description.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DescribeDevice AWS API Documentation
     #
@@ -279,6 +282,8 @@ module Aws::IoT1ClickDevicesService
     #
     # @option params [required, String] :device_id
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::FinalizeDeviceClaimResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FinalizeDeviceClaimResponse#state #state} => String
@@ -287,6 +292,9 @@ module Aws::IoT1ClickDevicesService
     #
     #   resp = client.finalize_device_claim({
     #     device_id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -475,12 +483,15 @@ module Aws::IoT1ClickDevicesService
     # @example Response structure
     #
     #   resp.devices #=> Array
+    #   resp.devices[0].arn #=> String
     #   resp.devices[0].attributes #=> Hash
     #   resp.devices[0].attributes["__string"] #=> String
     #   resp.devices[0].device_id #=> String
     #   resp.devices[0].enabled #=> Boolean
     #   resp.devices[0].remaining_life #=> Float
     #   resp.devices[0].type #=> String
+    #   resp.devices[0].tags #=> Hash
+    #   resp.devices[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListDevices AWS API Documentation
@@ -489,6 +500,62 @@ module Aws::IoT1ClickDevicesService
     # @param [Hash] params ({})
     def list_devices(params = {}, options = {})
       req = build_request(:list_devices, params)
+      req.send_request(options)
+    end
+
+    # List all tags on an AWS IoT 1-Click resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Associate a set of tags with an AWS IoT 1-Click resource. You can then
+    # activate these user-defined tags so that they appear on the Billing
+    # and Cost Management console for cost allocation tracking.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -516,6 +583,30 @@ module Aws::IoT1ClickDevicesService
     # @param [Hash] params ({})
     def unclaim_device(params = {}, options = {})
       req = build_request(:unclaim_device, params)
+      req.send_request(options)
+    end
+
+    # Removes the association of tags from an AWS IoT 1-Click resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -558,7 +649,7 @@ module Aws::IoT1ClickDevicesService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot1clickdevicesservice'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

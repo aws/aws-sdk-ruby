@@ -225,8 +225,32 @@ module Aws::TranscribeService
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries.
     #
-    # @option params [required, Array<String>] :phrases
+    # @option params [Array<String>] :phrases
     #   An array of strings that contains the vocabulary entries.
+    #
+    # @option params [String] :vocabulary_file_uri
+    #   The S3 location of the text file that contains the definition of the
+    #   custom vocabulary. The URI must be in the same region as the API
+    #   endpoint that you are calling. The general form is
+    #
+    #   `
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -241,7 +265,8 @@ module Aws::TranscribeService
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
     #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR
-    #     phrases: ["Phrase"], # required
+    #     phrases: ["Phrase"],
+    #     vocabulary_file_uri: "Uri",
     #   })
     #
     # @example Response structure
@@ -608,8 +633,32 @@ module Aws::TranscribeService
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries.
     #
-    # @option params [required, Array<String>] :phrases
+    # @option params [Array<String>] :phrases
     #   An array of strings containing the vocabulary entries.
+    #
+    # @option params [String] :vocabulary_file_uri
+    #   The S3 location of the text file that contains the definition of the
+    #   custom vocabulary. The URI must be in the same region as the API
+    #   endpoint that you are calling. The general form is
+    #
+    #   `
+    #   https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -623,7 +672,8 @@ module Aws::TranscribeService
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
     #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR
-    #     phrases: ["Phrase"], # required
+    #     phrases: ["Phrase"],
+    #     vocabulary_file_uri: "Uri",
     #   })
     #
     # @example Response structure
@@ -655,7 +705,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -364,10 +364,20 @@ module Aws::IoTAnalytics
     #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   \[Optional\] How long, in days, message data is kept for the data set.
-    #   If not given or set to null, the latest version of the dataset content
-    #   plus the latest succeeded version (if they are different) are retained
-    #   for at most 90 days.
+    #   \[Optional\] How long, in days, versions of data set contents are kept
+    #   for the data set. If not specified or set to null, versions of data
+    #   set contents are retained for at most 90 days. The number of versions
+    #   of data set contents retained is determined by the
+    #   `versioningConfiguration` parameter. (For more information, see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+    #
+    # @option params [Types::VersioningConfiguration] :versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time period
+    #   specified by the "retentionPeriod" parameter. (For more information,
+    #   see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data set.
@@ -443,6 +453,10 @@ module Aws::IoTAnalytics
     #     retention_period: {
     #       unlimited: false,
     #       number_of_days: 1,
+    #     },
+    #     versioning_configuration: {
+    #       unlimited: false,
+    #       max_versions: 1,
     #     },
     #     tags: [
     #       {
@@ -543,20 +557,26 @@ module Aws::IoTAnalytics
 
     # Creates a pipeline. A pipeline consumes messages from one or more
     # channels and allows you to process the messages before storing them in
-    # a data store.
+    # a data store. You must specify both a `channel` and a `datastore`
+    # activity and, optionally, as many as 23 additional activities in the
+    # `pipelineActivities` array.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline.
     #
     # @option params [required, Array<Types::PipelineActivity>] :pipeline_activities
-    #   A list of pipeline activities.
+    #   A list of "PipelineActivity" objects. Activities perform
+    #   transformations on your messages, such as removing, renaming or adding
+    #   message attributes; filtering messages based on attribute values;
+    #   invoking your Lambda functions on messages for advanced processing; or
+    #   performing mathematical transformations to normalize device data.
     #
-    #   The list can be 1-25 **PipelineActivity** objects. Activities perform
-    #   transformations on your messages, such as removing, renaming, or
-    #   adding message attributes; filtering messages based on attribute
-    #   values; invoking your Lambda functions on messages for advanced
-    #   processing; or performing mathematical transformations to normalize
-    #   device data.
+    #   The list can be 2-25 **PipelineActivity** objects and must contain
+    #   both a `channel` and a `datastore` activity. Each entry in the list
+    #   must contain only one activity, for example:
+    #
+    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
+    #   ... \} \}, ... ]`
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the pipeline.
@@ -848,6 +868,8 @@ module Aws::IoTAnalytics
     #   resp.dataset.last_update_time #=> Time
     #   resp.dataset.retention_period.unlimited #=> Boolean
     #   resp.dataset.retention_period.number_of_days #=> Integer
+    #   resp.dataset.versioning_configuration.unlimited #=> Boolean
+    #   resp.dataset.versioning_configuration.max_versions #=> Integer
     #
     # @overload describe_dataset(params = {})
     # @param [Hash] params ({})
@@ -1570,7 +1592,15 @@ module Aws::IoTAnalytics
     #   specified here.
     #
     # @option params [Types::RetentionPeriod] :retention_period
-    #   How long, in days, message data is kept for the data set.
+    #   How long, in days, data set contents are kept for the data set.
+    #
+    # @option params [Types::VersioningConfiguration] :versioning_configuration
+    #   \[Optional\] How many versions of data set contents are kept. If not
+    #   specified or set to null, only the latest version plus the latest
+    #   succeeded version (if they are different) are kept for the time period
+    #   specified by the "retentionPeriod" parameter. (For more information,
+    #   see
+    #   https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1640,6 +1670,10 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       number_of_days: 1,
     #     },
+    #     versioning_configuration: {
+    #       unlimited: false,
+    #       max_versions: 1,
+    #     },
     #   })
     #
     # @overload update_dataset(params = {})
@@ -1676,19 +1710,26 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Updates the settings of a pipeline.
+    # Updates the settings of a pipeline. You must specify both a `channel`
+    # and a `datastore` activity and, optionally, as many as 23 additional
+    # activities in the `pipelineActivities` array.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to update.
     #
     # @option params [required, Array<Types::PipelineActivity>] :pipeline_activities
-    #   A list of "PipelineActivity" objects.
-    #
-    #   The list can be 1-25 **PipelineActivity** objects. Activities perform
+    #   A list of "PipelineActivity" objects. Activities perform
     #   transformations on your messages, such as removing, renaming or adding
     #   message attributes; filtering messages based on attribute values;
     #   invoking your Lambda functions on messages for advanced processing; or
     #   performing mathematical transformations to normalize device data.
+    #
+    #   The list can be 2-25 **PipelineActivity** objects and must contain
+    #   both a `channel` and a `datastore` activity. Each entry in the list
+    #   must contain only one activity, for example:
+    #
+    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
+    #   ... \} \}, ... ]`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1779,7 +1820,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

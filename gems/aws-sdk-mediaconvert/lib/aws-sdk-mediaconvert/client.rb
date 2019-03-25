@@ -290,7 +290,7 @@ module Aws::MediaConvert
     # @option params [required, Types::JobSettings] :settings
     #   JobSettings contains all the transcode settings for a job.
     #
-    # @option params [Integer] :status_update_interval_in_secs
+    # @option params [String] :status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
@@ -481,6 +481,14 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -507,6 +515,14 @@ module Aws::MediaConvert
     #             dash_iso_group_settings: {
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -524,6 +540,14 @@ module Aws::MediaConvert
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -540,6 +564,14 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -578,6 +610,14 @@ module Aws::MediaConvert
     #             ms_smooth_group_settings: {
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -1095,7 +1135,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
-    #     status_update_interval_in_secs: 1,
+    #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #     user_metadata: {
     #       "__string" => "__string",
     #     },
@@ -1107,9 +1147,11 @@ module Aws::MediaConvert
     #   resp.job.arn #=> String
     #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.job.created_at #=> Time
+    #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
     #   resp.job.id #=> String
+    #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
     #   resp.job.output_group_details #=> Array
     #   resp.job.output_group_details[0].output_details #=> Array
@@ -1117,6 +1159,7 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
     #   resp.job.settings.avail_blanking.avail_blanking_image #=> String
@@ -1221,6 +1264,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -1241,6 +1286,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1253,6 +1300,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -1265,6 +1314,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -1296,6 +1347,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -1690,7 +1743,7 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
-    #   resp.job.status_update_interval_in_secs #=> Integer
+    #   resp.job.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job.timing.finish_time #=> Time
     #   resp.job.timing.start_time #=> Time
     #   resp.job.timing.submit_time #=> Time
@@ -1731,7 +1784,7 @@ module Aws::MediaConvert
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
     #
-    # @option params [Integer] :status_update_interval_in_secs
+    # @option params [String] :status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
@@ -1913,6 +1966,14 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -1939,6 +2000,14 @@ module Aws::MediaConvert
     #             dash_iso_group_settings: {
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -1956,6 +2025,14 @@ module Aws::MediaConvert
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -1972,6 +2049,14 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -2010,6 +2095,14 @@ module Aws::MediaConvert
     #             ms_smooth_group_settings: {
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -2527,7 +2620,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
-    #     status_update_interval_in_secs: 1,
+    #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -2639,6 +2732,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -2659,6 +2754,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -2671,6 +2768,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -2683,6 +2782,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -2714,6 +2815,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -3107,7 +3210,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
-    #   resp.job_template.status_update_interval_in_secs #=> Integer
+    #   resp.job_template.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplate AWS API Documentation
@@ -4245,9 +4348,11 @@ module Aws::MediaConvert
     #   resp.job.arn #=> String
     #   resp.job.billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.job.created_at #=> Time
+    #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
     #   resp.job.id #=> String
+    #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
     #   resp.job.output_group_details #=> Array
     #   resp.job.output_group_details[0].output_details #=> Array
@@ -4255,6 +4360,7 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
     #   resp.job.settings.avail_blanking.avail_blanking_image #=> String
@@ -4359,6 +4465,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4379,6 +4487,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4391,6 +4501,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -4403,6 +4515,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -4434,6 +4548,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4828,7 +4944,7 @@ module Aws::MediaConvert
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
     #   resp.job.status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
-    #   resp.job.status_update_interval_in_secs #=> Integer
+    #   resp.job.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job.timing.finish_time #=> Time
     #   resp.job.timing.start_time #=> Time
     #   resp.job.timing.submit_time #=> Time
@@ -4965,6 +5081,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -4985,6 +5103,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -4997,6 +5117,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -5009,6 +5131,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -5040,6 +5164,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -5433,7 +5559,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
-    #   resp.job_template.status_update_interval_in_secs #=> Integer
+    #   resp.job_template.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobTemplate AWS API Documentation
@@ -6039,6 +6165,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6059,6 +6187,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6071,6 +6201,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -6083,6 +6215,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -6114,6 +6248,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6507,7 +6643,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_templates[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
-    #   resp.job_templates[0].status_update_interval_in_secs #=> Integer
+    #   resp.job_templates[0].status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_templates[0].type #=> String, one of "SYSTEM", "CUSTOM"
     #   resp.next_token #=> String
     #
@@ -6568,9 +6704,11 @@ module Aws::MediaConvert
     #   resp.jobs[0].arn #=> String
     #   resp.jobs[0].billing_tags_source #=> String, one of "QUEUE", "PRESET", "JOB_TEMPLATE"
     #   resp.jobs[0].created_at #=> Time
+    #   resp.jobs[0].current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.jobs[0].error_code #=> Integer
     #   resp.jobs[0].error_message #=> String
     #   resp.jobs[0].id #=> String
+    #   resp.jobs[0].job_percent_complete #=> Integer
     #   resp.jobs[0].job_template #=> String
     #   resp.jobs[0].output_group_details #=> Array
     #   resp.jobs[0].output_group_details[0].output_details #=> Array
@@ -6578,6 +6716,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.height_in_px #=> Integer
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.jobs[0].queue #=> String
+    #   resp.jobs[0].retry_count #=> Integer
     #   resp.jobs[0].role #=> String
     #   resp.jobs[0].settings.ad_avail_offset #=> Integer
     #   resp.jobs[0].settings.avail_blanking.avail_blanking_image #=> String
@@ -6682,6 +6821,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6702,6 +6843,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -6714,6 +6857,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -6726,6 +6871,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -6757,6 +6904,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -7151,7 +7300,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.jobs[0].settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"
-    #   resp.jobs[0].status_update_interval_in_secs #=> Integer
+    #   resp.jobs[0].status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.jobs[0].timing.finish_time #=> Time
     #   resp.jobs[0].timing.start_time #=> Time
     #   resp.jobs[0].timing.submit_time #=> Time
@@ -7779,7 +7928,7 @@ module Aws::MediaConvert
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
     #
-    # @option params [Integer] :status_update_interval_in_secs
+    # @option params [String] :status_update_interval
     #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
     #   CloudWatch Events. Set the interval, in seconds, between status
     #   updates. MediaConvert sends an update at this interval from the time
@@ -7957,6 +8106,14 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
@@ -7983,6 +8140,14 @@ module Aws::MediaConvert
     #             dash_iso_group_settings: {
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -8000,6 +8165,14 @@ module Aws::MediaConvert
     #             },
     #             file_group_settings: {
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #             },
     #             hls_group_settings: {
     #               ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -8016,6 +8189,14 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #               encryption: {
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
@@ -8054,6 +8235,14 @@ module Aws::MediaConvert
     #             ms_smooth_group_settings: {
     #               audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
     #               destination: "__stringPatternS3",
+    #               destination_settings: {
+    #                 s3_settings: {
+    #                   encryption: {
+    #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_key_arn: "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+    #                   },
+    #                 },
+    #               },
     #               encryption: {
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
@@ -8571,7 +8760,7 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
-    #     status_update_interval_in_secs: 1,
+    #     status_update_interval: "SECONDS_10", # accepts SECONDS_10, SECONDS_12, SECONDS_15, SECONDS_20, SECONDS_30, SECONDS_60, SECONDS_120, SECONDS_180, SECONDS_240, SECONDS_300, SECONDS_360, SECONDS_420, SECONDS_480, SECONDS_540, SECONDS_600
     #   })
     #
     # @example Response structure
@@ -8680,6 +8869,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.initialization_vector_in_manifest #=> String, one of "INCLUDE", "EXCLUDE"
@@ -8700,6 +8891,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -8712,6 +8905,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
@@ -8724,6 +8919,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.encryption_method #=> String, one of "AES128", "SAMPLE_AES"
@@ -8755,6 +8952,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_deduplication #=> String, one of "COMBINE_DUPLICATE_STREAMS", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids #=> Array
@@ -9148,7 +9347,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions #=> Array
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].id_3 #=> String
     #   resp.job_template.settings.timed_metadata_insertion.id_3_insertions[0].timecode #=> String
-    #   resp.job_template.status_update_interval_in_secs #=> Integer
+    #   resp.job_template.status_update_interval #=> String, one of "SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"
     #   resp.job_template.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplate AWS API Documentation
@@ -10125,7 +10324,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

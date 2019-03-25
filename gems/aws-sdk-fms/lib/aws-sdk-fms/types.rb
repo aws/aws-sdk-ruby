@@ -46,7 +46,7 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_type
     #   The resource type. This is in the format shown in [AWS Resource
-    #   Types Reference][1]. Valid values are
+    #   Types Reference][1]. For example:
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer` or
     #   `AWS::CloudFront::Distribution`.
     #
@@ -84,9 +84,23 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] delete_all_policy_resources
-    #   If `True`, the request will also delete all web ACLs in this policy.
-    #   Associated resources will no longer be protected by web ACLs in this
-    #   policy.
+    #   If `True`, the request will also perform a clean-up process that
+    #   will:
+    #
+    #   * Delete rule groups created by AWS Firewall Manager
+    #
+    #   * Remove web ACLs from in-scope resources
+    #
+    #   * Delete web ACLs that contain no rules or rule groups
+    #
+    #   After the cleanup, in-scope resources will no longer be protected by
+    #   web ACLs in this policy. Protection of out-of-scope resources will
+    #   remain unchanged. Scope is determined by tags and accounts
+    #   associated with the policy. When creating the policy, if you
+    #   specified that only resources in specific accounts or with specific
+    #   tags be protected by the policy, those resources are in-scope. All
+    #   others are out of scope. If you did not specify tags or accounts,
+    #   all resources are in-scope.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeletePolicyRequest AWS API Documentation
@@ -249,6 +263,121 @@ module Aws::FMS
     class GetPolicyResponse < Struct.new(
       :policy,
       :policy_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetProtectionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_id: "PolicyId", # required
+    #         member_account_id: "AWSAccountId",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] policy_id
+    #   The ID of the policy for which you want to get the attack
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_id
+    #   The AWS account that is in scope of the policy that you want to get
+    #   the details for.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time period to query for the attacks. This is a
+    #   `timestamp` type. The sample request above indicates a number type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period to query for the attacks. This is a
+    #   `timestamp` type. The sample request above indicates a number type
+    #   because the default used by AWS Firewall Manager is Unix time in
+    #   seconds. However, any valid `timestamp` format is allowed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   If you specify a value for `MaxResults` and you have more objects
+    #   than the number that you specify for `MaxResults`, AWS Firewall
+    #   Manager returns a `NextToken` value in the response that allows you
+    #   to list another group of objects. For the second and subsequent
+    #   `GetProtectionStatus` requests, specify the value of `NextToken`
+    #   from the previous response to get information about another batch of
+    #   objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the number of objects that you want AWS Firewall Manager
+    #   to return for this request. If you have more objects than the number
+    #   that you specify for `MaxResults`, the response includes a
+    #   `NextToken` value that you can use to get another batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatusRequest AWS API Documentation
+    #
+    class GetProtectionStatusRequest < Struct.new(
+      :policy_id,
+      :member_account_id,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_account_id
+    #   The ID of the AWS Firewall administrator account for this policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   The service type that is protected by the policy. Currently, this is
+    #   always `SHIELD_ADVANCED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Details about the attack, including the following:
+    #
+    #   * Attack type
+    #
+    #   * Account ID
+    #
+    #   * ARN of the resource attacked
+    #
+    #   * Start time of the attack
+    #
+    #   * End time of the attack (ongoing attacks will not have an end time)
+    #
+    #   The details are in JSON format. An example is shown in the Examples
+    #   section below.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you have more objects than the number that you specified for
+    #   `MaxResults` in the request, the response includes a `NextToken`
+    #   value. To list more objects, submit another `GetProtectionStatus`
+    #   request, and specify the `NextToken` value from the response in the
+    #   `NextToken` value in the next request.
+    #
+    #   AWS SDKs provide auto-pagination that identify `NextToken` in a
+    #   response and make subsequent request calls automatically on your
+    #   behalf. However, this feature is not supported by
+    #   `GetProtectionStatus`. You must submit subsequent requests with
+    #   `NextToken` using your own processes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatusResponse AWS API Documentation
+    #
+    class GetProtectionStatusResponse < Struct.new(
+      :admin_account_id,
+      :service_type,
+      :data,
+      :next_token)
       include Aws::Structure
     end
 
@@ -435,10 +564,11 @@ module Aws::FMS
     #         policy_name: "ResourceName", # required
     #         policy_update_token: "PolicyUpdateToken",
     #         security_service_policy_data: { # required
-    #           type: "WAF", # required, accepts WAF
+    #           type: "WAF", # required, accepts WAF, SHIELD_ADVANCED
     #           managed_service_data: "ManagedServiceData",
     #         },
     #         resource_type: "ResourceType", # required
+    #         resource_type_list: ["ResourceType"],
     #         resource_tags: [
     #           {
     #             key: "TagKey", # required
@@ -477,16 +607,19 @@ module Aws::FMS
     #   @return [Types::SecurityServicePolicyData]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to protect with the policy, either an
-    #   Application Load Balancer or a CloudFront distribution. This is in
-    #   the format shown in [AWS Resource Types Reference][1]. Valid values
-    #   are `AWS::ElasticLoadBalancingV2::LoadBalancer` or
+    #   The type of resource to protect with the policy. This is in the
+    #   format shown in [AWS Resource Types Reference][1]. For example:
+    #   `AWS::ElasticLoadBalancingV2::LoadBalancer` or
     #   `AWS::CloudFront::Distribution`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
+    #
+    # @!attribute [rw] resource_type_list
+    #   An array of `ResourceType`.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] resource_tags
     #   An array of `ResourceTag` objects.
@@ -533,6 +666,7 @@ module Aws::FMS
       :policy_update_token,
       :security_service_policy_data,
       :resource_type,
+      :resource_type_list,
       :resource_tags,
       :exclude_resource_tags,
       :remediation_enabled,
@@ -655,10 +789,9 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to protect with the policy, either an
-    #   Application Load Balancer or a CloudFront distribution. This is in
-    #   the format shown in [AWS Resource Types Reference][1]. Valid values
-    #   are `AWS::ElasticLoadBalancingV2::LoadBalancer` or
+    #   The type of resource to protect with the policy. This is in the
+    #   format shown in [AWS Resource Types Reference][1]. For example:
+    #   `AWS::ElasticLoadBalancingV2::LoadBalancer` or
     #   `AWS::CloudFront::Distribution`.
     #
     #
@@ -668,7 +801,8 @@ module Aws::FMS
     #
     # @!attribute [rw] security_service_type
     #   The service that the policy is using to protect the resources. This
-    #   value is `WAF`.
+    #   specifies the type of policy that is created, either a WAF policy or
+    #   Shield Advanced policy.
     #   @return [String]
     #
     # @!attribute [rw] remediation_enabled
@@ -723,10 +857,11 @@ module Aws::FMS
     #           policy_name: "ResourceName", # required
     #           policy_update_token: "PolicyUpdateToken",
     #           security_service_policy_data: { # required
-    #             type: "WAF", # required, accepts WAF
+    #             type: "WAF", # required, accepts WAF, SHIELD_ADVANCED
     #             managed_service_data: "ManagedServiceData",
     #           },
     #           resource_type: "ResourceType", # required
+    #           resource_type_list: ["ResourceType"],
     #           resource_tags: [
     #             {
     #               key: "TagKey", # required
@@ -816,13 +951,14 @@ module Aws::FMS
     #   data as a hash:
     #
     #       {
-    #         type: "WAF", # required, accepts WAF
+    #         type: "WAF", # required, accepts WAF, SHIELD_ADVANCED
     #         managed_service_data: "ManagedServiceData",
     #       }
     #
     # @!attribute [rw] type
     #   The service that the policy is using to protect the resources. This
-    #   value is `WAF`.
+    #   specifies the type of policy that is created, either a WAF policy or
+    #   Shield Advanced policy.
     #   @return [String]
     #
     # @!attribute [rw] managed_service_data
@@ -833,6 +969,8 @@ module Aws::FMS
     #   [\{"id": "12345678-1bcd-9012-efga-0987654321ab",
     #   "overrideAction" : \{"type": "COUNT"\}\}], "defaultAction":
     #   \{"type": "BLOCK"\}\}`
+    #
+    #   If this is a Shield Advanced policy, this string will be empty.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/SecurityServicePolicyData AWS API Documentation
