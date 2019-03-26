@@ -108,6 +108,7 @@ module Aws::Glue
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
     CreateCrawlerRequest = Shapes::StructureShape.new(name: 'CreateCrawlerRequest')
     CreateCrawlerResponse = Shapes::StructureShape.new(name: 'CreateCrawlerResponse')
+    CreateCsvClassifierRequest = Shapes::StructureShape.new(name: 'CreateCsvClassifierRequest')
     CreateDatabaseRequest = Shapes::StructureShape.new(name: 'CreateDatabaseRequest')
     CreateDatabaseResponse = Shapes::StructureShape.new(name: 'CreateDatabaseResponse')
     CreateDevEndpointRequest = Shapes::StructureShape.new(name: 'CreateDevEndpointRequest')
@@ -130,6 +131,11 @@ module Aws::Glue
     CreateUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'CreateUserDefinedFunctionResponse')
     CreateXMLClassifierRequest = Shapes::StructureShape.new(name: 'CreateXMLClassifierRequest')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
+    CsvClassifier = Shapes::StructureShape.new(name: 'CsvClassifier')
+    CsvColumnDelimiter = Shapes::StringShape.new(name: 'CsvColumnDelimiter')
+    CsvHeader = Shapes::ListShape.new(name: 'CsvHeader')
+    CsvHeaderOption = Shapes::StringShape.new(name: 'CsvHeaderOption')
+    CsvQuoteSymbol = Shapes::StringShape.new(name: 'CsvQuoteSymbol')
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
     DagNodes = Shapes::ListShape.new(name: 'DagNodes')
@@ -326,6 +332,7 @@ module Aws::Glue
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     NotificationProperty = Shapes::StructureShape.new(name: 'NotificationProperty')
     NotifyDelayAfter = Shapes::IntegerShape.new(name: 'NotifyDelayAfter')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
     Order = Shapes::StructureShape.new(name: 'Order')
@@ -441,6 +448,7 @@ module Aws::Glue
     UpdateCrawlerResponse = Shapes::StructureShape.new(name: 'UpdateCrawlerResponse')
     UpdateCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'UpdateCrawlerScheduleRequest')
     UpdateCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'UpdateCrawlerScheduleResponse')
+    UpdateCsvClassifierRequest = Shapes::StructureShape.new(name: 'UpdateCsvClassifierRequest')
     UpdateDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateDatabaseRequest')
     UpdateDatabaseResponse = Shapes::StructureShape.new(name: 'UpdateDatabaseResponse')
     UpdateDevEndpointRequest = Shapes::StructureShape.new(name: 'UpdateDevEndpointRequest')
@@ -608,6 +616,7 @@ module Aws::Glue
     Classifier.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: GrokClassifier, location_name: "GrokClassifier"))
     Classifier.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: XMLClassifier, location_name: "XMLClassifier"))
     Classifier.add_member(:json_classifier, Shapes::ShapeRef.new(shape: JsonClassifier, location_name: "JsonClassifier"))
+    Classifier.add_member(:csv_classifier, Shapes::ShapeRef.new(shape: CsvClassifier, location_name: "CsvClassifier"))
     Classifier.struct_class = Types::Classifier
 
     ClassifierList.member = Shapes::ShapeRef.new(shape: Classifier)
@@ -726,6 +735,7 @@ module Aws::Glue
     CreateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: CreateGrokClassifierRequest, location_name: "GrokClassifier"))
     CreateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: CreateXMLClassifierRequest, location_name: "XMLClassifier"))
     CreateClassifierRequest.add_member(:json_classifier, Shapes::ShapeRef.new(shape: CreateJsonClassifierRequest, location_name: "JsonClassifier"))
+    CreateClassifierRequest.add_member(:csv_classifier, Shapes::ShapeRef.new(shape: CreateCsvClassifierRequest, location_name: "CsvClassifier"))
     CreateClassifierRequest.struct_class = Types::CreateClassifierRequest
 
     CreateClassifierResponse.struct_class = Types::CreateClassifierResponse
@@ -751,6 +761,15 @@ module Aws::Glue
     CreateCrawlerRequest.struct_class = Types::CreateCrawlerRequest
 
     CreateCrawlerResponse.struct_class = Types::CreateCrawlerResponse
+
+    CreateCsvClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateCsvClassifierRequest.add_member(:delimiter, Shapes::ShapeRef.new(shape: CsvColumnDelimiter, location_name: "Delimiter"))
+    CreateCsvClassifierRequest.add_member(:quote_symbol, Shapes::ShapeRef.new(shape: CsvQuoteSymbol, location_name: "QuoteSymbol"))
+    CreateCsvClassifierRequest.add_member(:contains_header, Shapes::ShapeRef.new(shape: CsvHeaderOption, location_name: "ContainsHeader"))
+    CreateCsvClassifierRequest.add_member(:header, Shapes::ShapeRef.new(shape: CsvHeader, location_name: "Header"))
+    CreateCsvClassifierRequest.add_member(:disable_value_trimming, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "DisableValueTrimming"))
+    CreateCsvClassifierRequest.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
+    CreateCsvClassifierRequest.struct_class = Types::CreateCsvClassifierRequest
 
     CreateDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateDatabaseRequest.add_member(:database_input, Shapes::ShapeRef.new(shape: DatabaseInput, required: true, location_name: "DatabaseInput"))
@@ -876,6 +895,20 @@ module Aws::Glue
     CreateXMLClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateXMLClassifierRequest.add_member(:row_tag, Shapes::ShapeRef.new(shape: RowTag, location_name: "RowTag"))
     CreateXMLClassifierRequest.struct_class = Types::CreateXMLClassifierRequest
+
+    CsvClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CsvClassifier.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    CsvClassifier.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    CsvClassifier.add_member(:version, Shapes::ShapeRef.new(shape: VersionId, location_name: "Version"))
+    CsvClassifier.add_member(:delimiter, Shapes::ShapeRef.new(shape: CsvColumnDelimiter, location_name: "Delimiter"))
+    CsvClassifier.add_member(:quote_symbol, Shapes::ShapeRef.new(shape: CsvQuoteSymbol, location_name: "QuoteSymbol"))
+    CsvClassifier.add_member(:contains_header, Shapes::ShapeRef.new(shape: CsvHeaderOption, location_name: "ContainsHeader"))
+    CsvClassifier.add_member(:header, Shapes::ShapeRef.new(shape: CsvHeader, location_name: "Header"))
+    CsvClassifier.add_member(:disable_value_trimming, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "DisableValueTrimming"))
+    CsvClassifier.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
+    CsvClassifier.struct_class = Types::CsvClassifier
+
+    CsvHeader.member = Shapes::ShapeRef.new(shape: NameString)
 
     DagEdges.member = Shapes::ShapeRef.new(shape: CodeGenEdge)
 
@@ -1782,6 +1815,7 @@ module Aws::Glue
     UpdateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: UpdateGrokClassifierRequest, location_name: "GrokClassifier"))
     UpdateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: UpdateXMLClassifierRequest, location_name: "XMLClassifier"))
     UpdateClassifierRequest.add_member(:json_classifier, Shapes::ShapeRef.new(shape: UpdateJsonClassifierRequest, location_name: "JsonClassifier"))
+    UpdateClassifierRequest.add_member(:csv_classifier, Shapes::ShapeRef.new(shape: UpdateCsvClassifierRequest, location_name: "CsvClassifier"))
     UpdateClassifierRequest.struct_class = Types::UpdateClassifierRequest
 
     UpdateClassifierResponse.struct_class = Types::UpdateClassifierResponse
@@ -1813,6 +1847,15 @@ module Aws::Glue
     UpdateCrawlerScheduleRequest.struct_class = Types::UpdateCrawlerScheduleRequest
 
     UpdateCrawlerScheduleResponse.struct_class = Types::UpdateCrawlerScheduleResponse
+
+    UpdateCsvClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateCsvClassifierRequest.add_member(:delimiter, Shapes::ShapeRef.new(shape: CsvColumnDelimiter, location_name: "Delimiter"))
+    UpdateCsvClassifierRequest.add_member(:quote_symbol, Shapes::ShapeRef.new(shape: CsvQuoteSymbol, location_name: "QuoteSymbol"))
+    UpdateCsvClassifierRequest.add_member(:contains_header, Shapes::ShapeRef.new(shape: CsvHeaderOption, location_name: "ContainsHeader"))
+    UpdateCsvClassifierRequest.add_member(:header, Shapes::ShapeRef.new(shape: CsvHeader, location_name: "Header"))
+    UpdateCsvClassifierRequest.add_member(:disable_value_trimming, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "DisableValueTrimming"))
+    UpdateCsvClassifierRequest.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
+    UpdateCsvClassifierRequest.struct_class = Types::UpdateCsvClassifierRequest
 
     UpdateDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))

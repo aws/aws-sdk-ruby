@@ -394,7 +394,7 @@ module Aws::Glue
     #   @return [Array<Types::Crawler>]
     #
     # @!attribute [rw] crawlers_not_found
-    #   A list of crawlers not found.
+    #   A list of names of crawlers not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlersResponse AWS API Documentation
@@ -710,8 +710,9 @@ module Aws::Glue
     # You can use the standard classifiers that AWS Glue supplies, or you
     # can write your own classifiers to best categorize your data sources
     # and specify the appropriate schemas to use for them. A classifier can
-    # be a `grok` classifier, an `XML` classifier, or a `JSON` classifier,
-    # as specified in one of the fields in the `Classifier` object.
+    # be a `grok` classifier, an `XML` classifier, a `JSON` classifier, or a
+    # custom `CSV` classifier as specified in one of the fields in the
+    # `Classifier` object.
     #
     # @!attribute [rw] grok_classifier
     #   A `GrokClassifier` object.
@@ -725,12 +726,17 @@ module Aws::Glue
     #   A `JsonClassifier` object.
     #   @return [Types::JsonClassifier]
     #
+    # @!attribute [rw] csv_classifier
+    #   A `CSVClassifier` object.
+    #   @return [Types::CsvClassifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Classifier AWS API Documentation
     #
     class Classifier < Struct.new(
       :grok_classifier,
       :xml_classifier,
-      :json_classifier)
+      :json_classifier,
+      :csv_classifier)
       include Aws::Structure
     end
 
@@ -1380,6 +1386,15 @@ module Aws::Glue
     #           name: "NameString", # required
     #           json_path: "JsonPath", # required
     #         },
+    #         csv_classifier: {
+    #           name: "NameString", # required
+    #           delimiter: "CsvColumnDelimiter",
+    #           quote_symbol: "CsvQuoteSymbol",
+    #           contains_header: "UNKNOWN", # accepts UNKNOWN, PRESENT, ABSENT
+    #           header: ["NameString"],
+    #           disable_value_trimming: false,
+    #           allow_single_column: false,
+    #         },
     #       }
     #
     # @!attribute [rw] grok_classifier
@@ -1394,12 +1409,17 @@ module Aws::Glue
     #   A `JsonClassifier` object specifying the classifier to create.
     #   @return [Types::CreateJsonClassifierRequest]
     #
+    # @!attribute [rw] csv_classifier
+    #   A `CsvClassifier` object specifying the classifier to create.
+    #   @return [Types::CreateCsvClassifierRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifierRequest AWS API Documentation
     #
     class CreateClassifierRequest < Struct.new(
       :grok_classifier,
       :xml_classifier,
-      :json_classifier)
+      :json_classifier,
+      :csv_classifier)
       include Aws::Structure
     end
 
@@ -1584,6 +1604,65 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerResponse AWS API Documentation
     #
     class CreateCrawlerResponse < Aws::EmptyStructure; end
+
+    # Specifies a custom CSV classifier for `CreateClassifier` to create.
+    #
+    # @note When making an API call, you may pass CreateCsvClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         delimiter: "CsvColumnDelimiter",
+    #         quote_symbol: "CsvQuoteSymbol",
+    #         contains_header: "UNKNOWN", # accepts UNKNOWN, PRESENT, ABSENT
+    #         header: ["NameString"],
+    #         disable_value_trimming: false,
+    #         allow_single_column: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] delimiter
+    #   A custom symbol to denote what separates each column entry in the
+    #   row.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_symbol
+    #   A custom symbol to denote what combines content into a single column
+    #   value. Must be different from the column delimiter.
+    #   @return [String]
+    #
+    # @!attribute [rw] contains_header
+    #   Indicates whether the CSV file contains a header.
+    #   @return [String]
+    #
+    # @!attribute [rw] header
+    #   A list of strings representing column names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disable_value_trimming
+    #   Specifies not to trim values before identifying the type of column
+    #   values. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_single_column
+    #   Enables the processing of files that contain only one column.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCsvClassifierRequest AWS API Documentation
+    #
+    class CreateCsvClassifierRequest < Struct.new(
+      :name,
+      :delimiter,
+      :quote_symbol,
+      :contains_header,
+      :header,
+      :disable_value_trimming,
+      :allow_single_column)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateDatabaseRequest
     #   data as a hash:
@@ -2584,6 +2663,67 @@ module Aws::Glue
       :classification,
       :name,
       :row_tag)
+      include Aws::Structure
+    end
+
+    # A classifier for custom `CSV` content.
+    #
+    # @!attribute [rw] name
+    #   The name of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time this classifier was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated
+    #   The time this classifier was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version of this classifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delimiter
+    #   A custom symbol to denote what separates each column entry in the
+    #   row.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_symbol
+    #   A custom symbol to denote what combines content into a single column
+    #   value. Must be different from the column delimiter.
+    #   @return [String]
+    #
+    # @!attribute [rw] contains_header
+    #   Indicates whether the CSV file contains a header.
+    #   @return [String]
+    #
+    # @!attribute [rw] header
+    #   A list of strings representing column names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disable_value_trimming
+    #   Specifies not to trim values before identifying the type of column
+    #   values. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_single_column
+    #   Enables the processing of files that contain only one column.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CsvClassifier AWS API Documentation
+    #
+    class CsvClassifier < Struct.new(
+      :name,
+      :creation_time,
+      :last_updated,
+      :version,
+      :delimiter,
+      :quote_symbol,
+      :contains_header,
+      :header,
+      :disable_value_trimming,
+      :allow_single_column)
       include Aws::Structure
     end
 
@@ -7700,6 +7840,15 @@ module Aws::Glue
     #           name: "NameString", # required
     #           json_path: "JsonPath",
     #         },
+    #         csv_classifier: {
+    #           name: "NameString", # required
+    #           delimiter: "CsvColumnDelimiter",
+    #           quote_symbol: "CsvQuoteSymbol",
+    #           contains_header: "UNKNOWN", # accepts UNKNOWN, PRESENT, ABSENT
+    #           header: ["NameString"],
+    #           disable_value_trimming: false,
+    #           allow_single_column: false,
+    #         },
     #       }
     #
     # @!attribute [rw] grok_classifier
@@ -7714,12 +7863,17 @@ module Aws::Glue
     #   A `JsonClassifier` object with updated fields.
     #   @return [Types::UpdateJsonClassifierRequest]
     #
+    # @!attribute [rw] csv_classifier
+    #   A `CsvClassifier` object with updated fields.
+    #   @return [Types::UpdateCsvClassifierRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifierRequest AWS API Documentation
     #
     class UpdateClassifierRequest < Struct.new(
       :grok_classifier,
       :xml_classifier,
-      :json_classifier)
+      :json_classifier,
+      :csv_classifier)
       include Aws::Structure
     end
 
@@ -7932,6 +8086,65 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerScheduleResponse AWS API Documentation
     #
     class UpdateCrawlerScheduleResponse < Aws::EmptyStructure; end
+
+    # Specifies a custom CSV classifier to be updated.
+    #
+    # @note When making an API call, you may pass UpdateCsvClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         delimiter: "CsvColumnDelimiter",
+    #         quote_symbol: "CsvQuoteSymbol",
+    #         contains_header: "UNKNOWN", # accepts UNKNOWN, PRESENT, ABSENT
+    #         header: ["NameString"],
+    #         disable_value_trimming: false,
+    #         allow_single_column: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] delimiter
+    #   A custom symbol to denote what separates each column entry in the
+    #   row.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_symbol
+    #   A custom symbol to denote what combines content into a single column
+    #   value. Must be different from the column delimiter.
+    #   @return [String]
+    #
+    # @!attribute [rw] contains_header
+    #   Indicates whether the CSV file contains a header.
+    #   @return [String]
+    #
+    # @!attribute [rw] header
+    #   A list of strings representing column names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disable_value_trimming
+    #   Specifies not to trim values before identifying the type of column
+    #   values. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_single_column
+    #   Enables the processing of files that contain only one column.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCsvClassifierRequest AWS API Documentation
+    #
+    class UpdateCsvClassifierRequest < Struct.new(
+      :name,
+      :delimiter,
+      :quote_symbol,
+      :contains_header,
+      :header,
+      :disable_value_trimming,
+      :allow_single_column)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateDatabaseRequest
     #   data as a hash:

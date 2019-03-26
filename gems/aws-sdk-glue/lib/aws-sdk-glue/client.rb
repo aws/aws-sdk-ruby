@@ -505,7 +505,8 @@ module Aws::Glue
     # Returns a list of resource metadata for a given list of crawler names.
     # After calling the `ListCrawlers` operation, you can call this
     # operation to access the data to which you have been granted
-    # permissions to based on tags.
+    # permissions. This operation supports all IAM permissions, including
+    # permission conditions that uses tags.
     #
     # @option params [required, Array<String>] :crawler_names
     #   A list of crawler names, which may be the names returned from the
@@ -869,8 +870,8 @@ module Aws::Glue
     end
 
     # Creates a classifier in the user's account. This may be a
-    # `GrokClassifier`, an `XMLClassifier`, or abbrev `JsonClassifier`,
-    # depending on which field of the request is present.
+    # `GrokClassifier`, an `XMLClassifier`, a `JsonClassifier`, or a
+    # `CsvClassifier`, depending on which field of the request is present.
     #
     # @option params [Types::CreateGrokClassifierRequest] :grok_classifier
     #   A `GrokClassifier` object specifying the classifier to create.
@@ -880,6 +881,9 @@ module Aws::Glue
     #
     # @option params [Types::CreateJsonClassifierRequest] :json_classifier
     #   A `JsonClassifier` object specifying the classifier to create.
+    #
+    # @option params [Types::CreateCsvClassifierRequest] :csv_classifier
+    #   A `CsvClassifier` object specifying the classifier to create.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -900,6 +904,15 @@ module Aws::Glue
     #     json_classifier: {
     #       name: "NameString", # required
     #       json_path: "JsonPath", # required
+    #     },
+    #     csv_classifier: {
+    #       name: "NameString", # required
+    #       delimiter: "CsvColumnDelimiter",
+    #       quote_symbol: "CsvQuoteSymbol",
+    #       contains_header: "UNKNOWN", # accepts UNKNOWN, PRESENT, ABSENT
+    #       header: ["NameString"],
+    #       disable_value_trimming: false,
+    #       allow_single_column: false,
     #     },
     #   })
     #
@@ -2274,6 +2287,17 @@ module Aws::Glue
     #   resp.classifier.json_classifier.last_updated #=> Time
     #   resp.classifier.json_classifier.version #=> Integer
     #   resp.classifier.json_classifier.json_path #=> String
+    #   resp.classifier.csv_classifier.name #=> String
+    #   resp.classifier.csv_classifier.creation_time #=> Time
+    #   resp.classifier.csv_classifier.last_updated #=> Time
+    #   resp.classifier.csv_classifier.version #=> Integer
+    #   resp.classifier.csv_classifier.delimiter #=> String
+    #   resp.classifier.csv_classifier.quote_symbol #=> String
+    #   resp.classifier.csv_classifier.contains_header #=> String, one of "UNKNOWN", "PRESENT", "ABSENT"
+    #   resp.classifier.csv_classifier.header #=> Array
+    #   resp.classifier.csv_classifier.header[0] #=> String
+    #   resp.classifier.csv_classifier.disable_value_trimming #=> Boolean
+    #   resp.classifier.csv_classifier.allow_single_column #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier AWS API Documentation
     #
@@ -2325,6 +2349,17 @@ module Aws::Glue
     #   resp.classifiers[0].json_classifier.last_updated #=> Time
     #   resp.classifiers[0].json_classifier.version #=> Integer
     #   resp.classifiers[0].json_classifier.json_path #=> String
+    #   resp.classifiers[0].csv_classifier.name #=> String
+    #   resp.classifiers[0].csv_classifier.creation_time #=> Time
+    #   resp.classifiers[0].csv_classifier.last_updated #=> Time
+    #   resp.classifiers[0].csv_classifier.version #=> Integer
+    #   resp.classifiers[0].csv_classifier.delimiter #=> String
+    #   resp.classifiers[0].csv_classifier.quote_symbol #=> String
+    #   resp.classifiers[0].csv_classifier.contains_header #=> String, one of "UNKNOWN", "PRESENT", "ABSENT"
+    #   resp.classifiers[0].csv_classifier.header #=> Array
+    #   resp.classifiers[0].csv_classifier.header[0] #=> String
+    #   resp.classifiers[0].csv_classifier.disable_value_trimming #=> Boolean
+    #   resp.classifiers[0].csv_classifier.allow_single_column #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers AWS API Documentation
@@ -4926,8 +4961,9 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Modifies an existing classifier (a `GrokClassifier`, `XMLClassifier`,
-    # or `JsonClassifier`, depending on which field is present).
+    # Modifies an existing classifier (a `GrokClassifier`, an
+    # `XMLClassifier`, a `JsonClassifier`, or a `CsvClassifier`, depending
+    # on which field is present).
     #
     # @option params [Types::UpdateGrokClassifierRequest] :grok_classifier
     #   A `GrokClassifier` object with updated fields.
@@ -4937,6 +4973,9 @@ module Aws::Glue
     #
     # @option params [Types::UpdateJsonClassifierRequest] :json_classifier
     #   A `JsonClassifier` object with updated fields.
+    #
+    # @option params [Types::UpdateCsvClassifierRequest] :csv_classifier
+    #   A `CsvClassifier` object with updated fields.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4957,6 +4996,15 @@ module Aws::Glue
     #     json_classifier: {
     #       name: "NameString", # required
     #       json_path: "JsonPath",
+    #     },
+    #     csv_classifier: {
+    #       name: "NameString", # required
+    #       delimiter: "CsvColumnDelimiter",
+    #       quote_symbol: "CsvQuoteSymbol",
+    #       contains_header: "UNKNOWN", # accepts UNKNOWN, PRESENT, ABSENT
+    #       header: ["NameString"],
+    #       disable_value_trimming: false,
+    #       allow_single_column: false,
     #     },
     #   })
     #
@@ -5625,7 +5673,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -473,6 +473,7 @@ module Aws::WorkMail
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon WorkMail",
+        "serviceId" => "WorkMail",
         "signatureVersion" => "v4",
         "targetPrefix" => "WorkMailService",
         "uid" => "workmail-2017-10-01",

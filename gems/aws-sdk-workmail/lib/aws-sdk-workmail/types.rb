@@ -22,7 +22,7 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The resource for which members are associated.
+    #   The resource for which members (users or groups) are associated.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
@@ -56,11 +56,11 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] group_id
-    #   The group for which the member is associated.
+    #   The group to which the member (user or group) is associated.
     #   @return [String]
     #
     # @!attribute [rw] member_id
-    #   The member to associate to the group.
+    #   The member (user or group) to associate to the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateMemberToGroupRequest AWS API Documentation
@@ -122,15 +122,15 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The organization under which the member exists.
+    #   The organization under which the member (user or group) exists.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The alias is added to this Amazon WorkMail entity.
+    #   The member (user or group) to which this alias is added.
     #   @return [String]
     #
     # @!attribute [rw] alias
-    #   The alias to add to the user.
+    #   The alias to add to the member set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAliasRequest AWS API Documentation
@@ -171,7 +171,7 @@ module Aws::WorkMail
     end
 
     # @!attribute [rw] group_id
-    #   The ID of the group.
+    #   The identifier of the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateGroupResponse AWS API Documentation
@@ -196,11 +196,12 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the created resource.
+    #   The name of the new resource.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the created resource.
+    #   The type of the new resource. The available types are `equipment`
+    #   and `room`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateResourceRequest AWS API Documentation
@@ -213,7 +214,7 @@ module Aws::WorkMail
     end
 
     # @!attribute [rw] resource_id
-    #   The identifier of the created resource.
+    #   The identifier of the new resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateResourceResponse AWS API Documentation
@@ -238,15 +239,16 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name for the user to be created.
+    #   The name for the new user. Simple AD or AD Connector user names have
+    #   a maximum length of 20. All others have a maximum length of 64.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name for the user to be created.
+    #   The display name for the new user.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password for the user to be created.
+    #   The password for the new user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUserRequest AWS API Documentation
@@ -260,7 +262,7 @@ module Aws::WorkMail
     end
 
     # @!attribute [rw] user_id
-    #   The information regarding the newly created user.
+    #   The identifier for the new user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUserResponse AWS API Documentation
@@ -274,8 +276,8 @@ module Aws::WorkMail
     # UserAttribute enumeration.
     #
     # @!attribute [rw] id
-    #   The identifier for the user or group is associated as the
-    #   resource's delegate.
+    #   The identifier for the user or group associated as the resource's
+    #   delegate.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -304,8 +306,8 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier for the Amazon WorkMail entity to have the aliases
-    #   removed.
+    #   The identifier for the member (user or group) from which to have the
+    #   aliases removed.
     #   @return [String]
     #
     # @!attribute [rw] alias
@@ -365,17 +367,16 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The identifier of the organization under which the entity (user or
+    #   The identifier of the organization under which the member (user or
     #   group) exists.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier of the entity (user or group) for which to delete
-    #   mailbox permissions.
+    #   The identifier of the member (user or group)that owns the mailbox.
     #   @return [String]
     #
     # @!attribute [rw] grantee_id
-    #   The identifier of the entity (user or group) for which to delete
+    #   The identifier of the member (user or group) for which to delete
     #   granted permissions.
     #   @return [String]
     #
@@ -401,7 +402,7 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The identifier associated with the organization for which the
+    #   The identifier associated with the organization from which the
     #   resource is deleted.
     #   @return [String]
     #
@@ -430,7 +431,7 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The organization that contains the user.
+    #   The organization that contains the user to be deleted.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -463,7 +464,7 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier for the entity to be updated.
+    #   The identifier for the member (user or group) to be updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterFromWorkMailRequest AWS API Documentation
@@ -516,17 +517,17 @@ module Aws::WorkMail
     #
     # @!attribute [rw] state
     #   The state of the user: enabled (registered to Amazon WorkMail) or
-    #   disabled (deregistered or never registered to Amazon WorkMail).
+    #   disabled (deregistered or never registered to WorkMail).
     #   @return [String]
     #
     # @!attribute [rw] enabled_date
-    #   The date and time when a user was registered to Amazon WorkMail, in
-    #   UNIX epoch time format.
+    #   The date and time when a user was registered to WorkMail, in UNIX
+    #   epoch time format.
     #   @return [Time]
     #
     # @!attribute [rw] disabled_date
-    #   The date and time when a user was deregistered from Amazon WorkMail,
-    #   in UNIX epoch time format.
+    #   The date and time when a user was deregistered from WorkMail, in
+    #   UNIX epoch time format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeGroupResponse AWS API Documentation
@@ -577,8 +578,7 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] directory_type
-    #   The type of directory associated with the Amazon WorkMail
-    #   organization.
+    #   The type of directory associated with the WorkMail organization.
     #   @return [String]
     #
     # @!attribute [rw] default_mail_domain
@@ -586,12 +586,12 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] completed_date
-    #   The date at which the organization became usable in the Amazon
-    #   WorkMail context, in UNIX epoch time format.
+    #   The date at which the organization became usable in the WorkMail
+    #   context, in UNIX epoch time format.
     #   @return [Time]
     #
     # @!attribute [rw] error_message
-    #   The (optional) error message indicating if unexpected behavior was
+    #   (Optional) The error message indicating if unexpected behavior was
     #   encountered with regards to the organization.
     #   @return [String]
     #
@@ -656,17 +656,17 @@ module Aws::WorkMail
     #
     # @!attribute [rw] state
     #   The state of the resource: enabled (registered to Amazon WorkMail)
-    #   or disabled (deregistered or never registered to Amazon WorkMail).
+    #   or disabled (deregistered or never registered to WorkMail).
     #   @return [String]
     #
     # @!attribute [rw] enabled_date
-    #   The date and time when a resource was registered to Amazon WorkMail,
-    #   in UNIX epoch time format.
+    #   The date and time when a resource was enabled for WorkMail, in UNIX
+    #   epoch time format.
     #   @return [Time]
     #
     # @!attribute [rw] disabled_date
-    #   The date and time when a resource was registered from Amazon
-    #   WorkMail, in UNIX epoch time format.
+    #   The date and time when a resource was disabled from WorkMail, in
+    #   UNIX epoch time format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeResourceResponse AWS API Documentation
@@ -725,17 +725,17 @@ module Aws::WorkMail
     #
     # @!attribute [rw] state
     #   The state of a user: enabled (registered to Amazon WorkMail) or
-    #   disabled (deregistered or never registered to Amazon WorkMail).
+    #   disabled (deregistered or never registered to WorkMail).
     #   @return [String]
     #
     # @!attribute [rw] user_role
-    #   In certain cases other entities are modeled as users. If
+    #   In certain cases, other entities are modeled as users. If
     #   interoperability is enabled, resources are imported into Amazon
-    #   WorkMail as users. Because different Amazon WorkMail organizations
-    #   rely on different directory types, administrators can distinguish
-    #   between a user that is not registered to Amazon WorkMail (is
-    #   disabled and has a user role) and the administrative users of the
-    #   directory. The values are USER, RESOURCE, and SYSTEM\_USER.
+    #   WorkMail as users. Because different WorkMail organizations rely on
+    #   different directory types, administrators can distinguish between an
+    #   unregistered user (account is disabled and has a user role) and the
+    #   directory administrators. The values are USER, RESOURCE, and
+    #   SYSTEM\_USER.
     #   @return [String]
     #
     # @!attribute [rw] enabled_date
@@ -941,7 +941,8 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] group_id
-    #   The identifier for the group to which the members are associated.
+    #   The identifier for the group to which the members (users or groups)
+    #   are associated.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1039,12 +1040,12 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The identifier of the organization under which the entity (user or
-    #   group) exists.
+    #   The identifier of the organization under which the user, group, or
+    #   resource exists.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier of the entity (user or group) for which to list
+    #   The identifier of the user, group, or resource for which to list
     #   mailbox permissions.
     #   @return [String]
     #
@@ -1068,7 +1069,7 @@ module Aws::WorkMail
     end
 
     # @!attribute [rw] permissions
-    #   One page of the entity's mailbox permissions.
+    #   One page of the user, group, or resource mailbox permissions.
     #   @return [Array<Types::Permission>]
     #
     # @!attribute [rw] next_token
@@ -1246,7 +1247,8 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   TBD
+    #   The token to use to retrieve the next page of results. The first
+    #   call does not contain any tokens.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1279,7 +1281,7 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # The representation of a group member (user or group).
+    # The representation of a user or group.
     #
     # @!attribute [rw] id
     #   The identifier of the member.
@@ -1319,7 +1321,7 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # The brief overview associated with an organization.
+    # The representation of an organization.
     #
     # @!attribute [rw] organization_id
     #   The identifier associated with the organization.
@@ -1350,17 +1352,16 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # Permission granted to an entity (user, group) to access a certain
-    # aspect of another entity's mailbox.
+    # Permission granted to a user, group, or resource to access a certain
+    # aspect of another user, group, or resource mailbox.
     #
     # @!attribute [rw] grantee_id
-    #   The identifier of the entity (user or group) to which the
+    #   The identifier of the user, group, or resource to which the
     #   permissions are granted.
     #   @return [String]
     #
     # @!attribute [rw] grantee_type
-    #   The type of entity (user, group) of the entity referred to in
-    #   GranteeId.
+    #   The type of user, group, or resource referred to in GranteeId.
     #   @return [String]
     #
     # @!attribute [rw] permission_values
@@ -1393,17 +1394,17 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The identifier of the organization under which the entity (user or
-    #   group) exists.
+    #   The identifier of the organization under which the user, group, or
+    #   resource exists.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier of the entity (user or group) for which to update
+    #   The identifier of the user, group, or resource for which to update
     #   mailbox permissions.
     #   @return [String]
     #
     # @!attribute [rw] grantee_id
-    #   The identifier of the entity (user or group) to which to grant the
+    #   The identifier of the user, group, or resource to which to grant the
     #   permissions.
     #   @return [String]
     #
@@ -1441,16 +1442,16 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The identifier for the organization under which the Amazon WorkMail
-    #   entity exists.
+    #   The identifier for the organization under which the user, group, or
+    #   resource exists.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier for the entity to be updated.
+    #   The identifier for the user, group, or resource to be updated.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   The email for the entity to be updated.
+    #   The email for the user, group, or resource to be updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterToWorkMailRequest AWS API Documentation
@@ -1501,7 +1502,7 @@ module Aws::WorkMail
     #
     class ResetPasswordResponse < Aws::EmptyStructure; end
 
-    # The overview for a resource containing relevant data regarding it.
+    # The representation of a resource.
     #
     # @!attribute [rw] id
     #   The identifier of the resource.
@@ -1557,11 +1558,12 @@ module Aws::WorkMail
     #       }
     #
     # @!attribute [rw] organization_id
-    #   The organization that contains the entity to update.
+    #   The organization that contains the user, group, or resource to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The entity to update (user, group, or resource).
+    #   The user, group, or resource to update.
     #   @return [String]
     #
     # @!attribute [rw] email

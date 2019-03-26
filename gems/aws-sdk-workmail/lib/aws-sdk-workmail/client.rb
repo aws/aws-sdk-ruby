@@ -215,13 +215,13 @@ module Aws::WorkMail
 
     # @!group API Operations
 
-    # Adds a member to the resource's set of delegates.
+    # Adds a member (user or group) to the resource's set of delegates.
     #
     # @option params [required, String] :organization_id
     #   The organization under which the resource exists.
     #
     # @option params [required, String] :resource_id
-    #   The resource for which members are associated.
+    #   The resource for which members (users or groups) are associated.
     #
     # @option params [required, String] :entity_id
     #   The member (user or group) to associate to the resource.
@@ -245,16 +245,16 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Adds a member to the group's set.
+    # Adds a member (user or group) to the group's set.
     #
     # @option params [required, String] :organization_id
     #   The organization under which the group exists.
     #
     # @option params [required, String] :group_id
-    #   The group for which the member is associated.
+    #   The group to which the member (user or group) is associated.
     #
     # @option params [required, String] :member_id
-    #   The member to associate to the group.
+    #   The member (user or group) to associate to the group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -275,16 +275,17 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Adds an alias to the set of a given member of Amazon WorkMail.
+    # Adds an alias to the set of a given member (user or group) of Amazon
+    # WorkMail.
     #
     # @option params [required, String] :organization_id
-    #   The organization under which the member exists.
+    #   The organization under which the member (user or group) exists.
     #
     # @option params [required, String] :entity_id
-    #   The alias is added to this Amazon WorkMail entity.
+    #   The member (user or group) to which this alias is added.
     #
     # @option params [required, String] :alias
-    #   The alias to add to the user.
+    #   The alias to add to the member set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -338,18 +339,18 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Creates a new Amazon WorkMail resource. The available types are
-    # equipment and room.
+    # Creates a new Amazon WorkMail resource.
     #
     # @option params [required, String] :organization_id
     #   The identifier associated with the organization for which the resource
     #   is created.
     #
     # @option params [required, String] :name
-    #   The name of the created resource.
+    #   The name of the new resource.
     #
     # @option params [required, String] :type
-    #   The type of the created resource.
+    #   The type of the new resource. The available types are `equipment` and
+    #   `room`.
     #
     # @return [Types::CreateResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -383,13 +384,14 @@ module Aws::WorkMail
     #   The identifier of the organization for which the user is created.
     #
     # @option params [required, String] :name
-    #   The name for the user to be created.
+    #   The name for the new user. Simple AD or AD Connector user names have a
+    #   maximum length of 20. All others have a maximum length of 64.
     #
     # @option params [required, String] :display_name
-    #   The display name for the user to be created.
+    #   The display name for the new user.
     #
     # @option params [required, String] :password
-    #   The password for the user to be created.
+    #   The password for the new user.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -417,14 +419,15 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Remove the alias from a set of aliases for a given user.
+    # Remove one or more specified aliases from a set of aliases for a given
+    # user.
     #
     # @option params [required, String] :organization_id
     #   The identifier for the organization under which the user exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier for the Amazon WorkMail entity to have the aliases
-    #   removed.
+    #   The identifier for the member (user or group) from which to have the
+    #   aliases removed.
     #
     # @option params [required, String] :alias
     #   The aliases to be removed from the user's set of aliases. Duplicate
@@ -476,18 +479,17 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Deletes permissions granted to a user or group.
+    # Deletes permissions granted to a member (user or group).
     #
     # @option params [required, String] :organization_id
-    #   The identifier of the organization under which the entity (user or
+    #   The identifier of the organization under which the member (user or
     #   group) exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the entity (user or group) for which to delete
-    #   mailbox permissions.
+    #   The identifier of the member (user or group)that owns the mailbox.
     #
     # @option params [required, String] :grantee_id
-    #   The identifier of the entity (user or group) for which to delete
+    #   The identifier of the member (user or group) for which to delete
     #   granted permissions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -512,8 +514,8 @@ module Aws::WorkMail
     # Deletes the specified resource.
     #
     # @option params [required, String] :organization_id
-    #   The identifier associated with the organization for which the resource
-    #   is deleted.
+    #   The identifier associated with the organization from which the
+    #   resource is deleted.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource to be deleted.
@@ -536,12 +538,15 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Deletes a user from Amazon WorkMail and all subsequent systems. The
-    # action can't be undone. The mailbox is kept as-is for a minimum of 30
-    # days, without any means to restore it.
+    # Deletes a user from Amazon WorkMail and all subsequent systems. Before
+    # you can delete a user, the user state must be `DISABLED`. Use the
+    # DescribeUser action to confirm the user state.
+    #
+    # Deleting a user is permanent and cannot be undone. WorkMail archives
+    # user mailboxes for 30 days before they are permanently removed.
     #
     # @option params [required, String] :organization_id
-    #   The organization that contains the user.
+    #   The organization that contains the user to be deleted.
     #
     # @option params [required, String] :user_id
     #   The identifier of the user to be deleted.
@@ -566,15 +571,15 @@ module Aws::WorkMail
 
     # Mark a user, group, or resource as no longer used in Amazon WorkMail.
     # This action disassociates the mailbox and schedules it for clean-up.
-    # Amazon WorkMail keeps mailboxes for 30 days before they are
-    # permanently removed. The functionality in the console is *Disable*.
+    # WorkMail keeps mailboxes for 30 days before they are permanently
+    # removed. The functionality in the console is *Disable*.
     #
     # @option params [required, String] :organization_id
     #   The identifier for the organization under which the Amazon WorkMail
     #   entity exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier for the entity to be updated.
+    #   The identifier for the member (user or group) to be updated.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -881,13 +886,15 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Returns an overview of the members of a group.
+    # Returns an overview of the members of a group. Users and groups can be
+    # members of a group.
     #
     # @option params [required, String] :organization_id
     #   The identifier for the organization under which the group exists.
     #
     # @option params [required, String] :group_id
-    #   The identifier for the group to which the members are associated.
+    #   The identifier for the group to which the members (users or groups)
+    #   are associated.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results. The first call
@@ -975,15 +982,16 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Lists the mailbox permissions associated with a mailbox.
+    # Lists the mailbox permissions associated with a user, group, or
+    # resource mailbox.
     #
     # @option params [required, String] :organization_id
-    #   The identifier of the organization under which the entity (user or
-    #   group) exists.
+    #   The identifier of the organization under which the user, group, or
+    #   resource exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the entity (user or group) for which to list mailbox
-    #   permissions.
+    #   The identifier of the user, group, or resource for which to list
+    #   mailbox permissions.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results. The first call
@@ -1162,7 +1170,8 @@ module Aws::WorkMail
     #   The identifier for the organization under which the users exist.
     #
     # @option params [String] :next_token
-    #   TBD
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not contain any tokens.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
@@ -1202,19 +1211,19 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Sets permissions for a user or group. This replaces any pre-existing
-    # permissions set for the entity.
+    # Sets permissions for a user, group, or resource. This replaces any
+    # pre-existing permissions.
     #
     # @option params [required, String] :organization_id
-    #   The identifier of the organization under which the entity (user or
-    #   group) exists.
+    #   The identifier of the organization under which the user, group, or
+    #   resource exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the entity (user or group) for which to update
+    #   The identifier of the user, group, or resource for which to update
     #   mailbox permissions.
     #
     # @option params [required, String] :grantee_id
-    #   The identifier of the entity (user or group) to which to grant the
+    #   The identifier of the user, group, or resource to which to grant the
     #   permissions.
     #
     # @option params [required, Array<String>] :permission_values
@@ -1246,28 +1255,31 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Registers an existing and disabled user, group, or resource/entity for
-    # Amazon WorkMail use by associating a mailbox and calendaring
-    # capabilities. It performs no change if the entity is enabled and fails
-    # if the entity is deleted. This operation results in the accumulation
-    # of costs. For more information, see [Pricing][1]. The equivalent
-    # console functionality for this operation is *Enable*. Users can either
-    # be created by calling the CreateUser API or they can be synchronized
-    # from your directory. For more information, see DeregisterFromWorkMail.
+    # Registers an existing and disabled user, group, or resource for Amazon
+    # WorkMail use by associating a mailbox and calendaring capabilities. It
+    # performs no change if the user, group, or resource is enabled and
+    # fails if the user, group, or resource is deleted. This operation
+    # results in the accumulation of costs. For more information, see
+    # [Pricing][1]. The equivalent console functionality for this operation
+    # is *Enable*.
+    #
+    # Users can either be created by calling the CreateUser API operation or
+    # they can be synchronized from your directory. For more information,
+    # see DeregisterFromWorkMail.
     #
     #
     #
-    # [1]: http://aws.amazon.com/workmail/pricing
+    # [1]: https://aws.amazon.com//workmail/pricing
     #
     # @option params [required, String] :organization_id
-    #   The identifier for the organization under which the Amazon WorkMail
-    #   entity exists.
+    #   The identifier for the organization under which the user, group, or
+    #   resource exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier for the entity to be updated.
+    #   The identifier for the user, group, or resource to be updated.
     #
     # @option params [required, String] :email
-    #   The email for the entity to be updated.
+    #   The email for the user, group, or resource to be updated.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1319,16 +1331,16 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Updates the primary email for an entity. The current email is moved
-    # into the list of aliases (or swapped between an existing alias and the
-    # current primary email) and the email provided in the input is promoted
-    # as the primary.
+    # Updates the primary email for a user, group, or resource. The current
+    # email is moved into the list of aliases (or swapped between an
+    # existing alias and the current primary email), and the email provided
+    # in the input is promoted as the primary.
     #
     # @option params [required, String] :organization_id
-    #   The organization that contains the entity to update.
+    #   The organization that contains the user, group, or resource to update.
     #
     # @option params [required, String] :entity_id
-    #   The entity to update (user, group, or resource).
+    #   The user, group, or resource to update.
     #
     # @option params [required, String] :email
     #   The value of the email to be updated as primary.
@@ -1352,9 +1364,10 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Updates data for the resource. It must be preceded by a describe call
-    # in order to have the latest information. The dataset in the request
-    # should be the one expected when performing another describe call.
+    # Updates data for the resource. To have the latest information, it must
+    # be preceded by a DescribeResource call. The dataset in the request
+    # should be the one expected when performing another `DescribeResource`
+    # call.
     #
     # @option params [required, String] :organization_id
     #   The identifier associated with the organization for which the resource
@@ -1406,7 +1419,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
