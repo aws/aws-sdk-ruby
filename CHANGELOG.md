@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.248 (2019-03-26)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 * Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
