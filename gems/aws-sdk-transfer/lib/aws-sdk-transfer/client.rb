@@ -267,6 +267,10 @@ module Aws::Transfer
     # The response returns the `ServerId` value for the newly created
     # server.
     #
+    # @option params [Types::EndpointDetails] :endpoint_details
+    #
+    # @option params [String] :endpoint_type
+    #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
     #   An array containing all of the information required to call a
     #   customer-supplied authentication API. This parameter is not required
@@ -282,7 +286,7 @@ module Aws::Transfer
     #   provider of your choice.
     #
     # @option params [String] :logging_role
-    #   A value that allows the service to write your SFTP users’ activity to
+    #   A value that allows the service to write your SFTP users' activity to
     #   your Amazon CloudWatch logs for monitoring and auditing purposes.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -295,6 +299,10 @@ module Aws::Transfer
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_server({
+    #     endpoint_details: {
+    #       vpc_endpoint_id: "VpcEndpointId",
+    #     },
+    #     endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
     #     identity_provider_details: {
     #       url: "Url",
     #       invocation_role: "Role",
@@ -345,12 +353,12 @@ module Aws::Transfer
     #   `$\{Transfer:HomeBucket\}`.
     #
     # @option params [required, String] :role
-    #   The IAM role that controls your user’s access to your Amazon S3
+    #   The IAM role that controls your user's access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level of
     #   access you want to provide your users when transferring files into and
     #   out of your Amazon S3 bucket or buckets. The IAM role should also
     #   contain a trust relationship that allows the SFTP server to access
-    #   your resources when servicing your SFTP user’s transfer requests.
+    #   your resources when servicing your SFTP user's transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for an SFTP server instance. This
@@ -440,7 +448,7 @@ module Aws::Transfer
     #   Protocol (SFTP) server instance that has the user assigned to it.
     #
     # @option params [required, String] :ssh_public_key_id
-    #   A unique identifier used to reference your user’s specific SSH key.
+    #   A unique identifier used to reference your user's specific SSH key.
     #
     # @option params [required, String] :user_name
     #   A unique string that identifies a user whose public key is being
@@ -520,6 +528,8 @@ module Aws::Transfer
     # @example Response structure
     #
     #   resp.server.arn #=> String
+    #   resp.server.endpoint_details.vpc_endpoint_id #=> String
+    #   resp.server.endpoint_type #=> String, one of "PUBLIC", "VPC_ENDPOINT"
     #   resp.server.identity_provider_details.url #=> String
     #   resp.server.identity_provider_details.invocation_role #=> String
     #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
@@ -668,6 +678,7 @@ module Aws::Transfer
     #   resp.servers #=> Array
     #   resp.servers[0].arn #=> String
     #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
+    #   resp.servers[0].endpoint_type #=> String, one of "PUBLIC", "VPC_ENDPOINT"
     #   resp.servers[0].logging_role #=> String
     #   resp.servers[0].server_id #=> String
     #   resp.servers[0].state #=> String, one of "OFFLINE", "ONLINE", "STARTING", "STOPPING", "START_FAILED", "STOP_FAILED"
@@ -970,6 +981,10 @@ module Aws::Transfer
     # The `UpdateServer` call returns the `ServerId` of the Secure File
     # Transfer Protocol (SFTP) server you updated.
     #
+    # @option params [Types::EndpointDetails] :endpoint_details
+    #
+    # @option params [String] :endpoint_type
+    #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
     #   This response parameter is an array containing all of the information
     #   required to call a customer's authentication API method.
@@ -990,6 +1005,10 @@ module Aws::Transfer
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_server({
+    #     endpoint_details: {
+    #       vpc_endpoint_id: "VpcEndpointId",
+    #     },
+    #     endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
     #     identity_provider_details: {
     #       url: "Url",
     #       invocation_role: "Role",
@@ -1032,13 +1051,13 @@ module Aws::Transfer
     #   `$\{Transfer:HomeBucket\}`.
     #
     # @option params [String] :role
-    #   The IAM role that controls your user’s access to your Amazon S3
+    #   The IAM role that controls your user's access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level of
     #   access you want to provide your users when transferring files into and
     #   out of your Amazon S3 bucket or buckets. The IAM role should also
     #   contain a trust relationship that allows the Secure File Transfer
     #   Protocol (SFTP) server to access your resources when servicing your
-    #   SFTP user’s transfer requests.
+    #   SFTP user's transfer requests.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for an SFTP server instance that
@@ -1091,7 +1110,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

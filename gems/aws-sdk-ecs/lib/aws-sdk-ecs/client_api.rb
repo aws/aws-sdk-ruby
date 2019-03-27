@@ -59,6 +59,8 @@ module Aws::ECS
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateServiceRequest = Shapes::StructureShape.new(name: 'CreateServiceRequest')
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
+    CreateTaskSetRequest = Shapes::StructureShape.new(name: 'CreateTaskSetRequest')
+    CreateTaskSetResponse = Shapes::StructureShape.new(name: 'CreateTaskSetResponse')
     DeleteAccountSettingRequest = Shapes::StructureShape.new(name: 'DeleteAccountSettingRequest')
     DeleteAccountSettingResponse = Shapes::StructureShape.new(name: 'DeleteAccountSettingResponse')
     DeleteAttributesRequest = Shapes::StructureShape.new(name: 'DeleteAttributesRequest')
@@ -67,6 +69,8 @@ module Aws::ECS
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteServiceRequest = Shapes::StructureShape.new(name: 'DeleteServiceRequest')
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
+    DeleteTaskSetRequest = Shapes::StructureShape.new(name: 'DeleteTaskSetRequest')
+    DeleteTaskSetResponse = Shapes::StructureShape.new(name: 'DeleteTaskSetResponse')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
@@ -84,6 +88,8 @@ module Aws::ECS
     DescribeServicesResponse = Shapes::StructureShape.new(name: 'DescribeServicesResponse')
     DescribeTaskDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeTaskDefinitionRequest')
     DescribeTaskDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeTaskDefinitionResponse')
+    DescribeTaskSetsRequest = Shapes::StructureShape.new(name: 'DescribeTaskSetsRequest')
+    DescribeTaskSetsResponse = Shapes::StructureShape.new(name: 'DescribeTaskSetsResponse')
     DescribeTasksRequest = Shapes::StructureShape.new(name: 'DescribeTasksRequest')
     DescribeTasksResponse = Shapes::StructureShape.new(name: 'DescribeTasksResponse')
     DesiredStatus = Shapes::StringShape.new(name: 'DesiredStatus')
@@ -242,6 +248,7 @@ module Aws::ECS
     TaskFieldList = Shapes::ListShape.new(name: 'TaskFieldList')
     TaskOverride = Shapes::StructureShape.new(name: 'TaskOverride')
     TaskSet = Shapes::StructureShape.new(name: 'TaskSet')
+    TaskSetNotFoundException = Shapes::StructureShape.new(name: 'TaskSetNotFoundException')
     TaskSets = Shapes::ListShape.new(name: 'TaskSets')
     TaskStopCode = Shapes::StringShape.new(name: 'TaskStopCode')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
@@ -260,8 +267,12 @@ module Aws::ECS
     UpdateContainerInstancesStateRequest = Shapes::StructureShape.new(name: 'UpdateContainerInstancesStateRequest')
     UpdateContainerInstancesStateResponse = Shapes::StructureShape.new(name: 'UpdateContainerInstancesStateResponse')
     UpdateInProgressException = Shapes::StructureShape.new(name: 'UpdateInProgressException')
+    UpdateServicePrimaryTaskSetRequest = Shapes::StructureShape.new(name: 'UpdateServicePrimaryTaskSetRequest')
+    UpdateServicePrimaryTaskSetResponse = Shapes::StructureShape.new(name: 'UpdateServicePrimaryTaskSetResponse')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
+    UpdateTaskSetRequest = Shapes::StructureShape.new(name: 'UpdateTaskSetRequest')
+    UpdateTaskSetResponse = Shapes::StructureShape.new(name: 'UpdateTaskSetResponse')
     VersionInfo = Shapes::StructureShape.new(name: 'VersionInfo')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     VolumeFrom = Shapes::StructureShape.new(name: 'VolumeFrom')
@@ -428,7 +439,7 @@ module Aws::ECS
 
     CreateServiceRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     CreateServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
-    CreateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
+    CreateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
     CreateServiceRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
     CreateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     CreateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "desiredCount"))
@@ -450,6 +461,22 @@ module Aws::ECS
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     CreateServiceResponse.struct_class = Types::CreateServiceResponse
+
+    CreateTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    CreateTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    CreateTaskSetRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    CreateTaskSetRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
+    CreateTaskSetRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    CreateTaskSetRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    CreateTaskSetRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
+    CreateTaskSetRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    CreateTaskSetRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    CreateTaskSetRequest.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, location_name: "scale"))
+    CreateTaskSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateTaskSetRequest.struct_class = Types::CreateTaskSetRequest
+
+    CreateTaskSetResponse.add_member(:task_set, Shapes::ShapeRef.new(shape: TaskSet, location_name: "taskSet"))
+    CreateTaskSetResponse.struct_class = Types::CreateTaskSetResponse
 
     DeleteAccountSettingRequest.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, required: true, location_name: "name"))
     DeleteAccountSettingRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
@@ -478,6 +505,15 @@ module Aws::ECS
 
     DeleteServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     DeleteServiceResponse.struct_class = Types::DeleteServiceResponse
+
+    DeleteTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    DeleteTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    DeleteTaskSetRequest.add_member(:task_set, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskSet"))
+    DeleteTaskSetRequest.add_member(:force, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "force"))
+    DeleteTaskSetRequest.struct_class = Types::DeleteTaskSetRequest
+
+    DeleteTaskSetResponse.add_member(:task_set, Shapes::ShapeRef.new(shape: TaskSet, location_name: "taskSet"))
+    DeleteTaskSetResponse.struct_class = Types::DeleteTaskSetResponse
 
     Deployment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Deployment.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
@@ -548,6 +584,15 @@ module Aws::ECS
     DescribeTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
     DescribeTaskDefinitionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeTaskDefinitionResponse.struct_class = Types::DescribeTaskDefinitionResponse
+
+    DescribeTaskSetsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    DescribeTaskSetsRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    DescribeTaskSetsRequest.add_member(:task_sets, Shapes::ShapeRef.new(shape: StringList, location_name: "taskSets"))
+    DescribeTaskSetsRequest.struct_class = Types::DescribeTaskSetsRequest
+
+    DescribeTaskSetsResponse.add_member(:task_sets, Shapes::ShapeRef.new(shape: TaskSets, location_name: "taskSets"))
+    DescribeTaskSetsResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    DescribeTaskSetsResponse.struct_class = Types::DescribeTaskSetsResponse
 
     DescribeTasksRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     DescribeTasksRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "tasks"))
@@ -1102,6 +1147,8 @@ module Aws::ECS
 
     TaskSet.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     TaskSet.add_member(:task_set_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskSetArn"))
+    TaskSet.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
+    TaskSet.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     TaskSet.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
     TaskSet.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
     TaskSet.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
@@ -1115,6 +1162,7 @@ module Aws::ECS
     TaskSet.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     TaskSet.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     TaskSet.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    TaskSet.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     TaskSet.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, location_name: "scale"))
     TaskSet.add_member(:stability_status, Shapes::ShapeRef.new(shape: StabilityStatus, location_name: "stabilityStatus"))
     TaskSet.add_member(:stability_status_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stabilityStatusAt"))
@@ -1160,6 +1208,14 @@ module Aws::ECS
     UpdateContainerInstancesStateResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     UpdateContainerInstancesStateResponse.struct_class = Types::UpdateContainerInstancesStateResponse
 
+    UpdateServicePrimaryTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    UpdateServicePrimaryTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    UpdateServicePrimaryTaskSetRequest.add_member(:primary_task_set, Shapes::ShapeRef.new(shape: String, required: true, location_name: "primaryTaskSet"))
+    UpdateServicePrimaryTaskSetRequest.struct_class = Types::UpdateServicePrimaryTaskSetRequest
+
+    UpdateServicePrimaryTaskSetResponse.add_member(:task_set, Shapes::ShapeRef.new(shape: TaskSet, location_name: "taskSet"))
+    UpdateServicePrimaryTaskSetResponse.struct_class = Types::UpdateServicePrimaryTaskSetResponse
+
     UpdateServiceRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     UpdateServiceRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
     UpdateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "desiredCount"))
@@ -1173,6 +1229,15 @@ module Aws::ECS
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     UpdateServiceResponse.struct_class = Types::UpdateServiceResponse
+
+    UpdateTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    UpdateTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    UpdateTaskSetRequest.add_member(:task_set, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskSet"))
+    UpdateTaskSetRequest.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, required: true, location_name: "scale"))
+    UpdateTaskSetRequest.struct_class = Types::UpdateTaskSetRequest
+
+    UpdateTaskSetResponse.add_member(:task_set, Shapes::ShapeRef.new(shape: TaskSet, location_name: "taskSet"))
+    UpdateTaskSetResponse.struct_class = Types::UpdateTaskSetResponse
 
     VersionInfo.add_member(:agent_version, Shapes::ShapeRef.new(shape: String, location_name: "agentVersion"))
     VersionInfo.add_member(:agent_hash, Shapes::ShapeRef.new(shape: String, location_name: "agentHash"))
@@ -1238,6 +1303,24 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_task_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTaskSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTaskSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+      end)
+
       api.add_operation(:delete_account_setting, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAccountSetting"
         o.http_method = "POST"
@@ -1286,6 +1369,23 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+      end)
+
+      api.add_operation(:delete_task_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTaskSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTaskSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
       end)
 
       api.add_operation(:deregister_container_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -1355,6 +1455,22 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:describe_task_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTaskSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTaskSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTaskSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
       end)
 
       api.add_operation(:describe_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -1705,6 +1821,41 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_service_primary_task_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServicePrimaryTaskSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServicePrimaryTaskSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateServicePrimaryTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_task_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTaskSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTaskSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
       end)
     end
 

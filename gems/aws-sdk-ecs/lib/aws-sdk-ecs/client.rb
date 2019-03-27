@@ -355,7 +355,7 @@ module Aws::ECS
 
     # Runs and maintains a desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
-    # `desiredCount`, Amazon ECS spawns another copy of the task in the
+    # the `desiredCount`, Amazon ECS spawns another copy of the task in the
     # specified cluster. To update an existing service, see UpdateService.
     #
     # In addition to maintaining the desired count of tasks in your service,
@@ -364,26 +364,52 @@ module Aws::ECS
     # the service. For more information, see [Service Load Balancing][1] in
     # the *Amazon Elastic Container Service Developer Guide*.
     #
+    # Tasks for services that *do not* use a load balancer are considered
+    # healthy if they're in the `RUNNING` state. Tasks for services that
+    # *do* use a load balancer are considered healthy if they're in the
+    # `RUNNING` state and the container instance that they're hosted on is
+    # reported as healthy by the load balancer.
+    #
+    # There are two service scheduler strategies available:
+    #
+    # * `REPLICA` - The replica scheduling strategy places and maintains the
+    #   desired number of tasks across your cluster. By default, the service
+    #   scheduler spreads tasks across Availability Zones. You can use task
+    #   placement strategies and constraints to customize task placement
+    #   decisions. For more information, see [Service Scheduler Concepts][2]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
+    #   on each active container instance that meets all of the task
+    #   placement constraints that you specify in your cluster. When using
+    #   this strategy, you don't need to specify a desired number of tasks,
+    #   a task placement strategy, or use Service Auto Scaling policies. For
+    #   more information, see [Service Scheduler Concepts][2] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
+    #
     # You can optionally specify a deployment configuration for your
     # service. The deployment is triggered by changing properties, such as
     # the task definition or the desired count of a service, with an
-    # UpdateService operation.
+    # UpdateService operation. The default value for a replica service for
+    # `minimumHealthyPercent` is 100%. The default value for a daemon
+    # service for `minimumHealthyPercent` is 0%.
     #
-    # If a service is using the `ECS` deployment controller, the **minimum
-    # healthy percent** represents a lower limit on the number of tasks in a
+    # If a service is using the `ECS` deployment controller, the minimum
+    # healthy percent represents a lower limit on the number of tasks in a
     # service that must remain in the `RUNNING` state during a deployment,
     # as a percentage of the desired number of tasks (rounded up to the
     # nearest integer), and while any container instances are in the
     # `DRAINING` state if the service contains tasks using the EC2 launch
     # type. This parameter enables you to deploy without using additional
     # cluster capacity. For example, if your service has a desired number of
-    # four tasks and a minimum healthy percent of 50%, the scheduler may
+    # four tasks and a minimum healthy percent of 50%, the scheduler might
     # stop two existing tasks to free up cluster capacity before starting
     # two new tasks. Tasks for services that *do not* use a load balancer
-    # are considered healthy if they are in the `RUNNING` state; tasks for
-    # services that *do* use a load balancer are considered healthy if they
-    # are in the `RUNNING` state and they are reported as healthy by the
-    # load balancer. The default value for minimum healthy percent is 100%.
+    # are considered healthy if they're in the `RUNNING` state. Tasks for
+    # services that *do* use a load balancer are considered healthy if
+    # they're in the `RUNNING` state and they're reported as healthy by
+    # the load balancer. The default value for minimum healthy percent is
+    # 100%.
     #
     # If a service is using the `ECS` deployment controller, the **maximum
     # percent** parameter represents an upper limit on the number of tasks
@@ -398,23 +424,22 @@ module Aws::ECS
     # tasks (provided that the cluster resources required to do this are
     # available). The default value for maximum percent is 200%.
     #
-    # If a service is using the `CODE_DEPLOY` deployment controller and
-    # tasks that use the EC2 launch type, the **minimum healthy percent**
-    # and **maximum percent** values are only used to define the lower and
-    # upper limit on the number of the tasks in the service that remain in
-    # the `RUNNING` state while the container instances are in the
-    # `DRAINING` state. If the tasks in the service use the Fargate launch
-    # type, the minimum healthy percent and maximum percent values are not
-    # used, although they are currently visible when describing your
-    # service.
+    # If a service is using either the `CODE_DEPLOY` or `EXTERNAL`
+    # deployment controller types and tasks that use the EC2 launch type,
+    # the **minimum healthy percent** and **maximum percent** values are
+    # used only to define the lower and upper limit on the number of the
+    # tasks in the service that remain in the `RUNNING` state while the
+    # container instances are in the `DRAINING` state. If the tasks in the
+    # service use the Fargate launch type, the minimum healthy percent and
+    # maximum percent values aren't used, although they're currently
+    # visible when describing your service.
     #
-    # Tasks for services that *do not* use a load balancer are considered
-    # healthy if they are in the `RUNNING` state. Tasks for services that
-    # *do* use a load balancer are considered healthy if they are in the
-    # `RUNNING` state and the container instance they are hosted on is
-    # reported as healthy by the load balancer. The default value for a
-    # replica service for `minimumHealthyPercent` is 100%. The default value
-    # for a daemon service for `minimumHealthyPercent` is 0%.
+    # When creating a service that uses the `EXTERNAL` deployment
+    # controller, you can specify only parameters that aren't controlled at
+    # the task set level. The only required parameter is the service name.
+    # You control your services using the CreateTaskSet operation. For more
+    # information, see [Amazon ECS Deployment Types][3] in the *Amazon
+    # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster using the following logic:
@@ -443,6 +468,8 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -455,10 +482,13 @@ module Aws::ECS
     #   unique within a cluster, but you can have similarly named services in
     #   multiple clusters within a Region or across multiple Regions.
     #
-    # @option params [required, String] :task_definition
+    # @option params [String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
     #   task definition to run in your service. If a `revision` is not
     #   specified, the latest `ACTIVE` revision is used.
+    #
+    #   A task definition must be specified if the service is using the `ECS`
+    #   deployment controller.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancer to use with your
@@ -539,9 +569,9 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #
     # @option params [String] :platform_version
-    #   The platform version on which your tasks in the service are running. A
-    #   platform version is only specified for tasks using the Fargate launch
-    #   type. If one is not specified, the `LATEST` platform version is used
+    #   The platform version that your tasks in the service are running on. A
+    #   platform version is specified only for tasks using the Fargate launch
+    #   type. If one isn't specified, the `LATEST` platform version is used
     #   by default. For more information, see [AWS Fargate Platform
     #   Versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
@@ -625,18 +655,18 @@ module Aws::ECS
     #     desired number of tasks across your cluster. By default, the service
     #     scheduler spreads tasks across Availability Zones. You can use task
     #     placement strategies and constraints to customize task placement
-    #     decisions. This scheduler strategy is required if using the
-    #     `CODE_DEPLOY` deployment controller.
+    #     decisions. This scheduler strategy is required if the service is
+    #     using the `CODE_DEPLOY` or `EXTERNAL` deployment controller types.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
     #     each active container instance that meets all of the task placement
-    #     constraints that you specify in your cluster. When you are using
-    #     this strategy, there is no need to specify a desired number of
-    #     tasks, a task placement strategy, or use Service Auto Scaling
-    #     policies.
+    #     constraints that you specify in your cluster. When you're using
+    #     this strategy, you don't need to specify a desired number of tasks,
+    #     a task placement strategy, or use Service Auto Scaling policies.
     #
-    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` deploymenet
-    #     controller do not support the `DAEMON` scheduling strategy.
+    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` or
+    #     `EXTERNAL` deployment controller types don't support the `DAEMON`
+    #     scheduling strategy.
     #
     #      </note>
     #
@@ -799,7 +829,7 @@ module Aws::ECS
     #   resp = client.create_service({
     #     cluster: "String",
     #     service_name: "String", # required
-    #     task_definition: "String", # required
+    #     task_definition: "String",
     #     load_balancers: [
     #       {
     #         target_group_arn: "String",
@@ -847,7 +877,7 @@ module Aws::ECS
     #     health_check_grace_period_seconds: 1,
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #     deployment_controller: {
-    #       type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #       type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
     #     },
     #     tags: [
     #       {
@@ -886,6 +916,8 @@ module Aws::ECS
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].service_arn #=> String
+    #   resp.service.task_sets[0].cluster_arn #=> String
     #   resp.service.task_sets[0].started_by #=> String
     #   resp.service.task_sets[0].external_id #=> String
     #   resp.service.task_sets[0].status #=> String
@@ -907,6 +939,11 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].service_registries #=> Array
+    #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.service.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.service.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.service.task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.service.task_sets[0].scale.value #=> Float
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -946,7 +983,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -960,6 +997,162 @@ module Aws::ECS
     # @param [Hash] params ({})
     def create_service(params = {}, options = {})
       req = build_request(:create_service, params)
+      req.send_request(options)
+    end
+
+    # Create a task set in the specified cluster and service. This is used
+    # when a service uses the `EXTERNAL` deployment controller type. For
+    # more information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service to
+    #   create the task set in.
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service to create the task set in.
+    #
+    # @option params [String] :external_id
+    #   An optional non-unique tag that identifies this task set in external
+    #   systems. If the task set is associated with a service discovery
+    #   registry, the tasks in this task set will have the
+    #   `ECS_TASK_SET_EXTERNAL_ID` AWS Cloud Map attribute set to the provided
+    #   value.
+    #
+    # @option params [required, String] :task_definition
+    #   The task definition for the tasks in the task set to use.
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   An object representing the network configuration for a task or
+    #   service.
+    #
+    # @option params [Array<Types::LoadBalancer>] :load_balancers
+    #   A load balancer object representing the load balancer to use with the
+    #   task set. The supported load balancer types are either an Application
+    #   Load Balancer or a Network Load Balancer.
+    #
+    # @option params [Array<Types::ServiceRegistry>] :service_registries
+    #   The details of the service discovery registries to assign to this task
+    #   set. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #
+    # @option params [String] :launch_type
+    #   The launch type that new tasks in the task set will use. For more
+    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #
+    # @option params [String] :platform_version
+    #   The platform version that the tasks in the task set should use. A
+    #   platform version is specified only for tasks using the Fargate launch
+    #   type. If one isn't specified, the `LATEST` platform version is used
+    #   by default.
+    #
+    # @option params [Types::Scale] :scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the task set.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 32 ASCII characters are allowed.
+    #
+    # @return [Types::CreateTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_task_set({
+    #     service: "String", # required
+    #     cluster: "String", # required
+    #     external_id: "String",
+    #     task_definition: "String", # required
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     load_balancers: [
+    #       {
+    #         target_group_arn: "String",
+    #         load_balancer_name: "String",
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
+    #     service_registries: [
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
+    #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     platform_version: "String",
+    #     scale: {
+    #       value: 1.0,
+    #       unit: "PERCENT", # accepts PERCENT
+    #     },
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSet AWS API Documentation
+    #
+    # @overload create_task_set(params = {})
+    # @param [Hash] params ({})
+    def create_task_set(params = {}, options = {})
+      req = build_request(:create_task_set, params)
       req.send_request(options)
     end
 
@@ -1250,6 +1443,8 @@ module Aws::ECS
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].service_arn #=> String
+    #   resp.service.task_sets[0].cluster_arn #=> String
     #   resp.service.task_sets[0].started_by #=> String
     #   resp.service.task_sets[0].external_id #=> String
     #   resp.service.task_sets[0].status #=> String
@@ -1271,6 +1466,11 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].service_registries #=> Array
+    #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.service.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.service.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.service.task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.service.task_sets[0].scale.value #=> Float
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -1310,7 +1510,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -1324,6 +1524,90 @@ module Aws::ECS
     # @param [Hash] params ({})
     def delete_service(params = {}, options = {})
       req = build_request(:delete_service, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified task set within a service. This is used when a
+    # service uses the `EXTERNAL` deployment controller type. For more
+    # information, see [Amazon ECS Deployment Types][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task set exists in to delete.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   hosts the task set to delete.
+    #
+    # @option params [required, String] :task_set
+    #   The task set ID or full Amazon Resource Name (ARN) of the task set to
+    #   delete.
+    #
+    # @option params [Boolean] :force
+    #   If `true`, this allows you to delete a task set even if it hasn't
+    #   been scaled down to zero.
+    #
+    # @return [Types::DeleteTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_task_set({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     task_set: "String", # required
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSet AWS API Documentation
+    #
+    # @overload delete_task_set(params = {})
+    # @param [Hash] params ({})
+    def delete_task_set(params = {}, options = {})
+      req = build_request(:delete_task_set, params)
       req.send_request(options)
     end
 
@@ -2017,6 +2301,8 @@ module Aws::ECS
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
+    #   resp.services[0].task_sets[0].service_arn #=> String
+    #   resp.services[0].task_sets[0].cluster_arn #=> String
     #   resp.services[0].task_sets[0].started_by #=> String
     #   resp.services[0].task_sets[0].external_id #=> String
     #   resp.services[0].task_sets[0].status #=> String
@@ -2038,6 +2324,11 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.services[0].task_sets[0].load_balancers[0].container_name #=> String
     #   resp.services[0].task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].task_sets[0].service_registries #=> Array
+    #   resp.services[0].task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.services[0].task_sets[0].service_registries[0].port #=> Integer
+    #   resp.services[0].task_sets[0].service_registries[0].container_name #=> String
+    #   resp.services[0].task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.services[0].task_sets[0].scale.value #=> Float
     #   resp.services[0].task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.services[0].task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -2077,7 +2368,7 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].health_check_grace_period_seconds #=> Integer
     #   resp.services[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.services[0].deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.services[0].deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.services[0].tags #=> Array
     #   resp.services[0].tags[0].key #=> String
     #   resp.services[0].tags[0].value #=> String
@@ -2332,6 +2623,89 @@ module Aws::ECS
     # @param [Hash] params ({})
     def describe_task_definition(params = {}, options = {})
       req = build_request(:describe_task_definition, params)
+      req.send_request(options)
+    end
+
+    # Describes the task sets in the specified cluster and service. This is
+    # used when a service uses the `EXTERNAL` deployment controller type.
+    # For more information, see [Amazon ECS Deployment Types][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task sets exist in.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   the task sets exist in.
+    #
+    # @option params [Array<String>] :task_sets
+    #   The ID or full Amazon Resource Name (ARN) of task sets to describe.
+    #
+    # @return [Types::DescribeTaskSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTaskSetsResponse#task_sets #task_sets} => Array&lt;Types::TaskSet&gt;
+    #   * {Types::DescribeTaskSetsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_task_sets({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     task_sets: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_sets #=> Array
+    #   resp.task_sets[0].id #=> String
+    #   resp.task_sets[0].task_set_arn #=> String
+    #   resp.task_sets[0].service_arn #=> String
+    #   resp.task_sets[0].cluster_arn #=> String
+    #   resp.task_sets[0].started_by #=> String
+    #   resp.task_sets[0].external_id #=> String
+    #   resp.task_sets[0].status #=> String
+    #   resp.task_sets[0].task_definition #=> String
+    #   resp.task_sets[0].computed_desired_count #=> Integer
+    #   resp.task_sets[0].pending_count #=> Integer
+    #   resp.task_sets[0].running_count #=> Integer
+    #   resp.task_sets[0].created_at #=> Time
+    #   resp.task_sets[0].updated_at #=> Time
+    #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_sets[0].platform_version #=> String
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_sets[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_sets[0].load_balancers #=> Array
+    #   resp.task_sets[0].load_balancers[0].target_group_arn #=> String
+    #   resp.task_sets[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.task_sets[0].load_balancers[0].container_name #=> String
+    #   resp.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.task_sets[0].service_registries #=> Array
+    #   resp.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.task_sets[0].service_registries[0].container_port #=> Integer
+    #   resp.task_sets[0].scale.value #=> Float
+    #   resp.task_sets[0].scale.unit #=> String, one of "PERCENT"
+    #   resp.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_sets[0].stability_status_at #=> Time
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSets AWS API Documentation
+    #
+    # @overload describe_task_sets(params = {})
+    # @param [Hash] params ({})
+    def describe_task_sets(params = {}, options = {})
+      req = build_request(:describe_task_sets, params)
       req.send_request(options)
     end
 
@@ -4081,6 +4455,18 @@ module Aws::ECS
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
     #
+    #   Your Amazon ECS container instances require at least version 1.26.0 of
+    #   the container agent and at least version 1.26.0-1 of the `ecs-init`
+    #   package to enable a proxy configuration. If your container instances
+    #   are launched from the Amazon ECS-optimized AMI version `20190301` or
+    #   later, then they contain the required versions of the container agent
+    #   and `ecs-init`. For more information, see [Amazon ECS-optimized Linux
+    #   AMI][1] in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
@@ -5069,7 +5455,7 @@ module Aws::ECS
     #   cluster is assumed.
     #
     # @option params [required, String] :task
-    #   The task ID or full ARN entry of the task to stop.
+    #   The task ID or full Amazon Resource Name (ARN) of the task to stop.
     #
     # @option params [String] :reason
     #   An optional message specified when a task is stopped. For example, if
@@ -5667,6 +6053,12 @@ module Aws::ECS
     # information, see [CreateDeployment][1] in the *AWS CodeDeploy API
     # Reference*.
     #
+    # For services using an external deployment controller, you can update
+    # only the desired count and health check grace period using this API.
+    # If the launch type, load balancer, network configuration, platform
+    # version, or task definition need to be updated, you should create a
+    # new task set. For more information, see CreateTaskSet.
+    #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
     # running in and a new `desiredCount` parameter.
@@ -5913,6 +6305,8 @@ module Aws::ECS
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
+    #   resp.service.task_sets[0].service_arn #=> String
+    #   resp.service.task_sets[0].cluster_arn #=> String
     #   resp.service.task_sets[0].started_by #=> String
     #   resp.service.task_sets[0].external_id #=> String
     #   resp.service.task_sets[0].status #=> String
@@ -5934,6 +6328,11 @@ module Aws::ECS
     #   resp.service.task_sets[0].load_balancers[0].load_balancer_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_name #=> String
     #   resp.service.task_sets[0].load_balancers[0].container_port #=> Integer
+    #   resp.service.task_sets[0].service_registries #=> Array
+    #   resp.service.task_sets[0].service_registries[0].registry_arn #=> String
+    #   resp.service.task_sets[0].service_registries[0].port #=> Integer
+    #   resp.service.task_sets[0].service_registries[0].container_name #=> String
+    #   resp.service.task_sets[0].service_registries[0].container_port #=> Integer
     #   resp.service.task_sets[0].scale.value #=> Float
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
@@ -5973,7 +6372,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
     #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
-    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY"
+    #   resp.service.deployment_controller.type #=> String, one of "ECS", "CODE_DEPLOY", "EXTERNAL"
     #   resp.service.tags #=> Array
     #   resp.service.tags[0].key #=> String
     #   resp.service.tags[0].value #=> String
@@ -5990,6 +6389,174 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies which task set in a service is the primary task set. Any
+    # parameters that are updated on the primary task set in a service will
+    # transition to the service. This is used when a service uses the
+    # `EXTERNAL` deployment controller type. For more information, see
+    # [Amazon ECS Deployment Types][1] in the *Amazon Elastic Container
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task set exists in.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   the task set exists in.
+    #
+    # @option params [required, String] :primary_task_set
+    #   The short name or full Amazon Resource Name (ARN) of the task set to
+    #   set as the primary task set in the deployment.
+    #
+    # @return [Types::UpdateServicePrimaryTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServicePrimaryTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_primary_task_set({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     primary_task_set: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSet AWS API Documentation
+    #
+    # @overload update_service_primary_task_set(params = {})
+    # @param [Hash] params ({})
+    def update_service_primary_task_set(params = {}, options = {})
+      req = build_request(:update_service_primary_task_set, params)
+      req.send_request(options)
+    end
+
+    # Modifies a task set. This is used when a service uses the `EXTERNAL`
+    # deployment controller type. For more information, see [Amazon ECS
+    # Deployment Types][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task set exists in.
+    #
+    # @option params [required, String] :service
+    #   The short name or full Amazon Resource Name (ARN) of the service that
+    #   the task set exists in.
+    #
+    # @option params [required, String] :task_set
+    #   The short name or full Amazon Resource Name (ARN) of the task set to
+    #   update.
+    #
+    # @option params [required, Types::Scale] :scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the task set.
+    #
+    # @return [Types::UpdateTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTaskSetResponse#task_set #task_set} => Types::TaskSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_set({
+    #     cluster: "String", # required
+    #     service: "String", # required
+    #     task_set: "String", # required
+    #     scale: { # required
+    #       value: 1.0,
+    #       unit: "PERCENT", # accepts PERCENT
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_set.id #=> String
+    #   resp.task_set.task_set_arn #=> String
+    #   resp.task_set.service_arn #=> String
+    #   resp.task_set.cluster_arn #=> String
+    #   resp.task_set.started_by #=> String
+    #   resp.task_set.external_id #=> String
+    #   resp.task_set.status #=> String
+    #   resp.task_set.task_definition #=> String
+    #   resp.task_set.computed_desired_count #=> Integer
+    #   resp.task_set.pending_count #=> Integer
+    #   resp.task_set.running_count #=> Integer
+    #   resp.task_set.created_at #=> Time
+    #   resp.task_set.updated_at #=> Time
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.platform_version #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.task_set.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.task_set.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_set.load_balancers #=> Array
+    #   resp.task_set.load_balancers[0].target_group_arn #=> String
+    #   resp.task_set.load_balancers[0].load_balancer_name #=> String
+    #   resp.task_set.load_balancers[0].container_name #=> String
+    #   resp.task_set.load_balancers[0].container_port #=> Integer
+    #   resp.task_set.service_registries #=> Array
+    #   resp.task_set.service_registries[0].registry_arn #=> String
+    #   resp.task_set.service_registries[0].port #=> Integer
+    #   resp.task_set.service_registries[0].container_name #=> String
+    #   resp.task_set.service_registries[0].container_port #=> Integer
+    #   resp.task_set.scale.value #=> Float
+    #   resp.task_set.scale.unit #=> String, one of "PERCENT"
+    #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
+    #   resp.task_set.stability_status_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSet AWS API Documentation
+    #
+    # @overload update_task_set(params = {})
+    # @param [Hash] params ({})
+    def update_task_set(params = {}, options = {})
+      req = build_request(:update_task_set, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6003,7 +6570,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

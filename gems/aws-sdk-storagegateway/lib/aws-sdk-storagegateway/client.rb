@@ -329,8 +329,8 @@ module Aws::StorageGateway
     #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of up to ten (10) tags assigned to the gateway may be
-    #   specified. Every tag is a key-value pair.
+    #   A list of up to 10 tags that can be assigned to the gateway. Each tag
+    #   is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters: +
@@ -466,11 +466,11 @@ module Aws::StorageGateway
     #
     # * Storage gateways of all types
     #
-    # * Storage Volumes
+    # * Storage volumes
     #
-    # * Virtual Tapes
+    # * Virtual tapes
     #
-    # * NFS and SMB File Shares
+    # * NFS and SMB file shares
     #
     # You can create a maximum of 10 tags for each resource. Virtual tapes
     # and storage volumes that are recovered to a new gateway maintain their
@@ -1026,7 +1026,8 @@ module Aws::StorageGateway
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #
     # @option params [String] :squash
-    #   Maps a user to anonymous user. Valid options are the following:
+    #   A value that maps a user to anonymous user. Valid options are the
+    #   following:
     #
     #   * `RootSquash` - Only root is mapped to anonymous user.
     #
@@ -1049,8 +1050,8 @@ module Aws::StorageGateway
     #   default value is `private`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of up to ten (10) tags can be assigned to the NFS file share.
-    #   Every tag is a key-value pair.
+    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters: +
@@ -1196,8 +1197,8 @@ module Aws::StorageGateway
     #   `ActiveDirectory`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of up to ten (10) tags can be assigned to the NFS file share.
-    #   Every tag is a key-value pair.
+    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters: +
@@ -1582,6 +1583,15 @@ module Aws::StorageGateway
     #   server side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
+    # @option params [String] :pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
     # @return [Types::CreateTapeWithBarcodeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTapeWithBarcodeOutput#tape_arn #tape_arn} => String
@@ -1610,6 +1620,7 @@ module Aws::StorageGateway
     #     tape_barcode: "TapeBarcode", # required
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
+    #     pool_id: "PoolId",
     #   })
     #
     # @example Response structure
@@ -1678,6 +1689,15 @@ module Aws::StorageGateway
     #   server side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
+    # @option params [String] :pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class you chose
+    #   when you created the tape. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive).
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
     # @return [Types::CreateTapesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTapesOutput#tape_arns #tape_arns} => Array&lt;String&gt;
@@ -1714,6 +1734,7 @@ module Aws::StorageGateway
     #     tape_barcode_prefix: "TapeBarcodePrefix", # required
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
+    #     pool_id: "PoolId",
     #   })
     #
     # @example Response structure
@@ -2931,6 +2952,7 @@ module Aws::StorageGateway
     #   resp.tape_archives[0].tape_status #=> String
     #   resp.tape_archives[0].tape_used_in_bytes #=> Integer
     #   resp.tape_archives[0].kms_key #=> String
+    #   resp.tape_archives[0].pool_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives AWS API Documentation
@@ -3112,6 +3134,7 @@ module Aws::StorageGateway
     #   resp.tapes[0].progress #=> Float
     #   resp.tapes[0].tape_used_in_bytes #=> Integer
     #   resp.tapes[0].kms_key #=> String
+    #   resp.tapes[0].pool_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes AWS API Documentation
@@ -3878,6 +3901,7 @@ module Aws::StorageGateway
     #   resp.tape_infos[0].tape_size_in_bytes #=> Integer
     #   resp.tape_infos[0].tape_status #=> String
     #   resp.tape_infos[0].gateway_arn #=> String
+    #   resp.tape_infos[0].pool_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes AWS API Documentation
@@ -5335,7 +5359,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

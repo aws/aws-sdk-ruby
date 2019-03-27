@@ -11,6 +11,7 @@ module Aws::AppMesh
 
     include Seahorse::Model
 
+    AccessLog = Shapes::StructureShape.new(name: 'AccessLog')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Backend = Shapes::StructureShape.new(name: 'Backend')
     Backends = Shapes::ListShape.new(name: 'Backends')
@@ -47,6 +48,10 @@ module Aws::AppMesh
     DescribeVirtualServiceInput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceInput')
     DescribeVirtualServiceOutput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceOutput')
     DnsServiceDiscovery = Shapes::StructureShape.new(name: 'DnsServiceDiscovery')
+    EgressFilter = Shapes::StructureShape.new(name: 'EgressFilter')
+    EgressFilterType = Shapes::StringShape.new(name: 'EgressFilterType')
+    FileAccessLog = Shapes::StructureShape.new(name: 'FileAccessLog')
+    FilePath = Shapes::StringShape.new(name: 'FilePath')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     HealthCheckIntervalMillis = Shapes::IntegerShape.new(name: 'HealthCheckIntervalMillis')
     HealthCheckPolicy = Shapes::StructureShape.new(name: 'HealthCheckPolicy')
@@ -64,6 +69,8 @@ module Aws::AppMesh
     ListRoutesInput = Shapes::StructureShape.new(name: 'ListRoutesInput')
     ListRoutesLimit = Shapes::IntegerShape.new(name: 'ListRoutesLimit')
     ListRoutesOutput = Shapes::StructureShape.new(name: 'ListRoutesOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListVirtualNodesInput = Shapes::StructureShape.new(name: 'ListVirtualNodesInput')
     ListVirtualNodesLimit = Shapes::IntegerShape.new(name: 'ListVirtualNodesLimit')
     ListVirtualNodesOutput = Shapes::StructureShape.new(name: 'ListVirtualNodesOutput')
@@ -75,10 +82,12 @@ module Aws::AppMesh
     ListVirtualServicesOutput = Shapes::StructureShape.new(name: 'ListVirtualServicesOutput')
     Listener = Shapes::StructureShape.new(name: 'Listener')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
+    Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
     MeshRef = Shapes::StructureShape.new(name: 'MeshRef')
+    MeshSpec = Shapes::StructureShape.new(name: 'MeshSpec')
     MeshStatus = Shapes::StructureShape.new(name: 'MeshStatus')
     MeshStatusCode = Shapes::StringShape.new(name: 'MeshStatusCode')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -99,8 +108,23 @@ module Aws::AppMesh
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     String = Shapes::StringShape.new(name: 'String')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagRef = Shapes::StructureShape.new(name: 'TagRef')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagsLimit = Shapes::IntegerShape.new(name: 'TagsLimit')
+    TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
+    TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateMeshInput = Shapes::StructureShape.new(name: 'UpdateMeshInput')
+    UpdateMeshOutput = Shapes::StructureShape.new(name: 'UpdateMeshOutput')
     UpdateRouteInput = Shapes::StructureShape.new(name: 'UpdateRouteInput')
     UpdateRouteOutput = Shapes::StructureShape.new(name: 'UpdateRouteOutput')
     UpdateVirtualNodeInput = Shapes::StructureShape.new(name: 'UpdateVirtualNodeInput')
@@ -136,6 +160,9 @@ module Aws::AppMesh
     WeightedTarget = Shapes::StructureShape.new(name: 'WeightedTarget')
     WeightedTargets = Shapes::ListShape.new(name: 'WeightedTargets')
 
+    AccessLog.add_member(:file, Shapes::ShapeRef.new(shape: FileAccessLog, location_name: "file"))
+    AccessLog.struct_class = Types::AccessLog
+
     Backend.add_member(:virtual_service, Shapes::ShapeRef.new(shape: VirtualServiceBackend, location_name: "virtualService"))
     Backend.struct_class = Types::Backend
 
@@ -143,6 +170,8 @@ module Aws::AppMesh
 
     CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
+    CreateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
+    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateMeshInput.struct_class = Types::CreateMeshInput
 
     CreateMeshOutput.add_member(:mesh, Shapes::ShapeRef.new(shape: MeshData, required: true, location_name: "mesh"))
@@ -154,6 +183,7 @@ module Aws::AppMesh
     CreateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
     CreateRouteInput.add_member(:spec, Shapes::ShapeRef.new(shape: RouteSpec, required: true, location_name: "spec"))
+    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     CreateRouteInput.struct_class = Types::CreateRouteInput
 
@@ -165,6 +195,7 @@ module Aws::AppMesh
     CreateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
+    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     CreateVirtualNodeInput.struct_class = Types::CreateVirtualNodeInput
 
@@ -176,6 +207,7 @@ module Aws::AppMesh
     CreateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
+    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     CreateVirtualRouterInput.struct_class = Types::CreateVirtualRouterInput
 
@@ -187,6 +219,7 @@ module Aws::AppMesh
     CreateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))
+    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     CreateVirtualServiceInput.struct_class = Types::CreateVirtualServiceInput
 
@@ -288,6 +321,12 @@ module Aws::AppMesh
     DnsServiceDiscovery.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
     DnsServiceDiscovery.struct_class = Types::DnsServiceDiscovery
 
+    EgressFilter.add_member(:type, Shapes::ShapeRef.new(shape: EgressFilterType, required: true, location_name: "type"))
+    EgressFilter.struct_class = Types::EgressFilter
+
+    FileAccessLog.add_member(:path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "path"))
+    FileAccessLog.struct_class = Types::FileAccessLog
+
     HealthCheckPolicy.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckThreshold, required: true, location_name: "healthyThreshold"))
     HealthCheckPolicy.add_member(:interval_millis, Shapes::ShapeRef.new(shape: HealthCheckIntervalMillis, required: true, location_name: "intervalMillis"))
     HealthCheckPolicy.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
@@ -325,6 +364,15 @@ module Aws::AppMesh
     ListRoutesOutput.add_member(:routes, Shapes::ShapeRef.new(shape: RouteList, required: true, location_name: "routes"))
     ListRoutesOutput.struct_class = Types::ListRoutesOutput
 
+    ListTagsForResourceInput.add_member(:limit, Shapes::ShapeRef.new(shape: TagsLimit, location: "querystring", location_name: "limit"))
+    ListTagsForResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListVirtualNodesInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListVirtualNodesLimit, location: "querystring", location_name: "limit"))
     ListVirtualNodesInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     ListVirtualNodesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -358,8 +406,12 @@ module Aws::AppMesh
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
 
+    Logging.add_member(:access_log, Shapes::ShapeRef.new(shape: AccessLog, location_name: "accessLog"))
+    Logging.struct_class = Types::Logging
+
     MeshData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     MeshData.add_member(:metadata, Shapes::ShapeRef.new(shape: ResourceMetadata, required: true, location_name: "metadata"))
+    MeshData.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, required: true, location_name: "spec"))
     MeshData.add_member(:status, Shapes::ShapeRef.new(shape: MeshStatus, required: true, location_name: "status"))
     MeshData.struct_class = Types::MeshData
 
@@ -368,6 +420,9 @@ module Aws::AppMesh
     MeshRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     MeshRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     MeshRef.struct_class = Types::MeshRef
+
+    MeshSpec.add_member(:egress_filter, Shapes::ShapeRef.new(shape: EgressFilter, location_name: "egressFilter"))
+    MeshSpec.struct_class = Types::MeshSpec
 
     MeshStatus.add_member(:status, Shapes::ShapeRef.new(shape: MeshStatusCode, location_name: "status"))
     MeshStatus.struct_class = Types::MeshStatus
@@ -400,6 +455,7 @@ module Aws::AppMesh
     RouteRef.struct_class = Types::RouteRef
 
     RouteSpec.add_member(:http_route, Shapes::ShapeRef.new(shape: HttpRoute, location_name: "httpRoute"))
+    RouteSpec.add_member(:tcp_route, Shapes::ShapeRef.new(shape: TcpRoute, location_name: "tcpRoute"))
     RouteSpec.struct_class = Types::RouteSpec
 
     RouteStatus.add_member(:status, Shapes::ShapeRef.new(shape: RouteStatusCode, required: true, location_name: "status"))
@@ -407,6 +463,42 @@ module Aws::AppMesh
 
     ServiceDiscovery.add_member(:dns, Shapes::ShapeRef.new(shape: DnsServiceDiscovery, location_name: "dns"))
     ServiceDiscovery.struct_class = Types::ServiceDiscovery
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: TagRef)
+
+    TagRef.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    TagRef.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    TagRef.struct_class = Types::TagRef
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TcpRoute.add_member(:action, Shapes::ShapeRef.new(shape: TcpRouteAction, required: true, location_name: "action"))
+    TcpRoute.struct_class = Types::TcpRoute
+
+    TcpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
+    TcpRouteAction.struct_class = Types::TcpRouteAction
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    UpdateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
+    UpdateMeshInput.struct_class = Types::UpdateMeshInput
+
+    UpdateMeshOutput.add_member(:mesh, Shapes::ShapeRef.new(shape: MeshData, required: true, location_name: "mesh"))
+    UpdateMeshOutput.struct_class = Types::UpdateMeshOutput
+    UpdateMeshOutput[:payload] = :mesh
+    UpdateMeshOutput[:payload_member] = UpdateMeshOutput.member(:mesh)
 
     UpdateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
@@ -472,6 +564,7 @@ module Aws::AppMesh
 
     VirtualNodeSpec.add_member(:backends, Shapes::ShapeRef.new(shape: Backends, location_name: "backends"))
     VirtualNodeSpec.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "listeners"))
+    VirtualNodeSpec.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     VirtualNodeSpec.add_member(:service_discovery, Shapes::ShapeRef.new(shape: ServiceDiscovery, location_name: "serviceDiscovery"))
     VirtualNodeSpec.struct_class = Types::VirtualNodeSpec
 
@@ -821,6 +914,24 @@ module Aws::AppMesh
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20190125/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_virtual_nodes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVirtualNodes"
         o.http_method = "GET"
@@ -879,6 +990,46 @@ module Aws::AppMesh
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20190125/tag"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20190125/untag"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_mesh, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMesh"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20190125/meshes/{meshName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMeshInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMeshOutput)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_route, Seahorse::Model::Operation.new.tap do |o|

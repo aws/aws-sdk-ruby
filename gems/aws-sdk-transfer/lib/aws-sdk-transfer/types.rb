@@ -12,6 +12,10 @@ module Aws::Transfer
     #   data as a hash:
     #
     #       {
+    #         endpoint_details: {
+    #           vpc_endpoint_id: "VpcEndpointId",
+    #         },
+    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
     #         identity_provider_details: {
     #           url: "Url",
     #           invocation_role: "Role",
@@ -25,6 +29,12 @@ module Aws::Transfer
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] endpoint_details
+    #   @return [Types::EndpointDetails]
+    #
+    # @!attribute [rw] endpoint_type
+    #   @return [String]
     #
     # @!attribute [rw] identity_provider_details
     #   An array containing all of the information required to call a
@@ -43,7 +53,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   A value that allows the service to write your SFTP users’ activity
+    #   A value that allows the service to write your SFTP users' activity
     #   to your Amazon CloudWatch logs for monitoring and auditing purposes.
     #   @return [String]
     #
@@ -54,6 +64,8 @@ module Aws::Transfer
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
+      :endpoint_details,
+      :endpoint_type,
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
@@ -104,12 +116,12 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls your user’s access to your Amazon S3
+    #   The IAM role that controls your user's access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level
     #   of access you want to provide your users when transferring files
     #   into and out of your Amazon S3 bucket or buckets. The IAM role
     #   should also contain a trust relationship that allows the SFTP server
-    #   to access your resources when servicing your SFTP user’s transfer
+    #   to access your resources when servicing your SFTP user's transfer
     #   requests.
     #   @return [String]
     #
@@ -196,7 +208,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_id
-    #   A unique identifier used to reference your user’s specific SSH key.
+    #   A unique identifier used to reference your user's specific SSH key.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -324,6 +336,12 @@ module Aws::Transfer
     #   described.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_details
+    #   @return [Types::EndpointDetails]
+    #
+    # @!attribute [rw] endpoint_type
+    #   @return [String]
+    #
     # @!attribute [rw] identity_provider_details
     #   Specifies information to call a customer-supplied authentication
     #   API. This field is not populated when the `IdentityProviderType` of
@@ -378,6 +396,8 @@ module Aws::Transfer
     #
     class DescribedServer < Struct.new(
       :arn,
+      :endpoint_details,
+      :endpoint_type,
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
@@ -407,13 +427,13 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   This property specifies the IAM role that controls your user’s
+    #   This property specifies the IAM role that controls your user's
     #   access to your Amazon S3 bucket. The policies attached to this role
     #   will determine the level of access you want to provide your users
     #   when transferring files into and out of your Amazon S3 bucket or
     #   buckets. The IAM role should also contain a trust relationship that
     #   allows the SFTP server to access your resources when servicing your
-    #   SFTP user’s transfer requests.
+    #   SFTP user's transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_keys
@@ -444,6 +464,23 @@ module Aws::Transfer
       :ssh_public_keys,
       :tags,
       :user_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EndpointDetails
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_id: "VpcEndpointId",
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails AWS API Documentation
+    #
+    class EndpointDetails < Struct.new(
+      :vpc_endpoint_id)
       include Aws::Structure
     end
 
@@ -718,6 +755,9 @@ module Aws::Transfer
     #   `API_GATEWAY`.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_type
+    #   @return [String]
+    #
     # @!attribute [rw] logging_role
     #   The AWS Identity and Access Management entity that allows the server
     #   to turn on Amazon CloudWatch logging.
@@ -752,6 +792,7 @@ module Aws::Transfer
     class ListedServer < Struct.new(
       :arn,
       :identity_provider_type,
+      :endpoint_type,
       :logging_role,
       :server_id,
       :state,
@@ -1015,6 +1056,10 @@ module Aws::Transfer
     #   data as a hash:
     #
     #       {
+    #         endpoint_details: {
+    #           vpc_endpoint_id: "VpcEndpointId",
+    #         },
+    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
     #         identity_provider_details: {
     #           url: "Url",
     #           invocation_role: "Role",
@@ -1022,6 +1067,12 @@ module Aws::Transfer
     #         logging_role: "NullableRole",
     #         server_id: "ServerId", # required
     #       }
+    #
+    # @!attribute [rw] endpoint_details
+    #   @return [Types::EndpointDetails]
+    #
+    # @!attribute [rw] endpoint_type
+    #   @return [String]
     #
     # @!attribute [rw] identity_provider_details
     #   This response parameter is an array containing all of the
@@ -1043,6 +1094,8 @@ module Aws::Transfer
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
+      :endpoint_details,
+      :endpoint_type,
       :identity_provider_details,
       :logging_role,
       :server_id)
@@ -1088,13 +1141,13 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls your user’s access to your Amazon S3
+    #   The IAM role that controls your user's access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level
     #   of access you want to provide your users when transferring files
     #   into and out of your Amazon S3 bucket or buckets. The IAM role
     #   should also contain a trust relationship that allows the Secure File
     #   Transfer Protocol (SFTP) server to access your resources when
-    #   servicing your SFTP user’s transfer requests.
+    #   servicing your SFTP user's transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id

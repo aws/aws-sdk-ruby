@@ -197,6 +197,7 @@ module Aws::StorageGateway
     Path = Shapes::StringShape.new(name: 'Path')
     PermissionId = Shapes::IntegerShape.new(name: 'PermissionId')
     PermissionMode = Shapes::StringShape.new(name: 'PermissionMode')
+    PoolId = Shapes::StringShape.new(name: 'PoolId')
     PositiveIntObject = Shapes::IntegerShape.new(name: 'PositiveIntObject')
     RecurrenceInHours = Shapes::IntegerShape.new(name: 'RecurrenceInHours')
     RefreshCacheInput = Shapes::StructureShape.new(name: 'RefreshCacheInput')
@@ -484,6 +485,7 @@ module Aws::StorageGateway
     CreateTapeWithBarcodeInput.add_member(:tape_barcode, Shapes::ShapeRef.new(shape: TapeBarcode, required: true, location_name: "TapeBarcode"))
     CreateTapeWithBarcodeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateTapeWithBarcodeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    CreateTapeWithBarcodeInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
     CreateTapeWithBarcodeInput.struct_class = Types::CreateTapeWithBarcodeInput
 
     CreateTapeWithBarcodeOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
@@ -496,6 +498,7 @@ module Aws::StorageGateway
     CreateTapesInput.add_member(:tape_barcode_prefix, Shapes::ShapeRef.new(shape: TapeBarcodePrefix, required: true, location_name: "TapeBarcodePrefix"))
     CreateTapesInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateTapesInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    CreateTapesInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
     CreateTapesInput.struct_class = Types::CreateTapesInput
 
     CreateTapesOutput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
@@ -1014,6 +1017,7 @@ module Aws::StorageGateway
     Tape.add_member(:progress, Shapes::ShapeRef.new(shape: DoubleObject, location_name: "Progress"))
     Tape.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
     Tape.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    Tape.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
     Tape.struct_class = Types::Tape
 
     TapeARNs.member = Shapes::ShapeRef.new(shape: TapeARN)
@@ -1027,6 +1031,7 @@ module Aws::StorageGateway
     TapeArchive.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeArchiveStatus, location_name: "TapeStatus"))
     TapeArchive.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
     TapeArchive.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    TapeArchive.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
     TapeArchive.struct_class = Types::TapeArchive
 
     TapeArchives.member = Shapes::ShapeRef.new(shape: TapeArchive)
@@ -1036,6 +1041,7 @@ module Aws::StorageGateway
     TapeInfo.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
     TapeInfo.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeStatus, location_name: "TapeStatus"))
     TapeInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    TapeInfo.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
     TapeInfo.struct_class = Types::TapeInfo
 
     TapeInfos.member = Shapes::ShapeRef.new(shape: TapeInfo)

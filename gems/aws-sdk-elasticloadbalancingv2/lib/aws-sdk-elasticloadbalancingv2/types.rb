@@ -720,6 +720,30 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             field: "ConditionFieldName",
     #             values: ["StringValue"],
+    #             host_header_config: {
+    #               values: ["StringValue"],
+    #             },
+    #             path_pattern_config: {
+    #               values: ["StringValue"],
+    #             },
+    #             http_header_config: {
+    #               http_header_name: "HttpHeaderConditionName",
+    #               values: ["StringValue"],
+    #             },
+    #             query_string_config: {
+    #               values: [
+    #                 {
+    #                   key: "StringValue",
+    #                   value: "StringValue",
+    #                 },
+    #               ],
+    #             },
+    #             http_request_method_config: {
+    #               values: ["StringValue"],
+    #             },
+    #             source_ip_config: {
+    #               values: ["StringValue"],
+    #             },
     #           },
     #         ],
     #         priority: 1, # required
@@ -1669,6 +1693,62 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass HostHeaderConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringValue"],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig AWS API Documentation
+    #
+    class HostHeaderConditionConfig < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass HttpHeaderConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         http_header_name: "HttpHeaderConditionName",
+    #         values: ["StringValue"],
+    #       }
+    #
+    # @!attribute [rw] http_header_name
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig AWS API Documentation
+    #
+    class HttpHeaderConditionConfig < Struct.new(
+      :http_header_name,
+      :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass HttpRequestMethodConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringValue"],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpRequestMethodConditionConfig AWS API Documentation
+    #
+    class HttpRequestMethodConditionConfig < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
     # Information about an Elastic Load Balancing resource limit for your
     # AWS account.
     #
@@ -2157,6 +2237,30 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             field: "ConditionFieldName",
     #             values: ["StringValue"],
+    #             host_header_config: {
+    #               values: ["StringValue"],
+    #             },
+    #             path_pattern_config: {
+    #               values: ["StringValue"],
+    #             },
+    #             http_header_config: {
+    #               http_header_name: "HttpHeaderConditionName",
+    #               values: ["StringValue"],
+    #             },
+    #             query_string_config: {
+    #               values: [
+    #                 {
+    #                   key: "StringValue",
+    #                   value: "StringValue",
+    #                 },
+    #               ],
+    #             },
+    #             http_request_method_config: {
+    #               values: ["StringValue"],
+    #             },
+    #             source_ip_config: {
+    #               values: ["StringValue"],
+    #             },
     #           },
     #         ],
     #         actions: [
@@ -2441,6 +2545,67 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PathPatternConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringValue"],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig AWS API Documentation
+    #
+    class PathPatternConditionConfig < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass QueryStringConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         values: [
+    #           {
+    #             key: "StringValue",
+    #             value: "StringValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   @return [Array<Types::QueryStringKeyValuePair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringConditionConfig AWS API Documentation
+    #
+    class QueryStringConditionConfig < Struct.new(
+      :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass QueryStringKeyValuePair
+    #   data as a hash:
+    #
+    #       {
+    #         key: "StringValue",
+    #         value: "StringValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringKeyValuePair AWS API Documentation
+    #
+    class QueryStringKeyValuePair < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # Information about a redirect action.
     #
     # A URI consists of the following components:
@@ -2663,6 +2828,30 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         field: "ConditionFieldName",
     #         values: ["StringValue"],
+    #         host_header_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         path_pattern_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         http_header_config: {
+    #           http_header_name: "HttpHeaderConditionName",
+    #           values: ["StringValue"],
+    #         },
+    #         query_string_config: {
+    #           values: [
+    #             {
+    #               key: "StringValue",
+    #               value: "StringValue",
+    #             },
+    #           ],
+    #         },
+    #         http_request_method_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         source_ip_config: {
+    #           values: ["StringValue"],
+    #         },
     #       }
     #
     # @!attribute [rw] field
@@ -2704,11 +2893,35 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #   @return [Array<String>]
     #
+    # @!attribute [rw] host_header_config
+    #   @return [Types::HostHeaderConditionConfig]
+    #
+    # @!attribute [rw] path_pattern_config
+    #   @return [Types::PathPatternConditionConfig]
+    #
+    # @!attribute [rw] http_header_config
+    #   @return [Types::HttpHeaderConditionConfig]
+    #
+    # @!attribute [rw] query_string_config
+    #   @return [Types::QueryStringConditionConfig]
+    #
+    # @!attribute [rw] http_request_method_config
+    #   @return [Types::HttpRequestMethodConditionConfig]
+    #
+    # @!attribute [rw] source_ip_config
+    #   @return [Types::SourceIpConditionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition AWS API Documentation
     #
     class RuleCondition < Struct.new(
       :field,
-      :values)
+      :values,
+      :host_header_config,
+      :path_pattern_config,
+      :http_header_config,
+      :query_string_config,
+      :http_request_method_config,
+      :source_ip_config)
       include Aws::Structure
     end
 
@@ -2895,6 +3108,23 @@ module Aws::ElasticLoadBalancingV2
     #
     class SetSubnetsOutput < Struct.new(
       :availability_zones)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SourceIpConditionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["StringValue"],
+    #       }
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SourceIpConditionConfig AWS API Documentation
+    #
+    class SourceIpConditionConfig < Struct.new(
+      :values)
       include Aws::Structure
     end
 

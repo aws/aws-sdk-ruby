@@ -118,7 +118,11 @@ module Aws::ElasticLoadBalancingV2
     HealthCheckThresholdCount = Shapes::IntegerShape.new(name: 'HealthCheckThresholdCount')
     HealthCheckTimeoutSeconds = Shapes::IntegerShape.new(name: 'HealthCheckTimeoutSeconds')
     HealthUnavailableException = Shapes::StructureShape.new(name: 'HealthUnavailableException')
+    HostHeaderConditionConfig = Shapes::StructureShape.new(name: 'HostHeaderConditionConfig')
     HttpCode = Shapes::StringShape.new(name: 'HttpCode')
+    HttpHeaderConditionConfig = Shapes::StructureShape.new(name: 'HttpHeaderConditionConfig')
+    HttpHeaderConditionName = Shapes::StringShape.new(name: 'HttpHeaderConditionName')
+    HttpRequestMethodConditionConfig = Shapes::StructureShape.new(name: 'HttpRequestMethodConditionConfig')
     IncompatibleProtocolsException = Shapes::StructureShape.new(name: 'IncompatibleProtocolsException')
     InvalidConfigurationRequestException = Shapes::StructureShape.new(name: 'InvalidConfigurationRequestException')
     InvalidLoadBalancerActionException = Shapes::StructureShape.new(name: 'InvalidLoadBalancerActionException')
@@ -171,9 +175,13 @@ module Aws::ElasticLoadBalancingV2
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Path = Shapes::StringShape.new(name: 'Path')
+    PathPatternConditionConfig = Shapes::StructureShape.new(name: 'PathPatternConditionConfig')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
+    QueryStringConditionConfig = Shapes::StructureShape.new(name: 'QueryStringConditionConfig')
+    QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
+    QueryStringKeyValuePairList = Shapes::ListShape.new(name: 'QueryStringKeyValuePairList')
     RedirectActionConfig = Shapes::StructureShape.new(name: 'RedirectActionConfig')
     RedirectActionHost = Shapes::StringShape.new(name: 'RedirectActionHost')
     RedirectActionPath = Shapes::StringShape.new(name: 'RedirectActionPath')
@@ -211,6 +219,7 @@ module Aws::ElasticLoadBalancingV2
     SetSecurityGroupsOutput = Shapes::StructureShape.new(name: 'SetSecurityGroupsOutput')
     SetSubnetsInput = Shapes::StructureShape.new(name: 'SetSubnetsInput')
     SetSubnetsOutput = Shapes::StructureShape.new(name: 'SetSubnetsOutput')
+    SourceIpConditionConfig = Shapes::StructureShape.new(name: 'SourceIpConditionConfig')
     SslPolicies = Shapes::ListShape.new(name: 'SslPolicies')
     SslPolicy = Shapes::StructureShape.new(name: 'SslPolicy')
     SslPolicyName = Shapes::StringShape.new(name: 'SslPolicyName')
@@ -514,6 +523,16 @@ module Aws::ElasticLoadBalancingV2
     FixedResponseActionConfig.add_member(:content_type, Shapes::ShapeRef.new(shape: FixedResponseActionContentType, location_name: "ContentType"))
     FixedResponseActionConfig.struct_class = Types::FixedResponseActionConfig
 
+    HostHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    HostHeaderConditionConfig.struct_class = Types::HostHeaderConditionConfig
+
+    HttpHeaderConditionConfig.add_member(:http_header_name, Shapes::ShapeRef.new(shape: HttpHeaderConditionName, location_name: "HttpHeaderName"))
+    HttpHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    HttpHeaderConditionConfig.struct_class = Types::HttpHeaderConditionConfig
+
+    HttpRequestMethodConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    HttpRequestMethodConditionConfig.struct_class = Types::HttpRequestMethodConditionConfig
+
     Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
     Limit.struct_class = Types::Limit
@@ -622,6 +641,18 @@ module Aws::ElasticLoadBalancingV2
     ModifyTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
     ModifyTargetGroupOutput.struct_class = Types::ModifyTargetGroupOutput
 
+    PathPatternConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    PathPatternConditionConfig.struct_class = Types::PathPatternConditionConfig
+
+    QueryStringConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairList, location_name: "Values"))
+    QueryStringConditionConfig.struct_class = Types::QueryStringConditionConfig
+
+    QueryStringKeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: StringValue, location_name: "Key"))
+    QueryStringKeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: StringValue, location_name: "Value"))
+    QueryStringKeyValuePair.struct_class = Types::QueryStringKeyValuePair
+
+    QueryStringKeyValuePairList.member = Shapes::ShapeRef.new(shape: QueryStringKeyValuePair)
+
     RedirectActionConfig.add_member(:protocol, Shapes::ShapeRef.new(shape: RedirectActionProtocol, location_name: "Protocol"))
     RedirectActionConfig.add_member(:port, Shapes::ShapeRef.new(shape: RedirectActionPort, location_name: "Port"))
     RedirectActionConfig.add_member(:host, Shapes::ShapeRef.new(shape: RedirectActionHost, location_name: "Host"))
@@ -661,6 +692,12 @@ module Aws::ElasticLoadBalancingV2
 
     RuleCondition.add_member(:field, Shapes::ShapeRef.new(shape: ConditionFieldName, location_name: "Field"))
     RuleCondition.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    RuleCondition.add_member(:host_header_config, Shapes::ShapeRef.new(shape: HostHeaderConditionConfig, location_name: "HostHeaderConfig"))
+    RuleCondition.add_member(:path_pattern_config, Shapes::ShapeRef.new(shape: PathPatternConditionConfig, location_name: "PathPatternConfig"))
+    RuleCondition.add_member(:http_header_config, Shapes::ShapeRef.new(shape: HttpHeaderConditionConfig, location_name: "HttpHeaderConfig"))
+    RuleCondition.add_member(:query_string_config, Shapes::ShapeRef.new(shape: QueryStringConditionConfig, location_name: "QueryStringConfig"))
+    RuleCondition.add_member(:http_request_method_config, Shapes::ShapeRef.new(shape: HttpRequestMethodConditionConfig, location_name: "HttpRequestMethodConfig"))
+    RuleCondition.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConditionConfig, location_name: "SourceIpConfig"))
     RuleCondition.struct_class = Types::RuleCondition
 
     RuleConditionList.member = Shapes::ShapeRef.new(shape: RuleCondition)
@@ -702,6 +739,9 @@ module Aws::ElasticLoadBalancingV2
 
     SetSubnetsOutput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     SetSubnetsOutput.struct_class = Types::SetSubnetsOutput
+
+    SourceIpConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    SourceIpConditionConfig.struct_class = Types::SourceIpConditionConfig
 
     SslPolicies.member = Shapes::ShapeRef.new(shape: SslPolicy)
 

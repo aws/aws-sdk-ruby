@@ -248,7 +248,7 @@ module Aws::AppMesh
 
     # @!group API Operations
 
-    # Creates a new service mesh. A service mesh is a logical boundary for
+    # Creates a service mesh. A service mesh is a logical boundary for
     # network traffic between the services that reside within it.
     #
     # After you create your service mesh, you can create virtual services,
@@ -266,6 +266,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name to use for the service mesh.
     #
+    # @option params [Types::MeshSpec] :spec
+    #   The service mesh specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the service mesh to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
+    #
     # @return [Types::CreateMeshOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeshOutput#mesh #mesh} => Types::MeshData
@@ -275,6 +285,17 @@ module Aws::AppMesh
     #   resp = client.create_mesh({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     spec: {
+    #       egress_filter: {
+    #         type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -285,6 +306,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.last_updated_at #=> Time
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
+    #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMesh AWS API Documentation
@@ -296,13 +318,12 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
-    # Creates a new route that is associated with a virtual router.
+    # Creates a route that is associated with a virtual router.
     #
     # You can use the `prefix` parameter in your route specification for
-    # path-based routing of requests. For example, if your virtual router
-    # service name is `my-service.local`, and you want the route to match
-    # requests to `my-service.local/metrics`, then your prefix should be
-    # `/metrics`.
+    # path-based routing of requests. For example, if your virtual service
+    # name is `my-service.local` and you want the route to match requests to
+    # `my-service.local/metrics`, your prefix should be `/metrics`.
     #
     # If your route matches a request, you can distribute traffic to one or
     # more target virtual nodes with relative weighting.
@@ -316,13 +337,20 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to create the route.
+    #   The name of the service mesh to create the route in.
     #
     # @option params [required, String] :route_name
     #   The name to use for the route.
     #
     # @option params [required, Types::RouteSpec] :spec
     #   The route specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the route to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a maximum
+    #   character length of 128 characters, and tag values can have a maximum
+    #   length of 256 characters.
     #
     # @option params [required, String] :virtual_router_name
     #   The name of the virtual router in which to create the route.
@@ -351,7 +379,23 @@ module Aws::AppMesh
     #           prefix: "String", # required
     #         },
     #       },
+    #       tcp_route: {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     virtual_router_name: "ResourceName", # required
     #   })
     #
@@ -368,6 +412,9 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -380,9 +427,9 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
-    # Creates a new virtual node within a service mesh.
+    # Creates a virtual node within a service mesh.
     #
-    # A virtual node acts as logical pointer to a particular task group,
+    # A virtual node acts as a logical pointer to a particular task group,
     # such as an Amazon ECS service or a Kubernetes deployment. When you
     # create a virtual node, you must specify the DNS service discovery
     # hostname for your task group.
@@ -393,8 +440,8 @@ module Aws::AppMesh
     #
     # The response metadata for your new virtual node contains the `arn`
     # that is associated with the virtual node. Set this value (either the
-    # full ARN or the truncated resource name, for example,
-    # `mesh/default/virtualNode/simpleapp`, as the
+    # full ARN or the truncated resource name: for example,
+    # `mesh/default/virtualNode/simpleapp`) as the
     # `APPMESH_VIRTUAL_NODE_NAME` environment variable for your task
     # group's Envoy proxy container in your task definition or pod spec.
     # This is then mapped to the `node.id` and `node.cluster` Envoy
@@ -416,10 +463,17 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to create the virtual node.
+    #   The name of the service mesh to create the virtual node in.
     #
     # @option params [required, Types::VirtualNodeSpec] :spec
     #   The virtual node specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the virtual node to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
     #
     # @option params [required, String] :virtual_node_name
     #   The name to use for the virtual node.
@@ -458,12 +512,25 @@ module Aws::AppMesh
     #           },
     #         },
     #       ],
+    #       logging: {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       },
     #       service_discovery: {
     #         dns: {
     #           hostname: "Hostname", # required
     #         },
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     virtual_node_name: "ResourceName", # required
     #   })
     #
@@ -487,6 +554,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -500,12 +568,12 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
-    # Creates a new virtual router within a service mesh.
+    # Creates a virtual router within a service mesh.
     #
     # Any inbound traffic that your virtual router expects should be
     # specified as a `listener`.
     #
-    # Virtual routers handle traffic for one or more service names within
+    # Virtual routers handle traffic for one or more virtual services within
     # your mesh. After you create your virtual router, create and associate
     # routes for your virtual router that direct incoming requests to
     # different virtual nodes.
@@ -523,6 +591,13 @@ module Aws::AppMesh
     #
     # @option params [required, Types::VirtualRouterSpec] :spec
     #   The virtual router specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the virtual router to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
     #
     # @option params [required, String] :virtual_router_name
     #   The name to use for the virtual router.
@@ -546,6 +621,12 @@ module Aws::AppMesh
     #         },
     #       ],
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     virtual_router_name: "ResourceName", # required
     #   })
     #
@@ -574,9 +655,9 @@ module Aws::AppMesh
 
     # Creates a virtual service within a service mesh.
     #
-    # A virtual service is an abstraction of a real service that is either
-    # provided by a virtual node directly, or indirectly by means of a
-    # virtual router. Dependent services call your virtual service by its
+    # A virtual service is an abstraction of a real service that is provided
+    # by a virtual node directly or indirectly by means of a virtual router.
+    # Dependent services call your virtual service by its
     # `virtualServiceName`, and those requests are routed to the virtual
     # node or virtual router that is specified as the provider for the
     # virtual service.
@@ -590,10 +671,17 @@ module Aws::AppMesh
     #   not need to pass this option.**
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to create the virtual service.
+    #   The name of the service mesh to create the virtual service in.
     #
     # @option params [required, Types::VirtualServiceSpec] :spec
     #   The virtual service specification to apply.
+    #
+    # @option params [Array<Types::TagRef>] :tags
+    #   Optional metadata that you can apply to the virtual service to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
     #
     # @option params [required, String] :virtual_service_name
     #   The name to use for the virtual service.
@@ -617,6 +705,12 @@ module Aws::AppMesh
     #         },
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     virtual_service_name: "ServiceName", # required
     #   })
     #
@@ -645,8 +739,8 @@ module Aws::AppMesh
     # Deletes an existing service mesh.
     #
     # You must delete all resources (virtual services, routes, virtual
-    # routers, virtual nodes) in the service mesh before you can delete the
-    # mesh itself.
+    # routers, and virtual nodes) in the service mesh before you can delete
+    # the mesh itself.
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to delete.
@@ -669,6 +763,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.last_updated_at #=> Time
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
+    #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMesh AWS API Documentation
@@ -716,6 +811,9 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -770,6 +868,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -892,6 +991,7 @@ module Aws::AppMesh
     #   resp.mesh.metadata.last_updated_at #=> Time
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
+    #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
     #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMesh AWS API Documentation
@@ -939,6 +1039,9 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -990,6 +1093,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1104,7 +1208,7 @@ module Aws::AppMesh
     #   that parameter. Pagination continues from the end of the previous
     #   results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1151,7 +1255,7 @@ module Aws::AppMesh
     #   applicable.
     #
     # @option params [required, String] :mesh_name
-    #   The name of the service mesh in which to list routes.
+    #   The name of the service mesh to list routes in.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListRoutes`
@@ -1191,6 +1295,57 @@ module Aws::AppMesh
     # @param [Hash] params ({})
     def list_routes(params = {}, options = {})
       req = build_request(:list_routes, params)
+      req.send_request(options)
+    end
+
+    # List the tags for an App Mesh resource.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of tag results returned by `ListTagsForResource` in
+    #   paginated output. When this parameter is used, `ListTagsForResource`
+    #   returns only `limit` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListTagsForResource` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   you don't use this parameter, `ListTagsForResource` returns up to 100
+    #   results and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListTagsForResource` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   the tags for.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::TagRef&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     limit: 1,
+    #     next_token: "String",
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1347,6 +1502,120 @@ module Aws::AppMesh
       req.send_request(options)
     end
 
+    # Associates the specified tags to a resource with the specified
+    # `resourceArn`. If existing tags on a resource aren't specified in the
+    # request parameters, they aren't changed. When a resource is deleted,
+    # the tags associated with that resource are also deleted.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
+    #
+    # @option params [required, Array<Types::TagRef>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Tag keys can have a maximum character length of 128 characters, and
+    #   tag values can have a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing service mesh.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :mesh_name
+    #   The name of the service mesh to update.
+    #
+    # @option params [Types::MeshSpec] :spec
+    #   The service mesh specification to apply.
+    #
+    # @return [Types::UpdateMeshOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMeshOutput#mesh #mesh} => Types::MeshData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_mesh({
+    #     client_token: "String",
+    #     mesh_name: "ResourceName", # required
+    #     spec: {
+    #       egress_filter: {
+    #         type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mesh.mesh_name #=> String
+    #   resp.mesh.metadata.arn #=> String
+    #   resp.mesh.metadata.created_at #=> Time
+    #   resp.mesh.metadata.last_updated_at #=> Time
+    #   resp.mesh.metadata.uid #=> String
+    #   resp.mesh.metadata.version #=> Integer
+    #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
+    #   resp.mesh.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMesh AWS API Documentation
+    #
+    # @overload update_mesh(params = {})
+    # @param [Hash] params ({})
+    def update_mesh(params = {}, options = {})
+      req = build_request(:update_mesh, params)
+      req.send_request(options)
+    end
+
     # Updates an existing route for a specified service mesh and virtual
     # router.
     #
@@ -1395,6 +1664,16 @@ module Aws::AppMesh
     #           prefix: "String", # required
     #         },
     #       },
+    #       tcp_route: {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #     virtual_router_name: "ResourceName", # required
     #   })
@@ -1412,6 +1691,9 @@ module Aws::AppMesh
     #   resp.route.spec.http_route.action.weighted_targets[0].virtual_node #=> String
     #   resp.route.spec.http_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.spec.http_route.match.prefix #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets #=> Array
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].virtual_node #=> String
+    #   resp.route.spec.tcp_route.action.weighted_targets[0].weight #=> Integer
     #   resp.route.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.route.virtual_router_name #=> String
     #
@@ -1478,6 +1760,13 @@ module Aws::AppMesh
     #           },
     #         },
     #       ],
+    #       logging: {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       },
     #       service_discovery: {
     #         dns: {
     #           hostname: "Hostname", # required
@@ -1507,6 +1796,7 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "http", "tcp"
+    #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.dns.hostname #=> String
     #   resp.virtual_node.status.status #=> String, one of "ACTIVE", "DELETED", "INACTIVE"
     #   resp.virtual_node.virtual_node_name #=> String
@@ -1662,7 +1952,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

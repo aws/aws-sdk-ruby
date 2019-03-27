@@ -63,6 +63,13 @@ module Aws::AppMesh
     #               },
     #             },
     #           ],
+    #           logging: {
+    #             access_log: {
+    #               file: {
+    #                 path: "FilePath", # required
+    #               },
+    #             },
+    #           },
     #           service_discovery: {
     #             dns: {
     #               hostname: "Hostname", # required
@@ -138,6 +145,12 @@ module Aws::AppMesh
     #             },
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         virtual_service_name: "ServiceName", # required
     #       }
     #
@@ -151,12 +164,20 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to create the virtual service.
+    #   The name of the service mesh to create the virtual service in.
     #   @return [String]
     #
     # @!attribute [rw] spec
     #   The virtual service specification to apply.
     #   @return [Types::VirtualServiceSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual service to
+    #   assist with categorization and organization. Each tag consists of a
+    #   key and an optional value, both of which you define. Tag keys can
+    #   have a maximum character length of 128 characters, and tag values
+    #   can have a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
     #
     # @!attribute [rw] virtual_service_name
     #   The name to use for the virtual service.
@@ -168,6 +189,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_name,
       :spec,
+      :tags,
       :virtual_service_name)
       include Aws::Structure
     end
@@ -223,6 +245,48 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         next_token: "String",
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of tag results returned by `ListTagsForResource`
+    #   in paginated output. When this parameter is used,
+    #   `ListTagsForResource` returns only `limit` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another
+    #   `ListTagsForResource` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If you don't use this
+    #   parameter, `ListTagsForResource` returns up to 100 results and a
+    #   `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListTagsForResource` request where `limit` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   the tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :limit,
+      :next_token,
+      :resource_arn)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_node
     #   The full description of your virtual node following the create call.
     #   @return [Types::VirtualNodeData]
@@ -231,6 +295,30 @@ module Aws::AppMesh
     #
     class CreateVirtualNodeOutput < Struct.new(
       :virtual_node)
+      include Aws::Structure
+    end
+
+    # An object representing the logging information for a virtual node.
+    #
+    # @note When making an API call, you may pass Logging
+    #   data as a hash:
+    #
+    #       {
+    #         access_log: {
+    #           file: {
+    #             path: "FilePath", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] access_log
+    #   The access log configuration for a virtual node.
+    #   @return [Types::AccessLog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Logging AWS API Documentation
+    #
+    class Logging < Struct.new(
+      :access_log)
       include Aws::Structure
     end
 
@@ -345,21 +433,6 @@ module Aws::AppMesh
     #
     # @!attribute [rw] arn
     #   The full Amazon Resource Name (ARN) for the resource.
-    #
-    #   <note markdown="1"> After you create a virtual node, set this value (either the full ARN
-    #   or the truncated resource name, for example,
-    #   `mesh/default/virtualNode/simpleapp`, as the
-    #   `APPMESH_VIRTUAL_NODE_NAME` environment variable for your task
-    #   group's Envoy proxy container in your task definition or pod spec.
-    #   This is then mapped to the `node.id` and `node.cluster` Envoy
-    #   parameters.
-    #
-    #    If you require your Envoy stats or tracing to use a different name,
-    #   you can override the `node.cluster` value that is set by
-    #   `APPMESH_VIRTUAL_NODE_NAME` with the `APPMESH_VIRTUAL_NODE_CLUSTER`
-    #   environment variable.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -556,7 +629,7 @@ module Aws::AppMesh
     #   @return [Integer]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to list routes.
+    #   The name of the service mesh to list routes in.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -663,6 +736,30 @@ module Aws::AppMesh
       :arn,
       :mesh_name,
       :virtual_service_name)
+      include Aws::Structure
+    end
+
+    # An object representing the egress filter rules for a service mesh.
+    #
+    # @note When making an API call, you may pass EgressFilter
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The egress filter type. By default, the type is `DROP_ALL`, which
+    #   allows egress only from virtual nodes to other defined resources in
+    #   the service mesh (and any traffic to `*.amazonaws.com` for AWS API
+    #   calls). You can set the egress filter type to `ALLOW_ALL` to allow
+    #   egress to any endpoint inside or outside of the service mesh.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/EgressFilter AWS API Documentation
+    #
+    class EgressFilter < Struct.new(
+      :type)
       include Aws::Structure
     end
 
@@ -776,6 +873,17 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         spec: {
+    #           egress_filter: {
+    #             type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
@@ -791,11 +899,25 @@ module Aws::AppMesh
     #   The name to use for the service mesh.
     #   @return [String]
     #
+    # @!attribute [rw] spec
+    #   The service mesh specification to apply.
+    #   @return [Types::MeshSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the service mesh to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMeshInput AWS API Documentation
     #
     class CreateMeshInput < Struct.new(
       :client_token,
-      :mesh_name)
+      :mesh_name,
+      :spec,
+      :tags)
       include Aws::Structure
     end
 
@@ -807,6 +929,18 @@ module Aws::AppMesh
     #
     class DescribeVirtualNodeOutput < Struct.new(
       :virtual_node)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mesh
+    #   An object representing a service mesh returned by a describe
+    #   operation.
+    #   @return [Types::MeshData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMeshOutput AWS API Documentation
+    #
+    class UpdateMeshOutput < Struct.new(
+      :mesh)
       include Aws::Structure
     end
 
@@ -930,6 +1064,10 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
+
     # An object representing the specification of a virtual service.
     #
     # @note When making an API call, you may pass VirtualServiceSpec
@@ -1006,8 +1144,8 @@ module Aws::AppMesh
     #   the value of that parameter. Pagination continues from the end of
     #   the previous results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
     #   programmatic purposes.
     #
     #    </note>
@@ -1018,6 +1156,33 @@ module Aws::AppMesh
     class ListMeshesInput < Struct.new(
       :limit,
       :next_token)
+      include Aws::Structure
+    end
+
+    # An object representing the TCP routing specification for a route.
+    #
+    # @note When making an API call, you may pass TcpRoute
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           weighted_targets: [ # required
+    #             {
+    #               virtual_node: "ResourceName", # required
+    #               weight: 1, # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to take if a match is determined.
+    #   @return [Types::TcpRouteAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRoute AWS API Documentation
+    #
+    class TcpRoute < Struct.new(
+      :action)
       include Aws::Structure
     end
 
@@ -1095,6 +1260,45 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateMeshInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         mesh_name: "ResourceName", # required
+    #         spec: {
+    #           egress_filter: {
+    #             type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_name
+    #   The name of the service mesh to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The service mesh specification to apply.
+    #   @return [Types::MeshSpec]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMeshInput AWS API Documentation
+    #
+    class UpdateMeshInput < Struct.new(
+      :client_token,
+      :mesh_name,
+      :spec)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListVirtualServicesInput
     #   data as a hash:
     #
@@ -1151,6 +1355,12 @@ module Aws::AppMesh
     #             },
     #           ],
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
@@ -1171,6 +1381,14 @@ module Aws::AppMesh
     #   The virtual router specification to apply.
     #   @return [Types::VirtualRouterSpec]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual router to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
+    #
     # @!attribute [rw] virtual_router_name
     #   The name to use for the virtual router.
     #   @return [String]
@@ -1181,7 +1399,31 @@ module Aws::AppMesh
       :client_token,
       :mesh_name,
       :spec,
+      :tags,
       :virtual_router_name)
+      include Aws::Structure
+    end
+
+    # An object representing the access logging information for a virtual
+    # node.
+    #
+    # @note When making an API call, you may pass AccessLog
+    #   data as a hash:
+    #
+    #       {
+    #         file: {
+    #           path: "FilePath", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file
+    #   The file object to send virtual node access logs to.
+    #   @return [Types::FileAccessLog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AccessLog AWS API Documentation
+    #
+    class AccessLog < Struct.new(
+      :file)
       include Aws::Structure
     end
 
@@ -1331,6 +1573,13 @@ module Aws::AppMesh
     #             },
     #           },
     #         ],
+    #         logging: {
+    #           access_log: {
+    #             file: {
+    #               path: "FilePath", # required
+    #             },
+    #           },
+    #         },
     #         service_discovery: {
     #           dns: {
     #             hostname: "Hostname", # required
@@ -1349,8 +1598,15 @@ module Aws::AppMesh
     #   node.
     #   @return [Array<Types::Listener>]
     #
+    # @!attribute [rw] logging
+    #   The inbound and outbound access logging information for the virtual
+    #   node.
+    #   @return [Types::Logging]
+    #
     # @!attribute [rw] service_discovery
-    #   The service discovery information for the virtual node.
+    #   The service discovery information for the virtual node. If your
+    #   virtual node does not expect ingress traffic, you can omit this
+    #   parameter.
     #   @return [Types::ServiceDiscovery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeSpec AWS API Documentation
@@ -1358,6 +1614,7 @@ module Aws::AppMesh
     class VirtualNodeSpec < Struct.new(
       :backends,
       :listeners,
+      :logging,
       :service_discovery)
       include Aws::Structure
     end
@@ -1405,16 +1662,49 @@ module Aws::AppMesh
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
     #   always start with `/`, which by itself matches all requests to the
-    #   virtual router service name. You can also match for path-based
-    #   routing of requests. For example, if your virtual router service
-    #   name is `my-service.local` and you want the route to match requests
-    #   to `my-service.local/metrics`, your prefix should be `/metrics`.
+    #   virtual service name. You can also match for path-based routing of
+    #   requests. For example, if your virtual service name is
+    #   `my-service.local` and you want the route to match requests to
+    #   `my-service.local/metrics`, your prefix should be `/metrics`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
     #
     class HttpRouteMatch < Struct.new(
       :prefix)
+      include Aws::Structure
+    end
+
+    # Optional metadata that you apply to a resource to assist with
+    # categorization and organization. Each tag consists of a key and an
+    # optional value, both of which you define. Tag keys can have a maximum
+    # character length of 128 characters, and tag values can have a maximum
+    # length of 256 characters.
+    #
+    # @note When making an API call, you may pass TagRef
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagRef AWS API Documentation
+    #
+    class TagRef < Struct.new(
+      :key,
+      :value)
       include Aws::Structure
     end
 
@@ -1474,6 +1764,10 @@ module Aws::AppMesh
     #   The associated metadata for the service mesh.
     #   @return [Types::ResourceMetadata]
     #
+    # @!attribute [rw] spec
+    #   The associated specification for the service mesh.
+    #   @return [Types::MeshSpec]
+    #
     # @!attribute [rw] status
     #   The status of the service mesh.
     #   @return [Types::MeshStatus]
@@ -1483,6 +1777,7 @@ module Aws::AppMesh
     class MeshData < Struct.new(
       :mesh_name,
       :metadata,
+      :spec,
       :status)
       include Aws::Structure
     end
@@ -1547,6 +1842,34 @@ module Aws::AppMesh
     class WeightedTarget < Struct.new(
       :virtual_node,
       :weight)
+      include Aws::Structure
+    end
+
+    # An object representing the traffic distribution requirements for
+    # matched TCP requests.
+    #
+    # @note When making an API call, you may pass TcpRouteAction
+    #   data as a hash:
+    #
+    #       {
+    #         weighted_targets: [ # required
+    #           {
+    #             virtual_node: "ResourceName", # required
+    #             weight: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] weighted_targets
+    #   The targets that traffic is routed to when a request matches the
+    #   route. You can specify one or more targets and their relative
+    #   weights to distribute traffic with.
+    #   @return [Array<Types::WeightedTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRouteAction AWS API Documentation
+    #
+    class TcpRouteAction < Struct.new(
+      :weighted_targets)
       include Aws::Structure
     end
 
@@ -1769,6 +2092,10 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] mesh
     #   The service mesh that was deleted.
     #   @return [Types::MeshData]
@@ -1777,6 +2104,38 @@ module Aws::AppMesh
     #
     class DeleteMeshOutput < Struct.new(
       :mesh)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -1801,7 +2160,23 @@ module Aws::AppMesh
     #               prefix: "String", # required
     #             },
     #           },
+    #           tcp_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
@@ -1815,7 +2190,7 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to create the route.
+    #   The name of the service mesh to create the route in.
     #   @return [String]
     #
     # @!attribute [rw] route_name
@@ -1825,6 +2200,14 @@ module Aws::AppMesh
     # @!attribute [rw] spec
     #   The route specification to apply.
     #   @return [Types::RouteSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the route to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
     #
     # @!attribute [rw] virtual_router_name
     #   The name of the virtual router in which to create the route.
@@ -1837,6 +2220,7 @@ module Aws::AppMesh
       :mesh_name,
       :route_name,
       :spec,
+      :tags,
       :virtual_router_name)
       include Aws::Structure
     end
@@ -1901,6 +2285,16 @@ module Aws::AppMesh
     #             },
     #             match: { # required
     #               prefix: "String", # required
+    #             },
+    #           },
+    #           tcp_route: {
+    #             action: { # required
+    #               weighted_targets: [ # required
+    #                 {
+    #                   virtual_node: "ResourceName", # required
+    #                   weight: 1, # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         },
@@ -1988,12 +2382,25 @@ module Aws::AppMesh
     #               },
     #             },
     #           ],
+    #           logging: {
+    #             access_log: {
+    #               file: {
+    #                 path: "FilePath", # required
+    #               },
+    #             },
+    #           },
     #           service_discovery: {
     #             dns: {
     #               hostname: "Hostname", # required
     #             },
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         virtual_node_name: "ResourceName", # required
     #       }
     #
@@ -2007,12 +2414,20 @@ module Aws::AppMesh
     #   @return [String]
     #
     # @!attribute [rw] mesh_name
-    #   The name of the service mesh in which to create the virtual node.
+    #   The name of the service mesh to create the virtual node in.
     #   @return [String]
     #
     # @!attribute [rw] spec
     #   The virtual node specification to apply.
     #   @return [Types::VirtualNodeSpec]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you can apply to the virtual node to assist
+    #   with categorization and organization. Each tag consists of a key and
+    #   an optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::TagRef>]
     #
     # @!attribute [rw] virtual_node_name
     #   The name to use for the virtual node.
@@ -2024,6 +2439,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_name,
       :spec,
+      :tags,
       :virtual_node_name)
       include Aws::Structure
     end
@@ -2047,16 +2463,31 @@ module Aws::AppMesh
     #             prefix: "String", # required
     #           },
     #         },
+    #         tcp_route: {
+    #           action: { # required
+    #             weighted_targets: [ # required
+    #               {
+    #                 virtual_node: "ResourceName", # required
+    #                 weight: 1, # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] http_route
     #   The HTTP routing information for the route.
     #   @return [Types::HttpRoute]
     #
+    # @!attribute [rw] tcp_route
+    #   The TCP routing information for the route.
+    #   @return [Types::TcpRoute]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteSpec AWS API Documentation
     #
     class RouteSpec < Struct.new(
-      :http_route)
+      :http_route,
+      :tcp_route)
       include Aws::Structure
     end
 
@@ -2113,6 +2544,28 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the specification of a service mesh.
+    #
+    # @note When making an API call, you may pass MeshSpec
+    #   data as a hash:
+    #
+    #       {
+    #         egress_filter: {
+    #           type: "ALLOW_ALL", # required, accepts ALLOW_ALL, DROP_ALL
+    #         },
+    #       }
+    #
+    # @!attribute [rw] egress_filter
+    #   The egress filter rules for the service mesh.
+    #   @return [Types::EgressFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshSpec AWS API Documentation
+    #
+    class MeshSpec < Struct.new(
+      :egress_filter)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_service
     #   The full description of your virtual service following the create
     #   call.
@@ -2122,6 +2575,36 @@ module Aws::AppMesh
     #
     class CreateVirtualServiceOutput < Struct.new(
       :virtual_service)
+      include Aws::Structure
+    end
+
+    # An object representing an access log file.
+    #
+    # @note When making an API call, you may pass FileAccessLog
+    #   data as a hash:
+    #
+    #       {
+    #         path: "FilePath", # required
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The file path to write access logs to. You can use `/dev/stdout` to
+    #   send access logs to standard out and configure your Envoy container
+    #   to use a log driver, such as `awslogs`, to export the access logs to
+    #   a log storage service such as Amazon CloudWatch Logs. You can also
+    #   specify a path in the Envoy container's file system to write the
+    #   files to disk.
+    #
+    #   <note markdown="1"> The Envoy process must have write permissions to the path that you
+    #   specify here. Otherwise, Envoy fails to bootstrap properly.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog AWS API Documentation
+    #
+    class FileAccessLog < Struct.new(
+      :path)
       include Aws::Structure
     end
 
@@ -2169,6 +2652,26 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListTagsForResource`
+    #   request. When the results of a `ListTagsForResource` request exceed
+    #   `limit`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::TagRef>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :next_token,
+      :tags)
+      include Aws::Structure
+    end
+
     # An object representing the service discovery information for a virtual
     # node.
     #
@@ -2209,6 +2712,30 @@ module Aws::AppMesh
     class ListVirtualNodesOutput < Struct.new(
       :next_token,
       :virtual_nodes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

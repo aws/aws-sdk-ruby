@@ -1014,6 +1014,30 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         field: "ConditionFieldName",
     #         values: ["StringValue"],
+    #         host_header_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         path_pattern_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         http_header_config: {
+    #           http_header_name: "HttpHeaderConditionName",
+    #           values: ["StringValue"],
+    #         },
+    #         query_string_config: {
+    #           values: [
+    #             {
+    #               key: "StringValue",
+    #               value: "StringValue",
+    #             },
+    #           ],
+    #         },
+    #         http_request_method_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         source_ip_config: {
+    #           values: ["StringValue"],
+    #         },
     #       },
     #     ],
     #     priority: 1, # required
@@ -1076,6 +1100,20 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
+    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
+    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -1986,6 +2024,20 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
+    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
+    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -3085,6 +3137,30 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         field: "ConditionFieldName",
     #         values: ["StringValue"],
+    #         host_header_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         path_pattern_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         http_header_config: {
+    #           http_header_name: "HttpHeaderConditionName",
+    #           values: ["StringValue"],
+    #         },
+    #         query_string_config: {
+    #           values: [
+    #             {
+    #               key: "StringValue",
+    #               value: "StringValue",
+    #             },
+    #           ],
+    #         },
+    #         http_request_method_config: {
+    #           values: ["StringValue"],
+    #         },
+    #         source_ip_config: {
+    #           values: ["StringValue"],
+    #         },
     #       },
     #     ],
     #     actions: [
@@ -3146,6 +3222,20 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
+    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
+    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -3696,6 +3786,20 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].field #=> String
     #   resp.rules[0].conditions[0].values #=> Array
     #   resp.rules[0].conditions[0].values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
+    #   resp.rules[0].conditions[0].http_header_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values #=> Array
+    #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
+    #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
+    #   resp.rules[0].conditions[0].http_request_method_config.values #=> Array
+    #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
+    #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -3894,7 +3998,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -852,29 +852,82 @@ module Aws::ECS
     #   @return [Array<Types::Secret>]
     #
     # @!attribute [rw] depends_on
-    #   The dependencies defined for container startup. A container can
-    #   contain multiple dependencies.
+    #   The dependencies defined for container startup and shutdown. A
+    #   container can contain multiple dependencies. When a dependency is
+    #   defined for container startup, for container shutdown it is
+    #   reversed.
+    #
+    #   Your Amazon ECS container instances require at least version 1.26.0
+    #   of the container agent to enable container dependencies. However, we
+    #   recommend using the latest container agent version. For information
+    #   about checking your agent version and updating to the latest
+    #   version, see [Updating the Amazon ECS Container Agent][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*. If you are using
+    #   an Amazon ECS-optimized Linux AMI, your instance needs at least
+    #   version 1.26.0-1 of the `ecs-init` package. If your container
+    #   instances are launched from version `20190301` or later, then they
+    #   contain the required versions of the container agent and `ecs-init`.
+    #   For more information, see [Amazon ECS-optimized Linux AMI][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Array<Types::ContainerDependency>]
     #
     # @!attribute [rw] start_timeout
-    #   Time duration to wait before giving up on starting the container.
+    #   Time duration to wait before giving up on resolving dependencies for
+    #   a container. For example, you specify two containers in a task
+    #   definition with containerA having a dependency on containerB
+    #   reaching a `COMPLETE`, `SUCCESS`, or `HEALTHY` status. If a
+    #   `startTimeout` value is specified for containerB and it does not
+    #   reach the desired status within that time then containerA will give
+    #   up and not start. This results in the task transitioning to a
+    #   `STOPPED` state.
     #
-    #   <note markdown="1"> The `startTimeout` value for the container will take precedence over
-    #   the `ECS_CONTAINER_START_TIMEOUT` container agent configuration
-    #   parameter, if used.
+    #   Your Amazon ECS container instances require at least version 1.26.0
+    #   of the container agent to enable a container start timeout value.
+    #   However, we recommend using the latest container agent version. For
+    #   information about checking your agent version and updating to the
+    #   latest version, see [Updating the Amazon ECS Container Agent][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*. If you are
+    #   using an Amazon ECS-optimized Linux AMI, your instance needs at
+    #   least version 1.26.0-1 of the `ecs-init` package. If your container
+    #   instances are launched from version `20190301` or later, then they
+    #   contain the required versions of the container agent and `ecs-init`.
+    #   For more information, see [Amazon ECS-optimized Linux AMI][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
-    #    </note>
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Integer]
     #
     # @!attribute [rw] stop_timeout
     #   Time duration to wait before the container is forcefully killed if
-    #   it does not exit normally on its own.
+    #   it doesn't exit normally on its own. The stop timeout value for the
+    #   container takes precedence over the `ECS_CONTAINER_STOP_TIMEOUT`
+    #   container agent configuration parameter, if used.
     #
-    #   <note markdown="1"> The `stopTimeout` value for the container will take precedence over
-    #   the `ECS_CONTAINER_STOP_TIMEOUT` container agent configuration
-    #   parameter, if used.
+    #   Your Amazon ECS container instances require at least version 1.26.0
+    #   of the container agent to enable a container stop timeout value.
+    #   However, we recommend using the latest container agent version. For
+    #   information about checking your agent version and updating to the
+    #   latest version, see [Updating the Amazon ECS Container Agent][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*. If you are
+    #   using an Amazon ECS-optimized Linux AMI, your instance needs at
+    #   least version 1.26.0-1 of the `ecs-init` package. If your container
+    #   instances are launched from version `20190301` or later, then they
+    #   contain the required versions of the container agent and `ecs-init`.
+    #   For more information, see [Amazon ECS-optimized Linux AMI][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
-    #    </note>
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Integer]
     #
     # @!attribute [rw] hostname
@@ -895,12 +948,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   The username to use inside the container. This parameter maps to
+    #   The user name to use inside the container. This parameter maps to
     #   `User` in the [Create a container][1] section of the [Docker Remote
     #   API][2] and the `--user` option to [docker run][3].
     #
-    #   This following formats can be used. If specifying a UID or GID, it
-    #   must be specified as a positive integer.
+    #   You can use the following formats. If specifying a UID or GID, you
+    #   must specify it as a positive integer.
     #
     #   * `user`
     #
@@ -1269,8 +1322,32 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The dependencies defined for container startup. A container can
-    # contain multiple dependencies.
+    # The dependencies defined for container startup and shutdown. A
+    # container can contain multiple dependencies. When a dependency is
+    # defined for container startup, for container shutdown it is reversed.
+    #
+    # Your Amazon ECS container instances require at least version 1.26.0 of
+    # the container agent to enable container dependencies. However, we
+    # recommend using the latest container agent version. For information
+    # about checking your agent version and updating to the latest version,
+    # see [Updating the Amazon ECS Container Agent][1] in the *Amazon
+    # Elastic Container Service Developer Guide*. If you are using an Amazon
+    # ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
+    # of the `ecs-init` package. If your container instances are launched
+    # from version `20190301` or later, then they contain the required
+    # versions of the container agent and `ecs-init`. For more information,
+    # see [Amazon ECS-optimized Linux AMI][2] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
+    # <note markdown="1"> If you are using tasks that use the Fargate launch type, container
+    # dependency parameters are not supported.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #
     # @note When making an API call, you may pass ContainerDependency
     #   data as a hash:
@@ -1294,16 +1371,16 @@ module Aws::ECS
     #
     #   * `COMPLETE` - This condition validates that a dependent container
     #     runs to completion (exits) before permitting other containers to
-    #     start. This can be useful for non-essential containers that run a
-    #     script and then subsequently exit.
+    #     start. This can be useful for nonessential containers that run a
+    #     script and then exit.
     #
-    #   * `SUCCESS` - This condition is the same as `COMPLETE`, but it will
-    #     also require that the container exits with a `zero` status.
+    #   * `SUCCESS` - This condition is the same as `COMPLETE`, but it also
+    #     requires that the container exits with a `zero` status.
     #
     #   * `HEALTHY` - This condition validates that the dependent container
     #     passes its Docker health check before permitting other containers
     #     to start. This requires that the dependent container has health
-    #     checks configured. This condition will only be confirmed at task
+    #     checks configured. This condition is confirmed only at task
     #     startup.
     #   @return [String]
     #
@@ -1637,7 +1714,7 @@ module Aws::ECS
     #       {
     #         cluster: "String",
     #         service_name: "String", # required
-    #         task_definition: "String", # required
+    #         task_definition: "String",
     #         load_balancers: [
     #           {
     #             target_group_arn: "String",
@@ -1685,7 +1762,7 @@ module Aws::ECS
     #         health_check_grace_period_seconds: 1,
     #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #         deployment_controller: {
-    #           type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #           type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
     #         },
     #         tags: [
     #           {
@@ -1715,6 +1792,9 @@ module Aws::ECS
     #   The `family` and `revision` (`family:revision`) or full ARN of the
     #   task definition to run in your service. If a `revision` is not
     #   specified, the latest `ACTIVE` revision is used.
+    #
+    #   A task definition must be specified if the service is using the
+    #   `ECS` deployment controller.
     #   @return [String]
     #
     # @!attribute [rw] load_balancers
@@ -1803,9 +1883,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The platform version on which your tasks in the service are running.
-    #   A platform version is only specified for tasks using the Fargate
-    #   launch type. If one is not specified, the `LATEST` platform version
+    #   The platform version that your tasks in the service are running on.
+    #   A platform version is specified only for tasks using the Fargate
+    #   launch type. If one isn't specified, the `LATEST` platform version
     #   is used by default. For more information, see [AWS Fargate Platform
     #   Versions][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
@@ -1899,19 +1979,20 @@ module Aws::ECS
     #     desired number of tasks across your cluster. By default, the
     #     service scheduler spreads tasks across Availability Zones. You can
     #     use task placement strategies and constraints to customize task
-    #     placement decisions. This scheduler strategy is required if using
-    #     the `CODE_DEPLOY` deployment controller.
+    #     placement decisions. This scheduler strategy is required if the
+    #     service is using the `CODE_DEPLOY` or `EXTERNAL` deployment
+    #     controller types.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
     #     on each active container instance that meets all of the task
-    #     placement constraints that you specify in your cluster. When you
-    #     are using this strategy, there is no need to specify a desired
+    #     placement constraints that you specify in your cluster. When
+    #     you're using this strategy, you don't need to specify a desired
     #     number of tasks, a task placement strategy, or use Service Auto
     #     Scaling policies.
     #
-    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY`
-    #     deploymenet controller do not support the `DAEMON` scheduling
-    #     strategy.
+    #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` or
+    #     `EXTERNAL` deployment controller types don't support the `DAEMON`
+    #     scheduling strategy.
     #
     #      </note>
     #
@@ -1995,6 +2076,146 @@ module Aws::ECS
     #
     class CreateServiceResponse < Struct.new(
       :service)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTaskSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service: "String", # required
+    #         cluster: "String", # required
+    #         external_id: "String",
+    #         task_definition: "String", # required
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         load_balancers: [
+    #           {
+    #             target_group_arn: "String",
+    #             load_balancer_name: "String",
+    #             container_name: "String",
+    #             container_port: 1,
+    #           },
+    #         ],
+    #         service_registries: [
+    #           {
+    #             registry_arn: "String",
+    #             port: 1,
+    #             container_name: "String",
+    #             container_port: 1,
+    #           },
+    #         ],
+    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         platform_version: "String",
+    #         scale: {
+    #           value: 1.0,
+    #           unit: "PERCENT", # accepts PERCENT
+    #         },
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] service
+    #   The short name or full Amazon Resource Name (ARN) of the service to
+    #   create the task set in.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service to create the task set in.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   An optional non-unique tag that identifies this task set in external
+    #   systems. If the task set is associated with a service discovery
+    #   registry, the tasks in this task set will have the
+    #   `ECS_TASK_SET_EXTERNAL_ID` AWS Cloud Map attribute set to the
+    #   provided value.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_definition
+    #   The task definition for the tasks in the task set to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   An object representing the network configuration for a task or
+    #   service.
+    #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] load_balancers
+    #   A load balancer object representing the load balancer to use with
+    #   the task set. The supported load balancer types are either an
+    #   Application Load Balancer or a Network Load Balancer.
+    #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] service_registries
+    #   The details of the service discovery registries to assign to this
+    #   task set. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   @return [Array<Types::ServiceRegistry>]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type that new tasks in the task set will use. For more
+    #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_version
+    #   The platform version that the tasks in the task set should use. A
+    #   platform version is specified only for tasks using the Fargate
+    #   launch type. If one isn't specified, the `LATEST` platform version
+    #   is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the task set.
+    #   @return [Types::Scale]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Up to 32 ASCII characters are allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSetRequest AWS API Documentation
+    #
+    class CreateTaskSetRequest < Struct.new(
+      :service,
+      :cluster,
+      :external_id,
+      :task_definition,
+      :network_configuration,
+      :load_balancers,
+      :service_registries,
+      :launch_type,
+      :platform_version,
+      :scale,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_set
+    #   Information about a set of Amazon ECS tasks in either an AWS
+    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
+    #   includes details such as the desired number of tasks, how many tasks
+    #   are running, and whether the task set serves production traffic.
+    #   @return [Types::TaskSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSetResponse AWS API Documentation
+    #
+    class CreateTaskSetResponse < Struct.new(
+      :task_set)
       include Aws::Structure
     end
 
@@ -2167,8 +2388,62 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The details of an Amazon ECS service deployment. This is used when a
-    # service uses the `CODE_DEPLOY` deployment controller type.
+    # @note When making an API call, you may pass DeleteTaskSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         service: "String", # required
+    #         task_set: "String", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service that the task set exists in to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The short name or full Amazon Resource Name (ARN) of the service
+    #   that hosts the task set to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_set
+    #   The task set ID or full Amazon Resource Name (ARN) of the task set
+    #   to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   If `true`, this allows you to delete a task set even if it hasn't
+    #   been scaled down to zero.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSetRequest AWS API Documentation
+    #
+    class DeleteTaskSetRequest < Struct.new(
+      :cluster,
+      :service,
+      :task_set,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_set
+    #   Information about a set of Amazon ECS tasks in either an AWS
+    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
+    #   includes details such as the desired number of tasks, how many tasks
+    #   are running, and whether the task set serves production traffic.
+    #   @return [Types::TaskSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSetResponse AWS API Documentation
+    #
+    class DeleteTaskSetResponse < Struct.new(
+      :task_set)
+      include Aws::Structure
+    end
+
+    # The details of an Amazon ECS service deployment. This is used only
+    # when a service uses the `ECS` deployment controller type.
     #
     # @!attribute [rw] id
     #   The ID of the deployment.
@@ -2266,7 +2541,7 @@ module Aws::ECS
     end
 
     # Optional deployment parameters that control how many tasks run during
-    # the deployment and the ordering of stopping and starting tasks.
+    # a deployment and the ordering of stopping and starting tasks.
     #
     # @note When making an API call, you may pass DeploymentConfiguration
     #   data as a hash:
@@ -2290,14 +2565,14 @@ module Aws::ECS
     #   four older tasks (provided that the cluster resources required to do
     #   this are available). The default value for maximum percent is 200%.
     #
-    #   If a service is using the blue/green (`CODE_DEPLOY`) deployment type
-    #   and tasks that use the EC2 launch type, the **maximum percent**
-    #   value is set to the default value and is used to define the upper
-    #   limit on the number of the tasks in the service that remain in the
-    #   `RUNNING` state while the container instances are in the `DRAINING`
-    #   state. If the tasks in the service use the Fargate launch type, the
-    #   maximum percent value is not used, although it is returned when
-    #   describing your service.
+    #   If a service is using the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    #   deployment types and tasks that use the EC2 launch type, the
+    #   **maximum percent** value is set to the default value and is used to
+    #   define the upper limit on the number of the tasks in the service
+    #   that remain in the `RUNNING` state while the container instances are
+    #   in the `DRAINING` state. If the tasks in the service use the Fargate
+    #   launch type, the maximum percent value is not used, although it is
+    #   returned when describing your service.
     #   @return [Integer]
     #
     # @!attribute [rw] minimum_healthy_percent
@@ -2318,14 +2593,14 @@ module Aws::ECS
     #   and they are reported as healthy by the load balancer. The default
     #   value for minimum healthy percent is 100%.
     #
-    #   If a service is using the blue/green (`CODE_DEPLOY`) deployment type
-    #   and tasks that use the EC2 launch type, the **minimum healthy
-    #   percent** value is set to the default value and is used to define
-    #   the lower limit on the number of the tasks in the service that
-    #   remain in the `RUNNING` state while the container instances are in
-    #   the `DRAINING` state. If the tasks in the service use the Fargate
-    #   launch type, the minimum healthy percent value is not used, although
-    #   it is returned when describing your service.
+    #   If a service is using the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    #   deployment types and tasks that use the EC2 launch type, the
+    #   **minimum healthy percent** value is set to the default value and is
+    #   used to define the lower limit on the number of the tasks in the
+    #   service that remain in the `RUNNING` state while the container
+    #   instances are in the `DRAINING` state. If the tasks in the service
+    #   use the Fargate launch type, the minimum healthy percent value is
+    #   not used, although it is returned when describing your service.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
@@ -2348,13 +2623,13 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
-    #         type: "ECS", # required, accepts ECS, CODE_DEPLOY
+    #         type: "ECS", # required, accepts ECS, CODE_DEPLOY, EXTERNAL
     #       }
     #
     # @!attribute [rw] type
     #   The deployment controller type to use.
     #
-    #   There are two deployment controller types available:
+    #   There are three deployment controller types available:
     #
     #   ECS
     #
@@ -2370,13 +2645,13 @@ module Aws::ECS
     #   : The blue/green (`CODE_DEPLOY`) deployment type uses the blue/green
     #     deployment model powered by AWS CodeDeploy, which allows you to
     #     verify a new deployment of a service before sending production
-    #     traffic to it. For more information, see [Amazon ECS Deployment
-    #     Types][1] in the *Amazon Elastic Container Service Developer
-    #     Guide*.
+    #     traffic to it.
     #
+    #   EXTERNAL
     #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #   : The external (`EXTERNAL`) deployment type enables you to use any
+    #     third-party deployment controller for full control over the
+    #     deployment process for an Amazon ECS service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController AWS API Documentation
@@ -2686,6 +2961,54 @@ module Aws::ECS
     class DescribeTaskDefinitionResponse < Struct.new(
       :task_definition,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTaskSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         service: "String", # required
+    #         task_sets: ["String"],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service that the task sets exist in.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The short name or full Amazon Resource Name (ARN) of the service
+    #   that the task sets exist in.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_sets
+    #   The ID or full Amazon Resource Name (ARN) of task sets to describe.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSetsRequest AWS API Documentation
+    #
+    class DescribeTaskSetsRequest < Struct.new(
+      :cluster,
+      :service,
+      :task_sets)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_sets
+    #   The list of task sets described.
+    #   @return [Array<Types::TaskSet>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSetsResponse AWS API Documentation
+    #
+    class DescribeTaskSetsResponse < Struct.new(
+      :task_sets,
+      :failures)
       include Aws::Structure
     end
 
@@ -4535,6 +4858,18 @@ module Aws::ECS
 
     # The configuration details for the App Mesh proxy.
     #
+    # Your Amazon ECS container instances require at least version 1.26.0 of
+    # the container agent and at least version 1.26.0-1 of the `ecs-init`
+    # package to enable a proxy configuration. If your container instances
+    # are launched from the Amazon ECS-optimized AMI version `20190301` or
+    # later, then they contain the required versions of the container agent
+    # and `ecs-init`. For more information, see [Amazon ECS-optimized Linux
+    # AMI][1] in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #
     # @note When making an API call, you may pass ProxyConfiguration
     #   data as a hash:
     #
@@ -4572,7 +4907,7 @@ module Aws::ECS
     #     traffic. If `IgnoredGID` is specified, this field can be empty.
     #
     #   * `AppPorts` - (Required) The list of ports that the application
-    #     uses. Network traffic to these ports will be forwarded to the
+    #     uses. Network traffic to these ports is forwarded to the
     #     `ProxyIngressPort` and `ProxyEgressPort`.
     #
     #   * `ProxyIngressPort` - (Required) Specifies the port that incoming
@@ -4581,13 +4916,13 @@ module Aws::ECS
     #   * `ProxyEgressPort` - (Required) Specifies the port that outgoing
     #     traffic from the `AppPorts` is directed to.
     #
-    #   * `EgressIgnoredPorts` - (Required) The egress traffic going to
-    #     these specified ports will be ignored and not redirected to the
-    #     `ProxyEgressPort`. It can be empty list.
+    #   * `EgressIgnoredPorts` - (Required) The egress traffic going to the
+    #     specified ports is ignored and not redirected to the
+    #     `ProxyEgressPort`. It can be an empty list.
     #
-    #   * `EgressIgnoredIPs` - (Required) The egress traffic going to these
-    #     specified IP addresses will be ignored and not redirected to the
-    #     `ProxyEgressPort`. It can be empty list.
+    #   * `EgressIgnoredIPs` - (Required) The egress traffic going to the
+    #     specified IP addresses is ignored and not redirected to the
+    #     `ProxyEgressPort`. It can be an empty list.
     #   @return [Array<Types::KeyValuePair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ProxyConfiguration AWS API Documentation
@@ -5293,6 +5628,19 @@ module Aws::ECS
     #
     # @!attribute [rw] proxy_configuration
     #   The configuration details for the App Mesh proxy.
+    #
+    #   Your Amazon ECS container instances require at least version 1.26.0
+    #   of the container agent and at least version 1.26.0-1 of the
+    #   `ecs-init` package to enable a proxy configuration. If your
+    #   container instances are launched from the Amazon ECS-optimized AMI
+    #   version `20190301` or later, then they contain the required versions
+    #   of the container agent and `ecs-init`. For more information, see
+    #   [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
@@ -5683,12 +6031,20 @@ module Aws::ECS
     end
 
     # A floating-point percentage of the desired number of tasks to place
-    # and keep running in the service. This is used when a service uses the
-    # `CODE_DEPLOY` deployment controller type.
+    # and keep running in the task set.
+    #
+    # @note When making an API call, you may pass Scale
+    #   data as a hash:
+    #
+    #       {
+    #         value: 1.0,
+    #         unit: "PERCENT", # accepts PERCENT
+    #       }
     #
     # @!attribute [rw] value
     #   The value, specified as a percent total of a service's
-    #   `desiredCount`, to scale the task set.
+    #   `desiredCount`, to scale the task set. Accepted values are numbers
+    #   between 0 and 100.
     #   @return [Float]
     #
     # @!attribute [rw] unit
@@ -5786,6 +6142,12 @@ module Aws::ECS
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
+    #   The details of the service discovery registries to assign to this
+    #   service. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] status
@@ -5844,10 +6206,10 @@ module Aws::ECS
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] task_sets
-    #   Information about a set of Amazon ECS tasks in an AWS CodeDeploy
-    #   deployment. An Amazon ECS task set includes details such as the
-    #   desired number of tasks, how many tasks are running, and whether the
-    #   task set serves production traffic.
+    #   Information about a set of Amazon ECS tasks in either an AWS
+    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
+    #   includes details such as the desired number of tasks, how many tasks
+    #   are running, and whether the task set serves production traffic.
     #   @return [Array<Types::TaskSet>]
     #
     # @!attribute [rw] deployments
@@ -6020,12 +6382,12 @@ module Aws::ECS
     #
     # @!attribute [rw] registry_arn
     #   The Amazon Resource Name (ARN) of the service registry. The
-    #   currently supported service registry is Amazon Route 53 Auto Naming.
-    #   For more information, see [Service][1].
+    #   currently supported service registry is AWS Cloud Map. For more
+    #   information, see [CreateService][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_autonaming_Service.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -6074,11 +6436,10 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The current account setting for the resource name. If `enabled`,
-    #   then the resource will receive the new Amazon Resource Name (ARN)
-    #   and resource identifier (ID) format. If `disabled`, then the
-    #   resource will receive the old Amazon Resource Name (ARN) and
-    #   resource identifier (ID) format.
+    #   The current account setting for the resource name. If `enabled`, the
+    #   resource receives the new Amazon Resource Name (ARN) and resource
+    #   identifier (ID) format. If `disabled`, the resource receives the old
+    #   Amazon Resource Name (ARN) and resource identifier (ID) format.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
@@ -6279,7 +6640,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task
-    #   The task ID or full ARN entry of the task to stop.
+    #   The task ID or full Amazon Resource Name (ARN) of the task to stop.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -7131,6 +7492,20 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #
+    #   Your Amazon ECS container instances require at least version 1.26.0
+    #   of the container agent and at least version 1.26.0-1 of the
+    #   `ecs-init` package to enable a proxy configuration. If your
+    #   container instances are launched from the Amazon ECS-optimized AMI
+    #   version `20190301` or later, then they contain the required versions
+    #   of the container agent and `ecs-init`. For more information, see
+    #   [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
@@ -7258,10 +7633,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Information about a set of Amazon ECS tasks in an AWS CodeDeploy
-    # deployment. An Amazon ECS task set includes details such as the
-    # desired number of tasks, how many tasks are running, and whether the
-    # task set serves production traffic.
+    # Information about a set of Amazon ECS tasks in either an AWS
+    # CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
+    # includes details such as the desired number of tasks, how many tasks
+    # are running, and whether the task set serves production traffic.
     #
     # @!attribute [rw] id
     #   The ID of the task set.
@@ -7271,14 +7646,33 @@ module Aws::ECS
     #   The Amazon Resource Name (ARN) of the task set.
     #   @return [String]
     #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the service the task set exists
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster that the service that
+    #   hosts the task set exists in.
+    #   @return [String]
+    #
     # @!attribute [rw] started_by
-    #   The tag specified when a task set is started. If the task is started
-    #   by an AWS CodeDeploy deployment, then the `startedBy` parameter is
-    #   `CODE_DEPLOY`.
+    #   The tag specified when a task set is started. If the task set is
+    #   created by an AWS CodeDeploy deployment, the `startedBy` parameter
+    #   is `CODE_DEPLOY`. For a task set created for an external deployment,
+    #   the startedBy field isn't used.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The deployment ID of the AWS CodeDeploy deployment.
+    #   The external ID associated with the task set.
+    #
+    #   If a task set is created by an AWS CodeDeploy deployment, the
+    #   `externalId` parameter contains the AWS CodeDeploy deployment ID.
+    #
+    #   If a task set is created for an external deployment and is
+    #   associated with a service discovery registry, the `externalId`
+    #   parameter contains the `ECS_TASK_SET_EXTERNAL_ID` AWS Cloud Map
+    #   attribute.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -7306,14 +7700,15 @@ module Aws::ECS
     # @!attribute [rw] computed_desired_count
     #   The computed desired count for the task set. This is calculated by
     #   multiplying the service's `desiredCount` by the task set's `scale`
-    #   percentage.
+    #   percentage. The result is always rounded up. For example, if the
+    #   computed desired count is 1.2, it rounds up to 2 tasks.
     #   @return [Integer]
     #
     # @!attribute [rw] pending_count
     #   The number of tasks in the task set that are in the `PENDING` status
     #   during a deployment. A task in the `PENDING` state is preparing to
     #   enter the `RUNNING` state. A task set enters the `PENDING` status
-    #   when it launches for the first time, or when it is restarted after
+    #   when it launches for the first time or when it is restarted after
     #   being in the `STOPPED` state.
     #   @return [Integer]
     #
@@ -7362,9 +7757,18 @@ module Aws::ECS
     #   Details on a load balancer that is used with a task set.
     #   @return [Array<Types::LoadBalancer>]
     #
+    # @!attribute [rw] service_registries
+    #   The details of the service discovery registries to assign to this
+    #   task set. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   @return [Array<Types::ServiceRegistry>]
+    #
     # @!attribute [rw] scale
     #   A floating-point percentage of the desired number of tasks to place
-    #   and keep running in the service.
+    #   and keep running in the task set.
     #   @return [Types::Scale]
     #
     # @!attribute [rw] stability_status
@@ -7396,6 +7800,8 @@ module Aws::ECS
     class TaskSet < Struct.new(
       :id,
       :task_set_arn,
+      :service_arn,
+      :cluster_arn,
       :started_by,
       :external_id,
       :status,
@@ -7409,6 +7815,7 @@ module Aws::ECS
       :platform_version,
       :network_configuration,
       :load_balancers,
+      :service_registries,
       :scale,
       :stability_status,
       :stability_status_at)
@@ -7605,6 +8012,53 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateServicePrimaryTaskSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         service: "String", # required
+    #         primary_task_set: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service that the task set exists in.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The short name or full Amazon Resource Name (ARN) of the service
+    #   that the task set exists in.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_task_set
+    #   The short name or full Amazon Resource Name (ARN) of the task set to
+    #   set as the primary task set in the deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSetRequest AWS API Documentation
+    #
+    class UpdateServicePrimaryTaskSetRequest < Struct.new(
+      :cluster,
+      :service,
+      :primary_task_set)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_set
+    #   Information about a set of Amazon ECS tasks in either an AWS
+    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
+    #   includes details such as the desired number of tasks, how many tasks
+    #   are running, and whether the task set serves production traffic.
+    #   @return [Types::TaskSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSetResponse AWS API Documentation
+    #
+    class UpdateServicePrimaryTaskSetResponse < Struct.new(
+      :task_set)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateServiceRequest
     #   data as a hash:
     #
@@ -7738,6 +8192,63 @@ module Aws::ECS
     #
     class UpdateServiceResponse < Struct.new(
       :service)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTaskSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         service: "String", # required
+    #         task_set: "String", # required
+    #         scale: { # required
+    #           value: 1.0,
+    #           unit: "PERCENT", # accepts PERCENT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service that the task set exists in.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The short name or full Amazon Resource Name (ARN) of the service
+    #   that the task set exists in.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_set
+    #   The short name or full Amazon Resource Name (ARN) of the task set to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] scale
+    #   A floating-point percentage of the desired number of tasks to place
+    #   and keep running in the task set.
+    #   @return [Types::Scale]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSetRequest AWS API Documentation
+    #
+    class UpdateTaskSetRequest < Struct.new(
+      :cluster,
+      :service,
+      :task_set,
+      :scale)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_set
+    #   Information about a set of Amazon ECS tasks in either an AWS
+    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
+    #   includes details such as the desired number of tasks, how many tasks
+    #   are running, and whether the task set serves production traffic.
+    #   @return [Types::TaskSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSetResponse AWS API Documentation
+    #
+    class UpdateTaskSetResponse < Struct.new(
+      :task_set)
       include Aws::Structure
     end
 

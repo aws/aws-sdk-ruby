@@ -109,8 +109,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to ten (10) tags assigned to the gateway may be
-    #   specified. Every tag is a key-value pair.
+    #   A list of up to 10 tags that can be assigned to the gateway. Each
+    #   tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters:
@@ -840,7 +840,8 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
-    #   Maps a user to anonymous user. Valid options are the following:
+    #   A value that maps a user to anonymous user. Valid options are the
+    #   following:
     #
     #   * `RootSquash` - Only root is mapped to anonymous user.
     #
@@ -867,8 +868,8 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of up to ten (10) tags can be assigned to the NFS file share.
-    #   Every tag is a key-value pair.
+    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters:
@@ -1022,8 +1023,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to ten (10) tags can be assigned to the NFS file share.
-    #   Every tag is a key-value pair.
+    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters:
@@ -1317,6 +1318,7 @@ module Aws::StorageGateway
     #         tape_barcode: "TapeBarcode", # required
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
+    #         pool_id: "PoolId",
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -1353,6 +1355,16 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeInput AWS API Documentation
     #
     class CreateTapeWithBarcodeInput < Struct.new(
@@ -1360,7 +1372,8 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :tape_barcode,
       :kms_encrypted,
-      :kms_key)
+      :kms_key,
+      :pool_id)
       include Aws::Structure
     end
 
@@ -1391,6 +1404,7 @@ module Aws::StorageGateway
     #         tape_barcode_prefix: "TapeBarcodePrefix", # required
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
+    #         pool_id: "PoolId",
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -1443,6 +1457,16 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class you chose
+    #   when you created the tape. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive).
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapesInput AWS API Documentation
     #
     class CreateTapesInput < Struct.new(
@@ -1452,7 +1476,8 @@ module Aws::StorageGateway
       :num_tapes_to_create,
       :tape_barcode_prefix,
       :kms_encrypted,
-      :kms_key)
+      :kms_key,
+      :pool_id)
       include Aws::Structure
     end
 
@@ -2061,10 +2086,10 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to ten (10) tags assigned to the gateway are returned,
-    #   sorted alphabetically by key name. Every tag is a key-value pair.
-    #   For a gateway with more than 10 tags assigned, you can view all tags
-    #   using the `ListTagsForResource` API.
+    #   A list of up to 10 tags assigned to the gateway, sorted
+    #   alphabetically by key name. Each tag is a key-value pair. For a
+    #   gateway with more than 10 tags assigned, you can view all tags using
+    #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
@@ -3674,10 +3699,10 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of up to ten (10) tags assigned to the NFS file share are
-    #   returned, sorted alphabetically by key name. Every tag is a
-    #   key-value pair. For a gateway with more than 10 tags assigned, you
-    #   can view all tags using the `ListTagsForResource` API.
+    #   A list of up to 10 tags assigned to the NFS file share, sorted
+    #   alphabetically by key name. Each tag is a key-value pair. For a
+    #   gateway with more than 10 tags assigned, you can view all tags using
+    #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
@@ -4089,10 +4114,10 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to ten (10) tags assigned to the SMB file share are
-    #   returned, sorted alphabetically by key name. Every tag is a
-    #   key-value pair. For a gateway with more than 10 tags assigned, you
-    #   can view all tags using the `ListTagsForResource` API.
+    #   A list of up to 10 tags assigned to the SMB file share, sorted
+    #   alphabetically by key name. Each tag is a key-value pair. For a
+    #   gateway with more than 10 tags assigned, you can view all tags using
+    #   the `ListTagsForResource` API operation.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
@@ -4481,6 +4506,16 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that contains tapes that will be archived. The
+    #   tapes in this pool are archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape AWS API Documentation
     #
     class Tape < Struct.new(
@@ -4492,7 +4527,8 @@ module Aws::StorageGateway
       :vtl_device,
       :progress,
       :tape_used_in_bytes,
-      :kms_key)
+      :kms_key,
+      :pool_id)
       include Aws::Structure
     end
 
@@ -4547,6 +4583,14 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that was used to archive the tape. The tapes in
+    #   this pool are archived in the S3 storage class that is associated
+    #   with the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive AWS API Documentation
     #
     class TapeArchive < Struct.new(
@@ -4558,7 +4602,8 @@ module Aws::StorageGateway
       :retrieved_to,
       :tape_status,
       :tape_used_in_bytes,
-      :kms_key)
+      :kms_key,
+      :pool_id)
       include Aws::Structure
     end
 
@@ -4585,6 +4630,16 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @!attribute [rw] pool_id
+    #   The ID of the pool that you want to add your tape to for archiving.
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
+    #   eject the tape, the tape is archived directly into the storage class
+    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #
+    #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeInfo AWS API Documentation
     #
     class TapeInfo < Struct.new(
@@ -4592,7 +4647,8 @@ module Aws::StorageGateway
       :tape_barcode,
       :tape_size_in_bytes,
       :tape_status,
-      :gateway_arn)
+      :gateway_arn,
+      :pool_id)
       include Aws::Structure
     end
 

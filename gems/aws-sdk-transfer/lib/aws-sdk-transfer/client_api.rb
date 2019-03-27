@@ -26,6 +26,8 @@ module Aws::Transfer
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
     DescribedServer = Shapes::StructureShape.new(name: 'DescribedServer')
     DescribedUser = Shapes::StructureShape.new(name: 'DescribedUser')
+    EndpointDetails = Shapes::StructureShape.new(name: 'EndpointDetails')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     HomeDirectory = Shapes::StringShape.new(name: 'HomeDirectory')
     IdentityProviderDetails = Shapes::StructureShape.new(name: 'IdentityProviderDetails')
     IdentityProviderType = Shapes::StringShape.new(name: 'IdentityProviderType')
@@ -83,7 +85,10 @@ module Aws::Transfer
     UserCount = Shapes::IntegerShape.new(name: 'UserCount')
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserPassword = Shapes::StringShape.new(name: 'UserPassword')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
 
+    CreateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
+    CreateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     CreateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     CreateServerRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     CreateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
@@ -133,6 +138,8 @@ module Aws::Transfer
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
     DescribedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    DescribedServer.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
+    DescribedServer.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     DescribedServer.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     DescribedServer.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     DescribedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
@@ -150,6 +157,9 @@ module Aws::Transfer
     DescribedUser.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedUser.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
     DescribedUser.struct_class = Types::DescribedUser
+
+    EndpointDetails.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    EndpointDetails.struct_class = Types::EndpointDetails
 
     IdentityProviderDetails.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
     IdentityProviderDetails.add_member(:invocation_role, Shapes::ShapeRef.new(shape: Role, location_name: "InvocationRole"))
@@ -195,6 +205,7 @@ module Aws::Transfer
 
     ListedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     ListedServer.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
+    ListedServer.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     ListedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     ListedServer.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, location_name: "ServerId"))
     ListedServer.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
@@ -251,6 +262,8 @@ module Aws::Transfer
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
+    UpdateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
+    UpdateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     UpdateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     UpdateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: NullableRole, location_name: "LoggingRole"))
     UpdateServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

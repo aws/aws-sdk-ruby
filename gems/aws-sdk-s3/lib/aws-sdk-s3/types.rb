@@ -401,13 +401,13 @@ module Aws::S3
     #               {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #               },
     #             ],
     #             noncurrent_version_transitions: [
     #               {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #               },
     #             ],
     #             noncurrent_version_expiration: {
@@ -972,7 +972,7 @@ module Aws::S3
     #         metadata_directive: "COPY", # accepts COPY, REPLACE
     #         tagging_directive: "COPY", # accepts COPY, REPLACE
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -1425,7 +1425,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -2178,7 +2178,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         account: "AccountId",
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         access_control_translation: {
     #           owner: "Destination", # required, accepts Destination
     #         },
@@ -4407,11 +4407,11 @@ module Aws::S3
     #             transition: {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #             },
     #             noncurrent_version_transition: {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #             },
     #             noncurrent_version_expiration: {
     #               noncurrent_days: 1,
@@ -4500,13 +4500,13 @@ module Aws::S3
     #           {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #           },
     #         ],
     #         noncurrent_version_transitions: [
     #           {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #           },
     #         ],
     #         noncurrent_version_expiration: {
@@ -5770,7 +5770,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionExpiration AWS API Documentation
@@ -5782,18 +5782,19 @@ module Aws::S3
 
     # Container for the transition rule that describes when noncurrent
     # objects transition to the STANDARD\_IA, ONEZONE\_IA,
-    # INTELLIGENT\_TIERING or GLACIER storage class. If your bucket is
-    # versioning-enabled (or versioning is suspended), you can set this
-    # action to request that Amazon S3 transition noncurrent object versions
-    # to the STANDARD\_IA, ONEZONE\_IA, INTELLIGENT\_TIERING or GLACIER
-    # storage class at a specific period in the object's lifetime.
+    # INTELLIGENT\_TIERING, GLACIER or DEEP\_ARCHIVE storage class. If your
+    # bucket is versioning-enabled (or versioning is suspended), you can set
+    # this action to request that Amazon S3 transition noncurrent object
+    # versions to the STANDARD\_IA, ONEZONE\_IA, INTELLIGENT\_TIERING,
+    # GLACIER or DEEP\_ARCHIVE storage class at a specific period in the
+    # object's lifetime.
     #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
     #
     #       {
     #         noncurrent_days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #       }
     #
     # @!attribute [rw] noncurrent_days
@@ -6220,7 +6221,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         },
     #       }
     #
@@ -6780,13 +6781,13 @@ module Aws::S3
     #                 {
     #                   date: Time.now,
     #                   days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #                 },
     #               ],
     #               noncurrent_version_transitions: [
     #                 {
     #                   noncurrent_days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #                 },
     #               ],
     #               noncurrent_version_expiration: {
@@ -6834,11 +6835,11 @@ module Aws::S3
     #               transition: {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #               },
     #               noncurrent_version_transition: {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #               },
     #               noncurrent_version_expiration: {
     #                 noncurrent_days: 1,
@@ -7158,7 +7159,7 @@ module Aws::S3
     #               destination: { # required
     #                 bucket: "BucketName", # required
     #                 account: "AccountId",
-    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #                 access_control_translation: {
     #                   owner: "Destination", # required, accepts Destination
     #                 },
@@ -7680,7 +7681,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -8268,7 +8269,7 @@ module Aws::S3
     #             destination: { # required
     #               bucket: "BucketName", # required
     #               account: "AccountId",
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #               access_control_translation: {
     #                 owner: "Destination", # required, accepts Destination
     #               },
@@ -8337,7 +8338,7 @@ module Aws::S3
     #         destination: { # required
     #           bucket: "BucketName", # required
     #           account: "AccountId",
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #           access_control_translation: {
     #             owner: "Destination", # required, accepts Destination
     #           },
@@ -8644,7 +8645,7 @@ module Aws::S3
     #                   value: "MetadataValue",
     #                 },
     #               ],
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #             },
     #           },
     #         },
@@ -8765,7 +8766,7 @@ module Aws::S3
     #                 value: "MetadataValue",
     #               },
     #             ],
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #           },
     #         },
     #       }
@@ -8867,11 +8868,11 @@ module Aws::S3
     #         transition: {
     #           date: Time.now,
     #           days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #         },
     #         noncurrent_version_transition: {
     #           noncurrent_days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #         },
     #         noncurrent_version_expiration: {
     #           noncurrent_days: 1,
@@ -8904,12 +8905,12 @@ module Aws::S3
     # @!attribute [rw] noncurrent_version_transition
     #   Container for the transition rule that describes when noncurrent
     #   objects transition to the STANDARD\_IA, ONEZONE\_IA,
-    #   INTELLIGENT\_TIERING or GLACIER storage class. If your bucket is
-    #   versioning-enabled (or versioning is suspended), you can set this
-    #   action to request that Amazon S3 transition noncurrent object
-    #   versions to the STANDARD\_IA, ONEZONE\_IA, INTELLIGENT\_TIERING or
-    #   GLACIER storage class at a specific period in the object's
-    #   lifetime.
+    #   INTELLIGENT\_TIERING, GLACIER or DEEP\_ARCHIVE storage class. If
+    #   your bucket is versioning-enabled (or versioning is suspended), you
+    #   can set this action to request that Amazon S3 transition noncurrent
+    #   object versions to the STANDARD\_IA, ONEZONE\_IA,
+    #   INTELLIGENT\_TIERING, GLACIER or DEEP\_ARCHIVE storage class at a
+    #   specific period in the object's lifetime.
     #   @return [Types::NoncurrentVersionTransition]
     #
     # @!attribute [rw] noncurrent_version_expiration
@@ -9008,7 +9009,7 @@ module Aws::S3
     #             value: "MetadataValue",
     #           },
     #         ],
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -9698,7 +9699,7 @@ module Aws::S3
     #       {
     #         date: Time.now,
     #         days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #       }
     #
     # @!attribute [rw] date
