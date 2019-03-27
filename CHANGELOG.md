@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECS - Updated the API, documentation, and integration test for Amazon EC2 Container Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer for SFTP.
+
 2.11.248 (2019-03-26)
 ------------------
 
