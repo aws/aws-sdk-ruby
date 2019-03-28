@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.250 (2019-03-28)
+------------------
+
 * Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
 
 * Feature - Aws::PinpointEmail - Updated the API, and documentation for Amazon Pinpoint Email Service.
