@@ -574,6 +574,15 @@ module Aws::ServiceCatalog
     #     `\{"NotificationArns" :
     #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
     #
+    #   RESOUCE\_UPDATE
+    #
+    #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
+    #
+    #     `\{"Version":"2.0","Properties":\{"TagUpdateOnProvisionedProduct":"String"\}\}`
+    #
+    #     The `TagUpdatesOnProvisionedProduct` property accepts a string
+    #     value of `ALLOWED` or `NOT_ALLOWED`.
+    #
     #   STACKSET
     #
     #   : Specify the `Parameters` property as follows:
@@ -606,6 +615,8 @@ module Aws::ServiceCatalog
     #   * `LAUNCH`
     #
     #   * `NOTIFICATION`
+    #
+    #   * `RESOURCE_UPDATE`
     #
     #   * `STACKSET`
     #
@@ -6005,6 +6016,12 @@ module Aws::ServiceCatalog
     #           stack_set_max_concurrency_percentage: 1,
     #           stack_set_operation_type: "CREATE", # accepts CREATE, UPDATE, DELETE
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #         update_token: "IdempotencyToken", # required
     #       }
     #
@@ -6050,6 +6067,12 @@ module Aws::ServiceCatalog
     #   preferences for a stack set.
     #   @return [Types::UpdateProvisioningPreferences]
     #
+    # @!attribute [rw] tags
+    #   One or more tags. Requires the product to have `RESOURCE_UPDATE`
+    #   constraint with `TagUpdatesOnProvisionedProduct` set to `ALLOWED` to
+    #   allow tag updates.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] update_token
     #   The idempotency token that uniquely identifies the provisioning
     #   update request.
@@ -6069,6 +6092,7 @@ module Aws::ServiceCatalog
       :path_id,
       :provisioning_parameters,
       :provisioning_preferences,
+      :tags,
       :update_token)
       include Aws::Structure
     end

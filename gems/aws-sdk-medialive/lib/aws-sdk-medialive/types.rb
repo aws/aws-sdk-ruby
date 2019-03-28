@@ -8,6 +8,8 @@
 module Aws::MediaLive
   module Types
 
+    # Aac Settings
+    #
     # @note When making an API call, you may pass AacSettings
     #   data as a hash:
     #
@@ -89,6 +91,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Ac3 Settings
+    #
     # @note When making an API call, you may pass Ac3Settings
     #   data as a hash:
     #
@@ -161,6 +165,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Archive Container Settings
+    #
     # @note When making an API call, you may pass ArchiveContainerSettings
     #   data as a hash:
     #
@@ -227,6 +233,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] m2ts_settings
+    #   M2ts Settings
     #   @return [Types::M2tsSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveContainerSettings AWS API Documentation
@@ -236,6 +243,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Archive Group Settings
+    #
     # @note When making an API call, you may pass ArchiveGroupSettings
     #   data as a hash:
     #
@@ -263,6 +272,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Archive Output Settings
+    #
     # @note When making an API call, you may pass ArchiveOutputSettings
     #   data as a hash:
     #
@@ -355,18 +366,24 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Arib Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribDestinationSettings AWS API Documentation
     #
     class AribDestinationSettings < Aws::EmptyStructure; end
 
+    # Arib Source Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribSourceSettings AWS API Documentation
     #
     class AribSourceSettings < Aws::EmptyStructure; end
 
+    # Audio Channel Mapping
+    #
     # @note When making an API call, you may pass AudioChannelMapping
     #   data as a hash:
     #
@@ -397,6 +414,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Codec Settings
+    #
     # @note When making an API call, you may pass AudioCodecSettings
     #   data as a hash:
     #
@@ -453,18 +472,23 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] aac_settings
+    #   Aac Settings
     #   @return [Types::AacSettings]
     #
     # @!attribute [rw] ac_3_settings
+    #   Ac3 Settings
     #   @return [Types::Ac3Settings]
     #
     # @!attribute [rw] eac_3_settings
+    #   Eac3 Settings
     #   @return [Types::Eac3Settings]
     #
     # @!attribute [rw] mp_2_settings
+    #   Mp2 Settings
     #   @return [Types::Mp2Settings]
     #
     # @!attribute [rw] pass_through_settings
+    #   Pass Through Settings
     #   @return [Types::PassThroughSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioCodecSettings AWS API Documentation
@@ -478,6 +502,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Description
+    #
     # @note When making an API call, you may pass AudioDescription
     #   data as a hash:
     #
@@ -635,6 +661,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Language Selection
+    #
     # @note When making an API call, you may pass AudioLanguageSelection
     #   data as a hash:
     #
@@ -666,6 +694,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Normalization Settings
+    #
     # @note When making an API call, you may pass AudioNormalizationSettings
     #   data as a hash:
     #
@@ -702,6 +732,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Only Hls Settings
+    #
     # @note When making an API call, you may pass AudioOnlyHlsSettings
     #   data as a hash:
     #
@@ -754,6 +786,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Pid Selection
+    #
     # @note When making an API call, you may pass AudioPidSelection
     #   data as a hash:
     #
@@ -772,6 +806,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Selector
+    #
     # @note When making an API call, you may pass AudioSelector
     #   data as a hash:
     #
@@ -806,6 +842,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Selector Settings
+    #
     # @note When making an API call, you may pass AudioSelectorSettings
     #   data as a hash:
     #
@@ -820,9 +858,11 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] audio_language_selection
+    #   Audio Language Selection
     #   @return [Types::AudioLanguageSelection]
     #
     # @!attribute [rw] audio_pid_selection
+    #   Audio Pid Selection
     #   @return [Types::AudioPidSelection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelectorSettings AWS API Documentation
@@ -833,6 +873,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Avail Blanking
+    #
     # @note When making an API call, you may pass AvailBlanking
     #   data as a hash:
     #
@@ -863,6 +905,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Avail Configuration
+    #
     # @note When making an API call, you may pass AvailConfiguration
     #   data as a hash:
     #
@@ -892,6 +936,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Avail Settings
+    #
     # @note When making an API call, you may pass AvailSettings
     #   data as a hash:
     #
@@ -909,9 +955,11 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] scte_35_splice_insert
+    #   Scte35 Splice Insert
     #   @return [Types::Scte35SpliceInsert]
     #
     # @!attribute [rw] scte_35_time_signal_apos
+    #   Scte35 Time Signal Apos
     #   @return [Types::Scte35TimeSignalApos]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailSettings AWS API Documentation
@@ -1222,6 +1270,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Blackout Slate
+    #
     # @note When making an API call, you may pass BlackoutSlate
     #   data as a hash:
     #
@@ -1282,6 +1332,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Burn In Destination Settings
+    #
     # @note When making an API call, you may pass BurnInDestinationSettings
     #   data as a hash:
     #
@@ -1569,6 +1621,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Caption Destination Settings
+    #
     # @note When making an API call, you may pass CaptionDestinationSettings
     #   data as a hash:
     #
@@ -1643,39 +1697,51 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] arib_destination_settings
+    #   Arib Destination Settings
     #   @return [Types::AribDestinationSettings]
     #
     # @!attribute [rw] burn_in_destination_settings
+    #   Burn In Destination Settings
     #   @return [Types::BurnInDestinationSettings]
     #
     # @!attribute [rw] dvb_sub_destination_settings
+    #   Dvb Sub Destination Settings
     #   @return [Types::DvbSubDestinationSettings]
     #
     # @!attribute [rw] embedded_destination_settings
+    #   Embedded Destination Settings
     #   @return [Types::EmbeddedDestinationSettings]
     #
     # @!attribute [rw] embedded_plus_scte_20_destination_settings
+    #   Embedded Plus Scte20 Destination Settings
     #   @return [Types::EmbeddedPlusScte20DestinationSettings]
     #
     # @!attribute [rw] rtmp_caption_info_destination_settings
+    #   Rtmp Caption Info Destination Settings
     #   @return [Types::RtmpCaptionInfoDestinationSettings]
     #
     # @!attribute [rw] scte_20_plus_embedded_destination_settings
+    #   Scte20 Plus Embedded Destination Settings
     #   @return [Types::Scte20PlusEmbeddedDestinationSettings]
     #
     # @!attribute [rw] scte_27_destination_settings
+    #   Scte27 Destination Settings
     #   @return [Types::Scte27DestinationSettings]
     #
     # @!attribute [rw] smpte_tt_destination_settings
+    #   Smpte Tt Destination Settings
     #   @return [Types::SmpteTtDestinationSettings]
     #
     # @!attribute [rw] teletext_destination_settings
+    #   Teletext Destination Settings
     #   @return [Types::TeletextDestinationSettings]
     #
     # @!attribute [rw] ttml_destination_settings
+    #   Ttml Destination Settings
     #   @return [Types::TtmlDestinationSettings]
     #
     # @!attribute [rw] webvtt_destination_settings
+    #   Webvtt Destination Settings
     #   @return [Types::WebvttDestinationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDestinationSettings AWS API Documentation
@@ -1790,6 +1856,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Caption Selector Settings
+    #
     # @note When making an API call, you may pass CaptionSelectorSettings
     #   data as a hash:
     #
@@ -1818,21 +1886,27 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] arib_source_settings
+    #   Arib Source Settings
     #   @return [Types::AribSourceSettings]
     #
     # @!attribute [rw] dvb_sub_source_settings
+    #   Dvb Sub Source Settings
     #   @return [Types::DvbSubSourceSettings]
     #
     # @!attribute [rw] embedded_source_settings
+    #   Embedded Source Settings
     #   @return [Types::EmbeddedSourceSettings]
     #
     # @!attribute [rw] scte_20_source_settings
+    #   Scte20 Source Settings
     #   @return [Types::Scte20SourceSettings]
     #
     # @!attribute [rw] scte_27_source_settings
+    #   Scte27 Source Settings
     #   @return [Types::Scte27SourceSettings]
     #
     # @!attribute [rw] teletext_source_settings
+    #   Teletext Source Settings
     #   @return [Types::TeletextSourceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionSelectorSettings AWS API Documentation
@@ -1862,6 +1936,7 @@ module Aws::MediaLive
     #   @return [Array<Types::ChannelEgressEndpoint>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] id
@@ -2015,6 +2090,7 @@ module Aws::MediaLive
     #   @return [Array<Types::OutputDestination>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] input_attachments
@@ -2301,6 +2377,7 @@ module Aws::MediaLive
     #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
     #               repeat_frame_msec: 1,
     #             },
+    #             output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #           },
@@ -2803,6 +2880,7 @@ module Aws::MediaLive
     #   @return [Array<Types::OutputDestination>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] input_attachments
@@ -3144,6 +3222,7 @@ module Aws::MediaLive
     #   @return [Array<Types::ChannelEgressEndpoint>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] id
@@ -3379,6 +3458,7 @@ module Aws::MediaLive
     #   @return [Array<Types::ChannelEgressEndpoint>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] id
@@ -3834,6 +3914,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Dvb Sub Destination Settings
+    #
     # @note When making an API call, you may pass DvbSubDestinationSettings
     #   data as a hash:
     #
@@ -4009,6 +4091,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Dvb Sub Source Settings
+    #
     # @note When making an API call, you may pass DvbSubSourceSettings
     #   data as a hash:
     #
@@ -4050,6 +4134,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Eac3 Settings
+    #
     # @note When making an API call, you may pass Eac3Settings
     #   data as a hash:
     #
@@ -4203,18 +4289,24 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Embedded Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings AWS API Documentation
     #
     class EmbeddedDestinationSettings < Aws::EmptyStructure; end
 
+    # Embedded Plus Scte20 Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedPlusScte20DestinationSettings AWS API Documentation
     #
     class EmbeddedPlusScte20DestinationSettings < Aws::EmptyStructure; end
 
+    # Embedded Source Settings
+    #
     # @note When making an API call, you may pass EmbeddedSourceSettings
     #   data as a hash:
     #
@@ -4260,6 +4352,8 @@ module Aws::MediaLive
     #
     class Empty < Aws::EmptyStructure; end
 
+    # Encoder Settings
+    #
     # @note When making an API call, you may pass EncoderSettings
     #   data as a hash:
     #
@@ -4474,6 +4568,7 @@ module Aws::MediaLive
     #             input_loss_image_type: "COLOR", # accepts COLOR, SLATE
     #             repeat_frame_msec: 1,
     #           },
+    #           output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #           output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #           support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #         },
@@ -4930,6 +5025,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Fec Output Settings
+    #
     # @note When making an API call, you may pass FecOutputSettings
     #   data as a hash:
     #
@@ -5091,6 +5188,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Global Configuration
+    #
     # @note When making an API call, you may pass GlobalConfiguration
     #   data as a hash:
     #
@@ -5108,6 +5207,7 @@ module Aws::MediaLive
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
     #           repeat_frame_msec: 1,
     #         },
+    #         output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #       }
@@ -5130,6 +5230,13 @@ module Aws::MediaLive
     #   Settings for system actions when input is lost.
     #   @return [Types::InputLossBehavior]
     #
+    # @!attribute [rw] output_locking_mode
+    #   Indicates how MediaLive pipelines are synchronized. PIPELINELOCKING
+    #   - MediaLive will attempt to synchronize the output of each pipeline
+    #   to the other. EPOCHLOCKING - MediaLive will attempt to synchronize
+    #   the output of each pipeline to the Unix epoch.
+    #   @return [String]
+    #
     # @!attribute [rw] output_timing_source
     #   Indicates whether the rate of frames emitted by the Live encoder
     #   should be paced by its system clock (which optionally may be locked
@@ -5149,11 +5256,14 @@ module Aws::MediaLive
       :initial_audio_gain,
       :input_end_action,
       :input_loss_behavior,
+      :output_locking_mode,
       :output_timing_source,
       :support_low_framerate_inputs)
       include Aws::Structure
     end
 
+    # H264 Settings
+    #
     # @note When making an API call, you may pass H264Settings
     #   data as a hash:
     #
@@ -5457,6 +5567,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Akamai Settings
+    #
     # @note When making an API call, you may pass HlsAkamaiSettings
     #   data as a hash:
     #
@@ -5516,6 +5628,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Basic Put Settings
+    #
     # @note When making an API call, you may pass HlsBasicPutSettings
     #   data as a hash:
     #
@@ -5555,6 +5669,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Cdn Settings
+    #
     # @note When making an API call, you may pass HlsCdnSettings
     #   data as a hash:
     #
@@ -5591,15 +5707,19 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] hls_akamai_settings
+    #   Hls Akamai Settings
     #   @return [Types::HlsAkamaiSettings]
     #
     # @!attribute [rw] hls_basic_put_settings
+    #   Hls Basic Put Settings
     #   @return [Types::HlsBasicPutSettings]
     #
     # @!attribute [rw] hls_media_store_settings
+    #   Hls Media Store Settings
     #   @return [Types::HlsMediaStoreSettings]
     #
     # @!attribute [rw] hls_webdav_settings
+    #   Hls Webdav Settings
     #   @return [Types::HlsWebdavSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsCdnSettings AWS API Documentation
@@ -5612,6 +5732,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Group Settings
+    #
     # @note When making an API call, you may pass HlsGroupSettings
     #   data as a hash:
     #
@@ -5978,6 +6100,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Input Settings
+    #
     # @note When making an API call, you may pass HlsInputSettings
     #   data as a hash:
     #
@@ -6022,6 +6146,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Media Store Settings
+    #
     # @note When making an API call, you may pass HlsMediaStoreSettings
     #   data as a hash:
     #
@@ -6068,6 +6194,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Output Settings
+    #
     # @note When making an API call, you may pass HlsOutputSettings
     #   data as a hash:
     #
@@ -6131,6 +6259,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Settings
+    #
     # @note When making an API call, you may pass HlsSettings
     #   data as a hash:
     #
@@ -6168,9 +6298,11 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] audio_only_hls_settings
+    #   Audio Only Hls Settings
     #   @return [Types::AudioOnlyHlsSettings]
     #
     # @!attribute [rw] standard_hls_settings
+    #   Standard Hls Settings
     #   @return [Types::StandardHlsSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsSettings AWS API Documentation
@@ -6202,6 +6334,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls Webdav Settings
+    #
     # @note When making an API call, you may pass HlsWebdavSettings
     #   data as a hash:
     #
@@ -6415,6 +6549,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Input Channel Level
+    #
     # @note When making an API call, you may pass InputChannelLevel
     #   data as a hash:
     #
@@ -6508,6 +6644,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Input Location
+    #
     # @note When making an API call, you may pass InputLocation
     #   data as a hash:
     #
@@ -6545,6 +6683,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Input Loss Behavior
+    #
     # @note When making an API call, you may pass InputLossBehavior
     #   data as a hash:
     #
@@ -6989,6 +7129,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Key Provider Settings
+    #
     # @note When making an API call, you may pass KeyProviderSettings
     #   data as a hash:
     #
@@ -7004,6 +7146,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] static_key_settings
+    #   Static Key Settings
     #   @return [Types::StaticKeySettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/KeyProviderSettings AWS API Documentation
@@ -7386,6 +7529,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # M2ts Settings
+    #
     # @note When making an API call, you may pass M2tsSettings
     #   data as a hash:
     #
@@ -8005,6 +8150,8 @@ module Aws::MediaLive
     #
     class MediaPackageOutputSettings < Aws::EmptyStructure; end
 
+    # Mp2 Settings
+    #
     # @note When making an API call, you may pass Mp2Settings
     #   data as a hash:
     #
@@ -8036,6 +8183,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Ms Smooth Group Settings
+    #
     # @note When making an API call, you may pass MsSmoothGroupSettings
     #   data as a hash:
     #
@@ -8191,6 +8340,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Ms Smooth Output Settings
+    #
     # @note When making an API call, you may pass MsSmoothOutputSettings
     #   data as a hash:
     #
@@ -9001,6 +9152,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Output Group Settings
+    #
     # @note When making an API call, you may pass OutputGroupSettings
     #   data as a hash:
     #
@@ -9146,6 +9299,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] archive_group_settings
+    #   Archive Group Settings
     #   @return [Types::ArchiveGroupSettings]
     #
     # @!attribute [rw] frame_capture_group_settings
@@ -9153,6 +9307,7 @@ module Aws::MediaLive
     #   @return [Types::FrameCaptureGroupSettings]
     #
     # @!attribute [rw] hls_group_settings
+    #   Hls Group Settings
     #   @return [Types::HlsGroupSettings]
     #
     # @!attribute [rw] media_package_group_settings
@@ -9160,12 +9315,15 @@ module Aws::MediaLive
     #   @return [Types::MediaPackageGroupSettings]
     #
     # @!attribute [rw] ms_smooth_group_settings
+    #   Ms Smooth Group Settings
     #   @return [Types::MsSmoothGroupSettings]
     #
     # @!attribute [rw] rtmp_group_settings
+    #   Rtmp Group Settings
     #   @return [Types::RtmpGroupSettings]
     #
     # @!attribute [rw] udp_group_settings
+    #   Udp Group Settings
     #   @return [Types::UdpGroupSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings AWS API Documentation
@@ -9200,6 +9358,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Output Settings
+    #
     # @note When making an API call, you may pass OutputSettings
     #   data as a hash:
     #
@@ -9396,6 +9556,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] archive_output_settings
+    #   Archive Output Settings
     #   @return [Types::ArchiveOutputSettings]
     #
     # @!attribute [rw] frame_capture_output_settings
@@ -9403,6 +9564,7 @@ module Aws::MediaLive
     #   @return [Types::FrameCaptureOutputSettings]
     #
     # @!attribute [rw] hls_output_settings
+    #   Hls Output Settings
     #   @return [Types::HlsOutputSettings]
     #
     # @!attribute [rw] media_package_output_settings
@@ -9410,12 +9572,15 @@ module Aws::MediaLive
     #   @return [Types::MediaPackageOutputSettings]
     #
     # @!attribute [rw] ms_smooth_output_settings
+    #   Ms Smooth Output Settings
     #   @return [Types::MsSmoothOutputSettings]
     #
     # @!attribute [rw] rtmp_output_settings
+    #   Rtmp Output Settings
     #   @return [Types::RtmpOutputSettings]
     #
     # @!attribute [rw] udp_output_settings
+    #   Udp Output Settings
     #   @return [Types::UdpOutputSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings AWS API Documentation
@@ -9431,6 +9596,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Pass Through Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PassThroughSettings AWS API Documentation
@@ -9574,6 +9741,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Remix Settings
+    #
     # @note When making an API call, you may pass RemixSettings
     #   data as a hash:
     #
@@ -9778,12 +9947,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Rtmp Caption Info Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpCaptionInfoDestinationSettings AWS API Documentation
     #
     class RtmpCaptionInfoDestinationSettings < Aws::EmptyStructure; end
 
+    # Rtmp Group Settings
+    #
     # @note When making an API call, you may pass RtmpGroupSettings
     #   data as a hash:
     #
@@ -9849,6 +10022,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Rtmp Output Settings
+    #
     # @note When making an API call, you may pass RtmpOutputSettings
     #   data as a hash:
     #
@@ -10173,12 +10348,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Scte20 Plus Embedded Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20PlusEmbeddedDestinationSettings AWS API Documentation
     #
     class Scte20PlusEmbeddedDestinationSettings < Aws::EmptyStructure; end
 
+    # Scte20 Source Settings
+    #
     # @note When making an API call, you may pass Scte20SourceSettings
     #   data as a hash:
     #
@@ -10207,12 +10386,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Scte27 Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27DestinationSettings AWS API Documentation
     #
     class Scte27DestinationSettings < Aws::EmptyStructure; end
 
+    # Scte27 Source Settings
+    #
     # @note When making an API call, you may pass Scte27SourceSettings
     #   data as a hash:
     #
@@ -10484,6 +10667,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Scte35 Splice Insert
+    #
     # @note When making an API call, you may pass Scte35SpliceInsert
     #   data as a hash:
     #
@@ -10551,6 +10736,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Scte35 Time Signal Apos
+    #
     # @note When making an API call, you may pass Scte35TimeSignalApos
     #   data as a hash:
     #
@@ -10629,12 +10816,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Smpte Tt Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SmpteTtDestinationSettings AWS API Documentation
     #
     class SmpteTtDestinationSettings < Aws::EmptyStructure; end
 
+    # Standard Hls Settings
+    #
     # @note When making an API call, you may pass StandardHlsSettings
     #   data as a hash:
     #
@@ -10705,6 +10896,7 @@ module Aws::MediaLive
     #   @return [Array<Types::ChannelEgressEndpoint>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] id
@@ -10884,6 +11076,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Static Key Settings
+    #
     # @note When making an API call, you may pass StaticKeySettings
     #   data as a hash:
     #
@@ -10939,6 +11133,7 @@ module Aws::MediaLive
     #   @return [Array<Types::ChannelEgressEndpoint>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] id
@@ -10998,12 +11193,16 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Teletext Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextDestinationSettings AWS API Documentation
     #
     class TeletextDestinationSettings < Aws::EmptyStructure; end
 
+    # Teletext Source Settings
+    #
     # @note When making an API call, you may pass TeletextSourceSettings
     #   data as a hash:
     #
@@ -11025,6 +11224,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Timecode Config
+    #
     # @note When making an API call, you may pass TimecodeConfig
     #   data as a hash:
     #
@@ -11058,6 +11259,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Ttml Destination Settings
+    #
     # @note When making an API call, you may pass TtmlDestinationSettings
     #   data as a hash:
     #
@@ -11078,6 +11281,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Udp Container Settings
+    #
     # @note When making an API call, you may pass UdpContainerSettings
     #   data as a hash:
     #
@@ -11144,6 +11349,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] m2ts_settings
+    #   M2ts Settings
     #   @return [Types::M2tsSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpContainerSettings AWS API Documentation
@@ -11153,6 +11359,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Udp Group Settings
+    #
     # @note When making an API call, you may pass UdpGroupSettings
     #   data as a hash:
     #
@@ -11190,6 +11398,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Udp Output Settings
+    #
     # @note When making an API call, you may pass UdpOutputSettings
     #   data as a hash:
     #
@@ -11275,6 +11485,7 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] container_settings
+    #   Udp Container Settings
     #   @return [Types::UdpContainerSettings]
     #
     # @!attribute [rw] destination
@@ -11575,6 +11786,7 @@ module Aws::MediaLive
     #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
     #               repeat_frame_msec: 1,
     #             },
+    #             output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #           },
@@ -12075,6 +12287,7 @@ module Aws::MediaLive
     #   @return [Array<Types::OutputDestination>]
     #
     # @!attribute [rw] encoder_settings
+    #   Encoder Settings
     #   @return [Types::EncoderSettings]
     #
     # @!attribute [rw] input_attachments
@@ -12322,6 +12535,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Video Codec Settings
+    #
     # @note When making an API call, you may pass VideoCodecSettings
     #   data as a hash:
     #
@@ -12375,6 +12590,7 @@ module Aws::MediaLive
     #   @return [Types::FrameCaptureSettings]
     #
     # @!attribute [rw] h264_settings
+    #   H264 Settings
     #   @return [Types::H264Settings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings AWS API Documentation
@@ -12557,6 +12773,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Video Selector Pid
+    #
     # @note When making an API call, you may pass VideoSelectorPid
     #   data as a hash:
     #
@@ -12575,6 +12793,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Video Selector Program Id
+    #
     # @note When making an API call, you may pass VideoSelectorProgramId
     #   data as a hash:
     #
@@ -12595,6 +12815,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Video Selector Settings
+    #
     # @note When making an API call, you may pass VideoSelectorSettings
     #   data as a hash:
     #
@@ -12608,9 +12830,11 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] video_selector_pid
+    #   Video Selector Pid
     #   @return [Types::VideoSelectorPid]
     #
     # @!attribute [rw] video_selector_program_id
+    #   Video Selector Program Id
     #   @return [Types::VideoSelectorProgramId]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorSettings AWS API Documentation
@@ -12621,6 +12845,8 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Webvtt Destination Settings
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttDestinationSettings AWS API Documentation

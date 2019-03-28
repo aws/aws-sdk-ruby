@@ -266,6 +266,12 @@ module Aws::PinpointEmail
     #         sending_options: {
     #           sending_enabled: false,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] configuration_set_name
@@ -293,6 +299,11 @@ module Aws::PinpointEmail
     #   that you send using the configuration set.
     #   @return [Types::SendingOptions]
     #
+    # @!attribute [rw] tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the configuration set.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetRequest AWS API Documentation
     #
     class CreateConfigurationSetRequest < Struct.new(
@@ -300,7 +311,8 @@ module Aws::PinpointEmail
       :tracking_options,
       :delivery_options,
       :reputation_options,
-      :sending_options)
+      :sending_options,
+      :tags)
       include Aws::Structure
     end
 
@@ -318,16 +330,28 @@ module Aws::PinpointEmail
     #
     #       {
     #         pool_name: "PoolName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pool_name
     #   The name of the dedicated IP pool.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the pool.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDedicatedIpPoolRequest AWS API Documentation
     #
     class CreateDedicatedIpPoolRequest < Struct.new(
-      :pool_name)
+      :pool_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -375,6 +399,12 @@ module Aws::PinpointEmail
     #             data: "data", # required
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] report_name
@@ -392,12 +422,18 @@ module Aws::PinpointEmail
     #   predictive inbox placement test.
     #   @return [Types::EmailContent]
     #
+    # @!attribute [rw] tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the predictive inbox placement test.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportRequest AWS API Documentation
     #
     class CreateDeliverabilityTestReportRequest < Struct.new(
       :report_name,
       :from_email_address,
-      :content)
+      :content,
+      :tags)
       include Aws::Structure
     end
 
@@ -433,16 +469,28 @@ module Aws::PinpointEmail
     #
     #       {
     #         email_identity: "Identity", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] email_identity
     #   The email address or domain that you want to verify.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the email identity.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateEmailIdentityRequest AWS API Documentation
     #
     class CreateEmailIdentityRequest < Struct.new(
-      :email_identity)
+      :email_identity,
+      :tags)
       include Aws::Structure
     end
 
@@ -465,7 +513,7 @@ module Aws::PinpointEmail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dkim_attributes
@@ -1590,7 +1638,7 @@ module Aws::PinpointEmail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dkim_attributes
@@ -1928,6 +1976,38 @@ module Aws::PinpointEmail
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tag information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array that lists all the tags that are associated with the
+    #   resource. Each tag consists of a required tag key (`Key`) and an
+    #   associated tag value (`Value`)
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -2880,7 +2960,7 @@ module Aws::PinpointEmail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SnsDestination AWS API Documentation
@@ -2889,6 +2969,108 @@ module Aws::PinpointEmail
       :topic_arn)
       include Aws::Structure
     end
+
+    # An object that defines the tags that are associated with a resource.
+    # A *tag* is a label that you optionally define and associate with a
+    # resource in Amazon Pinpoint. Tags can help you categorize and manage
+    # resources in different ways, such as by purpose, owner, environment,
+    # or other criteria. A resource can have as many as 50 tags.
+    #
+    # Each tag consists of a required *tag key* and an associated *tag
+    # value*, both of which you define. A tag key is a general label that
+    # acts as a category for a more specific tag value. A tag value acts as
+    # a descriptor within a tag key. For example, if you have two versions
+    # of an Amazon Pinpoint project, one for internal testing and another
+    # for external use, you might assign a `Stack` tag key to both projects.
+    # The value of the `Stack` tag key might be `Test` for one project
+    # and `Production` for the other project.
+    #
+    # A tag key can contain as many as 128 characters. A tag value can
+    # contain as many as 256 characters. The characters can be Unicode
+    # letters, digits, white space, or one of the following symbols: \_ . :
+    # / = + -. The following additional restrictions apply to tags:
+    #
+    # * Tag keys and values are case sensitive.
+    #
+    # * For each associated resource, each tag key must be unique and it can
+    #   have only one value.
+    #
+    # * The `aws:` prefix is reserved for use by AWS; you can’t use it in
+    #   any tag keys or values that you define. In addition, you can't edit
+    #   or remove tag keys or values that use this prefix. Tags that use
+    #   this prefix don’t count against the limit of 50 tags per resource.
+    #
+    # * You can associate tags with public or shared resources, but the tags
+    #   are available only for your AWS account, not any other accounts that
+    #   share the resource. In addition, the tags are available only for
+    #   resources that are located in the specified AWS Region for your AWS
+    #   account.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that defines a tag. The maximum length
+    #   of a tag key is 128 characters. The minimum length is 1 character.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that defines a tag. The
+    #   maximum length of a tag value is 256 characters. The minimum length
+    #   is 0 characters. If you don’t want a resource to have a specific tag
+    #   value, don’t specify a value for this parameter. Amazon Pinpoint
+    #   will set the value to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add
+    #   one or more tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of the tags that you want to add to the resource. A tag
+    #   consists of a required tag key (`Key`) and an associated tag value
+    #   (`Value`). The maximum length of a tag key is 128 characters. The
+    #   maximum length of a tag value is 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # An object that defines the tracking options for a configuration set.
     # When you use Amazon Pinpoint to send an email, it contains an
@@ -2917,6 +3099,42 @@ module Aws::PinpointEmail
       :custom_redirect_domain)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   remove one or more tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tags (tag keys) that you want to remove from the resource. When
+    #   you specify a tag key, the action removes both that key and its
+    #   associated tag value.
+    #
+    #   To remove more than one tag from the resource, append the `TagKeys`
+    #   parameter and argument for each additional tag to remove, separated
+    #   by an ampersand. For example:
+    #   `/v1/email/tags?ResourceArn=ResourceArn&TagKeys=Key1&TagKeys=Key2`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # A request to change the settings for an event destination for a
     # configuration set.

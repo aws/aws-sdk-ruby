@@ -177,6 +177,12 @@ module Aws::WorkSpaces
     #             rule_desc: "IpRuleDesc",
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] group_name
@@ -191,12 +197,17 @@ module Aws::WorkSpaces
     #   The rules to add to the group.
     #   @return [Array<Types::IpRuleItem>]
     #
+    # @!attribute [rw] tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupRequest AWS API Documentation
     #
     class CreateIpGroupRequest < Struct.new(
       :group_name,
       :group_desc,
-      :user_rules)
+      :user_rules,
+      :tags)
       include Aws::Structure
     end
 
@@ -488,7 +499,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_ids
-    #   The resource identifiers, in the form of directory IDs.
+    #   The resource identifier, in the form of directory IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientPropertiesRequest AWS API Documentation
@@ -941,6 +952,12 @@ module Aws::WorkSpaces
     #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
     #         image_name: "WorkspaceImageName", # required
     #         image_description: "WorkspaceImageDescription", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] ec2_image_id
@@ -959,13 +976,18 @@ module Aws::WorkSpaces
     #   The description of the WorkSpace image.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImageRequest AWS API Documentation
     #
     class ImportWorkspaceImageRequest < Struct.new(
       :ec2_image_id,
       :ingestion_process,
       :image_name,
-      :image_description)
+      :image_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -1903,7 +1925,7 @@ module Aws::WorkSpaces
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
     #   @return [String]
     #
     # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes

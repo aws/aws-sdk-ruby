@@ -164,6 +164,7 @@ module Aws::MediaLive
     GlobalConfiguration = Shapes::StructureShape.new(name: 'GlobalConfiguration')
     GlobalConfigurationInputEndAction = Shapes::StringShape.new(name: 'GlobalConfigurationInputEndAction')
     GlobalConfigurationLowFramerateInputs = Shapes::StringShape.new(name: 'GlobalConfigurationLowFramerateInputs')
+    GlobalConfigurationOutputLockingMode = Shapes::StringShape.new(name: 'GlobalConfigurationOutputLockingMode')
     GlobalConfigurationOutputTimingSource = Shapes::StringShape.new(name: 'GlobalConfigurationOutputTimingSource')
     H264AdaptiveQuantization = Shapes::StringShape.new(name: 'H264AdaptiveQuantization')
     H264ColorMetadata = Shapes::StringShape.new(name: 'H264ColorMetadata')
@@ -1073,6 +1074,7 @@ module Aws::MediaLive
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
     GlobalConfiguration.add_member(:input_end_action, Shapes::ShapeRef.new(shape: GlobalConfigurationInputEndAction, location_name: "inputEndAction"))
     GlobalConfiguration.add_member(:input_loss_behavior, Shapes::ShapeRef.new(shape: InputLossBehavior, location_name: "inputLossBehavior"))
+    GlobalConfiguration.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: GlobalConfigurationOutputLockingMode, location_name: "outputLockingMode"))
     GlobalConfiguration.add_member(:output_timing_source, Shapes::ShapeRef.new(shape: GlobalConfigurationOutputTimingSource, location_name: "outputTimingSource"))
     GlobalConfiguration.add_member(:support_low_framerate_inputs, Shapes::ShapeRef.new(shape: GlobalConfigurationLowFramerateInputs, location_name: "supportLowFramerateInputs"))
     GlobalConfiguration.struct_class = Types::GlobalConfiguration

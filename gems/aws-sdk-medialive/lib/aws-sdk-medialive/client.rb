@@ -455,6 +455,7 @@ module Aws::MediaLive
     # @option params [Array<Types::OutputDestination>] :destinations
     #
     # @option params [Types::EncoderSettings] :encoder_settings
+    #   Encoder Settings
     #
     # @option params [Array<Types::InputAttachment>] :input_attachments
     #
@@ -711,6 +712,7 @@ module Aws::MediaLive
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
     #           repeat_frame_msec: 1,
     #         },
+    #         output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #       },
@@ -1352,6 +1354,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_slate.username #=> String
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_type #=> String, one of "COLOR", "SLATE"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.repeat_frame_msec #=> Integer
+    #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
@@ -2042,6 +2045,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_slate.username #=> String
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_type #=> String, one of "COLOR", "SLATE"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.repeat_frame_msec #=> Integer
+    #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -2690,6 +2694,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_slate.username #=> String
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_type #=> String, one of "COLOR", "SLATE"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.repeat_frame_msec #=> Integer
+    #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -3927,6 +3932,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_slate.username #=> String
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_type #=> String, one of "COLOR", "SLATE"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.repeat_frame_msec #=> Integer
+    #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -4444,6 +4450,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_slate.username #=> String
     #   resp.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_type #=> String, one of "COLOR", "SLATE"
     #   resp.encoder_settings.global_configuration.input_loss_behavior.repeat_frame_msec #=> Integer
+    #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -4799,6 +4806,7 @@ module Aws::MediaLive
     # @option params [Array<Types::OutputDestination>] :destinations
     #
     # @option params [Types::EncoderSettings] :encoder_settings
+    #   Encoder Settings
     #
     # @option params [Array<Types::InputAttachment>] :input_attachments
     #
@@ -5048,6 +5056,7 @@ module Aws::MediaLive
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
     #           repeat_frame_msec: 1,
     #         },
+    #         output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #       },
@@ -5684,6 +5693,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_slate.username #=> String
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.input_loss_image_type #=> String, one of "COLOR", "SLATE"
     #   resp.channel.encoder_settings.global_configuration.input_loss_behavior.repeat_frame_msec #=> Integer
+    #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
@@ -6174,7 +6184,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -344,6 +344,9 @@ module Aws::WorkSpaces
     # @option params [Array<Types::IpRuleItem>] :user_rules
     #   The rules to add to the group.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #
     # @return [Types::CreateIpGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIpGroupResult#group_id #group_id} => String
@@ -357,6 +360,12 @@ module Aws::WorkSpaces
     #       {
     #         ip_rule: "IpRule",
     #         rule_desc: "IpRuleDesc",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -637,7 +646,7 @@ module Aws::WorkSpaces
     # WorkSpaces clients.
     #
     # @option params [required, Array<String>] :resource_ids
-    #   The resource identifiers, in the form of directory IDs.
+    #   The resource identifier, in the form of directory IDs.
     #
     # @return [Types::DescribeClientPropertiesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1069,6 +1078,9 @@ module Aws::WorkSpaces
     # @option params [required, String] :image_description
     #   The description of the WorkSpace image.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #
     # @return [Types::ImportWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportWorkspaceImageResult#image_id #image_id} => String
@@ -1080,6 +1092,12 @@ module Aws::WorkSpaces
     #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1176,7 +1194,7 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the properties of the specified Amazon WorkSpaces client.
+    # Modifies the properties of the specified Amazon WorkSpaces clients.
     #
     # @option params [required, String] :resource_id
     #   The resource identifiers, in the form of directory IDs.
@@ -1323,7 +1341,7 @@ module Aws::WorkSpaces
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html
     #
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
@@ -1549,7 +1567,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

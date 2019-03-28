@@ -275,6 +275,10 @@ module Aws::PinpointEmail
     #   An object that defines whether or not Amazon Pinpoint can send email
     #   that you send using the configuration set.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the configuration set.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -294,6 +298,12 @@ module Aws::PinpointEmail
     #     sending_options: {
     #       sending_enabled: false,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSet AWS API Documentation
@@ -377,12 +387,22 @@ module Aws::PinpointEmail
     # @option params [required, String] :pool_name
     #   The name of the dedicated IP pool.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the pool.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_dedicated_ip_pool({
     #     pool_name: "PoolName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDedicatedIpPool AWS API Documentation
@@ -416,6 +436,10 @@ module Aws::PinpointEmail
     #   The HTML body of the message that you sent when you performed the
     #   predictive inbox placement test.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the predictive inbox placement test.
+    #
     # @return [Types::CreateDeliverabilityTestReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeliverabilityTestReportResponse#report_id #report_id} => String
@@ -447,6 +471,12 @@ module Aws::PinpointEmail
     #         data: "data", # required
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -485,6 +515,10 @@ module Aws::PinpointEmail
     # @option params [required, String] :email_identity
     #   The email address or domain that you want to verify.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An object that defines the tags (keys and values) that you want to
+    #   associate with the email identity.
+    #
     # @return [Types::CreateEmailIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEmailIdentityResponse#identity_type #identity_type} => String
@@ -495,6 +529,12 @@ module Aws::PinpointEmail
     #
     #   resp = client.create_email_identity({
     #     email_identity: "Identity", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1236,6 +1276,42 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Retrieve a list of the tags (keys and values) that are associated with
+    # a specific resource. A *tag* is a label that you optionally define and
+    # associate with a resource in Amazon Pinpoint. Each tag consists of a
+    # required *tag key* and an optional associated *tag value*. A tag key
+    # is a general label that acts as a category for more specific tag
+    # values. A tag value acts as a descriptor within a tag key.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tag information for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Enable or disable the automatic warm-up feature for dedicated IP
     # addresses.
     #
@@ -1738,6 +1814,85 @@ module Aws::PinpointEmail
       req.send_request(options)
     end
 
+    # Add one or more tags (keys and values) to one or more specified
+    # resources. A *tag* is a label that you optionally define and associate
+    # with a resource in Amazon Pinpoint. Tags can help you categorize and
+    # manage resources in different ways, such as by purpose, owner,
+    # environment, or other criteria. A resource can have as many as 50
+    # tags.
+    #
+    # Each tag consists of a required *tag key* and an associated *tag
+    # value*, both of which you define. A tag key is a general label that
+    # acts as a category for more specific tag values. A tag value acts as a
+    # descriptor within a tag key.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add
+    #   one or more tags to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of the tags that you want to add to the resource. A tag
+    #   consists of a required tag key (`Key`) and an associated tag value
+    #   (`Value`). The maximum length of a tag key is 128 characters. The
+    #   maximum length of a tag value is 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove one or more tags (keys and values) from a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to remove
+    #   one or more tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tags (tag keys) that you want to remove from the resource. When
+    #   you specify a tag key, the action removes both that key and its
+    #   associated tag value.
+    #
+    #   To remove more than one tag from the resource, append the `TagKeys`
+    #   parameter and argument for each additional tag to remove, separated by
+    #   an ampersand. For example:
+    #   `/v1/email/tags?ResourceArn=ResourceArn&TagKeys=Key1&TagKeys=Key2`
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Update the configuration of an event destination for a configuration
     # set.
     #
@@ -1812,7 +1967,7 @@ module Aws::PinpointEmail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
