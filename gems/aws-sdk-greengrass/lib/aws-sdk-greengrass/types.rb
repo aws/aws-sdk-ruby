@@ -369,6 +369,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -382,12 +385,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateConnectorDefinitionRequest AWS API Documentation
     #
     class CreateConnectorDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -498,6 +505,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -510,12 +520,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionRequest AWS API Documentation
     #
     class CreateCoreDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -685,6 +699,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -697,12 +714,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionRequest AWS API Documentation
     #
     class CreateDeviceDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -846,6 +867,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -858,12 +882,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionRequest AWS API Documentation
     #
     class CreateFunctionDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1045,6 +1073,9 @@ module Aws::Greengrass
     #           subscription_definition_version_arn: "__string",
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1057,12 +1088,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupRequest AWS API Documentation
     #
     class CreateGroupRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1196,6 +1231,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1208,12 +1246,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionRequest AWS API Documentation
     #
     class CreateLoggerDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1351,6 +1393,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1363,12 +1408,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionRequest AWS API Documentation
     #
     class CreateResourceDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1580,6 +1629,9 @@ module Aws::Greengrass
     #           ],
     #         },
     #         name: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -1592,12 +1644,16 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionRequest AWS API Documentation
     #
     class CreateSubscriptionDefinitionRequest < Struct.new(
       :amzn_client_token,
       :initial_version,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1691,6 +1747,30 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # Information about a definition.
     #
     # @!attribute [rw] arn
@@ -1723,6 +1803,9 @@ module Aws::Greengrass
     #   The name of the definition.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DefinitionInformation AWS API Documentation
     #
     class DefinitionInformation < Struct.new(
@@ -1732,7 +1815,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1903,6 +1987,28 @@ module Aws::Greengrass
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinitionResponse AWS API Documentation
     #
     class DeleteSubscriptionDefinitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
 
     # Information about a deployment.
     #
@@ -2572,6 +2678,9 @@ module Aws::Greengrass
     #   Error message
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatusResponse AWS API Documentation
     #
     class GetBulkDeploymentStatusResponse < Struct.new(
@@ -2579,7 +2688,8 @@ module Aws::Greengrass
       :bulk_deployment_status,
       :created_at,
       :error_details,
-      :error_message)
+      :error_message,
+      :tags)
       include Aws::Structure
     end
 
@@ -2656,6 +2766,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinitionResponse AWS API Documentation
     #
     class GetConnectorDefinitionResponse < Struct.new(
@@ -2665,7 +2778,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -2774,6 +2888,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionResponse AWS API Documentation
     #
     class GetCoreDefinitionResponse < Struct.new(
@@ -2783,7 +2900,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -2942,6 +3060,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionResponse AWS API Documentation
     #
     class GetDeviceDefinitionResponse < Struct.new(
@@ -2951,7 +3072,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3058,6 +3180,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionResponse AWS API Documentation
     #
     class GetFunctionDefinitionResponse < Struct.new(
@@ -3067,7 +3192,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3256,6 +3382,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupResponse AWS API Documentation
     #
     class GetGroupResponse < Struct.new(
@@ -3265,7 +3394,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3363,6 +3493,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionResponse AWS API Documentation
     #
     class GetLoggerDefinitionResponse < Struct.new(
@@ -3372,7 +3505,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3475,6 +3609,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionResponse AWS API Documentation
     #
     class GetResourceDefinitionResponse < Struct.new(
@@ -3484,7 +3621,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -3604,6 +3742,9 @@ module Aws::Greengrass
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionResponse AWS API Documentation
     #
     class GetSubscriptionDefinitionResponse < Struct.new(
@@ -3613,7 +3754,8 @@ module Aws::Greengrass
       :last_updated_timestamp,
       :latest_version,
       :latest_version_arn,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -4652,6 +4794,33 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A list of versions.
     #
     # @!attribute [rw] next_token
@@ -5182,6 +5351,9 @@ module Aws::Greengrass
     #         amzn_client_token: "__string",
     #         execution_role_arn: "__string",
     #         input_file_uri: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -5205,12 +5377,16 @@ module Aws::Greengrass
     #   ''NewDeployment'' deployment types.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeploymentRequest AWS API Documentation
     #
     class StartBulkDeploymentRequest < Struct.new(
       :amzn_client_token,
       :execution_role_arn,
-      :input_file_uri)
+      :input_file_uri,
+      :tags)
       include Aws::Structure
     end
 

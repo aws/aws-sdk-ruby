@@ -325,6 +325,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateConnectorDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectorDefinitionResponse#arn #arn} => String
@@ -351,6 +353,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -432,6 +437,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateCoreDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCoreDefinitionResponse#arn #arn} => String
@@ -457,6 +464,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -584,6 +594,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateDeviceDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeviceDefinitionResponse#arn #arn} => String
@@ -609,6 +621,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -690,6 +705,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateFunctionDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFunctionDefinitionResponse#arn #arn} => String
@@ -749,6 +766,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -868,6 +888,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGroupResponse#arn #arn} => String
@@ -892,6 +914,9 @@ module Aws::Greengrass
     #       subscription_definition_version_arn: "__string",
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1012,6 +1037,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateLoggerDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoggerDefinitionResponse#arn #arn} => String
@@ -1038,6 +1065,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1119,6 +1149,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateResourceDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResourceDefinitionResponse#arn #arn} => String
@@ -1171,6 +1203,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1337,6 +1372,8 @@ module Aws::Greengrass
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::CreateSubscriptionDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSubscriptionDefinitionResponse#arn #arn} => String
@@ -1362,6 +1399,9 @@ module Aws::Greengrass
     #       ],
     #     },
     #     name: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1427,6 +1467,34 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def create_subscription_definition_version(params = {}, options = {})
       req = build_request(:create_subscription_definition_version, params)
+      req.send_request(options)
+    end
+
+    # Add resource tags to a Greengrass Resource. Valid resources are Group,
+    # Connector, Core, Device, Function, Logger, Subscription, and Resource
+    # Defintions, and also BulkDeploymentIds.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -1598,6 +1666,30 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Remove resource tags from a Greengrass Resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Disassociates the role from a group.
     #
     # @option params [required, String] :group_id
@@ -1685,6 +1777,7 @@ module Aws::Greengrass
     #   * {Types::GetBulkDeploymentStatusResponse#created_at #created_at} => String
     #   * {Types::GetBulkDeploymentStatusResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::GetBulkDeploymentStatusResponse#error_message #error_message} => String
+    #   * {Types::GetBulkDeploymentStatusResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1703,6 +1796,8 @@ module Aws::Greengrass
     #   resp.error_details[0].detailed_error_code #=> String
     #   resp.error_details[0].detailed_error_message #=> String
     #   resp.error_message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatus AWS API Documentation
     #
@@ -1759,6 +1854,7 @@ module Aws::Greengrass
     #   * {Types::GetConnectorDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetConnectorDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetConnectorDefinitionResponse#name #name} => String
+    #   * {Types::GetConnectorDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1775,6 +1871,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinition AWS API Documentation
     #
@@ -1848,6 +1946,7 @@ module Aws::Greengrass
     #   * {Types::GetCoreDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetCoreDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetCoreDefinitionResponse#name #name} => String
+    #   * {Types::GetCoreDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1864,6 +1963,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinition AWS API Documentation
     #
@@ -1971,6 +2072,7 @@ module Aws::Greengrass
     #   * {Types::GetDeviceDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetDeviceDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetDeviceDefinitionResponse#name #name} => String
+    #   * {Types::GetDeviceDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1987,6 +2089,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinition AWS API Documentation
     #
@@ -2058,6 +2162,7 @@ module Aws::Greengrass
     #   * {Types::GetFunctionDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetFunctionDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetFunctionDefinitionResponse#name #name} => String
+    #   * {Types::GetFunctionDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2074,6 +2179,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinition AWS API Documentation
     #
@@ -2162,6 +2269,7 @@ module Aws::Greengrass
     #   * {Types::GetGroupResponse#latest_version #latest_version} => String
     #   * {Types::GetGroupResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetGroupResponse#name #name} => String
+    #   * {Types::GetGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2178,6 +2286,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroup AWS API Documentation
     #
@@ -2311,6 +2421,7 @@ module Aws::Greengrass
     #   * {Types::GetLoggerDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetLoggerDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetLoggerDefinitionResponse#name #name} => String
+    #   * {Types::GetLoggerDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2327,6 +2438,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinition AWS API Documentation
     #
@@ -2397,6 +2510,7 @@ module Aws::Greengrass
     #   * {Types::GetResourceDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetResourceDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetResourceDefinitionResponse#name #name} => String
+    #   * {Types::GetResourceDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2413,6 +2527,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinition AWS API Documentation
     #
@@ -2512,6 +2628,7 @@ module Aws::Greengrass
     #   * {Types::GetSubscriptionDefinitionResponse#latest_version #latest_version} => String
     #   * {Types::GetSubscriptionDefinitionResponse#latest_version_arn #latest_version_arn} => String
     #   * {Types::GetSubscriptionDefinitionResponse#name #name} => String
+    #   * {Types::GetSubscriptionDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2528,6 +2645,8 @@ module Aws::Greengrass
     #   resp.latest_version #=> String
     #   resp.latest_version_arn #=> String
     #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinition AWS API Documentation
     #
@@ -2736,6 +2855,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListConnectorDefinitions AWS API Documentation
@@ -2814,6 +2935,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitions AWS API Documentation
@@ -2932,6 +3055,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitions AWS API Documentation
@@ -3010,6 +3135,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitions AWS API Documentation
@@ -3195,6 +3322,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitions AWS API Documentation
@@ -3273,6 +3402,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitions AWS API Documentation
@@ -3351,6 +3482,8 @@ module Aws::Greengrass
     #   resp.definitions[0].latest_version #=> String
     #   resp.definitions[0].latest_version_arn #=> String
     #   resp.definitions[0].name #=> String
+    #   resp.definitions[0].tags #=> Hash
+    #   resp.definitions[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitions AWS API Documentation
@@ -3359,6 +3492,34 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def list_subscription_definitions(params = {}, options = {})
       req = build_request(:list_subscription_definitions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of resource tags for a resource arn.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -3424,6 +3585,8 @@ module Aws::Greengrass
     #   Currently, AWS IoT Greengrass supports only ''NewDeployment''
     #   deployment types.
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::StartBulkDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBulkDeploymentResponse#bulk_deployment_arn #bulk_deployment_arn} => String
@@ -3435,6 +3598,9 @@ module Aws::Greengrass
     #     amzn_client_token: "__string",
     #     execution_role_arn: "__string",
     #     input_file_uri: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3759,7 +3925,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

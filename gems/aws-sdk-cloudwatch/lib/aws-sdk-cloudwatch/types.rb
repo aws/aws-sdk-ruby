@@ -564,7 +564,7 @@ module Aws::CloudWatch
     #   that align with the value of the metric's `Period` and sync up with
     #   the beginning and end of an hour. For example, if the `Period` of a
     #   metric is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can
-    #   get a faster response from CloudWatch then setting 12:07 or 12:29 as
+    #   get a faster response from CloudWatch than setting 12:07 or 12:29 as
     #   the `StartTime`.
     #   @return [Time]
     #
@@ -575,7 +575,7 @@ module Aws::CloudWatch
     #   that align with the value of the metric's `Period` and sync up with
     #   the beginning and end of an hour. For example, if the `Period` of a
     #   metric is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get
-    #   a faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   a faster response from CloudWatch than setting 12:07 or 12:29 as the
     #   `EndTime`.
     #   @return [Time]
     #
@@ -619,11 +619,16 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] messages
-    #   Contains a message about the operation or the results, if the
-    #   operation results in such a message. Examples of messages that may
-    #   be returned include `Maximum number of allowed metrics exceeded` and
-    #   `You are not authorized to search one or more metrics`. If there is
-    #   a message, as much of the operation as possible is still executed.
+    #   Contains a message about this `GetMetricData` operation, if the
+    #   operation results in such a message. An example of a message that
+    #   may be returned is `Maximum number of allowed metrics exceeded`. If
+    #   there is a message, as much of the operation as possible is still
+    #   executed.
+    #
+    #   A message appears here only if it is related to the global
+    #   `GetMetricData` operation. Any message about a specific metric
+    #   returned by the operation appears in the `MetricDataResult` object
+    #   returned for that metric.
     #   @return [Array<Types::MessageData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataOutput AWS API Documentation
@@ -826,8 +831,7 @@ module Aws::CloudWatch
     #   response with the content-type set to `text/xml`. The image data is
     #   in a `MetricWidgetImage` field. For example:
     #
-    #   ` <GetMetricWidgetImageResponse
-    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #   ` <GetMetricWidgetImageResponse xmlns=<URLstring>>`
     #
     #   ` <GetMetricWidgetImageResult>`
     #
@@ -974,6 +978,42 @@ module Aws::CloudWatch
     class ListMetricsOutput < Struct.new(
       :metrics,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch resource that you want to view tags for.
+    #   For more information on ARN format, see [Example ARNs][1] in the
+    #   *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tag keys and values associated with the resource you
+    #   specified.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1206,9 +1246,13 @@ module Aws::CloudWatch
     # structures can include as many as 10 structures that contain a
     # `MetricStat` parameter to retrieve a metric, and as many as 10
     # structures that contain the `Expression` parameter to perform a math
-    # expression. Any expression used in a `PutMetricAlarm` operation must
-    # return a single time series. For more information, see [Metric Math
-    # Syntax and Functions][1] in the *Amazon CloudWatch User Guide*.
+    # expression. Of those `Expression` structures, one must have `True` as
+    # the value for `ReturnData`. The result of this expression is the value
+    # the alarm watches.
+    #
+    # Any expression used in a `PutMetricAlarm` operation must return a
+    # single time series. For more information, see [Metric Math Syntax and
+    # Functions][1] in the *Amazon CloudWatch User Guide*.
     #
     # Some of the parameters of this structure also have different uses
     # whether you are using this structure in a `GetMetricData` operation or
@@ -1632,6 +1676,12 @@ module Aws::CloudWatch
     #             return_data: false,
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] alarm_name
@@ -1677,6 +1727,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1697,6 +1748,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1847,12 +1899,27 @@ module Aws::CloudWatch
     #   in the `Metrics` array either retrieves a metric or performs a math
     #   expression.
     #
+    #   One item in the `Metrics` array is the expression that the alarm
+    #   watches. You designate this expression by setting `ReturnValue` to
+    #   true for this object in the array. For more information, see
+    #   MetricDataQuery.
+    #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
     #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
     #   operation. Instead, you retrieve the metrics you are using in your
     #   math expression as part of the `Metrics` array.
     #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the alarm or dashboard.
+    #   You can associate as many as 50 tags with an alarm.
+    #
+    #   Tags can help you organize and categorize your resources. You can
+    #   also use them to scope user permissions, by granting a user
+    #   permission to access or change only resources with certain tag
+    #   values.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
     #
@@ -1876,7 +1943,8 @@ module Aws::CloudWatch
       :comparison_operator,
       :treat_missing_data,
       :evaluate_low_sample_count_percentile,
-      :metrics)
+      :metrics,
+      :tags)
       include Aws::Structure
     end
 
@@ -2007,6 +2075,106 @@ module Aws::CloudWatch
       :maximum)
       include Aws::Structure
     end
+
+    # A key-value pair associated with a CloudWatch resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A string that you can use to assign a value. The combination of tag
+    #   keys and values can help you organize and categorize your resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the specified tag key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch resource that you're adding tags to. For
+    #   more information on ARN format, see [Example ARNs][1] in the *Amazon
+    #   Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the CloudWatch resource that you're removing tags from.
+    #   For more information on ARN format, see [Example ARNs][1] in the
+    #   *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
   end
 end

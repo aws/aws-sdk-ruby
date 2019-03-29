@@ -264,7 +264,7 @@ module Aws::Comprehend
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
     #
     # @option params [required, Array<String>] :text_list
     #   A list containing the text of the input documents. The list can
@@ -526,6 +526,17 @@ module Aws::Comprehend
     #   The language of the input documents. You can specify English ("en")
     #   or Spanish ("es"). All documents must be in the same language.
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentClassifierResponse#document_classifier_arn #document_classifier_arn} => String
@@ -540,6 +551,7 @@ module Aws::Comprehend
     #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -586,6 +598,17 @@ module Aws::Comprehend
     #   The language of the input documents. All documents must be in the same
     #   language. Only English ("en") is currently supported.
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEntityRecognizerResponse#entity_recognizer_arn #entity_recognizer_arn} => String
@@ -613,6 +636,7 @@ module Aws::Comprehend
     #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -720,7 +744,9 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties.input_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.document_classification_job_properties.output_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties.data_access_role_arn #=> String
+    #   resp.document_classification_job_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJob AWS API Documentation
     #
@@ -766,6 +792,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.recall #=> Float
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.document_classifier_properties.data_access_role_arn #=> String
+    #   resp.document_classifier_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -804,7 +831,9 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.dominant_language_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties.data_access_role_arn #=> String
+    #   resp.dominant_language_detection_job_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDominantLanguageDetectionJob AWS API Documentation
     #
@@ -844,8 +873,10 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties.data_access_role_arn #=> String
+    #   resp.entities_detection_job_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
     #
@@ -896,6 +927,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types #=> Array
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties.data_access_role_arn #=> String
+    #   resp.entity_recognizer_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -934,8 +966,10 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties.data_access_role_arn #=> String
+    #   resp.key_phrases_detection_job_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob AWS API Documentation
     #
@@ -974,8 +1008,10 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties.data_access_role_arn #=> String
+    #   resp.sentiment_detection_job_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob AWS API Documentation
     #
@@ -1013,7 +1049,10 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.topics_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.topics_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.topics_detection_job_properties.number_of_topics #=> Integer
+    #   resp.topics_detection_job_properties.data_access_role_arn #=> String
+    #   resp.topics_detection_job_properties.volume_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTopicsDetectionJob AWS API Documentation
     #
@@ -1030,7 +1069,7 @@ module Aws::Comprehend
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
     #
     # @option params [required, String] :text
     #   A UTF-8 text string. Each string should contain at least 20 characters
@@ -1266,7 +1305,9 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.document_classification_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.document_classification_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.document_classification_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobs AWS API Documentation
@@ -1329,6 +1370,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.recall #=> Float
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.document_classifier_properties_list[0].data_access_role_arn #=> String
+    #   resp.document_classifier_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -1385,7 +1427,9 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.dominant_language_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDominantLanguageDetectionJobs AWS API Documentation
@@ -1442,8 +1486,10 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.entities_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs AWS API Documentation
@@ -1517,6 +1563,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types #=> Array
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties_list[0].data_access_role_arn #=> String
+    #   resp.entity_recognizer_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -1572,8 +1619,10 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListKeyPhrasesDetectionJobs AWS API Documentation
@@ -1629,8 +1678,10 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.sentiment_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListSentimentDetectionJobs AWS API Documentation
@@ -1686,7 +1737,10 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.topics_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.topics_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.topics_detection_job_properties_list[0].number_of_topics #=> Integer
+    #   resp.topics_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.topics_detection_job_properties_list[0].volume_kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTopicsDetectionJobs AWS API Documentation
@@ -1726,6 +1780,17 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::StartDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentClassificationJobResponse#job_id #job_id} => String
@@ -1742,9 +1807,11 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1791,6 +1858,17 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::StartDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDominantLanguageDetectionJobResponse#job_id #job_id} => String
@@ -1805,10 +1883,12 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1872,6 +1952,17 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::StartEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEntitiesDetectionJobResponse#job_id #job_id} => String
@@ -1886,12 +1977,14 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     entity_recognizer_arn: "EntityRecognizerArn",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1941,6 +2034,17 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::StartKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartKeyPhrasesDetectionJobResponse#job_id #job_id} => String
@@ -1955,11 +2059,13 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -2009,6 +2115,17 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::StartSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSentimentDetectionJobResponse#job_id #job_id} => String
@@ -2023,11 +2140,13 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -2079,6 +2198,17 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
+    #   either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
     # @return [Types::StartTopicsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTopicsDetectionJobResponse#job_id #job_id} => String
@@ -2093,11 +2223,13 @@ module Aws::Comprehend
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     job_name: "JobName",
     #     number_of_topics: 1,
     #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -2355,7 +2487,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

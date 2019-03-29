@@ -696,7 +696,7 @@ module Aws::CloudWatch
     #   align with the value of the metric's `Period` and sync up with the
     #   beginning and end of an hour. For example, if the `Period` of a metric
     #   is 5 minutes, specifying 12:05 or 12:30 as `StartTime` can get a
-    #   faster response from CloudWatch then setting 12:07 or 12:29 as the
+    #   faster response from CloudWatch than setting 12:07 or 12:29 as the
     #   `StartTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
@@ -706,7 +706,7 @@ module Aws::CloudWatch
     #   align with the value of the metric's `Period` and sync up with the
     #   beginning and end of an hour. For example, if the `Period` of a metric
     #   is 5 minutes, specifying 12:05 or 12:30 as `EndTime` can get a faster
-    #   response from CloudWatch then setting 12:07 or 12:29 as the `EndTime`.
+    #   response from CloudWatch than setting 12:07 or 12:29 as the `EndTime`.
     #
     # @option params [String] :next_token
     #   Include this value, if it was returned by the previous call, to get
@@ -1038,8 +1038,7 @@ module Aws::CloudWatch
     #   response with the content-type set to `text/xml`. The image data is in
     #   a `MetricWidgetImage` field. For example:
     #
-    #   ` <GetMetricWidgetImageResponse
-    #   xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">`
+    #   ` <GetMetricWidgetImageResponse xmlns=<URLstring>>`
     #
     #   ` <GetMetricWidgetImageResult>`
     #
@@ -1199,6 +1198,43 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Displays the tags associated with a CloudWatch resource. Alarms
+    # support tagging.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch resource that you want to view tags for. For
+    #   more information on ARN format, see [Example ARNs][1] in the *Amazon
+    #   Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates a dashboard if it does not already exist, or updates an
     # existing dashboard. If you update a dashboard, the entire contents are
     # replaced with what you specify here.
@@ -1286,8 +1322,7 @@ module Aws::CloudWatch
     #
     # * `ec2:TerminateInstances` for alarms with terminate actions
     #
-    # * `ec2:DescribeInstanceRecoveryAttribute` and `ec2:RecoverInstances`
-    #   for alarms with recover actions
+    # * No specific permissions are needed for alarms with recover actions
     #
     # If you have read/write permissions for Amazon CloudWatch but not for
     # Amazon EC2, you can still create an alarm, but the stop or terminate
@@ -1352,6 +1387,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1371,6 +1407,7 @@ module Aws::CloudWatch
     #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
     #   `arn:aws:automate:region:ec2:terminate` \|
     #   `arn:aws:automate:region:ec2:recover` \|
+    #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
@@ -1506,11 +1543,24 @@ module Aws::CloudWatch
     #   the `Metrics` array either retrieves a metric or performs a math
     #   expression.
     #
+    #   One item in the `Metrics` array is the expression that the alarm
+    #   watches. You designate this expression by setting `ReturnValue` to
+    #   true for this object in the array. For more information, see
+    #   MetricDataQuery.
+    #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
     #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
     #   operation. Instead, you retrieve the metrics you are using in your
     #   math expression as part of the `Metrics` array.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the alarm or dashboard.
+    #   You can associate as many as 50 tags with an alarm.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions, by granting a user permission to
+    #   access or change only resources with certain tag values.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1564,6 +1614,12 @@ module Aws::CloudWatch
     #         return_data: false,
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -1600,9 +1656,9 @@ module Aws::CloudWatch
     # example, NaN, +Infinity, -Infinity) are not supported.
     #
     # You can use up to 10 dimensions per metric to further clarify what
-    # data the metric collects. For more information about specifying
-    # dimensions, see [Publishing Metrics][1] in the *Amazon CloudWatch User
-    # Guide*.
+    # data the metric collects. Each dimension consists of a Name and Value
+    # pair. For more information about specifying dimensions, see
+    # [Publishing Metrics][1] in the *Amazon CloudWatch User Guide*.
     #
     # Data points with time stamps from 24 hours ago or longer can take at
     # least 48 hours to become available for GetMetricData or
@@ -1719,6 +1775,91 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Assigns one or more tags (key-value pairs) to the specified CloudWatch
+    # resource. Tags can help you organize and categorize your resources.
+    # You can also use them to scope user permissions, by granting a user
+    # permission to access or change only resources with certain tag values.
+    # In CloudWatch, alarms can be tagged.
+    #
+    # Tags don't have any semantic meaning to AWS and are interpreted
+    # strictly as strings of characters.
+    #
+    # You can use the `TagResource` action with a resource that already has
+    # tags. If you specify a new tag key for the resource, this tag is
+    # appended to the list of tags associated with the resource. If you
+    # specify a tag key that is already associated with the resource, the
+    # new tag value that you specify replaces the previous value for that
+    # tag.
+    #
+    # You can associate as many as 50 tags with a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch resource that you're adding tags to. For
+    #   more information on ARN format, see [Example ARNs][1] in the *Amazon
+    #   Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The list of key-value pairs to associate with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the CloudWatch resource that you're removing tags from.
+    #   For more information on ARN format, see [Example ARNs][1] in the
+    #   *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1732,7 +1873,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

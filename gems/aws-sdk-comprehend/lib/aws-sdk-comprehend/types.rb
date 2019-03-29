@@ -464,6 +464,7 @@ module Aws::Comprehend
     #         },
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -494,6 +495,18 @@ module Aws::Comprehend
     #   language.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
     #
     class CreateDocumentClassifierRequest < Struct.new(
@@ -501,7 +514,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :input_data_config,
       :client_request_token,
-      :language_code)
+      :language_code,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -541,6 +555,7 @@ module Aws::Comprehend
     #         },
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] recognizer_name
@@ -575,6 +590,18 @@ module Aws::Comprehend
     #   same language. Only English ("en") is currently supported.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
     #
     class CreateEntityRecognizerRequest < Struct.new(
@@ -582,7 +609,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :input_data_config,
       :client_request_token,
-      :language_code)
+      :language_code,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -1194,6 +1222,18 @@ module Aws::Comprehend
     #   your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobProperties AWS API Documentation
     #
     class DocumentClassificationJobProperties < Struct.new(
@@ -1206,7 +1246,8 @@ module Aws::Comprehend
       :document_classifier_arn,
       :input_data_config,
       :output_data_config,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -1342,6 +1383,18 @@ module Aws::Comprehend
     #   data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -1355,7 +1408,8 @@ module Aws::Comprehend
       :training_end_time,
       :input_data_config,
       :classifier_metadata,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -1476,6 +1530,18 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguageDetectionJobProperties AWS API Documentation
     #
     class DominantLanguageDetectionJobProperties < Struct.new(
@@ -1487,7 +1553,8 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -1589,6 +1656,18 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobProperties AWS API Documentation
     #
     class EntitiesDetectionJobProperties < Struct.new(
@@ -1602,7 +1681,8 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :language_code,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -1930,6 +2010,18 @@ module Aws::Comprehend
     #   data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -1943,7 +2035,8 @@ module Aws::Comprehend
       :training_end_time,
       :input_data_config,
       :recognizer_metadata,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -2140,6 +2233,18 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrasesDetectionJobProperties AWS API Documentation
     #
     class KeyPhrasesDetectionJobProperties < Struct.new(
@@ -2152,7 +2257,8 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :language_code,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -2594,6 +2700,7 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -2609,10 +2716,27 @@ module Aws::Comprehend
     #   is a compressed archive that contains the ouput of the operation.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   The KmsKeyId can be one of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * KMS Key Alias: `"alias/ExampleAlias"`
+    #
+    #   * ARN of a KMS Key Alias:
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/OutputDataConfig AWS API Documentation
     #
     class OutputDataConfig < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -2731,6 +2855,18 @@ module Aws::Comprehend
     #   access to your input data.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentDetectionJobProperties AWS API Documentation
     #
     class SentimentDetectionJobProperties < Struct.new(
@@ -2743,7 +2879,8 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :language_code,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -2792,9 +2929,11 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] job_name
@@ -2828,6 +2967,18 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJobRequest AWS API Documentation
     #
     class StartDocumentClassificationJobRequest < Struct.new(
@@ -2836,7 +2987,8 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -2881,10 +3033,12 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -2918,6 +3072,18 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDominantLanguageDetectionJobRequest AWS API Documentation
     #
     class StartDominantLanguageDetectionJobRequest < Struct.new(
@@ -2925,7 +3091,8 @@ module Aws::Comprehend
       :output_data_config,
       :data_access_role_arn,
       :job_name,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -2967,12 +3134,14 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         entity_recognizer_arn: "EntityRecognizerArn",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3021,6 +3190,18 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobRequest AWS API Documentation
     #
     class StartEntitiesDetectionJobRequest < Struct.new(
@@ -3030,7 +3211,8 @@ module Aws::Comprehend
       :job_name,
       :entity_recognizer_arn,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -3077,11 +3259,13 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3121,6 +3305,18 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJobRequest AWS API Documentation
     #
     class StartKeyPhrasesDetectionJobRequest < Struct.new(
@@ -3129,7 +3325,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -3171,11 +3368,13 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3215,6 +3414,18 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJobRequest AWS API Documentation
     #
     class StartSentimentDetectionJobRequest < Struct.new(
@@ -3223,7 +3434,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -3265,11 +3477,13 @@ module Aws::Comprehend
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
     #         },
     #         data_access_role_arn: "IamRoleArn", # required
     #         job_name: "JobName",
     #         number_of_topics: 1,
     #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3310,6 +3524,18 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJobRequest AWS API Documentation
     #
     class StartTopicsDetectionJobRequest < Struct.new(
@@ -3318,7 +3544,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :number_of_topics,
-      :client_request_token)
+      :client_request_token,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
@@ -3667,6 +3894,24 @@ module Aws::Comprehend
     #   detection job. The default is 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TopicsDetectionJobProperties AWS API Documentation
     #
     class TopicsDetectionJobProperties < Struct.new(
@@ -3678,7 +3923,9 @@ module Aws::Comprehend
       :end_time,
       :input_data_config,
       :output_data_config,
-      :number_of_topics)
+      :number_of_topics,
+      :data_access_role_arn,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
