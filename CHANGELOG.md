@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
 2.11.250 (2019-03-28)
 ------------------
 
