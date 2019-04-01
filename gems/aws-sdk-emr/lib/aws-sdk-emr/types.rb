@@ -318,7 +318,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
     # @note When making an API call, you may pass Application
     #   data as a hash:
@@ -745,13 +745,13 @@ module Aws::EMR
     #   release version, for example, `emr-5.14.0`. For more information
     #   about Amazon EMR release versions and included application versions
     #   and features, see
-    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
+    #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
     #   release label applies only to Amazon EMR releases versions 4.x and
     #   later. Earlier versions use `AmiVersion`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [String]
     #
     # @!attribute [rw] auto_terminate
@@ -861,7 +861,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #   @return [Types::KerberosAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
@@ -1031,7 +1031,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
     # @note When making an API call, you may pass Configuration
     #   data as a hash:
@@ -1095,7 +1095,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfigurationInput AWS API Documentation
@@ -2179,6 +2179,21 @@ module Aws::EMR
     #   group (master, core, and task).
     #   @return [Array<Types::Configuration>]
     #
+    # @!attribute [rw] configurations_version
+    #   The version number of the requested configuration specification for
+    #   this instance group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_successfully_applied_configurations
+    #   A list of configurations that were successfully applied for an
+    #   instance group last time.
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] last_successfully_applied_configurations_version
+    #   The version number of a configuration specification that was
+    #   successfully applied for an instance group last time.
+    #   @return [Integer]
+    #
     # @!attribute [rw] ebs_block_devices
     #   The EBS block devices that are mapped to this instance group.
     #   @return [Array<Types::EbsBlockDevice>]
@@ -2214,6 +2229,9 @@ module Aws::EMR
       :running_instance_count,
       :status,
       :configurations,
+      :configurations_version,
+      :last_successfully_applied_configurations,
+      :last_successfully_applied_configurations_version,
       :ebs_block_devices,
       :ebs_optimized,
       :shrink_policy,
@@ -2448,7 +2466,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Modify an instance group size.
+    # Modify the size or configurations of an instance group.
     #
     # @note When making an API call, you may pass InstanceGroupModifyConfig
     #   data as a hash:
@@ -2465,6 +2483,17 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         configurations: [
+    #           {
+    #             classification: "String",
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #             properties: {
+    #               "String" => "String",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] instance_group_id
@@ -2484,13 +2513,19 @@ module Aws::EMR
     #   Policy for customizing shrink operations.
     #   @return [Types::ShrinkPolicy]
     #
+    # @!attribute [rw] configurations
+    #   A list of new or modified configurations to apply for an instance
+    #   group.
+    #   @return [Array<Types::Configuration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupModifyConfig AWS API Documentation
     #
     class InstanceGroupModifyConfig < Struct.new(
       :instance_group_id,
       :instance_count,
       :ec2_instance_ids_to_terminate,
-      :shrink_policy)
+      :shrink_policy,
+      :configurations)
       include Aws::Structure
     end
 
@@ -3333,7 +3368,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
     # @note When making an API call, you may pass KerberosAttributes
     #   data as a hash:
@@ -3859,6 +3894,17 @@ module Aws::EMR
     #                 instance_termination_timeout: 1,
     #               },
     #             },
+    #             configurations: [
+    #               {
+    #                 classification: "String",
+    #                 configurations: {
+    #                   # recursive ConfigurationList
+    #                 },
+    #                 properties: {
+    #                   "String" => "String",
+    #                 },
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -4325,13 +4371,13 @@ module Aws::EMR
     #   release version, for example, `emr-5.14.0`. For more information
     #   about Amazon EMR release versions and included application versions
     #   and features, see
-    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
+    #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The
     #   release label applies only to Amazon EMR releases versions 4.x and
     #   later. Earlier versions use `AmiVersion`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [String]
     #
     # @!attribute [rw] instances
@@ -4363,7 +4409,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<String>]
     #
     # @!attribute [rw] new_supported_products
@@ -4401,7 +4447,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<Types::SupportedProductConfig>]
     #
     # @!attribute [rw] applications
@@ -4412,7 +4458,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] configurations
@@ -4490,9 +4536,9 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
-    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
     #   @return [String]
     #
     # @!attribute [rw] ebs_root_volume_size
@@ -4517,7 +4563,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #   @return [Types::KerberosAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
@@ -5262,7 +5308,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -5278,7 +5324,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5287,7 +5333,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Tag AWS API Documentation

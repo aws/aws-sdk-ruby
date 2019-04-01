@@ -474,7 +474,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :job_flow_id
     #   A string that uniquely identifies the job flow. This identifier is
@@ -531,7 +531,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier to which tags will be added. This
@@ -621,7 +621,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
     #
     # @return [Types::CreateSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -833,7 +833,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.instance_groups[0].instance_type #=> String
     #   resp.job_flows[0].instances.instance_groups[0].instance_request_count #=> Integer
     #   resp.job_flows[0].instances.instance_groups[0].instance_running_count #=> Integer
-    #   resp.job_flows[0].instances.instance_groups[0].state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
+    #   resp.job_flows[0].instances.instance_groups[0].state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RECONFIGURING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
     #   resp.job_flows[0].instances.instance_groups[0].last_state_change_reason #=> String
     #   resp.job_flows[0].instances.instance_groups[0].creation_date_time #=> Time
     #   resp.job_flows[0].instances.instance_groups[0].start_date_time #=> Time
@@ -1169,7 +1169,7 @@ module Aws::EMR
     #   resp.instance_groups[0].instance_type #=> String
     #   resp.instance_groups[0].requested_instance_count #=> Integer
     #   resp.instance_groups[0].running_instance_count #=> Integer
-    #   resp.instance_groups[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
+    #   resp.instance_groups[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RECONFIGURING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED", "ARRESTED", "SHUTTING_DOWN", "ENDED"
     #   resp.instance_groups[0].status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "CLUSTER_TERMINATED"
     #   resp.instance_groups[0].status.state_change_reason.message #=> String
     #   resp.instance_groups[0].status.timeline.creation_date_time #=> Time
@@ -1180,6 +1180,13 @@ module Aws::EMR
     #   resp.instance_groups[0].configurations[0].configurations #=> Types::ConfigurationList
     #   resp.instance_groups[0].configurations[0].properties #=> Hash
     #   resp.instance_groups[0].configurations[0].properties["String"] #=> String
+    #   resp.instance_groups[0].configurations_version #=> Integer
+    #   resp.instance_groups[0].last_successfully_applied_configurations #=> Array
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].classification #=> String
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].configurations #=> Types::ConfigurationList
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].properties #=> Hash
+    #   resp.instance_groups[0].last_successfully_applied_configurations[0].properties["String"] #=> String
+    #   resp.instance_groups[0].last_successfully_applied_configurations_version #=> Integer
     #   resp.instance_groups[0].ebs_block_devices #=> Array
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.volume_type #=> String
     #   resp.instance_groups[0].ebs_block_devices[0].volume_specification.iops #=> Integer
@@ -1472,6 +1479,17 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         configurations: [
+    #           {
+    #             classification: "String",
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #             properties: {
+    #               "String" => "String",
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1629,7 +1647,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier from which tags will be removed.
@@ -1691,7 +1709,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :name
     #   The name of the job flow.
@@ -1715,13 +1733,13 @@ module Aws::EMR
     #   release version, for example, `emr-5.14.0`. For more information about
     #   Amazon EMR release versions and included application versions and
     #   features, see
-    #   [http://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
+    #   [https://docs.aws.amazon.com/emr/latest/ReleaseGuide/][1]. The release
     #   label applies only to Amazon EMR releases versions 4.x and later.
     #   Earlier versions use `AmiVersion`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [required, Types::JobFlowInstancesConfig] :instances
     #   A specification of the number and type of Amazon EC2 instances.
@@ -1749,7 +1767,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
@@ -1786,7 +1804,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
     #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive list
@@ -1796,7 +1814,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
     #
     # @option params [Array<Types::Configuration>] :configurations
     #   For Amazon EMR releases 4.0 and later. The list of configurations
@@ -1864,9 +1882,9 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
-    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
     #
     # @option params [Integer] :ebs_root_volume_size
     #   The size, in GiB, of the EBS root device volume of the Linux AMI that
@@ -1888,7 +1906,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2155,7 +2173,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
     #
     # @option params [required, Array<String>] :job_flow_ids
     #   A list of strings that uniquely identify the clusters to protect. This
@@ -2267,7 +2285,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

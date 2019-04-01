@@ -516,8 +516,8 @@ module Aws::SSM
     #
     # @option params [required, String] :name
     #   The name of the SSM document that contains the configuration
-    #   information for the instance. You can specify Command, Policy, or
-    #   Automation documents.
+    #   information for the instance. You can specify Command or Automation
+    #   documents.
     #
     #   You can specify AWS-predefined documents, documents you created, or a
     #   document that is shared with you from another account.
@@ -588,8 +588,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association while
-    #   Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
@@ -975,10 +975,10 @@ module Aws::SSM
     #   Systems Manager stops scheduling new tasks for execution.
     #
     # @option params [required, Boolean] :allow_unassociated_targets
-    #   Enables a Maintenance Window task to execute on managed instances,
-    #   even if you have not registered those instances as targets. If
-    #   enabled, then you must specify the unregistered instances (by instance
-    #   ID) when you register a task with the Maintenance Window
+    #   Enables a Maintenance Window task to run on managed instances, even if
+    #   you have not registered those instances as targets. If enabled, then
+    #   you must specify the unregistered instances (by instance ID) when you
+    #   register a task with the Maintenance Window
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
@@ -2814,7 +2814,7 @@ module Aws::SSM
     end
 
     # Retrieves the individual task executions (one per target) for a
-    # particular task executed as part of a Maintenance Window execution.
+    # particular task run as part of a Maintenance Window execution.
     #
     # @option params [required, String] :window_execution_id
     #   The ID of the Maintenance Window execution the task is part of.
@@ -2884,7 +2884,7 @@ module Aws::SSM
     end
 
     # For a given Maintenance Window execution, lists the tasks that were
-    # executed.
+    # run.
     #
     # @option params [required, String] :window_execution_id
     #   The ID of the Maintenance Window execution whose task executions
@@ -4179,8 +4179,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves details about a specific task executed as part of a
-    # Maintenance Window execution.
+    # Retrieves details about a specific task run as part of a Maintenance
+    # Window execution.
     #
     # @option params [required, String] :window_execution_id
     #   The ID of the Maintenance Window execution that includes the task.
@@ -4219,7 +4219,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the details about a specific task executed as part of a
+    # Retrieves the details about a specific task run as part of a
     # Maintenance Window execution.
     #
     # @option params [required, String] :window_execution_id
@@ -4281,7 +4281,7 @@ module Aws::SSM
     end
 
     # Retrieves a task invocation. A task invocation is a specific task
-    # executing on a specific target. Maintenance Windows report status for
+    # running on a specific target. Maintenance Windows report status for
     # all invocations.
     #
     # @option params [required, String] :window_execution_id
@@ -4604,10 +4604,11 @@ module Aws::SSM
     #   Retrieve all parameters within a hierarchy.
     #
     #   If a user has access to a path, then the user can access all levels of
-    #   that path. For example, if a user has permission to access path /a,
-    #   then the user can also access /a/b. Even if a user has explicitly been
-    #   denied access in IAM for parameter /a, they can still call the
-    #   GetParametersByPath API action recursively and view /a/b.
+    #   that path. For example, if a user has permission to access path `/a`,
+    #   then the user can also access `/a/b`. Even if a user has explicitly
+    #   been denied access in IAM for parameter `/a/b`, they can still call
+    #   the GetParametersByPath API action recursively for `/a` and view
+    #   `/a/b`.
     #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
@@ -5030,7 +5031,7 @@ module Aws::SSM
 
     # An invocation is copy of a command sent to a specific instance. A
     # command can apply to one or more instances. A command invocation
-    # applies to one instance. For example, if a user executes SendCommand
+    # applies to one instance. For example, if a user runs SendCommand
     # against three instances, then a command invocation is created for each
     # requested instance ID. ListCommandInvocations provide status about
     # command execution.
@@ -6202,7 +6203,7 @@ module Aws::SSM
     #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
     #
     # @option params [required, String] :task_arn
-    #   The ARN of the task to execute
+    #   The ARN of the task to run.
     #
     # @option params [String] :service_role_arn
     #   The role to assume when running the Maintenance Window task.
@@ -6227,7 +6228,7 @@ module Aws::SSM
     #   The type of task being registered.
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
-    #   The parameters that should be passed to the task when it is executed.
+    #   The parameters that should be passed to the task when it is run.
     #
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
     #   a task when it runs, instead use the `Parameters` option in the
@@ -6540,10 +6541,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Executes commands on one or more managed instances.
+    # Runs commands on one or more managed instances.
     #
     # @option params [Array<String>] :instance_ids
-    #   The instance IDs where the command should execute. You can specify a
+    #   The instance IDs where the command should run. You can specify a
     #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
     #   you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information about
@@ -6566,15 +6567,15 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [required, String] :document_name
-    #   Required. The name of the Systems Manager document to execute. This
-    #   can be a public document or a custom document.
+    #   Required. The name of the Systems Manager document to run. This can be
+    #   a public document or a custom document.
     #
     # @option params [String] :document_version
     #   The SSM document version to use in the request. You can specify
-    #   $DEFAULT, $LATEST, or a specific version number. If you execute
-    #   commands by using the AWS CLI, then you must escape the first two
-    #   options by using a backslash. If you specify a version number, then
-    #   you don't need to use the backslash. For example:
+    #   $DEFAULT, $LATEST, or a specific version number. If you run commands
+    #   by using the AWS CLI, then you must escape the first two options by
+    #   using a backslash. If you specify a version number, then you don't
+    #   need to use the backslash. For example:
     #
     #   --document-version "\\$DEFAULT"
     #
@@ -6599,7 +6600,7 @@ module Aws::SSM
     #
     # @option params [Integer] :timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not run.
+    #   running, it will not run.
     #
     # @option params [String] :comment
     #   User-specified information about the command, such as a brief
@@ -6607,7 +6608,7 @@ module Aws::SSM
     #
     # @option params [Hash<String,Array>] :parameters
     #   The required and optional parameters specified in the document being
-    #   executed.
+    #   run.
     #
     # @option params [String] :output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
@@ -6623,8 +6624,8 @@ module Aws::SSM
     #   should be stored.
     #
     # @option params [String] :max_concurrency
-    #   (Optional) The maximum number of instances that are allowed to execute
-    #   the command at the same time. You can specify a number such as 10 or a
+    #   (Optional) The maximum number of instances that are allowed to run the
+    #   command at the same time. You can specify a number such as 10 or a
     #   percentage such as 10%. The default value is 50. For more information
     #   about how to use MaxConcurrency, see [Using Concurrency Controls][1]
     #   in the *AWS Systems Manager User Guide*.
@@ -6740,11 +6741,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Use this API action to execute an association immediately and only one
+    # Use this API action to run an association immediately and only one
     # time. This action can be helpful when troubleshooting associations.
     #
     # @option params [required, Array<String>] :association_ids
-    #   The association IDs that you want to execute immediately and only one
+    #   The association IDs that you want to run immediately and only one
     #   time.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6821,10 +6822,10 @@ module Aws::SSM
     #
     # @option params [Array<Types::TargetLocation>] :target_locations
     #   A location is a combination of AWS Regions and/or AWS accounts where
-    #   you want to execute the Automation. Use this action to start an
-    #   Automation in multiple Regions and multiple accounts. For more
-    #   information, see [Concurrently Executing Automations in Multiple AWS
-    #   Regions and Accounts][1] in the *AWS Systems Manager User Guide*.
+    #   you want to run the Automation. Use this action to start an Automation
+    #   in multiple Regions and multiple accounts. For more information, see
+    #   [Executing Automations in Multiple AWS Regions and Accounts][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -6940,7 +6941,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Stop an Automation that is currently executing.
+    # Stop an Automation that is currently running.
     #
     # @option params [required, String] :automation_execution_id
     #   The execution ID of the Automation to stop.
@@ -7001,6 +7002,9 @@ module Aws::SSM
     # version, the document version, schedule, parameters, and Amazon S3
     # output.
     #
+    # When you update an association, the association immediately runs
+    # against the specified targets.
+    #
     # @option params [required, String] :association_id
     #   The ID of the association you want to update.
     #
@@ -7022,8 +7026,8 @@ module Aws::SSM
     #
     # @option params [String] :name
     #   The name of the SSM document that contains the configuration
-    #   information for the instance. You can specify Command, Policy, or
-    #   Automation documents.
+    #   information for the instance. You can specify Command or Automation
+    #   documents.
     #
     #   You can specify AWS-predefined documents, documents you created, or a
     #   document that is shared with you from another account.
@@ -7082,8 +7086,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association while
-    #   Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
@@ -8096,7 +8100,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

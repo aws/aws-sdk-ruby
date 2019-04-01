@@ -159,6 +159,7 @@ module Aws::EMR
     ListSecurityConfigurationsOutput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsOutput')
     ListStepsInput = Shapes::StructureShape.new(name: 'ListStepsInput')
     ListStepsOutput = Shapes::StructureShape.new(name: 'ListStepsOutput')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
@@ -552,6 +553,9 @@ module Aws::EMR
     InstanceGroup.add_member(:running_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "RunningInstanceCount"))
     InstanceGroup.add_member(:status, Shapes::ShapeRef.new(shape: InstanceGroupStatus, location_name: "Status"))
     InstanceGroup.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
+    InstanceGroup.add_member(:configurations_version, Shapes::ShapeRef.new(shape: Long, location_name: "ConfigurationsVersion"))
+    InstanceGroup.add_member(:last_successfully_applied_configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "LastSuccessfullyAppliedConfigurations"))
+    InstanceGroup.add_member(:last_successfully_applied_configurations_version, Shapes::ShapeRef.new(shape: Long, location_name: "LastSuccessfullyAppliedConfigurationsVersion"))
     InstanceGroup.add_member(:ebs_block_devices, Shapes::ShapeRef.new(shape: EbsBlockDeviceList, location_name: "EbsBlockDevices"))
     InstanceGroup.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EbsOptimized"))
     InstanceGroup.add_member(:shrink_policy, Shapes::ShapeRef.new(shape: ShrinkPolicy, location_name: "ShrinkPolicy"))
@@ -597,6 +601,7 @@ module Aws::EMR
     InstanceGroupModifyConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     InstanceGroupModifyConfig.add_member(:ec2_instance_ids_to_terminate, Shapes::ShapeRef.new(shape: EC2InstanceIdsToTerminateList, location_name: "EC2InstanceIdsToTerminate"))
     InstanceGroupModifyConfig.add_member(:shrink_policy, Shapes::ShapeRef.new(shape: ShrinkPolicy, location_name: "ShrinkPolicy"))
+    InstanceGroupModifyConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
     InstanceGroupModifyConfig.struct_class = Types::InstanceGroupModifyConfig
 
     InstanceGroupModifyConfigList.member = Shapes::ShapeRef.new(shape: InstanceGroupModifyConfig)
@@ -1217,6 +1222,11 @@ module Aws::EMR
         o.output = Shapes::ShapeRef.new(shape: ListSecurityConfigurationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_steps, Seahorse::Model::Operation.new.tap do |o|

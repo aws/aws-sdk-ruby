@@ -300,8 +300,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association
-    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
@@ -664,8 +664,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association
-    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
@@ -800,7 +800,7 @@ module Aws::SSM
     # @!attribute [rw] step_executions
     #   A list of details about the current state of all steps that comprise
     #   an execution. An Automation document contains a list of steps that
-    #   are executed in order.
+    #   are run in order.
     #   @return [Array<Types::StepExecution>]
     #
     # @!attribute [rw] step_executions_truncated
@@ -833,16 +833,15 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] executed_by
-    #   The Amazon Resource Name (ARN) of the user who executed the
-    #   automation.
+    #   The Amazon Resource Name (ARN) of the user who ran the automation.
     #   @return [String]
     #
     # @!attribute [rw] current_step_name
-    #   The name of the currently executing step.
+    #   The name of the step that is currently running.
     #   @return [String]
     #
     # @!attribute [rw] current_action
-    #   The action of the currently executing step.
+    #   The action of the step that is currently running.
     #   @return [String]
     #
     # @!attribute [rw] target_parameter_name
@@ -878,7 +877,7 @@ module Aws::SSM
     #
     # @!attribute [rw] target_locations
     #   The combination of AWS Regions and/or AWS accounts where you want to
-    #   execute the Automation.
+    #   run the Automation.
     #   @return [Array<Types::TargetLocation>]
     #
     # @!attribute [rw] progress_counters
@@ -976,7 +975,7 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] executed_by
-    #   The IAM role ARN of the user who executed the Automation.
+    #   The IAM role ARN of the user who ran the Automation.
     #   @return [String]
     #
     # @!attribute [rw] log_file
@@ -996,11 +995,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] current_step_name
-    #   The name of the currently executing step.
+    #   The name of the step that is currently running.
     #   @return [String]
     #
     # @!attribute [rw] current_action
-    #   The action of the currently executing step.
+    #   The action of the step that is currently running.
     #   @return [String]
     #
     # @!attribute [rw] failure_message
@@ -1040,10 +1039,10 @@ module Aws::SSM
     #
     # @!attribute [rw] automation_type
     #   Use this filter with DescribeAutomationExecutions. Specify either
-    #   Local or CrossAccount. CrossAccount is an Automation that executes
-    #   in multiple AWS Regions and accounts. For more information, see
-    #   [Concurrently Executing Automations in Multiple AWS Regions and
-    #   Accounts][1] in the *AWS Systems Manager User Guide*.
+    #   Local or CrossAccount. CrossAccount is an Automation that runs in
+    #   multiple AWS Regions and accounts. For more information, see
+    #   [Executing Automations in Multiple AWS Regions and Accounts][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -1190,13 +1189,13 @@ module Aws::SSM
     #
     # @!attribute [rw] expires_after
     #   If this time is reached and the command has not already started
-    #   executing, it will not run. Calculated based on the ExpiresAfter
-    #   user input provided as part of the SendCommand API.
+    #   running, it will not run. Calculated based on the ExpiresAfter user
+    #   input provided as part of the SendCommand API.
     #   @return [Time]
     #
     # @!attribute [rw] parameters
-    #   The parameter values to be inserted in the document when executing
-    #   the command.
+    #   The parameter values to be inserted in the document when running the
+    #   command.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] instance_ids
@@ -1231,8 +1230,8 @@ module Aws::SSM
     #   * In Progress: The command has been sent to at least one instance
     #     but has not reached a final state on all instances.
     #
-    #   * Success: The command successfully executed on all invocations.
-    #     This is a terminal state.
+    #   * Success: The command successfully ran on all invocations. This is
+    #     a terminal state.
     #
     #   * Delivery Timed Out: The value of MaxErrors or more command
     #     invocations shows a status of Delivery Timed Out. This is a
@@ -1255,8 +1254,8 @@ module Aws::SSM
     #
     #   * Rate Exceeded: The number of instances targeted by the command
     #     exceeded the account limit for pending invocations. The system has
-    #     canceled the command before executing it on any instance. This is
-    #     a terminal state.
+    #     canceled the command before running it on any instance. This is a
+    #     terminal state.
     #
     #
     #
@@ -1281,12 +1280,12 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
-    #   The maximum number of instances that are allowed to execute the
-    #   command at the same time. You can specify a number of instances,
-    #   such as 10, or a percentage of instances, such as 10%. The default
-    #   value is 50. For more information about how to use MaxConcurrency,
-    #   see [Executing Commands Using Systems Manager Run Command][1] in the
-    #   *AWS Systems Manager User Guide*.
+    #   The maximum number of instances that are allowed to run the command
+    #   at the same time. You can specify a number of instances, such as 10,
+    #   or a percentage of instances, such as 10%. The default value is 50.
+    #   For more information about how to use MaxConcurrency, see [Running
+    #   Commands Using Systems Manager Run Command][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #
     #
@@ -1298,7 +1297,7 @@ module Aws::SSM
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
     #   default value is 0. For more information about how to use MaxErrors,
-    #   see [Executing Commands Using Systems Manager Run Command][1] in the
+    #   see [Running Commands Using Systems Manager Run Command][1] in the
     #   *AWS Systems Manager User Guide*.
     #
     #
@@ -1437,10 +1436,10 @@ module Aws::SSM
 
     # An invocation is copy of a command sent to a specific instance. A
     # command can apply to one or more instances. A command invocation
-    # applies to one instance. For example, if a user executes SendCommand
+    # applies to one instance. For example, if a user runs SendCommand
     # against three instances, then a command invocation is created for each
     # requested instance ID. A command invocation returns status and detail
-    # information about a command you executed.
+    # information about a command you ran.
     #
     # @!attribute [rw] command_id
     #   The command against which this invocation was requested.
@@ -1602,7 +1601,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of this plugin. You can execute a document with multiple
+    #   The status of this plugin. You can run a document with multiple
     #   plugins.
     #   @return [String]
     #
@@ -1660,16 +1659,16 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] response_code
-    #   A numeric response code generated after executing the plugin.
+    #   A numeric response code generated after running the plugin.
     #   @return [Integer]
     #
     # @!attribute [rw] response_start_date_time
-    #   The time the plugin started executing.
+    #   The time the plugin started running.
     #   @return [Time]
     #
     # @!attribute [rw] response_finish_date_time
-    #   The time the plugin stopped executing. Could stop prematurely if,
-    #   for example, a cancel command was sent.
+    #   The time the plugin stopped running. Could stop prematurely if, for
+    #   example, a cancel command was sent.
     #   @return [Time]
     #
     # @!attribute [rw] output
@@ -2168,8 +2167,8 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the SSM document that contains the configuration
-    #   information for the instance. You can specify Command, Policy, or
-    #   Automation documents.
+    #   information for the instance. You can specify Command or Automation
+    #   documents.
     #
     #   You can specify AWS-predefined documents, documents you created, or
     #   a document that is shared with you from another account.
@@ -2249,8 +2248,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association
-    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
@@ -2327,8 +2326,8 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the SSM document that contains the configuration
-    #   information for the instance. You can specify Command, Policy, or
-    #   Automation documents.
+    #   information for the instance. You can specify Command or Automation
+    #   documents.
     #
     #   You can specify AWS-predefined documents, documents you created, or
     #   a document that is shared with you from another account.
@@ -2409,8 +2408,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association
-    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
@@ -2642,10 +2641,10 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Enables a Maintenance Window task to execute on managed instances,
-    #   even if you have not registered those instances as targets. If
-    #   enabled, then you must specify the unregistered instances (by
-    #   instance ID) when you register a task with the Maintenance Window
+    #   Enables a Maintenance Window task to run on managed instances, even
+    #   if you have not registered those instances as targets. If enabled,
+    #   then you must specify the unregistered instances (by instance ID)
+    #   when you register a task with the Maintenance Window
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
@@ -5548,7 +5547,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters specified in a System Manager document that execute on the
+    # Parameters specified in a System Manager document that run on the
     # server when the command is run.
     #
     # @!attribute [rw] name
@@ -5791,7 +5790,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_name
-    #   The name of the document that was executed. For example,
+    #   The name of the document that was run. For example,
     #   AWS-RunShellScript.
     #   @return [String]
     #
@@ -5806,12 +5805,12 @@ module Aws::SSM
     #
     # @!attribute [rw] response_code
     #   The error level response code for the plugin script. If the response
-    #   code is -1, then the command has not started executing on the
+    #   code is -1, then the command has not started running on the
     #   instance, or it was not received by the instance.
     #   @return [Integer]
     #
     # @!attribute [rw] execution_start_date_time
-    #   The date and time the plugin started executing. Date and time are
+    #   The date and time the plugin started running. Date and time are
     #   written in ISO 8601 format. For example, June 7, 2017 is represented
     #   as 2017-06-7. The following sample AWS CLI command uses the
     #   `InvokedBefore` filter.
@@ -5819,7 +5818,7 @@ module Aws::SSM
     #   `aws ssm list-commands --filters
     #   key=InvokedBefore,value=2017-06-07T00:00:00Z`
     #
-    #   If the plugin has not started to execute, the string is empty.
+    #   If the plugin has not started to run, the string is empty.
     #   @return [String]
     #
     # @!attribute [rw] execution_elapsed_time
@@ -5827,15 +5826,15 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] execution_end_date_time
-    #   The date and time the plugin was finished executing. Date and time
-    #   are written in ISO 8601 format. For example, June 7, 2017 is
-    #   represented as 2017-06-7. The following sample AWS CLI command uses
-    #   the `InvokedAfter` filter.
+    #   The date and time the plugin was finished running. Date and time are
+    #   written in ISO 8601 format. For example, June 7, 2017 is represented
+    #   as 2017-06-7. The following sample AWS CLI command uses the
+    #   `InvokedAfter` filter.
     #
     #   `aws ssm list-commands --filters
     #   key=InvokedAfter,value=2017-06-07T00:00:00Z`
     #
-    #   If the plugin has not started to execute, the string is empty.
+    #   If the plugin has not started to run, the string is empty.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5862,8 +5861,8 @@ module Aws::SSM
     #     available because of network issues, the instance was stopped,
     #     etc. The system will try to deliver the command again.
     #
-    #   * Success: The command or plugin was executed successfully. This is
-    #     a terminal state.
+    #   * Success: The command or plugin was run successfully. This is a
+    #     terminal state.
     #
     #   * Delivery Timed Out: The command was not delivered to the instance
     #     before the delivery timeout expired. Delivery timeouts do not
@@ -5871,17 +5870,16 @@ module Aws::SSM
     #     contribute to whether the parent command status is Success or
     #     Incomplete. This is a terminal state.
     #
-    #   * Execution Timed Out: The command started to execute on the
-    #     instance, but the execution was not complete before the timeout
-    #     expired. Execution timeouts count against the MaxErrors limit of
-    #     the parent command. This is a terminal state.
+    #   * Execution Timed Out: The command started to run on the instance,
+    #     but the execution was not complete before the timeout expired.
+    #     Execution timeouts count against the MaxErrors limit of the parent
+    #     command. This is a terminal state.
     #
-    #   * Failed: The command wasn't executed successfully on the instance.
-    #     For a plugin, this indicates that the result code was not zero.
-    #     For a command invocation, this indicates that the result code for
-    #     one or more plugins was not zero. Invocation failures count
-    #     against the MaxErrors limit of the parent command. This is a
-    #     terminal state.
+    #   * Failed: The command wasn't run successfully on the instance. For
+    #     a plugin, this indicates that the result code was not zero. For a
+    #     command invocation, this indicates that the result code for one or
+    #     more plugins was not zero. Invocation failures count against the
+    #     MaxErrors limit of the parent command. This is a terminal state.
     #
     #   * Canceled: The command was terminated before it was completed. This
     #     is a terminal state.
@@ -5904,7 +5902,7 @@ module Aws::SSM
     #
     # @!attribute [rw] standard_output_content
     #   The first 24,000 characters written by the plugin to stdout. If the
-    #   command has not finished executing, if ExecutionStatus is neither
+    #   command has not finished running, if ExecutionStatus is neither
     #   Succeeded nor Failed, then this string is empty.
     #   @return [String]
     #
@@ -5916,12 +5914,12 @@ module Aws::SSM
     #
     # @!attribute [rw] standard_error_content
     #   The first 8,000 characters written by the plugin to stderr. If the
-    #   command has not finished executing, then this string is empty.
+    #   command has not finished running, then this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_url
     #   The URL for the complete text written by the plugin to stderr. If
-    #   the command has not finished executing, then this string is empty.
+    #   the command has not finished running, then this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_output_config
@@ -6371,11 +6369,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time the Maintenance Window started executing.
+    #   The time the Maintenance Window started running.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time the Maintenance Window finished executing.
+    #   The time the Maintenance Window finished running.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionResult AWS API Documentation
@@ -6444,7 +6442,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters used at the time that the task executed.
+    #   The parameters used at the time that the task ran.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6457,11 +6455,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time that the task started executing on the target.
+    #   The time that the task started running on the target.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time that the task finished executing on the target.
+    #   The time that the task finished running on the target.
     #   @return [Time]
     #
     # @!attribute [rw] owner_information
@@ -6526,19 +6524,19 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_arn
-    #   The ARN of the executed task.
+    #   The ARN of the task that ran.
     #   @return [String]
     #
     # @!attribute [rw] service_role
-    #   The role that was assumed when executing the task.
+    #   The role that was assumed when running the task.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of task executed.
+    #   The type of task that was run.
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters passed to the task when it was executed.
+    #   The parameters passed to the task when it was run.
     #
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
@@ -6750,7 +6748,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets where the task should execute.
+    #   The targets where the task should run.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -6766,11 +6764,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_type
-    #   The type of task to execute.
+    #   The type of task to run.
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters to pass to the task when it executes.
+    #   The parameters to pass to the task when it runs.
     #
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
@@ -6782,11 +6780,11 @@ module Aws::SSM
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
-    #   The parameters to pass to the task when it executes.
+    #   The parameters to pass to the task when it runs.
     #   @return [Types::MaintenanceWindowTaskInvocationParameters]
     #
     # @!attribute [rw] priority
-    #   The priority of the task when it executes. The lower the number, the
+    #   The priority of the task when it runs. The lower the number, the
     #   higher the priority. Tasks that have the same priority are scheduled
     #   in parallel.
     #   @return [Integer]
@@ -6964,10 +6962,10 @@ module Aws::SSM
     #
     #   If a user has access to a path, then the user can access all levels
     #   of that path. For example, if a user has permission to access path
-    #   /a, then the user can also access /a/b. Even if a user has
-    #   explicitly been denied access in IAM for parameter /a, they can
-    #   still call the GetParametersByPath API action recursively and view
-    #   /a/b.
+    #   `/a`, then the user can also access `/a/b`. Even if a user has
+    #   explicitly been denied access in IAM for parameter `/a/b`, they can
+    #   still call the GetParametersByPath API action recursively for `/a`
+    #   and view `/a/b`.
     #   @return [Boolean]
     #
     # @!attribute [rw] parameter_filters
@@ -7364,7 +7362,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] execution_date
-    #   The date the instance association executed.
+    #   The date the instance association ran.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -7486,7 +7484,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] last_association_execution_date
-    #   The date the association was last executed.
+    #   The date the association was last run.
     #   @return [Time]
     #
     # @!attribute [rw] last_successful_association_execution_date
@@ -9096,11 +9094,11 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] task_arn
-    #   The ARN of the executed task.
+    #   The ARN of the task that ran.
     #   @return [String]
     #
     # @!attribute [rw] task_type
-    #   The type of executed task.
+    #   The type of task that ran.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskIdentity AWS API Documentation
@@ -9146,7 +9144,7 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The parameters that were provided for the invocation when it was
-    #   executed.
+    #   run.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9415,7 +9413,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] comment
-    #   Information about the command(s) to execute.
+    #   Information about the command(s) to run.
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -9450,7 +9448,7 @@ module Aws::SSM
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it doesn't run.
+    #   running, it doesn't run.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowRunCommandParameters AWS API Documentation
@@ -9593,8 +9591,7 @@ module Aws::SSM
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters that should be passed to the task when it is
-    #   executed.
+    #   The parameters that should be passed to the task when it is run.
     #
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
@@ -9625,7 +9622,7 @@ module Aws::SSM
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] service_role_arn
-    #   The role that should be assumed when executing the task
+    #   The role that should be assumed when running the task.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -10973,7 +10970,7 @@ module Aws::SSM
     # for a multi-Region and multi-account Automation execution.
     #
     # @!attribute [rw] total_steps
-    #   The total number of steps executed in all specified AWS Regions and
+    #   The total number of steps run in all specified AWS Regions and
     #   accounts for the current Automation execution.
     #   @return [Integer]
     #
@@ -10984,8 +10981,8 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] failed_steps
-    #   The total number of steps that failed to execute in all specified
-    #   AWS Regions and accounts for the current Automation execution.
+    #   The total number of steps that failed to run in all specified AWS
+    #   Regions and accounts for the current Automation execution.
     #   @return [Integer]
     #
     # @!attribute [rw] cancelled_steps
@@ -11541,7 +11538,7 @@ module Aws::SSM
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
-    #   The ARN of the task to execute
+    #   The ARN of the task to run.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -11570,8 +11567,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters that should be passed to the task when it is
-    #   executed.
+    #   The parameters that should be passed to the task when it is run.
     #
     #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
     #   to a task when it runs, instead use the `Parameters` option in the
@@ -12147,7 +12143,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   The instance IDs where the command should execute. You can specify a
+    #   The instance IDs where the command should run. You can specify a
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information
@@ -12172,16 +12168,16 @@ module Aws::SSM
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] document_name
-    #   Required. The name of the Systems Manager document to execute. This
-    #   can be a public document or a custom document.
+    #   Required. The name of the Systems Manager document to run. This can
+    #   be a public document or a custom document.
     #   @return [String]
     #
     # @!attribute [rw] document_version
     #   The SSM document version to use in the request. You can specify
-    #   $DEFAULT, $LATEST, or a specific version number. If you execute
-    #   commands by using the AWS CLI, then you must escape the first two
-    #   options by using a backslash. If you specify a version number, then
-    #   you don't need to use the backslash. For example:
+    #   $DEFAULT, $LATEST, or a specific version number. If you run commands
+    #   by using the AWS CLI, then you must escape the first two options by
+    #   using a backslash. If you specify a version number, then you don't
+    #   need to use the backslash. For example:
     #
     #   --document-version "\\$DEFAULT"
     #
@@ -12209,7 +12205,7 @@ module Aws::SSM
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not run.
+    #   running, it will not run.
     #   @return [Integer]
     #
     # @!attribute [rw] comment
@@ -12219,7 +12215,7 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The required and optional parameters specified in the document being
-    #   executed.
+    #   run.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] output_s3_region
@@ -12239,9 +12235,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
-    #   (Optional) The maximum number of instances that are allowed to
-    #   execute the command at the same time. You can specify a number such
-    #   as 10 or a percentage such as 10%. The default value is 50. For more
+    #   (Optional) The maximum number of instances that are allowed to run
+    #   the command at the same time. You can specify a number such as 10 or
+    #   a percentage such as 10%. The default value is 50. For more
     #   information about how to use MaxConcurrency, see [Using Concurrency
     #   Controls][1] in the *AWS Systems Manager User Guide*.
     #
@@ -12566,8 +12562,8 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] association_ids
-    #   The association IDs that you want to execute immediately and only
-    #   one time.
+    #   The association IDs that you want to run immediately and only one
+    #   time.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnceRequest AWS API Documentation
@@ -12682,10 +12678,10 @@ module Aws::SSM
     #
     # @!attribute [rw] target_locations
     #   A location is a combination of AWS Regions and/or AWS accounts where
-    #   you want to execute the Automation. Use this action to start an
+    #   you want to run the Automation. Use this action to start an
     #   Automation in multiple Regions and multiple accounts. For more
-    #   information, see [Concurrently Executing Automations in Multiple AWS
-    #   Regions and Accounts][1] in the *AWS Systems Manager User Guide*.
+    #   information, see [Executing Automations in Multiple AWS Regions and
+    #   Accounts][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -12864,8 +12860,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] overridden_parameters
-    #   A user-specified list of parameters to override when executing a
-    #   step.
+    #   A user-specified list of parameters to override when running a step.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] is_end
@@ -12885,8 +12880,8 @@ module Aws::SSM
     # @!attribute [rw] valid_next_steps
     #   Strategies used when step fails, we support Continue and Abort.
     #   Abort will fail the automation when the step fails. Continue will
-    #   ignore the failure of current step and allow automation to execute
-    #   the next step. With conditional branching, we add step:stepName to
+    #   ignore the failure of current step and allow automation to run the
+    #   next step. With conditional branching, we add step:stepName to
     #   support the automation to go to another specific step.
     #   @return [Array<String>]
     #
@@ -13041,8 +13036,8 @@ module Aws::SSM
     #
     # @!attribute [rw] values
     #   User-defined criteria that maps to Key. For example, if you
-    #   specified tag:ServerRole, you could specify value:WebServer to
-    #   execute a command on instances that include Amazon EC2 tags of
+    #   specified tag:ServerRole, you could specify value:WebServer to run a
+    #   command on instances that include Amazon EC2 tags of
     #   ServerRole,WebServer. For more information about how to send
     #   commands that target instances using Key,Value parameters, see
     #   [Sending Commands to a Fleet][1] in the *AWS Systems Manager User
@@ -13090,12 +13085,12 @@ module Aws::SSM
     #
     # @!attribute [rw] target_location_max_errors
     #   The maxium number of errors allowed before the system stops queueing
-    #   additional Automation executions for the currently executing
+    #   additional Automation executions for the currently running
     #   Automation.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
-    #   The Automation execution role used by the currently executing
+    #   The Automation execution role used by the currently running
     #   Automation.
     #   @return [String]
     #
@@ -13197,8 +13192,8 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the SSM document that contains the configuration
-    #   information for the instance. You can specify Command, Policy, or
-    #   Automation documents.
+    #   information for the instance. You can specify Command or Automation
+    #   documents.
     #
     #   You can specify AWS-predefined documents, documents you created, or
     #   a document that is shared with you from another account.
@@ -13263,8 +13258,8 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to execute an association
-    #   while Systems Manager is executing MaxConcurrency associations, the
+    #   If a new instance starts and attempts to run an association while
+    #   Systems Manager is running MaxConcurrency associations, the
     #   association is allowed to run. During the next association interval,
     #   the new instance will process its association within the limit
     #   specified for MaxConcurrency.
