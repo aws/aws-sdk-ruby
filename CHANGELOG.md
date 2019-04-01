@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.252 (2019-04-01)
+------------------
+
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
 
 * Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Manager (SSM).
