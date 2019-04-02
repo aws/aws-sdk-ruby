@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
 2.11.252 (2019-04-01)
 ------------------
 
