@@ -13,6 +13,7 @@ module Aws::SecurityHub
 
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountDetails = Shapes::StructureShape.new(name: 'AccountDetails')
     AccountDetailsList = Shapes::ListShape.new(name: 'AccountDetailsList')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -88,6 +89,7 @@ module Aws::SecurityHub
     InsightResults = Shapes::StructureShape.new(name: 'InsightResults')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
+    InvalidAccessException = Shapes::StructureShape.new(name: 'InvalidAccessException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     Invitation = Shapes::StructureShape.new(name: 'Invitation')
     InvitationList = Shapes::ListShape.new(name: 'InvitationList')
@@ -131,6 +133,7 @@ module Aws::SecurityHub
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     Remediation = Shapes::StructureShape.new(name: 'Remediation')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -746,6 +749,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
       end)
 
       api.add_operation(:batch_disable_standards, Seahorse::Model::Operation.new.tap do |o|
@@ -756,6 +760,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: BatchDisableStandardsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -767,6 +772,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: BatchEnableStandardsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -779,6 +785,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
       end)
 
       api.add_operation(:create_insight, Seahorse::Model::Operation.new.tap do |o|
@@ -790,6 +797,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:create_members, Seahorse::Model::Operation.new.tap do |o|
@@ -801,6 +810,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:decline_invitations, Seahorse::Model::Operation.new.tap do |o|
@@ -811,7 +822,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: DeclineInvitationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -823,7 +834,9 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: DeleteInsightResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_invitations, Seahorse::Model::Operation.new.tap do |o|
@@ -836,6 +849,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
       end)
 
       api.add_operation(:delete_members, Seahorse::Model::Operation.new.tap do |o|
@@ -846,6 +860,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: DeleteMembersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -859,6 +874,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:disable_security_hub, Seahorse::Model::Operation.new.tap do |o|
@@ -869,6 +886,8 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: DisableSecurityHubResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:disassociate_from_master_account, Seahorse::Model::Operation.new.tap do |o|
@@ -879,6 +898,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -891,6 +911,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: DisassociateMembersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -903,6 +924,9 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: EnableImportFindingsForProductResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:enable_security_hub, Seahorse::Model::Operation.new.tap do |o|
@@ -913,6 +937,9 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: EnableSecurityHubResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_enabled_standards, Seahorse::Model::Operation.new.tap do |o|
@@ -923,6 +950,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetEnabledStandardsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -934,8 +962,8 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetFindingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -952,7 +980,9 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetInsightResultsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_insights, Seahorse::Model::Operation.new.tap do |o|
@@ -963,7 +993,9 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetInsightsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -980,8 +1012,8 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetInvitationsCountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_master_account, Seahorse::Model::Operation.new.tap do |o|
@@ -992,6 +1024,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1004,6 +1037,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: GetMembersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1016,6 +1050,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: InviteMembersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1028,6 +1063,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: ListEnabledProductsForImportResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1044,8 +1080,8 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: ListInvitationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_members, Seahorse::Model::Operation.new.tap do |o|
@@ -1056,8 +1092,8 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: ListMembersResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -1069,6 +1105,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1080,6 +1117,7 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: UpdateInsightResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

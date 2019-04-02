@@ -808,11 +808,13 @@ module Aws::ACM
     # Renews an eligable ACM certificate. At this time, only exported
     # private certificates can be renewed with this operation. In order to
     # renew your ACM PCA certificates with ACM, you must first [grant the
-    # ACM service principal permission to do
-    # so](acm-pca/latest/userguide/PcaPermissions.html). For more
-    # information, see [Testing Managed
-    # Renewal](acm/latest/userguide/manuel-renewal.html) in the ACM User
-    # Guide.
+    # ACM service principal permission to do so][1]. For more information,
+    # see [Testing Managed Renewal][2] in the ACM User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to be renewed.
@@ -1113,7 +1115,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

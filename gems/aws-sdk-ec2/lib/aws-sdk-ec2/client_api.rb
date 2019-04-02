@@ -8588,6 +8588,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeByoipCidrsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeByoipCidrsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_capacity_reservations, Seahorse::Model::Operation.new.tap do |o|
@@ -8596,6 +8602,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeCapacityReservationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCapacityReservationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_classic_link_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -8604,6 +8616,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClassicLinkInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClassicLinkInstancesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_client_vpn_authorization_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -8612,6 +8630,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnAuthorizationRulesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnAuthorizationRulesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_client_vpn_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -8620,6 +8644,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnConnectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnConnectionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_client_vpn_endpoints, Seahorse::Model::Operation.new.tap do |o|
@@ -8628,6 +8658,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnEndpointsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_client_vpn_routes, Seahorse::Model::Operation.new.tap do |o|
@@ -8636,6 +8672,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnRoutesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnRoutesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_client_vpn_target_networks, Seahorse::Model::Operation.new.tap do |o|
@@ -8644,6 +8686,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClientVpnTargetNetworksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClientVpnTargetNetworksResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_conversion_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -8676,6 +8724,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_elastic_gpus, Seahorse::Model::Operation.new.tap do |o|
@@ -8716,6 +8770,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFleetsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFleetsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_flow_logs, Seahorse::Model::Operation.new.tap do |o|
@@ -8724,6 +8784,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFlowLogsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFlowLogsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_fpga_image_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -8740,6 +8806,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFpgaImagesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFpgaImagesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_host_reservation_offerings, Seahorse::Model::Operation.new.tap do |o|
@@ -8748,6 +8820,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeHostReservationOfferingsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeHostReservationOfferingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_host_reservations, Seahorse::Model::Operation.new.tap do |o|
@@ -8756,6 +8834,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeHostReservationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeHostReservationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_hosts, Seahorse::Model::Operation.new.tap do |o|
@@ -8764,6 +8848,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeHostsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeHostsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_iam_instance_profile_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -8772,6 +8862,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeIamInstanceProfileAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeIamInstanceProfileAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_id_format, Seahorse::Model::Operation.new.tap do |o|
@@ -8812,6 +8908,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeImportImageTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeImportImageTasksResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_import_snapshot_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -8820,6 +8922,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeImportSnapshotTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeImportSnapshotTasksResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -8836,6 +8944,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceCreditSpecificationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceCreditSpecificationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_status, Seahorse::Model::Operation.new.tap do |o|
@@ -8894,6 +9008,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLaunchTemplateVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLaunchTemplateVersionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_launch_templates, Seahorse::Model::Operation.new.tap do |o|
@@ -8902,6 +9022,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLaunchTemplatesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLaunchTemplatesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_moving_addresses, Seahorse::Model::Operation.new.tap do |o|
@@ -8910,6 +9036,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeMovingAddressesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMovingAddressesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_nat_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -8954,6 +9086,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacePermissionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacePermissionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_network_interfaces, Seahorse::Model::Operation.new.tap do |o|
@@ -8984,6 +9122,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePrefixListsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePrefixListsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_principal_id_format, Seahorse::Model::Operation.new.tap do |o|
@@ -8992,6 +9136,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_public_ipv_4_pools, Seahorse::Model::Operation.new.tap do |o|
@@ -9000,6 +9150,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePublicIpv4PoolsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePublicIpv4PoolsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_regions, Seahorse::Model::Operation.new.tap do |o|
@@ -9073,6 +9229,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeScheduledInstanceAvailabilityRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeScheduledInstanceAvailabilityResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_scheduled_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -9081,6 +9243,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeScheduledInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeScheduledInstancesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_security_group_references, Seahorse::Model::Operation.new.tap do |o|
@@ -9171,6 +9339,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSpotInstanceRequestsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSpotInstanceRequestsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_spot_price_history, Seahorse::Model::Operation.new.tap do |o|
@@ -9193,6 +9367,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeStaleSecurityGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeStaleSecurityGroupsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_subnets, Seahorse::Model::Operation.new.tap do |o|
@@ -9223,6 +9403,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayAttachmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayAttachmentsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_transit_gateway_route_tables, Seahorse::Model::Operation.new.tap do |o|
@@ -9231,6 +9417,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayRouteTablesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayRouteTablesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_transit_gateway_vpc_attachments, Seahorse::Model::Operation.new.tap do |o|
@@ -9239,6 +9431,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayVpcAttachmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayVpcAttachmentsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_transit_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -9247,6 +9445,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewaysResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_volume_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -9291,6 +9495,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVolumesModificationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVolumesModificationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -9315,6 +9525,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcClassicLinkDnsSupportRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcClassicLinkDnsSupportResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_endpoint_connection_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -9323,6 +9539,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointConnectionNotificationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointConnectionNotificationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_endpoint_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -9331,6 +9553,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointConnectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointConnectionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_endpoint_service_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -9339,6 +9567,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointServiceConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointServiceConfigurationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_endpoint_service_permissions, Seahorse::Model::Operation.new.tap do |o|
@@ -9347,6 +9581,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointServicePermissionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointServicePermissionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_endpoint_services, Seahorse::Model::Operation.new.tap do |o|
@@ -9363,6 +9603,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_vpc_peering_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -9655,6 +9901,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayAttachmentPropagationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayAttachmentPropagationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_transit_gateway_route_table_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -9663,6 +9915,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTableAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTableAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_transit_gateway_route_table_propagations, Seahorse::Model::Operation.new.tap do |o|
@@ -9671,6 +9929,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTablePropagationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayRouteTablePropagationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:import_client_vpn_client_certificate_revocation_list, Seahorse::Model::Operation.new.tap do |o|

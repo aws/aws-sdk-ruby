@@ -415,10 +415,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] title
     #   A finding's title.
+    #
+    #   <note markdown="1"> In this release, Title is a required property.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
     #   A finding's description.
+    #
+    #   <note markdown="1"> In this release, Description is a required property.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] remediation
@@ -1588,6 +1596,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_subscription_requests
     #   The list of standards that you want to enable.
+    #
+    #   In this release, Security Hub only supports the CIS AWS Foundations
+    #   standard.
+    #
+    #    Its ARN is
+    #   arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandardsRequest AWS API Documentation
@@ -4571,6 +4585,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_arn
     #   The ARN of a standard.
+    #
+    #   In this release, Security Hub only supports the CIS AWS Foundations
+    #   standard.
+    #
+    #    Its ARN is
+    #   arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
     #   @return [String]
     #
     # @!attribute [rw] standards_input
@@ -4604,6 +4624,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_arn
     #   The ARN of the standard that you want to enable.
+    #
+    #   In this release, Security Hub only supports the CIS AWS Foundations
+    #   standard.
+    #
+    #    Its ARN is
+    #   arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
     #   @return [String]
     #
     # @!attribute [rw] standards_input
