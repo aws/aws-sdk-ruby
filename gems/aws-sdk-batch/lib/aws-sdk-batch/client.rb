@@ -343,9 +343,9 @@ module Aws::Batch
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
-    # [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
     #
     # @option params [required, String] :compute_environment_name
     #   The name for your compute environment. Up to 128 letters (uppercase
@@ -357,7 +357,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [String] :state
     #   The state of the compute environment. If the state is `ENABLED`, then
@@ -1023,6 +1023,9 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].container_properties.user #=> String
     #   resp.job_definitions[0].container_properties.instance_type #=> String
+    #   resp.job_definitions[0].container_properties.resource_requirements #=> Array
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].type #=> String, one of "GPU"
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1052,6 +1055,9 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.user #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.instance_type #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1288,6 +1294,9 @@ module Aws::Batch
     #   resp.jobs[0].container.network_interfaces[0].attachment_id #=> String
     #   resp.jobs[0].container.network_interfaces[0].ipv6_address #=> String
     #   resp.jobs[0].container.network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.jobs[0].container.resource_requirements #=> Array
+    #   resp.jobs[0].container.resource_requirements[0].value #=> String
+    #   resp.jobs[0].container.resource_requirements[0].type #=> String, one of "GPU"
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1318,6 +1327,9 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].container.user #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.instance_type #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1521,7 +1533,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1601,6 +1613,12 @@ module Aws::Batch
     #       ],
     #       user: "String",
     #       instance_type: "String",
+    #       resource_requirements: [
+    #         {
+    #           value: "String", # required
+    #           type: "GPU", # required, accepts GPU
+    #         },
+    #       ],
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -1646,6 +1664,12 @@ module Aws::Batch
     #             ],
     #             user: "String",
     #             instance_type: "String",
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
+    #               },
+    #             ],
     #           },
     #         },
     #       ],
@@ -1748,7 +1772,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1801,8 +1825,15 @@ module Aws::Batch
     #           value: "String",
     #         },
     #       ],
+    #       resource_requirements: [
+    #         {
+    #           value: "String", # required
+    #           type: "GPU", # required, accepts GPU
+    #         },
+    #       ],
     #     },
     #     node_overrides: {
+    #       num_nodes: 1,
     #       node_property_overrides: [
     #         {
     #           target_nodes: "String", # required
@@ -1815,6 +1846,12 @@ module Aws::Batch
     #               {
     #                 name: "String",
     #                 value: "String",
+    #               },
+    #             ],
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
     #               },
     #             ],
     #           },
@@ -2052,7 +2089,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

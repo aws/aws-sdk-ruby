@@ -512,6 +512,13 @@ module Aws::Comprehend
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the document classifier being created. A
+    #   tag is a key-value pair that adds as a metadata to a resource used by
+    #   Amazon Comprehend. For example, a tag with the key-value pair
+    #   ‘Department’:’Sales’ might be added to a resource to indicate its use
+    #   by a particular department.
+    #
     # @option params [required, Types::DocumentClassifierInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data for the job.
     #
@@ -546,6 +553,12 @@ module Aws::Comprehend
     #   resp = client.create_document_classifier({
     #     document_classifier_name: "ComprehendArnName", # required
     #     data_access_role_arn: "IamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #     },
@@ -581,6 +594,13 @@ module Aws::Comprehend
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the entity recognizer being created. A tag
+    #   is a key-value pair that adds as a metadata to a resource used by
+    #   Amazon Comprehend. For example, a tag with the key-value pair
+    #   ‘Department’:’Sales’ might be added to a resource to indicate its use
+    #   by a particular department.
     #
     # @option params [required, Types::EntityRecognizerInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
@@ -618,6 +638,12 @@ module Aws::Comprehend
     #   resp = client.create_entity_recognizer({
     #     recognizer_name: "ComprehendArnName", # required
     #     data_access_role_arn: "IamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     input_data_config: { # required
     #       entity_types: [ # required
     #         {
@@ -1693,6 +1719,40 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Lists all tags associated with a given Amazon Comprehend resource. Up
+    # to the maximum number of tags allowed per resource will be displayed.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
+    #   you are querying.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ComprehendArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the topic detection jobs that you have submitted.
     #
     # @option params [Types::TopicsDetectionJobFilter] :filter
@@ -2474,6 +2534,72 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Associates a specific tag with an Amazon Comprehend resource. A tag is
+    # a key-value pair that adds as a metadata to a resource used by Amazon
+    # Comprehend. For example, a tag with the key-value pair
+    # ‘Department’:’Sales’ might be added to a resource to indicate its use
+    # by a particular department.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
+    #   to which you want to associate the tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   Tags being associated with a specific Amazon Comprehend resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ComprehendArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a specific tag associated with an Amazon Comprehend resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
+    #   from which you want to remove the tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The initial part of a key-value pair that forms a tag being removed
+    #   from a given resource. For instance, “Department” might be used as the
+    #   key portion of the pair, with multiple values such as “sales,”
+    #   “legal,” and “administration.”
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ComprehendArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2487,7 +2613,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

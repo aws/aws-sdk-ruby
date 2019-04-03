@@ -93,6 +93,9 @@ module Aws::Batch
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
+    ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
+    ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     String = Shapes::StringShape.new(name: 'String')
@@ -208,6 +211,7 @@ module Aws::Batch
     ContainerDetail.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "logStreamName"))
     ContainerDetail.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerDetail.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
+    ContainerDetail.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
@@ -215,6 +219,7 @@ module Aws::Batch
     ContainerOverrides.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerOverrides.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerOverrides.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerOverrides.struct_class = Types::ContainerOverrides
 
     ContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
@@ -230,6 +235,7 @@ module Aws::Batch
     ContainerProperties.add_member(:ulimits, Shapes::ShapeRef.new(shape: Ulimits, location_name: "ulimits"))
     ContainerProperties.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
     ContainerProperties.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    ContainerProperties.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -421,6 +427,7 @@ module Aws::Batch
     NodeDetails.add_member(:is_main_node, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMainNode"))
     NodeDetails.struct_class = Types::NodeDetails
 
+    NodeOverrides.add_member(:num_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "numNodes"))
     NodeOverrides.add_member(:node_property_overrides, Shapes::ShapeRef.new(shape: NodePropertyOverrides, location_name: "nodePropertyOverrides"))
     NodeOverrides.struct_class = Types::NodeOverrides
 
@@ -462,6 +469,12 @@ module Aws::Batch
     RegisterJobDefinitionResponse.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
     RegisterJobDefinitionResponse.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "revision"))
     RegisterJobDefinitionResponse.struct_class = Types::RegisterJobDefinitionResponse
+
+    ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    ResourceRequirement.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "type"))
+    ResourceRequirement.struct_class = Types::ResourceRequirement
+
+    ResourceRequirements.member = Shapes::ShapeRef.new(shape: ResourceRequirement)
 
     RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
     RetryStrategy.struct_class = Types::RetryStrategy

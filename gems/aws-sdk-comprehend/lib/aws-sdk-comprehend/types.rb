@@ -459,6 +459,12 @@ module Aws::Comprehend
     #       {
     #         document_classifier_name: "ComprehendArnName", # required
     #         data_access_role_arn: "IamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #         },
@@ -476,6 +482,14 @@ module Aws::Comprehend
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the document classifier being created. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Comprehend. For example, a tag with the key-value pair
+    #   ‘Department’:’Sales’ might be added to a resource to indicate its
+    #   use by a particular department.
+    #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
@@ -512,6 +526,7 @@ module Aws::Comprehend
     class CreateDocumentClassifierRequest < Struct.new(
       :document_classifier_name,
       :data_access_role_arn,
+      :tags,
       :input_data_config,
       :client_request_token,
       :language_code,
@@ -537,6 +552,12 @@ module Aws::Comprehend
     #       {
     #         recognizer_name: "ComprehendArnName", # required
     #         data_access_role_arn: "IamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         input_data_config: { # required
     #           entity_types: [ # required
     #             {
@@ -570,6 +591,14 @@ module Aws::Comprehend
     #   (IAM) role that grants Amazon Comprehend read access to your input
     #   data.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the entity recognizer being created. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Comprehend. For example, a tag with the key-value pair
+    #   ‘Department’:’Sales’ might be added to a resource to indicate its
+    #   use by a particular department.
+    #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
@@ -607,6 +636,7 @@ module Aws::Comprehend
     class CreateEntityRecognizerRequest < Struct.new(
       :recognizer_name,
       :data_access_role_arn,
+      :tags,
       :input_data_config,
       :client_request_token,
       :language_code,
@@ -2638,6 +2668,46 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource you are querying.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource you are querying.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the Amazon Comprehend resource being queried. A
+    #   tag is a key-value pair that adds as a metadata to a resource used
+    #   by Amazon Comprehend. For example, a tag with the key-value pair
+    #   ‘Department’:’Sales’ might be added to a resource to indicate its
+    #   use by a particular department.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTopicsDetectionJobsRequest
     #   data as a hash:
     #
@@ -3806,6 +3876,77 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # A key-value pair that adds as a metadata to a resource used by Amazon
+    # Comprehend. For example, a tag with the key-value pair
+    # ‘Department’:’Sales’ might be added to a resource to indicate its use
+    # by a particular department.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The initial part of a key-value pair that forms a tag associated
+    #   with a given resource. For instance, if you want to show which
+    #   resources are used by which departments, you might use “Department”
+    #   as the key portion of the pair, with multiple possible values such
+    #   as “sales,” “legal,” and “administration.”
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The second part of a key-value pair that forms a tag associated with
+    #   a given resource. For instance, if you want to show which resources
+    #   are used by which departments, you might use “Department” as the
+    #   initial (key) portion of the pair, with a value of “sales” to
+    #   indicate the sales department.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource to which you want to associate the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags being associated with a specific Amazon Comprehend resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Provides information for filtering topic detection jobs. For more
     # information, see .
     #
@@ -3896,7 +4037,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
-    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   (IAM) role that grants Amazon Comprehend read access to your job
     #   data.
     #   @return [String]
     #
@@ -3928,6 +4069,38 @@ module Aws::Comprehend
       :volume_kms_key_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the given Amazon Comprehend
+    #   resource from which you want to remove the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The initial part of a key-value pair that forms a tag being removed
+    #   from a given resource. For instance, “Department” might be used as
+    #   the key portion of the pair, with multiple values such as “sales,”
+    #   “legal,” and “administration.”
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

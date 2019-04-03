@@ -391,7 +391,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #   @return [String]
     #
     # @!attribute [rw] bid_percentage
@@ -568,6 +568,11 @@ module Aws::Batch
     #   The network interfaces associated with the job.
     #   @return [Array<Types::NetworkInterface>]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container.
+    #   Currently, the only supported resource is `GPU`.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -589,7 +594,8 @@ module Aws::Batch
       :task_arn,
       :log_stream_name,
       :instance_type,
-      :network_interfaces)
+      :network_interfaces,
+      :resource_requirements)
       include Aws::Structure
     end
 
@@ -607,6 +613,12 @@ module Aws::Batch
     #           {
     #             name: "String",
     #             value: "String",
+    #           },
+    #         ],
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
     #           },
     #         ],
     #       }
@@ -644,6 +656,12 @@ module Aws::Batch
     #    </note>
     #   @return [Array<Types::KeyValuePair>]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container. This
+    #   value overrides the value set in the job definition. Currently, the
+    #   only supported resource is `GPU`.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides AWS API Documentation
     #
     class ContainerOverrides < Struct.new(
@@ -651,7 +669,8 @@ module Aws::Batch
       :memory,
       :command,
       :instance_type,
-      :environment)
+      :environment,
+      :resource_requirements)
       include Aws::Structure
     end
 
@@ -699,6 +718,12 @@ module Aws::Batch
     #         ],
     #         user: "String",
     #         instance_type: "String",
+    #         resource_requirements: [
+    #           {
+    #             value: "String", # required
+    #             type: "GPU", # required, accepts GPU
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] image
@@ -881,6 +906,11 @@ module Aws::Batch
     #   jobs.
     #   @return [String]
     #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container.
+    #   Currently, the only supported resource is `GPU`.
+    #   @return [Array<Types::ResourceRequirement>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
     class ContainerProperties < Struct.new(
@@ -896,7 +926,8 @@ module Aws::Batch
       :privileged,
       :ulimits,
       :user,
-      :instance_type)
+      :instance_type,
+      :resource_requirements)
       include Aws::Structure
     end
 
@@ -963,7 +994,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1467,7 +1498,13 @@ module Aws::Batch
     #   Default parameters or parameter substitution placeholders that are
     #   set in the job definition. Parameters are specified as a key-value
     #   pair mapping. Parameters in a `SubmitJob` request override any
-    #   corresponding parameter defaults from the job definition.
+    #   corresponding parameter defaults from the job definition. For more
+    #   information about specifying parameters, see [Job Definition
+    #   Parameters][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/job_definition_parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] retry_strategy
@@ -1558,7 +1595,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable
     #   @return [String]
     #
     # @!attribute [rw] attempts
@@ -2030,6 +2067,7 @@ module Aws::Batch
     #   data as a hash:
     #
     #       {
+    #         num_nodes: 1,
     #         node_property_overrides: [
     #           {
     #             target_nodes: "String", # required
@@ -2044,10 +2082,32 @@ module Aws::Batch
     #                   value: "String",
     #                 },
     #               ],
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] num_nodes
+    #   The number of nodes to use with a multi-node parallel job. This
+    #   value overrides the number of nodes that are specified in the job
+    #   definition. To use this override:
+    #
+    #   * There must be at least one node range in your job definition that
+    #     has an open upper boundary (such as `:` or `n:`).
+    #
+    #   * The lower boundary of the node range specified in the job
+    #     definition must be fewer than the number of nodes specified in the
+    #     override.
+    #
+    #   * The main node index specified in the job definition must be fewer
+    #     than the number of nodes specified in the override.
+    #   @return [Integer]
     #
     # @!attribute [rw] node_property_overrides
     #   The node property overrides for the job.
@@ -2056,6 +2116,7 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeOverrides AWS API Documentation
     #
     class NodeOverrides < Struct.new(
+      :num_nodes,
       :node_property_overrides)
       include Aws::Structure
     end
@@ -2110,6 +2171,12 @@ module Aws::Batch
     #               ],
     #               user: "String",
     #               instance_type: "String",
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -2121,7 +2188,7 @@ module Aws::Batch
     #
     # @!attribute [rw] main_node
     #   Specifies the node index for the main node of a multi-node parallel
-    #   job.
+    #   job. This node index value must be fewer than the number of nodes.
     #   @return [Integer]
     #
     # @!attribute [rw] node_range_properties
@@ -2182,6 +2249,12 @@ module Aws::Batch
     #             {
     #               name: "String",
     #               value: "String",
+    #             },
+    #           ],
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
     #             },
     #           ],
     #         },
@@ -2253,6 +2326,12 @@ module Aws::Batch
     #           ],
     #           user: "String",
     #           instance_type: "String",
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -2326,6 +2405,12 @@ module Aws::Batch
     #           ],
     #           user: "String",
     #           instance_type: "String",
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #         node_properties: {
     #           num_nodes: 1, # required
@@ -2371,6 +2456,12 @@ module Aws::Batch
     #                 ],
     #                 user: "String",
     #                 instance_type: "String",
+    #                 resource_requirements: [
+    #                   {
+    #                     value: "String", # required
+    #                     type: "GPU", # required, accepts GPU
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -2439,7 +2530,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #   @return [Types::JobTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest AWS API Documentation
@@ -2473,6 +2564,37 @@ module Aws::Batch
       :job_definition_name,
       :job_definition_arn,
       :revision)
+      include Aws::Structure
+    end
+
+    # The type and amount of a resource to assign to a container. Currently,
+    # the only supported resource type is `GPU`.
+    #
+    # @note When making an API call, you may pass ResourceRequirement
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String", # required
+    #         type: "GPU", # required, accepts GPU
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The number of physical GPUs to reserve for the container. The number
+    #   of GPUs reserved for all containers in a job should not exceed the
+    #   number of available GPUs on the compute resource that the job is
+    #   launched on.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of resource to assign to a container. Currently, the only
+    #   supported resource type is `GPU`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ResourceRequirement AWS API Documentation
+    #
+    class ResourceRequirement < Struct.new(
+      :value,
+      :type)
       include Aws::Structure
     end
 
@@ -2529,8 +2651,15 @@ module Aws::Batch
     #               value: "String",
     #             },
     #           ],
+    #           resource_requirements: [
+    #             {
+    #               value: "String", # required
+    #               type: "GPU", # required, accepts GPU
+    #             },
+    #           ],
     #         },
     #         node_overrides: {
+    #           num_nodes: 1,
     #           node_property_overrides: [
     #             {
     #               target_nodes: "String", # required
@@ -2543,6 +2672,12 @@ module Aws::Batch
     #                   {
     #                     name: "String",
     #                     value: "String",
+    #                   },
+    #                 ],
+    #                 resource_requirements: [
+    #                   {
+    #                     value: "String", # required
+    #                     type: "GPU", # required, accepts GPU
     #                   },
     #                 ],
     #               },
@@ -2638,7 +2773,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #   @return [Types::JobTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest AWS API Documentation
