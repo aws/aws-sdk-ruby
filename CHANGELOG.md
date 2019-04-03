@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
 2.11.253 (2019-04-02)
 ------------------
 
