@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.255 (2019-04-04)
+------------------
+
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Container Service for Kubernetes.
 
 * Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
