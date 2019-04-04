@@ -136,7 +136,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     # @option options [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
     #
@@ -188,7 +188,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :group_name
     #   The name of the group to create. Do not include the path in this
@@ -248,7 +248,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @return [InstanceProfile]
     def create_instance_profile(options = {})
@@ -298,7 +298,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :policy_document
     #   The JSON policy document that you want to use as the content for the
@@ -370,7 +370,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :role_name
     #   The name of the role to create.
@@ -426,7 +426,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the role.
@@ -444,7 +444,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Role]
     def create_role(options = {})
       resp = @client.create_role(options)
@@ -475,7 +475,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     # @option options [required, String] :name
     #   The name of the provider to create.
     #
@@ -527,7 +527,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :server_certificate_name
     #   The name for the server certificate. Do not include the path in this
@@ -681,7 +681,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :user_name
     #   The name of the user to create.
@@ -712,7 +712,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create_user(options = {})
       resp = @client.create_user(options)
@@ -746,7 +746,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :virtual_mfa_device_name
     #   The name of the virtual MFA device. Use with path to uniquely identify

@@ -36,7 +36,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -48,7 +48,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def user_id
       data[:user_id]
@@ -60,7 +60,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -100,7 +100,7 @@ module Aws::IAM
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]
@@ -124,7 +124,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
@@ -331,7 +331,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(user_name: @name)
@@ -368,7 +368,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
@@ -387,7 +387,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create(options = {})
       options = options.merge(user_name: @name)
@@ -524,7 +524,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(user_name: @name)
@@ -566,7 +566,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @option options [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
@@ -581,7 +581,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @return [MfaDevice]
     def enable_mfa(options = {})
       options = options.merge(user_name: @name)

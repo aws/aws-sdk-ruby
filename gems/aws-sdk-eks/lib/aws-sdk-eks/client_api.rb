@@ -37,6 +37,11 @@ module Aws::EKS
     ListUpdatesRequest = Shapes::StructureShape.new(name: 'ListUpdatesRequest')
     ListUpdatesRequestMaxResults = Shapes::IntegerShape.new(name: 'ListUpdatesRequestMaxResults')
     ListUpdatesResponse = Shapes::StructureShape.new(name: 'ListUpdatesResponse')
+    LogSetup = Shapes::StructureShape.new(name: 'LogSetup')
+    LogSetups = Shapes::ListShape.new(name: 'LogSetups')
+    LogType = Shapes::StringShape.new(name: 'LogType')
+    LogTypes = Shapes::ListShape.new(name: 'LogTypes')
+    Logging = Shapes::StructureShape.new(name: 'Logging')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -69,6 +74,7 @@ module Aws::EKS
     Cluster.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     Cluster.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
     Cluster.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "resourcesVpcConfig"))
+    Cluster.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "status"))
     Cluster.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificateAuthority"))
     Cluster.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken"))
@@ -79,6 +85,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     CreateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
     CreateClusterRequest.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigRequest, required: true, location_name: "resourcesVpcConfig"))
+    CreateClusterRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     CreateClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
@@ -128,6 +135,17 @@ module Aws::EKS
     ListUpdatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListUpdatesResponse.struct_class = Types::ListUpdatesResponse
 
+    LogSetup.add_member(:types, Shapes::ShapeRef.new(shape: LogTypes, location_name: "types"))
+    LogSetup.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
+    LogSetup.struct_class = Types::LogSetup
+
+    LogSetups.member = Shapes::ShapeRef.new(shape: LogSetup)
+
+    LogTypes.member = Shapes::ShapeRef.new(shape: LogType)
+
+    Logging.add_member(:cluster_logging, Shapes::ShapeRef.new(shape: LogSetups, location_name: "clusterLogging"))
+    Logging.struct_class = Types::Logging
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     Update.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -140,6 +158,7 @@ module Aws::EKS
 
     UpdateClusterConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdateClusterConfigRequest.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigRequest, location_name: "resourcesVpcConfig"))
+    UpdateClusterConfigRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     UpdateClusterConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateClusterConfigRequest.struct_class = Types::UpdateClusterConfigRequest
 

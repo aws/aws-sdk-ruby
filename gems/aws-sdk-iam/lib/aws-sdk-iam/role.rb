@@ -36,7 +36,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -48,7 +48,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def role_id
       data[:role_id]
@@ -60,7 +60,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -116,7 +116,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
@@ -268,7 +268,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(role_name: @name)
@@ -301,7 +301,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(role_name: @name)

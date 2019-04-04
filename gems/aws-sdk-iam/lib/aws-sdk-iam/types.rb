@@ -104,7 +104,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyLastUsed AWS API Documentation
@@ -290,7 +290,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyRequest AWS API Documentation
@@ -331,7 +331,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyRequest AWS API Documentation
@@ -372,7 +372,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyRequest AWS API Documentation
@@ -393,7 +393,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #
     # @!attribute [rw] permissions_boundary_type
     #   The permissions boundary usage type that indicates what type of IAM
@@ -427,7 +427,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] policy_name
     #   The friendly name of the attached policy.
@@ -442,7 +442,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPolicy AWS API Documentation
@@ -626,7 +626,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -704,7 +704,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -861,7 +861,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest AWS API Documentation
@@ -930,7 +930,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -1007,7 +1007,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] policy_document
@@ -1044,7 +1044,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionRequest AWS API Documentation
@@ -1103,7 +1103,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -1168,7 +1168,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
     # @!attribute [rw] permissions_boundary
@@ -1190,7 +1190,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
@@ -1240,7 +1240,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1301,7 +1301,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1426,7 +1426,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -1464,7 +1464,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest AWS API Documentation
@@ -1514,7 +1514,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -1825,7 +1825,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyRequest AWS API Documentation
@@ -1852,7 +1852,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -1869,7 +1869,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionRequest AWS API Documentation
@@ -2346,7 +2346,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyRequest AWS API Documentation
@@ -2387,7 +2387,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyRequest AWS API Documentation
@@ -2428,7 +2428,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyRequest AWS API Documentation
@@ -2490,7 +2490,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #   @return [String]
     #
     # @!attribute [rw] authentication_code_2
@@ -2507,7 +2507,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceRequest AWS API Documentation
@@ -2543,7 +2543,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://www.iso.org/iso/iso8601
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityDetails AWS API Documentation
@@ -2567,7 +2567,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2588,7 +2588,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EntityInfo AWS API Documentation
@@ -2679,7 +2679,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] resource_specific_results
@@ -2996,7 +2996,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] policy_input_list
@@ -3306,7 +3306,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderRequest AWS API Documentation
@@ -3367,7 +3367,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyRequest AWS API Documentation
@@ -3407,7 +3407,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -3565,7 +3565,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderRequest AWS API Documentation
@@ -3839,8 +3839,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -4090,8 +4090,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
     #   @return [Types::User]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserResponse AWS API Documentation
@@ -4118,7 +4118,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -4132,7 +4132,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4142,7 +4142,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -4177,7 +4177,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -4191,7 +4191,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4203,7 +4203,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -4255,7 +4255,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_name
@@ -4269,7 +4269,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4279,7 +4279,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -4782,7 +4782,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] entity_filter
@@ -5451,8 +5451,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] policies
@@ -5503,8 +5503,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccessRequest AWS API Documentation
@@ -5685,7 +5685,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -5727,7 +5727,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [Array<Types::PolicyVersion>]
     #
     # @!attribute [rw] is_truncated
@@ -6728,7 +6728,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] policy_name
     #   The friendly name (not ARN) identifying the policy.
@@ -6742,7 +6742,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -6754,7 +6754,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -6765,7 +6765,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
@@ -6777,7 +6777,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
     # @!attribute [rw] attachment_count
@@ -6794,7 +6794,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Integer]
     #
     # @!attribute [rw] is_attachable
@@ -6863,7 +6863,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry AWS API Documentation
@@ -6967,7 +6967,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] policy_name
     #   The friendly name (not ARN) identifying the policy.
@@ -6981,7 +6981,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -6993,7 +6993,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -7004,7 +7004,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
@@ -7026,7 +7026,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Integer]
     #
     # @!attribute [rw] is_attachable
@@ -7119,7 +7119,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
@@ -7131,7 +7131,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] entity_type
@@ -7144,7 +7144,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #   @return [String]
     #
     # @!attribute [rw] entity_name
@@ -7157,7 +7157,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGrantingServiceAccess AWS API Documentation
@@ -7182,7 +7182,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) identifying the group.
@@ -7195,7 +7195,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGroup AWS API Documentation
@@ -7217,7 +7217,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] role_name
     #   The name (friendly name, not ARN) identifying the role.
@@ -7230,7 +7230,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyRole AWS API Documentation
@@ -7252,7 +7252,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] user_name
     #   The name (friendly name, not ARN) identifying the user.
@@ -7265,7 +7265,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyUser AWS API Documentation
@@ -7287,7 +7287,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @!attribute [rw] document
     #   The policy document.
@@ -7624,7 +7624,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] client_id
@@ -7906,7 +7906,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -7920,7 +7920,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -7930,7 +7930,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -7974,7 +7974,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
@@ -8005,7 +8005,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -8019,7 +8019,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -8031,7 +8031,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -8078,7 +8078,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail AWS API Documentation
@@ -8269,7 +8269,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] server_certificate_name
@@ -8283,7 +8283,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -8293,7 +8293,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] upload_date
@@ -8336,7 +8336,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://www.iso.org/iso/iso8601
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Time]
     #
     # @!attribute [rw] service_namespace
@@ -8352,8 +8352,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
     # @!attribute [rw] last_authenticated_entity
@@ -8366,7 +8366,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [String]
     #
     # @!attribute [rw] total_authenticated_entities
@@ -8378,7 +8378,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceLastAccessed AWS API Documentation
@@ -8509,7 +8509,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -8520,7 +8520,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionRequest AWS API Documentation
@@ -8615,8 +8615,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
     #   [3]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
@@ -8648,7 +8648,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_policy
@@ -8754,7 +8754,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -8861,7 +8861,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] policy_input_list
@@ -8910,7 +8910,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_policy
@@ -8973,7 +8973,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] context_entries
@@ -9027,7 +9027,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -9107,7 +9107,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -9415,7 +9415,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     #   @return [Boolean]
     #
     # @!attribute [rw] max_password_age
@@ -9651,7 +9651,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] thumbprint_list
@@ -9740,7 +9740,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleRequest AWS API Documentation
@@ -9781,7 +9781,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest AWS API Documentation
@@ -10174,7 +10174,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
@@ -10359,7 +10359,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -10373,7 +10373,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -10383,7 +10383,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -10420,7 +10420,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://www.iso.org/iso/iso8601
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #   @return [Time]
     #
     # @!attribute [rw] permissions_boundary
@@ -10440,7 +10440,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/User AWS API Documentation
@@ -10469,7 +10469,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -10483,7 +10483,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -10495,7 +10495,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -10536,7 +10536,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail AWS API Documentation

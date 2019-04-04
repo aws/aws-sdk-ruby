@@ -314,10 +314,10 @@ module Aws::IAM
     #
     #
     # [1]: https://en.wikipedia.org/wiki/Eventual_consistency
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to update.
@@ -435,7 +435,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the group to attach the policy
@@ -458,7 +458,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -506,7 +506,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to attach the policy to.
@@ -528,7 +528,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -568,7 +568,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the IAM user to attach the policy
@@ -591,7 +591,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -630,7 +630,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
     # @option params [required, String] :old_password
     #   The IAM user's current password.
@@ -702,7 +702,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @option params [String] :user_name
     #   The name of the IAM user that the new key will belong to.
@@ -769,7 +769,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
     #
     # @option params [required, String] :account_alias
     #   The account alias to create.
@@ -816,7 +816,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @option params [String] :path
     #   The path to the group. For more information about paths, see [IAM
@@ -834,7 +834,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :group_name
@@ -908,8 +908,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to create.
@@ -939,7 +939,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @return [Types::CreateInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1014,7 +1014,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user to create a password for. The user must
@@ -1178,7 +1178,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
     #
     # @return [Types::CreateOpenIDConnectProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1238,8 +1238,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_name
     #   The friendly name of the policy.
@@ -1271,7 +1271,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :policy_document
@@ -1355,7 +1355,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy to which you want to
@@ -1366,7 +1366,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :policy_document
     #   The JSON policy document that you want to use as the content for this
@@ -1401,7 +1401,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @return [Types::CreatePolicyVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1438,8 +1438,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @option params [String] :path
     #   The path to the role. For more information about paths, see [IAM
@@ -1457,7 +1457,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :role_name
@@ -1517,7 +1517,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
     # @option params [String] :permissions_boundary
     #   The ARN of the policy that is used to set the permissions boundary for
@@ -1537,7 +1537,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @return [Types::CreateRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1636,9 +1636,9 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     #
     # @option params [required, String] :saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that supports
@@ -1653,7 +1653,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     #
     # @option params [required, String] :name
     #   The name of the provider to create.
@@ -1705,7 +1705,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
     #
     # @option params [required, String] :aws_service_name
     #   The service principal for the AWS service to which this role is
@@ -1721,7 +1721,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html
     #
     # @option params [String] :description
     #   The description of the role.
@@ -1793,7 +1793,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user that is to be associated with the
@@ -1852,7 +1852,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @option params [String] :path
     #   The path for the user name. For more information about paths, see [IAM
@@ -1870,7 +1870,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :user_name
@@ -1904,7 +1904,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1984,8 +1984,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @option params [String] :path
     #   The path for the virtual MFA device. For more information about paths,
@@ -2003,7 +2003,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :virtual_mfa_device_name
@@ -2066,7 +2066,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
     #
     # @option params [required, String] :user_name
     #   The name of the user whose MFA device you want to deactivate.
@@ -2177,7 +2177,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
     #
     # @option params [required, String] :account_alias
     #   The name of the account alias to delete.
@@ -2281,7 +2281,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) identifying the group that the
@@ -2349,7 +2349,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to delete.
@@ -2496,7 +2496,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to delete.
@@ -2506,7 +2506,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2537,7 +2537,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy from which you want
@@ -2548,7 +2548,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :version_id
     #   The policy version to delete.
@@ -2564,7 +2564,7 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2595,7 +2595,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to delete.
@@ -2672,7 +2672,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) identifying the role that the policy
@@ -2740,7 +2740,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider to delete.
@@ -2772,7 +2772,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user associated with the SSH public key.
@@ -2834,8 +2834,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
-    # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [2]: https://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html
     #
     # @option params [required, String] :server_certificate_name
     #   The name of the server certificate you want to delete.
@@ -2891,7 +2891,7 @@ module Aws::IAM
     #
     #
     # [1]: http://docs.aws.amazon.com/
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
     #
     # @option params [required, String] :role_name
     #   The name of the service-linked role to be deleted.
@@ -3103,7 +3103,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) identifying the user that the policy
@@ -3214,7 +3214,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the IAM group to detach the
@@ -3237,7 +3237,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3266,7 +3266,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the IAM role to detach the policy
@@ -3289,7 +3289,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3318,7 +3318,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the IAM user to detach the policy
@@ -3341,7 +3341,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3404,7 +3404,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #
     # @option params [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
@@ -3420,7 +3420,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3448,7 +3448,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #
     # @return [Types::GenerateCredentialReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3525,10 +3525,10 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html
     #
     # @option params [required, String] :arn
     #   The ARN of the IAM resource (user, group, role, or managed policy)
@@ -3785,7 +3785,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html
     #
     # @return [Types::GetAccountPasswordPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3845,7 +3845,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
     #
     # @return [Types::GetAccountSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3999,7 +3999,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :policy_input_list
     #   An optional list of additional policies for which you want the list of
@@ -4052,7 +4052,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #
     # @return [Types::GetCredentialReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4175,7 +4175,7 @@ module Aws::IAM
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name of the group the policy is associated with.
@@ -4236,7 +4236,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to get information about.
@@ -4392,7 +4392,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::GetOpenIDConnectProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4443,7 +4443,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the managed policy that you want
@@ -4454,7 +4454,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4515,8 +4515,8 @@ module Aws::IAM
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the managed policy that you want
@@ -4527,7 +4527,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :version_id
     #   Identifies the policy version to retrieve.
@@ -4583,7 +4583,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
     # [2]: https://tools.ietf.org/html/rfc3986
     #
     # @option params [required, String] :role_name
@@ -4679,8 +4679,8 @@ module Aws::IAM
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
     #
     # @option params [required, String] :role_name
     #   The name of the role associated with the policy.
@@ -4743,7 +4743,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider resource object in
@@ -4754,7 +4754,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::GetSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4794,7 +4794,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user associated with the SSH public key.
@@ -4864,7 +4864,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
     #
     # @option params [required, String] :server_certificate_name
     #   The name of the server certificate you want to retrieve information
@@ -4952,7 +4952,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
     #
     # @option params [required, String] :job_id
     #   The ID of the request generated by the
@@ -5093,8 +5093,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @option params [Integer] :max_items
     #   Use this only when paginating results to indicate the maximum number
@@ -5333,7 +5333,7 @@ module Aws::IAM
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name of the user who the policy is associated with.
@@ -5500,7 +5500,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -5579,7 +5579,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the group to list attached
@@ -5675,7 +5675,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to list attached
@@ -5771,7 +5771,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the user to list attached
@@ -5871,7 +5871,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :entity_filter
     #   The entity type to use for filtering the results.
@@ -5982,7 +5982,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name of the group to list policies for.
@@ -6275,7 +6275,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example, the prefix
@@ -6370,7 +6370,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to list instance profiles for.
@@ -6558,7 +6558,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [String] :scope
     #   The scope to use for filtering the results.
@@ -6704,8 +6704,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -6731,8 +6731,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #
     # @return [Types::ListPoliciesGrantingServiceAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6825,7 +6825,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy for which you want
@@ -6836,7 +6836,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -6902,7 +6902,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to list policies for.
@@ -6969,7 +6969,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @option params [required, String] :role_name
     #   The name of the IAM role for which you want to see the list of tags.
@@ -7065,7 +7065,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example, the prefix
@@ -7152,7 +7152,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @return [Types::ListSAMLProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7189,7 +7189,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
     #
     # @option params [String] :user_name
     #   The name of the IAM user to list SSH public keys for. If none is
@@ -7268,7 +7268,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example:
@@ -7350,7 +7350,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html
     #
     # @option params [String] :user_name
     #   The name of the user whose service-specific credentials you want
@@ -7515,7 +7515,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name of the user to list policies for.
@@ -7582,7 +7582,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user whose tags you want to see.
@@ -7895,9 +7895,9 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [required, String] :group_name
     #   The name of the group to associate the policy with.
@@ -7988,7 +7988,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the IAM role for which you want
@@ -8044,10 +8044,10 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to associate the policy with.
@@ -8136,7 +8136,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the IAM user for which you want
@@ -8185,9 +8185,9 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [required, String] :user_name
     #   The name of the user to associate the policy with.
@@ -8279,7 +8279,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :client_id
     #   The client ID (also known as audience) to remove from the IAM OIDC
@@ -8318,8 +8318,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to update.
@@ -8496,7 +8496,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
     #
     # @option params [required, String] :user_name
     #   The name of the user whose MFA device you want to resynchronize.
@@ -8564,7 +8564,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy whose default version
@@ -8575,7 +8575,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :version_id
     #   The version of the policy to set as the default (operative) version.
@@ -8585,7 +8585,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8651,8 +8651,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
     #   [3]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, Array<String>] :action_names
@@ -8682,7 +8682,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :resource_policy
     #   A resource-based policy to include in the simulation provided as a
@@ -8781,7 +8781,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [Integer] :max_items
     #   Use this only when paginating results to indicate the maximum number
@@ -8917,7 +8917,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :policy_input_list
     #   An optional list of additional policy documents to include in the
@@ -8963,7 +8963,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :resource_policy
     #   A resource-based policy to include in the simulation provided as a
@@ -9022,7 +9022,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<Types::ContextEntry>] :context_entries
     #   A list of context keys and corresponding values for the simulation to
@@ -9073,7 +9073,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [Integer] :max_items
     #   Use this only when paginating results to indicate the maximum number
@@ -9203,8 +9203,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @option params [required, String] :role_name
     #   The name of the role that you want to add tags to.
@@ -9303,8 +9303,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @option params [required, String] :user_name
     #   The name of the user that you want to add tags to.
@@ -9369,7 +9369,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @option params [required, String] :role_name
     #   The name of the IAM role from which you want to remove tags.
@@ -9422,7 +9422,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user from which you want to remove tags.
@@ -9485,7 +9485,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html
     #
     # @option params [String] :user_name
     #   The name of the user whose key you want to update.
@@ -9565,7 +9565,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html
     #
     # @option params [Integer] :minimum_password_length
     #   The minimum number of characters allowed in an IAM user password.
@@ -9619,7 +9619,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     #
     # @option params [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
@@ -9689,7 +9689,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to update with the new policy.
@@ -9768,8 +9768,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
     #
     # @option params [required, String] :group_name
     #   Name of the IAM group to update. If you're changing the name of the
@@ -9849,7 +9849,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
     # @option params [required, String] :user_name
     #   The name of the user whose password you want to update.
@@ -9950,7 +9950,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<String>] :thumbprint_list
     #   A list of certificate thumbprints that are associated with the
@@ -10002,7 +10002,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -10080,7 +10080,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that supports
@@ -10098,7 +10098,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::UpdateSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10137,7 +10137,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user associated with the SSH public key.
@@ -10211,9 +10211,9 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
     #
     # @option params [required, String] :server_certificate_name
     #   The name of the server certificate that you want to update.
@@ -10413,9 +10413,9 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_renaming
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_renaming
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
     #
     # @option params [required, String] :user_name
     #   Name of the user to update. If you're changing the name of the user,
@@ -10498,7 +10498,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html
     #
     # @option params [required, String] :user_name
     #   The name of the IAM user to associate the SSH public key with.
@@ -10595,12 +10595,12 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/certificate-manager/
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
-    # [5]: http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
-    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html
+    # [1]: https://docs.aws.amazon.com/certificate-manager/
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
+    # [5]: https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html
     #
     # @option params [String] :path
     #   The path for the server certificate. For more information about paths,
@@ -10623,7 +10623,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :server_certificate_name
@@ -10775,8 +10775,8 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [String] :user_name
     #   The name of the user the signing certificate is for.
@@ -10871,7 +10871,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

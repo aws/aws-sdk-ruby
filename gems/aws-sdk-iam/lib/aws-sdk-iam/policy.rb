@@ -43,7 +43,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def policy_id
       data[:policy_id]
@@ -56,7 +56,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -84,7 +84,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     # @return [Integer]
     def permissions_boundary_usage_count
       data[:permissions_boundary_usage_count]
@@ -378,7 +378,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     # @return [PolicyVersion]
     def create_version(options = {})
       options = options.merge(policy_arn: @arn)

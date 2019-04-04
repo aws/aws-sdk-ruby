@@ -66,6 +66,10 @@ module Aws::EKS
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigResponse]
     #
+    # @!attribute [rw] logging
+    #   The logging configuration for your cluster.
+    #   @return [Types::Logging]
+    #
     # @!attribute [rw] status
     #   The current status of the cluster.
     #   @return [String]
@@ -99,6 +103,7 @@ module Aws::EKS
       :endpoint,
       :role_arn,
       :resources_vpc_config,
+      :logging,
       :status,
       :certificate_authority,
       :client_request_token,
@@ -118,6 +123,14 @@ module Aws::EKS
     #           security_group_ids: ["String"],
     #           endpoint_public_access: false,
     #           endpoint_private_access: false,
+    #         },
+    #         logging: {
+    #           cluster_logging: [
+    #             {
+    #               types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #               enabled: false,
+    #             },
+    #           ],
     #         },
     #         client_request_token: "String",
     #       }
@@ -158,6 +171,25 @@ module Aws::EKS
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     #   @return [Types::VpcConfigRequest]
     #
+    # @!attribute [rw] logging
+    #   Enable or disable exporting the Kubernetes control plane logs for
+    #   your cluster to CloudWatch Logs. By default, cluster control plane
+    #   logs are not exported to CloudWatch Logs. For more information, see
+    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   User Guide</i> </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
+    #   @return [Types::Logging]
+    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -173,6 +205,7 @@ module Aws::EKS
       :version,
       :role_arn,
       :resources_vpc_config,
+      :logging,
       :client_request_token)
       include Aws::Structure
     end
@@ -446,6 +479,62 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing the enabled or disabled Kubernetes control
+    # plane logs for your cluster.
+    #
+    # @note When making an API call, you may pass LogSetup
+    #   data as a hash:
+    #
+    #       {
+    #         types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] types
+    #   The available cluster control plane log types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled
+    #   If a log type is enabled, then that log type exports its control
+    #   plane logs to CloudWatch Logs. If a log type is not enabled, then
+    #   that log type does not export its control plane logs. Each
+    #   individual log type can be enabled or disabled independently.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LogSetup AWS API Documentation
+    #
+    class LogSetup < Struct.new(
+      :types,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # An object representing the logging configuration for resources in your
+    # cluster.
+    #
+    # @note When making an API call, you may pass Logging
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_logging: [
+    #           {
+    #             types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #             enabled: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster_logging
+    #   The cluster control plane logging configuration for your cluster.
+    #   @return [Array<Types::LogSetup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Logging AWS API Documentation
+    #
+    class Logging < Struct.new(
+      :cluster_logging)
+      include Aws::Structure
+    end
+
     # An object representing an asynchronous update.
     #
     # @!attribute [rw] id
@@ -496,6 +585,14 @@ module Aws::EKS
     #           endpoint_public_access: false,
     #           endpoint_private_access: false,
     #         },
+    #         logging: {
+    #           cluster_logging: [
+    #             {
+    #               types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #               enabled: false,
+    #             },
+    #           ],
+    #         },
     #         client_request_token: "String",
     #       }
     #
@@ -504,9 +601,28 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
-    #   An object representing an Amazon EKS cluster VPC configuration
-    #   request.
+    #   An object representing the VPC configuration to use for an Amazon
+    #   EKS cluster.
     #   @return [Types::VpcConfigRequest]
+    #
+    # @!attribute [rw] logging
+    #   Enable or disable exporting the Kubernetes control plane logs for
+    #   your cluster to CloudWatch Logs. By default, cluster control plane
+    #   logs are not exported to CloudWatch Logs. For more information, see
+    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   User Guide</i> </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
+    #   @return [Types::Logging]
     #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -521,6 +637,7 @@ module Aws::EKS
     class UpdateClusterConfigRequest < Struct.new(
       :name,
       :resources_vpc_config,
+      :logging,
       :client_request_token)
       include Aws::Structure
     end
@@ -599,8 +716,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an Amazon EKS cluster VPC configuration
-    # request.
+    # An object representing the VPC configuration to use for an Amazon EKS
+    # cluster.
     #
     # @note When making an API call, you may pass VpcConfigRequest
     #   data as a hash:

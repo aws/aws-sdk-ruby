@@ -253,11 +253,9 @@ module Aws::EKS
     # The Amazon EKS control plane consists of control plane instances that
     # run the Kubernetes software, like `etcd` and the API server. The
     # control plane runs in an account managed by AWS, and the Kubernetes
-    # API is exposed via the Amazon EKS API server endpoint.
-    #
-    # Amazon EKS worker nodes run in your AWS account and connect to your
-    # cluster's control plane via the Kubernetes API server endpoint and a
-    # certificate file that is created for your cluster.
+    # API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS
+    # cluster control plane is single-tenant and unique, and runs on its own
+    # set of Amazon EC2 instances.
     #
     # The cluster control plane is provisioned across multiple Availability
     # Zones and fronted by an Elastic Load Balancing Network Load Balancer.
@@ -266,16 +264,43 @@ module Aws::EKS
     # the worker nodes (for example, to support `kubectl exec`, `logs`, and
     # `proxy` data flows).
     #
-    # After you create an Amazon EKS cluster, you must configure your
-    # Kubernetes tooling to communicate with the API server and launch
-    # worker nodes into your cluster. For more information, see [Managing
-    # Cluster Authentication][1] and [Launching Amazon EKS Worker
-    # Nodes][2]in the *Amazon EKS User Guide*.
+    # Amazon EKS worker nodes run in your AWS account and connect to your
+    # cluster's control plane via the Kubernetes API server endpoint and a
+    # certificate file that is created for your cluster.
+    #
+    # You can use the `endpointPublicAccess` and `endpointPrivateAccess`
+    # parameters to enable or disable public and private access to your
+    # cluster's Kubernetes API server endpoint. By default, public access
+    # is enabled and private access is disabled. For more information, see
+    # [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
+    # EKS User Guide</i> </i>.
+    #
+    # You can use the `logging` parameter to enable or disable exporting the
+    # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
+    # default, cluster control plane logs are not exported to CloudWatch
+    # Logs. For more information, see [Amazon EKS Cluster Control Plane
+    # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    # apply to exported control plane logs. For more information, see
+    # [Amazon CloudWatch Pricing][3].
+    #
+    #  </note>
+    #
+    # Cluster creation typically takes between 10 and 15 minutes. After you
+    # create an Amazon EKS cluster, you must configure your Kubernetes
+    # tooling to communicate with the API server and launch worker nodes
+    # into your cluster. For more information, see [Managing Cluster
+    # Authentication][4] and [Launching Amazon EKS Worker Nodes][5] in the
+    # *Amazon EKS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
-    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    # [3]: http://aws.amazon.com/cloudwatch/pricing/
+    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
+    # [5]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
     #
     # @option params [required, String] :name
     #   The unique name to give to your cluster.
@@ -307,6 +332,24 @@ module Aws::EKS
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    #
+    # @option params [Types::Logging] :logging
+    #   Enable or disable exporting the Kubernetes control plane logs for your
+    #   cluster to CloudWatch Logs. By default, cluster control plane logs are
+    #   not exported to CloudWatch Logs. For more information, see [Amazon EKS
+    #   Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User Guide</i>
+    #   </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -356,6 +399,14 @@ module Aws::EKS
     #       endpoint_public_access: false,
     #       endpoint_private_access: false,
     #     },
+    #     logging: {
+    #       cluster_logging: [
+    #         {
+    #           types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #           enabled: false,
+    #         },
+    #       ],
+    #     },
     #     client_request_token: "String",
     #   })
     #
@@ -374,6 +425,10 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
     #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -444,6 +499,10 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
     #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -537,6 +596,10 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.vpc_id #=> String
     #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
     #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
@@ -579,9 +642,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -722,10 +785,23 @@ module Aws::EKS
     # that you can use to track the status of your cluster update with the
     # DescribeUpdate API operation.
     #
-    # Currently, the only cluster configuration changes supported are to
-    # enable or disable Amazon EKS public and private API server endpoints.
-    # For more information, see [Amazon EKS Cluster Endpoint Access
-    # Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    # You can use this API operation to enable or disable public and private
+    # access to your cluster's Kubernetes API server endpoint. By default,
+    # public access is enabled and private access is disabled. For more
+    # information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    # the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # You can also use this API operation to enable or disable exporting the
+    # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
+    # default, cluster control plane logs are not exported to CloudWatch
+    # Logs. For more information, see [Amazon EKS Cluster Control Plane
+    # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    # apply to exported control plane logs. For more information, see
+    # [Amazon CloudWatch Pricing][3].
+    #
+    #  </note>
     #
     # Cluster updates are asynchronous, and they should finish within a few
     # minutes. During an update, the cluster status moves to `UPDATING`
@@ -736,13 +812,33 @@ module Aws::EKS
     #
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    # [3]: http://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [required, String] :name
     #   The name of the Amazon EKS cluster to update.
     #
     # @option params [Types::VpcConfigRequest] :resources_vpc_config
-    #   An object representing an Amazon EKS cluster VPC configuration
-    #   request.
+    #   An object representing the VPC configuration to use for an Amazon EKS
+    #   cluster.
+    #
+    # @option params [Types::Logging] :logging
+    #   Enable or disable exporting the Kubernetes control plane logs for your
+    #   cluster to CloudWatch Logs. By default, cluster control plane logs are
+    #   not exported to CloudWatch Logs. For more information, see [Amazon EKS
+    #   Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User Guide</i>
+    #   </i>.
+    #
+    #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
+    #   apply to exported control plane logs. For more information, see
+    #   [Amazon CloudWatch Pricing][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+    #   [2]: http://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -765,6 +861,14 @@ module Aws::EKS
     #       endpoint_public_access: false,
     #       endpoint_private_access: false,
     #     },
+    #     logging: {
+    #       cluster_logging: [
+    #         {
+    #           types: ["api"], # accepts api, audit, authenticator, controllerManager, scheduler
+    #           enabled: false,
+    #         },
+    #       ],
+    #     },
     #     client_request_token: "String",
     #   })
     #
@@ -772,9 +876,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -832,9 +936,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -865,7 +969,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

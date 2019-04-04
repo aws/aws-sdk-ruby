@@ -25,7 +25,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -43,7 +43,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def user_id
       data[:user_id]
@@ -55,7 +55,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -95,7 +95,7 @@ module Aws::IAM
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]
@@ -119,7 +119,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
