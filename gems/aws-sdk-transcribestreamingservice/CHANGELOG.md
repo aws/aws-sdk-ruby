@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Amazon Transcribe now supports GB English, CA French and FR French which expands upon the existing language support for US English and US Spanish.
+
 1.0.1 (2019-03-26)
 ------------------
 

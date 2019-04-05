@@ -109,7 +109,10 @@
       "type":"string",
       "enum":[
         "en-US",
-        "es-US"
+        "en-GB",
+        "es-US",
+        "fr-CA",
+        "fr-FR"
       ]
     },
     "LimitExceededException":{
