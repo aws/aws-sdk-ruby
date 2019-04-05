@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.256 (2019-04-05)
+------------------
+
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
