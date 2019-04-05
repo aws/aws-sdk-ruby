@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::IoT1ClickDevicesService - Updated the documentation for AWS IoT 1-Click Devices Service.
+
+* Feature - Aws::MediaConvert - Updated the API for AWS Elemental MediaConvert.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
 2.11.255 (2019-04-04)
 ------------------
 
