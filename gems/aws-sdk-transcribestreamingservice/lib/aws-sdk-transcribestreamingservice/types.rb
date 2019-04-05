@@ -184,7 +184,7 @@ module Aws::TranscribeStreamingService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR
     #         media_sample_rate_hertz: 1, # required
     #         media_encoding: "pcm", # required, accepts pcm
     #         vocabulary_name: "VocabularyName",
