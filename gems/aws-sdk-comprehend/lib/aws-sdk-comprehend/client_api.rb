@@ -76,6 +76,7 @@ module Aws::Comprehend
     DocumentClassifierArn = Shapes::StringShape.new(name: 'DocumentClassifierArn')
     DocumentClassifierFilter = Shapes::StructureShape.new(name: 'DocumentClassifierFilter')
     DocumentClassifierInputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierInputDataConfig')
+    DocumentClassifierOutputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierOutputDataConfig')
     DocumentClassifierProperties = Shapes::StructureShape.new(name: 'DocumentClassifierProperties')
     DocumentClassifierPropertiesList = Shapes::ListShape.new(name: 'DocumentClassifierPropertiesList')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
@@ -295,6 +296,7 @@ module Aws::Comprehend
     CreateDocumentClassifierRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     CreateDocumentClassifierRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDocumentClassifierRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, required: true, location_name: "InputDataConfig"))
+    CreateDocumentClassifierRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierOutputDataConfig, location_name: "OutputDataConfig"))
     CreateDocumentClassifierRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateDocumentClassifierRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     CreateDocumentClassifierRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
@@ -437,6 +439,10 @@ module Aws::Comprehend
     DocumentClassifierInputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     DocumentClassifierInputDataConfig.struct_class = Types::DocumentClassifierInputDataConfig
 
+    DocumentClassifierOutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    DocumentClassifierOutputDataConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    DocumentClassifierOutputDataConfig.struct_class = Types::DocumentClassifierOutputDataConfig
+
     DocumentClassifierProperties.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
     DocumentClassifierProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     DocumentClassifierProperties.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
@@ -446,6 +452,7 @@ module Aws::Comprehend
     DocumentClassifierProperties.add_member(:training_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingStartTime"))
     DocumentClassifierProperties.add_member(:training_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
     DocumentClassifierProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, location_name: "InputDataConfig"))
+    DocumentClassifierProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierOutputDataConfig, location_name: "OutputDataConfig"))
     DocumentClassifierProperties.add_member(:classifier_metadata, Shapes::ShapeRef.new(shape: ClassifierMetadata, location_name: "ClassifierMetadata"))
     DocumentClassifierProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     DocumentClassifierProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))

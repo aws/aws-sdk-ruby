@@ -78,6 +78,7 @@ module Aws::MediaLive
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
     CaptionSelectorSettings = Shapes::StructureShape.new(name: 'CaptionSelectorSettings')
     Channel = Shapes::StructureShape.new(name: 'Channel')
+    ChannelClass = Shapes::StringShape.new(name: 'ChannelClass')
     ChannelConfigurationValidationError = Shapes::StructureShape.new(name: 'ChannelConfigurationValidationError')
     ChannelEgressEndpoint = Shapes::StructureShape.new(name: 'ChannelEgressEndpoint')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
@@ -221,6 +222,7 @@ module Aws::MediaLive
     Input = Shapes::StructureShape.new(name: 'Input')
     InputAttachment = Shapes::StructureShape.new(name: 'InputAttachment')
     InputChannelLevel = Shapes::StructureShape.new(name: 'InputChannelLevel')
+    InputClass = Shapes::StringShape.new(name: 'InputClass')
     InputCodec = Shapes::StringShape.new(name: 'InputCodec')
     InputDeblockFilter = Shapes::StringShape.new(name: 'InputDeblockFilter')
     InputDenoiseFilter = Shapes::StringShape.new(name: 'InputDenoiseFilter')
@@ -416,6 +418,10 @@ module Aws::MediaLive
     UpdateInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupRequest')
     UpdateInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupResponse')
     UpdateInputSecurityGroupResultModel = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupResultModel')
+    UpdateReservation = Shapes::StructureShape.new(name: 'UpdateReservation')
+    UpdateReservationRequest = Shapes::StructureShape.new(name: 'UpdateReservationRequest')
+    UpdateReservationResponse = Shapes::StructureShape.new(name: 'UpdateReservationResponse')
+    UpdateReservationResultModel = Shapes::StructureShape.new(name: 'UpdateReservationResultModel')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     VideoCodecSettings = Shapes::StructureShape.new(name: 'VideoCodecSettings')
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
@@ -713,6 +719,7 @@ module Aws::MediaLive
     CaptionSelectorSettings.struct_class = Types::CaptionSelectorSettings
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Channel.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     Channel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     Channel.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
     Channel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
@@ -735,6 +742,7 @@ module Aws::MediaLive
     ChannelEgressEndpoint.struct_class = Types::ChannelEgressEndpoint
 
     ChannelSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    ChannelSummary.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     ChannelSummary.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     ChannelSummary.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
     ChannelSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -748,6 +756,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
+    CreateChannel.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     CreateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     CreateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
     CreateChannel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
@@ -760,6 +769,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannel.struct_class = Types::CreateChannel
 
+    CreateChannelRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     CreateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     CreateChannelRequest.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
     CreateChannelRequest.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
@@ -826,6 +836,7 @@ module Aws::MediaLive
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
 
     DeleteChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteChannelResponse.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     DeleteChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     DeleteChannelResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
     DeleteChannelResponse.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
@@ -869,6 +880,7 @@ module Aws::MediaLive
     DeleteReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
     DeleteReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     DeleteReservationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    DeleteReservationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeleteReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
     DeleteReservationResponse.struct_class = Types::DeleteReservationResponse
 
@@ -880,6 +892,7 @@ module Aws::MediaLive
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
     DescribeChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeChannelResponse.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     DescribeChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     DescribeChannelResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
     DescribeChannelResponse.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
@@ -901,6 +914,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:attached_channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "attachedChannels"))
     DescribeInputResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     DescribeInputResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeInputResponse.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
     DescribeInputResponse.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     DescribeInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeInputResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -957,6 +971,7 @@ module Aws::MediaLive
     DescribeReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
     DescribeReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     DescribeReservationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    DescribeReservationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
     DescribeReservationResponse.struct_class = Types::DescribeReservationResponse
 
@@ -1214,6 +1229,7 @@ module Aws::MediaLive
     Input.add_member(:attached_channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "attachedChannels"))
     Input.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     Input.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Input.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
     Input.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     Input.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     Input.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1357,6 +1373,7 @@ module Aws::MediaLive
     ListInputsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListInputsResultModel.struct_class = Types::ListInputsResultModel
 
+    ListOfferingsRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelClass"))
     ListOfferingsRequest.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelConfiguration"))
     ListOfferingsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
     ListOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1377,6 +1394,7 @@ module Aws::MediaLive
     ListOfferingsResultModel.add_member(:offerings, Shapes::ShapeRef.new(shape: __listOfOffering, location_name: "offerings"))
     ListOfferingsResultModel.struct_class = Types::ListOfferingsResultModel
 
+    ListReservationsRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelClass"))
     ListReservationsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
     ListReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListReservationsRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumBitrate"))
@@ -1584,6 +1602,7 @@ module Aws::MediaLive
     PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     PurchaseOffering.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    PurchaseOffering.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PurchaseOffering.struct_class = Types::PurchaseOffering
 
     PurchaseOfferingRequest.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
@@ -1591,6 +1610,7 @@ module Aws::MediaLive
     PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
     PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     PurchaseOfferingRequest.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    PurchaseOfferingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
 
     PurchaseOfferingResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
@@ -1620,9 +1640,11 @@ module Aws::MediaLive
     Reservation.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
     Reservation.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     Reservation.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    Reservation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Reservation.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
     Reservation.struct_class = Types::Reservation
 
+    ReservationResourceSpecification.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     ReservationResourceSpecification.add_member(:codec, Shapes::ShapeRef.new(shape: ReservationCodec, location_name: "codec"))
     ReservationResourceSpecification.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: ReservationMaximumBitrate, location_name: "maximumBitrate"))
     ReservationResourceSpecification.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: ReservationMaximumFramerate, location_name: "maximumFramerate"))
@@ -1743,6 +1765,7 @@ module Aws::MediaLive
     StartChannelRequest.struct_class = Types::StartChannelRequest
 
     StartChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    StartChannelResponse.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     StartChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     StartChannelResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
     StartChannelResponse.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
@@ -1781,6 +1804,7 @@ module Aws::MediaLive
     StopChannelRequest.struct_class = Types::StopChannelRequest
 
     StopChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    StopChannelResponse.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
     StopChannelResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     StopChannelResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
     StopChannelResponse.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
@@ -1885,6 +1909,19 @@ module Aws::MediaLive
 
     UpdateInputSecurityGroupResultModel.add_member(:security_group, Shapes::ShapeRef.new(shape: InputSecurityGroup, location_name: "securityGroup"))
     UpdateInputSecurityGroupResultModel.struct_class = Types::UpdateInputSecurityGroupResultModel
+
+    UpdateReservation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateReservation.struct_class = Types::UpdateReservation
+
+    UpdateReservationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
+    UpdateReservationRequest.struct_class = Types::UpdateReservationRequest
+
+    UpdateReservationResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    UpdateReservationResponse.struct_class = Types::UpdateReservationResponse
+
+    UpdateReservationResultModel.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    UpdateReservationResultModel.struct_class = Types::UpdateReservationResultModel
 
     ValidationError.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
     ValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
@@ -2452,6 +2489,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReservation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/reservations/{reservationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end

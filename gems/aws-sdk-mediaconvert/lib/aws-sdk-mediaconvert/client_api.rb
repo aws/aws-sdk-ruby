@@ -842,7 +842,7 @@ module Aws::MediaConvert
     DestinationSettings.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3DestinationSettings, location_name: "s3Settings"))
     DestinationSettings.struct_class = Types::DestinationSettings
 
-    DisassociateCertificateRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
+    DisassociateCertificateRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
     DisassociateCertificateRequest.struct_class = Types::DisassociateCertificateRequest
 
     DisassociateCertificateResponse.struct_class = Types::DisassociateCertificateResponse

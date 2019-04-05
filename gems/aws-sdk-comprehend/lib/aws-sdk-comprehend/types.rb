@@ -468,6 +468,10 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #         },
+    #         output_data_config: {
+    #           s3_uri: "S3Uri",
+    #           kms_key_id: "KmsKeyId",
+    #         },
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         volume_kms_key_id: "KmsKeyId",
@@ -486,14 +490,19 @@ module Aws::Comprehend
     # @!attribute [rw] tags
     #   Tags to be associated with the document classifier being created. A
     #   tag is a key-value pair that adds as a metadata to a resource used
-    #   by Amazon Comprehend. For example, a tag with the key-value pair
-    #   ‘Department’:’Sales’ might be added to a resource to indicate its
-    #   use by a particular department.
+    #   by Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data for the job.
     #   @return [Types::DocumentClassifierInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Enables the addition of output results configuration parameters for
+    #   custom classifier jobs.
+    #   @return [Types::DocumentClassifierOutputDataConfig]
     #
     # @!attribute [rw] client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -528,6 +537,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :tags,
       :input_data_config,
+      :output_data_config,
       :client_request_token,
       :language_code,
       :volume_kms_key_id)
@@ -595,9 +605,9 @@ module Aws::Comprehend
     # @!attribute [rw] tags
     #   Tags to be associated with the entity recognizer being created. A
     #   tag is a key-value pair that adds as a metadata to a resource used
-    #   by Amazon Comprehend. For example, a tag with the key-value pair
-    #   ‘Department’:’Sales’ might be added to a resource to indicate its
-    #   use by a particular department.
+    #   by Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] input_data_config
@@ -1352,6 +1362,54 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # Provides output results configuration parameters for custom classifier
+    # jobs.
+    #
+    # @note When making an API call, you may pass DocumentClassifierOutputDataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri",
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   When you use the `OutputDataConfig` object while creating a custom
+    #   classifier, you specify the Amazon S3 location where you want to
+    #   write the confusion matrix. The URI must be in the same region as
+    #   the API endpoint that you are calling. The location is used as the
+    #   prefix for the actual location of this output file.
+    #
+    #   When the custom classifier job is finished, the service creates the
+    #   output file in a directory specific to the job. The `S3Uri` field
+    #   contains the location of the output file, called `output.tar.gz`. It
+    #   is a compressed archive that contains the confusion matrix.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   The KmsKeyId can be one of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * KMS Key Alias: `"alias/ExampleAlias"`
+    #
+    #   * ARN of a KMS Key Alias:
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierOutputDataConfig AWS API Documentation
+    #
+    class DocumentClassifierOutputDataConfig < Struct.new(
+      :s3_uri,
+      :kms_key_id)
+      include Aws::Structure
+    end
+
     # Provides information about a document classifier.
     #
     # @!attribute [rw] document_classifier_arn
@@ -1401,6 +1459,11 @@ module Aws::Comprehend
     #   document classifier for training.
     #   @return [Types::DocumentClassifierInputDataConfig]
     #
+    # @!attribute [rw] output_data_config
+    #   Provides output results configuration parameters for custom
+    #   classifier jobs.
+    #   @return [Types::DocumentClassifierOutputDataConfig]
+    #
     # @!attribute [rw] classifier_metadata
     #   Information about the document classifier, including the number of
     #   documents used for training the classifier, the number of documents
@@ -1437,6 +1500,7 @@ module Aws::Comprehend
       :training_start_time,
       :training_end_time,
       :input_data_config,
+      :output_data_config,
       :classifier_metadata,
       :data_access_role_arn,
       :volume_kms_key_id)
@@ -2695,9 +2759,9 @@ module Aws::Comprehend
     # @!attribute [rw] tags
     #   Tags associated with the Amazon Comprehend resource being queried. A
     #   tag is a key-value pair that adds as a metadata to a resource used
-    #   by Amazon Comprehend. For example, a tag with the key-value pair
-    #   ‘Department’:’Sales’ might be added to a resource to indicate its
-    #   use by a particular department.
+    #   by Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResourceResponse AWS API Documentation
@@ -3933,6 +3997,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] tags
     #   Tags being associated with a specific Amazon Comprehend resource.
+    #   There can be a maximum of 50 tags (both existing and pending)
+    #   associated with a specific resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResourceRequest AWS API Documentation
@@ -4085,9 +4151,10 @@ module Aws::Comprehend
     #
     # @!attribute [rw] tag_keys
     #   The initial part of a key-value pair that forms a tag being removed
-    #   from a given resource. For instance, “Department” might be used as
-    #   the key portion of the pair, with multiple values such as “sales,”
-    #   “legal,” and “administration.”
+    #   from a given resource. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department. Keys must be unique and cannot be duplicated for a
+    #   particular resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceRequest AWS API Documentation

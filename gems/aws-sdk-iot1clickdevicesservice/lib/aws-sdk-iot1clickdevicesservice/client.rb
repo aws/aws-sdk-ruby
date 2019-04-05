@@ -546,7 +546,7 @@ module Aws::IoT1ClickDevicesService
       req.send_request(options)
     end
 
-    # List all tags on an AWS IoT 1-Click resource.
+    # Lists the tags associated with the specified resource ARN.
     #
     # @option params [required, String] :resource_arn
     #
@@ -574,9 +574,13 @@ module Aws::IoT1ClickDevicesService
       req.send_request(options)
     end
 
-    # Associate a set of tags with an AWS IoT 1-Click resource. You can then
-    # activate these user-defined tags so that they appear on the Billing
-    # and Cost Management console for cost allocation tracking.
+    # Adds or updates the tags associated with the resource ARN. See [AWS
+    # IoT 1-Click Service Limits][1] for the maximum number of tags allowed
+    # per resource.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits
     #
     # @option params [required, String] :resource_arn
     #
@@ -629,7 +633,8 @@ module Aws::IoT1ClickDevicesService
       req.send_request(options)
     end
 
-    # Removes the association of tags from an AWS IoT 1-Click resource.
+    # Using tag keys, deletes the tags (key/value pairs) associated with the
+    # specified resource ARN.
     #
     # @option params [required, String] :resource_arn
     #
@@ -692,7 +697,7 @@ module Aws::IoT1ClickDevicesService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot1clickdevicesservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

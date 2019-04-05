@@ -1925,6 +1925,11 @@ module Aws::MediaLive
     #   The unique arn of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] channel_class
+    #   The class for this channel. STANDARD for a channel with two
+    #   pipelines or SINGLE\_PIPELINE for a channel with one pipeline.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   A list of destinations of the channel. For UDP outputs, there is one
     #   destination per output. For other types (HLS, for example), there is
@@ -1978,6 +1983,7 @@ module Aws::MediaLive
     #
     class Channel < Struct.new(
       :arn,
+      :channel_class,
       :destinations,
       :egress_endpoints,
       :encoder_settings,
@@ -2021,6 +2027,11 @@ module Aws::MediaLive
 
     # @!attribute [rw] arn
     #   The unique arn of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_class
+    #   The class for this channel. STANDARD for a channel with two
+    #   pipelines or SINGLE\_PIPELINE for a channel with one pipeline.
     #   @return [String]
     #
     # @!attribute [rw] destinations
@@ -2072,6 +2083,7 @@ module Aws::MediaLive
     #
     class ChannelSummary < Struct.new(
       :arn,
+      :channel_class,
       :destinations,
       :egress_endpoints,
       :id,
@@ -2086,6 +2098,11 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] channel_class
+    #   The class for this channel. STANDARD for a channel with two
+    #   pipelines or SINGLE\_PIPELINE for a channel with one pipeline.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::OutputDestination>]
     #
@@ -2131,6 +2148,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
+      :channel_class,
       :destinations,
       :encoder_settings,
       :input_attachments,
@@ -2148,6 +2166,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         channel_class: "STANDARD", # accepts STANDARD, SINGLE_PIPELINE
     #         destinations: [
     #           {
     #             id: "__string",
@@ -2876,6 +2895,11 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::OutputDestination>]
     #
@@ -2913,6 +2937,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
+      :channel_class,
       :destinations,
       :encoder_settings,
       :input_attachments,
@@ -3215,6 +3240,11 @@ module Aws::MediaLive
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::OutputDestination>]
     #
@@ -3257,6 +3287,7 @@ module Aws::MediaLive
     #
     class DeleteChannelResponse < Struct.new(
       :arn,
+      :channel_class,
       :destinations,
       :egress_endpoints,
       :encoder_settings,
@@ -3383,6 +3414,9 @@ module Aws::MediaLive
     #   Current reservation state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] usage_price
     #   @return [Float]
     #
@@ -3405,6 +3439,7 @@ module Aws::MediaLive
       :resource_specification,
       :start,
       :state,
+      :tags,
       :usage_price)
       include Aws::Structure
     end
@@ -3451,6 +3486,11 @@ module Aws::MediaLive
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::OutputDestination>]
     #
@@ -3493,6 +3533,7 @@ module Aws::MediaLive
     #
     class DescribeChannelResponse < Struct.new(
       :arn,
+      :channel_class,
       :destinations,
       :egress_endpoints,
       :encoder_settings,
@@ -3537,6 +3578,11 @@ module Aws::MediaLive
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] input_class
+    #   A standard input has two sources and a single pipeline input only
+    #   has one.
+    #   @return [String]
+    #
     # @!attribute [rw] media_connect_flows
     #   @return [Array<Types::MediaConnectFlow>]
     #
@@ -3568,6 +3614,7 @@ module Aws::MediaLive
       :attached_channels,
       :destinations,
       :id,
+      :input_class,
       :media_connect_flows,
       :name,
       :role_arn,
@@ -3765,6 +3812,9 @@ module Aws::MediaLive
     #   Current reservation state
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] usage_price
     #   @return [Float]
     #
@@ -3787,6 +3837,7 @@ module Aws::MediaLive
       :resource_specification,
       :start,
       :state,
+      :tags,
       :usage_price)
       include Aws::Structure
     end
@@ -6398,6 +6449,17 @@ module Aws::MediaLive
     #   The generated ID of the input (unique for user account, immutable).
     #   @return [String]
     #
+    # @!attribute [rw] input_class
+    #   STANDARD - MediaLive expects two sources to be connected to this
+    #   input. If the channel is also STANDARD, both sources will be
+    #   ingested. If the channel is SINGLE\_PIPELINE, only the first source
+    #   will be ingested; the second source will always be ignored, even if
+    #   the first source fails. SINGLE\_PIPELINE - You can connect only one
+    #   source to this input. If the ChannelClass is also SINGLE\_PIPELINE,
+    #   this value is valid. If the ChannelClass is STANDARD, this value is
+    #   not valid because the channel requires two sources in the input.
+    #   @return [String]
+    #
     # @!attribute [rw] media_connect_flows
     #   A list of MediaConnect Flows for this input.
     #   @return [Array<Types::MediaConnectFlow>]
@@ -6437,6 +6499,7 @@ module Aws::MediaLive
       :attached_channels,
       :destinations,
       :id,
+      :input_class,
       :media_connect_flows,
       :name,
       :role_arn,
@@ -7323,6 +7386,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         channel_class: "__string",
     #         channel_configuration: "__string",
     #         codec: "__string",
     #         max_results: 1,
@@ -7334,6 +7398,9 @@ module Aws::MediaLive
     #         special_feature: "__string",
     #         video_quality: "__string",
     #       }
+    #
+    # @!attribute [rw] channel_class
+    #   @return [String]
     #
     # @!attribute [rw] channel_configuration
     #   @return [String]
@@ -7368,6 +7435,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferingsRequest AWS API Documentation
     #
     class ListOfferingsRequest < Struct.new(
+      :channel_class,
       :channel_configuration,
       :codec,
       :max_results,
@@ -7417,6 +7485,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         channel_class: "__string",
     #         codec: "__string",
     #         max_results: 1,
     #         maximum_bitrate: "__string",
@@ -7427,6 +7496,9 @@ module Aws::MediaLive
     #         special_feature: "__string",
     #         video_quality: "__string",
     #       }
+    #
+    # @!attribute [rw] channel_class
+    #   @return [String]
     #
     # @!attribute [rw] codec
     #   @return [String]
@@ -7458,6 +7530,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservationsRequest AWS API Documentation
     #
     class ListReservationsRequest < Struct.new(
+      :channel_class,
       :codec,
       :max_results,
       :maximum_bitrate,
@@ -9668,13 +9741,18 @@ module Aws::MediaLive
     #   and one year from now. If no value is given, the default is now.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
     #
     class PurchaseOffering < Struct.new(
       :count,
       :name,
       :request_id,
-      :start)
+      :start,
+      :tags)
       include Aws::Structure
     end
 
@@ -9687,6 +9765,9 @@ module Aws::MediaLive
     #         offering_id: "__string", # required
     #         request_id: "__string",
     #         start: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] count
@@ -9706,6 +9787,9 @@ module Aws::MediaLive
     # @!attribute [rw] start
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOfferingRequest AWS API Documentation
     #
     class PurchaseOfferingRequest < Struct.new(
@@ -9713,7 +9797,8 @@ module Aws::MediaLive
       :name,
       :offering_id,
       :request_id,
-      :start)
+      :start,
+      :tags)
       include Aws::Structure
     end
 
@@ -9857,6 +9942,10 @@ module Aws::MediaLive
     #   Current state of reservation, e.g. 'ACTIVE'
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] usage_price
     #   Recurring usage charge for each reserved resource, e.g. '157.0'
     #   @return [Float]
@@ -9880,11 +9969,16 @@ module Aws::MediaLive
       :resource_specification,
       :start,
       :state,
+      :tags,
       :usage_price)
       include Aws::Structure
     end
 
     # Resource configuration (codec, resolution, bitrate, ...)
+    #
+    # @!attribute [rw] channel_class
+    #   Channel class, e.g. 'STANDARD'
+    #   @return [String]
     #
     # @!attribute [rw] codec
     #   Codec, e.g. 'AVC'
@@ -9917,6 +10011,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ReservationResourceSpecification AWS API Documentation
     #
     class ReservationResourceSpecification < Struct.new(
+      :channel_class,
       :codec,
       :maximum_bitrate,
       :maximum_framerate,
@@ -10889,6 +10984,11 @@ module Aws::MediaLive
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::OutputDestination>]
     #
@@ -10931,6 +11031,7 @@ module Aws::MediaLive
     #
     class StartChannelResponse < Struct.new(
       :arn,
+      :channel_class,
       :destinations,
       :egress_endpoints,
       :encoder_settings,
@@ -11126,6 +11227,11 @@ module Aws::MediaLive
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
     # @!attribute [rw] destinations
     #   @return [Array<Types::OutputDestination>]
     #
@@ -11168,6 +11274,7 @@ module Aws::MediaLive
     #
     class StopChannelResponse < Struct.new(
       :arn,
+      :channel_class,
       :destinations,
       :egress_endpoints,
       :encoder_settings,
@@ -12518,6 +12625,65 @@ module Aws::MediaLive
     #
     class UpdateInputSecurityGroupResultModel < Struct.new(
       :security_group)
+      include Aws::Structure
+    end
+
+    # UpdateReservation request
+    #
+    # @!attribute [rw] name
+    #   Name of the reservation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservation AWS API Documentation
+    #
+    class UpdateReservation < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateReservationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string",
+    #         reservation_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservationRequest AWS API Documentation
+    #
+    class UpdateReservationRequest < Struct.new(
+      :name,
+      :reservation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reservation
+    #   Reserved resources available to use
+    #   @return [Types::Reservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservationResponse AWS API Documentation
+    #
+    class UpdateReservationResponse < Struct.new(
+      :reservation)
+      include Aws::Structure
+    end
+
+    # UpdateReservation response
+    #
+    # @!attribute [rw] reservation
+    #   Reserved resources available to use
+    #   @return [Types::Reservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservationResultModel AWS API Documentation
+    #
+    class UpdateReservationResultModel < Struct.new(
+      :reservation)
       include Aws::Structure
     end
 

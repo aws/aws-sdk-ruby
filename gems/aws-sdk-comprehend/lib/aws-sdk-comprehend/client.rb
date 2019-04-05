@@ -515,12 +515,15 @@ module Aws::Comprehend
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be associated with the document classifier being created. A
     #   tag is a key-value pair that adds as a metadata to a resource used by
-    #   Amazon Comprehend. For example, a tag with the key-value pair
-    #   ‘Department’:’Sales’ might be added to a resource to indicate its use
-    #   by a particular department.
+    #   Amazon Comprehend. For example, a tag with "Sales" as the key might
+    #   be added to a resource to indicate its use by the sales department.
     #
     # @option params [required, Types::DocumentClassifierInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [Types::DocumentClassifierOutputDataConfig] :output_data_config
+    #   Enables the addition of output results configuration parameters for
+    #   custom classifier jobs.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -562,6 +565,10 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #     },
+    #     output_data_config: {
+    #       s3_uri: "S3Uri",
+    #       kms_key_id: "KmsKeyId",
+    #     },
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     volume_kms_key_id: "KmsKeyId",
@@ -598,9 +605,8 @@ module Aws::Comprehend
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be associated with the entity recognizer being created. A tag
     #   is a key-value pair that adds as a metadata to a resource used by
-    #   Amazon Comprehend. For example, a tag with the key-value pair
-    #   ‘Department’:’Sales’ might be added to a resource to indicate its use
-    #   by a particular department.
+    #   Amazon Comprehend. For example, a tag with "Sales" as the key might
+    #   be added to a resource to indicate its use by the sales department.
     #
     # @option params [required, Types::EntityRecognizerInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
@@ -810,6 +816,8 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.training_start_time #=> Time
     #   resp.document_classifier_properties.training_end_time #=> Time
     #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
     #   resp.document_classifier_properties.classifier_metadata.number_of_trained_documents #=> Integer
     #   resp.document_classifier_properties.classifier_metadata.number_of_test_documents #=> Integer
@@ -1388,6 +1396,8 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].training_start_time #=> Time
     #   resp.document_classifier_properties_list[0].training_end_time #=> Time
     #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_trained_documents #=> Integer
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_test_documents #=> Integer
@@ -1719,8 +1729,7 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Lists all tags associated with a given Amazon Comprehend resource. Up
-    # to the maximum number of tags allowed per resource will be displayed.
+    # Lists all tags associated with a given Amazon Comprehend resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
@@ -2536,9 +2545,8 @@ module Aws::Comprehend
 
     # Associates a specific tag with an Amazon Comprehend resource. A tag is
     # a key-value pair that adds as a metadata to a resource used by Amazon
-    # Comprehend. For example, a tag with the key-value pair
-    # ‘Department’:’Sales’ might be added to a resource to indicate its use
-    # by a particular department.
+    # Comprehend. For example, a tag with "Sales" as the key might be
+    # added to a resource to indicate its use by the sales department.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the given Amazon Comprehend resource
@@ -2546,6 +2554,8 @@ module Aws::Comprehend
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Tags being associated with a specific Amazon Comprehend resource.
+    #   There can be a maximum of 50 tags (both existing and pending)
+    #   associated with a specific resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2578,9 +2588,10 @@ module Aws::Comprehend
     #
     # @option params [required, Array<String>] :tag_keys
     #   The initial part of a key-value pair that forms a tag being removed
-    #   from a given resource. For instance, “Department” might be used as the
-    #   key portion of the pair, with multiple values such as “sales,”
-    #   “legal,” and “administration.”
+    #   from a given resource. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department. Keys must be unique and cannot be duplicated for a
+    #   particular resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2613,7 +2624,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

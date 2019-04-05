@@ -452,6 +452,10 @@ module Aws::MediaLive
 
     # Creates a new channel
     #
+    # @option params [String] :channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #
     # @option params [Array<Types::OutputDestination>] :destinations
     #
     # @option params [Types::EncoderSettings] :encoder_settings
@@ -483,6 +487,7 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_channel({
+    #     channel_class: "STANDARD", # accepts STANDARD, SINGLE_PIPELINE
     #     destinations: [
     #       {
     #         id: "__string",
@@ -1214,6 +1219,7 @@ module Aws::MediaLive
     # @example Response structure
     #
     #   resp.channel.arn #=> String
+    #   resp.channel.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.channel.destinations #=> Array
     #   resp.channel.destinations[0].id #=> String
     #   resp.channel.destinations[0].media_package_settings #=> Array
@@ -1782,6 +1788,7 @@ module Aws::MediaLive
     #   resp.input.destinations[0].vpc.availability_zone #=> String
     #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
+    #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
@@ -1883,6 +1890,7 @@ module Aws::MediaLive
     # @return [Types::DeleteChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteChannelResponse#arn #arn} => String
+    #   * {Types::DeleteChannelResponse#channel_class #channel_class} => String
     #   * {Types::DeleteChannelResponse#destinations #destinations} => Array&lt;Types::OutputDestination&gt;
     #   * {Types::DeleteChannelResponse#egress_endpoints #egress_endpoints} => Array&lt;Types::ChannelEgressEndpoint&gt;
     #   * {Types::DeleteChannelResponse#encoder_settings #encoder_settings} => Types::EncoderSettings
@@ -1905,6 +1913,7 @@ module Aws::MediaLive
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
@@ -2458,6 +2467,7 @@ module Aws::MediaLive
     #   * {Types::DeleteReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
     #   * {Types::DeleteReservationResponse#start #start} => String
     #   * {Types::DeleteReservationResponse#state #state} => String
+    #   * {Types::DeleteReservationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DeleteReservationResponse#usage_price #usage_price} => Float
     #
     # @example Request syntax with placeholder values
@@ -2481,6 +2491,7 @@ module Aws::MediaLive
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
     #   resp.reservation_id #=> String
+    #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
@@ -2490,6 +2501,8 @@ module Aws::MediaLive
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.start #=> String
     #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.usage_price #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteReservation AWS API Documentation
@@ -2532,6 +2545,7 @@ module Aws::MediaLive
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChannelResponse#arn #arn} => String
+    #   * {Types::DescribeChannelResponse#channel_class #channel_class} => String
     #   * {Types::DescribeChannelResponse#destinations #destinations} => Array&lt;Types::OutputDestination&gt;
     #   * {Types::DescribeChannelResponse#egress_endpoints #egress_endpoints} => Array&lt;Types::ChannelEgressEndpoint&gt;
     #   * {Types::DescribeChannelResponse#encoder_settings #encoder_settings} => Types::EncoderSettings
@@ -2554,6 +2568,7 @@ module Aws::MediaLive
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
@@ -3053,6 +3068,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#attached_channels #attached_channels} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#destinations #destinations} => Array&lt;Types::InputDestination&gt;
     #   * {Types::DescribeInputResponse#id #id} => String
+    #   * {Types::DescribeInputResponse#input_class #input_class} => String
     #   * {Types::DescribeInputResponse#media_connect_flows #media_connect_flows} => Array&lt;Types::MediaConnectFlow&gt;
     #   * {Types::DescribeInputResponse#name #name} => String
     #   * {Types::DescribeInputResponse#role_arn #role_arn} => String
@@ -3080,6 +3096,7 @@ module Aws::MediaLive
     #   resp.destinations[0].vpc.availability_zone #=> String
     #   resp.destinations[0].vpc.network_interface_id #=> String
     #   resp.id #=> String
+    #   resp.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.media_connect_flows #=> Array
     #   resp.media_connect_flows[0].flow_arn #=> String
     #   resp.name #=> String
@@ -3179,6 +3196,7 @@ module Aws::MediaLive
     #   resp.offering_id #=> String
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
+    #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
@@ -3219,6 +3237,7 @@ module Aws::MediaLive
     #   * {Types::DescribeReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
     #   * {Types::DescribeReservationResponse#start #start} => String
     #   * {Types::DescribeReservationResponse#state #state} => String
+    #   * {Types::DescribeReservationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeReservationResponse#usage_price #usage_price} => Float
     #
     # @example Request syntax with placeholder values
@@ -3242,6 +3261,7 @@ module Aws::MediaLive
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
     #   resp.reservation_id #=> String
+    #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
@@ -3251,6 +3271,8 @@ module Aws::MediaLive
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.start #=> String
     #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.usage_price #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeReservation AWS API Documentation
@@ -3359,6 +3381,7 @@ module Aws::MediaLive
     #
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
+    #   resp.channels[0].channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.channels[0].destinations #=> Array
     #   resp.channels[0].destinations[0].id #=> String
     #   resp.channels[0].destinations[0].media_package_settings #=> Array
@@ -3498,6 +3521,7 @@ module Aws::MediaLive
     #   resp.inputs[0].destinations[0].vpc.availability_zone #=> String
     #   resp.inputs[0].destinations[0].vpc.network_interface_id #=> String
     #   resp.inputs[0].id #=> String
+    #   resp.inputs[0].input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.inputs[0].media_connect_flows #=> Array
     #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
     #   resp.inputs[0].name #=> String
@@ -3524,6 +3548,8 @@ module Aws::MediaLive
     end
 
     # List offerings available for purchase.
+    #
+    # @option params [String] :channel_class
     #
     # @option params [String] :channel_configuration
     #
@@ -3553,6 +3579,7 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_offerings({
+    #     channel_class: "__string",
     #     channel_configuration: "__string",
     #     codec: "__string",
     #     max_results: 1,
@@ -3578,6 +3605,7 @@ module Aws::MediaLive
     #   resp.offerings[0].offering_id #=> String
     #   resp.offerings[0].offering_type #=> String, one of "NO_UPFRONT"
     #   resp.offerings[0].region #=> String
+    #   resp.offerings[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
@@ -3597,6 +3625,8 @@ module Aws::MediaLive
     end
 
     # List purchased reservations.
+    #
+    # @option params [String] :channel_class
     #
     # @option params [String] :codec
     #
@@ -3624,6 +3654,7 @@ module Aws::MediaLive
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_reservations({
+    #     channel_class: "__string",
     #     codec: "__string",
     #     max_results: 1,
     #     maximum_bitrate: "__string",
@@ -3652,6 +3683,7 @@ module Aws::MediaLive
     #   resp.reservations[0].offering_type #=> String, one of "NO_UPFRONT"
     #   resp.reservations[0].region #=> String
     #   resp.reservations[0].reservation_id #=> String
+    #   resp.reservations[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
@@ -3661,6 +3693,8 @@ module Aws::MediaLive
     #   resp.reservations[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservations[0].start #=> String
     #   resp.reservations[0].state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservations[0].tags #=> Hash
+    #   resp.reservations[0].tags["__string"] #=> String
     #   resp.reservations[0].usage_price #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservations AWS API Documentation
@@ -3714,6 +3748,8 @@ module Aws::MediaLive
     #
     # @option params [String] :start
     #
+    # @option params [Hash<String,String>] :tags
+    #
     # @return [Types::PurchaseOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseOfferingResponse#reservation #reservation} => Types::Reservation
@@ -3726,6 +3762,9 @@ module Aws::MediaLive
     #     offering_id: "__string", # required
     #     request_id: "__string",
     #     start: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3743,6 +3782,7 @@ module Aws::MediaLive
     #   resp.reservation.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.reservation.region #=> String
     #   resp.reservation.reservation_id #=> String
+    #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
@@ -3752,6 +3792,8 @@ module Aws::MediaLive
     #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservation.start #=> String
     #   resp.reservation.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservation.tags #=> Hash
+    #   resp.reservation.tags["__string"] #=> String
     #   resp.reservation.usage_price #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
@@ -3770,6 +3812,7 @@ module Aws::MediaLive
     # @return [Types::StartChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChannelResponse#arn #arn} => String
+    #   * {Types::StartChannelResponse#channel_class #channel_class} => String
     #   * {Types::StartChannelResponse#destinations #destinations} => Array&lt;Types::OutputDestination&gt;
     #   * {Types::StartChannelResponse#egress_endpoints #egress_endpoints} => Array&lt;Types::ChannelEgressEndpoint&gt;
     #   * {Types::StartChannelResponse#encoder_settings #encoder_settings} => Types::EncoderSettings
@@ -3792,6 +3835,7 @@ module Aws::MediaLive
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
@@ -4288,6 +4332,7 @@ module Aws::MediaLive
     # @return [Types::StopChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopChannelResponse#arn #arn} => String
+    #   * {Types::StopChannelResponse#channel_class #channel_class} => String
     #   * {Types::StopChannelResponse#destinations #destinations} => Array&lt;Types::OutputDestination&gt;
     #   * {Types::StopChannelResponse#egress_endpoints #egress_endpoints} => Array&lt;Types::ChannelEgressEndpoint&gt;
     #   * {Types::StopChannelResponse#encoder_settings #encoder_settings} => Types::EncoderSettings
@@ -4310,6 +4355,7 @@ module Aws::MediaLive
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.destinations #=> Array
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
@@ -5553,6 +5599,7 @@ module Aws::MediaLive
     # @example Response structure
     #
     #   resp.channel.arn #=> String
+    #   resp.channel.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.channel.destinations #=> Array
     #   resp.channel.destinations[0].id #=> String
     #   resp.channel.destinations[0].media_package_settings #=> Array
@@ -6100,6 +6147,7 @@ module Aws::MediaLive
     #   resp.input.destinations[0].vpc.availability_zone #=> String
     #   resp.input.destinations[0].vpc.network_interface_id #=> String
     #   resp.input.id #=> String
+    #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
     #   resp.input.name #=> String
@@ -6171,6 +6219,61 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Update reservation.
+    #
+    # @option params [String] :name
+    #
+    # @option params [required, String] :reservation_id
+    #
+    # @return [Types::UpdateReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateReservationResponse#reservation #reservation} => Types::Reservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_reservation({
+    #     name: "__string",
+    #     reservation_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reservation.arn #=> String
+    #   resp.reservation.count #=> Integer
+    #   resp.reservation.currency_code #=> String
+    #   resp.reservation.duration #=> Integer
+    #   resp.reservation.duration_units #=> String, one of "MONTHS"
+    #   resp.reservation.end #=> String
+    #   resp.reservation.fixed_price #=> Float
+    #   resp.reservation.name #=> String
+    #   resp.reservation.offering_description #=> String
+    #   resp.reservation.offering_id #=> String
+    #   resp.reservation.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.reservation.region #=> String
+    #   resp.reservation.reservation_id #=> String
+    #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.reservation.start #=> String
+    #   resp.reservation.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservation.tags #=> Hash
+    #   resp.reservation.tags["__string"] #=> String
+    #   resp.reservation.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservation AWS API Documentation
+    #
+    # @overload update_reservation(params = {})
+    # @param [Hash] params ({})
+    def update_reservation(params = {}, options = {})
+      req = build_request(:update_reservation, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6184,7 +6287,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

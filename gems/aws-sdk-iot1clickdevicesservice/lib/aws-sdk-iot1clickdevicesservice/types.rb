@@ -108,6 +108,7 @@ module Aws::IoT1ClickDevicesService
     end
 
     # @!attribute [rw] arn
+    #   The ARN of the device.
     #   @return [String]
     #
     # @!attribute [rw] attributes

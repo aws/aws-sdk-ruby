@@ -1979,6 +1979,8 @@ module Aws::Glue
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         number_of_workers: 1,
     #         security_configuration: "NameString",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -2066,6 +2068,9 @@ module Aws::Glue
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
     #
+    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   `NumberOfWorkers`.
+    #
     #   The value that can be allocated for `MaxCapacity` depends on whether
     #   you are running a python shell job, or an Apache Spark ETL job:
     #
@@ -2086,6 +2091,28 @@ module Aws::Glue
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated when a job runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
     #   The name of the SecurityConfiguration structure to be used with this
@@ -2118,6 +2145,8 @@ module Aws::Glue
       :timeout,
       :max_capacity,
       :notification_property,
+      :worker_type,
+      :number_of_workers,
       :security_configuration,
       :tags)
       include Aws::Structure
@@ -5413,6 +5442,9 @@ module Aws::Glue
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
     #
+    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   `NumberOfWorkers`.
+    #
     #   The value that can be allocated for `MaxCapacity` depends on whether
     #   you are running a python shell job, or an Apache Spark ETL job:
     #
@@ -5430,14 +5462,36 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
-    # @!attribute [rw] notification_property
-    #   Specifies configuration properties of a job notification.
-    #   @return [Types::NotificationProperty]
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated when a job runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
     #   The name of the SecurityConfiguration structure to be used with this
     #   job.
     #   @return [String]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
@@ -5456,8 +5510,10 @@ module Aws::Glue
       :allocated_capacity,
       :timeout,
       :max_capacity,
-      :notification_property,
-      :security_configuration)
+      :worker_type,
+      :number_of_workers,
+      :security_configuration,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -5647,6 +5703,9 @@ module Aws::Glue
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
     #
+    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   `NumberOfWorkers`.
+    #
     #   The value that can be allocated for `MaxCapacity` depends on whether
     #   you are running a python shell job, or an Apache Spark ETL job:
     #
@@ -5667,6 +5726,28 @@ module Aws::Glue
     # @!attribute [rw] notification_property
     #   Specifies configuration properties of a job run notification.
     #   @return [Types::NotificationProperty]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated when a job runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
     #   The name of the SecurityConfiguration structure to be used with this
@@ -5703,6 +5784,8 @@ module Aws::Glue
       :timeout,
       :max_capacity,
       :notification_property,
+      :worker_type,
+      :number_of_workers,
       :security_configuration,
       :log_group_name)
       include Aws::Structure
@@ -5736,10 +5819,12 @@ module Aws::Glue
     #         allocated_capacity: 1,
     #         timeout: 1,
     #         max_capacity: 1.0,
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         number_of_workers: 1,
+    #         security_configuration: "NameString",
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
-    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] description
@@ -5818,6 +5903,9 @@ module Aws::Glue
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
     #
+    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   `NumberOfWorkers`.
+    #
     #   The value that can be allocated for `MaxCapacity` depends on whether
     #   you are running a python shell job, or an Apache Spark ETL job:
     #
@@ -5835,14 +5923,36 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
-    # @!attribute [rw] notification_property
-    #   Specifies configuration properties of a job notification.
-    #   @return [Types::NotificationProperty]
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated when a job runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
     #   The name of the SecurityConfiguration structure to be used with this
     #   job.
     #   @return [String]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
@@ -5858,8 +5968,10 @@ module Aws::Glue
       :allocated_capacity,
       :timeout,
       :max_capacity,
-      :notification_property,
-      :security_configuration)
+      :worker_type,
+      :number_of_workers,
+      :security_configuration,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -6990,10 +7102,12 @@ module Aws::Glue
     #         allocated_capacity: 1,
     #         timeout: 1,
     #         max_capacity: 1.0,
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         number_of_workers: 1,
+    #         security_configuration: "NameString",
     #         notification_property: {
     #           notify_delay_after: 1,
     #         },
-    #         security_configuration: "NameString",
     #       }
     #
     # @!attribute [rw] job_name
@@ -7053,6 +7167,9 @@ module Aws::Glue
     #   GB of memory. For more information, see the [AWS Glue pricing
     #   page][1].
     #
+    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   `NumberOfWorkers`.
+    #
     #   The value that can be allocated for `MaxCapacity` depends on whether
     #   you are running a python shell job, or an Apache Spark ETL job:
     #
@@ -7070,14 +7187,36 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
-    # @!attribute [rw] notification_property
-    #   Specifies configuration properties of a job run notification.
-    #   @return [Types::NotificationProperty]
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated when a job runs.
+    #   Accepts a value of Standard, G.1X, or G.2X.
+    #
+    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
+    #     of memory and a 50GB disk, and 2 executors per worker.
+    #
+    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
+    #     memory and a 64GB disk, and 1 executor per worker.
+    #
+    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
+    #     memory and a 128GB disk, and 1 executor per worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `workerType` that are allocated
+    #   when a job runs.
+    #
+    #   The maximum number of workers you can define are 299 for `G.1X`, and
+    #   149 for `G.2X`.
+    #   @return [Integer]
     #
     # @!attribute [rw] security_configuration
     #   The name of the SecurityConfiguration structure to be used with this
     #   job run.
     #   @return [String]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
     #
@@ -7088,8 +7227,10 @@ module Aws::Glue
       :allocated_capacity,
       :timeout,
       :max_capacity,
-      :notification_property,
-      :security_configuration)
+      :worker_type,
+      :number_of_workers,
+      :security_configuration,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -8328,10 +8469,12 @@ module Aws::Glue
     #           allocated_capacity: 1,
     #           timeout: 1,
     #           max_capacity: 1.0,
+    #           worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #           number_of_workers: 1,
+    #           security_configuration: "NameString",
     #           notification_property: {
     #             notify_delay_after: 1,
     #           },
-    #           security_configuration: "NameString",
     #         },
     #       }
     #
