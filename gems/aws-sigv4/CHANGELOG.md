@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix NoMethodError when assume role fails
+
 1.1.0 (2019-03-13)
 ------------------
 
