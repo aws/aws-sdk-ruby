@@ -7,6 +7,12 @@ module Aws
   module Sigv4
     describe Signer do
 
+      class NilCredentialsProvider
+        def credentials
+          nil
+        end
+      end
+
       let(:credentials) {{
         access_key_id: 'akid',
         secret_access_key: 'secret',
@@ -99,6 +105,18 @@ module Aws
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
           expect(creds.session_token).to eq('token')
+        end
+
+        it 'checks nil credentials' do
+          signer = Signer.new(options.merge(
+            credentials_provider: NilCredentialsProvider.new
+          ))
+          creds = signer.credentials_provider.credentials
+          expect(signer.credentials_provider.credentials).to eq(nil)
+
+          expect do
+            signer.sign_request(nil)
+          end.to raise_error(Errors::MissingCredentialsError)
         end
 
         it 'accepts :credentials_provider' do

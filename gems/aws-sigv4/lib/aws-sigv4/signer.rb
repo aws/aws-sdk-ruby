@@ -658,7 +658,7 @@ module Aws
 
       def get_credentials
         credentials = @credentials_provider.credentials
-        if credentials_set?(credentials)
+        if credentials && credentials_set?(credentials)
           credentials
         else
           msg = 'unable to sign request without credentials set'
