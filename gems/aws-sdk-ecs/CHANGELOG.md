@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Feature - Add pagination for AWS ECS ListAttributes.
 
 1.36.0 (2019-03-27)
 ------------------

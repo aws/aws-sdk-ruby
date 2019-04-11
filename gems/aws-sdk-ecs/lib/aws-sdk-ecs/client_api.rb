@@ -1514,6 +1514,12 @@ module Aws::ECS
         o.output = Shapes::ShapeRef.new(shape: ListAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
