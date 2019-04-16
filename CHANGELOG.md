@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.257 (2019-04-16)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::CloudWatch - Updated the documentation for Amazon CloudWatch.
