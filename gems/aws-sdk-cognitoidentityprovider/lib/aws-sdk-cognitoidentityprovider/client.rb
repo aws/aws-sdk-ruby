@@ -2262,6 +2262,7 @@ module Aws::CognitoIdentityProvider
     #     email_configuration: {
     #       source_arn: "ArnType",
     #       reply_to_email_address: "EmailAddressType",
+    #       email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
     #     },
     #     sms_configuration: {
     #       sns_caller_arn: "ArnType", # required
@@ -2355,6 +2356,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.estimated_number_of_users #=> Integer
     #   resp.user_pool.email_configuration.source_arn #=> String
     #   resp.user_pool.email_configuration.reply_to_email_address #=> String
+    #   resp.user_pool.email_configuration.email_sending_account #=> String, one of "COGNITO_DEFAULT", "DEVELOPER"
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
@@ -3070,6 +3072,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.estimated_number_of_users #=> Integer
     #   resp.user_pool.email_configuration.source_arn #=> String
     #   resp.user_pool.email_configuration.reply_to_email_address #=> String
+    #   resp.user_pool.email_configuration.email_sending_account #=> String, one of "COGNITO_DEFAULT", "DEVELOPER"
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
@@ -5388,6 +5391,7 @@ module Aws::CognitoIdentityProvider
     #     email_configuration: {
     #       source_arn: "ArnType",
     #       reply_to_email_address: "EmailAddressType",
+    #       email_sending_account: "COGNITO_DEFAULT", # accepts COGNITO_DEFAULT, DEVELOPER
     #     },
     #     sms_configuration: {
     #       sns_caller_arn: "ArnType", # required
@@ -5755,7 +5759,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

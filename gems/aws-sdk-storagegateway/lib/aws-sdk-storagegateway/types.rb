@@ -109,7 +109,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to 10 tags that can be assigned to the gateway. Each
+    #   A list of up to 50 tags that can be assigned to the gateway. Each
     #   tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
@@ -653,6 +653,12 @@ module Aws::StorageGateway
     #         client_token: "ClientToken", # required
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -722,6 +728,18 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a cached volume.
+    #   Each tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeInput AWS API Documentation
     #
     class CreateCachediSCSIVolumeInput < Struct.new(
@@ -733,7 +751,8 @@ module Aws::StorageGateway
       :network_interface_id,
       :client_token,
       :kms_encrypted,
-      :kms_key)
+      :kms_key,
+      :tags)
       include Aws::Structure
     end
 
@@ -862,13 +881,21 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is
+    #   set to true, the requester pays the costs. Otherwise the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   A list of up to 50 tags that can be assigned to the NFS file share.
     #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
@@ -996,9 +1023,17 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is
+    #   set to true, the requester pays the costs. Otherwise the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] valid_user_list
@@ -1023,7 +1058,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   A list of up to 50 tags that can be assigned to the NFS file share.
     #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
@@ -1200,6 +1235,12 @@ module Aws::StorageGateway
     #         network_interface_id: "NetworkInterfaceId", # required
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -1269,6 +1310,18 @@ module Aws::StorageGateway
     #   is true. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a stored volume.
+    #   Each tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeInput AWS API Documentation
     #
     class CreateStorediSCSIVolumeInput < Struct.new(
@@ -1279,7 +1332,8 @@ module Aws::StorageGateway
       :target_name,
       :network_interface_id,
       :kms_encrypted,
-      :kms_key)
+      :kms_key,
+      :tags)
       include Aws::Structure
     end
 
@@ -1319,6 +1373,12 @@ module Aws::StorageGateway
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
     #         pool_id: "PoolId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -1365,6 +1425,18 @@ module Aws::StorageGateway
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a virtual tape that
+    #   has a barcode. Each tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeInput AWS API Documentation
     #
     class CreateTapeWithBarcodeInput < Struct.new(
@@ -1373,7 +1445,8 @@ module Aws::StorageGateway
       :tape_barcode,
       :kms_encrypted,
       :kms_key,
-      :pool_id)
+      :pool_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1405,6 +1478,12 @@ module Aws::StorageGateway
     #         kms_encrypted: false,
     #         kms_key: "KMSKey",
     #         pool_id: "PoolId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -1459,13 +1538,25 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] pool_id
     #   The ID of the pool that you want to add your tape to for archiving.
-    #   The tape in this pool is archived in the S3 storage class you chose
-    #   when you created the tape. When you use your backup application to
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (Glacier or Deep Archive).
+    #   (Glacier or Deep Archive) that corresponds to the pool.
     #
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a virtual tape. Each
+    #   tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapesInput AWS API Documentation
     #
@@ -1477,7 +1568,8 @@ module Aws::StorageGateway
       :tape_barcode_prefix,
       :kms_encrypted,
       :kms_key,
-      :pool_id)
+      :pool_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1914,6 +2006,9 @@ module Aws::StorageGateway
     #   @return [Float]
     #
     # @!attribute [rw] cache_miss_percentage
+    #   Percent of application read operations from the file shares that are
+    #   not served from cache. The sample is taken at the end of the
+    #   reporting period.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCacheOutput AWS API Documentation
@@ -2085,8 +2180,17 @@ module Aws::StorageGateway
     #   return a value in the response.
     #   @return [String]
     #
+    # @!attribute [rw] ec2_instance_id
+    #   The ID of the Amazon EC2 instance that was used to launch the
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_instance_region
+    #   The AWS Region where the Amazon EC2 instance is located.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
-    #   A list of up to 10 tags assigned to the gateway, sorted
+    #   A list of up to 50 tags assigned to the gateway, sorted
     #   alphabetically by key name. Each tag is a key-value pair. For a
     #   gateway with more than 10 tags assigned, you can view all tags using
     #   the `ListTagsForResource` API operation.
@@ -2104,6 +2208,8 @@ module Aws::StorageGateway
       :gateway_type,
       :next_update_availability_date,
       :last_software_update,
+      :ec2_instance_id,
+      :ec2_instance_region,
       :tags)
       include Aws::Structure
     end
@@ -2130,6 +2236,8 @@ module Aws::StorageGateway
     end
 
     # A JSON object containing the following fields:
+    #
+    # * DescribeMaintenanceStartTimeOutput$DayOfMonth
     #
     # * DescribeMaintenanceStartTimeOutput$DayOfWeek
     #
@@ -2162,6 +2270,17 @@ module Aws::StorageGateway
     #   of week is in the time zone of the gateway.
     #   @return [Integer]
     #
+    # @!attribute [rw] day_of_month
+    #   The day of the month component of the maintenance start time
+    #   represented as an ordinal number from 1 to 28, where 1 represents
+    #   the first day of the month and 28 represents the last day of the
+    #   month.
+    #
+    #   <note markdown="1"> This value is only available for tape and volume gateways.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] timezone
     #   A value that indicates the time zone that is set for the gateway.
     #   The start time and day of week specified should be in the time zone
@@ -2175,6 +2294,7 @@ module Aws::StorageGateway
       :hour_of_day,
       :minute_of_hour,
       :day_of_week,
+      :day_of_month,
       :timezone)
       include Aws::Structure
     end
@@ -3037,6 +3157,15 @@ module Aws::StorageGateway
     #   The name of the gateway.
     #   @return [String]
     #
+    # @!attribute [rw] ec2_instance_id
+    #   The ID of the Amazon EC2 instance that was used to launch the
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_instance_region
+    #   The AWS Region where the Amazon EC2 instance is located.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/GatewayInfo AWS API Documentation
     #
     class GatewayInfo < Struct.new(
@@ -3044,7 +3173,9 @@ module Aws::StorageGateway
       :gateway_arn,
       :gateway_type,
       :gateway_operational_state,
-      :gateway_name)
+      :gateway_name,
+      :ec2_instance_id,
+      :ec2_instance_region)
       include Aws::Structure
     end
 
@@ -3693,13 +3824,21 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is
+    #   set to true, the requester pays the costs. Otherwise the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of up to 10 tags assigned to the NFS file share, sorted
+    #   A list of up to 50 tags assigned to the NFS file share, sorted
     #   alphabetically by key name. Each tag is a key-value pair. For a
     #   gateway with more than 10 tags assigned, you can view all tags using
     #   the `ListTagsForResource` API operation.
@@ -4087,9 +4226,17 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is
+    #   set to true, the requester pays the costs. Otherwise the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] valid_user_list
@@ -4114,7 +4261,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of up to 10 tags assigned to the SMB file share, sorted
+    #   A list of up to 50 tags assigned to the SMB file share, sorted
     #   alphabetically by key name. Each tag is a key-value pair. For a
     #   gateway with more than 10 tags assigned, you can view all tags using
     #   the `ListTagsForResource` API operation.
@@ -4905,6 +5052,8 @@ module Aws::StorageGateway
 
     # A JSON object containing the following fields:
     #
+    # * UpdateMaintenanceStartTimeInput$DayOfMonth
+    #
     # * UpdateMaintenanceStartTimeInput$DayOfWeek
     #
     # * UpdateMaintenanceStartTimeInput$HourOfDay
@@ -4918,7 +5067,8 @@ module Aws::StorageGateway
     #         gateway_arn: "GatewayARN", # required
     #         hour_of_day: 1, # required
     #         minute_of_hour: 1, # required
-    #         day_of_week: 1, # required
+    #         day_of_week: 1,
+    #         day_of_month: 1,
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -4939,8 +5089,20 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] day_of_week
-    #   The maintenance start time day of the week represented as an ordinal
-    #   number from 0 to 6, where 0 represents Sunday and 6 Saturday.
+    #   The day of the week component of the maintenance start time week
+    #   represented as an ordinal number from 0 to 6, where 0 represents
+    #   Sunday and 6 Saturday.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month component of the maintenance start time
+    #   represented as an ordinal number from 1 to 28, where 1 represents
+    #   the first day of the month and 28 represents the last day of the
+    #   month.
+    #
+    #   <note markdown="1"> This value is only available for tape and volume gateways.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeInput AWS API Documentation
@@ -4949,7 +5111,8 @@ module Aws::StorageGateway
       :gateway_arn,
       :hour_of_day,
       :minute_of_hour,
-      :day_of_week)
+      :day_of_week,
+      :day_of_month)
       include Aws::Structure
     end
 
@@ -5051,9 +5214,17 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is
+    #   set to true, the requester pays the costs. Otherwise the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
@@ -5145,9 +5316,17 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is
+    #   set to true, the requester pays the costs. Otherwise the S3 bucket
+    #   owner pays. However, the S3 bucket owner always pays the cost of
+    #   storing data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] valid_user_list

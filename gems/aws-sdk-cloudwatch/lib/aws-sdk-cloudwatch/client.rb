@@ -1555,8 +1555,8 @@ module Aws::CloudWatch
     #   math expression as part of the `Metrics` array.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs to associate with the alarm or dashboard.
-    #   You can associate as many as 50 tags with an alarm.
+    #   A list of key-value pairs to associate with the alarm. You can
+    #   associate as many as 50 tags with an alarm.
     #
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions, by granting a user permission to
@@ -1873,7 +1873,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

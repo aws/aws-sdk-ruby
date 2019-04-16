@@ -188,6 +188,7 @@ module Aws::CognitoIdentityProvider
     EmailConfigurationType = Shapes::StructureShape.new(name: 'EmailConfigurationType')
     EmailNotificationBodyType = Shapes::StringShape.new(name: 'EmailNotificationBodyType')
     EmailNotificationSubjectType = Shapes::StringShape.new(name: 'EmailNotificationSubjectType')
+    EmailSendingAccountType = Shapes::StringShape.new(name: 'EmailSendingAccountType')
     EmailVerificationMessageByLinkType = Shapes::StringShape.new(name: 'EmailVerificationMessageByLinkType')
     EmailVerificationMessageType = Shapes::StringShape.new(name: 'EmailVerificationMessageType')
     EmailVerificationSubjectByLinkType = Shapes::StringShape.new(name: 'EmailVerificationSubjectByLinkType')
@@ -1013,6 +1014,7 @@ module Aws::CognitoIdentityProvider
 
     EmailConfigurationType.add_member(:source_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "SourceArn"))
     EmailConfigurationType.add_member(:reply_to_email_address, Shapes::ShapeRef.new(shape: EmailAddressType, location_name: "ReplyToEmailAddress"))
+    EmailConfigurationType.add_member(:email_sending_account, Shapes::ShapeRef.new(shape: EmailSendingAccountType, location_name: "EmailSendingAccount"))
     EmailConfigurationType.struct_class = Types::EmailConfigurationType
 
     EventContextDataType.add_member(:ip_address, Shapes::ShapeRef.new(shape: StringType, location_name: "IpAddress"))
@@ -2018,6 +2020,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:admin_list_user_auth_events, Seahorse::Model::Operation.new.tap do |o|
@@ -2033,6 +2041,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:admin_remove_user_from_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2172,6 +2186,9 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
       end)
 
       api.add_operation(:admin_user_global_sign_out, Seahorse::Model::Operation.new.tap do |o|
@@ -2835,6 +2852,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_identity_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -2848,6 +2871,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resource_servers, Seahorse::Model::Operation.new.tap do |o|
@@ -2861,6 +2890,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2900,6 +2935,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_user_pools, Seahorse::Model::Operation.new.tap do |o|
@@ -2912,6 +2953,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
@@ -2938,6 +2985,12 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:resend_confirmation_code, Seahorse::Model::Operation.new.tap do |o|

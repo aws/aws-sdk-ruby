@@ -56,6 +56,7 @@ module Aws::StorageGateway
     CreateTapesInput = Shapes::StructureShape.new(name: 'CreateTapesInput')
     CreateTapesOutput = Shapes::StructureShape.new(name: 'CreateTapesOutput')
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
+    DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::IntegerShape.new(name: 'DayOfWeek')
     DeleteBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitInput')
     DeleteBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitOutput')
@@ -125,6 +126,8 @@ module Aws::StorageGateway
     DomainUserName = Shapes::StringShape.new(name: 'DomainUserName')
     DomainUserPassword = Shapes::StringShape.new(name: 'DomainUserPassword')
     DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
+    Ec2InstanceId = Shapes::StringShape.new(name: 'Ec2InstanceId')
+    Ec2InstanceRegion = Shapes::StringShape.new(name: 'Ec2InstanceRegion')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     FileShareARN = Shapes::StringShape.new(name: 'FileShareARN')
     FileShareARNList = Shapes::ListShape.new(name: 'FileShareARNList')
@@ -402,6 +405,7 @@ module Aws::StorageGateway
     CreateCachediSCSIVolumeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateCachediSCSIVolumeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateCachediSCSIVolumeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    CreateCachediSCSIVolumeInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateCachediSCSIVolumeInput.struct_class = Types::CreateCachediSCSIVolumeInput
 
     CreateCachediSCSIVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -473,6 +477,7 @@ module Aws::StorageGateway
     CreateStorediSCSIVolumeInput.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
     CreateStorediSCSIVolumeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateStorediSCSIVolumeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    CreateStorediSCSIVolumeInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStorediSCSIVolumeInput.struct_class = Types::CreateStorediSCSIVolumeInput
 
     CreateStorediSCSIVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -486,6 +491,7 @@ module Aws::StorageGateway
     CreateTapeWithBarcodeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateTapeWithBarcodeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateTapeWithBarcodeInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    CreateTapeWithBarcodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateTapeWithBarcodeInput.struct_class = Types::CreateTapeWithBarcodeInput
 
     CreateTapeWithBarcodeOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
@@ -499,6 +505,7 @@ module Aws::StorageGateway
     CreateTapesInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
     CreateTapesInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateTapesInput.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, location_name: "PoolId"))
+    CreateTapesInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateTapesInput.struct_class = Types::CreateTapesInput
 
     CreateTapesOutput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
@@ -601,6 +608,8 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     DescribeGatewayInformationOutput.add_member(:next_update_availability_date, Shapes::ShapeRef.new(shape: NextUpdateAvailabilityDate, location_name: "NextUpdateAvailabilityDate"))
     DescribeGatewayInformationOutput.add_member(:last_software_update, Shapes::ShapeRef.new(shape: LastSoftwareUpdate, location_name: "LastSoftwareUpdate"))
+    DescribeGatewayInformationOutput.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: Ec2InstanceId, location_name: "Ec2InstanceId"))
+    DescribeGatewayInformationOutput.add_member(:ec2_instance_region, Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
     DescribeGatewayInformationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
@@ -611,6 +620,7 @@ module Aws::StorageGateway
     DescribeMaintenanceStartTimeOutput.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, location_name: "HourOfDay"))
     DescribeMaintenanceStartTimeOutput.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "MinuteOfHour"))
     DescribeMaintenanceStartTimeOutput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
+    DescribeMaintenanceStartTimeOutput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     DescribeMaintenanceStartTimeOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
     DescribeMaintenanceStartTimeOutput.struct_class = Types::DescribeMaintenanceStartTimeOutput
 
@@ -765,6 +775,8 @@ module Aws::StorageGateway
     GatewayInfo.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
     GatewayInfo.add_member(:gateway_operational_state, Shapes::ShapeRef.new(shape: GatewayOperationalState, location_name: "GatewayOperationalState"))
     GatewayInfo.add_member(:gateway_name, Shapes::ShapeRef.new(shape: string, location_name: "GatewayName"))
+    GatewayInfo.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: Ec2InstanceId, location_name: "Ec2InstanceId"))
+    GatewayInfo.add_member(:ec2_instance_region, Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
     GatewayInfo.struct_class = Types::GatewayInfo
 
     GatewayNetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
@@ -1092,7 +1104,8 @@ module Aws::StorageGateway
     UpdateMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     UpdateMaintenanceStartTimeInput.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "HourOfDay"))
     UpdateMaintenanceStartTimeInput.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
-    UpdateMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, required: true, location_name: "DayOfWeek"))
+    UpdateMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
+    UpdateMaintenanceStartTimeInput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     UpdateMaintenanceStartTimeInput.struct_class = Types::UpdateMaintenanceStartTimeInput
 
     UpdateMaintenanceStartTimeOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))

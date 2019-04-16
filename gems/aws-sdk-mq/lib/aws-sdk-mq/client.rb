@@ -486,7 +486,7 @@ module Aws::MQ
       req.send_request(options)
     end
 
-    # Remove a tag from a resource.
+    # Removes a tag from a resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -618,6 +618,92 @@ module Aws::MQ
     # @param [Hash] params ({})
     def describe_broker(params = {}, options = {})
       req = build_request(:describe_broker, params)
+      req.send_request(options)
+    end
+
+    # Describe available engine types and versions.
+    #
+    # @option params [String] :engine_type
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeBrokerEngineTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrokerEngineTypesResponse#broker_engine_types #broker_engine_types} => Array&lt;Types::BrokerEngineType&gt;
+    #   * {Types::DescribeBrokerEngineTypesResponse#max_results #max_results} => Integer
+    #   * {Types::DescribeBrokerEngineTypesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_broker_engine_types({
+    #     engine_type: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.broker_engine_types #=> Array
+    #   resp.broker_engine_types[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.broker_engine_types[0].engine_versions #=> Array
+    #   resp.broker_engine_types[0].engine_versions[0].name #=> String
+    #   resp.max_results #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypes AWS API Documentation
+    #
+    # @overload describe_broker_engine_types(params = {})
+    # @param [Hash] params ({})
+    def describe_broker_engine_types(params = {}, options = {})
+      req = build_request(:describe_broker_engine_types, params)
+      req.send_request(options)
+    end
+
+    # Describe available broker instance options.
+    #
+    # @option params [String] :engine_type
+    #
+    # @option params [String] :host_instance_type
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeBrokerInstanceOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrokerInstanceOptionsResponse#broker_instance_options #broker_instance_options} => Array&lt;Types::BrokerInstanceOption&gt;
+    #   * {Types::DescribeBrokerInstanceOptionsResponse#max_results #max_results} => Integer
+    #   * {Types::DescribeBrokerInstanceOptionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_broker_instance_options({
+    #     engine_type: "__string",
+    #     host_instance_type: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.broker_instance_options #=> Array
+    #   resp.broker_instance_options[0].availability_zones #=> Array
+    #   resp.broker_instance_options[0].availability_zones[0].name #=> String
+    #   resp.broker_instance_options[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.broker_instance_options[0].host_instance_type #=> String
+    #   resp.broker_instance_options[0].supported_engine_versions #=> Array
+    #   resp.broker_instance_options[0].supported_engine_versions[0] #=> String
+    #   resp.max_results #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptions AWS API Documentation
+    #
+    # @overload describe_broker_instance_options(params = {})
+    # @param [Hash] params ({})
+    def describe_broker_instance_options(params = {}, options = {})
+      req = build_request(:describe_broker_instance_options, params)
       req.send_request(options)
     end
 
@@ -1115,7 +1201,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

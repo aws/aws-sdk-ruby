@@ -329,7 +329,7 @@ module Aws::StorageGateway
     #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of up to 10 tags that can be assigned to the gateway. Each tag
+    #   A list of up to 50 tags that can be assigned to the gateway. Each tag
     #   is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
@@ -472,7 +472,7 @@ module Aws::StorageGateway
     #
     # * NFS and SMB file shares
     #
-    # You can create a maximum of 10 tags for each resource. Virtual tapes
+    # You can create a maximum of 50 tags for each resource. Virtual tapes
     # and storage volumes that are recovered to a new gateway maintain their
     # tags.
     #
@@ -914,6 +914,17 @@ module Aws::StorageGateway
     #   server side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a cached volume. Each
+    #   tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::CreateCachediSCSIVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCachediSCSIVolumeOutput#volume_arn #volume_arn} => String
@@ -951,6 +962,12 @@ module Aws::StorageGateway
     #     client_token: "ClientToken", # required
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1045,12 +1062,20 @@ module Aws::StorageGateway
     #   guessing, and otherwise to false. The default value is true.
     #
     # @option params [Boolean] :requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is set
+    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
+    #   pays. However, the S3 bucket owner always pays the cost of storing
+    #   data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   A list of up to 50 tags that can be assigned to the NFS file share.
     #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
@@ -1174,9 +1199,17 @@ module Aws::StorageGateway
     #   guessing, and otherwise to false. The default value is true.
     #
     # @option params [Boolean] :requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is set
+    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
+    #   pays. However, the S3 bucket owner always pays the cost of storing
+    #   data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
@@ -1197,7 +1230,7 @@ module Aws::StorageGateway
     #   `ActiveDirectory`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of up to 10 tags that can be assigned to the NFS file share.
+    #   A list of up to 50 tags that can be assigned to the NFS file share.
     #   Each tag is a key-value pair.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
@@ -1255,7 +1288,7 @@ module Aws::StorageGateway
     # snapshots of your data to Amazon Simple Storage (S3) for durable
     # off-site recovery, as well as import the data to an Amazon Elastic
     # Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You
-    # can take snapshots of your gateway volume on a scheduled or ad-hoc
+    # can take snapshots of your gateway volume on a scheduled or ad hoc
     # basis. This API enables you to take ad-hoc snapshot. For more
     # information, see [Editing a Snapshot Schedule][1].
     #
@@ -1487,6 +1520,17 @@ module Aws::StorageGateway
     #   server side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a stored volume. Each
+    #   tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::CreateStorediSCSIVolumeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStorediSCSIVolumeOutput#volume_arn #volume_arn} => String
@@ -1525,6 +1569,12 @@ module Aws::StorageGateway
     #     network_interface_id: "NetworkInterfaceId", # required
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1592,6 +1642,17 @@ module Aws::StorageGateway
     #
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a virtual tape that
+    #   has a barcode. Each tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #
     # @return [Types::CreateTapeWithBarcodeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTapeWithBarcodeOutput#tape_arn #tape_arn} => String
@@ -1621,6 +1682,12 @@ module Aws::StorageGateway
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
     #     pool_id: "PoolId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1691,12 +1758,23 @@ module Aws::StorageGateway
     #
     # @option params [String] :pool_id
     #   The ID of the pool that you want to add your tape to for archiving.
-    #   The tape in this pool is archived in the S3 storage class you chose
-    #   when you created the tape. When you use your backup application to
+    #   The tape in this pool is archived in the S3 storage class that is
+    #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (Glacier or Deep Archive).
+    #   (Glacier or Deep Archive) that corresponds to the pool.
     #
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of up to 50 tags that can be assigned to a virtual tape. Each
+    #   tag is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters: +
+    #   - = . \_ : / @. The maximum length of a tag's key is 128 characters,
+    #   and the maximum length for a tag's value is 256.
+    #
+    #    </note>
     #
     # @return [Types::CreateTapesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1735,6 +1813,12 @@ module Aws::StorageGateway
     #     kms_encrypted: false,
     #     kms_key: "KMSKey",
     #     pool_id: "PoolId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2465,6 +2549,8 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#gateway_type #gateway_type} => String
     #   * {Types::DescribeGatewayInformationOutput#next_update_availability_date #next_update_availability_date} => String
     #   * {Types::DescribeGatewayInformationOutput#last_software_update #last_software_update} => String
+    #   * {Types::DescribeGatewayInformationOutput#ec2_instance_id #ec2_instance_id} => String
+    #   * {Types::DescribeGatewayInformationOutput#ec2_instance_region #ec2_instance_region} => String
     #   * {Types::DescribeGatewayInformationOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
@@ -2514,6 +2600,8 @@ module Aws::StorageGateway
     #   resp.gateway_type #=> String
     #   resp.next_update_availability_date #=> String
     #   resp.last_software_update #=> String
+    #   resp.ec2_instance_id #=> String
+    #   resp.ec2_instance_region #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -2541,6 +2629,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeMaintenanceStartTimeOutput#hour_of_day #hour_of_day} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#minute_of_hour #minute_of_hour} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_week #day_of_week} => Integer
+    #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_month #day_of_month} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#timezone #timezone} => String
     #
     #
@@ -2573,6 +2662,7 @@ module Aws::StorageGateway
     #   resp.hour_of_day #=> Integer
     #   resp.minute_of_hour #=> Integer
     #   resp.day_of_week #=> Integer
+    #   resp.day_of_month #=> Integer
     #   resp.timezone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime AWS API Documentation
@@ -3688,6 +3778,8 @@ module Aws::StorageGateway
     #   resp.gateways[0].gateway_type #=> String
     #   resp.gateways[0].gateway_operational_state #=> String
     #   resp.gateways[0].gateway_name #=> String
+    #   resp.gateways[0].ec2_instance_id #=> String
+    #   resp.gateways[0].ec2_instance_region #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways AWS API Documentation
@@ -4160,6 +4252,14 @@ module Aws::StorageGateway
     # You can subscribe to be notified through an Amazon CloudWatch event
     # when your RefreshCache operation completes. For more information, see
     # [Getting Notified About File Operations][1].
+    #
+    # When this API is called, it only initiates the refresh operation. When
+    # the API call completes and returns a success code, it doesn't
+    # necessarily mean that the file refresh has completed. You should use
+    # the refresh-complete notification to determine that the operation has
+    # completed before you check for new files on the gateway file share.
+    # You can subscribe to be notified through an CloudWatch event when your
+    # `RefreshCache` operation completes.
     #
     #
     #
@@ -4951,9 +5051,19 @@ module Aws::StorageGateway
     #   *mm*, where *mm* is the minute (00 to 59). The minute of the hour is
     #   in the time zone of the gateway.
     #
-    # @option params [required, Integer] :day_of_week
-    #   The maintenance start time day of the week represented as an ordinal
-    #   number from 0 to 6, where 0 represents Sunday and 6 Saturday.
+    # @option params [Integer] :day_of_week
+    #   The day of the week component of the maintenance start time week
+    #   represented as an ordinal number from 0 to 6, where 0 represents
+    #   Sunday and 6 Saturday.
+    #
+    # @option params [Integer] :day_of_month
+    #   The day of the month component of the maintenance start time
+    #   represented as an ordinal number from 1 to 28, where 1 represents the
+    #   first day of the month and 28 represents the last day of the month.
+    #
+    #   <note markdown="1"> This value is only available for tape and volume gateways.
+    #
+    #    </note>
     #
     # @return [Types::UpdateMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4983,7 +5093,8 @@ module Aws::StorageGateway
     #     gateway_arn: "GatewayARN", # required
     #     hour_of_day: 1, # required
     #     minute_of_hour: 1, # required
-    #     day_of_week: 1, # required
+    #     day_of_week: 1,
+    #     day_of_month: 1,
     #   })
     #
     # @example Response structure
@@ -5073,9 +5184,17 @@ module Aws::StorageGateway
     #   guessing, and otherwise to false. The default value is true.
     #
     # @option params [Boolean] :requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is set
+    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
+    #   pays. However, the S3 bucket owner always pays the cost of storing
+    #   data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5172,9 +5291,17 @@ module Aws::StorageGateway
     #   guessing, and otherwise to false. The default value is true.
     #
     # @option params [Boolean] :requester_pays
-    #   A value that sets the access control list permission for objects in
-    #   the Amazon S3 bucket that a file gateway puts objects into. The
-    #   default value is `private`.
+    #   A value that sets who pays the cost of the request and the cost
+    #   associated with data download from the S3 bucket. If this value is set
+    #   to true, the requester pays the costs. Otherwise the S3 bucket owner
+    #   pays. However, the S3 bucket owner always pays the cost of storing
+    #   data.
+    #
+    #   <note markdown="1"> `RequesterPays` is a configuration for the S3 bucket that backs the
+    #   file share, so make sure that the configuration on the file share is
+    #   the same as the S3 bucket configuration.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
@@ -5359,7 +5486,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

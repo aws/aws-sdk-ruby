@@ -8,6 +8,63 @@
 module Aws::MQ
   module Types
 
+    # Name of the availability zone.
+    #
+    # @!attribute [rw] name
+    #   Id for the availability zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/AvailabilityZone AWS API Documentation
+    #
+    class AvailabilityZone < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Types of broker engines.
+    #
+    # @!attribute [rw] engine_type
+    #   The type of broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_versions
+    #   The list of engine versions.
+    #   @return [Array<Types::EngineVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerEngineType AWS API Documentation
+    #
+    class BrokerEngineType < Struct.new(
+      :engine_type,
+      :engine_versions)
+      include Aws::Structure
+    end
+
+    # Returns a list of broker engine type.
+    #
+    # @!attribute [rw] broker_engine_types
+    #   List of available engine types and versions.
+    #   @return [Array<Types::BrokerEngineType>]
+    #
+    # @!attribute [rw] max_results
+    #   Required. The maximum number of engine types that can be returned
+    #   per page (20 by default). This value must be an integer from 5 to
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that specifies the next page of results Amazon MQ should
+    #   return. To request the first page, leave nextToken empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerEngineTypeOutput AWS API Documentation
+    #
+    class BrokerEngineTypeOutput < Struct.new(
+      :broker_engine_types,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Returns information about all brokers.
     #
     # @!attribute [rw] console_url
@@ -29,6 +86,60 @@ module Aws::MQ
       :console_url,
       :endpoints,
       :ip_address)
+      include Aws::Structure
+    end
+
+    # Option for host instance type.
+    #
+    # @!attribute [rw] availability_zones
+    #   The list of available az.
+    #   @return [Array<Types::AvailabilityZone>]
+    #
+    # @!attribute [rw] engine_type
+    #   The type of broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_instance_type
+    #   The type of broker instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_engine_versions
+    #   The list of supported engine versions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstanceOption AWS API Documentation
+    #
+    class BrokerInstanceOption < Struct.new(
+      :availability_zones,
+      :engine_type,
+      :host_instance_type,
+      :supported_engine_versions)
+      include Aws::Structure
+    end
+
+    # Returns a list of broker instance options.
+    #
+    # @!attribute [rw] broker_instance_options
+    #   List of available broker instance options.
+    #   @return [Array<Types::BrokerInstanceOption>]
+    #
+    # @!attribute [rw] max_results
+    #   Required. The maximum number of instance options that can be
+    #   returned per page (20 by default). This value must be an integer
+    #   from 5 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that specifies the next page of results Amazon MQ should
+    #   return. To request the first page, leave nextToken empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstanceOptionsOutput AWS API Documentation
+    #
+    class BrokerInstanceOptionsOutput < Struct.new(
+      :broker_instance_options,
+      :max_results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -777,6 +888,101 @@ module Aws::MQ
     #
     class DeleteUserResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeBrokerEngineTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         engine_type: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] engine_type
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypesRequest AWS API Documentation
+    #
+    class DescribeBrokerEngineTypesRequest < Struct.new(
+      :engine_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] broker_engine_types
+    #   @return [Array<Types::BrokerEngineType>]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypesResponse AWS API Documentation
+    #
+    class DescribeBrokerEngineTypesResponse < Struct.new(
+      :broker_engine_types,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBrokerInstanceOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         engine_type: "__string",
+    #         host_instance_type: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] engine_type
+    #   @return [String]
+    #
+    # @!attribute [rw] host_instance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsRequest AWS API Documentation
+    #
+    class DescribeBrokerInstanceOptionsRequest < Struct.new(
+      :engine_type,
+      :host_instance_type,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] broker_instance_options
+    #   @return [Array<Types::BrokerInstanceOption>]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsResponse AWS API Documentation
+    #
+    class DescribeBrokerInstanceOptionsResponse < Struct.new(
+      :broker_instance_options,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The version of the broker engine. For a list of supported engine
     # versions, see
     # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
@@ -1239,6 +1445,19 @@ module Aws::MQ
       :groups,
       :pending,
       :username)
+      include Aws::Structure
+    end
+
+    # Id of the engine version.
+    #
+    # @!attribute [rw] name
+    #   Id for the version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EngineVersion AWS API Documentation
+    #
+    class EngineVersion < Struct.new(
+      :name)
       include Aws::Structure
     end
 

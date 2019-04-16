@@ -3849,7 +3849,7 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists all the roots, organizaitonal units (OUs), and accounts to which
+    # Lists all the roots, organizational units (OUs), and accounts to which
     # the specified policy is attached.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
@@ -4322,7 +4322,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

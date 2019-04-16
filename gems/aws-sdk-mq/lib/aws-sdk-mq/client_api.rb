@@ -11,8 +11,13 @@ module Aws::MQ
 
     include Seahorse::Model
 
+    AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BrokerEngineType = Shapes::StructureShape.new(name: 'BrokerEngineType')
+    BrokerEngineTypeOutput = Shapes::StructureShape.new(name: 'BrokerEngineTypeOutput')
     BrokerInstance = Shapes::StructureShape.new(name: 'BrokerInstance')
+    BrokerInstanceOption = Shapes::StructureShape.new(name: 'BrokerInstanceOption')
+    BrokerInstanceOptionsOutput = Shapes::StructureShape.new(name: 'BrokerInstanceOptionsOutput')
     BrokerState = Shapes::StringShape.new(name: 'BrokerState')
     BrokerSummary = Shapes::StructureShape.new(name: 'BrokerSummary')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
@@ -41,6 +46,10 @@ module Aws::MQ
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteUserResponse = Shapes::StructureShape.new(name: 'DeleteUserResponse')
     DeploymentMode = Shapes::StringShape.new(name: 'DeploymentMode')
+    DescribeBrokerEngineTypesRequest = Shapes::StructureShape.new(name: 'DescribeBrokerEngineTypesRequest')
+    DescribeBrokerEngineTypesResponse = Shapes::StructureShape.new(name: 'DescribeBrokerEngineTypesResponse')
+    DescribeBrokerInstanceOptionsRequest = Shapes::StructureShape.new(name: 'DescribeBrokerInstanceOptionsRequest')
+    DescribeBrokerInstanceOptionsResponse = Shapes::StructureShape.new(name: 'DescribeBrokerInstanceOptionsResponse')
     DescribeBrokerOutput = Shapes::StructureShape.new(name: 'DescribeBrokerOutput')
     DescribeBrokerRequest = Shapes::StructureShape.new(name: 'DescribeBrokerRequest')
     DescribeBrokerResponse = Shapes::StructureShape.new(name: 'DescribeBrokerResponse')
@@ -53,6 +62,7 @@ module Aws::MQ
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
+    EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
     Error = Shapes::StructureShape.new(name: 'Error')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
@@ -100,11 +110,15 @@ module Aws::MQ
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin5Max100 = Shapes::IntegerShape.new(name: '__integerMin5Max100')
+    __listOfAvailabilityZone = Shapes::ListShape.new(name: '__listOfAvailabilityZone')
+    __listOfBrokerEngineType = Shapes::ListShape.new(name: '__listOfBrokerEngineType')
     __listOfBrokerInstance = Shapes::ListShape.new(name: '__listOfBrokerInstance')
+    __listOfBrokerInstanceOption = Shapes::ListShape.new(name: '__listOfBrokerInstanceOption')
     __listOfBrokerSummary = Shapes::ListShape.new(name: '__listOfBrokerSummary')
     __listOfConfiguration = Shapes::ListShape.new(name: '__listOfConfiguration')
     __listOfConfigurationId = Shapes::ListShape.new(name: '__listOfConfigurationId')
     __listOfConfigurationRevision = Shapes::ListShape.new(name: '__listOfConfigurationRevision')
+    __listOfEngineVersion = Shapes::ListShape.new(name: '__listOfEngineVersion')
     __listOfSanitizationWarning = Shapes::ListShape.new(name: '__listOfSanitizationWarning')
     __listOfUser = Shapes::ListShape.new(name: '__listOfUser')
     __listOfUserSummary = Shapes::ListShape.new(name: '__listOfUserSummary')
@@ -115,10 +129,33 @@ module Aws::MQ
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    AvailabilityZone.struct_class = Types::AvailabilityZone
+
+    BrokerEngineType.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    BrokerEngineType.add_member(:engine_versions, Shapes::ShapeRef.new(shape: __listOfEngineVersion, location_name: "engineVersions"))
+    BrokerEngineType.struct_class = Types::BrokerEngineType
+
+    BrokerEngineTypeOutput.add_member(:broker_engine_types, Shapes::ShapeRef.new(shape: __listOfBrokerEngineType, location_name: "brokerEngineTypes"))
+    BrokerEngineTypeOutput.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin5Max100, location_name: "maxResults"))
+    BrokerEngineTypeOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    BrokerEngineTypeOutput.struct_class = Types::BrokerEngineTypeOutput
+
     BrokerInstance.add_member(:console_url, Shapes::ShapeRef.new(shape: __string, location_name: "consoleURL"))
     BrokerInstance.add_member(:endpoints, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "endpoints"))
     BrokerInstance.add_member(:ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "ipAddress"))
     BrokerInstance.struct_class = Types::BrokerInstance
+
+    BrokerInstanceOption.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOfAvailabilityZone, location_name: "availabilityZones"))
+    BrokerInstanceOption.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
+    BrokerInstanceOption.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    BrokerInstanceOption.add_member(:supported_engine_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "supportedEngineVersions"))
+    BrokerInstanceOption.struct_class = Types::BrokerInstanceOption
+
+    BrokerInstanceOptionsOutput.add_member(:broker_instance_options, Shapes::ShapeRef.new(shape: __listOfBrokerInstanceOption, location_name: "brokerInstanceOptions"))
+    BrokerInstanceOptionsOutput.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin5Max100, location_name: "maxResults"))
+    BrokerInstanceOptionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    BrokerInstanceOptionsOutput.struct_class = Types::BrokerInstanceOptionsOutput
 
     BrokerSummary.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
     BrokerSummary.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
@@ -259,6 +296,27 @@ module Aws::MQ
 
     DeleteUserResponse.struct_class = Types::DeleteUserResponse
 
+    DescribeBrokerEngineTypesRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "engineType"))
+    DescribeBrokerEngineTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    DescribeBrokerEngineTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    DescribeBrokerEngineTypesRequest.struct_class = Types::DescribeBrokerEngineTypesRequest
+
+    DescribeBrokerEngineTypesResponse.add_member(:broker_engine_types, Shapes::ShapeRef.new(shape: __listOfBrokerEngineType, location_name: "brokerEngineTypes"))
+    DescribeBrokerEngineTypesResponse.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin5Max100, location_name: "maxResults"))
+    DescribeBrokerEngineTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    DescribeBrokerEngineTypesResponse.struct_class = Types::DescribeBrokerEngineTypesResponse
+
+    DescribeBrokerInstanceOptionsRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "engineType"))
+    DescribeBrokerInstanceOptionsRequest.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "hostInstanceType"))
+    DescribeBrokerInstanceOptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    DescribeBrokerInstanceOptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    DescribeBrokerInstanceOptionsRequest.struct_class = Types::DescribeBrokerInstanceOptionsRequest
+
+    DescribeBrokerInstanceOptionsResponse.add_member(:broker_instance_options, Shapes::ShapeRef.new(shape: __listOfBrokerInstanceOption, location_name: "brokerInstanceOptions"))
+    DescribeBrokerInstanceOptionsResponse.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin5Max100, location_name: "maxResults"))
+    DescribeBrokerInstanceOptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    DescribeBrokerInstanceOptionsResponse.struct_class = Types::DescribeBrokerInstanceOptionsResponse
+
     DescribeBrokerOutput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     DescribeBrokerOutput.add_member(:broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "brokerArn"))
     DescribeBrokerOutput.add_member(:broker_id, Shapes::ShapeRef.new(shape: __string, location_name: "brokerId"))
@@ -353,6 +411,9 @@ module Aws::MQ
     DescribeUserResponse.add_member(:pending, Shapes::ShapeRef.new(shape: UserPendingChanges, location_name: "pending"))
     DescribeUserResponse.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
+
+    EngineVersion.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    EngineVersion.struct_class = Types::EngineVersion
 
     Error.add_member(:error_attribute, Shapes::ShapeRef.new(shape: __string, location_name: "errorAttribute"))
     Error.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -538,7 +599,13 @@ module Aws::MQ
     WeeklyStartTime.add_member(:time_zone, Shapes::ShapeRef.new(shape: __string, location_name: "timeZone"))
     WeeklyStartTime.struct_class = Types::WeeklyStartTime
 
+    __listOfAvailabilityZone.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
+
+    __listOfBrokerEngineType.member = Shapes::ShapeRef.new(shape: BrokerEngineType)
+
     __listOfBrokerInstance.member = Shapes::ShapeRef.new(shape: BrokerInstance)
+
+    __listOfBrokerInstanceOption.member = Shapes::ShapeRef.new(shape: BrokerInstanceOption)
 
     __listOfBrokerSummary.member = Shapes::ShapeRef.new(shape: BrokerSummary)
 
@@ -547,6 +614,8 @@ module Aws::MQ
     __listOfConfigurationId.member = Shapes::ShapeRef.new(shape: ConfigurationId)
 
     __listOfConfigurationRevision.member = Shapes::ShapeRef.new(shape: ConfigurationRevision)
+
+    __listOfEngineVersion.member = Shapes::ShapeRef.new(shape: EngineVersion)
 
     __listOfSanitizationWarning.member = Shapes::ShapeRef.new(shape: SanitizationWarning)
 
@@ -670,6 +739,28 @@ module Aws::MQ
         o.input = Shapes::ShapeRef.new(shape: DescribeBrokerRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeBrokerResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:describe_broker_engine_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBrokerEngineTypes"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/broker-engine-types"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBrokerEngineTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBrokerEngineTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:describe_broker_instance_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBrokerInstanceOptions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/broker-instance-options"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBrokerInstanceOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBrokerInstanceOptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

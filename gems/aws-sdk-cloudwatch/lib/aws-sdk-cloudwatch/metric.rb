@@ -529,8 +529,8 @@ module Aws::CloudWatch
     #   operation. Instead, you retrieve the metrics you are using in your
     #   math expression as part of the `Metrics` array.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of key-value pairs to associate with the alarm or dashboard.
-    #   You can associate as many as 50 tags with an alarm.
+    #   A list of key-value pairs to associate with the alarm. You can
+    #   associate as many as 50 tags with an alarm.
     #
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions, by granting a user permission to

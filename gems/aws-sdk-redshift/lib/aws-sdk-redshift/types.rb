@@ -36,9 +36,6 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] exchanged_reserved_node
-    #   Describes a reserved node. You can call the
-    #   DescribeReservedNodeOfferings API to obtain the available reserved
-    #   node offerings.
     #   @return [Types::ReservedNode]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeOutputMessage AWS API Documentation
@@ -509,8 +506,6 @@ module Aws::Redshift
     #   @return [Types::RestoreStatus]
     #
     # @!attribute [rw] data_transfer_progress
-    #   Describes the status of a cluster while it is in the process of
-    #   resizing with an incremental resize.
     #   @return [Types::DataTransferProgress]
     #
     # @!attribute [rw] hsm_status
@@ -564,7 +559,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] iam_roles
@@ -892,7 +887,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #   @return [Array<Types::ClusterParameterStatus>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupStatus AWS API Documentation
@@ -1362,8 +1357,8 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html
-    #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html
+    #   [2]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -1410,7 +1405,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #   @return [String]
     #
     # @!attribute [rw] master_username
@@ -1430,7 +1425,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -1506,7 +1501,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name
@@ -1526,7 +1521,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #   @return [String]
     #
     # @!attribute [rw] automated_snapshot_retention_period
@@ -1603,7 +1598,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #   @return [Integer]
     #
     # @!attribute [rw] publicly_accessible
@@ -1638,7 +1633,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1663,7 +1658,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] additional_info
@@ -2302,7 +2297,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
     #   @return [Types::SnapshotCopyGrant]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrantResult AWS API Documentation
@@ -2345,6 +2340,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   An optional set of tags you can use to search for the schedule.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] dry_run
@@ -3118,8 +3114,8 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The identifier of the cluster for which information about snapshots
-    #   is requested.
+    #   The identifier of the cluster which generated the requested
+    #   snapshots.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_identifier
@@ -3211,10 +3207,23 @@ module Aws::Redshift
     #
     # @!attribute [rw] cluster_exists
     #   A value that indicates whether to return snapshots only for an
-    #   existing cluster. Table-level restore can be performed only using a
-    #   snapshot of an existing cluster, that is, a cluster that has not
-    #   been deleted. If `ClusterExists` is set to `true`,
-    #   `ClusterIdentifier` is required.
+    #   existing cluster. You can perform table-level restore only by using
+    #   a snapshot of an existing cluster, that is, a cluster that has not
+    #   been deleted. Values for this parameter work as follows:
+    #
+    #   * If `ClusterExists` is set to `true`, `ClusterIdentifier` is
+    #     required.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier`
+    #     isn't specified, all snapshots associated with deleted clusters
+    #     (orphaned snapshots) are returned.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     specified for a deleted cluster, snapshots associated with that
+    #     cluster are returned.
+    #
+    #   * If `ClusterExists` is set to `false` and `ClusterIdentifier` is
+    #     specified for an existing cluster, no snapshots are returned.
     #   @return [Boolean]
     #
     # @!attribute [rw] sorting_entities
@@ -4320,7 +4329,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4555,7 +4564,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region
     #   @return [String]
     #
     # @!attribute [rw] retention_period
@@ -4900,7 +4909,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [String]
     #
@@ -5392,7 +5401,7 @@ module Aws::Redshift
     # @!attribute [rw] defer_maintenance_duration
     #   An integer indicating the duration of the maintenance window in
     #   days. If you specify a duration, you can't specify an end time. The
-    #   duration must be 14 days or less.
+    #   duration must be 45 days or less.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceMessage AWS API Documentation
@@ -5620,7 +5629,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #   @return [String]
     #
     # @!attribute [rw] allow_version_upgrade
@@ -5675,7 +5684,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
     #   @return [String]
     #
     # @!attribute [rw] enhanced_vpc_routing
@@ -5691,7 +5700,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] maintenance_track_name
@@ -6213,7 +6222,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #   @return [String]
     #
     # @!attribute [rw] is_modifiable
@@ -6295,7 +6304,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] maintenance_track_name
@@ -6822,6 +6831,11 @@ module Aws::Redshift
     #   values are: `Legacy` and `None`.
     #   @return [String]
     #
+    # @!attribute [rw] data_transfer_progress_percent
+    #   The percent of data transferred from source cluster to target
+    #   cluster.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
@@ -6839,7 +6853,8 @@ module Aws::Redshift
       :estimated_time_to_completion_in_seconds,
       :resize_type,
       :message,
-      :target_encryption_type)
+      :target_encryption_type,
+      :data_transfer_progress_percent)
       include Aws::Structure
     end
 
@@ -6979,7 +6994,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_security_groups
@@ -7017,7 +7032,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows
     #   @return [String]
     #
     # @!attribute [rw] automated_snapshot_retention_period
@@ -7033,6 +7048,11 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] manual_snapshot_retention_period
+    #   The default number of days to retain a manual snapshot. If the value
+    #   is -1, the snapshot is retained indefinitely. This setting doesn't
+    #   change the retention period of existing snapshots.
+    #
+    #   The value must be either -1 or an integer between 1 and 3,653.
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -7059,7 +7079,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
     #   @return [String]
     #
     # @!attribute [rw] enhanced_vpc_routing
@@ -7075,7 +7095,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] additional_info
@@ -7589,7 +7609,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] maintenance_track_name
@@ -7662,7 +7682,7 @@ module Aws::Redshift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
     #
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant.
@@ -7767,7 +7787,7 @@ module Aws::Redshift
     # specific dates.
     #
     # @!attribute [rw] schedule_definitions
-    #   A list of ScheduleDefinitions
+    #   A list of ScheduleDefinitions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] schedule_identifier
@@ -7786,9 +7806,12 @@ module Aws::Redshift
     #   @return [Array<Time>]
     #
     # @!attribute [rw] associated_cluster_count
+    #   The number of clusters associated with the schedule.
     #   @return [Integer]
     #
     # @!attribute [rw] associated_clusters
+    #   A list of clusters associated with the schedule. A maximum of 100
+    #   clusters is returned.
     #   @return [Array<Types::ClusterAssociatedToSchedule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSchedule AWS API Documentation
@@ -7837,7 +7860,6 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] subnet_availability_zone
-    #   Describes an availability zone.
     #   @return [Types::AvailabilityZone]
     #
     # @!attribute [rw] subnet_status
@@ -8053,7 +8075,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResource AWS API Documentation

@@ -2418,7 +2418,7 @@ module Aws::Organizations
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #   @return [String]
     #
     # @!attribute [rw] master_account_arn

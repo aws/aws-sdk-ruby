@@ -1407,6 +1407,7 @@ module Aws::Redshift
     ResizeProgressMessage.add_member(:resize_type, Shapes::ShapeRef.new(shape: String, location_name: "ResizeType"))
     ResizeProgressMessage.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResizeProgressMessage.add_member(:target_encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetEncryptionType"))
+    ResizeProgressMessage.add_member(:data_transfer_progress_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "DataTransferProgressPercent"))
     ResizeProgressMessage.struct_class = Types::ResizeProgressMessage
 
     RestorableNodeTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeType")
