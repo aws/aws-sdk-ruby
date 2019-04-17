@@ -389,11 +389,11 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for a
-    #   volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   The block device mapping entries. You can't specify both a snapshot
+    #   ID and an encryption value. This is because only blank volumes can be
+    #   encrypted on creation. If a snapshot is the basis for a volume, it is
+    #   not blank and its encryption status is used for the volume encryption
+    #   status.
     # @option options [String] :image_id
     #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
     #   is required to launch an instance and must be specified here or in a
@@ -418,11 +418,11 @@ module Aws::EC2
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
+    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
+    #   associate with the primary network interface. You cannot specify this
+    #   option and the option to assign a number of IPv6 addresses in the same
+    #   request. You cannot specify this option if you've specified a minimum
+    #   number of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -485,7 +485,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     # @option options [Array<String>] :security_group_ids
-    #   One or more security group IDs. You can create a security group using
+    #   The IDs of the security groups. You can create a security group using
     #   CreateSecurityGroup.
     #
     #   Default: Amazon EC2 uses the default security group.
@@ -493,7 +493,7 @@ module Aws::EC2
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     # @option options [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
     #   You cannot specify this option and the network interfaces option in
@@ -555,7 +555,7 @@ module Aws::EC2
     #
     #   Default: `stop`
     # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -788,7 +788,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
@@ -1050,7 +1050,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run

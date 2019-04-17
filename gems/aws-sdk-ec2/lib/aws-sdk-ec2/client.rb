@@ -1808,14 +1808,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Adds one or more egress rules to a security group for
-    # use with a VPC. Specifically, this action permits instances to send
-    # traffic to one or more destination IPv4 or IPv6 CIDR address ranges,
-    # or to one or more destination security groups for the same VPC. This
-    # action doesn't apply to security groups for use in EC2-Classic. For
-    # more information, see [Security Groups for Your VPC][1] in the *Amazon
-    # Virtual Private Cloud User Guide*. For more information about security
-    # group limits, see [Amazon VPC Limits][2].
+    # \[EC2-VPC only\] Adds the specified egress rules to a security group
+    # for use with a VPC. Specifically, this action permits instances to
+    # send traffic to the specified destination IPv4 or IPv6 CIDR address
+    # ranges, or to the specified destination security groups for the same
+    # VPC. This action doesn't apply to security groups for use in
+    # EC2-Classic. For more information, see [Security Groups for Your
+    # VPC][1] in the *Amazon Virtual Private Cloud User Guide*. For more
+    # information about security group limits, see [Amazon VPC Limits][2].
     #
     # Each rule consists of the protocol (for example, TCP), plus either a
     # CIDR range or a source group. For the TCP and UDP protocols, you must
@@ -1842,9 +1842,8 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     #
     # @option params [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
@@ -1976,23 +1975,23 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Adds one or more ingress rules to a security group.
+    # Adds the specified ingress rules to a security group.
     #
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
     #
-    # \[EC2-Classic\] This action gives one or more IPv4 CIDR address ranges
-    # permission to access a security group in your account, or gives one or
-    # more security groups (called the *source groups*) permission to access
-    # a security group for your account. A source group can be for your own
+    # \[EC2-Classic\] This action gives the IPv4 CIDR address ranges
+    # permission to access a security group in your account, or gives the
+    # security groups (called the *source groups*) permission to access a
+    # security group for your account. A source group can be for your own
     # AWS account, or another. You can have up to 100 rules per group.
     #
-    # \[EC2-VPC\] This action gives one or more IPv4 or IPv6 CIDR address
-    # ranges permission to access a security group in your VPC, or gives one
-    # or more other security groups (called the *source groups*) permission
-    # to access a security group for your VPC. The security groups must all
-    # be for the same VPC or a peer VPC in a VPC peering connection. For
-    # more information about VPC security group limits, see [Amazon VPC
+    # \[EC2-VPC\] This action gives the specified IPv4 or IPv6 CIDR address
+    # ranges permission to access a security group in your VPC, or gives the
+    # specified security groups (called the *source groups*) permission to
+    # access a security group for your VPC. The security groups must all be
+    # for the same VPC or a peer VPC in a VPC peering connection. For more
+    # information about VPC security group limits, see [Amazon VPC
     # Limits][1].
     #
     # You can optionally specify a description for the security group rule.
@@ -2022,8 +2021,8 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. Can be used to specify multiple
-    #   rules in a single command.
+    #   The sets of IP permissions. Can be used to specify multiple rules in a
+    #   single command.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
@@ -2875,7 +2874,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -3022,7 +3024,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -4395,10 +4400,9 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings. This parameter
-    #   cannot be used to modify the encryption status of existing volumes or
-    #   snapshots. To create an AMI with encrypted snapshots, use the
-    #   CopyImage action.
+    #   Tthe block device mappings. This parameter cannot be used to modify
+    #   the encryption status of existing volumes or snapshots. To create an
+    #   AMI with encrypted snapshots, use the CopyImage action.
     #
     # @option params [String] :description
     #   A description for the new image.
@@ -6659,7 +6663,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Adds or overwrites one or more tags for the specified Amazon EC2
+    # Adds or overwrites the specified tags for the specified Amazon EC2
     # resource or resources. Each resource can have a maximum of 50 tags.
     # Each tag consists of a key and optional value. Tag keys must be unique
     # per resource.
@@ -6682,7 +6686,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The IDs of one or more resources, separated by spaces.
+    #   The IDs of the resources, separated by spaces.
     #
     #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -7104,7 +7108,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -7526,6 +7533,7 @@ module Aws::EC2
     #   resp.vpc_endpoint.groups[0].group_id #=> String
     #   resp.vpc_endpoint.groups[0].group_name #=> String
     #   resp.vpc_endpoint.private_dns_enabled #=> Boolean
+    #   resp.vpc_endpoint.requester_managed #=> Boolean
     #   resp.vpc_endpoint.network_interface_ids #=> Array
     #   resp.vpc_endpoint.network_interface_ids[0] #=> String
     #   resp.vpc_endpoint.dns_entries #=> Array
@@ -7682,6 +7690,7 @@ module Aws::EC2
     #   resp.service_configuration.availability_zones #=> Array
     #   resp.service_configuration.availability_zones[0] #=> String
     #   resp.service_configuration.acceptance_required #=> Boolean
+    #   resp.service_configuration.manages_vpc_endpoints #=> Boolean
     #   resp.service_configuration.network_load_balancer_arns #=> Array
     #   resp.service_configuration.network_load_balancer_arns[0] #=> String
     #   resp.service_configuration.base_endpoint_dns_names #=> Array
@@ -9130,7 +9139,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The IDs of one or more resources, separated by spaces.
+    #   The IDs of the resources, separated by spaces.
     #
     #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -9841,7 +9850,7 @@ module Aws::EC2
     #   that you can allocate for use with EC2-VPC.
     #
     # @option params [Array<String>] :attribute_names
-    #   One or more account attribute names.
+    #   The account attribute names.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9968,7 +9977,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Elastic IP addresses.
+    # Describes the specified Elastic IP addresses or all of your Elastic IP
+    # addresses.
     #
     # An Elastic IP address is for use in either the EC2-Classic platform or
     # in a VPC. For more information, see [Elastic IP Addresses][1] in the
@@ -10017,9 +10027,7 @@ module Aws::EC2
     #   Default: Describes all your Elastic IP addresses.
     #
     # @option params [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -10210,10 +10218,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the Availability Zones that are available to
-    # you. The results include zones only for the region you're currently
-    # using. If there is an event impacting an Availability Zone, you can
-    # use this request to view the state and any provided message for that
+    # Describes the Availability Zones that are available to you. The
+    # results include zones only for the region you're currently using. If
+    # there is an event impacting an Availability Zone, you can use this
+    # request to view the state and any provided message for that
     # Availability Zone.
     #
     # For more information, see [Regions and Availability Zones][1] in the
@@ -10224,7 +10232,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `message` - Information about the Availability Zone.
     #
@@ -10241,10 +10249,10 @@ module Aws::EC2
     #     `us-east-1a`).
     #
     # @option params [Array<String>] :zone_names
-    #   The names of one or more Availability Zones.
+    #   The names of the Availability Zones.
     #
     # @option params [Array<String>] :zone_ids
-    #   The IDs of one or more Availability Zones.
+    #   The IDs of the Availability Zones.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -10332,7 +10340,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your bundling tasks.
+    # Describes the specified bundle tasks or all of your bundle tasks.
     #
     # <note markdown="1"> Completed bundle tasks are listed for only a limited time. If your
     # bundle task is no longer in the list, you can still register an AMI
@@ -12586,10 +12594,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the images (AMIs, AKIs, and ARIs) available
-    # to you. Images available to you include public images, private images
-    # that you own, and private images owned by other AWS accounts but for
-    # which you have explicit launch permissions.
+    # Describes the specified images (AMIs, AKIs, and ARIs) available to you
+    # or all of the images available to you.
+    #
+    # The images available to you include public images, private images that
+    # you own, and private images owned by other AWS accounts for which you
+    # have explicit launch permissions.
     #
     # <note markdown="1"> Deregistered images are included in the returned results for an
     # unspecified interval after deregistration.
@@ -13128,8 +13138,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the credit option for CPU usage of one or more of your T2 or
-    # T3 instances. The credit options are `standard` and `unlimited`.
+    # Describes the credit option for CPU usage of the specified T2 or T3
+    # instances. The credit options are `standard` and `unlimited`.
     #
     # If you do not specify an instance ID, Amazon EC2 returns T2 and T3
     # instances with the `unlimited` credit option, as well as instances
@@ -13165,14 +13175,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
     #   ^
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -13223,9 +13233,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the status of one or more instances. By default, only
-    # running instances are described, unless you specifically indicate to
-    # return the status of all instances.
+    # Describes the status of the specified instances or all of your
+    # instances. By default, only running instances are described, unless
+    # you specifically indicate to return the status of all instances.
     #
     # Instance status includes the following components:
     #
@@ -13254,7 +13264,7 @@ module Aws::EC2
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -13303,7 +13313,7 @@ module Aws::EC2
     #     `not-applicable`).
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -13429,7 +13439,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your instances.
+    # Describes the specified instances or all of your instances.
     #
     # If you specify one or more instance IDs, Amazon EC2 returns
     # information for those instances. If you do not specify instance IDs,
@@ -13448,7 +13458,7 @@ module Aws::EC2
     # IDs that are in an unaffected zone, the call works normally.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
@@ -13711,7 +13721,7 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -14060,7 +14070,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your key pairs.
+    # Describes the specified key pairs or all of your key pairs.
     #
     # For more information about key pairs, see [Key Pairs][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
@@ -14070,14 +14080,14 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
     #
     # @option params [Array<String>] :key_names
-    #   One or more key pair names.
+    #   The key pair names.
     #
     #   Default: Describes all your key pairs.
     #
@@ -15362,16 +15372,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your placement groups. For more information,
-    # see [Placement Groups][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Describes the specified placement groups or all of your placement
+    # groups. For more information, see [Placement Groups][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `group-name` - The name of the placement group.
     #
@@ -15388,7 +15398,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :group_names
-    #   One or more placement group names.
+    #   The names of the placement groups.
     #
     #   Default: Describes all your placement groups, or only those otherwise
     #   specified.
@@ -15626,7 +15636,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more regions that are currently available to you.
+    # Describes the regions that are currently available to you.
     #
     # For a list of the regions supported by Amazon EC2, see [Regions and
     # Endpoints][1].
@@ -15636,7 +15646,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `endpoint` - The endpoint of the region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
@@ -15644,7 +15654,7 @@ module Aws::EC2
     #   * `region-name` - The name of the region (for example, `us-east-1`).
     #
     # @option params [Array<String>] :region_names
-    #   The names of one or more regions.
+    #   The names of the regions.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16796,7 +16806,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :group_id
-    #   One or more security group IDs in your account.
+    #   The IDs of the security groups in your account.
     #
     # @return [Types::DescribeSecurityGroupReferencesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16847,7 +16857,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your security groups.
+    # Describes the specified security groups or all of your security
+    # groups.
     #
     # A security group is for use with instances either in the EC2-Classic
     # platform or in a specific VPC. For more information, see [Amazon EC2
@@ -16861,9 +16872,9 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters. If using multiple filters for rules, the results
-    #   include security groups for which any combination of rules - not
-    #   necessarily a single rule - match all filters.
+    #   The filters. If using multiple filters for rules, the results include
+    #   security groups for which any combination of rules - not necessarily a
+    #   single rule - match all filters.
     #
     #   * `description` - The description of the security group.
     #
@@ -16941,13 +16952,13 @@ module Aws::EC2
     #     created.
     #
     # @option params [Array<String>] :group_ids
-    #   One or more security group IDs. Required for security groups in a
+    #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
     #
     #   Default: Describes all your security groups.
     #
     # @option params [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group names.
+    #   \[EC2-Classic and default VPC only\] The names of the security groups.
     #   You can specify either the security group name or the security group
     #   ID. For security groups in a nondefault VPC, use the `group-name`
     #   filter to describe security groups by name.
@@ -17161,11 +17172,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the EBS snapshots available to you. Available
-    # snapshots include public snapshots available for use by any AWS
-    # account, private snapshots that you own, and private snapshots owned
-    # by another AWS account for which you've been given explicit create
-    # volume permissions.
+    # Describes the specified EBS snapshots available to you or all of the
+    # EBS snapshots available to you.
+    #
+    # The snapshots available to you include public snapshots, private
+    # snapshots that you own, and private snapshots owned by other AWS
+    # accounts for which you have explicit create volume permissions.
     #
     # The create volume permissions fall into the following categories:
     #
@@ -17216,14 +17228,14 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `description` - A description of the snapshot.
     #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
-    #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM console.
+    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
+    #     owners. Not to be confused with the user-configured AWS account
+    #     alias, which is set from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -17271,14 +17283,13 @@ module Aws::EC2
     #   value. This value is `null` when there are no more results to return.
     #
     # @option params [Array<String>] :owner_ids
-    #   Describes the snapshots owned by one or more owners.
+    #   Describes the snapshots owned by these owners.
     #
     # @option params [Array<String>] :restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
+    #   The IDs of the AWS accounts that can create volumes from the snapshot.
     #
     # @option params [Array<String>] :snapshot_ids
-    #   One or more snapshot IDs.
+    #   The snapshot IDs.
     #
     #   Default: Describes the snapshots for which you have create volume
     #   permissions.
@@ -18563,7 +18574,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of the tags for your EC2 resources.
+    # Describes the specified tags for your EC2 resources.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
     # the *Amazon Elastic Compute Cloud User Guide*.
@@ -19166,7 +19177,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `action.code` - The action code for the event (for example,
     #     `enable-volume-io`).
@@ -19219,7 +19230,7 @@ module Aws::EC2
     #   `null` when there are no more results to return.
     #
     # @option params [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The IDs of the volumes.
     #
     #   Default: Describes all your volumes.
     #
@@ -19340,7 +19351,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified EBS volumes.
+    # Describes the specified EBS volumes or all of your EBS volumes.
     #
     # If you are describing a long list of volumes, you can paginate the
     # output to make the list more manageable. The `MaxResults` parameter
@@ -19358,7 +19369,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.attach-time` - The time stamp when the attachment
     #     initiated.
@@ -19407,7 +19418,7 @@ module Aws::EC2
     #     Magnetic volumes.
     #
     # @option params [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The volume IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19597,14 +19608,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :volume_ids
-    #   One or more volume IDs for which in-progress modifications will be
+    #   The IDs of the volumes for which in-progress modifications will be
     #   described.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters. Supported filters: `volume-id`,
-    #   `modification-state`, `target-size`, `target-iops`,
-    #   `target-volume-type`, `original-size`, `original-iops`,
-    #   `original-volume-type`, `start-time`.
+    #   The filters. Supported filters: `volume-id`, `modification-state`,
+    #   `target-size`, `target-iops`, `target-volume-type`, `original-size`,
+    #   `original-iops`, `original-volume-type`, `start-time`.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned by a previous paginated request.
@@ -20069,6 +20079,7 @@ module Aws::EC2
     #   resp.service_configurations[0].availability_zones #=> Array
     #   resp.service_configurations[0].availability_zones[0] #=> String
     #   resp.service_configurations[0].acceptance_required #=> Boolean
+    #   resp.service_configurations[0].manages_vpc_endpoints #=> Boolean
     #   resp.service_configurations[0].network_load_balancer_arns #=> Array
     #   resp.service_configurations[0].network_load_balancer_arns[0] #=> String
     #   resp.service_configurations[0].base_endpoint_dns_names #=> Array
@@ -20218,6 +20229,7 @@ module Aws::EC2
     #   resp.service_details[0].private_dns_name #=> String
     #   resp.service_details[0].vpc_endpoint_policy_supported #=> Boolean
     #   resp.service_details[0].acceptance_required #=> Boolean
+    #   resp.service_details[0].manages_vpc_endpoints #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServices AWS API Documentation
@@ -20301,6 +20313,7 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].groups[0].group_id #=> String
     #   resp.vpc_endpoints[0].groups[0].group_name #=> String
     #   resp.vpc_endpoints[0].private_dns_enabled #=> Boolean
+    #   resp.vpc_endpoints[0].requester_managed #=> Boolean
     #   resp.vpc_endpoints[0].network_interface_ids #=> Array
     #   resp.vpc_endpoints[0].network_interface_ids[0] #=> String
     #   resp.vpc_endpoints[0].dns_entries #=> Array
@@ -22730,7 +22743,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -23088,7 +23104,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -25573,7 +25592,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -26009,7 +26028,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Requests a reboot of one or more instances. This operation is
+    # Requests a reboot of the specified instances. This operation is
     # asynchronous; it only queues a request to reboot the specified
     # instances. The operation succeeds if the instances are valid and
     # belong to you. Requests to reboot terminated instances are ignored.
@@ -26026,7 +26045,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -26925,11 +26944,10 @@ module Aws::EC2
     #   The time at which the reported instance health state ended.
     #
     # @option params [required, Array<String>] :instances
-    #   One or more instances.
+    #   The instances.
     #
     # @option params [required, Array<String>] :reason_codes
-    #   One or more reason codes that describe the health state of your
-    #   instance.
+    #   The reason codes that describe the health state of your instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
     #
@@ -28015,7 +28033,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Removes one or more egress rules from a security
+    # \[EC2-VPC only\] Removes the specified egress rules from a security
     # group for EC2-VPC. This action doesn't apply to security groups for
     # use in EC2-Classic. To remove a rule, the values that you specify (for
     # example, ports) must match the existing rule's values exactly.
@@ -28040,9 +28058,8 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     #
     # @option params [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
@@ -28125,7 +28142,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Removes one or more ingress rules from a security group. To remove a
+    # Removes the specified ingress rules from a security group. To remove a
     # rule, the values that you specify (for example, ports) must match the
     # existing rule's values exactly.
     #
@@ -28164,9 +28181,8 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a source
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a source security group
+    #   and a CIDR IP address range in the same set of permissions.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
@@ -28333,11 +28349,11 @@ module Aws::EC2
     # [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for a
-    #   volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   The block device mapping entries. You can't specify both a snapshot
+    #   ID and an encryption value. This is because only blank volumes can be
+    #   encrypted on creation. If a snapshot is the basis for a volume, it is
+    #   not blank and its encryption status is used for the volume encryption
+    #   status.
     #
     # @option params [String] :image_id
     #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
@@ -28366,11 +28382,11 @@ module Aws::EC2
     #   the same request.
     #
     # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
+    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
+    #   associate with the primary network interface. You cannot specify this
+    #   option and the option to assign a number of IPv6 addresses in the same
+    #   request. You cannot specify this option if you've specified a minimum
+    #   number of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -28441,7 +28457,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     #
     # @option params [Array<String>] :security_group_ids
-    #   One or more security group IDs. You can create a security group using
+    #   The IDs of the security groups. You can create a security group using
     #   CreateSecurityGroup.
     #
     #   Default: Amazon EC2 uses the default security group.
@@ -28450,7 +28466,7 @@ module Aws::EC2
     #   the same request.
     #
     # @option params [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
     #   You cannot specify this option and the network interfaces option in
@@ -28527,7 +28543,7 @@ module Aws::EC2
     #   Default: `stop`
     #
     # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -29246,7 +29262,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -29371,7 +29387,7 @@ module Aws::EC2
     # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [Boolean] :hibernate
     #   Hibernates the instance if the instance was enabled for hibernation at
@@ -29514,8 +29530,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Shuts down one or more instances. This operation is idempotent; if you
-    # terminate an instance more than once, each call succeeds.
+    # Shuts down the specified instances. This operation is idempotent; if
+    # you terminate an instance more than once, each call succeeds.
     #
     # If you specify multiple instances and the request fails (for example,
     # because of a single incorrect instance ID), none of the instances are
@@ -29549,7 +29565,7 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     #   Constraints: Up to 1000 instance IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -29702,7 +29718,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
     #
     # @option params [required, Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -30022,7 +30038,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -192,7 +192,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] attribute_values
-    #   One or more values for the account attribute.
+    #   The values for the account attribute.
     #   @return [Array<Types::AccountAttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttribute AWS API Documentation
@@ -1539,7 +1539,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
+    #   The sets of IP permissions. You can't specify a destination
     #   security group and a CIDR IP address range in the same set of
     #   permissions.
     #   @return [Array<Types::IpPermission>]
@@ -1662,8 +1662,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   One or more sets of IP permissions. Can be used to specify multiple
-    #   rules in a single command.
+    #   The sets of IP permissions. Can be used to specify multiple rules in
+    #   a single command.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
@@ -3637,7 +3637,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -3761,7 +3764,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -5012,8 +5018,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateImage.
-    #
     # @note When making an API call, you may pass CreateImageRequest
     #   data as a hash:
     #
@@ -5042,10 +5046,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   Information about one or more block device mappings. This parameter
-    #   cannot be used to modify the encryption status of existing volumes
-    #   or snapshots. To create an AMI with encrypted snapshots, use the
-    #   CopyImage action.
+    #   Tthe block device mappings. This parameter cannot be used to modify
+    #   the encryption status of existing volumes or snapshots. To create an
+    #   AMI with encrypted snapshots, use the CopyImage action.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -5091,8 +5094,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of CreateImage.
-    #
     # @!attribute [rw] image_id
     #   The ID of the new AMI.
     #   @return [String]
@@ -6479,7 +6480,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] resources
-    #   The IDs of one or more resources, separated by spaces.
+    #   The IDs of the resources, separated by spaces.
     #
     #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -6922,7 +6923,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -8616,7 +8620,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] resources
-    #   The IDs of one or more resources, separated by spaces.
+    #   The IDs of the resources, separated by spaces.
     #
     #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -9181,7 +9185,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] attribute_names
-    #   One or more account attribute names.
+    #   The account attribute names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -9200,7 +9204,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] account_attributes
-    #   Information about one or more account attributes.
+    #   Information about the account attributes.
     #   @return [Array<Types::AccountAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountAttributesResult AWS API Documentation
@@ -9266,9 +9270,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -9289,7 +9291,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] addresses
-    #   Information about one or more Elastic IP addresses.
+    #   Information about the Elastic IP addresses.
     #   @return [Array<Types::Address>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesResult AWS API Documentation
@@ -9354,7 +9356,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `message` - Information about the Availability Zone.
     #
@@ -9372,11 +9374,11 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] zone_names
-    #   The names of one or more Availability Zones.
+    #   The names of the Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] zone_ids
-    #   The IDs of one or more Availability Zones.
+    #   The IDs of the Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -9397,7 +9399,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] availability_zones
-    #   Information about one or more Availability Zones.
+    #   Information about the Availability Zones.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesResult AWS API Documentation
@@ -9407,8 +9409,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeBundleTasks.
-    #
     # @note When making an API call, you may pass DescribeBundleTasksRequest
     #   data as a hash:
     #
@@ -9473,10 +9473,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeBundleTasks.
-    #
     # @!attribute [rw] bundle_tasks
-    #   Information about one or more bundle tasks.
+    #   Information about the bundle tasks.
     #   @return [Array<Types::BundleTask>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasksResult AWS API Documentation
@@ -11440,8 +11438,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeImages.
-    #
     # @note When making an API call, you may pass DescribeImagesRequest
     #   data as a hash:
     #
@@ -11589,10 +11585,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeImages.
-    #
     # @!attribute [rw] images
-    #   Information about one or more images.
+    #   Information about the images.
     #   @return [Array<Types::Image>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesResult AWS API Documentation
@@ -11810,7 +11804,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -11818,7 +11812,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -11883,7 +11877,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -11934,7 +11928,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #
@@ -11980,7 +11974,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] instance_statuses
-    #   One or more instance status descriptions.
+    #   Information about the status of the instances.
     #   @return [Array<Types::InstanceStatus>]
     #
     # @!attribute [rw] next_token
@@ -12013,7 +12007,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
@@ -12284,7 +12278,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     #   @return [Array<String>]
@@ -12320,7 +12314,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] reservations
-    #   Zero or more reservations.
+    #   Information about the reservations.
     #   @return [Array<Types::Reservation>]
     #
     # @!attribute [rw] next_token
@@ -12443,7 +12437,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
@@ -12451,7 +12445,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] key_names
-    #   One or more key pair names.
+    #   The key pair names.
     #
     #   Default: Describes all your key pairs.
     #   @return [Array<String>]
@@ -12473,7 +12467,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] key_pairs
-    #   Information about one or more key pairs.
+    #   Information about the key pairs.
     #   @return [Array<Types::KeyPairInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairsResult AWS API Documentation
@@ -13312,7 +13306,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `group-name` - The name of the placement group.
     #
@@ -13331,7 +13325,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] group_names
-    #   One or more placement group names.
+    #   The names of the placement groups.
     #
     #   Default: Describes all your placement groups, or only those
     #   otherwise specified.
@@ -13347,7 +13341,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] placement_groups
-    #   One or more placement groups.
+    #   Information about the placement groups.
     #   @return [Array<Types::PlacementGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroupsResult AWS API Documentation
@@ -13561,7 +13555,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `endpoint` - The endpoint of the region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
@@ -13570,7 +13564,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] region_names
-    #   The names of one or more regions.
+    #   The names of the regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -13590,7 +13584,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] regions
-    #   Information about one or more regions.
+    #   Information about the regions.
     #   @return [Array<Types::Region>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsResult AWS API Documentation
@@ -14445,7 +14439,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] group_id
-    #   One or more security group IDs in your account.
+    #   The IDs of the security groups in your account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferencesRequest AWS API Documentation
@@ -14485,9 +14479,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters. If using multiple filters for rules, the
-    #   results include security groups for which any combination of rules -
-    #   not necessarily a single rule - match all filters.
+    #   The filters. If using multiple filters for rules, the results
+    #   include security groups for which any combination of rules - not
+    #   necessarily a single rule - match all filters.
     #
     #   * `description` - The description of the security group.
     #
@@ -14569,15 +14563,15 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] group_ids
-    #   One or more security group IDs. Required for security groups in a
+    #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
     #
     #   Default: Describes all your security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group
-    #   names. You can specify either the security group name or the
+    #   \[EC2-Classic and default VPC only\] The names of the security
+    #   groups. You can specify either the security group name or the
     #   security group ID. For security groups in a nondefault VPC, use the
     #   `group-name` filter to describe security groups by name.
     #
@@ -14615,7 +14609,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] security_groups
-    #   Information about one or more security groups.
+    #   Information about the security groups.
     #   @return [Array<Types::SecurityGroup>]
     #
     # @!attribute [rw] next_token
@@ -14690,8 +14684,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeSnapshots.
-    #
     # @note When making an API call, you may pass DescribeSnapshotsRequest
     #   data as a hash:
     #
@@ -14711,14 +14703,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `description` - A description of the snapshot.
     #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
-    #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM console.
+    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
+    #     owners. Not to be confused with the user-configured AWS account
+    #     alias, which is set from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -14771,16 +14763,16 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_ids
-    #   Describes the snapshots owned by one or more owners.
+    #   Describes the snapshots owned by these owners.
     #   @return [Array<String>]
     #
     # @!attribute [rw] restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
+    #   The IDs of the AWS accounts that can create volumes from the
     #   snapshot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_ids
-    #   One or more snapshot IDs.
+    #   The snapshot IDs.
     #
     #   Default: Describes the snapshots for which you have create volume
     #   permissions.
@@ -14806,8 +14798,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeSnapshots.
-    #
     # @!attribute [rw] snapshots
     #   Information about the snapshots.
     #   @return [Array<Types::Snapshot>]
@@ -16069,8 +16059,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVolumeStatus.
-    #
     # @note When making an API call, you may pass DescribeVolumeStatusRequest
     #   data as a hash:
     #
@@ -16088,7 +16076,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `action.code` - The action code for the event (for example,
     #     `enable-volume-io`).
@@ -16144,7 +16132,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] volume_ids
-    #   One or more volume IDs.
+    #   The IDs of the volumes.
     #
     #   Default: Describes all your volumes.
     #   @return [Array<String>]
@@ -16167,15 +16155,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVolumeStatus.
-    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] volume_statuses
-    #   A list of volumes.
+    #   Information about the status of the volumes.
     #   @return [Array<Types::VolumeStatusItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatusResult AWS API Documentation
@@ -16210,15 +16196,14 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_ids
-    #   One or more volume IDs for which in-progress modifications will be
+    #   The IDs of the volumes for which in-progress modifications will be
     #   described.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters. Supported filters: `volume-id`,
-    #   `modification-state`, `target-size`, `target-iops`,
-    #   `target-volume-type`, `original-size`, `original-iops`,
-    #   `original-volume-type`, `start-time`.
+    #   The filters. Supported filters: `volume-id`, `modification-state`,
+    #   `target-size`, `target-iops`, `target-volume-type`, `original-size`,
+    #   `original-iops`, `original-volume-type`, `start-time`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -16242,7 +16227,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] volumes_modifications
-    #   A list of returned VolumeModification objects.
+    #   Information about the volume modifications.
     #   @return [Array<Types::VolumeModification>]
     #
     # @!attribute [rw] next_token
@@ -16257,8 +16242,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeVolumes.
-    #
     # @note When making an API call, you may pass DescribeVolumesRequest
     #   data as a hash:
     #
@@ -16276,7 +16259,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.attach-time` - The time stamp when the attachment
     #     initiated.
@@ -16326,7 +16309,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] volume_ids
-    #   One or more volume IDs.
+    #   The volume IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -16369,8 +16352,6 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeVolumes.
-    #
     # @!attribute [rw] volumes
     #   Information about the volumes.
     #   @return [Array<Types::Volume>]
@@ -19237,7 +19218,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   One or more filter values. Filter values are case-sensitive.
+    #   The filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Filter AWS API Documentation
@@ -21352,7 +21333,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -21971,7 +21955,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias, in the form `alias/ExampleAlias `
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -22300,7 +22287,7 @@ module Aws::EC2
     #   @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
     #
     # @!attribute [rw] network_interfaces
-    #   \[EC2-VPC\] One or more network interfaces for the instance.
+    #   \[EC2-VPC\] The network interfaces for the instance.
     #   @return [Array<Types::InstanceNetworkInterface>]
     #
     # @!attribute [rw] root_device_name
@@ -22314,7 +22301,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   One or more security groups for the instance.
+    #   The security groups for the instance.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] source_dest_check
@@ -23377,18 +23364,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_ranges
-    #   One or more IPv4 ranges.
+    #   The IPv4 ranges.
     #   @return [Array<Types::IpRange>]
     #
     # @!attribute [rw] ipv_6_ranges
-    #   \[EC2-VPC only\] One or more IPv6 ranges.
+    #   \[EC2-VPC only\] The IPv6 ranges.
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   \[EC2-VPC only\] One or more prefix list IDs for an AWS service.
-    #   With AuthorizeSecurityGroupEgress, this is the AWS service that you
-    #   want to access through a VPC endpoint from instances associated with
-    #   the security group.
+    #   \[EC2-VPC only\] The prefix list IDs for an AWS service. With
+    #   AuthorizeSecurityGroupEgress, this is the AWS service that you want
+    #   to access through a VPC endpoint from instances associated with the
+    #   security group.
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
@@ -23399,7 +23386,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
-    #   One or more security group and AWS account ID pairs.
+    #   The security group and AWS account ID pairs.
     #   @return [Array<Types::UserIdGroupPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpPermission AWS API Documentation
@@ -27018,7 +27005,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -28741,7 +28728,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -29525,12 +29512,11 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] instances
-    #   One or more instances.
+    #   The instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] reason_codes
-    #   One or more reason codes that describe the health state of your
-    #   instance.
+    #   The reason codes that describe the health state of your instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
     #
@@ -30499,11 +30485,11 @@ module Aws::EC2
     # Describes a reservation.
     #
     # @!attribute [rw] groups
-    #   \[EC2-Classic only\] One or more security groups.
+    #   \[EC2-Classic only\] The security groups.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] instances
-    #   One or more instances.
+    #   The instances.
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] owner_id
@@ -31522,7 +31508,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
+    #   The sets of IP permissions. You can't specify a destination
     #   security group and a CIDR IP address range in the same set of
     #   permissions.
     #   @return [Array<Types::IpPermission>]
@@ -31644,9 +31630,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   One or more sets of IP permissions. You can't specify a source
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a source security
+    #   group and a CIDR IP address range in the same set of permissions.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
@@ -32028,11 +32013,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for
-    #   a volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   The block device mapping entries. You can't specify both a snapshot
+    #   ID and an encryption value. This is because only blank volumes can
+    #   be encrypted on creation. If a snapshot is the basis for a volume,
+    #   it is not blank and its encryption status is used for the volume
+    #   encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
@@ -32065,11 +32050,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
+    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
+    #   associate with the primary network interface. You cannot specify
+    #   this option and the option to assign a number of IPv6 addresses in
+    #   the same request. You cannot specify this option if you've
+    #   specified a minimum number of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -32148,7 +32133,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   One or more security group IDs. You can create a security group
+    #   The IDs of the security groups. You can create a security group
     #   using CreateSecurityGroup.
     #
     #   Default: Amazon EC2 uses the default security group.
@@ -32158,7 +32143,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
     #   You cannot specify this option and the network interfaces option in
@@ -32247,7 +32232,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -33430,7 +33415,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   One or more inbound rules associated with the security group.
+    #   The inbound rules associated with the security group.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] owner_id
@@ -33442,8 +33427,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions_egress
-    #   \[EC2-VPC\] One or more outbound rules associated with the security
-    #   group.
+    #   \[EC2-VPC\] The outbound rules associated with the security group.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] tags
@@ -33537,6 +33521,12 @@ module Aws::EC2
     #   endpoint to the service must first be accepted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] manages_vpc_endpoints
+    #   Indicates whether the service manages it's VPC Endpoints.
+    #   Management of the service VPC Endpoints using the VPC Endpoint API
+    #   is restricted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] network_load_balancer_arns
     #   The Amazon Resource Names (ARNs) of the Network Load Balancers for
     #   the service.
@@ -33559,6 +33549,7 @@ module Aws::EC2
       :service_state,
       :availability_zones,
       :acceptance_required,
+      :manages_vpc_endpoints,
       :network_load_balancer_arns,
       :base_endpoint_dns_names,
       :private_dns_name)
@@ -33600,6 +33591,12 @@ module Aws::EC2
     #   must be accepted by the service owner.
     #   @return [Boolean]
     #
+    # @!attribute [rw] manages_vpc_endpoints
+    #   Indicates whether the service manages it's VPC Endpoints.
+    #   Management of the service VPC Endpoints using the VPC Endpoint API
+    #   is restricted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail AWS API Documentation
     #
     class ServiceDetail < Struct.new(
@@ -33610,7 +33607,8 @@ module Aws::EC2
       :base_endpoint_dns_names,
       :private_dns_name,
       :vpc_endpoint_policy_supported,
-      :acceptance_required)
+      :acceptance_required,
+      :manages_vpc_endpoints)
       include Aws::Structure
     end
 
@@ -33754,10 +33752,10 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] owner_alias
-    #   Value from an Amazon-maintained list (`amazon` \| `aws-marketplace`
-    #   \| `microsoft`) of snapshot owners. Not to be confused with the
-    #   user-configured AWS account alias, which is set from the IAM
-    #   console.
+    #   Value from an Amazon-maintained list (`amazon` \| `self` \| `all` \|
+    #   `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
+    #   confused with the user-configured AWS account alias, which is set
+    #   from the IAM console.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -35021,13 +35019,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_ranges
-    #   One or more IP ranges. Not applicable for stale security group
-    #   rules.
+    #   The IP ranges. Not applicable for stale security group rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   One or more prefix list IDs for an AWS service. Not applicable for
-    #   stale security group rules.
+    #   The prefix list IDs for an AWS service. Not applicable for stale
+    #   security group rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] to_port
@@ -35036,9 +35033,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
-    #   One or more security group pairs. Returns the ID of the referenced
-    #   security group and VPC, and the ID and status of the VPC peering
-    #   connection.
+    #   The security group pairs. Returns the ID of the referenced security
+    #   group and VPC, and the ID and status of the VPC peering connection.
     #   @return [Array<Types::UserIdGroupPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleIpPermission AWS API Documentation
@@ -35102,7 +35098,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_info
@@ -35126,7 +35122,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] starting_instances
-    #   Information about one or more started instances.
+    #   Information about the started instances.
     #   @return [Array<Types::InstanceStateChange>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstancesResult AWS API Documentation
@@ -35206,7 +35202,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] hibernate
@@ -35249,7 +35245,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] stopping_instances
-    #   Information about one or more stopped instances.
+    #   Information about the stopped instances.
     #   @return [Array<Types::InstanceStateChange>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesResult AWS API Documentation
@@ -35870,7 +35866,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #
     #   Constraints: Up to 1000 instance IDs. We recommend breaking up this
     #   request into smaller batches.
@@ -35892,7 +35888,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] terminating_instances
-    #   Information about one or more terminated instances.
+    #   Information about the terminated instances.
     #   @return [Array<Types::InstanceStateChange>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstancesResult AWS API Documentation
@@ -36520,7 +36516,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -37519,6 +37515,10 @@ module Aws::EC2
     #   private hosted zone.
     #   @return [Boolean]
     #
+    # @!attribute [rw] requester_managed
+    #   Indicates whether the VPC Endpoint is being managed by its service.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] network_interface_ids
     #   (Interface endpoint) One or more network interfaces for the
     #   endpoint.
@@ -37545,6 +37545,7 @@ module Aws::EC2
       :subnet_ids,
       :groups,
       :private_dns_enabled,
+      :requester_managed,
       :network_interface_ids,
       :dns_entries,
       :creation_timestamp)

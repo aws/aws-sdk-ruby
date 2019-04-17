@@ -43,7 +43,7 @@ module Aws::EC2
       data[:group_name]
     end
 
-    # One or more inbound rules associated with the security group.
+    # The inbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions
       data[:ip_permissions]
@@ -55,8 +55,7 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # \[EC2-VPC\] One or more outbound rules associated with the security
-    # group.
+    # \[EC2-VPC\] The outbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions_egress
       data[:ip_permissions_egress]
@@ -260,9 +259,8 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     # @option options [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
@@ -347,8 +345,8 @@ module Aws::EC2
     #   specify either the security group ID or the security group name in the
     #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. Can be used to specify multiple
-    #   rules in a single command.
+    #   The sets of IP permissions. Can be used to specify multiple rules in a
+    #   single command.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
@@ -507,9 +505,8 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     # @option options [String] :cidr_ip
     #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
@@ -592,9 +589,8 @@ module Aws::EC2
     #   specify either the security group ID or the security group name in the
     #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   One or more sets of IP permissions. You can't specify a source
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The sets of IP permissions. You can't specify a source security group
+    #   and a CIDR IP address range in the same set of permissions.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). Use `-1` to specify all.

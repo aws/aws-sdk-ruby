@@ -237,7 +237,7 @@ module Aws::EC2
       data[:root_device_type]
     end
 
-    # One or more security groups for the instance.
+    # The security groups for the instance.
     # @return [Array<Types::GroupIdentifier>]
     def security_groups
       data[:security_groups]
@@ -636,10 +636,9 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings. This parameter
-    #   cannot be used to modify the encryption status of existing volumes or
-    #   snapshots. To create an AMI with encrypted snapshots, use the
-    #   CopyImage action.
+    #   Tthe block device mappings. This parameter cannot be used to modify
+    #   the encryption status of existing volumes or snapshots. To create an
+    #   AMI with encrypted snapshots, use the CopyImage action.
     # @option options [String] :description
     #   A description for the new image.
     # @option options [Boolean] :dry_run
@@ -998,8 +997,7 @@ module Aws::EC2
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The time at which the reported instance health state ended.
     # @option options [required, Array<String>] :reason_codes
-    #   One or more reason codes that describe the health state of your
-    #   instance.
+    #   The reason codes that describe the health state of your instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
     #
@@ -1308,7 +1306,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.attach-time` - The time stamp when the attachment
     #     initiated.
@@ -1356,7 +1354,7 @@ module Aws::EC2
     #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
     # @option options [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The volume IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1448,9 +1446,7 @@ module Aws::EC2
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

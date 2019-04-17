@@ -112,9 +112,10 @@ module Aws::EC2
       data[:volume_size]
     end
 
-    # Value from an Amazon-maintained list (`amazon` \| `aws-marketplace` \|
-    # `microsoft`) of snapshot owners. Not to be confused with the
-    # user-configured AWS account alias, which is set from the IAM console.
+    # Value from an Amazon-maintained list (`amazon` \| `self` \| `all` \|
+    # `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
+    # confused with the user-configured AWS account alias, which is set from
+    # the IAM console.
     # @return [String]
     def owner_alias
       data[:owner_alias]
@@ -323,7 +324,10 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias
+    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
