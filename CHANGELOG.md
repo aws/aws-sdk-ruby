@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.258 (2019-04-17)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Polly - Updated the API for Amazon Polly.
