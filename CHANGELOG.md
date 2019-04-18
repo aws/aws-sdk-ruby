@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the API for AWS Application Discovery Service.
+
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::WorkLink - Updated the API, and documentation for Amazon WorkLink.
+
+* Feature - Aws::WorkSpaces - Updated the documentation for Amazon WorkSpaces.
+
 2.11.258 (2019-04-17)
 ------------------
 
