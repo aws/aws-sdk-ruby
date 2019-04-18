@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Small memory retention reduction.
+
 3.48.3 (2019-03-26)
 ------------------
 
