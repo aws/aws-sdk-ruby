@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.259 (2019-04-18)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::ApplicationDiscoveryService - Updated the API for AWS Application Discovery Service.
