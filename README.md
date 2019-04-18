@@ -74,7 +74,7 @@ require 'aws-sdk-ec2'
 
 If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/), then you might have either `aws-sdk ~> 2` or `aws-sdk-resources ~> 2` exists in your project, you can simply update it to `~> 3` or using separate service gems as described in version 2 upgrade options.
 
-For addtional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
+For additional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
 
 ### Addtional Information
 
