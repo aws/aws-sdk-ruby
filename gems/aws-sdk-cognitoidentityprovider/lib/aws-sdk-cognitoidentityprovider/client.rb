@@ -2423,7 +2423,8 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [Array<String>] :supported_identity_providers
     #   A list of provider names for the identity providers that are supported
-    #   on this client.
+    #   on this client. The following are supported: `COGNITO`, `Facebook`,
+    #   `Google` and `LoginWithAmazon`.
     #
     # @option params [Array<String>] :callback_urls
     #   A list of allowed redirect (callback) URLs for the identity providers.
@@ -5507,9 +5508,6 @@ module Aws::CognitoIdentityProvider
     #   authorization code as the response. This code can be exchanged for
     #   access tokens with the token endpoint.
     #
-    #   Set to `token` to specify that the client should get the access token
-    #   (and, optionally, ID token, based on scopes) directly.
-    #
     # @option params [Array<String>] :allowed_o_auth_scopes
     #   A list of allowed `OAuth` scopes. Currently supported values are
     #   `"phone"`, `"email"`, `"openid"`, and `"Cognito"`.
@@ -5759,7 +5757,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

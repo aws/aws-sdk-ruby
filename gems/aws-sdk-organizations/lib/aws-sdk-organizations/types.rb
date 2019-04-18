@@ -342,8 +342,9 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # Contains the status about a CreateAccount request to create an AWS
-    # account in an organization.
+    # Contains the status about a CreateAccount or CreateGovCloudAccount
+    # request to create an AWS account or an AWS GovCloud (US) account in an
+    # organization.
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) that references this request. You get
@@ -389,6 +390,9 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] gov_cloud_account_id
+    #   @return [String]
+    #
     # @!attribute [rw] failure_reason
     #   If the request failed, a description of the reason for the failure.
     #
@@ -419,7 +423,106 @@ module Aws::Organizations
       :requested_timestamp,
       :completed_timestamp,
       :account_id,
+      :gov_cloud_account_id,
       :failure_reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGovCloudAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email: "Email", # required
+    #         account_name: "AccountName", # required
+    #         role_name: "RoleName",
+    #         iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
+    #       }
+    #
+    # @!attribute [rw] email
+    #   The email address of the owner to assign to the new member account
+    #   in the commercial Region. This email address must not already be
+    #   associated with another AWS account. You must use a valid email
+    #   address to complete account creation. You can't access the root
+    #   user of the account or remove an account that was created with an
+    #   invalid email address. Like all request parameters for
+    #   `CreateGovCloudAccount`, the request for the email address for the
+    #   AWS GovCloud (US) account originates from the commercial Region, not
+    #   from the AWS GovCloud (US) Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_name
+    #   The friendly name of the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   (Optional)
+    #
+    #   The name of an IAM role that AWS Organizations automatically
+    #   preconfigures in the new member accounts in both the AWS GovCloud
+    #   (US) Region and in the commercial Region. This role trusts the
+    #   master account, allowing users in the master account to assume the
+    #   role, as permitted by the master account administrator. The role has
+    #   administrator permissions in the new member account.
+    #
+    #   If you don't specify this parameter, the role name defaults to
+    #   `OrganizationAccountAccessRole`.
+    #
+    #   For more information about how to use this role to access the member
+    #   account, see [Accessing and Administering the Member Accounts in
+    #   Your Organization][1] in the *AWS Organizations User Guide* and
+    #   steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
+    #   Using IAM Roles][2] in the *IAM User Guide.*
+    #
+    #   The [regex pattern][3] that is used to validate this parameter is a
+    #   string of characters that can consist of uppercase letters,
+    #   lowercase letters, digits with no spaces, and any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
+    #   [3]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_user_access_to_billing
+    #   If set to `ALLOW`, the new linked account in the commercial Region
+    #   enables IAM users to access account billing information *if* they
+    #   have the required permissions. If set to `DENY`, only the root user
+    #   of the new account can access account billing information. For more
+    #   information, see [Activating Access to the Billing and Cost
+    #   Management Console][1] in the *AWS Billing and Cost Management User
+    #   Guide.*
+    #
+    #   If you don't specify this parameter, the value defaults to `ALLOW`,
+    #   and IAM users and roles with the required permissions can access
+    #   billing information for the new account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccountRequest AWS API Documentation
+    #
+    class CreateGovCloudAccountRequest < Struct.new(
+      :email,
+      :account_name,
+      :role_name,
+      :iam_user_access_to_billing)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_account_status
+    #   Contains the status about a CreateAccount or CreateGovCloudAccount
+    #   request to create an AWS account or an AWS GovCloud (US) account in
+    #   an organization.
+    #   @return [Types::CreateAccountStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccountResponse AWS API Documentation
+    #
+    class CreateGovCloudAccountResponse < Struct.new(
+      :create_account_status)
       include Aws::Structure
     end
 
@@ -438,6 +541,9 @@ module Aws::Organizations
     #     consolidated to and paid by the master account. For more
     #     information, see [Consolidated billing][1] in the *AWS
     #     Organizations User Guide*.
+    #
+    #     The consolidated billing feature subset isn't available for
+    #     organizations in the AWS GovCloud (US) Region.
     #
     #   * *ALL*\: In addition to all the features supported by the
     #     consolidated billing feature set, the master account can also

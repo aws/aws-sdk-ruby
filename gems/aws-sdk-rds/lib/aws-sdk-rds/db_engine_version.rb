@@ -101,7 +101,7 @@ module Aws::RDS
       data[:supports_log_exports_to_cloudwatch_logs]
     end
 
-    # Indicates whether the database engine version supports read replicas.
+    # Indicates whether the database engine version supports Read Replicas.
     # @return [Boolean]
     def supports_read_replica
       data[:supports_read_replica]

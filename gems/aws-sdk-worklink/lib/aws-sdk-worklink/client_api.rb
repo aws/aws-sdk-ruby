@@ -11,6 +11,9 @@ module Aws::WorkLink
 
     include Seahorse::Model
 
+    AcmCertificateArn = Shapes::StringShape.new(name: 'AcmCertificateArn')
+    AssociateDomainRequest = Shapes::StructureShape.new(name: 'AssociateDomainRequest')
+    AssociateDomainResponse = Shapes::StructureShape.new(name: 'AssociateDomainResponse')
     AssociateWebsiteCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'AssociateWebsiteCertificateAuthorityRequest')
     AssociateWebsiteCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'AssociateWebsiteCertificateAuthorityResponse')
     AuditStreamArn = Shapes::StringShape.new(name: 'AuditStreamArn')
@@ -31,6 +34,8 @@ module Aws::WorkLink
     DescribeDevicePolicyConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeDevicePolicyConfigurationResponse')
     DescribeDeviceRequest = Shapes::StructureShape.new(name: 'DescribeDeviceRequest')
     DescribeDeviceResponse = Shapes::StructureShape.new(name: 'DescribeDeviceResponse')
+    DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
+    DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
     DescribeFleetMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFleetMetadataRequest')
     DescribeFleetMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFleetMetadataResponse')
     DescribeIdentityProviderConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigurationRequest')
@@ -45,9 +50,15 @@ module Aws::WorkLink
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     DeviceSummaryList = Shapes::ListShape.new(name: 'DeviceSummaryList')
+    DisassociateDomainRequest = Shapes::StructureShape.new(name: 'DisassociateDomainRequest')
+    DisassociateDomainResponse = Shapes::StructureShape.new(name: 'DisassociateDomainResponse')
     DisassociateWebsiteCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'DisassociateWebsiteCertificateAuthorityRequest')
     DisassociateWebsiteCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'DisassociateWebsiteCertificateAuthorityResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
+    DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
+    DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     FleetArn = Shapes::StringShape.new(name: 'FleetArn')
     FleetName = Shapes::StringShape.new(name: 'FleetName')
@@ -60,6 +71,8 @@ module Aws::WorkLink
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
+    ListDomainsRequest = Shapes::StructureShape.new(name: 'ListDomainsRequest')
+    ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
     ListFleetsRequest = Shapes::StructureShape.new(name: 'ListFleetsRequest')
     ListFleetsResponse = Shapes::StructureShape.new(name: 'ListFleetsResponse')
     ListWebsiteCertificateAuthoritiesRequest = Shapes::StructureShape.new(name: 'ListWebsiteCertificateAuthoritiesRequest')
@@ -68,6 +81,10 @@ module Aws::WorkLink
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RestoreDomainAccessRequest = Shapes::StructureShape.new(name: 'RestoreDomainAccessRequest')
+    RestoreDomainAccessResponse = Shapes::StructureShape.new(name: 'RestoreDomainAccessResponse')
+    RevokeDomainAccessRequest = Shapes::StructureShape.new(name: 'RevokeDomainAccessRequest')
+    RevokeDomainAccessResponse = Shapes::StructureShape.new(name: 'RevokeDomainAccessResponse')
     SamlMetadata = Shapes::StringShape.new(name: 'SamlMetadata')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
@@ -83,6 +100,8 @@ module Aws::WorkLink
     UpdateCompanyNetworkConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateCompanyNetworkConfigurationResponse')
     UpdateDevicePolicyConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateDevicePolicyConfigurationRequest')
     UpdateDevicePolicyConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateDevicePolicyConfigurationResponse')
+    UpdateDomainMetadataRequest = Shapes::StructureShape.new(name: 'UpdateDomainMetadataRequest')
+    UpdateDomainMetadataResponse = Shapes::StructureShape.new(name: 'UpdateDomainMetadataResponse')
     UpdateFleetMetadataRequest = Shapes::StructureShape.new(name: 'UpdateFleetMetadataRequest')
     UpdateFleetMetadataResponse = Shapes::StructureShape.new(name: 'UpdateFleetMetadataResponse')
     UpdateIdentityProviderConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateIdentityProviderConfigurationRequest')
@@ -91,6 +110,14 @@ module Aws::WorkLink
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     WebsiteCaSummary = Shapes::StructureShape.new(name: 'WebsiteCaSummary')
     WebsiteCaSummaryList = Shapes::ListShape.new(name: 'WebsiteCaSummaryList')
+
+    AssociateDomainRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    AssociateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    AssociateDomainRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "AcmCertificateArn"))
+    AssociateDomainRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    AssociateDomainRequest.struct_class = Types::AssociateDomainRequest
+
+    AssociateDomainResponse.struct_class = Types::AssociateDomainResponse
 
     AssociateWebsiteCertificateAuthorityRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     AssociateWebsiteCertificateAuthorityRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, required: true, location_name: "Certificate"))
@@ -148,6 +175,15 @@ module Aws::WorkLink
     DescribeDeviceResponse.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
     DescribeDeviceResponse.struct_class = Types::DescribeDeviceResponse
 
+    DescribeDomainRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    DescribeDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DescribeDomainRequest.struct_class = Types::DescribeDomainRequest
+
+    DescribeDomainResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    DescribeDomainResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
+    DescribeDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
+    DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
+
     DescribeFleetMetadataRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     DescribeFleetMetadataRequest.struct_class = Types::DescribeFleetMetadataRequest
 
@@ -183,11 +219,25 @@ module Aws::WorkLink
 
     DeviceSummaryList.member = Shapes::ShapeRef.new(shape: DeviceSummary)
 
+    DisassociateDomainRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    DisassociateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DisassociateDomainRequest.struct_class = Types::DisassociateDomainRequest
+
+    DisassociateDomainResponse.struct_class = Types::DisassociateDomainResponse
+
     DisassociateWebsiteCertificateAuthorityRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     DisassociateWebsiteCertificateAuthorityRequest.add_member(:website_ca_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "WebsiteCaId"))
     DisassociateWebsiteCertificateAuthorityRequest.struct_class = Types::DisassociateWebsiteCertificateAuthorityRequest
 
     DisassociateWebsiteCertificateAuthorityResponse.struct_class = Types::DisassociateWebsiteCertificateAuthorityResponse
+
+    DomainSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DomainSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreatedTime"))
+    DomainSummary.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, required: true, location_name: "DomainStatus"))
+    DomainSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    DomainSummary.struct_class = Types::DomainSummary
+
+    DomainSummaryList.member = Shapes::ShapeRef.new(shape: DomainSummary)
 
     FleetSummary.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
     FleetSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
@@ -209,6 +259,15 @@ module Aws::WorkLink
     ListDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDevicesResponse.struct_class = Types::ListDevicesResponse
 
+    ListDomainsRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    ListDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListDomainsRequest.struct_class = Types::ListDomainsRequest
+
+    ListDomainsResponse.add_member(:domains, Shapes::ShapeRef.new(shape: DomainSummaryList, location_name: "Domains"))
+    ListDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDomainsResponse.struct_class = Types::ListDomainsResponse
+
     ListFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFleetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListFleetsRequest.struct_class = Types::ListFleetsRequest
@@ -225,6 +284,18 @@ module Aws::WorkLink
     ListWebsiteCertificateAuthoritiesResponse.add_member(:website_certificate_authorities, Shapes::ShapeRef.new(shape: WebsiteCaSummaryList, location_name: "WebsiteCertificateAuthorities"))
     ListWebsiteCertificateAuthoritiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListWebsiteCertificateAuthoritiesResponse.struct_class = Types::ListWebsiteCertificateAuthoritiesResponse
+
+    RestoreDomainAccessRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    RestoreDomainAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    RestoreDomainAccessRequest.struct_class = Types::RestoreDomainAccessRequest
+
+    RestoreDomainAccessResponse.struct_class = Types::RestoreDomainAccessResponse
+
+    RevokeDomainAccessRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    RevokeDomainAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    RevokeDomainAccessRequest.struct_class = Types::RevokeDomainAccessRequest
+
+    RevokeDomainAccessResponse.struct_class = Types::RevokeDomainAccessResponse
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -255,6 +326,13 @@ module Aws::WorkLink
     UpdateDevicePolicyConfigurationRequest.struct_class = Types::UpdateDevicePolicyConfigurationRequest
 
     UpdateDevicePolicyConfigurationResponse.struct_class = Types::UpdateDevicePolicyConfigurationResponse
+
+    UpdateDomainMetadataRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
+    UpdateDomainMetadataRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    UpdateDomainMetadataRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    UpdateDomainMetadataRequest.struct_class = Types::UpdateDomainMetadataRequest
+
+    UpdateDomainMetadataResponse.struct_class = Types::UpdateDomainMetadataResponse
 
     UpdateFleetMetadataRequest.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, required: true, location_name: "FleetArn"))
     UpdateFleetMetadataRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
@@ -295,6 +373,20 @@ module Aws::WorkLink
         "signingName" => "worklink",
         "uid" => "worklink-2018-09-25",
       }
+
+      api.add_operation(:associate_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/associateDomain"
+        o.input = Shapes::ShapeRef.new(shape: AssociateDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
 
       api.add_operation(:associate_website_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateWebsiteCertificateAuthority"
@@ -389,6 +481,19 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:describe_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeDomain"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:describe_fleet_metadata, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFleetMetadata"
         o.http_method = "POST"
@@ -428,6 +533,19 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:disassociate_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/disassociateDomain"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:disassociate_website_certificate_authority, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateWebsiteCertificateAuthority"
         o.http_method = "POST"
@@ -451,6 +569,24 @@ module Aws::WorkLink
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_domains, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDomains"
+        o.http_method = "POST"
+        o.http_request_uri = "/listDomains"
+        o.input = Shapes::ShapeRef.new(shape: ListDomainsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDomainsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -494,6 +630,32 @@ module Aws::WorkLink
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:restore_domain_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreDomainAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/restoreDomainAccess"
+        o.input = Shapes::ShapeRef.new(shape: RestoreDomainAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreDomainAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:revoke_domain_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeDomainAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/revokeDomainAccess"
+        o.input = Shapes::ShapeRef.new(shape: RevokeDomainAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeDomainAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:sign_out_user, Seahorse::Model::Operation.new.tap do |o|
@@ -541,6 +703,19 @@ module Aws::WorkLink
         o.http_request_uri = "/updateDevicePolicyConfiguration"
         o.input = Shapes::ShapeRef.new(shape: UpdateDevicePolicyConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDevicePolicyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_domain_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDomainMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/updateDomainMetadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDomainMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDomainMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)

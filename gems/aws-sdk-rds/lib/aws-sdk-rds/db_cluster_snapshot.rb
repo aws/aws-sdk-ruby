@@ -479,6 +479,7 @@ module Aws::RDS
     #       max_capacity: 1,
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,

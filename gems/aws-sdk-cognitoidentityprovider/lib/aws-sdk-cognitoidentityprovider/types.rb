@@ -781,6 +781,14 @@ module Aws::CognitoIdentityProvider
     #   * COMPROMISED - User is disabled due to a potential security threat.
     #
     #   * UNKNOWN - User status is not known.
+    #
+    #   * RESET\_REQUIRED - User is confirmed, but the user must request a
+    #     code and reset his or her password before he or she can sign in.
+    #
+    #   * FORCE\_CHANGE\_PASSWORD - The user is confirmed and the user can
+    #     sign in using a temporary password, but on first sign-in, the user
+    #     must change his or her password to a new value before doing
+    #     anything else.
     #   @return [String]
     #
     # @!attribute [rw] mfa_options
@@ -2647,7 +2655,8 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] supported_identity_providers
     #   A list of provider names for the identity providers that are
-    #   supported on this client.
+    #   supported on this client. The following are supported: `COGNITO`,
+    #   `Facebook`, `Google` and `LoginWithAmazon`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
@@ -7101,9 +7110,6 @@ module Aws::CognitoIdentityProvider
     #   Set to `code` to initiate a code grant flow, which provides an
     #   authorization code as the response. This code can be exchanged for
     #   access tokens with the token endpoint.
-    #
-    #   Set to `token` to specify that the client should get the access
-    #   token (and, optionally, ID token, based on scopes) directly.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_scopes
@@ -7981,6 +7987,14 @@ module Aws::CognitoIdentityProvider
     #   * COMPROMISED - User is disabled due to a potential security threat.
     #
     #   * UNKNOWN - User status is not known.
+    #
+    #   * RESET\_REQUIRED - User is confirmed, but the user must request a
+    #     code and reset his or her password before he or she can sign in.
+    #
+    #   * FORCE\_CHANGE\_PASSWORD - The user is confirmed and the user can
+    #     sign in using a temporary password, but on first sign-in, the user
+    #     must change his or her password to a new value before doing
+    #     anything else.
     #   @return [String]
     #
     # @!attribute [rw] mfa_options

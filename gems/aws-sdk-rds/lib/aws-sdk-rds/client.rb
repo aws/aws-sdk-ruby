@@ -475,7 +475,7 @@ module Aws::RDS
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid values: `system-update`, `db-upgrade`
+    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`
     #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request, or undoes an opt-in
@@ -1961,6 +1961,7 @@ module Aws::RDS
     #       max_capacity: 1,
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
@@ -2031,6 +2032,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -3370,9 +3372,8 @@ module Aws::RDS
 
     # Creates a new DB instance that acts as a Read Replica for an existing
     # source DB instance. You can create a Read Replica for a DB instance
-    # running MySQL, MariaDB, or PostgreSQL. For more information, see
-    # [Working with PostgreSQL, MySQL, and MariaDB Read Replicas][1] in the
-    # *Amazon RDS User Guide*.
+    # running MySQL, MariaDB, Oracle, or PostgreSQL. For more information,
+    # see [Working with Read Replicas][1] in the *Amazon RDS User Guide*.
     #
     # Amazon Aurora doesn't support this action. You must call the
     # `CreateDBInstance` action to create a DB instance for an Aurora DB
@@ -3400,11 +3401,14 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL
-    #     DB instance.
+    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle, or
+    #     PostgreSQL DB instance.
     #
     #   * Can specify a DB instance that is a MySQL Read Replica only if the
     #     source is running MySQL 5.6 or later.
+    #
+    #   * For the limitations of Oracle Read Replicas, see [Read Replica
+    #     Limitations with Oracle][1] in the *Amazon RDS User Guide*.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
     #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
@@ -3418,12 +3422,13 @@ module Aws::RDS
     #
     #   * If the source DB instance is in a different AWS Region than the Read
     #     Replica, specify a valid DB instance ARN. For more information, go
-    #     to [ Constructing an ARN for Amazon RDS][1] in the *Amazon RDS User
+    #     to [ Constructing an ARN for Amazon RDS][2] in the *Amazon RDS User
     #     Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #
     # @option params [String] :db_instance_class
     #   The compute and memory capacity of the Read Replica, for example,
@@ -3474,7 +3479,7 @@ module Aws::RDS
     #
     # @option params [String] :option_group_name
     #   The option group the DB instance is associated with. If omitted, the
-    #   default option group for the engine specified is used.
+    #   option group associated with the source instance is used.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the DB instance. A value of
@@ -3650,7 +3655,7 @@ module Aws::RDS
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
-    #   True to enable Performance Insights for the read replica, and
+    #   True to enable Performance Insights for the Read Replica, and
     #   otherwise false.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
@@ -4809,6 +4814,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -6583,6 +6589,7 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_clusters[0].scaling_configuration_info.timeout_action #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
@@ -9400,6 +9407,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -9522,6 +9530,9 @@ module Aws::RDS
     #
     # @option params [Integer] :capacity
     #   The DB cluster capacity.
+    #
+    #   When you change the capacity of a paused Aurora Serverless DB cluster,
+    #   it automatically resumes.
     #
     #   Constraints:
     #
@@ -9842,6 +9853,7 @@ module Aws::RDS
     #       max_capacity: 1,
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
     #     },
     #     deletion_protection: false,
     #     enable_http_endpoint: false,
@@ -9911,6 +9923,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -11969,6 +11982,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -13054,6 +13068,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -13290,6 +13305,7 @@ module Aws::RDS
     #       max_capacity: 1,
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
@@ -13359,6 +13375,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -13685,6 +13702,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -15515,6 +15533,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -15774,6 +15793,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
@@ -15960,7 +15980,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -58,9 +58,7 @@ module Aws::RDS
     end
 
     # The meaning of this parameter differs according to the database engine
-    # you use. For example, this value returns MySQL, MariaDB, or PostgreSQL
-    # information when returning values from CreateDBInstanceReadReplica
-    # since Read Replicas are only supported for these engines.
+    # you use.
     #
     # **MySQL, MariaDB, SQL Server, PostgreSQL**
     #
@@ -1511,7 +1509,7 @@ module Aws::RDS
     #   be initially allocated for the DB instance.
     # @option options [String] :option_group_name
     #   The option group the DB instance is associated with. If omitted, the
-    #   default option group for the engine specified is used.
+    #   option group associated with the source instance is used.
     # @option options [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the DB instance. A value of
     #   true specifies an Internet-facing instance with a publicly resolvable
@@ -1675,7 +1673,7 @@ module Aws::RDS
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
-    #   True to enable Performance Insights for the read replica, and
+    #   True to enable Performance Insights for the Read Replica, and
     #   otherwise false.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in

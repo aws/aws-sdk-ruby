@@ -815,6 +815,7 @@ module Aws::Organizations
     #   resp.create_account_status.requested_timestamp #=> Time
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
+    #   resp.create_account_status.gov_cloud_account_id #=> String
     #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
@@ -823,6 +824,220 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def create_account(params = {}, options = {})
       req = build_request(:create_account, params)
+      req.send_request(options)
+    end
+
+    # This action is available if all of the following are true:
+    #
+    # * You are authorized to create accounts in the AWS GovCloud (US)
+    #   Region. For more information on the AWS GovCloud (US) Region, see
+    #   the [ *AWS GovCloud User Guide*.][1]
+    #
+    # * You already have an account in the AWS GovCloud (US) Region that is
+    #   associated with your master account in the commercial Region.
+    #
+    # * You call this action from the master account of your organization in
+    #   the commercial Region.
+    #
+    # * You have the `organizations:CreateGovCloudAccount` permission. AWS
+    #   Organizations creates the required service-linked role named
+    #   `AWSServiceRoleForOrganizations`. For more information, see [AWS
+    #   Organizations and Service-Linked Roles][2] in the *AWS Organizations
+    #   User Guide*.
+    #
+    # AWS automatically enables AWS CloudTrail for AWS GovCloud (US)
+    # accounts, but you should also do the following:
+    #
+    # * Verify that AWS CloudTrail is enabled to store logs.
+    #
+    # * Create an S3 bucket for AWS CloudTrail log storage.
+    #
+    #   For more information, see [Verifying AWS CloudTrail Is Enabled][3]
+    #   in the *AWS GovCloud User Guide*.
+    #
+    # You call this action from the master account of your organization in
+    # the commercial Region to create a standalone AWS account in the AWS
+    # GovCloud (US) Region. After the account is created, the master account
+    # of an organization in the AWS GovCloud (US) Region can invite it to
+    # that organization. For more information on inviting standalone
+    # accounts in the AWS GovCloud (US) to join an organization, see [AWS
+    # Organizations][4] in the *AWS GovCloud User Guide.*
+    #
+    # Calling `CreateGovCloudAccount` is an asynchronous request that AWS
+    # performs in the background. Because `CreateGovCloudAccount` operates
+    # asynchronously, it can return a successful completion message even
+    # though account initialization might still be in progress. You might
+    # need to wait a few minutes before you can successfully access the
+    # account. To check the status of the request, do one of the following:
+    #
+    # * Use the `OperationId` response element from this operation to
+    #   provide as a parameter to the DescribeCreateAccountStatus operation.
+    #
+    # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
+    #   For information on using AWS CloudTrail with Organizations, see
+    #   [Monitoring the Activity in Your Organization][5] in the *AWS
+    #   Organizations User Guide.*
+    #
+    #
+    #
+    # When you call the `CreateGovCloudAccount` action, you create two
+    # accounts: a standalone account in the AWS GovCloud (US) Region and an
+    # associated account in the commercial Region for billing and support
+    # purposes. The account in the commercial Region is automatically a
+    # member of the organization whose credentials made the request. Both
+    # accounts are associated with the same email address.
+    #
+    # A role is created in the new account in the commercial Region that
+    # allows the master account in the organization in the commercial Region
+    # to assume it. An AWS GovCloud (US) account is then created and
+    # associated with the commercial account that you just created. A role
+    # is created in the new AWS GovCloud (US) account that can be assumed by
+    # the AWS GovCloud (US) account that is associated with the master
+    # account of the commercial organization. For more information and to
+    # view a diagram that explains how account access works, see [AWS
+    # Organizations][4] in the *AWS GovCloud User Guide.*
+    #
+    # For more information about creating accounts, see [Creating an AWS
+    # Account in Your Organization][6] in the *AWS Organizations User
+    # Guide.*
+    #
+    # * When you create an account in an organization using the AWS
+    #   Organizations console, API, or CLI commands, the information
+    #   required for the account to operate as a standalone account, such as
+    #   a payment method and signing the end user license agreement (EULA)
+    #   is *not* automatically collected. If you must remove an account from
+    #   your organization later, you can do so only after you provide the
+    #   missing information. Follow the steps at [ To leave an organization
+    #   as a member account][7] in the *AWS Organizations User Guide.*
+    #
+    # * If you get an exception that indicates that you exceeded your
+    #   account limits for the organization, contact [AWS Support][8].
+    #
+    # * If you get an exception that indicates that the operation failed
+    #   because your organization is still initializing, wait one hour and
+    #   then try again. If the error persists, contact [AWS Support][8].
+    #
+    # * Using `CreateGovCloudAccount` to create multiple temporary accounts
+    #   isn't recommended. You can only close an account from the AWS
+    #   Billing and Cost Management console, and you must be signed in as
+    #   the root user. For information on the requirements and process for
+    #   closing an account, see [Closing an AWS Account][9] in the *AWS
+    #   Organizations User Guide*.
+    #
+    # <note markdown="1"> When you create a member account with this operation, you can choose
+    # whether to create the account with the **IAM User and Role Access to
+    # Billing Information** switch enabled. If you enable it, IAM users and
+    # roles that have appropriate permissions can view billing information
+    # for the account. If you disable it, only the account root user can
+    # access billing information. For information about how to disable this
+    # switch for an account, see [Granting Access to Your Billing
+    # Information and Tools][10].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
+    # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html
+    # [4]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    # [5]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
+    # [7]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [8]: https://console.aws.amazon.com/support/home#/
+    # [9]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    # [10]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
+    #
+    # @option params [required, String] :email
+    #   The email address of the owner to assign to the new member account in
+    #   the commercial Region. This email address must not already be
+    #   associated with another AWS account. You must use a valid email
+    #   address to complete account creation. You can't access the root user
+    #   of the account or remove an account that was created with an invalid
+    #   email address. Like all request parameters for
+    #   `CreateGovCloudAccount`, the request for the email address for the AWS
+    #   GovCloud (US) account originates from the commercial Region, not from
+    #   the AWS GovCloud (US) Region.
+    #
+    # @option params [required, String] :account_name
+    #   The friendly name of the member account.
+    #
+    # @option params [String] :role_name
+    #   (Optional)
+    #
+    #   The name of an IAM role that AWS Organizations automatically
+    #   preconfigures in the new member accounts in both the AWS GovCloud (US)
+    #   Region and in the commercial Region. This role trusts the master
+    #   account, allowing users in the master account to assume the role, as
+    #   permitted by the master account administrator. The role has
+    #   administrator permissions in the new member account.
+    #
+    #   If you don't specify this parameter, the role name defaults to
+    #   `OrganizationAccountAccessRole`.
+    #
+    #   For more information about how to use this role to access the member
+    #   account, see [Accessing and Administering the Member Accounts in Your
+    #   Organization][1] in the *AWS Organizations User Guide* and steps 2 and
+    #   3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
+    #   Roles][2] in the *IAM User Guide.*
+    #
+    #   The [regex pattern][3] that is used to validate this parameter is a
+    #   string of characters that can consist of uppercase letters, lowercase
+    #   letters, digits with no spaces, and any of the following characters:
+    #   =,.@-
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html
+    #   [3]: http://wikipedia.org/wiki/regex
+    #
+    # @option params [String] :iam_user_access_to_billing
+    #   If set to `ALLOW`, the new linked account in the commercial Region
+    #   enables IAM users to access account billing information *if* they have
+    #   the required permissions. If set to `DENY`, only the root user of the
+    #   new account can access account billing information. For more
+    #   information, see [Activating Access to the Billing and Cost Management
+    #   Console][1] in the *AWS Billing and Cost Management User Guide.*
+    #
+    #   If you don't specify this parameter, the value defaults to `ALLOW`,
+    #   and IAM users and roles with the required permissions can access
+    #   billing information for the new account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
+    #
+    # @return [Types::CreateGovCloudAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGovCloudAccountResponse#create_account_status #create_account_status} => Types::CreateAccountStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_gov_cloud_account({
+    #     email: "Email", # required
+    #     account_name: "AccountName", # required
+    #     role_name: "RoleName",
+    #     iam_user_access_to_billing: "ALLOW", # accepts ALLOW, DENY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_account_status.id #=> String
+    #   resp.create_account_status.account_name #=> String
+    #   resp.create_account_status.state #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.create_account_status.requested_timestamp #=> Time
+    #   resp.create_account_status.completed_timestamp #=> Time
+    #   resp.create_account_status.account_id #=> String
+    #   resp.create_account_status.gov_cloud_account_id #=> String
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
+    #
+    # @overload create_gov_cloud_account(params = {})
+    # @param [Hash] params ({})
+    def create_gov_cloud_account(params = {}, options = {})
+      req = build_request(:create_gov_cloud_account, params)
       req.send_request(options)
     end
 
@@ -854,6 +1069,9 @@ module Aws::Organizations
     #     consolidated to and paid by the master account. For more
     #     information, see [Consolidated billing][1] in the *AWS Organizations
     #     User Guide*.
+    #
+    #     The consolidated billing feature subset isn't available for
+    #     organizations in the AWS GovCloud (US) Region.
     #
     #   * *ALL*\: In addition to all the features supported by the
     #     consolidated billing feature set, the master account can also apply
@@ -1484,6 +1702,7 @@ module Aws::Organizations
     #   resp.create_account_status.requested_timestamp #=> Time
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
+    #   resp.create_account_status.gov_cloud_account_id #=> String
     #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
@@ -2974,6 +3193,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].requested_timestamp #=> Time
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
+    #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
     #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
     #   resp.next_token #=> String
     #
@@ -4322,7 +4542,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

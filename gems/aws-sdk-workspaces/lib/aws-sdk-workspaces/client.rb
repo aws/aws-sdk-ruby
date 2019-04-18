@@ -383,14 +383,15 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Creates the specified tags for the specified WorkSpace.
+    # Creates the specified tags for the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom bundles,
+    #   and IP access control groups.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each WorkSpace can have a maximum of 50 tags.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -532,11 +533,12 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Deletes the specified tags from the specified WorkSpace.
+    # Deletes the specified tags from the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom bundles,
+    #   and IP access control groups.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys.
@@ -718,11 +720,12 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the specified tags for the specified WorkSpace.
+    # Describes the specified tags for the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpace. To find this ID, use
-    #   DescribeWorkspaces.
+    #   The identifier of the WorkSpaces resource. The supported resource
+    #   types are WorkSpaces, registered directories, images, custom bundles,
+    #   and IP access control groups.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1567,7 +1570,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

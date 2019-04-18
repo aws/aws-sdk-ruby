@@ -248,6 +248,41 @@ module Aws::WorkLink
 
     # @!group API Operations
 
+    # Specifies a domain to be associated to Amazon WorkLink.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #
+    # @option params [required, String] :domain_name
+    #   The fully qualified domain name (FQDN).
+    #
+    # @option params [required, String] :acm_certificate_arn
+    #   The ARN of an issued ACM certificate that is valid for the domain
+    #   being associated.
+    #
+    # @option params [String] :display_name
+    #   The name to display.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_domain({
+    #     fleet_arn: "FleetArn", # required
+    #     domain_name: "DomainName", # required
+    #     acm_certificate_arn: "AcmCertificateArn", # required
+    #     display_name: "DisplayName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomain AWS API Documentation
+    #
+    # @overload associate_domain(params = {})
+    # @param [Hash] params ({})
+    def associate_domain(params = {}, options = {})
+      req = build_request(:associate_domain, params)
+      req.send_request(options)
+    end
+
     # Imports the root certificate of a certificate authority (CA) used to
     # obtain TLS certificates used by associated websites within the company
     # network.
@@ -489,6 +524,42 @@ module Aws::WorkLink
       req.send_request(options)
     end
 
+    # Provides information about the domain.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Types::DescribeDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainResponse#display_name #display_name} => String
+    #   * {Types::DescribeDomainResponse#created_time #created_time} => Time
+    #   * {Types::DescribeDomainResponse#domain_status #domain_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain({
+    #     fleet_arn: "FleetArn", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.created_time #=> Time
+    #   resp.domain_status #=> String, one of "PENDING_VALIDATION", "ASSOCIATING", "ACTIVE", "INACTIVE", "DISASSOCIATING", "DISASSOCIATED", "FAILED_TO_ASSOCIATE", "FAILED_TO_DISASSOCIATE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomain AWS API Documentation
+    #
+    # @overload describe_domain(params = {})
+    # @param [Hash] params ({})
+    def describe_domain(params = {}, options = {})
+      req = build_request(:describe_domain, params)
+      req.send_request(options)
+    end
+
     # Provides basic information for the specified fleet, excluding identity
     # provider, networking, and device configuration details.
     #
@@ -598,6 +669,33 @@ module Aws::WorkLink
       req.send_request(options)
     end
 
+    # Disassociates a domain from Amazon WorkLink. End users lose the
+    # ability to access the domain with Amazon WorkLink.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_domain({
+    #     fleet_arn: "FleetArn", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateDomain AWS API Documentation
+    #
+    # @overload disassociate_domain(params = {})
+    # @param [Hash] params ({})
+    def disassociate_domain(params = {}, options = {})
+      req = build_request(:disassociate_domain, params)
+      req.send_request(options)
+    end
+
     # Removes a certificate authority (CA).
     #
     # @option params [required, String] :fleet_arn
@@ -662,6 +760,49 @@ module Aws::WorkLink
     # @param [Hash] params ({})
     def list_devices(params = {}, options = {})
       req = build_request(:list_devices, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of domains associated to a specified fleet.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @return [Types::ListDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainsResponse#domains #domains} => Array&lt;Types::DomainSummary&gt;
+    #   * {Types::ListDomainsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domains({
+    #     fleet_arn: "FleetArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domains #=> Array
+    #   resp.domains[0].domain_name #=> String
+    #   resp.domains[0].created_time #=> Time
+    #   resp.domains[0].domain_status #=> String, one of "PENDING_VALIDATION", "ASSOCIATING", "ACTIVE", "INACTIVE", "DISASSOCIATING", "DISASSOCIATED", "FAILED_TO_ASSOCIATE", "FAILED_TO_DISASSOCIATE"
+    #   resp.domains[0].display_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListDomains AWS API Documentation
+    #
+    # @overload list_domains(params = {})
+    # @param [Hash] params ({})
+    def list_domains(params = {}, options = {})
+      req = build_request(:list_domains, params)
       req.send_request(options)
     end
 
@@ -747,6 +888,58 @@ module Aws::WorkLink
     # @param [Hash] params ({})
     def list_website_certificate_authorities(params = {}, options = {})
       req = build_request(:list_website_certificate_authorities, params)
+      req.send_request(options)
+    end
+
+    # Moves a domain to ACTIVE status if it was in the INACTIVE status.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_domain_access({
+    #     fleet_arn: "FleetArn", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RestoreDomainAccess AWS API Documentation
+    #
+    # @overload restore_domain_access(params = {})
+    # @param [Hash] params ({})
+    def restore_domain_access(params = {}, options = {})
+      req = build_request(:restore_domain_access, params)
+      req.send_request(options)
+    end
+
+    # Moves a domain to INACTIVE status if it was in the ACTIVE status.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_domain_access({
+    #     fleet_arn: "FleetArn", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RevokeDomainAccess AWS API Documentation
+    #
+    # @overload revoke_domain_access(params = {})
+    # @param [Hash] params ({})
+    def revoke_domain_access(params = {}, options = {})
+      req = build_request(:revoke_domain_access, params)
       req.send_request(options)
     end
 
@@ -867,6 +1060,36 @@ module Aws::WorkLink
       req.send_request(options)
     end
 
+    # Updates domain metadata, such as DisplayName.
+    #
+    # @option params [required, String] :fleet_arn
+    #   The ARN of the fleet.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [String] :display_name
+    #   The name to display.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_metadata({
+    #     fleet_arn: "FleetArn", # required
+    #     domain_name: "DomainName", # required
+    #     display_name: "DisplayName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDomainMetadata AWS API Documentation
+    #
+    # @overload update_domain_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_domain_metadata(params = {}, options = {})
+      req = build_request(:update_domain_metadata, params)
+      req.send_request(options)
+    end
+
     # Updates fleet metadata, such as DisplayName.
     #
     # @option params [required, String] :fleet_arn
@@ -945,7 +1168,7 @@ module Aws::WorkLink
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-worklink'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

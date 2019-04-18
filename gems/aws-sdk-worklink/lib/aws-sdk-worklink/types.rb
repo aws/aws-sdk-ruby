@@ -8,6 +8,47 @@
 module Aws::WorkLink
   module Types
 
+    # @note When making an API call, you may pass AssociateDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         domain_name: "DomainName", # required
+    #         acm_certificate_arn: "AcmCertificateArn", # required
+    #         display_name: "DisplayName",
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name (FQDN).
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The ARN of an issued ACM certificate that is valid for the domain
+    #   being associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name to display.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomainRequest AWS API Documentation
+    #
+    class AssociateDomainRequest < Struct.new(
+      :fleet_arn,
+      :domain_name,
+      :acm_certificate_arn,
+      :display_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomainResponse AWS API Documentation
+    #
+    class AssociateDomainResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateWebsiteCertificateAuthorityRequest
     #   data as a hash:
     #
@@ -290,6 +331,51 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomainRequest AWS API Documentation
+    #
+    class DescribeDomainRequest < Struct.new(
+      :fleet_arn,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The name to display.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the domain was added.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_status
+    #   The current state for the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomainResponse AWS API Documentation
+    #
+    class DescribeDomainResponse < Struct.new(
+      :display_name,
+      :created_time,
+      :domain_status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeFleetMetadataRequest
     #   data as a hash:
     #
@@ -453,6 +539,34 @@ module Aws::WorkLink
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateDomainRequest AWS API Documentation
+    #
+    class DisassociateDomainRequest < Struct.new(
+      :fleet_arn,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateDomainResponse AWS API Documentation
+    #
+    class DisassociateDomainResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateWebsiteCertificateAuthorityRequest
     #   data as a hash:
     #
@@ -480,6 +594,34 @@ module Aws::WorkLink
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteCertificateAuthorityResponse AWS API Documentation
     #
     class DisassociateWebsiteCertificateAuthorityResponse < Aws::EmptyStructure; end
+
+    # The summary of the domain.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the domain was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_status
+    #   The status of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name to display.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DomainSummary AWS API Documentation
+    #
+    class DomainSummary < Struct.new(
+      :domain_name,
+      :created_time,
+      :domain_status,
+      :display_name)
+      include Aws::Structure
+    end
 
     # The summary of the fleet.
     #
@@ -568,6 +710,54 @@ module Aws::WorkLink
     #
     class ListDevicesResponse < Struct.new(
       :devices,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDomainsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be included in the next page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListDomainsRequest AWS API Documentation
+    #
+    class ListDomainsRequest < Struct.new(
+      :fleet_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domains
+    #   Information about the domains.
+    #   @return [Array<Types::DomainSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListDomainsResponse AWS API Documentation
+    #
+    class ListDomainsResponse < Struct.new(
+      :domains,
       :next_token)
       include Aws::Structure
     end
@@ -661,6 +851,62 @@ module Aws::WorkLink
       :next_token)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass RestoreDomainAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RestoreDomainAccessRequest AWS API Documentation
+    #
+    class RestoreDomainAccessRequest < Struct.new(
+      :fleet_arn,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RestoreDomainAccessResponse AWS API Documentation
+    #
+    class RestoreDomainAccessResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RevokeDomainAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RevokeDomainAccessRequest AWS API Documentation
+    #
+    class RevokeDomainAccessRequest < Struct.new(
+      :fleet_arn,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RevokeDomainAccessResponse AWS API Documentation
+    #
+    class RevokeDomainAccessResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SignOutUserRequest
     #   data as a hash:
@@ -789,6 +1035,40 @@ module Aws::WorkLink
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDevicePolicyConfigurationResponse AWS API Documentation
     #
     class UpdateDevicePolicyConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateDomainMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_arn: "FleetArn", # required
+    #         domain_name: "DomainName", # required
+    #         display_name: "DisplayName",
+    #       }
+    #
+    # @!attribute [rw] fleet_arn
+    #   The ARN of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name to display.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDomainMetadataRequest AWS API Documentation
+    #
+    class UpdateDomainMetadataRequest < Struct.new(
+      :fleet_arn,
+      :domain_name,
+      :display_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDomainMetadataResponse AWS API Documentation
+    #
+    class UpdateDomainMetadataResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateFleetMetadataRequest
     #   data as a hash:

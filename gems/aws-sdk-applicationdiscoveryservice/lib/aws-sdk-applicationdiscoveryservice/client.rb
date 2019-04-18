@@ -313,7 +313,7 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp.errors #=> Array
     #   resp.errors[0].import_task_id #=> String
-    #   resp.errors[0].error_code #=> String, one of "NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].error_code #=> String, one of "NOT_FOUND", "INTERNAL_SERVER_ERROR", "OVER_LIMIT"
     #   resp.errors[0].error_description #=> String
     #
     # @overload batch_delete_import_data(params = {})
@@ -773,7 +773,7 @@ module Aws::ApplicationDiscoveryService
     #   resp.tasks[0].client_request_token #=> String
     #   resp.tasks[0].name #=> String
     #   resp.tasks[0].import_url #=> String
-    #   resp.tasks[0].status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED"
+    #   resp.tasks[0].status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_COMPLETE_WITH_ERRORS", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.tasks[0].import_request_time #=> Time
     #   resp.tasks[0].import_completion_time #=> Time
     #   resp.tasks[0].import_deleted_time #=> Time
@@ -1294,7 +1294,7 @@ module Aws::ApplicationDiscoveryService
     #   resp.task.client_request_token #=> String
     #   resp.task.name #=> String
     #   resp.task.import_url #=> String
-    #   resp.task.status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED"
+    #   resp.task.status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_COMPLETE_WITH_ERRORS", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.task.import_request_time #=> Time
     #   resp.task.import_completion_time #=> Time
     #   resp.task.import_deleted_time #=> Time
@@ -1411,7 +1411,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

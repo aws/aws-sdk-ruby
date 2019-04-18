@@ -49,6 +49,8 @@ module Aws::Organizations
     CreateAccountStatus = Shapes::StructureShape.new(name: 'CreateAccountStatus')
     CreateAccountStatusNotFoundException = Shapes::StructureShape.new(name: 'CreateAccountStatusNotFoundException')
     CreateAccountStatuses = Shapes::ListShape.new(name: 'CreateAccountStatuses')
+    CreateGovCloudAccountRequest = Shapes::StructureShape.new(name: 'CreateGovCloudAccountRequest')
+    CreateGovCloudAccountResponse = Shapes::StructureShape.new(name: 'CreateGovCloudAccountResponse')
     CreateOrganizationRequest = Shapes::StructureShape.new(name: 'CreateOrganizationRequest')
     CreateOrganizationResponse = Shapes::StructureShape.new(name: 'CreateOrganizationResponse')
     CreateOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'CreateOrganizationalUnitRequest')
@@ -202,6 +204,7 @@ module Aws::Organizations
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UnsupportedAPIEndpointException = Shapes::StructureShape.new(name: 'UnsupportedAPIEndpointException')
     UpdateOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationalUnitRequest')
     UpdateOrganizationalUnitResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationalUnitResponse')
     UpdatePolicyRequest = Shapes::StructureShape.new(name: 'UpdatePolicyRequest')
@@ -257,10 +260,20 @@ module Aws::Organizations
     CreateAccountStatus.add_member(:requested_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequestedTimestamp"))
     CreateAccountStatus.add_member(:completed_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedTimestamp"))
     CreateAccountStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    CreateAccountStatus.add_member(:gov_cloud_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "GovCloudAccountId"))
     CreateAccountStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: CreateAccountFailureReason, location_name: "FailureReason"))
     CreateAccountStatus.struct_class = Types::CreateAccountStatus
 
     CreateAccountStatuses.member = Shapes::ShapeRef.new(shape: CreateAccountStatus)
+
+    CreateGovCloudAccountRequest.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
+    CreateGovCloudAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
+    CreateGovCloudAccountRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "RoleName"))
+    CreateGovCloudAccountRequest.add_member(:iam_user_access_to_billing, Shapes::ShapeRef.new(shape: IAMUserAccessToBilling, location_name: "IamUserAccessToBilling"))
+    CreateGovCloudAccountRequest.struct_class = Types::CreateGovCloudAccountRequest
+
+    CreateGovCloudAccountResponse.add_member(:create_account_status, Shapes::ShapeRef.new(shape: CreateAccountStatus, location_name: "CreateAccountStatus"))
+    CreateGovCloudAccountResponse.struct_class = Types::CreateGovCloudAccountResponse
 
     CreateOrganizationRequest.add_member(:feature_set, Shapes::ShapeRef.new(shape: OrganizationFeatureSet, location_name: "FeatureSet"))
     CreateOrganizationRequest.struct_class = Types::CreateOrganizationRequest
@@ -685,6 +698,24 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: FinalizingOrganizationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+      end)
+
+      api.add_operation(:create_gov_cloud_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGovCloudAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGovCloudAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGovCloudAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: FinalizingOrganizationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:create_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -827,6 +858,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:describe_handshake, Seahorse::Model::Operation.new.tap do |o|
@@ -1107,6 +1139,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

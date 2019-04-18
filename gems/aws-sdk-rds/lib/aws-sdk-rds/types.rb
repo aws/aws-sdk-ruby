@@ -215,7 +215,7 @@ module Aws::RDS
     # @!attribute [rw] apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid values: `system-update`, `db-upgrade`
+    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`
     #   @return [String]
     #
     # @!attribute [rw] opt_in_type
@@ -1295,6 +1295,7 @@ module Aws::RDS
     #           max_capacity: 1,
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
+    #           timeout_action: "String",
     #         },
     #         deletion_protection: false,
     #         global_cluster_identifier: "String",
@@ -2860,11 +2861,14 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing MySQL, MariaDB, or
+    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle, or
     #     PostgreSQL DB instance.
     #
     #   * Can specify a DB instance that is a MySQL Read Replica only if the
     #     source is running MySQL 5.6 or later.
+    #
+    #   * For the limitations of Oracle Read Replicas, see [Read Replica
+    #     Limitations with Oracle][1] in the *Amazon RDS User Guide*.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
     #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
@@ -2878,12 +2882,13 @@ module Aws::RDS
     #
     #   * If the source DB instance is in a different AWS Region than the
     #     Read Replica, specify a valid DB instance ARN. For more
-    #     information, go to [ Constructing an ARN for Amazon RDS][1] in the
+    #     information, go to [ Constructing an ARN for Amazon RDS][2] in the
     #     *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
@@ -2942,7 +2947,7 @@ module Aws::RDS
     #
     # @!attribute [rw] option_group_name
     #   The option group the DB instance is associated with. If omitted, the
-    #   default option group for the engine specified is used.
+    #   option group associated with the source instance is used.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -3133,7 +3138,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
-    #   True to enable Performance Insights for the read replica, and
+    #   True to enable Performance Insights for the Read Replica, and
     #   otherwise false.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
@@ -4814,8 +4819,8 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_read_replica
-    #   Indicates whether the database engine version supports read
-    #   replicas.
+    #   Indicates whether the database engine version supports Read
+    #   Replicas.
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_engine_modes
@@ -4902,10 +4907,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_name
     #   The meaning of this parameter differs according to the database
-    #   engine you use. For example, this value returns MySQL, MariaDB, or
-    #   PostgreSQL information when returning values from
-    #   CreateDBInstanceReadReplica since Read Replicas are only supported
-    #   for these engines.
+    #   engine you use.
     #
     #   **MySQL, MariaDB, SQL Server, PostgreSQL**
     #
@@ -5525,7 +5527,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   Status of the DB instance. For a StatusType of read replica, the
+    #   Status of the DB instance. For a StatusType of Read Replica, the
     #   values can be replicating, replication stop point set, replication
     #   stop point reached, error, stopped, or terminated.
     #   @return [String]
@@ -9603,6 +9605,9 @@ module Aws::RDS
     # @!attribute [rw] capacity
     #   The DB cluster capacity.
     #
+    #   When you change the capacity of a paused Aurora Serverless DB
+    #   cluster, it automatically resumes.
+    #
     #   Constraints:
     #
     #   * Value must be `2`, `4`, `8`, `16`, `32`, `64`, `128`, or `256`.
@@ -9709,6 +9714,7 @@ module Aws::RDS
     #           max_capacity: 1,
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
+    #           timeout_action: "String",
     #         },
     #         deletion_protection: false,
     #         enable_http_endpoint: false,
@@ -11368,12 +11374,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_security_group_memberships
-    #   A list of DBSecurityGroupMemebrship name strings used for this
+    #   A list of DBSecurityGroupMembership name strings used for this
     #   option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_security_group_memberships
-    #   A list of VpcSecurityGroupMemebrship name strings used for this
+    #   A list of VpcSecurityGroupMembership name strings used for this
     #   option.
     #   @return [Array<String>]
     #
@@ -12017,7 +12023,8 @@ module Aws::RDS
     #
     # @!attribute [rw] action
     #   The type of pending maintenance action that is available for the
-    #   resource. Valid actions are `system-update` and `db-upgrade`.
+    #   resource. Valid actions are `system-update`, `db-upgrade`, and
+    #   `hardware-maintenance`.
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date
@@ -13421,6 +13428,7 @@ module Aws::RDS
     #           max_capacity: 1,
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
+    #           timeout_action: "String",
     #         },
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
@@ -15284,6 +15292,7 @@ module Aws::RDS
     #         max_capacity: 1,
     #         auto_pause: false,
     #         seconds_until_auto_pause: 1,
+    #         timeout_action: "String",
     #       }
     #
     # @!attribute [rw] min_capacity
@@ -15325,13 +15334,32 @@ module Aws::RDS
     #   mode is paused.
     #   @return [Integer]
     #
+    # @!attribute [rw] timeout_action
+    #   The action to take when the timeout is reached, either
+    #   `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #
+    #   `ForceApplyCapacityChange`, the default, sets the capacity to the
+    #   specified value as soon as possible.
+    #
+    #   `RollbackCapacityChange` ignores the capacity change if a scaling
+    #   point is not found in the timeout period.
+    #
+    #   For more information, see [ Autoscaling for Aurora Serverless][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfiguration AWS API Documentation
     #
     class ScalingConfiguration < Struct.new(
       :min_capacity,
       :max_capacity,
       :auto_pause,
-      :seconds_until_auto_pause)
+      :seconds_until_auto_pause,
+      :timeout_action)
       include Aws::Structure
     end
 
@@ -15358,6 +15386,9 @@ module Aws::RDS
     # @!attribute [rw] auto_pause
     #   A value that indicates whether automatic pause is allowed for the
     #   Aurora DB cluster in `serverless` DB engine mode.
+    #
+    #   When the value is set to false for an Aurora Serverless DB cluster,
+    #   the DB cluster automatically resumes.
     #   @return [Boolean]
     #
     # @!attribute [rw] seconds_until_auto_pause
@@ -15366,13 +15397,19 @@ module Aws::RDS
     #   only when it's idle (it has no connections).
     #   @return [Integer]
     #
+    # @!attribute [rw] timeout_action
+    #   The timeout action of a call to `ModifyCurrentDBClusterCapacity`,
+    #   either `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfigurationInfo AWS API Documentation
     #
     class ScalingConfigurationInfo < Struct.new(
       :min_capacity,
       :max_capacity,
       :auto_pause,
-      :seconds_until_auto_pause)
+      :seconds_until_auto_pause,
+      :timeout_action)
       include Aws::Structure
     end
 
