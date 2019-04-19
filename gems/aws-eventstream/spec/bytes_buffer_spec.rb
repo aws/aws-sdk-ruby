@@ -16,7 +16,7 @@ module Aws
           buffer.read(5)
         }.to raise_error(
           Aws::EventStream::Errors::ReadBytesExceedLengthError,
-          "Attempting reading bytes to offset 4 exceeds buffer length of 3"
+          'Attempting reading bytes to offset 4 exceeds buffer length of 3'
         )
       end
 

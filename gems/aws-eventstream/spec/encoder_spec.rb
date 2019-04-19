@@ -7,7 +7,7 @@ module Aws
     
     describe Encoder do
 
-      describe "#encode" do
+      describe '#encode' do
         
         Dir.glob(File.expand_path('../fixtures/decoded/positive/*', __FILE__)).each do |path|
 

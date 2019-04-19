@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Use single quotes for string where interpolation is not done.
+
 1.0.2 (2019-03-11)
 ------------------
 
