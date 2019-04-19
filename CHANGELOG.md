@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.260 (2019-04-19)
+------------------
+
 * Feature - Aws::ResourceGroups - Updated the API, and documentation for AWS Resource Groups.
 
 * Feature - Aws::TranscribeService - Updated the API for Amazon Transcribe Service.
