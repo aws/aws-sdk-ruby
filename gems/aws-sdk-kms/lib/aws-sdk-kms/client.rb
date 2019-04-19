@@ -1855,12 +1855,12 @@ module Aws::KMS
     #
     #   resp = client.encrypt({
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to use for encryption. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
-    #     plaintext: "<binary data>", # The data to encrypt.
+    #     plaintext: "data", # The data to encrypt.
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     ciphertext_blob: "<binary data>", # The encrypted data (ciphertext).
+    #     ciphertext_blob: "encrypted data", # The encrypted data (ciphertext).
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK that was used to encrypt the data.
     #   }
     #
@@ -4112,7 +4112,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

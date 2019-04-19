@@ -383,15 +383,14 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Creates the specified tags for the specified WorkSpaces resource.
+    # Creates the specified tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpaces resource. The supported resource
-    #   types are WorkSpaces, registered directories, images, custom bundles,
-    #   and IP access control groups.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   The tags. Each WorkSpace can have a maximum of 50 tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -533,12 +532,11 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Deletes the specified tags from the specified WorkSpaces resource.
+    # Deletes the specified tags from the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpaces resource. The supported resource
-    #   types are WorkSpaces, registered directories, images, custom bundles,
-    #   and IP access control groups.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys.
@@ -720,12 +718,11 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the specified tags for the specified WorkSpaces resource.
+    # Describes the specified tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the WorkSpaces resource. The supported resource
-    #   types are WorkSpaces, registered directories, images, custom bundles,
-    #   and IP access control groups.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1349,6 +1346,9 @@ module Aws::WorkSpaces
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #
+    # @option params [String] :additional_info
+    #   Reserved.
+    #
     # @return [Types::RebuildWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RebuildWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
@@ -1361,6 +1361,7 @@ module Aws::WorkSpaces
     #         workspace_id: "WorkspaceId", # required
     #       },
     #     ],
+    #     additional_info: "AdditionalInfo",
     #   })
     #
     # @example Response structure
@@ -1570,7 +1571,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

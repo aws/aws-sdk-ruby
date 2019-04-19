@@ -15,6 +15,7 @@ module Aws::WorkSpaces
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountModification = Shapes::StructureShape.new(name: 'AccountModification')
     AccountModificationList = Shapes::ListShape.new(name: 'AccountModificationList')
+    AdditionalInfo = Shapes::StringShape.new(name: 'AdditionalInfo')
     Alias = Shapes::StringShape.new(name: 'Alias')
     AssociateIpGroupsRequest = Shapes::StructureShape.new(name: 'AssociateIpGroupsRequest')
     AssociateIpGroupsResult = Shapes::StructureShape.new(name: 'AssociateIpGroupsResult')
@@ -485,6 +486,7 @@ module Aws::WorkSpaces
     RebuildWorkspaceRequests.member = Shapes::ShapeRef.new(shape: RebuildRequest)
 
     RebuildWorkspacesRequest.add_member(:rebuild_workspace_requests, Shapes::ShapeRef.new(shape: RebuildWorkspaceRequests, required: true, location_name: "RebuildWorkspaceRequests"))
+    RebuildWorkspacesRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfo, location_name: "AdditionalInfo"))
     RebuildWorkspacesRequest.struct_class = Types::RebuildWorkspacesRequest
 
     RebuildWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRebuildWorkspaceRequests, location_name: "FailedRequests"))
@@ -892,6 +894,7 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:list_available_management_cidr_ranges, Seahorse::Model::Operation.new.tap do |o|

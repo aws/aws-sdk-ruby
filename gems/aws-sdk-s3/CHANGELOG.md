@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.36.1 (2019-04-19)
+------------------
+
 * Issue - Reduce memory usage of `Aws::S3::Object#upload_stream` when `StringIO` is used
 
 1.36.0 (2019-03-27)

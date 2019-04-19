@@ -236,13 +236,12 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpaces resource. The supported resource
-    #   types are WorkSpaces, registered directories, images, custom
-    #   bundles, and IP access control groups.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   The tags. Each WorkSpace can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -386,9 +385,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpaces resource. The supported resource
-    #   types are WorkSpaces, registered directories, images, custom
-    #   bundles, and IP access control groups.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -578,9 +576,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the WorkSpaces resource. The supported resource
-    #   types are WorkSpaces, registered directories, images, custom
-    #   bundles, and IP access control groups.
+    #   The identifier of the WorkSpace. To find this ID, use
+    #   DescribeWorkspaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
@@ -1320,16 +1317,22 @@ module Aws::WorkSpaces
     #             workspace_id: "WorkspaceId", # required
     #           },
     #         ],
+    #         additional_info: "AdditionalInfo",
     #       }
     #
     # @!attribute [rw] rebuild_workspace_requests
     #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #   @return [Array<Types::RebuildRequest>]
     #
+    # @!attribute [rw] additional_info
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesRequest AWS API Documentation
     #
     class RebuildWorkspacesRequest < Struct.new(
-      :rebuild_workspace_requests)
+      :rebuild_workspace_requests,
+      :additional_info)
       include Aws::Structure
     end
 

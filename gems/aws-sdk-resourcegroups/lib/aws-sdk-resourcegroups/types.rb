@@ -176,7 +176,7 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource for which you want a list of tags. The
+    #   The ARN of the resource group for which you want a list of tags. The
     #   resource must exist within the account you are using.
     #   @return [String]
     #
@@ -188,11 +188,11 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the tagged resource.
+    #   The ARN of the tagged resource group.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the specified resource.
+    #   The tags associated with the specified resource group.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsOutput AWS API Documentation
@@ -545,12 +545,12 @@ module Aws::ResourceGroups
     #   The results of this query might include the following.
     #
     #   * An EC2 instance that has the following two tags:
-    #     `\{"Key":"Stage","Values":["Deploy"]\}`, and
-    #     `\{"Key":"Version","Values":["2"]\}`
+    #     `\{"Key":"Stage","Value":"Deploy"\}`, and
+    #     `\{"Key":"Version","Value":"2"\}`
     #
     #   * An S3 bucket that has the following two tags:
-    #     \\\{"Key":"Stage","Values":\["Test","Deploy"\]\\}, and
-    #     \\\{"Key":"Version","Values":\["1"\]\\}
+    #     \\\{"Key":"Stage","Value":"Test"\\}, and
+    #     \\\{"Key":"Version","Value":"1"\\}
     #
     #   The query would not return the following results, however. The
     #   following EC2 instance does not have all tag keys specified in the
@@ -559,11 +559,11 @@ module Aws::ResourceGroups
     #   values in the filter.
     #
     #   * An EC2 instance that has only the following tag:
-    #     `\{"Key":"Stage","Values":["Deploy"]\}`.
+    #     `\{"Key":"Stage","Value":"Deploy"\}`.
     #
     #   * An RDS database that has the following two tags:
-    #     `\{"Key":"Stage","Values":["Archived"]\}`, and
-    #     `\{"Key":"Version","Values":["4"]\}`
+    #     `\{"Key":"Stage","Value":"Archived"\}`, and
+    #     `\{"Key":"Version","Value":"4"\}`
     #
     #   <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that
     #   lets you specify a CloudFormation stack ARN.

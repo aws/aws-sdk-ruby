@@ -406,11 +406,11 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of tags that are associated with a resource, specified
-    # by an ARN.
+    # Returns a list of tags that are associated with a resource group,
+    # specified by an ARN.
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource for which you want a list of tags. The
+    #   The ARN of the resource group for which you want a list of tags. The
     #   resource must exist within the account you are using.
     #
     # @return [Types::GetTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -783,7 +783,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
