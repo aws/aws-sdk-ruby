@@ -120,6 +120,11 @@ module Aws
             expect(inspector(error).throttling_error?).to be(true)
           end
 
+          it 'returns true for PriorRequestNotComplete' do
+            error = RetryErrorsSvc::Errors::PriorRequestNotComplete.new(nil,nil)
+            expect(inspector(error).throttling_error?).to be(true)
+          end
+
           it 'returns true for error codes that match /throttl/' do
             error = RetryErrorsSvc::Errors::Throttled.new(nil,nil)
             expect(inspector(error).throttling_error?).to be(true)
