@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add PriorRequestNotComplete to throttling errors.
+
 3.48.4 (2019-04-18)
 ------------------
 
