@@ -10,9 +10,11 @@ gem 'jmespath'
 
 group :test do
 
-  gem 'rspec'
-
   if RUBY_VERSION == '1.9.3'
+
+    # '3.8.3' fails 1.9.3 test suits
+    gem 'rspec-expectations', '3.8.2'
+
     # webmock depends on addressable, but the latest version of addressable
     # has a dependency on ~> 2.0 of public_suffix which is not compatible
     # with Ruby 1.9.3
@@ -34,6 +36,9 @@ group :test do
     gem 'webmock'
     gem 'cucumber'
   end
+
+  gem 'rspec'
+
   gem 'json-schema'
   gem 'multipart-post'
 
