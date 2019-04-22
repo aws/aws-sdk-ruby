@@ -85,6 +85,7 @@ A delay randomiser function used by the default backoff function. Some predefine
           'BandwidthLimitExceeded',                 # cloud search
           'LimitExceededException',                 # kinesis
           'TooManyRequestsException',               # batch
+          'PriorRequestNotComplete',                # route53
         ])
 
         CHECKSUM_ERRORS = Set.new([
