@@ -53,6 +53,7 @@ module Aws::RDS
     #       {
     #         db_cluster_identifier: "String", # required
     #         role_arn: "String", # required
+    #         feature_name: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -65,11 +66,18 @@ module Aws::RDS
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   The name of the feature for the DB cluster that the IAM role is to
+    #   be associated with. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBClusterMessage AWS API Documentation
     #
     class AddRoleToDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      :role_arn)
+      :role_arn,
+      :feature_name)
       include Aws::Structure
     end
 
@@ -4550,6 +4558,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] feature_name
+    #   The name of the feature associated with the AWS Identity and Access
+    #   Management (IAM) role. For the list of supported feature names, see
+    #   DBEngineVersion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole AWS API Documentation
@@ -12581,6 +12592,7 @@ module Aws::RDS
     #       {
     #         db_cluster_identifier: "String", # required
     #         role_arn: "String", # required
+    #         feature_name: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -12593,11 +12605,18 @@ module Aws::RDS
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   The name of the feature for the DB cluster that the IAM role is to
+    #   be disassociated from. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBClusterMessage AWS API Documentation
     #
     class RemoveRoleFromDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      :role_arn)
+      :role_arn,
+      :feature_name)
       include Aws::Structure
     end
 

@@ -477,7 +477,13 @@ module Aws::StorageGateway
     #   @return [Time]
     #
     # @!attribute [rw] volume_used_in_bytes
-    #   The size of the data stored on the volume in bytes.
+    #   The size of the data stored on the volume in bytes. This value is
+    #   calculated based on the number of blocks that are touched, instead
+    #   of the actual amount of data written. This value can be useful for
+    #   sequential write patterns but less accurate for random write
+    #   patterns. `VolumeUsedInBytes` is different from the compressed size
+    #   of the volume, which is the value that is used to calculate your
+    #   bill.
     #
     #   <note markdown="1"> This value is not available for volumes created prior to May 13,
     #   2015, until you store data on the volume.
@@ -957,6 +963,7 @@ module Aws::StorageGateway
     #         read_only: false,
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
+    #         smbacl_enabled: false,
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #         authentication: "Authentication",
@@ -1036,6 +1043,12 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -1083,6 +1096,7 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
+      :smbacl_enabled,
       :valid_user_list,
       :invalid_user_list,
       :authentication,
@@ -4239,6 +4253,13 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] smbacl_enabled
+    #   If this value is set to "true", indicates that ACL (access control
+    #   list) is enabled on the SMB file share. If it is set to "false",
+    #   it indicates that file and directory permissions are mapped to the
+    #   POSIX permission.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -4284,6 +4305,7 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
+      :smbacl_enabled,
       :valid_user_list,
       :invalid_user_list,
       :authentication,
@@ -4531,7 +4553,13 @@ module Aws::StorageGateway
     #   @return [Time]
     #
     # @!attribute [rw] volume_used_in_bytes
-    #   The size of the data stored on the volume in bytes.
+    #   The size of the data stored on the volume in bytes. This value is
+    #   calculated based on the number of blocks that are touched, instead
+    #   of the actual amount of data written. This value can be useful for
+    #   sequential write patterns but less accurate for random write
+    #   patterns. `VolumeUsedInBytes` is different from the compressed size
+    #   of the volume, which is the value that is used to calculate your
+    #   bill.
     #
     #   <note markdown="1"> This value is not available for volumes created prior to May 13,
     #   2015, until you store data on the volume.
@@ -5271,6 +5299,7 @@ module Aws::StorageGateway
     #         read_only: false,
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
+    #         smbacl_enabled: false,
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #       }
@@ -5329,6 +5358,12 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -5354,6 +5389,7 @@ module Aws::StorageGateway
       :read_only,
       :guess_mime_type_enabled,
       :requester_pays,
+      :smbacl_enabled,
       :valid_user_list,
       :invalid_user_list)
       include Aws::Structure

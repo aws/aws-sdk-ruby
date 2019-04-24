@@ -301,6 +301,7 @@ module Aws::MediaTailor
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
+    #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.name #=> String
     #   resp.playback_configuration_arn #=> String
@@ -352,6 +353,7 @@ module Aws::MediaTailor
     #   resp.items[0].cdn_configuration.content_segment_url_prefix #=> String
     #   resp.items[0].dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.items[0].dash_configuration.mpd_location #=> String
+    #   resp.items[0].dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.items[0].hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].playback_configuration_arn #=> String
@@ -469,6 +471,7 @@ module Aws::MediaTailor
     #     },
     #     dash_configuration: {
     #       mpd_location: "__string",
+    #       origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
     #     },
     #     name: "__string",
     #     slate_ad_url: "__string",
@@ -486,6 +489,7 @@ module Aws::MediaTailor
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
+    #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.name #=> String
     #   resp.playback_configuration_arn #=> String
@@ -571,7 +575,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

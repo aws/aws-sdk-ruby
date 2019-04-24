@@ -692,7 +692,7 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
-    # Lists all tags associated with the resource.
+    # List all tags on an AWS Elemental MediaConnect resource
     #
     # @option params [required, String] :resource_arn
     #
@@ -848,9 +848,10 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
-    # Associates the specified tags to a resource. If the request does not
-    # mention an existing tag associated with the resource, that tag is not
-    # changed.
+    # Associates the specified tags to a resource with the specified
+    # resourceArn. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are deleted as well.
     #
     # @option params [required, String] :resource_arn
     #
@@ -879,7 +880,7 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
-    # Deletes the specified tags from a resource.
+    # Deletes specified tags from a resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -1161,7 +1162,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

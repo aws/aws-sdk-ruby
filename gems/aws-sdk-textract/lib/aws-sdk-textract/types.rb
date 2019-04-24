@@ -28,6 +28,9 @@ module Aws::Textract
     #   If you use the AWS CLI to call Amazon Textract operations, you
     #   can't pass image bytes. The document must be an image in JPG or PNG
     #   format.
+    #
+    #   If you are using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes passed using the `Bytes` field.
     #   @return [Types::Document]
     #
     # @!attribute [rw] feature_types
@@ -63,13 +66,13 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # A `Block` represents text that's recognized in a document within a
+    # A `Block` represents items that are recognized in a document within a
     # group of pixels close to each other. The information returned in a
     # `Block` depends on the type of operation. In document-text detection
     # (for example DetectDocumentText), you get information about the
     # detected words and lines of text. In text analysis (for example
-    # AnalyzeDocument), you can get information about the fields and tables
-    # that are detected in the document.
+    # AnalyzeDocument), you can also get information about the fields,
+    # tables and selection elements that are detected in the document.
     #
     # An array of `Block` objects is returned by both synchronous and
     # asynchronous operations. In synchronous operations, such as
@@ -77,37 +80,54 @@ module Aws::Textract
     # results. In asynchronous operations, such as GetDocumentAnalysis, the
     # array is returned over one or more responses.
     #
+    # For more information, see [How Amazon Textract Works][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html
+    #
     # @!attribute [rw] block_type
     #   The type of text that's recognized in a block. In text-detection
     #   operations, the following types are returned:
     #
     #   * *PAGE* - Contains a list of the LINE Block objects that are
-    #     detected on a specific page.
+    #     detected on a document page.
     #
-    #   * *WORD* - One or more ISO basic Latin script characters that
-    #     aren't separated by spaces.
+    #   * *WORD* - A word detected on a document page. A word is one or more
+    #     ISO basic Latin script characters that aren't separated by
+    #     spaces.
     #
-    #   * *LINE* - A string of equally spaced words.
+    #   * *LINE* - A string of tab-delimited, contiguous words that's
+    #     detected on a document page.
     #
     #   In text analysis operations, the following types are returned:
     #
     #   * *PAGE* - Contains a list of child Block objects that are detected
-    #     on a specific page.
+    #     on a document page.
     #
     #   * *KEY\_VALUE\_SET* - Stores the KEY and VALUE Block objects for a
-    #     field that's detected in a document. Use the `EntityType` field
-    #     to determine if a KEY\_VALUE\_SET object is a KEY Block object or
-    #     a VALUE Block object.
+    #     field that's detected on a document page. Use the `EntityType`
+    #     field to determine if a KEY\_VALUE\_SET object is a KEY Block
+    #     object or a VALUE Block object.
     #
-    #   * *WORD* - One or more ISO basic Latin script characters that
-    #     aren't separated by spaces.
+    #   * *WORD* - A word detected on a document page. A word is one or more
+    #     ISO basic Latin script characters that aren't separated by spaces
+    #     that's detected on a document page.
     #
-    #   * *LINE* - A string of tab-delimited, contiguous words.
+    #   * *LINE* - A string of tab-delimited, contiguous words that's
+    #     detected on a document page.
     #
-    #   * *TABLE* - A table that's detected in the document.
+    #   * *TABLE* - A table that's detected on a document page. A table is
+    #     any grid-based information with 2 or more rows or columns with a
+    #     cell span of 1 row and 1 column each.
     #
     #   * *CELL* - A cell within a detected table. The cell is the parent of
     #     the block that contains the text in the cell.
+    #
+    #   * *SELECTION\_ELEMENT* - A selectable element such as a radio button
+    #     or checkbox that's detected on a document page. Use the value of
+    #     `SelectionStatus` to determine the status of the selection
+    #     element.
     #   @return [String]
     #
     # @!attribute [rw] confidence
@@ -176,8 +196,19 @@ module Aws::Textract
     #   `GetDocumentTextDetection`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] selection_status
+    #   The selection status of a selectable element such as a radio button
+    #   or checkbox.
+    #   @return [String]
+    #
     # @!attribute [rw] page
-    #   The page in which a block was detected.
+    #   The page in which a block was detected. `Page` is returned by
+    #   asynchronous operations. Page values greater than 1 are only
+    #   returned for multi-page documents that are in PDF format. A scanned
+    #   image (JPG/PNG), even if it contains multiple document pages, is
+    #   always considered to be a single-page document and the value of
+    #   `Page` is always 1. Synchronous operations don't return `Page` as
+    #   every input document is considered to be a single-page document.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Block AWS API Documentation
@@ -194,6 +225,7 @@ module Aws::Textract
       :id,
       :relationships,
       :entity_types,
+      :selection_status,
       :page)
       include Aws::Structure
     end
@@ -264,6 +296,9 @@ module Aws::Textract
     #   If you use the AWS CLI to call Amazon Textract operations, you
     #   can't pass image bytes. The document must be an image in JPG or PNG
     #   format.
+    #
+    #   If you are using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes passed using the `Bytes` field.
     #   @return [Types::Document]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectDocumentTextRequest AWS API Documentation
@@ -305,7 +340,7 @@ module Aws::Textract
     # bucket don't need to be base64 encoded.
     #
     # The AWS Region for the S3 bucket that contains the S3 object must
-    # match the Region that you use for Amazon Textract operations.
+    # match the AWS Region that you use for Amazon Textract operations.
     #
     # If you use the AWS CLI to call Amazon Textract operations, passing
     # image bytes using the Bytes property isn't supported. You must first
@@ -328,8 +363,12 @@ module Aws::Textract
     #       }
     #
     # @!attribute [rw] bytes
-    #   A blob of documents bytes. The maximum size of a document that's
-    #   provided in a blob of bytes is 5 MB.
+    #   A blob of base-64 encoded documents bytes. The maximum size of a
+    #   document that's provided in a blob of bytes is 5 MB. The document
+    #   bytes must be in PNG or JPG format.
+    #
+    #   If you are using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes passed using the `Bytes` field.
     #   @return [String]
     #
     # @!attribute [rw] s3_object
@@ -715,7 +754,9 @@ module Aws::Textract
     #   to return information about the tables that are detected in the
     #   input document. Add FORMS to return detected fields and the
     #   associated text. To perform both types of analysis, add TABLES and
-    #   FORMS to `FeatureTypes`.
+    #   FORMS to `FeatureTypes`. All selectable elements
+    #   (`SELECTION_ELEMENT`) that are detected are returned, whatever the
+    #   value of `FeatureTypes`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_request_token
@@ -726,8 +767,10 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   The unique identifier you specify to identify the job in the
-    #   completion status that's published to the Amazon SNS topic.
+    #   An identifier you specify that's included in the completion
+    #   notification that's published to the Amazon SNS topic. For example,
+    #   you can use `JobTag` to identify the type of document, such as a tax
+    #   form or a receipt, that the completion notification corresponds to.
     #   @return [String]
     #
     # @!attribute [rw] notification_channel
@@ -747,7 +790,7 @@ module Aws::Textract
     end
 
     # @!attribute [rw] job_id
-    #   The identifier for the document text-detection job. Use `JobId` to
+    #   The identifier for the document text detection job. Use `JobId` to
     #   identify the job in a subsequent call to `GetDocumentAnalysis`.
     #   @return [String]
     #
@@ -789,9 +832,10 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   A unique identifier you specify to identify the job in the
-    #   completion status that's published to the Amazon Simple
-    #   Notification Service (Amazon SNS) topic.
+    #   An identifier you specify that's included in the completion
+    #   notification that's published to the Amazon SNS topic. For example,
+    #   you can use `JobTag` to identify the type of document, such as a tax
+    #   form or a receipt, that the completion notification corresponds to.
     #   @return [String]
     #
     # @!attribute [rw] notification_channel

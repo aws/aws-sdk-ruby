@@ -387,6 +387,7 @@ module Aws::SSM
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdempotentParameterMismatch = Shapes::StructureShape.new(name: 'IdempotentParameterMismatch')
+    IncompatiblePolicyException = Shapes::StructureShape.new(name: 'IncompatiblePolicyException')
     InstallOverrideList = Shapes::StringShape.new(name: 'InstallOverrideList')
     InstanceAggregatedAssociationOverview = Shapes::StructureShape.new(name: 'InstanceAggregatedAssociationOverview')
     InstanceAssociation = Shapes::StructureShape.new(name: 'InstanceAssociation')
@@ -459,6 +460,8 @@ module Aws::SSM
     InvalidParameters = Shapes::StructureShape.new(name: 'InvalidParameters')
     InvalidPermissionType = Shapes::StructureShape.new(name: 'InvalidPermissionType')
     InvalidPluginName = Shapes::StructureShape.new(name: 'InvalidPluginName')
+    InvalidPolicyAttributeException = Shapes::StructureShape.new(name: 'InvalidPolicyAttributeException')
+    InvalidPolicyTypeException = Shapes::StructureShape.new(name: 'InvalidPolicyTypeException')
     InvalidResourceId = Shapes::StructureShape.new(name: 'InvalidResourceId')
     InvalidResourceType = Shapes::StructureShape.new(name: 'InvalidResourceType')
     InvalidResultAttributeException = Shapes::StructureShape.new(name: 'InvalidResultAttributeException')
@@ -643,6 +646,7 @@ module Aws::SSM
     ParameterDescription = Shapes::StringShape.new(name: 'ParameterDescription')
     ParameterHistory = Shapes::StructureShape.new(name: 'ParameterHistory')
     ParameterHistoryList = Shapes::ListShape.new(name: 'ParameterHistoryList')
+    ParameterInlinePolicy = Shapes::StructureShape.new(name: 'ParameterInlinePolicy')
     ParameterKeyId = Shapes::StringShape.new(name: 'ParameterKeyId')
     ParameterLabel = Shapes::StringShape.new(name: 'ParameterLabel')
     ParameterLabelList = Shapes::ListShape.new(name: 'ParameterLabelList')
@@ -655,12 +659,15 @@ module Aws::SSM
     ParameterNameList = Shapes::ListShape.new(name: 'ParameterNameList')
     ParameterNotFound = Shapes::StructureShape.new(name: 'ParameterNotFound')
     ParameterPatternMismatchException = Shapes::StructureShape.new(name: 'ParameterPatternMismatchException')
+    ParameterPolicies = Shapes::StringShape.new(name: 'ParameterPolicies')
+    ParameterPolicyList = Shapes::ListShape.new(name: 'ParameterPolicyList')
     ParameterStringFilter = Shapes::StructureShape.new(name: 'ParameterStringFilter')
     ParameterStringFilterKey = Shapes::StringShape.new(name: 'ParameterStringFilterKey')
     ParameterStringFilterList = Shapes::ListShape.new(name: 'ParameterStringFilterList')
     ParameterStringFilterValue = Shapes::StringShape.new(name: 'ParameterStringFilterValue')
     ParameterStringFilterValueList = Shapes::ListShape.new(name: 'ParameterStringFilterValueList')
     ParameterStringQueryOption = Shapes::StringShape.new(name: 'ParameterStringQueryOption')
+    ParameterTier = Shapes::StringShape.new(name: 'ParameterTier')
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ParameterValueList = Shapes::ListShape.new(name: 'ParameterValueList')
@@ -733,6 +740,7 @@ module Aws::SSM
     PingStatus = Shapes::StringShape.new(name: 'PingStatus')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
+    PoliciesLimitExceededException = Shapes::StructureShape.new(name: 'PoliciesLimitExceededException')
     Product = Shapes::StringShape.new(name: 'Product')
     ProgressCounters = Shapes::StructureShape.new(name: 'ProgressCounters')
     PutComplianceItemsRequest = Shapes::StructureShape.new(name: 'PutComplianceItemsRequest')
@@ -2634,9 +2642,16 @@ module Aws::SSM
     ParameterHistory.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     ParameterHistory.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     ParameterHistory.add_member(:labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "Labels"))
+    ParameterHistory.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
+    ParameterHistory.add_member(:policies, Shapes::ShapeRef.new(shape: ParameterPolicyList, location_name: "Policies"))
     ParameterHistory.struct_class = Types::ParameterHistory
 
     ParameterHistoryList.member = Shapes::ShapeRef.new(shape: ParameterHistory)
+
+    ParameterInlinePolicy.add_member(:policy_text, Shapes::ShapeRef.new(shape: String, location_name: "PolicyText"))
+    ParameterInlinePolicy.add_member(:policy_type, Shapes::ShapeRef.new(shape: String, location_name: "PolicyType"))
+    ParameterInlinePolicy.add_member(:policy_status, Shapes::ShapeRef.new(shape: String, location_name: "PolicyStatus"))
+    ParameterInlinePolicy.struct_class = Types::ParameterInlinePolicy
 
     ParameterLabelList.member = Shapes::ShapeRef.new(shape: ParameterLabel)
 
@@ -2650,11 +2665,15 @@ module Aws::SSM
     ParameterMetadata.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "Description"))
     ParameterMetadata.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     ParameterMetadata.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
+    ParameterMetadata.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
+    ParameterMetadata.add_member(:policies, Shapes::ShapeRef.new(shape: ParameterPolicyList, location_name: "Policies"))
     ParameterMetadata.struct_class = Types::ParameterMetadata
 
     ParameterMetadataList.member = Shapes::ShapeRef.new(shape: ParameterMetadata)
 
     ParameterNameList.member = Shapes::ShapeRef.new(shape: PSParameterName)
+
+    ParameterPolicyList.member = Shapes::ShapeRef.new(shape: ParameterInlinePolicy)
 
     ParameterStringFilter.add_member(:key, Shapes::ShapeRef.new(shape: ParameterStringFilterKey, required: true, location_name: "Key"))
     ParameterStringFilter.add_member(:option, Shapes::ShapeRef.new(shape: ParameterStringQueryOption, location_name: "Option"))
@@ -2802,6 +2821,8 @@ module Aws::SSM
     PutParameterRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite", metadata: {"box"=>true}))
     PutParameterRequest.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     PutParameterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutParameterRequest.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
+    PutParameterRequest.add_member(:policies, Shapes::ShapeRef.new(shape: ParameterPolicies, location_name: "Policies"))
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
@@ -4374,6 +4395,10 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ParameterMaxVersionLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: ParameterPatternMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedParameterType)
+        o.errors << Shapes::ShapeRef.new(shape: PoliciesLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyAttributeException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatiblePolicyException)
       end)
 
       api.add_operation(:register_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|

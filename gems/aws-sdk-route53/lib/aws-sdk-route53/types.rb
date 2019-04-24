@@ -34,8 +34,11 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The current value for the limit that is specified by
-    #   AccountLimit$Type.
+    #   The current value for the limit that is specified by [Type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AccountLimit.html#Route53-Type-AccountLimit-Type
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AccountLimit AWS API Documentation
@@ -54,7 +57,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #         name: "AlarmName", # required
     #       }
     #
@@ -101,17 +104,12 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # *Alias resource record sets only:* Information about the CloudFront
-    # distribution, Elastic Beanstalk environment, ELB load balancer, Amazon
-    # S3 bucket, or Amazon Route 53 resource record set that you're
-    # redirecting queries to. An Elastic Beanstalk environment must have a
-    # regionalized subdomain.
+    # *Alias resource record sets only:* Information about the AWS resource,
+    # such as a CloudFront distribution or an Amazon S3 bucket, that you
+    # want to route traffic to.
     #
     # When creating resource record sets for a private hosted zone, note the
     # following:
-    #
-    # * Resource record sets can't be created for CloudFront distributions
-    #   in a private hosted zone.
     #
     # * Creating geolocation alias resource record sets or latency alias
     #   resource record sets in a private hosted zone is unsupported.
@@ -137,6 +135,22 @@ module Aws::Route53
     #   *Alias resource records sets only*\: The value used depends on where
     #   you want to route traffic:
     #
+    #   Amazon API Gateway custom regional APIs and edge-optimized APIs
+    #
+    #   : Specify the hosted zone ID for your API. You can get the
+    #     applicable value using the AWS CLI command [get-domain-names][1]\:
+    #
+    #     * For regional APIs, specify the value of `regionalHostedZoneId`.
+    #
+    #     * For edge-optimized APIs, specify the value of
+    #       `distributionHostedZoneId`.
+    #
+    #   Amazon Virtual Private Cloud interface VPC endpoint
+    #
+    #   : Specify the hosted zone ID for your interface endpoint. You can
+    #     get the value of `HostedZoneId` using the AWS CLI command
+    #     [describe-vpc-endpoints][2].
+    #
     #   CloudFront distribution
     #
     #   : Specify `Z2FDTNDATAQYW2`.
@@ -151,7 +165,7 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region that you created the
     #     environment in. The environment must have a regionalized
     #     subdomain. For a list of regions and the corresponding hosted zone
-    #     IDs, see [AWS Elastic Beanstalk][1] in the "AWS Regions and
+    #     IDs, see [AWS Elastic Beanstalk][3] in the "AWS Regions and
     #     Endpoints" chapter of the *Amazon Web Services General
     #     Reference*.
     #
@@ -160,7 +174,7 @@ module Aws::Route53
     #   : Specify the value of the hosted zone ID for the load balancer. Use
     #     the following methods to get the hosted zone ID:
     #
-    #     * [Elastic Load Balancing][2] table in the "AWS Regions and
+    #     * [Elastic Load Balancing][4] table in the "AWS Regions and
     #       Endpoints" chapter of the *Amazon Web Services General
     #       Reference*\: Use the value that corresponds with the region that
     #       you created your load balancer in. Note that there are separate
@@ -176,29 +190,29 @@ module Aws::Route53
     #       get the applicable value. For more information, see the
     #       applicable guide:
     #
-    #       * Classic Load Balancers: Use [DescribeLoadBalancers][3] to get
+    #       * Classic Load Balancers: Use [DescribeLoadBalancers][5] to get
     #         the value of `CanonicalHostedZoneNameId`.
     #
     #       * Application and Network Load Balancers: Use
-    #         [DescribeLoadBalancers][4] to get the value of
+    #         [DescribeLoadBalancers][6] to get the value of
     #         `CanonicalHostedZoneId`.
     #
     #     * **AWS CLI**\: Use `describe-load-balancers` to get the
     #       applicable value. For more information, see the applicable
     #       guide:
     #
-    #       * Classic Load Balancers: Use [describe-load-balancers][5] to
+    #       * Classic Load Balancers: Use [describe-load-balancers][7] to
     #         get the value of `CanonicalHostedZoneNameId`.
     #
     #       * Application and Network Load Balancers: Use
-    #         [describe-load-balancers][6] to get the value of
+    #         [describe-load-balancers][8] to get the value of
     #         `CanonicalHostedZoneId`.
     #
     #   An Amazon S3 bucket configured as a static website
     #
     #   : Specify the hosted zone ID for the region that you created the
     #     bucket in. For more information about valid values, see the
-    #     [Amazon Simple Storage Service Website Endpoints][7] table in the
+    #     [Amazon Simple Storage Service Website Endpoints][9] table in the
     #     "AWS Regions and Endpoints" chapter of the *Amazon Web Services
     #     General Reference*.
     #
@@ -210,18 +224,44 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region
-    #   [3]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
-    #   [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
-    #   [5]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
-    #   [6]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
-    #   [7]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html
+    #   [3]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
+    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region
+    #   [5]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [6]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [7]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
+    #   [8]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
+    #   [9]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] dns_name
     #   *Alias resource record sets only:* The value that you specify
     #   depends on where you want to route queries:
+    #
+    #   Amazon API Gateway custom regional APIs and edge-optimized APIs
+    #
+    #   : Specify the applicable domain name for your API. You can get the
+    #     applicable value using the AWS CLI command [get-domain-names][1]\:
+    #
+    #     * For regional APIs, specify the value of `regionalDomainName`.
+    #
+    #     * For edge-optimized APIs, specify the value of
+    #       `distributionDomainName`. This is the name of the associated
+    #       CloudFront distribution, such as `da1b2c3d4e5.cloudfront.net`.
+    #
+    #     <note markdown="1"> The name of the record that you're creating must match a custom
+    #     domain name for your API, such as `api.example.com`.
+    #
+    #      </note>
+    #
+    #   Amazon Virtual Private Cloud interface VPC endpoint
+    #
+    #   : Enter the API endpoint for the interface endpoint, such as
+    #     `vpce-123456789abcdef01-example-us-east-1a.elasticloadbalancing.us-east-1.vpce.amazonaws.com`.
+    #     For edge-optimized APIs, this is the domain name for the
+    #     corresponding CloudFront distribution. You can get the value of
+    #     `DnsName` using the AWS CLI command [describe-vpc-endpoints][2].
     #
     #   CloudFront distribution
     #
@@ -233,8 +273,11 @@ module Aws::Route53
     #     the name of the resource record set is *acme.example.com*, your
     #     CloudFront distribution must include *acme.example.com* as one of
     #     the alternate domain names. For more information, see [Using
-    #     Alternate Domain Names (CNAMEs)][1] in the *Amazon CloudFront
+    #     Alternate Domain Names (CNAMEs)][3] in the *Amazon CloudFront
     #     Developer Guide*.
+    #
+    #     You can't create a resource record set in a private hosted zone
+    #     to route traffic to a CloudFront distribution.
     #
     #     <note markdown="1"> For failover alias records, you can't specify a CloudFront
     #     distribution for both the primary and secondary records. A
@@ -270,17 +313,17 @@ module Aws::Route53
     #
     #     * *AWS Management Console*\: For information about how to get the
     #       value by using the console, see [Using Custom Domains with AWS
-    #       Elastic Beanstalk][2] in the *AWS Elastic Beanstalk Developer
+    #       Elastic Beanstalk][4] in the *AWS Elastic Beanstalk Developer
     #       Guide*.
     #
     #     * *Elastic Beanstalk API*\: Use the `DescribeEnvironments` action
     #       to get the value of the `CNAME` attribute. For more information,
-    #       see [DescribeEnvironments][3] in the *AWS Elastic Beanstalk API
+    #       see [DescribeEnvironments][5] in the *AWS Elastic Beanstalk API
     #       Reference*.
     #
     #     * *AWS CLI*\: Use the `describe-environments` command to get the
     #       value of the `CNAME` attribute. For more information, see
-    #       [describe-environments][4] in the *AWS Command Line Interface
+    #       [describe-environments][6] in the *AWS Command Line Interface
     #       Reference*.
     #
     #   ELB load balancer
@@ -303,18 +346,18 @@ module Aws::Route53
     #       get the value of `DNSName`. For more information, see the
     #       applicable guide:
     #
-    #       * Classic Load Balancers: [DescribeLoadBalancers][5]
+    #       * Classic Load Balancers: [DescribeLoadBalancers][7]
     #
     #       * Application and Network Load Balancers:
-    #         [DescribeLoadBalancers][6]
+    #         [DescribeLoadBalancers][8]
     #
     #     * **AWS CLI**\: Use `describe-load-balancers` to get the value of
     #       `DNSName`. For more information, see the applicable guide:
     #
-    #       * Classic Load Balancers: [describe-load-balancers][7]
+    #       * Classic Load Balancers: [describe-load-balancers][9]
     #
     #       * Application and Network Load Balancers:
-    #         [describe-load-balancers][8]
+    #         [describe-load-balancers][10]
     #
     #   Amazon S3 bucket that is configured as a static website
     #
@@ -322,9 +365,9 @@ module Aws::Route53
     #     created the bucket in, for example,
     #     `s3-website.us-east-2.amazonaws.com`. For more information about
     #     valid values, see the table [Amazon Simple Storage Service (S3)
-    #     Website Endpoints][9] in the *Amazon Web Services General
+    #     Website Endpoints][11] in the *Amazon Web Services General
     #     Reference*. For more information about using S3 buckets for
-    #     websites, see [Getting Started with Amazon Route 53][10] in the
+    #     websites, see [Getting Started with Amazon Route 53][12] in the
     #     *Amazon Route 53 Developer Guide.*
     #
     #   Another Route 53 resource record set
@@ -344,16 +387,18 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
-    #   [2]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html
-    #   [3]: http://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html
-    #   [4]: http://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html
-    #   [5]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
-    #   [6]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
-    #   [7]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
-    #   [8]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
-    #   [9]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    #   [10]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html
+    #   [3]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
+    #   [4]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html
+    #   [5]: http://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html
+    #   [6]: http://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html
+    #   [7]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [8]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [9]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
+    #   [10]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
+    #   [11]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [12]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
     #   @return [String]
     #
     # @!attribute [rw] evaluate_target_health
@@ -410,7 +455,7 @@ module Aws::Route53
     #         and Route 53 routes queries to other resources.
     #
     #       * A target group that has no registered targets is considered
-    #         healthy.
+    #         unhealthy.
     #
     #     <note markdown="1"> When you create a load balancer, you configure settings for
     #     Elastic Load Balancing health checks; they're not Route 53 health
@@ -463,7 +508,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "AssociateVPCComment",
@@ -521,7 +566,7 @@ module Aws::Route53
     #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-south-1
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
     #           geo_location: {
     #             continent_code: "GeoLocationContinentCode",
     #             country_code: "GeoLocationCountryCode",
@@ -554,7 +599,7 @@ module Aws::Route53
     #   * `DELETE`\: Deletes a existing resource record set.
     #
     #     To delete the resource record set that is associated with a
-    #     traffic policy instance, use ` DeleteTrafficPolicyInstance `.
+    #     traffic policy instance, use [DeleteTrafficPolicyInstance][1].
     #     Amazon Route 53 will delete the resource record set automatically.
     #     If you delete the resource record set by using
     #     `ChangeResourceRecordSets`, Route 53 doesn't automatically delete
@@ -564,6 +609,10 @@ module Aws::Route53
     #   * `UPSERT`\: If a resource record set doesn't already exist, Route
     #     53 creates it. If a resource record set does exist, Route 53
     #     updates it with the values in the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicyInstance.html
     #   @return [String]
     #
     # @!attribute [rw] resource_record_set
@@ -594,7 +643,7 @@ module Aws::Route53
     #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
-    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-south-1
+    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
     #               geo_location: {
     #                 continent_code: "GeoLocationContinentCode",
     #                 country_code: "GeoLocationCountryCode",
@@ -664,8 +713,12 @@ module Aws::Route53
     #   A complex type that describes change information about changes made
     #   to your hosted zone.
     #
-    #   This element contains an ID that you use when performing a GetChange
-    #   action to get detailed information about the change.
+    #   This element contains an ID that you use when performing a
+    #   [GetChange][1] action to get detailed information about the change.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeInfo AWS API Documentation
@@ -696,7 +749,7 @@ module Aws::Route53
     #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
-    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-south-1
+    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
     #                 geo_location: {
     #                   continent_code: "GeoLocationContinentCode",
     #                   country_code: "GeoLocationCountryCode",
@@ -747,8 +800,12 @@ module Aws::Route53
     #   A complex type that contains information about changes made to your
     #   hosted zone.
     #
-    #   This element contains an ID that you use when performing a GetChange
-    #   action to get detailed information about the change.
+    #   This element contains an ID that you use when performing a
+    #   [GetChange][1] action to get detailed information about the change.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html
     #   @return [Types::ChangeInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSetsResponse AWS API Documentation
@@ -911,7 +968,7 @@ module Aws::Route53
     #           enable_sni: false,
     #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #           alarm_identifier: {
-    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1
+    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #             name: "AlarmName", # required
     #           },
     #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -983,7 +1040,7 @@ module Aws::Route53
     #       {
     #         name: "DNSName", # required
     #         vpc: {
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         caller_reference: "Nonce", # required
@@ -1014,7 +1071,11 @@ module Aws::Route53
     #
     #   You can specify only one Amazon VPC when you create a private hosted
     #   zone. To associate additional Amazon VPCs with the hosted zone, use
-    #   AssociateVPCWithHostedZone after you create a hosted zone.
+    #   [AssociateVPCWithHostedZone][1] after you create a hosted zone.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html
     #   @return [Types::VPC]
     #
     # @!attribute [rw] caller_reference
@@ -1042,7 +1103,11 @@ module Aws::Route53
     #   If you want to associate a reusable delegation set with this hosted
     #   zone, the ID that Amazon Route 53 assigned to the reusable
     #   delegation set when you created it. For more information about
-    #   reusable delegation sets, see CreateReusableDelegationSet.
+    #   reusable delegation sets, see [CreateReusableDelegationSet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneRequest AWS API Documentation
@@ -1119,8 +1184,8 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html
-    #   [2]: http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfigRequest AWS API Documentation
@@ -1292,7 +1357,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -1349,7 +1414,11 @@ module Aws::Route53
     #   The definition of this version of the traffic policy, in JSON
     #   format. You specified the JSON in the `CreateTrafficPolicyVersion`
     #   request. For more information about the JSON format, see
-    #   CreateTrafficPolicy.
+    #   [CreateTrafficPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateTrafficPolicy.html
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -1397,7 +1466,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1647,7 +1716,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1709,7 +1778,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "DisassociateVPCComment",
@@ -1932,13 +2001,19 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # Empty request.
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest AWS API Documentation
     #
     class GetCheckerIpRangesRequest < Aws::EmptyStructure; end
 
+    # A complex type that contains the `CheckerIpRanges` element.
+    #
     # @!attribute [rw] checker_ip_ranges
+    #   A complex type that contains sorted list of IP ranges in CIDR format
+    #   for Amazon Route 53 health checkers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesResponse AWS API Documentation
@@ -2323,7 +2398,12 @@ module Aws::Route53
 
     # @!attribute [rw] query_logging_config
     #   A complex type that contains information about the query logging
-    #   configuration that you specified in a GetQueryLoggingConfig request.
+    #   configuration that you specified in a [GetQueryLoggingConfig][1]
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html
     #   @return [Types::QueryLoggingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfigResponse AWS API Documentation
@@ -2591,7 +2671,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -2621,28 +2701,28 @@ module Aws::Route53
     #   the Elastic IP address for `IPAddress`. This ensures that the IP
     #   address of your instance will never change.
     #
-    #   For more information, see
-    #   HealthCheckConfig$FullyQualifiedDomainName.
+    #   For more information, see [FullyQualifiedDomainName][1].
     #
     #   Constraints: Route 53 can't check the health of endpoints for which
     #   the IP address is in local, private, non-routable, or multicast
     #   ranges. For more information about IP addresses for which you can't
     #   create health checks, see the following documents:
     #
-    #   * [RFC 5735, Special Use IPv4 Addresses][1]
+    #   * [RFC 5735, Special Use IPv4 Addresses][2]
     #
-    #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][2]
+    #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][3]
     #
-    #   * [RFC 5156, Special-Use IPv6 Addresses][3]
+    #   * [RFC 5156, Special-Use IPv6 Addresses][4]
     #
     #   When the value of `Type` is `CALCULATED` or `CLOUDWATCH_METRIC`,
     #   omit `IPAddress`.
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc5735
-    #   [2]: https://tools.ietf.org/html/rfc6598
-    #   [3]: https://tools.ietf.org/html/rfc5156
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName
+    #   [2]: https://tools.ietf.org/html/rfc5735
+    #   [3]: https://tools.ietf.org/html/rfc6598
+    #   [4]: https://tools.ietf.org/html/rfc5156
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -2702,7 +2782,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #   @return [String]
     #
     # @!attribute [rw] resource_path
@@ -2853,24 +2933,23 @@ module Aws::Route53
     #   the health check to always be healthy. If you configured DNS
     #   failover, Route 53 continues to route traffic to the corresponding
     #   resources. If you want to stop routing traffic to a resource, change
-    #   the value of UpdateHealthCheckRequest$Inverted.
+    #   the value of [Inverted][1].
     #
     #   Charges for a health check still apply when the health check is
-    #   disabled. For more information, see [Amazon Route 53 Pricing][1].
+    #   disabled. For more information, see [Amazon Route 53 Pricing][2].
     #
     #
     #
-    #   [1]: http://aws.amazon.com/route53/pricing/
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted
+    #   [2]: http://aws.amazon.com/route53/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] health_threshold
     #   The number of child health checks that are associated with a
-    #   `CALCULATED` health that Amazon Route 53 must consider healthy for
-    #   the `CALCULATED` health check to be considered healthy. To specify
-    #   the child health checks that you want to associate with a
-    #   `CALCULATED` health check, use the
-    #   HealthCheckConfig$ChildHealthChecks and
-    #   HealthCheckConfig$ChildHealthChecks elements.
+    #   `CALCULATED` health check that Amazon Route 53 must consider healthy
+    #   for the `CALCULATED` health check to be considered healthy. To
+    #   specify the child health checks that you want to associate with a
+    #   `CALCULATED` health check, use the [ChildHealthChecks][1] element.
     #
     #   Note the following:
     #
@@ -2880,6 +2959,10 @@ module Aws::Route53
     #
     #   * If you specify `0`, Route 53 always considers this health check to
     #     be healthy.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-ChildHealthChecks
     #   @return [Integer]
     #
     # @!attribute [rw] child_health_checks
@@ -3016,7 +3099,11 @@ module Aws::Route53
     #
     #   For information about how to specify characters other than `a-z`,
     #   `0-9`, and `-` (hyphen) and how to specify internationalized domain
-    #   names, see CreateHostedZone.
+    #   names, see [CreateHostedZone][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html
     #   @return [String]
     #
     # @!attribute [rw] caller_reference
@@ -3583,12 +3670,15 @@ module Aws::Route53
     #   (Optional) The maximum number of query logging configurations that
     #   you want Amazon Route 53 to return in response to the current
     #   request. If the current AWS account has more than `MaxResults`
-    #   configurations, use the value of
-    #   ListQueryLoggingConfigsResponse$NextToken in the response to get the
-    #   next page of results.
+    #   configurations, use the value of [NextToken][1] in the response to
+    #   get the next page of results.
     #
     #   If you don't specify a value for `MaxResults`, Route 53 returns up
     #   to 100 configurations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigsRequest AWS API Documentation
@@ -3601,9 +3691,13 @@ module Aws::Route53
     end
 
     # @!attribute [rw] query_logging_configs
-    #   An array that contains one QueryLoggingConfig element for each
+    #   An array that contains one [QueryLoggingConfig][1] element for each
     #   configuration for DNS query logging that is associated with the
     #   current AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html
     #   @return [Array<Types::QueryLoggingConfig>]
     #
     # @!attribute [rw] next_token
@@ -3613,9 +3707,13 @@ module Aws::Route53
     #
     #   If a response doesn't include the last of the configurations, you
     #   can get more configurations by submitting another
-    #   ListQueryLoggingConfigs request. Get the value of `NextToken` that
-    #   Amazon Route 53 returned in the previous response and include it in
-    #   `NextToken` in the next request.
+    #   [ListQueryLoggingConfigs][1] request. Get the value of `NextToken`
+    #   that Amazon Route 53 returned in the previous response and include
+    #   it in `NextToken` in the next request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigsResponse AWS API Documentation
@@ -3663,14 +3761,18 @@ module Aws::Route53
     #
     #   Values for alias resource record sets:
     #
+    #   * **API Gateway custom regional API or edge-optimized API**\: A
+    #
     #   * **CloudFront distribution**\: A or AAAA
     #
     #   * **Elastic Beanstalk environment that has a regionalized
     #     subdomain**\: A
     #
-    #   * **ELB load balancer**\: A \| AAAA
+    #   * **Elastic Load Balancing load balancer**\: A \| AAAA
     #
     #   * **Amazon S3 bucket**\: A
+    #
+    #   * **Amazon VPC interface VPC endpoint**\: A
     #
     #   * **Another resource record set in this hosted zone:** The type of
     #     the resource record set that the alias references.
@@ -3745,7 +3847,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -4617,7 +4719,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecord AWS API Documentation
@@ -4637,7 +4739,7 @@ module Aws::Route53
     #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-south-1
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, ap-south-1
     #         geo_location: {
     #           continent_code: "GeoLocationContinentCode",
     #           country_code: "GeoLocationCountryCode",
@@ -4738,6 +4840,9 @@ module Aws::Route53
     #
     #   Values for alias resource record sets:
     #
+    #   * **Amazon API Gateway custom regional APIs and edge-optimized
+    #     APIs:** `A`
+    #
     #   * **CloudFront distributions:** `A`
     #
     #     If IPv6 is enabled for the distribution, create two resource
@@ -4750,6 +4855,8 @@ module Aws::Route53
     #   * **ELB load balancers:** `A` \| `AAAA`
     #
     #   * **Amazon S3 buckets:** `A`
+    #
+    #   * **Amazon Virtual Private Cloud interface VPC endpoints** `A`
     #
     #   * **Another resource record set in this hosted zone:** Specify the
     #     type of the resource record set that you're creating the alias
@@ -4784,7 +4891,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -5030,17 +5137,15 @@ module Aws::Route53
     #   @return [Array<Types::ResourceRecord>]
     #
     # @!attribute [rw] alias_target
-    #   *Alias resource record sets only:* Information about the CloudFront
-    #   distribution, AWS Elastic Beanstalk environment, ELB load balancer,
-    #   Amazon S3 bucket, or Amazon Route 53 resource record set to which
-    #   you're redirecting queries. The AWS Elastic Beanstalk environment
-    #   must have a regionalized subdomain.
+    #   *Alias resource record sets only:* Information about the AWS
+    #   resource, such as a CloudFront distribution or an Amazon S3 bucket,
+    #   that you want to route traffic to.
     #
     #   If you're creating resource records sets for a private hosted zone,
     #   note the following:
     #
-    #   * You can't create alias resource record sets for CloudFront
-    #     distributions in a private hosted zone.
+    #   * You can't create an alias resource record set in a private hosted
+    #     zone to route traffic to a CloudFront distribution.
     #
     #   * Creating geolocation alias resource record sets or latency alias
     #     resource record sets in a private hosted zone is unsupported.
@@ -5179,7 +5284,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
     #   [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #   @return [String]
@@ -5499,7 +5604,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -5660,7 +5765,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -5731,27 +5836,27 @@ module Aws::Route53
     #
     #    </note>
     #
-    #   For more information, see
-    #   UpdateHealthCheckRequest$FullyQualifiedDomainName.
+    #   For more information, see [FullyQualifiedDomainName][3].
     #
     #   Constraints: Route 53 can't check the health of endpoints for which
     #   the IP address is in local, private, non-routable, or multicast
     #   ranges. For more information about IP addresses for which you can't
     #   create health checks, see the following documents:
     #
-    #   * [RFC 5735, Special Use IPv4 Addresses][3]
+    #   * [RFC 5735, Special Use IPv4 Addresses][4]
     #
-    #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][4]
+    #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][5]
     #
-    #   * [RFC 5156, Special-Use IPv6 Addresses][5]
+    #   * [RFC 5156, Special-Use IPv6 Addresses][6]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html
-    #   [3]: https://tools.ietf.org/html/rfc5735
-    #   [4]: https://tools.ietf.org/html/rfc6598
-    #   [5]: https://tools.ietf.org/html/rfc5156
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName
+    #   [4]: https://tools.ietf.org/html/rfc5735
+    #   [5]: https://tools.ietf.org/html/rfc6598
+    #   [6]: https://tools.ietf.org/html/rfc5156
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -5892,14 +5997,15 @@ module Aws::Route53
     #   the health check to always be healthy. If you configured DNS
     #   failover, Route 53 continues to route traffic to the corresponding
     #   resources. If you want to stop routing traffic to a resource, change
-    #   the value of UpdateHealthCheckRequest$Inverted.
+    #   the value of [Inverted][1].
     #
     #   Charges for a health check still apply when the health check is
-    #   disabled. For more information, see [Amazon Route 53 Pricing][1].
+    #   disabled. For more information, see [Amazon Route 53 Pricing][2].
     #
     #
     #
-    #   [1]: http://aws.amazon.com/route53/pricing/
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted
+    #   [2]: http://aws.amazon.com/route53/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] health_threshold
@@ -5985,16 +6091,22 @@ module Aws::Route53
     #   values for `ResettableElementName` include the following:
     #
     #   * `ChildHealthChecks`\: Amazon Route 53 resets
-    #     HealthCheckConfig$ChildHealthChecks to null.
+    #     [ChildHealthChecks][1] to null.
     #
     #   * `FullyQualifiedDomainName`\: Route 53 resets
-    #     HealthCheckConfig$FullyQualifiedDomainName to null.
+    #     [FullyQualifiedDomainName][2]. to null.
     #
-    #   * `Regions`\: Route 53 resets the HealthCheckConfig$Regions list to
-    #     the default set of regions.
+    #   * `Regions`\: Route 53 resets the [Regions][3] list to the default
+    #     set of regions.
     #
-    #   * `ResourcePath`\: Route 53 resets HealthCheckConfig$ResourcePath to
-    #     null.
+    #   * `ResourcePath`\: Route 53 resets [ResourcePath][4] to null.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ChildHealthChecks
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
+    #   [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheckRequest AWS API Documentation
@@ -6020,6 +6132,9 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that contains the response to the `UpdateHealthCheck`
+    # request.
+    #
     # @!attribute [rw] health_check
     #   A complex type that contains the response to an `UpdateHealthCheck`
     #   request.
@@ -6192,7 +6307,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
+    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1
     #         vpc_id: "VPCId",
     #       }
     #

@@ -47,20 +47,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # The configuration for HLS content.
-    #
-    # @!attribute [rw] manifest_endpoint_prefix
-    #   The URL that is used to initiate a playback session for devices that
-    #   support Apple HLS. The session uses server-side reporting.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HlsConfiguration AWS API Documentation
-    #
-    class HlsConfiguration < Struct.new(
-      :manifest_endpoint_prefix)
-      include Aws::Structure
-    end
-
     # The configuration for DASH content.
     #
     # @!attribute [rw] manifest_endpoint_prefix
@@ -74,18 +60,28 @@ module Aws::MediaTailor
     #   tag in DASH manifests. MediaTailor populates the Location tag with
     #   the URL for manifest update requests, to be used by players that
     #   don't support sticky redirects. Disable this if you have CDN
-    #   routing rules set up for accessing MediaTailor manifests and you are
-    #   either using client-side reporting or your players support sticky
-    #   HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT. The
-    #   EMT\_DEFAULT setting enables the inclusion of the tag and is the
+    #   routing rules set up for accessing MediaTailor manifests, and you
+    #   are either using client-side reporting or your players support
+    #   sticky HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT.
+    #   The EMT\_DEFAULT setting enables the inclusion of the tag and is the
     #   default value.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_manifest_type
+    #   The setting that controls whether MediaTailor handles manifests from
+    #   the origin server as multi-period manifests or single-period
+    #   manifests. If your origin server produces single-period manifests,
+    #   set this to SINGLE\_PERIOD. The default setting is MULTI\_PERIOD.
+    #   For multi-period manifests, omit this setting or set it to
+    #   MULTI\_PERIOD.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfiguration AWS API Documentation
     #
     class DashConfiguration < Struct.new(
       :manifest_endpoint_prefix,
-      :mpd_location)
+      :mpd_location,
+      :origin_manifest_type)
       include Aws::Structure
     end
 
@@ -96,6 +92,7 @@ module Aws::MediaTailor
     #
     #       {
     #         mpd_location: "__string",
+    #         origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
     #       }
     #
     # @!attribute [rw] mpd_location
@@ -103,17 +100,27 @@ module Aws::MediaTailor
     #   tag in DASH manifests. MediaTailor populates the Location tag with
     #   the URL for manifest update requests, to be used by players that
     #   don't support sticky redirects. Disable this if you have CDN
-    #   routing rules set up for accessing MediaTailor manifests and you are
-    #   either using client-side reporting or your players support sticky
-    #   HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT. The
-    #   EMT\_DEFAULT setting enables the inclusion of the tag and is the
+    #   routing rules set up for accessing MediaTailor manifests, and you
+    #   are either using client-side reporting or your players support
+    #   sticky HTTP redirects. Valid values are DISABLED and EMT\_DEFAULT.
+    #   The EMT\_DEFAULT setting enables the inclusion of the tag and is the
     #   default value.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_manifest_type
+    #   The setting that controls whether MediaTailor handles manifests from
+    #   the origin server as multi-period manifests or single-period
+    #   manifests. If your origin server produces single-period manifests,
+    #   set this to SINGLE\_PERIOD. The default setting is MULTI\_PERIOD.
+    #   For multi-period manifests, omit this setting or set it to
+    #   MULTI\_PERIOD.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut AWS API Documentation
     #
     class DashConfigurationForPut < Struct.new(
-      :mpd_location)
+      :mpd_location,
+      :origin_manifest_type)
       include Aws::Structure
     end
 
@@ -133,6 +140,10 @@ module Aws::MediaTailor
       :name)
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationResponse AWS API Documentation
+    #
+    class DeletePlaybackConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass GetPlaybackConfigurationRequest
     #   data as a hash:
@@ -235,6 +246,89 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for HLS content.
+    #
+    # @!attribute [rw] manifest_endpoint_prefix
+    #   The URL that is used to initiate a playback session for devices that
+    #   support Apple HLS. The session uses server-side reporting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HlsConfiguration AWS API Documentation
+    #
+    class HlsConfiguration < Struct.new(
+      :manifest_endpoint_prefix)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPlaybackConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsRequest AWS API Documentation
+    #
+    class ListPlaybackConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Array of playback configurations. This might be all the available
+    #   configurations or a subset, depending on the settings that you
+    #   provide and the total number of configurations stored.
+    #   @return [Array<Types::PlaybackConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token returned by the GET list request when results
+    #   exceed the maximum allowed. Use the token to fetch the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsResponse AWS API Documentation
+    #
+    class ListPlaybackConfigurationsResponse < Struct.new(
+      :items,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ad_decision_server_url
     #   @return [String]
     #
@@ -293,75 +387,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListPlaybackConfigurationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
-    # @!attribute [rw] max_results
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsRequest AWS API Documentation
-    #
-    class ListPlaybackConfigurationsRequest < Struct.new(
-      :max_results,
-      :next_token)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] items
-    #   Array of playback configurations. This may be all of the available
-    #   configurations or a subset, depending on the settings you provide
-    #   and on the total number of configurations stored.
-    #   @return [Array<Types::PlaybackConfiguration>]
-    #
-    # @!attribute [rw] next_token
-    #   Pagination token returned by the GET list request when results
-    #   exceed the maximum allowed. Use the token to fetch the next page of
-    #   results.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsResponse AWS API Documentation
-    #
-    class ListPlaybackConfigurationsResponse < Struct.new(
-      :items,
-      :next_token)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
-    # @!attribute [rw] resource_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceRequest AWS API Documentation
-    #
-    class ListTagsForResourceRequest < Struct.new(
-      :resource_arn)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tags
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceResponse AWS API Documentation
-    #
-    class ListTagsForResourceResponse < Struct.new(
-      :tags)
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass PutPlaybackConfigurationRequest
     #   data as a hash:
     #
@@ -373,6 +398,7 @@ module Aws::MediaTailor
     #         },
     #         dash_configuration: {
     #           mpd_location: "__string",
+    #           origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
     #         },
     #         name: "__string",
     #         slate_ad_url: "__string",

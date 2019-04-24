@@ -348,9 +348,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] execution_id
-    #   The execution ID for the association. If the association does not
-    #   run at intervals or according to a schedule, then the ExecutionID is
-    #   the same as the AssociationID.
+    #   The execution ID for the association.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -431,9 +429,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] execution_id
-    #   The execution ID. If the association does not run at intervals or
-    #   according to a schedule, then the ExecutionID is the same as the
-    #   AssociationID.
+    #   The execution ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2357,7 +2353,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters for the documents runtime configuration.
+    #   The parameters for the runtime configuration of the document.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] targets
@@ -2785,7 +2781,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
@@ -2809,7 +2805,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] rejected_patches_action
@@ -9516,7 +9512,7 @@ module Aws::SSM
     # The target registered with the Maintenance Window.
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID where the target is registered.
+    #   The ID of the Maintenance Window to register the target with.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -9524,20 +9520,26 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of target.
+    #   The type of target that is being registered with the Maintenance
+    #   Window.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags). Instances are specified
-    #   using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets, either instances or tags.
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=instanceids,Values=<instanceid1>,<instanceid2>`
+    #
+    #   Tags are specified using the following format:
+    #
+    #   `Key=<tag name>,Values=<tag value>`.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] owner_information
-    #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   A user-provided value that will be included in any CloudWatch events
+    #   that are raised while running tasks for these targets in this
+    #   Maintenance Window.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9545,7 +9547,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the target.
+    #   A description for the target.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTarget AWS API Documentation
@@ -9564,7 +9566,7 @@ module Aws::SSM
     # Information about a task defined for a Maintenance Window.
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID where the task is registered.
+    #   The ID of the Maintenance Window where the task is registered.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
@@ -9626,7 +9628,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
-    #   The maximum number of targets this task can be run for in parallel.
+    #   The maximum number of targets this task can be run for, in parallel.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -9982,6 +9984,14 @@ module Aws::SSM
     #   Labels assigned to the parameter version.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tier
+    #   The parameter tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] policies
+    #   Information about the policies assigned to a parameter.
+    #   @return [Array<Types::ParameterInlinePolicy>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -9994,7 +10004,36 @@ module Aws::SSM
       :value,
       :allowed_pattern,
       :version,
-      :labels)
+      :labels,
+      :tier,
+      :policies)
+      include Aws::Structure
+    end
+
+    # One or more policies assigned to a parameter.
+    #
+    # @!attribute [rw] policy_text
+    #   The JSON text of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy. Parameter Store supports the following policy
+    #   types: Expiration, ExpirationNotification, and NoChangeNotification.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_status
+    #   The status of the policy. Policies report the following statuses:
+    #   Pending (the policy has not been enforced or applied yet), Finished
+    #   (the policy was applied), Failed (the policy was not applied), or
+    #   InProgress (the policy is being applied now).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterInlinePolicy AWS API Documentation
+    #
+    class ParameterInlinePolicy < Struct.new(
+      :policy_text,
+      :policy_type,
+      :policy_status)
       include Aws::Structure
     end
 
@@ -10037,6 +10076,14 @@ module Aws::SSM
     #   The parameter version.
     #   @return [Integer]
     #
+    # @!attribute [rw] tier
+    #   The parameter tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] policies
+    #   A list of policies associated with a parameter.
+    #   @return [Array<Types::ParameterInlinePolicy>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
     #
     class ParameterMetadata < Struct.new(
@@ -10047,15 +10094,18 @@ module Aws::SSM
       :last_modified_user,
       :description,
       :allowed_pattern,
-      :version)
+      :version,
+      :tier,
+      :policies)
       include Aws::Structure
     end
 
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
-    # <note markdown="1"> The `Name` field can't be used with the GetParametersByPath API
-    # action.
+    # <note markdown="1"> The `Name` and `Tier` filter keys can't be used with the
+    # GetParametersByPath API action. Also, the `Label` filter key can't be
+    # used with the DescribeParameters API action.
     #
     #  </note>
     #
@@ -11151,6 +11201,8 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         tier: "Standard", # accepts Standard, Advanced
+    #         policies: "ParameterPolicies",
     #       }
     #
     # @!attribute [rw] name
@@ -11200,7 +11252,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The parameter value that you want to add to the system.
+    #   The parameter value that you want to add to the system. Standard
+    #   parameters have a value limit of 4 KB. Advanced parameters have a
+    #   value limit of 8 KB.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -11267,6 +11321,69 @@ module Aws::SSM
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] tier
+    #   Parameter Store offers a standard tier and an advanced tier for
+    #   parameters. Standard parameters have a value limit of 4 KB and
+    #   can't be configured to use parameter policies. You can create a
+    #   maximum of 10,000 standard parameters per account and per Region.
+    #   Standard parameters are offered at no additional cost.
+    #
+    #   Advanced parameters have a value limit of 8 KB and can be configured
+    #   to use parameter policies. You can create a maximum of 100,000
+    #   advanced parameters per account and per Region. Advanced parameters
+    #   incur a charge.
+    #
+    #   If you don't specify a parameter tier when you create a new
+    #   parameter, the parameter defaults to using the standard tier. You
+    #   can change a standard parameter to an advanced parameter at any
+    #   time. But you can't revert an advanced parameter to a standard
+    #   parameter. Reverting an advanced parameter to a standard parameter
+    #   would result in data loss because the system would truncate the size
+    #   of the parameter from 8 KB to 4 KB. Reverting would also remove any
+    #   policies attached to the parameter. Lastly, advanced parameters use
+    #   a different form of encryption than standard parameters.
+    #
+    #   If you no longer need an advanced parameter, or if you no longer
+    #   want to incur charges for an advanced parameter, you must delete it
+    #   and recreate it as a new standard parameter. For more information,
+    #   see [About Advanced Parameters][1] in the *AWS Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policies
+    #   One or more policies to apply to a parameter. This action takes a
+    #   JSON array. Parameter Store supports the following policy types:
+    #
+    #   Expiration: This policy deletes the parameter after it expires. When
+    #   you create the policy, you specify the expiration date. You can
+    #   update the expiration date and time by updating the policy. Updating
+    #   the *parameter* does not affect the expiration date and time. When
+    #   the expiration time is reached, Parameter Store deletes the
+    #   parameter.
+    #
+    #   ExpirationNotification: This policy triggers an event in Amazon
+    #   CloudWatch Events that notifies you about the expiration. By using
+    #   this policy, you can receive notification before or after the
+    #   expiration time is reached, in units of days or hours.
+    #
+    #   NoChangeNotification: This policy triggers a CloudWatch event if a
+    #   parameter has not been modified for a specified period of time. This
+    #   policy type is useful when, for example, a secret needs to be
+    #   changed within a period of time, but it has not been changed.
+    #
+    #   All existing policies are preserved until you send new policies or
+    #   an empty policy. For more information about parameter policies, see
+    #   [Working with Parameter Policies][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-policies.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
     #
     class PutParameterRequest < Struct.new(
@@ -11277,7 +11394,9 @@ module Aws::SSM
       :key_id,
       :overwrite,
       :allowed_pattern,
-      :tags)
+      :tags,
+      :tier,
+      :policies)
       include Aws::Structure
     end
 
@@ -13024,28 +13143,29 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target instances
-    #   that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or
-    #   InstanceIds. For more information about how to send commands that
-    #   target instances using Key,Value parameters, see [Targeting Multiple
-    #   Instances][1] in the *AWS Systems Manager User Guide*.
+    #   that meet the criteria. `Key` can be `tag:<Amazon EC2 tag>` or
+    #   `InstanceIds`. For more information about how to send commands that
+    #   target instances using `Key,Value` parameters, see [Using Targets
+    #   and Rate Controls to Send Commands to a Fleet][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   User-defined criteria that maps to Key. For example, if you
-    #   specified tag:ServerRole, you could specify value:WebServer to run a
-    #   command on instances that include Amazon EC2 tags of
-    #   ServerRole,WebServer. For more information about how to send
-    #   commands that target instances using Key,Value parameters, see
-    #   [Sending Commands to a Fleet][1] in the *AWS Systems Manager User
-    #   Guide*.
+    #   User-defined criteria that maps to `Key`. For example, if you
+    #   specified `tag:ServerRole`, you could specify `value:WebServer` to
+    #   run a command on instances that include Amazon EC2 tags of
+    #   `ServerRole,WebServer`. For more information about how to send
+    #   commands that target instances using `Key,Value` parameters, see
+    #   [Using Targets and Rate Controls to Send Commands to a Fleet][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation
@@ -14127,7 +14247,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
@@ -14150,7 +14270,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] rejected_patches_action

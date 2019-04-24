@@ -66,6 +66,7 @@ module Aws::Textract
     S3ObjectName = Shapes::StringShape.new(name: 'S3ObjectName')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     SNSTopicArn = Shapes::StringShape.new(name: 'SNSTopicArn')
+    SelectionStatus = Shapes::StringShape.new(name: 'SelectionStatus')
     StartDocumentAnalysisRequest = Shapes::StructureShape.new(name: 'StartDocumentAnalysisRequest')
     StartDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'StartDocumentAnalysisResponse')
     StartDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionRequest')
@@ -97,6 +98,7 @@ module Aws::Textract
     Block.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
     Block.add_member(:relationships, Shapes::ShapeRef.new(shape: RelationshipList, location_name: "Relationships"))
     Block.add_member(:entity_types, Shapes::ShapeRef.new(shape: EntityTypes, location_name: "EntityTypes"))
+    Block.add_member(:selection_status, Shapes::ShapeRef.new(shape: SelectionStatus, location_name: "SelectionStatus"))
     Block.add_member(:page, Shapes::ShapeRef.new(shape: UInteger, location_name: "Page"))
     Block.struct_class = Types::Block
 

@@ -676,8 +676,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # AWS Elemental MediaConnect listed the tags associated with the
-    # resource.
+    # The tags for the resource.
     #
     # @!attribute [rw] tags
     #   A map from tag keys to values. Tag keys can have a maximum character

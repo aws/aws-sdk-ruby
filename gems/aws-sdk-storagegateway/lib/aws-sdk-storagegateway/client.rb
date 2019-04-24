@@ -1211,6 +1211,11 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [Boolean] :smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
@@ -1258,6 +1263,7 @@ module Aws::StorageGateway
     #     read_only: false,
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
+    #     smbacl_enabled: false,
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
     #     authentication: "Authentication",
@@ -2764,6 +2770,7 @@ module Aws::StorageGateway
     #   resp.smb_file_share_info_list[0].read_only #=> Boolean
     #   resp.smb_file_share_info_list[0].guess_mime_type_enabled #=> Boolean
     #   resp.smb_file_share_info_list[0].requester_pays #=> Boolean
+    #   resp.smb_file_share_info_list[0].smbacl_enabled #=> Boolean
     #   resp.smb_file_share_info_list[0].valid_user_list #=> Array
     #   resp.smb_file_share_info_list[0].valid_user_list[0] #=> String
     #   resp.smb_file_share_info_list[0].invalid_user_list #=> Array
@@ -5303,6 +5310,11 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [Boolean] :smbacl_enabled
+    #   Set this value to "true to enable ACL (access control list) on the
+    #   SMB file share. Set it to "false" to map file and directory
+    #   permissions to the POSIX permissions.
+    #
     # @option params [Array<String>] :valid_user_list
     #   A list of users or groups in the Active Directory that are allowed to
     #   access the file share. A group must be prefixed with the @ character.
@@ -5330,6 +5342,7 @@ module Aws::StorageGateway
     #     read_only: false,
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
+    #     smbacl_enabled: false,
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
     #   })
@@ -5486,7 +5499,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

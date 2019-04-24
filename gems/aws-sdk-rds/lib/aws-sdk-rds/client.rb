@@ -271,6 +271,11 @@ module Aws::RDS
     #   Aurora DB cluster, for example
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #
+    # @option params [String] :feature_name
+    #   The name of the feature for the DB cluster that the IAM role is to be
+    #   associated with. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -278,6 +283,7 @@ module Aws::RDS
     #   resp = client.add_role_to_db_cluster({
     #     db_cluster_identifier: "String", # required
     #     role_arn: "String", # required
+    #     feature_name: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBCluster AWS API Documentation
@@ -291,6 +297,11 @@ module Aws::RDS
 
     # Associates an AWS Identity and Access Management (IAM) role with a DB
     # instance.
+    #
+    # <note markdown="1"> To add a role to a DB instance, the status of the DB instance must be
+    # `available`.
+    #
+    #  </note>
     #
     # @option params [required, String] :db_instance_identifier
     #   The name of the DB instance to associate the IAM role with.
@@ -12342,6 +12353,11 @@ module Aws::RDS
     #   the Aurora DB cluster, for example
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #
+    # @option params [String] :feature_name
+    #   The name of the feature for the DB cluster that the IAM role is to be
+    #   disassociated from. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -12349,6 +12365,7 @@ module Aws::RDS
     #   resp = client.remove_role_from_db_cluster({
     #     db_cluster_identifier: "String", # required
     #     role_arn: "String", # required
+    #     feature_name: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBCluster AWS API Documentation
@@ -15980,7 +15997,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
