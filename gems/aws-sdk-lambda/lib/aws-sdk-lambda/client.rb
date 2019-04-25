@@ -1665,6 +1665,56 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns information about a version of an [AWS Lambda layer][1], with
+    # a link to download the layer archive that's valid for 10 minutes.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the layer version.
+    #
+    # @return [Types::GetLayerVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLayerVersionResponse#content #content} => Types::LayerVersionContentOutput
+    #   * {Types::GetLayerVersionResponse#layer_arn #layer_arn} => String
+    #   * {Types::GetLayerVersionResponse#layer_version_arn #layer_version_arn} => String
+    #   * {Types::GetLayerVersionResponse#description #description} => String
+    #   * {Types::GetLayerVersionResponse#created_date #created_date} => Time
+    #   * {Types::GetLayerVersionResponse#version #version} => Integer
+    #   * {Types::GetLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
+    #   * {Types::GetLayerVersionResponse#license_info #license_info} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_layer_version_by_arn({
+    #     arn: "LayerVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content.location #=> String
+    #   resp.content.code_sha_256 #=> String
+    #   resp.content.code_size #=> Integer
+    #   resp.layer_arn #=> String
+    #   resp.layer_version_arn #=> String
+    #   resp.description #=> String
+    #   resp.created_date #=> Time
+    #   resp.version #=> Integer
+    #   resp.compatible_runtimes #=> Array
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "python3.7", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.license_info #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn AWS API Documentation
+    #
+    # @overload get_layer_version_by_arn(params = {})
+    # @param [Hash] params ({})
+    def get_layer_version_by_arn(params = {}, options = {})
+      req = build_request(:get_layer_version_by_arn, params)
+      req.send_request(options)
+    end
+
     # Returns the permission policy for a version of an [AWS Lambda
     # layer][1]. For more information, see AddLayerVersionPermission.
     #
@@ -1783,9 +1833,15 @@ module Aws::Lambda
     # asynchronous invocations, configure your function with a [dead letter
     # queue][2].
     #
+    # When an error occurs, your function may be invoked multiple times.
+    # Retry behavior varies by error type, client, event source, and
+    # invocation type. For example, if you invoke a function asynchronously
+    # and it returns an error, Lambda executes the function up to two more
+    # times. For more information, see [Retry Behavior][3].
+    #
     # The status code in the API response doesn't reflect function errors.
     # Error codes are reserved for errors that prevent your function from
-    # executing, such as permissions errors, [limit errors][3], or issues
+    # executing, such as permissions errors, [limit errors][4], or issues
     # with your function's code and configuration. For example, Lambda
     # returns `TooManyRequestsException` if executing the function would
     # cause you to exceed a concurrency limit at either the account level
@@ -1804,7 +1860,8 @@ module Aws::Lambda
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
-    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function, version, or alias.
@@ -3309,7 +3366,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Modify the version-specifc settings of a Lambda function.
+    # Modify the version-specific settings of a Lambda function.
     #
     # These settings can vary between versions of a function and are locked
     # when you publish a version. You can't modify the configuration of a
@@ -3554,7 +3611,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

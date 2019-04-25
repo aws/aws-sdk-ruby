@@ -45,6 +45,8 @@ module Aws::GameLift
     CreatePlayerSessionOutput = Shapes::StructureShape.new(name: 'CreatePlayerSessionOutput')
     CreatePlayerSessionsInput = Shapes::StructureShape.new(name: 'CreatePlayerSessionsInput')
     CreatePlayerSessionsOutput = Shapes::StructureShape.new(name: 'CreatePlayerSessionsOutput')
+    CreateScriptInput = Shapes::StructureShape.new(name: 'CreateScriptInput')
+    CreateScriptOutput = Shapes::StructureShape.new(name: 'CreateScriptOutput')
     CreateVpcPeeringAuthorizationInput = Shapes::StructureShape.new(name: 'CreateVpcPeeringAuthorizationInput')
     CreateVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'CreateVpcPeeringAuthorizationOutput')
     CreateVpcPeeringConnectionInput = Shapes::StructureShape.new(name: 'CreateVpcPeeringConnectionInput')
@@ -60,6 +62,7 @@ module Aws::GameLift
     DeleteMatchmakingRuleSetInput = Shapes::StructureShape.new(name: 'DeleteMatchmakingRuleSetInput')
     DeleteMatchmakingRuleSetOutput = Shapes::StructureShape.new(name: 'DeleteMatchmakingRuleSetOutput')
     DeleteScalingPolicyInput = Shapes::StructureShape.new(name: 'DeleteScalingPolicyInput')
+    DeleteScriptInput = Shapes::StructureShape.new(name: 'DeleteScriptInput')
     DeleteVpcPeeringAuthorizationInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationInput')
     DeleteVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationOutput')
     DeleteVpcPeeringConnectionInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionInput')
@@ -102,6 +105,8 @@ module Aws::GameLift
     DescribeRuntimeConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeRuntimeConfigurationOutput')
     DescribeScalingPoliciesInput = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesInput')
     DescribeScalingPoliciesOutput = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesOutput')
+    DescribeScriptInput = Shapes::StructureShape.new(name: 'DescribeScriptInput')
+    DescribeScriptOutput = Shapes::StructureShape.new(name: 'DescribeScriptOutput')
     DescribeVpcPeeringAuthorizationsInput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringAuthorizationsInput')
     DescribeVpcPeeringAuthorizationsOutput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringAuthorizationsOutput')
     DescribeVpcPeeringConnectionsInput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringConnectionsInput')
@@ -183,6 +188,8 @@ module Aws::GameLift
     ListBuildsOutput = Shapes::StructureShape.new(name: 'ListBuildsOutput')
     ListFleetsInput = Shapes::StructureShape.new(name: 'ListFleetsInput')
     ListFleetsOutput = Shapes::StructureShape.new(name: 'ListFleetsOutput')
+    ListScriptsInput = Shapes::StructureShape.new(name: 'ListScriptsInput')
+    ListScriptsOutput = Shapes::StructureShape.new(name: 'ListScriptsOutput')
     MatchedPlayerSession = Shapes::StructureShape.new(name: 'MatchedPlayerSession')
     MatchedPlayerSessionList = Shapes::ListShape.new(name: 'MatchedPlayerSessionList')
     MatchmakerData = Shapes::StringShape.new(name: 'MatchmakerData')
@@ -248,6 +255,9 @@ module Aws::GameLift
     ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
     ScalingPolicyList = Shapes::ListShape.new(name: 'ScalingPolicyList')
     ScalingStatusType = Shapes::StringShape.new(name: 'ScalingStatusType')
+    Script = Shapes::StructureShape.new(name: 'Script')
+    ScriptId = Shapes::StringShape.new(name: 'ScriptId')
+    ScriptList = Shapes::ListShape.new(name: 'ScriptList')
     SearchGameSessionsInput = Shapes::StructureShape.new(name: 'SearchGameSessionsInput')
     SearchGameSessionsOutput = Shapes::StructureShape.new(name: 'SearchGameSessionsOutput')
     ServerProcess = Shapes::StructureShape.new(name: 'ServerProcess')
@@ -293,6 +303,8 @@ module Aws::GameLift
     UpdateMatchmakingConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateMatchmakingConfigurationOutput')
     UpdateRuntimeConfigurationInput = Shapes::StructureShape.new(name: 'UpdateRuntimeConfigurationInput')
     UpdateRuntimeConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateRuntimeConfigurationOutput')
+    UpdateScriptInput = Shapes::StructureShape.new(name: 'UpdateScriptInput')
+    UpdateScriptOutput = Shapes::StructureShape.new(name: 'UpdateScriptOutput')
     ValidateMatchmakingRuleSetInput = Shapes::StructureShape.new(name: 'ValidateMatchmakingRuleSetInput')
     ValidateMatchmakingRuleSetOutput = Shapes::StructureShape.new(name: 'ValidateMatchmakingRuleSetOutput')
     VpcPeeringAuthorization = Shapes::StructureShape.new(name: 'VpcPeeringAuthorization')
@@ -301,6 +313,7 @@ module Aws::GameLift
     VpcPeeringConnectionList = Shapes::ListShape.new(name: 'VpcPeeringConnectionList')
     VpcPeeringConnectionStatus = Shapes::StructureShape.new(name: 'VpcPeeringConnectionStatus')
     WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
+    ZipBlob = Shapes::BlobShape.new(name: 'ZipBlob')
 
     AcceptMatchInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "TicketId"))
     AcceptMatchInput.add_member(:player_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "PlayerIds"))
@@ -363,7 +376,8 @@ module Aws::GameLift
 
     CreateFleetInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
     CreateFleetInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
-    CreateFleetInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, required: true, location_name: "BuildId"))
+    CreateFleetInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
+    CreateFleetInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
     CreateFleetInput.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
     CreateFleetInput.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
     CreateFleetInput.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
@@ -445,6 +459,15 @@ module Aws::GameLift
     CreatePlayerSessionsOutput.add_member(:player_sessions, Shapes::ShapeRef.new(shape: PlayerSessionList, location_name: "PlayerSessions"))
     CreatePlayerSessionsOutput.struct_class = Types::CreatePlayerSessionsOutput
 
+    CreateScriptInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
+    CreateScriptInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
+    CreateScriptInput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
+    CreateScriptInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: ZipBlob, location_name: "ZipFile"))
+    CreateScriptInput.struct_class = Types::CreateScriptInput
+
+    CreateScriptOutput.add_member(:script, Shapes::ShapeRef.new(shape: Script, location_name: "Script"))
+    CreateScriptOutput.struct_class = Types::CreateScriptOutput
+
     CreateVpcPeeringAuthorizationInput.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "GameLiftAwsAccountId"))
     CreateVpcPeeringAuthorizationInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PeerVpcId"))
     CreateVpcPeeringAuthorizationInput.struct_class = Types::CreateVpcPeeringAuthorizationInput
@@ -486,6 +509,9 @@ module Aws::GameLift
     DeleteScalingPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
     DeleteScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
     DeleteScalingPolicyInput.struct_class = Types::DeleteScalingPolicyInput
+
+    DeleteScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, required: true, location_name: "ScriptId"))
+    DeleteScriptInput.struct_class = Types::DeleteScriptInput
 
     DeleteVpcPeeringAuthorizationInput.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "GameLiftAwsAccountId"))
     DeleteVpcPeeringAuthorizationInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PeerVpcId"))
@@ -663,6 +689,12 @@ module Aws::GameLift
     DescribeScalingPoliciesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeScalingPoliciesOutput.struct_class = Types::DescribeScalingPoliciesOutput
 
+    DescribeScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, required: true, location_name: "ScriptId"))
+    DescribeScriptInput.struct_class = Types::DescribeScriptInput
+
+    DescribeScriptOutput.add_member(:script, Shapes::ShapeRef.new(shape: Script, location_name: "Script"))
+    DescribeScriptOutput.struct_class = Types::DescribeScriptOutput
+
     DescribeVpcPeeringAuthorizationsInput.struct_class = Types::DescribeVpcPeeringAuthorizationsInput
 
     DescribeVpcPeeringAuthorizationsOutput.add_member(:vpc_peering_authorizations, Shapes::ShapeRef.new(shape: VpcPeeringAuthorizationList, location_name: "VpcPeeringAuthorizations"))
@@ -718,6 +750,7 @@ module Aws::GameLift
     FleetAttributes.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
     FleetAttributes.add_member(:status, Shapes::ShapeRef.new(shape: FleetStatus, location_name: "Status"))
     FleetAttributes.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
+    FleetAttributes.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
     FleetAttributes.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
     FleetAttributes.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
     FleetAttributes.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
@@ -888,6 +921,7 @@ module Aws::GameLift
     ListBuildsOutput.struct_class = Types::ListBuildsOutput
 
     ListFleetsInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
+    ListFleetsInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
     ListFleetsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     ListFleetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     ListFleetsInput.struct_class = Types::ListFleetsInput
@@ -895,6 +929,14 @@ module Aws::GameLift
     ListFleetsOutput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdList, location_name: "FleetIds"))
     ListFleetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     ListFleetsOutput.struct_class = Types::ListFleetsOutput
+
+    ListScriptsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
+    ListScriptsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
+    ListScriptsInput.struct_class = Types::ListScriptsInput
+
+    ListScriptsOutput.add_member(:scripts, Shapes::ShapeRef.new(shape: ScriptList, location_name: "Scripts"))
+    ListScriptsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
+    ListScriptsOutput.struct_class = Types::ListScriptsOutput
 
     MatchedPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     MatchedPlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
@@ -1042,6 +1084,7 @@ module Aws::GameLift
     S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Bucket"))
     S3Location.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Key"))
     S3Location.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleArn"))
+    S3Location.add_member(:object_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ObjectVersion"))
     S3Location.struct_class = Types::S3Location
 
     ScalingPolicy.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
@@ -1058,6 +1101,16 @@ module Aws::GameLift
     ScalingPolicy.struct_class = Types::ScalingPolicy
 
     ScalingPolicyList.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
+
+    Script.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
+    Script.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
+    Script.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
+    Script.add_member(:size_on_disk, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "SizeOnDisk"))
+    Script.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Script.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
+    Script.struct_class = Types::Script
+
+    ScriptList.member = Shapes::ShapeRef.new(shape: Script)
 
     SearchGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     SearchGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
@@ -1226,6 +1279,16 @@ module Aws::GameLift
 
     UpdateRuntimeConfigurationOutput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
     UpdateRuntimeConfigurationOutput.struct_class = Types::UpdateRuntimeConfigurationOutput
+
+    UpdateScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, required: true, location_name: "ScriptId"))
+    UpdateScriptInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
+    UpdateScriptInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
+    UpdateScriptInput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
+    UpdateScriptInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: ZipBlob, location_name: "ZipFile"))
+    UpdateScriptInput.struct_class = Types::UpdateScriptInput
+
+    UpdateScriptOutput.add_member(:script, Shapes::ShapeRef.new(shape: Script, location_name: "Script"))
+    UpdateScriptOutput.struct_class = Types::UpdateScriptOutput
 
     ValidateMatchmakingRuleSetInput.add_member(:rule_set_body, Shapes::ShapeRef.new(shape: RuleSetBody, required: true, location_name: "RuleSetBody"))
     ValidateMatchmakingRuleSetInput.struct_class = Types::ValidateMatchmakingRuleSetInput
@@ -1409,6 +1472,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:create_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateScriptInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateScriptOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:create_vpc_peering_authorization, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVpcPeeringAuthorization"
         o.http_method = "POST"
@@ -1516,6 +1591,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:delete_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScriptInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:delete_vpc_peering_authorization, Seahorse::Model::Operation.new.tap do |o|
@@ -1769,6 +1856,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:describe_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeScriptInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeScriptOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:describe_vpc_peering_authorizations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeVpcPeeringAuthorizations"
         o.http_method = "POST"
@@ -1848,6 +1947,17 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:list_scripts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScripts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListScriptsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListScriptsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2102,6 +2212,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+      end)
+
+      api.add_operation(:update_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScriptInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScriptOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:validate_matchmaking_rule_set, Seahorse::Model::Operation.new.tap do |o|

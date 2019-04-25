@@ -44,6 +44,6 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # @service
 module Aws::DynamoDB
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

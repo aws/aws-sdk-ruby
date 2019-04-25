@@ -1309,6 +1309,24 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLayerVersionByArnRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "LayerVersionArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the layer version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArnRequest AWS API Documentation
+    #
+    class GetLayerVersionByArnRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetLayerVersionPolicyRequest
     #   data as a hash:
     #

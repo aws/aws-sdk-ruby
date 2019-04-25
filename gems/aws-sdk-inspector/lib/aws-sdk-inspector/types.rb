@@ -1560,7 +1560,7 @@ module Aws::Inspector
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReportRequest AWS API Documentation
