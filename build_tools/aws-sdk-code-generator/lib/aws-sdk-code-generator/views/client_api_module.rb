@@ -137,6 +137,15 @@ module AwsSdkCodeGenerator
               lines << "#{shape_name}[:payload_member] = #{shape_name}.member(:#{underscore(payload)})"
             end
             groups << lines.join("\n")
+          elsif error_struct?(shape)
+            required = Set.new(shape['required'] || [])
+            unless shape['members'].nil?
+              shape['members'].each do |member_name, member_ref|
+                lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
+              end
+            end
+            lines << "#{shape_name}.struct_class = Types::#{shape_name}"
+            groups << lines.join("\n")
           elsif shape['type'] == 'list'
             lines << "#{shape_name}.member = #{shape_ref(shape['member'])}"
             groups << lines.join("\n")
@@ -293,11 +302,17 @@ module AwsSdkCodeGenerator
         end
       end
 
+      def error_struct?(shape)
+        shape['type'] == 'structure' && !!!shape['event']
+          (shape['error'] || shape['exception']) &&
+          shape['members'] && shape['members'].size > 0
+      end
+
       def structure_shape_enum
         Enumerator.new do |y|
           shape_enum.each do |shape_name, shape|
-            # skip error types
-            if non_error_struct?(shape)
+            # non error types && non empty error struct
+            if non_error_struct?(shape) || error_struct?(shape)
               y.yield(shape_name, shape)
             end
           end
