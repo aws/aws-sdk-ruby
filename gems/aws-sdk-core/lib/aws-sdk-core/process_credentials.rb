@@ -27,6 +27,8 @@ module Aws
     def initialize(process)
       @process = process
       @credentials = credentials_from_process(@process)
+      
+      super
     end
 
     private
