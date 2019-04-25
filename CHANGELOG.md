@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.262 (2019-04-25)
+------------------
+
 * Feature - Aws::Batch - Updated the documentation for AWS Batch.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
