@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the documentation for AWS Batch.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::WorkSpaces - Updated the documentation for Amazon WorkSpaces.
+
 2.11.261 (2019-04-24)
 ------------------
 
