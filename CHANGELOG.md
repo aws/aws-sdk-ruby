@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Updated the API, documentation, and waiters for AWS Identity and Access Management.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
 2.11.262 (2019-04-25)
 ------------------
 
