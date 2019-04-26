@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.48.6 (2019-04-26)
+------------------
+
 * Issue - Call RefreshingCredentials initialize method in ProcessCredentials to set mutex. 
 
 3.48.5 (2019-04-24)

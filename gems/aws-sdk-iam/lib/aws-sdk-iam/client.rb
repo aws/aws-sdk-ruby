@@ -1112,14 +1112,13 @@ module Aws::IAM
     #   application or applications that are allowed to authenticate using
     #   the OIDC provider
     #
-    # * A list of thumbprints of the server certificate(s) that the IdP
-    #   uses.
+    # * A list of thumbprints of the server certificate(s) that the IdP uses
     #
     # You get all of this information from the OIDC IdP that you want to use
     # to access AWS.
     #
-    # <note markdown="1"> Because trust for the OIDC provider is derived from the IAM provider
-    # that this operation creates, it is best to limit access to the
+    # <note markdown="1"> The trust for the OIDC provider is derived from the IAM provider that
+    # this operation creates. Therefore, it is best to limit access to the
     # CreateOpenIDConnectProvider operation to highly privileged users.
     #
     #  </note>
@@ -1614,7 +1613,7 @@ module Aws::IAM
     #
     # The SAML provider resource that you create with this operation can be
     # used as a principal in an IAM role's trust policy. Such a policy can
-    # enable federated users who sign-in using the SAML IdP to assume the
+    # enable federated users who sign in using the SAML IdP to assume the
     # role. You can create an IAM role that supports Web-based single
     # sign-on (SSO) to the AWS Management Console or one that supports API
     # access to AWS.
@@ -1714,8 +1713,8 @@ module Aws::IAM
     #
     #   Service principals are unique and case-sensitive. To find the exact
     #   service principal for your service-linked role, see [AWS Services That
-    #   Work with IAM][1] in the *IAM User Guide* and look for the services
-    #   that have <b>Yes </b>in the **Service-Linked Role** column. Choose the
+    #   Work with IAM][1] in the *IAM User Guide*. Look for the services that
+    #   have <b>Yes </b>in the **Service-Linked Role** column. Choose the
     #   **Yes** link to view the service-linked role documentation for that
     #   service.
     #
@@ -1977,10 +1976,10 @@ module Aws::IAM
     # create, see [Limitations on Entities][2] in the *IAM User Guide*.
     #
     # The seed information contained in the QR code and the Base32 string
-    # should be treated like any other secret access information, such as
-    # your AWS access keys or your passwords. After you provision your
-    # virtual device, you should ensure that the information is destroyed
-    # following secure procedures.
+    # should be treated like any other secret access information. In other
+    # words, protect the seed information as you would your AWS access keys
+    # or your passwords. After you provision your virtual device, you should
+    # ensure that the information is destroyed following secure procedures.
     #
     #
     #
@@ -2638,8 +2637,8 @@ module Aws::IAM
     # Deletes the permissions boundary for the specified IAM role.
     #
     # Deleting the permissions boundary for a role might increase its
-    # permissions by allowing anyone who assumes the role to perform all the
-    # actions granted in its permissions policies.
+    # permissions. For example, it might allow anyone who assumes the role
+    # to perform all the actions granted in its permissions policies.
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the IAM role from which you want
@@ -3024,9 +3023,34 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the specified IAM user. The user must not belong to any groups
-    # or have any access keys, signing certificates, MFA devices enabled for
-    # AWS, or attached policies.
+    # Deletes the specified IAM user. Unlike the AWS Management Console,
+    # when you delete a user programmatically, you must delete the items
+    # attached to the user manually, or the deletion fails. For more
+    # information, see [Deleting an IAM User][1]. Before attempting to
+    # delete a user, remove the following items:
+    #
+    # * Password (DeleteLoginProfile)
+    #
+    # * Access keys (DeleteAccessKey)
+    #
+    # * Signing certificate (DeleteSigningCertificate)
+    #
+    # * SSH public key (DeleteSSHPublicKey)
+    #
+    # * Git credentials (DeleteServiceSpecificCredential)
+    #
+    # * Multi-factor authentication (MFA) device (DeactivateMFADevice,
+    #   DeleteVirtualMFADevice)
+    #
+    # * Inline policies (DeleteUserPolicy)
+    #
+    # * Attached managed policies (DetachUserPolicy)
+    #
+    # * Group memberships (RemoveUserFromGroup)
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting_cli
     #
     # @option params [required, String] :user_name
     #   The name of the user to delete.
@@ -3473,7 +3497,7 @@ module Aws::IAM
     # IAM resource (user, group, role, or policy) was last used in an
     # attempt to access AWS services. Recent activity usually appears within
     # four hours. IAM reports activity for the last 365 days, or less if
-    # your region began supporting this feature within the last year. For
+    # your Region began supporting this feature within the last year. For
     # more information, see [Regions Where Data Is Tracked][1].
     #
     # The service last accessed data includes all attempts to access an AWS
@@ -3574,7 +3598,7 @@ module Aws::IAM
 
     # Retrieves information about when the specified access key was last
     # used. The information includes the date and time of last use, along
-    # with the AWS service and region that were specified in the last
+    # with the AWS service and Region that were specified in the last
     # request made with that key.
     #
     # @option params [required, String] :access_key_id
@@ -3869,6 +3893,7 @@ module Aws::IAM
     #       "AttachedPoliciesPerGroupQuota" => 10, 
     #       "AttachedPoliciesPerRoleQuota" => 10, 
     #       "AttachedPoliciesPerUserQuota" => 10, 
+    #       "GlobalEndpointTokenVersion" => 2, 
     #       "GroupPolicySizeQuota" => 5120, 
     #       "Groups" => 15, 
     #       "GroupsPerUserQuota" => 10, 
@@ -4933,10 +4958,10 @@ module Aws::IAM
     # the reason that it failed.
     #
     # The `GetServiceLastAccessedDetails` operation returns a list of
-    # services that includes the number of entities that have attempted to
-    # access the service and the date and time of the last attempt. It also
-    # returns the ARN of the following entity, depending on the resource ARN
-    # that you used to generate the report:
+    # services. This list includes the number of entities that have
+    # attempted to access the service and the date and time of the last
+    # attempt. It also returns the ARN of the following entity, depending on
+    # the resource ARN that you used to generate the report:
     #
     # * **User** – Returns the user ARN that you used to generate the report
     #
@@ -5085,7 +5110,7 @@ module Aws::IAM
     #
     #   To learn the service namespace for a service, go to [Actions,
     #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
-    #   Guide* and choose the name of the service to view details for that
+    #   Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For example,
     #   `(service prefix: a4b)`. For more information about service
     #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
@@ -5324,7 +5349,7 @@ module Aws::IAM
     #
     # An IAM user can also have managed policies attached to it. To retrieve
     # a managed policy document that is attached to a user, use GetPolicy to
-    # determine the policy's default version, then use GetPolicyVersion to
+    # determine the policy's default version. Then use GetPolicyVersion to
     # retrieve the policy document.
     #
     # For more information about policies, see [Managed Policies and Inline
@@ -6986,8 +7011,8 @@ module Aws::IAM
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
-    #   to the value of the `Marker` element in the response to indicate where
-    #   the next call should start.
+    #   to the value of the `Marker` element in the response that you received
+    #   to indicate where the next call should start.
     #
     # @option params [Integer] :max_items
     #   (Optional) Use this only when paginating results to indicate the
@@ -7175,8 +7200,8 @@ module Aws::IAM
     end
 
     # Returns information about the SSH public keys associated with the
-    # specified IAM user. If there none exists, the operation returns an
-    # empty list.
+    # specified IAM user. If none exists, the operation returns an empty
+    # list.
     #
     # The SSH public keys returned by this operation are used only for
     # authenticating the IAM user to an AWS CodeCommit repository. For more
@@ -7402,8 +7427,8 @@ module Aws::IAM
     end
 
     # Returns information about the signing certificates associated with the
-    # specified IAM user. If there none exists, the operation returns an
-    # empty list.
+    # specified IAM user. If none exists, the operation returns an empty
+    # list.
     #
     # Although each user is limited to a small number of signing
     # certificates, you can still paginate the results using the `MaxItems`
@@ -7599,8 +7624,8 @@ module Aws::IAM
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
     #   receive a response indicating that the results are truncated. Set it
-    #   to the value of the `Marker` element in the response to indicate where
-    #   the next call should start.
+    #   to the value of the `Marker` element in the response that you received
+    #   to indicate where the next call should start.
     #
     # @option params [Integer] :max_items
     #   (Optional) Use this only when paginating results to indicate the
@@ -8605,6 +8630,76 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Sets the specified version of the global endpoint token as the token
+    # version used for the AWS account.
+    #
+    # By default, AWS Security Token Service (STS) is available as a global
+    # service, and all STS requests go to a single endpoint at
+    # `https://sts.amazonaws.com`. AWS recommends using Regional STS
+    # endpoints to reduce latency, build in redundancy, and increase session
+    # token availability. For information about Regional endpoints for STS,
+    # see [AWS Regions and Endpoints][1] in the *AWS General Reference*.
+    #
+    # If you make an STS call to the global endpoint, the resulting session
+    # tokens might be valid in some Regions but not others. It depends on
+    # the version that is set in this operation. Version 1 tokens are valid
+    # only in AWS Regions that are available by default. These tokens do not
+    # work in manually enabled Regions, such as Asia Pacific (Hong Kong).
+    # Version 2 tokens are valid in all Regions. However, version 2 tokens
+    # are longer and might affect systems where you temporarily store
+    # tokens. For information, see [Activating and Deactivating STS in an
+    # AWS Region][2] in the *IAM User Guide*.
+    #
+    # To view the current session token version, see the
+    # `GlobalEndpointTokenVersion` entry in the response of the
+    # GetAccountSummary operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#sts_region
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #
+    # @option params [required, String] :global_endpoint_token_version
+    #   The version of the global endpoint token. Version 1 tokens are valid
+    #   only in AWS Regions that are available by default. These tokens do not
+    #   work in manually enabled Regions, such as Asia Pacific (Hong Kong).
+    #   Version 2 tokens are valid in all Regions. However, version 2 tokens
+    #   are longer and might affect systems where you temporarily store
+    #   tokens.
+    #
+    #   For information, see [Activating and Deactivating STS in an AWS
+    #   Region][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an access key for an IAM user
+    #
+    #   # The following command sets the STS global endpoint token to version 2. Version 2 tokens are valid in all Regions.
+    #
+    #   resp = client.set_security_token_service_preferences({
+    #     global_endpoint_token_version: "v2Token", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_security_token_service_preferences({
+    #     global_endpoint_token_version: "v1Token", # required, accepts v1Token, v2Token
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetSecurityTokenServicePreferences AWS API Documentation
+    #
+    # @overload set_security_token_service_preferences(params = {})
+    # @param [Hash] params ({})
+    def set_security_token_service_preferences(params = {}, options = {})
+      req = build_request(:set_security_token_service_preferences, params)
+      req.send_request(options)
+    end
+
     # Simulate how a set of IAM policies and optionally a resource-based
     # policy works with a list of API operations and AWS resources to
     # determine the policies' effective permissions. The policies are
@@ -8658,7 +8753,8 @@ module Aws::IAM
     # @option params [required, Array<String>] :action_names
     #   A list of names of API operations to evaluate in the simulation. Each
     #   operation is evaluated against each resource. Each operation must
-    #   include the service identifier, such as `iam:CreateUser`.
+    #   include the service identifier, such as `iam:CreateUser`. This
+    #   operation does not support using wildcards (*) in an action name.
     #
     # @option params [Array<String>] :resource_arns
     #   A list of ARNs of AWS resources to include in the simulation. If this
@@ -8709,14 +8805,15 @@ module Aws::IAM
     # @option params [String] :resource_owner
     #   An ARN representing the AWS account ID that specifies the owner of any
     #   simulated resource that does not identify its owner in the resource
-    #   ARN, such as an S3 bucket or object. If `ResourceOwner` is specified,
-    #   it is also used as the account owner of any `ResourcePolicy` included
-    #   in the simulation. If the `ResourceOwner` parameter is not specified,
-    #   then the owner of the resources and the resource policy defaults to
-    #   the account of the identity provided in `CallerArn`. This parameter is
-    #   required only if you specify a resource-based policy and account that
-    #   owns the resource is different from the account that owns the
-    #   simulated calling user `CallerArn`.
+    #   ARN. Examples of resource ARNs include an S3 bucket or object. If
+    #   `ResourceOwner` is specified, it is also used as the account owner of
+    #   any `ResourcePolicy` included in the simulation. If the
+    #   `ResourceOwner` parameter is not specified, then the owner of the
+    #   resources and the resource policy defaults to the account of the
+    #   identity provided in `CallerArn`. This parameter is required only if
+    #   you specify a resource-based policy and account that owns the resource
+    #   is different from the account that owns the simulated calling user
+    #   `CallerArn`.
     #
     #   The ARN for an account uses the following syntax:
     #   `arn:aws:iam::AWS-account-ID:root`. For example, to represent the
@@ -8735,7 +8832,7 @@ module Aws::IAM
     # @option params [Array<Types::ContextEntry>] :context_entries
     #   A list of context keys and corresponding values for the simulation to
     #   use. Whenever a context key is evaluated in one of the simulated IAM
-    #   permission policies, the corresponding value is supplied.
+    #   permissions policies, the corresponding value is supplied.
     #
     # @option params [String] :resource_handling_option
     #   Specifies the type of simulation to run. Different API operations that
@@ -8886,7 +8983,7 @@ module Aws::IAM
     # You can also optionally include one resource-based policy to be
     # evaluated with each of the resources included in the simulation.
     #
-    # The simulation does not perform the API operations, it only checks the
+    # The simulation does not perform the API operations; it only checks the
     # authorization to determine if the simulated policies allow or deny the
     # operations.
     #
@@ -8989,15 +9086,15 @@ module Aws::IAM
     #
     # @option params [String] :resource_owner
     #   An AWS account ID that specifies the owner of any simulated resource
-    #   that does not identify its owner in the resource ARN, such as an S3
-    #   bucket or object. If `ResourceOwner` is specified, it is also used as
-    #   the account owner of any `ResourcePolicy` included in the simulation.
-    #   If the `ResourceOwner` parameter is not specified, then the owner of
-    #   the resources and the resource policy defaults to the account of the
-    #   identity provided in `CallerArn`. This parameter is required only if
-    #   you specify a resource-based policy and account that owns the resource
-    #   is different from the account that owns the simulated calling user
-    #   `CallerArn`.
+    #   that does not identify its owner in the resource ARN. Examples of
+    #   resource ARNs include an S3 bucket or object. If `ResourceOwner` is
+    #   specified, it is also used as the account owner of any
+    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
+    #   parameter is not specified, then the owner of the resources and the
+    #   resource policy defaults to the account of the identity provided in
+    #   `CallerArn`. This parameter is required only if you specify a
+    #   resource-based policy and account that owns the resource is different
+    #   from the account that owns the simulated calling user `CallerArn`.
     #
     # @option params [String] :caller_arn
     #   The ARN of the IAM user that you want to specify as the simulated
@@ -9474,7 +9571,7 @@ module Aws::IAM
     # Inactive, or vice versa. This operation can be used to disable a
     # user's key as part of a key rotation workflow.
     #
-    # If the `UserName` field is not specified, the user name is determined
+    # If the `UserName` is not specified, the user name is determined
     # implicitly based on the AWS access key ID used to sign the request.
     # This operation works for access keys under the AWS account.
     # Consequently, you can use this operation to manage AWS account root
@@ -10595,7 +10692,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/certificate-manager/
+    # [1]: https://docs.aws.amazon.com/acm/
     # [2]: https://docs.aws.amazon.com/acm/latest/userguide/
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
     # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
@@ -10758,9 +10855,9 @@ module Aws::IAM
     # to validate requests that are signed with a corresponding private key.
     # When you upload the certificate, its default status is `Active`.
     #
-    # If the `UserName` field is not specified, the IAM user name is
-    # determined implicitly based on the AWS access key ID used to sign the
-    # request. This operation works for access keys under the AWS account.
+    # If the `UserName` is not specified, the IAM user name is determined
+    # implicitly based on the AWS access key ID used to sign the request.
+    # This operation works for access keys under the AWS account.
     # Consequently, you can use this operation to manage AWS account root
     # user credentials even if the AWS account has no associated users.
     #
@@ -10871,7 +10968,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -10940,6 +11037,8 @@ module Aws::IAM
     # | waiter_name             | params                  | :delay   | :max_attempts |
     # | ----------------------- | ----------------------- | -------- | ------------- |
     # | instance_profile_exists | {#get_instance_profile} | 1        | 40            |
+    # | policy_exists           | {#get_policy}           | 1        | 20            |
+    # | role_exists             | {#get_role}             | 1        | 20            |
     # | user_exists             | {#get_user}             | 1        | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
@@ -10992,6 +11091,8 @@ module Aws::IAM
     def waiters
       {
         instance_profile_exists: Waiters::InstanceProfileExists,
+        policy_exists: Waiters::PolicyExists,
+        role_exists: Waiters::RoleExists,
         user_exists: Waiters::UserExists
       }
     end
