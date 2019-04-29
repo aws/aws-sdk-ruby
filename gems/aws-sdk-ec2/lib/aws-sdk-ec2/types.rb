@@ -445,15 +445,21 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] auto_placement
-    #   This is enabled by default. This property allows instances to be
-    #   automatically placed onto available Dedicated Hosts, when you are
-    #   launching instances without specifying a host ID.
+    #   Indicates whether the host accepts any untargeted instance launches
+    #   that match its instance type configuration, or if it only accepts
+    #   Host tenancy instance launches that specify its unique host ID. For
+    #   more information, see [ Understanding Instance Placement and Host
+    #   Affinity][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   Default: Enabled
+    #   Default: `on`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone for the Dedicated Hosts.
+    #   The Availability Zone in which to allocate the Dedicated Host.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -467,7 +473,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   Specify the instance type for which to configure your Dedicated
+    #   Specifies the instance type for which to configure your Dedicated
     #   Hosts. When you specify the instance type, that is the only instance
     #   type that you can launch onto that host.
     #   @return [String]
@@ -700,7 +706,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   The Elastic IP address. This is required for EC2-Classic.
+    #   The Elastic IP address to associate with the instance. This is
+    #   required for EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] allow_reassociation
@@ -724,6 +731,9 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID of the network interface. If the instance has
     #   more than one network interface, you must specify a network
     #   interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -1638,15 +1648,21 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
+    #   The IPv4 address range, in CIDR format. You can't specify this
+    #   parameter when specifying a source security group. To specify an
+    #   IPv6 address range, use a set of IP permissions.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1`
-    #   to specify all types. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The start of port range for the TCP and UDP protocols, or an ICMP
+    #   type number. For the ICMP type number, use `-1` to specify all
+    #   types. If you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
@@ -1662,19 +1678,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   The sets of IP permissions. Can be used to specify multiple rules in
-    #   a single command.
+    #   The sets of IP permissions.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`,
-    #   or `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is
-    #   allowed.
+    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #
+    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1`
+    #   or a protocol other than `tcp`, `udp`, or `icmp`, traffic on all
+    #   ports is allowed, regardless of any ports you specify.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     #
     #
@@ -1703,10 +1719,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use `-1`
-    #   to specify all codes. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The end of port range for the TCP and UDP protocols, or an ICMP code
+    #   number. For the ICMP code number, use `-1` to specify all codes. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -4849,26 +4867,37 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a log
-    #   group.
+    #   The ARN for the IAM role that permits Amazon EC2 to publish flow
+    #   logs to a CloudWatch Logs log group in your account.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #   @return [String]
     #
     # @!attribute [rw] log_group_name
-    #   The name of the log group.
+    #   The name of a new or existing CloudWatch Logs log group where Amazon
+    #   EC2 publishes your flow logs.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
-    #   One or more subnet, network interface, or VPC IDs.
+    #   The ID of the subnet, network interface, or VPC for which you want
+    #   to create a flow log.
     #
     #   Constraints: Maximum of 1000 resources
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource on which to create the flow log.
+    #   The type of resource for which to create the flow log. For example,
+    #   if you specified a VPC ID for the `ResourceId` property, specify
+    #   `VPC` for this property.
     #   @return [String]
     #
     # @!attribute [rw] traffic_type
-    #   The type of traffic to log.
+    #   The type of traffic to log. You can log traffic that the resource
+    #   accepts or rejects, or all traffic.
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
@@ -4878,14 +4907,17 @@ module Aws::EC2
     #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
     #   `s3`.
     #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #
     #   Default: `cloud-watch-logs`
     #   @return [String]
     #
     # @!attribute [rw] log_destination
     #   Specifies the destination to which the flow log data is to be
-    #   published. Flow log data can be published to an CloudWatch Logs log
+    #   published. Flow log data can be published to a CloudWatch Logs log
     #   group or an Amazon S3 bucket. The value specified for this parameter
-    #   depends on the value specified for LogDestinationType.
+    #   depends on the value specified for `LogDestinationType`.
     #
     #   If LogDestinationType is not specified or `cloud-watch-logs`,
     #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
@@ -5261,6 +5293,7 @@ module Aws::EC2
     #               description: "String",
     #               device_index: 1,
     #               groups: ["String"],
+    #               interface_type: "String",
     #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
@@ -5343,14 +5376,14 @@ module Aws::EC2
     #               capacity_reservation_id: "String",
     #             },
     #           },
-    #           hibernation_options: {
-    #             configured: false,
-    #           },
     #           license_specifications: [
     #             {
     #               license_configuration_arn: "String",
     #             },
     #           ],
+    #           hibernation_options: {
+    #             configured: false,
+    #           },
     #         },
     #       }
     #
@@ -5447,6 +5480,7 @@ module Aws::EC2
     #               description: "String",
     #               device_index: 1,
     #               groups: ["String"],
+    #               interface_type: "String",
     #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
@@ -5529,14 +5563,14 @@ module Aws::EC2
     #               capacity_reservation_id: "String",
     #             },
     #           },
-    #           hibernation_options: {
-    #             configured: false,
-    #           },
     #           license_specifications: [
     #             {
     #               license_configuration_arn: "String",
     #             },
     #           ],
+    #           hibernation_options: {
+    #             configured: false,
+    #           },
     #         },
     #       }
     #
@@ -5886,6 +5920,7 @@ module Aws::EC2
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
+    #         interface_type: "efa", # accepts efa
     #         subnet_id: "String", # required
     #       }
     #
@@ -5948,6 +5983,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #   @return [Integer]
     #
+    # @!attribute [rw] interface_type
+    #   Indicates whether the network interface is an Elastic Fabric Adapter
+    #   (EFA). Only specify this parameter to create an EFA. For more
+    #   information, see [Elastic Fabric
+    #   Adapter](AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA ENI, omit this parameter.
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet to associate with the network interface.
     #   @return [String]
@@ -5963,6 +6008,7 @@ module Aws::EC2
       :private_ip_address,
       :private_ip_addresses,
       :secondary_private_ip_address_count,
+      :interface_type,
       :subnet_id)
       include Aws::Structure
     end
@@ -6487,9 +6533,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags. The `value` parameter is required, but if you
-    #   don't want the tag to have a value, specify the parameter with no
-    #   value, and we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTagsRequest AWS API Documentation
@@ -6593,7 +6639,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] blackhole
-    #   Indicates whether traffic matching this route is to be dropped.
+    #   Indicates whether to drop traffic if the target isn't available.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -8627,11 +8673,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags to delete. Specify a tag key and an optional tag
-    #   value to delete specific tags. If you specify a tag key without a
-    #   tag value, we delete any tag with this key regardless of its value.
-    #   If you specify a tag key with an empty string as the tag value, we
-    #   delete the tag only if its value is an empty string.
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value,
+    #   we delete any tag with this key regardless of its value. If you
+    #   specify a tag key with an empty string as the tag value, we delete
+    #   the tag only if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete AWS-generated tags (tags that
@@ -9424,13 +9470,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] bundle_ids
-    #   One or more bundle task IDs.
+    #   The bundle task IDs.
     #
     #   Default: Describes all your bundle tasks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `bundle-id` - The ID of the bundle task.
     #
@@ -10059,7 +10105,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] conversion_task_ids
-    #   One or more conversion task IDs.
+    #   The conversion task IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -10315,7 +10361,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] elastic_gpu_ids
-    #   One or more Elastic Graphics accelerator IDs.
+    #   The Elastic Graphics accelerator IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -10326,7 +10372,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone in which the Elastic
     #     Graphics accelerator resides.
@@ -10400,7 +10446,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] export_task_ids
-    #   One or more export task IDs.
+    #   The export task IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasksRequest AWS API Documentation
@@ -10598,7 +10644,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-type` - The instance type.
     #
@@ -10713,7 +10759,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `activity-status` - The progress of the EC2 Fleet ( `error` \|
     #     `pending-fulfillment` \| `pending-termination` \| `fulfilled`).
@@ -10914,7 +10960,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] fpga_image_ids
-    #   One or more AFI IDs.
+    #   The AFI IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] owners
@@ -10924,7 +10970,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `create-time` - The creation time of the AFI.
     #
@@ -10979,7 +11025,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] fpga_images
-    #   Information about one or more FPGA images.
+    #   Information about the FPGA images.
     #   @return [Array<Types::FpgaImage>]
     #
     # @!attribute [rw] next_token
@@ -11013,7 +11059,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family of the offering (for
     #     example, `m4`).
@@ -11100,7 +11146,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family (for example, `m4`).
     #
@@ -11122,7 +11168,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] host_reservation_id_set
-    #   One or more host reservation IDs.
+    #   The host reservation IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -11180,7 +11226,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
@@ -11266,11 +11312,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] association_ids
-    #   One or more IAM instance profile associations.
+    #   The IAM instance profile associations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -11299,7 +11345,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] iam_instance_profile_associations
-    #   Information about one or more IAM instance profile associations.
+    #   Information about the IAM instance profile associations.
     #   @return [Array<Types::IamInstanceProfileAssociation>]
     #
     # @!attribute [rw] next_token
@@ -11461,7 +11507,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `architecture` - The image architecture (`i386` \| `x86_64`).
     #
@@ -11554,7 +11600,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] image_ids
-    #   One or more image IDs.
+    #   The image IDs.
     #
     #   Default: Describes all images available to you.
     #   @return [Array<String>]
@@ -11697,7 +11743,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] import_task_ids
@@ -12205,8 +12251,8 @@ module Aws::EC2
     #   * `placement-partition-number` - The partition in which the instance
     #     is located.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -13212,7 +13258,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -14253,7 +14299,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -14360,7 +14406,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -14385,7 +14431,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] scheduled_instance_ids
-    #   One or more Scheduled Instance IDs.
+    #   The Scheduled Instance IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] slot_start_time_range
@@ -14706,6 +14752,9 @@ module Aws::EC2
     #   The filters.
     #
     #   * `description` - A description of the snapshot.
+    #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true`
+    #     \| `false`)
     #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
@@ -15578,7 +15627,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `key` - The tag key.
     #
@@ -16281,7 +16330,8 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -18346,18 +18396,19 @@ module Aws::EC2
     # @!attribute [rw] volume_size
     #   The size of the volume, in GiB.
     #
+    #   Default: If you're creating the volume from a snapshot and don't
+    #   specify a volume size, the default is the snapshot size.
+    #
     #   Constraints: 1-16384 for General Purpose SSD (`gp2`), 4-16384 for
     #   Provisioned IOPS SSD (`io1`), 500-16384 for Throughput Optimized HDD
     #   (`st1`), 500-16384 for Cold HDD (`sc1`), and 1-1024 for Magnetic
     #   (`standard`) volumes. If you specify a snapshot, the volume size
     #   must be equal to or larger than the snapshot size.
-    #
-    #   Default: If you're creating the volume from a snapshot and don't
-    #   specify a volume size, the default is the snapshot size.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type: `gp2`, `io1`, `st1`, `sc1`, or `standard`.
+    #   The volume type. If you set the type to `io1`, you must also set the
+    #   **Iops** property.
     #
     #   Default: `standard`
     #   @return [String]
@@ -18606,7 +18657,7 @@ module Aws::EC2
     #
     # @!attribute [rw] type
     #   The type of elastic inference accelerator. The possible values are
-    #   eia1.small, eia1.medium, and eia1.large.
+    #   `eia1.small`, `eia1.medium`, and `eia1.large`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAccelerator AWS API Documentation
@@ -18701,11 +18752,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway that is attached to a VPC. The
+    #   virtual private gateway must be attached to the same VPC that the
+    #   routing tables are associated with.
     #   @return [String]
     #
     # @!attribute [rw] route_table_id
-    #   The ID of the route table.
+    #   The ID of the route table. The routing table must be associated with
+    #   the same VPC that the virtual private gateway is attached to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationRequest AWS API Documentation
@@ -18814,7 +18868,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot Fleet event.
+    # Describes an EC2 Fleet or Spot Fleet event.
     #
     # @!attribute [rw] event_description
     #   The description of the event.
@@ -18825,8 +18879,9 @@ module Aws::EC2
     #
     #   The following are the `error` events:
     #
-    #   * `iamFleetRoleInvalid` - The Spot Fleet did not have the required
-    #     permissions either to launch or terminate an instance.
+    #   * `iamFleetRoleInvalid` - The EC2 Fleet or Spot Fleet did not have
+    #     the required permissions either to launch or terminate an
+    #     instance.
     #
     #   * `spotFleetRequestConfigurationInvalid` - The configuration is not
     #     valid. For more information, see the description of the event.
@@ -18836,35 +18891,39 @@ module Aws::EC2
     #
     #   The following are the `fleetRequestChange` events:
     #
-    #   * `active` - The Spot Fleet has been validated and Amazon EC2 is
-    #     attempting to maintain the target number of running Spot
-    #     Instances.
+    #   * `active` - The EC2 Fleet or Spot Fleet request has been validated
+    #     and Amazon EC2 is attempting to maintain the target number of
+    #     running Spot Instances.
     #
-    #   * `cancelled` - The Spot Fleet is canceled and has no running Spot
-    #     Instances. The Spot Fleet will be deleted two days after its
-    #     instances were terminated.
+    #   * `cancelled` - The EC2 Fleet or Spot Fleet request is canceled and
+    #     has no running Spot Instances. The EC2 Fleet or Spot Fleet will be
+    #     deleted two days after its instances were terminated.
     #
-    #   * `cancelled_running` - The Spot Fleet is canceled and does not
-    #     launch additional Spot Instances. Existing Spot Instances continue
-    #     to run until they are interrupted or terminated.
+    #   * `cancelled_running` - The EC2 Fleet or Spot Fleet request is
+    #     canceled and does not launch additional Spot Instances. Existing
+    #     Spot Instances continue to run until they are interrupted or
+    #     terminated.
     #
-    #   * `cancelled_terminating` - The Spot Fleet is canceled and its Spot
-    #     Instances are terminating.
+    #   * `cancelled_terminating` - The EC2 Fleet or Spot Fleet request is
+    #     canceled and its Spot Instances are terminating.
     #
-    #   * `expired` - The Spot Fleet request has expired. A subsequent event
-    #     indicates that the instances were terminated, if the request was
-    #     created with `TerminateInstancesWithExpiration` set.
+    #   * `expired` - The EC2 Fleet or Spot Fleet request has expired. A
+    #     subsequent event indicates that the instances were terminated, if
+    #     the request was created with `TerminateInstancesWithExpiration`
+    #     set.
     #
-    #   * `modify_in_progress` - A request to modify the Spot Fleet request
-    #     was accepted and is in progress.
+    #   * `modify_in_progress` - A request to modify the EC2 Fleet or Spot
+    #     Fleet request was accepted and is in progress.
     #
-    #   * `modify_successful` - The Spot Fleet request was modified.
+    #   * `modify_successful` - The EC2 Fleet or Spot Fleet request was
+    #     modified.
     #
     #   * `price_update` - The price for a launch configuration was adjusted
     #     because it was too high. This change is permanent.
     #
-    #   * `submitted` - The Spot Fleet request is being evaluated and Amazon
-    #     EC2 is preparing to launch the target number of Spot Instances.
+    #   * `submitted` - The EC2 Fleet or Spot Fleet request is being
+    #     evaluated and Amazon EC2 is preparing to launch the target number
+    #     of Spot Instances.
     #
     #   The following are the `instanceChange` events:
     #
@@ -19808,11 +19867,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] load_permissions
-    #   One or more load permissions.
+    #   The load permissions.
     #   @return [Array<Types::LoadPermission>]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes.
+    #   The product codes.
     #   @return [Array<Types::ProductCode>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageAttribute AWS API Documentation
@@ -21084,7 +21143,7 @@ module Aws::EC2
     # Describes an image attribute.
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
@@ -21092,11 +21151,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_permissions
-    #   One or more launch permissions.
+    #   The launch permissions.
     #   @return [Array<Types::LaunchPermission>]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes.
+    #   The product codes.
     #   @return [Array<Types::ProductCode>]
     #
     # @!attribute [rw] description
@@ -21603,11 +21662,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_ids
-    #   One or more security group IDs.
+    #   The security group IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_names
-    #   One or more security group names.
+    #   The security group names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_initiated_shutdown_behavior
@@ -21773,7 +21832,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] volumes
-    #   One or more volumes.
+    #   The volumes.
     #   @return [Array<Types::ImportInstanceVolumeDetailItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceTaskDetails AWS API Documentation
@@ -22824,6 +22883,10 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] interface_type
+    #   Describes the type of network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
@@ -22841,7 +22904,8 @@ module Aws::EC2
       :source_dest_check,
       :status,
       :subnet_id,
-      :vpc_id)
+      :vpc_id,
+      :interface_type)
       include Aws::Structure
     end
 
@@ -22931,6 +22995,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         interface_type: "String",
     #       }
     #
     # @!attribute [rw] associate_public_ip_address
@@ -23009,6 +23074,10 @@ module Aws::EC2
     #   only if creating a network interface when launching an instance.
     #   @return [String]
     #
+    # @!attribute [rw] interface_type
+    #   The type of interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class InstanceNetworkInterfaceSpecification < Struct.new(
@@ -23023,7 +23092,8 @@ module Aws::EC2
       :private_ip_address,
       :private_ip_addresses,
       :secondary_private_ip_address_count,
-      :subnet_id)
+      :subnet_id,
+      :interface_type)
       include Aws::Structure
     end
 
@@ -23347,16 +23417,16 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]).
+    #   The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
+    #   [Protocol Numbers][1]).
     #
-    #   \[EC2-VPC only\] Use `-1` to specify all protocols. When authorizing
+    #   \[VPC only\] Use `-1` to specify all protocols. When authorizing
     #   security group rules, specifying `-1` or a protocol number other
-    #   than `tcp`, `udp`, `icmp`, or `58` (ICMPv6) allows traffic on all
-    #   ports, regardless of any port range you specify. For `tcp`, `udp`,
-    #   and `icmp`, you must specify a port range. For `58` (ICMPv6), you
-    #   can optionally specify a port range; if you don't, traffic for all
-    #   types and codes is allowed when authorizing rules.
+    #   than `tcp`, `udp`, `icmp`, or `icmpv6` allows traffic on all ports,
+    #   regardless of any port range you specify. For `tcp`, `udp`, and
+    #   `icmp`, you must specify a port range. For `icmpv6`, the port range
+    #   is optional; if you omit the port range, traffic for all types and
+    #   codes is allowed.
     #
     #
     #
@@ -23368,21 +23438,19 @@ module Aws::EC2
     #   @return [Array<Types::IpRange>]
     #
     # @!attribute [rw] ipv_6_ranges
-    #   \[EC2-VPC only\] The IPv6 ranges.
+    #   \[VPC only\] The IPv6 ranges.
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   \[EC2-VPC only\] The prefix list IDs for an AWS service. With
-    #   AuthorizeSecurityGroupEgress, this is the AWS service that you want
-    #   to access through a VPC endpoint from instances associated with the
-    #   security group.
+    #   \[VPC only\] The prefix list IDs for an AWS service. With outbound
+    #   rules, this is the AWS service to access through a VPC endpoint from
+    #   instances associated with the security group.
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
     #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes
-    #   for the specified ICMP type. If you specify all ICMP/ICMPv6 types,
-    #   you must specify all codes.
+    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes.
+    #   If you specify all ICMP/ICMPv6 types, you must specify all codes.
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -24059,12 +24127,16 @@ module Aws::EC2
     #   performance of the volume and the rate at which the volume
     #   accumulates I/O credits for bursting. For more information about
     #   General Purpose SSD baseline performance, I/O credits, and bursting,
-    #   see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User
-    #   Guide.
+    #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
     #   Condition: This parameter is required for requests to create io1
     #   volumes; it is not used in requests to create gp2, st1, sc1, or
     #   standard volumes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -24297,6 +24369,10 @@ module Aws::EC2
     #   The IDs of one or more security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] interface_type
+    #   The type of network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_address_count
     #   The number of IPv6 addresses for the network interface.
     #   @return [Integer]
@@ -24334,6 +24410,7 @@ module Aws::EC2
       :description,
       :device_index,
       :groups,
+      :interface_type,
       :ipv_6_address_count,
       :ipv_6_addresses,
       :network_interface_id,
@@ -24355,6 +24432,7 @@ module Aws::EC2
     #         description: "String",
     #         device_index: 1,
     #         groups: ["String"],
+    #         interface_type: "String",
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -24394,6 +24472,10 @@ module Aws::EC2
     # @!attribute [rw] groups
     #   The IDs of one or more security groups.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of networking interface.
+    #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
     #   The number of IPv6 addresses to assign to a network interface.
@@ -24437,6 +24519,7 @@ module Aws::EC2
       :description,
       :device_index,
       :groups,
+      :interface_type,
       :ipv_6_address_count,
       :ipv_6_addresses,
       :network_interface_id,
@@ -25309,19 +25392,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_ids
-    #   One or more AWS account IDs. This parameter is valid only when
-    #   modifying the `loadPermission` attribute.
+    #   The AWS account IDs. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
-    #   One or more user groups. This parameter is valid only when modifying
-    #   the `loadPermission` attribute.
+    #   The user groups. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes. After you add a product code to an AFI,
-    #   it can't be removed. This parameter is valid only when modifying
-    #   the `productCodes` attribute.
+    #   The product codes. After you add a product code to an AFI, it can't
+    #   be removed. This parameter is valid only when modifying the
+    #   `productCodes` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_permission
@@ -25540,18 +25623,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
-    #   One or more user groups. This parameter can be used only when the
+    #   The user groups. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_ids
-    #   One or more AWS account IDs. This parameter can be used only when
-    #   the `Attribute` parameter is `launchPermission`.
+    #   The AWS account IDs. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] value
@@ -25901,7 +25984,7 @@ module Aws::EC2
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation.`
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_id
@@ -27391,7 +27474,7 @@ module Aws::EC2
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] interface_type
-    #   The type of interface.
+    #   The type of network interface.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_addresses
@@ -27903,6 +27986,9 @@ module Aws::EC2
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
+    #
+    #   If not specified, an Availability Zone will be automatically chosen
+    #   for you based on the load balancing criteria for the region.
     #   @return [String]
     #
     # @!attribute [rw] affinity
@@ -28694,7 +28780,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] purchase_requests
-    #   One or more purchase requests.
+    #   The purchase requests.
     #   @return [Array<Types::PurchaseRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesRequest AWS API Documentation
@@ -28830,7 +28916,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -29600,6 +29686,7 @@ module Aws::EC2
     #             description: "String",
     #             device_index: 1,
     #             groups: ["String"],
+    #             interface_type: "String",
     #             ipv_6_address_count: 1,
     #             ipv_6_addresses: [
     #               {
@@ -29682,14 +29769,14 @@ module Aws::EC2
     #             capacity_reservation_id: "String",
     #           },
     #         },
-    #         hibernation_options: {
-    #           configured: false,
-    #         },
     #         license_specifications: [
     #           {
     #             license_configuration_arn: "String",
     #           },
     #         ],
+    #         hibernation_options: {
+    #           configured: false,
+    #         },
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -29733,7 +29820,11 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by using DescribeImages.
+    #   The ID of the AMI, which you can get by using [DescribeImages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -29747,11 +29838,16 @@ module Aws::EC2
     #
     # @!attribute [rw] key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another
     #   way to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #   @return [String]
     #
     # @!attribute [rw] monitoring
@@ -29777,7 +29873,11 @@ module Aws::EC2
     # @!attribute [rw] disable_api_termination
     #   If set to `true`, you can't terminate the instance using the Amazon
     #   EC2 console, CLI, or API. To change this attribute to `false` after
-    #   launch, use ModifyInstanceAttribute.
+    #   launch, use [ ModifyInstanceAttribute][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_initiated_shutdown_behavior
@@ -29854,6 +29954,10 @@ module Aws::EC2
     #   Availability Zone).
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationRequest]
     #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LaunchTemplateLicenseConfigurationRequest>]
+    #
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
@@ -29866,10 +29970,6 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptionsRequest]
-    #
-    # @!attribute [rw] license_specifications
-    #   The license configurations.
-    #   @return [Array<Types::LaunchTemplateLicenseConfigurationRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
@@ -29897,8 +29997,8 @@ module Aws::EC2
       :credit_specification,
       :cpu_options,
       :capacity_reservation_specification,
-      :hibernation_options,
-      :license_specifications)
+      :license_specifications,
+      :hibernation_options)
       include Aws::Structure
     end
 
@@ -29977,6 +30077,7 @@ module Aws::EC2
     #                   ],
     #                   secondary_private_ip_address_count: 1,
     #                   subnet_id: "String",
+    #                   interface_type: "String",
     #                 },
     #               ],
     #               placement: {
@@ -30149,6 +30250,7 @@ module Aws::EC2
     #               ],
     #               secondary_private_ip_address_count: 1,
     #               subnet_id: "String",
+    #               interface_type: "String",
     #             },
     #           ],
     #           placement: {
@@ -30365,6 +30467,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             interface_type: "String",
     #           },
     #         ],
     #         placement: {
@@ -30457,7 +30560,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data for the instance.
+    #   The Base64-encoded user data for the instance. User data is limited
+    #   to 16 KB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification AWS API Documentation
@@ -31300,6 +31404,10 @@ module Aws::EC2
     #   Information about the Capacity Reservation targeting option.
     #   @return [Types::LaunchTemplateCapacityReservationSpecificationResponse]
     #
+    # @!attribute [rw] license_specifications
+    #   The license configurations.
+    #   @return [Array<Types::LaunchTemplateLicenseConfiguration>]
+    #
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is configured for hibernation. For
     #   more information, see [Hibernate Your Instance][1] in the *Amazon
@@ -31309,10 +31417,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptions]
-    #
-    # @!attribute [rw] license_specifications
-    #   The license configurations.
-    #   @return [Array<Types::LaunchTemplateLicenseConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
@@ -31340,8 +31444,8 @@ module Aws::EC2
       :credit_specification,
       :cpu_options,
       :capacity_reservation_specification,
-      :hibernation_options,
-      :license_specifications)
+      :license_specifications,
+      :hibernation_options)
       include Aws::Structure
     end
 
@@ -31950,6 +32054,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             interface_type: "String",
     #           },
     #         ],
     #         private_ip_address: "String",
@@ -32021,9 +32126,8 @@ module Aws::EC2
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An
-    #   AMI is required to launch an instance and must be specified here or
-    #   in a launch template.
+    #   The ID of the AMI. An AMI is required to launch an instance and must
+    #   be specified here or in a launch template.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -32038,11 +32142,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
-    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
-    #   range of your subnet. You cannot specify this option and the option
-    #   to assign specific IPv6 addresses in the same request. You can
-    #   specify this option if you've specified a minimum number of
+    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the
+    #   primary network interface. Amazon EC2 chooses the IPv6 addresses
+    #   from the range of your subnet. You cannot specify this option and
+    #   the option to assign specific IPv6 addresses in the same request.
+    #   You can specify this option if you've specified a minimum number of
     #   instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
@@ -32113,7 +32217,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] monitoring
-    #   The monitoring for the instance.
+    #   Specifies whether detailed monitoring is enabled for the instance.
     #   @return [Types::RunInstancesMonitoringEnabled]
     #
     # @!attribute [rw] placement
@@ -32121,7 +32225,11 @@ module Aws::EC2
     #   @return [Types::Placement]
     #
     # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk to select. Some kernels require additional
+    #   drivers at launch. Check the kernel requirements for information
+    #   about whether you need to specify a RAM disk. To find kernel
+    #   requirements, go to the AWS Resource Center and search for the
+    #   kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
@@ -32165,7 +32273,7 @@ module Aws::EC2
     #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
     #   using a command line tool, base64-encoding is performed for you, and
     #   you can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text.
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
@@ -32232,10 +32340,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   The network interfaces.
-    #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   The network interfaces to associate with the instance.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -32253,11 +32358,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   An elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance. An Elastic GPU is a
+    #   GPU resource that you can attach to your Windows instance to
+    #   accelerate the graphics performance of your applications. For more
+    #   information, see [ Amazon EC2 Elastic GPUs][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   An elastic inference accelerator.
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications
@@ -32283,11 +32399,11 @@ module Aws::EC2
     #   @return [Types::InstanceMarketOptionsRequest]
     #
     # @!attribute [rw] credit_specification
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`. To change this attribute after launch,
-    #   use ModifyInstanceCreditSpecification. For more information, see
-    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   The credit option for CPU usage of the T2 or T3 instance. Valid
+    #   values are `standard` and `unlimited`. To change this attribute
+    #   after launch, use ModifyInstanceCreditSpecification. For more
+    #   information, see [Burstable Performance Instances][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
@@ -33057,7 +33173,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::ScheduledInstancesBlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -33096,7 +33212,7 @@ module Aws::EC2
     #   @return [Types::ScheduledInstancesMonitoring]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces.
     #   @return [Array<Types::ScheduledInstancesNetworkInterface>]
     #
     # @!attribute [rw] placement
@@ -33108,7 +33224,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The IDs of one or more security groups.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
@@ -33211,7 +33327,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] groups
-    #   The IDs of one or more security groups.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_address_count
@@ -33220,7 +33336,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses from the subnet range.
+    #   The specific IPv6 addresses from the subnet range.
     #   @return [Array<Types::ScheduledInstancesIpv6Address>]
     #
     # @!attribute [rw] network_interface_id
@@ -33427,7 +33543,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions_egress
-    #   \[EC2-VPC\] The outbound rules associated with the security group.
+    #   \[VPC only\] The outbound rules associated with the security group.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] tags
@@ -33435,7 +33551,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_id
-    #   \[EC2-VPC\] The ID of the VPC for the security group.
+    #   \[VPC only\] The ID of the VPC for the security group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroup AWS API Documentation
@@ -33522,8 +33638,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
-    #   Indicates whether the service manages it's VPC Endpoints.
-    #   Management of the service VPC Endpoints using the VPC Endpoint API
+    #   Indicates whether the service manages it's VPC endpoints.
+    #   Management of the service VPC endpoints using the VPC endpoint API
     #   is restricted.
     #   @return [Boolean]
     #
@@ -33592,8 +33708,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
-    #   Indicates whether the service manages it's VPC Endpoints.
-    #   Management of the service VPC Endpoints using the VPC Endpoint API
+    #   Indicates whether the service manages it's VPC endpoints.
+    #   Management of the service VPC endpoints using the VPC endpoint API
     #   is restricted.
     #   @return [Boolean]
     #
@@ -34045,6 +34161,7 @@ module Aws::EC2
     #             ],
     #             secondary_private_ip_address_count: 1,
     #             subnet_id: "String",
+    #             interface_type: "String",
     #           },
     #         ],
     #         placement: {
@@ -34327,6 +34444,7 @@ module Aws::EC2
     #                 ],
     #                 secondary_private_ip_address_count: 1,
     #                 subnet_id: "String",
+    #                 interface_type: "String",
     #               },
     #             ],
     #             placement: {
@@ -34448,11 +34566,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_specifications
-    #   The launch specifications for the Spot Fleet request.
+    #   The launch specifications for the Spot Fleet request. If you specify
+    #   `LaunchSpecifications`, you can't specify `LaunchTemplateConfigs`.
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
     # @!attribute [rw] launch_template_configs
-    #   The launch template and overrides.
+    #   The launch template and overrides. If you specify
+    #   `LaunchTemplateConfigs`, you can't specify `LaunchSpecifications`.
     #   @return [Array<Types::LaunchTemplateConfig>]
     #
     # @!attribute [rw] spot_price
@@ -37516,7 +37636,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_managed
-    #   Indicates whether the VPC Endpoint is being managed by its service.
+    #   Indicates whether the VPC endpoint is being managed by its service.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids

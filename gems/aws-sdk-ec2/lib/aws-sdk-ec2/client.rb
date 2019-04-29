@@ -638,14 +638,20 @@ module Aws::EC2
     # allocate.
     #
     # @option params [String] :auto_placement
-    #   This is enabled by default. This property allows instances to be
-    #   automatically placed onto available Dedicated Hosts, when you are
-    #   launching instances without specifying a host ID.
+    #   Indicates whether the host accepts any untargeted instance launches
+    #   that match its instance type configuration, or if it only accepts Host
+    #   tenancy instance launches that specify its unique host ID. For more
+    #   information, see [ Understanding Instance Placement and Host
+    #   Affinity][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   Default: Enabled
+    #   Default: `on`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding
     #
     # @option params [required, String] :availability_zone
-    #   The Availability Zone for the Dedicated Hosts.
+    #   The Availability Zone in which to allocate the Dedicated Host.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -657,9 +663,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :instance_type
-    #   Specify the instance type for which to configure your Dedicated Hosts.
-    #   When you specify the instance type, that is the only instance type
-    #   that you can launch onto that host.
+    #   Specifies the instance type for which to configure your Dedicated
+    #   Hosts. When you specify the instance type, that is the only instance
+    #   type that you can launch onto that host.
     #
     # @option params [required, Integer] :quantity
     #   The number of Dedicated Hosts to allocate to your account with these
@@ -945,7 +951,8 @@ module Aws::EC2
     #   exactly one network interface is attached.
     #
     # @option params [String] :public_ip
-    #   The Elastic IP address. This is required for EC2-Classic.
+    #   The Elastic IP address to associate with the instance. This is
+    #   required for EC2-Classic.
     #
     # @option params [Boolean] :allow_reassociation
     #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to allow
@@ -965,6 +972,9 @@ module Aws::EC2
     # @option params [String] :network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has more
     #   than one network interface, you must specify a network interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     #
     # @option params [String] :private_ip_address
     #   \[EC2-VPC\] The primary or secondary private IP address to associate
@@ -1808,29 +1818,28 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Adds the specified egress rules to a security group
-    # for use with a VPC. Specifically, this action permits instances to
-    # send traffic to the specified destination IPv4 or IPv6 CIDR address
-    # ranges, or to the specified destination security groups for the same
-    # VPC. This action doesn't apply to security groups for use in
-    # EC2-Classic. For more information, see [Security Groups for Your
-    # VPC][1] in the *Amazon Virtual Private Cloud User Guide*. For more
-    # information about security group limits, see [Amazon VPC Limits][2].
+    # \[VPC only\] Adds the specified egress rules to a security group for
+    # use with a VPC.
     #
-    # Each rule consists of the protocol (for example, TCP), plus either a
-    # CIDR range or a source group. For the TCP and UDP protocols, you must
-    # also specify the destination port or port range. For the ICMP
-    # protocol, you must also specify the ICMP type and code. You can use -1
-    # for the type or code to mean all types or all codes. You can
-    # optionally specify a description for the rule.
+    # An outbound rule permits instances to send traffic to the specified
+    # destination IPv4 or IPv6 CIDR address ranges, or to the specified
+    # destination security groups for the same VPC.
+    #
+    # You specify a protocol for each rule (for example, TCP). For the TCP
+    # and UDP protocols, you must also specify the destination port or port
+    # range. For the ICMP protocol, you must also specify the ICMP type and
+    # code. You can use -1 for the type or code to mean all types or all
+    # codes.
     #
     # Rule changes are propagated to affected instances as quickly as
     # possible. However, a small delay might occur.
     #
+    # For more information about VPC security group limits, see [Amazon VPC
+    # Limits][1].
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
-    # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1977,38 +1986,40 @@ module Aws::EC2
 
     # Adds the specified ingress rules to a security group.
     #
+    # An inbound rule permits instances to receive traffic from the
+    # specified destination IPv4 or IPv6 CIDR address ranges, or from the
+    # specified destination security groups.
+    #
+    # You specify a protocol for each rule (for example, TCP). For TCP and
+    # UDP, you must also specify the destination port or port range. For
+    # ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You
+    # can use -1 to mean all types or all codes.
+    #
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
     #
-    # \[EC2-Classic\] This action gives the IPv4 CIDR address ranges
-    # permission to access a security group in your account, or gives the
-    # security groups (called the *source groups*) permission to access a
-    # security group for your account. A source group can be for your own
-    # AWS account, or another. You can have up to 100 rules per group.
-    #
-    # \[EC2-VPC\] This action gives the specified IPv4 or IPv6 CIDR address
-    # ranges permission to access a security group in your VPC, or gives the
-    # specified security groups (called the *source groups*) permission to
-    # access a security group for your VPC. The security groups must all be
-    # for the same VPC or a peer VPC in a VPC peering connection. For more
-    # information about VPC security group limits, see [Amazon VPC
+    # For more information about VPC security group limits, see [Amazon VPC
     # Limits][1].
     #
-    # You can optionally specify a description for the security group rule.
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [String] :cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
+    #   The IPv4 address range, in CIDR format. You can't specify this
+    #   parameter when specifying a source security group. To specify an IPv6
+    #   address range, use a set of IP permissions.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     # @option params [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
-    #   specify all types. If you specify all ICMP/ICMPv6 types, you must
-    #   specify all codes.
+    #   The start of port range for the TCP and UDP protocols, or an ICMP type
+    #   number. For the ICMP type number, use `-1` to specify all types. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     # @option params [String] :group_id
     #   The ID of the security group. You must specify either the security
@@ -2021,17 +2032,18 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions. Can be used to specify multiple rules in a
-    #   single command.
+    #   The sets of IP permissions.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`, or
-    #   `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is allowed.
+    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #
+    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1` or
+    #   a protocol other than `tcp`, `udp`, or `icmp`, traffic on all ports is
+    #   allowed, regardless of any ports you specify.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     #
     #
@@ -2056,10 +2068,12 @@ module Aws::EC2
     #   protocol and port range, use a set of IP permissions instead.
     #
     # @option params [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-    #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
-    #   codes. If you specify all ICMP/ICMPv6 types, you must specify all
-    #   codes.
+    #   The end of port range for the TCP and UDP protocols, or an ICMP code
+    #   number. For the ICMP code number, use `-1` to specify all codes. If
+    #   you specify all ICMP types, you must specify all codes.
+    #
+    #   Alternatively, use a set of IP permissions to specify multiple rules
+    #   and a description for the rule.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4222,22 +4236,33 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [String] :deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a log
-    #   group.
+    #   The ARN for the IAM role that permits Amazon EC2 to publish flow logs
+    #   to a CloudWatch Logs log group in your account.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #
     # @option params [String] :log_group_name
-    #   The name of the log group.
+    #   The name of a new or existing CloudWatch Logs log group where Amazon
+    #   EC2 publishes your flow logs.
+    #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
     #
     # @option params [required, Array<String>] :resource_ids
-    #   One or more subnet, network interface, or VPC IDs.
+    #   The ID of the subnet, network interface, or VPC for which you want to
+    #   create a flow log.
     #
     #   Constraints: Maximum of 1000 resources
     #
     # @option params [required, String] :resource_type
-    #   The type of resource on which to create the flow log.
+    #   The type of resource for which to create the flow log. For example, if
+    #   you specified a VPC ID for the `ResourceId` property, specify `VPC`
+    #   for this property.
     #
     # @option params [required, String] :traffic_type
-    #   The type of traffic to log.
+    #   The type of traffic to log. You can log traffic that the resource
+    #   accepts or rejects, or all traffic.
     #
     # @option params [String] :log_destination_type
     #   Specifies the type of destination to which the flow log data is to be
@@ -4246,13 +4271,16 @@ module Aws::EC2
     #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
     #   `s3`.
     #
+    #   If you specify `LogDestinationType` as `s3`, do not specify
+    #   `DeliverLogsPermissionArn` or `LogGroupName`.
+    #
     #   Default: `cloud-watch-logs`
     #
     # @option params [String] :log_destination
     #   Specifies the destination to which the flow log data is to be
-    #   published. Flow log data can be published to an CloudWatch Logs log
+    #   published. Flow log data can be published to a CloudWatch Logs log
     #   group or an Amazon S3 bucket. The value specified for this parameter
-    #   depends on the value specified for LogDestinationType.
+    #   depends on the value specified for `LogDestinationType`.
     #
     #   If LogDestinationType is not specified or `cloud-watch-logs`, specify
     #   the Amazon Resource Name (ARN) of the CloudWatch Logs log group.
@@ -4311,7 +4339,7 @@ module Aws::EC2
     # for use, check the output logs.
     #
     # An AFI contains the FPGA bitstream that is ready to download to an
-    # FPGA. You can securely deploy an AFI on one or more FPGA-accelerated
+    # FPGA. You can securely deploy an AFI on multiple FPGA-accelerated
     # instances. For more information, see the [AWS FPGA Hardware
     # Development Kit][1].
     #
@@ -4817,6 +4845,7 @@ module Aws::EC2
     #           description: "String",
     #           device_index: 1,
     #           groups: ["String"],
+    #           interface_type: "String",
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
     #             {
@@ -4899,14 +4928,14 @@ module Aws::EC2
     #           capacity_reservation_id: "String",
     #         },
     #       },
-    #       hibernation_options: {
-    #         configured: false,
-    #       },
     #       license_specifications: [
     #         {
     #           license_configuration_arn: "String",
     #         },
     #       ],
+    #       hibernation_options: {
+    #         configured: false,
+    #       },
     #     },
     #   })
     #
@@ -5063,6 +5092,7 @@ module Aws::EC2
     #           description: "String",
     #           device_index: 1,
     #           groups: ["String"],
+    #           interface_type: "String",
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
     #             {
@@ -5145,14 +5175,14 @@ module Aws::EC2
     #           capacity_reservation_id: "String",
     #         },
     #       },
-    #       hibernation_options: {
-    #         configured: false,
-    #       },
     #       license_specifications: [
     #         {
     #           license_configuration_arn: "String",
     #         },
     #       ],
+    #       hibernation_options: {
+    #         configured: false,
+    #       },
     #     },
     #   })
     #
@@ -5187,6 +5217,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].device_index #=> Integer
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].groups #=> Array
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].interface_type #=> String
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -5235,9 +5266,9 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
-    #   resp.launch_template_version.launch_template_data.hibernation_options.configured #=> Boolean
     #   resp.launch_template_version.launch_template_data.license_specifications #=> Array
     #   resp.launch_template_version.launch_template_data.license_specifications[0].license_configuration_arn #=> String
+    #   resp.launch_template_version.launch_template_data.hibernation_options.configured #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -5639,6 +5670,15 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #
+    # @option params [String] :interface_type
+    #   Indicates whether the network interface is an Elastic Fabric Adapter
+    #   (EFA). Only specify this parameter to create an EFA. For more
+    #   information, see [Elastic Fabric
+    #   Adapter](AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #   If you are not creating an EFA ENI, omit this parameter.
+    #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     #
@@ -5711,6 +5751,7 @@ module Aws::EC2
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
+    #     interface_type: "efa", # accepts efa
     #     subnet_id: "String", # required
     #   })
     #
@@ -5733,7 +5774,7 @@ module Aws::EC2
     #   resp.network_interface.groups #=> Array
     #   resp.network_interface.groups[0].group_name #=> String
     #   resp.network_interface.groups[0].group_id #=> String
-    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway"
+    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa"
     #   resp.network_interface.ipv_6_addresses #=> Array
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interface.mac_address #=> String
@@ -6216,15 +6257,11 @@ module Aws::EC2
 
     # Creates a security group.
     #
-    # A security group is for use with instances either in the EC2-Classic
-    # platform or in a specific VPC. For more information, see [Amazon EC2
-    # Security Groups][1] in the *Amazon Elastic Compute Cloud User Guide*
-    # and [Security Groups for Your VPC][2] in the *Amazon Virtual Private
-    # Cloud User Guide*.
-    #
-    # EC2-Classic: You can have up to 500 security groups.
-    #
-    #  EC2-VPC: You can create up to 500 security groups per VPC.
+    # A security group acts as a virtual firewall for your instance to
+    # control inbound and outbound traffic. For more information, see
+    # [Amazon EC2 Security Groups][1] in the *Amazon Elastic Compute Cloud
+    # User Guide* and [Security Groups for Your VPC][2] in the *Amazon
+    # Virtual Private Cloud User Guide*.
     #
     # When you create a security group, you specify a friendly name of your
     # choice. You can have a security group for use in EC2-Classic with the
@@ -6243,10 +6280,14 @@ module Aws::EC2
     # AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress,
     # RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress.
     #
+    # For more information about VPC security group limits, see [Amazon VPC
+    # Limits][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
     # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [required, String] :description
     #   A description for the security group. This is informational only.
@@ -6692,9 +6733,9 @@ module Aws::EC2
     #   request into smaller batches.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6849,7 +6890,7 @@ module Aws::EC2
     #   The ID of the attachment.
     #
     # @option params [Boolean] :blackhole
-    #   Indicates whether traffic matching this route is to be dropped.
+    #   Indicates whether to drop traffic if the target isn't available.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9145,11 +9186,11 @@ module Aws::EC2
     #   request into smaller batches.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   One or more tags to delete. Specify a tag key and an optional tag
-    #   value to delete specific tags. If you specify a tag key without a tag
-    #   value, we delete any tag with this key regardless of its value. If you
-    #   specify a tag key with an empty string as the tag value, we delete the
-    #   tag only if its value is an empty string.
+    #   The tags to delete. Specify a tag key and an optional tag value to
+    #   delete specific tags. If you specify a tag key without a tag value, we
+    #   delete any tag with this key regardless of its value. If you specify a
+    #   tag key with an empty string as the tag value, we delete the tag only
+    #   if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete AWS-generated tags (tags that
@@ -10350,12 +10391,12 @@ module Aws::EC2
     #  </note>
     #
     # @option params [Array<String>] :bundle_ids
-    #   One or more bundle task IDs.
+    #   The bundle task IDs.
     #
     #   Default: Describes all your bundle tasks.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `bundle-id` - The ID of the bundle task.
     #
@@ -10997,8 +11038,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your conversion tasks. For more information,
-    # see the [VM Import/Export User Guide][1].
+    # Describes the specified conversion tasks or all your conversion tasks.
+    # For more information, see the [VM Import/Export User Guide][1].
     #
     # For information about the import manifest referenced by this API
     # action, see [VM Import Manifest][2].
@@ -11009,7 +11050,7 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [Array<String>] :conversion_task_ids
-    #   One or more conversion task IDs.
+    #   The conversion task IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11355,7 +11396,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
     #
     # @option params [Array<String>] :elastic_gpu_ids
-    #   One or more Elastic Graphics accelerator IDs.
+    #   The Elastic Graphics accelerator IDs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11364,7 +11405,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone in which the Elastic
     #     Graphics accelerator resides.
@@ -11431,10 +11472,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your export tasks.
+    # Describes the specified export tasks or all your export tasks.
     #
     # @option params [Array<String>] :export_task_ids
-    #   One or more export task IDs.
+    #   The export task IDs.
     #
     # @return [Types::DescribeExportTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11559,7 +11600,7 @@ module Aws::EC2
     #   The ID of the EC2 Fleet.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-type` - The instance type.
     #
@@ -11605,7 +11646,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your EC2 Fleets.
+    # Describes the specified EC2 Fleets or all your EC2 Fleets.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11626,7 +11667,7 @@ module Aws::EC2
     #   The ID of the EC2 Fleets.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `activity-status` - The progress of the EC2 Fleet ( `error` \|
     #     `pending-fulfillment` \| `pending-termination` \| `fulfilled`).
@@ -11883,7 +11924,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more available Amazon FPGA Images (AFIs). These
+    # Describes the Amazon FPGA Images (AFIs) available to you. These
     # include public AFIs, private AFIs that you own, and AFIs owned by
     # other AWS accounts for which you have load permissions.
     #
@@ -11894,7 +11935,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :fpga_image_ids
-    #   One or more AFI IDs.
+    #   The AFI IDs.
     #
     # @option params [Array<String>] :owners
     #   Filters the AFI by owner. Specify an AWS account ID, `self` (owner is
@@ -11902,7 +11943,7 @@ module Aws::EC2
     #   `amazon` \| `aws-marketplace`).
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `create-time` - The creation time of the AFI.
     #
@@ -12014,7 +12055,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family of the offering (for
     #     example, `m4`).
@@ -12095,7 +12136,7 @@ module Aws::EC2
     # your account.
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-family` - The instance family (for example, `m4`).
     #
@@ -12116,7 +12157,7 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     # @option params [Array<String>] :host_reservation_id_set
-    #   One or more host reservation IDs.
+    #   The host reservation IDs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -12178,7 +12219,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Dedicated Hosts.
+    # Describes the specified Dedicated Hosts or all your Dedicated Hosts.
     #
     # The results describe only the Dedicated Hosts in the Region you're
     # currently using. All listed instances consume capacity on your
@@ -12186,7 +12227,7 @@ module Aws::EC2
     # listed with the state `released`.
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
@@ -12284,10 +12325,10 @@ module Aws::EC2
     # Describes your IAM instance profile associations.
     #
     # @option params [Array<String>] :association_ids
-    #   One or more IAM instance profile associations.
+    #   The IAM instance profile associations.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -12601,10 +12642,8 @@ module Aws::EC2
     # you own, and private images owned by other AWS accounts for which you
     # have explicit launch permissions.
     #
-    # <note markdown="1"> Deregistered images are included in the returned results for an
-    # unspecified interval after deregistration.
-    #
-    #  </note>
+    # Recently deregistered images might appear in the returned results for
+    # a short interval.
     #
     # @option params [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -12612,7 +12651,7 @@ module Aws::EC2
     #   (public AMIs).
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `architecture` - The image architecture (`i386` \| `x86_64`).
     #
@@ -12702,7 +12741,7 @@ module Aws::EC2
     #     `hvm`).
     #
     # @option params [Array<String>] :image_ids
-    #   One or more image IDs.
+    #   The image IDs.
     #
     #   Default: Describes all images available to you.
     #
@@ -12925,7 +12964,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     # @option params [Array<String>] :import_task_ids
     #   A list of import snapshot task IDs.
@@ -13650,8 +13689,8 @@ module Aws::EC2
     #   * `placement-partition-number` - The partition in which the instance
     #     is located.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -13914,6 +13953,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.reservations[0].instances[0].network_interfaces[0].subnet_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].vpc_id #=> String
+    #   resp.reservations[0].instances[0].network_interfaces[0].interface_type #=> String
     #   resp.reservations[0].instances[0].root_device_name #=> String
     #   resp.reservations[0].instances[0].root_device_type #=> String, one of "ebs", "instance-store"
     #   resp.reservations[0].instances[0].security_groups #=> Array
@@ -14323,6 +14363,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].device_index #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].groups #=> Array
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].interface_type #=> String
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -14371,9 +14412,9 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
-    #   resp.launch_template_versions[0].launch_template_data.hibernation_options.configured #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.license_specifications #=> Array
     #   resp.launch_template_versions[0].launch_template_data.license_specifications[0].license_configuration_arn #=> String
+    #   resp.launch_template_versions[0].launch_template_data.hibernation_options.configured #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -15186,7 +15227,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -15335,7 +15376,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].groups #=> Array
     #   resp.network_interfaces[0].groups[0].group_name #=> String
     #   resp.network_interfaces[0].groups[0].group_id #=> String
-    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway"
+    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa"
     #   resp.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].mac_address #=> String
@@ -16511,7 +16552,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -16660,7 +16701,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your Scheduled Instances.
+    # Describes the specified Scheduled Instances or all your Scheduled
+    # Instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16669,7 +16711,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone (for example,
     #     `us-west-2a`).
@@ -16691,7 +16733,7 @@ module Aws::EC2
     #   The token for the next set of results.
     #
     # @option params [Array<String>] :scheduled_instance_ids
-    #   One or more Scheduled Instance IDs.
+    #   The Scheduled Instance IDs.
     #
     # @option params [Types::SlotStartTimeRangeRequest] :slot_start_time_range
     #   The time period for the first schedule to start.
@@ -16795,7 +16837,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Describes the VPCs on the other side of a VPC peering
+    # \[VPC only\] Describes the VPCs on the other side of a VPC peering
     # connection that are referencing the security groups you've specified
     # in this request.
     #
@@ -17231,6 +17273,9 @@ module Aws::EC2
     #   The filters.
     #
     #   * `description` - A description of the snapshot.
+    #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
+    #     `false`)
     #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
@@ -17820,6 +17865,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].subnet_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].interface_type #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.group_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
@@ -18155,6 +18201,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].interface_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
@@ -18335,7 +18382,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Describes the stale security group rules for security
+    # \[VPC only\] Describes the stale security group rules for security
     # groups in a specified VPC. Rules are stale when they reference a
     # deleted security group in a peer VPC, or a security group in a peer
     # VPC for which the VPC peering connection has been deleted.
@@ -18590,7 +18637,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `key` - The tag key.
     #
@@ -19391,7 +19438,8 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -21630,10 +21678,13 @@ module Aws::EC2
     # specified route table of a VPC.
     #
     # @option params [required, String] :gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway that is attached to a VPC. The
+    #   virtual private gateway must be attached to the same VPC that the
+    #   routing tables are associated with.
     #
     # @option params [required, String] :route_table_id
-    #   The ID of the route table.
+    #   The ID of the route table. The routing table must be associated with
+    #   the same VPC that the virtual private gateway is attached to.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -22232,6 +22283,7 @@ module Aws::EC2
     #   resp.launch_template_data.network_interfaces[0].device_index #=> Integer
     #   resp.launch_template_data.network_interfaces[0].groups #=> Array
     #   resp.launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_data.network_interfaces[0].interface_type #=> String
     #   resp.launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
     #   resp.launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -22280,9 +22332,9 @@ module Aws::EC2
     #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
-    #   resp.launch_template_data.hibernation_options.configured #=> Boolean
     #   resp.launch_template_data.license_specifications #=> Array
     #   resp.launch_template_data.license_specifications[0].license_configuration_arn #=> String
+    #   resp.launch_template_data.hibernation_options.configured #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -23501,16 +23553,16 @@ module Aws::EC2
     #   The operation type.
     #
     # @option params [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter is valid only when
-    #   modifying the `loadPermission` attribute.
+    #   The AWS account IDs. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #
     # @option params [Array<String>] :user_groups
-    #   One or more user groups. This parameter is valid only when modifying
-    #   the `loadPermission` attribute.
+    #   The user groups. This parameter is valid only when modifying the
+    #   `loadPermission` attribute.
     #
     # @option params [Array<String>] :product_codes
-    #   One or more product codes. After you add a product code to an AFI, it
-    #   can't be removed. This parameter is valid only when modifying the
+    #   The product codes. After you add a product code to an AFI, it can't
+    #   be removed. This parameter is valid only when modifying the
     #   `productCodes` attribute.
     #
     # @option params [Types::LoadPermissionModifications] :load_permission
@@ -23797,15 +23849,15 @@ module Aws::EC2
     #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [Array<String>] :product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     #
     # @option params [Array<String>] :user_groups
-    #   One or more user groups. This parameter can be used only when the
-    #   `Attribute` parameter is `launchPermission`.
+    #   The user groups. This parameter can be used only when the `Attribute`
+    #   parameter is `launchPermission`.
     #
     # @option params [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter can be used only when the
+    #   The AWS account IDs. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [String] :value
@@ -24225,7 +24277,7 @@ module Aws::EC2
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation.`
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance with the scheduled event.
@@ -25902,7 +25954,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Purchases one or more Scheduled Instances with the specified schedule.
+    # Purchases the Scheduled Instances with the specified schedule.
     #
     # Scheduled Instances enable you to purchase Amazon EC2 compute capacity
     # by the hour for a one-year term. Before you can purchase a Scheduled
@@ -25932,7 +25984,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<Types::PurchaseRequest>] :purchase_requests
-    #   One or more purchase requests.
+    #   The purchase requests.
     #
     # @return [Types::PurchaseScheduledInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26139,7 +26191,7 @@ module Aws::EC2
     #   AMIs, the architecture specified in the manifest file.
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #
     # @option params [String] :description
     #   A description for your AMI.
@@ -27272,6 +27324,7 @@ module Aws::EC2
     #               ],
     #               secondary_private_ip_address_count: 1,
     #               subnet_id: "String",
+    #               interface_type: "String",
     #             },
     #           ],
     #           placement: {
@@ -27579,6 +27632,7 @@ module Aws::EC2
     #           ],
     #           secondary_private_ip_address_count: 1,
     #           subnet_id: "String",
+    #           interface_type: "String",
     #         },
     #       ],
     #       placement: {
@@ -27648,6 +27702,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].interface_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
@@ -28033,9 +28088,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Removes the specified egress rules from a security
-    # group for EC2-VPC. This action doesn't apply to security groups for
-    # use in EC2-Classic. To remove a rule, the values that you specify (for
+    # \[VPC only\] Removes the specified egress rules from a security group
+    # for EC2-VPC. This action doesn't apply to security groups for use in
+    # EC2-Classic. To remove a rule, the values that you specify (for
     # example, ports) must match the existing rule's values exactly.
     #
     # Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or
@@ -28146,8 +28201,8 @@ module Aws::EC2
     # rule, the values that you specify (for example, ports) must match the
     # existing rule's values exactly.
     #
-    # <note markdown="1"> \[EC2-Classic security groups only\] If the values you specify do not
-    # match the existing rule's values, no error is returned. Use
+    # <note markdown="1"> \[EC2-Classic only\] If the values you specify do not match the
+    # existing rule's values, no error is returned. Use
     # DescribeSecurityGroups to verify that the rule has been removed.
     #
     #  </note>
@@ -28356,9 +28411,8 @@ module Aws::EC2
     #   status.
     #
     # @option params [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
-    #   is required to launch an instance and must be specified here or in a
-    #   launch template.
+    #   The ID of the AMI. An AMI is required to launch an instance and must
+    #   be specified here or in a launch template.
     #
     # @option params [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
@@ -28371,7 +28425,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the primary
     #   network interface. Amazon EC2 chooses the IPv6 addresses from the
     #   range of your subnet. You cannot specify this option and the option to
     #   assign specific IPv6 addresses in the same request. You can specify
@@ -28440,13 +28494,16 @@ module Aws::EC2
     #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
     #
     # @option params [Types::RunInstancesMonitoringEnabled] :monitoring
-    #   The monitoring for the instance.
+    #   Specifies whether detailed monitoring is enabled for the instance.
     #
     # @option params [Types::Placement] :placement
     #   The placement for the instance.
     #
     # @option params [String] :ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk to select. Some kernels require additional
+    #   drivers at launch. Check the kernel requirements for information about
+    #   whether you need to specify a RAM disk. To find kernel requirements,
+    #   go to the AWS Resource Center and search for the kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
@@ -28485,7 +28542,8 @@ module Aws::EC2
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
     #   [Adding User Data][2] (Windows). If you are using a command line tool,
     #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text.
+    #   file. Otherwise, you must provide base64-encoded text. User data is
+    #   limited to 16 KB.
     #
     #
     #
@@ -28543,10 +28601,7 @@ module Aws::EC2
     #   Default: `stop`
     #
     # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   The network interfaces.
-    #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   The network interfaces to associate with the instance.
     #
     # @option params [String] :private_ip_address
     #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
@@ -28562,10 +28617,21 @@ module Aws::EC2
     #   the same request.
     #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
+    #   resource that you can attach to your Windows instance to accelerate
+    #   the graphics performance of your applications. For more information,
+    #   see [ Amazon EC2 Elastic GPUs][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
     #
     # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
-    #   An elastic inference accelerator.
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
@@ -28587,9 +28653,9 @@ module Aws::EC2
     #   `stop`.
     #
     # @option params [Types::CreditSpecificationRequest] :credit_specification
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`. To change this attribute after launch, use
-    #   ModifyInstanceCreditSpecification. For more information, see
+    #   The credit option for CPU usage of the T2 or T3 instance. Valid values
+    #   are `standard` and `unlimited`. To change this attribute after launch,
+    #   use ModifyInstanceCreditSpecification. For more information, see
     #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
@@ -28757,6 +28823,7 @@ module Aws::EC2
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         interface_type: "String",
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -28909,6 +28976,7 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.instances[0].network_interfaces[0].subnet_id #=> String
     #   resp.instances[0].network_interfaces[0].vpc_id #=> String
+    #   resp.instances[0].network_interfaces[0].interface_type #=> String
     #   resp.instances[0].root_device_name #=> String
     #   resp.instances[0].root_device_type #=> String, one of "ebs", "instance-store"
     #   resp.instances[0].security_groups #=> Array
@@ -29752,8 +29820,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[EC2-VPC only\] Updates the description of an egress (outbound)
-    # security group rule. You can replace an existing description, or add a
+    # \[VPC only\] Updates the description of an egress (outbound) security
+    # group rule. You can replace an existing description, or add a
     # description to a rule that did not have one previously.
     #
     # You specify the description as part of the IP permissions structure.
@@ -30038,7 +30106,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
