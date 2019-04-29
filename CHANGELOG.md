@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.264 (2019-04-29)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer for SFTP.
