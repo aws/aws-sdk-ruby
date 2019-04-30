@@ -128,6 +128,7 @@ module Aws
     MTurk
     MachineLearning
     Macie
+    ManagedBlockchain
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering

@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::Neptune - Updated the API, documentation, and integration test for Amazon Neptune.
+
+* Feature - Aws::S3Control - Updated the API, and documentation for AWS S3 Control.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::ManagedBlockchain - Added support for a new service, Amazon Managed Blockchain.
+
 2.11.264 (2019-04-29)
 ------------------
 

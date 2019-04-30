@@ -305,8 +305,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                            | Lambda                          | 2015-03-31  |
+| AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
@@ -380,8 +380,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -391,6 +391,7 @@ to be backwards compatible.
 | Amazon Lightsail                                      | Lightsail                       | 2016-11-28  |
 | Amazon Machine Learning                               | MachineLearning                 | 2014-12-12  |
 | Amazon Macie                                          | Macie                           | 2017-12-19  |
+| Amazon Managed Blockchain                             | ManagedBlockchain               | 2018-09-24  |
 | Amazon Mechanical Turk                                | MTurk                           | 2017-01-17  |
 | Amazon Neptune                                        | Neptune                         | 2014-10-31  |
 | Amazon Pinpoint                                       | Pinpoint                        | 2016-12-01  |
