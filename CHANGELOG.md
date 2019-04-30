@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.265 (2019-04-30)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
