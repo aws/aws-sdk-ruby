@@ -31,12 +31,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] associated_gateway_owner_account
-    #   The ID of the AWS account that owns the virtual private gateway.
+    #   The ID of the AWS account that owns the virtual private gateway or
+    #   transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] override_allowed_prefixes_to_direct_connect_gateway
-    #   Overrides the Amazon VPC prefixes advertised to the Direct Connect
-    #   gateway.
+    #   Overrides the existing Amazon VPC prefixes advertised to the Direct
+    #   Connect gateway.
     #   @return [Array<Types::RouteFilterPrefix>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposalRequest AWS API Documentation
@@ -51,7 +52,7 @@ module Aws::DirectConnect
 
     # @!attribute [rw] direct_connect_gateway_association
     #   Information about an association between a Direct Connect gateway
-    #   and a virtual private gateway.
+    #   and a virtual private gateway or transit gateway.
     #   @return [Types::DirectConnectGatewayAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposalResult AWS API Documentation
@@ -239,6 +240,57 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AllocateTransitVirtualInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         owner_account: "OwnerAccount", # required
+    #         new_transit_virtual_interface_allocation: { # required
+    #           virtual_interface_name: "VirtualInterfaceName",
+    #           vlan: 1,
+    #           asn: 1,
+    #           mtu: 1,
+    #           auth_key: "BGPAuthKey",
+    #           amazon_address: "AmazonAddress",
+    #           customer_address: "CustomerAddress",
+    #           address_family: "ipv4", # accepts ipv4, ipv6
+    #         },
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection on which the transit virtual interface is
+    #   provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the AWS account that owns the transit virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_transit_virtual_interface_allocation
+    #   Information about the transit virtual interface.
+    #   @return [Types::NewTransitVirtualInterfaceAllocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterfaceRequest AWS API Documentation
+    #
+    class AllocateTransitVirtualInterfaceRequest < Struct.new(
+      :connection_id,
+      :owner_account,
+      :new_transit_virtual_interface_allocation)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface
+    #   Information about a virtual interface.
+    #   @return [Types::VirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterfaceResult AWS API Documentation
+    #
+    class AllocateTransitVirtualInterfaceResult < Struct.new(
+      :virtual_interface)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateConnectionWithLagRequest
     #   data as a hash:
     #
@@ -323,7 +375,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] owner_account
     #   The ID of the AWS account that owns the associated virtual private
-    #   gateway.
+    #   gateway or transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -604,6 +656,73 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ConfirmTransitVirtualInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_id: "VirtualInterfaceId", # required
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmTransitVirtualInterfaceRequest AWS API Documentation
+    #
+    class ConfirmTransitVirtualInterfaceRequest < Struct.new(
+      :virtual_interface_id,
+      :direct_connect_gateway_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface_state
+    #   The state of the virtual interface. The following are the possible
+    #   values:
+    #
+    #   * `confirming`\: The creation of the virtual interface is pending
+    #     confirmation from the virtual interface owner. If the owner of the
+    #     virtual interface is different from the owner of the connection on
+    #     which it is provisioned, then the virtual interface will remain in
+    #     this state until it is confirmed by the virtual interface owner.
+    #
+    #   * `verifying`\: This state only applies to public virtual
+    #     interfaces. Each public virtual interface needs validation before
+    #     the virtual interface can be created.
+    #
+    #   * `pending`\: A virtual interface is in this state from the time
+    #     that it is created until the virtual interface is ready to forward
+    #     traffic.
+    #
+    #   * `available`\: A virtual interface that is able to forward traffic.
+    #
+    #   * `down`\: A virtual interface that is BGP down.
+    #
+    #   * `deleting`\: A virtual interface is in this state immediately
+    #     after calling DeleteVirtualInterface until it can no longer
+    #     forward traffic.
+    #
+    #   * `deleted`\: A virtual interface that cannot forward traffic.
+    #
+    #   * `rejected`\: The virtual interface owner has declined creation of
+    #     the virtual interface. If a virtual interface in the `Confirming`
+    #     state is deleted by the virtual interface owner, the virtual
+    #     interface enters the `Rejected` state.
+    #
+    #   * `unknown`\: The state of the virtual interface is not available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmTransitVirtualInterfaceResponse AWS API Documentation
+    #
+    class ConfirmTransitVirtualInterfaceResponse < Struct.new(
+      :virtual_interface_state)
+      include Aws::Structure
+    end
+
     # Information about an AWS Direct Connect connection.
     #
     # @!attribute [rw] owner_account
@@ -833,7 +952,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway or transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] add_allowed_prefixes_to_direct_connect_gateway
@@ -886,7 +1005,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway or transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] add_allowed_prefixes_to_direct_connect_gateway
@@ -1109,6 +1228,51 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTransitVirtualInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         new_transit_virtual_interface: { # required
+    #           virtual_interface_name: "VirtualInterfaceName",
+    #           vlan: 1,
+    #           asn: 1,
+    #           mtu: 1,
+    #           auth_key: "BGPAuthKey",
+    #           amazon_address: "AmazonAddress",
+    #           customer_address: "CustomerAddress",
+    #           address_family: "ipv4", # accepts ipv4, ipv6
+    #           direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_transit_virtual_interface
+    #   Information about the transit virtual interface.
+    #   @return [Types::NewTransitVirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterfaceRequest AWS API Documentation
+    #
+    class CreateTransitVirtualInterfaceRequest < Struct.new(
+      :connection_id,
+      :new_transit_virtual_interface)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface
+    #   Information about a virtual interface.
+    #   @return [Types::VirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterfaceResult AWS API Documentation
+    #
+    class CreateTransitVirtualInterfaceResult < Struct.new(
+      :virtual_interface)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteBGPPeerRequest
     #   data as a hash:
     #
@@ -1194,7 +1358,7 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] direct_connect_gateway_association_proposal
-    #   The ID of the virtual private gateway.
+    #   The ID of the associated gateway.
     #   @return [Types::DirectConnectGatewayAssociationProposal]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationProposalResult AWS API Documentation
@@ -1503,7 +1667,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] associated_gateway_id
-    #   The ID of the associated virtual private gateway.
+    #   The ID of the associated gateway.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1912,7 +2076,8 @@ module Aws::DirectConnect
     end
 
     # Information about a Direct Connect gateway, which enables you to
-    # connect virtual interfaces and virtual private gateways.
+    # connect virtual interfaces and virtual private gateway or transit
+    # gateways.
     #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
@@ -1964,7 +2129,7 @@ module Aws::DirectConnect
     end
 
     # Information about an association between a Direct Connect gateway and
-    # a virtual private gateway.
+    # a virtual private gateway or transit gateway.
     #
     # @!attribute [rw] direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
@@ -1981,14 +2146,16 @@ module Aws::DirectConnect
     #     CreateDirectConnectGatewayAssociation.
     #
     #   * `associated`\: The Direct Connect gateway and virtual private
-    #     gateway are successfully associated and ready to pass traffic.
+    #     gateway or transit gateway are successfully associated and ready
+    #     to pass traffic.
     #
     #   * `disassociating`\: The initial state after calling
     #     DeleteDirectConnectGatewayAssociation.
     #
-    #   * `disassociated`\: The virtual private gateway is disassociated
-    #     from the Direct Connect gateway. Traffic flow between the Direct
-    #     Connect gateway and virtual private gateway is stopped.
+    #   * `disassociated`\: The virtual private gateway or transit gateway
+    #     is disassociated from the Direct Connect gateway. Traffic flow
+    #     between the Direct Connect gateway and virtual private gateway or
+    #     transit gateway is stopped.
     #   @return [String]
     #
     # @!attribute [rw] state_change_error
@@ -1996,7 +2163,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] associated_gateway
-    #   Information about the associated virtual private gateway.
+    #   Information about the associated gateway.
     #   @return [Types::AssociatedGateway]
     #
     # @!attribute [rw] association_id
@@ -2037,7 +2204,7 @@ module Aws::DirectConnect
     end
 
     # Information about the proposal request to attach a virtual private
-    # gateway to a DDirect Connect gateway.
+    # gateway to a Direct Connect gateway.
     #
     # @!attribute [rw] proposal_id
     #   The ID of the association proposal.
@@ -2066,7 +2233,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] associated_gateway
-    #   Information about the associated virtual private gateway.
+    #   Information about the associated gateway.
     #   @return [Types::AssociatedGateway]
     #
     # @!attribute [rw] existing_allowed_prefixes_to_direct_connect_gateway
@@ -2127,6 +2294,10 @@ module Aws::DirectConnect
     #     and virtual interface is stopped.
     #   @return [String]
     #
+    # @!attribute [rw] attachment_type
+    #   The type of attachment.
+    #   @return [String]
+    #
     # @!attribute [rw] state_change_error
     #   The error message if the state of an object failed to advance.
     #   @return [String]
@@ -2139,6 +2310,7 @@ module Aws::DirectConnect
       :virtual_interface_region,
       :virtual_interface_owner_account,
       :attachment_state,
+      :attachment_type,
       :state_change_error)
       include Aws::Structure
     end
@@ -2766,6 +2938,141 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Information about a transit virtual interface.
+    #
+    # @note When making an API call, you may pass NewTransitVirtualInterface
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_name: "VirtualInterfaceName",
+    #         vlan: 1,
+    #         asn: 1,
+    #         mtu: 1,
+    #         auth_key: "BGPAuthKey",
+    #         amazon_address: "AmazonAddress",
+    #         customer_address: "CustomerAddress",
+    #         address_family: "ipv4", # accepts ipv4, ipv6
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_name
+    #   The name of the virtual interface assigned by the customer network.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan
+    #   The ID of the VLAN.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mtu
+    #   The maximum transmission unit (MTU), in bytes. The supported values
+    #   are 1500 and 9001. The default value is 1500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auth_key
+    #   The authentication key for BGP configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_address
+    #   The IP address assigned to the Amazon interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_address
+    #   The IP address assigned to the customer interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_family
+    #   The address family for the BGP peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterface AWS API Documentation
+    #
+    class NewTransitVirtualInterface < Struct.new(
+      :virtual_interface_name,
+      :vlan,
+      :asn,
+      :mtu,
+      :auth_key,
+      :amazon_address,
+      :customer_address,
+      :address_family,
+      :direct_connect_gateway_id)
+      include Aws::Structure
+    end
+
+    # Information about a transit virtual interface to be provisioned on a
+    # connection.
+    #
+    # @note When making an API call, you may pass NewTransitVirtualInterfaceAllocation
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_name: "VirtualInterfaceName",
+    #         vlan: 1,
+    #         asn: 1,
+    #         mtu: 1,
+    #         auth_key: "BGPAuthKey",
+    #         amazon_address: "AmazonAddress",
+    #         customer_address: "CustomerAddress",
+    #         address_family: "ipv4", # accepts ipv4, ipv6
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_name
+    #   The name of the virtual interface assigned by the customer network.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan
+    #   The ID of the VLAN.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mtu
+    #   The maximum transmission unit (MTU), in bytes. The supported values
+    #   are 1500 and 9001. The default value is 1500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auth_key
+    #   The authentication key for BGP configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_address
+    #   The IP address assigned to the Amazon interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_address
+    #   The IP address assigned to the customer interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_family
+    #   The address family for the BGP peer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterfaceAllocation AWS API Documentation
+    #
+    class NewTransitVirtualInterfaceAllocation < Struct.new(
+      :virtual_interface_name,
+      :vlan,
+      :asn,
+      :mtu,
+      :auth_key,
+      :amazon_address,
+      :customer_address,
+      :address_family)
+      include Aws::Structure
+    end
+
     # Information about a tag associated with an AWS Direct Connect
     # resource.
     #
@@ -2935,7 +3242,7 @@ module Aws::DirectConnect
 
     # @!attribute [rw] direct_connect_gateway_association
     #   Information about an association between a Direct Connect gateway
-    #   and a virtual private gateway.
+    #   and a virtual private gateway or transit gateway.
     #   @return [Types::DirectConnectGatewayAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayAssociationResult AWS API Documentation

@@ -95,6 +95,34 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateBudgetWithResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         budget_name: "BudgetName", # required
+    #         resource_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] budget_name
+    #   The name of the budget you want to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier. Either a portfolio-id or a product-id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateBudgetWithResourceInput AWS API Documentation
+    #
+    class AssociateBudgetWithResourceInput < Struct.new(
+      :budget_name,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateBudgetWithResourceOutput AWS API Documentation
+    #
+    class AssociateBudgetWithResourceOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociatePrincipalWithPortfolioInput
     #   data as a hash:
     #
@@ -361,6 +389,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # Information about a budget.
+    #
+    # @!attribute [rw] budget_name
+    #   Name of the associated budget.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BudgetDetail AWS API Documentation
+    #
+    class BudgetDetail < Struct.new(
+      :budget_name)
+      include Aws::Structure
+    end
+
     # Information about a CloudWatch dashboard.
     #
     # @!attribute [rw] name
@@ -574,7 +615,7 @@ module Aws::ServiceCatalog
     #     `\{"NotificationArns" :
     #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
     #
-    #   RESOUCE\_UPDATE
+    #   RESOURCE\_UPDATE
     #
     #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
     #
@@ -838,6 +879,7 @@ module Aws::ServiceCatalog
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
     #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #           disable_template_validation: false,
     #         },
     #         idempotency_token: "IdempotencyToken", # required
     #       }
@@ -1090,6 +1132,7 @@ module Aws::ServiceCatalog
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
     #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #           disable_template_validation: false,
     #         },
     #         idempotency_token: "IdempotencyToken", # required
     #       }
@@ -1727,12 +1770,17 @@ module Aws::ServiceCatalog
     #   Information about the TagOptions associated with the portfolio.
     #   @return [Array<Types::TagOptionDetail>]
     #
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioOutput AWS API Documentation
     #
     class DescribePortfolioOutput < Struct.new(
       :portfolio_detail,
       :tags,
-      :tag_options)
+      :tag_options,
+      :budgets)
       include Aws::Structure
     end
 
@@ -1740,7 +1788,7 @@ module Aws::ServiceCatalog
     #   data as a hash:
     #
     #       {
-    #         portfolio_share_token: "PortfolioShareToken", # required
+    #         portfolio_share_token: "Id", # required
     #       }
     #
     # @!attribute [rw] portfolio_share_token
@@ -1835,13 +1883,18 @@ module Aws::ServiceCatalog
     #   Information about the TagOptions associated with the product.
     #   @return [Array<Types::TagOptionDetail>]
     #
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminOutput AWS API Documentation
     #
     class DescribeProductAsAdminOutput < Struct.new(
       :product_view_detail,
       :provisioning_artifact_summaries,
       :tags,
-      :tag_options)
+      :tag_options,
+      :budgets)
       include Aws::Structure
     end
 
@@ -1884,11 +1937,16 @@ module Aws::ServiceCatalog
     #   product.
     #   @return [Array<Types::ProvisioningArtifact>]
     #
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductOutput AWS API Documentation
     #
     class DescribeProductOutput < Struct.new(
       :product_view_summary,
-      :provisioning_artifacts)
+      :provisioning_artifacts,
+      :budgets)
       include Aws::Structure
     end
 
@@ -2340,6 +2398,35 @@ module Aws::ServiceCatalog
     #
     class DisableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateBudgetFromResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         budget_name: "BudgetName", # required
+    #         resource_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] budget_name
+    #   The name of the budget you want to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier you want to disassociate from. Either a
+    #   portfolio-id or a product-id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateBudgetFromResourceInput AWS API Documentation
+    #
+    class DisassociateBudgetFromResourceInput < Struct.new(
+      :budget_name,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateBudgetFromResourceOutput AWS API Documentation
+    #
+    class DisassociateBudgetFromResourceOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociatePrincipalFromPortfolioInput
     #   data as a hash:
     #
@@ -2762,6 +2849,66 @@ module Aws::ServiceCatalog
     #
     class ListAcceptedPortfolioSharesOutput < Struct.new(
       :portfolio_details,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBudgetsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         resource_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListBudgetsForResourceInput AWS API Documentation
+    #
+    class ListBudgetsForResourceInput < Struct.new(
+      :accept_language,
+      :resource_id,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] budgets
+    #   Information about the associated budgets.
+    #   @return [Array<Types::BudgetDetail>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListBudgetsForResourceOutput AWS API Documentation
+    #
+    class ListBudgetsForResourceOutput < Struct.new(
+      :budgets,
       :next_page_token)
       include Aws::Structure
     end
@@ -4565,6 +4712,7 @@ module Aws::ServiceCatalog
     #           "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #         },
     #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #         disable_template_validation: false,
     #       }
     #
     # @!attribute [rw] name
@@ -4595,13 +4743,19 @@ module Aws::ServiceCatalog
     #   * `MARKETPLACE_CAR` - AWS Marketplace Clusters and AWS Resources
     #   @return [String]
     #
+    # @!attribute [rw] disable_template_validation
+    #   If set to true, AWS Service Catalog stops validating the specified
+    #   provisioning artifact even if it is invalid.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
     #
     class ProvisioningArtifactProperties < Struct.new(
       :name,
       :description,
       :info,
-      :type)
+      :type,
+      :disable_template_validation)
       include Aws::Structure
     end
 

@@ -301,6 +301,7 @@ module Aws::CodePipeline
     ActionConfigurationPropertyList.member = Shapes::ShapeRef.new(shape: ActionConfigurationProperty)
 
     ActionContext.add_member(:name, Shapes::ShapeRef.new(shape: ActionName, location_name: "name"))
+    ActionContext.add_member(:action_execution_id, Shapes::ShapeRef.new(shape: ActionExecutionId, location_name: "actionExecutionId"))
     ActionContext.struct_class = Types::ActionContext
 
     ActionDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "name"))
@@ -634,6 +635,8 @@ module Aws::CodePipeline
     PipelineContext.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "pipelineName"))
     PipelineContext.add_member(:stage, Shapes::ShapeRef.new(shape: StageContext, location_name: "stage"))
     PipelineContext.add_member(:action, Shapes::ShapeRef.new(shape: ActionContext, location_name: "action"))
+    PipelineContext.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "pipelineArn"))
+    PipelineContext.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     PipelineContext.struct_class = Types::PipelineContext
 
     PipelineDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))

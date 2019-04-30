@@ -348,7 +348,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to be assigned to the Amazon Neptune resource.
@@ -386,7 +386,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
@@ -461,7 +461,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, String] :target_db_cluster_parameter_group_identifier
     #   The identifier for the copied DB cluster parameter group.
@@ -482,12 +482,7 @@ module Aws::Neptune
     #   A description for the copied DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the copied DB cluster parameter group.
     #
     # @return [Types::CopyDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -529,84 +524,19 @@ module Aws::Neptune
     # snapshot, `SourceDBClusterSnapshotIdentifier` must be the Amazon
     # Resource Name (ARN) of the shared DB cluster snapshot.
     #
-    # You can copy an encrypted DB cluster snapshot from another AWS Region.
-    # In that case, the AWS Region where you call the
-    # `CopyDBClusterSnapshot` action is the destination AWS Region for the
-    # encrypted DB cluster snapshot to be copied to. To copy an encrypted DB
-    # cluster snapshot from another AWS Region, you must provide the
-    # following values:
-    #
-    # * `KmsKeyId` - The AWS Key Management System (AWS KMS) key identifier
-    #   for the key to use to encrypt the copy of the DB cluster snapshot in
-    #   the destination AWS Region.
-    #
-    # * `PreSignedUrl` - A URL that contains a Signature Version 4 signed
-    #   request for the `CopyDBClusterSnapshot` action to be called in the
-    #   source AWS Region where the DB cluster snapshot is copied from. The
-    #   pre-signed URL must be a valid request for the
-    #   `CopyDBClusterSnapshot` API action that can be executed in the
-    #   source AWS Region that contains the encrypted DB cluster snapshot to
-    #   be copied.
-    #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
-    #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster snapshot in the destination AWS Region.
-    #     This is the same identifier for both the `CopyDBClusterSnapshot`
-    #     action that is called in the destination AWS Region, and the
-    #     action contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB
-    #     cluster snapshot will be created in.
-    #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied.
-    #     This identifier must be in the Amazon Resource Name (ARN) format
-    #     for the source AWS Region. For example, if you are copying an
-    #     encrypted DB cluster snapshot from the us-west-2 AWS Region, then
-    #     your `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature
-    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
-    #
-    # * `TargetDBClusterSnapshotIdentifier` - The identifier for the new
-    #   copy of the DB cluster snapshot in the destination AWS Region.
-    #
-    # * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #   identifier for the encrypted DB cluster snapshot to be copied. This
-    #   identifier must be in the ARN format for the source AWS Region and
-    #   is the same value as the `SourceDBClusterSnapshotIdentifier` in the
-    #   pre-signed URL.
-    #
-    # To cancel the copy operation once it is in progress, delete the target
-    # DB cluster snapshot identified by `TargetDBClusterSnapshotIdentifier`
-    # while that DB cluster snapshot is in "copying" status.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    # [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # You can't copy from one AWS Region to another.
     #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
     #
-    #   You can't copy an encrypted, shared DB cluster snapshot from one AWS
-    #   Region to another.
+    #   You can't copy from one AWS Region to another.
     #
     #   Constraints:
     #
     #   * Must specify a valid system snapshot in the "available" state.
     #
-    #   * If the source snapshot is in the same AWS Region as the copy,
-    #     specify a valid DB snapshot identifier.
-    #
-    #   * If the source snapshot is in a different AWS Region than the copy,
-    #     specify a valid DB cluster snapshot ARN.
+    #   * Specify a valid DB snapshot identifier.
     #
     #   Example: `my-cluster-snapshot1`
     #
@@ -642,64 +572,19 @@ module Aws::Neptune
     #   If you copy an encrypted DB cluster snapshot that is shared from
     #   another AWS account, then you must specify a value for `KmsKeyId`.
     #
-    #   To copy an encrypted DB cluster snapshot to another AWS Region, you
-    #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
-    #   copy of the DB cluster snapshot in the destination AWS Region. KMS
-    #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one AWS Region in another
-    #   AWS Region.
+    #   KMS encryption keys are specific to the AWS Region that they are
+    #   created in, and you can't use encryption keys from one AWS Region in
+    #   another AWS Region.
     #
     # @option params [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
-    #   source DB cluster snapshot to copy. The `PreSignedUrl` parameter must
-    #   be used when copying an encrypted DB cluster snapshot from another AWS
-    #   Region.
-    #
-    #   The pre-signed URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the source
-    #   AWS Region that contains the encrypted DB cluster snapshot to be
-    #   copied. The pre-signed URL request must contain the following
-    #   parameter values:
-    #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster snapshot in the destination AWS
-    #     Region. This is the same identifier for both the
-    #     `CopyDBClusterSnapshot` action that is called in the destination AWS
-    #     Region, and the action contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot will be created in.
-    #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied. This
-    #     identifier must be in the Amazon Resource Name (ARN) format for the
-    #     source AWS Region. For example, if you are copying an encrypted DB
-    #     cluster snapshot from the us-west-2 AWS Region, then your
-    #     `SourceDBClusterSnapshotIdentifier` looks like the following
-    #     example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   Not currently supported.
     #
     # @option params [Boolean] :copy_tags
     #   True to copy all tags from the source DB cluster snapshot to the
     #   target DB cluster snapshot, and otherwise false. The default is false.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to assign to the new DB cluster snapshot copy.
     #
     # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,20 +655,20 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, String] :target_db_parameter_group_identifier
     #   The identifier for the copied DB parameter group.
     #
     #   Constraints:
     #
-    #   * Cannot be null, empty, or blank
+    #   * Cannot be null, empty, or blank.
     #
-    #   * Must contain from 1 to 255 letters, numbers, or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-db-parameter-group`
     #
@@ -791,12 +676,7 @@ module Aws::Neptune
     #   A description for the copied DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the copied DB parameter group.
     #
     # @return [Types::CopyDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -836,9 +716,7 @@ module Aws::Neptune
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create the
     # DB cluster as a Read Replica of another DB cluster or Amazon Neptune
-    # DB instance. For cross-region replication where the DB cluster
-    # identified by `ReplicationSourceIdentifier` is encrypted, you must
-    # also specify the `PreSignedUrl` parameter.
+    # DB instance.
     #
     # @option params [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster can
@@ -964,7 +842,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -983,19 +861,14 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a Read Replica.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to assign to the new DB cluster.
     #
     # @option params [Boolean] :storage_encrypted
     #   Specifies whether the DB cluster is encrypted.
@@ -1030,44 +903,7 @@ module Aws::Neptune
     #   in that AWS Region.
     #
     # @option params [String] :pre_signed_url
-    #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster is replicated from. You only need to specify
-    #   `PreSignedUrl` when you are performing cross-region replication from
-    #   an encrypted DB cluster.
-    #
-    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source AWS Region that contains
-    #   the encrypted DB cluster to be copied.
-    #
-    #   The pre-signed URL request must contain the following parameter
-    #   values:
-    #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster in the destination AWS Region.
-    #     This should refer to the same KMS key for both the `CreateDBCluster`
-    #     action that is called in the destination AWS Region, and the action
-    #     contained in the pre-signed URL.
-    #
-    #   * `DestinationRegion` - The name of the AWS Region that Read Replica
-    #     will be created in.
-    #
-    #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
-    #     encrypted DB cluster to be copied. This identifier must be in the
-    #     Amazon Resource Name (ARN) format for the source AWS Region. For
-    #     example, if you are copying an encrypted DB cluster from the
-    #     us-west-2 AWS Region, then your `ReplicationSourceIdentifier` would
-    #     look like Example:
-    #     `arn:aws:rds:us-west-2:123456789012:cluster:neptune-cluster1`.
-    #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   This parameter is not currently supported.
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
@@ -1227,12 +1063,7 @@ module Aws::Neptune
     #   The description for the DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the new DB cluster parameter group.
     #
     # @return [Types::CreateDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1352,9 +1183,7 @@ module Aws::Neptune
     # Creates a new DB instance.
     #
     # @option params [String] :db_name
-    #   The database name.
-    #
-    #   Type: String
+    #   Not supported.
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier. This parameter is stored as a lowercase
@@ -1413,7 +1242,7 @@ module Aws::Neptune
     #   VPC.
     #
     # @option params [String] :availability_zone
-    #   The EC2 Availability Zone that the DB instance is created in.
+    #   The EC2 Availability Zone that the DB instance is created in
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -1527,15 +1356,10 @@ module Aws::Neptune
     #   more information, see CreateDBCluster.
     #
     # @option params [Boolean] :publicly_accessible
-    #   This parameter is not supported.
+    #   This flag should no longer be used.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to assign to the new instance.
     #
     # @option params [String] :db_cluster_identifier
     #   The identifier of the DB cluster that the instance will belong to.
@@ -1857,12 +1681,7 @@ module Aws::Neptune
     #   The description for the DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the new DB parameter group.
     #
     # @return [Types::CreateDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1917,12 +1736,7 @@ module Aws::Neptune
     #   The EC2 Subnet IDs for the DB subnet group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be assigned to the new DB subnet group.
     #
     # @return [Types::CreateDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2037,12 +1851,7 @@ module Aws::Neptune
     #   **false** to create the subscription but not active it.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be applied to the new event subscription.
     #
     # @return [Types::CreateEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2313,15 +2122,9 @@ module Aws::Neptune
     # If the specified DB instance is part of a DB cluster, you can't
     # delete the DB instance if both of the following conditions are true:
     #
-    # * The DB cluster is a Read Replica of another DB cluster.
-    #
     # * The DB instance is the only instance in the DB cluster.
     #
-    # To delete a DB instance in this case, first call the
-    # PromoteReadReplicaDBCluster API action to promote the DB cluster so
-    # it's no longer a Read Replica. After the promotion completes, then
-    # call the `DeleteDBInstance` API action to delete the final instance in
-    # the DB cluster.
+    # ^
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
@@ -4289,7 +4092,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
@@ -4775,12 +4578,7 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [String] :master_user_password
-    #   The new password for the master user. The password can include any
-    #   printable ASCII character except "/", """, or "@".
-    #
     #   Not applicable.
-    #
-    #   Default: Uses existing setting
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
@@ -4797,10 +4595,6 @@ module Aws::Neptune
     #   group family as this DB instance.
     #
     # @option params [Integer] :backup_retention_period
-    #   The number of days to retain automated backups. Setting this parameter
-    #   to a positive number enables backups. Setting this parameter to 0
-    #   disables automated backups.
-    #
     #   Not applicable. The retention period for automated backups is managed
     #   by the DB cluster. For more information, see ModifyDBCluster.
     #
@@ -4878,10 +4672,7 @@ module Aws::Neptune
     #   enabled auto patching for that engine version.
     #
     # @option params [String] :license_model
-    #   The license model for the DB instance.
-    #
-    #   Valid values: `license-included` \| `bring-your-own-license` \|
-    #   `general-public-license`
+    #   Not supported.
     #
     # @option params [Integer] :iops
     #   The new Provisioned IOPS (I/O operations per second) value for the
@@ -4926,31 +4717,7 @@ module Aws::Neptune
     #   Example: `mydbinstance`
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the DB instance.
-    #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a value
-    #   for the `Iops` parameter.
-    #
-    #   If you choose to migrate your DB instance from using standard storage
-    #   to using Provisioned IOPS, or from using Provisioned IOPS to using
-    #   standard storage, the process can take time. The duration of the
-    #   migration depends on several factors such as database load, storage
-    #   size, storage type (standard or Provisioned IOPS), amount of IOPS
-    #   provisioned (if any), and the number of prior scale storage
-    #   operations. Typical migration times are under 24 hours, but the
-    #   process can take up to several days in some cases. During the
-    #   migration, the DB instance is available for use, but might experience
-    #   performance degradation. While the migration takes place, nightly
-    #   backups for the instance are suspended. No other Amazon Neptune
-    #   operations can take place for the instance, including modifying the
-    #   instance, rebooting the instance, deleting the instance, creating a
-    #   Read Replica for the instance, and creating a DB snapshot of the
-    #   instance.
-    #
-    #   Valid values: `standard | gp2 | io1`
-    #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise
-    #   `standard`
+    #   Not supported.
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -4994,7 +4761,7 @@ module Aws::Neptune
     #   Default: `8182`
     #
     # @option params [Boolean] :publicly_accessible
-    #   This parameter is not supported.
+    #   This flag should no longer be used.
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits Neptune to send enhanced
@@ -5029,13 +4796,10 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
-    #   True to enable Performance Insights for the DB instance, and otherwise
-    #   false.
+    #   Not supported.
     #
     # @option params [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   Not supported.
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
@@ -5406,19 +5170,10 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Promotes a Read Replica DB cluster to a standalone DB cluster.
+    # Not supported.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The identifier of the DB cluster Read Replica to promote. This
-    #   parameter is not case-sensitive.
-    #
-    #   Constraints:
-    #
-    #   * Must match the identifier of an existing DBCluster Read Replica.
-    #
-    #   ^
-    #
-    #   Example: `my-cluster-replica1`
+    #   Not supported.
     #
     # @return [Types::PromoteReadReplicaDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5719,7 +5474,7 @@ module Aws::Neptune
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag key (name) of the tag to be removed.
@@ -5946,7 +5701,7 @@ module Aws::Neptune
     #   Example: `mySubnetgroup`
     #
     # @option params [String] :database_name
-    #   The database name for the restored DB cluster.
+    #   Not supported.
     #
     # @option params [String] :option_group_name
     #   The name of the option group to use for the restored DB cluster.
@@ -5983,6 +5738,17 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with the new
+    #   DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6008,6 +5774,7 @@ module Aws::Neptune
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     db_cluster_parameter_group_name: "String",
     #   })
     #
     # @example Response structure
@@ -6097,20 +5864,8 @@ module Aws::Neptune
     #   * Cannot end with a hyphen or contain two consecutive hyphens
     #
     # @option params [String] :restore_type
-    #   The type of restore to be performed. You can specify one of the
-    #   following values:
-    #
-    #   * `full-copy` - The new DB cluster is restored as a full copy of the
-    #     source DB cluster.
-    #
-    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
-    #     source DB cluster.
-    #
-    #   Constraints: You can't specify `copy-on-write` if the engine version
-    #   of the source DB cluster is earlier than 1.11.
-    #
-    #   If you don't specify a `RestoreType` value, then the new DB cluster
-    #   is restored as a full copy of the source DB cluster.
+    #   The type of restore to be performed. The only type of restore
+    #   currently supported is `full-copy` (the default).
     #
     # @option params [required, String] :source_db_cluster_identifier
     #   The identifier of the source DB cluster from which to restore.
@@ -6171,12 +5926,7 @@ module Aws::Neptune
     #   A list of VPC security groups that the new DB cluster belongs to.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon Neptune
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html
+    #   The tags to be applied to the restored DB cluster.
     #
     # @option params [String] :kms_key_id
     #   The AWS KMS key identifier to use when restoring an encrypted DB
@@ -6212,6 +5962,17 @@ module Aws::Neptune
     #
     #   Default: `false`
     #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with the new
+    #   DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6236,6 +5997,7 @@ module Aws::Neptune
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     db_cluster_parameter_group_name: "String",
     #   })
     #
     # @example Response structure
@@ -6310,7 +6072,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

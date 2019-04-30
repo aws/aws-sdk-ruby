@@ -24,6 +24,8 @@ module Aws::ServiceCatalog
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     ApproximateCount = Shapes::IntegerShape.new(name: 'ApproximateCount')
+    AssociateBudgetWithResourceInput = Shapes::StructureShape.new(name: 'AssociateBudgetWithResourceInput')
+    AssociateBudgetWithResourceOutput = Shapes::StructureShape.new(name: 'AssociateBudgetWithResourceOutput')
     AssociatePrincipalWithPortfolioInput = Shapes::StructureShape.new(name: 'AssociatePrincipalWithPortfolioInput')
     AssociatePrincipalWithPortfolioOutput = Shapes::StructureShape.new(name: 'AssociatePrincipalWithPortfolioOutput')
     AssociateProductWithPortfolioInput = Shapes::StructureShape.new(name: 'AssociateProductWithPortfolioInput')
@@ -37,6 +39,9 @@ module Aws::ServiceCatalog
     BatchAssociateServiceActionWithProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'BatchAssociateServiceActionWithProvisioningArtifactOutput')
     BatchDisassociateServiceActionFromProvisioningArtifactInput = Shapes::StructureShape.new(name: 'BatchDisassociateServiceActionFromProvisioningArtifactInput')
     BatchDisassociateServiceActionFromProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'BatchDisassociateServiceActionFromProvisioningArtifactOutput')
+    BudgetDetail = Shapes::StructureShape.new(name: 'BudgetDetail')
+    BudgetName = Shapes::StringShape.new(name: 'BudgetName')
+    Budgets = Shapes::ListShape.new(name: 'Budgets')
     CausingEntity = Shapes::StringShape.new(name: 'CausingEntity')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     CloudWatchDashboard = Shapes::StructureShape.new(name: 'CloudWatchDashboard')
@@ -120,6 +125,9 @@ module Aws::ServiceCatalog
     Description = Shapes::StringShape.new(name: 'Description')
     DisableAWSOrganizationsAccessInput = Shapes::StructureShape.new(name: 'DisableAWSOrganizationsAccessInput')
     DisableAWSOrganizationsAccessOutput = Shapes::StructureShape.new(name: 'DisableAWSOrganizationsAccessOutput')
+    DisableTemplateValidation = Shapes::BooleanShape.new(name: 'DisableTemplateValidation')
+    DisassociateBudgetFromResourceInput = Shapes::StructureShape.new(name: 'DisassociateBudgetFromResourceInput')
+    DisassociateBudgetFromResourceOutput = Shapes::StructureShape.new(name: 'DisassociateBudgetFromResourceOutput')
     DisassociatePrincipalFromPortfolioInput = Shapes::StructureShape.new(name: 'DisassociatePrincipalFromPortfolioInput')
     DisassociatePrincipalFromPortfolioOutput = Shapes::StructureShape.new(name: 'DisassociatePrincipalFromPortfolioOutput')
     DisassociateProductFromPortfolioInput = Shapes::StructureShape.new(name: 'DisassociateProductFromPortfolioInput')
@@ -157,6 +165,8 @@ module Aws::ServiceCatalog
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAcceptedPortfolioSharesInput = Shapes::StructureShape.new(name: 'ListAcceptedPortfolioSharesInput')
     ListAcceptedPortfolioSharesOutput = Shapes::StructureShape.new(name: 'ListAcceptedPortfolioSharesOutput')
+    ListBudgetsForResourceInput = Shapes::StructureShape.new(name: 'ListBudgetsForResourceInput')
+    ListBudgetsForResourceOutput = Shapes::StructureShape.new(name: 'ListBudgetsForResourceOutput')
     ListConstraintsForPortfolioInput = Shapes::StructureShape.new(name: 'ListConstraintsForPortfolioInput')
     ListConstraintsForPortfolioOutput = Shapes::StructureShape.new(name: 'ListConstraintsForPortfolioOutput')
     ListLaunchPathsInput = Shapes::StructureShape.new(name: 'ListLaunchPathsInput')
@@ -216,7 +226,6 @@ module Aws::ServiceCatalog
     PortfolioDetails = Shapes::ListShape.new(name: 'PortfolioDetails')
     PortfolioDisplayName = Shapes::StringShape.new(name: 'PortfolioDisplayName')
     PortfolioName = Shapes::StringShape.new(name: 'PortfolioName')
-    PortfolioShareToken = Shapes::StringShape.new(name: 'PortfolioShareToken')
     PortfolioShareType = Shapes::StringShape.new(name: 'PortfolioShareType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalARN = Shapes::StringShape.new(name: 'PrincipalARN')
@@ -433,6 +442,12 @@ module Aws::ServiceCatalog
 
     AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
 
+    AssociateBudgetWithResourceInput.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    AssociateBudgetWithResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
+    AssociateBudgetWithResourceInput.struct_class = Types::AssociateBudgetWithResourceInput
+
+    AssociateBudgetWithResourceOutput.struct_class = Types::AssociateBudgetWithResourceOutput
+
     AssociatePrincipalWithPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     AssociatePrincipalWithPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
     AssociatePrincipalWithPortfolioInput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalARN, required: true, location_name: "PrincipalARN"))
@@ -476,6 +491,11 @@ module Aws::ServiceCatalog
 
     BatchDisassociateServiceActionFromProvisioningArtifactOutput.add_member(:failed_service_action_associations, Shapes::ShapeRef.new(shape: FailedServiceActionAssociations, location_name: "FailedServiceActionAssociations"))
     BatchDisassociateServiceActionFromProvisioningArtifactOutput.struct_class = Types::BatchDisassociateServiceActionFromProvisioningArtifactOutput
+
+    BudgetDetail.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, location_name: "BudgetName"))
+    BudgetDetail.struct_class = Types::BudgetDetail
+
+    Budgets.member = Shapes::ShapeRef.new(shape: BudgetDetail)
 
     CloudWatchDashboard.add_member(:name, Shapes::ShapeRef.new(shape: CloudWatchDashboardName, location_name: "Name"))
     CloudWatchDashboard.struct_class = Types::CloudWatchDashboard
@@ -542,7 +562,7 @@ module Aws::ServiceCatalog
     CreatePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
     CreatePortfolioShareInput.struct_class = Types::CreatePortfolioShareInput
 
-    CreatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, location_name: "PortfolioShareToken"))
+    CreatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
     CreatePortfolioShareOutput.struct_class = Types::CreatePortfolioShareOutput
 
     CreateProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -631,7 +651,7 @@ module Aws::ServiceCatalog
     DeletePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
     DeletePortfolioShareInput.struct_class = Types::DeletePortfolioShareInput
 
-    DeletePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, location_name: "PortfolioShareToken"))
+    DeletePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
     DeletePortfolioShareOutput.struct_class = Types::DeletePortfolioShareOutput
 
     DeleteProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -690,12 +710,13 @@ module Aws::ServiceCatalog
     DescribePortfolioOutput.add_member(:portfolio_detail, Shapes::ShapeRef.new(shape: PortfolioDetail, location_name: "PortfolioDetail"))
     DescribePortfolioOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribePortfolioOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptions"))
+    DescribePortfolioOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
     DescribePortfolioOutput.struct_class = Types::DescribePortfolioOutput
 
-    DescribePortfolioShareStatusInput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, required: true, location_name: "PortfolioShareToken"))
+    DescribePortfolioShareStatusInput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioShareToken"))
     DescribePortfolioShareStatusInput.struct_class = Types::DescribePortfolioShareStatusInput
 
-    DescribePortfolioShareStatusOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: PortfolioShareToken, location_name: "PortfolioShareToken"))
+    DescribePortfolioShareStatusOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
     DescribePortfolioShareStatusOutput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioId"))
     DescribePortfolioShareStatusOutput.add_member(:organization_node_value, Shapes::ShapeRef.new(shape: OrganizationNodeValue, location_name: "OrganizationNodeValue"))
     DescribePortfolioShareStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
@@ -710,6 +731,7 @@ module Aws::ServiceCatalog
     DescribeProductAsAdminOutput.add_member(:provisioning_artifact_summaries, Shapes::ShapeRef.new(shape: ProvisioningArtifactSummaries, location_name: "ProvisioningArtifactSummaries"))
     DescribeProductAsAdminOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeProductAsAdminOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptions"))
+    DescribeProductAsAdminOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
     DescribeProductAsAdminOutput.struct_class = Types::DescribeProductAsAdminOutput
 
     DescribeProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -718,6 +740,7 @@ module Aws::ServiceCatalog
 
     DescribeProductOutput.add_member(:product_view_summary, Shapes::ShapeRef.new(shape: ProductViewSummary, location_name: "ProductViewSummary"))
     DescribeProductOutput.add_member(:provisioning_artifacts, Shapes::ShapeRef.new(shape: ProvisioningArtifacts, location_name: "ProvisioningArtifacts"))
+    DescribeProductOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
     DescribeProductOutput.struct_class = Types::DescribeProductOutput
 
     DescribeProductViewInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -799,6 +822,12 @@ module Aws::ServiceCatalog
 
     DisableAWSOrganizationsAccessOutput.struct_class = Types::DisableAWSOrganizationsAccessOutput
 
+    DisassociateBudgetFromResourceInput.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
+    DisassociateBudgetFromResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
+    DisassociateBudgetFromResourceInput.struct_class = Types::DisassociateBudgetFromResourceInput
+
+    DisassociateBudgetFromResourceOutput.struct_class = Types::DisassociateBudgetFromResourceOutput
+
     DisassociatePrincipalFromPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DisassociatePrincipalFromPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
     DisassociatePrincipalFromPortfolioInput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalARN, required: true, location_name: "PrincipalARN"))
@@ -879,6 +908,16 @@ module Aws::ServiceCatalog
     ListAcceptedPortfolioSharesOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
     ListAcceptedPortfolioSharesOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     ListAcceptedPortfolioSharesOutput.struct_class = Types::ListAcceptedPortfolioSharesOutput
+
+    ListBudgetsForResourceInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    ListBudgetsForResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
+    ListBudgetsForResourceInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListBudgetsForResourceInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListBudgetsForResourceInput.struct_class = Types::ListBudgetsForResourceInput
+
+    ListBudgetsForResourceOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
+    ListBudgetsForResourceOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
+    ListBudgetsForResourceOutput.struct_class = Types::ListBudgetsForResourceOutput
 
     ListConstraintsForPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListConstraintsForPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -1221,6 +1260,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifactProperties.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
     ProvisioningArtifactProperties.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, required: true, location_name: "Info"))
     ProvisioningArtifactProperties.add_member(:type, Shapes::ShapeRef.new(shape: ProvisioningArtifactType, location_name: "Type"))
+    ProvisioningArtifactProperties.add_member(:disable_template_validation, Shapes::ShapeRef.new(shape: DisableTemplateValidation, location_name: "DisableTemplateValidation"))
     ProvisioningArtifactProperties.struct_class = Types::ProvisioningArtifactProperties
 
     ProvisioningArtifactSummaries.member = Shapes::ShapeRef.new(shape: ProvisioningArtifactSummary)
@@ -1595,6 +1635,18 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:associate_budget_with_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateBudgetWithResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateBudgetWithResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateBudgetWithResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:associate_principal_with_portfolio, Seahorse::Model::Operation.new.tap do |o|
@@ -1992,6 +2044,15 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
+      api.add_operation(:disassociate_budget_from_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateBudgetFromResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateBudgetFromResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateBudgetFromResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:disassociate_principal_from_portfolio, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociatePrincipalFromPortfolio"
         o.http_method = "POST"
@@ -2083,6 +2144,22 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListAcceptedPortfolioSharesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_budgets_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBudgetsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBudgetsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListBudgetsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o[:pager] = Aws::Pager.new(
           limit_key: "page_size",
           tokens: {

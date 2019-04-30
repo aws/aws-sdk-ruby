@@ -306,6 +306,32 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Associates the specified budget with the specified resource.
+    #
+    # @option params [required, String] :budget_name
+    #   The name of the budget you want to associate.
+    #
+    # @option params [required, String] :resource_id
+    #   The resource identifier. Either a portfolio-id or a product-id.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_budget_with_resource({
+    #     budget_name: "BudgetName", # required
+    #     resource_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateBudgetWithResource AWS API Documentation
+    #
+    # @overload associate_budget_with_resource(params = {})
+    # @param [Hash] params ({})
+    def associate_budget_with_resource(params = {}, options = {})
+      req = build_request(:associate_budget_with_resource, params)
+      req.send_request(options)
+    end
+
     # Associates the specified principal ARN with the specified portfolio.
     #
     # @option params [String] :accept_language
@@ -673,7 +699,7 @@ module Aws::ServiceCatalog
     #     `\{"NotificationArns" :
     #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
     #
-    #   RESOUCE\_UPDATE
+    #   RESOURCE\_UPDATE
     #
     #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
     #
@@ -977,6 +1003,7 @@ module Aws::ServiceCatalog
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
     #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
     #   })
@@ -1177,6 +1204,7 @@ module Aws::ServiceCatalog
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
     #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
     #   })
@@ -1724,6 +1752,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribePortfolioOutput#portfolio_detail #portfolio_detail} => Types::PortfolioDetail
     #   * {Types::DescribePortfolioOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribePortfolioOutput#tag_options #tag_options} => Array&lt;Types::TagOptionDetail&gt;
+    #   * {Types::DescribePortfolioOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1748,6 +1777,8 @@ module Aws::ServiceCatalog
     #   resp.tag_options[0].value #=> String
     #   resp.tag_options[0].active #=> Boolean
     #   resp.tag_options[0].id #=> String
+    #   resp.budgets #=> Array
+    #   resp.budgets[0].budget_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio AWS API Documentation
     #
@@ -1776,7 +1807,7 @@ module Aws::ServiceCatalog
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_portfolio_share_status({
-    #     portfolio_share_token: "PortfolioShareToken", # required
+    #     portfolio_share_token: "Id", # required
     #   })
     #
     # @example Response structure
@@ -1820,6 +1851,7 @@ module Aws::ServiceCatalog
     #
     #   * {Types::DescribeProductOutput#product_view_summary #product_view_summary} => Types::ProductViewSummary
     #   * {Types::DescribeProductOutput#provisioning_artifacts #provisioning_artifacts} => Array&lt;Types::ProvisioningArtifact&gt;
+    #   * {Types::DescribeProductOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1846,6 +1878,8 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifacts[0].name #=> String
     #   resp.provisioning_artifacts[0].description #=> String
     #   resp.provisioning_artifacts[0].created_time #=> Time
+    #   resp.budgets #=> Array
+    #   resp.budgets[0].budget_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProduct AWS API Documentation
     #
@@ -1877,6 +1911,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProductAsAdminOutput#provisioning_artifact_summaries #provisioning_artifact_summaries} => Array&lt;Types::ProvisioningArtifactSummary&gt;
     #   * {Types::DescribeProductAsAdminOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeProductAsAdminOutput#tag_options #tag_options} => Array&lt;Types::TagOptionDetail&gt;
+    #   * {Types::DescribeProductAsAdminOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1916,6 +1951,8 @@ module Aws::ServiceCatalog
     #   resp.tag_options[0].value #=> String
     #   resp.tag_options[0].active #=> Boolean
     #   resp.tag_options[0].id #=> String
+    #   resp.budgets #=> Array
+    #   resp.budgets[0].budget_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin AWS API Documentation
     #
@@ -2421,6 +2458,33 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Disassociates the specified budget from the specified resource.
+    #
+    # @option params [required, String] :budget_name
+    #   The name of the budget you want to disassociate.
+    #
+    # @option params [required, String] :resource_id
+    #   The resource identifier you want to disassociate from. Either a
+    #   portfolio-id or a product-id.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_budget_from_resource({
+    #     budget_name: "BudgetName", # required
+    #     resource_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateBudgetFromResource AWS API Documentation
+    #
+    # @overload disassociate_budget_from_resource(params = {})
+    # @param [Hash] params ({})
+    def disassociate_budget_from_resource(params = {}, options = {})
+      req = build_request(:disassociate_budget_from_resource, params)
+      req.send_request(options)
+    end
+
     # Disassociates a previously associated principal ARN from a specified
     # portfolio.
     #
@@ -2792,6 +2856,56 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def list_accepted_portfolio_shares(params = {}, options = {})
       req = build_request(:list_accepted_portfolio_shares, params)
+      req.send_request(options)
+    end
+
+    # Lists all the budgets associated to the specified resource.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :resource_id
+    #   The resource identifier.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @return [Types::ListBudgetsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBudgetsForResourceOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
+    #   * {Types::ListBudgetsForResourceOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_budgets_for_resource({
+    #     accept_language: "AcceptLanguage",
+    #     resource_id: "Id", # required
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.budgets #=> Array
+    #   resp.budgets[0].budget_name #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListBudgetsForResource AWS API Documentation
+    #
+    # @overload list_budgets_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_budgets_for_resource(params = {}, options = {})
+      req = build_request(:list_budgets_for_resource, params)
       req.send_request(options)
     end
 
@@ -4722,7 +4836,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -220,10 +220,16 @@ module Aws::CodePipeline
     #   The name of the action within the context of a job.
     #   @return [String]
     #
+    # @!attribute [rw] action_execution_id
+    #   The system-generated unique ID that corresponds to an action's
+    #   execution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionContext AWS API Documentation
     #
     class ActionContext < Struct.new(
-      :name)
+      :name,
+      :action_execution_id)
       include Aws::Structure
     end
 
@@ -1805,6 +1811,10 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] pipeline_context
     #   Represents information about a pipeline to a job worker.
+    #
+    #   <note markdown="1"> Includes `pipelineArn` and `pipelineExecutionId` for Custom jobs.
+    #
+    #    </note>
     #   @return [Types::PipelineContext]
     #
     # @!attribute [rw] input_artifacts
@@ -1895,9 +1905,13 @@ module Aws::CodePipeline
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
-    #   nextToken value. The action execution history is limited to the most
-    #   recent 12 months, based on action execution start times. Default
-    #   value is 100.
+    #   nextToken value. Action execution history is retained for up to 12
+    #   months, based on action execution start times. Default value is 100.
+    #
+    #   <note markdown="1"> Detailed execution history is available for executions run on or
+    #   after February 21, 2019.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2005,9 +2019,9 @@ module Aws::CodePipeline
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
-    #   nextToken value. The available pipeline execution history is limited
-    #   to the most recent 12 months, based on pipeline execution start
-    #   times. Default value is 100.
+    #   nextToken value. Pipeline history is limited to the most recent 12
+    #   months, based on pipeline execution start times. Default value is
+    #   100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2209,6 +2223,12 @@ module Aws::CodePipeline
 
     # Represents information about a pipeline to a job worker.
     #
+    # <note markdown="1"> PipelineContext contains `pipelineArn` and `pipelineExecutionId` for
+    # custom action jobs. The `pipelineArn` and `pipelineExecutionId` fields
+    # are not populated for ThirdParty action jobs.
+    #
+    #  </note>
+    #
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline. This is a user-specified value. Pipeline
     #   names must be unique across all pipeline names under an Amazon Web
@@ -2224,12 +2244,22 @@ module Aws::CodePipeline
     #   pipeline.
     #   @return [Types::ActionContext]
     #
+    # @!attribute [rw] pipeline_arn
+    #   The pipeline execution ID provided to the job worker.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The pipeline Amazon Resource Name (ARN) provided to the job worker.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineContext AWS API Documentation
     #
     class PipelineContext < Struct.new(
       :pipeline_name,
       :stage,
-      :action)
+      :action,
+      :pipeline_arn,
+      :pipeline_execution_id)
       include Aws::Structure
     end
 
@@ -3308,6 +3338,11 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] pipeline_context
     #   Represents information about a pipeline to a job worker.
+    #
+    #   <note markdown="1"> Does not include `pipelineArn` and `pipelineExecutionId` for
+    #   ThirdParty jobs.
+    #
+    #    </note>
     #   @return [Types::PipelineContext]
     #
     # @!attribute [rw] input_artifacts

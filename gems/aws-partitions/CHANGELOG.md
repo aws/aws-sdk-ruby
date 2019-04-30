@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2019-04-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ManagedBlockchain`.
+
 1.155.0 (2019-04-29)
 ------------------
 

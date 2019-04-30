@@ -19,6 +19,8 @@ module Aws::DirectConnect
     AllocateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AllocateHostedConnectionRequest')
     AllocatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocatePrivateVirtualInterfaceRequest')
     AllocatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocatePublicVirtualInterfaceRequest')
+    AllocateTransitVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocateTransitVirtualInterfaceRequest')
+    AllocateTransitVirtualInterfaceResult = Shapes::StructureShape.new(name: 'AllocateTransitVirtualInterfaceResult')
     AmazonAddress = Shapes::StringShape.new(name: 'AmazonAddress')
     AssociateConnectionWithLagRequest = Shapes::StructureShape.new(name: 'AssociateConnectionWithLagRequest')
     AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
@@ -43,6 +45,8 @@ module Aws::DirectConnect
     ConfirmPrivateVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'ConfirmPrivateVirtualInterfaceResponse')
     ConfirmPublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'ConfirmPublicVirtualInterfaceRequest')
     ConfirmPublicVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'ConfirmPublicVirtualInterfaceResponse')
+    ConfirmTransitVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'ConfirmTransitVirtualInterfaceRequest')
+    ConfirmTransitVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'ConfirmTransitVirtualInterfaceResponse')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionId = Shapes::StringShape.new(name: 'ConnectionId')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
@@ -63,6 +67,8 @@ module Aws::DirectConnect
     CreateLagRequest = Shapes::StructureShape.new(name: 'CreateLagRequest')
     CreatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePrivateVirtualInterfaceRequest')
     CreatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePublicVirtualInterfaceRequest')
+    CreateTransitVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreateTransitVirtualInterfaceRequest')
+    CreateTransitVirtualInterfaceResult = Shapes::StructureShape.new(name: 'CreateTransitVirtualInterfaceResult')
     CustomerAddress = Shapes::StringShape.new(name: 'CustomerAddress')
     DeleteBGPPeerRequest = Shapes::StructureShape.new(name: 'DeleteBGPPeerRequest')
     DeleteBGPPeerResponse = Shapes::StructureShape.new(name: 'DeleteBGPPeerResponse')
@@ -112,6 +118,7 @@ module Aws::DirectConnect
     DirectConnectGatewayAttachment = Shapes::StructureShape.new(name: 'DirectConnectGatewayAttachment')
     DirectConnectGatewayAttachmentList = Shapes::ListShape.new(name: 'DirectConnectGatewayAttachmentList')
     DirectConnectGatewayAttachmentState = Shapes::StringShape.new(name: 'DirectConnectGatewayAttachmentState')
+    DirectConnectGatewayAttachmentType = Shapes::StringShape.new(name: 'DirectConnectGatewayAttachmentType')
     DirectConnectGatewayId = Shapes::StringShape.new(name: 'DirectConnectGatewayId')
     DirectConnectGatewayList = Shapes::ListShape.new(name: 'DirectConnectGatewayList')
     DirectConnectGatewayName = Shapes::StringShape.new(name: 'DirectConnectGatewayName')
@@ -154,6 +161,8 @@ module Aws::DirectConnect
     NewPrivateVirtualInterfaceAllocation = Shapes::StructureShape.new(name: 'NewPrivateVirtualInterfaceAllocation')
     NewPublicVirtualInterface = Shapes::StructureShape.new(name: 'NewPublicVirtualInterface')
     NewPublicVirtualInterfaceAllocation = Shapes::StructureShape.new(name: 'NewPublicVirtualInterfaceAllocation')
+    NewTransitVirtualInterface = Shapes::StructureShape.new(name: 'NewTransitVirtualInterface')
+    NewTransitVirtualInterfaceAllocation = Shapes::StructureShape.new(name: 'NewTransitVirtualInterfaceAllocation')
     OwnerAccount = Shapes::StringShape.new(name: 'OwnerAccount')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartnerName = Shapes::StringShape.new(name: 'PartnerName')
@@ -231,6 +240,14 @@ module Aws::DirectConnect
     AllocatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface_allocation, Shapes::ShapeRef.new(shape: NewPublicVirtualInterfaceAllocation, required: true, location_name: "newPublicVirtualInterfaceAllocation"))
     AllocatePublicVirtualInterfaceRequest.struct_class = Types::AllocatePublicVirtualInterfaceRequest
 
+    AllocateTransitVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    AllocateTransitVirtualInterfaceRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, required: true, location_name: "ownerAccount"))
+    AllocateTransitVirtualInterfaceRequest.add_member(:new_transit_virtual_interface_allocation, Shapes::ShapeRef.new(shape: NewTransitVirtualInterfaceAllocation, required: true, location_name: "newTransitVirtualInterfaceAllocation"))
+    AllocateTransitVirtualInterfaceRequest.struct_class = Types::AllocateTransitVirtualInterfaceRequest
+
+    AllocateTransitVirtualInterfaceResult.add_member(:virtual_interface, Shapes::ShapeRef.new(shape: VirtualInterface, location_name: "virtualInterface"))
+    AllocateTransitVirtualInterfaceResult.struct_class = Types::AllocateTransitVirtualInterfaceResult
+
     AssociateConnectionWithLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AssociateConnectionWithLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     AssociateConnectionWithLagRequest.struct_class = Types::AssociateConnectionWithLagRequest
@@ -283,6 +300,13 @@ module Aws::DirectConnect
 
     ConfirmPublicVirtualInterfaceResponse.add_member(:virtual_interface_state, Shapes::ShapeRef.new(shape: VirtualInterfaceState, location_name: "virtualInterfaceState"))
     ConfirmPublicVirtualInterfaceResponse.struct_class = Types::ConfirmPublicVirtualInterfaceResponse
+
+    ConfirmTransitVirtualInterfaceRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
+    ConfirmTransitVirtualInterfaceRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
+    ConfirmTransitVirtualInterfaceRequest.struct_class = Types::ConfirmTransitVirtualInterfaceRequest
+
+    ConfirmTransitVirtualInterfaceResponse.add_member(:virtual_interface_state, Shapes::ShapeRef.new(shape: VirtualInterfaceState, location_name: "virtualInterfaceState"))
+    ConfirmTransitVirtualInterfaceResponse.struct_class = Types::ConfirmTransitVirtualInterfaceResponse
 
     Connection.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     Connection.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
@@ -365,6 +389,13 @@ module Aws::DirectConnect
     CreatePublicVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     CreatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface, Shapes::ShapeRef.new(shape: NewPublicVirtualInterface, required: true, location_name: "newPublicVirtualInterface"))
     CreatePublicVirtualInterfaceRequest.struct_class = Types::CreatePublicVirtualInterfaceRequest
+
+    CreateTransitVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    CreateTransitVirtualInterfaceRequest.add_member(:new_transit_virtual_interface, Shapes::ShapeRef.new(shape: NewTransitVirtualInterface, required: true, location_name: "newTransitVirtualInterface"))
+    CreateTransitVirtualInterfaceRequest.struct_class = Types::CreateTransitVirtualInterfaceRequest
+
+    CreateTransitVirtualInterfaceResult.add_member(:virtual_interface, Shapes::ShapeRef.new(shape: VirtualInterface, location_name: "virtualInterface"))
+    CreateTransitVirtualInterfaceResult.struct_class = Types::CreateTransitVirtualInterfaceResult
 
     DeleteBGPPeerRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     DeleteBGPPeerRequest.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
@@ -539,6 +570,7 @@ module Aws::DirectConnect
     DirectConnectGatewayAttachment.add_member(:virtual_interface_region, Shapes::ShapeRef.new(shape: VirtualInterfaceRegion, location_name: "virtualInterfaceRegion"))
     DirectConnectGatewayAttachment.add_member(:virtual_interface_owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "virtualInterfaceOwnerAccount"))
     DirectConnectGatewayAttachment.add_member(:attachment_state, Shapes::ShapeRef.new(shape: DirectConnectGatewayAttachmentState, location_name: "attachmentState"))
+    DirectConnectGatewayAttachment.add_member(:attachment_type, Shapes::ShapeRef.new(shape: DirectConnectGatewayAttachmentType, location_name: "attachmentType"))
     DirectConnectGatewayAttachment.add_member(:state_change_error, Shapes::ShapeRef.new(shape: StateChangeError, location_name: "stateChangeError"))
     DirectConnectGatewayAttachment.struct_class = Types::DirectConnectGatewayAttachment
 
@@ -654,6 +686,27 @@ module Aws::DirectConnect
     NewPublicVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewPublicVirtualInterfaceAllocation.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
     NewPublicVirtualInterfaceAllocation.struct_class = Types::NewPublicVirtualInterfaceAllocation
+
+    NewTransitVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
+    NewTransitVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
+    NewTransitVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewTransitVirtualInterface.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
+    NewTransitVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
+    NewTransitVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+    NewTransitVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+    NewTransitVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+    NewTransitVirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
+    NewTransitVirtualInterface.struct_class = Types::NewTransitVirtualInterface
+
+    NewTransitVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
+    NewTransitVirtualInterfaceAllocation.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
+    NewTransitVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+    NewTransitVirtualInterfaceAllocation.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
+    NewTransitVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
+    NewTransitVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+    NewTransitVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+    NewTransitVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+    NewTransitVirtualInterfaceAllocation.struct_class = Types::NewTransitVirtualInterfaceAllocation
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
@@ -813,6 +866,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:allocate_transit_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AllocateTransitVirtualInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AllocateTransitVirtualInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AllocateTransitVirtualInterfaceResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:associate_connection_with_lag, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateConnectionWithLag"
         o.http_method = "POST"
@@ -869,6 +932,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ConfirmPublicVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfirmPublicVirtualInterfaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:confirm_transit_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConfirmTransitVirtualInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ConfirmTransitVirtualInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfirmTransitVirtualInterfaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -959,6 +1032,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreatePublicVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:create_transit_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitVirtualInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitVirtualInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitVirtualInterfaceResult)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

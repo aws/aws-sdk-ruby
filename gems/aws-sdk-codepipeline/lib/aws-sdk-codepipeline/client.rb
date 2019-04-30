@@ -795,6 +795,9 @@ module Aws::CodePipeline
     #   resp.job_details.data.pipeline_context.pipeline_name #=> String
     #   resp.job_details.data.pipeline_context.stage.name #=> String
     #   resp.job_details.data.pipeline_context.action.name #=> String
+    #   resp.job_details.data.pipeline_context.action.action_execution_id #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_arn #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_execution_id #=> String
     #   resp.job_details.data.input_artifacts #=> Array
     #   resp.job_details.data.input_artifacts[0].name #=> String
     #   resp.job_details.data.input_artifacts[0].revision #=> String
@@ -1050,6 +1053,9 @@ module Aws::CodePipeline
     #   resp.job_details.data.pipeline_context.pipeline_name #=> String
     #   resp.job_details.data.pipeline_context.stage.name #=> String
     #   resp.job_details.data.pipeline_context.action.name #=> String
+    #   resp.job_details.data.pipeline_context.action.action_execution_id #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_arn #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_execution_id #=> String
     #   resp.job_details.data.input_artifacts #=> Array
     #   resp.job_details.data.input_artifacts[0].name #=> String
     #   resp.job_details.data.input_artifacts[0].revision #=> String
@@ -1091,8 +1097,13 @@ module Aws::CodePipeline
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
     #   the remaining results, make another call with the returned nextToken
-    #   value. The action execution history is limited to the most recent 12
-    #   months, based on action execution start times. Default value is 100.
+    #   value. Action execution history is retained for up to 12 months, based
+    #   on action execution start times. Default value is 100.
+    #
+    #   <note markdown="1"> Detailed execution history is available for executions run on or after
+    #   February 21, 2019.
+    #
+    #    </note>
     #
     # @option params [String] :next_token
     #   The token that was returned from the previous ListActionExecutions
@@ -1223,9 +1234,8 @@ module Aws::CodePipeline
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
     #   the remaining results, make another call with the returned nextToken
-    #   value. The available pipeline execution history is limited to the most
-    #   recent 12 months, based on pipeline execution start times. Default
-    #   value is 100.
+    #   value. Pipeline history is limited to the most recent 12 months, based
+    #   on pipeline execution start times. Default value is 100.
     #
     # @option params [String] :next_token
     #   The token that was returned from the previous ListPipelineExecutions
@@ -1412,6 +1422,9 @@ module Aws::CodePipeline
     #   resp.jobs[0].data.pipeline_context.pipeline_name #=> String
     #   resp.jobs[0].data.pipeline_context.stage.name #=> String
     #   resp.jobs[0].data.pipeline_context.action.name #=> String
+    #   resp.jobs[0].data.pipeline_context.action.action_execution_id #=> String
+    #   resp.jobs[0].data.pipeline_context.pipeline_arn #=> String
+    #   resp.jobs[0].data.pipeline_context.pipeline_execution_id #=> String
     #   resp.jobs[0].data.input_artifacts #=> Array
     #   resp.jobs[0].data.input_artifacts[0].name #=> String
     #   resp.jobs[0].data.input_artifacts[0].revision #=> String
@@ -2076,7 +2089,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
