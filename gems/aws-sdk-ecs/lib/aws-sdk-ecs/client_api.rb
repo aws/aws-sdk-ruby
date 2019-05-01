@@ -777,6 +777,7 @@ module Aws::ECS
 
     LogConfiguration.add_member(:log_driver, Shapes::ShapeRef.new(shape: LogDriver, required: true, location_name: "logDriver"))
     LogConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: LogConfigurationOptionsMap, location_name: "options"))
+    LogConfiguration.add_member(:secret_options, Shapes::ShapeRef.new(shape: SecretList, location_name: "secretOptions"))
     LogConfiguration.struct_class = Types::LogConfiguration
 
     LogConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)

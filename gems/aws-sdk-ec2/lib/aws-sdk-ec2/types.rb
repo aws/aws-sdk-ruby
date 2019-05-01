@@ -27079,6 +27079,49 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyVpnConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "String", # required
+    #         transit_gateway_id: "String",
+    #         vpn_gateway_id: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionRequest AWS API Documentation
+    #
+    class ModifyVpnConnectionRequest < Struct.new(
+      :vpn_connection_id,
+      :transit_gateway_id,
+      :vpn_gateway_id,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection
+    #   Describes a VPN connection.
+    #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionResult AWS API Documentation
+    #
+    class ModifyVpnConnectionResult < Struct.new(
+      :vpn_connection)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass MonitorInstancesRequest
     #   data as a hash:
     #

@@ -1859,6 +1859,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].health_check.command #=> Array
     #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
     #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
@@ -2564,6 +2567,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].health_check.command #=> Array
     #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
     #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
@@ -4455,13 +4461,18 @@ module Aws::ECS
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
     #
-    #   Your Amazon ECS container instances require at least version 1.26.0 of
-    #   the container agent and at least version 1.26.0-1 of the `ecs-init`
-    #   package to enable a proxy configuration. If your container instances
-    #   are launched from the Amazon ECS-optimized AMI version `20190301` or
-    #   later, then they contain the required versions of the container agent
-    #   and `ecs-init`. For more information, see [Amazon ECS-optimized Linux
-    #   AMI][1] in the *Amazon Elastic Container Service Developer Guide*.
+    #   For tasks using the EC2 launch type, the container instances require
+    #   at least version 1.26.0 of the container agent and at least version
+    #   1.26.0-1 of the `ecs-init` package to enable a proxy configuration. If
+    #   your container instances are launched from the Amazon ECS-optimized
+    #   AMI version `20190301` or later, then they contain the required
+    #   versions of the container agent and `ecs-init`. For more information,
+    #   see [Amazon ECS-optimized Linux AMI][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #   This parameter is available for tasks using the Fargate launch type in
+    #   the Ohio (us-east-2) region only and the task or service requires
+    #   platform version 1.3.0 or later.
     #
     #
     #
@@ -4644,6 +4655,12 @@ module Aws::ECS
     #           options: {
     #             "String" => "String",
     #           },
+    #           secret_options: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
     #         },
     #         health_check: {
     #           command: ["String"], # required
@@ -4795,6 +4812,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
     #   resp.task_definition.container_definitions[0].health_check.command #=> Array
     #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
     #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
@@ -6570,7 +6590,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
