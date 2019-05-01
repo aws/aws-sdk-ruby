@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.266 (2019-05-01)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
