@@ -248,11 +248,11 @@ module Aws::ElasticLoadBalancingV2
     #   The behavior if the user is not authenticated. The following are
     #   possible values:
     #
-    #   * deny`` - Return an HTTP 401 Unauthorized error.
+    #   * `deny` - Return an HTTP 401 Unauthorized error.
     #
-    #   * allow`` - Allow the request to be forwarded to the target.
+    #   * `allow` - Allow the request to be forwarded to the target.
     #
-    #   * authenticate`` - Redirect the request to the IdP authorization
+    #   * `authenticate` - Redirect the request to the IdP authorization
     #     endpoint. This is the default value.
     #   @return [String]
     #
@@ -350,11 +350,11 @@ module Aws::ElasticLoadBalancingV2
     #   The behavior if the user is not authenticated. The following are
     #   possible values:
     #
-    #   * deny`` - Return an HTTP 401 Unauthorized error.
+    #   * `deny` - Return an HTTP 401 Unauthorized error.
     #
-    #   * allow`` - Allow the request to be forwarded to the target.
+    #   * `allow` - Allow the request to be forwarded to the target.
     #
-    #   * authenticate`` - Redirect the request to the IdP authorization
+    #   * `authenticate` - Redirect the request to the IdP authorization
     #     endpoint. This is the default value.
     #   @return [String]
     #

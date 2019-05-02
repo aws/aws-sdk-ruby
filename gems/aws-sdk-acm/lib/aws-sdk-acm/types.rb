@@ -399,9 +399,9 @@ module Aws::ACM
     #
     #   * `PENDING_VALIDATION`
     #
-    #   * ``SUCCESS
+    #   * `SUCCESS`
     #
-    #   * ``FAILED
+    #   * `FAILED`
     #   @return [String]
     #
     # @!attribute [rw] resource_record
