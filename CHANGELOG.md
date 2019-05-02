@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.267 (2019-05-02)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
