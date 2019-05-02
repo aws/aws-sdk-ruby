@@ -2947,6 +2947,81 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Triggers an asynchronous flow to send text, SSML, or audio
+    # announcements to multiple rooms, identified by a search, such as
+    # filter.
+    #
+    # @option params [required, Array<Types::Filter>] :room_filters
+    #   The filters to use to send an announcement to a specified list of
+    #   rooms. The supported filter keys are RoomName, ProfileName, RoomArn,
+    #   and ProfileArn. To send to all rooms, specify an empty RoomFilters
+    #   list.
+    #
+    # @option params [required, Types::Content] :content
+    #   The announcement content. This can contain only one of the three
+    #   possible announcement types (text, SSML or audio).
+    #
+    # @option params [Integer] :time_to_live_in_seconds
+    #   The time to live for an announcement. If delivery doesn't occur
+    #   within this time, the announcement will not be delivered.
+    #
+    # @option params [required, String] :client_request_token
+    #   The unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendAnnouncementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendAnnouncementResponse#announcement_arn #announcement_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_announcement({
+    #     room_filters: [ # required
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     content: { # required
+    #       text_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           value: "TextValue", # required
+    #         },
+    #       ],
+    #       ssml_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           value: "SsmlValue", # required
+    #         },
+    #       ],
+    #       audio_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           location: "AudioLocation", # required
+    #         },
+    #       ],
+    #     },
+    #     time_to_live_in_seconds: 1,
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.announcement_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncement AWS API Documentation
+    #
+    # @overload send_announcement(params = {})
+    # @param [Hash] params ({})
+    def send_announcement(params = {}, options = {})
+      req = build_request(:send_announcement, params)
+      req.send_request(options)
+    end
+
     # Sends an enrollment invitation email with a URL to a user. The URL is
     # valid for 72 hours or until you call this operation again, whichever
     # comes first.
@@ -3484,7 +3559,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

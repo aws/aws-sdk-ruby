@@ -35,12 +35,16 @@ module Aws::AlexaForBusiness
     AssociateSkillWithSkillGroupResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithSkillGroupResponse')
     AssociateSkillWithUsersRequest = Shapes::StructureShape.new(name: 'AssociateSkillWithUsersRequest')
     AssociateSkillWithUsersResponse = Shapes::StructureShape.new(name: 'AssociateSkillWithUsersResponse')
+    Audio = Shapes::StructureShape.new(name: 'Audio')
+    AudioList = Shapes::ListShape.new(name: 'AudioList')
+    AudioLocation = Shapes::StringShape.new(name: 'AudioLocation')
     AuthorizationResult = Shapes::MapShape.new(name: 'AuthorizationResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BulletPoint = Shapes::StringShape.new(name: 'BulletPoint')
     BulletPoints = Shapes::ListShape.new(name: 'BulletPoints')
     BusinessReport = Shapes::StructureShape.new(name: 'BusinessReport')
     BusinessReportContentRange = Shapes::StructureShape.new(name: 'BusinessReportContentRange')
+    BusinessReportDeliveryTime = Shapes::TimestampShape.new(name: 'BusinessReportDeliveryTime')
     BusinessReportDownloadUrl = Shapes::StringShape.new(name: 'BusinessReportDownloadUrl')
     BusinessReportFailureCode = Shapes::StringShape.new(name: 'BusinessReportFailureCode')
     BusinessReportFormat = Shapes::StringShape.new(name: 'BusinessReportFormat')
@@ -70,6 +74,7 @@ module Aws::AlexaForBusiness
     ContactData = Shapes::StructureShape.new(name: 'ContactData')
     ContactDataList = Shapes::ListShape.new(name: 'ContactDataList')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
+    Content = Shapes::StructureShape.new(name: 'Content')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CreateAddressBookRequest = Shapes::StructureShape.new(name: 'CreateAddressBookRequest')
     CreateAddressBookResponse = Shapes::StructureShape.new(name: 'CreateAddressBookResponse')
@@ -122,6 +127,7 @@ module Aws::AlexaForBusiness
     DeviceDataList = Shapes::ListShape.new(name: 'DeviceDataList')
     DeviceEvent = Shapes::StructureShape.new(name: 'DeviceEvent')
     DeviceEventList = Shapes::ListShape.new(name: 'DeviceEventList')
+    DeviceEventTime = Shapes::TimestampShape.new(name: 'DeviceEventTime')
     DeviceEventType = Shapes::StringShape.new(name: 'DeviceEventType')
     DeviceEventValue = Shapes::StringShape.new(name: 'DeviceEventValue')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
@@ -228,6 +234,7 @@ module Aws::AlexaForBusiness
     ListSmartHomeAppliancesResponse = Shapes::StructureShape.new(name: 'ListSmartHomeAppliancesResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
+    Locale = Shapes::StringShape.new(name: 'Locale')
     MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxVolumeLimit = Shapes::IntegerShape.new(name: 'MaxVolumeLimit')
@@ -297,6 +304,8 @@ module Aws::AlexaForBusiness
     SearchSkillGroupsResponse = Shapes::StructureShape.new(name: 'SearchSkillGroupsResponse')
     SearchUsersRequest = Shapes::StructureShape.new(name: 'SearchUsersRequest')
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
+    SendAnnouncementRequest = Shapes::StructureShape.new(name: 'SendAnnouncementRequest')
+    SendAnnouncementResponse = Shapes::StructureShape.new(name: 'SendAnnouncementResponse')
     SendInvitationRequest = Shapes::StructureShape.new(name: 'SendInvitationRequest')
     SendInvitationResponse = Shapes::StructureShape.new(name: 'SendInvitationResponse')
     ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
@@ -326,6 +335,9 @@ module Aws::AlexaForBusiness
     SortKey = Shapes::StringShape.new(name: 'SortKey')
     SortList = Shapes::ListShape.new(name: 'SortList')
     SortValue = Shapes::StringShape.new(name: 'SortValue')
+    Ssml = Shapes::StructureShape.new(name: 'Ssml')
+    SsmlList = Shapes::ListShape.new(name: 'SsmlList')
+    SsmlValue = Shapes::StringShape.new(name: 'SsmlValue')
     StartDeviceSyncRequest = Shapes::StructureShape.new(name: 'StartDeviceSyncRequest')
     StartDeviceSyncResponse = Shapes::StructureShape.new(name: 'StartDeviceSyncResponse')
     StartSmartHomeApplianceDiscoveryRequest = Shapes::StructureShape.new(name: 'StartSmartHomeApplianceDiscoveryRequest')
@@ -338,7 +350,10 @@ module Aws::AlexaForBusiness
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemperatureUnit = Shapes::StringShape.new(name: 'TemperatureUnit')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Text = Shapes::StructureShape.new(name: 'Text')
+    TextList = Shapes::ListShape.new(name: 'TextList')
+    TextValue = Shapes::StringShape.new(name: 'TextValue')
+    TimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'TimeToLiveInSeconds')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -423,6 +438,12 @@ module Aws::AlexaForBusiness
 
     AssociateSkillWithUsersResponse.struct_class = Types::AssociateSkillWithUsersResponse
 
+    Audio.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "Locale"))
+    Audio.add_member(:location, Shapes::ShapeRef.new(shape: AudioLocation, required: true, location_name: "Location"))
+    Audio.struct_class = Types::Audio
+
+    AudioList.member = Shapes::ShapeRef.new(shape: Audio)
+
     AuthorizationResult.key = Shapes::ShapeRef.new(shape: Key)
     AuthorizationResult.value = Shapes::ShapeRef.new(shape: Value)
 
@@ -431,7 +452,7 @@ module Aws::AlexaForBusiness
     BusinessReport.add_member(:status, Shapes::ShapeRef.new(shape: BusinessReportStatus, location_name: "Status"))
     BusinessReport.add_member(:failure_code, Shapes::ShapeRef.new(shape: BusinessReportFailureCode, location_name: "FailureCode"))
     BusinessReport.add_member(:s3_location, Shapes::ShapeRef.new(shape: BusinessReportS3Location, location_name: "S3Location"))
-    BusinessReport.add_member(:delivery_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeliveryTime"))
+    BusinessReport.add_member(:delivery_time, Shapes::ShapeRef.new(shape: BusinessReportDeliveryTime, location_name: "DeliveryTime"))
     BusinessReport.add_member(:download_url, Shapes::ShapeRef.new(shape: BusinessReportDownloadUrl, location_name: "DownloadUrl"))
     BusinessReport.struct_class = Types::BusinessReport
 
@@ -491,6 +512,11 @@ module Aws::AlexaForBusiness
     ContactData.struct_class = Types::ContactData
 
     ContactDataList.member = Shapes::ShapeRef.new(shape: ContactData)
+
+    Content.add_member(:text_list, Shapes::ShapeRef.new(shape: TextList, location_name: "TextList"))
+    Content.add_member(:ssml_list, Shapes::ShapeRef.new(shape: SsmlList, location_name: "SsmlList"))
+    Content.add_member(:audio_list, Shapes::ShapeRef.new(shape: AudioList, location_name: "AudioList"))
+    Content.struct_class = Types::Content
 
     CreateAddressBookRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, required: true, location_name: "Name"))
     CreateAddressBookRequest.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
@@ -683,7 +709,7 @@ module Aws::AlexaForBusiness
 
     DeviceEvent.add_member(:type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "Type"))
     DeviceEvent.add_member(:value, Shapes::ShapeRef.new(shape: DeviceEventValue, location_name: "Value"))
-    DeviceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    DeviceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DeviceEventTime, location_name: "Timestamp"))
     DeviceEvent.struct_class = Types::DeviceEvent
 
     DeviceEventList.member = Shapes::ShapeRef.new(shape: DeviceEvent)
@@ -1135,6 +1161,15 @@ module Aws::AlexaForBusiness
     SearchUsersResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
     SearchUsersResponse.struct_class = Types::SearchUsersResponse
 
+    SendAnnouncementRequest.add_member(:room_filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "RoomFilters"))
+    SendAnnouncementRequest.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Content"))
+    SendAnnouncementRequest.add_member(:time_to_live_in_seconds, Shapes::ShapeRef.new(shape: TimeToLiveInSeconds, location_name: "TimeToLiveInSeconds"))
+    SendAnnouncementRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendAnnouncementRequest.struct_class = Types::SendAnnouncementRequest
+
+    SendAnnouncementResponse.add_member(:announcement_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnnouncementArn"))
+    SendAnnouncementResponse.struct_class = Types::SendAnnouncementResponse
+
     SendInvitationRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UserArn"))
     SendInvitationRequest.struct_class = Types::SendInvitationRequest
 
@@ -1201,6 +1236,12 @@ module Aws::AlexaForBusiness
 
     SortList.member = Shapes::ShapeRef.new(shape: Sort)
 
+    Ssml.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "Locale"))
+    Ssml.add_member(:value, Shapes::ShapeRef.new(shape: SsmlValue, required: true, location_name: "Value"))
+    Ssml.struct_class = Types::Ssml
+
+    SsmlList.member = Shapes::ShapeRef.new(shape: Ssml)
+
     StartDeviceSyncRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     StartDeviceSyncRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     StartDeviceSyncRequest.add_member(:features, Shapes::ShapeRef.new(shape: Features, required: true, location_name: "Features"))
@@ -1226,6 +1267,12 @@ module Aws::AlexaForBusiness
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Text.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "Locale"))
+    Text.add_member(:value, Shapes::ShapeRef.new(shape: TextValue, required: true, location_name: "Value"))
+    Text.struct_class = Types::Text
+
+    TextList.member = Shapes::ShapeRef.new(shape: Text)
 
     UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
@@ -2099,6 +2146,16 @@ module Aws::AlexaForBusiness
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:send_announcement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendAnnouncement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendAnnouncementRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendAnnouncementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
       end)
 
       api.add_operation(:send_invitation, Seahorse::Model::Operation.new.tap do |o|

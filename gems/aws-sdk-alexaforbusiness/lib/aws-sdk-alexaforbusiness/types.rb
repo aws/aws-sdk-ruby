@@ -211,6 +211,54 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithUsersResponse < Aws::EmptyStructure; end
 
+    # The audio message. There is a 1 MB limit on the audio file input, and
+    # the only supported format is MP3. You must convert audio files to an
+    # Alexa-friendly format.
+    #
+    # You might need to use converter software to convert your MP3 files to
+    # the required codec version (MPEG version 2) and bit rate (48 kbps).
+    # One option for this is a command-line tool, FFmpeg. For more
+    # information, see [FFmpeg][1]. The following command converts the
+    # provided &lt;input-file&gt; to an MP3 file that will be played in the
+    # announcement:
+    #
+    # `ffmpeg -i <input-file> -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000
+    # <output-file.mp3>`
+    #
+    #
+    #
+    # [1]: https://www.ffmpeg.org/
+    #
+    # @note When making an API call, you may pass Audio
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "en-US", # required, accepts en-US
+    #         location: "AudioLocation", # required
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale of the audio message. Currently, en-US is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the audio file. Currently, S3 URLs are supported.
+    #   Only S3 locations comprised of safe character are valid. For more
+    #   information, see [Safe Characters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Audio AWS API Documentation
+    #
+    class Audio < Struct.new(
+      :locale,
+      :location)
+      include Aws::Structure
+    end
+
     # Usage report with specified parameters.
     #
     # @!attribute [rw] status
@@ -502,6 +550,54 @@ module Aws::AlexaForBusiness
       :first_name,
       :last_name,
       :phone_number)
+      include Aws::Structure
+    end
+
+    # The content definition. It can contain only one text, SSML, or audio
+    # list object.
+    #
+    # @note When making an API call, you may pass Content
+    #   data as a hash:
+    #
+    #       {
+    #         text_list: [
+    #           {
+    #             locale: "en-US", # required, accepts en-US
+    #             value: "TextValue", # required
+    #           },
+    #         ],
+    #         ssml_list: [
+    #           {
+    #             locale: "en-US", # required, accepts en-US
+    #             value: "SsmlValue", # required
+    #           },
+    #         ],
+    #         audio_list: [
+    #           {
+    #             locale: "en-US", # required, accepts en-US
+    #             location: "AudioLocation", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] text_list
+    #   The list of text messages.
+    #   @return [Array<Types::Text>]
+    #
+    # @!attribute [rw] ssml_list
+    #   The list of SSML messages.
+    #   @return [Array<Types::Ssml>]
+    #
+    # @!attribute [rw] audio_list
+    #   The list of audio messages.
+    #   @return [Array<Types::Audio>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Content AWS API Documentation
+    #
+    class Content < Struct.new(
+      :text_list,
+      :ssml_list,
+      :audio_list)
       include Aws::Structure
     end
 
@@ -3833,6 +3929,86 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendAnnouncementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         room_filters: [ # required
+    #           {
+    #             key: "FilterKey", # required
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         content: { # required
+    #           text_list: [
+    #             {
+    #               locale: "en-US", # required, accepts en-US
+    #               value: "TextValue", # required
+    #             },
+    #           ],
+    #           ssml_list: [
+    #             {
+    #               locale: "en-US", # required, accepts en-US
+    #               value: "SsmlValue", # required
+    #             },
+    #           ],
+    #           audio_list: [
+    #             {
+    #               locale: "en-US", # required, accepts en-US
+    #               location: "AudioLocation", # required
+    #             },
+    #           ],
+    #         },
+    #         time_to_live_in_seconds: 1,
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] room_filters
+    #   The filters to use to send an announcement to a specified list of
+    #   rooms. The supported filter keys are RoomName, ProfileName, RoomArn,
+    #   and ProfileArn. To send to all rooms, specify an empty RoomFilters
+    #   list.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] content
+    #   The announcement content. This can contain only one of the three
+    #   possible announcement types (text, SSML or audio).
+    #   @return [Types::Content]
+    #
+    # @!attribute [rw] time_to_live_in_seconds
+    #   The time to live for an announcement. If delivery doesn't occur
+    #   within this time, the announcement will not be delivered.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncementRequest AWS API Documentation
+    #
+    class SendAnnouncementRequest < Struct.new(
+      :room_filters,
+      :content,
+      :time_to_live_in_seconds,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] announcement_arn
+    #   The identifier of the announcement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncementResponse AWS API Documentation
+    #
+    class SendAnnouncementResponse < Struct.new(
+      :announcement_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SendInvitationRequest
     #   data as a hash:
     #
@@ -4088,6 +4264,37 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The SSML message. For more information, see [SSML Reference][1].
+    #
+    #
+    #
+    # [1]: https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
+    #
+    # @note When making an API call, you may pass Ssml
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "en-US", # required, accepts en-US
+    #         value: "SsmlValue", # required
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale of the SSML message. Currently, en-US is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the SSML message in the correct SSML format. The audio
+    #   tag is not supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Ssml AWS API Documentation
+    #
+    class Ssml < Struct.new(
+      :locale,
+      :value)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartDeviceSyncRequest
     #   data as a hash:
     #
@@ -4204,6 +4411,32 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The text message.
+    #
+    # @note When making an API call, you may pass Text
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "en-US", # required, accepts en-US
+    #         value: "TextValue", # required
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale of the text message. Currently, en-US is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the text message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Text AWS API Documentation
+    #
+    class Text < Struct.new(
+      :locale,
+      :value)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
