@@ -1465,6 +1465,34 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # @option params [required, String] :user_pool_id
+    #
+    # @option params [required, String] :username
+    #
+    # @option params [required, String] :password
+    #
+    # @option params [Boolean] :permanent
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_set_user_password({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     password: "PasswordType", # required
+    #     permanent: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserPassword AWS API Documentation
+    #
+    # @overload admin_set_user_password(params = {})
+    # @param [Hash] params ({})
+    def admin_set_user_password(params = {}, options = {})
+      req = build_request(:admin_set_user_password, params)
+      req.send_request(options)
+    end
+
     # Sets all the user settings for a specified user name. Works on any
     # user.
     #
@@ -2225,6 +2253,7 @@ module Aws::CognitoIdentityProvider
     #         require_lowercase: false,
     #         require_numbers: false,
     #         require_symbols: false,
+    #         temporary_password_validity_days: 1,
     #       },
     #     },
     #     lambda_config: {
@@ -2311,6 +2340,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.require_lowercase #=> Boolean
     #   resp.user_pool.policies.password_policy.require_numbers #=> Boolean
     #   resp.user_pool.policies.password_policy.require_symbols #=> Boolean
+    #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
     #   resp.user_pool.lambda_config.custom_message #=> String
     #   resp.user_pool.lambda_config.post_confirmation #=> String
@@ -3028,6 +3058,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.require_lowercase #=> Boolean
     #   resp.user_pool.policies.password_policy.require_numbers #=> Boolean
     #   resp.user_pool.policies.password_policy.require_symbols #=> Boolean
+    #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
     #   resp.user_pool.lambda_config.custom_message #=> String
     #   resp.user_pool.lambda_config.post_confirmation #=> String
@@ -5357,6 +5388,7 @@ module Aws::CognitoIdentityProvider
     #         require_lowercase: false,
     #         require_numbers: false,
     #         require_symbols: false,
+    #         temporary_password_validity_days: 1,
     #       },
     #     },
     #     lambda_config: {
@@ -5757,7 +5789,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

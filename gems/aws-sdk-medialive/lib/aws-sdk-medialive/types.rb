@@ -3444,6 +3444,27 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteScheduleRequest AWS API Documentation
+    #
+    class DeleteScheduleRequest < Struct.new(
+      :channel_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteScheduleResponse AWS API Documentation
+    #
+    class DeleteScheduleResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteTagsRequest
     #   data as a hash:
     #
@@ -10425,6 +10446,12 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Result of a schedule deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleDeleteResultModel AWS API Documentation
+    #
+    class ScheduleDeleteResultModel < Aws::EmptyStructure; end
+
     # Results of a schedule describe.
     #
     # @!attribute [rw] next_token
@@ -11656,6 +11683,78 @@ module Aws::MediaLive
       :log_level,
       :name,
       :role_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_class
+    #   The channel class that you wish to update this channel to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   A list of output destinations for this channel.
+    #   @return [Array<Types::OutputDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClass AWS API Documentation
+    #
+    class UpdateChannelClass < Struct.new(
+      :channel_class,
+      :destinations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateChannelClassRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_class: "STANDARD", # required, accepts STANDARD, SINGLE_PIPELINE
+    #         channel_id: "__string", # required
+    #         destinations: [
+    #           {
+    #             id: "__string",
+    #             media_package_settings: [
+    #               {
+    #                 channel_id: "__stringMin1",
+    #               },
+    #             ],
+    #             settings: [
+    #               {
+    #                 password_param: "__string",
+    #                 stream_name: "__string",
+    #                 url: "__string",
+    #                 username: "__string",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::OutputDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClassRequest AWS API Documentation
+    #
+    class UpdateChannelClassRequest < Struct.new(
+      :channel_class,
+      :channel_id,
+      :destinations)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel
+    #   @return [Types::Channel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClassResponse AWS API Documentation
+    #
+    class UpdateChannelClassResponse < Struct.new(
+      :channel)
       include Aws::Structure
     end
 

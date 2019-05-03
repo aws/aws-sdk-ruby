@@ -832,6 +832,48 @@ module Aws::WorkMail
     #
     class DisassociateMemberFromGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass GetMailboxDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "WorkMailIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier for the organization that contains the user whose
+    #   mailbox details are being requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user whose mailbox details are being
+    #   requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailboxDetailsRequest AWS API Documentation
+    #
+    class GetMailboxDetailsRequest < Struct.new(
+      :organization_id,
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mailbox_quota
+    #   The maximum allowed mailbox size, in MB, for the specified user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mailbox_size
+    #   The current mailbox size, in MB, for the specified user.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailboxDetailsResponse AWS API Documentation
+    #
+    class GetMailboxDetailsResponse < Struct.new(
+      :mailbox_quota,
+      :mailbox_size)
+      include Aws::Structure
+    end
+
     # The representation of an Amazon WorkMail group.
     #
     # @!attribute [rw] id
@@ -1547,6 +1589,41 @@ module Aws::WorkMail
       :disabled_date)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateMailboxQuotaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "WorkMailIdentifier", # required
+    #         mailbox_quota: 1, # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier for the organization that contains the user for whom
+    #   to update the mailbox quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifer for the user for whom to update the mailbox quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailbox_quota
+    #   The updated mailbox quota, in MB, for the specified user.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMailboxQuotaRequest AWS API Documentation
+    #
+    class UpdateMailboxQuotaRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :mailbox_quota)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMailboxQuotaResponse AWS API Documentation
+    #
+    class UpdateMailboxQuotaResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePrimaryEmailAddressRequest
     #   data as a hash:

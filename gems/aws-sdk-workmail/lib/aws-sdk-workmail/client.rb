@@ -884,6 +884,42 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Requests a user's mailbox details for a specified organization and
+    # user.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization that contains the user whose
+    #   mailbox details are being requested.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user whose mailbox details are being requested.
+    #
+    # @return [Types::GetMailboxDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMailboxDetailsResponse#mailbox_quota #mailbox_quota} => Integer
+    #   * {Types::GetMailboxDetailsResponse#mailbox_size #mailbox_size} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mailbox_details({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "WorkMailIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mailbox_quota #=> Integer
+    #   resp.mailbox_size #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailboxDetails AWS API Documentation
+    #
+    # @overload get_mailbox_details(params = {})
+    # @param [Hash] params ({})
+    def get_mailbox_details(params = {}, options = {})
+      req = build_request(:get_mailbox_details, params)
+      req.send_request(options)
+    end
+
     # Creates a paginated call to list the aliases associated with a given
     # entity.
     #
@@ -1374,6 +1410,38 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Updates a user's current mailbox quota for a specified organization
+    # and user.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization that contains the user for whom to
+    #   update the mailbox quota.
+    #
+    # @option params [required, String] :user_id
+    #   The identifer for the user for whom to update the mailbox quota.
+    #
+    # @option params [required, Integer] :mailbox_quota
+    #   The updated mailbox quota, in MB, for the specified user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_mailbox_quota({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "WorkMailIdentifier", # required
+    #     mailbox_quota: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMailboxQuota AWS API Documentation
+    #
+    # @overload update_mailbox_quota(params = {})
+    # @param [Hash] params ({})
+    def update_mailbox_quota(params = {}, options = {})
+      req = build_request(:update_mailbox_quota, params)
+      req.send_request(options)
+    end
+
     # Updates the primary email for a user, group, or resource. The current
     # email is moved into the list of aliases (or swapped between an
     # existing alias and the current primary email), and the email provided
@@ -1462,7 +1530,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
