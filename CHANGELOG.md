@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.268 (2019-05-03)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
