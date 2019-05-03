@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
+
 2.11.267 (2019-05-02)
 ------------------
 
