@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.269 (2019-05-06)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
