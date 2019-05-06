@@ -34,8 +34,8 @@ module Aws::STS
     #   visible to, and can be logged by the account that owns the role. The
     #   role session name is also used in the ARN of the assumed role
     #   principal. This means that subsequent cross-account API requests
-    #   using the temporary security credentials will expose the role
-    #   session name to the external account in their CloudTrail logs.
+    #   that use the temporary security credentials will expose the role
+    #   session name to the external account in their AWS CloudTrail logs.
     #
     #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
@@ -46,17 +46,15 @@ module Aws::STS
     # @!attribute [rw] policy
     #   An IAM policy in JSON format.
     #
-    #   This parameter is optional. If you pass a policy, the temporary
-    #   security credentials that are returned by the operation have the
-    #   permissions that are allowed by both (the intersection of) the
-    #   access policy of the role that is being assumed, *and* the policy
-    #   that you pass. This gives you a way to further restrict the
-    #   permissions for the resulting temporary security credentials. You
-    #   cannot use the passed policy to grant permissions that are in excess
-    #   of those allowed by the access policy of the role that is being
-    #   assumed. For more information, see [Permissions for AssumeRole,
-    #   AssumeRoleWithSAML, and AssumeRoleWithWebIdentity][1] in the *IAM
-    #   User Guide*.
+    #   This parameter is optional. If you pass a policy to this operation,
+    #   the resulting temporary credentials have the permissions of the
+    #   assumed role *and* the policy that you pass. This gives you a way to
+    #   further restrict the permissions for the resulting temporary
+    #   security credentials. You cannot use the passed policy to grant
+    #   permissions that are in excess of those allowed by the permissions
+    #   policy of the role that is being assumed. For more information, see
+    #   [ Permissions for AssumeRole, AssumeRoleWithSAML, and
+    #   AssumeRoleWithWebIdentity ][1] in the *IAM User Guide*.
     #
     #   The format for this parameter, as described by its regex pattern, is
     #   a string of characters up to 2048 characters in length. The
@@ -65,17 +63,17 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plain text must be 2048 bytes or shorter. However, an
+    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
     #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The PackedPolicySize response element indicates by
-    #   percentage how close to the upper size limit the policy is, with
-    #   100% equaling the maximum allowed size.
+    #   separate limit. The `PackedPolicySize` response element indicates by
+    #   percentage how close to the upper size limit the policy is, where
+    #   100 percent is the maximum allowed size.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -89,7 +87,7 @@ module Aws::STS
     #   value for your role, see [View the Maximum Session Duration Setting
     #   for a Role][1] in the *IAM User Guide*.
     #
-    #   By default, the value is set to 3600 seconds.
+    #   By default, the value is set to `3600` seconds.
     #
     #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
     #   console session that you might request using the returned
@@ -103,30 +101,32 @@ module Aws::STS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
     # @!attribute [rw] external_id
-    #   A unique identifier that is used by third parties when assuming
-    #   roles in their customers' accounts. For each role that the third
-    #   party can assume, they should instruct their customers to ensure the
-    #   role's trust policy checks for the external ID that the third party
-    #   generated. Each time the third party assumes the role, they should
-    #   pass the customer's external ID. The external ID is useful in order
-    #   to help third parties bind a role to the customer who created it.
-    #   For more information about the external ID, see [How to Use an
-    #   External ID When Granting Access to Your AWS Resources to a Third
-    #   Party][1] in the *IAM User Guide*.
+    #   A unique identifier that might be required when you assume a role in
+    #   another account. If the administrator of the account to which the
+    #   role belongs provided you with an external ID, then provide that
+    #   value in the `ExternalId` parameter. This value can be any string,
+    #   such as a passphrase or account number. Because a cross-account role
+    #   is usually set up to trust everyone in an account, the administrator
+    #   of the trusting account might send an external ID to the
+    #   administrator of the trusted account. That way, only someone with
+    #   the ID can assume the role, rather than everyone in the account. For
+    #   more information about the external ID, see [How to Use an External
+    #   ID When Granting Access to Your AWS Resources to a Third Party][1]
+    #   in the *IAM User Guide*.
     #
-    #   The regex used to validated this parameter is a string of characters
+    #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
     #   characters: =,.@:/-
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
     #   @return [String]
     #
     # @!attribute [rw] serial_number
@@ -175,11 +175,13 @@ module Aws::STS
     #   The temporary security credentials, which include an access key ID,
     #   a secret access key, and a security (or session) token.
     #
-    #   **Note:** The size of the security token that STS APIs return is not
+    #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
     #   maximum size. As of this writing, the typical size is less than 4096
     #   bytes, but that can vary. Also, future updates to AWS might require
     #   larger sizes.
+    #
+    #    </note>
     #   @return [Types::Credentials]
     #
     # @!attribute [rw] assumed_role_user
@@ -232,26 +234,25 @@ module Aws::STS
     #   IdP.
     #
     #   For more information, see [Configuring a Relying Party and Adding
-    #   Claims][1] in the *Using IAM* guide.
+    #   Claims][1] in the *IAM User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] policy
     #   An IAM policy in JSON format.
     #
-    #   The policy parameter is optional. If you pass a policy, the
-    #   temporary security credentials that are returned by the operation
-    #   have the permissions that are allowed by both the access policy of
-    #   the role that is being assumed, <i> <b>and</b> </i> the policy that
-    #   you pass. This gives you a way to further restrict the permissions
-    #   for the resulting temporary security credentials. You cannot use the
-    #   passed policy to grant permissions that are in excess of those
-    #   allowed by the access policy of the role that is being assumed. For
-    #   more information, [Permissions for AssumeRole, AssumeRoleWithSAML,
-    #   and AssumeRoleWithWebIdentity][1] in the *IAM User Guide*.
+    #   The policy parameter is optional. If you pass a policy to this
+    #   operation, the resulting temporary credentials have the permissions
+    #   of the assumed role *and* the policy that you pass. This gives you a
+    #   way to further restrict the permissions for the resulting temporary
+    #   security credentials. You cannot use the passed policy to grant
+    #   permissions that are in excess of those allowed by the permissions
+    #   policy of the role that is being assumed. For more information, see
+    #   [ Permissions for AssumeRole, AssumeRoleWithSAML, and
+    #   AssumeRoleWithWebIdentity ][1] in the *IAM User Guide*.
     #
     #   The format for this parameter, as described by its regex pattern, is
     #   a string of characters up to 2048 characters in length. The
@@ -260,17 +261,17 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plain text must be 2048 bytes or shorter. However, an
+    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
     #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The PackedPolicySize response element indicates by
-    #   percentage how close to the upper size limit the policy is, with
-    #   100% equaling the maximum allowed size.
+    #   separate limit. The `PackedPolicySize` response element indicates by
+    #   percentage how close to the upper size limit the policy is, where
+    #   100 percent is the maximum allowed size.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -288,7 +289,7 @@ module Aws::STS
     #   Maximum Session Duration Setting for a Role][1] in the *IAM User
     #   Guide*.
     #
-    #   By default, the value is set to 3600 seconds.
+    #   By default, the value is set to `3600` seconds.
     #
     #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
     #   console session that you might request using the returned
@@ -302,8 +303,8 @@ module Aws::STS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLRequest AWS API Documentation
@@ -325,11 +326,13 @@ module Aws::STS
     #   The temporary security credentials, which include an access key ID,
     #   a secret access key, and a security (or session) token.
     #
-    #   **Note:** The size of the security token that STS APIs return is not
+    #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
     #   maximum size. As of this writing, the typical size is less than 4096
     #   bytes, but that can vary. Also, future updates to AWS might require
     #   larger sizes.
+    #
+    #    </note>
     #   @return [Types::Credentials]
     #
     # @!attribute [rw] assumed_role_user
@@ -450,16 +453,15 @@ module Aws::STS
     # @!attribute [rw] policy
     #   An IAM policy in JSON format.
     #
-    #   The policy parameter is optional. If you pass a policy, the
-    #   temporary security credentials that are returned by the operation
-    #   have the permissions that are allowed by both the access policy of
-    #   the role that is being assumed, <i> <b>and</b> </i> the policy that
-    #   you pass. This gives you a way to further restrict the permissions
-    #   for the resulting temporary security credentials. You cannot use the
-    #   passed policy to grant permissions that are in excess of those
-    #   allowed by the access policy of the role that is being assumed. For
-    #   more information, see [Permissions for AssumeRoleWithWebIdentity][1]
-    #   in the *IAM User Guide*.
+    #   The policy parameter is optional. If you pass a policy to this
+    #   operation, the resulting temporary credentials have the permissions
+    #   of the assumed role *and* the policy that you pass. This gives you a
+    #   way to further restrict the permissions for the resulting temporary
+    #   security credentials. You cannot use the passed policy to grant
+    #   permissions that are in excess of those allowed by the permissions
+    #   policy of the role that is being assumed. For more information, see
+    #   [ Permissions for AssumeRole, AssumeRoleWithSAML, and
+    #   AssumeRoleWithWebIdentity ][1] in the *IAM User Guide*.
     #
     #   The format for this parameter, as described by its regex pattern, is
     #   a string of characters up to 2048 characters in length. The
@@ -468,17 +470,17 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plain text must be 2048 bytes or shorter. However, an
+    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
     #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The PackedPolicySize response element indicates by
-    #   percentage how close to the upper size limit the policy is, with
-    #   100% equaling the maximum allowed size.
+    #   separate limit. The `PackedPolicySize` response element indicates by
+    #   percentage how close to the upper size limit the policy is, where
+    #   100 percent is the maximum allowed size.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -492,7 +494,7 @@ module Aws::STS
     #   value for your role, see [View the Maximum Session Duration Setting
     #   for a Role][1] in the *IAM User Guide*.
     #
-    #   By default, the value is set to 3600 seconds.
+    #   By default, the value is set to `3600` seconds.
     #
     #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
     #   console session that you might request using the returned
@@ -506,8 +508,8 @@ module Aws::STS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
-    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityRequest AWS API Documentation
@@ -530,11 +532,13 @@ module Aws::STS
     #   The temporary security credentials, which include an access key ID,
     #   a secret access key, and a security token.
     #
-    #   **Note:** The size of the security token that STS APIs return is not
+    #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
     #   maximum size. As of this writing, the typical size is less than 4096
     #   bytes, but that can vary. Also, future updates to AWS might require
     #   larger sizes.
+    #
+    #    </note>
     #   @return [Types::Credentials]
     #
     # @!attribute [rw] subject_from_web_identity_token
@@ -564,8 +568,8 @@ module Aws::STS
     #
     # @!attribute [rw] provider
     #   The issuing authority of the web identity token presented. For
-    #   OpenID Connect ID Tokens this contains the value of the `iss` field.
-    #   For OAuth 2.0 access tokens, this contains the value of the
+    #   OpenID Connect ID tokens, this contains the value of the `iss`
+    #   field. For OAuth 2.0 access tokens, this contains the value of the
     #   `ProviderId` parameter that was passed in the
     #   `AssumeRoleWithWebIdentity` request.
     #   @return [String]
@@ -604,7 +608,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumedRoleUser AWS API Documentation
@@ -693,7 +697,7 @@ module Aws::STS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/FederatedUser AWS API Documentation
@@ -715,14 +719,14 @@ module Aws::STS
     #
     # @!attribute [rw] user_id
     #   The unique identifier of the calling entity. The exact value depends
-    #   on the type of entity making the call. The values returned are those
-    #   listed in the **aws:userid** column in the [Principal table][1]
-    #   found on the **Policy Variables** reference page in the *IAM User
-    #   Guide*.
+    #   on the type of entity that is making the call. The values returned
+    #   are those listed in the **aws:userid** column in the [Principal
+    #   table][1] found on the **Policy Variables** reference page in the
+    #   *IAM User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html#principaltable
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html#principaltable
     #   @return [String]
     #
     # @!attribute [rw] account
@@ -765,22 +769,15 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   An IAM policy in JSON format that is passed with the
-    #   `GetFederationToken` call and evaluated along with the policy or
-    #   policies that are attached to the IAM user whose credentials are
-    #   used to call `GetFederationToken`. The passed policy is used to
-    #   scope down the permissions that are available to the IAM user, by
-    #   allowing only a subset of the permissions that are granted to the
-    #   IAM user. The passed policy cannot grant more permissions than those
-    #   granted to the IAM user. The final permissions for the federated
-    #   user are the most restrictive set based on the intersection of the
-    #   passed policy and the IAM user policy.
-    #
-    #   If you do not pass a policy, the resulting temporary security
-    #   credentials have no effective permissions. The only exception is
-    #   when the temporary security credentials are used to access a
-    #   resource that has a resource-based policy that specifically allows
-    #   the federated user to access the resource.
+    #   An IAM policy in JSON format. You must pass an IAM permissions
+    #   policy to `GetFederationToken`. When you pass a policy to this
+    #   operation, the resulting temporary credentials are defined by the
+    #   intersection of your IAM user policies and the policy that you pass.
+    #   The passed policy defines the permissions of the *federated user*.
+    #   AWS allows the federated user's request only when both the attached
+    #   policy and the IAM user policy explicitly allow the federated user
+    #   to perform the requested action. The passed policy cannot grant more
+    #   permissions than those that are defined in the IAM user policy.
     #
     #   The format for this parameter, as described by its regex pattern, is
     #   a string of characters up to 2048 characters in length. The
@@ -789,11 +786,11 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plain text must be 2048 bytes or shorter. However, an
+    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
     #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The PackedPolicySize response element indicates by
-    #   percentage how close to the upper size limit the policy is, with
-    #   100% equaling the maximum allowed size.
+    #   separate limit. The `PackedPolicySize` response element indicates by
+    #   percentage how close to the upper size limit the policy is, where
+    #   100 percent is the maximum allowed size.
     #
     #    </note>
     #
@@ -802,18 +799,17 @@ module Aws::STS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, that the session should last. Acceptable
     #   durations for federation sessions range from 900 seconds (15
-    #   minutes) to 129600 seconds (36 hours), with 43200 seconds (12 hours)
-    #   as the default. Sessions obtained using AWS account (root)
-    #   credentials are restricted to a maximum of 3600 seconds (one hour).
+    #   minutes) to 129,600 seconds (36 hours), with 43,200 seconds (12
+    #   hours) as the default. Sessions obtained using AWS account root user
+    #   credentials are restricted to a maximum of 3,600 seconds (one hour).
     #   If the specified duration is longer than one hour, the session
-    #   obtained by using AWS account (root) credentials defaults to one
-    #   hour.
+    #   obtained by using root user credentials defaults to one hour.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenRequest AWS API Documentation
@@ -833,11 +829,13 @@ module Aws::STS
     #   The temporary security credentials, which include an access key ID,
     #   a secret access key, and a security (or session) token.
     #
-    #   **Note:** The size of the security token that STS APIs return is not
+    #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
     #   maximum size. As of this writing, the typical size is less than 4096
     #   bytes, but that can vary. Also, future updates to AWS might require
     #   larger sizes.
+    #
+    #    </note>
     #   @return [Types::Credentials]
     #
     # @!attribute [rw] federated_user
@@ -874,9 +872,9 @@ module Aws::STS
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, that the credentials should remain valid.
     #   Acceptable durations for IAM user sessions range from 900 seconds
-    #   (15 minutes) to 129600 seconds (36 hours), with 43200 seconds (12
+    #   (15 minutes) to 129,600 seconds (36 hours), with 43,200 seconds (12
     #   hours) as the default. Sessions for AWS account owners are
-    #   restricted to a maximum of 3600 seconds (one hour). If the duration
+    #   restricted to a maximum of 3,600 seconds (one hour). If the duration
     #   is longer than one hour, the session for AWS account owners defaults
     #   to one hour.
     #   @return [Integer]
@@ -891,7 +889,7 @@ module Aws::STS
     #   the device for an IAM user by going to the AWS Management Console
     #   and viewing the user's security credentials.
     #
-    #   The regex used to validated this parameter is a string of characters
+    #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
     #   characters: =,.@:/-
@@ -900,9 +898,9 @@ module Aws::STS
     # @!attribute [rw] token_code
     #   The value provided by the MFA device, if MFA is required. If any
     #   policy requires the IAM user to submit an MFA code, specify this
-    #   value. If MFA authentication is required, and the user does not
-    #   provide a code when requesting a set of temporary security
-    #   credentials, the user will receive an "access denied" response
+    #   value. If MFA authentication is required, the user must provide a
+    #   code when requesting a set of temporary security credentials. A user
+    #   who fails to provide the code receives an "access denied" response
     #   when requesting resources that require MFA authentication.
     #
     #   The format for this parameter, as described by its regex pattern, is
@@ -926,11 +924,13 @@ module Aws::STS
     #   The temporary security credentials, which include an access key ID,
     #   a secret access key, and a security (or session) token.
     #
-    #   **Note:** The size of the security token that STS APIs return is not
+    #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
     #   maximum size. As of this writing, the typical size is less than 4096
     #   bytes, but that can vary. Also, future updates to AWS might require
     #   larger sizes.
+    #
+    #    </note>
     #   @return [Types::Credentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenResponse AWS API Documentation
