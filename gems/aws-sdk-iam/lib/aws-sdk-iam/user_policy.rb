@@ -40,6 +40,11 @@ module Aws::IAM
     alias :policy_name :name
 
     # The policy document.
+    #
+    # IAM stores policies in JSON format. However, resources that were
+    # created using AWS CloudFormation templates can be formatted in YAML.
+    # AWS CloudFormation always converts a YAML policy to JSON format before
+    # submitting it to IAM.
     # @return [String]
     def policy_document
       data[:policy_document]
@@ -202,6 +207,11 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @option options [required, String] :policy_document
     #   The policy document.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:

@@ -944,12 +944,6 @@ module Aws::ConfigService
     # Provides options for how often AWS Config delivers configuration
     # snapshots to the Amazon S3 bucket in your delivery channel.
     #
-    # <note markdown="1"> If you want to create a rule that triggers evaluations for your
-    # resources when AWS Config delivers the configuration snapshot, see the
-    # following:
-    #
-    #  </note>
-    #
     # The frequency for a rule that triggers evaluations for your resources
     # when AWS Config delivers the configuration snapshot is set by one of
     # two values, depending on which is less frequent:
@@ -1878,7 +1872,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is
-    #   more than the default of 50 rules.
+    #   more than the default of 150 rules.
     #
     #   For information about requesting a rule limit increase, see [AWS
     #   Config Limits][1] in the *AWS General Reference Guide*.
@@ -3411,7 +3405,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # This object contains regions to setup the aggregator and an IAM role
+    # This object contains regions to set up the aggregator and an IAM role
     # to retrieve organization details.
     #
     # @note When making an API call, you may pass OrganizationAggregationSource
@@ -3424,7 +3418,7 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] role_arn
-    #   ARN of the IAM role used to retreive AWS Organization details
+    #   ARN of the IAM role used to retrieve AWS Organization details
     #   associated with the aggregator account.
     #   @return [String]
     #
@@ -3470,6 +3464,12 @@ module Aws::ConfigService
     #       {
     #         authorized_account_id: "AccountId", # required
     #         authorized_aws_region: "AwsRegion", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] authorized_account_id
@@ -3480,11 +3480,15 @@ module Aws::ConfigService
     #   The region authorized to collect aggregated data.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationRequest AWS API Documentation
     #
     class PutAggregationAuthorizationRequest < Struct.new(
       :authorized_account_id,
-      :authorized_aws_region)
+      :authorized_aws_region,
+      :tags)
       include Aws::Structure
     end
 
@@ -3530,16 +3534,26 @@ module Aws::ConfigService
     #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
     #           created_by: "StringWithCharLimit256",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] config_rule
     #   The rule that you want to add to your account.
     #   @return [Types::ConfigRule]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleRequest AWS API Documentation
     #
     class PutConfigRuleRequest < Struct.new(
-      :config_rule)
+      :config_rule,
+      :tags)
       include Aws::Structure
     end
 
@@ -3560,6 +3574,12 @@ module Aws::ConfigService
     #           aws_regions: ["String"],
     #           all_aws_regions: false,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] configuration_aggregator_name
@@ -3574,12 +3594,16 @@ module Aws::ConfigService
     #   An OrganizationAggregationSource object.
     #   @return [Types::OrganizationAggregationSource]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregatorRequest AWS API Documentation
     #
     class PutConfigurationAggregatorRequest < Struct.new(
       :configuration_aggregator_name,
       :account_aggregation_sources,
-      :organization_aggregation_source)
+      :organization_aggregation_source,
+      :tags)
       include Aws::Structure
     end
 

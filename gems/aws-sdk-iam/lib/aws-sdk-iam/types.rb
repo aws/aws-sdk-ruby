@@ -634,16 +634,10 @@ module Aws::IAM
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-. The group name must be unique within the
-    #   account. Group names are not distinguished by case. For example, you
-    #   cannot create groups named both "ADMINS" and "admins".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupRequest AWS API Documentation
@@ -902,14 +896,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The friendly name of the policy.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -937,6 +927,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1013,6 +1008,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The JSON policy document that you want to use as the content for
     #   this new version of the policy.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1110,22 +1110,20 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #   Role names are not distinguished by case. For example, you cannot
-    #   create roles named both "PRODROLE" and "prodrole".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] assume_role_policy_document
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -1433,16 +1431,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to create.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-. User names are not distinguished by case. For
-    #   example, you cannot create users named both "TESTUSER" and
-    #   "testuser".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary
@@ -3110,6 +3102,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyResponse AWS API Documentation
@@ -3498,6 +3495,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyResponse AWS API Documentation
@@ -4026,6 +4028,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   IAM stores policies in JSON format. However, resources that were
+    #   created using AWS CloudFormation templates can be formatted in YAML.
+    #   AWS CloudFormation always converts a YAML policy to JSON format
+    #   before submitting it to IAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyResponse AWS API Documentation
@@ -7374,14 +7381,7 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   &amp;regex-name;.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -7399,6 +7399,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -7490,6 +7495,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -7579,6 +7589,11 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_document
     #   The policy document.
+    #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
@@ -9521,6 +9536,11 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy that grants an entity permission to assume the role.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the
+    #   policy in JSON or YAML format. AWS CloudFormation always converts a
+    #   YAML policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string
     #   of characters consisting of the following:
     #
@@ -9589,14 +9609,10 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the
     #   group's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupRequest AWS API Documentation
@@ -10094,14 +10110,10 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're
     #   changing the user's name.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following
-    #   characters: \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you
+    #   cannot create resources named both "MyResource" and
+    #   "myresource".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserRequest AWS API Documentation
