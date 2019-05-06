@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::STS - Updated the documentation, and integration test for AWS Security Token Service.
+
 2.11.268 (2019-05-03)
 ------------------
 
