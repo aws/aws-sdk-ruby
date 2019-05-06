@@ -34,6 +34,15 @@ module Aws
       end
     end
 
+    # Raised when a `streaming` operation has `requiresLength` trait
+    # enabled but request payload size/length cannot be calculated
+    class MissingContentLength < RuntimeError
+      def initialize(*args)
+        msg = 'Required `Content-Length` value missing for the request.'
+        super(msg)
+      end
+    end
+
     # Rasied when endpoint discovery failed for operations
     # that requires endpoints from endpoint discovery
     class EndpointDiscoveryError < RuntimeError

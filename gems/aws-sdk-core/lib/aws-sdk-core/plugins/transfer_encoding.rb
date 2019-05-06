@@ -1,0 +1,50 @@
+module Aws
+  module Plugins
+
+    # For Streaming Input Operations, when `requiresLength` is enabled
+    # checking whether `Content-Length` header can be set,
+    # for `v4-unsigned-body` operations, set `Transfer-Encoding` header
+    class TransferEncoding < Seahorse::Client::Plugin
+
+      # @api private
+      class Handler < Seahorse::Client::Handler
+
+        def call(context)
+          if streaming?(context.operation.input)
+            if requires_length?(context.operation.input)
+              if context.http_request.body.size.nil?
+                raise Aws::Errors::MissingContentLength.new
+              end
+            elsif context.operation['authtype'] == "v4-unsigned-body"
+              context.http_request.headers['Transfer-Encoding'] = 'chunked'
+            end
+          end
+
+          @handler.call(context)
+        end
+
+        private
+
+        def streaming?(ref)
+          if payload = ref[:payload_member]
+            payload["streaming"] || # checking ref and shape
+              payload.shape["streaming"]
+          else
+            false
+          end
+        end
+
+        def requires_length?(ref)
+          payload = ref[:payload_member]
+          payload["requiresLength"] || # checking ref and shape
+            payload.shape["requiresLength"]
+        end
+
+      end
+
+      handler(Handler, step: :sign)
+
+    end
+
+  end
+end

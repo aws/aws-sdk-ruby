@@ -27,6 +27,8 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        'streaming'  => true, # transfer-encoding
+        'requiresLength' => true, # transder-encoding
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -47,7 +49,6 @@ module AwsSdkCodeGenerator
         'locationName'  => false,
         'value' => false,
         'required' => false,
-        'streaming'  => false,
         'enum' => false,
         'exception' => false,
         'payload' => false,
