@@ -12,7 +12,10 @@ module Aws
         def call(context)
           if streaming?(context.operation.input)
             if requires_length?(context.operation.input)
-              if context.http_request.body.size.nil?
+              begin
+                context.http_request.body.size
+              rescue
+                # if size of the IO is not available
                 raise Aws::Errors::MissingContentLength.new
               end
             elsif context.operation['authtype'] == "v4-unsigned-body"

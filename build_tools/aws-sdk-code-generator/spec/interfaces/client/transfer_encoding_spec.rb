@@ -25,7 +25,7 @@ describe 'Client Interface:' do
 
     it 'raises error when `Content-Length` header is required but cannot be set' do
       stream = StringIO.new('stream')
-      allow(stream).to receive(:size).and_return(nil)
+      allow(stream).to receive(:size).and_raise(NoMethodError)
       msg = "Required `Content-Length` value missing for the request."
       expect {
         client.streaming(body: stream)
