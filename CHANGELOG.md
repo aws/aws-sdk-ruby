@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::DynamoDB - Replaced BigDecimal.new() with BigDecimal() #1937
+
 2.11.269 (2019-05-06)
 ------------------
 
