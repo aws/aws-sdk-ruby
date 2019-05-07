@@ -26,8 +26,11 @@ gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
 gem 'oga'
 
 group :test do
-  gem 'rspec'
+
   if RUBY_VERSION == '1.9.3'
+    # '3.8.3' fails 1.9.3 test suits
+    gem 'rspec-expectations', '3.8.2'
+
     # webmock dropped support for Ruby 1.9.3 after version 2.2.0
     gem 'webmock', '2.2.0'
     # webmock depends on addressable, but the latest version of addressable
@@ -45,6 +48,9 @@ group :test do
   end
   gem 'simplecov', require: false
   gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
+
+  gem 'rspec'
+
   gem 'json-schema'
   gem 'multipart-post'
 end
