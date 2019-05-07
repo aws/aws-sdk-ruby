@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Support transfer encoding and `requiresLength` trait
 
+3.50.0 (2019-05-06)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.49.0 (2019-04-30)
 ------------------
 

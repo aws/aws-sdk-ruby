@@ -343,8 +343,8 @@ module Aws::CodePipeline
     #   The category of the custom action, such as a build action or a test
     #   action.
     #
-    #   <note markdown="1"> Although Source and Approval are listed as valid values, they are not
-    #   currently functional. These values are reserved for future use.
+    #   <note markdown="1"> Although `Source` and `Approval` are listed as valid values, they are
+    #   not currently functional. These values are reserved for future use.
     #
     #    </note>
     #
@@ -356,7 +356,7 @@ module Aws::CodePipeline
     #   The version identifier of the custom action.
     #
     # @option params [Types::ActionTypeSettings] :settings
-    #   Returns information about the settings for an action type.
+    #   URLs that provide users information about this custom action.
     #
     # @option params [Array<Types::ActionConfigurationProperty>] :configuration_properties
     #   The configuration properties for the custom action.
@@ -570,7 +570,7 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Marks a custom action as deleted. PollForJobs for the custom action
+    # Marks a custom action as deleted. `PollForJobs` for the custom action
     # will fail after the action is marked for deletion. Only used for
     # custom actions.
     #
@@ -949,9 +949,9 @@ module Aws::CodePipeline
     # Returns information about the state of a pipeline, including the
     # stages and actions.
     #
-    # <note markdown="1"> Values returned in the revisionId and revisionUrl fields indicate the
-    # source revision information, such as the commit ID, for the current
-    # state.
+    # <note markdown="1"> Values returned in the `revisionId` and `revisionUrl` fields indicate
+    # the source revision information, such as the commit ID, for the
+    # current state.
     #
     #  </note>
     #
@@ -1106,7 +1106,7 @@ module Aws::CodePipeline
     #    </note>
     #
     # @option params [String] :next_token
-    #   The token that was returned from the previous ListActionExecutions
+    #   The token that was returned from the previous `ListActionExecutions`
     #   call, which can be used to return the next set of action executions in
     #   the list.
     #
@@ -1238,7 +1238,7 @@ module Aws::CodePipeline
     #   on pipeline execution start times. Default value is 100.
     #
     # @option params [String] :next_token
-    #   The token that was returned from the previous ListPipelineExecutions
+    #   The token that was returned from the previous `ListPipelineExecutions`
     #   call, which can be used to return the next set of pipeline executions
     #   in the list.
     #
@@ -1367,9 +1367,9 @@ module Aws::CodePipeline
     end
 
     # Returns information about any jobs for AWS CodePipeline to act upon.
-    # PollForJobs is only valid for action types with "Custom" in the
+    # `PollForJobs` is only valid for action types with "Custom" in the
     # owner field. If the action type contains "AWS" or "ThirdParty" in
-    # the owner field, the PollForJobs action returns an error.
+    # the owner field, the `PollForJobs` action returns an error.
     #
     # When this API is called, AWS CodePipeline returns temporary
     # credentials for the Amazon S3 bucket used to store artifacts for the
@@ -1605,7 +1605,7 @@ module Aws::CodePipeline
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID of the job that failed. This is the
-    #   same ID returned from PollForJobs.
+    #   same ID returned from `PollForJobs`.
     #
     # @option params [required, Types::FailureDetails] :failure_details
     #   The details about the failure of a job.
@@ -1637,7 +1637,7 @@ module Aws::CodePipeline
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID of the job that succeeded. This is the
-    #   same ID returned from PollForJobs.
+    #   same ID returned from `PollForJobs`.
     #
     # @option params [Types::CurrentRevision] :current_revision
     #   The ID of the current revision of the artifact successfully worked
@@ -1689,7 +1689,7 @@ module Aws::CodePipeline
     #
     # @option params [required, String] :job_id
     #   The ID of the job that failed. This is the same ID returned from
-    #   PollForThirdPartyJobs.
+    #   `PollForThirdPartyJobs`.
     #
     # @option params [required, String] :client_token
     #   The clientToken portion of the clientId and clientToken pair used to
@@ -1727,7 +1727,7 @@ module Aws::CodePipeline
     #
     # @option params [required, String] :job_id
     #   The ID of the job that successfully completed. This is the same ID
-    #   returned from PollForThirdPartyJobs.
+    #   returned from `PollForThirdPartyJobs`.
     #
     # @option params [required, String] :client_token
     #   The clientToken portion of the clientId and clientToken pair used to
@@ -1956,8 +1956,9 @@ module Aws::CodePipeline
 
     # Updates a specified pipeline with edits or changes to its structure.
     # Use a JSON file with the pipeline structure in conjunction with
-    # UpdatePipeline to provide the full structure of the pipeline. Updating
-    # the pipeline increases the version number of the pipeline by 1.
+    # `UpdatePipeline` to provide the full structure of the pipeline.
+    # Updating the pipeline increases the version number of the pipeline by
+    # 1.
     #
     # @option params [required, Types::PipelineDeclaration] :pipeline
     #   The name of the pipeline to be updated.
@@ -2089,7 +2090,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -325,6 +325,7 @@ module Aws::ConfigService
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TagsList = Shapes::ListShape.new(name: 'TagsList')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnprocessedResourceIdentifierList = Shapes::ListShape.new(name: 'UnprocessedResourceIdentifierList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -956,17 +957,20 @@ module Aws::ConfigService
 
     PutAggregationAuthorizationRequest.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AuthorizedAccountId"))
     PutAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
+    PutAggregationAuthorizationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     PutAggregationAuthorizationRequest.struct_class = Types::PutAggregationAuthorizationRequest
 
     PutAggregationAuthorizationResponse.add_member(:aggregation_authorization, Shapes::ShapeRef.new(shape: AggregationAuthorization, location_name: "AggregationAuthorization"))
     PutAggregationAuthorizationResponse.struct_class = Types::PutAggregationAuthorizationResponse
 
     PutConfigRuleRequest.add_member(:config_rule, Shapes::ShapeRef.new(shape: ConfigRule, required: true, location_name: "ConfigRule"))
+    PutConfigRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     PutConfigRuleRequest.struct_class = Types::PutConfigRuleRequest
 
     PutConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     PutConfigurationAggregatorRequest.add_member(:account_aggregation_sources, Shapes::ShapeRef.new(shape: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
     PutConfigurationAggregatorRequest.add_member(:organization_aggregation_source, Shapes::ShapeRef.new(shape: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
+    PutConfigurationAggregatorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     PutConfigurationAggregatorRequest.struct_class = Types::PutConfigurationAggregatorRequest
 
     PutConfigurationAggregatorResponse.add_member(:configuration_aggregator, Shapes::ShapeRef.new(shape: ConfigurationAggregator, location_name: "ConfigurationAggregator"))
@@ -1174,6 +1178,8 @@ module Aws::ConfigService
 
     Tags.key = Shapes::ShapeRef.new(shape: Name)
     Tags.value = Shapes::ShapeRef.new(shape: Value)
+
+    TagsList.member = Shapes::ShapeRef.new(shape: Tag)
 
     UnprocessedResourceIdentifierList.member = Shapes::ShapeRef.new(shape: AggregateResourceIdentifier)
 
