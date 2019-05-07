@@ -24,7 +24,8 @@ module Aws
             stub[key] = nil
           end
           if more_results = @pager.instance_variable_get('@more_results')
-            stub[more_results] = false
+            key = more_results.split(/\b/)[0]
+            stub[key] = false
           end
         end
       end
