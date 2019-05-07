@@ -106,6 +106,8 @@ module Aws::AlexaForBusiness
     DeleteContactResponse = Shapes::StructureShape.new(name: 'DeleteContactResponse')
     DeleteDeviceRequest = Shapes::StructureShape.new(name: 'DeleteDeviceRequest')
     DeleteDeviceResponse = Shapes::StructureShape.new(name: 'DeleteDeviceResponse')
+    DeleteDeviceUsageDataRequest = Shapes::StructureShape.new(name: 'DeleteDeviceUsageDataRequest')
+    DeleteDeviceUsageDataResponse = Shapes::StructureShape.new(name: 'DeleteDeviceUsageDataResponse')
     DeleteGatewayGroupRequest = Shapes::StructureShape.new(name: 'DeleteGatewayGroupRequest')
     DeleteGatewayGroupResponse = Shapes::StructureShape.new(name: 'DeleteGatewayGroupResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
@@ -140,6 +142,7 @@ module Aws::AlexaForBusiness
     DeviceStatusDetails = Shapes::ListShape.new(name: 'DeviceStatusDetails')
     DeviceStatusInfo = Shapes::StructureShape.new(name: 'DeviceStatusInfo')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
+    DeviceUsageType = Shapes::StringShape.new(name: 'DeviceUsageType')
     DisassociateContactFromAddressBookRequest = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookRequest')
     DisassociateContactFromAddressBookResponse = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookResponse')
     DisassociateDeviceFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomRequest')
@@ -636,6 +639,12 @@ module Aws::AlexaForBusiness
     DeleteDeviceRequest.struct_class = Types::DeleteDeviceRequest
 
     DeleteDeviceResponse.struct_class = Types::DeleteDeviceResponse
+
+    DeleteDeviceUsageDataRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
+    DeleteDeviceUsageDataRequest.add_member(:device_usage_type, Shapes::ShapeRef.new(shape: DeviceUsageType, required: true, location_name: "DeviceUsageType"))
+    DeleteDeviceUsageDataRequest.struct_class = Types::DeleteDeviceUsageDataRequest
+
+    DeleteDeviceUsageDataResponse.struct_class = Types::DeleteDeviceUsageDataResponse
 
     DeleteGatewayGroupRequest.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayGroupArn"))
     DeleteGatewayGroupRequest.struct_class = Types::DeleteGatewayGroupRequest
@@ -1595,6 +1604,17 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateAuthorityException)
+      end)
+
+      api.add_operation(:delete_device_usage_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeviceUsageData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeviceUsageDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDeviceUsageDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:delete_gateway_group, Seahorse::Model::Operation.new.tap do |o|

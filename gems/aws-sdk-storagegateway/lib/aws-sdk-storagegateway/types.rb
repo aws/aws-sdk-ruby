@@ -964,6 +964,7 @@ module Aws::StorageGateway
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
     #         smbacl_enabled: false,
+    #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #         authentication: "Authentication",
@@ -1049,6 +1050,13 @@ module Aws::StorageGateway
     #   permissions to the POSIX permissions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -1097,6 +1105,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :smbacl_enabled,
+      :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
       :authentication,
@@ -4260,6 +4269,13 @@ module Aws::StorageGateway
     #   POSIX permission.
     #   @return [Boolean]
     #
+    # @!attribute [rw] admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -4306,6 +4322,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :smbacl_enabled,
+      :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
       :authentication,
@@ -5300,6 +5317,7 @@ module Aws::StorageGateway
     #         guess_mime_type_enabled: false,
     #         requester_pays: false,
     #         smbacl_enabled: false,
+    #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
     #       }
@@ -5364,6 +5382,13 @@ module Aws::StorageGateway
     #   permissions to the POSIX permissions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] admin_user_list
+    #   A list of users or groups in the Active Directory that have
+    #   administrator rights to the file share. A group must be prefixed
+    #   with the @ character. For example `@group1`. Can only be set if
+    #   Authentication is set to `ActiveDirectory`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] valid_user_list
     #   A list of users or groups in the Active Directory that are allowed
     #   to access the file share. A group must be prefixed with the @
@@ -5390,6 +5415,7 @@ module Aws::StorageGateway
       :guess_mime_type_enabled,
       :requester_pays,
       :smbacl_enabled,
+      :admin_user_list,
       :valid_user_list,
       :invalid_user_list)
       include Aws::Structure

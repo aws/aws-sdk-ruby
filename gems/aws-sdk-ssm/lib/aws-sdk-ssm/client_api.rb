@@ -278,6 +278,8 @@ module Aws::SSM
     DescribePatchGroupStateResult = Shapes::StructureShape.new(name: 'DescribePatchGroupStateResult')
     DescribePatchGroupsRequest = Shapes::StructureShape.new(name: 'DescribePatchGroupsRequest')
     DescribePatchGroupsResult = Shapes::StructureShape.new(name: 'DescribePatchGroupsResult')
+    DescribePatchPropertiesRequest = Shapes::StructureShape.new(name: 'DescribePatchPropertiesRequest')
+    DescribePatchPropertiesResult = Shapes::StructureShape.new(name: 'DescribePatchPropertiesResult')
     DescribeSessionsRequest = Shapes::StructureShape.new(name: 'DescribeSessionsRequest')
     DescribeSessionsResponse = Shapes::StructureShape.new(name: 'DescribeSessionsResponse')
     DescriptionInDocument = Shapes::StringShape.new(name: 'DescriptionInDocument')
@@ -724,9 +726,13 @@ module Aws::SSM
     PatchOrchestratorFilterValues = Shapes::ListShape.new(name: 'PatchOrchestratorFilterValues')
     PatchProduct = Shapes::StringShape.new(name: 'PatchProduct')
     PatchProductFamily = Shapes::StringShape.new(name: 'PatchProductFamily')
+    PatchPropertiesList = Shapes::ListShape.new(name: 'PatchPropertiesList')
+    PatchProperty = Shapes::StringShape.new(name: 'PatchProperty')
+    PatchPropertyEntry = Shapes::MapShape.new(name: 'PatchPropertyEntry')
     PatchRule = Shapes::StructureShape.new(name: 'PatchRule')
     PatchRuleGroup = Shapes::StructureShape.new(name: 'PatchRuleGroup')
     PatchRuleList = Shapes::ListShape.new(name: 'PatchRuleList')
+    PatchSet = Shapes::StringShape.new(name: 'PatchSet')
     PatchSeverity = Shapes::StringShape.new(name: 'PatchSeverity')
     PatchSource = Shapes::StructureShape.new(name: 'PatchSource')
     PatchSourceConfiguration = Shapes::StringShape.new(name: 'PatchSourceConfiguration')
@@ -736,6 +742,7 @@ module Aws::SSM
     PatchSourceProductList = Shapes::ListShape.new(name: 'PatchSourceProductList')
     PatchStatus = Shapes::StructureShape.new(name: 'PatchStatus')
     PatchTitle = Shapes::StringShape.new(name: 'PatchTitle')
+    PatchUnreportedNotApplicableCount = Shapes::IntegerShape.new(name: 'PatchUnreportedNotApplicableCount')
     PatchVendor = Shapes::StringShape.new(name: 'PatchVendor')
     PingStatus = Shapes::StringShape.new(name: 'PingStatus')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
@@ -894,6 +901,7 @@ module Aws::SSM
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
+    UnsupportedFeatureRequiredException = Shapes::StructureShape.new(name: 'UnsupportedFeatureRequiredException')
     UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
     UnsupportedInventorySchemaVersionException = Shapes::StructureShape.new(name: 'UnsupportedInventorySchemaVersionException')
     UnsupportedOperatingSystem = Shapes::StructureShape.new(name: 'UnsupportedOperatingSystem')
@@ -1758,6 +1766,7 @@ module Aws::SSM
     DescribePatchGroupStateResult.add_member(:instances_with_missing_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithMissingPatches"))
     DescribePatchGroupStateResult.add_member(:instances_with_failed_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithFailedPatches"))
     DescribePatchGroupStateResult.add_member(:instances_with_not_applicable_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithNotApplicablePatches"))
+    DescribePatchGroupStateResult.add_member(:instances_with_unreported_not_applicable_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithUnreportedNotApplicablePatches", metadata: {"box"=>true}))
     DescribePatchGroupStateResult.struct_class = Types::DescribePatchGroupStateResult
 
     DescribePatchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -1768,6 +1777,17 @@ module Aws::SSM
     DescribePatchGroupsResult.add_member(:mappings, Shapes::ShapeRef.new(shape: PatchGroupPatchBaselineMappingList, location_name: "Mappings"))
     DescribePatchGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribePatchGroupsResult.struct_class = Types::DescribePatchGroupsResult
+
+    DescribePatchPropertiesRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, required: true, location_name: "OperatingSystem"))
+    DescribePatchPropertiesRequest.add_member(:property, Shapes::ShapeRef.new(shape: PatchProperty, required: true, location_name: "Property"))
+    DescribePatchPropertiesRequest.add_member(:patch_set, Shapes::ShapeRef.new(shape: PatchSet, location_name: "PatchSet"))
+    DescribePatchPropertiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribePatchPropertiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePatchPropertiesRequest.struct_class = Types::DescribePatchPropertiesRequest
+
+    DescribePatchPropertiesResult.add_member(:properties, Shapes::ShapeRef.new(shape: PatchPropertiesList, location_name: "Properties"))
+    DescribePatchPropertiesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePatchPropertiesResult.struct_class = Types::DescribePatchPropertiesResult
 
     DescribeSessionsRequest.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, required: true, location_name: "State"))
     DescribeSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SessionMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -2213,6 +2233,7 @@ module Aws::SSM
     InstancePatchState.add_member(:installed_rejected_count, Shapes::ShapeRef.new(shape: PatchInstalledRejectedCount, location_name: "InstalledRejectedCount", metadata: {"box"=>true}))
     InstancePatchState.add_member(:missing_count, Shapes::ShapeRef.new(shape: PatchMissingCount, location_name: "MissingCount"))
     InstancePatchState.add_member(:failed_count, Shapes::ShapeRef.new(shape: PatchFailedCount, location_name: "FailedCount"))
+    InstancePatchState.add_member(:unreported_not_applicable_count, Shapes::ShapeRef.new(shape: PatchUnreportedNotApplicableCount, location_name: "UnreportedNotApplicableCount", metadata: {"box"=>true}))
     InstancePatchState.add_member(:not_applicable_count, Shapes::ShapeRef.new(shape: PatchNotApplicableCount, location_name: "NotApplicableCount"))
     InstancePatchState.add_member(:operation_start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "OperationStartTime"))
     InstancePatchState.add_member(:operation_end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "OperationEndTime"))
@@ -2761,6 +2782,11 @@ module Aws::SSM
     PatchOrchestratorFilterList.member = Shapes::ShapeRef.new(shape: PatchOrchestratorFilter)
 
     PatchOrchestratorFilterValues.member = Shapes::ShapeRef.new(shape: PatchOrchestratorFilterValue)
+
+    PatchPropertiesList.member = Shapes::ShapeRef.new(shape: PatchPropertyEntry)
+
+    PatchPropertyEntry.key = Shapes::ShapeRef.new(shape: AttributeName)
+    PatchPropertyEntry.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     PatchRule.add_member(:patch_filter_group, Shapes::ShapeRef.new(shape: PatchFilterGroup, required: true, location_name: "PatchFilterGroup"))
     PatchRule.add_member(:compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ComplianceLevel"))
@@ -3916,6 +3942,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_patch_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePatchProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePatchPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePatchPropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_sessions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSessions"
         o.http_method = "POST"
@@ -3976,6 +4011,7 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: GetDeployablePatchSnapshotForInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperatingSystem)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureRequiredException)
       end)
 
       api.add_operation(:get_document, Seahorse::Model::Operation.new.tap do |o|
