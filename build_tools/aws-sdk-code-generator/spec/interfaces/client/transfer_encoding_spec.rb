@@ -13,7 +13,6 @@ describe 'Client Interface:' do
         access_key_id: 'akid',
         secret_access_key: 'secret',
         stub_responses: true,
-        validate_params: false,
         endpoint: 'https://svc.us-west-2.amazonaws.com'
       )
     }
@@ -30,6 +29,15 @@ describe 'Client Interface:' do
       expect {
         client.streaming(body: stream)
       }.to raise_error(Aws::Errors::MissingContentLength, msg)
+      expect {
+        client.unsign_require_len_streaming(body: stream)
+      }.to raise_error(Aws::Errors::MissingContentLength, msg)
+    end
+
+    it 'allows `requireLength` and `v4-unsigned-body` for streaming operations' do
+      resp = client.unsign_require_len_streaming(body: StringIO.new('hey'))
+      expect(resp.context.http_request.headers['Transfer-Encoding']).to be(nil)
+      expect(resp.context.http_request.headers['Content-Length']).to eq("3")
     end
 
     it 'sets `Content-Length` header for streaming operations' do
