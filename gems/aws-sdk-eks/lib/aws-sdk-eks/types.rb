@@ -12,7 +12,7 @@ module Aws::EKS
     # cluster.
     #
     # @!attribute [rw] data
-    #   The base64 encoded certificate data required to communicate with
+    #   The Base64-encoded certificate data required to communicate with
     #   your cluster. Add this to the `certificate-authority-data` section
     #   of the `kubeconfig` file for your cluster.
     #   @return [String]
@@ -140,7 +140,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The desired Kubernetes version for your cluster. If you do not
+    #   The desired Kubernetes version for your cluster. If you don't
     #   specify a value here, the latest version available in Amazon EKS is
     #   used.
     #   @return [String]
@@ -162,7 +162,7 @@ module Aws::EKS
     #   Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You may specify up to five security groups, but we recommend that
+    #   You can specify up to five security groups, but we recommend that
     #   you use a dedicated security group for your cluster control plane.
     #
     #
@@ -174,7 +174,7 @@ module Aws::EKS
     # @!attribute [rw] logging
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
-    #   logs are not exported to CloudWatch Logs. For more information, see
+    #   logs aren't exported to CloudWatch Logs. For more information, see
     #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
@@ -319,27 +319,27 @@ module Aws::EKS
     # @!attribute [rw] error_code
     #   A brief description of the error.
     #
-    #   * **SubnetNotFound**\: One of the subnets associated with the
-    #     cluster could not be found.
+    #   * **SubnetNotFound**\: We couldn't find one of the subnets
+    #     associated with the cluster.
     #
-    #   * **SecurityGroupNotFound**\: One of the security groups associated
-    #     with the cluster could not be found.
+    #   * **SecurityGroupNotFound**\: We couldn't find one of the security
+    #     groups associated with the cluster.
     #
     #   * **EniLimitReached**\: You have reached the elastic network
     #     interface limit for your account.
     #
-    #   * **IpNotAvailable**\: A subnet associated with the cluster does not
+    #   * **IpNotAvailable**\: A subnet associated with the cluster doesn't
     #     have any free IP addresses.
     #
-    #   * **AccessDenied**\: You do not have permissions to perform the
+    #   * **AccessDenied**\: You don't have permissions to perform the
     #     specified operation.
     #
     #   * **OperationNotPermitted**\: The service role associated with the
-    #     cluster does not have the required access permissions for Amazon
+    #     cluster doesn't have the required access permissions for Amazon
     #     EKS.
     #
-    #   * **VpcIdNotFound**\: The VPC associated with the cluster could not
-    #     be found.
+    #   * **VpcIdNotFound**\: We couldn't find the VPC associated with the
+    #     cluster.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -370,12 +370,12 @@ module Aws::EKS
     #
     # @!attribute [rw] max_results
     #   The maximum number of cluster results returned by `ListClusters` in
-    #   paginated output. When this parameter is used, `ListClusters` only
-    #   returns `maxResults` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `ListClusters` request with
+    #   paginated output. When you use this parameter, `ListClusters`
+    #   returns only `maxResults` results in a single page along with a
+    #   `nextToken` response element. You can see the remaining results of
+    #   the initial request by sending another `ListClusters` request with
     #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If this parameter is not used, then `ListClusters` returns up to 100
+    #   If you don't use this parameter, `ListClusters` returns up to 100
     #   results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
@@ -385,8 +385,8 @@ module Aws::EKS
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
     #   programmatic purposes.
     #
     #    </note>
@@ -408,7 +408,7 @@ module Aws::EKS
     # @!attribute [rw] next_token
     #   The `nextToken` value to include in a future `ListClusters` request.
     #   When the results of a `ListClusters` request exceed `maxResults`,
-    #   this value can be used to retrieve the next page of results. This
+    #   you can use this value to retrieve the next page of results. This
     #   value is `null` when there are no more results to return.
     #   @return [String]
     #
@@ -430,7 +430,7 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the Amazon EKS cluster for which to list updates.
+    #   The name of the Amazon EKS cluster to list updates for.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -442,13 +442,13 @@ module Aws::EKS
     #
     # @!attribute [rw] max_results
     #   The maximum number of update results returned by `ListUpdates` in
-    #   paginated output. When this parameter is used, `ListUpdates` only
-    #   returns `maxResults` results in a single page along with a
-    #   `nextToken` response element. The remaining results of the initial
-    #   request can be seen by sending another `ListUpdates` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If this parameter is not used, then `ListUpdates` returns up to 100
-    #   results and a `nextToken` value if applicable.
+    #   paginated output. When you use this parameter, `ListUpdates` returns
+    #   only `maxResults` results in a single page along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListUpdates` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you
+    #   don't use this parameter, `ListUpdates` returns up to 100 results
+    #   and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest AWS API Documentation
@@ -466,9 +466,9 @@ module Aws::EKS
     #
     # @!attribute [rw] next_token
     #   The `nextToken` value to include in a future `ListUpdates` request.
-    #   When the results of a `ListUpdates` request exceed `maxResults`,
-    #   this value can be used to retrieve the next page of results. This
-    #   value is `null` when there are no more results to return.
+    #   When the results of a `ListUpdates` request exceed `maxResults`, you
+    #   can use this value to retrieve the next page of results. This value
+    #   is `null` when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse AWS API Documentation
@@ -495,10 +495,10 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] enabled
-    #   If a log type is enabled, then that log type exports its control
-    #   plane logs to CloudWatch Logs. If a log type is not enabled, then
-    #   that log type does not export its control plane logs. Each
-    #   individual log type can be enabled or disabled independently.
+    #   If a log type is enabled, that log type exports its control plane
+    #   logs to CloudWatch Logs. If a log type isn't enabled, that log type
+    #   doesn't export its control plane logs. Each individual log type can
+    #   be enabled or disabled independently.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LogSetup AWS API Documentation
@@ -608,7 +608,7 @@ module Aws::EKS
     # @!attribute [rw] logging
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
-    #   logs are not exported to CloudWatch Logs. For more information, see
+    #   logs aren't exported to CloudWatch Logs. For more information, see
     #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
@@ -740,14 +740,14 @@ module Aws::EKS
     #   Specify one or more security groups for the cross-account elastic
     #   network interfaces that Amazon EKS creates to use to allow
     #   communication between your worker nodes and the Kubernetes control
-    #   plane. If you do not specify a security group, the default security
+    #   plane. If you don't specify a security group, the default security
     #   group for your VPC is used.
     #   @return [Array<String>]
     #
     # @!attribute [rw] endpoint_public_access
     #   Set this value to `false` to disable public access for your
     #   cluster's Kubernetes API server endpoint. If you disable public
-    #   access, your cluster's Kubernetes API server can only receive
+    #   access, your cluster's Kubernetes API server can receive only
     #   requests from within the cluster VPC. The default value for this
     #   parameter is `true`, which enables public access for your Kubernetes
     #   API server. For more information, see [Amazon EKS Cluster Endpoint
@@ -761,9 +761,9 @@ module Aws::EKS
     # @!attribute [rw] endpoint_private_access
     #   Set this value to `true` to enable private access for your
     #   cluster's Kubernetes API server endpoint. If you enable private
-    #   access, Kubernetes API requests from within your cluster's VPC will
-    #   use the private VPC endpoint. The default value for this parameter
-    #   is `false`, which disables private access for your Kubernetes API
+    #   access, Kubernetes API requests from within your cluster's VPC use
+    #   the private VPC endpoint. The default value for this parameter is
+    #   `false`, which disables private access for your Kubernetes API
     #   server. For more information, see [Amazon EKS Cluster Endpoint
     #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
@@ -802,7 +802,7 @@ module Aws::EKS
     # @!attribute [rw] endpoint_public_access
     #   This parameter indicates whether the Amazon EKS public API server
     #   endpoint is enabled. If the Amazon EKS public API server endpoint is
-    #   disabled, your cluster's Kubernetes API server can only receive
+    #   disabled, your cluster's Kubernetes API server can receive only
     #   requests that originate from within the cluster VPC.
     #   @return [Boolean]
     #
@@ -810,8 +810,8 @@ module Aws::EKS
     #   This parameter indicates whether the Amazon EKS private API server
     #   endpoint is enabled. If the Amazon EKS private API server endpoint
     #   is enabled, Kubernetes API requests that originate from within your
-    #   cluster's VPC will use the private VPC endpoint instead of
-    #   traversing the internet.
+    #   cluster's VPC use the private VPC endpoint instead of traversing
+    #   the internet.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse AWS API Documentation

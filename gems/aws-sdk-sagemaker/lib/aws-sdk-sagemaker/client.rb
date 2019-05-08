@@ -260,8 +260,8 @@ module Aws::SageMaker
 
     # Adds or overwrites one or more tags for the specified Amazon SageMaker
     # resource. You can add tags to notebook instances, training jobs,
-    # hyperparameter tuning jobs, models, endpoint configurations, and
-    # endpoints.
+    # hyperparameter tuning jobs, batch transform jobs, models, labeling
+    # jobs, work teams, endpoint configurations, and endpoints.
     #
     # Each tag consists of a key and an optional value. Tag keys must be
     # unique per resource. For more information about tags, see For more
@@ -465,7 +465,7 @@ module Aws::SageMaker
     #               {
     #                 channel_name: "ChannelName", # required
     #                 data_source: { # required
-    #                   s3_data_source: { # required
+    #                   s3_data_source: {
     #                     s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #                     s3_uri: "S3Uri", # required
     #                     s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -631,7 +631,7 @@ module Aws::SageMaker
     #   the AWS Region and within your AWS account.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
     #   SageMaker to perform tasks on your behalf.
     #
     #   During model compilation, Amazon SageMaker needs your permission to:
@@ -681,7 +681,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "ml_m4", # required, accepts ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, rasp3b, deeplens, rk3399, rk3288
+    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -708,6 +708,11 @@ module Aws::SageMaker
     #
     # <note markdown="1"> Use this API only for hosting models using Amazon SageMaker hosting
     # services.
+    #
+    #  You must not delete an `EndpointConfig` in use by an endpoint that is
+    # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
+    # being performed on the endpoint. To update an endpoint, you must
+    # create a new `EndpointConfig`.
     #
     #  </note>
     #
@@ -830,13 +835,13 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #
     # @option params [required, Array<Types::ProductionVariant>] :production_variants
-    #   An array of `ProductionVariant` objects, one for each model that you
+    #   An list of `ProductionVariant` objects, one for each model that you
     #   want to host at this endpoint.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*.
+    #   A list of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the <i> AWS Billing and Cost Management User
+    #   Guide</i>.
     #
     #
     #
@@ -908,7 +913,7 @@ module Aws::SageMaker
     #   limits for the tuning job. For more information, see
     #   automatic-model-tuning
     #
-    # @option params [required, Types::HyperParameterTrainingJobDefinition] :training_job_definition
+    # @option params [Types::HyperParameterTrainingJobDefinition] :training_job_definition
     #   The HyperParameterTrainingJobDefinition object that describes the
     #   training jobs that this tuning job launches, including static
     #   hyperparameters, input data configuration, output data configuration,
@@ -957,7 +962,7 @@ module Aws::SageMaker
     #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
     #     hyper_parameter_tuning_job_config: { # required
     #       strategy: "Bayesian", # required, accepts Bayesian, Random
-    #       hyper_parameter_tuning_job_objective: { # required
+    #       hyper_parameter_tuning_job_objective: {
     #         type: "Maximize", # required, accepts Maximize, Minimize
     #         metric_name: "MetricName", # required
     #       },
@@ -965,7 +970,7 @@ module Aws::SageMaker
     #         max_number_of_training_jobs: 1, # required
     #         max_parallel_training_jobs: 1, # required
     #       },
-    #       parameter_ranges: { # required
+    #       parameter_ranges: {
     #         integer_parameter_ranges: [
     #           {
     #             name: "ParameterKey", # required
@@ -991,7 +996,7 @@ module Aws::SageMaker
     #       },
     #       training_job_early_stopping_type: "Off", # accepts Off, Auto
     #     },
-    #     training_job_definition: { # required
+    #     training_job_definition: {
     #       static_hyper_parameters: {
     #         "ParameterKey" => "ParameterValue",
     #       },
@@ -1011,7 +1016,7 @@ module Aws::SageMaker
     #         {
     #           channel_name: "ChannelName", # required
     #           data_source: { # required
-    #             s3_data_source: { # required
+    #             s3_data_source: {
     #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #               s3_uri: "S3Uri", # required
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -1344,17 +1349,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   A VpcConfig object that specifies the VPC that you want your model to
-    #   connect to. Control access to and from your model container by
-    #   configuring the VPC. `VpcConfig` is used in hosting services and in
+    #   A [VpcConfig][1] object that specifies the VPC that you want your
+    #   model to connect to. Control access to and from your model container
+    #   by configuring the VPC. `VpcConfig` is used in hosting services and in
     #   batch transform. For more information, see [Protect Endpoints by Using
-    #   an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
-    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
+    #   an Amazon Virtual Private Cloud][2] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the model container. No inbound or outbound network calls can
@@ -1626,11 +1632,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [String] :kms_key_id
-    #   If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
-    #   data at rest on the ML storage volume that is attached to your
-    #   notebook instance. The KMS key you provide must be enabled. For
-    #   information, see [Enabling and Disabling Keys][1] in the *AWS Key
-    #   Management Service Developer Guide*.
+    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
+    #   that Amazon SageMaker uses to encrypt data on the storage volume
+    #   attached to your notebook instance. The KMS key you provide must be
+    #   enabled. For information, see [Enabling and Disabling Keys][1] in the
+    #   *AWS Key Management Service Developer Guide*.
     #
     #
     #
@@ -1842,6 +1848,12 @@ module Aws::SageMaker
     # condition context key to specify the list of IP addresses that you
     # want to have access to the notebook instance. For more information,
     # see [Limit Access to a Notebook Instance by IP Address][1].
+    #
+    # <note markdown="1"> The URL that you get from a call to is valid only for 5 minutes. If
+    # you try to use the URL after the 5-minute limit expires, you are
+    # directed to the AWS console sign-in page.
+    #
+    #  </note>
     #
     #
     #
@@ -2091,7 +2103,7 @@ module Aws::SageMaker
     #       {
     #         channel_name: "ChannelName", # required
     #         data_source: { # required
-    #           s3_data_source: { # required
+    #           s3_data_source: {
     #             s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix, AugmentedManifestFile
     #             s3_uri: "S3Uri", # required
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
@@ -2191,9 +2203,17 @@ module Aws::SageMaker
     #
     # @option params [Integer] :max_concurrent_transforms
     #   The maximum number of parallel requests that can be sent to each
-    #   instance in a transform job. The default value is `1`. To allow Amazon
-    #   SageMaker to determine the appropriate number for
-    #   `MaxConcurrentTransforms`, set the value to `0`.
+    #   instance in a transform job. If `MaxConcurrentTransforms` is set to
+    #   `0` or left unset, Amazon SageMaker checks the optional
+    #   execution-parameters to determine the optimal settings for your chosen
+    #   algorithm. If the execution-parameters endpoint is not enabled, the
+    #   default value is `1`. For more information on execution-parameters,
+    #   see [How Containers Serve Requests][1]. For built-in algorithms, you
+    #   don't need to set a value for `MaxConcurrentTransforms`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests
     #
     # @option params [Integer] :max_payload_in_mb
     #   The maximum allowed size of the payload, in MB. A *payload* is the
@@ -2331,6 +2351,10 @@ module Aws::SageMaker
     # @option params [required, String] :description
     #   A description of the work team.
     #
+    # @option params [Types::NotificationConfiguration] :notification_configuration
+    #   Configures notification of workers regarding available or expiring
+    #   work items.
+    #
     # @option params [Array<Types::Tag>] :tags
     #
     # @return [Types::CreateWorkteamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2351,6 +2375,9 @@ module Aws::SageMaker
     #       },
     #     ],
     #     description: "String200", # required
+    #     notification_configuration: {
+    #       notification_topic_arn: "NotificationTopicArn",
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2869,7 +2896,7 @@ module Aws::SageMaker
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens", "rk3399", "rk3288"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -3704,6 +3731,7 @@ module Aws::SageMaker
     #   resp.workteam.sub_domain #=> String
     #   resp.workteam.create_date #=> Time
     #   resp.workteam.last_updated_date #=> Time
+    #   resp.workteam.notification_configuration.notification_topic_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteam AWS API Documentation
     #
@@ -3969,7 +3997,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "rasp3b", "deeplens", "rk3399", "rk3288"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -4008,8 +4036,8 @@ module Aws::SageMaker
     #   specified time (timestamp).
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
-    #   A filter that returns only endpoint configurations created after the
-    #   specified time (timestamp).
+    #   A filter that returns only endpoint configurations with a creation
+    #   time greater than or equal to the specified time (timestamp).
     #
     # @return [Types::ListEndpointConfigsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4070,8 +4098,8 @@ module Aws::SageMaker
     #   specified time (timestamp).
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
-    #   A filter that returns only endpoints that were created after the
-    #   specified time (timestamp).
+    #   A filter that returns only endpoints with a creation time greater than
+    #   or equal to the specified time (timestamp).
     #
     # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
     #   A filter that returns only endpoints that were modified before the
@@ -4368,6 +4396,7 @@ module Aws::SageMaker
     #   resp.labeling_job_summary_list[0].label_counters.human_labeled #=> Integer
     #   resp.labeling_job_summary_list[0].label_counters.pending_human #=> Integer
     #   resp.labeling_job_summary_list[0].label_counters.total #=> Integer
+    #   resp.labeling_job_summary_list[0].number_of_human_workers_per_data_object #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteam AWS API Documentation
@@ -4473,8 +4502,8 @@ module Aws::SageMaker
     #   (timestamp).
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
-    #   A filter that returns only models created after the specified time
-    #   (timestamp).
+    #   A filter that returns only models with a creation time greater than or
+    #   equal to the specified time (timestamp).
     #
     # @return [Types::ListModelsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5074,6 +5103,7 @@ module Aws::SageMaker
     #   resp.workteams[0].sub_domain #=> String
     #   resp.workteams[0].create_date #=> Time
     #   resp.workteams[0].last_updated_date #=> Time
+    #   resp.workteams[0].notification_configuration.notification_topic_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteams AWS API Documentation
@@ -5394,7 +5424,9 @@ module Aws::SageMaker
 
     # Terminates the ML compute instance. Before terminating the instance,
     # Amazon SageMaker disconnects the ML storage volume from it. Amazon
-    # SageMaker preserves the ML storage volume.
+    # SageMaker preserves the ML storage volume. Amazon SageMaker stops
+    # charging you for the ML compute instance when you call
+    # `StopNotebookInstance`.
     #
     # To access data on the ML storage volume for a notebook instance that
     # has been terminated, call the `StartNotebookInstance` API.
@@ -5529,8 +5561,10 @@ module Aws::SageMaker
     # to `InService`. To check the status of an endpoint, use the
     # [DescribeEndpoint][1] API.
     #
-    # <note markdown="1"> You cannot update an endpoint with the current `EndpointConfig`. To
-    # update an endpoint, you must create a new `EndpointConfig`.
+    # <note markdown="1"> You must not delete an `EndpointConfig` in use by an endpoint that is
+    # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
+    # being performed on the endpoint. To update an endpoint, you must
+    # create a new `EndpointConfig`.
     #
     #  </note>
     #
@@ -5618,7 +5652,7 @@ module Aws::SageMaker
     # Updates a notebook instance. NotebookInstance updates include
     # upgrading or downgrading the ML compute instance used for your
     # notebook instance to accommodate changes in your workload
-    # requirements. You can also update the VPC security groups.
+    # requirements.
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance to update.
@@ -5651,7 +5685,10 @@ module Aws::SageMaker
     #
     # @option params [Boolean] :disassociate_lifecycle_config
     #   Set to `true` to remove the notebook instance lifecycle configuration
-    #   currently associated with the notebook instance.
+    #   currently associated with the notebook instance. This operation is
+    #   idempotent. If you specify a lifecycle configuration that is not
+    #   associated with the notebook instance when you call this method, it
+    #   does not throw an error.
     #
     # @option params [Integer] :volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
@@ -5697,15 +5734,21 @@ module Aws::SageMaker
     #
     # @option params [Boolean] :disassociate_accelerator_types
     #   A list of the Elastic Inference (EI) instance types to remove from
-    #   this notebook instance.
+    #   this notebook instance. This operation is idempotent. If you specify
+    #   an accelerator type that is not associated with the notebook instance
+    #   when you call this method, it does not throw an error.
     #
     # @option params [Boolean] :disassociate_default_code_repository
     #   The name or URL of the default Git repository to remove from this
-    #   notebook instance.
+    #   notebook instance. This operation is idempotent. If you specify a Git
+    #   repository that is not associated with the notebook instance when you
+    #   call this method, it does not throw an error.
     #
     # @option params [Boolean] :disassociate_additional_code_repositories
     #   A list of names or URLs of the default Git repositories to remove from
-    #   this notebook instance.
+    #   this notebook instance. This operation is idempotent. If you specify a
+    #   Git repository that is not associated with the notebook instance when
+    #   you call this method, it does not throw an error.
     #
     # @option params [String] :root_access
     #   Whether root access is enabled or disabled for users of the notebook
@@ -5800,6 +5843,10 @@ module Aws::SageMaker
     # @option params [String] :description
     #   An updated description for the work team.
     #
+    # @option params [Types::NotificationConfiguration] :notification_configuration
+    #   Configures SNS topic notifications for available or expiring work
+    #   items
+    #
     # @return [Types::UpdateWorkteamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkteamResponse#workteam #workteam} => Types::Workteam
@@ -5818,6 +5865,9 @@ module Aws::SageMaker
     #       },
     #     ],
     #     description: "String200",
+    #     notification_configuration: {
+    #       notification_topic_arn: "NotificationTopicArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5834,6 +5884,7 @@ module Aws::SageMaker
     #   resp.workteam.sub_domain #=> String
     #   resp.workteam.create_date #=> Time
     #   resp.workteam.last_updated_date #=> Time
+    #   resp.workteam.notification_configuration.notification_topic_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteam AWS API Documentation
     #
@@ -5857,7 +5908,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
