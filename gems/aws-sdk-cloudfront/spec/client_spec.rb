@@ -37,10 +37,6 @@ module Aws
 
       it 'supports incomplete stubs for paginators' do
         client = Client.new(:stub_responses => true)
-        resp = client.list_cloud_front_origin_access_identities
-        expect(resp.cloud_front_origin_access_identity_list.next_marker).to be(nil)
-        expect(resp.cloud_front_origin_access_identity_list.is_truncated).to be(false)
-
         expect {
           client.stub_data(
             :list_cloud_front_origin_access_identities,

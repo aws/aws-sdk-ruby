@@ -20,19 +20,8 @@ module Aws
       def remove_paging_tokens(stub)
         if @pager
           @pager.instance_variable_get("@tokens").keys.each do |path|
-            if path.include?(' || ') || path.include?(' or ')
-              stub[path.split(/\b/)[0]] = nil
-            else
-              parts = path.split('.')
-              if parts.size > 1
-                # nested struct, EmptyStub auto-pop 'string'
-                visit = stub
-                parts[0..-2].each {|key| visit = visit[key]}
-                visit[parts[-1]] = nil
-              else
-                stub[parts[0]] = nil
-              end
-            end
+            key = path.split(/\b/)[0]
+            stub[key] = nil
           end
           if more_results = @pager.instance_variable_get('@more_results')
             parts = more_results.split('.')
