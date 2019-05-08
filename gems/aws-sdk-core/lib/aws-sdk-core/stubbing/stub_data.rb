@@ -20,12 +20,16 @@ module Aws
       def remove_paging_tokens(stub)
         if @pager
           @pager.instance_variable_get("@tokens").keys.each do |path|
-            key = path.split(/\b/)[0]
-            stub[key] = nil
+            parts = path.split(/\b/)
+            # if nested struct/expression, EmptyStub auto-pop "string"
+            # currently not support remove "string" for nested/expression
+            # as it requires reverse JMESPATH search
+            stub[parts[0]] = nil if parts.size == 1
           end
           if more_results = @pager.instance_variable_get('@more_results')
-            parts = more_results.split('.')
-            # if nested struct, EmptyStub auto-pop false value
+            parts = more_results.split(/\b/)
+            # if nested struct/expression, EmptyStub auto-pop false value
+            # no further work needed
             stub[parts[0]] = false if parts.size == 1
           end
         end

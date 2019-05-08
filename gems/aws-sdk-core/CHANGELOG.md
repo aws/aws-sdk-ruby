@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Support nested paginator stubs #2040
+* Issue - Handle paginator stubs with expression #2040
 
 3.50.0 (2019-05-06)
 ------------------
