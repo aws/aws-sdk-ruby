@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.271 (2019-05-08)
+------------------
+
 * Feature - Aws::EKS - Updated the documentation for Amazon Elastic Container Service for Kubernetes.
 
 * Feature - Aws::IoT1ClickProjects - Updated the API for AWS IoT 1-Click Projects Service.
