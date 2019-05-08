@@ -19,7 +19,14 @@ describe 'Client Interface:' do
 
     it 'adds `Transfer-Encoding` header for `v4-unsigned-body` streaming operations' do
       resp = client.unsign_streaming(body: StringIO.new('hey'))
-      expect(resp.context.http_request.headers['Transfer-Encoding']).to eq('chunked')
+      expect(resp.context.http_request.headers['Transfer-Encoding']).to be(nil)
+      expect(resp.context.http_request.headers['Content-Length']).to eq("3")
+
+
+      stream = StringIO.new('stream')
+      allow(stream).to receive(:size).and_raise(NoMethodError)
+      resp = client.unsign_streaming(body: stream)
+      expect(resp.context.http_request.headers['Transfer-Encoding']).to eq("chunked")
     end
 
     it 'raises error when `Content-Length` header is required but cannot be set' do

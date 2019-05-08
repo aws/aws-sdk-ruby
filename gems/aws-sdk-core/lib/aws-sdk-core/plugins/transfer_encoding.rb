@@ -11,15 +11,15 @@ module Aws
 
         def call(context)
           if streaming?(context.operation.input)
-            if requires_length?(context.operation.input)
-              begin
-                context.http_request.body.size
-              rescue
-                # if size of the IO is not available
+            begin
+              context.http_request.body.size
+            rescue
+              if requires_length?(context.operation.input)
+                # if size of the IO is not available but required
                 raise Aws::Errors::MissingContentLength.new
+              elsif context.operation['authtype'] == "v4-unsigned-body"
+                context.http_request.headers['Transfer-Encoding'] = 'chunked'
               end
-            elsif context.operation['authtype'] == "v4-unsigned-body"
-              context.http_request.headers['Transfer-Encoding'] = 'chunked'
             end
           end
 
