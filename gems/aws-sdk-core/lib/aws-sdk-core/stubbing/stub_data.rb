@@ -20,6 +20,9 @@ module Aws
       def remove_paging_tokens(stub)
         if @pager
           @pager.instance_variable_get("@tokens").keys.each do |path|
+            if divide = (path[' || '] || path[' or '])
+              path = path.split(divide)[0]
+            end
             parts = path.split(/\b/)
             # if nested struct/expression, EmptyStub auto-pop "string"
             # currently not support remove "string" for nested/expression

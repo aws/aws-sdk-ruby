@@ -29,6 +29,12 @@ module Aws
         }.to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
+      it 'supports empty stub with token set to nil' do
+        s3 = Client.new(stub_responses: true)
+        resp = s3.list_objects(bucket: 'foo')
+        expect(resp.next_marker).to be(nil)
+      end
+
       describe 'request ids' do
 
         it 'populates request id and host id in the response context' do
