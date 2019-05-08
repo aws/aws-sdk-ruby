@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EKS - Updated the documentation for Amazon Elastic Container Service for Kubernetes.
+
+* Feature - Aws::IoT1ClickProjects - Updated the API for AWS IoT 1-Click Projects Service.
+
+* Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::KinesisAnalyticsV2 - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
 2.11.270 (2019-05-07)
 ------------------
 
