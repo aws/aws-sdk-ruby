@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.272 (2019-05-10)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 * Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
