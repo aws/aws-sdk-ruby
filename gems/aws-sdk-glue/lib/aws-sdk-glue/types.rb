@@ -378,7 +378,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] crawler_names
-    #   A list of crawler names, which may be the names returned from the
+    #   A list of crawler names, which might be the names returned from the
     #   `ListCrawlers` operation.
     #   @return [Array<String>]
     #
@@ -394,7 +394,7 @@ module Aws::Glue
     #   @return [Array<Types::Crawler>]
     #
     # @!attribute [rw] crawlers_not_found
-    #   A list of names of crawlers not found.
+    #   A list of names of crawlers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlersResponse AWS API Documentation
@@ -653,7 +653,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies a table definition in the Data Catalog.
+    # Specifies a table definition in the AWS Glue Data Catalog.
     #
     # @note When making an API call, you may pass CatalogEntry
     #   data as a hash:
@@ -702,32 +702,58 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an AWS Glue Data Catalog target.
+    #
+    # @note When making an API call, you may pass CatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         database_name: "NameString", # required
+    #         tables: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database to be synchronized.
+    #   @return [String]
+    #
+    # @!attribute [rw] tables
+    #   A list of the tables to be synchronized.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogTarget AWS API Documentation
+    #
+    class CatalogTarget < Struct.new(
+      :database_name,
+      :tables)
+      include Aws::Structure
+    end
+
     # Classifiers are triggered during a crawl task. A classifier checks
-    # whether a given file is in a format it can handle, and if it is, the
+    # whether a given file is in a format it can handle. If it is, the
     # classifier creates a schema in the form of a `StructType` object that
     # matches that data format.
     #
-    # You can use the standard classifiers that AWS Glue supplies, or you
+    # You can use the standard classifiers that AWS Glue provides, or you
     # can write your own classifiers to best categorize your data sources
     # and specify the appropriate schemas to use for them. A classifier can
     # be a `grok` classifier, an `XML` classifier, a `JSON` classifier, or a
-    # custom `CSV` classifier as specified in one of the fields in the
+    # custom `CSV` classifier, as specified in one of the fields in the
     # `Classifier` object.
     #
     # @!attribute [rw] grok_classifier
-    #   A `GrokClassifier` object.
+    #   A classifier that uses `grok`.
     #   @return [Types::GrokClassifier]
     #
     # @!attribute [rw] xml_classifier
-    #   An `XMLClassifier` object.
+    #   A classifier for XML content.
     #   @return [Types::XMLClassifier]
     #
     # @!attribute [rw] json_classifier
-    #   A `JsonClassifier` object.
+    #   A classifier for JSON content.
     #   @return [Types::JsonClassifier]
     #
     # @!attribute [rw] csv_classifier
-    #   A `CSVClassifier` object.
+    #   A classifier for comma-separated values (CSV).
     #   @return [Types::CsvClassifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Classifier AWS API Documentation
@@ -821,7 +847,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] node_type
-    #   The type of node this is.
+    #   The type of node that this is.
     #   @return [String]
     #
     # @!attribute [rw] args
@@ -1169,12 +1195,13 @@ module Aws::Glue
     # Catalog.
     #
     # @!attribute [rw] name
-    #   The crawler name.
+    #   The name of the crawler.
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role (or ARN of an IAM role) used to access customer
-    #   resources, such as data in Amazon S3.
+    #   The Amazon Resource Name (ARN) of an IAM role that's used to access
+    #   customer resources, such as Amazon Simple Storage Service (Amazon
+    #   S3) data.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -1182,7 +1209,7 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] database_name
-    #   The database where metadata is written by this crawler.
+    #   The name of the database in which the crawler's output is stored.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1190,12 +1217,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] classifiers
-    #   A list of custom classifiers associated with the crawler.
+    #   A list of UTF-8 strings that specify the custom classifiers that are
+    #   associated with the crawler.
     #   @return [Array<String>]
     #
     # @!attribute [rw] schema_change_policy
-    #   Sets the behavior when the crawler finds a changed or deleted
-    #   object.
+    #   The policy that specifies update and delete behaviors for the
+    #   crawler.
     #   @return [Types::SchemaChangePolicy]
     #
     # @!attribute [rw] state
@@ -1217,11 +1245,11 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
-    #   The time when the crawler was created.
+    #   The time that the crawler was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated
-    #   The time the crawler was last updated.
+    #   The time that the crawler was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] last_crawl
@@ -1244,8 +1272,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
-    #   The name of the SecurityConfiguration structure to be used by this
-    #   Crawler.
+    #   The name of the `SecurityConfiguration` structure to be used by this
+    #   crawler.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -1344,10 +1372,16 @@ module Aws::Glue
     #             path: "Path",
     #           },
     #         ],
+    #         catalog_targets: [
+    #           {
+    #             database_name: "NameString", # required
+    #             tables: ["NameString"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] s3_targets
-    #   Specifies Amazon S3 targets.
+    #   Specifies Amazon Simple Storage Service (Amazon S3) targets.
     #   @return [Array<Types::S3Target>]
     #
     # @!attribute [rw] jdbc_targets
@@ -1355,15 +1389,20 @@ module Aws::Glue
     #   @return [Array<Types::JdbcTarget>]
     #
     # @!attribute [rw] dynamo_db_targets
-    #   Specifies DynamoDB targets.
+    #   Specifies Amazon DynamoDB targets.
     #   @return [Array<Types::DynamoDBTarget>]
+    #
+    # @!attribute [rw] catalog_targets
+    #   Specifies AWS Glue Data Catalog targets.
+    #   @return [Array<Types::CatalogTarget>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
     #
     class CrawlerTargets < Struct.new(
       :s3_targets,
       :jdbc_targets,
-      :dynamo_db_targets)
+      :dynamo_db_targets,
+      :catalog_targets)
       include Aws::Structure
     end
 
@@ -1475,7 +1514,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         role: "Role", # required
-    #         database_name: "DatabaseName", # required
+    #         database_name: "DatabaseName",
     #         description: "DescriptionString",
     #         targets: { # required
     #           s3_targets: [
@@ -1494,6 +1533,12 @@ module Aws::Glue
     #           dynamo_db_targets: [
     #             {
     #               path: "Path",
+    #             },
+    #           ],
+    #           catalog_targets: [
+    #             {
+    #               database_name: "NameString", # required
+    #               tables: ["NameString"], # required
     #             },
     #           ],
     #         },
@@ -1516,8 +1561,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role (or ARN of an IAM role) used by the new crawler to
-    #   access customer resources.
+    #   The IAM role or Amazon Resource Name (ARN) of an IAM role used by
+    #   the new crawler to access customer resources.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -1534,9 +1579,10 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] schedule
-    #   A `cron` expression used to specify the schedule (see [Time-Based
-    #   Schedules for Jobs and Crawlers][1]. For example, to run something
-    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
+    #   For example, to run something every day at 12:15 UTC, specify
+    #   `cron(15 12 * * ? *)`.
     #
     #
     #
@@ -1555,12 +1601,12 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schema_change_policy
-    #   Policy for the crawler's update and deletion behavior.
+    #   The policy for the crawler's update and deletion behavior.
     #   @return [Types::SchemaChangePolicy]
     #
     # @!attribute [rw] configuration
-    #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
+    #   The crawler configuration information. This versioned JSON string
+    #   allows users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
@@ -1569,14 +1615,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
-    #   The name of the SecurityConfiguration structure to be used by this
-    #   Crawler.
+    #   The name of the `SecurityConfiguration` structure to be used by this
+    #   crawler.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to use with this crawler request. You may use tags to limit
-    #   access to the crawler. For more information about tags in AWS Glue,
-    #   see [AWS Tags in AWS Glue][1] in the developer guide.
+    #   The tags to use with this crawler request. You can use tags to limit
+    #   access to the crawler. For more information, see [AWS Tags in AWS
+    #   Glue][1].
     #
     #
     #
@@ -2179,7 +2225,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   classify. AWS Glue supports a subset of `JsonPath`, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -2679,11 +2725,11 @@ module Aws::Glue
     #
     # @!attribute [rw] row_tag
     #   The XML tag designating the element that contains each record in an
-    #   XML document being parsed. Note that this cannot identify a
-    #   self-closing element (closed by `/>`). An empty row element that
-    #   contains only attributes can be parsed as long as it ends with a
-    #   closing tag (for example, `<row item_a="A" item_b="B"></row>` is
-    #   okay, but `<row item_a="A" item_b="B" />` is not).
+    #   XML document being parsed. This can't identify a self-closing
+    #   element (closed by `/>`). An empty row element that contains only
+    #   attributes can be parsed as long as it ends with a closing tag (for
+    #   example, `<row item_a="A" item_b="B"></row>` is okay, but `<row
+    #   item_a="A" item_b="B" />` is not).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateXMLClassifierRequest AWS API Documentation
@@ -2702,11 +2748,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time this classifier was registered.
+    #   The time that this classifier was registered.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated
-    #   The time this classifier was last updated.
+    #   The time that this classifier was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] version
@@ -2720,7 +2766,7 @@ module Aws::Glue
     #
     # @!attribute [rw] quote_symbol
     #   A custom symbol to denote what combines content into a single column
-    #   value. Must be different from the column delimiter.
+    #   value. It must be different from the column delimiter.
     #   @return [String]
     #
     # @!attribute [rw] contains_header
@@ -2733,7 +2779,7 @@ module Aws::Glue
     #
     # @!attribute [rw] disable_value_trimming
     #   Specifies not to trim values before identifying the type of column
-    #   values. The default value is true.
+    #   values. The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_single_column
@@ -2930,7 +2976,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   Name of the crawler to remove.
+    #   The name of the crawler to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawlerRequest AWS API Documentation
@@ -3452,7 +3498,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies a DynamoDB table to crawl.
+    # Specifies an Amazon DynamoDB table to crawl.
     #
     # @note When making an API call, you may pass DynamoDBTarget
     #   data as a hash:
@@ -3649,7 +3695,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] max_results
-    #   Size of the list to return (optional).
+    #   The size of the list to return (optional).
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -3879,7 +3925,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   Name of the crawler to retrieve metadata for.
+    #   The name of the crawler to retrieve metadata for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlerRequest AWS API Documentation
@@ -4668,7 +4714,7 @@ module Aws::Glue
     #   @return [Array<Types::CatalogEntry>]
     #
     # @!attribute [rw] location
-    #   Parameters for the mapping.
+    #   The parameters for the mapping.
     #   @return [Types::Location]
     #
     # @!attribute [rw] language
@@ -4691,7 +4737,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] scala_code
-    #   Scala code to perform the mapping.
+    #   The Scala code to perform the mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlanResponse AWS API Documentation
@@ -5247,11 +5293,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time this classifier was registered.
+    #   The time that this classifier was registered.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated
-    #   The time this classifier was last updated.
+    #   The time that this classifier was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] version
@@ -5261,7 +5307,7 @@ module Aws::Glue
     # @!attribute [rw] grok_pattern
     #   The grok pattern applied to a data store by this classifier. For
     #   more information, see built-in patterns in [Writing Custom
-    #   Classifers][1].
+    #   Classifiers][1].
     #
     #
     #
@@ -5270,7 +5316,7 @@ module Aws::Glue
     #
     # @!attribute [rw] custom_patterns
     #   Optional custom grok patterns defined by this classifier. For more
-    #   information, see custom patterns in [Writing Custom Classifers][1].
+    #   information, see custom patterns in [Writing Custom Classifiers][1].
     #
     #
     #
@@ -5982,11 +6028,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time this classifier was registered.
+    #   The time that this classifier was registered.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated
-    #   The time this classifier was last updated.
+    #   The time that this classifier was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] version
@@ -5995,7 +6041,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   classify. AWS Glue supports a subset of `JsonPath`, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -6294,11 +6340,11 @@ module Aws::Glue
     #   @return [Array<Types::CodeGenNodeArg>]
     #
     # @!attribute [rw] s3
-    #   An Amazon S3 location.
+    #   An Amazon Simple Storage Service (Amazon S3) location.
     #   @return [Array<Types::CodeGenNodeArg>]
     #
     # @!attribute [rw] dynamo_db
-    #   A DynamoDB Table location.
+    #   An Amazon DynamoDB table location.
     #   @return [Array<Types::CodeGenNodeArg>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Location AWS API Documentation
@@ -6839,7 +6885,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies a data store in Amazon S3.
+    # Specifies a data store in Amazon Simple Storage Service (Amazon S3).
     #
     # @note When making an API call, you may pass S3Target
     #   data as a hash:
@@ -6873,9 +6919,10 @@ module Aws::Glue
     # A scheduling object using a `cron` statement to schedule an event.
     #
     # @!attribute [rw] schedule_expression
-    #   A `cron` expression used to specify the schedule (see [Time-Based
-    #   Schedules for Jobs and Crawlers][1]. For example, to run something
-    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
+    #   For example, to run something every day at 12:15 UTC, specify
+    #   `cron(15 12 * * ? *)`.
     #
     #
     #
@@ -6894,7 +6941,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Crawler policy for update and deletion behavior.
+    # A policy that specifies update and deletion behaviors for the crawler.
     #
     # @note When making an API call, you may pass SchemaChangePolicy
     #   data as a hash:
@@ -8098,6 +8145,12 @@ module Aws::Glue
     #               path: "Path",
     #             },
     #           ],
+    #           catalog_targets: [
+    #             {
+    #               database_name: "NameString", # required
+    #               tables: ["NameString"], # required
+    #             },
+    #           ],
     #         },
     #         schedule: "CronExpression",
     #         classifiers: ["NameString"],
@@ -8115,8 +8168,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role (or ARN of an IAM role) used by the new crawler to
-    #   access customer resources.
+    #   The IAM role or Amazon Resource Name (ARN) of an IAM role that is
+    #   used by the new crawler to access customer resources.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -8133,9 +8186,10 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] schedule
-    #   A `cron` expression used to specify the schedule (see [Time-Based
-    #   Schedules for Jobs and Crawlers][1]. For example, to run something
-    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
+    #   For example, to run something every day at 12:15 UTC, specify
+    #   `cron(15 12 * * ? *)`.
     #
     #
     #
@@ -8154,12 +8208,12 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schema_change_policy
-    #   Policy for the crawler's update and deletion behavior.
+    #   The policy for the crawler's update and deletion behavior.
     #   @return [Types::SchemaChangePolicy]
     #
     # @!attribute [rw] configuration
-    #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
+    #   The crawler configuration information. This versioned JSON string
+    #   allows users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
@@ -8168,8 +8222,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
-    #   The name of the SecurityConfiguration structure to be used by this
-    #   Crawler.
+    #   The name of the `SecurityConfiguration` structure to be used by this
+    #   crawler.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
@@ -8202,14 +8256,14 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] crawler_name
-    #   Name of the crawler whose schedule to update.
+    #   The name of the crawler whose schedule to update.
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   The updated `cron` expression used to specify the schedule (see
-    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
-    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * *
-    #   ? *)`.
+    #   The updated `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1].
+    #   For example, to run something every day at 12:15 UTC, specify
+    #   `cron(15 12 * * ? *)`.
     #
     #
     #
@@ -8254,7 +8308,7 @@ module Aws::Glue
     #
     # @!attribute [rw] quote_symbol
     #   A custom symbol to denote what combines content into a single column
-    #   value. Must be different from the column delimiter.
+    #   value. It must be different from the column delimiter.
     #   @return [String]
     #
     # @!attribute [rw] contains_header
@@ -8521,7 +8575,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   classify. AWS Glue supports a subset of `JsonPath`, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -8872,11 +8926,11 @@ module Aws::Glue
     #
     # @!attribute [rw] row_tag
     #   The XML tag designating the element that contains each record in an
-    #   XML document being parsed. Note that this cannot identify a
-    #   self-closing element (closed by `/>`). An empty row element that
-    #   contains only attributes can be parsed as long as it ends with a
-    #   closing tag (for example, `<row item_a="A" item_b="B"></row>` is
-    #   okay, but `<row item_a="A" item_b="B" />` is not).
+    #   XML document being parsed. This cannot identify a self-closing
+    #   element (closed by `/>`). An empty row element that contains only
+    #   attributes can be parsed as long as it ends with a closing tag (for
+    #   example, `<row item_a="A" item_b="B"></row>` is okay, but `<row
+    #   item_a="A" item_b="B" />` is not).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateXMLClassifierRequest AWS API Documentation
@@ -8987,11 +9041,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time this classifier was registered.
+    #   The time that this classifier was registered.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated
-    #   The time this classifier was last updated.
+    #   The time that this classifier was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] version
@@ -9000,11 +9054,11 @@ module Aws::Glue
     #
     # @!attribute [rw] row_tag
     #   The XML tag designating the element that contains each record in an
-    #   XML document being parsed. Note that this cannot identify a
-    #   self-closing element (closed by `/>`). An empty row element that
-    #   contains only attributes can be parsed as long as it ends with a
-    #   closing tag (for example, `<row item_a="A" item_b="B"></row>` is
-    #   okay, but `<row item_a="A" item_b="B" />` is not).
+    #   XML document being parsed. This can't identify a self-closing
+    #   element (closed by `/>`). An empty row element that contains only
+    #   attributes can be parsed as long as it ends with a closing tag (for
+    #   example, `<row item_a="A" item_b="B"></row>` is okay, but `<row
+    #   item_a="A" item_b="B" />` is not).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/XMLClassifier AWS API Documentation

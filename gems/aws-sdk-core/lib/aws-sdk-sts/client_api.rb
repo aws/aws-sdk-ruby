@@ -38,6 +38,7 @@ module Aws::STS
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     NameQualifier = Shapes::StringShape.new(name: 'NameQualifier')
     PackedPolicyTooLargeException = Shapes::StructureShape.new(name: 'PackedPolicyTooLargeException')
+    PolicyDescriptorType = Shapes::StructureShape.new(name: 'PolicyDescriptorType')
     RegionDisabledException = Shapes::StructureShape.new(name: 'RegionDisabledException')
     SAMLAssertionType = Shapes::StringShape.new(name: 'SAMLAssertionType')
     Subject = Shapes::StringShape.new(name: 'Subject')
@@ -62,6 +63,7 @@ module Aws::STS
     malformedPolicyDocumentMessage = Shapes::StringShape.new(name: 'malformedPolicyDocumentMessage')
     nonNegativeIntegerType = Shapes::IntegerShape.new(name: 'nonNegativeIntegerType')
     packedPolicyTooLargeMessage = Shapes::StringShape.new(name: 'packedPolicyTooLargeMessage')
+    policyDescriptorListType = Shapes::ListShape.new(name: 'policyDescriptorListType')
     regionDisabledMessage = Shapes::StringShape.new(name: 'regionDisabledMessage')
     roleDurationSecondsType = Shapes::IntegerShape.new(name: 'roleDurationSecondsType')
     roleSessionNameType = Shapes::StringShape.new(name: 'roleSessionNameType')
@@ -76,6 +78,7 @@ module Aws::STS
 
     AssumeRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "RoleArn"))
     AssumeRoleRequest.add_member(:role_session_name, Shapes::ShapeRef.new(shape: roleSessionNameType, required: true, location_name: "RoleSessionName"))
+    AssumeRoleRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     AssumeRoleRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     AssumeRoleRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: roleDurationSecondsType, location_name: "DurationSeconds"))
     AssumeRoleRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: externalIdType, location_name: "ExternalId"))
@@ -91,6 +94,7 @@ module Aws::STS
     AssumeRoleWithSAMLRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "RoleArn"))
     AssumeRoleWithSAMLRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PrincipalArn"))
     AssumeRoleWithSAMLRequest.add_member(:saml_assertion, Shapes::ShapeRef.new(shape: SAMLAssertionType, required: true, location_name: "SAMLAssertion"))
+    AssumeRoleWithSAMLRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     AssumeRoleWithSAMLRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     AssumeRoleWithSAMLRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: roleDurationSecondsType, location_name: "DurationSeconds"))
     AssumeRoleWithSAMLRequest.struct_class = Types::AssumeRoleWithSAMLRequest
@@ -109,6 +113,7 @@ module Aws::STS
     AssumeRoleWithWebIdentityRequest.add_member(:role_session_name, Shapes::ShapeRef.new(shape: roleSessionNameType, required: true, location_name: "RoleSessionName"))
     AssumeRoleWithWebIdentityRequest.add_member(:web_identity_token, Shapes::ShapeRef.new(shape: clientTokenType, required: true, location_name: "WebIdentityToken"))
     AssumeRoleWithWebIdentityRequest.add_member(:provider_id, Shapes::ShapeRef.new(shape: urlType, location_name: "ProviderId"))
+    AssumeRoleWithWebIdentityRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     AssumeRoleWithWebIdentityRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     AssumeRoleWithWebIdentityRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: roleDurationSecondsType, location_name: "DurationSeconds"))
     AssumeRoleWithWebIdentityRequest.struct_class = Types::AssumeRoleWithWebIdentityRequest
@@ -150,6 +155,7 @@ module Aws::STS
 
     GetFederationTokenRequest.add_member(:name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "Name"))
     GetFederationTokenRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
+    GetFederationTokenRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     GetFederationTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: durationSecondsType, location_name: "DurationSeconds"))
     GetFederationTokenRequest.struct_class = Types::GetFederationTokenRequest
 
@@ -165,6 +171,11 @@ module Aws::STS
 
     GetSessionTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetSessionTokenResponse.struct_class = Types::GetSessionTokenResponse
+
+    PolicyDescriptorType.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "arn"))
+    PolicyDescriptorType.struct_class = Types::PolicyDescriptorType
+
+    policyDescriptorListType.member = Shapes::ShapeRef.new(shape: PolicyDescriptorType)
 
 
     # @api private
