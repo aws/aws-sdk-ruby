@@ -461,6 +461,15 @@ module Aws::IoTAnalytics
     #                 input_name: "IotEventsInputName", # required
     #                 role_arn: "RoleArn", # required
     #               },
+    #               s3_destination_configuration: {
+    #                 bucket: "BucketName", # required
+    #                 key: "BucketKeyExpression", # required
+    #                 glue_configuration: {
+    #                   table_name: "GlueTableName", # required
+    #                   database_name: "GlueDatabaseName", # required
+    #                 },
+    #                 role_arn: "RoleArn", # required
+    #               },
     #             },
     #           },
     #         ],
@@ -857,6 +866,9 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Information about the action which automatically creates the data
+    # set's contents.
+    #
     # @!attribute [rw] action_name
     #   The name of the action which automatically creates the data set's
     #   contents.
@@ -883,6 +895,15 @@ module Aws::IoTAnalytics
     #           input_name: "IotEventsInputName", # required
     #           role_arn: "RoleArn", # required
     #         },
+    #         s3_destination_configuration: {
+    #           bucket: "BucketName", # required
+    #           key: "BucketKeyExpression", # required
+    #           glue_configuration: {
+    #             table_name: "GlueTableName", # required
+    #             database_name: "GlueDatabaseName", # required
+    #           },
+    #           role_arn: "RoleArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] iot_events_destination_configuration
@@ -890,8 +911,14 @@ module Aws::IoTAnalytics
     #   IoT Events.
     #   @return [Types::IotEventsDestinationConfiguration]
     #
+    # @!attribute [rw] s3_destination_configuration
+    #   Configuration information for delivery of data set contents to
+    #   Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
     class DatasetContentDeliveryDestination < Struct.new(
-      :iot_events_destination_configuration)
+      :iot_events_destination_configuration,
+      :s3_destination_configuration)
       include Aws::Structure
     end
 
@@ -906,6 +933,15 @@ module Aws::IoTAnalytics
     #         destination: { # required
     #           iot_events_destination_configuration: {
     #             input_name: "IotEventsInputName", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           s3_destination_configuration: {
+    #             bucket: "BucketName", # required
+    #             key: "BucketKeyExpression", # required
+    #             glue_configuration: {
+    #               table_name: "GlueTableName", # required
+    #               database_name: "GlueDatabaseName", # required
+    #             },
     #             role_arn: "RoleArn", # required
     #           },
     #         },
@@ -1627,6 +1663,36 @@ module Aws::IoTAnalytics
       :entries,
       :timestamp,
       :status)
+      include Aws::Structure
+    end
+
+    # Configuration information for coordination with the AWS Glue ETL
+    # (extract, transform and load) service.
+    #
+    # @note When making an API call, you may pass GlueConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "GlueTableName", # required
+    #         database_name: "GlueDatabaseName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table in your AWS Glue Data Catalog which is used to
+    #   perform the ETL (extract, transform and load) operations. (An AWS
+    #   Glue Data Catalog table contains partitioned data and descriptions
+    #   of data sources and targets.)
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in your AWS Glue Data Catalog in which the
+    #   table is located. (An AWS Glue Data Catalog database contains Glue
+    #   Data tables.)
+    #   @return [String]
+    #
+    class GlueConfiguration < Struct.new(
+      :table_name,
+      :database_name)
       include Aws::Structure
     end
 
@@ -2488,6 +2554,51 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Configuration information for delivery of data set contents to Amazon
+    # S3.
+    #
+    # @note When making an API call, you may pass S3DestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         key: "BucketKeyExpression", # required
+    #         glue_configuration: {
+    #           table_name: "GlueTableName", # required
+    #           database_name: "GlueDatabaseName", # required
+    #         },
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket to which data set contents are
+    #   delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key of the data set contents object. Each object in an Amazon S3
+    #   bucket has a key that is its unique identifier within the bucket
+    #   (each object in a bucket has exactly one key).
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_configuration
+    #   Configuration information for coordination with the AWS Glue ETL
+    #   (extract, transform and load) service.
+    #   @return [Types::GlueConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which grants AWS IoT Analytics permission to
+    #   interact with your Amazon S3 and AWS Glue resources.
+    #   @return [String]
+    #
+    class S3DestinationConfiguration < Struct.new(
+      :bucket,
+      :key,
+      :glue_configuration,
+      :role_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SampleChannelDataRequest
     #   data as a hash:
     #
@@ -2839,6 +2950,15 @@ module Aws::IoTAnalytics
     #                 input_name: "IotEventsInputName", # required
     #                 role_arn: "RoleArn", # required
     #               },
+    #               s3_destination_configuration: {
+    #                 bucket: "BucketName", # required
+    #                 key: "BucketKeyExpression", # required
+    #                 glue_configuration: {
+    #                   table_name: "GlueTableName", # required
+    #                   database_name: "GlueDatabaseName", # required
+    #                 },
+    #                 role_arn: "RoleArn", # required
+    #               },
     #             },
     #           },
     #         ],
@@ -3063,6 +3183,8 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Information about the versioning of data set contents.
+    #
     # @note When making an API call, you may pass VersioningConfiguration
     #   data as a hash:
     #

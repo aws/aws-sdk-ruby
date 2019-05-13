@@ -67,7 +67,7 @@ module Aws::DataSync
     #         agent_name: "TagValue",
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -84,12 +84,11 @@ module Aws::DataSync
     #   `activationKey`. It might also include other activation-related
     #   parameters; however, these are merely defaults. The arguments you
     #   pass to this API call determine the actual configuration of your
-    #   agent. For more information, see [Activating a Sync Agent][1] in the
-    #   *AWS DataSync User Guide.*
+    #   agent.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent"
+    #   (Activating a Agent) in the *AWS DataSync User Guide.*
     #   @return [String]
     #
     # @!attribute [rw] agent_name
@@ -98,9 +97,9 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents the tag you want to associate
-    #   with the agent. The value can be an empty string. This value helps
-    #   you manage, filter, and search for your agents.
+    #   The key-value pair that represents the tag that you want to
+    #   associate with the agent. The value can be an empty string. This
+    #   value helps you manage, filter, and search for your agents.
     #
     #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
     #   representable in UTF-8 format, and the following special characters:
@@ -139,7 +138,7 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "Subdirectory", # required
+    #         subdirectory: "Subdirectory",
     #         efs_filesystem_arn: "EfsFilesystemArn", # required
     #         ec2_config: { # required
     #           subnet_arn: "Ec2SubnetArn", # required
@@ -147,7 +146,7 @@ module Aws::DataSync
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -166,6 +165,28 @@ module Aws::DataSync
     #
     # @!attribute [rw] ec2_config
     #   The subnet and security group that the Amazon EFS file system uses.
+    #   The security group that you provide needs to be able to communicate
+    #   with the security group on the mount target in the subnet specified.
+    #
+    #   The exact relationship between security group M (of the mount
+    #   target) and security group S (which you provide for DataSync to use
+    #   at this stage) is as follows:
+    #
+    #   * Security group M (which you associate with the mount target) must
+    #     allow inbound access for the Transmission Control Protocol (TCP)
+    #     on the NFS port (2049) from security group S. You can enable
+    #     inbound connections either by IP address (CIDR range) or security
+    #     group.
+    #
+    #   * Security group S (provided to DataSync to access EFS) should have
+    #     a rule that enables outbound connections to the NFS port on one of
+    #     the file system’s mount targets. You can enable outbound
+    #     connections either by IP address (CIDR range) or security group.
+    #
+    #     For information about security groups and mount targets, see
+    #     "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access"
+    #     (Security Groups for Amazon EC2 Instances and Mount Targets) in
+    #     the *Amazon EFS User Guide*.
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] tags
@@ -205,14 +226,17 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "Subdirectory", # required
+    #         subdirectory: "NonEmptySubdirectory", # required
     #         server_hostname: "ServerHostname", # required
     #         on_prem_config: { # required
     #           agent_arns: ["AgentArn"], # required
     #         },
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -234,16 +258,14 @@ module Aws::DataSync
     #   To transfer all the data in the folder you specified, DataSync needs
     #   to have permissions to read all the data. To ensure this, either
     #   configure the NFS export with `no_root_squash,` or ensure that the
-    #   permissions for all of the files that you want sync allow read
+    #   permissions for all of the files that you want DataSync allow read
     #   access for all users. Doing either enables the agent to read the
     #   files. For the agent to access directories, you must additionally
-    #   enable all execute access. For information about NFS export
-    #   configuration, see [18.7. The /etc/exports Configuration File][1] in
-    #   the Centos documentation.
+    #   enable all execute access.
     #
-    #
-    #
-    #   [1]: https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html
+    #   For information about NFS export configuration, see
+    #   "http://web.mit.edu/rhel-doc/5/RHEL-5-manual/Deployment\_Guide-en-US/s1-nfs-server-config-exports.html"
+    #   (18.7. The /etc/exports Configuration File).
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
@@ -263,6 +285,10 @@ module Aws::DataSync
     #   used to connect to an NFS server.
     #   @return [Types::OnPremConfig]
     #
+    # @!attribute [rw] mount_options
+    #   The NFS mount options that DataSync can use to mount your NFS share.
+    #   @return [Types::NfsMountOptions]
+    #
     # @!attribute [rw] tags
     #   The key-value pair that represents the tag that you want to add to
     #   the location. The value can be an empty string. We recommend using
@@ -275,6 +301,7 @@ module Aws::DataSync
       :subdirectory,
       :server_hostname,
       :on_prem_config,
+      :mount_options,
       :tags)
       include Aws::Structure
     end
@@ -299,14 +326,14 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "Subdirectory", # required
+    #         subdirectory: "Subdirectory",
     #         s3_bucket_arn: "S3BucketArn", # required
     #         s3_config: { # required
     #           bucket_access_role_arn: "IamRoleArn", # required
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -325,12 +352,11 @@ module Aws::DataSync
     # @!attribute [rw] s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that is used to access an Amazon S3 bucket.
-    #   For detailed information about using such a role, see [Components
-    #   and Terminology][1] in the *AWS DataSync User Guide*.
     #
-    #
-    #
-    #   [1]: https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli
+    #   For detailed information about using such a role, see
+    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+    #   (Creating a Location for Amazon S3) in the *AWS DataSync User
+    #   Guide*.
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] tags
@@ -384,9 +410,15 @@ module Aws::DataSync
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
     #         },
+    #         excludes: [
+    #           {
+    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #             value: "FilterValue",
+    #           },
+    #         ],
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -403,17 +435,17 @@ module Aws::DataSync
     #
     # @!attribute [rw] cloud_watch_log_group_arn
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
-    #   that is used to monitor and log events in the task. For more
-    #   information on these groups, see [Working with Log Groups and Log
-    #   Streams][1] in the <i>Amazon CloudWatch User Guide. </i>
+    #   that is used to monitor and log events in the task.
+    #
+    #   For more information on these groups, see
+    #   "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html"
+    #   (Working with Log Groups and Log Streams) in the *Amazon CloudWatch
+    #   User Guide*.
     #
     #   For more information about how to useCloudWatchLogs with DataSync,
-    #   see [Monitoring Your Task][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html
+    #   see
+    #   "https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html"
+    #   (Monitoring Your Task)
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -433,6 +465,12 @@ module Aws::DataSync
     #   execution. For more information, see the operation.
     #   @return [Types::Options]
     #
+    # @!attribute [rw] excludes
+    #   A filter that determines which files to exclude from a task based on
+    #   the specified pattern. Transfers all files in the task’s
+    #   subdirectory, except files that match the filter that is set.
+    #   @return [Array<Types::FilterRule>]
+    #
     # @!attribute [rw] tags
     #   The key-value pair that represents the tag that you want to add to
     #   the resource. The value can be an empty string.
@@ -446,6 +484,7 @@ module Aws::DataSync
       :cloud_watch_log_group_arn,
       :name,
       :options,
+      :excludes,
       :tags)
       include Aws::Structure
     end
@@ -577,7 +616,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] last_connection_time
-    #   The time that the agent was last connected.
+    #   The time that the agent last connected to DataSyc.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
@@ -628,33 +667,11 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] ec2_config
-    #   The subnet and the security group that the target Amazon EFS file
-    #   system uses. The subnet must have at least one mount target for that
-    #   file system. The security group that you provide needs to be able to
-    #   communicate with the security group on the mount target in the
-    #   subnet specified.
-    #
-    #   The exact relationship between security group M (of the mount
-    #   target) and security group S (which you provide for DataSync to use
-    #   at this stage) is as follows:
-    #
-    #   * Security group M (which you associate with the mount target) must
-    #     allow inbound access for the Transmission Control Protocol (TCP)
-    #     on the NFS port (2049) from security group S. You can enable
-    #     inbound connections either by IP address (CIDR range) or security
-    #     group.
-    #
-    #   * Security group S (provided to DataSync to access EFS) should have
-    #     a rule that enables outbound connections to the NFS port on one of
-    #     the file system’s mount targets. You can enable outbound
-    #     connections either by IP address (CIDR range) or security group.
-    #     For information about security groups and mount targets, see
-    #     [Security Groups for Amazon EC2 Instances and Mount Targets][1] in
-    #     the *Amazon EFS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access
+    #   The subnet and the security group that DataSync uses to access
+    #   target EFS file system. The subnet must have at least one mount
+    #   target for that file system. The security group that you provide
+    #   needs to be able to communicate with the security group on the mount
+    #   target in the subnet specified.
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] creation_time
@@ -707,6 +724,10 @@ module Aws::DataSync
     #   Network File System (NFS) location.
     #   @return [Types::OnPremConfig]
     #
+    # @!attribute [rw] mount_options
+    #   The NFS mount options that DataSync used to mount your NFS share.
+    #   @return [Types::NfsMountOptions]
+    #
     # @!attribute [rw] creation_time
     #   The time that the NFS location was created.
     #   @return [Time]
@@ -717,6 +738,7 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :on_prem_config,
+      :mount_options,
       :creation_time)
       include Aws::Structure
     end
@@ -755,12 +777,11 @@ module Aws::DataSync
     # @!attribute [rw] s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that is used to access an Amazon S3 bucket.
-    #   For detailed information about using such a role, see [Components
-    #   and Terminology][1] in the *AWS DataSync User Guide*.
     #
-    #
-    #
-    #   [1]: https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli
+    #   For detailed information about using such a role, see
+    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+    #   (Creating a Location for Amazon S3) in the *AWS DataSync User
+    #   Guide*.
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] creation_time
@@ -805,18 +826,17 @@ module Aws::DataSync
     #   for the task that was executed.
     #
     #   For example, a `TaskExecution` value with the ARN
-    #   `arn:aws:sync:us-east-1:209870788375:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b`
+    #   `arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b`
     #   executed the task with the ARN
-    #   `arn:aws:sync:us-east-1:209870788375:task/task-0208075f79cedf4a2`.
+    #   `arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2`.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the task. For detailed information about sync
-    #   statuses, see [Understanding Sync Task Statuses][1].
+    #   The status of the task execution.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sync-service/latest/userguide/understand-sync-task-statuses.html
+    #   For detailed information about task execution statuses, see
+    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses"
+    #   (Understanding Task Statuses).
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -831,6 +851,19 @@ module Aws::DataSync
     #   used. You can override the defaults options on each task execution
     #   by specifying an overriding `Options` value to StartTaskExecution.
     #   @return [Types::Options]
+    #
+    # @!attribute [rw] excludes
+    #   Specifies that the task execution excludes files from the transfer
+    #   based on the specified pattern in the filter. Transfers all files in
+    #   the task’s subdirectory, except files that match the filter that is
+    #   set.
+    #   @return [Array<Types::FilterRule>]
+    #
+    # @!attribute [rw] includes
+    #   Specifies that the task execution excludes files in the transfer
+    #   based on the specified pattern in the filter. When multiple include
+    #   filters are set, they are interpreted as an OR.
+    #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] start_time
     #   The time that the task execution was started.
@@ -883,6 +916,8 @@ module Aws::DataSync
       :task_execution_arn,
       :status,
       :options,
+      :excludes,
+      :includes,
       :start_time,
       :estimated_files_to_transfer,
       :estimated_bytes_to_transfer,
@@ -920,12 +955,11 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the task that was described. For detailed information
-    #   about sync statuses, see [Understanding Sync Task Statuses][1].
+    #   The status of the task that was described.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sync-service/latest/userguide/understand-sync-task-statuses.html
+    #   For detailed information about task execution statuses, see
+    #   "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses"
+    #   (Understanding Task Statuses).
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -949,13 +983,12 @@ module Aws::DataSync
     #
     # @!attribute [rw] cloud_watch_log_group_arn
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
-    #   that was used to monitor and log events in the task. For more
-    #   information on these groups, see [Working with Log Groups and Log
-    #   Streams][1] in the *Amazon CloudWatch User Guide.*
+    #   that was used to monitor and log events in the task.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
+    #   For more information on these groups, see
+    #   "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html"
+    #   (Working with Log Groups and Log Streams) in the *Amazon CloudWatch
+    #   UserGuide*.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -968,6 +1001,12 @@ module Aws::DataSync
     #   For each individual task execution, you can override these options
     #   by specifying the overriding `OverrideOptions` value to operation.
     #   @return [Types::Options]
+    #
+    # @!attribute [rw] excludes
+    #   Specifies that the task excludes files in the transfer based on the
+    #   specified pattern in the filter. Transfers all files in the task’s
+    #   subdirectory, except files that match the filter that is set.
+    #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] error_code
     #   Errors that AWS DataSync encountered during execution of the task.
@@ -995,38 +1034,18 @@ module Aws::DataSync
       :destination_location_arn,
       :cloud_watch_log_group_arn,
       :options,
+      :excludes,
       :error_code,
       :error_detail,
       :creation_time)
       include Aws::Structure
     end
 
-    # The subnet and the security group that the target Amazon EFS file
-    # system uses. The subnet must have at least one mount target for that
-    # file system. The security group that you provide needs to be able to
-    # communicate with the security group on the mount target in the subnet
-    # specified.
-    #
-    # The exact relationship between security group M (of the mount target)
-    # and security group S (which you provide for DataSync to use at this
-    # stage) is as follows:
-    #
-    # * Security group M (which you associate with the mount target) must
-    #   allow inbound access for the Transmission Control Protocol (TCP) on
-    #   the NFS port (2049) from security group S. You can enable inbound
-    #   connections either by IP address (CIDR range) or security group.
-    #
-    # * Security group S (provided to DataSync to access EFS) should have a
-    #   rule that enables outbound connections to the NFS port on one of the
-    #   file system’s mount targets. You can enable outbound connections
-    #   either by IP address (CIDR range) or security group. For information
-    #   about security groups and mount targets, see [Security Groups for
-    #   Amazon EC2 Instances and Mount Targets][1] in the *Amazon EFS User
-    #   Guide.*
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access
+    # The subnet and the security group that DataSync uses to access target
+    # EFS file system. The subnet must have at least one mount target for
+    # that file system. The security group that you provide needs to be able
+    # to communicate with the security group on the mount target in the
+    # subnet specified.
     #
     # @note When making an API call, you may pass Ec2Config
     #   data as a hash:
@@ -1037,7 +1056,8 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] subnet_arn
-    #   The ARN of the subnet that the Amazon EC2 resource belongs in.
+    #   The ARN of the subnet and the security group that DataSync uses to
+    #   access the target EFS file system.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
@@ -1050,6 +1070,35 @@ module Aws::DataSync
     class Ec2Config < Struct.new(
       :subnet_arn,
       :security_group_arns)
+      include Aws::Structure
+    end
+
+    # A pattern that determines which files to include in the transfer or
+    # which files to exclude.
+    #
+    # @note When making an API call, you may pass FilterRule
+    #   data as a hash:
+    #
+    #       {
+    #         filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #         value: "FilterValue",
+    #       }
+    #
+    # @!attribute [rw] filter_type
+    #   Specifies the type of filter rule pattern to apply. DataSync only
+    #   supports the SIMPLE\_PATTERN rule type.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A pattern that defines the filter. The filter might include or
+    #   exclude files is a transfer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FilterRule AWS API Documentation
+    #
+    class FilterRule < Struct.new(
+      :filter_type,
+      :value)
       include Aws::Structure
     end
 
@@ -1337,6 +1386,30 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # Represents the mount options that are available for DataSync to access
+    # an NFS location.
+    #
+    # @note When making an API call, you may pass NfsMountOptions
+    #   data as a hash:
+    #
+    #       {
+    #         version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #       }
+    #
+    # @!attribute [rw] version
+    #   The specific NFS version that you want DataSync to use to mount your
+    #   NFS share. If you don't specify a version, DataSync defaults to
+    #   `AUTOMATIC`. That is, DataSync automatically selects a version based
+    #   on negotiation with the NFS server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NfsMountOptions AWS API Documentation
+    #
+    class NfsMountOptions < Struct.new(
+      :version)
+      include Aws::Structure
+    end
+
     # A list of Amazon Resource Names (ARNs) of agents to use for a Network
     # File System (NFS) location.
     #
@@ -1529,13 +1602,11 @@ module Aws::DataSync
     end
 
     # The Amazon Resource Name (ARN) of the AWS Identity and Access
-    # Management (IAM) role that is used to access an Amazon S3 bucket. For
-    # detailed information about using such a role, see [Components and
-    # Terminology][1] in the *AWS DataSync User Guide*.
+    # Management (IAM) role that is used to access an Amazon S3 bucket.
     #
-    #
-    #
-    # [1]: https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli
+    # For detailed information about using such a role, see
+    # "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+    # (Creating a Location for Amazon S3) in the *AWS DataSync User Guide*.
     #
     # @note When making an API call, you may pass S3Config
     #   data as a hash:
@@ -1574,6 +1645,12 @@ module Aws::DataSync
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
     #         },
+    #         includes: [
+    #           {
+    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #             value: "FilterValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] task_arn
@@ -1593,11 +1670,19 @@ module Aws::DataSync
     #   by specifying an overriding `Options` value to StartTaskExecution.
     #   @return [Types::Options]
     #
+    # @!attribute [rw] includes
+    #   A filter that determines which files to include in the transfer
+    #   during a task execution based on the specified pattern in the
+    #   filter. When multiple include filters are set, they are interpreted
+    #   as an OR.
+    #   @return [Array<Types::FilterRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionRequest AWS API Documentation
     #
     class StartTaskExecutionRequest < Struct.new(
       :task_arn,
-      :override_options)
+      :override_options,
+      :includes)
       include Aws::Structure
     end
 
@@ -1623,7 +1708,7 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       }
     #
@@ -1652,7 +1737,7 @@ module Aws::DataSync
     #         resource_arn: "TaggableResourceArn", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -1860,7 +1945,14 @@ module Aws::DataSync
     #           posix_permissions: "NONE", # accepts NONE, BEST_EFFORT, PRESERVE
     #           bytes_per_second: 1,
     #         },
+    #         excludes: [
+    #           {
+    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #             value: "FilterValue",
+    #           },
+    #         ],
     #         name: "TagValue",
+    #         cloud_watch_log_group_arn: "LogGroupArn",
     #       }
     #
     # @!attribute [rw] task_arn
@@ -1881,8 +1973,19 @@ module Aws::DataSync
     #   by specifying an overriding `Options` value to StartTaskExecution.
     #   @return [Types::Options]
     #
+    # @!attribute [rw] excludes
+    #   A filter that determines which files to exclude from a task based on
+    #   the specified pattern in the filter. Transfers all files in the
+    #   task’s subdirectory, except files that match the filter that is set.
+    #   @return [Array<Types::FilterRule>]
+    #
     # @!attribute [rw] name
     #   The name of the task to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_log_group_arn
+    #   The Amazon Resource Name (ARN) of the resource name of the
+    #   CloudWatch LogGroup.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskRequest AWS API Documentation
@@ -1890,7 +1993,9 @@ module Aws::DataSync
     class UpdateTaskRequest < Struct.new(
       :task_arn,
       :options,
-      :name)
+      :excludes,
+      :name,
+      :cloud_watch_log_group_arn)
       include Aws::Structure
     end
 
