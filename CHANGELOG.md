@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.273 (2019-05-13)
+------------------
+
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
 
 * Feature - Aws::IoTAnalytics - Updated the API, and documentation for AWS IoT Analytics.
