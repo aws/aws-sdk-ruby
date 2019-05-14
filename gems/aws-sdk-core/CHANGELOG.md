@@ -3,7 +3,6 @@ Unreleased Changes
 
 * Feature - Support transfer encoding and `requiresLength` trait
 
-=======
 3.51.0 (2019-05-10)
 ------------------
 
