@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -55,6 +56,7 @@ module Aws::Comprehend
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -547,6 +549,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your custom
+    #   classifier. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentClassifierResponse#document_classifier_arn #document_classifier_arn} => String
@@ -572,6 +583,10 @@ module Aws::Comprehend
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -635,6 +650,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your custom entity
+    #   recognizer. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEntityRecognizerResponse#entity_recognizer_arn #entity_recognizer_arn} => String
@@ -669,6 +693,10 @@ module Aws::Comprehend
     #     client_request_token: "ClientRequestTokenString",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -779,6 +807,10 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties.data_access_role_arn #=> String
     #   resp.document_classification_job_properties.volume_kms_key_id #=> String
+    #   resp.document_classification_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.document_classification_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classification_job_properties.vpc_config.subnets #=> Array
+    #   resp.document_classification_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassificationJob AWS API Documentation
     #
@@ -827,6 +859,10 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.document_classifier_properties.data_access_role_arn #=> String
     #   resp.document_classifier_properties.volume_kms_key_id #=> String
+    #   resp.document_classifier_properties.vpc_config.security_group_ids #=> Array
+    #   resp.document_classifier_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classifier_properties.vpc_config.subnets #=> Array
+    #   resp.document_classifier_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -868,6 +904,10 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties.data_access_role_arn #=> String
     #   resp.dominant_language_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.dominant_language_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.dominant_language_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.dominant_language_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.dominant_language_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDominantLanguageDetectionJob AWS API Documentation
     #
@@ -911,6 +951,10 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties.data_access_role_arn #=> String
     #   resp.entities_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.entities_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.entities_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.entities_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.entities_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
     #
@@ -962,6 +1006,10 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.recognizer_metadata.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties.data_access_role_arn #=> String
     #   resp.entity_recognizer_properties.volume_kms_key_id #=> String
+    #   resp.entity_recognizer_properties.vpc_config.security_group_ids #=> Array
+    #   resp.entity_recognizer_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.entity_recognizer_properties.vpc_config.subnets #=> Array
+    #   resp.entity_recognizer_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -1004,6 +1052,10 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties.data_access_role_arn #=> String
     #   resp.key_phrases_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.key_phrases_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.key_phrases_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.key_phrases_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.key_phrases_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob AWS API Documentation
     #
@@ -1046,6 +1098,10 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties.data_access_role_arn #=> String
     #   resp.sentiment_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.sentiment_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.sentiment_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.sentiment_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.sentiment_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob AWS API Documentation
     #
@@ -1087,6 +1143,10 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties.number_of_topics #=> Integer
     #   resp.topics_detection_job_properties.data_access_role_arn #=> String
     #   resp.topics_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.topics_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.topics_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.topics_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.topics_detection_job_properties.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTopicsDetectionJob AWS API Documentation
     #
@@ -1342,6 +1402,10 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties_list[0].data_access_role_arn #=> String
     #   resp.document_classification_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.document_classification_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.document_classification_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classification_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.document_classification_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobs AWS API Documentation
@@ -1407,6 +1471,10 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.f1_score #=> Float
     #   resp.document_classifier_properties_list[0].data_access_role_arn #=> String
     #   resp.document_classifier_properties_list[0].volume_kms_key_id #=> String
+    #   resp.document_classifier_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.document_classifier_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.document_classifier_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.document_classifier_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -1466,6 +1534,10 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.dominant_language_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.dominant_language_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDominantLanguageDetectionJobs AWS API Documentation
@@ -1526,6 +1598,10 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.entities_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.entities_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.entities_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.entities_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.entities_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.entities_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs AWS API Documentation
@@ -1600,6 +1676,10 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties_list[0].data_access_role_arn #=> String
     #   resp.entity_recognizer_properties_list[0].volume_kms_key_id #=> String
+    #   resp.entity_recognizer_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.entity_recognizer_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.entity_recognizer_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.entity_recognizer_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -1659,6 +1739,10 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.key_phrases_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.key_phrases_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.key_phrases_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListKeyPhrasesDetectionJobs AWS API Documentation
@@ -1718,6 +1802,10 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt"
     #   resp.sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.sentiment_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.sentiment_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListSentimentDetectionJobs AWS API Documentation
@@ -1810,6 +1898,10 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties_list[0].number_of_topics #=> Integer
     #   resp.topics_detection_job_properties_list[0].data_access_role_arn #=> String
     #   resp.topics_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.topics_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.topics_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.topics_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.topics_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTopicsDetectionJobs AWS API Documentation
@@ -1860,6 +1952,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your document
+    #   classification job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentClassificationJobResponse#job_id #job_id} => String
@@ -1881,6 +1982,10 @@ module Aws::Comprehend
     #     data_access_role_arn: "IamRoleArn", # required
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1938,6 +2043,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your dominant
+    #   language detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDominantLanguageDetectionJobResponse#job_id #job_id} => String
@@ -1958,6 +2072,10 @@ module Aws::Comprehend
     #     job_name: "JobName",
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2032,6 +2150,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your entity detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEntitiesDetectionJobResponse#job_id #job_id} => String
@@ -2054,6 +2181,10 @@ module Aws::Comprehend
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2114,6 +2245,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your key phrases
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartKeyPhrasesDetectionJobResponse#job_id #job_id} => String
@@ -2135,6 +2275,10 @@ module Aws::Comprehend
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2195,6 +2339,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your sentiment
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSentimentDetectionJobResponse#job_id #job_id} => String
@@ -2216,6 +2369,10 @@ module Aws::Comprehend
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2278,6 +2435,15 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for your topic detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
     # @return [Types::StartTopicsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTopicsDetectionJobResponse#job_id #job_id} => String
@@ -2299,6 +2465,10 @@ module Aws::Comprehend
     #     number_of_topics: 1,
     #     client_request_token: "ClientRequestTokenString",
     #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2624,7 +2794,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -465,6 +465,7 @@ module Aws::StorageGateway
 
     CreateSnapshotInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     CreateSnapshotInput.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotDescription, required: true, location_name: "SnapshotDescription"))
+    CreateSnapshotInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSnapshotInput.struct_class = Types::CreateSnapshotInput
 
     CreateSnapshotOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -1152,6 +1153,7 @@ module Aws::StorageGateway
     UpdateSnapshotScheduleInput.add_member(:start_at, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartAt"))
     UpdateSnapshotScheduleInput.add_member(:recurrence_in_hours, Shapes::ShapeRef.new(shape: RecurrenceInHours, required: true, location_name: "RecurrenceInHours"))
     UpdateSnapshotScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateSnapshotScheduleInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateSnapshotScheduleInput.struct_class = Types::UpdateSnapshotScheduleInput
 
     UpdateSnapshotScheduleOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))

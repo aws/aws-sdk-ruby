@@ -12,7 +12,7 @@ module Aws::LambdaPreview
     include Seahorse::Model
 
     AddEventSourceRequest = Shapes::StructureShape.new(name: 'AddEventSourceRequest')
-    Blob = Shapes::BlobShape.new(name: 'Blob')
+    Blob = Shapes::BlobShape.new(name: 'Blob', streaming: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
     Description = Shapes::StringShape.new(name: 'Description')

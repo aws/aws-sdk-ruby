@@ -104,7 +104,7 @@ module Aws::Glacier
     Size = Shapes::IntegerShape.new(name: 'Size')
     StatusCode = Shapes::StringShape.new(name: 'StatusCode')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
-    Stream = Shapes::BlobShape.new(name: 'Stream')
+    Stream = Shapes::BlobShape.new(name: 'Stream', streaming: true)
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')

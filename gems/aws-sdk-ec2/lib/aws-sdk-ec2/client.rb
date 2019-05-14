@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -57,6 +58,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
@@ -399,8 +401,8 @@ module Aws::EC2
     # must be the owner of the peer VPC. Use DescribeVpcPeeringConnections
     # to view your outstanding VPC peering connection requests.
     #
-    # For an inter-region VPC peering connection request, you must accept
-    # the VPC peering connection in the region of the accepter VPC.
+    # For an inter-Region VPC peering connection request, you must accept
+    # the VPC peering connection in the Region of the accepter VPC.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -540,8 +542,8 @@ module Aws::EC2
     #
     # An Elastic IP address is for use either in the EC2-Classic platform or
     # in a VPC. By default, you can allocate 5 Elastic IP addresses for
-    # EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per
-    # region.
+    # EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per
+    # Region.
     #
     # For more information, see [Elastic IP Addresses][2] in the *Amazon
     # Elastic Compute Cloud User Guide*.
@@ -2778,7 +2780,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Copies the specified Amazon FPGA Image (AFI) to the current region.
+    # Copies the specified Amazon FPGA Image (AFI) to the current Region.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2796,7 +2798,7 @@ module Aws::EC2
     #   The name for the new AFI. The default is the name of the source AFI.
     #
     # @option params [required, String] :source_region
-    #   The region that contains the source AFI.
+    #   The Region that contains the source AFI.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -2835,8 +2837,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Initiates the copy of an AMI from the specified source region to the
-    # current region. You specify the destination region by using its
+    # Initiates the copy of an AMI from the specified source Region to the
+    # current Region. You specify the destination Region by using its
     # endpoint when making the request.
     #
     # Copies of encrypted backing snapshots for the AMI are encrypted.
@@ -2862,7 +2864,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
     # @option params [String] :description
-    #   A description for the new AMI in the destination region.
+    #   A description for the new AMI in the destination Region.
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshots of the copied image should
@@ -2889,17 +2891,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -2908,17 +2910,17 @@ module Aws::EC2
     #   may appear to complete even though you provided an invalid identifier.
     #   This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is being
+    #   The specified CMK must exist in the Region that the snapshot is being
     #   copied to.
     #
     # @option params [required, String] :name
-    #   The name of the new AMI in the destination region.
+    #   The name of the new AMI in the destination Region.
     #
     # @option params [required, String] :source_image_id
     #   The ID of the AMI to copy.
     #
     # @option params [required, String] :source_region
-    #   The name of the region that contains the AMI to copy.
+    #   The name of the Region that contains the AMI to copy.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3039,17 +3041,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -3576,7 +3578,7 @@ module Aws::EC2
     #
     # <note markdown="1"> Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534,
     # with the exception of 7224, which is reserved in the `us-east-1`
-    # region, and 9059, which is reserved in the `eu-west-1` region.
+    # Region, and 9059, which is reserved in the `eu-west-1` Region.
     #
     #  </note>
     #
@@ -3814,7 +3816,7 @@ module Aws::EC2
     #
     # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
     #   specify `ec2.internal`. If you're using AmazonProvidedDNS in
-    #   another region, specify `region.compute.internal` (for example,
+    #   another Region, specify `region.compute.internal` (for example,
     #   `ap-northeast-1.compute.internal`). Otherwise, specify a domain name
     #   (for example, `MyCompany.com`). This value is used to complete
     #   unqualified DNS hostnames. **Important**\: Some Linux operating
@@ -4666,11 +4668,11 @@ module Aws::EC2
     # PKCS#1 private key. If a key with the specified name already exists,
     # Amazon EC2 returns an error.
     #
-    # You can have up to five thousand key pairs per region.
+    # You can have up to five thousand key pairs per Region.
     #
-    # The key pair returned to you is available only in the region in which
+    # The key pair returned to you is available only in the Region in which
     # you create it. If you prefer, you can create your own key pair using a
-    # third-party tool and upload it to any region using ImportKeyPair.
+    # third-party tool and upload it to any Region using ImportKeyPair.
     #
     # For more information, see [Key Pairs][1] in the *Amazon Elastic
     # Compute Cloud User Guide*.
@@ -5673,11 +5675,14 @@ module Aws::EC2
     # @option params [String] :interface_type
     #   Indicates whether the network interface is an Elastic Fabric Adapter
     #   (EFA). Only specify this parameter to create an EFA. For more
-    #   information, see [Elastic Fabric
-    #   Adapter](AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic
+    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
     #   If you are not creating an EFA ENI, omit this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
@@ -6890,7 +6895,7 @@ module Aws::EC2
     #   The ID of the attachment.
     #
     # @option params [Boolean] :blackhole
-    #   Indicates whether to drop traffic if the target isn't available.
+    #   Indicates whether to drop traffic that matches this route.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7150,17 +7155,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -7525,7 +7530,7 @@ module Aws::EC2
     # @option params [Boolean] :private_dns_enabled
     #   (Interface endpoint) Indicate whether to associate a private hosted
     #   zone with the specified VPC. The private hosted zone contains a record
-    #   set for the default public DNS name for the service for the region
+    #   set for the default public DNS name for the service for the Region
     #   (for example, `kinesis.us-east-1.amazonaws.com`) which resolves to the
     #   private IP addresses of the endpoint network interfaces in the VPC.
     #   This enables you to make requests to the default public DNS name for
@@ -7792,10 +7797,10 @@ module Aws::EC2
     #   request.
     #
     # @option params [String] :peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     #
     # @return [Types::CreateVpcPeeringConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10206,8 +10211,8 @@ module Aws::EC2
     end
 
     # Describes the longer ID format settings for all resource types in a
-    # specific region. This request is useful for performing a quick audit
-    # to determine whether a specific region is fully opted in for longer
+    # specific Region. This request is useful for performing a quick audit
+    # to determine whether a specific Region is fully opted in for longer
     # IDs (17-character IDs).
     #
     # This request only returns information about resource types that
@@ -10260,7 +10265,7 @@ module Aws::EC2
     end
 
     # Describes the Availability Zones that are available to you. The
-    # results include zones only for the region you're currently using. If
+    # results include zones only for the Region you're currently using. If
     # there is an event impacting an Availability Zone, you can use this
     # request to view the state and any provided message for that
     # Availability Zone.
@@ -10277,7 +10282,7 @@ module Aws::EC2
     #
     #   * `message` - Information about the Availability Zone.
     #
-    #   * `region-name` - The name of the region for the Availability Zone
+    #   * `region-name` - The name of the Region for the Availability Zone
     #     (for example, `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone (`available` \|
@@ -11264,9 +11269,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeDhcpOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDhcpOptionsResult#dhcp_options #dhcp_options} => Array&lt;Types::DhcpOptions&gt;
+    #   * {Types::DescribeDhcpOptionsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe a DHCP options set
@@ -11312,6 +11326,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -11326,6 +11342,7 @@ module Aws::EC2
     #   resp.dhcp_options[0].tags #=> Array
     #   resp.dhcp_options[0].tags[0].key #=> String
     #   resp.dhcp_options[0].tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptions AWS API Documentation
     #
@@ -12408,7 +12425,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the ID format settings for your resources on a per-region
+    # Describes the ID format settings for your resources on a per-Region
     # basis, for example, to view which resource types are enabled for
     # longer IDs. This request only returns information about resource types
     # whose ID formats can be modified; it does not return information about
@@ -12642,8 +12659,10 @@ module Aws::EC2
     # you own, and private images owned by other AWS accounts for which you
     # have explicit launch permissions.
     #
-    # Recently deregistered images might appear in the returned results for
-    # a short interval.
+    # Recently deregistered images appear in the returned results for a
+    # short interval and then return empty results. After all instances that
+    # reference a deregistered AMI are terminated, specifying the ID of the
+    # image results in an error indicating that the AMI ID cannot be found.
     #
     # @option params [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -15677,25 +15696,30 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the regions that are currently available to you.
+    # Describes the Regions that are currently available to you. The API
+    # returns a list of all the Regions, including Regions that are disabled
+    # for your account. For information about enabling Regions for your
+    # account, see [Enabling and Disabling Regions][1] in the *AWS Billing
+    # and Cost Management User Guide*.
     #
-    # For a list of the regions supported by Amazon EC2, see [Regions and
-    # Endpoints][1].
+    # For a list of the Regions supported by Amazon EC2, see [ Regions and
+    # Endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-account-payment.html#manage-account-payment-enable-disable-regions
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
-    #   * `endpoint` - The endpoint of the region (for example,
+    #   * `endpoint` - The endpoint of the Region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
     #
-    #   * `region-name` - The name of the region (for example, `us-east-1`).
+    #   * `region-name` - The name of the Region (for example, `us-east-1`).
     #
     # @option params [Array<String>] :region_names
-    #   The names of the regions.
+    #   The names of the Regions.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18539,9 +18563,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
     # @return [Types::DescribeSubnetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSubnetsResult#subnets #subnets} => Array&lt;Types::Subnet&gt;
+    #   * {Types::DescribeSubnetsResult#next_token #next_token} => String
     #
     #
     # @example Example: To describe the subnets for a VPC
@@ -18586,6 +18619,8 @@ module Aws::EC2
     #     ],
     #     subnet_ids: ["String"],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -18611,6 +18646,7 @@ module Aws::EC2
     #   resp.subnets[0].tags[0].key #=> String
     #   resp.subnets[0].tags[0].value #=> String
     #   resp.subnets[0].subnet_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnets AWS API Documentation
     #
@@ -22796,17 +22832,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -22815,7 +22851,7 @@ module Aws::EC2
     #   may appear to complete even though you provided an invalid identifier.
     #   This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the AMI is being
+    #   The specified CMK must exist in the Region that the AMI is being
     #   copied to.
     #
     # @option params [String] :license_type
@@ -23157,17 +23193,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     namespace, followed by the Region of the CMK, the AWS account ID of
     #     the CMK owner, the `alias` namespace, and then the CMK alias. For
     #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -23176,7 +23212,7 @@ module Aws::EC2
     #   may appear to complete even though you provided an invalid identifier.
     #   This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is being
+    #   The specified CMK must exist in the Region that the snapshot is being
     #   copied to.
     #
     # @option params [String] :role_name
@@ -23672,7 +23708,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the ID format for the specified resource on a per-region
+    # Modifies the ID format for the specified resource on a per-Region
     # basis. You can specify that resources should receive longer IDs
     # (17-character IDs) when they are created.
     #
@@ -25515,11 +25551,11 @@ module Aws::EC2
     # resolution for queries from the local VPC. This ensures that queries
     # from the local VPC resolve to private IP addresses in the peer VPC.
     # This option is not available if the peered VPCs are in different AWS
-    # accounts or different regions. For peered VPCs in different AWS
+    # accounts or different Regions. For peered VPCs in different AWS
     # accounts, each AWS account owner must initiate a separate request to
     # modify the peering connection options. For inter-region peering
-    # connections, you must use the region for the requester VPC to modify
-    # the requester VPC peering options and the region for the accepter VPC
+    # connections, you must use the Region for the requester VPC to modify
+    # the requester VPC peering options and the Region for the accepter VPC
     # to modify the accepter VPC peering options. To verify which VPCs are
     # the accepter and the requester for a VPC peering connection, use the
     # DescribeVpcPeeringConnections command.
@@ -25632,13 +25668,67 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the target gateway of a AWS Site-to-Site VPN connection. The
+    # following migration options are available:
+    #
+    # * An existing virtual private gateway to a new virtual private gateway
+    #
+    # * An existing virtual private gateway to a transit gateway
+    #
+    # * An existing transit gateway to a new transit gateway
+    #
+    # * An existing transit gateway to a virtual private gateway
+    #
+    # Before you perform the migration to the new gateway, you must
+    # configure the new gateway. Use CreateVpnGateway to create a virtual
+    # private gateway, or CreateTransitGateway to create a transit gateway.
+    #
+    # This step is required when you migrate from a virtual private gateway
+    # with static routes to a transit gateway.
+    #
+    # You must delete the static routes before you migrate to the new
+    # gateway.
+    #
+    # Keep a copy of the static route before you delete it. You will need to
+    # add back these routes to the transit gateway after the VPN connection
+    # migration is complete.
+    #
+    # After you migrate to the new gateway, you might need to modify your
+    # VPC route table. Use CreateRoute and DeleteRoute to make the changes
+    # described in [VPN Gateway Target Modification Required VPC Route Table
+    # Updates][1] in the *AWS Site-to-Site VPN User Guide*.
+    #
+    # When the new gateway is a transit gateway, modify the transit gateway
+    # route table to allow traffic between the VPC and the AWS Site-to-Site
+    # VPN connection. Use CreateTransitGatewayRoute to add the routes.
+    #
+    # If you deleted VPN static routes, you must add the static routes to
+    # the transit gateway route table.
+    #
+    # After you perform this operation, the AWS VPN endpoint's IP addresses
+    # on the AWS side and the tunnel options remain intact. Your s2slong;
+    # connection will be temporarily unavailable for approximately 10
+    # minutes while we provision the new endpoints
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing
+    #
     # @option params [required, String] :vpn_connection_id
+    #   The ID of the VPN connection.
     #
     # @option params [String] :transit_gateway_id
+    #   The ID of the transit gateway.
     #
     # @option params [String] :vpn_gateway_id
+    #   The ID of the virtual private gateway at the AWS side of the VPN
+    #   connection.
     #
     # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::ModifyVpnConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -25819,7 +25909,7 @@ module Aws::EC2
     #   The public IPv4 address range, in CIDR notation. The most specific
     #   prefix that you can specify is /24. The address range cannot overlap
     #   with another address range that you've brought to this or another
-    #   region.
+    #   Region.
     #
     # @option params [Types::CidrAuthorizationContext] :cidr_authorization_context
     #   A signed document that proves that you are authorized to bring the
@@ -28513,11 +28603,16 @@ module Aws::EC2
     #
     # @option params [String] :key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another way
     #   to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #
     # @option params [required, Integer] :max_count
     #   The maximum number of instances to launch. If you specify more
@@ -28570,19 +28665,21 @@ module Aws::EC2
     #
     # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups. You can create a security group using
-    #   CreateSecurityGroup.
+    #   [CreateSecurityGroup][1].
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #
     # @option params [Array<String>] :security_groups
     #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
     #   Default: Amazon EC2 uses the default security group.
     #
@@ -28623,11 +28720,15 @@ module Aws::EC2
     #   If you set this parameter to `true`, you can't terminate the instance
     #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
     #   change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
     #   the instance by running the shutdown command from the instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -28656,7 +28757,9 @@ module Aws::EC2
     #   Default: `stop`
     #
     # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   The network interfaces to associate with the instance.
+    #   The network interfaces to associate with the instance. If you specify
+    #   a network interface, you must specify any security groups as part of
+    #   the network interface.
     #
     # @option params [String] :private_ip_address
     #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
@@ -28692,7 +28795,11 @@ module Aws::EC2
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
     #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see CreateTags.
+    #   after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
@@ -28710,15 +28817,16 @@ module Aws::EC2
     # @option params [Types::CreditSpecificationRequest] :credit_specification
     #   The credit option for CPU usage of the T2 or T3 instance. Valid values
     #   are `standard` and `unlimited`. To change this attribute after launch,
-    #   use ModifyInstanceCreditSpecification. For more information, see
-    #   [Burstable Performance Instances][1] in the *Amazon Elastic Compute
+    #   use [ ModifyInstanceCreditSpecification][1]. For more information, see
+    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
     #   Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
@@ -30161,7 +30269,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

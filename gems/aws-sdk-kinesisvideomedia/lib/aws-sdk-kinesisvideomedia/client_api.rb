@@ -22,7 +22,7 @@ module Aws::KinesisVideoMedia
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidEndpointException = Shapes::StructureShape.new(name: 'InvalidEndpointException')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
-    Payload = Shapes::BlobShape.new(name: 'Payload')
+    Payload = Shapes::BlobShape.new(name: 'Payload', streaming: true)
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     StartSelector = Shapes::StructureShape.new(name: 'StartSelector')

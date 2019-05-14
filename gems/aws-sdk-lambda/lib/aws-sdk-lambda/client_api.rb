@@ -27,7 +27,7 @@ module Aws::Lambda
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     Blob = Shapes::BlobShape.new(name: 'Blob')
-    BlobStream = Shapes::BlobShape.new(name: 'BlobStream')
+    BlobStream = Shapes::BlobShape.new(name: 'BlobStream', streaming: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CodeStorageExceededException = Shapes::StructureShape.new(name: 'CodeStorageExceededException')
     CompatibleRuntimes = Shapes::ListShape.new(name: 'CompatibleRuntimes')

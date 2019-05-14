@@ -354,6 +354,61 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # A resource that allows Enterprise account administrators to configure
+    # an interface to receive events from Amazon Chime.
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The unique ID for the bot user.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The bot display name.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_type
+    #   The bot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   When true, the bot is stopped from running in your account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The bot creation timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The updated bot timestamp, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bot_email
+    #   The bot email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_token
+    #   The security token used to authenticate Amazon Chime with the
+    #   outgoing event endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Bot AWS API Documentation
+    #
+    class Bot < Struct.new(
+      :bot_id,
+      :user_id,
+      :display_name,
+      :bot_type,
+      :disabled,
+      :created_timestamp,
+      :updated_timestamp,
+      :bot_email,
+      :security_token)
+      include Aws::Structure
+    end
+
     # The Amazon Chime Business Calling settings for the administrator's
     # AWS account. Includes any Amazon S3 buckets designated for storing
     # call detail records.
@@ -402,6 +457,47 @@ module Aws::Chime
     #
     class CreateAccountResponse < Struct.new(
       :account)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         display_name: "SensitiveString", # required
+    #         domain: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The bot display name.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the Amazon Chime Enterprise account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateBotRequest AWS API Documentation
+    #
+    class CreateBotRequest < Struct.new(
+      :account_id,
+      :display_name,
+      :domain)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot
+    #   The bot details.
+    #   @return [Types::Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateBotResponse AWS API Documentation
+    #
+    class CreateBotResponse < Struct.new(
+      :bot)
       include Aws::Structure
     end
 
@@ -526,6 +622,30 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAccountResponse AWS API Documentation
     #
     class DeleteAccountResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteEventsConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         bot_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteEventsConfigurationRequest AWS API Documentation
+    #
+    class DeleteEventsConfigurationRequest < Struct.new(
+      :account_id,
+      :bot_id)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeletePhoneNumberRequest
     #   data as a hash:
@@ -689,6 +809,30 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The configuration that allows a bot to receive outgoing events. Can be
+    # either an HTTPS endpoint or a Lambda function ARN.
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_events_https_endpoint
+    #   HTTPS endpoint that allows a bot to receive outgoing events.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   Lambda function ARN that allows a bot to receive outgoing events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EventsConfiguration AWS API Documentation
+    #
+    class EventsConfiguration < Struct.new(
+      :bot_id,
+      :outbound_events_https_endpoint,
+      :lambda_function_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccountRequest
     #   data as a hash:
     #
@@ -744,6 +888,76 @@ module Aws::Chime
     #
     class GetAccountSettingsResponse < Struct.new(
       :account_settings)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         bot_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetBotRequest AWS API Documentation
+    #
+    class GetBotRequest < Struct.new(
+      :account_id,
+      :bot_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot
+    #   The chat bot details.
+    #   @return [Types::Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetBotResponse AWS API Documentation
+    #
+    class GetBotResponse < Struct.new(
+      :bot)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEventsConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         bot_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetEventsConfigurationRequest AWS API Documentation
+    #
+    class GetEventsConfigurationRequest < Struct.new(
+      :account_id,
+      :bot_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_configuration
+    #   The events configuration details.
+    #   @return [Types::EventsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetEventsConfigurationResponse AWS API Documentation
+    #
+    class GetEventsConfigurationResponse < Struct.new(
+      :events_configuration)
       include Aws::Structure
     end
 
@@ -1120,6 +1334,53 @@ module Aws::Chime
     #
     class ListAccountsResponse < Struct.new(
       :accounts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListBotsRequest AWS API Documentation
+    #
+    class ListBotsRequest < Struct.new(
+      :account_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bots
+    #   List of bots and bot details.
+    #   @return [Array<Types::Bot>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListBotsResponse AWS API Documentation
+    #
+    class ListBotsResponse < Struct.new(
+      :bots,
       :next_token)
       include Aws::Structure
     end
@@ -1669,6 +1930,54 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutEventsConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         bot_id: "NonEmptyString", # required
+    #         outbound_events_https_endpoint: "SensitiveString",
+    #         lambda_function_arn: "SensitiveString",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_events_https_endpoint
+    #   HTTPS endpoint that allows the bot to receive outgoing events.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   Lambda function ARN that allows the bot to receive outgoing events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutEventsConfigurationRequest AWS API Documentation
+    #
+    class PutEventsConfigurationRequest < Struct.new(
+      :account_id,
+      :bot_id,
+      :outbound_events_https_endpoint,
+      :lambda_function_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_configuration
+    #   The configuration that allows a bot to receive outgoing events. Can
+    #   be either an HTTPS endpoint or a Lambda function ARN.
+    #   @return [Types::EventsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutEventsConfigurationResponse AWS API Documentation
+    #
+    class PutEventsConfigurationResponse < Struct.new(
+      :events_configuration)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutVoiceConnectorOriginationRequest
     #   data as a hash:
     #
@@ -1782,6 +2091,42 @@ module Aws::Chime
     #
     class PutVoiceConnectorTerminationResponse < Struct.new(
       :termination)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegenerateSecurityTokenRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         bot_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RegenerateSecurityTokenRequest AWS API Documentation
+    #
+    class RegenerateSecurityTokenRequest < Struct.new(
+      :account_id,
+      :bot_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot
+    #   A resource that allows Enterprise account administrators to
+    #   configure an interface to receive events from Amazon Chime.
+    #   @return [Types::Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RegenerateSecurityTokenResponse AWS API Documentation
+    #
+    class RegenerateSecurityTokenResponse < Struct.new(
+      :bot)
       include Aws::Structure
     end
 
@@ -2073,6 +2418,47 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountSettingsResponse AWS API Documentation
     #
     class UpdateAccountSettingsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         bot_id: "NonEmptyString", # required
+    #         disabled: false,
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_id
+    #   The bot ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   When true, stops the specified bot from running in your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateBotRequest AWS API Documentation
+    #
+    class UpdateBotRequest < Struct.new(
+      :account_id,
+      :bot_id,
+      :disabled)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot
+    #   The updated bot details.
+    #   @return [Types::Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateBotResponse AWS API Documentation
+    #
+    class UpdateBotResponse < Struct.new(
+      :bot)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateGlobalSettingsRequest
     #   data as a hash:

@@ -12,7 +12,7 @@ module Aws::Polly
     include Seahorse::Model
 
     Alphabet = Shapes::StringShape.new(name: 'Alphabet')
-    AudioStream = Shapes::BlobShape.new(name: 'AudioStream')
+    AudioStream = Shapes::BlobShape.new(name: 'AudioStream', streaming: true)
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteLexiconInput = Shapes::StructureShape.new(name: 'DeleteLexiconInput')

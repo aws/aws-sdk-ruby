@@ -3,6 +3,13 @@ Unreleased Changes
 
 * Issue - Handle paginator stubs with expression #2040
 
+3.52.0 (2019-05-14)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Feature - Support transfer encoding and `requiresLength` trait
 
 3.51.0 (2019-05-10)

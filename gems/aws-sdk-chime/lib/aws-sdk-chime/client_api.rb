@@ -32,6 +32,9 @@ module Aws::Chime
     BatchUpdateUserRequest = Shapes::StructureShape.new(name: 'BatchUpdateUserRequest')
     BatchUpdateUserResponse = Shapes::StructureShape.new(name: 'BatchUpdateUserResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Bot = Shapes::StructureShape.new(name: 'Bot')
+    BotList = Shapes::ListShape.new(name: 'BotList')
+    BotType = Shapes::StringShape.new(name: 'BotType')
     BusinessCallingSettings = Shapes::StructureShape.new(name: 'BusinessCallingSettings')
     CallingRegion = Shapes::StringShape.new(name: 'CallingRegion')
     CallingRegionList = Shapes::ListShape.new(name: 'CallingRegionList')
@@ -39,6 +42,8 @@ module Aws::Chime
     CpsLimit = Shapes::IntegerShape.new(name: 'CpsLimit')
     CreateAccountRequest = Shapes::StructureShape.new(name: 'CreateAccountRequest')
     CreateAccountResponse = Shapes::StructureShape.new(name: 'CreateAccountResponse')
+    CreateBotRequest = Shapes::StructureShape.new(name: 'CreateBotRequest')
+    CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
     CreatePhoneNumberOrderRequest = Shapes::StructureShape.new(name: 'CreatePhoneNumberOrderRequest')
     CreatePhoneNumberOrderResponse = Shapes::StructureShape.new(name: 'CreatePhoneNumberOrderResponse')
     CreateVoiceConnectorRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorRequest')
@@ -47,6 +52,7 @@ module Aws::Chime
     CredentialList = Shapes::ListShape.new(name: 'CredentialList')
     DeleteAccountRequest = Shapes::StructureShape.new(name: 'DeleteAccountRequest')
     DeleteAccountResponse = Shapes::StructureShape.new(name: 'DeleteAccountResponse')
+    DeleteEventsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEventsConfigurationRequest')
     DeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'DeletePhoneNumberRequest')
     DeleteVoiceConnectorOriginationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorOriginationRequest')
     DeleteVoiceConnectorRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorRequest')
@@ -61,11 +67,16 @@ module Aws::Chime
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailStatus = Shapes::StringShape.new(name: 'EmailStatus')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    EventsConfiguration = Shapes::StructureShape.new(name: 'EventsConfiguration')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetAccountRequest = Shapes::StructureShape.new(name: 'GetAccountRequest')
     GetAccountResponse = Shapes::StructureShape.new(name: 'GetAccountResponse')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
+    GetBotRequest = Shapes::StructureShape.new(name: 'GetBotRequest')
+    GetBotResponse = Shapes::StructureShape.new(name: 'GetBotResponse')
+    GetEventsConfigurationRequest = Shapes::StructureShape.new(name: 'GetEventsConfigurationRequest')
+    GetEventsConfigurationResponse = Shapes::StructureShape.new(name: 'GetEventsConfigurationResponse')
     GetGlobalSettingsResponse = Shapes::StructureShape.new(name: 'GetGlobalSettingsResponse')
     GetPhoneNumberOrderRequest = Shapes::StructureShape.new(name: 'GetPhoneNumberOrderRequest')
     GetPhoneNumberOrderResponse = Shapes::StructureShape.new(name: 'GetPhoneNumberOrderResponse')
@@ -94,6 +105,8 @@ module Aws::Chime
     LicenseList = Shapes::ListShape.new(name: 'LicenseList')
     ListAccountsRequest = Shapes::StructureShape.new(name: 'ListAccountsRequest')
     ListAccountsResponse = Shapes::StructureShape.new(name: 'ListAccountsResponse')
+    ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
+    ListBotsResponse = Shapes::StructureShape.new(name: 'ListBotsResponse')
     ListPhoneNumberOrdersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumberOrdersRequest')
     ListPhoneNumberOrdersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumberOrdersResponse')
     ListPhoneNumbersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumbersRequest')
@@ -135,14 +148,19 @@ module Aws::Chime
     PhoneNumberStatus = Shapes::StringShape.new(name: 'PhoneNumberStatus')
     Port = Shapes::IntegerShape.new(name: 'Port')
     ProfileServiceMaxResults = Shapes::IntegerShape.new(name: 'ProfileServiceMaxResults')
+    PutEventsConfigurationRequest = Shapes::StructureShape.new(name: 'PutEventsConfigurationRequest')
+    PutEventsConfigurationResponse = Shapes::StructureShape.new(name: 'PutEventsConfigurationResponse')
     PutVoiceConnectorOriginationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorOriginationRequest')
     PutVoiceConnectorOriginationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorOriginationResponse')
     PutVoiceConnectorTerminationCredentialsRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationCredentialsRequest')
     PutVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationRequest')
     PutVoiceConnectorTerminationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationResponse')
+    RegenerateSecurityTokenRequest = Shapes::StructureShape.new(name: 'RegenerateSecurityTokenRequest')
+    RegenerateSecurityTokenResponse = Shapes::StructureShape.new(name: 'RegenerateSecurityTokenResponse')
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
     ResetPersonalPINRequest = Shapes::StructureShape.new(name: 'ResetPersonalPINRequest')
     ResetPersonalPINResponse = Shapes::StructureShape.new(name: 'ResetPersonalPINResponse')
+    ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     RestorePhoneNumberRequest = Shapes::StructureShape.new(name: 'RestorePhoneNumberRequest')
     RestorePhoneNumberResponse = Shapes::StructureShape.new(name: 'RestorePhoneNumberResponse')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
@@ -164,6 +182,8 @@ module Aws::Chime
     UpdateAccountResponse = Shapes::StructureShape.new(name: 'UpdateAccountResponse')
     UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
     UpdateAccountSettingsResponse = Shapes::StructureShape.new(name: 'UpdateAccountSettingsResponse')
+    UpdateBotRequest = Shapes::StructureShape.new(name: 'UpdateBotRequest')
+    UpdateBotResponse = Shapes::StructureShape.new(name: 'UpdateBotResponse')
     UpdateGlobalSettingsRequest = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsRequest')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberRequestItem = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequestItem')
@@ -250,6 +270,19 @@ module Aws::Chime
     BatchUpdateUserResponse.add_member(:user_errors, Shapes::ShapeRef.new(shape: UserErrorList, location_name: "UserErrors"))
     BatchUpdateUserResponse.struct_class = Types::BatchUpdateUserResponse
 
+    Bot.add_member(:bot_id, Shapes::ShapeRef.new(shape: String, location_name: "BotId"))
+    Bot.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "UserId"))
+    Bot.add_member(:display_name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "DisplayName"))
+    Bot.add_member(:bot_type, Shapes::ShapeRef.new(shape: BotType, location_name: "BotType"))
+    Bot.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
+    Bot.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    Bot.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    Bot.add_member(:bot_email, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "BotEmail"))
+    Bot.add_member(:security_token, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "SecurityToken"))
+    Bot.struct_class = Types::Bot
+
+    BotList.member = Shapes::ShapeRef.new(shape: Bot)
+
     BusinessCallingSettings.add_member(:cdr_bucket, Shapes::ShapeRef.new(shape: String, location_name: "CdrBucket", metadata: {"box"=>true}))
     BusinessCallingSettings.struct_class = Types::BusinessCallingSettings
 
@@ -260,6 +293,14 @@ module Aws::Chime
 
     CreateAccountResponse.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
     CreateAccountResponse.struct_class = Types::CreateAccountResponse
+
+    CreateBotRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    CreateBotRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "DisplayName"))
+    CreateBotRequest.add_member(:domain, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Domain"))
+    CreateBotRequest.struct_class = Types::CreateBotRequest
+
+    CreateBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
+    CreateBotResponse.struct_class = Types::CreateBotResponse
 
     CreatePhoneNumberOrderRequest.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, required: true, location_name: "ProductType"))
     CreatePhoneNumberOrderRequest.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, required: true, location_name: "E164PhoneNumbers"))
@@ -285,6 +326,10 @@ module Aws::Chime
     DeleteAccountRequest.struct_class = Types::DeleteAccountRequest
 
     DeleteAccountResponse.struct_class = Types::DeleteAccountResponse
+
+    DeleteEventsConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    DeleteEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
+    DeleteEventsConfigurationRequest.struct_class = Types::DeleteEventsConfigurationRequest
 
     DeletePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "phoneNumberId"))
     DeletePhoneNumberRequest.struct_class = Types::DeletePhoneNumberRequest
@@ -317,6 +362,11 @@ module Aws::Chime
 
     E164PhoneNumberList.member = Shapes::ShapeRef.new(shape: E164PhoneNumber)
 
+    EventsConfiguration.add_member(:bot_id, Shapes::ShapeRef.new(shape: String, location_name: "BotId"))
+    EventsConfiguration.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
+    EventsConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "LambdaFunctionArn"))
+    EventsConfiguration.struct_class = Types::EventsConfiguration
+
     GetAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetAccountRequest.struct_class = Types::GetAccountRequest
 
@@ -328,6 +378,20 @@ module Aws::Chime
 
     GetAccountSettingsResponse.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "AccountSettings"))
     GetAccountSettingsResponse.struct_class = Types::GetAccountSettingsResponse
+
+    GetBotRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    GetBotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
+    GetBotRequest.struct_class = Types::GetBotRequest
+
+    GetBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
+    GetBotResponse.struct_class = Types::GetBotResponse
+
+    GetEventsConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    GetEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
+    GetEventsConfigurationRequest.struct_class = Types::GetEventsConfigurationRequest
+
+    GetEventsConfigurationResponse.add_member(:events_configuration, Shapes::ShapeRef.new(shape: EventsConfiguration, location_name: "EventsConfiguration"))
+    GetEventsConfigurationResponse.struct_class = Types::GetEventsConfigurationResponse
 
     GetGlobalSettingsResponse.add_member(:business_calling, Shapes::ShapeRef.new(shape: BusinessCallingSettings, location_name: "BusinessCalling"))
     GetGlobalSettingsResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, location_name: "VoiceConnector"))
@@ -409,6 +473,15 @@ module Aws::Chime
     ListAccountsResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     ListAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAccountsResponse.struct_class = Types::ListAccountsResponse
+
+    ListBotsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    ListBotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListBotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListBotsRequest.struct_class = Types::ListBotsRequest
+
+    ListBotsResponse.add_member(:bots, Shapes::ShapeRef.new(shape: BotList, location_name: "Bots"))
+    ListBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListBotsResponse.struct_class = Types::ListBotsResponse
 
     ListPhoneNumberOrdersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListPhoneNumberOrdersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
@@ -526,6 +599,15 @@ module Aws::Chime
 
     PhoneNumberOrderList.member = Shapes::ShapeRef.new(shape: PhoneNumberOrder)
 
+    PutEventsConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    PutEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
+    PutEventsConfigurationRequest.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
+    PutEventsConfigurationRequest.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "LambdaFunctionArn"))
+    PutEventsConfigurationRequest.struct_class = Types::PutEventsConfigurationRequest
+
+    PutEventsConfigurationResponse.add_member(:events_configuration, Shapes::ShapeRef.new(shape: EventsConfiguration, location_name: "EventsConfiguration"))
+    PutEventsConfigurationResponse.struct_class = Types::PutEventsConfigurationResponse
+
     PutVoiceConnectorOriginationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorOriginationRequest.add_member(:origination, Shapes::ShapeRef.new(shape: Origination, required: true, location_name: "Origination"))
     PutVoiceConnectorOriginationRequest.struct_class = Types::PutVoiceConnectorOriginationRequest
@@ -543,6 +625,13 @@ module Aws::Chime
 
     PutVoiceConnectorTerminationResponse.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, location_name: "Termination"))
     PutVoiceConnectorTerminationResponse.struct_class = Types::PutVoiceConnectorTerminationResponse
+
+    RegenerateSecurityTokenRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    RegenerateSecurityTokenRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
+    RegenerateSecurityTokenRequest.struct_class = Types::RegenerateSecurityTokenRequest
+
+    RegenerateSecurityTokenResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
+    RegenerateSecurityTokenResponse.struct_class = Types::RegenerateSecurityTokenResponse
 
     ResetPersonalPINRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     ResetPersonalPINRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
@@ -600,6 +689,14 @@ module Aws::Chime
     UpdateAccountSettingsRequest.struct_class = Types::UpdateAccountSettingsRequest
 
     UpdateAccountSettingsResponse.struct_class = Types::UpdateAccountSettingsResponse
+
+    UpdateBotRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    UpdateBotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
+    UpdateBotRequest.add_member(:disabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Disabled"))
+    UpdateBotRequest.struct_class = Types::UpdateBotRequest
+
+    UpdateBotResponse.add_member(:bot, Shapes::ShapeRef.new(shape: Bot, location_name: "Bot"))
+    UpdateBotResponse.struct_class = Types::UpdateBotResponse
 
     UpdateGlobalSettingsRequest.add_member(:business_calling, Shapes::ShapeRef.new(shape: BusinessCallingSettings, required: true, location_name: "BusinessCalling"))
     UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, required: true, location_name: "VoiceConnector"))
@@ -823,6 +920,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBot"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/bots"
+        o.input = Shapes::ShapeRef.new(shape: CreateBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:create_phone_number_order, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePhoneNumberOrder"
         o.http_method = "POST"
@@ -865,6 +977,20 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_events_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventsConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{accountId}/bots/{botId}/events-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventsConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
       end)
 
       api.add_operation(:delete_phone_number, Seahorse::Model::Operation.new.tap do |o|
@@ -1000,6 +1126,35 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBot"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/bots/{botId}"
+        o.input = Shapes::ShapeRef.new(shape: GetBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_events_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventsConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/bots/{botId}/events-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetEventsConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventsConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_global_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1172,6 +1327,20 @@ module Aws::Chime
         )
       end)
 
+      api.add_operation(:list_bots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBots"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/bots"
+        o.input = Shapes::ShapeRef.new(shape: ListBotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBotsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:list_phone_number_orders, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPhoneNumberOrders"
         o.http_method = "GET"
@@ -1283,6 +1452,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:put_events_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEventsConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{accountId}/bots/{botId}/events-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutEventsConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEventsConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:put_voice_connector_origination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutVoiceConnectorOrigination"
         o.http_method = "PUT"
@@ -1326,6 +1510,20 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:regenerate_security_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegenerateSecurityToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/bots/{botId}?operation=regenerate-security-token"
+        o.input = Shapes::ShapeRef.new(shape: RegenerateSecurityTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegenerateSecurityTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:reset_personal_pin, Seahorse::Model::Operation.new.tap do |o|
@@ -1401,6 +1599,20 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBot"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/bots/{botId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
