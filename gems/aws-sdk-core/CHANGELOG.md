@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Handle paginator stubs with expression #2040
+
 3.52.0 (2019-05-14)
 ------------------
 
