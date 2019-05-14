@@ -56,6 +56,9 @@ module Aws::Glue
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
     CatalogIdString = Shapes::StringShape.new(name: 'CatalogIdString')
     CatalogImportStatus = Shapes::StructureShape.new(name: 'CatalogImportStatus')
+    CatalogTablesList = Shapes::ListShape.new(name: 'CatalogTablesList')
+    CatalogTarget = Shapes::StructureShape.new(name: 'CatalogTarget')
+    CatalogTargetList = Shapes::ListShape.new(name: 'CatalogTargetList')
     Classification = Shapes::StringShape.new(name: 'Classification')
     Classifier = Shapes::StructureShape.new(name: 'Classifier')
     ClassifierList = Shapes::ListShape.new(name: 'ClassifierList')
@@ -615,6 +618,14 @@ module Aws::Glue
     CatalogImportStatus.add_member(:imported_by, Shapes::ShapeRef.new(shape: NameString, location_name: "ImportedBy"))
     CatalogImportStatus.struct_class = Types::CatalogImportStatus
 
+    CatalogTablesList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    CatalogTarget.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    CatalogTarget.add_member(:tables, Shapes::ShapeRef.new(shape: CatalogTablesList, required: true, location_name: "Tables"))
+    CatalogTarget.struct_class = Types::CatalogTarget
+
+    CatalogTargetList.member = Shapes::ShapeRef.new(shape: CatalogTarget)
+
     Classifier.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: GrokClassifier, location_name: "GrokClassifier"))
     Classifier.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: XMLClassifier, location_name: "XMLClassifier"))
     Classifier.add_member(:json_classifier, Shapes::ShapeRef.new(shape: JsonClassifier, location_name: "JsonClassifier"))
@@ -732,6 +743,7 @@ module Aws::Glue
     CrawlerTargets.add_member(:s3_targets, Shapes::ShapeRef.new(shape: S3TargetList, location_name: "S3Targets"))
     CrawlerTargets.add_member(:jdbc_targets, Shapes::ShapeRef.new(shape: JdbcTargetList, location_name: "JdbcTargets"))
     CrawlerTargets.add_member(:dynamo_db_targets, Shapes::ShapeRef.new(shape: DynamoDBTargetList, location_name: "DynamoDBTargets"))
+    CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
 
     CreateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: CreateGrokClassifierRequest, location_name: "GrokClassifier"))
@@ -750,7 +762,7 @@ module Aws::Glue
 
     CreateCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateCrawlerRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
-    CreateCrawlerRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
+    CreateCrawlerRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
     CreateCrawlerRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateCrawlerRequest.add_member(:targets, Shapes::ShapeRef.new(shape: CrawlerTargets, required: true, location_name: "Targets"))
     CreateCrawlerRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: CronExpression, location_name: "Schedule"))

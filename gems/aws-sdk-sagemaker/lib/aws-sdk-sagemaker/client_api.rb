@@ -355,6 +355,8 @@ module Aws::SageMaker
     NotebookInstanceSummaryList = Shapes::ListShape.new(name: 'NotebookInstanceSummaryList')
     NotebookInstanceUrl = Shapes::StringShape.new(name: 'NotebookInstanceUrl')
     NotebookInstanceVolumeSizeInGB = Shapes::IntegerShape.new(name: 'NotebookInstanceVolumeSizeInGB')
+    NotificationConfiguration = Shapes::StructureShape.new(name: 'NotificationConfiguration')
+    NotificationTopicArn = Shapes::StringShape.new(name: 'NotificationTopicArn')
     NumberOfHumanWorkersPerDataObject = Shapes::IntegerShape.new(name: 'NumberOfHumanWorkersPerDataObject')
     ObjectiveStatus = Shapes::StringShape.new(name: 'ObjectiveStatus')
     ObjectiveStatusCounter = Shapes::IntegerShape.new(name: 'ObjectiveStatusCounter')
@@ -703,7 +705,7 @@ module Aws::SageMaker
 
     CreateHyperParameterTuningJobRequest.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, required: true, location_name: "HyperParameterTuningJobName"))
     CreateHyperParameterTuningJobRequest.add_member(:hyper_parameter_tuning_job_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobConfig, required: true, location_name: "HyperParameterTuningJobConfig"))
-    CreateHyperParameterTuningJobRequest.add_member(:training_job_definition, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition, required: true, location_name: "TrainingJobDefinition"))
+    CreateHyperParameterTuningJobRequest.add_member(:training_job_definition, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition, location_name: "TrainingJobDefinition"))
     CreateHyperParameterTuningJobRequest.add_member(:warm_start_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobWarmStartConfig, location_name: "WarmStartConfig"))
     CreateHyperParameterTuningJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHyperParameterTuningJobRequest.struct_class = Types::CreateHyperParameterTuningJobRequest
@@ -818,13 +820,14 @@ module Aws::SageMaker
     CreateWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     CreateWorkteamRequest.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, required: true, location_name: "MemberDefinitions"))
     CreateWorkteamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String200, required: true, location_name: "Description"))
+    CreateWorkteamRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
     CreateWorkteamRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWorkteamRequest.struct_class = Types::CreateWorkteamRequest
 
     CreateWorkteamResponse.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, location_name: "WorkteamArn"))
     CreateWorkteamResponse.struct_class = Types::CreateWorkteamResponse
 
-    DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, required: true, location_name: "S3DataSource"))
+    DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, location_name: "S3DataSource"))
     DataSource.struct_class = Types::DataSource
 
     DeleteAlgorithmInput.add_member(:algorithm_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "AlgorithmName"))
@@ -943,7 +946,7 @@ module Aws::SageMaker
     DescribeHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_job_name, Shapes::ShapeRef.new(shape: HyperParameterTuningJobName, required: true, location_name: "HyperParameterTuningJobName"))
     DescribeHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_job_arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, required: true, location_name: "HyperParameterTuningJobArn"))
     DescribeHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_job_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobConfig, required: true, location_name: "HyperParameterTuningJobConfig"))
-    DescribeHyperParameterTuningJobResponse.add_member(:training_job_definition, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition, required: true, location_name: "TrainingJobDefinition"))
+    DescribeHyperParameterTuningJobResponse.add_member(:training_job_definition, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition, location_name: "TrainingJobDefinition"))
     DescribeHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_job_status, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStatus, required: true, location_name: "HyperParameterTuningJobStatus"))
     DescribeHyperParameterTuningJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "HyperParameterTuningEndTime"))
@@ -1219,9 +1222,9 @@ module Aws::SageMaker
     HyperParameterTrainingJobSummary.struct_class = Types::HyperParameterTrainingJobSummary
 
     HyperParameterTuningJobConfig.add_member(:strategy, Shapes::ShapeRef.new(shape: HyperParameterTuningJobStrategyType, required: true, location_name: "Strategy"))
-    HyperParameterTuningJobConfig.add_member(:hyper_parameter_tuning_job_objective, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective, required: true, location_name: "HyperParameterTuningJobObjective"))
+    HyperParameterTuningJobConfig.add_member(:hyper_parameter_tuning_job_objective, Shapes::ShapeRef.new(shape: HyperParameterTuningJobObjective, location_name: "HyperParameterTuningJobObjective"))
     HyperParameterTuningJobConfig.add_member(:resource_limits, Shapes::ShapeRef.new(shape: ResourceLimits, required: true, location_name: "ResourceLimits"))
-    HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, required: true, location_name: "ParameterRanges"))
+    HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))
     HyperParameterTuningJobConfig.add_member(:training_job_early_stopping_type, Shapes::ShapeRef.new(shape: TrainingJobEarlyStoppingType, location_name: "TrainingJobEarlyStoppingType"))
     HyperParameterTuningJobConfig.struct_class = Types::HyperParameterTuningJobConfig
 
@@ -1308,6 +1311,7 @@ module Aws::SageMaker
     LabelingJobForWorkteamSummary.add_member(:work_requester_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "WorkRequesterAccountId"))
     LabelingJobForWorkteamSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     LabelingJobForWorkteamSummary.add_member(:label_counters, Shapes::ShapeRef.new(shape: LabelCountersForWorkteam, location_name: "LabelCounters"))
+    LabelingJobForWorkteamSummary.add_member(:number_of_human_workers_per_data_object, Shapes::ShapeRef.new(shape: NumberOfHumanWorkersPerDataObject, location_name: "NumberOfHumanWorkersPerDataObject"))
     LabelingJobForWorkteamSummary.struct_class = Types::LabelingJobForWorkteamSummary
 
     LabelingJobForWorkteamSummaryList.member = Shapes::ShapeRef.new(shape: LabelingJobForWorkteamSummary)
@@ -1702,6 +1706,9 @@ module Aws::SageMaker
 
     NotebookInstanceSummaryList.member = Shapes::ShapeRef.new(shape: NotebookInstanceSummary)
 
+    NotificationConfiguration.add_member(:notification_topic_arn, Shapes::ShapeRef.new(shape: NotificationTopicArn, location_name: "NotificationTopicArn"))
+    NotificationConfiguration.struct_class = Types::NotificationConfiguration
+
     ObjectiveStatusCounters.add_member(:succeeded, Shapes::ShapeRef.new(shape: ObjectiveStatusCounter, location_name: "Succeeded"))
     ObjectiveStatusCounters.add_member(:pending, Shapes::ShapeRef.new(shape: ObjectiveStatusCounter, location_name: "Pending"))
     ObjectiveStatusCounters.add_member(:failed, Shapes::ShapeRef.new(shape: ObjectiveStatusCounter, location_name: "Failed"))
@@ -2070,6 +2077,7 @@ module Aws::SageMaker
     UpdateWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     UpdateWorkteamRequest.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, location_name: "MemberDefinitions"))
     UpdateWorkteamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String200, location_name: "Description"))
+    UpdateWorkteamRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
     UpdateWorkteamRequest.struct_class = Types::UpdateWorkteamRequest
 
     UpdateWorkteamResponse.add_member(:workteam, Shapes::ShapeRef.new(shape: Workteam, required: true, location_name: "Workteam"))
@@ -2089,6 +2097,7 @@ module Aws::SageMaker
     Workteam.add_member(:sub_domain, Shapes::ShapeRef.new(shape: String, location_name: "SubDomain"))
     Workteam.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
     Workteam.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedDate"))
+    Workteam.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
     Workteam.struct_class = Types::Workteam
 
     Workteams.member = Shapes::ShapeRef.new(shape: Workteam)

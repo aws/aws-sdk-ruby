@@ -87,6 +87,7 @@ module Aws::KinesisAnalytics
     InvalidApplicationConfigurationException = Shapes::StructureShape.new(name: 'InvalidApplicationConfigurationException')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     JSONMappingParameters = Shapes::StructureShape.new(name: 'JSONMappingParameters')
+    KinesisAnalyticsARN = Shapes::StringShape.new(name: 'KinesisAnalyticsARN')
     KinesisFirehoseInput = Shapes::StructureShape.new(name: 'KinesisFirehoseInput')
     KinesisFirehoseInputDescription = Shapes::StructureShape.new(name: 'KinesisFirehoseInputDescription')
     KinesisFirehoseInputUpdate = Shapes::StructureShape.new(name: 'KinesisFirehoseInputUpdate')
@@ -106,6 +107,8 @@ module Aws::KinesisAnalytics
     ListApplicationsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationsInputLimit')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogStreamARN = Shapes::StringShape.new(name: 'LogStreamARN')
     MappingParameters = Shapes::StructureShape.new(name: 'MappingParameters')
     Output = Shapes::StructureShape.new(name: 'Output')
@@ -152,9 +155,19 @@ module Aws::KinesisAnalytics
     StartApplicationResponse = Shapes::StructureShape.new(name: 'StartApplicationResponse')
     StopApplicationRequest = Shapes::StructureShape.new(name: 'StopApplicationRequest')
     StopApplicationResponse = Shapes::StructureShape.new(name: 'StopApplicationResponse')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnableToDetectSchemaException = Shapes::StructureShape.new(name: 'UnableToDetectSchemaException')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
 
@@ -252,6 +265,7 @@ module Aws::KinesisAnalytics
     CreateApplicationRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: Outputs, location_name: "Outputs"))
     CreateApplicationRequest.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     CreateApplicationRequest.add_member(:application_code, Shapes::ShapeRef.new(shape: ApplicationCode, location_name: "ApplicationCode"))
+    CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_summary, Shapes::ShapeRef.new(shape: ApplicationSummary, required: true, location_name: "ApplicationSummary"))
@@ -461,6 +475,12 @@ module Aws::KinesisAnalytics
     ListApplicationsResponse.add_member(:has_more_applications, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreApplications"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MappingParameters.add_member(:json_mapping_parameters, Shapes::ShapeRef.new(shape: JSONMappingParameters, location_name: "JSONMappingParameters"))
     MappingParameters.add_member(:csv_mapping_parameters, Shapes::ShapeRef.new(shape: CSVMappingParameters, location_name: "CSVMappingParameters"))
     MappingParameters.struct_class = Types::MappingParameters
@@ -570,6 +590,26 @@ module Aws::KinesisAnalytics
 
     StopApplicationResponse.struct_class = Types::StopApplicationResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
     UpdateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     UpdateApplicationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
     UpdateApplicationRequest.add_member(:application_update, Shapes::ShapeRef.new(shape: ApplicationUpdate, required: true, location_name: "ApplicationUpdate"))
@@ -672,6 +712,8 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -768,6 +810,17 @@ module Aws::KinesisAnalytics
         o.output = Shapes::ShapeRef.new(shape: ListApplicationsResponse)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:start_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartApplication"
         o.http_method = "POST"
@@ -790,6 +843,32 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|

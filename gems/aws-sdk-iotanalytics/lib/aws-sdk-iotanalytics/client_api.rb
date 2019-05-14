@@ -21,6 +21,8 @@ module Aws::IoTAnalytics
     BatchPutMessageErrorEntry = Shapes::StructureShape.new(name: 'BatchPutMessageErrorEntry')
     BatchPutMessageRequest = Shapes::StructureShape.new(name: 'BatchPutMessageRequest')
     BatchPutMessageResponse = Shapes::StructureShape.new(name: 'BatchPutMessageResponse')
+    BucketKeyExpression = Shapes::StringShape.new(name: 'BucketKeyExpression')
+    BucketName = Shapes::StringShape.new(name: 'BucketName')
     CancelPipelineReprocessingRequest = Shapes::StructureShape.new(name: 'CancelPipelineReprocessingRequest')
     CancelPipelineReprocessingResponse = Shapes::StructureShape.new(name: 'CancelPipelineReprocessingResponse')
     Channel = Shapes::StructureShape.new(name: 'Channel')
@@ -104,6 +106,9 @@ module Aws::IoTAnalytics
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     GetDatasetContentRequest = Shapes::StructureShape.new(name: 'GetDatasetContentRequest')
     GetDatasetContentResponse = Shapes::StructureShape.new(name: 'GetDatasetContentResponse')
+    GlueConfiguration = Shapes::StructureShape.new(name: 'GlueConfiguration')
+    GlueDatabaseName = Shapes::StringShape.new(name: 'GlueDatabaseName')
+    GlueTableName = Shapes::StringShape.new(name: 'GlueTableName')
     Image = Shapes::StringShape.new(name: 'Image')
     IncludeStatisticsFlag = Shapes::BooleanShape.new(name: 'IncludeStatisticsFlag')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
@@ -169,6 +174,7 @@ module Aws::IoTAnalytics
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RunPipelineActivityRequest = Shapes::StructureShape.new(name: 'RunPipelineActivityRequest')
     RunPipelineActivityResponse = Shapes::StructureShape.new(name: 'RunPipelineActivityResponse')
+    S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     SampleChannelDataRequest = Shapes::StructureShape.new(name: 'SampleChannelDataRequest')
     SampleChannelDataResponse = Shapes::StructureShape.new(name: 'SampleChannelDataResponse')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -345,6 +351,7 @@ module Aws::IoTAnalytics
     DatasetActions.member = Shapes::ShapeRef.new(shape: DatasetAction)
 
     DatasetContentDeliveryDestination.add_member(:iot_events_destination_configuration, Shapes::ShapeRef.new(shape: IotEventsDestinationConfiguration, location_name: "iotEventsDestinationConfiguration"))
+    DatasetContentDeliveryDestination.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3DestinationConfiguration"))
     DatasetContentDeliveryDestination.struct_class = Types::DatasetContentDeliveryDestination
 
     DatasetContentDeliveryRule.add_member(:entry_name, Shapes::ShapeRef.new(shape: EntryName, location_name: "entryName"))
@@ -498,6 +505,10 @@ module Aws::IoTAnalytics
     GetDatasetContentResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetContentStatus, location_name: "status"))
     GetDatasetContentResponse.struct_class = Types::GetDatasetContentResponse
 
+    GlueConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueTableName, required: true, location_name: "tableName"))
+    GlueConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
+    GlueConfiguration.struct_class = Types::GlueConfiguration
+
     IotEventsDestinationConfiguration.add_member(:input_name, Shapes::ShapeRef.new(shape: IotEventsInputName, required: true, location_name: "inputName"))
     IotEventsDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     IotEventsDestinationConfiguration.struct_class = Types::IotEventsDestinationConfiguration
@@ -644,6 +655,12 @@ module Aws::IoTAnalytics
     RunPipelineActivityResponse.add_member(:payloads, Shapes::ShapeRef.new(shape: MessagePayloads, location_name: "payloads"))
     RunPipelineActivityResponse.add_member(:log_result, Shapes::ShapeRef.new(shape: LogResult, location_name: "logResult"))
     RunPipelineActivityResponse.struct_class = Types::RunPipelineActivityResponse
+
+    S3DestinationConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucket"))
+    S3DestinationConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: BucketKeyExpression, required: true, location_name: "key"))
+    S3DestinationConfiguration.add_member(:glue_configuration, Shapes::ShapeRef.new(shape: GlueConfiguration, location_name: "glueConfiguration"))
+    S3DestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    S3DestinationConfiguration.struct_class = Types::S3DestinationConfiguration
 
     SampleChannelDataRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
     SampleChannelDataRequest.add_member(:max_messages, Shapes::ShapeRef.new(shape: MaxMessages, location: "querystring", location_name: "maxMessages"))
