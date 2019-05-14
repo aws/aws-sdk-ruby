@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.274 (2019-05-14)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
