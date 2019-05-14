@@ -14,6 +14,11 @@ module Aws::STS
     #       {
     #         role_arn: "arnType", # required
     #         role_session_name: "roleSessionNameType", # required
+    #         policy_arns: [
+    #           {
+    #             arn: "arnType",
+    #           },
+    #         ],
     #         policy: "sessionPolicyDocumentType",
     #         duration_seconds: 1,
     #         external_id: "externalIdType",
@@ -43,37 +48,75 @@ module Aws::STS
     #   characters: =,.@-
     #   @return [String]
     #
+    # @!attribute [rw] policy_arns
+    #   The Amazon Resource Names (ARNs) of the IAM managed policies that
+    #   you want to use as managed session policies. The policies must exist
+    #   in the same account as the role.
+    #
+    #   This parameter is optional. You can provide up to 10 managed policy
+    #   ARNs. However, the plain text that you use for both inline and
+    #   managed session policies shouldn't exceed 2048 characters. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html)
+    #   in the AWS General Reference.
+    #
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
+    #
+    #    </note>
+    #
+    #   Passing policies to this operation returns new temporary
+    #   credentials. The resulting session's permissions are the
+    #   intersection of the role's identity-based policy and the session
+    #   policies. You can use the role's temporary credentials in
+    #   subsequent AWS API calls to access resources in the account that
+    #   owns the role. You cannot use session policies to grant more
+    #   permissions than those allowed by the identity-based policy of the
+    #   role that is being assumed. For more information, see [Session
+    #   Policies][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   @return [Array<Types::PolicyDescriptorType>]
+    #
     # @!attribute [rw] policy
-    #   An IAM policy in JSON format.
+    #   An IAM policy in JSON format that you want to use as an inline
+    #   session policy.
     #
-    #   This parameter is optional. If you pass a policy to this operation,
-    #   the resulting temporary credentials have the permissions of the
-    #   assumed role *and* the policy that you pass. This gives you a way to
-    #   further restrict the permissions for the resulting temporary
-    #   security credentials. You cannot use the passed policy to grant
-    #   permissions that are in excess of those allowed by the permissions
-    #   policy of the role that is being assumed. For more information, see
-    #   [ Permissions for AssumeRole, AssumeRoleWithSAML, and
-    #   AssumeRoleWithWebIdentity ][1] in the *IAM User Guide*.
+    #   This parameter is optional. Passing policies to this operation
+    #   returns new temporary credentials. The resulting session's
+    #   permissions are the intersection of the role's identity-based
+    #   policy and the session policies. You can use the role's temporary
+    #   credentials in subsequent AWS API calls to access resources in the
+    #   account that owns the role. You cannot use session policies to grant
+    #   more permissions than those allowed by the identity-based policy of
+    #   the role that is being assumed. For more information, see [Session
+    #   Policies][1] in the *IAM User Guide*.
     #
-    #   The format for this parameter, as described by its regex pattern, is
-    #   a string of characters up to 2048 characters in length. The
+    #   The plain text that you use for both inline and managed session
+    #   policies shouldn't exceed 2048 characters. The JSON policy
     #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020-\\u00FF). It can also
-    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
-    #   (\\u000D) characters.
+    #   the end of the valid character list (\\u0020 through \\u00FF). It
+    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
+    #   return (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
-    #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The `PackedPolicySize` response element indicates by
-    #   percentage how close to the upper size limit the policy is, where
-    #   100 percent is the maximum allowed size.
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -110,14 +153,14 @@ module Aws::STS
     #   another account. If the administrator of the account to which the
     #   role belongs provided you with an external ID, then provide that
     #   value in the `ExternalId` parameter. This value can be any string,
-    #   such as a passphrase or account number. Because a cross-account role
-    #   is usually set up to trust everyone in an account, the administrator
-    #   of the trusting account might send an external ID to the
-    #   administrator of the trusted account. That way, only someone with
-    #   the ID can assume the role, rather than everyone in the account. For
-    #   more information about the external ID, see [How to Use an External
-    #   ID When Granting Access to Your AWS Resources to a Third Party][1]
-    #   in the *IAM User Guide*.
+    #   such as a passphrase or account number. A cross-account role is
+    #   usually set up to trust everyone in an account. Therefore, the
+    #   administrator of the trusting account might send an external ID to
+    #   the administrator of the trusted account. That way, only someone
+    #   with the ID can assume the role, rather than everyone in the
+    #   account. For more information about the external ID, see [How to Use
+    #   an External ID When Granting Access to Your AWS Resources to a Third
+    #   Party][1] in the *IAM User Guide*.
     #
     #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
@@ -160,6 +203,7 @@ module Aws::STS
     class AssumeRoleRequest < Struct.new(
       :role_arn,
       :role_session_name,
+      :policy_arns,
       :policy,
       :duration_seconds,
       :external_id,
@@ -177,9 +221,7 @@ module Aws::STS
     #
     #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
-    #   maximum size. As of this writing, the typical size is less than 4096
-    #   bytes, but that can vary. Also, future updates to AWS might require
-    #   larger sizes.
+    #   maximum size.
     #
     #    </note>
     #   @return [Types::Credentials]
@@ -215,6 +257,11 @@ module Aws::STS
     #         role_arn: "arnType", # required
     #         principal_arn: "arnType", # required
     #         saml_assertion: "SAMLAssertionType", # required
+    #         policy_arns: [
+    #           {
+    #             arn: "arnType",
+    #           },
+    #         ],
     #         policy: "sessionPolicyDocumentType",
     #         duration_seconds: 1,
     #       }
@@ -241,37 +288,75 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html
     #   @return [String]
     #
+    # @!attribute [rw] policy_arns
+    #   The Amazon Resource Names (ARNs) of the IAM managed policies that
+    #   you want to use as managed session policies. The policies must exist
+    #   in the same account as the role.
+    #
+    #   This parameter is optional. You can provide up to 10 managed policy
+    #   ARNs. However, the plain text that you use for both inline and
+    #   managed session policies shouldn't exceed 2048 characters. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html)
+    #   in the AWS General Reference.
+    #
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
+    #
+    #    </note>
+    #
+    #   Passing policies to this operation returns new temporary
+    #   credentials. The resulting session's permissions are the
+    #   intersection of the role's identity-based policy and the session
+    #   policies. You can use the role's temporary credentials in
+    #   subsequent AWS API calls to access resources in the account that
+    #   owns the role. You cannot use session policies to grant more
+    #   permissions than those allowed by the identity-based policy of the
+    #   role that is being assumed. For more information, see [Session
+    #   Policies][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   @return [Array<Types::PolicyDescriptorType>]
+    #
     # @!attribute [rw] policy
-    #   An IAM policy in JSON format.
+    #   An IAM policy in JSON format that you want to use as an inline
+    #   session policy.
     #
-    #   The policy parameter is optional. If you pass a policy to this
-    #   operation, the resulting temporary credentials have the permissions
-    #   of the assumed role *and* the policy that you pass. This gives you a
-    #   way to further restrict the permissions for the resulting temporary
-    #   security credentials. You cannot use the passed policy to grant
-    #   permissions that are in excess of those allowed by the permissions
-    #   policy of the role that is being assumed. For more information, see
-    #   [ Permissions for AssumeRole, AssumeRoleWithSAML, and
-    #   AssumeRoleWithWebIdentity ][1] in the *IAM User Guide*.
+    #   This parameter is optional. Passing policies to this operation
+    #   returns new temporary credentials. The resulting session's
+    #   permissions are the intersection of the role's identity-based
+    #   policy and the session policies. You can use the role's temporary
+    #   credentials in subsequent AWS API calls to access resources in the
+    #   account that owns the role. You cannot use session policies to grant
+    #   more permissions than those allowed by the identity-based policy of
+    #   the role that is being assumed. For more information, see [Session
+    #   Policies][1] in the *IAM User Guide*.
     #
-    #   The format for this parameter, as described by its regex pattern, is
-    #   a string of characters up to 2048 characters in length. The
+    #   The plain text that you use for both inline and managed session
+    #   policies shouldn't exceed 2048 characters. The JSON policy
     #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020-\\u00FF). It can also
-    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
-    #   (\\u000D) characters.
+    #   the end of the valid character list (\\u0020 through \\u00FF). It
+    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
+    #   return (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
-    #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The `PackedPolicySize` response element indicates by
-    #   percentage how close to the upper size limit the policy is, where
-    #   100 percent is the maximum allowed size.
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -313,6 +398,7 @@ module Aws::STS
       :role_arn,
       :principal_arn,
       :saml_assertion,
+      :policy_arns,
       :policy,
       :duration_seconds)
       include Aws::Structure
@@ -328,9 +414,7 @@ module Aws::STS
     #
     #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
-    #   maximum size. As of this writing, the typical size is less than 4096
-    #   bytes, but that can vary. Also, future updates to AWS might require
-    #   larger sizes.
+    #   maximum size.
     #
     #    </note>
     #   @return [Types::Credentials]
@@ -407,6 +491,11 @@ module Aws::STS
     #         role_session_name: "roleSessionNameType", # required
     #         web_identity_token: "clientTokenType", # required
     #         provider_id: "urlType",
+    #         policy_arns: [
+    #           {
+    #             arn: "arnType",
+    #           },
+    #         ],
     #         policy: "sessionPolicyDocumentType",
     #         duration_seconds: 1,
     #       }
@@ -450,37 +539,75 @@ module Aws::STS
     #   Do not specify this value for OpenID Connect ID tokens.
     #   @return [String]
     #
+    # @!attribute [rw] policy_arns
+    #   The Amazon Resource Names (ARNs) of the IAM managed policies that
+    #   you want to use as managed session policies. The policies must exist
+    #   in the same account as the role.
+    #
+    #   This parameter is optional. You can provide up to 10 managed policy
+    #   ARNs. However, the plain text that you use for both inline and
+    #   managed session policies shouldn't exceed 2048 characters. For more
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces](general/latest/gr/aws-arns-and-namespaces.html)
+    #   in the AWS General Reference.
+    #
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
+    #
+    #    </note>
+    #
+    #   Passing policies to this operation returns new temporary
+    #   credentials. The resulting session's permissions are the
+    #   intersection of the role's identity-based policy and the session
+    #   policies. You can use the role's temporary credentials in
+    #   subsequent AWS API calls to access resources in the account that
+    #   owns the role. You cannot use session policies to grant more
+    #   permissions than those allowed by the identity-based policy of the
+    #   role that is being assumed. For more information, see [Session
+    #   Policies][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   @return [Array<Types::PolicyDescriptorType>]
+    #
     # @!attribute [rw] policy
-    #   An IAM policy in JSON format.
+    #   An IAM policy in JSON format that you want to use as an inline
+    #   session policy.
     #
-    #   The policy parameter is optional. If you pass a policy to this
-    #   operation, the resulting temporary credentials have the permissions
-    #   of the assumed role *and* the policy that you pass. This gives you a
-    #   way to further restrict the permissions for the resulting temporary
-    #   security credentials. You cannot use the passed policy to grant
-    #   permissions that are in excess of those allowed by the permissions
-    #   policy of the role that is being assumed. For more information, see
-    #   [ Permissions for AssumeRole, AssumeRoleWithSAML, and
-    #   AssumeRoleWithWebIdentity ][1] in the *IAM User Guide*.
+    #   This parameter is optional. Passing policies to this operation
+    #   returns new temporary credentials. The resulting session's
+    #   permissions are the intersection of the role's identity-based
+    #   policy and the session policies. You can use the role's temporary
+    #   credentials in subsequent AWS API calls to access resources in the
+    #   account that owns the role. You cannot use session policies to grant
+    #   more permissions than those allowed by the identity-based policy of
+    #   the role that is being assumed. For more information, see [Session
+    #   Policies][1] in the *IAM User Guide*.
     #
-    #   The format for this parameter, as described by its regex pattern, is
-    #   a string of characters up to 2048 characters in length. The
+    #   The plain text that you use for both inline and managed session
+    #   policies shouldn't exceed 2048 characters. The JSON policy
     #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020-\\u00FF). It can also
-    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
-    #   (\\u000D) characters.
+    #   the end of the valid character list (\\u0020 through \\u00FF). It
+    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
+    #   return (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
-    #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The `PackedPolicySize` response element indicates by
-    #   percentage how close to the upper size limit the policy is, where
-    #   100 percent is the maximum allowed size.
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -519,6 +646,7 @@ module Aws::STS
       :role_session_name,
       :web_identity_token,
       :provider_id,
+      :policy_arns,
       :policy,
       :duration_seconds)
       include Aws::Structure
@@ -534,9 +662,7 @@ module Aws::STS
     #
     #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
-    #   maximum size. As of this writing, the typical size is less than 4096
-    #   bytes, but that can vary. Also, future updates to AWS might require
-    #   larger sizes.
+    #   maximum size.
     #
     #    </note>
     #   @return [Types::Credentials]
@@ -753,6 +879,11 @@ module Aws::STS
     #       {
     #         name: "userNameType", # required
     #         policy: "sessionPolicyDocumentType",
+    #         policy_arns: [
+    #           {
+    #             arn: "arnType",
+    #           },
+    #         ],
     #         duration_seconds: 1,
     #       }
     #
@@ -769,38 +900,97 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   An IAM policy in JSON format. You must pass an IAM permissions
-    #   policy to `GetFederationToken`. When you pass a policy to this
-    #   operation, the resulting temporary credentials are defined by the
-    #   intersection of your IAM user policies and the policy that you pass.
-    #   The passed policy defines the permissions of the *federated user*.
-    #   AWS allows the federated user's request only when both the attached
-    #   policy and the IAM user policy explicitly allow the federated user
-    #   to perform the requested action. The passed policy cannot grant more
-    #   permissions than those that are defined in the IAM user policy.
+    #   An IAM policy in JSON format that you want to use as an inline
+    #   session policy.
     #
-    #   The format for this parameter, as described by its regex pattern, is
-    #   a string of characters up to 2048 characters in length. The
+    #   You must pass an inline or managed [session policy][1] to this
+    #   operation. You can pass a single JSON policy document to use as an
+    #   inline session policy. You can also specify up to 10 managed
+    #   policies to use as managed session policies.
+    #
+    #   This parameter is optional. However, if you do not pass any session
+    #   policies, then the resulting federated user session has no
+    #   permissions. The only exception is when the credentials are used to
+    #   access a resource that has a resource-based policy that specifically
+    #   references the federated user session in the `Principal` element of
+    #   the policy.
+    #
+    #   When you pass session policies, the session permissions are the
+    #   intersection of the IAM user policies and the session policies that
+    #   you pass. This gives you a way to further restrict the permissions
+    #   for a federated user. You cannot use session policies to grant more
+    #   permissions than those that are defined in the permissions policy of
+    #   the IAM user. For more information, see [Session Policies][2] in the
+    #   *IAM User Guide*.
+    #
+    #   The plain text that you use for both inline and managed session
+    #   policies shouldn't exceed 2048 characters. The JSON policy
     #   characters can be any ASCII character from the space character to
-    #   the end of the valid character list (\\u0020-\\u00FF). It can also
-    #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
-    #   (\\u000D) characters.
+    #   the end of the valid character list (\\u0020 through \\u00FF). It
+    #   can also include the tab (\\u0009), linefeed (\\u000A), and carriage
+    #   return (\\u000D) characters.
     #
-    #   <note markdown="1"> The policy plaintext must be 2048 bytes or shorter. However, an
-    #   internal conversion compresses it into a packed binary format with a
-    #   separate limit. The `PackedPolicySize` response element indicates by
-    #   percentage how close to the upper size limit the policy is, where
-    #   100 percent is the maximum allowed size.
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
     #
     #    </note>
     #
-    #   For more information about how permissions work, see [Permissions
-    #   for GetFederationToken][1].
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
     #   @return [String]
+    #
+    # @!attribute [rw] policy_arns
+    #   The Amazon Resource Names (ARNs) of the IAM managed policies that
+    #   you want to use as a managed session policy. The policies must exist
+    #   in the same account as the IAM user that is requesting federated
+    #   access.
+    #
+    #   You must pass an inline or managed [session policy][1] to this
+    #   operation. You can pass a single JSON policy document to use as an
+    #   inline session policy. You can also specify up to 10 managed
+    #   policies to use as managed session policies. The plain text that you
+    #   use for both inline and managed session policies shouldn't exceed
+    #   2048 characters. You can provide up to 10 managed policy ARNs. For
+    #   more information about ARNs, see [Amazon Resource Names (ARNs) and
+    #   AWS Service
+    #   Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   AWS General Reference.
+    #
+    #   This parameter is optional. However, if you do not pass any session
+    #   policies, then the resulting federated user session has no
+    #   permissions. The only exception is when the credentials are used to
+    #   access a resource that has a resource-based policy that specifically
+    #   references the federated user session in the `Principal` element of
+    #   the policy.
+    #
+    #   When you pass session policies, the session permissions are the
+    #   intersection of the IAM user policies and the session policies that
+    #   you pass. This gives you a way to further restrict the permissions
+    #   for a federated user. You cannot use session policies to grant more
+    #   permissions than those that are defined in the permissions policy of
+    #   the IAM user. For more information, see [Session Policies][2] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> The characters in this parameter count towards the 2048 character
+    #   session policy guideline. However, an AWS conversion compresses the
+    #   session policies into a packed binary format that has a separate
+    #   limit. This is the enforced limit. The `PackedPolicySize` response
+    #   element indicates by percentage how close the policy is to the upper
+    #   size limit.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session
+    #   @return [Array<Types::PolicyDescriptorType>]
     #
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, that the session should last. Acceptable
@@ -817,6 +1007,7 @@ module Aws::STS
     class GetFederationTokenRequest < Struct.new(
       :name,
       :policy,
+      :policy_arns,
       :duration_seconds)
       include Aws::Structure
     end
@@ -831,9 +1022,7 @@ module Aws::STS
     #
     #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
-    #   maximum size. As of this writing, the typical size is less than 4096
-    #   bytes, but that can vary. Also, future updates to AWS might require
-    #   larger sizes.
+    #   maximum size.
     #
     #    </note>
     #   @return [Types::Credentials]
@@ -926,9 +1115,7 @@ module Aws::STS
     #
     #   <note markdown="1"> The size of the security token that STS API operations return is not
     #   fixed. We strongly recommend that you make no assumptions about the
-    #   maximum size. As of this writing, the typical size is less than 4096
-    #   bytes, but that can vary. Also, future updates to AWS might require
-    #   larger sizes.
+    #   maximum size.
     #
     #    </note>
     #   @return [Types::Credentials]
@@ -937,6 +1124,31 @@ module Aws::STS
     #
     class GetSessionTokenResponse < Struct.new(
       :credentials)
+      include Aws::Structure
+    end
+
+    # A reference to the IAM managed policy that is passed as a session
+    # policy for a role session or a federated user session.
+    #
+    # @note When making an API call, you may pass PolicyDescriptorType
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "arnType",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the IAM managed policy to use as a
+    #   session policy for the role. For more information about ARNs, see
+    #   [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces](general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   *AWS General Reference*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/PolicyDescriptorType AWS API Documentation
+    #
+    class PolicyDescriptorType < Struct.new(
+      :arn)
       include Aws::Structure
     end
 

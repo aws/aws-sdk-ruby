@@ -1001,6 +1001,35 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # When this action is called for a specified shared device, it allows
+    # authorized users to delete the device's entire previous history of
+    # voice input data and associated response data. This action can be
+    # called once every 24 hours for a specific shared device.
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of the device.
+    #
+    # @option params [required, String] :device_usage_type
+    #   The type of usage data to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_device_usage_data({
+    #     device_arn: "Arn", # required
+    #     device_usage_type: "VOICE", # required, accepts VOICE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageData AWS API Documentation
+    #
+    # @overload delete_device_usage_data(params = {})
+    # @param [Hash] params ({})
+    def delete_device_usage_data(params = {}, options = {})
+      req = build_request(:delete_device_usage_data, params)
+      req.send_request(options)
+    end
+
     # Deletes a gateway group.
     #
     # @option params [required, String] :gateway_group_arn
@@ -1467,7 +1496,7 @@ module Aws::AlexaForBusiness
     #   resp.device.room_arn #=> String
     #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
     #   resp.device.device_status_info.device_status_details #=> Array
-    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice AWS API Documentation
@@ -2656,7 +2685,7 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].room_arn #=> String
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
-    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.devices[0].device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
@@ -2948,8 +2977,7 @@ module Aws::AlexaForBusiness
     end
 
     # Triggers an asynchronous flow to send text, SSML, or audio
-    # announcements to multiple rooms, identified by a search, such as
-    # filter.
+    # announcements to rooms that are identified by a search or filter.
     #
     # @option params [required, Array<Types::Filter>] :room_filters
     #   The filters to use to send an announcement to a specified list of
@@ -2962,8 +2990,8 @@ module Aws::AlexaForBusiness
     #   possible announcement types (text, SSML or audio).
     #
     # @option params [Integer] :time_to_live_in_seconds
-    #   The time to live for an announcement. If delivery doesn't occur
-    #   within this time, the announcement will not be delivered.
+    #   The time to live for an announcement. Default is 300. If delivery
+    #   doesn't occur within this time, the announcement is not delivered.
     #
     # @option params [required, String] :client_request_token
     #   The unique, user-specified identifier for the request that ensures
@@ -3559,7 +3587,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

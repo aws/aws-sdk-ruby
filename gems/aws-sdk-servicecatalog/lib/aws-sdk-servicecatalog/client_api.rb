@@ -1503,6 +1503,7 @@ module Aws::ServiceCatalog
     UpdateConstraintInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     UpdateConstraintInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     UpdateConstraintInput.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
+    UpdateConstraintInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ConstraintParameters, location_name: "Parameters"))
     UpdateConstraintInput.struct_class = Types::UpdateConstraintInput
 
     UpdateConstraintOutput.add_member(:constraint_detail, Shapes::ShapeRef.new(shape: ConstraintDetail, location_name: "ConstraintDetail"))

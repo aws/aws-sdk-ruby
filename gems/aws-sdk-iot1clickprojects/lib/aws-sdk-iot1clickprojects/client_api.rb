@@ -386,6 +386,12 @@ module Aws::IoT1ClickProjects
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_projects, Seahorse::Model::Operation.new.tap do |o|
@@ -396,6 +402,12 @@ module Aws::IoT1ClickProjects
         o.output = Shapes::ShapeRef.new(shape: ListProjectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

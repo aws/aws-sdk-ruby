@@ -5908,6 +5908,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         id: "Id", # required
     #         description: "ConstraintDescription",
+    #         parameters: "ConstraintParameters",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -5928,12 +5929,70 @@ module Aws::ServiceCatalog
     #   The updated description of the constraint.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The constraint parameters, in JSON format. The syntax depends on the
+    #   constraint type as follows:
+    #
+    #   LAUNCH
+    #
+    #   : Specify the `RoleArn` property as follows:
+    #
+    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `LAUNCH` constraint on a
+    #     product and portfolio.
+    #
+    #   NOTIFICATION
+    #
+    #   : Specify the `NotificationArns` property as follows:
+    #
+    #     `\{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #
+    #   RESOURCE\_UPDATE
+    #
+    #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
+    #
+    #     `\{"Version":"2.0","Properties":\{"TagUpdateOnProvisionedProduct":"String"\}\}`
+    #
+    #     The `TagUpdatesOnProvisionedProduct` property accepts a string
+    #     value of `ALLOWED` or `NOT_ALLOWED`.
+    #
+    #   STACKSET
+    #
+    #   : Specify the `Parameters` property as follows:
+    #
+    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String"
+    #     ], "RegionList": [ "String" ], "AdminRole": "String",
+    #     "ExecutionRole": "String"\}\}`
+    #
+    #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
+    #
+    #     You also cannot have more than one `STACKSET` constraint on a
+    #     product and portfolio.
+    #
+    #     Products with a `STACKSET` constraint will launch an AWS
+    #     CloudFormation stack set.
+    #
+    #   TEMPLATE
+    #
+    #   : Specify the `Rules` property. For more information, see [Template
+    #     Constraint Rules][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintInput AWS API Documentation
     #
     class UpdateConstraintInput < Struct.new(
       :accept_language,
       :id,
-      :description)
+      :description,
+      :parameters)
       include Aws::Structure
     end
 

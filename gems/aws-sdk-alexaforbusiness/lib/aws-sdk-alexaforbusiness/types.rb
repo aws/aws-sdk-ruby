@@ -211,16 +211,15 @@ module Aws::AlexaForBusiness
     #
     class AssociateSkillWithUsersResponse < Aws::EmptyStructure; end
 
-    # The audio message. There is a 1 MB limit on the audio file input, and
-    # the only supported format is MP3. You must convert audio files to an
-    # Alexa-friendly format.
+    # The audio message. There is a 1 MB limit on the audio file input and
+    # the only supported format is MP3. To convert your MP3 audio files to
+    # an Alexa-friendly,
     #
-    # You might need to use converter software to convert your MP3 files to
-    # the required codec version (MPEG version 2) and bit rate (48 kbps).
-    # One option for this is a command-line tool, FFmpeg. For more
-    # information, see [FFmpeg][1]. The following command converts the
-    # provided &lt;input-file&gt; to an MP3 file that will be played in the
-    # announcement:
+    # required codec version (MPEG version 2) and bit rate (48 kbps), you
+    # might use converter software. One option for this is a command-line
+    # tool, FFmpeg. For more information, see [FFmpeg][1]. The following
+    # command converts the provided &lt;input-file&gt; to an MP3 file that
+    # is played in the announcement:
     #
     # `ffmpeg -i <input-file> -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000
     # <output-file.mp3>`
@@ -243,7 +242,7 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] location
     #   The location of the audio file. Currently, S3 URLs are supported.
-    #   Only S3 locations comprised of safe character are valid. For more
+    #   Only S3 locations comprised of safe characters are valid. For more
     #   information, see [Safe Characters][1].
     #
     #
@@ -553,7 +552,7 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
-    # The content definition. It can contain only one text, SSML, or audio
+    # The content definition. This can contain only one text, SSML, or audio
     # list object.
     #
     # @note When making an API call, you may pass Content
@@ -1275,6 +1274,34 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceResponse AWS API Documentation
     #
     class DeleteDeviceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteDeviceUsageDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_arn: "Arn", # required
+    #         device_usage_type: "VOICE", # required, accepts VOICE
+    #       }
+    #
+    # @!attribute [rw] device_arn
+    #   The ARN of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_usage_type
+    #   The type of usage data to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageDataRequest AWS API Documentation
+    #
+    class DeleteDeviceUsageDataRequest < Struct.new(
+      :device_arn,
+      :device_usage_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageDataResponse AWS API Documentation
+    #
+    class DeleteDeviceUsageDataResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteGatewayGroupRequest
     #   data as a hash:
@@ -3976,8 +4003,8 @@ module Aws::AlexaForBusiness
     #   @return [Types::Content]
     #
     # @!attribute [rw] time_to_live_in_seconds
-    #   The time to live for an announcement. If delivery doesn't occur
-    #   within this time, the announcement will not be delivered.
+    #   The time to live for an announcement. Default is 300. If delivery
+    #   doesn't occur within this time, the announcement is not delivered.
     #   @return [Integer]
     #
     # @!attribute [rw] client_request_token

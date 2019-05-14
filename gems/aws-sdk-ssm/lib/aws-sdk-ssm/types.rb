@@ -2711,7 +2711,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -2722,7 +2722,7 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                     key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],
@@ -5101,6 +5101,12 @@ module Aws::SSM
     #   The number of instances with patches that aren't applicable.
     #   @return [Integer]
     #
+    # @!attribute [rw] instances_with_unreported_not_applicable_patches
+    #   The number of instances with `NotApplicable` patches beyond the
+    #   supported limit, which are not reported by name to Systems Manager
+    #   Inventory.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupStateResult AWS API Documentation
     #
     class DescribePatchGroupStateResult < Struct.new(
@@ -5110,7 +5116,8 @@ module Aws::SSM
       :instances_with_installed_rejected_patches,
       :instances_with_missing_patches,
       :instances_with_failed_patches,
-      :instances_with_not_applicable_patches)
+      :instances_with_not_applicable_patches,
+      :instances_with_unreported_not_applicable_patches)
       include Aws::Structure
     end
 
@@ -5169,6 +5176,71 @@ module Aws::SSM
     #
     class DescribePatchGroupsResult < Struct.new(
       :mappings,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePatchPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
+    #         patch_set: "OS", # accepts OS, APPLICATION
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system type for which to list patches.
+    #   @return [String]
+    #
+    # @!attribute [rw] property
+    #   The patch property for which you want to view patch details.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_set
+    #   Indicates whether to list patches for the Windows operating system
+    #   or for Microsoft applications. Not applicable for Linux operating
+    #   systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchPropertiesRequest AWS API Documentation
+    #
+    class DescribePatchPropertiesRequest < Struct.new(
+      :operating_system,
+      :property,
+      :patch_set,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] properties
+    #   A list of the properties for patches matching the filter request
+    #   parameters.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You use this token
+    #   in the next call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchPropertiesResult AWS API Documentation
+    #
+    class DescribePatchPropertiesResult < Struct.new(
+      :properties,
       :next_token)
       include Aws::Structure
     end
@@ -7657,10 +7729,18 @@ module Aws::SSM
     #   install.
     #   @return [Integer]
     #
+    # @!attribute [rw] unreported_not_applicable_count
+    #   The number of patches beyond the supported limit of
+    #   `NotApplicableCount` that are not reported by name to Systems
+    #   Manager Inventory.
+    #   @return [Integer]
+    #
     # @!attribute [rw] not_applicable_count
     #   The number of patches from the patch baseline that aren't
-    #   applicable for the instance and hence aren't installed on the
-    #   instance.
+    #   applicable for the instance and therefore aren't installed on the
+    #   instance. This number may be truncated if the list of patch names is
+    #   very large. The number of patches beyond this limit are reported in
+    #   `UnreportedNotApplicableCount`.
     #   @return [Integer]
     #
     # @!attribute [rw] operation_start_time
@@ -7692,6 +7772,7 @@ module Aws::SSM
       :installed_rejected_count,
       :missing_count,
       :failed_count,
+      :unreported_not_applicable_count,
       :not_applicable_count,
       :operation_start_time,
       :operation_end_time,
@@ -10329,456 +10410,44 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Defines a patch filter.
-    #
-    # A patch filter consists of key/value pairs, but not all keys are valid
-    # for all operating system types. For example, the key `PRODUCT` is
-    # valid for all supported operating system types. The key
-    # `MSRC_SEVERITY`, however, is valid only for Windows operating systems,
-    # and the key `SECTION` is valid only for Ubuntu operating systems.
-    #
-    # Refer to the following sections for information about which keys may
-    # be used with each major operating system, and which values are valid
-    # for each key.
-    #
-    # **Windows Operating Systems**
-    #
-    # The supported keys for Windows operating systems are `PRODUCT`,
-    # `CLASSIFICATION`, and `MSRC_SEVERITY`. See the following lists for
-    # valid values for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `Windows7`
-    #
-    # * `Windows8`
-    #
-    # * `Windows8.1`
-    #
-    # * `Windows8Embedded`
-    #
-    # * `Windows10`
-    #
-    # * `Windows10LTSB`
-    #
-    # * `WindowsServer2008`
-    #
-    # * `WindowsServer2008R2`
-    #
-    # * `WindowsServer2012`
-    #
-    # * `WindowsServer2012R2`
-    #
-    # * `WindowsServer2016`
-    #
-    # * `WindowsServer2019`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `CLASSIFICATION`
-    #
-    # *Supported values:*
-    #
-    # * `CriticalUpdates`
-    #
-    # * `DefinitionUpdates`
-    #
-    # * `Drivers`
-    #
-    # * `FeaturePacks`
-    #
-    # * `SecurityUpdates`
-    #
-    # * `ServicePacks`
-    #
-    # * `Tools`
-    #
-    # * `UpdateRollups`
-    #
-    # * `Updates`
-    #
-    # * `Upgrades`
-    #
-    # *Supported key:* `MSRC_SEVERITY`
-    #
-    # *Supported values:*
-    #
-    # * `Critical`
-    #
-    # * `Important`
-    #
-    # * `Moderate`
-    #
-    # * `Low`
-    #
-    # * `Unspecified`
-    #
-    # **Ubuntu Operating Systems**
-    #
-    # The supported keys for Ubuntu operating systems are `PRODUCT`,
-    # `PRIORITY`, and `SECTION`. See the following lists for valid values
-    # for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `Ubuntu14.04`
-    #
-    # * `Ubuntu16.04`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `PRIORITY`
-    #
-    # *Supported values:*
-    #
-    # * `Required`
-    #
-    # * `Important`
-    #
-    # * `Standard`
-    #
-    # * `Optional`
-    #
-    # * `Extra`
-    #
-    # *Supported key:* `SECTION`
-    #
-    # Only the length of the key value is validated. Minimum length is 1.
-    # Maximum length is 64.
-    #
-    # **Amazon Linux Operating Systems**
-    #
-    # The supported keys for Amazon Linux operating systems are `PRODUCT`,
-    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
-    # values for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `AmazonLinux2012.03`
-    #
-    # * `AmazonLinux2012.09`
-    #
-    # * `AmazonLinux2013.03`
-    #
-    # * `AmazonLinux2013.09`
-    #
-    # * `AmazonLinux2014.03`
-    #
-    # * `AmazonLinux2014.09`
-    #
-    # * `AmazonLinux2015.03`
-    #
-    # * `AmazonLinux2015.09`
-    #
-    # * `AmazonLinux2016.03`
-    #
-    # * `AmazonLinux2016.09`
-    #
-    # * `AmazonLinux2017.03`
-    #
-    # * `AmazonLinux2017.09`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `CLASSIFICATION`
-    #
-    # *Supported values:*
-    #
-    # * `Security`
-    #
-    # * `Bugfix`
-    #
-    # * `Enhancement`
-    #
-    # * `Recommended`
-    #
-    # * `Newpackage`
-    #
-    # *Supported key:* `SEVERITY`
-    #
-    # *Supported values:*
-    #
-    # * `Critical`
-    #
-    # * `Important`
-    #
-    # * `Medium`
-    #
-    # * `Low`
-    #
-    # **Amazon Linux 2 Operating Systems**
-    #
-    # The supported keys for Amazon Linux 2 operating systems are `PRODUCT`,
-    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
-    # values for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `AmazonLinux2`
-    #
-    # * `AmazonLinux2.0`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `CLASSIFICATION`
-    #
-    # *Supported values:*
-    #
-    # * `Security`
-    #
-    # * `Bugfix`
-    #
-    # * `Enhancement`
-    #
-    # * `Recommended`
-    #
-    # * `Newpackage`
-    #
-    # *Supported key:* `SEVERITY`
-    #
-    # *Supported values:*
-    #
-    # * `Critical`
-    #
-    # * `Important`
-    #
-    # * `Medium`
-    #
-    # * `Low`
-    #
-    # **RedHat Enterprise Linux (RHEL) Operating Systems**
-    #
-    # The supported keys for RedHat Enterprise Linux operating systems are
-    # `PRODUCT`, `CLASSIFICATION`, and `SEVERITY`. See the following lists
-    # for valid values for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `RedhatEnterpriseLinux6.5`
-    #
-    # * `RedhatEnterpriseLinux6.6`
-    #
-    # * `RedhatEnterpriseLinux6.7`
-    #
-    # * `RedhatEnterpriseLinux6.8`
-    #
-    # * `RedhatEnterpriseLinux6.9`
-    #
-    # * `RedhatEnterpriseLinux7.0`
-    #
-    # * `RedhatEnterpriseLinux7.1`
-    #
-    # * `RedhatEnterpriseLinux7.2`
-    #
-    # * `RedhatEnterpriseLinux7.3`
-    #
-    # * `RedhatEnterpriseLinux7.4`
-    #
-    # * `RedhatEnterpriseLinux7.5`
-    #
-    # * `RedhatEnterpriseLinux7.6`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `CLASSIFICATION`
-    #
-    # *Supported values:*
-    #
-    # * `Security`
-    #
-    # * `Bugfix`
-    #
-    # * `Enhancement`
-    #
-    # * `Recommended`
-    #
-    # * `Newpackage`
-    #
-    # *Supported key:* `SEVERITY`
-    #
-    # *Supported values:*
-    #
-    # * `Critical`
-    #
-    # * `Important`
-    #
-    # * `Medium`
-    #
-    # * `Low`
-    #
-    # **SUSE Linux Enterprise Server (SLES) Operating Systems**
-    #
-    # The supported keys for SLES operating systems are `PRODUCT`,
-    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
-    # values for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `Suse12.0`
-    #
-    # * `Suse12.1`
-    #
-    # * `Suse12.2`
-    #
-    # * `Suse12.3`
-    #
-    # * `Suse12.4`
-    #
-    # * `Suse12.5`
-    #
-    # * `Suse12.6`
-    #
-    # * `Suse12.7`
-    #
-    # * `Suse12.8`
-    #
-    # * `Suse12.9`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `CLASSIFICATION`
-    #
-    # *Supported values:*
-    #
-    # * `Security`
-    #
-    # * `Recommended`
-    #
-    # * `Optional`
-    #
-    # * `Feature`
-    #
-    # * `Document`
-    #
-    # * `Yast`
-    #
-    # *Supported key:* `SEVERITY`
-    #
-    # *Supported values:*
-    #
-    # * `Critical`
-    #
-    # * `Important`
-    #
-    # * `Moderate`
-    #
-    # * `Low`
-    #
-    # **CentOS Operating Systems**
-    #
-    # The supported keys for CentOS operating systems are `PRODUCT`,
-    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
-    # values for each of these keys.
-    #
-    # *Supported key:* `PRODUCT`
-    #
-    # *Supported values:*
-    #
-    # * `CentOS6.5`
-    #
-    # * `CentOS6.6`
-    #
-    # * `CentOS6.7`
-    #
-    # * `CentOS6.8`
-    #
-    # * `CentOS6.9`
-    #
-    # * `CentOS7.0`
-    #
-    # * `CentOS7.1`
-    #
-    # * `CentOS7.2`
-    #
-    # * `CentOS7.3`
-    #
-    # * `CentOS7.4`
-    #
-    # * `CentOS7.5`
-    #
-    # * `CentOS7.6`
-    #
-    # * `*`
-    #
-    #   *Use a wildcard character (*) to target all supported operating
-    #   system versions.*
-    #
-    # *Supported key:* `CLASSIFICATION`
-    #
-    # *Supported values:*
-    #
-    # * `Security`
-    #
-    # * `Bugfix`
-    #
-    # * `Enhancement`
-    #
-    # * `Recommended`
-    #
-    # * `Newpackage`
-    #
-    # *Supported key:* `SEVERITY`
-    #
-    # *Supported values:*
-    #
-    # * `Critical`
-    #
-    # * `Important`
-    #
-    # * `Medium`
-    #
-    # * `Low`
+    # Defines which patches should be included in a patch baseline.
+    #
+    # A patch filter consists of a key and a set of values. The filter key
+    # is a patch property. For example, the available filter keys for
+    # WINDOWS are PATCH\_SET, PRODUCT, PRODUCT\_FAMILY, CLASSIFICATION, and
+    # MSRC\_SEVERITY. The filter values define a matching criterion for the
+    # patch property indicated by the key. For example, if the filter key is
+    # PRODUCT and the filter values are \["Office 2013", "Office
+    # 2016"\], then the filter accepts all patches where product name is
+    # either "Office 2013" or "Office 2016". The filter values can be
+    # exact values for the patch property given as a key, or a wildcard
+    # (*), which matches all values.
+    #
+    # You can view lists of valid values for the patch properties by running
+    # the `DescribePatchProperties` command. For information about which
+    # patch properties can be used with each major operating system, see
+    # DescribePatchProperties.
     #
     # @note When making an API call, you may pass PatchFilter
     #   data as a hash:
     #
     #       {
-    #         key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #         key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #         values: ["PatchFilterValue"], # required
     #       }
     #
     # @!attribute [rw] key
     #   The key for the filter.
     #
-    #   See PatchFilter for lists of valid keys for each operating system
-    #   type.
+    #   Run the DescribePatchProperties command to view lists of valid keys
+    #   for each operating system type.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   The value for the filter key.
     #
-    #   See PatchFilter for lists of valid values for each key based on
-    #   operating system type.
+    #   Run the DescribePatchProperties command to view lists of valid
+    #   values for each key based on operating system type.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter AWS API Documentation
@@ -10797,7 +10466,7 @@ module Aws::SSM
     #       {
     #         patch_filters: [ # required
     #           {
-    #             key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #             key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #             values: ["PatchFilterValue"], # required
     #           },
     #         ],
@@ -10868,7 +10537,7 @@ module Aws::SSM
     #         patch_filter_group: { # required
     #           patch_filters: [ # required
     #             {
-    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -10923,7 +10592,7 @@ module Aws::SSM
     #             patch_filter_group: { # required
     #               patch_filters: [ # required
     #                 {
-    #                   key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                   key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                   values: ["PatchFilterValue"], # required
     #                 },
     #               ],
@@ -14184,7 +13853,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -14195,7 +13864,7 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                     key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],

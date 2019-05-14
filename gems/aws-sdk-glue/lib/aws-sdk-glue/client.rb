@@ -552,7 +552,7 @@ module Aws::Glue
     # permission conditions that uses tags.
     #
     # @option params [required, Array<String>] :crawler_names
-    #   A list of crawler names, which may be the names returned from the
+    #   A list of crawler names, which might be the names returned from the
     #   `ListCrawlers` operation.
     #
     # @return [Types::BatchGetCrawlersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -582,6 +582,10 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
     #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawlers[0].targets.catalog_targets #=> Array
+    #   resp.crawlers[0].targets.catalog_targets[0].database_name #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
+    #   resp.crawlers[0].targets.catalog_targets[0].tables[0] #=> String
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -914,7 +918,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a classifier in the user's account. This may be a
+    # Creates a classifier in the user's account. This can be a
     # `GrokClassifier`, an `XMLClassifier`, a `JsonClassifier`, or a
     # `CsvClassifier`, depending on which field of the request is present.
     #
@@ -1012,17 +1016,17 @@ module Aws::Glue
 
     # Creates a new crawler with specified targets, role, configuration, and
     # optional schedule. At least one crawl target must be specified, in the
-    # *s3Targets* field, the *jdbcTargets* field, or the *DynamoDBTargets*
+    # `s3Targets` field, the `jdbcTargets` field, or the `DynamoDBTargets`
     # field.
     #
     # @option params [required, String] :name
     #   Name of the new crawler.
     #
     # @option params [required, String] :role
-    #   The IAM role (or ARN of an IAM role) used by the new crawler to access
-    #   customer resources.
+    #   The IAM role or Amazon Resource Name (ARN) of an IAM role used by the
+    #   new crawler to access customer resources.
     #
-    # @option params [required, String] :database_name
+    # @option params [String] :database_name
     #   The AWS Glue database where results are written, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
@@ -1033,9 +1037,10 @@ module Aws::Glue
     #   A list of collection of targets to crawl.
     #
     # @option params [String] :schedule
-    #   A `cron` expression used to specify the schedule (see [Time-Based
-    #   Schedules for Jobs and Crawlers][1]. For example, to run something
-    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1]. For
+    #   example, to run something every day at 12:15 UTC, specify `cron(15 12
+    #   * * ? *)`.
     #
     #
     #
@@ -1051,11 +1056,11 @@ module Aws::Glue
     #   The table prefix used for catalog tables that are created.
     #
     # @option params [Types::SchemaChangePolicy] :schema_change_policy
-    #   Policy for the crawler's update and deletion behavior.
+    #   The policy for the crawler's update and deletion behavior.
     #
     # @option params [String] :configuration
-    #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
+    #   The crawler configuration information. This versioned JSON string
+    #   allows users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
@@ -1063,13 +1068,13 @@ module Aws::Glue
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @option params [String] :crawler_security_configuration
-    #   The name of the SecurityConfiguration structure to be used by this
-    #   Crawler.
+    #   The name of the `SecurityConfiguration` structure to be used by this
+    #   crawler.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to use with this crawler request. You may use tags to limit
-    #   access to the crawler. For more information about tags in AWS Glue,
-    #   see [AWS Tags in AWS Glue][1] in the developer guide.
+    #   The tags to use with this crawler request. You can use tags to limit
+    #   access to the crawler. For more information, see [AWS Tags in AWS
+    #   Glue][1].
     #
     #
     #
@@ -1082,7 +1087,7 @@ module Aws::Glue
     #   resp = client.create_crawler({
     #     name: "NameString", # required
     #     role: "Role", # required
-    #     database_name: "DatabaseName", # required
+    #     database_name: "DatabaseName",
     #     description: "DescriptionString",
     #     targets: { # required
     #       s3_targets: [
@@ -1101,6 +1106,12 @@ module Aws::Glue
     #       dynamo_db_targets: [
     #         {
     #           path: "Path",
+    #         },
+    #       ],
+    #       catalog_targets: [
+    #         {
+    #           database_name: "NameString", # required
+    #           tables: ["NameString"], # required
     #         },
     #       ],
     #     },
@@ -1950,11 +1961,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Removes a specified crawler from the Data Catalog, unless the crawler
-    # state is `RUNNING`.
+    # Removes a specified crawler from the AWS Glue Data Catalog, unless the
+    # crawler state is `RUNNING`.
     #
     # @option params [required, String] :name
-    #   Name of the crawler to remove.
+    #   The name of the crawler to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2380,7 +2391,7 @@ module Aws::Glue
     # Lists all classifier objects in the Data Catalog.
     #
     # @option params [Integer] :max_results
-    #   Size of the list to return (optional).
+    #   The size of the list to return (optional).
     #
     # @option params [String] :next_token
     #   An optional continuation token.
@@ -2567,7 +2578,7 @@ module Aws::Glue
     # Retrieves metadata for a specified crawler.
     #
     # @option params [required, String] :name
-    #   Name of the crawler to retrieve metadata for.
+    #   The name of the crawler to retrieve metadata for.
     #
     # @return [Types::GetCrawlerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2594,6 +2605,10 @@ module Aws::Glue
     #   resp.crawler.targets.jdbc_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.dynamo_db_targets #=> Array
     #   resp.crawler.targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawler.targets.catalog_targets #=> Array
+    #   resp.crawler.targets.catalog_targets[0].database_name #=> String
+    #   resp.crawler.targets.catalog_targets[0].tables #=> Array
+    #   resp.crawler.targets.catalog_targets[0].tables[0] #=> String
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -2708,6 +2723,10 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
     #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
+    #   resp.crawlers[0].targets.catalog_targets #=> Array
+    #   resp.crawlers[0].targets.catalog_targets[0].database_name #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
+    #   resp.crawlers[0].targets.catalog_targets[0].tables[0] #=> String
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -3591,7 +3610,7 @@ module Aws::Glue
     #   The target tables.
     #
     # @option params [Types::Location] :location
-    #   Parameters for the mapping.
+    #   The parameters for the mapping.
     #
     # @option params [String] :language
     #   The programming language of the code to perform the mapping.
@@ -5169,8 +5188,8 @@ module Aws::Glue
     #   Name of the new crawler.
     #
     # @option params [String] :role
-    #   The IAM role (or ARN of an IAM role) used by the new crawler to access
-    #   customer resources.
+    #   The IAM role or Amazon Resource Name (ARN) of an IAM role that is used
+    #   by the new crawler to access customer resources.
     #
     # @option params [String] :database_name
     #   The AWS Glue database where results are stored, such as:
@@ -5183,9 +5202,10 @@ module Aws::Glue
     #   A list of targets to crawl.
     #
     # @option params [String] :schedule
-    #   A `cron` expression used to specify the schedule (see [Time-Based
-    #   Schedules for Jobs and Crawlers][1]. For example, to run something
-    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1]. For
+    #   example, to run something every day at 12:15 UTC, specify `cron(15 12
+    #   * * ? *)`.
     #
     #
     #
@@ -5201,11 +5221,11 @@ module Aws::Glue
     #   The table prefix used for catalog tables that are created.
     #
     # @option params [Types::SchemaChangePolicy] :schema_change_policy
-    #   Policy for the crawler's update and deletion behavior.
+    #   The policy for the crawler's update and deletion behavior.
     #
     # @option params [String] :configuration
-    #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a crawler's behavior. For more
+    #   The crawler configuration information. This versioned JSON string
+    #   allows users to specify aspects of a crawler's behavior. For more
     #   information, see [Configuring a Crawler][1].
     #
     #
@@ -5213,8 +5233,8 @@ module Aws::Glue
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @option params [String] :crawler_security_configuration
-    #   The name of the SecurityConfiguration structure to be used by this
-    #   Crawler.
+    #   The name of the `SecurityConfiguration` structure to be used by this
+    #   crawler.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5244,6 +5264,12 @@ module Aws::Glue
     #           path: "Path",
     #         },
     #       ],
+    #       catalog_targets: [
+    #         {
+    #           database_name: "NameString", # required
+    #           tables: ["NameString"], # required
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -5268,13 +5294,13 @@ module Aws::Glue
     # Updates the schedule of a crawler using a `cron` expression.
     #
     # @option params [required, String] :crawler_name
-    #   Name of the crawler whose schedule to update.
+    #   The name of the crawler whose schedule to update.
     #
     # @option params [String] :schedule
-    #   The updated `cron` expression used to specify the schedule (see
-    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
-    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * * ?
-    #   *)`.
+    #   The updated `cron` expression used to specify the schedule. For more
+    #   information, see [Time-Based Schedules for Jobs and Crawlers][1]. For
+    #   example, to run something every day at 12:15 UTC, specify `cron(15 12
+    #   * * ? *)`.
     #
     #
     #
@@ -5776,7 +5802,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
