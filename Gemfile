@@ -36,6 +36,8 @@ group :test do
     # cucumber drop support for Ruby under 2.2 after 3.0.0
     gem 'cucumber', '3.0.0'
   elsif RUBY_VERSION < '2.2'
+    gem 'addressable'
+    gem 'webmock'
     # cucumber drop support for Ruby under 2.2 after 3.0.0
     gem 'cucumber', '3.0.0'
   else
