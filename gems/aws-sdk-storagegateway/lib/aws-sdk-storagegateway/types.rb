@@ -1048,6 +1048,10 @@ module Aws::StorageGateway
     #   Set this value to "true to enable ACL (access control list) on the
     #   SMB file share. Set it to "false" to map file and directory
     #   permissions to the POSIX permissions.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
+    #   in the Storage Gateway User Guide.
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
@@ -1190,6 +1194,12 @@ module Aws::StorageGateway
     #       {
     #         volume_arn: "VolumeARN", # required
     #         snapshot_description: "SnapshotDescription", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] volume_arn
@@ -1204,11 +1214,24 @@ module Aws::StorageGateway
     #   **Description** field
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotInput AWS API Documentation
     #
     class CreateSnapshotInput < Struct.new(
       :volume_arn,
-      :snapshot_description)
+      :snapshot_description,
+      :tags)
       include Aws::Structure
     end
 
@@ -4267,6 +4290,10 @@ module Aws::StorageGateway
     #   list) is enabled on the SMB file share. If it is set to "false",
     #   it indicates that file and directory permissions are mapped to the
     #   POSIX permission.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
+    #   in the Storage Gateway User Guide.
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
@@ -5380,6 +5407,10 @@ module Aws::StorageGateway
     #   Set this value to "true to enable ACL (access control list) on the
     #   SMB file share. Set it to "false" to map file and directory
     #   permissions to the POSIX permissions.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin
+    #   the Storage Gateway User Guide.
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_user_list
@@ -5452,6 +5483,12 @@ module Aws::StorageGateway
     #         start_at: 1, # required
     #         recurrence_in_hours: 1, # required
     #         description: "Description",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] volume_arn
@@ -5475,13 +5512,26 @@ module Aws::StorageGateway
     #   description.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to a snapshot. Each tag
+    #   is a key-value pair.
+    #
+    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
+    #   representable in UTF-8 format, and the following special characters:
+    #   + - = . \_ : / @. The maximum length of a tag's key is 128
+    #   characters, and the maximum length for a tag's value is 256.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotScheduleInput AWS API Documentation
     #
     class UpdateSnapshotScheduleInput < Struct.new(
       :volume_arn,
       :start_at,
       :recurrence_in_hours,
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 

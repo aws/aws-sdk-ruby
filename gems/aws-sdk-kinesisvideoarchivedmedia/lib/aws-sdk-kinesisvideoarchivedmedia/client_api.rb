@@ -41,7 +41,7 @@ module Aws::KinesisVideoArchivedMedia
     NoDataRetentionException = Shapes::StructureShape.new(name: 'NoDataRetentionException')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
     PageLimit = Shapes::IntegerShape.new(name: 'PageLimit')
-    Payload = Shapes::BlobShape.new(name: 'Payload')
+    Payload = Shapes::BlobShape.new(name: 'Payload', streaming: true)
     PlaybackMode = Shapes::StringShape.new(name: 'PlaybackMode')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')

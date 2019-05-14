@@ -1761,7 +1761,7 @@ module Aws::EC2
     #   @return [Array<Types::AvailabilityZoneMessage>]
     #
     # @!attribute [rw] region_name
-    #   The name of the region.
+    #   The name of the Region.
     #   @return [String]
     #
     # @!attribute [rw] zone_name
@@ -3564,7 +3564,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The region that contains the source AFI.
+    #   The Region that contains the source AFI.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -3627,7 +3627,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the new AMI in the destination region.
+    #   A description for the new AMI in the destination Region.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -3656,17 +3656,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -3675,12 +3675,12 @@ module Aws::EC2
     #   call may appear to complete even though you provided an invalid
     #   identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is
+    #   The specified CMK must exist in the Region that the snapshot is
     #   being copied to.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the new AMI in the destination region.
+    #   The name of the new AMI in the destination Region.
     #   @return [String]
     #
     # @!attribute [rw] source_image_id
@@ -3688,7 +3688,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The name of the region that contains the AMI to copy.
+    #   The name of the Region that contains the AMI to copy.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -3783,17 +3783,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -5986,11 +5986,14 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   Indicates whether the network interface is an Elastic Fabric Adapter
     #   (EFA). Only specify this parameter to create an EFA. For more
-    #   information, see [Elastic Fabric
-    #   Adapter](AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic
+    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
     #
     #   If you are not creating an EFA ENI, omit this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -6639,7 +6642,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] blackhole
-    #   Indicates whether to drop traffic if the target isn't available.
+    #   Indicates whether to drop traffic that matches this route.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -6970,17 +6973,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -7203,7 +7206,7 @@ module Aws::EC2
     #   (Interface endpoint) Indicate whether to associate a private hosted
     #   zone with the specified VPC. The private hosted zone contains a
     #   record set for the default public DNS name for the service for the
-    #   region (for example, `kinesis.us-east-1.amazonaws.com`) which
+    #   Region (for example, `kinesis.us-east-1.amazonaws.com`) which
     #   resolves to the private IP addresses of the endpoint network
     #   interfaces in the VPC. This enables you to make requests to the
     #   default public DNS name for the service instead of the public DNS
@@ -7351,10 +7354,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionRequest AWS API Documentation
@@ -9369,9 +9372,9 @@ module Aws::EC2
     end
 
     # @!attribute [rw] use_long_ids_aggregated
-    #   Indicates whether all resource types in the region are configured to
+    #   Indicates whether all resource types in the Region are configured to
     #   use longer IDs. This value is only `true` if all users are
-    #   configured to use longer IDs for all resources types in the region.
+    #   configured to use longer IDs for all resources types in the Region.
     #   @return [Boolean]
     #
     # @!attribute [rw] statuses
@@ -9406,7 +9409,7 @@ module Aws::EC2
     #
     #   * `message` - Information about the Availability Zone.
     #
-    #   * `region-name` - The name of the region for the Availability Zone
+    #   * `region-name` - The name of the Region for the Availability Zone
     #     (for example, `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone (`available` \|
@@ -10227,6 +10230,8 @@ module Aws::EC2
     #           },
     #         ],
     #         dry_run: false,
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] dhcp_options_ids
@@ -10266,12 +10271,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsRequest AWS API Documentation
     #
     class DescribeDhcpOptionsRequest < Struct.new(
       :dhcp_options_ids,
       :filters,
-      :dry_run)
+      :dry_run,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -10279,10 +10296,16 @@ module Aws::EC2
     #   Information about one or more DHCP options sets.
     #   @return [Array<Types::DhcpOptions>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsResult AWS API Documentation
     #
     class DescribeDhcpOptionsResult < Struct.new(
-      :dhcp_options)
+      :dhcp_options,
+      :next_token)
       include Aws::Structure
     end
 
@@ -13603,14 +13626,14 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
-    #   * `endpoint` - The endpoint of the region (for example,
+    #   * `endpoint` - The endpoint of the Region (for example,
     #     `ec2.us-east-1.amazonaws.com`).
     #
-    #   * `region-name` - The name of the region (for example, `us-east-1`).
+    #   * `region-name` - The name of the Region (for example, `us-east-1`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] region_names
-    #   The names of the regions.
+    #   The names of the Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -13630,7 +13653,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] regions
-    #   Information about the regions.
+    #   Information about the Regions.
     #   @return [Array<Types::Region>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsResult AWS API Documentation
@@ -15518,6 +15541,8 @@ module Aws::EC2
     #         ],
     #         subnet_ids: ["String"],
     #         dry_run: false,
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -15584,12 +15609,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsRequest AWS API Documentation
     #
     class DescribeSubnetsRequest < Struct.new(
       :filters,
       :subnet_ids,
-      :dry_run)
+      :dry_run,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -15597,10 +15634,16 @@ module Aws::EC2
     #   Information about one or more subnets.
     #   @return [Array<Types::Subnet>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsResult AWS API Documentation
     #
     class DescribeSubnetsResult < Struct.new(
-      :subnets)
+      :subnets,
+      :next_token)
       include Aws::Structure
     end
 
@@ -21393,17 +21436,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -21412,7 +21455,7 @@ module Aws::EC2
     #   call may appear to complete even though you provided an invalid
     #   identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the AMI is being
+    #   The specified CMK must exist in the Region that the AMI is being
     #   copied to.
     #   @return [String]
     #
@@ -22015,17 +22058,17 @@ module Aws::EC2
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `alias` namespace, and then the CMK alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     followed by the Region of the CMK, the AWS account ID of the CMK
     #     owner, the `key` namespace, and then the CMK ID. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     namespace, followed by the Region of the CMK, the AWS account ID
     #     of the CMK owner, the `alias` namespace, and then the CMK alias.
     #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
@@ -22034,7 +22077,7 @@ module Aws::EC2
     #   call may appear to complete even though you provided an invalid
     #   identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the region that the snapshot is
+    #   The specified CMK must exist in the Region that the snapshot is
     #   being copied to.
     #   @return [String]
     #
@@ -23019,9 +23062,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] device_index
-    #   The index of the device on the instance for the network interface
-    #   attachment. If you are specifying a network interface in a
-    #   RunInstances request, you must provide the device index.
+    #   The position of the network interface in the attachment order. A
+    #   primary network interface has a device index of 0.
+    #
+    #   If you specify a network interface when launching an instance, you
+    #   must specify the device index.
     #   @return [Integer]
     #
     # @!attribute [rw] groups
@@ -23052,21 +23097,34 @@ module Aws::EC2
     #   The private IPv4 address of the network interface. Applies only if
     #   creating a network interface when launching an instance. You cannot
     #   specify this option if you're launching more than one instance in a
-    #   RunInstances request.
+    #   [RunInstances][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
     #   One or more private IPv4 addresses to assign to the network
     #   interface. Only one private IPv4 address can be designated as
     #   primary. You cannot specify this option if you're launching more
-    #   than one instance in a RunInstances request.
+    #   than one instance in a [RunInstances][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Array<Types::PrivateIpAddressSpecification>]
     #
     # @!attribute [rw] secondary_private_ip_address_count
     #   The number of secondary private IPv4 addresses. You can't specify
     #   this option and specify more than one private IP address using the
     #   private IP addresses option. You cannot specify this option if
-    #   you're launching more than one instance in a RunInstances request.
+    #   you're launching more than one instance in a [RunInstances][1]
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_id
@@ -24874,7 +24932,11 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are `instance` and `volume`. To tag a
-    #   resource after it has been created, see CreateTags.
+    #   resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -27090,15 +27152,23 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway at the AWS side of the VPN
+    #   connection.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionRequest AWS API Documentation
@@ -28031,7 +28101,7 @@ module Aws::EC2
     #   The Availability Zone of the instance.
     #
     #   If not specified, an Availability Zone will be automatically chosen
-    #   for you based on the load balancing criteria for the region.
+    #   for you based on the load balancing criteria for the Region.
     #   @return [String]
     #
     # @!attribute [rw] affinity
@@ -28056,8 +28126,12 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the ImportInstance
-    #   command.
+    #   hardware. The `host` tenancy is not supported for the
+    #   [ImportInstance][1] command.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
@@ -28385,7 +28459,7 @@ module Aws::EC2
     #   The public IPv4 address range, in CIDR notation. The most specific
     #   prefix that you can specify is /24. The address range cannot overlap
     #   with another address range that you've brought to this or another
-    #   region.
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -28893,14 +28967,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a region.
+    # Describes a Region.
     #
     # @!attribute [rw] endpoint
-    #   The region service endpoint.
+    #   The Region service endpoint.
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The name of the region.
+    #   The name of the Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region AWS API Documentation
@@ -29859,7 +29933,9 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateBlockDeviceMappingRequest>]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
+    #   One or more network interfaces. If you specify a network interface,
+    #   you must specify any security groups as part of the network
+    #   interface.
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
@@ -29946,7 +30022,11 @@ module Aws::EC2
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to
     #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see CreateTags.
+    #   resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
@@ -29959,8 +30039,12 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   One or more security group IDs. You can create a security group
-    #   using CreateSecurityGroup. You cannot specify both a security group
-    #   ID and security name in the same request.
+    #   using [CreateSecurityGroup][1]. You cannot specify both a security
+    #   group ID and security name in the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
@@ -30870,7 +30954,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Whether the Reserved Instance is applied to instances in a region or
+    #   Whether the Reserved Instance is applied to instances in a Region or
     #   instances in a specific Availability Zone.
     #   @return [String]
     #
@@ -31111,7 +31195,7 @@ module Aws::EC2
     #   @return [Array<Types::RecurringCharge>]
     #
     # @!attribute [rw] scope
-    #   Whether the Reserved Instance is applied to instances in a region or
+    #   Whether the Reserved Instance is applied to instances in a Region or
     #   an Availability Zone.
     #   @return [String]
     #
@@ -32221,11 +32305,16 @@ module Aws::EC2
     #
     # @!attribute [rw] key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another
     #   way to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #   @return [String]
     #
     # @!attribute [rw] max_count
@@ -32285,20 +32374,22 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups. You can create a security group
-    #   using CreateSecurityGroup.
+    #   using [CreateSecurityGroup][1].
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
     #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
     #   Default: Amazon EC2 uses the default security group.
     #   @return [Array<String>]
@@ -32344,12 +32435,16 @@ module Aws::EC2
     #   If you set this parameter to `true`, you can't terminate the
     #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
     #   can. To change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
+    #   [ModifyInstanceAttribute][1]. Alternatively, if you set
     #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
     #   terminate the instance by running the shutdown command from the
     #   instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -32383,7 +32478,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   The network interfaces to associate with the instance.
+    #   The network interfaces to associate with the instance. If you
+    #   specify a network interface, you must specify any security groups as
+    #   part of the network interface.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -32423,7 +32520,11 @@ module Aws::EC2
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to
     #   all instances or volumes that are created during launch. To tag a
-    #   resource after it has been created, see CreateTags.
+    #   resource after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] launch_template
@@ -32444,15 +32545,16 @@ module Aws::EC2
     # @!attribute [rw] credit_specification
     #   The credit option for CPU usage of the T2 or T3 instance. Valid
     #   values are `standard` and `unlimited`. To change this attribute
-    #   after launch, use ModifyInstanceCreditSpecification. For more
-    #   information, see [Burstable Performance Instances][1] in the *Amazon
+    #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
+    #   information, see [Burstable Performance Instances][2] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #   @return [Types::CreditSpecificationRequest]
     #
     # @!attribute [rw] cpu_options
@@ -34140,7 +34242,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the launch specification for one or more Spot Instances.
+    # Describes the launch specification for one or more Spot Instances. If
+    # you include On-Demand capacity in your fleet request, you can't use
+    # `SpotFleetLaunchSpecification`; you must use
+    # [LaunchTemplateConfig][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html
     #
     # @note When making an API call, you may pass SpotFleetLaunchSpecification
     #   data as a hash:
@@ -34242,11 +34351,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for
-    #   a volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   One or more block devices that are mapped to the Spot instances. You
+    #   can't specify both a snapshot ID and an encryption value. This is
+    #   because only blank volumes can be encrypted on creation. If a
+    #   snapshot is the basis for a volume, it is not blank and its
+    #   encryption status is used for the volume encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -34295,7 +34404,10 @@ module Aws::EC2
     #   @return [Types::SpotPlacement]
     #
     # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk. Some kernels require additional drivers at
+    #   launch. Check the kernel requirements for information about whether
+    #   you need to specify a RAM disk. To find kernel requirements, refer
+    #   to the AWS Resource Center and search for the kernel ID.
     #   @return [String]
     #
     # @!attribute [rw] spot_price
@@ -34312,18 +34424,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data to make available to the instances.
+    #   The Base64-encoded user data that instances use when starting up.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type. These
     #   are the same units that you chose to set the target capacity in
-    #   terms (instances or a performance characteristic such as vCPUs,
-    #   memory, or I/O).
+    #   terms of instances, or a performance characteristic such as vCPUs,
+    #   memory, or I/O.
     #
     #   If the target capacity divided by this value is not a whole number,
-    #   we round the number of instances to the next whole number. If this
-    #   value is not specified, the default is 1.
+    #   Amazon EC2 rounds the number of instances to the next whole number.
+    #   If this value is not specified, the default is 1.
     #   @return [Float]
     #
     # @!attribute [rw] tag_specifications
@@ -34586,8 +34698,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot Instances should be terminated if the
-    #   target capacity of the Spot Fleet request is decreased below the
+    #   Indicates whether running Spot Instances should be terminated if you
+    #   decrease the target capacity of the Spot Fleet request below the
     #   current size of the Spot Fleet.
     #   @return [String]
     #
@@ -34602,20 +34714,32 @@ module Aws::EC2
     #   @return [Float]
     #
     # @!attribute [rw] iam_fleet_role
-    #   Grants the Spot Fleet permission to terminate Spot Instances on your
-    #   behalf when you cancel its Spot Fleet request using
-    #   CancelSpotFleetRequests or when the Spot Fleet request expires, if
-    #   you set `terminateInstancesWithExpiration`.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that grants the Spot Fleet the permission to
+    #   request, launch, terminate, and tag instances on your behalf. For
+    #   more information, see [Spot Fleet Prerequisites][1] in the *Amazon
+    #   EC2 User Guide for Linux Instances*. Spot Fleet can terminate Spot
+    #   Instances on your behalf when you cancel its Spot Fleet request
+    #   using CancelSpotFleetRequests or when the Spot Fleet request
+    #   expires, if you set `TerminateInstancesWithExpiration`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites
     #   @return [String]
     #
     # @!attribute [rw] launch_specifications
     #   The launch specifications for the Spot Fleet request. If you specify
     #   `LaunchSpecifications`, you can't specify `LaunchTemplateConfigs`.
+    #   If you include On-Demand capacity in your request, you must use
+    #   `LaunchTemplateConfigs`.
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
     # @!attribute [rw] launch_template_configs
     #   The launch template and overrides. If you specify
     #   `LaunchTemplateConfigs`, you can't specify `LaunchSpecifications`.
+    #   If you include On-Demand capacity in your request, you must use
+    #   `LaunchTemplateConfigs`.
     #   @return [Array<Types::LaunchTemplateConfig>]
     #
     # @!attribute [rw] spot_price
@@ -34624,11 +34748,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity
-    #   The number of units to request. You can choose to set the target
-    #   capacity in terms of instances or a performance characteristic that
-    #   is important to your application workload, such as vCPUs, memory, or
-    #   I/O. If the request type is `maintain`, you can specify a target
-    #   capacity of 0 and add capacity later.
+    #   The number of units to request for the Spot Fleet. You can choose to
+    #   set the target capacity in terms of instances or a performance
+    #   characteristic that is important to your application workload, such
+    #   as vCPUs, memory, or I/O. If the request type is `maintain`, you can
+    #   specify a target capacity of 0 and add capacity later.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -34640,8 +34764,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] terminate_instances_with_expiration
-    #   Indicates whether running Spot Instances should be terminated when
-    #   the Spot Fleet request expires.
+    #   Indicates whether running Spot Instances are terminated when the
+    #   Spot Fleet request expires.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
@@ -34658,17 +34782,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] valid_from
-    #   The start date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   The start date and time of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). By default, Amazon EC2 starts
     #   fulfilling the request immediately.
     #   @return [Time]
     #
     # @!attribute [rw] valid_until
-    #   The end date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new Spot
-    #   Instance requests are placed or able to fulfill the request. If no
-    #   value is specified, the Spot Fleet request remains until you cancel
-    #   it.
+    #   The end date and time of the request, in UTC format
+    #   (*YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). After the end date and time,
+    #   no new Spot Instance requests are placed or able to fulfill the
+    #   request. If no value is specified, the Spot Fleet request remains
+    #   until you cancel it.
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
@@ -37884,7 +38008,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The region in which the VPC is located.
+    #   The Region in which the VPC is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionVpcInfo AWS API Documentation

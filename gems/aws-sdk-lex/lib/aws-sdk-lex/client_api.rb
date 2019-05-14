@@ -15,7 +15,7 @@ module Aws::Lex
     AttributesString = Shapes::StringShape.new(name: 'AttributesString')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
-    BlobStream = Shapes::BlobShape.new(name: 'BlobStream')
+    BlobStream = Shapes::BlobShape.new(name: 'BlobStream', streaming: true)
     BotAlias = Shapes::StringShape.new(name: 'BotAlias')
     BotName = Shapes::StringShape.new(name: 'BotName')
     Button = Shapes::StructureShape.new(name: 'Button')

@@ -475,6 +475,10 @@ module Aws::Comprehend
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -530,6 +534,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your custom
+    #   classifier. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
     #
     class CreateDocumentClassifierRequest < Struct.new(
@@ -540,7 +554,8 @@ module Aws::Comprehend
       :output_data_config,
       :client_request_token,
       :language_code,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -587,6 +602,10 @@ module Aws::Comprehend
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] recognizer_name
@@ -641,6 +660,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your custom
+    #   entity recognizer. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
     #
     class CreateEntityRecognizerRequest < Struct.new(
@@ -650,7 +679,8 @@ module Aws::Comprehend
       :input_data_config,
       :client_request_token,
       :language_code,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -1274,6 +1304,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your document
+    #   classification job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobProperties AWS API Documentation
     #
     class DocumentClassificationJobProperties < Struct.new(
@@ -1287,7 +1327,8 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -1488,6 +1529,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your custom classifier.
+    #   For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -1503,7 +1554,8 @@ module Aws::Comprehend
       :output_data_config,
       :classifier_metadata,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -1636,6 +1688,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your dominant language
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguageDetectionJobProperties AWS API Documentation
     #
     class DominantLanguageDetectionJobProperties < Struct.new(
@@ -1648,7 +1710,8 @@ module Aws::Comprehend
       :input_data_config,
       :output_data_config,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -1762,6 +1825,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your entity detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobProperties AWS API Documentation
     #
     class EntitiesDetectionJobProperties < Struct.new(
@@ -1776,7 +1849,8 @@ module Aws::Comprehend
       :output_data_config,
       :language_code,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -2116,6 +2190,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your custom entity
+    #   recognizer. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -2130,7 +2214,8 @@ module Aws::Comprehend
       :input_data_config,
       :recognizer_metadata,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -2339,6 +2424,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your key phrases
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrasesDetectionJobProperties AWS API Documentation
     #
     class KeyPhrasesDetectionJobProperties < Struct.new(
@@ -2352,7 +2447,8 @@ module Aws::Comprehend
       :output_data_config,
       :language_code,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3001,6 +3097,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your sentiment detection
+    #   job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentDetectionJobProperties AWS API Documentation
     #
     class SentimentDetectionJobProperties < Struct.new(
@@ -3014,7 +3120,8 @@ module Aws::Comprehend
       :output_data_config,
       :language_code,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3068,6 +3175,10 @@ module Aws::Comprehend
     #         data_access_role_arn: "IamRoleArn", # required
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -3113,6 +3224,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your document
+    #   classification job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJobRequest AWS API Documentation
     #
     class StartDocumentClassificationJobRequest < Struct.new(
@@ -3122,7 +3243,8 @@ module Aws::Comprehend
       :output_data_config,
       :data_access_role_arn,
       :client_request_token,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3173,6 +3295,10 @@ module Aws::Comprehend
     #         job_name: "JobName",
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3218,6 +3344,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your dominant
+    #   language detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDominantLanguageDetectionJobRequest AWS API Documentation
     #
     class StartDominantLanguageDetectionJobRequest < Struct.new(
@@ -3226,7 +3362,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :client_request_token,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3276,6 +3413,10 @@ module Aws::Comprehend
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3336,6 +3477,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your entity
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobRequest AWS API Documentation
     #
     class StartEntitiesDetectionJobRequest < Struct.new(
@@ -3346,7 +3497,8 @@ module Aws::Comprehend
       :entity_recognizer_arn,
       :language_code,
       :client_request_token,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3400,6 +3552,10 @@ module Aws::Comprehend
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3451,6 +3607,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your key
+    #   phrases detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJobRequest AWS API Documentation
     #
     class StartKeyPhrasesDetectionJobRequest < Struct.new(
@@ -3460,7 +3626,8 @@ module Aws::Comprehend
       :job_name,
       :language_code,
       :client_request_token,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3509,6 +3676,10 @@ module Aws::Comprehend
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3560,6 +3731,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your
+    #   sentiment detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJobRequest AWS API Documentation
     #
     class StartSentimentDetectionJobRequest < Struct.new(
@@ -3569,7 +3750,8 @@ module Aws::Comprehend
       :job_name,
       :language_code,
       :client_request_token,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -3618,6 +3800,10 @@ module Aws::Comprehend
     #         number_of_topics: 1,
     #         client_request_token: "ClientRequestTokenString",
     #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -3670,6 +3856,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for your topic
+    #   detection job. For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJobRequest AWS API Documentation
     #
     class StartTopicsDetectionJobRequest < Struct.new(
@@ -3679,7 +3875,8 @@ module Aws::Comprehend
       :job_name,
       :number_of_topics,
       :client_request_token,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -4119,6 +4316,16 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for a private Virtual Private Cloud (VPC)
+    #   containing the resources you are using for your topic detection job.
+    #   For more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TopicsDetectionJobProperties AWS API Documentation
     #
     class TopicsDetectionJobProperties < Struct.new(
@@ -4132,7 +4339,8 @@ module Aws::Comprehend
       :output_data_config,
       :number_of_topics,
       :data_access_role_arn,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -4168,6 +4376,57 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Configuration parameters for an optional private Virtual Private Cloud
+    # (VPC) containing the resources you are using for the job. For For more
+    # information, see [Amazon VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
+    # @note When making an API call, you may pass VpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   The ID number for a security group on an instance of your private
+    #   VPC. Security groups on your VPC function serve as a virtual
+    #   firewall to control inbound and outbound traffic and provides
+    #   security for the resources that you’ll be accessing on the VPC. This
+    #   ID number is preceded by "sg-", for instance:
+    #   "sg-03b388029b0a285ea". For more information, see [Security Groups
+    #   for your VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID for each subnet being used in your private VPC. This subnet
+    #   is a subset of the a range of IPv4 addresses used by the VPC and is
+    #   specific to a given availability zone in the VPC’s region. This ID
+    #   number is preceded by "subnet-", for instance:
+    #   "subnet-04ccf456919e69055". For more information, see [VPCs and
+    #   Subnets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
+      include Aws::Structure
+    end
 
   end
 end
