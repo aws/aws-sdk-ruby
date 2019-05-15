@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-sagemakerruntime/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.48.2')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.52.0')
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end
