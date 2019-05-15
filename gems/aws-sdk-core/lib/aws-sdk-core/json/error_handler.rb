@@ -49,7 +49,8 @@ module Aws
             # match modeled shape name with the type(code) only
             # some type(code) might contains invalid characters
             # such as ':' (efs) etc
-            if rule.shape.name == code.gsub(/[^^a-zA-Z0-9]/, '')
+            match = rule.shape.name == code.gsub(/[^^a-zA-Z0-9]/, '')
+            if match && rule.shape.members.any?
               data = Parser.new(rule).parse(context.http_response.body_contents)
             end
           end

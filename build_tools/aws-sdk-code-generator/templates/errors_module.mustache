@@ -19,7 +19,7 @@ module {{module_name}}
       {{#members}}
       # @return [{{type}}]
       def {{name}}
-        @data[:{{name}}]
+        {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
       end
 
       {{/members}}

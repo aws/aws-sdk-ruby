@@ -44,13 +44,14 @@ module Aws
             # match `code` in the error trait before
             # match modeled shape name
             error_shape_code = rule.shape['error']['code'] if rule.shape['error']
-            if code == error_shape_code || code == rule.shape.name
+            match = (code == error_shape_code || code == rule.shape.name)
+            if match && rule.shape.members.any?
               data = Parser.new(rule).parse(context.http_response.body_contents)
             end
           end
         end
         data
-      rescue Parser::ParsingError
+      rescue Xml::Parser::ParsingError
         EmptyStructure.new
       end
 

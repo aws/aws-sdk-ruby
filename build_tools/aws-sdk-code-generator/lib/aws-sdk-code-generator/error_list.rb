@@ -14,7 +14,8 @@ module AwsSdkCodeGenerator
           members = shape['members'].inject([]) do |arr, (k, v)|
             arr << {
               name: Underscore.underscore(k),
-              type: Docstring.ucfirst(v['type'] ||'String')
+              type: Docstring.ucfirst(v['type'] ||'String'),
+              shared: k.downcase == 'message' || k.downcase == 'code'
             }
             arr
           end
