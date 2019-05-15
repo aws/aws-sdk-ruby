@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MediaPackage - Updated the API, and documentation for AWS Elemental MediaPackage.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::TranscribeService - Updated the API for Amazon Transcribe Service.
+
 2.11.274 (2019-05-14)
 ------------------
 
