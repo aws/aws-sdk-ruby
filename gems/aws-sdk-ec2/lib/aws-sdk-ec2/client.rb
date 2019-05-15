@@ -7586,6 +7586,9 @@ module Aws::EC2
     #   resp.vpc_endpoint.dns_entries[0].dns_name #=> String
     #   resp.vpc_endpoint.dns_entries[0].hosted_zone_id #=> String
     #   resp.vpc_endpoint.creation_timestamp #=> Time
+    #   resp.vpc_endpoint.tags #=> Array
+    #   resp.vpc_endpoint.tags[0].key #=> String
+    #   resp.vpc_endpoint.tags[0].value #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpoint AWS API Documentation
@@ -7742,6 +7745,9 @@ module Aws::EC2
     #   resp.service_configuration.base_endpoint_dns_names #=> Array
     #   resp.service_configuration.base_endpoint_dns_names[0] #=> String
     #   resp.service_configuration.private_dns_name #=> String
+    #   resp.service_configuration.tags #=> Array
+    #   resp.service_configuration.tags[0].key #=> String
+    #   resp.service_configuration.tags[0].value #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfiguration AWS API Documentation
@@ -18439,7 +18445,7 @@ module Aws::EC2
     #   resp = client.describe_stale_security_groups({
     #     dry_run: false,
     #     max_results: 1,
-    #     next_token: "NextToken",
+    #     next_token: "DescribeStaleSecurityGroupsNextToken",
     #     vpc_id: "String", # required
     #   })
     #
@@ -20122,6 +20128,16 @@ module Aws::EC2
     #   * `service-state` - The state of the service (`Pending` \| `Available`
     #     \| `Deleting` \| `Deleted` \| `Failed`).
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
@@ -20169,6 +20185,9 @@ module Aws::EC2
     #   resp.service_configurations[0].base_endpoint_dns_names #=> Array
     #   resp.service_configurations[0].base_endpoint_dns_names[0] #=> String
     #   resp.service_configurations[0].private_dns_name #=> String
+    #   resp.service_configurations[0].tags #=> Array
+    #   resp.service_configurations[0].tags[0].key #=> String
+    #   resp.service_configurations[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurations AWS API Documentation
@@ -20262,7 +20281,15 @@ module Aws::EC2
     #
     #   * `service-name`\: The name of the service.
     #
-    #   ^
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -20303,6 +20330,7 @@ module Aws::EC2
     #   resp.service_names[0] #=> String
     #   resp.service_details #=> Array
     #   resp.service_details[0].service_name #=> String
+    #   resp.service_details[0].service_id #=> String
     #   resp.service_details[0].service_type #=> Array
     #   resp.service_details[0].service_type[0].service_type #=> String, one of "Interface", "Gateway"
     #   resp.service_details[0].availability_zones #=> Array
@@ -20314,6 +20342,9 @@ module Aws::EC2
     #   resp.service_details[0].vpc_endpoint_policy_supported #=> Boolean
     #   resp.service_details[0].acceptance_required #=> Boolean
     #   resp.service_details[0].manages_vpc_endpoints #=> Boolean
+    #   resp.service_details[0].tags #=> Array
+    #   resp.service_details[0].tags[0].key #=> String
+    #   resp.service_details[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServices AWS API Documentation
@@ -20347,6 +20378,16 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-state`\: The state of the endpoint. (`pending` \|
     #     `available` \| `deleting` \| `deleted`)
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -20404,6 +20445,9 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].dns_entries[0].dns_name #=> String
     #   resp.vpc_endpoints[0].dns_entries[0].hosted_zone_id #=> String
     #   resp.vpc_endpoints[0].creation_timestamp #=> Time
+    #   resp.vpc_endpoints[0].tags #=> Array
+    #   resp.vpc_endpoints[0].tags[0].key #=> String
+    #   resp.vpc_endpoints[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpoints AWS API Documentation
@@ -30269,7 +30313,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

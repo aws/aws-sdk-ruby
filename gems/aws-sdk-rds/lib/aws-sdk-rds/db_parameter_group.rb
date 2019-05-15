@@ -214,12 +214,7 @@ module Aws::RDS
     # @option options [required, String] :description
     #   The description for the DB parameter group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   Tags to assign to the DB parameter group.
     # @return [DBParameterGroup]
     def create(options = {})
       options = options.merge(db_parameter_group_name: @name)
@@ -356,10 +351,9 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :reset_all_parameters
-    #   Specifies whether (`true`) or not (`false`) to reset all parameters in
-    #   the DB parameter group to default values.
-    #
-    #   Default: `true`
+    #   A value that indicates whether to reset all parameters in the DB
+    #   parameter group to default values. By default, all parameters in the
+    #   DB parameter group are reset to default values.
     # @option options [Array<Types::Parameter>] :parameters
     #   To reset the entire DB parameter group, specify the `DBParameterGroup`
     #   name and `ResetAllParameters` parameters. To reset specific

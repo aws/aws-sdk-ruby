@@ -3924,7 +3924,7 @@ module Aws::SWF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

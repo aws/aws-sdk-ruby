@@ -323,8 +323,9 @@ module Aws::RDS
     #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier` must
     #     be supplied.
     # @option options [Boolean] :enabled
-    #   A Boolean value; set to **true** to activate the subscription, set to
-    #   **false** to create the subscription but not active it.
+    #   A value that indicates whether to activate the subscription. If the
+    #   event notification subscription is not activated, the subscription is
+    #   created but not active.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1] in the *Amazon RDS User Guide.*
@@ -389,7 +390,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     # @option options [Boolean] :enabled
-    #   A Boolean value; set to **true** to activate the subscription.
+    #   A value that indicates whether to activate the subscription.
     # @return [EventSubscription]
     def modify(options = {})
       options = options.merge(subscription_name: @name)

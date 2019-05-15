@@ -43,6 +43,6 @@ require_relative 'aws-sdk-ecs/customizations'
 # @service
 module Aws::ECS
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

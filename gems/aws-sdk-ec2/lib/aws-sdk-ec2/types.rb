@@ -15476,7 +15476,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         max_results: 1,
-    #         next_token: "NextToken",
+    #         next_token: "DescribeStaleSecurityGroupsNextToken",
     #         vpc_id: "String", # required
     #       }
     #
@@ -16832,6 +16832,16 @@ module Aws::EC2
     #
     #   * `service-state` - The state of the service (`Pending` \|
     #     `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16984,7 +16994,15 @@ module Aws::EC2
     #
     #   * `service-name`\: The name of the service.
     #
-    #   ^
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -17076,6 +17094,16 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-state`\: The state of the endpoint. (`pending` \|
     #     `available` \| `deleting` \| `deleted`)
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -33801,6 +33829,10 @@ module Aws::EC2
     #   The private DNS name for the service.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the service.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceConfiguration AWS API Documentation
     #
     class ServiceConfiguration < Struct.new(
@@ -33813,7 +33845,8 @@ module Aws::EC2
       :manages_vpc_endpoints,
       :network_load_balancer_arns,
       :base_endpoint_dns_names,
-      :private_dns_name)
+      :private_dns_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -33821,6 +33854,10 @@ module Aws::EC2
     #
     # @!attribute [rw] service_name
     #   The Amazon Resource Name (ARN) of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the endpoint service.
     #   @return [String]
     #
     # @!attribute [rw] service_type
@@ -33858,10 +33895,15 @@ module Aws::EC2
     #   is restricted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the service.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail AWS API Documentation
     #
     class ServiceDetail < Struct.new(
       :service_name,
+      :service_id,
       :service_type,
       :availability_zones,
       :owner,
@@ -33869,7 +33911,8 @@ module Aws::EC2
       :private_dns_name,
       :vpc_endpoint_policy_supported,
       :acceptance_required,
-      :manages_vpc_endpoints)
+      :manages_vpc_endpoints,
+      :tags)
       include Aws::Structure
     end
 
@@ -37819,6 +37862,10 @@ module Aws::EC2
     #   The date and time the VPC endpoint was created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the VPC endpoint.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
@@ -37835,7 +37882,8 @@ module Aws::EC2
       :requester_managed,
       :network_interface_ids,
       :dns_entries,
-      :creation_timestamp)
+      :creation_timestamp,
+      :tags)
       include Aws::Structure
     end
 

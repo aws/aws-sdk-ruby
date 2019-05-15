@@ -42,6 +42,6 @@ require_relative 'aws-sdk-codepipeline/customizations'
 # @service
 module Aws::CodePipeline
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

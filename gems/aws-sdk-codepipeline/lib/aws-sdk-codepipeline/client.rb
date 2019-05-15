@@ -383,9 +383,13 @@ module Aws::CodePipeline
     #   The details of the output artifact of the action, such as its commit
     #   ID.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the custom action.
+    #
     # @return [Types::CreateCustomActionTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomActionTypeOutput#action_type #action_type} => Types::ActionType
+    #   * {Types::CreateCustomActionTypeOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -418,6 +422,12 @@ module Aws::CodePipeline
     #       minimum_count: 1, # required
     #       maximum_count: 1, # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -442,6 +452,9 @@ module Aws::CodePipeline
     #   resp.action_type.input_artifact_details.maximum_count #=> Integer
     #   resp.action_type.output_artifact_details.minimum_count #=> Integer
     #   resp.action_type.output_artifact_details.maximum_count #=> Integer
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionType AWS API Documentation
     #
@@ -458,9 +471,13 @@ module Aws::CodePipeline
     #   Represents the structure of actions and stages to be performed in the
     #   pipeline.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the pipeline.
+    #
     # @return [Types::CreatePipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipelineOutput#pipeline #pipeline} => Types::PipelineDeclaration
+    #   * {Types::CreatePipelineOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -526,6 +543,12 @@ module Aws::CodePipeline
     #       ],
     #       version: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -562,6 +585,9 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipeline AWS API Documentation
     #
@@ -1315,6 +1341,50 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Gets the set of key/value pairs (metadata) that are used to manage the
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous API call, which would be
+    #   used to return the next page of the list. However, the
+    #   ListTagsforResource call lists all available tags in one call and does
+    #   not use pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Gets a listing of all the webhooks in this region for this account.
     # The output lists all webhooks and includes the webhook URL and ARN, as
     # well the configuration for each webhook.
@@ -1357,6 +1427,9 @@ module Aws::CodePipeline
     #   resp.webhooks[0].error_code #=> String
     #   resp.webhooks[0].last_triggered #=> Time
     #   resp.webhooks[0].arn #=> String
+    #   resp.webhooks[0].tags #=> Array
+    #   resp.webhooks[0].tags[0].key #=> String
+    #   resp.webhooks[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooks AWS API Documentation
@@ -1799,6 +1872,9 @@ module Aws::CodePipeline
     #   may choose to name the webhook after the pipeline and action it
     #   targets so that you can easily recognize what it's used for later.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the webhook.
+    #
     # @return [Types::PutWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutWebhookOutput#webhook #webhook} => Types::ListWebhookItem
@@ -1822,6 +1898,12 @@ module Aws::CodePipeline
     #         secret_token: "WebhookAuthConfigurationSecretToken",
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1840,6 +1922,9 @@ module Aws::CodePipeline
     #   resp.webhook.error_code #=> String
     #   resp.webhook.last_triggered #=> Time
     #   resp.webhook.arn #=> String
+    #   resp.webhook.tags #=> Array
+    #   resp.webhook.tags[0].key #=> String
+    #   resp.webhook.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhook AWS API Documentation
     #
@@ -1953,6 +2038,65 @@ module Aws::CodePipeline
     # @param [Hash] params ({})
     def start_pipeline_execution(params = {}, options = {})
       req = build_request(:start_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # that can be used to manage a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource you want to add tags
+    #   to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of keys for the tags to be removed from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2092,7 +2236,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

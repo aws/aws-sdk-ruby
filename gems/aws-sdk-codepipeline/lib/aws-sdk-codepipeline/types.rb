@@ -1003,6 +1003,12 @@ module Aws::CodePipeline
     #           minimum_count: 1, # required
     #           maximum_count: 1, # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] category
@@ -1055,6 +1061,10 @@ module Aws::CodePipeline
     #   ID.
     #   @return [Types::ArtifactDetails]
     #
+    # @!attribute [rw] tags
+    #   The tags for the custom action.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeInput AWS API Documentation
     #
     class CreateCustomActionTypeInput < Struct.new(
@@ -1064,7 +1074,8 @@ module Aws::CodePipeline
       :settings,
       :configuration_properties,
       :input_artifact_details,
-      :output_artifact_details)
+      :output_artifact_details,
+      :tags)
       include Aws::Structure
     end
 
@@ -1074,10 +1085,15 @@ module Aws::CodePipeline
     #   Returns information about the details of an action type.
     #   @return [Types::ActionType]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the custom action.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeOutput AWS API Documentation
     #
     class CreateCustomActionTypeOutput < Struct.new(
-      :action_type)
+      :action_type,
+      :tags)
       include Aws::Structure
     end
 
@@ -1148,6 +1164,12 @@ module Aws::CodePipeline
     #           ],
     #           version: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pipeline
@@ -1155,10 +1177,15 @@ module Aws::CodePipeline
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
     #
+    # @!attribute [rw] tags
+    #   The tags for the pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipelineInput AWS API Documentation
     #
     class CreatePipelineInput < Struct.new(
-      :pipeline)
+      :pipeline,
+      :tags)
       include Aws::Structure
     end
 
@@ -1169,10 +1196,15 @@ module Aws::CodePipeline
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipelineOutput AWS API Documentation
     #
     class CreatePipelineOutput < Struct.new(
-      :pipeline)
+      :pipeline,
+      :tags)
       include Aws::Structure
     end
 
@@ -2103,6 +2135,59 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was returned from the previous API call, which would
+    #   be used to return the next page of the list. However, the
+    #   ListTagsforResource call lists all available tags in one call and
+    #   does not use pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   If the amount of returned information is significantly large, an
+    #   identifier is also returned and can be used in a subsequent API call
+    #   to return the next page of the list. However, the
+    #   ListTagsforResource call lists all available tags in one call and
+    #   does not use pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The detail returned for each webhook after listing webhooks, such as
     # the webhook URL, the webhook name, and the webhook ARN.
     #
@@ -2136,6 +2221,10 @@ module Aws::CodePipeline
     #   The Amazon Resource Name (ARN) of the webhook.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the webhook.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhookItem AWS API Documentation
     #
     class ListWebhookItem < Struct.new(
@@ -2144,7 +2233,8 @@ module Aws::CodePipeline
       :error_message,
       :error_code,
       :last_triggered,
-      :arn)
+      :arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -2958,6 +3048,12 @@ module Aws::CodePipeline
     #             secret_token: "WebhookAuthConfigurationSecretToken",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] webhook
@@ -2968,10 +3064,15 @@ module Aws::CodePipeline
     #   targets so that you can easily recognize what it's used for later.
     #   @return [Types::WebhookDefinition]
     #
+    # @!attribute [rw] tags
+    #   The tags for the webhook.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookInput AWS API Documentation
     #
     class PutWebhookInput < Struct.new(
-      :webhook)
+      :webhook,
+      :tags)
       include Aws::Structure
     end
 
@@ -3307,6 +3408,66 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # A tag is a key/value pair that is used to manage the resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource you want to add tags
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you want to modify or add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # A response to a `PollForThirdPartyJobs `request returned by AWS
     # CodePipeline when there is a job to be worked upon by a partner
     # action.
@@ -3451,6 +3612,34 @@ module Aws::CodePipeline
       :disabled_reason)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of keys for the tags to be removed from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # Represents the input of an `UpdatePipeline` action.
     #
