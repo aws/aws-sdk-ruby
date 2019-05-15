@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.275 (2019-05-15)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
